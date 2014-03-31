@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<UIProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <filePath>Z:\下载\cocos2d-x-2.2.2\projects\FootballHero\editor\Navigator\Navigator.xml.ui</filePath>
+  <Version>1.2.0.1</Version>
+  <Name>Navigator</Name>
+  <ProjectDir>Z:\下载\cocos2d-x-2.2.2\projects\FootballHero\editor\Navigator</ProjectDir>
+  <JsonFileName>Navigator.json</JsonFileName>
+  <Resources>Z:\下载\cocos2d-x-2.2.2\projects\FootballHero\editor\Navigator\Resources</Resources>
+  <JsonFolder>Z:\下载\cocos2d-x-2.2.2\projects\FootballHero\editor\Navigator\Json</JsonFolder>
+  <JsonList>
+    <string>Navigator.json</string>
+  </JsonList>
+  <imageFileList>
+    <string>Navigator0.plist</string>
+  </imageFileList>
+  <JsonSuffix>.json</JsonSuffix>
+  <CurrentUIJson>Navigator.json</CurrentUIJson>
+  <CanvasSize>
+    <Width>640</Width>
+    <Height>120</Height>
+  </CanvasSize>
+</UIProject>
