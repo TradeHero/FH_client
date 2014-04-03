@@ -178,7 +178,6 @@
 		1AB87029175E0A40005D39BF /* CCSkeleton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1AB87025175E0A40005D39BF /* CCSkeleton.cpp */; };
 		1AB8702A175E0A40005D39BF /* CCSkeletonAnimation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1AB87027175E0A40005D39BF /* CCSkeletonAnimation.cpp */; };
 		1AB87031175E0A5B005D39BF /* libwebsockets.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AB87030175E0A5B005D39BF /* libwebsockets.a */; };
-		1AC3623516D47C5C000847F2 /* fonts in Resources */ = {isa = PBXBuildFile; fileRef = 1AC3622916D47C5C000847F2 /* fonts */; };
 		373F993E1869F07A0080E035 /* CCActionFrame.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 373F99331869F07A0080E035 /* CCActionFrame.cpp */; };
 		373F993F1869F07A0080E035 /* CCActionFrameEasing.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 373F99351869F07A0080E035 /* CCActionFrameEasing.cpp */; };
 		373F99401869F07A0080E035 /* CCActionManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 373F99371869F07A0080E035 /* CCActionManager.cpp */; };
@@ -212,7 +211,10 @@
 		730D984D18DC4317000CA5F9 /* scenes in Resources */ = {isa = PBXBuildFile; fileRef = 730D983E18DC4317000CA5F9 /* scenes */; };
 		730D984E18DC4317000CA5F9 /* scripts in Resources */ = {isa = PBXBuildFile; fileRef = 730D983F18DC4317000CA5F9 /* scripts */; };
 		730D984F18DC4317000CA5F9 /* sounds in Resources */ = {isa = PBXBuildFile; fileRef = 730D984018DC4317000CA5F9 /* sounds */; };
-		73C7D8E518E9119200D39A26 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 73C7D8E418E9119100D39A26 /* Info.plist */; };
+		73EDFC7618EAAF0700322624 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73EDFC7518EAAF0700322624 /* FacebookSDK.framework */; };
+		73EDFC8018EBE69E00322624 /* FacebookDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 73EDFC7D18EBE69E00322624 /* FacebookDelegate.cpp */; };
+		73EDFC8218EBFFD200322624 /* FacebookDelegate.h in Sources */ = {isa = PBXBuildFile; fileRef = 73EDFC7E18EBE69E00322624 /* FacebookDelegate.h */; };
+		73EDFC8518EC005700322624 /* LuaCocos2dExtension.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 73EDFC8318EC005700322624 /* LuaCocos2dExtension.cpp */; };
 		ED35C0C718323498002A0750 /* CCArmatureAnimation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED35C03818323497002A0750 /* CCArmatureAnimation.cpp */; };
 		ED35C0C818323498002A0750 /* CCProcessBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED35C03A18323497002A0750 /* CCProcessBase.cpp */; };
 		ED35C0C918323498002A0750 /* CCTween.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED35C03C18323497002A0750 /* CCTween.cpp */; };
@@ -698,6 +700,12 @@
 		730D983F18DC4317000CA5F9 /* scripts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = scripts; sourceTree = "<group>"; };
 		730D984018DC4317000CA5F9 /* sounds */ = {isa = PBXFileReference; lastKnownFileType = folder; path = sounds; sourceTree = "<group>"; };
 		73C7D8E418E9119100D39A26 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		73EDFC7518EAAF0700322624 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = ../../../../../Documents/FacebookSDK/FacebookSDK.framework; sourceTree = "<group>"; };
+		73EDFC7D18EBE69E00322624 /* FacebookDelegate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FacebookDelegate.cpp; path = Social/FacebookDelegate.cpp; sourceTree = "<group>"; };
+		73EDFC7E18EBE69E00322624 /* FacebookDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FacebookDelegate.h; path = Social/FacebookDelegate.h; sourceTree = "<group>"; };
+		73EDFC7F18EBE69E00322624 /* Singleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Singleton.h; path = Social/Singleton.h; sourceTree = "<group>"; };
+		73EDFC8318EC005700322624 /* LuaCocos2dExtension.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LuaCocos2dExtension.cpp; sourceTree = "<group>"; };
+		73EDFC8418EC005700322624 /* LuaCocos2dExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LuaCocos2dExtension.h; sourceTree = "<group>"; };
 		ED35C03818323497002A0750 /* CCArmatureAnimation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCArmatureAnimation.cpp; sourceTree = "<group>"; };
 		ED35C03918323497002A0750 /* CCArmatureAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCArmatureAnimation.h; sourceTree = "<group>"; };
 		ED35C03A18323497002A0750 /* CCProcessBase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCProcessBase.cpp; sourceTree = "<group>"; };
@@ -814,6 +822,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				73EDFC7618EAAF0700322624 /* FacebookSDK.framework in Frameworks */,
 				15C1568E1683131500D239F2 /* libcurl.a in Frameworks */,
 				15C1568C168311EC00D239F2 /* libcocos2dx.a in Frameworks */,
 				F293B3CD15EB7BE500256477 /* QuartzCore.framework in Frameworks */,
@@ -843,6 +852,7 @@
 		15C153791683112E00D239F2 /* extensions */ = {
 			isa = PBXGroup;
 			children = (
+				73EDFC8118EBE6A600322624 /* Social */,
 				ED35C02A18323496002A0750 /* CocoStudio */,
 				15C1537B1683112E00D239F2 /* CCBReader */,
 				15C153B01683112E00D239F2 /* cocos-ext.h */,
@@ -1505,6 +1515,8 @@
 		46C1007916BF786A00F74D54 /* cocos2dx_support */ = {
 			isa = PBXGroup;
 			children = (
+				73EDFC8318EC005700322624 /* LuaCocos2dExtension.cpp */,
+				73EDFC8418EC005700322624 /* LuaCocos2dExtension.h */,
 				15CA8CEF18696743000032AB /* lua_cocos2dx_cocostudio_manual.cpp */,
 				15CA8CF018696743000032AB /* lua_cocos2dx_cocostudio_manual.h */,
 				15CA8CF118696743000032AB /* lua_cocos2dx_manual.cpp */,
@@ -1562,6 +1574,16 @@
 				46C59AD217641FF300F43DC3 /* CCBReaderLoad.lua */,
 			);
 			path = script;
+			sourceTree = "<group>";
+		};
+		73EDFC8118EBE6A600322624 /* Social */ = {
+			isa = PBXGroup;
+			children = (
+				73EDFC7F18EBE69E00322624 /* Singleton.h */,
+				73EDFC7E18EBE69E00322624 /* FacebookDelegate.h */,
+				73EDFC7D18EBE69E00322624 /* FacebookDelegate.cpp */,
+			);
+			name = Social;
 			sourceTree = "<group>";
 		};
 		ED35C02A18323496002A0750 /* CocoStudio */ = {
@@ -1835,6 +1857,7 @@
 		F293B3CB15EB7BE500256477 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				73EDFC7518EAAF0700322624 /* FacebookSDK.framework */,
 				15C1568D1683131500D239F2 /* libcurl.a */,
 				F293B3CC15EB7BE500256477 /* QuartzCore.framework */,
 				F293B3CE15EB7BE500256477 /* OpenGLES.framework */,
@@ -1927,7 +1950,7 @@
 		F293B3BF15EB7BE500256477 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0430;
+				LastUpgradeCheck = 0510;
 				TargetAttributes = {
 					F293B3C715EB7BE500256477 = {
 						DevelopmentTeam = RSLW4S7XVW;
@@ -1983,7 +2006,6 @@
 				15C1569B1683138E00D239F2 /* Icon-57.png in Resources */,
 				730D984718DC4317000CA5F9 /* example.lua in Resources */,
 				730D984318DC4317000CA5F9 /* CCBReaderLoad.lua in Resources */,
-				73C7D8E518E9119200D39A26 /* Info.plist in Resources */,
 				730D984C18DC4317000CA5F9 /* json.lua in Resources */,
 				730D984418DC4317000CA5F9 /* Cocos2d.lua in Resources */,
 				15C1569C1683138E00D239F2 /* Icon-72.png in Resources */,
@@ -1992,7 +2014,6 @@
 				730D984518DC4317000CA5F9 /* CocoStudio.lua in Resources */,
 				15C1569D1683138E00D239F2 /* Icon-114.png in Resources */,
 				15C1569E1683138E00D239F2 /* Icon-144.png in Resources */,
-				1AC3623516D47C5C000847F2 /* fonts in Resources */,
 				730D984618DC4317000CA5F9 /* config in Resources */,
 				46C59AD317641FF300F43DC3 /* AudioEngine.lua in Resources */,
 				46C59AD417641FF300F43DC3 /* CCBReaderLoad.lua in Resources */,
@@ -2007,6 +2028,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				73EDFC8218EBFFD200322624 /* FacebookDelegate.h in Sources */,
 				F293B6FC15EB823D00256477 /* AppController.mm in Sources */,
 				F293B6FD15EB823D00256477 /* main.m in Sources */,
 				373F993F1869F07A0080E035 /* CCActionFrameEasing.cpp in Sources */,
@@ -2173,12 +2195,14 @@
 				15C155591683118600D239F2 /* b2Rope.cpp in Sources */,
 				15C155DA168311AA00D239F2 /* CDAudioManager.m in Sources */,
 				ED35C0CE18323498002A0750 /* CCDecorativeDisplay.cpp in Sources */,
+				73EDFC8018EBE69E00322624 /* FacebookDelegate.cpp in Sources */,
 				15C155DB168311AA00D239F2 /* CDOpenALSupport.m in Sources */,
 				15CA8CF518696744000032AB /* lua_cocos2dx_cocostudio_manual.cpp in Sources */,
 				15C155DC168311AA00D239F2 /* CocosDenshion.m in Sources */,
 				15C155DD168311AA00D239F2 /* SimpleAudioEngine.mm in Sources */,
 				15C155DE168311AA00D239F2 /* SimpleAudioEngine_objc.m in Sources */,
 				15C15685168311CB00D239F2 /* tolua_event.c in Sources */,
+				73EDFC8518EC005700322624 /* LuaCocos2dExtension.cpp in Sources */,
 				15C15686168311CB00D239F2 /* tolua_is.c in Sources */,
 				15C15687168311CB00D239F2 /* tolua_map.c in Sources */,
 				15C15688168311CB00D239F2 /* tolua_push.c in Sources */,
@@ -2250,7 +2274,6 @@
 		F293B6C215EB7BEA00256477 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -2278,6 +2301,7 @@
 					"$(SRCROOT)/../../cocos2dx/include",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -2285,7 +2309,6 @@
 		F293B6C315EB7BEA00256477 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -2322,6 +2345,10 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/trdehero/Documents/FacebookSDK,
+				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Prefix.pch;
@@ -2376,6 +2403,10 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/trdehero/Documents/FacebookSDK,
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = (

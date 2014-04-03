@@ -4,11 +4,13 @@
 #include "CCLuaEngine.h"
 #include "SimpleAudioEngine.h"
 #include "Lua_extensions_CCB.h"
+#include "FacebookDelegate.h"
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS || CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID || CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
 #include "Lua_web_socket.h"
 #endif
 
 using namespace CocosDenshion;
+using namespace Social;
 
 USING_NS_CC;
 
