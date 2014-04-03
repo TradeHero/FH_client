@@ -211,10 +211,11 @@
 		730D984D18DC4317000CA5F9 /* scenes in Resources */ = {isa = PBXBuildFile; fileRef = 730D983E18DC4317000CA5F9 /* scenes */; };
 		730D984E18DC4317000CA5F9 /* scripts in Resources */ = {isa = PBXBuildFile; fileRef = 730D983F18DC4317000CA5F9 /* scripts */; };
 		730D984F18DC4317000CA5F9 /* sounds in Resources */ = {isa = PBXBuildFile; fileRef = 730D984018DC4317000CA5F9 /* sounds */; };
-		73EDFC7618EAAF0700322624 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73EDFC7518EAAF0700322624 /* FacebookSDK.framework */; };
 		73EDFC8018EBE69E00322624 /* FacebookDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 73EDFC7D18EBE69E00322624 /* FacebookDelegate.cpp */; };
 		73EDFC8218EBFFD200322624 /* FacebookDelegate.h in Sources */ = {isa = PBXBuildFile; fileRef = 73EDFC7E18EBE69E00322624 /* FacebookDelegate.h */; };
 		73EDFC8518EC005700322624 /* LuaCocos2dExtension.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 73EDFC8318EC005700322624 /* LuaCocos2dExtension.cpp */; };
+		73EDFC8B18ECF85F00322624 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73EDFC8A18ECF85F00322624 /* FacebookSDK.framework */; };
+		73EDFC9618ECFE7400322624 /* FacebookConnector.mm in Sources */ = {isa = PBXBuildFile; fileRef = 73EDFC9518ECFE7400322624 /* FacebookConnector.mm */; };
 		ED35C0C718323498002A0750 /* CCArmatureAnimation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED35C03818323497002A0750 /* CCArmatureAnimation.cpp */; };
 		ED35C0C818323498002A0750 /* CCProcessBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED35C03A18323497002A0750 /* CCProcessBase.cpp */; };
 		ED35C0C918323498002A0750 /* CCTween.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED35C03C18323497002A0750 /* CCTween.cpp */; };
@@ -700,12 +701,14 @@
 		730D983F18DC4317000CA5F9 /* scripts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = scripts; sourceTree = "<group>"; };
 		730D984018DC4317000CA5F9 /* sounds */ = {isa = PBXFileReference; lastKnownFileType = folder; path = sounds; sourceTree = "<group>"; };
 		73C7D8E418E9119100D39A26 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		73EDFC7518EAAF0700322624 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = ../../../../../Documents/FacebookSDK/FacebookSDK.framework; sourceTree = "<group>"; };
 		73EDFC7D18EBE69E00322624 /* FacebookDelegate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FacebookDelegate.cpp; path = Social/FacebookDelegate.cpp; sourceTree = "<group>"; };
 		73EDFC7E18EBE69E00322624 /* FacebookDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FacebookDelegate.h; path = Social/FacebookDelegate.h; sourceTree = "<group>"; };
 		73EDFC7F18EBE69E00322624 /* Singleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Singleton.h; path = Social/Singleton.h; sourceTree = "<group>"; };
 		73EDFC8318EC005700322624 /* LuaCocos2dExtension.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LuaCocos2dExtension.cpp; sourceTree = "<group>"; };
 		73EDFC8418EC005700322624 /* LuaCocos2dExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LuaCocos2dExtension.h; sourceTree = "<group>"; };
+		73EDFC8A18ECF85F00322624 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
+		73EDFC9418ECFE7400322624 /* FacebookConnector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacebookConnector.h; sourceTree = "<group>"; };
+		73EDFC9518ECFE7400322624 /* FacebookConnector.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FacebookConnector.mm; sourceTree = "<group>"; };
 		ED35C03818323497002A0750 /* CCArmatureAnimation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCArmatureAnimation.cpp; sourceTree = "<group>"; };
 		ED35C03918323497002A0750 /* CCArmatureAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCArmatureAnimation.h; sourceTree = "<group>"; };
 		ED35C03A18323497002A0750 /* CCProcessBase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCProcessBase.cpp; sourceTree = "<group>"; };
@@ -822,7 +825,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				73EDFC7618EAAF0700322624 /* FacebookSDK.framework in Frameworks */,
+				73EDFC8B18ECF85F00322624 /* FacebookSDK.framework in Frameworks */,
 				15C1568E1683131500D239F2 /* libcurl.a in Frameworks */,
 				15C1568C168311EC00D239F2 /* libcocos2dx.a in Frameworks */,
 				F293B3CD15EB7BE500256477 /* QuartzCore.framework in Frameworks */,
@@ -1857,7 +1860,7 @@
 		F293B3CB15EB7BE500256477 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				73EDFC7518EAAF0700322624 /* FacebookSDK.framework */,
+				73EDFC8A18ECF85F00322624 /* FacebookSDK.framework */,
 				15C1568D1683131500D239F2 /* libcurl.a */,
 				F293B3CC15EB7BE500256477 /* QuartzCore.framework */,
 				F293B3CE15EB7BE500256477 /* OpenGLES.framework */,
@@ -1874,6 +1877,8 @@
 		F293B6E815EB807E00256477 /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
+				73EDFC9418ECFE7400322624 /* FacebookConnector.h */,
+				73EDFC9518ECFE7400322624 /* FacebookConnector.mm */,
 				73C7D8E418E9119100D39A26 /* Info.plist */,
 				F293B6F615EB823D00256477 /* AppController.h */,
 				F293B6F715EB823D00256477 /* AppController.mm */,
@@ -2184,6 +2189,7 @@
 				15C155441683118600D239F2 /* b2MouseJoint.cpp in Sources */,
 				ED35C0DC18323498002A0750 /* CCComController.cpp in Sources */,
 				15C155451683118600D239F2 /* b2PrismaticJoint.cpp in Sources */,
+				73EDFC9618ECFE7400322624 /* FacebookConnector.mm in Sources */,
 				ED35C0EE18323498002A0750 /* UIImageView.cpp in Sources */,
 				15C155461683118600D239F2 /* b2PulleyJoint.cpp in Sources */,
 				15C155471683118600D239F2 /* b2RevoluteJoint.cpp in Sources */,
@@ -2348,6 +2354,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/trdehero/Documents/FacebookSDK,
+					"$(PROJECT_DIR)",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -2406,6 +2413,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/trdehero/Documents/FacebookSDK,
+					"$(PROJECT_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Prefix.pch;

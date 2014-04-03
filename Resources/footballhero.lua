@@ -28,7 +28,7 @@ local function main()
 
     local eventManager = require("scripts.events.EventManager").getInstance()
     local event = require("scripts.events.Event").EventList
-    eventManager:postEvent( event.Load_Match_List )
+    --eventManager:postEvent( event.Load_Match_List )
 
     FacebookDelegate:sharedDelegate():login()
 end

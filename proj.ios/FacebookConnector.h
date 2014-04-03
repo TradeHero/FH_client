@@ -6,13 +6,11 @@
 //
 //
 
-#include <iostream>
-#import <FacebookSDK/FacebookSDK.h>
-
 class FacebookConnector
 {
 public:
     static FacebookConnector* getInstance();
     
+    void initSession();
     void login();
 };
