@@ -1,0 +1,7 @@
+
+class FacebookDelegate
+{
+	static FacebookDelegate* sharedDelegate();
+
+	void login();
+};

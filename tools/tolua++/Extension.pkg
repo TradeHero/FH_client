@@ -1,0 +1,3 @@
+$#include "LuaCocos2dExtension.h"
+
+$pfile "FacebookDelegate.pkg"
