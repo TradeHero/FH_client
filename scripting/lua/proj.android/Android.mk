@@ -6,6 +6,7 @@ LOCAL_MODULE    := cocos_lua_static
 LOCAL_MODULE_FILENAME := liblua
 
 LOCAL_SRC_FILES := ../cocos2dx_support/CCLuaBridge.cpp \
+          ../cocos2dx_support/LuaCocos2dExtension.cpp \
           ../cocos2dx_support/CCLuaEngine.cpp \
           ../cocos2dx_support/CCLuaStack.cpp \
           ../cocos2dx_support/CCLuaValue.cpp \
@@ -39,7 +40,8 @@ LOCAL_C_INCLUDES := $(LOCAL_PATH)/ \
                     $(LOCAL_PATH)/../../../cocos2dx/platform/android \
                     $(LOCAL_PATH)/../../../cocos2dx/kazmath/include \
                     $(LOCAL_PATH)/../../../CocosDenshion/include \
-                    $(LOCAL_PATH)/../../../extensions
+                    $(LOCAL_PATH)/../../../extensions \
+                    $(LOCAL_PATH)/../../../extensions/Social
 
 LOCAL_WHOLE_STATIC_LIBRARIES := luajit_static
 LOCAL_WHOLE_STATIC_LIBRARIES += cocos_extension_static

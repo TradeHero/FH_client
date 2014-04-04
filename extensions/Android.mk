@@ -52,6 +52,7 @@ network/HttpClient.cpp \
 network/WebSocket.cpp \
 physics_nodes/CCPhysicsDebugNode.cpp \
 physics_nodes/CCPhysicsSprite.cpp \
+Social/FacebookDelegate.cpp \
 LocalStorage/LocalStorageAndroid.cpp \
 CocoStudio/Armature/CCArmature.cpp \
 CocoStudio/Armature/CCBone.cpp \
