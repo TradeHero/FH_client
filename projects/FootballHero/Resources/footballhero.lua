@@ -30,7 +30,11 @@ local function main()
     local event = require("scripts.events.Event").EventList
     eventManager:postEvent( event.Load_Match_List )
 
-    --FacebookDelegate:sharedDelegate():login()
+    local handler = function( num )
+        cclog("Get login result "..num)
+    end
+
+    FacebookDelegate:sharedDelegate():login( handler, handler )
 end
 
 

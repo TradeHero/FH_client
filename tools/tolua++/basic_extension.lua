@@ -292,12 +292,19 @@ extern "C" {
 
 #include <map>
 #include <string>
+#include "cocos2d.h"
+#include "CCLuaEngine.h"
 #include "FacebookDelegate.h"
 
+using namespace cocos2d;
 using namespace Social;]])
 
       replace([[/* Exported function */
 TOLUA_API int  tolua_Extension_open (lua_State* tolua_S);]], [[]])
+
+      replace([[*((LUA_FUNCTION*)]], [[(]])
+
+      replace([[tolua_usertype(tolua_S,"LUA_FUNCTION");]], [[]])
 
       replace('\t', '    ')
 

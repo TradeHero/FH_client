@@ -11,10 +11,13 @@ namespace Social
 		~FacebookDelegate();
 		static FacebookDelegate* sharedDelegate();
 
-		void login();
+		void login(int successHandler, int errorHandler);
+        void loginResult();
 
 	protected:
 		FacebookDelegate();
+		int mSuccessHandler;
+		int mErrorHandler;
 	
 	};
 };

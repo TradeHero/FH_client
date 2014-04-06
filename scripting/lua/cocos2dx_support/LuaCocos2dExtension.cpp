@@ -1,6 +1,6 @@
 /*
 ** Lua binding: Extension
-** Generated automatically by tolua++-1.0.92 on 04/02/14 16:09:22.
+** Generated automatically by tolua++-1.0.92 on 04/04/14 22:19:53.
 */
 
 /****************************************************************************
@@ -33,8 +33,11 @@ extern "C" {
 
 #include <map>
 #include <string>
+#include "cocos2d.h"
+#include "CCLuaEngine.h"
 #include "FacebookDelegate.h"
 
+using namespace cocos2d;
 using namespace Social;
 
 
@@ -45,6 +48,7 @@ using namespace Social;
 static void tolua_reg_types (lua_State* tolua_S)
 {
  tolua_usertype(tolua_S,"FacebookDelegate");
+ 
 }
 
 /* method: sharedDelegate of class  FacebookDelegate */
@@ -83,18 +87,22 @@ static int tolua_Extension_FacebookDelegate_login00(lua_State* tolua_S)
  tolua_Error tolua_err;
  if (
      !tolua_isusertype(tolua_S,1,"FacebookDelegate",0,&tolua_err) ||
-     !tolua_isnoobj(tolua_S,2,&tolua_err)
+     (tolua_isvaluenil(tolua_S,2,&tolua_err) || !toluafix_isfunction(tolua_S,2,"LUA_FUNCTION",0,&tolua_err)) ||
+     (tolua_isvaluenil(tolua_S,3,&tolua_err) || !toluafix_isfunction(tolua_S,3,"LUA_FUNCTION",0,&tolua_err)) ||
+     !tolua_isnoobj(tolua_S,4,&tolua_err)
  )
   goto tolua_lerror;
  else
 #endif
  {
   FacebookDelegate* self = (FacebookDelegate*)  tolua_tousertype(tolua_S,1,0);
+  LUA_FUNCTION successHandler = (  toluafix_ref_function(tolua_S,2,0));
+  LUA_FUNCTION errorHandler = (  toluafix_ref_function(tolua_S,3,0));
 #ifndef TOLUA_RELEASE
   if (!self) tolua_error(tolua_S,"invalid 'self' in function 'login'", NULL);
 #endif
   {
-   self->login();
+   self->login(successHandler,errorHandler);
   }
  }
  return 0;

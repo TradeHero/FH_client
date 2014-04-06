@@ -3,5 +3,5 @@ class FacebookDelegate
 {
 	static FacebookDelegate* sharedDelegate();
 
-	void login();
+	void login(LUA_FUNCTION successHandler, LUA_FUNCTION errorHandler);
 };

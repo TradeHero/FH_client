@@ -7,7 +7,9 @@
 //
 
 #include "FacebookConnector.h"
+#include "FacebookDelegate.h"
 #import <FacebookSDK/FacebookSDK.h>
+
 
 static FacebookConnector* instance;
 FBSession* session;
@@ -45,5 +47,5 @@ void FacebookConnector::login()
                                                      NSError *error) {
         NSLog(session.accessTokenData.accessToken);
     }];
-
+    Social::FacebookDelegate::sharedDelegate()->loginResult();
 }
