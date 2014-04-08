@@ -1,27 +1,36 @@
 module(..., package.seeall)
 
 local SceneManager = require("scripts.SceneManager")
-local MatchListScene = require("scripts.MatchListScene")
+local EventManager = require("scripts.events.EventManager").getInstance()
+local Event = require("scripts.events.Event").EventList
 
 function loadFrame()
-	local widget = GUIReader:shareReader():widgetFromJsonFile("scenes/LoginNReg/LoginNReg.ExportJson")
+	local widget = GUIReader:shareReader():widgetFromJsonFile("scenes/LoginNReg/LoginNReg.json")
     SceneManager.clearNAddWidget(widget)
 
-    local loginBt = widget:getChildByName("login")
+    local signinBt = widget:getChildByName("signin")
     local registerBt = widget:getChildByName("register")
+    local facebookBt = widget:getChildByName("facebookConnect")
 
-    loginBt:addTouchEventListener( loginEventHandler )
+    signinBt:addTouchEventListener( signinEventHandler )
     registerBt:addTouchEventListener( registerEventHandler )
+    facebookBt:addTouchEventListener( facebookEventHandler )
 end
 
-function loginEventHandler( sender,eventType )
+function signinEventHandler( sender,eventType )
 	if eventType == TOUCH_EVENT_ENDED then
-        MatchListScene.loadFrame()
+        
     end
 end
 
 function registerEventHandler( sender,eventType )
 	if eventType == TOUCH_EVENT_ENDED then
-        MatchListScene.loadFrame()
+        EventManager:postEvent( Event.Register )
+    end
+end
+
+function facebookEventHandler( sender,eventType )
+    if eventType == TOUCH_EVENT_ENDED then
+        
     end
 end

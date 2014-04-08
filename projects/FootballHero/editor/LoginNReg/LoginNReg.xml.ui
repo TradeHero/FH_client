@@ -1,20 +1,20 @@
 <?xml version="1.0"?>
 <UIProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <filePath>Z:\下载\cocos2d-x-2.2.2\projects\FootballHero\editor\LoginNReg\LoginNReg.xml.ui</filePath>
+  <filePath>Z:\FH_client\projects\FootballHero\editor\LoginNReg\LoginNReg.xml.ui</filePath>
   <Version>1.2.0.1</Version>
   <Name>LoginNReg</Name>
-  <ProjectDir>Z:\下载\cocos2d-x-2.2.2\projects\FootballHero\editor\LoginNReg</ProjectDir>
+  <ProjectDir>Z:\FH_client\projects\FootballHero\editor\LoginNReg</ProjectDir>
   <JsonFileName>LoginNReg.json</JsonFileName>
-  <Resources>Z:\下载\cocos2d-x-2.2.2\projects\FootballHero\editor\LoginNReg\Resources</Resources>
-  <JsonFolder>Z:\下载\cocos2d-x-2.2.2\projects\FootballHero\editor\LoginNReg\Json</JsonFolder>
+  <Resources>Z:\FH_client\projects\FootballHero\editor\LoginNReg\Resources</Resources>
+  <JsonFolder>Z:\FH_client\projects\FootballHero\editor\LoginNReg\Json</JsonFolder>
   <JsonList>
     <string>LoginNReg.json</string>
+    <string>Register.json</string>
+    <string>RegisterName.json</string>
   </JsonList>
-  <imageFileList>
-    <string>LoginNReg0.plist</string>
-  </imageFileList>
+  <imageFileList />
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>LoginNReg.json</CurrentUIJson>
+  <CurrentUIJson>RegisterName.json</CurrentUIJson>
   <CanvasSize>
     <Width>640</Width>
     <Height>960</Height>

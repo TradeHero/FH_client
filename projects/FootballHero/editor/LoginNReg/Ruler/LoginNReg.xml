@@ -4,4 +4,12 @@
     <Project>LoginNReg</Project>
     <GuidesList />
   </GuidesProject>
+  <GuidesProject>
+    <Project>Register</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>RegisterName</Project>
+    <GuidesList />
+  </GuidesProject>
 </ArrayOfGuidesProject>

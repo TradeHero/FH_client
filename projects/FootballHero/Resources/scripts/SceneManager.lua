@@ -5,7 +5,9 @@ local Event = require("scripts.events.Event").EventList
 local LoadMatchListAction = require("scripts.actions.LoadMatchListAction")
 local EnterMatchAction = require("scripts.actions.EnterMatchAction")
 local PredictionConfirmAction = require("scripts.actions.PredictionConfirmAction")
-
+local LoginNRegAction = require("scripts.actions.LoginNRegAction")
+local RegisterAction = require("scripts.actions.RegisterAction")
+local RegisterNameAction = require("scripts.actions.RegisterNameAction")
 
 local mSceneGameLayer
 
@@ -25,6 +27,9 @@ function init()
 end
 
 function initEvents()
+	EventManager:registerEventHandler( Event.Login_N_Reg, LoginNRegAction )
+	EventManager:registerEventHandler( Event.Register, RegisterAction )
+	EventManager:registerEventHandler( Event.Register_Name, RegisterNameAction )
 	EventManager:registerEventHandler( Event.Load_Match_List, LoadMatchListAction )
 	EventManager:registerEventHandler( Event.Enter_Match, EnterMatchAction )
 	EventManager:registerEventHandler( Event.Prediction_Confirm, PredictionConfirmAction )

@@ -28,13 +28,17 @@ local function main()
 
     local eventManager = require("scripts.events.EventManager").getInstance()
     local event = require("scripts.events.Event").EventList
-    eventManager:postEvent( event.Load_Match_List )
+    eventManager:postEvent( event.Login_N_Reg )
 
+
+
+--[[
     local handler = function( num )
         cclog("Get login result "..num)
     end
 
     FacebookDelegate:sharedDelegate():login( handler, handler )
+--]]
 end
 
 

@@ -16,6 +16,9 @@ end
 
 EventNameList = 
 { 
+    "Login_N_Reg",
+    "Register",
+    "Register_Name",
     "Load_Match_List",
     "Enter_Match",
     "Prediction_Confirm"
