@@ -483,6 +483,9 @@
     <ClCompile Include="..\Social\FacebookDelegate.cpp">
       <Filter>Social</Filter>
     </ClCompile>
+    <ClCompile Include="..\network\HttpRequestForLua.cpp">
+      <Filter>network</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\GUI\CCScrollView\CCScrollView.h">
@@ -867,6 +870,9 @@
     </ClInclude>
     <ClInclude Include="..\Social\FacebookDelegate.h">
       <Filter>Social</Filter>
+    </ClInclude>
+    <ClInclude Include="..\network\HttpRequestForLua.h">
+      <Filter>network</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

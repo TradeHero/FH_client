@@ -295,8 +295,10 @@ extern "C" {
 #include "cocos2d.h"
 #include "CCLuaEngine.h"
 #include "FacebookDelegate.h"
+#include "HttpRequestForLua.h"
 
 using namespace cocos2d;
+using namespace cocos2d::extension;
 using namespace Social;]])
 
       replace([[/* Exported function */

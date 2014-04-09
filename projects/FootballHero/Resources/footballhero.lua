@@ -30,6 +30,12 @@ local function main()
     local event = require("scripts.events.Event").EventList
     eventManager:postEvent( event.Login_N_Reg )
 
+    local handler = function( isSucceed, body, header, status, errorBuffer )
+        cclog( "Http reponse: "..body )
+    end
+
+    local httpRequest = HttpRequestForLua:create( CCHttpRequest.kHttpGet, "application/json", "kdjfkj" )
+    httpRequest:sendHttpRequest( "http://192.168.1.12:8080/source/", handler )
 
 
 --[[
