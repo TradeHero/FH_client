@@ -39,6 +39,8 @@ function confirmEventHandler( sender,eventType )
         local email = mWidget:getChildByName( USERNAME_CONTAINER_NAME ):getNodeByTag( 1 ):getText()
         local pass = mWidget:getChildByName( FIRSTNAME_CONTAINER_NAME ):getNodeByTag( 1 ):getText()
         local passConf = mWidget:getChildByName( LASTNAME_CONTAINER_NAME ):getNodeByTag( 1 ):getText()
+
+        EventManager:postEvent( Event.Load_Match_List )
     end
 end
 

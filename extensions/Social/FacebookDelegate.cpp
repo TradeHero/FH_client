@@ -4,6 +4,9 @@
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
 #include "FacebookConnector.h"
 #endif
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+#include "platform/android/jni/JniHelper.h"
+#endif
 
 USING_NS_CC;
 
@@ -36,6 +39,21 @@ namespace Social
 		mErrorHandler = errorHandler;
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
         FacebookConnector::getInstance()->login();
+#endif
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+		JniMethodInfo jmi;
+		if (JniHelper::getStaticMethodInfo(jmi, "org/tradehero/th/FootballHero", "login", "([Ljava/lang/String;)V"))
+		{
+			jclass str_cls = jmi.env->FindClass("java/lang/String");
+			jstring str1 = jmi.env->NewStringUTF("I'm a titile");
+			jstring str2 = jmi.env->NewStringUTF("Are yor exit game?");
+			jobjectArray arrs = jmi.env->NewObjectArray(2, str_cls, 0);
+
+			jmi.env->SetObjectArrayElement(arrs, 0, str1);
+			jmi.env->SetObjectArrayElement(arrs, 1, str2);
+			
+			jmi.env->CallStaticVoidMethod(jmi.classID, jmi.methodID, arrs);
+		}
 #endif
 	}
     

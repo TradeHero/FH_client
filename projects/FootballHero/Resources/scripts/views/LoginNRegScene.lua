@@ -19,7 +19,7 @@ end
 
 function signinEventHandler( sender,eventType )
 	if eventType == TOUCH_EVENT_ENDED then
-        
+        EventManager:postEvent( Event.Login )
     end
 end
 

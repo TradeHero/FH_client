@@ -12,4 +12,8 @@
     <Project>RegisterName</Project>
     <GuidesList />
   </GuidesProject>
+  <GuidesProject>
+    <Project>Signin</Project>
+    <GuidesList />
+  </GuidesProject>
 </ArrayOfGuidesProject>

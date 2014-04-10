@@ -11,10 +11,11 @@
     <string>LoginNReg.json</string>
     <string>Register.json</string>
     <string>RegisterName.json</string>
+    <string>Signin.json</string>
   </JsonList>
   <imageFileList />
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>RegisterName.json</CurrentUIJson>
+  <CurrentUIJson>Signin.json</CurrentUIJson>
   <CanvasSize>
     <Width>640</Width>
     <Height>960</Height>

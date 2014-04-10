@@ -34,9 +34,10 @@ local function main()
         cclog( "Http reponse: "..body )
     end
 
+--[[
     local httpRequest = HttpRequestForLua:create( CCHttpRequest.kHttpGet, "application/json", "kdjfkj" )
     httpRequest:sendHttpRequest( "http://192.168.1.12:8080/source/", handler )
-
+--]]
 
 --[[
     local handler = function( num )

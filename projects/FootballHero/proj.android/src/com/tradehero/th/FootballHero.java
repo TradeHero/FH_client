@@ -46,7 +46,12 @@ public class FootballHero extends Cocos2dxActivity{
         Cocos2dxGLSurfaceView glSurfaceView = new Cocos2dxGLSurfaceView(this); 
         glSurfaceView.setEGLConfigChooser(5, 6, 5, 0, 16, 8); 
         return glSurfaceView; 
-    } 
+    }
+    
+    public static void login()
+    {
+    	System.out.println("C++ to java");
+    }
 }
 
 class LuaGLSurfaceView extends Cocos2dxGLSurfaceView{
