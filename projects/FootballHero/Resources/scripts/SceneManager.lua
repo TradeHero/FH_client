@@ -16,9 +16,9 @@ local mSceneGameLayer
 function init()
 	local eglView = CCEGLView:sharedOpenGLView()
 	if CCApplication:sharedApplication():getTargetPlatform() == kTargetWindows then
-		eglView:setFrameSize( 640, 960 )
+		eglView:setFrameSize( 640, 1136 )
 	end
-	eglView:setDesignResolutionSize( 640, 960, kResolutionShowAll )
+	eglView:setDesignResolutionSize( 640, 1136, kResolutionShowAll )
 
 	local sceneGame = CCScene:create()
     CCDirector:sharedDirector():runWithScene( sceneGame )
