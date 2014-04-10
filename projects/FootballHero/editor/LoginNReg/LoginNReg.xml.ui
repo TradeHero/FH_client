@@ -12,10 +12,11 @@
     <string>Register.json</string>
     <string>RegisterName.json</string>
     <string>Signin.json</string>
+    <string>ForgotPassword.json</string>
   </JsonList>
   <imageFileList />
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>Signin.json</CurrentUIJson>
+  <CurrentUIJson>ForgotPassword.json</CurrentUIJson>
   <CanvasSize>
     <Width>640</Width>
     <Height>960</Height>

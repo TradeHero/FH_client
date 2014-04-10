@@ -3,6 +3,7 @@ module(..., package.seeall)
 local SceneManager = require("scripts.SceneManager")
 local EventManager = require("scripts.events.EventManager").getInstance()
 local Event = require("scripts.events.Event").EventList
+local ViewUtils = require("scripts.views.ViewUtils")
 
 local EMAIL_CONTAINER_NAME = "emailContainer"
 local PASSWORD_CONTAINER_NAME = "passwordContainer"
@@ -18,11 +19,16 @@ function loadFrame()
 
     local signinBt = widget:getChildByName("signin")
     local backBt = widget:getChildByName("back")
+    local forgotPasswordBt = widget:getChildByName("forgotPassword")
     signinBt:addTouchEventListener( signinEventHandler )
     backBt:addTouchEventListener( backEventHandler )
+    forgotPasswordBt:addTouchEventListener( forgotPasswordEventHandler )
 
-    createTextInput( EMAIL_CONTAINER_NAME, "E-mail address", kEditBoxInputFlagInitialCapsAllCharacters, kEditBoxInputModeEmailAddr )
-    createTextInput( PASSWORD_CONTAINER_NAME, "Password", kEditBoxInputFlagPassword, kEditBoxInputModeSingleLine )
+    local emailInput = ViewUtils.createTextInput( mWidget:getChildByName( EMAIL_CONTAINER_NAME ), "E-mail address" )
+    emailInput:setFontColor( ccc3( 0, 0, 0 ) )
+    local passwordInput = ViewUtils.createTextInput( mWidget:getChildByName( PASSWORD_CONTAINER_NAME ), "Password" )
+    passwordInput:setInputFlag( kEditBoxInputFlagPassword )
+    passwordInput:setFontColor( ccc3( 0, 0, 0 ) )
 end
 
 function backEventHandler( sender,eventType )
@@ -40,13 +46,8 @@ function signinEventHandler( sender,eventType )
     end
 end
 
-function createTextInput( containerID, placeholderText, inputFlag, inputMode )
-    local textInput = CCEditBox:create( CCSizeMake( inputWidth, inputHeight ), CCScale9Sprite:create() )
-    local container = mWidget:getChildByName( containerID )
-    container:addNode( textInput, 0, 1 )
-    textInput:setPosition( inputWidth / 2, inputHeight / 2 )
-    textInput:setFont("Newgtbxc", 20)
-    textInput:setPlaceHolder( placeholderText )
-    textInput:setInputFlag( inputFlag )
-    textInput:setInputMode( inputMode )
+function forgotPasswordEventHandler( sender, eventType )
+    if eventType == TOUCH_EVENT_ENDED then
+        EventManager:postEvent( Event.Forgot_Password )
+    end
 end

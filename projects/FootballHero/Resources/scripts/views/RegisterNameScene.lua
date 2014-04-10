@@ -3,6 +3,7 @@ module(..., package.seeall)
 local SceneManager = require("scripts.SceneManager")
 local EventManager = require("scripts.events.EventManager").getInstance()
 local Event = require("scripts.events.Event").EventList
+local ViewUtils = require("scripts.views.ViewUtils")
 
 local USERNAME_CONTAINER_NAME = "usernameContainer"
 local FIRSTNAME_CONTAINER_NAME = "firstnameContainer"
@@ -23,9 +24,9 @@ function loadFrame()
     backBt:addTouchEventListener( backEventHandler )
     confirmBt:addTouchEventListener( confirmEventHandler )
 
-    createTextInput( USERNAME_CONTAINER_NAME, "Username", kEditBoxInputFlagInitialCapsAllCharacters, kEditBoxInputModeSingleLine )
-    createTextInput( FIRSTNAME_CONTAINER_NAME, "First name", kEditBoxInputFlagInitialCapsAllCharacters, kEditBoxInputModeSingleLine )
-    createTextInput( LASTNAME_CONTAINER_NAME, "Last name", kEditBoxInputFlagInitialCapsAllCharacters, kEditBoxInputModeSingleLine )
+    ViewUtils.createTextInput( mWidget:getChildByName( USERNAME_CONTAINER_NAME ), "Username" )
+    ViewUtils.createTextInput( mWidget:getChildByName( FIRSTNAME_CONTAINER_NAME ), "First name" )
+    ViewUtils.createTextInput( mWidget:getChildByName( LASTNAME_CONTAINER_NAME ), "Last name" )
 end
 
 function backEventHandler( sender,eventType )
@@ -42,15 +43,4 @@ function confirmEventHandler( sender,eventType )
 
         EventManager:postEvent( Event.Load_Match_List )
     end
-end
-
-function createTextInput( containerID, placeholderText, inputFlag, inputMode )
-    local textInput = CCEditBox:create( CCSizeMake( inputWidth, inputHeight ), CCScale9Sprite:create() )
-    local container = mWidget:getChildByName( containerID )
-    container:addNode( textInput, 0, 1 )
-    textInput:setPosition( inputWidth / 2, inputHeight / 2 )
-    textInput:setFont("Newgtbxc", 20)
-    textInput:setPlaceHolder( placeholderText )
-    textInput:setInputFlag( inputFlag )
-    textInput:setInputMode( inputMode )
 end

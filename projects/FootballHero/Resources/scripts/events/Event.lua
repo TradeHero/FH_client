@@ -20,6 +20,7 @@ EventNameList =
     "Register",
     "Register_Name",
     "Login",
+    "Forgot_Password",
     "Load_Match_List",
     "Enter_Match",
     "Prediction_Confirm"

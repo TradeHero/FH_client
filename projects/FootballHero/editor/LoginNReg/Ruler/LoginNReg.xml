@@ -16,4 +16,8 @@
     <Project>Signin</Project>
     <GuidesList />
   </GuidesProject>
+  <GuidesProject>
+    <Project>ForgotPassword</Project>
+    <GuidesList />
+  </GuidesProject>
 </ArrayOfGuidesProject>
