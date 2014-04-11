@@ -26,12 +26,12 @@ end
 function okEventHandler( sender,eventType )
     if eventType == TOUCH_EVENT_ENDED then
         local email = mWidget:getChildByName( EMAIL_CONTAINER_NAME ):getNodeByTag( 1 ):getText()
-        EventManager:postEvent( Event.Login )
+        EventManager:postEvent( Event.Enter_Login )
     end
 end
 
 function cancelEventHandler( sender,eventType )
 	if eventType == TOUCH_EVENT_ENDED then
-        EventManager:postEvent( Event.Login )
+        EventManager:postEvent( Event.Enter_Login )
     end
 end

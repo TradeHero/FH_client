@@ -34,7 +34,7 @@ end
 
 function backEventHandler( sender,eventType )
 	if eventType == TOUCH_EVENT_ENDED then
-        EventManager:postEvent( Event.Login_N_Reg )
+        EventManager:postEvent( Event.Enter_Login_N_Reg )
     end
 end
 
@@ -44,6 +44,6 @@ function registerEventHandler( sender,eventType )
         local pass = mWidget:getChildByName( PASSWORD_CONTAINER_NAME ):getNodeByTag( 1 ):getText()
         local passConf = mWidget:getChildByName( PASSWORD_CONF_CONTAINER_NAME ):getNodeByTag( 1 ):getText()
 
-        EventManager:postEvent( Event.Register_Name )
+        EventManager:postEvent( Event.Enter_Register_Name )
     end
 end

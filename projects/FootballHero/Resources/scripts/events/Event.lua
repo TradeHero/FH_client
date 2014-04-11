@@ -16,14 +16,14 @@ end
 
 EventNameList = 
 { 
-    "Login_N_Reg",
-    "Register",
-    "Register_Name",
-    "Login",
-    "Forgot_Password",
-    "Load_Match_List",
+    "Enter_Login_N_Reg",
+    "Enter_Register",
+    "Enter_Register_Name",
+    "Enter_Login",
+    "Enter_Forgot_Password",
+    "Enter_Match_List",
     "Enter_Match",
-    "Prediction_Confirm"
+    "Enter_Prediction_Confirm"
 }
 
 EventList = CreatEnumTable( EventNameList )

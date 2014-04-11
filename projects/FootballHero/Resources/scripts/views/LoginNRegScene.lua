@@ -19,13 +19,13 @@ end
 
 function signinEventHandler( sender,eventType )
 	if eventType == TOUCH_EVENT_ENDED then
-        EventManager:postEvent( Event.Login )
+        EventManager:postEvent( Event.Enter_Login )
     end
 end
 
 function registerEventHandler( sender,eventType )
 	if eventType == TOUCH_EVENT_ENDED then
-        EventManager:postEvent( Event.Register )
+        EventManager:postEvent( Event.Enter_Register )
     end
 end
 

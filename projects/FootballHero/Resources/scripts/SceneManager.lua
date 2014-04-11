@@ -2,14 +2,14 @@ module(..., package.seeall)
 
 local EventManager = require("scripts.events.EventManager").getInstance()
 local Event = require("scripts.events.Event").EventList
-local LoadMatchListAction = require("scripts.actions.LoadMatchListAction")
+local EnterMatchListAction = require("scripts.actions.EnterMatchListAction")
 local EnterMatchAction = require("scripts.actions.EnterMatchAction")
-local PredictionConfirmAction = require("scripts.actions.PredictionConfirmAction")
-local LoginNRegAction = require("scripts.actions.LoginNRegAction")
-local RegisterAction = require("scripts.actions.RegisterAction")
-local RegisterNameAction = require("scripts.actions.RegisterNameAction")
-local LoginAction = require("scripts.actions.LoginAction")
-local ForgotPasswordAction = require("scripts.actions.ForgotPasswordAction")
+local EnterPredictionConfirmAction = require("scripts.actions.EnterPredictionConfirmAction")
+local EnterLoginNRegAction = require("scripts.actions.EnterLoginNRegAction")
+local EnterRegisterAction = require("scripts.actions.EnterRegisterAction")
+local EnterRegisterNameAction = require("scripts.actions.EnterRegisterNameAction")
+local EnterLoginAction = require("scripts.actions.EnterLoginAction")
+local EnterForgotPasswordAction = require("scripts.actions.EnterForgotPasswordAction")
 
 local mSceneGameLayer
 
@@ -29,14 +29,14 @@ function init()
 end
 
 function initEvents()
-	EventManager:registerEventHandler( Event.Login_N_Reg, LoginNRegAction )
-	EventManager:registerEventHandler( Event.Register, RegisterAction )
-	EventManager:registerEventHandler( Event.Register_Name, RegisterNameAction )
-	EventManager:registerEventHandler( Event.Login, LoginAction )
-	EventManager:registerEventHandler( Event.Forgot_Password, ForgotPasswordAction )
-	EventManager:registerEventHandler( Event.Load_Match_List, LoadMatchListAction )
+	EventManager:registerEventHandler( Event.Enter_Login_N_Reg, EnterLoginNRegAction )
+	EventManager:registerEventHandler( Event.Enter_Register, EnterRegisterAction )
+	EventManager:registerEventHandler( Event.Enter_Register_Name, EnterRegisterNameAction )
+	EventManager:registerEventHandler( Event.Enter_Login, EnterLoginAction )
+	EventManager:registerEventHandler( Event.Enter_Forgot_Password, EnterForgotPasswordAction )
+	EventManager:registerEventHandler( Event.Enter_Match_List, EnterMatchListAction )
 	EventManager:registerEventHandler( Event.Enter_Match, EnterMatchAction )
-	EventManager:registerEventHandler( Event.Prediction_Confirm, PredictionConfirmAction )
+	EventManager:registerEventHandler( Event.Enter_Prediction_Confirm, EnterPredictionConfirmAction )
 end
 
 function clearNAddWidget( widget )

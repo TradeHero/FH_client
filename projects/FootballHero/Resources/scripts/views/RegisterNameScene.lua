@@ -31,7 +31,7 @@ end
 
 function backEventHandler( sender,eventType )
 	if eventType == TOUCH_EVENT_ENDED then
-        EventManager:postEvent( Event.Register )
+        EventManager:postEvent( Event.Enter_Register )
     end
 end
 
@@ -41,6 +41,6 @@ function confirmEventHandler( sender,eventType )
         local pass = mWidget:getChildByName( FIRSTNAME_CONTAINER_NAME ):getNodeByTag( 1 ):getText()
         local passConf = mWidget:getChildByName( LASTNAME_CONTAINER_NAME ):getNodeByTag( 1 ):getText()
 
-        EventManager:postEvent( Event.Load_Match_List )
+        EventManager:postEvent( Event.Enter_Match_List )
     end
 end

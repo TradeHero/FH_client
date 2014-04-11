@@ -39,10 +39,10 @@ function submitEventHandler( sender, eventType )
 		local scorePredictionList = MatchConfig.getPredictionList( matchIndex )
 
 		Logic:addPrediction( matchIndex, mPrediction )
-	    EventManager:postEvent( Event.Load_Match_List )
+	    EventManager:postEvent( Event.Enter_Match_List )
 	    --[[
 	    if table.getn( scorePredictionList ) == 0 then
-	        EventManager:postEvent( Event.Load_Match_List )
+	        EventManager:postEvent( Event.Enter_Match_List )
 	    else
 	        ScorePrediction.loadFrame()
 	    end

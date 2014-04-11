@@ -33,7 +33,7 @@ end
 
 function backEventHandler( sender,eventType )
     if eventType == TOUCH_EVENT_ENDED then
-        EventManager:postEvent( Event.Login_N_Reg )
+        EventManager:postEvent( Event.Enter_Login_N_Reg )
     end
 end
 
@@ -42,12 +42,12 @@ function signinEventHandler( sender,eventType )
         local email = mWidget:getChildByName( EMAIL_CONTAINER_NAME ):getNodeByTag( 1 ):getText()
         local pass = mWidget:getChildByName( PASSWORD_CONTAINER_NAME ):getNodeByTag( 1 ):getText()
 
-        EventManager:postEvent( Event.Load_Match_List )
+        EventManager:postEvent( Event.Enter_Match_List )
     end
 end
 
 function forgotPasswordEventHandler( sender, eventType )
     if eventType == TOUCH_EVENT_ENDED then
-        EventManager:postEvent( Event.Forgot_Password )
+        EventManager:postEvent( Event.Enter_Forgot_Password )
     end
 end

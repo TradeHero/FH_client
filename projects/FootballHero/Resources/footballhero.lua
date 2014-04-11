@@ -28,15 +28,17 @@ local function main()
 
     local eventManager = require("scripts.events.EventManager").getInstance()
     local event = require("scripts.events.Event").EventList
-    eventManager:postEvent( event.Login_N_Reg )
-
-    local handler = function( isSucceed, body, header, status, errorBuffer )
-        cclog( "Http reponse: "..body )
-    end
+    eventManager:postEvent( event.Enter_Login_N_Reg )
 
 --[[
+    local Json = require("json")
+    local handler = function( isSucceed, body, header, status, errorBuffer )
+        cclog( "Http reponse: "..body )
+        local jsonResponse = Json.decode( body )
+        cclog(jsonResponse["ip"])
+    end
     local httpRequest = HttpRequestForLua:create( CCHttpRequest.kHttpGet, "application/json", "kdjfkj" )
-    httpRequest:sendHttpRequest( "http://192.168.1.12:8080/source/", handler )
+    httpRequest:sendHttpRequest( "http://ip.jsontest.com/", handler )
 --]]
 
 --[[
