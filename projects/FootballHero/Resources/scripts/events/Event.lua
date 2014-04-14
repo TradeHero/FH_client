@@ -23,7 +23,11 @@ EventNameList =
     "Enter_Forgot_Password",
     "Enter_Match_List",
     "Enter_Match",
-    "Enter_Prediction_Confirm"
+    "Enter_Prediction_Confirm",
+
+    "Do_Register",
+
+    "Show_Error_Message",
 }
 
 EventList = CreatEnumTable( EventNameList )

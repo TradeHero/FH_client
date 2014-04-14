@@ -1,6 +1,6 @@
 /*
 ** Lua binding: Extension
-** Generated automatically by tolua++-1.0.92 on 04/09/14 12:27:31.
+** Generated automatically by tolua++-1.0.92 on 04/14/14 14:11:28.
 */
 
 /****************************************************************************
@@ -424,18 +424,16 @@ static int tolua_Extension_HttpRequestForLua_create00(lua_State* tolua_S)
      !tolua_isusertable(tolua_S,1,"HttpRequestForLua",0,&tolua_err) ||
      !tolua_isnumber(tolua_S,2,0,&tolua_err) ||
      !tolua_isstring(tolua_S,3,0,&tolua_err) ||
-     !tolua_isstring(tolua_S,4,0,&tolua_err) ||
-     !tolua_isnoobj(tolua_S,5,&tolua_err)
+     !tolua_isnoobj(tolua_S,4,&tolua_err)
  )
   goto tolua_lerror;
  else
 #endif
  {
   CCHttpRequest::HttpRequestType type = ((CCHttpRequest::HttpRequestType) (int)  tolua_tonumber(tolua_S,2,0));
-  const char* contentType = ((const char*)  tolua_tostring(tolua_S,3,0));
-  const char* fhToken = ((const char*)  tolua_tostring(tolua_S,4,0));
+  const char* header = ((const char*)  tolua_tostring(tolua_S,3,0));
   {
-   HttpRequestForLua* tolua_ret = (HttpRequestForLua*)  HttpRequestForLua::create(type,contentType,fhToken);
+   HttpRequestForLua* tolua_ret = (HttpRequestForLua*)  HttpRequestForLua::create(type,header);
     tolua_pushusertype(tolua_S,(void*)tolua_ret,"HttpRequestForLua");
   }
  }

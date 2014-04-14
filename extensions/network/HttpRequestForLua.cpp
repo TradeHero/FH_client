@@ -13,7 +13,7 @@ HttpRequestForLua::~HttpRequestForLua()
 {
 }
 
-HttpRequestForLua * HttpRequestForLua::create(CCHttpRequest::HttpRequestType type, const char* contentType, const char* fhToken)
+HttpRequestForLua * HttpRequestForLua::create(CCHttpRequest::HttpRequestType type, const char* header)
 {
 	HttpRequestForLua* requestForLua = new HttpRequestForLua();
 
@@ -24,19 +24,11 @@ HttpRequestForLua * HttpRequestForLua::create(CCHttpRequest::HttpRequestType typ
 		CCHttpRequest* request = new CCHttpRequest();
 		request->setRequestType(type);
 
-		std::string header = "";
-		if (contentType != NULL)
-		{
-			header.append("Content-Type=");
-			header.append(contentType);
-		}
-		if (fhToken != NULL)
-		{
-			header.append("FH-Token=");
-			header.append(fhToken);
-		}
 		std::vector<std::string> headers;
-		headers.push_back(header);
+		if (header != NULL)
+		{
+			headers.push_back(header);
+		}
 		request->setHeaders(headers);
 
 		requestForLua->setRequest(request);
@@ -80,7 +72,6 @@ void HttpRequestForLua::onHttpRequestCompleted(cocos2d::CCNode *sender, void *da
 	{
 		CCLog("response failed");
 		CCLog("error buffer: %s", response->getErrorBuffer());
-		return;
 	}
 
 	// dump data

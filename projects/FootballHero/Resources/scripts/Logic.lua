@@ -28,6 +28,9 @@ function Logic:new()
 		mPoint = 5000,
 		mSelectedMatchIndex = 0,
 		mPredictionList = {},
+		sessionToken = 0,
+		email = "",
+		password = "",
 	}
     
     setmetatable(obj, self)
@@ -63,6 +66,24 @@ function Logic:consumePoint( v )
 	end
 end
 
+function Logic:setUserInfo( email, password, sessionToken )
+	self.email = email
+	self.password = password
+	self.sessionToken = sessionToken
+end
+
+function Logic:getEmail()
+	return self.email
+end
+
+function Logic.getPassword()
+	return self.password
+end
+
+function Logic.getSessionToken()
+	return self.sessionToken
+end
+
 function Logic:getPrediction( predictionIndex )
 	return self.mPredictionList[MATCH_PREDICTION..predictionIndex]
 end
@@ -70,8 +91,6 @@ end
 function Logic:addPrediction( predictionIndex, prediciton )
 	print("Index "..predictionIndex.." value "..prediciton)
 	self.mPredictionList[MATCH_PREDICTION..predictionIndex] = prediciton		-- use tonumber("3")
-
-	self:writeToFile()
 end
 
 function Logic:getScorePrediction( predictionIndex )
@@ -83,8 +102,6 @@ function Logic:addScorePrediction( predictionIndex, scorePredictionIndex, predic
 		self.mPredictionList[SCORE_PREDICTION..predictionIndex] = {}
 	end
 	self.mPredictionList[SCORE_PREDICTION..predictionIndex][SUB_PREDICTION..scorePredictionIndex] = prediction
-
-	self:writeToFile()
 end
 
 function Logic:writeToFile()
