@@ -26,6 +26,8 @@ EventNameList =
     "Enter_Prediction_Confirm",
 
     "Do_Register",
+    "Do_Register_Name",
+    "Do_Login",
 
     "Show_Error_Message",
 }

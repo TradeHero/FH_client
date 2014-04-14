@@ -13,7 +13,7 @@
   </JsonList>
   <imageFileList />
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>ConnectingMessage.json</CurrentUIJson>
+  <CurrentUIJson>ErrorMessage.json</CurrentUIJson>
   <CanvasSize>
     <Width>640</Width>
     <Height>1136</Height>

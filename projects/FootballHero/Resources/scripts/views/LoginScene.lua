@@ -42,7 +42,7 @@ function signinEventHandler( sender,eventType )
         local email = mWidget:getChildByName( EMAIL_CONTAINER_NAME ):getNodeByTag( 1 ):getText()
         local pass = mWidget:getChildByName( PASSWORD_CONTAINER_NAME ):getNodeByTag( 1 ):getText()
 
-        EventManager:postEvent( Event.Enter_Match_List )
+        EventManager:postEvent( Event.Do_Login, { email, pass } )
     end
 end
 

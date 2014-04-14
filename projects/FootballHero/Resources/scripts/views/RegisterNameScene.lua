@@ -25,8 +25,8 @@ function loadFrame()
     confirmBt:addTouchEventListener( confirmEventHandler )
 
     ViewUtils.createTextInput( mWidget:getChildByName( USERNAME_CONTAINER_NAME ), "Username" )
-    ViewUtils.createTextInput( mWidget:getChildByName( FIRSTNAME_CONTAINER_NAME ), "First name" )
-    ViewUtils.createTextInput( mWidget:getChildByName( LASTNAME_CONTAINER_NAME ), "Last name" )
+    ViewUtils.createTextInput( mWidget:getChildByName( FIRSTNAME_CONTAINER_NAME ), "First name (Optional)" )
+    ViewUtils.createTextInput( mWidget:getChildByName( LASTNAME_CONTAINER_NAME ), "Last name (Optional)" )
 end
 
 function backEventHandler( sender,eventType )
@@ -37,10 +37,10 @@ end
 
 function confirmEventHandler( sender,eventType )
 	if eventType == TOUCH_EVENT_ENDED then
-        local email = mWidget:getChildByName( USERNAME_CONTAINER_NAME ):getNodeByTag( 1 ):getText()
-        local pass = mWidget:getChildByName( FIRSTNAME_CONTAINER_NAME ):getNodeByTag( 1 ):getText()
-        local passConf = mWidget:getChildByName( LASTNAME_CONTAINER_NAME ):getNodeByTag( 1 ):getText()
+        local userName = mWidget:getChildByName( USERNAME_CONTAINER_NAME ):getNodeByTag( 1 ):getText()
+        local firstName = mWidget:getChildByName( FIRSTNAME_CONTAINER_NAME ):getNodeByTag( 1 ):getText()
+        local lastName = mWidget:getChildByName( LASTNAME_CONTAINER_NAME ):getNodeByTag( 1 ):getText()
 
-        EventManager:postEvent( Event.Enter_Match_List, { email, pass, passConf } )
+        EventManager:postEvent( Event.Do_Register_Name, { userName, firstName, lastName } )
     end
 end

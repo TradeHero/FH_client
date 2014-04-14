@@ -1,0 +1,55 @@
+module(..., package.seeall)
+
+local EventManager = require("scripts.events.EventManager").getInstance()
+local Event = require("scripts.events.Event").EventList
+local ConnectingMessage = require("scripts.views.ConnectingMessage")
+
+local mUserName = "SamYu"
+local mFirstName = "Yu"
+local mLastName = "Zheng"
+
+
+function action( param )
+	local Json = require("json")
+	local RequestConstants = require("scripts.RequestConstants")
+
+    mUserName, mFirstName, mLastName = param[1], param[2], param[3]
+    if string.len( mUserName ) == 0 then
+        onRequestFailed( "User name is blank." )
+        return
+    end
+
+    local handler = function( isSucceed, body, header, status, errorBuffer )
+        print( "Http reponse: "..status.." and errorBuffer: "..errorBuffer )
+        print( "Http reponse body: "..body )
+        local jsonResponse = Json.decode( body )
+        ConnectingMessage.selfRemove()
+        if status == RequestConstants.HTTP_200 then
+            local sessionToken = jsonResponse["sessionToken"]
+            onRequestSuccess()
+        else
+            onRequestFailed( jsonResponse["Message"] )
+        end
+    end
+
+--[[
+    local requestContent = { Email = mEmail, Password = mPassword }
+    local requestContentText = Json.encode( requestContent )
+    print("Request content is "..requestContentText)
+
+    local httpRequest = HttpRequestForLua:create( CCHttpRequest.kHttpPost, "Content-Type: application/json" )
+    httpRequest:getRequest():setRequestData( requestContentText, string.len( requestContentText ) )
+    httpRequest:sendHttpRequest( RequestConstants.EMAIL_REGISTER_REST_CALL, handler )
+
+    ConnectingMessage.loadFrame()
+--]]
+    onRequestSuccess( nil )
+end
+
+function onRequestSuccess( sessionToken )
+    EventManager:postEvent( Event.Enter_Match_List )
+end
+
+function onRequestFailed( errorBuffer )
+    EventManager:postEvent( Event.Show_Error_Message, { errorBuffer } )
+end

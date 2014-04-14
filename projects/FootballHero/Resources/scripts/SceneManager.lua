@@ -11,6 +11,8 @@ local EnterRegisterNameAction = require("scripts.actions.EnterRegisterNameAction
 local EnterLoginAction = require("scripts.actions.EnterLoginAction")
 local EnterForgotPasswordAction = require("scripts.actions.EnterForgotPasswordAction")
 local DoRegisterAction = require("scripts.actions.DoRegisterAction")
+local DoLoginAction = require("scripts.actions.DoLoginAction")
+local DoRegisterNameAction = require("scripts.actions.DoRegisterNameAction")
 local ShowErrorMessageAction = require("scripts.actions.ShowErrorMessageAction")
 
 local mSceneGameLayer
@@ -40,6 +42,8 @@ function initEvents()
 	EventManager:registerEventHandler( Event.Enter_Match, EnterMatchAction )
 	EventManager:registerEventHandler( Event.Enter_Prediction_Confirm, EnterPredictionConfirmAction )
 	EventManager:registerEventHandler( Event.Do_Register, DoRegisterAction )
+	EventManager:registerEventHandler( Event.Do_Register_Name, DoRegisterNameAction )
+	EventManager:registerEventHandler( Event.Do_Login, DoLoginAction )
 	EventManager:registerEventHandler( Event.Show_Error_Message, ShowErrorMessageAction )
 end
 
