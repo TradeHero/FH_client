@@ -12,7 +12,7 @@ namespace Social
 		static FacebookDelegate* sharedDelegate();
 
 		void login(int successHandler, int errorHandler);
-        void loginResult();
+        void loginResult(const char* accessToken);
 
 	protected:
 		FacebookDelegate();

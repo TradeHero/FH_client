@@ -8,6 +8,7 @@
 
 class FacebookConnector
 {
+
 public:
     static FacebookConnector* getInstance();
     

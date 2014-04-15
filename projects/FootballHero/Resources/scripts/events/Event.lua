@@ -28,6 +28,7 @@ EventNameList =
     "Do_Register",
     "Do_Register_Name",
     "Do_Login",
+    "Do_FB_Connect",
 
     "Show_Error_Message",
 }

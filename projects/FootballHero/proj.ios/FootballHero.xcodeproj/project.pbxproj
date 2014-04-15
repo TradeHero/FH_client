@@ -211,6 +211,7 @@
 		730D984D18DC4317000CA5F9 /* scenes in Resources */ = {isa = PBXBuildFile; fileRef = 730D983E18DC4317000CA5F9 /* scenes */; };
 		730D984E18DC4317000CA5F9 /* scripts in Resources */ = {isa = PBXBuildFile; fileRef = 730D983F18DC4317000CA5F9 /* scripts */; };
 		730D984F18DC4317000CA5F9 /* sounds in Resources */ = {isa = PBXBuildFile; fileRef = 730D984018DC4317000CA5F9 /* sounds */; };
+		7365C0D218FCE99200C39027 /* FBSessionSingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 7365C0D118FCE99200C39027 /* FBSessionSingleton.m */; };
 		7388C04118F4E2FF00CF667C /* HttpRequestForLua.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7388C03F18F4E2FF00CF667C /* HttpRequestForLua.cpp */; };
 		73EDFC8018EBE69E00322624 /* FacebookDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 73EDFC7D18EBE69E00322624 /* FacebookDelegate.cpp */; };
 		73EDFC8518EC005700322624 /* LuaCocos2dExtension.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 73EDFC8318EC005700322624 /* LuaCocos2dExtension.cpp */; };
@@ -700,6 +701,8 @@
 		730D983E18DC4317000CA5F9 /* scenes */ = {isa = PBXFileReference; lastKnownFileType = folder; path = scenes; sourceTree = "<group>"; };
 		730D983F18DC4317000CA5F9 /* scripts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = scripts; sourceTree = "<group>"; };
 		730D984018DC4317000CA5F9 /* sounds */ = {isa = PBXFileReference; lastKnownFileType = folder; path = sounds; sourceTree = "<group>"; };
+		7365C0D018FCE99200C39027 /* FBSessionSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBSessionSingleton.h; sourceTree = "<group>"; };
+		7365C0D118FCE99200C39027 /* FBSessionSingleton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBSessionSingleton.m; sourceTree = "<group>"; };
 		7388C03F18F4E2FF00CF667C /* HttpRequestForLua.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HttpRequestForLua.cpp; sourceTree = "<group>"; };
 		7388C04018F4E2FF00CF667C /* HttpRequestForLua.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpRequestForLua.h; sourceTree = "<group>"; };
 		73C7D8E418E9119100D39A26 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -1881,6 +1884,8 @@
 		F293B6E815EB807E00256477 /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
+				7365C0D018FCE99200C39027 /* FBSessionSingleton.h */,
+				7365C0D118FCE99200C39027 /* FBSessionSingleton.m */,
 				73EDFC9418ECFE7400322624 /* FacebookConnector.h */,
 				73EDFC9518ECFE7400322624 /* FacebookConnector.mm */,
 				73C7D8E418E9119100D39A26 /* Info.plist */,
@@ -2068,6 +2073,7 @@
 				15C154071683112E00D239F2 /* CCMenuItemLoader.cpp in Sources */,
 				15C154081683112E00D239F2 /* CCNode+CCBRelativePositioning.cpp in Sources */,
 				15C154091683112E00D239F2 /* CCNodeLoader.cpp in Sources */,
+				7365C0D218FCE99200C39027 /* FBSessionSingleton.m in Sources */,
 				15C1540A1683112E00D239F2 /* CCNodeLoaderLibrary.cpp in Sources */,
 				15C1540B1683112E00D239F2 /* CCParticleSystemQuadLoader.cpp in Sources */,
 				15C1540C1683112E00D239F2 /* CCScale9SpriteLoader.cpp in Sources */,

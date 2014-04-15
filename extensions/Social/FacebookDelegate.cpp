@@ -57,7 +57,7 @@ namespace Social
 #endif
 	}
     
-    void FacebookDelegate::loginResult()
+    void FacebookDelegate::loginResult(const char* accessToken)
 	{
 		CCScriptEngineProtocol* pScriptProtocol = CCScriptEngineManager::sharedManager()->getScriptEngine();
 		cocos2d::CCLuaEngine* pLuaEngine = dynamic_cast<CCLuaEngine*>(pScriptProtocol);
@@ -68,7 +68,7 @@ namespace Social
 		}
 
 		CCLuaStack* pStack = pLuaEngine->getLuaStack();
-		pStack->pushFloat(0.1);
+		pStack->pushString(accessToken);
 		int ret = pStack->executeFunctionByHandler(mSuccessHandler, 1);
 		pStack->clean();
 	}

@@ -21,7 +21,7 @@
 		<string>Icon-152.png</string>
 	</array>
 	<key>CFBundleIdentifier</key>
-	<string>com.tradehero.th</string>
+	<string>com.myhero.fh</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -42,11 +42,11 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1.0.3</string>
+	<string>1.0.4</string>
 	<key>FacebookAppID</key>
 	<string>788386747851675</string>
 	<key>FacebookDisplayName</key>
-	<string>FootballHero</string>
+	<string>Football Hero</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>UIAppFonts</key>

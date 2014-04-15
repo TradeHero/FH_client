@@ -31,6 +31,6 @@ end
 
 function facebookEventHandler( sender,eventType )
     if eventType == TOUCH_EVENT_ENDED then
-        
+        EventManager:postEvent( Event.Do_FB_Connect ) 
     end
 end

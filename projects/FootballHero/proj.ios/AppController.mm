@@ -28,6 +28,8 @@
 #import "AppDelegate.h"
 
 #import "RootViewController.h"
+#import "FBSessionSingleton.h"
+#import <FacebookSDK/FacebookSDK.h>
 
 @implementation AppController
 
@@ -131,6 +133,15 @@ static AppDelegate s_sharedApplication;
     [super dealloc];
 }
 
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication
+         annotation:(id)annotation {
+    // attempt to extract a token from the url
+    return [FBAppCall handleOpenURL:url
+                  sourceApplication:sourceApplication
+                        withSession:[FBSessionSingleton sharedInstance].session];
+}
 
 @end
 

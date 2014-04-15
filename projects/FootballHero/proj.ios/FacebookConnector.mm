@@ -9,10 +9,9 @@
 #include "FacebookConnector.h"
 #include "FacebookDelegate.h"
 #import <FacebookSDK/FacebookSDK.h>
-
+#import "FBSessionSingleton.h"
 
 static FacebookConnector* instance;
-FBSession* session;
 
 FacebookConnector* FacebookConnector::getInstance()
 {
@@ -28,14 +27,12 @@ FacebookConnector* FacebookConnector::getInstance()
 void FacebookConnector::initSession()
 {
     NSLog(@"\nFacebook Connector init.");
-    if (!session.isOpen) {
-        // create a fresh session object
-        session = [[FBSession alloc] init];
-    }
+    [FBSessionSingleton sharedInstance].session;
 }
 
 void FacebookConnector::login()
 {
+    FBSession* session = [FBSessionSingleton sharedInstance].session;
     if (session.state != FBSessionStateCreated) {
         // Create a new, logged out session.
         session = [[FBSession alloc] init];
@@ -45,7 +42,7 @@ void FacebookConnector::login()
     [session openWithCompletionHandler:^(FBSession *session,
                                                      FBSessionState status,
                                                      NSError *error) {
-        NSLog(session.accessTokenData.accessToken);
+        const char* accessToken =[session.accessTokenData.accessToken UTF8String];
+        Social::FacebookDelegate::sharedDelegate()->loginResult(accessToken);
     }];
-    Social::FacebookDelegate::sharedDelegate()->loginResult();
 }
