@@ -137,10 +137,8 @@ static AppDelegate s_sharedApplication;
             openURL:(NSURL *)url
   sourceApplication:(NSString *)sourceApplication
          annotation:(id)annotation {
-    // attempt to extract a token from the url
     return [FBAppCall handleOpenURL:url
-                  sourceApplication:sourceApplication
-                        withSession:[FBSessionSingleton sharedInstance].session];
+                  sourceApplication:sourceApplication];
 }
 
 @end

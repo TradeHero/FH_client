@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "___ZN17FacebookConnector5loginEv_block_invoke:FacebookConnector.mm">
+         <PersistentStrings>
+            <PersistentString
+               value = "session.accessTokenData.permissions">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>

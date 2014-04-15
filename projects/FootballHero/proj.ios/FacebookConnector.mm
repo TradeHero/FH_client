@@ -38,11 +38,11 @@ void FacebookConnector::login()
         session = [[FBSession alloc] init];
     }
     
-    // if the session isn't open, let's open it now and present the login UX to the user
-    [session openWithCompletionHandler:^(FBSession *session,
-                                                     FBSessionState status,
-                                                     NSError *error) {
-        const char* accessToken =[session.accessTokenData.accessToken UTF8String];
+    [FBSession openActiveSessionWithReadPermissions: @[@"basic_info", @"email", @"user_birthday"] allowLoginUI:YES completionHandler:^(FBSession *aSession, FBSessionState status, NSError *error) {
+        
+        [FBSessionSingleton sharedInstance].session = aSession;
+        const char* accessToken =[aSession.accessTokenData.accessToken UTF8String];
         Social::FacebookDelegate::sharedDelegate()->loginResult(accessToken);
+        
     }];
 }

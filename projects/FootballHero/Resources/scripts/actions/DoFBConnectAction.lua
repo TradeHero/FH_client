@@ -9,12 +9,12 @@ function action( param )
 	local RequestConstants = require("scripts.RequestConstants")
 
     local successHandler = function( num )
-        print("Get login result "..num)
+        if num == nil then
+            -- To handle user reject to the oAuth.
+        else
+            print("Get login result "..num)
+        end
     end
 
-    local failHandler = function( num )
-        print("Get login result "..num)
-    end
-
-    FacebookDelegate:sharedDelegate():login( successHandler, failHandler )
+    FacebookDelegate:sharedDelegate():login( successHandler, successHandler )
 end
