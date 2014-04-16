@@ -8,11 +8,13 @@
   <Resources>Z:\FH_client\projects\FootballHero\editor\FavouriteTeam\Resources</Resources>
   <JsonFolder>Z:\FH_client\projects\FootballHero\editor\FavouriteTeam\Json</JsonFolder>
   <JsonList>
-    <string>FavouriteTeam_1.json</string>
+    <string>FavouriteTeam.json</string>
+    <string>Country.json</string>
+    <string>Team.json</string>
   </JsonList>
   <imageFileList />
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>FavouriteTeam_1.json</CurrentUIJson>
+  <CurrentUIJson>Team.json</CurrentUIJson>
   <CanvasSize>
     <Width>640</Width>
     <Height>1136</Height>

@@ -29,6 +29,10 @@ function loadFrame()
     ViewUtils.createTextInput( mWidget:getChildByName( LASTNAME_CONTAINER_NAME ), "Last name (Optional)" )
 end
 
+function setUserName( name )
+    mWidget:getChildByName( USERNAME_CONTAINER_NAME ):getNodeByTag( 1 ):setText( name )
+end
+
 function backEventHandler( sender,eventType )
 	if eventType == TOUCH_EVENT_ENDED then
         EventManager:postEvent( Event.Enter_Register )

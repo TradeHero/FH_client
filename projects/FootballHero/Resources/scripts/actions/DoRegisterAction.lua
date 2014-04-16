@@ -3,6 +3,8 @@ module(..., package.seeall)
 local EventManager = require("scripts.events.EventManager").getInstance()
 local Event = require("scripts.events.Event").EventList
 local ConnectingMessage = require("scripts.views.ConnectingMessage")
+local Json = require("json")
+local RequestConstants = require("scripts.RequestConstants")
 
 local mEmail = "test126@abc.com"
 local mPassword = "test126"
@@ -10,8 +12,6 @@ local mPasswordConf = "test126"
 
 
 function action( param )
-	local Json = require("json")
-	local RequestConstants = require("scripts.RequestConstants")
 
     mEmail, mPassword, mPasswordConf = param[1], param[2], param[3]
     if string.len( mEmail ) == 0 then
@@ -42,7 +42,7 @@ function action( param )
         ConnectingMessage.selfRemove()
         if status == RequestConstants.HTTP_200 then
             local sessionToken = jsonResponse["sessionToken"]
-            onRequestSuccess()
+            onRequestSuccess( sessionToken )
         else
             onRequestFailed( jsonResponse["Message"] )
         end
