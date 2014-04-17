@@ -3,7 +3,7 @@ module(..., package.seeall)
 local inputWidth = 400
 local inputHeight = 50
 local FONT_NAME = "Newgtbxc"
-local FONT_SIZE = 20
+local FONT_SIZE = 30
 
 function createTextInput( container, placeholderText )
     local textInput = CCEditBox:create( CCSizeMake( inputWidth, inputHeight ), CCScale9Sprite:create() )

@@ -16,7 +16,7 @@
   </JsonList>
   <imageFileList />
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>RegisterName.json</CurrentUIJson>
+  <CurrentUIJson>ForgotPassword.json</CurrentUIJson>
   <CanvasSize>
     <Width>640</Width>
     <Height>960</Height>
