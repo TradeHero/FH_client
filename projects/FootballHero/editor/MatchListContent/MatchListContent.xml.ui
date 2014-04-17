@@ -10,10 +10,12 @@
   <JsonList>
     <string>MatchListContent.json</string>
     <string>MatchDate.json</string>
+    <string>CountryListContent.json</string>
+    <string>LeagueListContent.json</string>
   </JsonList>
   <imageFileList />
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>MatchDate.json</CurrentUIJson>
+  <CurrentUIJson>MatchListContent.json</CurrentUIJson>
   <CanvasSize>
     <Width>640</Width>
     <Height>200</Height>

@@ -9,9 +9,7 @@
   "dataScale": 1,
   "designHeight": 200,
   "designWidth": 640,
-  "textures": [
-    "MatchListContent0.plist"
-  ],
+  "textures": [],
   "version": "1.2.0.1",
   "widgetTree": {
     "classname": "Panel",
@@ -40,7 +38,7 @@
           "layoutParameter": null,
           "opacity": 255,
           "positionPercentX": 0.5,
-          "positionPercentY": 0.511999965,
+          "positionPercentY": 0.51,
           "positionType": 0,
           "rotation": 0,
           "scaleX": 1,

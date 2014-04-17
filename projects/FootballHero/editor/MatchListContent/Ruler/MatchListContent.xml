@@ -8,4 +8,12 @@
     <Project>MatchDate</Project>
     <GuidesList />
   </GuidesProject>
+  <GuidesProject>
+    <Project>CountryListContent</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>LeagueListContent</Project>
+    <GuidesList />
+  </GuidesProject>
 </ArrayOfGuidesProject>

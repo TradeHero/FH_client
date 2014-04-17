@@ -9,12 +9,18 @@ local Logic = require("scripts.Logic").getInstance()
 local EventManager = require("scripts.events.EventManager").getInstance()
 local Event = require("scripts.events.Event").EventList
 
-
+local mWidget
+local mTopLayer
 local mMatchNum = MatchConfig.getConfigNum()
+
+local MIN_MOVE_DISTANCE = 100
+local OPTION_MOVE_TIME = 0.5
+local OPTION_VIEW_OFFSET_X = 475
 
 function loadFrame()
 	local widget = GUIReader:shareReader():widgetFromJsonFile("scenes/MatchList/MatchListScene.json")
     SceneManager.clearNAddWidget( widget )
+    mWidget = widget
 
     Navigator.loadFrame()
 
@@ -64,6 +70,39 @@ function loadFrame()
     contentContainer:setInnerContainerSize( CCSize:new( 0, contentHeight ) )
     local layout = tolua.cast( contentContainer, "Layout" )
     layout:requestDoLayout()
+
+    -- Init the league list
+    contentHeight = 0
+    local leagueList = tolua.cast( widget:getChildByName("leagueList"), "ScrollView" )
+
+    for i = 1, 2 do
+        local eventHandler = function( sender, eventType )
+            if eventType == TOUCH_EVENT_ENDED then
+                -- Handler
+            end
+        end
+
+        local content = GUIReader:shareReader():widgetFromJsonFile("scenes/MatchList/CountryListContent.json")
+
+        content:setLayoutParameter( layoutParameter )
+        content:addTouchEventListener( eventHandler )
+        leagueList:addChild( content )
+        contentHeight = contentHeight + content:getSize().height
+    end
+
+    leagueList:setInnerContainerSize( CCSize:new( 0, contentHeight ) )
+    local layout = tolua.cast( leagueList, "Layout" )
+    layout:requestDoLayout()
+
+    -- Option button
+    local optionBt = widget:getChildByName("option")
+    optionBt:addTouchEventListener( optionEventHandler )
+
+    -- Init the toplayer to listen to the swap action.
+    mTopLayer = CCLayer:create()
+    mTopLayer:registerScriptTouchHandler( onTopLevelTouch, false, -100)
+    mTopLayer:setTouchEnabled( false )
+    mWidget:addNode( mTopLayer )
 end
 
 function enterMatch( index )
@@ -91,5 +130,51 @@ function helperInitMatchInfo( content, matchIndex )
     else
         vsBt:setBright( false )
         vsBt:setTouchEnabled( false )
+    end
+end
+
+function optionEventHandler( sender, eventType )
+    if eventType == TOUCH_EVENT_ENDED then
+        local optionBt = mWidget:getChildByName("option")
+        optionBt:setTouchEnabled( false )
+
+        local seqArray = CCArray:create()
+        seqArray:addObject( CCMoveBy:create( OPTION_MOVE_TIME, ccp( OPTION_VIEW_OFFSET_X, 0 ) ) )
+        seqArray:addObject( CCCallFuncN:create( function()
+            mTopLayer:setTouchEnabled( true )
+        end ) )
+        mWidget:runAction( CCSequence:create( seqArray ) )
+    end
+end
+
+function onTopLevelTouch( eventType, x, y )
+    print( "onTopLevelTouch" )
+
+    if eventType == TOUCH_EVENT_ENDED then
+        local touchBeginPoint = sender:getTouchStartPos()
+        local touchEndPoint = sender:getTouchEndPos()
+        print( touchBeginPoint.x - touchEndPoint.x )
+        
+    end
+end
+
+
+local startPosX, startPosY
+function onTopLevelTouch( eventType, x, y )
+    if eventType == "began" then
+        startPosX, startPosY = x, y
+        return true
+    elseif eventType == "ended" then
+        if startPosX - x > MIN_MOVE_DISTANCE then
+            -- Swap to Left
+            mTopLayer:setTouchEnabled( false )
+            local seqArray = CCArray:create()
+            seqArray:addObject( CCMoveBy:create( OPTION_MOVE_TIME, ccp( OPTION_VIEW_OFFSET_X * (-1), 0 ) ) )
+            seqArray:addObject( CCCallFuncN:create( function()
+                local optionBt = mWidget:getChildByName("option")
+                optionBt:setTouchEnabled( true )
+            end ) )
+            mWidget:runAction( CCSequence:create( seqArray ) )
+        end
     end
 end
