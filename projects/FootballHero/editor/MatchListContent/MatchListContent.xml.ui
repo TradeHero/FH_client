@@ -1,20 +1,19 @@
 <?xml version="1.0"?>
 <UIProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <filePath>Z:\下载\cocos2d-x-2.2.2\projects\FootballHero\editor\MatchListContent\MatchListContent.xml.ui</filePath>
+  <filePath>Z:\FH_client\projects\FootballHero\editor\MatchListContent\MatchListContent.xml.ui</filePath>
   <Version>1.2.0.1</Version>
   <Name>MatchListContent</Name>
-  <ProjectDir>Z:\下载\cocos2d-x-2.2.2\projects\FootballHero\editor\MatchListContent</ProjectDir>
+  <ProjectDir>Z:\FH_client\projects\FootballHero\editor\MatchListContent</ProjectDir>
   <JsonFileName>MatchListContent.json</JsonFileName>
-  <Resources>Z:\下载\cocos2d-x-2.2.2\projects\FootballHero\editor\MatchListContent\Resources</Resources>
-  <JsonFolder>Z:\下载\cocos2d-x-2.2.2\projects\FootballHero\editor\MatchListContent\Json</JsonFolder>
+  <Resources>Z:\FH_client\projects\FootballHero\editor\MatchListContent\Resources</Resources>
+  <JsonFolder>Z:\FH_client\projects\FootballHero\editor\MatchListContent\Json</JsonFolder>
   <JsonList>
     <string>MatchListContent.json</string>
+    <string>MatchDate.json</string>
   </JsonList>
-  <imageFileList>
-    <string>MatchListContent0.plist</string>
-  </imageFileList>
+  <imageFileList />
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>MatchListContent.json</CurrentUIJson>
+  <CurrentUIJson>MatchDate.json</CurrentUIJson>
   <CanvasSize>
     <Width>640</Width>
     <Height>200</Height>

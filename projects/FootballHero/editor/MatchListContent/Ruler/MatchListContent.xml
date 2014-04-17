@@ -4,4 +4,8 @@
     <Project>MatchListContent</Project>
     <GuidesList />
   </GuidesProject>
+  <GuidesProject>
+    <Project>MatchDate</Project>
+    <GuidesList />
+  </GuidesProject>
 </ArrayOfGuidesProject>

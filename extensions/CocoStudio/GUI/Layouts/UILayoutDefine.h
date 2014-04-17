@@ -63,7 +63,7 @@ typedef enum
     LINEAR_GRAVITY_CENTER_VERTICAL,
     LINEAR_GRAVITY_CENTER_HORIZONTAL
 }LinearGravity;
-
+	
 typedef enum
 {
     RELATIVE_ALIGN_NONE,

@@ -20,8 +20,21 @@ function loadFrame()
 
     local contentContainer = tolua.cast( widget:getChildByName("ScrollView"), "ScrollView" )
     local layoutParameter = LinearLayoutParameter:create()
-    layoutParameter:setGravity(LINEAR_GRAVITY_LEFT)
+    layoutParameter:setGravity(LINEAR_GRAVITY_CENTER_VERTICAL)
     local contentHeight = 0
+
+    -- Add the date
+    local content = GUIReader:shareReader():widgetFromJsonFile("scenes/MatchList/MatchDate.json")
+    content:setLayoutParameter( layoutParameter )
+    contentContainer:addChild( content )
+    contentHeight = contentHeight + content:getSize().height
+
+    -- Add the seprater
+    local upper = ImageView:create()
+    upper:loadTexture("images/guang.png")
+    upper:setLayoutParameter( layoutParameter )
+    contentContainer:addChild( upper )
+    contentHeight = contentHeight + upper:getSize().height
 
     for i = 1, mMatchNum do
         local eventHandler = function( sender, eventType )
@@ -40,6 +53,13 @@ function loadFrame()
         local vsBt = content:getChildByName("VS")
         vsBt:addTouchEventListener( eventHandler )
     end
+
+    -- Add the seprater
+    local bottom = ImageView:create()
+    bottom:loadTexture("images/guang-xia.png")
+    bottom:setLayoutParameter( layoutParameter )
+    contentContainer:addChild( bottom )
+    contentHeight = contentHeight + bottom:getSize().height
 
     contentContainer:setInnerContainerSize( CCSize:new( 0, contentHeight ) )
     local layout = tolua.cast( contentContainer, "Layout" )
