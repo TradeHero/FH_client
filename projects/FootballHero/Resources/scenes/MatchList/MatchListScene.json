@@ -143,7 +143,7 @@
           "ignoreSize": false,
           "layoutParameter": null,
           "opacity": 255,
-          "positionPercentX": 0,
+          "positionPercentX": 0.00227270136,
           "positionPercentY": 0.117077462,
           "positionType": 0,
           "rotation": 0,
@@ -157,7 +157,7 @@
           "useMergedTexture": false,
           "visible": true,
           "width": 640,
-          "x": 0,
+          "x": 1,
           "y": 133,
           "backGroundImage": null,
           "backGroundImageData": null,
@@ -537,7 +537,7 @@
           "direction": 1,
           "innerHeight": 950,
           "innerWidth": 450,
-          "layoutType": 1,
+          "layoutType": 0,
           "vectorX": 0,
           "vectorY": -0.5
         }

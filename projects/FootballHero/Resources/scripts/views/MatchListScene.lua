@@ -12,7 +12,11 @@ local Event = require("scripts.events.Event").EventList
 local mWidget
 local mTopLayer
 local mMatchNum = MatchConfig.getConfigNum()
+local mCountryNum = 7
+local mCountryExpended = {}
 
+local COUNTRY_CONTENT_HEIGHT = 130
+local LEAGUE_CONTENT_HEIGHT = 130
 local MIN_MOVE_DISTANCE = 100
 local OPTION_MOVE_TIME = 0.5
 local OPTION_VIEW_OFFSET_X = 475
@@ -22,7 +26,7 @@ function loadFrame()
     SceneManager.clearNAddWidget( widget )
     mWidget = widget
 
-    Navigator.loadFrame()
+    Navigator.loadFrame( widget )
 
     local contentContainer = tolua.cast( widget:getChildByName("ScrollView"), "ScrollView" )
     local layoutParameter = LinearLayoutParameter:create()
@@ -72,27 +76,10 @@ function loadFrame()
     layout:requestDoLayout()
 
     -- Init the league list
-    contentHeight = 0
-    local leagueList = tolua.cast( widget:getChildByName("leagueList"), "ScrollView" )
-
-    for i = 1, 2 do
-        local eventHandler = function( sender, eventType )
-            if eventType == TOUCH_EVENT_ENDED then
-                -- Handler
-            end
-        end
-
-        local content = GUIReader:shareReader():widgetFromJsonFile("scenes/MatchList/CountryListContent.json")
-
-        content:setLayoutParameter( layoutParameter )
-        content:addTouchEventListener( eventHandler )
-        leagueList:addChild( content )
-        contentHeight = contentHeight + content:getSize().height
+    for i = 1, mCountryNum do
+        mCountryExpended[i] = false
     end
-
-    leagueList:setInnerContainerSize( CCSize:new( 0, contentHeight ) )
-    local layout = tolua.cast( leagueList, "Layout" )
-    layout:requestDoLayout()
+    helperInitLeagueList()
 
     -- Option button
     local optionBt = widget:getChildByName("option")
@@ -108,6 +95,84 @@ end
 function enterMatch( index )
     Logic:setSelectedMatchIndex( index )
     EventManager:postEvent( Event.Enter_Match )
+end
+
+function helperInitLeagueList()
+    local contentHeight = 0
+    local leagueList = tolua.cast( mWidget:getChildByName("leagueList"), "ScrollView" )
+
+    for i = 1, mCountryNum do
+        local eventHandler = function( sender, eventType )
+            if eventType == TOUCH_EVENT_ENDED then
+                -- Handler
+                if mCountryExpended[i] == true then
+                    mCountryExpended[i] = false
+                else
+                    mCountryExpended[i] = true
+                end
+                helperUpdateLeagueList( i )
+            end
+        end
+
+        local content = GUIReader:shareReader():widgetFromJsonFile("scenes/MatchList/CountryListContent.json")
+
+        content:addTouchEventListener( eventHandler )
+        content:setPosition( ccp( 0, ( i - 1 ) * COUNTRY_CONTENT_HEIGHT ) )
+        leagueList:addChild( content )
+        content:setName( "country"..i )
+        contentHeight = contentHeight + content:getSize().height
+    end
+
+    leagueList:setInnerContainerSize( CCSize:new( 0, contentHeight ) )
+    local layout = tolua.cast( leagueList, "Layout" )
+    layout:requestDoLayout()
+end
+
+function helperUpdateLeagueList( clickedCountryId )
+    local subLeagueNum = 2 -- Hack the number for now
+
+    -- Calculate the move offset
+    local moveOffsetX = 0
+    if mCountryExpended[clickedCountryId] == true then
+        moveOffsetX = subLeagueNum * LEAGUE_CONTENT_HEIGHT
+    else
+        moveOffsetX = subLeagueNum * (-LEAGUE_CONTENT_HEIGHT)
+    end
+
+    -- Move upper country and league logo's position    
+    local leagueList = mWidget:getChildByName("leagueList")
+    for i = clickedCountryId, mCountryNum do
+        local countryLogo = leagueList:getChildByName( "country"..i )
+        countryLogo:setPosition( ccp( countryLogo:getPositionX() , countryLogo:getPositionY() + moveOffsetX ) )
+        for j = 1, subLeagueNum do
+            local leagueLogo = leagueList:getChildByName( "country"..i.."_league"..j )
+            if leagueLogo ~= nil then
+                leagueLogo:setPosition( ccp( leagueLogo:getPositionX() , leagueLogo:getPositionY() + moveOffsetX ) )
+            end
+        end
+    end
+
+    -- Add or remove league logos according to the status
+    if mCountryExpended[clickedCountryId] == true then
+        for i = 1, subLeagueNum do
+            local content = GUIReader:shareReader():widgetFromJsonFile("scenes/MatchList/LeagueListContent.json")
+            local parent = leagueList:getChildByName( "country"..clickedCountryId )
+            content:setPosition( ccp( 0, parent:getPositionY() - ( subLeagueNum - i + 1 ) * LEAGUE_CONTENT_HEIGHT ) )
+            leagueList:addChild( content )
+            content:setName( "country"..clickedCountryId.."_league"..i )
+        end
+    else
+        for i = 1, subLeagueNum do
+            local leagueLogo = leagueList:getChildByName( "country"..clickedCountryId.."_league"..i )
+            leagueList:removeChild( leagueLogo )
+        end
+    end 
+    
+    -- Update the max container size.
+    local originHeight = leagueList:getInnerContainerSize().height
+    leagueList:setInnerContainerSize( CCSize:new( 0, originHeight + moveOffsetX ) )
+    local layout = tolua.cast( leagueList, "Layout" )
+    layout:requestDoLayout()
 end
 
 function helperInitMatchInfo( content, matchIndex )

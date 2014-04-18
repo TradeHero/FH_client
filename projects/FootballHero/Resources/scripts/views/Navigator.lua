@@ -6,9 +6,9 @@ local SceneManager = require("scripts.SceneManager")
 local mWidget
 local NAV_BT_NUM = 4
 
-function loadFrame()
+function loadFrame( parent )
 	local widget = GUIReader:shareReader():widgetFromJsonFile("scenes/Navigator/Navigator.ExportJson")
-    SceneManager.addWidget( widget )
+    parent:addChild( widget )
     mWidget = widget
 
     for i = 1, NAV_BT_NUM do
