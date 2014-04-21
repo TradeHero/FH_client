@@ -28,10 +28,7 @@
     <string>ScorePrediction.json</string>
     <string>PredConfirm.json</string>
   </JsonList>
-  <imageFileList>
-    <string>MatchPrediction0.plist</string>
-    <string>MatchPrediction1.plist</string>
-  </imageFileList>
+  <imageFileList />
   <JsonSuffix>.json</JsonSuffix>
   <CurrentUIJson>MatchPrediction.json</CurrentUIJson>
   <CanvasSize>

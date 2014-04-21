@@ -65,11 +65,15 @@ end
 function helperInitMatchInfo( content, matchIndex )
     local team1 = tolua.cast( content:getChildByName("team1"), "ImageView" )
     local team2 = tolua.cast( content:getChildByName("team2"), "ImageView" )
+    local team1Name = tolua.cast( content:getChildByName("team1Name"), "Label" )
+    local team2Name = tolua.cast( content:getChildByName("team2Name"), "Label" )
     local team1WinPoint = tolua.cast( team1:getChildByName("team1WinPoint"), "Label" )
     local team2WinPoint = tolua.cast( team2:getChildByName("team2WinPoint"), "Label" )
 
     team1:loadTexture( Constants.TEAM_IMAGE_PATH..TeamConfig.getLogo( MatchConfig.getTeam1( matchIndex ) ) )
     team2:loadTexture( Constants.TEAM_IMAGE_PATH..TeamConfig.getLogo( MatchConfig.getTeam2( matchIndex ) ) )
+    team1Name:setText( TeamConfig.getDisplayName( MatchConfig.getTeam1( matchIndex ) ) )
+    team2Name:setText( TeamConfig.getDisplayName( MatchConfig.getTeam2( matchIndex ) ) )
     team1WinPoint:setText( MatchConfig.getTeam1WinOdds( matchIndex ).." points" )
     team2WinPoint:setText( MatchConfig.getTeam2WinOdds( matchIndex ).." points" )
 end
