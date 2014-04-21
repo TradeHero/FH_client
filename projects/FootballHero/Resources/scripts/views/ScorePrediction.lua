@@ -14,7 +14,7 @@ local mCurrentPredictionQuest = 1
 function loadFrame()
 	mMatchIndex = Logic:getSelectedMatchIndex()
 
-	local widget = GUIReader:shareReader():widgetFromJsonFile("scenes/MatchPrediction/ScorePrediction.ExportJson")
+	local widget = GUIReader:shareReader():widgetFromJsonFile("scenes/ScorePrediction.json")
     SceneManager.clearNAddWidget(widget)
     mWidget = widget
 

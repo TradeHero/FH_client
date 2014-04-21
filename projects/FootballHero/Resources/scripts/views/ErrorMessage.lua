@@ -9,7 +9,7 @@ local mWidget
 
 function loadFrame()
 
-	local widget = GUIReader:shareReader():widgetFromJsonFile("scenes/ErrorMessage/ErrorMessage.json")
+	local widget = GUIReader:shareReader():widgetFromJsonFile("scenes/ErrorMessage.json")
     SceneManager.addWidget( widget )
 
     local okBt = widget:getChildByName("ok")

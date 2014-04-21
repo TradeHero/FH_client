@@ -5,7 +5,7 @@ local EventManager = require("scripts.events.EventManager").getInstance()
 local Event = require("scripts.events.Event").EventList
 
 function loadFrame()
-	local widget = GUIReader:shareReader():widgetFromJsonFile("scenes/LoginNReg/LoginNReg.json")
+	local widget = GUIReader:shareReader():widgetFromJsonFile("scenes/LoginNReg.json")
     SceneManager.clearNAddWidget(widget)
 
     local signinBt = widget:getChildByName("signin")

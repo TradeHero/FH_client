@@ -22,7 +22,7 @@ local OPTION_MOVE_TIME = 0.5
 local OPTION_VIEW_OFFSET_X = 475
 
 function loadFrame()
-	local widget = GUIReader:shareReader():widgetFromJsonFile("scenes/MatchList/MatchListScene.json")
+	local widget = GUIReader:shareReader():widgetFromJsonFile("scenes/MatchListScene.json")
     SceneManager.clearNAddWidget( widget )
     mWidget = widget
 
@@ -34,7 +34,7 @@ function loadFrame()
     local contentHeight = 0
 
     -- Add the date
-    local content = GUIReader:shareReader():widgetFromJsonFile("scenes/MatchList/MatchDate.json")
+    local content = GUIReader:shareReader():widgetFromJsonFile("scenes/MatchDate.json")
     content:setLayoutParameter( layoutParameter )
     contentContainer:addChild( content )
     contentHeight = contentHeight + content:getSize().height
@@ -53,7 +53,7 @@ function loadFrame()
             end
         end
 
-        local content = GUIReader:shareReader():widgetFromJsonFile("scenes/MatchList/MatchListContent.ExportJson")
+        local content = GUIReader:shareReader():widgetFromJsonFile("scenes/MatchListContent.json")
         helperInitMatchInfo( content, i )
 
         content:setLayoutParameter( layoutParameter )
@@ -114,7 +114,7 @@ function helperInitLeagueList()
             end
         end
 
-        local content = GUIReader:shareReader():widgetFromJsonFile("scenes/MatchList/CountryListContent.json")
+        local content = GUIReader:shareReader():widgetFromJsonFile("scenes/CountryListContent.json")
 
         content:addTouchEventListener( eventHandler )
         content:setPosition( ccp( 0, ( i - 1 ) * COUNTRY_CONTENT_HEIGHT ) )
@@ -155,7 +155,7 @@ function helperUpdateLeagueList( clickedCountryId )
     -- Add or remove league logos according to the status
     if mCountryExpended[clickedCountryId] == true then
         for i = 1, subLeagueNum do
-            local content = GUIReader:shareReader():widgetFromJsonFile("scenes/MatchList/LeagueListContent.json")
+            local content = GUIReader:shareReader():widgetFromJsonFile("scenes/LeagueListContent.json")
             local parent = leagueList:getChildByName( "country"..clickedCountryId )
             content:setPosition( ccp( 0, parent:getPositionY() - ( subLeagueNum - i + 1 ) * LEAGUE_CONTENT_HEIGHT ) )
             leagueList:addChild( content )

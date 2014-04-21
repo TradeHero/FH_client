@@ -14,7 +14,7 @@ local inputWidth = 400
 local inputHeight = 50
 
 function loadFrame()
-	local widget = GUIReader:shareReader():widgetFromJsonFile("scenes/LoginNReg/RegisterName.json")
+	local widget = GUIReader:shareReader():widgetFromJsonFile("scenes/RegisterName.json")
     SceneManager.clearNAddWidget(widget)
     mWidget = widget
 

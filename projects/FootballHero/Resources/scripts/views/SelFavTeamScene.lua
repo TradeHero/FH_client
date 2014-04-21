@@ -14,7 +14,7 @@ local mTeamId
 
 function loadFrame()
 
-	local widget = GUIReader:shareReader():widgetFromJsonFile("scenes/FavouriteTeam/FavouriteTeam.json")
+	local widget = GUIReader:shareReader():widgetFromJsonFile("scenes/FavouriteTeam.json")
     SceneManager.addWidget( widget )
 
     mWidget = widget
@@ -30,7 +30,7 @@ function loadFrame()
             end
         end
 
-        local content = GUIReader:shareReader():widgetFromJsonFile("scenes/FavouriteTeam/Country.json")
+        local content = GUIReader:shareReader():widgetFromJsonFile("scenes/Country.json")
         local coutryButton = tolua.cast( content:getChildByName("country"), "Button" )
         coutryButton:loadTextureNormal( Constants.LEAGUE_IMAGE_PATH..LeagueConfig.getLogo( i ) )
 
@@ -88,7 +88,7 @@ function countrySelected( index )
     local contentHeight = 0
     for i = 1, ( teamListLength + 1 ) / 2 do
 
-        local content = GUIReader:shareReader():widgetFromJsonFile("scenes/FavouriteTeam/Team.json")
+        local content = GUIReader:shareReader():widgetFromJsonFile("scenes/Team.json")
         for j = 1, 2 do
             local teamIndex = ( i - 1 ) * 2 + j
             local eventHandler = function( sender, eventType )

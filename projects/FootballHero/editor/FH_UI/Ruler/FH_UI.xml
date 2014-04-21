@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfGuidesProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <GuidesProject>
+    <Project>FH_UI_1</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>ForgotPassword</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>LoginNReg</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>Register</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>RegisterName</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>Signin</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>ConnectingMessage</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>ErrorMessage</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>Team</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>FavouriteTeam</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>Country</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>Navigator</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>LeagueListContent</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>MatchListContent</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>MatchDate</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>CountryListContent</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>MatchListScene</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>PredConfirm</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>MatchPrediction</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>ScorePrediction</Project>
+    <GuidesList />
+  </GuidesProject>
+</ArrayOfGuidesProject>

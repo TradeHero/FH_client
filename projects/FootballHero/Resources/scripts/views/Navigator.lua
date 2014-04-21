@@ -7,7 +7,7 @@ local mWidget
 local NAV_BT_NUM = 4
 
 function loadFrame( parent )
-	local widget = GUIReader:shareReader():widgetFromJsonFile("scenes/Navigator/Navigator.ExportJson")
+	local widget = GUIReader:shareReader():widgetFromJsonFile("scenes/Navigator.json")
     parent:addChild( widget )
     mWidget = widget
 

@@ -47,7 +47,7 @@ function action( param )
 end
 
 function onRequestSuccess( sessionToken )
-    EventManager:postEvent( Event.Enter_Match_List )
+    EventManager:postEvent( Event.Enter_Sel_Fav_Team )
 end
 
 function onRequestFailed( errorBuffer )

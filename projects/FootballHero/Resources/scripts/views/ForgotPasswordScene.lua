@@ -10,7 +10,7 @@ local EMAIL_CONTAINER_NAME = "emailContainer"
 local mWidget
 
 function loadFrame()
-	local widget = GUIReader:shareReader():widgetFromJsonFile("scenes/LoginNReg/ForgotPassword.json")
+	local widget = GUIReader:shareReader():widgetFromJsonFile("scenes/ForgotPassword.json")
     SceneManager.clearNAddWidget(widget)
     mWidget = widget
 

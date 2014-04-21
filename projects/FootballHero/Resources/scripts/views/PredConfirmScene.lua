@@ -18,7 +18,7 @@ function loadFrame( prediction, teamName, reward )
 	mTeamName = teamName
 	mReward = reward
 
-	local widget = GUIReader:shareReader():widgetFromJsonFile("scenes/PredConfirm/PredConfirm.ExportJson")
+	local widget = GUIReader:shareReader():widgetFromJsonFile("scenes/PredConfirm.json")
     SceneManager.clearNAddWidget(widget)
     mWidget = widget
 

@@ -19,7 +19,7 @@ local OPACITY = 255
 function loadFrame()
     mMatchIndex = Logic:getSelectedMatchIndex()
 
-	local widget = GUIReader:shareReader():widgetFromJsonFile("scenes/MatchPrediction/MatchPrediction.ExportJson")
+	local widget = GUIReader:shareReader():widgetFromJsonFile("scenes/MatchPrediction.json")
     SceneManager.clearNAddWidget(widget)
 
     local backBt = widget:getChildByName("Back")
