@@ -22,14 +22,14 @@ function loadFrame( prediction, teamName, reward )
     SceneManager.clearNAddWidget(widget)
     mWidget = widget
 
-	initContent()    
+	--initContent()    
     createTextInput()
 
-    local submitBt = widget:getChildByName("Submit")
-    submitBt:addTouchEventListener( submitEventHandler )
+    --local submitBt = widget:getChildByName("Submit")
+    --submitBt:addTouchEventListener( submitEventHandler )
 
-    local backBt = widget:getChildByName("Back")
-    backBt:addTouchEventListener( backEventHandler )
+    --local backBt = widget:getChildByName("Back")
+    --backBt:addTouchEventListener( backEventHandler )
 end
 
 function submitEventHandler( sender, eventType )
@@ -56,13 +56,22 @@ function backEventHandler( sender, eventType )
 	end
 end
 
-function createTextInput() 
-	local textInput = CCEditBox:create( CCSizeMake( 500, 40 ), CCScale9Sprite:create( "images/6.png" ) )
-    local container = mWidget:getChildByName("TextInput")
+function createTextInput()
+	local container = mWidget:getChildByName("TextInput")
+
+	local inputDelegate = EditBoxDelegateForLua:create()
+	inputDelegate:registerEventScriptHandler( EDIT_BOX_EVENT_TEXT_CHANGED, function ( textBox, text )
+		local textDisplay = tolua.cast( mWidget:getChildByName("Text"), "Label" )
+		textDisplay:setText( text )
+
+	end )
+	container:addNode( tolua.cast( inputDelegate, "CCNode" ) )
+
+	local textInput = CCEditBox:create( CCSizeMake( 550, 350 ), CCScale9Sprite:create() )
     container:addNode( textInput )
-    textInput:setPosition( 250, 20 )
+    textInput:setPosition( 550 / 2, 350 / 2 )
     textInput:setFont("Newgtbxc", 20)
-    textInput:setPlaceHolder("Write something here to share...")
+    textInput:setDelegate( inputDelegate.__CCEditBoxDelegate__ )
 end
 
 function initContent()

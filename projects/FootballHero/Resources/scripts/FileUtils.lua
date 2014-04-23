@@ -2,7 +2,7 @@ module(..., package.seeall)
 
 local Json = require("json")
 
-function writeTableToFile( fileName, content )
+function writeStringToFile( fileName, str )
 	local platformType = CCApplication:sharedApplication():getTargetPlatform()
 	if platformType ~= kTargetWindows then
 		return
@@ -16,13 +16,12 @@ function writeTableToFile( fileName, content )
 		assert( false, "Write failed to file"..fileName.." with error: "..errorCode )
 		return
 	end
-	
-	local text = Json.encode( content )
-	fileHandle:write( text )
+
+	fileHandle:write( str )
 	fileHandle:close()
 end
 
-function readTableFromFile( fileName )
+function readStringFromFile( fileName )
 	local platformType = CCApplication:sharedApplication():getTargetPlatform()
 	if platformType ~= kTargetWindows then
 		return
@@ -34,11 +33,20 @@ function readTableFromFile( fileName )
 	print( "Read from: "..writePath )
 	if fileHandler == nil then
 		assert( false, "Read failed from file"..fileName.." with error: "..errorCode )
-		return
+		return ""
 	end
 	
 	local text = fileHandler:read("*all")
 	fileHandler:close()
 	print( "File text: "..text )
-	return Json.decode( text )
+	return text
+end
+
+function writeTableToFile( fileName, content )
+	local text = Json.encode( content )
+	writeStringToFile( fileName, text )
+end
+
+function readTableFromFile( fileName )
+	return Json.decode( readStringFromFile( fileName ) )
 end

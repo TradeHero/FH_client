@@ -486,6 +486,9 @@
     <ClCompile Include="..\network\HttpRequestForLua.cpp">
       <Filter>network</Filter>
     </ClCompile>
+    <ClCompile Include="..\GUI\CCEditBox\EditBoxDelegateForLua.cpp">
+      <Filter>GUI\CCEditBox</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\GUI\CCScrollView\CCScrollView.h">
@@ -873,6 +876,9 @@
     </ClInclude>
     <ClInclude Include="..\network\HttpRequestForLua.h">
       <Filter>network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GUI\CCEditBox\EditBoxDelegateForLua.h">
+      <Filter>GUI\CCEditBox</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

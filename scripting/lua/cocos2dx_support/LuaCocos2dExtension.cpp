@@ -1,6 +1,6 @@
 /*
 ** Lua binding: Extension
-** Generated automatically by tolua++-1.0.92 on 04/14/14 14:11:28.
+** Generated automatically by tolua++-1.0.92 on 04/23/14 17:56:18.
 */
 
 /****************************************************************************
@@ -37,6 +37,7 @@ extern "C" {
 #include "CCLuaEngine.h"
 #include "FacebookDelegate.h"
 #include "HttpRequestForLua.h"
+#include "EditBoxDelegateForLua.h"
 
 using namespace cocos2d;
 using namespace cocos2d::extension;
@@ -49,12 +50,15 @@ using namespace Social;
 /* function to register type */
 static void tolua_reg_types (lua_State* tolua_S)
 {
- tolua_usertype(tolua_S,"FacebookDelegate");
+ tolua_usertype(tolua_S,"CCLayer");
  tolua_usertype(tolua_S,"cocos2d::CCNode");
+ tolua_usertype(tolua_S,"HttpRequestForLua");
+ tolua_usertype(tolua_S,"FacebookDelegate");
+ tolua_usertype(tolua_S,"CCHttpRequest");
  
  tolua_usertype(tolua_S,"CCObject");
- tolua_usertype(tolua_S,"HttpRequestForLua");
- tolua_usertype(tolua_S,"CCHttpRequest");
+ tolua_usertype(tolua_S,"CCEditBoxDelegate");
+ tolua_usertype(tolua_S,"EditBoxDelegateForLua");
 }
 
 /* method: sharedDelegate of class  FacebookDelegate */
@@ -581,6 +585,119 @@ static int tolua_Extension_HttpRequestForLua_getRequest00(lua_State* tolua_S)
 }
 #endif //#ifndef TOLUA_DISABLE
 
+/* method: create of class  EditBoxDelegateForLua */
+#ifndef TOLUA_DISABLE_tolua_Extension_EditBoxDelegateForLua_create00
+static int tolua_Extension_EditBoxDelegateForLua_create00(lua_State* tolua_S)
+{
+#ifndef TOLUA_RELEASE
+ tolua_Error tolua_err;
+ if (
+     !tolua_isusertable(tolua_S,1,"EditBoxDelegateForLua",0,&tolua_err) ||
+     !tolua_isnoobj(tolua_S,2,&tolua_err)
+ )
+  goto tolua_lerror;
+ else
+#endif
+ {
+  {
+   EditBoxDelegateForLua* tolua_ret = (EditBoxDelegateForLua*)  EditBoxDelegateForLua::create();
+    tolua_pushusertype(tolua_S,(void*)tolua_ret,"EditBoxDelegateForLua");
+  }
+ }
+ return 1;
+#ifndef TOLUA_RELEASE
+ tolua_lerror:
+ tolua_error(tolua_S,"#ferror in function 'create'.",&tolua_err);
+ return 0;
+#endif
+}
+#endif //#ifndef TOLUA_DISABLE
+
+/* method: registerEventScriptHandler of class  EditBoxDelegateForLua */
+#ifndef TOLUA_DISABLE_tolua_Extension_EditBoxDelegateForLua_registerEventScriptHandler00
+static int tolua_Extension_EditBoxDelegateForLua_registerEventScriptHandler00(lua_State* tolua_S)
+{
+#ifndef TOLUA_RELEASE
+ tolua_Error tolua_err;
+ if (
+     !tolua_isusertype(tolua_S,1,"EditBoxDelegateForLua",0,&tolua_err) ||
+     !tolua_isnumber(tolua_S,2,0,&tolua_err) ||
+     (tolua_isvaluenil(tolua_S,3,&tolua_err) || !toluafix_isfunction(tolua_S,3,"LUA_FUNCTION",0,&tolua_err)) ||
+     !tolua_isnoobj(tolua_S,4,&tolua_err)
+ )
+  goto tolua_lerror;
+ else
+#endif
+ {
+  EditBoxDelegateForLua* self = (EditBoxDelegateForLua*)  tolua_tousertype(tolua_S,1,0);
+  EditBoxEvent eventType = ((EditBoxEvent) (int)  tolua_tonumber(tolua_S,2,0));
+  LUA_FUNCTION nHandler = (  toluafix_ref_function(tolua_S,3,0));
+#ifndef TOLUA_RELEASE
+  if (!self) tolua_error(tolua_S,"invalid 'self' in function 'registerEventScriptHandler'", NULL);
+#endif
+  {
+   self->registerEventScriptHandler(eventType,nHandler);
+  }
+ }
+ return 0;
+#ifndef TOLUA_RELEASE
+ tolua_lerror:
+ tolua_error(tolua_S,"#ferror in function 'registerEventScriptHandler'.",&tolua_err);
+ return 0;
+#endif
+}
+#endif //#ifndef TOLUA_DISABLE
+
+/* method: unregisterEventScriptHandler of class  EditBoxDelegateForLua */
+#ifndef TOLUA_DISABLE_tolua_Extension_EditBoxDelegateForLua_unregisterEventScriptHandler00
+static int tolua_Extension_EditBoxDelegateForLua_unregisterEventScriptHandler00(lua_State* tolua_S)
+{
+#ifndef TOLUA_RELEASE
+ tolua_Error tolua_err;
+ if (
+     !tolua_isusertype(tolua_S,1,"EditBoxDelegateForLua",0,&tolua_err) ||
+     !tolua_isnumber(tolua_S,2,0,&tolua_err) ||
+     !tolua_isnoobj(tolua_S,3,&tolua_err)
+ )
+  goto tolua_lerror;
+ else
+#endif
+ {
+  EditBoxDelegateForLua* self = (EditBoxDelegateForLua*)  tolua_tousertype(tolua_S,1,0);
+  EditBoxEvent eventType = ((EditBoxEvent) (int)  tolua_tonumber(tolua_S,2,0));
+#ifndef TOLUA_RELEASE
+  if (!self) tolua_error(tolua_S,"invalid 'self' in function 'unregisterEventScriptHandler'", NULL);
+#endif
+  {
+   self->unregisterEventScriptHandler(eventType);
+  }
+ }
+ return 0;
+#ifndef TOLUA_RELEASE
+ tolua_lerror:
+ tolua_error(tolua_S,"#ferror in function 'unregisterEventScriptHandler'.",&tolua_err);
+ return 0;
+#endif
+}
+#endif //#ifndef TOLUA_DISABLE
+
+/* get function: __CCEditBoxDelegate__ of class  EditBoxDelegateForLua */
+#ifndef TOLUA_DISABLE_tolua_get_EditBoxDelegateForLua___CCEditBoxDelegate__
+static int tolua_get_EditBoxDelegateForLua___CCEditBoxDelegate__(lua_State* tolua_S)
+{
+  EditBoxDelegateForLua* self = (EditBoxDelegateForLua*)  tolua_tousertype(tolua_S,1,0);
+#ifndef TOLUA_RELEASE
+  if (!self) tolua_error(tolua_S,"invalid 'self' in accessing variable '__CCEditBoxDelegate__'",NULL);
+#endif
+#ifdef __cplusplus
+   tolua_pushusertype(tolua_S,(void*)static_cast<CCEditBoxDelegate*>(self), "CCEditBoxDelegate");
+#else
+   tolua_pushusertype(tolua_S,(void*)((CCEditBoxDelegate*)self), "CCEditBoxDelegate");
+#endif
+ return 1;
+}
+#endif //#ifndef TOLUA_DISABLE
+
 /* Open function */
 TOLUA_API int tolua_Extension_open (lua_State* tolua_S)
 {
@@ -617,6 +734,21 @@ TOLUA_API int tolua_Extension_open (lua_State* tolua_S)
    tolua_function(tolua_S,"onHttpRequestCompleted",tolua_Extension_HttpRequestForLua_onHttpRequestCompleted00);
    tolua_function(tolua_S,"setRequest",tolua_Extension_HttpRequestForLua_setRequest00);
    tolua_function(tolua_S,"getRequest",tolua_Extension_HttpRequestForLua_getRequest00);
+  tolua_endmodule(tolua_S);
+  tolua_constant(tolua_S,"EDIT_BOX_EVENT_DID_BEGIN",EDIT_BOX_EVENT_DID_BEGIN);
+  tolua_constant(tolua_S,"EDIT_BOX_EVENT_DID_END",EDIT_BOX_EVENT_DID_END);
+  tolua_constant(tolua_S,"EDIT_BOX_EVENT_TEXT_CHANGED",EDIT_BOX_EVENT_TEXT_CHANGED);
+  tolua_constant(tolua_S,"EDIT_BOX_EVENT_RETURN",EDIT_BOX_EVENT_RETURN);
+  tolua_constant(tolua_S,"EDIT_BOX_EVENT_MAX",EDIT_BOX_EVENT_MAX);
+  tolua_cclass(tolua_S,"CCEditBoxDelegate","CCEditBoxDelegate","",NULL);
+  tolua_beginmodule(tolua_S,"CCEditBoxDelegate");
+  tolua_endmodule(tolua_S);
+  tolua_cclass(tolua_S,"EditBoxDelegateForLua","EditBoxDelegateForLua","CCLayer",NULL);
+  tolua_beginmodule(tolua_S,"EditBoxDelegateForLua");
+   tolua_function(tolua_S,"create",tolua_Extension_EditBoxDelegateForLua_create00);
+   tolua_function(tolua_S,"registerEventScriptHandler",tolua_Extension_EditBoxDelegateForLua_registerEventScriptHandler00);
+   tolua_function(tolua_S,"unregisterEventScriptHandler",tolua_Extension_EditBoxDelegateForLua_unregisterEventScriptHandler00);
+   tolua_variable(tolua_S,"__CCEditBoxDelegate__",tolua_get_EditBoxDelegateForLua___CCEditBoxDelegate__,NULL);
   tolua_endmodule(tolua_S);
  tolua_endmodule(tolua_S);
  return 1;

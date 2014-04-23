@@ -3,11 +3,17 @@ module(..., package.seeall)
 local JsonConfigReader = require("scripts.config.JsonConfigReader")
 
 
-local FILE_NAME = "config/teams.json"
+local FILE_NAME = "config/teams.txt"
 local mConfig = {}
 local mConfigNum = 0
 
-mConfig, mConfigNum = JsonConfigReader.read( FILE_NAME, "id" )
+function init()
+	if mConfigNum > 0 then 
+		return
+	end
+	print("Read Team config.")
+	mConfig, mConfigNum = JsonConfigReader.read( FILE_NAME, "teamId" )
+end
 
 function getConfig( id )
 	assert( mConfig[id] ~= nil, FILE_NAME.." dosen't has "..id )
@@ -23,12 +29,19 @@ end
 	Provide additional getters.
 --]]
 
-function getLogo( id )
+function getTeamName( id )
 	local config = getConfig( id )
-	return config["logo"]
+	return config["teamName"]
 end
 
-function getDisplayName( id )
+function getLogo( id )
 	local config = getConfig( id )
-	return config["displayName"]
+	return config["teamId"]..".png"
 end
+
+function getThumbUrl( id )
+	local config = getConfig( id )
+	return config["thumbUrl"]
+end
+
+init()

@@ -203,6 +203,7 @@ local CCObjectTypes = {
     "CCScrollView",
     "CCTableViewCell",
     "CCTableView",
+
 }
 
 -- register CCObject types
@@ -296,6 +297,7 @@ extern "C" {
 #include "CCLuaEngine.h"
 #include "FacebookDelegate.h"
 #include "HttpRequestForLua.h"
+#include "EditBoxDelegateForLua.h"
 
 using namespace cocos2d;
 using namespace cocos2d::extension;

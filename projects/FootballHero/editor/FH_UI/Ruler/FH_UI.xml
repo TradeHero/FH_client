@@ -77,7 +77,23 @@
     <GuidesList />
   </GuidesProject>
   <GuidesProject>
-    <Project>ScorePrediction</Project>
+    <Project>WBTSPrediction</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>WTCBMTPrediction</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>WTGBMTPrediction</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>WTSPrediction</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>WTWBEGPrediction</Project>
     <GuidesList />
   </GuidesProject>
 </ArrayOfGuidesProject>

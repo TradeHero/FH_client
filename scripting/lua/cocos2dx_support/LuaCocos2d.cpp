@@ -1,6 +1,6 @@
 /*
 ** Lua binding: Cocos2d
-** Generated automatically by tolua++-1.0.92 on 04/02/14 12:13:56.
+** Generated automatically by tolua++-1.0.92 on 04/23/14 16:48:31.
 */
 
 /****************************************************************************
@@ -536,6 +536,7 @@ static void tolua_reg_types (lua_State* tolua_S)
  tolua_usertype(tolua_S,"CCDeccelAmplitude");
  tolua_usertype(tolua_S,"CCTableView");
  tolua_usertype(tolua_S,"CCTimer");
+ tolua_usertype(tolua_S,"CCEditBoxDelegate");
  tolua_usertype(tolua_S,"CCControlStepper");
  tolua_usertype(tolua_S,"CCFiniteTimeAction");
  tolua_usertype(tolua_S,"CCTransitionProgressRadialCW");
@@ -64067,6 +64068,39 @@ static int tolua_Cocos2d_CCEditBox_touchDownAction00(lua_State* tolua_S)
 }
 #endif //#ifndef TOLUA_DISABLE
 
+/* method: setDelegate of class  CCEditBox */
+#ifndef TOLUA_DISABLE_tolua_Cocos2d_CCEditBox_setDelegate00
+static int tolua_Cocos2d_CCEditBox_setDelegate00(lua_State* tolua_S)
+{
+#ifndef TOLUA_RELEASE
+ tolua_Error tolua_err;
+ if (
+     !tolua_isusertype(tolua_S,1,"CCEditBox",0,&tolua_err) ||
+     !tolua_isusertype(tolua_S,2,"CCEditBoxDelegate",0,&tolua_err) ||
+     !tolua_isnoobj(tolua_S,3,&tolua_err)
+ )
+  goto tolua_lerror;
+ else
+#endif
+ {
+  CCEditBox* self = (CCEditBox*)  tolua_tousertype(tolua_S,1,0);
+  CCEditBoxDelegate* pDelegate = ((CCEditBoxDelegate*)  tolua_tousertype(tolua_S,2,0));
+#ifndef TOLUA_RELEASE
+  if (!self) tolua_error(tolua_S,"invalid 'self' in function 'setDelegate'", NULL);
+#endif
+  {
+   self->setDelegate(pDelegate);
+  }
+ }
+ return 0;
+#ifndef TOLUA_RELEASE
+ tolua_lerror:
+ tolua_error(tolua_S,"#ferror in function 'setDelegate'.",&tolua_err);
+ return 0;
+#endif
+}
+#endif //#ifndef TOLUA_DISABLE
+
 /* method: new of class  CCInteger */
 #ifndef TOLUA_DISABLE_tolua_Cocos2d_CCInteger_new00
 static int tolua_Cocos2d_CCInteger_new00(lua_State* tolua_S)
@@ -69832,6 +69866,7 @@ TOLUA_API int tolua_Cocos2d_open (lua_State* tolua_S)
    tolua_function(tolua_S,"onEnter",tolua_Cocos2d_CCEditBox_onEnter00);
    tolua_function(tolua_S,"onExit",tolua_Cocos2d_CCEditBox_onExit00);
    tolua_function(tolua_S,"touchDownAction",tolua_Cocos2d_CCEditBox_touchDownAction00);
+   tolua_function(tolua_S,"setDelegate",tolua_Cocos2d_CCEditBox_setDelegate00);
   tolua_endmodule(tolua_S);
   #ifdef __cplusplus
   tolua_cclass(tolua_S,"CCInteger","CCInteger","CCObject",tolua_collect_CCInteger);

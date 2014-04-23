@@ -25,12 +25,16 @@
     <string>LeagueListContent.json</string>
     <string>MatchListScene.json</string>
     <string>MatchPrediction.json</string>
-    <string>ScorePrediction.json</string>
+    <string>WBTSPrediction.json</string>
     <string>PredConfirm.json</string>
+    <string>WTCBMTPrediction.json</string>
+    <string>WTGBMTPrediction.json</string>
+    <string>WTSPrediction.json</string>
+    <string>WTWBEGPrediction.json</string>
   </JsonList>
   <imageFileList />
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>MatchPrediction.json</CurrentUIJson>
+  <CurrentUIJson>PredConfirm.json</CurrentUIJson>
   <CanvasSize>
     <Width>640</Width>
     <Height>1136</Height>

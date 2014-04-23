@@ -30,17 +30,17 @@ local function main()
     local event = require("scripts.events.Event").EventList
     --eventManager:postEvent( event.Enter_Login_N_Reg )
     --eventManager:postEvent( event.Enter_Sel_Fav_Team )
-    eventManager:postEvent( event.Enter_Match_List )
+    --eventManager:postEvent( event.Enter_Match_List )
+    eventManager:postEvent( event.Enter_Prediction_Confirm, { 0, 0, 0 } )
 
 --[[
     local Json = require("json")
     local handler = function( isSucceed, body, header, status, errorBuffer )
         cclog( "Http reponse: "..body )
-        local jsonResponse = Json.decode( body )
-        cclog(jsonResponse["ip"])
+
     end
-    local httpRequest = HttpRequestForLua:create( CCHttpRequest.kHttpGet, "application/json", "kdjfkj" )
-    httpRequest:sendHttpRequest( "http://ip.jsontest.com/", handler )
+    local httpRequest = HttpRequestForLua:create( CCHttpRequest.kHttpGet, "Content-Type: application/json" )
+    httpRequest:sendHttpRequest( "http://az596986.vo.msecnd.net/fhsettings/countries.txt", handler )
 --]]
 
 --[[

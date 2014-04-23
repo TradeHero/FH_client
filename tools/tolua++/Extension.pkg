@@ -2,3 +2,4 @@ $#include "LuaCocos2dExtension.h"
 
 $pfile "FacebookDelegate.pkg"
 $pfile "HttpClientForLua.pkg"
+$pfile "EditBoxDelegateForLua.pkg"

@@ -217,6 +217,7 @@
 		73EDFC8518EC005700322624 /* LuaCocos2dExtension.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 73EDFC8318EC005700322624 /* LuaCocos2dExtension.cpp */; };
 		73EDFC8B18ECF85F00322624 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73EDFC8A18ECF85F00322624 /* FacebookSDK.framework */; };
 		73EDFC9618ECFE7400322624 /* FacebookConnector.mm in Sources */ = {isa = PBXBuildFile; fileRef = 73EDFC9518ECFE7400322624 /* FacebookConnector.mm */; };
+		73FE377F1907C8BA0039A45C /* EditBoxDelegateForLua.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 73FE377D1907C8BA0039A45C /* EditBoxDelegateForLua.cpp */; };
 		ED35C0C718323498002A0750 /* CCArmatureAnimation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED35C03818323497002A0750 /* CCArmatureAnimation.cpp */; };
 		ED35C0C818323498002A0750 /* CCProcessBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED35C03A18323497002A0750 /* CCProcessBase.cpp */; };
 		ED35C0C918323498002A0750 /* CCTween.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED35C03C18323497002A0750 /* CCTween.cpp */; };
@@ -714,6 +715,8 @@
 		73EDFC8A18ECF85F00322624 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
 		73EDFC9418ECFE7400322624 /* FacebookConnector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacebookConnector.h; sourceTree = "<group>"; };
 		73EDFC9518ECFE7400322624 /* FacebookConnector.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FacebookConnector.mm; sourceTree = "<group>"; };
+		73FE377D1907C8BA0039A45C /* EditBoxDelegateForLua.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EditBoxDelegateForLua.cpp; sourceTree = "<group>"; };
+		73FE377E1907C8BA0039A45C /* EditBoxDelegateForLua.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditBoxDelegateForLua.h; sourceTree = "<group>"; };
 		ED35C03818323497002A0750 /* CCArmatureAnimation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCArmatureAnimation.cpp; sourceTree = "<group>"; };
 		ED35C03918323497002A0750 /* CCArmatureAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCArmatureAnimation.h; sourceTree = "<group>"; };
 		ED35C03A18323497002A0750 /* CCProcessBase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCProcessBase.cpp; sourceTree = "<group>"; };
@@ -978,6 +981,8 @@
 		15C153CD1683112E00D239F2 /* CCEditBox */ = {
 			isa = PBXGroup;
 			children = (
+				73FE377D1907C8BA0039A45C /* EditBoxDelegateForLua.cpp */,
+				73FE377E1907C8BA0039A45C /* EditBoxDelegateForLua.h */,
 				15C153CE1683112E00D239F2 /* CCEditBox.cpp */,
 				15C153CF1683112E00D239F2 /* CCEditBox.h */,
 				15C153D01683112E00D239F2 /* CCEditBoxImpl.h */,
@@ -2191,6 +2196,7 @@
 				15C1553F1683118600D239F2 /* b2PolygonContact.cpp in Sources */,
 				ED35C0EA18323498002A0750 /* UIPageView.cpp in Sources */,
 				15C155401683118600D239F2 /* b2DistanceJoint.cpp in Sources */,
+				73FE377F1907C8BA0039A45C /* EditBoxDelegateForLua.cpp in Sources */,
 				15C155411683118600D239F2 /* b2FrictionJoint.cpp in Sources */,
 				373F99401869F07A0080E035 /* CCActionManager.cpp in Sources */,
 				15C155421683118600D239F2 /* b2GearJoint.cpp in Sources */,

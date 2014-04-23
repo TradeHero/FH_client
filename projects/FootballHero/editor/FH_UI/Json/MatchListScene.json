@@ -9,10 +9,7 @@
   "dataScale": 1,
   "designHeight": 1136,
   "designWidth": 640,
-  "textures": [
-    "MatchPrediction0.plist",
-    "MatchPrediction1.plist"
-  ],
+  "textures": [],
   "version": "1.2.0.1",
   "widgetTree": {
     "classname": "Panel",

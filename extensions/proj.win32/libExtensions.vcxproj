@@ -190,6 +190,7 @@
     <ClCompile Include="..\GUI\CCControlExtension\CCScale9Sprite.cpp" />
     <ClCompile Include="..\GUI\CCEditBox\CCEditBox.cpp" />
     <ClCompile Include="..\GUI\CCEditBox\CCEditBoxImplWin.cpp" />
+    <ClCompile Include="..\GUI\CCEditBox\EditBoxDelegateForLua.cpp" />
     <ClCompile Include="..\GUI\CCScrollView\CCScrollView.cpp" />
     <ClCompile Include="..\GUI\CCScrollView\CCSorting.cpp" />
     <ClCompile Include="..\GUI\CCScrollView\CCTableView.cpp" />
@@ -340,6 +341,7 @@
     <ClInclude Include="..\GUI\CCEditBox\CCEditBox.h" />
     <ClInclude Include="..\GUI\CCEditBox\CCEditBoxImpl.h" />
     <ClInclude Include="..\GUI\CCEditBox\CCEditBoxImplWin.h" />
+    <ClInclude Include="..\GUI\CCEditBox\EditBoxDelegateForLua.h" />
     <ClInclude Include="..\GUI\CCScrollView\CCScrollView.h" />
     <ClInclude Include="..\cocos-ext.h" />
     <ClInclude Include="..\ExtensionMacros.h" />

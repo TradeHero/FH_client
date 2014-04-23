@@ -95,4 +95,6 @@ class CCEditBox: public CCControlButton
     virtual void onExit(void);
     
     void touchDownAction(CCObject *sender, CCControlEvent controlEvent);
+
+    void setDelegate(CCEditBoxDelegate* pDelegate);
 };
