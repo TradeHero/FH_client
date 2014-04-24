@@ -1,5 +1,6 @@
 module(..., package.seeall)
 
+local Constants = require("scripts.Constants")
 local JsonConfigReader = require("scripts.config.JsonConfigReader")
 
 
@@ -16,6 +17,7 @@ function init()
 end
 
 function getConfig( id )
+	id = tostring(id)
 	assert( mConfig[id] ~= nil, FILE_NAME.." dosen't has "..id )
 
 	return mConfig[id]
@@ -36,7 +38,14 @@ end
 
 function getLogo( id )
 	local config = getConfig( id )
-	return config["teamId"]..".png"
+
+	local fileUtils = CCFileUtils:sharedFileUtils()
+	local filePath = fileUtils:fullPathForFilename( Constants.TEAM_IMAGE_PATH..config["teamId"]..".png" )
+	if fileUtils:isFileExist( filePath ) then
+		return config["teamId"]..".png"
+	else
+		return "default.png"
+	end
 end
 
 function getThumbUrl( id )

@@ -21,7 +21,7 @@ local MIN_MOVE_DISTANCE = 100
 local OPTION_MOVE_TIME = 0.5
 local OPTION_VIEW_OFFSET_X = 475
 
-function loadFrame()
+function loadFrame( matchList )
 	local widget = GUIReader:shareReader():widgetFromJsonFile("scenes/MatchListScene.json")
     SceneManager.clearNAddWidget( widget )
     mWidget = widget
@@ -33,43 +33,49 @@ function loadFrame()
     layoutParameter:setGravity(LINEAR_GRAVITY_CENTER_VERTICAL)
     local contentHeight = 0
 
-    -- Add the date
-    local content = GUIReader:shareReader():widgetFromJsonFile("scenes/MatchDate.json")
-    content:setLayoutParameter( layoutParameter )
-    contentContainer:addChild( content )
-    contentHeight = contentHeight + content:getSize().height
+    for k,v in pairs( matchList:getMatchDateList() ) do
+        local matchDate = v
 
-    -- Add the seprater
-    local upper = ImageView:create()
-    upper:loadTexture("images/guang.png")
-    upper:setLayoutParameter( layoutParameter )
-    contentContainer:addChild( upper )
-    contentHeight = contentHeight + upper:getSize().height
-
-    for i = 1, mMatchNum do
-        local eventHandler = function( sender, eventType )
-            if eventType == TOUCH_EVENT_ENDED then
-                enterMatch( i )
-            end
-        end
-
-        local content = GUIReader:shareReader():widgetFromJsonFile("scenes/MatchListContent.json")
-        helperInitMatchInfo( content, i )
-
+        -- Add the date
+        local content = GUIReader:shareReader():widgetFromJsonFile("scenes/MatchDate.json")
+        local dateDisplay = tolua.cast( content:getChildByName("date"), "Label" )
+        dateDisplay:setText( matchDate["dateDisplay"] )
         content:setLayoutParameter( layoutParameter )
         contentContainer:addChild( content )
         contentHeight = contentHeight + content:getSize().height
 
-        local vsBt = content:getChildByName("VS")
-        vsBt:addTouchEventListener( eventHandler )
-    end
+        -- Add the seprater
+        local upper = ImageView:create()
+        upper:loadTexture("images/guang.png")
+        upper:setLayoutParameter( layoutParameter )
+        contentContainer:addChild( upper )
+        contentHeight = contentHeight + upper:getSize().height
 
-    -- Add the seprater
-    local bottom = ImageView:create()
-    bottom:loadTexture("images/guang-xia.png")
-    bottom:setLayoutParameter( layoutParameter )
-    contentContainer:addChild( bottom )
-    contentHeight = contentHeight + bottom:getSize().height
+        for inK, inV in pairs( matchDate["matches"] ) do
+            local eventHandler = function( sender, eventType )
+                if eventType == TOUCH_EVENT_ENDED then
+                    --enterMatch( i )
+                end
+            end
+
+            local content = GUIReader:shareReader():widgetFromJsonFile("scenes/MatchListContent.json")
+            helperInitMatchInfo( content, inV )
+
+            content:setLayoutParameter( layoutParameter )
+            contentContainer:addChild( content )
+            contentHeight = contentHeight + content:getSize().height
+
+            local vsBt = content:getChildByName("VS")
+            vsBt:addTouchEventListener( eventHandler )
+        end
+
+        -- Add the seprater
+        local bottom = ImageView:create()
+        bottom:loadTexture("images/guang-xia.png")
+        bottom:setLayoutParameter( layoutParameter )
+        contentContainer:addChild( bottom )
+        contentHeight = contentHeight + bottom:getSize().height
+    end
 
     contentContainer:setInnerContainerSize( CCSize:new( 0, contentHeight ) )
     local layout = tolua.cast( contentContainer, "Layout" )
@@ -175,19 +181,22 @@ function helperUpdateLeagueList( clickedCountryId )
     layout:requestDoLayout()
 end
 
-function helperInitMatchInfo( content, matchIndex )
+function helperInitMatchInfo( content, matchInfo )
     local team1 = tolua.cast( content:getChildByName("team1"), "ImageView" )
     local team2 = tolua.cast( content:getChildByName("team2"), "ImageView" )
     local team1Name = tolua.cast( content:getChildByName("team1Name"), "Label" )
     local team2Name = tolua.cast( content:getChildByName("team2Name"), "Label" )
-    team1:loadTexture( Constants.TEAM_IMAGE_PATH..TeamConfig.getLogo( MatchConfig.getTeam1( matchIndex ) ) )
-    team2:loadTexture( Constants.TEAM_IMAGE_PATH..TeamConfig.getLogo( MatchConfig.getTeam2( matchIndex ) ) )
-    team1Name:setText( TeamConfig.getDisplayName( MatchConfig.getTeam1( matchIndex ) ) )
-    team2Name:setText( TeamConfig.getDisplayName( MatchConfig.getTeam2( matchIndex ) ) )
+    team1:loadTexture( Constants.TEAM_IMAGE_PATH..TeamConfig.getLogo( matchInfo["HomeTeamId"] ) )
+    team2:loadTexture( Constants.TEAM_IMAGE_PATH..TeamConfig.getLogo( matchInfo["AwayTeamId"] ) )
+    team1Name:setText( TeamConfig.getTeamName( matchInfo["HomeTeamId"] ) )
+    team2Name:setText( TeamConfig.getTeamName( matchInfo["AwayTeamId"] ) )
     team1Name:setFontName("fonts/Newgtbxc.ttf")
     team2Name:setFontName("fonts/Newgtbxc.ttf")
+    local time = tolua.cast( content:getChildByName("time"), "Label" )
+    time:setText( os.date( "%H:%M", matchInfo["StartTime"] ) )
+    time:setFontName("fonts/Newgtbxc.ttf")
 
-    local previousPrediction = Logic:getPrediction( matchIndex )
+    local previousPrediction = nil -- TODO Logic:getPrediction( matchIndex )
     local vsBt = tolua.cast( content:getChildByName("VS"), "Button" )
     if previousPrediction == nil then
         vsBt:setBright( true )

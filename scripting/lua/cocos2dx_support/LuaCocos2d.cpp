@@ -1,6 +1,6 @@
 /*
 ** Lua binding: Cocos2d
-** Generated automatically by tolua++-1.0.92 on 04/23/14 16:48:31.
+** Generated automatically by tolua++-1.0.92 on 04/24/14 11:08:43.
 */
 
 /****************************************************************************
@@ -9803,6 +9803,41 @@ static int tolua_Cocos2d_CCFileUtils_getFileData00(lua_State* tolua_S)
 #ifndef TOLUA_RELEASE
  tolua_lerror:
  tolua_error(tolua_S,"#ferror in function 'getFileData'.",&tolua_err);
+ return 0;
+#endif
+}
+#endif //#ifndef TOLUA_DISABLE
+
+/* method: isFileExist of class  CCFileUtils */
+#ifndef TOLUA_DISABLE_tolua_Cocos2d_CCFileUtils_isFileExist00
+static int tolua_Cocos2d_CCFileUtils_isFileExist00(lua_State* tolua_S)
+{
+#ifndef TOLUA_RELEASE
+ tolua_Error tolua_err;
+ if (
+     !tolua_isusertype(tolua_S,1,"CCFileUtils",0,&tolua_err) ||
+     !tolua_iscppstring(tolua_S,2,0,&tolua_err) ||
+     !tolua_isnoobj(tolua_S,3,&tolua_err)
+ )
+  goto tolua_lerror;
+ else
+#endif
+ {
+  CCFileUtils* self = (CCFileUtils*)  tolua_tousertype(tolua_S,1,0);
+  const std::string strFilePath = ((const std::string)  tolua_tocppstring(tolua_S,2,0));
+#ifndef TOLUA_RELEASE
+  if (!self) tolua_error(tolua_S,"invalid 'self' in function 'isFileExist'", NULL);
+#endif
+  {
+   bool tolua_ret = (bool)  self->isFileExist(strFilePath);
+   tolua_pushboolean(tolua_S,(bool)tolua_ret);
+   tolua_pushcppstring(tolua_S,(const char*)strFilePath);
+  }
+ }
+ return 2;
+#ifndef TOLUA_RELEASE
+ tolua_lerror:
+ tolua_error(tolua_S,"#ferror in function 'isFileExist'.",&tolua_err);
  return 0;
 #endif
 }
@@ -67033,6 +67068,7 @@ TOLUA_API int tolua_Cocos2d_open (lua_State* tolua_S)
    tolua_function(tolua_S,"setPopupNotify",tolua_Cocos2d_CCFileUtils_setPopupNotify00);
    tolua_function(tolua_S,"isPopupNotify",tolua_Cocos2d_CCFileUtils_isPopupNotify00);
    tolua_function(tolua_S,"getFileData",tolua_Cocos2d_CCFileUtils_getFileData00);
+   tolua_function(tolua_S,"isFileExist",tolua_Cocos2d_CCFileUtils_isFileExist00);
   tolua_endmodule(tolua_S);
   tolua_function(tolua_S,"ccDrawPoint",tolua_Cocos2d_ccDrawPoint00);
   tolua_function(tolua_S,"ccDrawPoints",tolua_Cocos2d_ccDrawPoints00);

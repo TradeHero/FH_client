@@ -18,4 +18,6 @@ class CCFileUtils
     bool isPopupNotify();
 
     unsigned char* getFileData(const char* pszFileName, const char* pszMode, unsigned long * pSize);
+
+    virtual bool isFileExist(const std::string& strFilePath);
 };

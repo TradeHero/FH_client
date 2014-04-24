@@ -298,7 +298,7 @@
         "options": {
           "__type": "ComGUILabelSurrogate:#EditorCommon.JsonModel.Component.GUI",
           "classname": "Label",
-          "name": "Label_48",
+          "name": "time",
           "ZOrder": 2,
           "actiontag": 48,
           "anchorPointX": 0.5,
@@ -335,7 +335,7 @@
           "fontName": "微软雅黑",
           "fontSize": 20,
           "hAlignment": 1,
-          "text": "3/19 7:00pm",
+          "text": "7:00pm",
           "touchScaleEnable": false,
           "vAlignment": 1
         }
