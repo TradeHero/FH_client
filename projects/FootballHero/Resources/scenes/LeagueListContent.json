@@ -146,7 +146,7 @@
       "sizePercentY": 1,
       "sizeType": 0,
       "tag": 23,
-      "touchAble": false,
+      "touchAble": true,
       "useMergedTexture": false,
       "visible": true,
       "width": 640,

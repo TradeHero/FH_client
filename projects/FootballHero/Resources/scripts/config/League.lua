@@ -40,6 +40,11 @@ end
 	Provide additional getters.
 --]]
 
+function getConfigId( id )
+	local config = getConfig( id )
+	return config["Id"]
+end
+
 function getCountryId( id )
 	local config = getConfig( id )
 	return config["countryId"]
@@ -47,7 +52,7 @@ end
 
 function getLogo( id )
 	local config = getConfig( id )
-	return config["leagueId"]..".png"
+	return config["Id"]..".png"
 end
 
 function getLeagueName( id )

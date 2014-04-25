@@ -4,7 +4,7 @@ local ConnectingMessage = require("scripts.views.ConnectingMessage")
 local JsonConfigReader = require("scripts.config.JsonConfigReader")
 
 function action( param )
-    local leagueId = "1301"
+    local leagueId = 1301
     if param ~= nil and param[1] ~= nil then
         leagueId = param[1]
     end
@@ -50,5 +50,10 @@ function onRequestSuccess( matchList )
     end
 
 	local matchListScene = require("scripts.views.MatchListScene")
-    matchListScene.loadFrame( sortedMatchList )
+    if matchListScene.isShown() then
+        matchListScene.initMatchList( sortedMatchList )
+    else
+        matchListScene.loadFrame( sortedMatchList )
+    end
+    
 end
