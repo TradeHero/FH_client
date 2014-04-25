@@ -18,13 +18,24 @@ function init()
 end
 
 function getConfig( id )
-	assert( mConfig[id] ~= nil, FILE_NAME.." dosen't has "..id )
+	if id == nil then
+		return nil
+	end
+	if mConfig[id] == nil then
+		print( FILE_NAME.." dosen't has "..id )
+		return nil
+	end
 
 	return mConfig[id]
 end
 
 function getConfigIdByKey( key )
-	assert( mIndex[key] ~= nil, FILE_NAME.." dosen't has "..key )
+	if key == nil then
+		return nil
+	end
+	if mIndex[key] == nil then
+		print( FILE_NAME.." dosen't has "..key )
+	end
 
 	return mIndex[key]
 end
@@ -39,16 +50,24 @@ end
 
 function getTeamName( id )
 	local config = getConfig( id )
-	return config["teamName"]
+	if config ~= nil then
+		return config["teamName"]
+	else
+		return "Unknow team"
+	end
 end
 
 function getLogo( id )
 	local config = getConfig( id )
 
-	local fileUtils = CCFileUtils:sharedFileUtils()
-	local filePath = fileUtils:fullPathForFilename( Constants.TEAM_IMAGE_PATH..config["Id"]..".png" )
-	if fileUtils:isFileExist( filePath ) then
-		return config["Id"]..".png"
+	if config ~= nil then
+		local fileUtils = CCFileUtils:sharedFileUtils()
+		local filePath = fileUtils:fullPathForFilename( Constants.TEAM_IMAGE_PATH..config["Id"]..".png" )
+		if fileUtils:isFileExist( filePath ) then
+			return config["Id"]..".png"
+		else
+			return "default.png"
+		end
 	else
 		return "default.png"
 	end
@@ -56,7 +75,12 @@ end
 
 function getThumbUrl( id )
 	local config = getConfig( id )
-	return config["thumbUrl"]
+	if config ~= nil then
+		return config["thumbUrl"]
+	else
+		return "Unknown"
+	end
+	
 end
 
 init()

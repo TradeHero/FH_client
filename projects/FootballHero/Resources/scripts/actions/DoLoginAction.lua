@@ -29,7 +29,7 @@ function action( param )
         local jsonResponse = Json.decode( body )
         ConnectingMessage.selfRemove()
         if status == RequestConstants.HTTP_200 then
-            local sessionToken = jsonResponse["profileDTO"]["sessionToken"]
+            local sessionToken = jsonResponse["ProfileDto"]["sessionToken"]
             onRequestSuccess()
         else
             onRequestFailed( jsonResponse["Message"] )
