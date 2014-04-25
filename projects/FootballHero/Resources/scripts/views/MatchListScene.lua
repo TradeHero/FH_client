@@ -2,8 +2,9 @@ module(..., package.seeall)
 
 local Constants = require("scripts.Constants")
 local SceneManager = require("scripts.SceneManager")
+local CountryConfig = require("scripts.config.Country")
+local LeagueConfig = require("scripts.config.League")
 local TeamConfig = require("scripts.config.Team")
-local MatchConfig = require("scripts.config.Match")
 local Navigator = require("scripts.views.Navigator")
 local Logic = require("scripts.Logic").getInstance()
 local EventManager = require("scripts.events.EventManager").getInstance()
@@ -11,20 +12,20 @@ local Event = require("scripts.events.Event").EventList
 
 local mWidget
 local mTopLayer
-local mMatchNum = MatchConfig.getConfigNum()
-local mCountryNum = 7
+local mCountryNum = CountryConfig.getConfigNum()
 local mCountryExpended = {}
 
 local COUNTRY_CONTENT_HEIGHT = 130
-local LEAGUE_CONTENT_HEIGHT = 130
+local LEAGUE_CONTENT_HEIGHT = 80
 local MIN_MOVE_DISTANCE = 100
 local OPTION_MOVE_TIME = 0.5
 local OPTION_VIEW_OFFSET_X = 475
 
 function loadFrame( matchList )
 	local widget = GUIReader:shareReader():widgetFromJsonFile("scenes/MatchListScene.json")
-    SceneManager.clearNAddWidget( widget )
     mWidget = widget
+    mWidget:registerScriptHandler( EnterOrExit )
+    SceneManager.clearNAddWidget( widget )
 
     Navigator.loadFrame( widget )
 
@@ -82,9 +83,6 @@ function loadFrame( matchList )
     layout:requestDoLayout()
 
     -- Init the league list
-    for i = 1, mCountryNum do
-        mCountryExpended[i] = false
-    end
     helperInitLeagueList()
 
     -- Option button
@@ -98,6 +96,13 @@ function loadFrame( matchList )
     mWidget:addNode( mTopLayer )
 end
 
+function EnterOrExit( eventType )
+    if eventType == "enter" then
+    elseif eventType == "exit" then
+        mWidget = nil
+    end
+end
+
 function enterMatch( index )
     Logic:setSelectedMatchIndex( index )
     EventManager:postEvent( Event.Enter_Match )
@@ -106,8 +111,10 @@ end
 function helperInitLeagueList()
     local contentHeight = 0
     local leagueList = tolua.cast( mWidget:getChildByName("leagueList"), "ScrollView" )
+    local leagueListHeight = leagueList:getSize().height
 
     for i = 1, mCountryNum do
+        mCountryExpended[i] = false
         local eventHandler = function( sender, eventType )
             if eventType == TOUCH_EVENT_ENDED then
                 -- Handler
@@ -121,12 +128,15 @@ function helperInitLeagueList()
         end
 
         local content = GUIReader:shareReader():widgetFromJsonFile("scenes/CountryListContent.json")
+        local countryName = tolua.cast( content:getChildByName("countryName"), "Label" )
+        countryName:setText( CountryConfig.getCountryName( i ) )
 
         content:addTouchEventListener( eventHandler )
         content:setPosition( ccp( 0, ( i - 1 ) * COUNTRY_CONTENT_HEIGHT ) )
         leagueList:addChild( content )
         content:setName( "country"..i )
         contentHeight = contentHeight + content:getSize().height
+        leagueList:jumpToPercentVertical( 1 )
     end
 
     leagueList:setInnerContainerSize( CCSize:new( 0, contentHeight ) )
@@ -135,14 +145,14 @@ function helperInitLeagueList()
 end
 
 function helperUpdateLeagueList( clickedCountryId )
-    local subLeagueNum = 2 -- Hack the number for now
+    local leagueNum = table.getn( CountryConfig.getLeagueList( clickedCountryId ) ) 
 
     -- Calculate the move offset
     local moveOffsetX = 0
     if mCountryExpended[clickedCountryId] == true then
-        moveOffsetX = subLeagueNum * LEAGUE_CONTENT_HEIGHT
+        moveOffsetX = leagueNum * LEAGUE_CONTENT_HEIGHT
     else
-        moveOffsetX = subLeagueNum * (-LEAGUE_CONTENT_HEIGHT)
+        moveOffsetX = leagueNum * (-LEAGUE_CONTENT_HEIGHT)
     end
 
     -- Move upper country and league logo's position    
@@ -150,7 +160,8 @@ function helperUpdateLeagueList( clickedCountryId )
     for i = clickedCountryId, mCountryNum do
         local countryLogo = leagueList:getChildByName( "country"..i )
         countryLogo:setPosition( ccp( countryLogo:getPositionX() , countryLogo:getPositionY() + moveOffsetX ) )
-        for j = 1, subLeagueNum do
+        local otherCountryLeagueNum = table.getn( CountryConfig.getLeagueList( i ) ) 
+        for j = 1, otherCountryLeagueNum do
             local leagueLogo = leagueList:getChildByName( "country"..i.."_league"..j )
             if leagueLogo ~= nil then
                 leagueLogo:setPosition( ccp( leagueLogo:getPositionX() , leagueLogo:getPositionY() + moveOffsetX ) )
@@ -160,15 +171,18 @@ function helperUpdateLeagueList( clickedCountryId )
 
     -- Add or remove league logos according to the status
     if mCountryExpended[clickedCountryId] == true then
-        for i = 1, subLeagueNum do
+        for i = 1, leagueNum do
             local content = GUIReader:shareReader():widgetFromJsonFile("scenes/LeagueListContent.json")
             local parent = leagueList:getChildByName( "country"..clickedCountryId )
-            content:setPosition( ccp( 0, parent:getPositionY() - ( subLeagueNum - i + 1 ) * LEAGUE_CONTENT_HEIGHT ) )
+            content:setPosition( ccp( 0, parent:getPositionY() - ( leagueNum - i + 1 ) * LEAGUE_CONTENT_HEIGHT ) )
             leagueList:addChild( content )
             content:setName( "country"..clickedCountryId.."_league"..i )
+            local leagueName = tolua.cast( content:getChildByName("leagueName"), "Label" )
+            local leagueId = CountryConfig.getLeagueList( clickedCountryId )[i]
+            leagueName:setText( LeagueConfig.getLeagueName( leagueId ) )
         end
     else
-        for i = 1, subLeagueNum do
+        for i = 1, leagueNum do
             local leagueLogo = leagueList:getChildByName( "country"..clickedCountryId.."_league"..i )
             leagueList:removeChild( leagueLogo )
         end
@@ -186,10 +200,10 @@ function helperInitMatchInfo( content, matchInfo )
     local team2 = tolua.cast( content:getChildByName("team2"), "ImageView" )
     local team1Name = tolua.cast( content:getChildByName("team1Name"), "Label" )
     local team2Name = tolua.cast( content:getChildByName("team2Name"), "Label" )
-    team1:loadTexture( Constants.TEAM_IMAGE_PATH..TeamConfig.getLogo( matchInfo["HomeTeamId"] ) )
-    team2:loadTexture( Constants.TEAM_IMAGE_PATH..TeamConfig.getLogo( matchInfo["AwayTeamId"] ) )
-    team1Name:setText( TeamConfig.getTeamName( matchInfo["HomeTeamId"] ) )
-    team2Name:setText( TeamConfig.getTeamName( matchInfo["AwayTeamId"] ) )
+    team1:loadTexture( Constants.TEAM_IMAGE_PATH..TeamConfig.getLogo( TeamConfig.getConfigIdByKey( matchInfo["HomeTeamId"] ) ) )
+    team2:loadTexture( Constants.TEAM_IMAGE_PATH..TeamConfig.getLogo( TeamConfig.getConfigIdByKey( matchInfo["AwayTeamId"] ) ) )
+    team1Name:setText( TeamConfig.getTeamName( TeamConfig.getConfigIdByKey( matchInfo["HomeTeamId"] ) ) )
+    team2Name:setText( TeamConfig.getTeamName( TeamConfig.getConfigIdByKey( matchInfo["AwayTeamId"] ) ) )
     team1Name:setFontName("fonts/Newgtbxc.ttf")
     team2Name:setFontName("fonts/Newgtbxc.ttf")
     local time = tolua.cast( content:getChildByName("time"), "Label" )

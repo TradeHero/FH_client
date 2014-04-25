@@ -19,8 +19,9 @@ function loadFrame( prediction, teamName, reward )
 	mReward = reward
 
 	local widget = GUIReader:shareReader():widgetFromJsonFile("scenes/PredConfirm.json")
-    SceneManager.clearNAddWidget(widget)
     mWidget = widget
+    mWidget:registerScriptHandler( EnterOrExit )
+    SceneManager.clearNAddWidget(widget)
 
 	--initContent()    
     createTextInput()
@@ -30,6 +31,13 @@ function loadFrame( prediction, teamName, reward )
 
     --local backBt = widget:getChildByName("Back")
     --backBt:addTouchEventListener( backEventHandler )
+end
+
+function EnterOrExit( eventType )
+    if eventType == "enter" then
+    elseif eventType == "exit" then
+        mWidget = nil
+    end
 end
 
 function submitEventHandler( sender, eventType )

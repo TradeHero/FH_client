@@ -11,8 +11,9 @@ local mWidget
 
 function loadFrame()
 	local widget = GUIReader:shareReader():widgetFromJsonFile("scenes/ForgotPassword.json")
-    SceneManager.clearNAddWidget(widget)
     mWidget = widget
+    mWidget:registerScriptHandler( EnterOrExit )
+    SceneManager.clearNAddWidget(widget)
 
     local okBt = widget:getChildByName("OK")
     local cancelBt = widget:getChildByName("cancel")
@@ -21,6 +22,13 @@ function loadFrame()
 
     local emailInput = ViewUtils.createTextInput( mWidget:getChildByName( EMAIL_CONTAINER_NAME ), "E-mail address" )
     emailInput:setFontColor( ccc3( 0, 0, 0 ) )
+end
+
+function EnterOrExit( eventType )
+    if eventType == "enter" then
+    elseif eventType == "exit" then
+        mWidget = nil
+    end
 end
 
 function okEventHandler( sender,eventType )

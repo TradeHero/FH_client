@@ -10,10 +10,18 @@ local mWidget
 function loadFrame()
 
 	local widget = GUIReader:shareReader():widgetFromJsonFile("scenes/ConnectingMessage.json")
-    SceneManager.addWidget( widget )
 
     widget:addTouchEventListener( onFrameTouch )
     mWidget = widget
+    mWidget:registerScriptHandler( EnterOrExit )
+    SceneManager.addWidget( widget )
+end
+
+function EnterOrExit( eventType )
+    if eventType == "enter" then
+    elseif eventType == "exit" then
+        mWidget = nil
+    end
 end
 
 function setMessage( message )

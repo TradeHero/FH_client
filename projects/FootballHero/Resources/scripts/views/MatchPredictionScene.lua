@@ -20,7 +20,6 @@ function loadFrame()
     mMatchIndex = Logic:getSelectedMatchIndex()
 
 	local widget = GUIReader:shareReader():widgetFromJsonFile("scenes/MatchPrediction.json")
-    SceneManager.clearNAddWidget(widget)
 
     local backBt = widget:getChildByName("Back")
     backBt:addTouchEventListener( backEventHandler )
@@ -29,6 +28,15 @@ function loadFrame()
 
     widget:addTouchEventListener( onFrameTouch )
     mWidget = widget
+    mWidget:registerScriptHandler( EnterOrExit )
+    SceneManager.clearNAddWidget(widget)
+end
+
+function EnterOrExit( eventType )
+    if eventType == "enter" then
+    elseif eventType == "exit" then
+        mWidget = nil
+    end
 end
 
 function selectTeam1Win()

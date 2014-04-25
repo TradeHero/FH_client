@@ -15,8 +15,9 @@ local inputHeight = 50
 
 function loadFrame()
 	local widget = GUIReader:shareReader():widgetFromJsonFile("scenes/Register.json")
-    SceneManager.clearNAddWidget(widget)
     mWidget = widget
+    mWidget:registerScriptHandler( EnterOrExit )
+    SceneManager.clearNAddWidget(widget)
 
     local backBt = widget:getChildByName("back")
     local registerBt = widget:getChildByName("register")
@@ -30,6 +31,13 @@ function loadFrame()
 
     passwordInput:setInputFlag( kEditBoxInputFlagPassword )
     passwordConfInput:setInputFlag( kEditBoxInputFlagPassword )
+end
+
+function EnterOrExit( eventType )
+    if eventType == "enter" then
+    elseif eventType == "exit" then
+        mWidget = nil
+    end
 end
 
 function backEventHandler( sender,eventType )

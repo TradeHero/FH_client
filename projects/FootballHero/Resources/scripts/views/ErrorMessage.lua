@@ -10,13 +10,21 @@ local mWidget
 function loadFrame()
 
 	local widget = GUIReader:shareReader():widgetFromJsonFile("scenes/ErrorMessage.json")
-    SceneManager.addWidget( widget )
 
     local okBt = widget:getChildByName("ok")
     okBt:addTouchEventListener( okEventHandler )
 
     widget:addTouchEventListener( onFrameTouch )
     mWidget = widget
+    mWidget:registerScriptHandler( EnterOrExit )
+    SceneManager.addWidget( widget )
+end
+
+function EnterOrExit( eventType )
+    if eventType == "enter" then
+    elseif eventType == "exit" then
+        mWidget = nil
+    end
 end
 
 function setErrorMessage( message )

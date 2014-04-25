@@ -14,8 +14,9 @@ local inputHeight = 50
 
 function loadFrame()
 	local widget = GUIReader:shareReader():widgetFromJsonFile("scenes/Signin.json")
-    SceneManager.clearNAddWidget(widget)
     mWidget = widget
+    mWidget:registerScriptHandler( EnterOrExit )
+    SceneManager.clearNAddWidget(widget)
 
     local signinBt = widget:getChildByName("signin")
     local backBt = widget:getChildByName("back")
@@ -29,6 +30,13 @@ function loadFrame()
     local passwordInput = ViewUtils.createTextInput( mWidget:getChildByName( PASSWORD_CONTAINER_NAME ), "Password" )
     passwordInput:setInputFlag( kEditBoxInputFlagPassword )
     passwordInput:setFontColor( ccc3( 0, 0, 0 ) )
+end
+
+function EnterOrExit( eventType )
+    if eventType == "enter" then
+    elseif eventType == "exit" then
+        mWidget = nil
+    end
 end
 
 function backEventHandler( sender,eventType )

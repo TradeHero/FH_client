@@ -15,8 +15,9 @@ local inputHeight = 50
 
 function loadFrame()
 	local widget = GUIReader:shareReader():widgetFromJsonFile("scenes/RegisterName.json")
-    SceneManager.clearNAddWidget(widget)
     mWidget = widget
+    mWidget:registerScriptHandler( EnterOrExit )
+    SceneManager.clearNAddWidget(widget)
 
     local backBt = widget:getChildByName("back")
     local confirmBt = widget:getChildByName("confirm")
@@ -27,6 +28,13 @@ function loadFrame()
     ViewUtils.createTextInput( mWidget:getChildByName( USERNAME_CONTAINER_NAME ), "Username" )
     ViewUtils.createTextInput( mWidget:getChildByName( FIRSTNAME_CONTAINER_NAME ), "First name (Optional)" )
     ViewUtils.createTextInput( mWidget:getChildByName( LASTNAME_CONTAINER_NAME ), "Last name (Optional)" )
+end
+
+function EnterOrExit( eventType )
+    if eventType == "enter" then
+    elseif eventType == "exit" then
+        mWidget = nil
+    end
 end
 
 function setUserName( name )

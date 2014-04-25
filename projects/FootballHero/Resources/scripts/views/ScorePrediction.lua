@@ -15,11 +15,19 @@ function loadFrame()
 	mMatchIndex = Logic:getSelectedMatchIndex()
 
 	local widget = GUIReader:shareReader():widgetFromJsonFile("scenes/ScorePrediction.json")
-    SceneManager.clearNAddWidget(widget)
     mWidget = widget
+    mWidget:registerScriptHandler( EnterOrExit )
+    SceneManager.clearNAddWidget(widget)
 
     helperInitMatchInfo( widget, mMatchIndex )
     initPredictionQuest()
+end
+
+function EnterOrExit( eventType )
+    if eventType == "enter" then
+    elseif eventType == "exit" then
+        mWidget = nil
+    end
 end
 
 function initPredictionQuest()

@@ -4,7 +4,11 @@ local ConnectingMessage = require("scripts.views.ConnectingMessage")
 local JsonConfigReader = require("scripts.config.JsonConfigReader")
 
 function action( param )
---[[
+    local leagueId = "1301"
+    if param ~= nil and param[1] ~= nil then
+        leagueId = param[1]
+    end
+
     local Json = require("json")
 	local RequestConstants = require("scripts.RequestConstants")
 
@@ -21,12 +25,14 @@ function action( param )
     end
 
     local httpRequest = HttpRequestForLua:create( CCHttpRequest.kHttpGet, "Content-Type: application/json" )
-    httpRequest:sendHttpRequest( RequestConstants.GET_ALL_UPCOMING_GAMES_REST_CALL, handler )
+    httpRequest:sendHttpRequest( RequestConstants.GET_UPCOMING_GAMES_BY_LEAGUE_REST_CALL.."?leagueId="..leagueId, handler )
 
     ConnectingMessage.loadFrame()
---]]
+
+--[[
     local config = JsonConfigReader.read( "config/matchList.json" )
     onRequestSuccess( config )
+--]]
 end
 
 function onRequestSuccess( matchList )

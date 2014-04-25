@@ -4,8 +4,12 @@ local SceneManager = require("scripts.SceneManager")
 local EventManager = require("scripts.events.EventManager").getInstance()
 local Event = require("scripts.events.Event").EventList
 
+local mWidget
+
 function loadFrame()
 	local widget = GUIReader:shareReader():widgetFromJsonFile("scenes/LoginNReg.json")
+    mWidget = widget
+    mWidget:registerScriptHandler( EnterOrExit )
     SceneManager.clearNAddWidget(widget)
 
     local signinBt = widget:getChildByName("signin")
@@ -15,6 +19,13 @@ function loadFrame()
     signinBt:addTouchEventListener( signinEventHandler )
     registerBt:addTouchEventListener( registerEventHandler )
     facebookBt:addTouchEventListener( facebookEventHandler )
+end
+
+function EnterOrExit( eventType )
+    if eventType == "enter" then
+    elseif eventType == "exit" then
+        mWidget = nil
+    end
 end
 
 function signinEventHandler( sender,eventType )

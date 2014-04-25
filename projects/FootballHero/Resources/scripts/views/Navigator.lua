@@ -8,8 +8,9 @@ local NAV_BT_NUM = 4
 
 function loadFrame( parent )
 	local widget = GUIReader:shareReader():widgetFromJsonFile("scenes/Navigator.json")
-    parent:addChild( widget )
     mWidget = widget
+    mWidget:registerScriptHandler( EnterOrExit )
+    parent:addChild( widget )
 
     for i = 1, NAV_BT_NUM do
     	local navBt = widget:getChildByName("nav"..i)
@@ -17,6 +18,13 @@ function loadFrame( parent )
     end
 
     chooseNav( 1 )
+end
+
+function EnterOrExit( eventType )
+    if eventType == "enter" then
+    elseif eventType == "exit" then
+        mWidget = nil
+    end
 end
 
 function navEventHandler( sender, eventType )

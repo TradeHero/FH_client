@@ -15,9 +15,11 @@ local mTeamId
 function loadFrame()
 
 	local widget = GUIReader:shareReader():widgetFromJsonFile("scenes/FavouriteTeam.json")
-    SceneManager.addWidget( widget )
 
     mWidget = widget
+    mWidget:registerScriptHandler( EnterOrExit )
+    SceneManager.addWidget( widget )
+
     local countryContainer = tolua.cast( widget:getChildByName("countryList"), "ScrollView" )
     local layoutParameter = LinearLayoutParameter:create()
     layoutParameter:setGravity(LINEAR_GRAVITY_LEFT)
@@ -48,6 +50,13 @@ function loadFrame()
 
     -- Set the default one.
     countrySelected( 1 )
+end
+
+function EnterOrExit( eventType )
+    if eventType == "enter" then
+    elseif eventType == "exit" then
+        mWidget = nil
+    end
 end
 
 function okEventHandler( sender, eventType )
