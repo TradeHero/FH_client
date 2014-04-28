@@ -57,7 +57,8 @@ function EnterOrExit( eventType )
     end
 end
 
-function initMatchList( matchList )
+-- Param matchList is Object of MatchListData
+function initMatchList( matchList ) 
     local contentContainer = tolua.cast( mWidget:getChildByName("ScrollView"), "ScrollView" )
     contentContainer:removeAllChildrenWithCleanup( true )
 
@@ -86,7 +87,7 @@ function initMatchList( matchList )
         for inK, inV in pairs( matchDate["matches"] ) do
             local eventHandler = function( sender, eventType )
                 if eventType == TOUCH_EVENT_ENDED then
-                    --enterMatch( i )
+                    enterMatch( inV )
                 end
             end
 
@@ -114,8 +115,8 @@ function initMatchList( matchList )
     layout:requestDoLayout()
 end
 
-function enterMatch( index )
-    Logic:setSelectedMatchIndex( index )
+function enterMatch( match )
+    Logic:setSelectedMatch( match )
     EventManager:postEvent( Event.Enter_Match )
 end
 

@@ -26,7 +26,8 @@ function Logic:new()
 	
 	local obj = {
 		mPoint = 5000,
-		mSelectedMatchIndex = 0,
+		mSelectedMatch = nil,
+		mCurDisplayMarketIndex = 0,
 		mPredictionList = {},
 		sessionToken = 0,
 		email = "",
@@ -42,12 +43,20 @@ function Logic:new()
     return obj 
 end
 
-function Logic:getSelectedMatchIndex()
-	return self.mSelectedMatchIndex
+function Logic:getSelectedMatch()
+	return self.mSelectedMatch
 end
 
-function Logic:setSelectedMatchIndex( index )
-	self.mSelectedMatchIndex = index
+function Logic:setSelectedMatch( match )
+	self.mSelectedMatch = match
+end
+
+function Logic:getCurDisplayMarketIndex()
+	return self.mCurDisplayMarketIndex
+end
+
+function Logic:setCurDisplayMarketIndex( index )
+	self.mCurDisplayMarketIndex = index
 end
 
 function Logic:getPoint()

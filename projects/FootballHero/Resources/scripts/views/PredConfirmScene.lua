@@ -2,7 +2,6 @@ module(..., package.seeall)
 
 local Constants = require("scripts.Constants")
 local SceneManager = require("scripts.SceneManager")
-local MatchConfig = require("scripts.config.Match")
 local Logic = require("scripts.Logic").getInstance()
 local EventManager = require("scripts.events.EventManager").getInstance()
 local Event = require("scripts.events.Event").EventList
@@ -21,16 +20,16 @@ function loadFrame( prediction, teamName, reward )
 	local widget = GUIReader:shareReader():widgetFromJsonFile("scenes/PredConfirm.json")
     mWidget = widget
     mWidget:registerScriptHandler( EnterOrExit )
-    SceneManager.clearNAddWidget(widget)
+    SceneManager.addWidget(widget)
 
 	--initContent()    
     createTextInput()
 
-    --local submitBt = widget:getChildByName("Submit")
-    --submitBt:addTouchEventListener( submitEventHandler )
+    local confirmBt = widget:getChildByName("confirm")
+    confirmBt:addTouchEventListener( confirmEventHandler )
 
-    --local backBt = widget:getChildByName("Back")
-    --backBt:addTouchEventListener( backEventHandler )
+    local cancelBt = widget:getChildByName("cancel")
+    cancelBt:addTouchEventListener( cancelEventHandler )
 end
 
 function EnterOrExit( eventType )
@@ -40,15 +39,15 @@ function EnterOrExit( eventType )
     end
 end
 
-function submitEventHandler( sender, eventType )
+function confirmEventHandler( sender, eventType )
 	if eventType == TOUCH_EVENT_ENDED then
 		local matchIndex = Logic:getSelectedMatchIndex()
-
-		local scorePredictionList = MatchConfig.getPredictionList( matchIndex )
 
 		Logic:addPrediction( matchIndex, mPrediction )
 	    EventManager:postEvent( Event.Enter_Match_List )
 	    --[[
+		local scorePredictionList = MatchConfig.getPredictionList( matchIndex )
+
 	    if table.getn( scorePredictionList ) == 0 then
 	        EventManager:postEvent( Event.Enter_Match_List )
 	    else
@@ -58,9 +57,9 @@ function submitEventHandler( sender, eventType )
 	end
 end
 
-function backEventHandler( sender, eventType )
+function cancelEventHandler( sender, eventType )
 	if eventType == TOUCH_EVENT_ENDED then
-		EventManager:postEvent( Event.Enter_Match )
+		SceneManager.removeWidget( mWidget )
 	end
 end
 

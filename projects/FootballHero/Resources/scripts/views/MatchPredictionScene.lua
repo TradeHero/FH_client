@@ -3,28 +3,30 @@ module(..., package.seeall)
 local Constants = require("scripts.Constants")
 local SceneManager = require("scripts.SceneManager")
 local TeamConfig = require("scripts.config.Team")
-local MatchConfig = require("scripts.config.Match")
+local MarketConfig = require("scripts.config.Market")
 local Logic = require("scripts.Logic").getInstance()
 local EventManager = require("scripts.events.EventManager").getInstance()
 local Event = require("scripts.events.Event").EventList
+local MarketsForGameData = require("scripts.data.MarketsForGameData")
 
-local mMatchIndex = 0
 local mWidget
+local mMarketsData
 
 local MIN_MOVE_DISTANCE = 100
 local SCALE_UP_OFFSET_MAX = 0.2
 local SCALE_DOWN_OFFSET_MAX = -0.2
 local OPACITY = 255
 
-function loadFrame()
-    mMatchIndex = Logic:getSelectedMatchIndex()
 
+-- Param: marketsData is the object for MarketsForGameData
+function loadFrame( marketsData )
 	local widget = GUIReader:shareReader():widgetFromJsonFile("scenes/MatchPrediction.json")
+    mMarketsData = marketsData
 
     local backBt = widget:getChildByName("Back")
     backBt:addTouchEventListener( backEventHandler )
 
-    helperInitMatchInfo( widget, mMatchIndex )
+    helperInitMatchInfo( widget )
 
     widget:addTouchEventListener( onFrameTouch )
     mWidget = widget
@@ -40,11 +42,21 @@ function EnterOrExit( eventType )
 end
 
 function selectTeam1Win()
-    makePrediction( Constants.TEAM1_WIN, TeamConfig.getDisplayName( MatchConfig.getTeam1( mMatchIndex ) ), MatchConfig.getTeam1WinOdds( mMatchIndex ) )
+    local match = Logic:getSelectedMatch()
+    local matchMarketData = mMarketsData:getMatchMarket()
+
+    makePrediction( Constants.TEAM1_WIN, 
+        TeamConfig.getTeamName( TeamConfig.getConfigIdByKey( match["HomeTeamId"] ) ), 
+        MarketsForGameData.getOddsForType( matchMarketData, MarketConfig.ODDS_TYPE_HOME_WIN ) )
 end
 
 function selectTeam2Win()
-    makePrediction( Constants.TEAM2_WIN, TeamConfig.getDisplayName( MatchConfig.getTeam2( mMatchIndex ) ), MatchConfig.getTeam2WinOdds( mMatchIndex ) )
+    local match = Logic:getSelectedMatch()
+    local matchMarketData = mMarketsData:getMatchMarket()
+
+    makePrediction( Constants.TEAM2_WIN, 
+        TeamConfig.getTeamName( TeamConfig.getConfigIdByKey( match["AwayTeamId"] ) ), 
+        MarketsForGameData.getOddsForType( matchMarketData, MarketConfig.ODDS_TYPE_AWAY_WIN ) )
 end
 
 function backEventHandler( sender, eventType )
@@ -70,7 +82,10 @@ function helperUpdatePoint( content )
     pointLabel:setText( point )
 end
 
-function helperInitMatchInfo( content, matchIndex )
+function helperInitMatchInfo( content, marketsData )
+    local match = Logic:getSelectedMatch()
+    local matchMarketData = mMarketsData:getMatchMarket()
+
     local team1 = tolua.cast( content:getChildByName("team1"), "ImageView" )
     local team2 = tolua.cast( content:getChildByName("team2"), "ImageView" )
     local team1Name = tolua.cast( content:getChildByName("team1Name"), "Label" )
@@ -78,14 +93,13 @@ function helperInitMatchInfo( content, matchIndex )
     local team1WinPoint = tolua.cast( team1:getChildByName("team1WinPoint"), "Label" )
     local team2WinPoint = tolua.cast( team2:getChildByName("team2WinPoint"), "Label" )
 
-    team1:loadTexture( Constants.TEAM_IMAGE_PATH..TeamConfig.getLogo( MatchConfig.getTeam1( matchIndex ) ) )
-    team2:loadTexture( Constants.TEAM_IMAGE_PATH..TeamConfig.getLogo( MatchConfig.getTeam2( matchIndex ) ) )
-    team1Name:setText( TeamConfig.getDisplayName( MatchConfig.getTeam1( matchIndex ) ) )
-    team2Name:setText( TeamConfig.getDisplayName( MatchConfig.getTeam2( matchIndex ) ) )
-    team1WinPoint:setText( MatchConfig.getTeam1WinOdds( matchIndex ).." points" )
-    team2WinPoint:setText( MatchConfig.getTeam2WinOdds( matchIndex ).." points" )
+    team1:loadTexture( Constants.TEAM_IMAGE_PATH..TeamConfig.getLogo( TeamConfig.getConfigIdByKey( match["HomeTeamId"] ) ) )
+    team2:loadTexture( Constants.TEAM_IMAGE_PATH..TeamConfig.getLogo( TeamConfig.getConfigIdByKey( match["AwayTeamId"] ) ) )
+    team1Name:setText( TeamConfig.getTeamName( TeamConfig.getConfigIdByKey( match["HomeTeamId"] ) ) )
+    team2Name:setText( TeamConfig.getTeamName( TeamConfig.getConfigIdByKey( match["AwayTeamId"] ) ) )
+    team1WinPoint:setText( MarketsForGameData.getOddsForType( matchMarketData, MarketConfig.ODDS_TYPE_HOME_WIN ).." points" )
+    team2WinPoint:setText( MarketsForGameData.getOddsForType( matchMarketData, MarketConfig.ODDS_TYPE_AWAY_WIN ).." points" )
 end
-
 
 
 function onFrameTouch( sender, eventType )

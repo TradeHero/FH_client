@@ -48,6 +48,7 @@ GUI/CCScrollView/CCTableViewCell.cpp \
 GUI/CCScrollView/CCSorting.cpp \
 GUI/CCEditBox/CCEditBox.cpp \
 GUI/CCEditBox/CCEditBoxImplAndroid.cpp \
+GUI/CCEditBox/EditBoxDelegateForLua.cpp \
 network/HttpClient.cpp \
 network/HttpRequestForLua.cpp \
 network/WebSocket.cpp \

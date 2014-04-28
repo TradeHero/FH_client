@@ -32,7 +32,13 @@ function onFBConnectSuccess( accessToken )
     local handler = function( isSucceed, body, header, status, errorBuffer )
         print( "Http reponse: "..status.." and errorBuffer: "..errorBuffer )
         print( "Http reponse body: "..body )
-        local jsonResponse = Json.decode( body )
+        
+        local jsonResponse = {}
+        if string.len( body ) > 0 then
+            jsonResponse = Json.decode( body )
+        else
+            jsonResponse["Message"] = errorBuffer
+        end
         ConnectingMessage.selfRemove()
         if status == RequestConstants.HTTP_200 then
             local sessionToken = jsonResponse["sessionToken"]
