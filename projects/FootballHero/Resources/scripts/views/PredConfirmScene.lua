@@ -20,6 +20,7 @@ function loadFrame( prediction, teamName, reward )
 	local widget = GUIReader:shareReader():widgetFromJsonFile("scenes/PredConfirm.json")
     mWidget = widget
     mWidget:registerScriptHandler( EnterOrExit )
+    mWidget:addTouchEventListener( bgEventHandler )
     SceneManager.addWidget(widget)
 
 	--initContent()    
@@ -63,6 +64,10 @@ function cancelEventHandler( sender, eventType )
 	end
 end
 
+function bgEventHandler( sender, eventType )
+	print(eventType)
+end
+
 function createTextInput()
 	local container = mWidget:getChildByName("TextInput")
 
@@ -70,15 +75,14 @@ function createTextInput()
 	inputDelegate:registerEventScriptHandler( EDIT_BOX_EVENT_TEXT_CHANGED, function ( textBox, text )
 		local textDisplay = tolua.cast( mWidget:getChildByName("Text"), "Label" )
 		textDisplay:setText( text )
-
 	end )
 	container:addNode( tolua.cast( inputDelegate, "CCNode" ) )
 
-	local textInput = CCEditBox:create( CCSizeMake( 550, 350 ), CCScale9Sprite:create() )
+	local textInput = CCEditBox:create( CCSizeMake( 700, 350 ), CCScale9Sprite:create() )
     container:addNode( textInput )
-    textInput:setPosition( 550 / 2, 350 / 2 )
-    textInput:setFont("Newgtbxc", 20)
+    textInput:setPosition( 700 / 2, 350 / 2 )
     textInput:setDelegate( inputDelegate.__CCEditBoxDelegate__ )
+    textInput:setTouchPriority( SceneManager.TOUCH_PRIORITY_MINUS_ONE )
 end
 
 function initContent()

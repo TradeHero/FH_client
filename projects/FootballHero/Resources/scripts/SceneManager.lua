@@ -17,6 +17,8 @@ local DoRegisterNameAction = require("scripts.actions.DoRegisterNameAction")
 local DoFBConnectAction = require("scripts.actions.DoFBConnectAction")
 local ShowErrorMessageAction = require("scripts.actions.ShowErrorMessageAction")
 
+TOUCH_PRIORITY_ZERO = 0
+TOUCH_PRIORITY_MINUS_ONE = -1
 
 local mSceneGameLayer
 
