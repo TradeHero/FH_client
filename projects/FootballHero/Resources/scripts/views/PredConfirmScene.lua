@@ -6,17 +6,17 @@ local Logic = require("scripts.Logic").getInstance()
 local EventManager = require("scripts.events.EventManager").getInstance()
 local Event = require("scripts.events.Event").EventList
 
-local mPrediction
 local mTeamName
 local mReward
+local mOddId
 local mWidget
 local mTextInput
 
-function loadFrame( prediction, teamName, reward )
+function loadFrame( teamName, reward, oddId )
 
-	mPrediction = prediction
 	mTeamName = teamName
 	mReward = reward
+	mOddId = oddId
 
 	local widget = GUIReader:shareReader():widgetFromJsonFile("scenes/PredConfirm.json")
     mWidget = widget
@@ -47,19 +47,11 @@ end
 
 function confirmEventHandler( sender, eventType )
 	if eventType == TOUCH_EVENT_ENDED then
-		local matchIndex = Logic:getSelectedMatchIndex()
+		local textDisplay = tolua.cast( mWidget:getChildByName("Text"), "Label" )
+		local comment = textDisplay:getStringValue()
 
-		Logic:addPrediction( matchIndex, mPrediction )
-	    EventManager:postEvent( Event.Enter_Match_List )
-	    --[[
-		local scorePredictionList = MatchConfig.getPredictionList( matchIndex )
-
-	    if table.getn( scorePredictionList ) == 0 then
-	        EventManager:postEvent( Event.Enter_Match_List )
-	    else
-	        ScorePrediction.loadFrame()
-	    end
-	    ]]
+		Logic:addPrediction( mOddId, comment )
+	    EventManager:postEvent( Event.Enter_Next_Prediction )
 	end
 end
 

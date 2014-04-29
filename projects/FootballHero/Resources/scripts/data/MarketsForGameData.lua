@@ -106,12 +106,34 @@ function MarketsForGameData:getMarketAt( index )
 end
 
 -- Getters for inner data structure
+
+function getMarketType( market )
+    return market["marketTypeId"]
+end
+
+function getOddIdForType( market, oddsType )
+    local oddsConfig = nil 
+    for k, v in pairs( market["odds"] ) do
+        local odds = v
+        if odds["OutcomeName"] == oddsType then
+            oddsConfig = v
+            break
+        end
+    end
+    
+    if oddsConfig ~= nil then
+        return oddsConfig["Id"]
+    end
+    return 0
+end
+
 function getOddsForType( market, oddsType )
 	local oddsConfig = nil 
 	for k, v in pairs( market["odds"] ) do
 		local odds = v
 		if odds["OutcomeName"] == oddsType then
 			oddsConfig = v
+            break
 		end
 	end
 	

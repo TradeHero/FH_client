@@ -1,6 +1,6 @@
 module(..., package.seeall)
 
-local FileUtils = require("scripts.FileUtils")
+local Json = require("json")
 
 -- Singleton of logic
 local MATCH_PREDICTION = "matchPrediction"
@@ -28,7 +28,8 @@ function Logic:new()
 		mPoint = 5000,
 		mSelectedMatch = nil,
 		mCurDisplayMarketIndex = 0,
-		mPredictionList = {},
+		mCurMarketInfo = nil,	-- DS: see MarketsForGameData
+		mPredictionList = {},  -- DS: { predictionID = comments } Save the prediction of the current match selected.
 		sessionToken = 0,
 		email = "",
 		password = "",
@@ -58,6 +59,15 @@ end
 function Logic:setCurDisplayMarketIndex( index )
 	self.mCurDisplayMarketIndex = index
 end
+
+function Logic:getCurMarketInfo()
+	return self.mCurMarketInfo
+end
+
+function Logic:setCurMarketInfo( info )
+	self.mCurMarketInfo = info
+end
+
 
 function Logic:getPoint()
 	return self.mPoint
@@ -93,30 +103,13 @@ function Logic.getSessionToken()
 	return self.sessionToken
 end
 
-function Logic:getPrediction( predictionIndex )
-	return self.mPredictionList[MATCH_PREDICTION..predictionIndex]
+function Logic:getPrediction()
+	return self.mPredictionList
 end
 
-function Logic:addPrediction( predictionIndex, prediciton )
-	print("Index "..predictionIndex.." value "..prediciton)
-	self.mPredictionList[MATCH_PREDICTION..predictionIndex] = prediciton		-- use tonumber("3")
-end
+function Logic:addPrediction( prediciton, comment )
+	print("Make Prediction: "..prediciton.." with comments: "..comment)
+	self.mPredictionList[prediciton] = comment
 
-function Logic:getScorePrediction( predictionIndex )
-	return self.mPredictionList[SCORE_PREDICTION..predictionIndex]
-end
-
-function Logic:addScorePrediction( predictionIndex, scorePredictionIndex, prediction )
-	if self.mPredictionList[SCORE_PREDICTION..predictionIndex] == nil then
-		self.mPredictionList[SCORE_PREDICTION..predictionIndex] = {}
-	end
-	self.mPredictionList[SCORE_PREDICTION..predictionIndex][SUB_PREDICTION..scorePredictionIndex] = prediction
-end
-
-function Logic:writeToFile()
-	FileUtils.writeTableToFile( "prediction.json", self.mPredictionList )
-end
-
-function Logic:readFromFile()
-	self.mPredictionList = FileUtils.readTableFromFile( "prediction.json" )
+	print(Json.encode( self.mPredictionList ))
 end

@@ -2,11 +2,12 @@ module(..., package.seeall)
 
 local Json = require("json")
 local ConnectingMessage = require("scripts.views.ConnectingMessage")
+local Logic = require("scripts.Logic").getInstance()
+
 
 function action( param )
 
 	local RequestConstants = require("scripts.RequestConstants")
-    local Logic = require("scripts.Logic").getInstance()
 
     local matchId = Logic:getSelectedMatch()["Id"]
 
@@ -38,7 +39,10 @@ end
 function onRequestSuccess( response )
     local MarketsForGameData = require("scripts.data.MarketsForGameData").MarketsForGameData
     local matchPredictionScene = require("scripts.views.MatchPredictionScene")
-    matchPredictionScene.loadFrame( MarketsForGameData:new( response ) )
+    local marketInfo = MarketsForGameData:new( response )
+
+    Logic:setCurMarketInfo( marketInfo )
+    matchPredictionScene.loadFrame( marketInfo:getMatchMarket() )
 end
 
 function onRequestFailed( errorBuffer )

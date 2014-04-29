@@ -10,6 +10,7 @@ local Event = require("scripts.events.Event").EventList
 local MarketsForGameData = require("scripts.data.MarketsForGameData")
 
 local mWidget
+local mMatch
 local mMarketsData
 
 local MIN_MOVE_DISTANCE = 100
@@ -18,10 +19,10 @@ local SCALE_DOWN_OFFSET_MAX = -0.2
 local OPACITY = 255
 
 
--- Param: marketsData is the object for MarketsForGameData
-function loadFrame( marketsData )
+function loadFrame()
 	local widget = GUIReader:shareReader():widgetFromJsonFile("scenes/MatchPrediction.json")
-    mMarketsData = marketsData
+    mMatch = Logic:getSelectedMatch()
+    mMarketsData = Logic:getCurMarketInfo():getMatchMarket()
 
     local backBt = widget:getChildByName("Back")
     backBt:addTouchEventListener( backEventHandler )
@@ -42,21 +43,17 @@ function EnterOrExit( eventType )
 end
 
 function selectTeam1Win()
-    local match = Logic:getSelectedMatch()
-    local matchMarketData = mMarketsData:getMatchMarket()
-
-    makePrediction( Constants.TEAM1_WIN, 
-        TeamConfig.getTeamName( TeamConfig.getConfigIdByKey( match["HomeTeamId"] ) ), 
-        MarketsForGameData.getOddsForType( matchMarketData, MarketConfig.ODDS_TYPE_HOME_WIN ) )
+    makePrediction(
+        TeamConfig.getTeamName( TeamConfig.getConfigIdByKey( mMatch["HomeTeamId"] ) ), 
+        MarketsForGameData.getOddsForType( mMarketsData, MarketConfig.ODDS_TYPE_HOME_WIN ),
+        MarketsForGameData.getOddIdForType( mMarketsData, MarketConfig.ODDS_TYPE_HOME_WIN ) )
 end
 
 function selectTeam2Win()
-    local match = Logic:getSelectedMatch()
-    local matchMarketData = mMarketsData:getMatchMarket()
-
-    makePrediction( Constants.TEAM2_WIN, 
-        TeamConfig.getTeamName( TeamConfig.getConfigIdByKey( match["AwayTeamId"] ) ), 
-        MarketsForGameData.getOddsForType( matchMarketData, MarketConfig.ODDS_TYPE_AWAY_WIN ) )
+    makePrediction(
+        TeamConfig.getTeamName( TeamConfig.getConfigIdByKey( mMatch["AwayTeamId"] ) ), 
+        MarketsForGameData.getOddsForType( mMarketsData, MarketConfig.ODDS_TYPE_AWAY_WIN ),
+        MarketsForGameData.getOddIdForType( mMarketsData, MarketConfig.ODDS_TYPE_AWAY_WIN ) )
 end
 
 function backEventHandler( sender, eventType )
@@ -83,9 +80,6 @@ function helperUpdatePoint( content )
 end
 
 function helperInitMatchInfo( content, marketsData )
-    local match = Logic:getSelectedMatch()
-    local matchMarketData = mMarketsData:getMatchMarket()
-
     local team1 = tolua.cast( content:getChildByName("team1"), "ImageView" )
     local team2 = tolua.cast( content:getChildByName("team2"), "ImageView" )
     local team1Name = tolua.cast( content:getChildByName("team1Name"), "Label" )
@@ -93,12 +87,12 @@ function helperInitMatchInfo( content, marketsData )
     local team1WinPoint = tolua.cast( team1:getChildByName("team1WinPoint"), "Label" )
     local team2WinPoint = tolua.cast( team2:getChildByName("team2WinPoint"), "Label" )
 
-    team1:loadTexture( Constants.TEAM_IMAGE_PATH..TeamConfig.getLogo( TeamConfig.getConfigIdByKey( match["HomeTeamId"] ) ) )
-    team2:loadTexture( Constants.TEAM_IMAGE_PATH..TeamConfig.getLogo( TeamConfig.getConfigIdByKey( match["AwayTeamId"] ) ) )
-    team1Name:setText( TeamConfig.getTeamName( TeamConfig.getConfigIdByKey( match["HomeTeamId"] ) ) )
-    team2Name:setText( TeamConfig.getTeamName( TeamConfig.getConfigIdByKey( match["AwayTeamId"] ) ) )
-    team1WinPoint:setText( MarketsForGameData.getOddsForType( matchMarketData, MarketConfig.ODDS_TYPE_HOME_WIN ).." points" )
-    team2WinPoint:setText( MarketsForGameData.getOddsForType( matchMarketData, MarketConfig.ODDS_TYPE_AWAY_WIN ).." points" )
+    team1:loadTexture( Constants.TEAM_IMAGE_PATH..TeamConfig.getLogo( TeamConfig.getConfigIdByKey( mMatch["HomeTeamId"] ) ) )
+    team2:loadTexture( Constants.TEAM_IMAGE_PATH..TeamConfig.getLogo( TeamConfig.getConfigIdByKey( mMatch["AwayTeamId"] ) ) )
+    team1Name:setText( TeamConfig.getTeamName( TeamConfig.getConfigIdByKey( mMatch["HomeTeamId"] ) ) )
+    team2Name:setText( TeamConfig.getTeamName( TeamConfig.getConfigIdByKey( mMatch["AwayTeamId"] ) ) )
+    team1WinPoint:setText( MarketsForGameData.getOddsForType( mMarketsData, MarketConfig.ODDS_TYPE_HOME_WIN ).." points" )
+    team2WinPoint:setText( MarketsForGameData.getOddsForType( mMarketsData, MarketConfig.ODDS_TYPE_AWAY_WIN ).." points" )
 end
 
 

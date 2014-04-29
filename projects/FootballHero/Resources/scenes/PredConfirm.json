@@ -76,7 +76,7 @@
           "__type": "ComGUIPanelSurrogate:#EditorCommon.JsonModel.Component.GUI",
           "classname": "Panel",
           "name": "TextInput",
-          "ZOrder": 2,
+          "ZOrder": -1,
           "actiontag": 177,
           "anchorPointX": 0,
           "anchorPointY": 0,
@@ -124,7 +124,7 @@
           "capInsetsX": 0,
           "capInsetsY": 0,
           "clipAble": true,
-          "colorType": 1,
+          "colorType": 0,
           "layoutType": 0,
           "vectorX": 0,
           "vectorY": -0.5

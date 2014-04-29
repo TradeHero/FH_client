@@ -34,7 +34,7 @@
   </JsonList>
   <imageFileList />
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>PredConfirm.json</CurrentUIJson>
+  <CurrentUIJson>WTCBMTPrediction.json</CurrentUIJson>
   <CanvasSize>
     <Width>640</Width>
     <Height>1136</Height>
