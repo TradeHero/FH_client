@@ -10,6 +10,7 @@ local mPrediction
 local mTeamName
 local mReward
 local mWidget
+local mTextInput
 
 function loadFrame( prediction, teamName, reward )
 
@@ -31,12 +32,16 @@ function loadFrame( prediction, teamName, reward )
 
     local cancelBt = widget:getChildByName("cancel")
     cancelBt:addTouchEventListener( cancelEventHandler )
+
+    local textDisplay = mWidget:getChildByName("Text")
+	textDisplay:addTouchEventListener( inputEventHandler )
 end
 
 function EnterOrExit( eventType )
     if eventType == "enter" then
     elseif eventType == "exit" then
         mWidget = nil
+        mTextInput = nil
     end
 end
 
@@ -65,7 +70,13 @@ function cancelEventHandler( sender, eventType )
 end
 
 function bgEventHandler( sender, eventType )
-	print(eventType)
+	-- Do nothing, just block
+end
+
+function inputEventHandler( sender, eventType )
+	if eventType == TOUCH_EVENT_ENDED then
+		mTextInput:touchDownAction( sender, eventType )
+	end
 end
 
 function createTextInput()
@@ -78,11 +89,13 @@ function createTextInput()
 	end )
 	container:addNode( tolua.cast( inputDelegate, "CCNode" ) )
 
-	local textInput = CCEditBox:create( CCSizeMake( 700, 350 ), CCScale9Sprite:create() )
-    container:addNode( textInput )
-    textInput:setPosition( 700 / 2, 350 / 2 )
-    textInput:setDelegate( inputDelegate.__CCEditBoxDelegate__ )
-    textInput:setTouchPriority( SceneManager.TOUCH_PRIORITY_MINUS_ONE )
+	mTextInput = CCEditBox:create( CCSizeMake( 550, 35 ), CCScale9Sprite:create() )
+    container:addNode( mTextInput )
+    mTextInput:setPosition( 550 / 2, 35 / 2 )
+    mTextInput:setFontColor( ccc3( 0, 0, 0 ) )
+    mTextInput:setVisible( false )
+    mTextInput:setDelegate( inputDelegate.__CCEditBoxDelegate__ )
+    mTextInput:setTouchPriority( SceneManager.TOUCH_PRIORITY_MINUS_ONE )
 end
 
 function initContent()
