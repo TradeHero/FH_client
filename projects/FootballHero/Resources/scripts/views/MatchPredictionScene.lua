@@ -44,17 +44,19 @@ function EnterOrExit( eventType )
 end
 
 function selectTeam1Win()
+    local team1 = tolua.cast( mWidget:getChildByName("team1"), "ImageView" )
     makePrediction(
-        TeamConfig.getTeamName( TeamConfig.getConfigIdByKey( mMatch["HomeTeamId"] ) ), 
         MarketsForGameData.getOddsForType( mMarketsData, MarketConfig.ODDS_TYPE_ONE_OPTION ),
-        MarketsForGameData.getOddIdForType( mMarketsData, MarketConfig.ODDS_TYPE_ONE_OPTION ) )
+        MarketsForGameData.getOddIdForType( mMarketsData, MarketConfig.ODDS_TYPE_ONE_OPTION ),
+        team1:getTextureFile() )
 end
 
 function selectTeam2Win()
+    local team2 = tolua.cast( mWidget:getChildByName("team2"), "ImageView" )
     makePrediction(
-        TeamConfig.getTeamName( TeamConfig.getConfigIdByKey( mMatch["AwayTeamId"] ) ), 
         MarketsForGameData.getOddsForType( mMarketsData, MarketConfig.ODDS_TYPE_TWO_OPTION ),
-        MarketsForGameData.getOddIdForType( mMarketsData, MarketConfig.ODDS_TYPE_TWO_OPTION ) )
+        MarketsForGameData.getOddIdForType( mMarketsData, MarketConfig.ODDS_TYPE_TWO_OPTION ),
+        team2:getTextureFile() )
 end
 
 function backEventHandler( sender, eventType )
@@ -63,11 +65,12 @@ function backEventHandler( sender, eventType )
     end
 end
 
-function makePrediction( prediction, teamName, reward )
+function makePrediction( rewards, oddId, answerIcon )
     local seqArray = CCArray:create()
     seqArray:addObject( CCDelayTime:create( 0.1 ) )
     seqArray:addObject( CCCallFuncN:create( function()
-        EventManager:postEvent( Event.Enter_Prediction_Confirm, { prediction, teamName, reward } )
+        local question = tolua.cast( mWidget:getChildByName("question"), "Label" )
+        EventManager:postEvent( Event.Enter_Prediction_Confirm, { question:getStringValue(), rewards, oddId, answerIcon } )
     end ) )
 
     mWidget:runAction( CCSequence:create( seqArray ) )

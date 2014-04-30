@@ -6,7 +6,7 @@ local Logic = require("scripts.Logic").getInstance()
 
 
 function action( param )
---[[
+
 	local RequestConstants = require("scripts.RequestConstants")
 
     local matchId = Logic:getSelectedMatch()["Id"]
@@ -33,8 +33,8 @@ function action( param )
     httpRequest:sendHttpRequest( RequestConstants.GET_GAME_MARKETS_REST_CALL.."?gameId="..matchId, handler )
 
     ConnectingMessage.loadFrame()
---]]
 
+--[[
     local JsonConfigReader = require("scripts.config.JsonConfigReader")
     local config = JsonConfigReader.read( "config/market.json" )
 
@@ -44,7 +44,7 @@ function action( param )
                 StartTime = 1398311338 }
     Logic:setSelectedMatch( match )
     onRequestSuccess( config )
-
+--]]
 end
 
 function onRequestSuccess( response )

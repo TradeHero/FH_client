@@ -8,58 +8,49 @@ MarketsForGameData = {}
 [
     {
         "marketTypeId": 25,
+        "Line": null,
         "odds": [
             {
-                "Id": 2273377,
-                "Odd": 2.91,
-                "OutcomeName": "1",
-                "Line": null
+                "Id": 2303086,
+                "Odd": 4,
+                "OutcomeUIPosition": 1
             },
             {
-                "Id": 2273383,
-                "Odd": 3.45,
-                "OutcomeName": "x",
-                "Line": null
-            },
-            {
-                "Id": 2273388,
-                "Odd": 2.41,
-                "OutcomeName": "2",
-                "Line": null
+                "Id": 2303100,
+                "Odd": 1.83,
+                "OutcomeUIPosition": 2
             }
         ]
     },
     {
         "marketTypeId": 26,
+        "Line": 2.5,
         "odds": [
             {
-                "Id": 2273395,
-                "Odd": 1.75,
-                "OutcomeName": "over",
-                "Line": 2.5
+                "Id": 2303110,
+                "Odd": 1.7,
+                "OutcomeUIPosition": 1
             },
             {
-                "Id": 2273403,
-                "Odd": 2.08,
-                "OutcomeName": "under",
-                "Line": 2.5
+                "Id": 2303116,
+                "Odd": 2.1,
+                "OutcomeUIPosition": 2
             }
         ]
     },
     {
         "marketTypeId": 27,
+        "Line": 0.5,
         "odds": [
             {
-                "Id": 2273470,
-                "Odd": 2.11,
-                "OutcomeName": "home",
-                "Line": 0
+                "Id": 2397661,
+                "Odd": 2.02,
+                "OutcomeUIPosition": 1
             },
             {
-                "Id": 2273485,
-                "Odd": 1.8,
-                "OutcomeName": "away",
-                "Line": 0
+                "Id": 2397666,
+                "Odd": 1.86,
+                "OutcomeUIPosition": 2
             }
         ]
     }
@@ -112,18 +103,13 @@ function getMarketType( market )
 end
 
 function getMarketLine( market )
-    local firstOddsConfig = getOddConfigForType( market, MarketConfig.ODDS_TYPE_ONE_OPTION )
-
-    if firstOddsConfig ~= nil then
-        return firstOddsConfig["Line"]
-    end
-    return 0
+    return market["Line"]
 end
 
 function getOddConfigForType( market, oddsType )
     for k, v in pairs( market["odds"] ) do
         local odds = v
-        if odds["OutcomeName"] == oddsType then
+        if odds["OutcomeUIPosition"] == oddsType then
             return odds
         end
     end

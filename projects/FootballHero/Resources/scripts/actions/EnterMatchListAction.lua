@@ -3,7 +3,7 @@ module(..., package.seeall)
 local ConnectingMessage = require("scripts.views.ConnectingMessage")
 
 function action( param )
-    local leagueId = 1301
+    local leagueId = 1658
     if param ~= nil and param[1] ~= nil then
         leagueId = param[1]
     end

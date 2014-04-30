@@ -1,6 +1,6 @@
 /*
 ** Lua binding: CocoStudio
-** Generated automatically by tolua++-1.0.92 on 04/02/14 12:02:55.
+** Generated automatically by tolua++-1.0.92 on 04/30/14 16:19:50.
 */
 
 /****************************************************************************
@@ -12104,6 +12104,38 @@ static int tolua_CocoStudio_ImageView_getVirtualRenderer00(lua_State* tolua_S)
 }
 #endif //#ifndef TOLUA_DISABLE
 
+/* method: getTextureFile of class  ImageView */
+#ifndef TOLUA_DISABLE_tolua_CocoStudio_ImageView_getTextureFile00
+static int tolua_CocoStudio_ImageView_getTextureFile00(lua_State* tolua_S)
+{
+#ifndef TOLUA_RELEASE
+ tolua_Error tolua_err;
+ if (
+     !tolua_isusertype(tolua_S,1,"ImageView",0,&tolua_err) ||
+     !tolua_isnoobj(tolua_S,2,&tolua_err)
+ )
+  goto tolua_lerror;
+ else
+#endif
+ {
+  ImageView* self = (ImageView*)  tolua_tousertype(tolua_S,1,0);
+#ifndef TOLUA_RELEASE
+  if (!self) tolua_error(tolua_S,"invalid 'self' in function 'getTextureFile'", NULL);
+#endif
+  {
+   const char* tolua_ret = (const char*)  self->getTextureFile();
+   tolua_pushstring(tolua_S,(const char*)tolua_ret);
+  }
+ }
+ return 1;
+#ifndef TOLUA_RELEASE
+ tolua_lerror:
+ tolua_error(tolua_S,"#ferror in function 'getTextureFile'.",&tolua_err);
+ return 0;
+#endif
+}
+#endif //#ifndef TOLUA_DISABLE
+
 /* method: new of class  Label */
 #ifndef TOLUA_DISABLE_tolua_CocoStudio_Label_new00
 static int tolua_CocoStudio_Label_new00(lua_State* tolua_S)
@@ -23856,6 +23888,7 @@ TOLUA_API int tolua_CocoStudio_open (lua_State* tolua_S)
    tolua_function(tolua_S,"getDescription",tolua_CocoStudio_ImageView_getDescription00);
    tolua_function(tolua_S,"getContentSize",tolua_CocoStudio_ImageView_getContentSize00);
    tolua_function(tolua_S,"getVirtualRenderer",tolua_CocoStudio_ImageView_getVirtualRenderer00);
+   tolua_function(tolua_S,"getTextureFile",tolua_CocoStudio_ImageView_getTextureFile00);
   tolua_endmodule(tolua_S);
   #ifdef __cplusplus
   tolua_cclass(tolua_S,"Label","Label","Widget",tolua_collect_Label);

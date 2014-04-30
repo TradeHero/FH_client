@@ -66,6 +66,7 @@ end
 
 function Logic:setCurMarketInfo( info )
 	self.mCurMarketInfo = info
+	self.mCurDisplayMarketIndex = 0
 end
 
 

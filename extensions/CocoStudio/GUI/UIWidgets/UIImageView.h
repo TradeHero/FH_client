@@ -107,6 +107,7 @@ public:
     
     virtual const CCSize& getContentSize() const;
     virtual CCNode* getVirtualRenderer();
+	const char* getTextureFile();
 protected:
     virtual void initRenderer();
     virtual void onSizeChanged();

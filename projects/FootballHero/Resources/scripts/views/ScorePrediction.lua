@@ -52,17 +52,19 @@ function getWidgetConfigFile()
 end
 
 function selectYes()
+    local yes = tolua.cast( mWidget:getChildByName("yes"), "ImageView" )
     makePrediction(
-        TeamConfig.getTeamName( TeamConfig.getConfigIdByKey( mMatch["HomeTeamId"] ) ), 
         MarketsForGameData.getOddsForType( mMarketsData, MarketConfig.ODDS_TYPE_ONE_OPTION ),
-        MarketsForGameData.getOddIdForType( mMarketsData, MarketConfig.ODDS_TYPE_ONE_OPTION ) )
+        MarketsForGameData.getOddIdForType( mMarketsData, MarketConfig.ODDS_TYPE_ONE_OPTION ),
+        yes:getTextureFile() )
 end
 
 function selectNo()
+    local no = tolua.cast( mWidget:getChildByName("no"), "ImageView" )
     makePrediction(
-        TeamConfig.getTeamName( TeamConfig.getConfigIdByKey( mMatch["AwayTeamId"] ) ), 
         MarketsForGameData.getOddsForType( mMarketsData, MarketConfig.ODDS_TYPE_TWO_OPTION ),
-        MarketsForGameData.getOddIdForType( mMarketsData, MarketConfig.ODDS_TYPE_TWO_OPTION ) )
+        MarketsForGameData.getOddIdForType( mMarketsData, MarketConfig.ODDS_TYPE_TWO_OPTION ),
+        no:getTextureFile() )
 end
 
 function backEventHandler( sender, eventType )
@@ -71,16 +73,18 @@ function backEventHandler( sender, eventType )
     end
 end
 
-function makePrediction( prediction, teamName, reward )
+function makePrediction( rewards, oddId, answerIcon )
     local seqArray = CCArray:create()
     seqArray:addObject( CCDelayTime:create( 0.1 ) )
     seqArray:addObject( CCCallFuncN:create( function()
-        EventManager:postEvent( Event.Enter_Prediction_Confirm, { prediction, teamName, reward } )
+        local question = tolua.cast( mWidget:getChildByName("question"), "Label" )
+        EventManager:postEvent( Event.Enter_Prediction_Confirm, { question:getStringValue(), rewards, oddId, answerIcon } )
     end ) )
 
     mWidget:runAction( CCSequence:create( seqArray ) )
     
 end
+
 function helperInitMarketInfo( content )
     local team1Name = tolua.cast( content:getChildByName("team1Name"), "Label" )
     local team2Name = tolua.cast( content:getChildByName("team2Name"), "Label" )
@@ -101,16 +105,16 @@ function helperInitQuestion( content )
     local marketType = MarketsForGameData.getMarketType( mMarketsData )
     local question = tolua.cast( content:getChildByName("question"), "Label" )
 
+    local line = MarketsForGameData.getMarketLine( mMarketsData )
     if marketType == MarketConfig.MARKET_TYPE_TOTAL_GOAL then
-        question:setText( string.format( question:getStringValue(), MarketsForGameData.getMarketLine( mMarketsData ) ) )    
+        question:setText( string.format( question:getStringValue(), math.ceil( line ) ) )
     elseif marketType == MarketConfig.MARKET_TYPE_ASIAN_HANDICAP then
         local teamName = TeamConfig.getTeamName( TeamConfig.getConfigIdByKey( mMatch["HomeTeamId"] ) )
-        local line = MarketsForGameData.getMarketLine( mMarketsData )
         if line < 0 then
             teamName = TeamConfig.getTeamName( TeamConfig.getConfigIdByKey( mMatch["AwayTeamId"] ) )
             line = line * ( -1 )
         end 
-        question:setText( string.format( question:getStringValue(), teamName, line ) )
+        question:setText( string.format( question:getStringValue(), teamName, math.ceil( line ) ) )
     end
     
 end

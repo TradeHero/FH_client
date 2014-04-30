@@ -6,17 +6,20 @@ local Logic = require("scripts.Logic").getInstance()
 local EventManager = require("scripts.events.EventManager").getInstance()
 local Event = require("scripts.events.Event").EventList
 
-local mTeamName
+local mQuestion
 local mReward
 local mOddId
+local mAnswerIcon
 local mWidget
 local mTextInput
 
-function loadFrame( teamName, reward, oddId )
+function loadFrame( question, reward, oddId, answerIcon )
 
-	mTeamName = teamName
+	print(answerIcon)
+	mQuestion = question
 	mReward = reward
 	mOddId = oddId
+	mAnswerIcon = answerIcon
 
 	local widget = GUIReader:shareReader():widgetFromJsonFile("scenes/PredConfirm.json")
     mWidget = widget
@@ -24,7 +27,7 @@ function loadFrame( teamName, reward, oddId )
     mWidget:addTouchEventListener( bgEventHandler )
     SceneManager.addWidget(widget)
 
-	--initContent()    
+	initContent()    
     createTextInput()
 
     local confirmBt = widget:getChildByName("confirm")
@@ -93,13 +96,13 @@ end
 
 function initContent()
 	local question = tolua.cast( mWidget:getChildByName("Question"), "Label" )
-	local answer = tolua.cast( mWidget:getChildByName("Answer"), "Label" )
 	local reward = tolua.cast( mWidget:getChildByName("Reward"), "Label" )
+	local answerIcon = tolua.cast( mWidget:getChildByName("answerIcon"), "ImageView" )
 
 	question:setFontName( "Newgtbxc" )
-	answer:setFontName( "Newgtbxc" )
 	reward:setFontName( "Newgtbxc" )
 
-	answer:setText( mTeamName )
-	reward:setText( "-Win "..mReward.." points." )
+	question:setText( mQuestion )
+	reward:setText( string.format( reward:getStringValue(), mReward ) )
+	answerIcon:loadTexture( mAnswerIcon )
 end
