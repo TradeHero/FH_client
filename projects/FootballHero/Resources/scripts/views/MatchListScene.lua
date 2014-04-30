@@ -21,6 +21,8 @@ local MIN_MOVE_DISTANCE = 100
 local OPTION_MOVE_TIME = 0.5
 local OPTION_VIEW_OFFSET_X = 475
 
+local CONTENT_FADEIN_TIME = 2
+
 function isShown()
     return mWidget ~= nil
 end
@@ -66,23 +68,39 @@ function initMatchList( matchList )
     layoutParameter:setGravity(LINEAR_GRAVITY_CENTER_VERTICAL)
     local contentHeight = 0
 
+    local seqArray = CCArray:create()
+
     for k,v in pairs( matchList:getMatchDateList() ) do
         local matchDate = v
 
-        -- Add the date
-        local content = GUIReader:shareReader():widgetFromJsonFile("scenes/MatchDate.json")
-        local dateDisplay = tolua.cast( content:getChildByName("date"), "Label" )
-        dateDisplay:setText( matchDate["dateDisplay"] )
-        content:setLayoutParameter( layoutParameter )
-        contentContainer:addChild( content )
-        contentHeight = contentHeight + content:getSize().height
+        seqArray:addObject( CCCallFuncN:create( function()
+            -- Add the date
+            local content = GUIReader:shareReader():widgetFromJsonFile("scenes/MatchDate.json")
+            local dateDisplay = tolua.cast( content:getChildByName("date"), "Label" )
+            dateDisplay:setText( matchDate["dateDisplay"] )
+            content:setLayoutParameter( layoutParameter )
+            contentContainer:addChild( content )
+            contentHeight = contentHeight + content:getSize().height
 
-        -- Add the seprater
-        local upper = ImageView:create()
-        upper:loadTexture("images/guang.png")
-        upper:setLayoutParameter( layoutParameter )
-        contentContainer:addChild( upper )
-        contentHeight = contentHeight + upper:getSize().height
+            content:setOpacity( 0 )
+            content:setCascadeOpacityEnabled( true )
+            mWidget:runAction( CCTargetedAction:create( content, CCFadeIn:create( CONTENT_FADEIN_TIME ) ) )
+        end ) )
+        seqArray:addObject( CCDelayTime:create( 0.2 ) )
+
+        seqArray:addObject( CCCallFuncN:create( function()
+            -- Add the seprater
+            local upper = ImageView:create()
+            upper:loadTexture("images/guang.png")
+            upper:setLayoutParameter( layoutParameter )
+            contentContainer:addChild( upper )
+            contentHeight = contentHeight + upper:getSize().height
+
+            upper:setOpacity( 0 )
+            mWidget:runAction( CCTargetedAction:create( upper, CCFadeIn:create( CONTENT_FADEIN_TIME ) ) )
+        end ) )
+        seqArray:addObject( CCDelayTime:create( 0.2 ) )
+        
 
         for inK, inV in pairs( matchDate["matches"] ) do
             local eventHandler = function( sender, eventType )
@@ -91,28 +109,45 @@ function initMatchList( matchList )
                 end
             end
 
-            local content = GUIReader:shareReader():widgetFromJsonFile("scenes/MatchListContent.json")
-            helperInitMatchInfo( content, inV )
+            seqArray:addObject( CCCallFuncN:create( function() 
+                local content = GUIReader:shareReader():widgetFromJsonFile("scenes/MatchListContent.json")
+                helperInitMatchInfo( content, inV )
 
-            content:setLayoutParameter( layoutParameter )
-            contentContainer:addChild( content )
-            contentHeight = contentHeight + content:getSize().height
+                content:setLayoutParameter( layoutParameter )
+                contentContainer:addChild( content )
+                contentHeight = contentHeight + content:getSize().height
 
-            local vsBt = content:getChildByName("VS")
-            vsBt:addTouchEventListener( eventHandler )
+                local vsBt = content:getChildByName("VS")
+                vsBt:addTouchEventListener( eventHandler )
+
+                content:setOpacity( 0 )
+                content:setCascadeOpacityEnabled( true )
+                mWidget:runAction( CCTargetedAction:create( content, CCFadeIn:create( CONTENT_FADEIN_TIME ) ) )
+            end ) )
+            seqArray:addObject( CCDelayTime:create( 0.2 ) )
         end
 
-        -- Add the seprater
-        local bottom = ImageView:create()
-        bottom:loadTexture("images/guang-xia.png")
-        bottom:setLayoutParameter( layoutParameter )
-        contentContainer:addChild( bottom )
-        contentHeight = contentHeight + bottom:getSize().height
+        seqArray:addObject( CCCallFuncN:create( function() 
+            -- Add the seprater
+            local bottom = ImageView:create()
+            bottom:loadTexture("images/guang-xia.png")
+            bottom:setLayoutParameter( layoutParameter )
+            contentContainer:addChild( bottom )
+            contentHeight = contentHeight + bottom:getSize().height
+
+            bottom:setOpacity( 0 )
+            mWidget:runAction( CCTargetedAction:create( bottom, CCFadeIn:create( CONTENT_FADEIN_TIME ) ) )
+        end ) )
+        seqArray:addObject( CCDelayTime:create( 0.2 ) )
     end
 
-    contentContainer:setInnerContainerSize( CCSize:new( 0, contentHeight ) )
-    local layout = tolua.cast( contentContainer, "Layout" )
-    layout:requestDoLayout()
+    seqArray:addObject( CCCallFuncN:create( function()
+        contentContainer:setInnerContainerSize( CCSize:new( 0, contentHeight ) )
+        local layout = tolua.cast( contentContainer, "Layout" )
+        layout:requestDoLayout()
+    end ) )
+
+    mWidget:runAction( CCSequence:create( seqArray ) )
 end
 
 function enterMatch( match )
