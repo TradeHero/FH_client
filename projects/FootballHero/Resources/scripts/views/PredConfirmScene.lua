@@ -50,7 +50,8 @@ function confirmEventHandler( sender, eventType )
 		local textDisplay = tolua.cast( mWidget:getChildByName("Text"), "Label" )
 		local comment = textDisplay:getStringValue()
 
-		Logic:addPrediction( mOddId, comment )
+		SceneManager.clear()
+		Logic:addPrediction( mOddId, comment, false )
 	    EventManager:postEvent( Event.Enter_Next_Prediction )
 	end
 end

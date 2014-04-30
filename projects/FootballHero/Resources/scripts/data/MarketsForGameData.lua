@@ -77,7 +77,7 @@ function MarketsForGameData:new( list )
 		end
 	end
 	if match ~= nil then
-		table.remove( list, k )
+		table.remove( list, matchIndex )
 	end
 
 	local obj = {
@@ -111,15 +111,27 @@ function getMarketType( market )
     return market["marketTypeId"]
 end
 
-function getOddIdForType( market, oddsType )
-    local oddsConfig = nil 
+function getMarketLine( market )
+    local firstOddsConfig = getOddConfigForType( market, MarketConfig.ODDS_TYPE_ONE_OPTION )
+
+    if firstOddsConfig ~= nil then
+        return firstOddsConfig["Line"]
+    end
+    return 0
+end
+
+function getOddConfigForType( market, oddsType )
     for k, v in pairs( market["odds"] ) do
         local odds = v
         if odds["OutcomeName"] == oddsType then
-            oddsConfig = v
-            break
+            return odds
         end
     end
+    return nil
+end
+
+function getOddIdForType( market, oddsType )
+    local oddsConfig = getOddConfigForType( market, oddsType )
     
     if oddsConfig ~= nil then
         return oddsConfig["Id"]
@@ -128,14 +140,7 @@ function getOddIdForType( market, oddsType )
 end
 
 function getOddsForType( market, oddsType )
-	local oddsConfig = nil 
-	for k, v in pairs( market["odds"] ) do
-		local odds = v
-		if odds["OutcomeName"] == oddsType then
-			oddsConfig = v
-            break
-		end
-	end
+	local oddsConfig = getOddConfigForType( market, oddsType )
 	
 	if oddsConfig ~= nil then
 		return oddsConfig["Odd"] * 1000

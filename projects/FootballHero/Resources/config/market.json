@@ -1,0 +1,59 @@
+[
+    {
+        "marketTypeId": 25,
+        "odds": [
+            {
+                "Id": 2273377,
+                "Odd": 2.91,
+                "OutcomeName": "1",
+                "Line": null
+            },
+            {
+                "Id": 2273383,
+                "Odd": 3.45,
+                "OutcomeName": "x",
+                "Line": null
+            },
+            {
+                "Id": 2273388,
+                "Odd": 2.41,
+                "OutcomeName": "2",
+                "Line": null
+            }
+        ]
+    },
+    {
+        "marketTypeId": 26,
+        "odds": [
+            {
+                "Id": 2273395,
+                "Odd": 1.75,
+                "OutcomeName": "1",
+                "Line": 2.5
+            },
+            {
+                "Id": 2273403,
+                "Odd": 2.08,
+                "OutcomeName": "2",
+                "Line": 2.5
+            }
+        ]
+    },
+    {
+        "marketTypeId": 27,
+        "odds": [
+            {
+                "Id": 2273470,
+                "Odd": 2.11,
+                "OutcomeName": "1",
+                "Line": 0
+            },
+            {
+                "Id": 2273485,
+                "Odd": 1.8,
+                "OutcomeName": "2",
+                "Line": 0
+            }
+        ]
+    }
+]

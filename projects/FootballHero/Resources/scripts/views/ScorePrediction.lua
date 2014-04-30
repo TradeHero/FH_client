@@ -4,15 +4,17 @@ local Constants = require("scripts.Constants")
 local SceneManager = require("scripts.SceneManager")
 local TeamConfig = require("scripts.config.Team")
 local MarketConfig = require("scripts.config.Market")
-local MatchListScene = require("scripts.MatchListScene")
 local Logic = require("scripts.Logic").getInstance()
 local MarketsForGameData = require("scripts.data.MarketsForGameData")
+local EventManager = require("scripts.events.EventManager").getInstance()
+local Event = require("scripts.events.Event").EventList
 
 local mWidget
 local mMatch
 local mMarketsData
 
 local MIN_MOVE_DISTANCE = 100
+local SCALE_BASE = 0.6
 local SCALE_UP_OFFSET_MAX = 0.2
 local SCALE_DOWN_OFFSET_MAX = -0.2
 local OPACITY = 255
@@ -25,7 +27,7 @@ function loadFrame()
     mWidget = widget
     mWidget:registerScriptHandler( EnterOrExit )
     mWidget:addTouchEventListener( onFrameTouch )
-    SceneManager.clearNAddWidget(widget)
+    SceneManager.clearNAddWidget( widget )
 
     helperInitMarketInfo( widget )
 end
@@ -40,33 +42,27 @@ end
 function getWidgetConfigFile()
     local marketType = MarketsForGameData.getMarketType( mMarketsData )
 
-    if marketType == 26 then
-        return "scenes/WBTSPrediction.json"
-    elseif marketType == 27 then
-        return "scenes/WTCBMTPrediction.json"
-    elseif marketType == 28 then
+    if marketType == MarketConfig.MARKET_TYPE_TOTAL_GOAL then
         return "scenes/WTGBMTPrediction.json"
-    elseif marketType == 29 then
-        return "scenes/WTSPrediction.json"
-    elseif marketType == 30 then
-        return "scenes/WTWBEGPrediction.json"        
+    elseif marketType == MarketConfig.MARKET_TYPE_ASIAN_HANDICAP then
+        return "scenes/WTWBEGPrediction.json"
     end
 
-    return "scenes/WBTSPrediction.json"
+    return "scenes/WTCBMTPrediction.json"
 end
 
 function selectYes()
     makePrediction(
         TeamConfig.getTeamName( TeamConfig.getConfigIdByKey( mMatch["HomeTeamId"] ) ), 
-        MarketsForGameData.getOddsForType( mMarketsData, MarketConfig.ODDS_TYPE_HOME_WIN ),
-        MarketsForGameData.getOddIdForType( mMarketsData, MarketConfig.ODDS_TYPE_HOME_WIN ) )
+        MarketsForGameData.getOddsForType( mMarketsData, MarketConfig.ODDS_TYPE_ONE_OPTION ),
+        MarketsForGameData.getOddIdForType( mMarketsData, MarketConfig.ODDS_TYPE_ONE_OPTION ) )
 end
 
 function selectNo()
     makePrediction(
         TeamConfig.getTeamName( TeamConfig.getConfigIdByKey( mMatch["AwayTeamId"] ) ), 
-        MarketsForGameData.getOddsForType( mMarketsData, MarketConfig.ODDS_TYPE_AWAY_WIN ),
-        MarketsForGameData.getOddIdForType( mMarketsData, MarketConfig.ODDS_TYPE_AWAY_WIN ) )
+        MarketsForGameData.getOddsForType( mMarketsData, MarketConfig.ODDS_TYPE_TWO_OPTION ),
+        MarketsForGameData.getOddIdForType( mMarketsData, MarketConfig.ODDS_TYPE_TWO_OPTION ) )
 end
 
 function backEventHandler( sender, eventType )
@@ -88,13 +84,35 @@ end
 function helperInitMarketInfo( content )
     local team1Name = tolua.cast( content:getChildByName("team1Name"), "Label" )
     local team2Name = tolua.cast( content:getChildByName("team2Name"), "Label" )
-    local answer1Point = tolua.cast( team1:getChildByName("answer1Point"), "Label" )
-    local answer2Point = tolua.cast( team2:getChildByName("answer2Point"), "Label" )
-
+    local yes = tolua.cast( mWidget:getChildByName("yes"), "ImageView" )
+    local no = tolua.cast( mWidget:getChildByName("no"), "ImageView" )
+    local answer1Point = tolua.cast( yes:getChildByName("answer1Point"), "Label" )
+    local answer2Point = tolua.cast( no:getChildByName("answer2Point"), "Label" )
+    
     team1Name:setText( TeamConfig.getTeamName( TeamConfig.getConfigIdByKey( mMatch["HomeTeamId"] ) ) )
     team2Name:setText( TeamConfig.getTeamName( TeamConfig.getConfigIdByKey( mMatch["AwayTeamId"] ) ) )
-    answer1Point:setText( MarketsForGameData.getOddsForType( mMarketsData, MarketConfig.ODDS_TYPE_HOME_WIN ).." points" )
-    answer2Point:setText( MarketsForGameData.getOddsForType( mMarketsData, MarketConfig.ODDS_TYPE_AWAY_WIN ).." points" )
+    answer1Point:setText( MarketsForGameData.getOddsForType( mMarketsData, MarketConfig.ODDS_TYPE_ONE_OPTION ).." points" )
+    answer2Point:setText( MarketsForGameData.getOddsForType( mMarketsData, MarketConfig.ODDS_TYPE_TWO_OPTION ).." points" )
+    
+    helperInitQuestion( content )
+end
+
+function helperInitQuestion( content )
+    local marketType = MarketsForGameData.getMarketType( mMarketsData )
+    local question = tolua.cast( content:getChildByName("question"), "Label" )
+
+    if marketType == MarketConfig.MARKET_TYPE_TOTAL_GOAL then
+        question:setText( string.format( question:getStringValue(), MarketsForGameData.getMarketLine( mMarketsData ) ) )    
+    elseif marketType == MarketConfig.MARKET_TYPE_ASIAN_HANDICAP then
+        local teamName = TeamConfig.getTeamName( TeamConfig.getConfigIdByKey( mMatch["HomeTeamId"] ) )
+        local line = MarketsForGameData.getMarketLine( mMarketsData )
+        if line < 0 then
+            teamName = TeamConfig.getTeamName( TeamConfig.getConfigIdByKey( mMatch["AwayTeamId"] ) )
+            line = line * ( -1 )
+        end 
+        question:setText( string.format( question:getStringValue(), teamName, line ) )
+    end
+    
 end
 
 function onFrameTouch( sender, eventType )
@@ -110,8 +128,8 @@ function onFrameTouch( sender, eventType )
             -- Swap to Right
             selectYes()
         else
-            yes:setScale( 1 )
-            no:setScale( 1 )
+            yes:setScale( SCALE_BASE )
+            no:setScale( SCALE_BASE )
             yes:setOpacity( OPACITY )
             no:setOpacity( OPACITY )
         end
@@ -124,13 +142,13 @@ function onFrameTouch( sender, eventType )
             scalePercentage = 1
         end
         if touchBeginPoint.x - touchMovPoint.x > 0 then
-            no:setScale( scalePercentage * SCALE_UP_OFFSET_MAX + 1 )
-            yes:setScale( scalePercentage * SCALE_DOWN_OFFSET_MAX + 1 )
+            no:setScale( scalePercentage * SCALE_UP_OFFSET_MAX + SCALE_BASE )
+            yes:setScale( scalePercentage * SCALE_DOWN_OFFSET_MAX + SCALE_BASE )
             no:setOpacity( OPACITY )
             yes:setOpacity( OPACITY / 3 )
         else
-            yes:setScale( scalePercentage * SCALE_UP_OFFSET_MAX + 1 )
-            no:setScale( scalePercentage * SCALE_DOWN_OFFSET_MAX + 1 )
+            yes:setScale( scalePercentage * SCALE_UP_OFFSET_MAX + SCALE_BASE )
+            no:setScale( scalePercentage * SCALE_DOWN_OFFSET_MAX + SCALE_BASE )
             yes:setOpacity( OPACITY )
             no:setOpacity( OPACITY / 3 )
         end

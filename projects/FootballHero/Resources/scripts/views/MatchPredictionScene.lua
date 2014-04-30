@@ -14,6 +14,7 @@ local mMatch
 local mMarketsData
 
 local MIN_MOVE_DISTANCE = 100
+local SCALE_BASE = 0.8
 local SCALE_UP_OFFSET_MAX = 0.2
 local SCALE_DOWN_OFFSET_MAX = -0.2
 local OPACITY = 255
@@ -45,15 +46,15 @@ end
 function selectTeam1Win()
     makePrediction(
         TeamConfig.getTeamName( TeamConfig.getConfigIdByKey( mMatch["HomeTeamId"] ) ), 
-        MarketsForGameData.getOddsForType( mMarketsData, MarketConfig.ODDS_TYPE_HOME_WIN ),
-        MarketsForGameData.getOddIdForType( mMarketsData, MarketConfig.ODDS_TYPE_HOME_WIN ) )
+        MarketsForGameData.getOddsForType( mMarketsData, MarketConfig.ODDS_TYPE_ONE_OPTION ),
+        MarketsForGameData.getOddIdForType( mMarketsData, MarketConfig.ODDS_TYPE_ONE_OPTION ) )
 end
 
 function selectTeam2Win()
     makePrediction(
         TeamConfig.getTeamName( TeamConfig.getConfigIdByKey( mMatch["AwayTeamId"] ) ), 
-        MarketsForGameData.getOddsForType( mMarketsData, MarketConfig.ODDS_TYPE_AWAY_WIN ),
-        MarketsForGameData.getOddIdForType( mMarketsData, MarketConfig.ODDS_TYPE_AWAY_WIN ) )
+        MarketsForGameData.getOddsForType( mMarketsData, MarketConfig.ODDS_TYPE_TWO_OPTION ),
+        MarketsForGameData.getOddIdForType( mMarketsData, MarketConfig.ODDS_TYPE_TWO_OPTION ) )
 end
 
 function backEventHandler( sender, eventType )
@@ -91,8 +92,8 @@ function helperInitMatchInfo( content, marketsData )
     team2:loadTexture( Constants.TEAM_IMAGE_PATH..TeamConfig.getLogo( TeamConfig.getConfigIdByKey( mMatch["AwayTeamId"] ) ) )
     team1Name:setText( TeamConfig.getTeamName( TeamConfig.getConfigIdByKey( mMatch["HomeTeamId"] ) ) )
     team2Name:setText( TeamConfig.getTeamName( TeamConfig.getConfigIdByKey( mMatch["AwayTeamId"] ) ) )
-    team1WinPoint:setText( MarketsForGameData.getOddsForType( mMarketsData, MarketConfig.ODDS_TYPE_HOME_WIN ).." points" )
-    team2WinPoint:setText( MarketsForGameData.getOddsForType( mMarketsData, MarketConfig.ODDS_TYPE_AWAY_WIN ).." points" )
+    team1WinPoint:setText( MarketsForGameData.getOddsForType( mMarketsData, MarketConfig.ODDS_TYPE_ONE_OPTION ).." points" )
+    team2WinPoint:setText( MarketsForGameData.getOddsForType( mMarketsData, MarketConfig.ODDS_TYPE_TWO_OPTION ).." points" )
 end
 
 
@@ -109,8 +110,8 @@ function onFrameTouch( sender, eventType )
             -- Swap to Right
             selectTeam1Win()
         else
-            team1:setScale( 1 )
-            team2:setScale( 1 )
+            team1:setScale( SCALE_BASE )
+            team2:setScale( SCALE_BASE )
             team1:setOpacity( OPACITY )
             team2:setOpacity( OPACITY )
         end
@@ -123,13 +124,13 @@ function onFrameTouch( sender, eventType )
             scalePercentage = 1
         end
         if touchBeginPoint.x - touchMovPoint.x > 0 then
-            team2:setScale( scalePercentage * SCALE_UP_OFFSET_MAX + 1 )
-            team1:setScale( scalePercentage * SCALE_DOWN_OFFSET_MAX + 1 )
+            team2:setScale( scalePercentage * SCALE_UP_OFFSET_MAX + SCALE_BASE )
+            team1:setScale( scalePercentage * SCALE_DOWN_OFFSET_MAX + SCALE_BASE )
             team2:setOpacity( OPACITY )
             team1:setOpacity( OPACITY / 3 )
         else
-            team1:setScale( scalePercentage * SCALE_UP_OFFSET_MAX + 1 )
-            team2:setScale( scalePercentage * SCALE_DOWN_OFFSET_MAX + 1 )
+            team1:setScale( scalePercentage * SCALE_UP_OFFSET_MAX + SCALE_BASE )
+            team2:setScale( scalePercentage * SCALE_DOWN_OFFSET_MAX + SCALE_BASE )
             team1:setOpacity( OPACITY )
             team2:setOpacity( OPACITY / 3 )
         end

@@ -265,7 +265,7 @@
           "fontName": "微软雅黑",
           "fontSize": 50,
           "hAlignment": 1,
-          "text": "Will Manchester United win by 3 goals or more?",
+          "text": "Will %s win by %d goals or more?",
           "touchScaleEnable": false,
           "vAlignment": 0
         }

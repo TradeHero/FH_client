@@ -26,10 +26,10 @@ function Logic:new()
 	
 	local obj = {
 		mPoint = 5000,
-		mSelectedMatch = nil,
+		mSelectedMatch = nil,	--DS: see MatchListData
 		mCurDisplayMarketIndex = 0,
 		mCurMarketInfo = nil,	-- DS: see MarketsForGameData
-		mPredictionList = {},  -- DS: { predictionID = comments } Save the prediction of the current match selected.
+		mPredictionList = {},  -- DS: [ { id = predictionID, comment = comments } ] Save the prediction of the current match selected.
 		sessionToken = 0,
 		email = "",
 		password = "",
@@ -107,9 +107,8 @@ function Logic:getPrediction()
 	return self.mPredictionList
 end
 
-function Logic:addPrediction( prediciton, comment )
+function Logic:addPrediction( prediciton, comment, facebookShare )
 	print("Make Prediction: "..prediciton.." with comments: "..comment)
-	self.mPredictionList[prediciton] = comment
-
-	print(Json.encode( self.mPredictionList ))
+	local item = { Id = prediciton, Comments = comment, FacebookShare = facebookShare }
+	table.insert( self.mPredictionList, item )
 end

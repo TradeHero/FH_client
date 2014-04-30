@@ -31,7 +31,8 @@ local function main()
     --eventManager:postEvent( event.Enter_Login_N_Reg )
     --eventManager:postEvent( event.Enter_Sel_Fav_Team )
     --eventManager:postEvent( event.Enter_Match_List )
-    eventManager:postEvent( event.Enter_Prediction_Confirm, { 0, 0, 0 } )
+    eventManager:postEvent( event.Enter_Match )
+    --eventManager:postEvent( event.Enter_Prediction_Confirm, { 0, 0, 0 } )
 
 --[[
     local Json = require("json")

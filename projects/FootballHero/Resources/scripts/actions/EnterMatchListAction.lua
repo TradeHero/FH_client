@@ -1,7 +1,6 @@
 module(..., package.seeall)
 
 local ConnectingMessage = require("scripts.views.ConnectingMessage")
-local JsonConfigReader = require("scripts.config.JsonConfigReader")
 
 function action( param )
     local leagueId = 1301
@@ -36,6 +35,7 @@ function action( param )
     ConnectingMessage.loadFrame()
 
 --[[
+    local JsonConfigReader = require("scripts.config.JsonConfigReader")
     local config = JsonConfigReader.read( "config/matchList.json" )
     onRequestSuccess( config )
 --]]
@@ -62,4 +62,8 @@ function onRequestSuccess( matchList )
         matchListScene.loadFrame( sortedMatchList )
     end
     
+end
+
+function onRequestFailed( errorBuffer )
+    EventManager:postEvent( Event.Show_Error_Message, { errorBuffer } )
 end

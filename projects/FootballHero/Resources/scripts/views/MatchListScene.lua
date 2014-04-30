@@ -151,7 +151,25 @@ function helperInitLeagueList()
         leagueList:jumpToPercentVertical( 1 )
     end
 
-    leagueList:setInnerContainerSize( CCSize:new( 0, contentHeight ) )
+    local scrollViewHeight = leagueList:getSize().height
+    if contentHeight < scrollViewHeight then
+        local offset = scrollViewHeight - contentHeight
+
+        for i = 1, mCountryNum do
+            local countryLogo = leagueList:getChildByName( "country"..i )
+            countryLogo:setPosition( ccp( countryLogo:getPositionX() , countryLogo:getPositionY() + offset ) )
+            local otherCountryLeagueNum = table.getn( CountryConfig.getLeagueList( i ) ) 
+            for j = 1, otherCountryLeagueNum do
+                local leagueLogo = leagueList:getChildByName( "country"..i.."_league"..j )
+                if leagueLogo ~= nil then
+                    leagueLogo:setPosition( ccp( leagueLogo:getPositionX() , leagueLogo:getPositionY() + offset ) )
+                end
+            end
+        end
+    else
+        leagueList:setInnerContainerSize( CCSize:new( 0, contentHeight ) )    
+    end
+
     local layout = tolua.cast( leagueList, "Layout" )
     layout:requestDoLayout()
 end

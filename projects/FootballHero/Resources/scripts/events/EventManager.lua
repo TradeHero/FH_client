@@ -39,7 +39,7 @@ end
 
 function EventManager:postEvent( eventId, param )
 	if self.mEventHandler[eventId] == nil then
-		print( "Event id = "..eventId.." has no action." )
+		print( "Event id = "..Event.GetEventNameById( eventId ).." has no action." )
 	else
 		print( "Event id = "..Event.GetEventNameById( eventId ).." handled." )
 		self.mEventHandler[eventId].action( param )

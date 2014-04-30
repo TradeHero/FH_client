@@ -265,7 +265,7 @@
           "fontName": "微软雅黑",
           "fontSize": 50,
           "hAlignment": 1,
-          "text": "Will total goals be more than 3?",
+          "text": "Will total goals be more than %d?",
           "touchScaleEnable": false,
           "vAlignment": 0
         }

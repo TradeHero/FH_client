@@ -11,7 +11,7 @@ local EnterRegisterNameAction = require("scripts.actions.EnterRegisterNameAction
 local EnterLoginAction = require("scripts.actions.EnterLoginAction")
 local EnterForgotPasswordAction = require("scripts.actions.EnterForgotPasswordAction")
 local EnterSelFavTeamAction = require("scripts.actions.EnterSelFavTeamAction")
-local EnterNextPredicionAction = require("scripts.actions.EnterNextPredicionAction")
+local EnterNextPredictionAction = require("scripts.actions.EnterNextPredictionAction")
 local DoRegisterAction = require("scripts.actions.DoRegisterAction")
 local DoLoginAction = require("scripts.actions.DoLoginAction")
 local DoRegisterNameAction = require("scripts.actions.DoRegisterNameAction")
@@ -48,7 +48,7 @@ function initEvents()
 	EventManager:registerEventHandler( Event.Enter_Match, EnterMatchAction )
 	EventManager:registerEventHandler( Event.Enter_Prediction_Confirm, EnterPredictionConfirmAction )
 	EventManager:registerEventHandler( Event.Enter_Sel_Fav_Team, EnterSelFavTeamAction )
-	EventManager:registerEventHandler( Event.Enter_Next_Prediction, EnterNextPredicionAction )
+	EventManager:registerEventHandler( Event.Enter_Next_Prediction, EnterNextPredictionAction )
 	EventManager:registerEventHandler( Event.Do_Register, DoRegisterAction )
 	EventManager:registerEventHandler( Event.Do_Register_Name, DoRegisterNameAction )
 	EventManager:registerEventHandler( Event.Do_Login, DoLoginAction )
@@ -59,6 +59,10 @@ end
 function clearNAddWidget( widget )
 	mSceneGameLayer:clear()
 	addWidget( widget )
+end
+
+function clear()
+	mSceneGameLayer:clear()
 end
 
 function addWidget( widget )
