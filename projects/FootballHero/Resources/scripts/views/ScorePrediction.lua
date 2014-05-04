@@ -109,9 +109,9 @@ function helperInitQuestion( content )
     if marketType == MarketConfig.MARKET_TYPE_TOTAL_GOAL then
         question:setText( string.format( question:getStringValue(), math.ceil( line ) ) )
     elseif marketType == MarketConfig.MARKET_TYPE_ASIAN_HANDICAP then
-        local teamName = TeamConfig.getTeamName( TeamConfig.getConfigIdByKey( mMatch["HomeTeamId"] ) )
+        local teamName = TeamConfig.getTeamName( TeamConfig.getConfigIdByKey( mMatch["AwayTeamId"] ) )
         if line < 0 then
-            teamName = TeamConfig.getTeamName( TeamConfig.getConfigIdByKey( mMatch["AwayTeamId"] ) )
+            teamName = TeamConfig.getTeamName( TeamConfig.getConfigIdByKey( mMatch["HomeTeamId"] ) )
             line = line * ( -1 )
         end 
         question:setText( string.format( question:getStringValue(), teamName, math.ceil( line ) ) )
