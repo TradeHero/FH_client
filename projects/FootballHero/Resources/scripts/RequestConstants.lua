@@ -1,6 +1,7 @@
 module(..., package.seeall)
 
 HTTP_200 = 200
+HTTP_204 = 204
 
 SERVER_IP = "http://fhapi-prod1.cloudapp.net"
 

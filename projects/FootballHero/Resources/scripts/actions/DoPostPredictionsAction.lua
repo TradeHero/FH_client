@@ -28,7 +28,7 @@ function postPredictionData()
             jsonResponse["Message"] = errorBuffer
         end
         ConnectingMessage.selfRemove()
-        if status == RequestConstants.HTTP_200 then
+        if status == RequestConstants.HTTP_204 then
             onRequestSuccess()
         else
             onRequestFailed( jsonResponse["Message"] )

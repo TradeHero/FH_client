@@ -1,9 +1,11 @@
 module(..., package.seeall)
 
 local ConnectingMessage = require("scripts.views.ConnectingMessage")
+local EventManager = require("scripts.events.EventManager").getInstance()
+local Event = require("scripts.events.Event").EventList
 
 function action( param )
-    local leagueId = 1658
+    local leagueId = 19
     if param ~= nil and param[1] ~= nil then
         leagueId = param[1]
     end

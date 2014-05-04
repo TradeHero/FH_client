@@ -3,7 +3,8 @@ module(..., package.seeall)
 local Json = require("json")
 local ConnectingMessage = require("scripts.views.ConnectingMessage")
 local Logic = require("scripts.Logic").getInstance()
-
+local EventManager = require("scripts.events.EventManager").getInstance()
+local Event = require("scripts.events.Event").EventList
 
 function action( param )
 
