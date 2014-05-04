@@ -1,5 +1,6 @@
 module(..., package.seeall)
 
+local Constants = require("scripts.Constants")
 local EventManager = require("scripts.events.EventManager").getInstance()
 local Event = require("scripts.events.Event").EventList
 local Logic = require("scripts.Logic").getInstance()
@@ -13,8 +14,7 @@ function action( param )
 	Logic:setCurDisplayMarketIndex( curDisplayMarketIndex )
 
 	if curDisplayMarketIndex > marketInfo:getNum() then
-		print( "All market prediciton are done." )
-		EventManager:postEvent( Event.Enter_Match_List )
+		EventManager:postEvent( Event.Do_Post_Predictions )
 	else
 		print( "Display the next prediction: "..curDisplayMarketIndex )
 		local ScorePrediction = require("scripts.views.ScorePrediction")

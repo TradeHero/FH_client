@@ -6,6 +6,7 @@ local EventManager = require("scripts.events.EventManager").getInstance()
 local Event = require("scripts.events.Event").EventList
 
 local mWidget
+local mRetryCall
 
 function loadFrame()
 
@@ -27,14 +28,19 @@ function EnterOrExit( eventType )
     end
 end
 
-function setErrorMessage( message )
+function setErrorMessage( message, retryCall )
     local errorMessage = tolua.cast( mWidget:getChildByName("errorMessage"), "Label" )
     errorMessage:setText( message )
+    mRetryCall = retryCall
 end
 
 function okEventHandler( sender, eventType )
     if eventType == TOUCH_EVENT_ENDED then
         SceneManager.removeWidget( mWidget )
+        if mRetryCall ~= nil then
+            mRetryCall()
+            mRetryCall = nil
+        end
     end
 end
 

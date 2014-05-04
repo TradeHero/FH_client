@@ -1,16 +1,17 @@
 module(..., package.seeall)
 
+local Json = require("json")
+local Constants = require("scripts.Constants")
 local EventManager = require("scripts.events.EventManager").getInstance()
 local Event = require("scripts.events.Event").EventList
 local ConnectingMessage = require("scripts.views.ConnectingMessage")
+local RequestConstants = require("scripts.RequestConstants")
 
 local mEmail = "test126@abc.com"
 local mPassword = "test126"
 
 
 function action( param )
-	local Json = require("json")
-	local RequestConstants = require("scripts.RequestConstants")
 
     mEmail, mPassword = param[1], param[2]
 
@@ -46,7 +47,8 @@ function action( param )
     local requestContentText = Json.encode( requestContent )
     print("Request content is "..requestContentText)
 
-    local httpRequest = HttpRequestForLua:create( CCHttpRequest.kHttpPost, "Content-Type: application/json" )
+    local httpRequest = HttpRequestForLua:create( CCHttpRequest.kHttpPost )
+    httpRequest:addHeader( Constants.CONTENT_TYPE_JSON )
     httpRequest:getRequest():setRequestData( requestContentText, string.len( requestContentText ) )
     httpRequest:sendHttpRequest( RequestConstants.EMAIL_LOGIN_REST_CALL, handler )
 

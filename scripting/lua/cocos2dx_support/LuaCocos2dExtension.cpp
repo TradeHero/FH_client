@@ -1,6 +1,6 @@
 /*
 ** Lua binding: Extension
-** Generated automatically by tolua++-1.0.92 on 04/23/14 17:56:18.
+** Generated automatically by tolua++-1.0.92 on 05/04/14 11:25:52.
 */
 
 /****************************************************************************
@@ -427,17 +427,15 @@ static int tolua_Extension_HttpRequestForLua_create00(lua_State* tolua_S)
  if (
      !tolua_isusertable(tolua_S,1,"HttpRequestForLua",0,&tolua_err) ||
      !tolua_isnumber(tolua_S,2,0,&tolua_err) ||
-     !tolua_isstring(tolua_S,3,0,&tolua_err) ||
-     !tolua_isnoobj(tolua_S,4,&tolua_err)
+     !tolua_isnoobj(tolua_S,3,&tolua_err)
  )
   goto tolua_lerror;
  else
 #endif
  {
   CCHttpRequest::HttpRequestType type = ((CCHttpRequest::HttpRequestType) (int)  tolua_tonumber(tolua_S,2,0));
-  const char* header = ((const char*)  tolua_tostring(tolua_S,3,0));
   {
-   HttpRequestForLua* tolua_ret = (HttpRequestForLua*)  HttpRequestForLua::create(type,header);
+   HttpRequestForLua* tolua_ret = (HttpRequestForLua*)  HttpRequestForLua::create(type);
     tolua_pushusertype(tolua_S,(void*)tolua_ret,"HttpRequestForLua");
   }
  }
@@ -445,6 +443,39 @@ static int tolua_Extension_HttpRequestForLua_create00(lua_State* tolua_S)
 #ifndef TOLUA_RELEASE
  tolua_lerror:
  tolua_error(tolua_S,"#ferror in function 'create'.",&tolua_err);
+ return 0;
+#endif
+}
+#endif //#ifndef TOLUA_DISABLE
+
+/* method: addHeader of class  HttpRequestForLua */
+#ifndef TOLUA_DISABLE_tolua_Extension_HttpRequestForLua_addHeader00
+static int tolua_Extension_HttpRequestForLua_addHeader00(lua_State* tolua_S)
+{
+#ifndef TOLUA_RELEASE
+ tolua_Error tolua_err;
+ if (
+     !tolua_isusertype(tolua_S,1,"HttpRequestForLua",0,&tolua_err) ||
+     !tolua_isstring(tolua_S,2,0,&tolua_err) ||
+     !tolua_isnoobj(tolua_S,3,&tolua_err)
+ )
+  goto tolua_lerror;
+ else
+#endif
+ {
+  HttpRequestForLua* self = (HttpRequestForLua*)  tolua_tousertype(tolua_S,1,0);
+  const char* header = ((const char*)  tolua_tostring(tolua_S,2,0));
+#ifndef TOLUA_RELEASE
+  if (!self) tolua_error(tolua_S,"invalid 'self' in function 'addHeader'", NULL);
+#endif
+  {
+   self->addHeader(header);
+  }
+ }
+ return 0;
+#ifndef TOLUA_RELEASE
+ tolua_lerror:
+ tolua_error(tolua_S,"#ferror in function 'addHeader'.",&tolua_err);
  return 0;
 #endif
 }
@@ -730,6 +761,7 @@ TOLUA_API int tolua_Extension_open (lua_State* tolua_S)
   tolua_cclass(tolua_S,"HttpRequestForLua","HttpRequestForLua","CCObject",NULL);
   tolua_beginmodule(tolua_S,"HttpRequestForLua");
    tolua_function(tolua_S,"create",tolua_Extension_HttpRequestForLua_create00);
+   tolua_function(tolua_S,"addHeader",tolua_Extension_HttpRequestForLua_addHeader00);
    tolua_function(tolua_S,"sendHttpRequest",tolua_Extension_HttpRequestForLua_sendHttpRequest00);
    tolua_function(tolua_S,"onHttpRequestCompleted",tolua_Extension_HttpRequestForLua_onHttpRequestCompleted00);
    tolua_function(tolua_S,"setRequest",tolua_Extension_HttpRequestForLua_setRequest00);

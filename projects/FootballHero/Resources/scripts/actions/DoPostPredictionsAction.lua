@@ -1,25 +1,23 @@
 module(..., package.seeall)
 
+local Json = require("json")
+local Constants = require("scripts.Constants")
 local EventManager = require("scripts.events.EventManager").getInstance()
 local Event = require("scripts.events.Event").EventList
+local Logic = require("scripts.Logic").getInstance()
+local RequestConstants = require("scripts.RequestConstants")
 local ConnectingMessage = require("scripts.views.ConnectingMessage")
 
-local mUserName = "SamYu"
-local mFirstName = "Yu"
-local mLastName = "Zheng"
-
-
 function action( param )
-	local Json = require("json")
-	local RequestConstants = require("scripts.RequestConstants")
-
-    mUserName, mFirstName, mLastName = param[1], param[2], param[3]
-    if string.len( mUserName ) == 0 then
-        onRequestFailed( "User name is blank." )
-        return
+    if Logic:getPredictions():getSize() > 0 then
+        postPredictionData()
+    else
+        EventManager:postEvent( Event.Enter_Match_List )
     end
+end
 
-    local handler = function( isSucceed, body, header, status, errorBuffer )
+function postPredictionData()
+	local handler = function( isSucceed, body, header, status, errorBuffer )
         print( "Http reponse: "..status.." and errorBuffer: "..errorBuffer )
         print( "Http reponse body: "..body )
         
@@ -31,32 +29,29 @@ function action( param )
         end
         ConnectingMessage.selfRemove()
         if status == RequestConstants.HTTP_200 then
-            local sessionToken = jsonResponse["sessionToken"]
             onRequestSuccess()
         else
             onRequestFailed( jsonResponse["Message"] )
         end
     end
 
---[[
-    local requestContent = { Email = mEmail, Password = mPassword }
-    local requestContentText = Json.encode( requestContent )
+    local requestContentText = Json.encode( Logic:getPredictions() )
     print("Request content is "..requestContentText)
 
     local httpRequest = HttpRequestForLua:create( CCHttpRequest.kHttpPost )
-    httpRequest:addHeader( "Content-Type: application/json" )
+    httpRequest:addHeader( Constants.CONTENT_TYPE_JSON )
+    httpRequest:addHeader( Logic:getAuthSessionString() )
+    
     httpRequest:getRequest():setRequestData( requestContentText, string.len( requestContentText ) )
-    httpRequest:sendHttpRequest( RequestConstants.EMAIL_REGISTER_REST_CALL, handler )
+    httpRequest:sendHttpRequest( RequestConstants.POST_COUPONS_REST_CALL, handler )
 
     ConnectingMessage.loadFrame()
---]]
-    onRequestSuccess( nil )
 end
 
-function onRequestSuccess( sessionToken )
-    EventManager:postEvent( Event.Enter_Sel_Fav_Team )
+function onRequestSuccess()
+    EventManager:postEvent( Event.Enter_Match_List )
 end
 
 function onRequestFailed( errorBuffer )
-    EventManager:postEvent( Event.Show_Error_Message, { errorBuffer } )
+    EventManager:postEvent( Event.Show_Error_Message, { errorBuffer, postPredictionData } )
 end

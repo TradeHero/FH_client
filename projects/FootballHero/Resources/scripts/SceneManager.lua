@@ -16,6 +16,7 @@ local DoRegisterAction = require("scripts.actions.DoRegisterAction")
 local DoLoginAction = require("scripts.actions.DoLoginAction")
 local DoRegisterNameAction = require("scripts.actions.DoRegisterNameAction")
 local DoFBConnectAction = require("scripts.actions.DoFBConnectAction")
+local DoPostPredictionsAction = require("scripts.actions.DoPostPredictionsAction")
 local ShowErrorMessageAction = require("scripts.actions.ShowErrorMessageAction")
 
 TOUCH_PRIORITY_ZERO = 0
@@ -53,6 +54,7 @@ function initEvents()
 	EventManager:registerEventHandler( Event.Do_Register_Name, DoRegisterNameAction )
 	EventManager:registerEventHandler( Event.Do_Login, DoLoginAction )
 	EventManager:registerEventHandler( Event.Do_FB_Connect, DoFBConnectAction )
+	EventManager:registerEventHandler( Event.Do_Post_Predictions, DoPostPredictionsAction )
 	EventManager:registerEventHandler( Event.Show_Error_Message, ShowErrorMessageAction )
 end
 

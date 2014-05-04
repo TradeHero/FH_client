@@ -285,7 +285,7 @@ function helperInitMatchInfo( content, matchInfo )
     time:setText( os.date( "%H:%M", matchInfo["StartTime"] ) )
     time:setFontName("fonts/Newgtbxc.ttf")
 
-    local previousPrediction = nil -- TODO Logic:getPrediction( matchIndex )
+    local previousPrediction = nil -- Todo update according to the prediciton history
     local vsBt = tolua.cast( content:getChildByName("VS"), "Button" )
     if previousPrediction == nil then
         vsBt:setBright( true )

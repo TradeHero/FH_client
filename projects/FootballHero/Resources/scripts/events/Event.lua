@@ -31,6 +31,7 @@ EventNameList =
     "Do_Register_Name",
     "Do_Login",
     "Do_FB_Connect",
+    "Do_Post_Predictions",
 
     "Show_Error_Message",
 }

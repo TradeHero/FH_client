@@ -1,5 +1,7 @@
 module(..., package.seeall)
 
+CONTENT_TYPE_JSON = "Content-Type: application/json"
+
 IMAGE_PATH = "images/"
 
 TEAM_IMAGE_PATH = IMAGE_PATH.."teams/"

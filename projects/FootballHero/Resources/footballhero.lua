@@ -40,7 +40,7 @@ local function main()
         cclog( "Http reponse: "..body )
 
     end
-    local httpRequest = HttpRequestForLua:create( CCHttpRequest.kHttpGet, "Content-Type: application/json" )
+    local httpRequest = HttpRequestForLua:create( CCHttpRequest.kHttpGet )
     httpRequest:sendHttpRequest( "http://az596986.vo.msecnd.net/fhsettings/countries.txt", handler )
 --]]
 

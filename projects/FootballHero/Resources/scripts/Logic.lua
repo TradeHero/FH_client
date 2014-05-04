@@ -1,6 +1,7 @@
 module(..., package.seeall)
 
 local Json = require("json")
+local Coupons = require("scripts.data.Coupons").Coupons
 
 -- Singleton of logic
 local MATCH_PREDICTION = "matchPrediction"
@@ -29,7 +30,7 @@ function Logic:new()
 		mSelectedMatch = nil,	--DS: see MatchListData
 		mCurDisplayMarketIndex = 0,
 		mCurMarketInfo = nil,	-- DS: see MarketsForGameData
-		mPredictionList = {},  -- DS: [ { id = predictionID, comment = comments } ] Save the prediction of the current match selected.
+		mCoupons = Coupons:new(),  -- DS: Coupons
 		sessionToken = 0,
 		email = "",
 		password = "",
@@ -96,20 +97,23 @@ function Logic:getEmail()
 	return self.email
 end
 
-function Logic.getPassword()
+function Logic:getPassword()
 	return self.password
 end
 
-function Logic.getSessionToken()
-	return self.sessionToken
-end
-
-function Logic:getPrediction()
-	return self.mPredictionList
+function Logic:getAuthSessionString()
+	return "Authorization: FH-Token "..self.sessionToken
 end
 
 function Logic:addPrediction( prediciton, comment, facebookShare )
 	print("Make Prediction: "..prediciton.." with comments: "..comment)
-	local item = { Id = prediciton, Comments = comment, FacebookShare = facebookShare }
-	table.insert( self.mPredictionList, item )
+	self.mCoupons:addCoupon( prediciton, comment, facebookShare )
+end
+
+function Logic:getPredictions()
+	return self.mCoupons
+end
+
+function Logic:resetPredictions()
+	self.mCoupons = Coupons:new()
 end

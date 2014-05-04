@@ -14,8 +14,9 @@ public:
 	HttpRequestForLua();
 	~HttpRequestForLua();
 
-	static HttpRequestForLua * create(CCHttpRequest::HttpRequestType type, const char* header);
+	static HttpRequestForLua * create(CCHttpRequest::HttpRequestType type);
 
+	void addHeader(const char* header);
 	void sendHttpRequest(const char* url, int callbackFunc);
 	void onHttpRequestCompleted(cocos2d::CCNode *sender, void *data);
 	void setRequest(CCHttpRequest* request) { mRequest = request; }

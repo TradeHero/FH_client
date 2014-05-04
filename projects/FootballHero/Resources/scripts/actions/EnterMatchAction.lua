@@ -29,7 +29,7 @@ function action( param )
         end
     end
 
-    local httpRequest = HttpRequestForLua:create( CCHttpRequest.kHttpGet, "Content-Type: application/json" )
+    local httpRequest = HttpRequestForLua:create( CCHttpRequest.kHttpGet )
     httpRequest:sendHttpRequest( RequestConstants.GET_GAME_MARKETS_REST_CALL.."?gameId="..matchId, handler )
 
     ConnectingMessage.loadFrame()

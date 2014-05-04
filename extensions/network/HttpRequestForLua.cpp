@@ -13,7 +13,7 @@ HttpRequestForLua::~HttpRequestForLua()
 {
 }
 
-HttpRequestForLua * HttpRequestForLua::create(CCHttpRequest::HttpRequestType type, const char* header)
+HttpRequestForLua * HttpRequestForLua::create(CCHttpRequest::HttpRequestType type)
 {
 	HttpRequestForLua* requestForLua = new HttpRequestForLua();
 
@@ -25,10 +25,6 @@ HttpRequestForLua * HttpRequestForLua::create(CCHttpRequest::HttpRequestType typ
 		request->setRequestType(type);
 
 		std::vector<std::string> headers;
-		if (header != NULL)
-		{
-			headers.push_back(header);
-		}
 		request->setHeaders(headers);
 
 		requestForLua->setRequest(request);
@@ -39,6 +35,14 @@ HttpRequestForLua * HttpRequestForLua::create(CCHttpRequest::HttpRequestType typ
 	}
 
 	return requestForLua;
+}
+
+void HttpRequestForLua::addHeader(const char* header)
+{
+	std::vector<std::string> headers = getRequest()->getHeaders();
+	
+	headers.push_back(header);
+	getRequest()->setHeaders(headers);
 }
 
 void HttpRequestForLua::sendHttpRequest(const char* url, int callbackFunc)
