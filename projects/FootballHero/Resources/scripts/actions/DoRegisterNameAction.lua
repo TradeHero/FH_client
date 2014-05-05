@@ -11,7 +11,7 @@ local mLastName = "Zheng"
 
 function action( param )
 	local Json = require("json")
-	local RequestConstants = require("scripts.RequestConstants")
+	local RequestUtils = require("scripts.RequestUtils")
 
     mUserName, mFirstName, mLastName = param[1], param[2], param[3]
     if string.len( mUserName ) == 0 then
@@ -30,7 +30,7 @@ function action( param )
             jsonResponse["Message"] = errorBuffer
         end
         ConnectingMessage.selfRemove()
-        if status == RequestConstants.HTTP_200 then
+        if status == RequestUtils.HTTP_200 then
             local sessionToken = jsonResponse["sessionToken"]
             onRequestSuccess()
         else
@@ -46,7 +46,7 @@ function action( param )
     local httpRequest = HttpRequestForLua:create( CCHttpRequest.kHttpPost )
     httpRequest:addHeader( "Content-Type: application/json" )
     httpRequest:getRequest():setRequestData( requestContentText, string.len( requestContentText ) )
-    httpRequest:sendHttpRequest( RequestConstants.EMAIL_REGISTER_REST_CALL, handler )
+    httpRequest:sendHttpRequest( RequestUtils.EMAIL_REGISTER_REST_CALL, handler )
 
     ConnectingMessage.loadFrame()
 --]]

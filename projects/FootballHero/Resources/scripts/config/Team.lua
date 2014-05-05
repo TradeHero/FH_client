@@ -53,7 +53,11 @@ function getTeamName( id )
 	if config ~= nil then
 		return config["teamName"]
 	else
-		return "Unknow team"
+		if id ~= nil then
+			return "Unknow team: "..id
+		else
+			return "Unknow team"
+		end
 	end
 end
 

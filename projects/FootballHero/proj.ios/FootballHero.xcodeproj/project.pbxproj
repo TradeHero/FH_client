@@ -213,6 +213,11 @@
 		730D984F18DC4317000CA5F9 /* sounds in Resources */ = {isa = PBXBuildFile; fileRef = 730D984018DC4317000CA5F9 /* sounds */; };
 		7365C0D218FCE99200C39027 /* FBSessionSingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 7365C0D118FCE99200C39027 /* FBSessionSingleton.m */; };
 		7388C04118F4E2FF00CF667C /* HttpRequestForLua.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7388C03F18F4E2FF00CF667C /* HttpRequestForLua.cpp */; };
+		73BFF75A191779FB002F173A /* des56.c in Sources */ = {isa = PBXBuildFile; fileRef = 73BFF753191779FB002F173A /* des56.c */; };
+		73BFF75B191779FB002F173A /* ldes56.c in Sources */ = {isa = PBXBuildFile; fileRef = 73BFF755191779FB002F173A /* ldes56.c */; };
+		73BFF75C191779FB002F173A /* md5.c in Sources */ = {isa = PBXBuildFile; fileRef = 73BFF757191779FB002F173A /* md5.c */; };
+		73BFF75D191779FB002F173A /* md5lib.c in Sources */ = {isa = PBXBuildFile; fileRef = 73BFF759191779FB002F173A /* md5lib.c */; };
+		73BFF75F19177A46002F173A /* MD5.lua in Resources */ = {isa = PBXBuildFile; fileRef = 73BFF75E19177A46002F173A /* MD5.lua */; };
 		73EDFC8018EBE69E00322624 /* FacebookDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 73EDFC7D18EBE69E00322624 /* FacebookDelegate.cpp */; };
 		73EDFC8518EC005700322624 /* LuaCocos2dExtension.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 73EDFC8318EC005700322624 /* LuaCocos2dExtension.cpp */; };
 		73EDFC8B18ECF85F00322624 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73EDFC8A18ECF85F00322624 /* FacebookSDK.framework */; };
@@ -706,6 +711,14 @@
 		7365C0D118FCE99200C39027 /* FBSessionSingleton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBSessionSingleton.m; sourceTree = "<group>"; };
 		7388C03F18F4E2FF00CF667C /* HttpRequestForLua.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HttpRequestForLua.cpp; sourceTree = "<group>"; };
 		7388C04018F4E2FF00CF667C /* HttpRequestForLua.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpRequestForLua.h; sourceTree = "<group>"; };
+		73BFF753191779FB002F173A /* des56.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = des56.c; path = crypt/des56.c; sourceTree = "<group>"; };
+		73BFF754191779FB002F173A /* des56.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = des56.h; path = crypt/des56.h; sourceTree = "<group>"; };
+		73BFF755191779FB002F173A /* ldes56.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ldes56.c; path = crypt/ldes56.c; sourceTree = "<group>"; };
+		73BFF756191779FB002F173A /* ldes56.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ldes56.h; path = crypt/ldes56.h; sourceTree = "<group>"; };
+		73BFF757191779FB002F173A /* md5.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = md5.c; path = crypt/md5.c; sourceTree = "<group>"; };
+		73BFF758191779FB002F173A /* md5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = md5.h; path = crypt/md5.h; sourceTree = "<group>"; };
+		73BFF759191779FB002F173A /* md5lib.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = md5lib.c; path = crypt/md5lib.c; sourceTree = "<group>"; };
+		73BFF75E19177A46002F173A /* MD5.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MD5.lua; sourceTree = "<group>"; };
 		73C7D8E418E9119100D39A26 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		73EDFC7D18EBE69E00322624 /* FacebookDelegate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FacebookDelegate.cpp; path = Social/FacebookDelegate.cpp; sourceTree = "<group>"; };
 		73EDFC7E18EBE69E00322624 /* FacebookDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FacebookDelegate.h; path = Social/FacebookDelegate.h; sourceTree = "<group>"; };
@@ -1331,6 +1344,7 @@
 		15C155FF168311CB00D239F2 /* lua */ = {
 			isa = PBXGroup;
 			children = (
+				73BFF750191779DE002F173A /* crypt */,
 				46C59AD017641FF300F43DC3 /* script */,
 				46C1007916BF786A00F74D54 /* cocos2dx_support */,
 				1A9D7E5B171E38A2000B3B9A /* luajit */,
@@ -1589,6 +1603,20 @@
 				46C59AD217641FF300F43DC3 /* CCBReaderLoad.lua */,
 			);
 			path = script;
+			sourceTree = "<group>";
+		};
+		73BFF750191779DE002F173A /* crypt */ = {
+			isa = PBXGroup;
+			children = (
+				73BFF753191779FB002F173A /* des56.c */,
+				73BFF754191779FB002F173A /* des56.h */,
+				73BFF755191779FB002F173A /* ldes56.c */,
+				73BFF756191779FB002F173A /* ldes56.h */,
+				73BFF757191779FB002F173A /* md5.c */,
+				73BFF758191779FB002F173A /* md5.h */,
+				73BFF759191779FB002F173A /* md5lib.c */,
+			);
+			name = crypt;
 			sourceTree = "<group>";
 		};
 		73EDFC8118EBE6A600322624 /* Social */ = {
@@ -1915,6 +1943,7 @@
 		F293BC4615EB859D00256477 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				73BFF75E19177A46002F173A /* MD5.lua */,
 				730D983318DC4316000CA5F9 /* AudioEngine.lua */,
 				730D983418DC4316000CA5F9 /* CCBReaderLoad.lua */,
 				730D983518DC4316000CA5F9 /* Cocos2d.lua */,
@@ -2035,6 +2064,7 @@
 				15C1569E1683138E00D239F2 /* Icon-144.png in Resources */,
 				730D984618DC4317000CA5F9 /* config in Resources */,
 				46C59AD317641FF300F43DC3 /* AudioEngine.lua in Resources */,
+				73BFF75F19177A46002F173A /* MD5.lua in Resources */,
 				46C59AD417641FF300F43DC3 /* CCBReaderLoad.lua in Resources */,
 				730D984218DC4317000CA5F9 /* AudioEngine.lua in Resources */,
 			);
@@ -2088,6 +2118,7 @@
 				15C1540F1683112E00D239F2 /* CCControl.cpp in Sources */,
 				15C154101683112E00D239F2 /* CCControlButton.cpp in Sources */,
 				15C154111683112E00D239F2 /* CCControlColourPicker.cpp in Sources */,
+				73BFF75C191779FB002F173A /* md5.c in Sources */,
 				15C154121683112E00D239F2 /* CCControlHuePicker.cpp in Sources */,
 				ED35C0EC18323498002A0750 /* UIButton.cpp in Sources */,
 				15C154131683112E00D239F2 /* CCControlPotentiometer.cpp in Sources */,
@@ -2208,7 +2239,9 @@
 				73EDFC9618ECFE7400322624 /* FacebookConnector.mm in Sources */,
 				ED35C0EE18323498002A0750 /* UIImageView.cpp in Sources */,
 				15C155461683118600D239F2 /* b2PulleyJoint.cpp in Sources */,
+				73BFF75D191779FB002F173A /* md5lib.c in Sources */,
 				15C155471683118600D239F2 /* b2RevoluteJoint.cpp in Sources */,
+				73BFF75A191779FB002F173A /* des56.c in Sources */,
 				15C155481683118600D239F2 /* b2RopeJoint.cpp in Sources */,
 				ED35C0EB18323498002A0750 /* UIScrollView.cpp in Sources */,
 				ED35C0DB18323498002A0750 /* CCComAudio.cpp in Sources */,
@@ -2260,6 +2293,7 @@
 				1A40E7E91727C47E006D4861 /* Json.cpp in Sources */,
 				1A40E7EA1727C47E006D4861 /* RegionAttachment.cpp in Sources */,
 				1A40E7EB1727C47E006D4861 /* Skeleton.cpp in Sources */,
+				73BFF75B191779FB002F173A /* ldes56.c in Sources */,
 				ED35C0D818323498002A0750 /* CCTweenFunction.cpp in Sources */,
 				1A40E7EC1727C47E006D4861 /* SkeletonData.cpp in Sources */,
 				1A40E7ED1727C47E006D4861 /* SkeletonJson.cpp in Sources */,

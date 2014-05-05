@@ -20,7 +20,7 @@ function readWithPrimaryKey( fileName, primaryKey, filter )
 	local text = CCFileUtils:sharedFileUtils():getFileData( fileName, "r", 0 )
 	--print( text )
 	local jsonObject = Json.decode( text )
-	for i,v in pairs(jsonObject) do
+	for i, v in pairs( jsonObject ) do
 		if filter( v ) then
 		    table.insert( config, v )
 	    	configNum = configNum + 1
@@ -41,7 +41,7 @@ function readWithoutPrimaryKey( fileName, filter )
 	local text = CCFileUtils:sharedFileUtils():getFileData( fileName, "r", 0 )
 	--print( text )
 	local jsonObject = Json.decode( text )
-	for i,v in pairs(jsonObject) do
+	for i, v in pairs( jsonObject ) do
 		if filter( v ) then
 			table.insert( config, v )
 	    	configNum = configNum + 1
@@ -53,4 +53,23 @@ end
 
 function passAll( v )
 	return true
+end
+
+function readAndCombine( fileName, primaryKey )
+	local config = {}
+
+	local fileName = CCFileUtils:sharedFileUtils():fullPathForFilename( fileName )
+	local text = CCFileUtils:sharedFileUtils():getFileData( fileName, "r", 0 )
+	--print( text )
+	local jsonObject = Json.decode( text )
+	for i, v in pairs( jsonObject ) do
+		local id = v[primaryKey]
+		if config[id] == nil then
+			config[id] = {}
+		end
+
+		table.insert( config[id], v )
+	end
+
+	return config
 end

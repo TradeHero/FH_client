@@ -76,7 +76,7 @@
           "direction": 1,
           "innerHeight": 1020,
           "innerWidth": 160,
-          "layoutType": 1,
+          "layoutType": 0,
           "vectorX": 0,
           "vectorY": -0.5
         }
@@ -103,8 +103,8 @@
           "ignoreSize": false,
           "layoutParameter": null,
           "opacity": 255,
-          "positionPercentX": 0.3109375,
-          "positionPercentY": 0.0008802817,
+          "positionPercentX": 0.309687525,
+          "positionPercentY": -0.0012324159,
           "positionType": 0,
           "rotation": 0,
           "scaleX": 1,
@@ -117,8 +117,8 @@
           "useMergedTexture": false,
           "visible": true,
           "width": 430,
-          "x": 199,
-          "y": 1,
+          "x": 198,
+          "y": -1,
           "backGroundImage": null,
           "backGroundImageData": null,
           "backGroundScale9Enable": false,
@@ -203,7 +203,7 @@
         "options": {
           "__type": "ComGUILabelSurrogate:#EditorCommon.JsonModel.Component.GUI",
           "classname": "Label",
-          "name": "countryName",
+          "name": "leagueName",
           "ZOrder": 2,
           "actiontag": 26,
           "anchorPointX": 0.5,
@@ -240,7 +240,7 @@
           "fontName": "微软雅黑",
           "fontSize": 18,
           "hAlignment": 0,
-          "text": "England",
+          "text": "England Premier",
           "touchScaleEnable": false,
           "vAlignment": 0
         }

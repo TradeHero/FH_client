@@ -8,7 +8,7 @@ local Event = require("scripts.events.Event").EventList
 
 function action( param )
 
-	local RequestConstants = require("scripts.RequestConstants")
+	local RequestUtils = require("scripts.RequestUtils")
 
     local matchId = Logic:getSelectedMatch()["Id"]
 
@@ -23,7 +23,7 @@ function action( param )
             jsonResponse["Message"] = errorBuffer
         end
         ConnectingMessage.selfRemove()
-        if status == RequestConstants.HTTP_200 then
+        if status == RequestUtils.HTTP_200 then
             onRequestSuccess( jsonResponse )
         else
             onRequestFailed( jsonResponse["Message"] )
@@ -31,7 +31,7 @@ function action( param )
     end
 
     local httpRequest = HttpRequestForLua:create( CCHttpRequest.kHttpGet )
-    httpRequest:sendHttpRequest( RequestConstants.GET_GAME_MARKETS_REST_CALL.."?gameId="..matchId, handler )
+    httpRequest:sendHttpRequest( RequestUtils.GET_GAME_MARKETS_REST_CALL.."?gameId="..matchId, handler )
 
     ConnectingMessage.loadFrame()
 

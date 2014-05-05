@@ -30,6 +30,8 @@ extern "C" {
 #include "lualib.h"
 #include "lauxlib.h"
 #include "tolua_fix.h"
+#include "md5.h"
+#include "ldes56.h"
 }
 
 #include "LuaCocos2d.h"
@@ -121,6 +123,8 @@ bool CCLuaStack::init(void)
     luaL_register(m_state, "_G", global_functions);
     tolua_CocoStudio_open(m_state);
 	tolua_Extension_open(m_state);
+	luaopen_md5_core(m_state);
+	luaopen_des56(m_state);
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS || CC_TARGET_PLATFORM == CC_PLATFORM_MAC)
     CCLuaObjcBridge::luaopen_luaoc(m_state);
 #endif

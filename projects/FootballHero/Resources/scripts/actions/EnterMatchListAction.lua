@@ -11,7 +11,7 @@ function action( param )
     end
 
     local Json = require("json")
-	local RequestConstants = require("scripts.RequestConstants")
+	local RequestUtils = require("scripts.RequestUtils")
 
     local handler = function( isSucceed, body, header, status, errorBuffer )
         print( "Http reponse: "..status.." and errorBuffer: "..errorBuffer )
@@ -24,7 +24,7 @@ function action( param )
             jsonResponse["Message"] = errorBuffer
         end
         ConnectingMessage.selfRemove()
-        if status == RequestConstants.HTTP_200 then
+        if status == RequestUtils.HTTP_200 then
             onRequestSuccess( jsonResponse )
         else
             onRequestFailed( jsonResponse["Message"] )
@@ -32,7 +32,7 @@ function action( param )
     end
 
     local httpRequest = HttpRequestForLua:create( CCHttpRequest.kHttpGet )
-    httpRequest:sendHttpRequest( RequestConstants.GET_UPCOMING_GAMES_BY_LEAGUE_REST_CALL.."?leagueId="..leagueId, handler )
+    httpRequest:sendHttpRequest( RequestUtils.GET_UPCOMING_GAMES_BY_LEAGUE_REST_CALL.."?leagueId="..leagueId, handler )
 
     ConnectingMessage.loadFrame()
 

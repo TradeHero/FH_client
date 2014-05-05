@@ -30,19 +30,18 @@ local function main()
     local event = require("scripts.events.Event").EventList
     --eventManager:postEvent( event.Enter_Login_N_Reg )
     --eventManager:postEvent( event.Enter_Sel_Fav_Team )
-    eventManager:postEvent( event.Enter_Match_List )
+    --eventManager:postEvent( event.Enter_Match_List )
     --eventManager:postEvent( event.Enter_Match )
     --eventManager:postEvent( event.Enter_Prediction_Confirm, { 0, 0, 0 } )
 
---[[
+    local MD5 = require("MD5")
     local Json = require("json")
     local handler = function( isSucceed, body, header, status, errorBuffer )
-        cclog( "Http reponse: "..body )
-
+        print("MD5: ".. MD5.sumhexa( body ))
     end
     local httpRequest = HttpRequestForLua:create( CCHttpRequest.kHttpGet )
-    httpRequest:sendHttpRequest( "http://az596986.vo.msecnd.net/fhsettings/countries.txt", handler )
---]]
+    httpRequest:sendHttpRequest( "http://portalvhdss3c1vgx5mrzv.blob.core.windows.net/fhsettings/countries.txt", handler )
+
 
 --[[
     local handler = function( num )
@@ -52,7 +51,5 @@ local function main()
     FacebookDelegate:sharedDelegate():login( handler, handler )
 --]]
 end
-
-
 
 xpcall(main, __G__TRACKBACK__)

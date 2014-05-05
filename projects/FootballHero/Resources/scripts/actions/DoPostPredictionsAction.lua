@@ -5,7 +5,7 @@ local Constants = require("scripts.Constants")
 local EventManager = require("scripts.events.EventManager").getInstance()
 local Event = require("scripts.events.Event").EventList
 local Logic = require("scripts.Logic").getInstance()
-local RequestConstants = require("scripts.RequestConstants")
+local RequestUtils = require("scripts.RequestUtils")
 local ConnectingMessage = require("scripts.views.ConnectingMessage")
 
 function action( param )
@@ -28,7 +28,7 @@ function postPredictionData()
             jsonResponse["Message"] = errorBuffer
         end
         ConnectingMessage.selfRemove()
-        if status == RequestConstants.HTTP_204 then
+        if status == RequestUtils.HTTP_204 then
             onRequestSuccess()
         else
             onRequestFailed( jsonResponse["Message"] )
@@ -43,7 +43,7 @@ function postPredictionData()
     httpRequest:addHeader( Logic:getAuthSessionString() )
     
     httpRequest:getRequest():setRequestData( requestContentText, string.len( requestContentText ) )
-    httpRequest:sendHttpRequest( RequestConstants.POST_COUPONS_REST_CALL, handler )
+    httpRequest:sendHttpRequest( RequestUtils.POST_COUPONS_REST_CALL, handler )
 
     ConnectingMessage.loadFrame()
 end

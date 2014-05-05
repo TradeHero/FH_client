@@ -16,7 +16,7 @@
     <string>ErrorMessage.json</string>
     <string>ConnectingMessage.json</string>
     <string>FavouriteTeam.json</string>
-    <string>Country.json</string>
+    <string>FavouriteCountryContent.json</string>
     <string>Team.json</string>
     <string>Navigator.json</string>
     <string>MatchListContent.json</string>
@@ -31,10 +31,11 @@
     <string>WTGBMTPrediction.json</string>
     <string>WTSPrediction.json</string>
     <string>WTWBEGPrediction.json</string>
+    <string>FavouriteLeagueContent.json</string>
   </JsonList>
   <imageFileList />
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>MatchListContent.json</CurrentUIJson>
+  <CurrentUIJson>FavouriteCountryContent.json</CurrentUIJson>
   <CanvasSize>
     <Width>640</Width>
     <Height>1136</Height>

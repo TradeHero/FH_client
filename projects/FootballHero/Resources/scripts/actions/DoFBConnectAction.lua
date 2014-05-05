@@ -5,12 +5,12 @@ local EventManager = require("scripts.events.EventManager").getInstance()
 local Event = require("scripts.events.Event").EventList
 local ConnectingMessage = require("scripts.views.ConnectingMessage")
 local Json = require("json")
-local RequestConstants = require("scripts.RequestConstants")
+local RequestUtils = require("scripts.RequestUtils")
 
 
 function action( param )
 	local Json = require("json")
-	local RequestConstants = require("scripts.RequestConstants")
+	local RequestUtils = require("scripts.RequestUtils")
 
     local successHandler = function( accessToken )
         if accessToken == nil then
@@ -41,7 +41,7 @@ function onFBConnectSuccess( accessToken )
             jsonResponse["Message"] = errorBuffer
         end
         ConnectingMessage.selfRemove()
-        if status == RequestConstants.HTTP_200 then
+        if status == RequestUtils.HTTP_200 then
             local sessionToken = jsonResponse["sessionToken"]
             local email = jsonResponse["email"]
             onRequestSuccess( sessionToken, email )
@@ -57,7 +57,7 @@ function onFBConnectSuccess( accessToken )
     local httpRequest = HttpRequestForLua:create( CCHttpRequest.kHttpPost )
     httpRequest:addHeader( Constants.CONTENT_TYPE_JSON )
     httpRequest:getRequest():setRequestData( requestContentText, string.len( requestContentText ) )
-    httpRequest:sendHttpRequest( RequestConstants.FB_LOGIN_REST_CALL, handler )
+    httpRequest:sendHttpRequest( RequestUtils.FB_LOGIN_REST_CALL, handler )
 
     ConnectingMessage.loadFrame()
 end

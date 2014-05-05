@@ -6,10 +6,11 @@ local EventManager = require("scripts.events.EventManager").getInstance()
 local Event = require("scripts.events.Event").EventList
 local LeagueConfig = require("scripts.config.League")
 local TeamConfig = require("scripts.config.Team")
+local LeagueTeamConfig = require("scripts.config.LeagueTeams")
+local LeagueListScene = require("scripts.views.LeagueListScene")
 
 local TEAM_NUM = 20
 local mWidget
-local mCountryId
 local mTeamId
 
 function loadFrame()
@@ -20,28 +21,8 @@ function loadFrame()
     mWidget:registerScriptHandler( EnterOrExit )
     SceneManager.addWidget( widget )
 
-    local countryContainer = tolua.cast( widget:getChildByName("countryList"), "ScrollView" )
-    local layoutParameter = LinearLayoutParameter:create()
-    layoutParameter:setGravity(LINEAR_GRAVITY_LEFT)
-    local contentHeight = 0
-
-    for i = 1, LeagueConfig.getConfigNum() do
-        local eventHandler = function( sender, eventType )
-            if eventType == TOUCH_EVENT_ENDED then
-                countrySelected( i )
-            end
-        end
-
-        local content = GUIReader:shareReader():widgetFromJsonFile("scenes/Country.json")
-        local coutryButton = tolua.cast( content:getChildByName("country"), "Button" )
-        coutryButton:loadTextureNormal( Constants.LEAGUE_IMAGE_PATH..LeagueConfig.getLogo( i ) )
-
-        content:setLayoutParameter( layoutParameter )
-        countryContainer:addChild( content, 0, i )
-        coutryButton:addTouchEventListener( eventHandler )
-        contentHeight = contentHeight + content:getSize().height
-    end
-    countryContainer:setInnerContainerSize( CCSize:new( 0, contentHeight ) )
+    LeagueListScene.loadFrame( "scenes/FavouriteCountryContent.json", "scenes/FavouriteLeagueContent.json", 
+        tolua.cast( mWidget:getChildByName("countryList"), "ScrollView" ), leagueSelected )
 
     -- Disable the ok button
     local okBt = widget:getChildByName("ok")
@@ -49,7 +30,7 @@ function loadFrame()
     okBt:setBright( false )
 
     -- Set the default one.
-    countrySelected( 1 )
+    leagueSelected( 1 )
 end
 
 function EnterOrExit( eventType )
@@ -61,31 +42,32 @@ end
 
 function okEventHandler( sender, eventType )
     if eventType == TOUCH_EVENT_ENDED then
-        print("Favourite Team is: "..mCountryId.."|"..mTeamId)
+        print("Favourite Team is: "..mTeamId)
         EventManager:postEvent( Event.Enter_Match_List )
     end
 end
 
-function countrySelected( index )
-    mCountryId = index
-
+function leagueSelected( leagueId )
+    print( "leagueSelected: "..leagueId )
     -- Update the country name
-    local countryName = tolua.cast( mWidget:getChildByName("countryName"), "Label" )
-    countryName:setText( LeagueConfig.getDisplayName( index ) )
+    local leagueName = tolua.cast( mWidget:getChildByName("leagueName"), "Label" )
+    leagueName:setText( LeagueConfig.getLeagueName( leagueId ) )
 
+--[[
     -- Update the country list
     local countryContainer = tolua.cast( mWidget:getChildByName("countryList"), "ScrollView" )
     for i = 1, LeagueConfig.getConfigNum() do
         local country = countryContainer:getChildByTag( i )
-        if i == index then
+        if i == leagueId then
             country:setOpacity( 255 )
         else
             country:setOpacity( 100 )
         end
     end
-
+--]]
+    
     -- Update the team list.
-    local teamList = LeagueConfig.getTeamList( index )
+    local teamList = LeagueTeamConfig.getConfig( leagueId )
     local teamListLength = table.getn( teamList )
 
     local teamContainer = tolua.cast( mWidget:getChildByName("teamList"), "ScrollView" )
@@ -113,9 +95,10 @@ function countrySelected( index )
                 teamName:setVisible( false )
                 teamButton:setVisible( false )
             else
-                teamButton:loadTextureNormal( Constants.TEAM_IMAGE_PATH..TeamConfig.getLogo( teamList[teamIndex] ) )
+                local teamId = TeamConfig.getConfigIdByKey( teamList[teamIndex]["teamId"] )
+                teamButton:loadTextureNormal( Constants.TEAM_IMAGE_PATH..TeamConfig.getLogo( teamId ) )
                 teamButton:addTouchEventListener( eventHandler )
-                teamName:setText( TeamConfig.getDisplayName( teamList[teamIndex] ) )
+                teamName:setText( TeamConfig.getTeamName( teamId ) )
             end
             
         end
@@ -126,6 +109,7 @@ function countrySelected( index )
     end
 
     teamContainer:setInnerContainerSize( CCSize:new( 0, contentHeight ) )
+
 end
 
 function teamSelected( index )

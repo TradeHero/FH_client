@@ -5,7 +5,7 @@ local EventManager = require("scripts.events.EventManager").getInstance()
 local Event = require("scripts.events.Event").EventList
 local ConnectingMessage = require("scripts.views.ConnectingMessage")
 local Json = require("json")
-local RequestConstants = require("scripts.RequestConstants")
+local RequestUtils = require("scripts.RequestUtils")
 
 local mEmail = "test126@abc.com"
 local mPassword = "test126"
@@ -47,7 +47,7 @@ function action( param )
             jsonResponse["Message"] = errorBuffer
         end
         ConnectingMessage.selfRemove()
-        if status == RequestConstants.HTTP_200 then
+        if status == RequestUtils.HTTP_200 then
             local sessionToken = jsonResponse["sessionToken"]
             onRequestSuccess( sessionToken )
         else
@@ -62,7 +62,7 @@ function action( param )
     local httpRequest = HttpRequestForLua:create( CCHttpRequest.kHttpPost )
     httpRequest:addHeader( Constants.CONTENT_TYPE_JSON )
     httpRequest:getRequest():setRequestData( requestContentText, string.len( requestContentText ) )
-    httpRequest:sendHttpRequest( RequestConstants.EMAIL_REGISTER_REST_CALL, handler )
+    httpRequest:sendHttpRequest( RequestUtils.EMAIL_REGISTER_REST_CALL, handler )
 
     ConnectingMessage.loadFrame()
 end

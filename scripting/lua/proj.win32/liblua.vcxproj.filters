@@ -13,6 +13,9 @@
     <Filter Include="luajit\include">
       <UniqueIdentifier>{b7025611-420a-4414-b567-f7496eec5f57}</UniqueIdentifier>
     </Filter>
+    <Filter Include="crypt">
+      <UniqueIdentifier>{d9e016ec-f3f6-4bca-b2c1-4fd54ecb04ad}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\tolua\tolua_event.c">
@@ -74,6 +77,18 @@
     </ClCompile>
     <ClCompile Include="..\cocos2dx_support\LuaCocos2dExtension.cpp">
       <Filter>cocos2dx_support</Filter>
+    </ClCompile>
+    <ClCompile Include="..\crypt\des56.c">
+      <Filter>crypt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\crypt\ldes56.c">
+      <Filter>crypt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\crypt\md5.c">
+      <Filter>crypt</Filter>
+    </ClCompile>
+    <ClCompile Include="..\crypt\md5lib.c">
+      <Filter>crypt</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -139,6 +154,15 @@
     </ClInclude>
     <ClInclude Include="..\cocos2dx_support\LuaCocos2dExtension.h">
       <Filter>cocos2dx_support</Filter>
+    </ClInclude>
+    <ClInclude Include="..\crypt\des56.h">
+      <Filter>crypt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\crypt\ldes56.h">
+      <Filter>crypt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\crypt\md5.h">
+      <Filter>crypt</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -36,7 +36,8 @@ function loadFrame( matchList )
     initMatchList( matchList )
 
     -- Init the league list
-    LeagueListScene.loadFrame( tolua.cast( mWidget:getChildByName("leagueList"), "ScrollView" ), leagueSelectedCallback )
+    LeagueListScene.loadFrame( "scenes/CountryListContent.json", "scenes/LeagueListContent.json", 
+        tolua.cast( mWidget:getChildByName("leagueList"), "ScrollView" ), leagueSelectedCallback )
 
     -- Option button
     local optionBt = widget:getChildByName("option")

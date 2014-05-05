@@ -41,7 +41,7 @@
     <GuidesList />
   </GuidesProject>
   <GuidesProject>
-    <Project>Country</Project>
+    <Project>FavouriteCountryContent</Project>
     <GuidesList />
   </GuidesProject>
   <GuidesProject>
@@ -94,6 +94,10 @@
   </GuidesProject>
   <GuidesProject>
     <Project>WTWBEGPrediction</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>FavouriteLeagueContent</Project>
     <GuidesList />
   </GuidesProject>
 </ArrayOfGuidesProject>

@@ -6,15 +6,24 @@ local LeagueConfig = require("scripts.config.League")
 local mCountryNum = CountryConfig.getConfigNum()
 local mCountryExpended = {}
 
-local COUNTRY_CONTENT_HEIGHT = 130
-local LEAGUE_CONTENT_HEIGHT = 80
+local COUNTRY_CONTENT_HEIGHT = 140
+local LEAGUE_CONTENT_HEIGHT = 60
 
+local mCountryWidget
+local mLeagueWidget
 local mLeagueListContainer
 local mLeagueSelectCallback
 
-function loadFrame( leagueListContainer, leagueSelectCallback )
+function loadFrame( countryWidget, leagueWidget, leagueListContainer, leagueSelectCallback )
+	mCountryWidget = countryWidget
+	mLeagueWidget = leagueWidget
 	mLeagueListContainer = leagueListContainer
 	mLeagueSelectCallback = leagueSelectCallback
+
+    local content = GUIReader:shareReader():widgetFromJsonFile( mCountryWidget )
+    COUNTRY_CONTENT_HEIGHT = content:getSize().height
+    content = GUIReader:shareReader():widgetFromJsonFile( mLeagueWidget )
+    LEAGUE_CONTENT_HEIGHT = content:getSize().height
 
 	helperInitLeagueList()
 end
@@ -36,9 +45,11 @@ function helperInitLeagueList()
             end
         end
 
-        local content = GUIReader:shareReader():widgetFromJsonFile("scenes/CountryListContent.json")
+        local content = GUIReader:shareReader():widgetFromJsonFile( mCountryWidget )
         local countryName = tolua.cast( content:getChildByName("countryName"), "Label" )
-        countryName:setText( CountryConfig.getCountryName( i ) )
+        if countryName ~= nil then
+        	countryName:setText( CountryConfig.getCountryName( i ) )
+       	end
 
         content:addTouchEventListener( eventHandler )
         content:setPosition( ccp( 0, ( i - 1 ) * COUNTRY_CONTENT_HEIGHT ) )
@@ -65,6 +76,8 @@ function helperInitLeagueList()
 end
 
 function helperUpdateLeagueList( clickedCountryId )
+	print( "helperUpdateLeagueList "..clickedCountryId )
+
     local leagueNum = table.getn( CountryConfig.getLeagueList( clickedCountryId ) ) 
 
     -- Calculate the move offset
@@ -99,7 +112,7 @@ function helperUpdateLeagueList( clickedCountryId )
                 end
             end
 
-            local content = GUIReader:shareReader():widgetFromJsonFile("scenes/LeagueListContent.json")
+            local content = GUIReader:shareReader():widgetFromJsonFile( mLeagueWidget )
             local parent = mLeagueListContainer:getChildByName( "country"..clickedCountryId )
             content:setPosition( ccp( 0, parent:getPositionY() - ( leagueNum - i + 1 ) * LEAGUE_CONTENT_HEIGHT ) )
             mLeagueListContainer:addChild( content )
