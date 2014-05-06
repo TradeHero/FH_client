@@ -59,7 +59,7 @@ end
 function onRequestSuccess( sessionToken, configMd5Info )
     local Logic = require("scripts.Logic").getInstance()
     Logic:setUserInfo( mEmail, mPassword, sessionToken )
-    EventManager:postEvent( Event.Check_File_Version, { configMd5Info } )
+    EventManager:postEvent( Event.Check_File_Version, { configMd5Info, Event.Enter_Match_List } )
 end
 
 function onRequestFailed( errorBuffer )

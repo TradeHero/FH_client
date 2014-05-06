@@ -48,7 +48,7 @@ function okEventHandler( sender, eventType )
 end
 
 function leagueSelected( leagueId )
-    print( "leagueSelected: "..leagueId )
+    print( "leagueSelected: "..LeagueConfig.getConfigId( leagueId ) )
     -- Update the country name
     local leagueName = tolua.cast( mWidget:getChildByName("leagueName"), "Label" )
     leagueName:setText( LeagueConfig.getLeagueName( leagueId ) )
@@ -67,7 +67,7 @@ function leagueSelected( leagueId )
 --]]
     
     -- Update the team list.
-    local teamList = LeagueTeamConfig.getConfig( leagueId )
+    local teamList = LeagueTeamConfig.getConfig( LeagueConfig.getConfigId( leagueId ) )
     local teamListLength = table.getn( teamList )
 
     local teamContainer = tolua.cast( mWidget:getChildByName("teamList"), "ScrollView" )

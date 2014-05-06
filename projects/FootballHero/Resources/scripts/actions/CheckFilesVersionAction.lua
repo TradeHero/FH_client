@@ -29,10 +29,12 @@ local CDNFileNameList = {
 }
 
 local mConfigMd5Info
+local mFinishEvent
 local mCurrentFileIndex
 
 function action( param )
 	mConfigMd5Info = param[1]
+	mFinishEvent = param[2]
 
 	mCurrentFileIndex = 0
 	checkNext()
@@ -43,7 +45,7 @@ function checkNext()
 	if mCurrentFileIndex <= table.getn( fileList ) then
 		checkFile( mCurrentFileIndex )	
 	else
-	    EventManager:postEvent( Event.Enter_Match_List )
+	    EventManager:postEvent( mFinishEvent )
 	end
 end
 

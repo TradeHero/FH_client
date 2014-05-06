@@ -5,7 +5,7 @@ local EventManager = require("scripts.events.EventManager").getInstance()
 local Event = require("scripts.events.Event").EventList
 
 function action( param )
-    local leagueId = 19
+    local leagueId = 1
     if param ~= nil and param[1] ~= nil then
         leagueId = param[1]
     end
