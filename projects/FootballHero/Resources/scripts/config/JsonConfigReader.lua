@@ -1,6 +1,7 @@
 module(..., package.seeall)
 
 local Json = require("json")
+local FileUtils = require("scripts.FileUtils")
 
 function read( fileName, primaryKey, filter )
 	filter = filter or passAll
@@ -16,8 +17,8 @@ function readWithPrimaryKey( fileName, primaryKey, filter )
 	local index = {}
 	local configNum = 0
 
-	local fileName = CCFileUtils:sharedFileUtils():fullPathForFilename( fileName )
-	local text = CCFileUtils:sharedFileUtils():getFileData( fileName, "r", 0 )
+	-- Check if there is a local version
+	local text = FileUtils.readStringFromFile( fileName )
 	--print( text )
 	local jsonObject = Json.decode( text )
 	for i, v in pairs( jsonObject ) do
@@ -37,8 +38,7 @@ function readWithoutPrimaryKey( fileName, filter )
 	local config = {}
 	local configNum = 0
 
-	local fileName = CCFileUtils:sharedFileUtils():fullPathForFilename( fileName )
-	local text = CCFileUtils:sharedFileUtils():getFileData( fileName, "r", 0 )
+	local text = FileUtils.readStringFromFile( fileName )
 	--print( text )
 	local jsonObject = Json.decode( text )
 	for i, v in pairs( jsonObject ) do
@@ -58,8 +58,7 @@ end
 function readAndCombine( fileName, primaryKey )
 	local config = {}
 
-	local fileName = CCFileUtils:sharedFileUtils():fullPathForFilename( fileName )
-	local text = CCFileUtils:sharedFileUtils():getFileData( fileName, "r", 0 )
+	local text = FileUtils.readStringFromFile( fileName )
 	--print( text )
 	local jsonObject = Json.decode( text )
 	for i, v in pairs( jsonObject ) do

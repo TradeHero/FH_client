@@ -37,7 +37,8 @@ function action( param )
         ConnectingMessage.selfRemove()
         if status == RequestUtils.HTTP_200 then
             local sessionToken = jsonResponse["ProfileDto"]["SessionToken"]
-            onRequestSuccess( sessionToken )
+            local configMd5Info = jsonResponse["ProfileDto"]["ConfigMd5Info"]
+            onRequestSuccess( sessionToken, configMd5Info )
         else
             onRequestFailed( jsonResponse["Message"] )
         end
@@ -55,10 +56,10 @@ function action( param )
     ConnectingMessage.loadFrame()
 end
 
-function onRequestSuccess( sessionToken )
+function onRequestSuccess( sessionToken, configMd5Info )
     local Logic = require("scripts.Logic").getInstance()
     Logic:setUserInfo( mEmail, mPassword, sessionToken )
-    EventManager:postEvent( Event.Enter_Match_List )
+    EventManager:postEvent( Event.Check_File_Version, { configMd5Info } )
 end
 
 function onRequestFailed( errorBuffer )

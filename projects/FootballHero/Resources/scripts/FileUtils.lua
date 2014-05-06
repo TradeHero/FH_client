@@ -3,13 +3,11 @@ module(..., package.seeall)
 local Json = require("json")
 
 function writeStringToFile( fileName, str )
-	local platformType = CCApplication:sharedApplication():getTargetPlatform()
-	if platformType ~= kTargetWindows then
-		return
-	end
-
 	local fileUtils = CCFileUtils:sharedFileUtils()
 	local writePath = fileUtils:getWritablePath()..fileName
+
+	createFolderRecur( fileUtils:getWritablePath(), fileName )
+
 	local fileHandle, errorCode = io.open( writePath, "w+" )
 	--print( "Write to: "..writePath )
 	if fileHandle == nil then
@@ -21,32 +19,40 @@ function writeStringToFile( fileName, str )
 	fileHandle:close()
 end
 
+function createFolderRecur( existFolder, toCreateFolder )
+	print("createFolderRecur: "..existFolder.."|"..toCreateFolder)
+	local pos = string.find( toCreateFolder, "/" )
+	if pos ~= nil then
+		local folderToCreate = existFolder..string.sub( toCreateFolder, 1, pos )
+		if lfs.mkdir( folderToCreate ) then
+			createFolderRecur( folderToCreate, string.sub( toCreateFolder, pos + 1 ) )
+		end
+	end
+end
+
+-- 1. check the writable path
+-- 2. check the file in the package
 function readStringFromFile( fileName )
-	local platformType = CCApplication:sharedApplication():getTargetPlatform()
-	if platformType ~= kTargetWindows then
-		return
-	end
-
+	local text = ""
 	local fileUtils = CCFileUtils:sharedFileUtils()
-	local writePath = fileUtils:getWritablePath()..fileName
-	local fileHandler, errorCode = io.open( writePath, "r" )
-	print( "Read from: "..writePath )
-	if fileHandler == nil then
-		assert( false, "Read failed from file"..fileName.." with error: "..errorCode )
-		return ""
+	local path = fileUtils:getWritablePath()..fileName
+	if fileUtils:isFileExist( path ) then
+		print("Read local file from: "..path)
+
+		local fileHandler, errorCode = io.open( path, "r" )
+		--print( "Read from: "..path )
+		if fileHandler == nil then
+			assert( false, "Read failed from file"..fileName.." with error: "..errorCode )
+			return ""
+		end
+		
+		text = fileHandler:read("*all")
+		fileHandler:close()
+	else
+		local fileName = fileUtils:fullPathForFilename( fileName )
+		print("Read file from package: "..fileName)
+		text = fileUtils:getFileData( fileName, "r", 0 )
 	end
-	
-	local text = fileHandler:read("*all")
-	fileHandler:close()
-	print( "File text: "..text )
+
 	return text
-end
-
-function writeTableToFile( fileName, content )
-	local text = Json.encode( content )
-	writeStringToFile( fileName, text )
-end
-
-function readTableFromFile( fileName )
-	return Json.decode( readStringFromFile( fileName ) )
 end

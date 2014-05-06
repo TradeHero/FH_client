@@ -28,12 +28,18 @@ local function main()
 
     local eventManager = require("scripts.events.EventManager").getInstance()
     local event = require("scripts.events.Event").EventList
-    --eventManager:postEvent( event.Enter_Login_N_Reg )
+    eventManager:postEvent( event.Enter_Login_N_Reg )
     --eventManager:postEvent( event.Enter_Sel_Fav_Team )
     --eventManager:postEvent( event.Enter_Match_List )
     --eventManager:postEvent( event.Enter_Match )
     --eventManager:postEvent( event.Enter_Prediction_Confirm, { 0, 0, 0 } )
 
+--[[
+    local FileUtils = require("scripts.FileUtils")
+    FileUtils.writeStringToFile( "ppp/ddd/ccc/001.txt", "001001" )
+--]]
+
+--[[
     local MD5 = require("MD5")
     local Json = require("json")
     local handler = function( isSucceed, body, header, status, errorBuffer )
@@ -41,7 +47,7 @@ local function main()
     end
     local httpRequest = HttpRequestForLua:create( CCHttpRequest.kHttpGet )
     httpRequest:sendHttpRequest( "http://portalvhdss3c1vgx5mrzv.blob.core.windows.net/fhsettings/countries.txt", handler )
-
+--]]
 
 --[[
     local handler = function( num )

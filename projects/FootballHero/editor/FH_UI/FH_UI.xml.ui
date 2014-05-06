@@ -35,7 +35,7 @@
   </JsonList>
   <imageFileList />
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>FavouriteCountryContent.json</CurrentUIJson>
+  <CurrentUIJson>ConnectingMessage.json</CurrentUIJson>
   <CanvasSize>
     <Width>640</Width>
     <Height>1136</Height>

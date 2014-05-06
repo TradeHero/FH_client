@@ -16,6 +16,8 @@ end
 
 EventNameList = 
 { 
+    "Check_File_Version",
+
     "Enter_Login_N_Reg",
     "Enter_Register",
     "Enter_Register_Name",
