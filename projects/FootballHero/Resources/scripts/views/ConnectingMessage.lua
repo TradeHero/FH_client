@@ -8,13 +8,14 @@ local Event = require("scripts.events.Event").EventList
 local mWidget
 
 function loadFrame( message )
+    if mWidget == nil then
+        local widget = GUIReader:shareReader():widgetFromJsonFile("scenes/ConnectingMessage.json")
 
-	local widget = GUIReader:shareReader():widgetFromJsonFile("scenes/ConnectingMessage.json")
-
-    widget:addTouchEventListener( onFrameTouch )
-    mWidget = widget
-    mWidget:registerScriptHandler( EnterOrExit )
-    SceneManager.addWidget( widget )
+        widget:addTouchEventListener( onFrameTouch )
+        mWidget = widget
+        mWidget:registerScriptHandler( EnterOrExit )
+        SceneManager.addWidget( widget )
+    end
     setMessage( message )
 end
 
@@ -27,6 +28,7 @@ end
 
 function setMessage( message )
     message = message or "Connecting..."
+    print( "Load connecting message scene:"..message )
     local messageLabel = tolua.cast( mWidget:getChildByName("connectMessage"), "Label" )
     messageLabel:setText( message )
 end

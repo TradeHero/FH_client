@@ -13,12 +13,16 @@ function read( fileName, primaryKey, filter )
 end
 
 function readWithPrimaryKey( fileName, primaryKey, filter )
+	local startTime = os.time()
+
 	local config = {}
 	local index = {}
 	local configNum = 0
 
 	-- Check if there is a local version
 	local text = FileUtils.readStringFromFile( fileName )
+	print( "Read file "..fileName.." took "..( os.time() - startTime ) )
+	startTime = os.time()
 	--print( text )
 	local jsonObject = Json.decode( text )
 	for i, v in pairs( jsonObject ) do
@@ -31,6 +35,7 @@ function readWithPrimaryKey( fileName, primaryKey, filter )
 		end
 	end
 
+	print( "Parse file "..fileName.." took "..( os.time() - startTime ) )
 	return config, configNum, index
 end
 

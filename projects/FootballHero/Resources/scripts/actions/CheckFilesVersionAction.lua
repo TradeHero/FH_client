@@ -45,7 +45,21 @@ function checkNext()
 	if mCurrentFileIndex <= table.getn( fileList ) then
 		checkFile( mCurrentFileIndex )	
 	else
-	    EventManager:postEvent( mFinishEvent )
+		-- Init the configure files.
+		ConnectingMessage.loadFrame( "Login success.\nLoading data, please wait..." )
+
+		local loadDataTaskSeqArray = CCArray:create()
+		loadDataTaskSeqArray:addObject( CCDelayTime:create( 1 ) )
+		loadDataTaskSeqArray:addObject( CCCallFuncN:create( function()
+			local LeagueTeamConfig = require("scripts.config.LeagueTeams")
+	        local CountryConfig = require("scripts.config.Country")
+	        local LeagueConfig = require("scripts.config.League")
+	        local TeamConfig = require("scripts.config.Team")
+
+	        EventManager:postEvent( mFinishEvent )
+		end ) )
+
+		CCDirector:sharedDirector():getRunningScene():runAction( CCSequence:create( loadDataTaskSeqArray ) )
 	end
 end
 
