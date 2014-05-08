@@ -41,7 +41,7 @@
   </JsonList>
   <imageFileList />
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>MatchListScene.json</CurrentUIJson>
+  <CurrentUIJson>MatchListContent.json</CurrentUIJson>
   <CanvasSize>
     <Width>640</Width>
     <Height>1136</Height>

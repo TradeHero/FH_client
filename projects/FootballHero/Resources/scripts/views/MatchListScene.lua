@@ -171,16 +171,22 @@ function helperInitMatchInfo( content, matchInfo )
     team1Name:setFontName("fonts/Newgtbxc.ttf")
     team2Name:setFontName("fonts/Newgtbxc.ttf")
     local time = tolua.cast( content:getChildByName("time"), "Label" )
-    time:setText( os.date( "%H:%M", matchInfo["StartTime"] ) )
+    local score = tolua.cast( content:getChildByName("score"), "Label" )
     time:setFontName("fonts/Newgtbxc.ttf")
+    score:setFontName("fonts/Newgtbxc.ttf")
+    if matchInfo["HomeGoals"] >= 0 and matchInfo["AwayGoals"] >= 0 then
+        score:setText( string.format( score:getStringValue(), matchInfo["HomeGoals"], matchInfo["AwayGoals"] ) )
+        time:setEnabled( false )
+    else
+        time:setText( os.date( "%H:%M", matchInfo["StartTime"] ) )
+        score:setEnabled( false )
+    end
 
-    local previousPrediction = nil -- Todo update according to the prediciton history
+    local isGameStart = matchInfo["StartTime"] > os.time()
     local vsBt = tolua.cast( content:getChildByName("VS"), "Button" )
-    if previousPrediction == nil then
-        vsBt:setBright( true )
+    if isGameStart then
         vsBt:setTouchEnabled( true )
     else
-        vsBt:setBright( false )
         vsBt:setTouchEnabled( false )
     end
 end
