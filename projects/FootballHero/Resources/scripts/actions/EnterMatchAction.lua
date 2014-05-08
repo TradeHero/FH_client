@@ -51,11 +51,19 @@ end
 
 function onRequestSuccess( response )
     local MarketsForGameData = require("scripts.data.MarketsForGameData").MarketsForGameData
-    local matchPredictionScene = require("scripts.views.MatchPredictionScene")
+    
     local marketInfo = MarketsForGameData:new( response )
 
     Logic:setCurMarketInfo( marketInfo )
-    matchPredictionScene.loadFrame( marketInfo:getMatchMarket() )
+    
+    if marketInfo:getMatchMarket() ~= nil then
+        local matchPredictionScene = require("scripts.views.MatchPredictionScene")
+        matchPredictionScene.loadFrame( marketInfo:getMatchMarket() )
+    elseif marketInfo:getNum() > 0 then
+        EventManager:postEvent( Event.Enter_Next_Prediction )
+    else
+        onRequestFailed( "You have completed this match." )
+    end
 end
 
 function onRequestFailed( errorBuffer )
