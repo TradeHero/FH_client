@@ -3,12 +3,19 @@ module(..., package.seeall)
 local ConnectingMessage = require("scripts.views.ConnectingMessage")
 local EventManager = require("scripts.events.EventManager").getInstance()
 local Event = require("scripts.events.Event").EventList
+local Logic = require("scripts.Logic").getInstance()
 
 function action( param )
     local leagueId = 1
+    if Logic:getPreviousLeagueSelected() > 0 then
+        leagueId = Logic:getPreviousLeagueSelected()
+    end
+
     if param ~= nil and param[1] ~= nil then
         leagueId = param[1]
     end
+
+    Logic:setPreviousLeagueSelected( leagueId )
 
     local Json = require("json")
 	local RequestUtils = require("scripts.RequestUtils")
@@ -32,6 +39,7 @@ function action( param )
     end
 
     local httpRequest = HttpRequestForLua:create( CCHttpRequest.kHttpGet )
+    httpRequest:addHeader( Logic:getAuthSessionString() )
     httpRequest:sendHttpRequest( RequestUtils.GET_UPCOMING_GAMES_BY_LEAGUE_REST_CALL.."?leagueId="..leagueId, handler )
 
     ConnectingMessage.loadFrame()

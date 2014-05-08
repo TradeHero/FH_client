@@ -28,6 +28,8 @@ EventNameList =
     "Enter_Prediction_Confirm",
     "Enter_Sel_Fav_Team",
     "Enter_Next_Prediction",
+    "Enter_History",
+    "Enter_History_Detail",
 
     "Do_Register",
     "Do_Register_Name",

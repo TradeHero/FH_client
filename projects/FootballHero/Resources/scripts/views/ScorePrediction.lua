@@ -56,6 +56,7 @@ function selectYes()
     makePrediction(
         MarketsForGameData.getOddsForType( mMarketsData, MarketConfig.ODDS_TYPE_ONE_OPTION ),
         MarketsForGameData.getOddIdForType( mMarketsData, MarketConfig.ODDS_TYPE_ONE_OPTION ),
+        helperGetTheAnswer( true ),
         yes:getTextureFile() )
 end
 
@@ -64,6 +65,7 @@ function selectNo()
     makePrediction(
         MarketsForGameData.getOddsForType( mMarketsData, MarketConfig.ODDS_TYPE_TWO_OPTION ),
         MarketsForGameData.getOddIdForType( mMarketsData, MarketConfig.ODDS_TYPE_TWO_OPTION ),
+        helperGetTheAnswer( false ),
         no:getTextureFile() )
 end
 
@@ -73,12 +75,11 @@ function backEventHandler( sender, eventType )
     end
 end
 
-function makePrediction( rewards, oddId, answerIcon )
+function makePrediction( rewards, oddId, answer, answerIcon )
     local seqArray = CCArray:create()
     seqArray:addObject( CCDelayTime:create( 0.1 ) )
     seqArray:addObject( CCCallFuncN:create( function()
-        local question = tolua.cast( mWidget:getChildByName("question"), "Label" )
-        EventManager:postEvent( Event.Enter_Prediction_Confirm, { question:getStringValue(), rewards, oddId, answerIcon } )
+        EventManager:postEvent( Event.Enter_Prediction_Confirm, { answer, rewards, oddId, answerIcon } )
     end ) )
 
     mWidget:runAction( CCSequence:create( seqArray ) )
@@ -116,7 +117,31 @@ function helperInitQuestion( content )
         end 
         question:setText( string.format( question:getStringValue(), teamName, math.ceil( line ) ) )
     end
-    
+end
+
+function helperGetTheAnswer( answerId )
+    local marketType = MarketsForGameData.getMarketType( mMarketsData )
+
+    local line = MarketsForGameData.getMarketLine( mMarketsData )
+    if marketType == MarketConfig.MARKET_TYPE_TOTAL_GOAL then
+        if answerId then
+            return string.format( "Total goals will be %d or more.", math.ceil( line ) )
+        else
+            return string.format( "Total goals will less than %d.", math.ceil( line ) )
+        end
+    elseif marketType == MarketConfig.MARKET_TYPE_ASIAN_HANDICAP then
+        local teamName = TeamConfig.getTeamName( TeamConfig.getConfigIdByKey( mMatch["AwayTeamId"] ) )
+        if line < 0 then
+            teamName = TeamConfig.getTeamName( TeamConfig.getConfigIdByKey( mMatch["HomeTeamId"] ) )
+            line = line * ( -1 )
+        end 
+        
+        if answerId then
+            return string.format( "%s will win by %d goals or more.", teamName, math.ceil( line ) )
+        else
+            return string.format( "%s will not win by %d goals or more.", teamName, math.ceil( line ) )
+        end
+    end
 end
 
 function onFrameTouch( sender, eventType )

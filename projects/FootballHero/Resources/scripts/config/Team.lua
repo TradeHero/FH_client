@@ -68,12 +68,12 @@ function getLogo( id )
 		local fileUtils = CCFileUtils:sharedFileUtils()
 		local filePath = fileUtils:fullPathForFilename( Constants.TEAM_IMAGE_PATH..config["Id"]..".png" )
 		if fileUtils:isFileExist( filePath ) then
-			return config["Id"]..".png"
+			return Constants.TEAM_IMAGE_PATH..config["Id"]..".png"
 		else
-			return "default.png"
+			return Constants.TEAM_IMAGE_PATH.."default.png"
 		end
 	else
-		return "default.png"
+		return Constants.TEAM_IMAGE_PATH.."default.png"
 	end
 end
 

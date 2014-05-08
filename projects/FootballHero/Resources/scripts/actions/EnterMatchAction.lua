@@ -31,6 +31,7 @@ function action( param )
     end
 
     local httpRequest = HttpRequestForLua:create( CCHttpRequest.kHttpGet )
+    httpRequest:addHeader( Logic:getAuthSessionString() )
     httpRequest:sendHttpRequest( RequestUtils.GET_GAME_MARKETS_REST_CALL.."?gameId="..matchId, handler )
 
     ConnectingMessage.loadFrame()

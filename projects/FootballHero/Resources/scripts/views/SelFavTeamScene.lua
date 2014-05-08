@@ -31,6 +31,9 @@ function loadFrame()
 
     -- Set the default one.
     leagueSelected( 1 )
+
+    local leagueName = tolua.cast( mWidget:getChildByName("leagueName"), "Label" )
+    leagueName:setText( "Please select your favourite team." )
 end
 
 function EnterOrExit( eventType )
@@ -49,10 +52,6 @@ end
 
 function leagueSelected( leagueId )
     print( "leagueSelected: "..LeagueConfig.getConfigId( leagueId ) )
-    -- Update the country name
-    local leagueName = tolua.cast( mWidget:getChildByName("leagueName"), "Label" )
-    leagueName:setText( LeagueConfig.getLeagueName( leagueId ) )
-
 --[[
     -- Update the country list
     local countryContainer = tolua.cast( mWidget:getChildByName("countryList"), "ScrollView" )
@@ -84,7 +83,8 @@ function leagueSelected( leagueId )
             local teamIndex = ( i - 1 ) * 2 + j
             local eventHandler = function( sender, eventType )
                 if eventType == TOUCH_EVENT_ENDED then
-                    teamSelected( teamIndex )
+                    local teamId = TeamConfig.getConfigIdByKey( teamList[teamIndex]["teamId"] )
+                    teamSelected( teamId )
                 end
             end
 
@@ -96,7 +96,7 @@ function leagueSelected( leagueId )
                 teamButton:setVisible( false )
             else
                 local teamId = TeamConfig.getConfigIdByKey( teamList[teamIndex]["teamId"] )
-                teamButton:loadTextureNormal( Constants.TEAM_IMAGE_PATH..TeamConfig.getLogo( teamId ) )
+                teamButton:loadTextureNormal( TeamConfig.getLogo( teamId ) )
                 teamButton:addTouchEventListener( eventHandler )
                 teamName:setText( TeamConfig.getTeamName( teamId ) )
             end
@@ -113,7 +113,10 @@ function leagueSelected( leagueId )
 end
 
 function teamSelected( index )
+    print("Team Selected: "..index)
     mTeamId = index
+    local leagueName = tolua.cast( mWidget:getChildByName("leagueName"), "Label" )
+    leagueName:setText( "Your favourite team: "..TeamConfig.getTeamName( mTeamId ) )
 
     local okBt = mWidget:getChildByName("ok")
     okBt:setBright( true )

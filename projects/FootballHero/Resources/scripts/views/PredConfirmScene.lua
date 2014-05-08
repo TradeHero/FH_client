@@ -6,17 +6,17 @@ local Logic = require("scripts.Logic").getInstance()
 local EventManager = require("scripts.events.EventManager").getInstance()
 local Event = require("scripts.events.Event").EventList
 
-local mQuestion
+local mAnswer
 local mReward
 local mOddId
 local mAnswerIcon
 local mWidget
 local mTextInput
 
-function loadFrame( question, reward, oddId, answerIcon )
+function loadFrame( answer, reward, oddId, answerIcon )
 
 	print(answerIcon)
-	mQuestion = question
+	mAnswer = answer
 	mReward = reward
 	mOddId = oddId
 	mAnswerIcon = answerIcon
@@ -102,7 +102,7 @@ function initContent()
 	question:setFontName( "Newgtbxc" )
 	reward:setFontName( "Newgtbxc" )
 
-	question:setText( mQuestion )
+	question:setText( mAnswer )
 	reward:setText( string.format( reward:getStringValue(), mReward ) )
 	answerIcon:loadTexture( mAnswerIcon )
 end

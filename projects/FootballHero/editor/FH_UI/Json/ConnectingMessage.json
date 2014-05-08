@@ -58,10 +58,10 @@
           "fontFile": null,
           "fontName": "微软雅黑",
           "fontSize": 20,
-          "hAlignment": 0,
+          "hAlignment": 1,
           "text": "Connecting...",
           "touchScaleEnable": false,
-          "vAlignment": 0
+          "vAlignment": 1
         }
       }
     ],

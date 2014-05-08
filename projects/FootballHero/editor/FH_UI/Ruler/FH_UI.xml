@@ -100,4 +100,28 @@
     <Project>FavouriteLeagueContent</Project>
     <GuidesList />
   </GuidesProject>
+  <GuidesProject>
+    <Project>HistoryHome</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>HistoryMainMatchContent</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>HistoryMainTitle</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>HistoryDetail</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>HistoryDetailClosedContent</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>HistoryDetailOpenContent</Project>
+    <GuidesList />
+  </GuidesProject>
 </ArrayOfGuidesProject>

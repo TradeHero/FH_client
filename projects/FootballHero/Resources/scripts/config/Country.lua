@@ -2,6 +2,7 @@ module(..., package.seeall)
 
 local JsonConfigReader = require("scripts.config.JsonConfigReader")
 local LeagueConfig = require("scripts.config.League")
+local Constants = require("scripts.Constants")
 
 
 local FILE_NAME = "config/countries.txt"
@@ -84,6 +85,23 @@ end
 function getLeagueList( id )
 	local config = getConfig( id )
 	return config["leagueList"]
+end
+
+function getLogo( id )
+	local config = getConfig( id )
+
+	if config ~= nil then
+		local fileUtils = CCFileUtils:sharedFileUtils()
+		local filePath = fileUtils:fullPathForFilename( Constants.COUNTRY_IMAGE_PATH..config["Id"]..".png" )
+		print( "Countries "..filePath )
+		if fileUtils:isFileExist( filePath ) then
+			return Constants.COUNTRY_IMAGE_PATH..config["Id"]..".png"
+		else
+			return Constants.COUNTRY_IMAGE_PATH.."default.png"
+		end
+	else
+		return Constants.COUNTRY_IMAGE_PATH.."default.png"
+	end
 end
 
 init()

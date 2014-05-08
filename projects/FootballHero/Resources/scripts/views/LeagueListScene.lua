@@ -55,6 +55,8 @@ function helperInitLeagueList()
         content:setPosition( ccp( 0, ( i - 1 ) * COUNTRY_CONTENT_HEIGHT ) )
         mLeagueListContainer:addChild( content )
         content:setName( "country"..i )
+        local logo = tolua.cast( content:getChildByName("countryLogo"), "ImageView" )
+        logo:loadTexture( CountryConfig.getLogo( i ) )
         contentHeight = contentHeight + content:getSize().height
         mLeagueListContainer:jumpToPercentVertical( 1 )
     end

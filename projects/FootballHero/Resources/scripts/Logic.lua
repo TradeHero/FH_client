@@ -31,6 +31,7 @@ function Logic:new()
 		mCurDisplayMarketIndex = 0,
 		mCurMarketInfo = nil,	-- DS: see MarketsForGameData
 		mCoupons = Coupons:new(),  -- DS: Coupons
+		mPreviousLeagueSelected = 0,
 		sessionToken = 0,
 		email = "",
 		password = "",
@@ -116,4 +117,12 @@ end
 
 function Logic:resetPredictions()
 	self.mCoupons = Coupons:new()
+end
+
+function Logic:getPreviousLeagueSelected()
+	return self.mPreviousLeagueSelected
+end
+
+function Logic:setPreviousLeagueSelected( id )
+	self.mPreviousLeagueSelected = id
 end

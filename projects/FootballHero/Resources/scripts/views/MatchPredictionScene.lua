@@ -48,6 +48,7 @@ function selectTeam1Win()
     makePrediction(
         MarketsForGameData.getOddsForType( mMarketsData, MarketConfig.ODDS_TYPE_ONE_OPTION ),
         MarketsForGameData.getOddIdForType( mMarketsData, MarketConfig.ODDS_TYPE_ONE_OPTION ),
+        TeamConfig.getTeamName( TeamConfig.getConfigIdByKey( mMatch["HomeTeamId"] ) ).." to win.",
         team1:getTextureFile() )
 end
 
@@ -56,6 +57,7 @@ function selectTeam2Win()
     makePrediction(
         MarketsForGameData.getOddsForType( mMarketsData, MarketConfig.ODDS_TYPE_TWO_OPTION ),
         MarketsForGameData.getOddIdForType( mMarketsData, MarketConfig.ODDS_TYPE_TWO_OPTION ),
+        TeamConfig.getTeamName( TeamConfig.getConfigIdByKey( mMatch["AwayTeamId"] ) ).." to win.",
         team2:getTextureFile() )
 end
 
@@ -65,12 +67,11 @@ function backEventHandler( sender, eventType )
     end
 end
 
-function makePrediction( rewards, oddId, answerIcon )
+function makePrediction( rewards, oddId, answer, answerIcon )
     local seqArray = CCArray:create()
     seqArray:addObject( CCDelayTime:create( 0.1 ) )
     seqArray:addObject( CCCallFuncN:create( function()
-        local question = tolua.cast( mWidget:getChildByName("question"), "Label" )
-        EventManager:postEvent( Event.Enter_Prediction_Confirm, { question:getStringValue(), rewards, oddId, answerIcon } )
+        EventManager:postEvent( Event.Enter_Prediction_Confirm, { answer, rewards, oddId, answerIcon } )
     end ) )
 
     mWidget:runAction( CCSequence:create( seqArray ) )
@@ -91,8 +92,8 @@ function helperInitMatchInfo( content, marketsData )
     local team1WinPoint = tolua.cast( team1:getChildByName("team1WinPoint"), "Label" )
     local team2WinPoint = tolua.cast( team2:getChildByName("team2WinPoint"), "Label" )
 
-    team1:loadTexture( Constants.TEAM_IMAGE_PATH..TeamConfig.getLogo( TeamConfig.getConfigIdByKey( mMatch["HomeTeamId"] ) ) )
-    team2:loadTexture( Constants.TEAM_IMAGE_PATH..TeamConfig.getLogo( TeamConfig.getConfigIdByKey( mMatch["AwayTeamId"] ) ) )
+    team1:loadTexture( TeamConfig.getLogo( TeamConfig.getConfigIdByKey( mMatch["HomeTeamId"] ) ) )
+    team2:loadTexture( TeamConfig.getLogo( TeamConfig.getConfigIdByKey( mMatch["AwayTeamId"] ) ) )
     team1Name:setText( TeamConfig.getTeamName( TeamConfig.getConfigIdByKey( mMatch["HomeTeamId"] ) ) )
     team2Name:setText( TeamConfig.getTeamName( TeamConfig.getConfigIdByKey( mMatch["AwayTeamId"] ) ) )
     team1WinPoint:setText( MarketsForGameData.getOddsForType( mMarketsData, MarketConfig.ODDS_TYPE_ONE_OPTION ).." points" )
