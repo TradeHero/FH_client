@@ -1,6 +1,7 @@
 module(..., package.seeall)
 
 local Json = require("json")
+local FileUtils = require("scripts.FileUtils")
 local Coupons = require("scripts.data.Coupons").Coupons
 
 -- Singleton of logic
@@ -9,9 +10,21 @@ local SCORE_PREDICTION = "scorePrediction"
 local SUB_PREDICTION = "sub"
 local instance
 
+local ACCOUNT_INFO_FILE = "ai.txt"
+local ACCOUNT_INFO_EMAIL = "email"
+local ACCOUNT_INFO_PASSWORD = "password"
+local ACCOUNT_INFO_SESSIONTOKEN = "sessionToken"
+
 function getInstance()
 	if instance == nil then
 		instance = Logic:new()
+
+		local savedAccountInfo = FileUtils.readStringFromFile( ACCOUNT_INFO_FILE )
+		if string.len( savedAccountInfo ) > 0 then
+			local accountInfo = Json.decode( savedAccountInfo )
+			print( savedAccountInfo )
+			instance:setUserInfo( accountInfo[ACCOUNT_INFO_EMAIL], accountInfo[ACCOUNT_INFO_PASSWORD], accountInfo[ACCOUNT_INFO_SESSIONTOKEN] )
+		end
 	end
 
 	return instance
@@ -92,6 +105,12 @@ function Logic:setUserInfo( email, password, sessionToken )
 	self.email = email
 	self.password = password
 	self.sessionToken = sessionToken
+
+	local accountInfo = {}
+	accountInfo[ACCOUNT_INFO_EMAIL] = email
+	accountInfo[ACCOUNT_INFO_PASSWORD] = password
+	accountInfo[ACCOUNT_INFO_SESSIONTOKEN] = sessionToken
+	FileUtils.writeStringToFile( ACCOUNT_INFO_FILE, Json.encode( accountInfo ) )
 end
 
 function Logic:getEmail()

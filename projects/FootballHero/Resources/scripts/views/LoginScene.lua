@@ -4,6 +4,7 @@ local SceneManager = require("scripts.SceneManager")
 local EventManager = require("scripts.events.EventManager").getInstance()
 local Event = require("scripts.events.Event").EventList
 local ViewUtils = require("scripts.views.ViewUtils")
+local Logic = require("scripts.Logic")
 
 local EMAIL_CONTAINER_NAME = "emailContainer"
 local PASSWORD_CONTAINER_NAME = "passwordContainer"
@@ -30,6 +31,9 @@ function loadFrame()
     local passwordInput = ViewUtils.createTextInput( mWidget:getChildByName( PASSWORD_CONTAINER_NAME ), "Password" )
     passwordInput:setInputFlag( kEditBoxInputFlagPassword )
     passwordInput:setFontColor( ccc3( 0, 0, 0 ) )
+
+    emailInput:setText( Logic.getInstance():getEmail() )
+    passwordInput:setText( Logic.getInstance():getPassword() )
 end
 
 function EnterOrExit( eventType )
