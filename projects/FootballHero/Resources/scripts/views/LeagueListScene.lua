@@ -2,6 +2,7 @@ module(..., package.seeall)
 
 local CountryConfig = require("scripts.config.Country")
 local LeagueConfig = require("scripts.config.League")
+local SceneManager = require("scripts.SceneManager")
 
 local mCountryNum = CountryConfig.getConfigNum()
 local mCountryExpended = {}
@@ -20,9 +21,9 @@ function loadFrame( countryWidget, leagueWidget, leagueListContainer, leagueSele
 	mLeagueListContainer = leagueListContainer
 	mLeagueSelectCallback = leagueSelectCallback
 
-    local content = GUIReader:shareReader():widgetFromJsonFile( mCountryWidget )
+    local content = SceneManager.widgetFromJsonFile( mCountryWidget )
     COUNTRY_CONTENT_HEIGHT = content:getSize().height
-    content = GUIReader:shareReader():widgetFromJsonFile( mLeagueWidget )
+    content = SceneManager.widgetFromJsonFile( mLeagueWidget )
     LEAGUE_CONTENT_HEIGHT = content:getSize().height
 
 	helperInitLeagueList()
@@ -45,7 +46,7 @@ function helperInitLeagueList()
             end
         end
 
-        local content = GUIReader:shareReader():widgetFromJsonFile( mCountryWidget )
+        local content = SceneManager.widgetFromJsonFile( mCountryWidget )
         local countryName = tolua.cast( content:getChildByName("countryName"), "Label" )
         if countryName ~= nil then
         	countryName:setText( CountryConfig.getCountryName( i ) )
@@ -114,7 +115,7 @@ function helperUpdateLeagueList( clickedCountryId )
                 end
             end
 
-            local content = GUIReader:shareReader():widgetFromJsonFile( mLeagueWidget )
+            local content = SceneManager.widgetFromJsonFile( mLeagueWidget )
             local parent = mLeagueListContainer:getChildByName( "country"..clickedCountryId )
             content:setPosition( ccp( 0, parent:getPositionY() - ( leagueNum - i + 1 ) * LEAGUE_CONTENT_HEIGHT ) )
             mLeagueListContainer:addChild( content )

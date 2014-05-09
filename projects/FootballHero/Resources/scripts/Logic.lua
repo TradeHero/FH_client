@@ -20,7 +20,7 @@ function getInstance()
 		instance = Logic:new()
 
 		local savedAccountInfo = FileUtils.readStringFromFile( ACCOUNT_INFO_FILE )
-		if string.len( savedAccountInfo ) > 0 then
+		if savedAccountInfo ~= nil and string.len( savedAccountInfo ) > 0 then
 			local accountInfo = Json.decode( savedAccountInfo )
 			print( savedAccountInfo )
 			instance:setUserInfo( accountInfo[ACCOUNT_INFO_EMAIL], accountInfo[ACCOUNT_INFO_PASSWORD], accountInfo[ACCOUNT_INFO_SESSIONTOKEN] )

@@ -62,7 +62,7 @@ function initContent()
 
         seqArray:addObject( CCCallFuncN:create( function()
             -- Add the open matches
-            local content = GUIReader:shareReader():widgetFromJsonFile("scenes/HistoryMainMatchContent.json")
+            local content = SceneManager.widgetFromJsonFile("scenes/HistoryMainMatchContent.json")
             content:setLayoutParameter( layoutParameter )
             contentContainer:addChild( content )
             contentHeight = contentHeight + content:getSize().height
@@ -100,7 +100,7 @@ function initContent()
 
         seqArray:addObject( CCCallFuncN:create( function()
             -- Add the open matches
-            local content = GUIReader:shareReader():widgetFromJsonFile("scenes/HistoryMainMatchContent.json")
+            local content = SceneManager.widgetFromJsonFile("scenes/HistoryMainMatchContent.json")
             content:setLayoutParameter( layoutParameter )
             contentContainer:addChild( content )
             contentHeight = contentHeight + content:getSize().height

@@ -26,6 +26,7 @@ TOUCH_PRIORITY_ZERO = 0
 TOUCH_PRIORITY_MINUS_ONE = -1
 
 local mSceneGameLayer
+local mWidgets = {}		-- Store widget show in the list to save time loading the same json file.
 
 function init()
 	local eglView = CCEGLView:sharedOpenGLView()
@@ -79,4 +80,13 @@ end
 
 function removeWidget( widget )
 	mSceneGameLayer:removeWidget( widget )
+end
+
+function widgetFromJsonFile( fileName )
+	if mWidgets[fileName] == nil then
+		local content = GUIReader:shareReader():widgetFromJsonFile( fileName )
+		content:retain()
+		mWidgets[fileName] = content
+	end
+	return mWidgets[fileName]:clone()
 end

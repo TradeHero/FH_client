@@ -18,7 +18,8 @@ local MIN_MOVE_DISTANCE = 100
 local OPTION_MOVE_TIME = 0.5
 local OPTION_VIEW_OFFSET_X = 475
 
-local CONTENT_FADEIN_TIME = 2
+local CONTENT_FADEIN_TIME = 0.1
+local CONTENT_DELAY_TIME = 0
 
 function isShown()
     return mWidget ~= nil
@@ -73,7 +74,7 @@ function initMatchList( matchList )
 
         seqArray:addObject( CCCallFuncN:create( function()
             -- Add the date
-            local content = GUIReader:shareReader():widgetFromJsonFile("scenes/MatchDate.json")
+            local content = SceneManager.widgetFromJsonFile("scenes/MatchDate.json")
             local dateDisplay = tolua.cast( content:getChildByName("date"), "Label" )
             dateDisplay:setText( matchDate["dateDisplay"] )
             content:setLayoutParameter( layoutParameter )
@@ -84,7 +85,7 @@ function initMatchList( matchList )
             content:setCascadeOpacityEnabled( true )
             mWidget:runAction( CCTargetedAction:create( content, CCFadeIn:create( CONTENT_FADEIN_TIME ) ) )
         end ) )
-        seqArray:addObject( CCDelayTime:create( 0.2 ) )
+        seqArray:addObject( CCDelayTime:create( CONTENT_DELAY_TIME ) )
 
         seqArray:addObject( CCCallFuncN:create( function()
             -- Add the seprater
@@ -97,7 +98,7 @@ function initMatchList( matchList )
             upper:setOpacity( 0 )
             mWidget:runAction( CCTargetedAction:create( upper, CCFadeIn:create( CONTENT_FADEIN_TIME ) ) )
         end ) )
-        seqArray:addObject( CCDelayTime:create( 0.2 ) )
+        seqArray:addObject( CCDelayTime:create( CONTENT_DELAY_TIME ) )
         
 
         for inK, inV in pairs( matchDate["matches"] ) do
@@ -108,7 +109,7 @@ function initMatchList( matchList )
             end
 
             seqArray:addObject( CCCallFuncN:create( function() 
-                local content = GUIReader:shareReader():widgetFromJsonFile("scenes/MatchListContent.json")
+                local content = SceneManager.widgetFromJsonFile("scenes/MatchListContent.json")
                 helperInitMatchInfo( content, inV )
 
                 content:setLayoutParameter( layoutParameter )
@@ -122,7 +123,7 @@ function initMatchList( matchList )
                 content:setCascadeOpacityEnabled( true )
                 mWidget:runAction( CCTargetedAction:create( content, CCFadeIn:create( CONTENT_FADEIN_TIME ) ) )
             end ) )
-            seqArray:addObject( CCDelayTime:create( 0.2 ) )
+            seqArray:addObject( CCDelayTime:create( CONTENT_DELAY_TIME ) )
         end
 
         seqArray:addObject( CCCallFuncN:create( function() 
@@ -136,7 +137,7 @@ function initMatchList( matchList )
             bottom:setOpacity( 0 )
             mWidget:runAction( CCTargetedAction:create( bottom, CCFadeIn:create( CONTENT_FADEIN_TIME ) ) )
         end ) )
-        seqArray:addObject( CCDelayTime:create( 0.2 ) )
+        seqArray:addObject( CCDelayTime:create( CONTENT_DELAY_TIME ) )
     end
 
     seqArray:addObject( CCCallFuncN:create( function()
