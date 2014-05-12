@@ -13,7 +13,6 @@ local instance
 local ACCOUNT_INFO_FILE = "ai.txt"
 local ACCOUNT_INFO_EMAIL = "email"
 local ACCOUNT_INFO_PASSWORD = "password"
-local ACCOUNT_INFO_SESSIONTOKEN = "sessionToken"
 
 function getInstance()
 	if instance == nil then
@@ -23,7 +22,7 @@ function getInstance()
 		if savedAccountInfo ~= nil and string.len( savedAccountInfo ) > 0 then
 			local accountInfo = Json.decode( savedAccountInfo )
 			print( savedAccountInfo )
-			instance:setUserInfo( accountInfo[ACCOUNT_INFO_EMAIL], accountInfo[ACCOUNT_INFO_PASSWORD], accountInfo[ACCOUNT_INFO_SESSIONTOKEN] )
+			instance:setUserInfo( accountInfo[ACCOUNT_INFO_EMAIL], accountInfo[ACCOUNT_INFO_PASSWORD], 0, "" )
 		end
 	end
 
@@ -48,6 +47,9 @@ function Logic:new()
 		sessionToken = 0,
 		email = "",
 		password = "",
+		userId = "",
+		displayName = "",
+		startLeagueId = 0,
 	}
     
     setmetatable(obj, self)
@@ -101,15 +103,15 @@ function Logic:consumePoint( v )
 	end
 end
 
-function Logic:setUserInfo( email, password, sessionToken )
+function Logic:setUserInfo( email, password, sessionToken, userId )
 	self.email = email
 	self.password = password
 	self.sessionToken = sessionToken
+	self.userId = userId
 
 	local accountInfo = {}
 	accountInfo[ACCOUNT_INFO_EMAIL] = email
 	accountInfo[ACCOUNT_INFO_PASSWORD] = password
-	accountInfo[ACCOUNT_INFO_SESSIONTOKEN] = sessionToken
 	FileUtils.writeStringToFile( ACCOUNT_INFO_FILE, Json.encode( accountInfo ) )
 end
 
@@ -123,6 +125,10 @@ end
 
 function Logic:getAuthSessionString()
 	return "Authorization: FH-Token "..self.sessionToken
+end
+
+function Logic:getUserId()
+	return self.userId
 end
 
 function Logic:addPrediction( prediciton, comment, facebookShare )
@@ -144,4 +150,20 @@ end
 
 function Logic:setPreviousLeagueSelected( id )
 	self.mPreviousLeagueSelected = id
+end
+
+function Logic:getDisplayName()
+	return self.displayName
+end
+
+function Logic:setDisplayName( name )
+	self.displayName = name
+end
+
+function Logic:getStartLeagueId()
+	return self.startLeagueId
+end
+
+function Logic:setStartLeagueId( id )
+	self.startLeagueId = id
 end

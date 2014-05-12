@@ -6,7 +6,7 @@ local Event = require("scripts.events.Event").EventList
 local Logic = require("scripts.Logic").getInstance()
 
 function action( param )
-    local leagueId = 1
+    local leagueId = Logic:getStartLeagueId()
     if Logic:getPreviousLeagueSelected() > 0 then
         leagueId = Logic:getPreviousLeagueSelected()
     end

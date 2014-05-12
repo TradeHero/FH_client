@@ -3,6 +3,7 @@ module(..., package.seeall)
 local EventManager = require("scripts.events.EventManager").getInstance()
 local Event = require("scripts.events.Event").EventList
 local ConnectingMessage = require("scripts.views.ConnectingMessage")
+local Logic = require("scripts.Logic").getInstance()
 
 local mUserName = "SamYu"
 local mFirstName = "Yu"
@@ -18,6 +19,13 @@ function action( param )
         onRequestFailed( "User name is blank." )
         return
     end
+    if mFirstName == nil then
+        mFirstName = ""
+    end
+
+    if mLastName == nil then
+        mLastName = ""
+    end
 
     local handler = function( isSucceed, body, header, status, errorBuffer )
         print( "Http reponse: "..status.." and errorBuffer: "..errorBuffer )
@@ -31,29 +39,26 @@ function action( param )
         end
         ConnectingMessage.selfRemove()
         if status == RequestUtils.HTTP_200 then
-            local sessionToken = jsonResponse["sessionToken"]
             onRequestSuccess()
         else
             onRequestFailed( jsonResponse["Message"] )
         end
     end
 
---[[
-    local requestContent = { Email = mEmail, Password = mPassword }
+    local requestContent = { DisplayName = mUserName, FirstName = mFirstName, LastName = mLastName, DoB = "" }
     local requestContentText = Json.encode( requestContent )
     print("Request content is "..requestContentText)
 
     local httpRequest = HttpRequestForLua:create( CCHttpRequest.kHttpPost )
     httpRequest:addHeader( "Content-Type: application/json" )
+    httpRequest:addHeader( Logic:getAuthSessionString() )
     httpRequest:getRequest():setRequestData( requestContentText, string.len( requestContentText ) )
-    httpRequest:sendHttpRequest( RequestUtils.EMAIL_REGISTER_REST_CALL, handler )
+    httpRequest:sendHttpRequest( RequestUtils.SET_USER_METADATA_REST_CALL, handler )
 
     ConnectingMessage.loadFrame()
---]]
-    onRequestSuccess( nil )
 end
 
-function onRequestSuccess( sessionToken )
+function onRequestSuccess()
     EventManager:postEvent( Event.Enter_Sel_Fav_Team )
 end
 

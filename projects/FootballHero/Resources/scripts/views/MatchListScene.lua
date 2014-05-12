@@ -19,7 +19,7 @@ local OPTION_MOVE_TIME = 0.5
 local OPTION_VIEW_OFFSET_X = 475
 
 local CONTENT_FADEIN_TIME = 0.1
-local CONTENT_DELAY_TIME = 0
+local CONTENT_DELAY_TIME = 0.2
 
 function isShown()
     return mWidget ~= nil

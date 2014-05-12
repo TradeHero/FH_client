@@ -14,18 +14,30 @@ MatchListData = {}
                 "HomeTeamId": 2744,
                 "AwayTeamId": 2942,
                 "StartTime": 1398311338
+                "HomeGoals": 2,
+                "AwayGoals": 3,
+                "PredictionsPlayed": 0,
+                "PredictionsAvailable": 0
             },
             {
                 "Id": 4555,
                 "HomeTeamId": 1573,
                 "AwayTeamId": 6914,
                 "StartTime": 1398311338
+                "HomeGoals": 2,
+                "AwayGoals": 3,
+                "PredictionsPlayed": 0,
+                "PredictionsAvailable": 0
             },
             {
                 "Id": 4083,
                 "HomeTeamId": 10310,
                 "AwayTeamId": 58760,
                 "StartTime": 1398311338
+                "HomeGoals": 2,
+                "AwayGoals": 3,
+                "PredictionsPlayed": 0,
+                "PredictionsAvailable": 0
             }
         ]
     },
@@ -39,18 +51,30 @@ MatchListData = {}
                 "HomeTeamId": 2744,
                 "AwayTeamId": 2942,
                 "StartTime": 1398311338
+                "HomeGoals": 2,
+                "AwayGoals": 3,
+                "PredictionsPlayed": 0,
+                "PredictionsAvailable": 0
             },
             {
                 "Id": 4555,
                 "HomeTeamId": 1573,
                 "AwayTeamId": 6914,
                 "StartTime": 1398311338
+                "HomeGoals": 2,
+                "AwayGoals": 3,
+                "PredictionsPlayed": 0,
+                "PredictionsAvailable": 0
             },
             {
                 "Id": 4083,
                 "HomeTeamId": 10310,
                 "AwayTeamId": 58760,
                 "StartTime": 1398311338
+                "HomeGoals": 2,
+                "AwayGoals": 3,
+                "PredictionsPlayed": 0,
+                "PredictionsAvailable": 0
             }
         ]
     }

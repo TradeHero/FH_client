@@ -38,10 +38,15 @@
     <string>HistoryDetail.json</string>
     <string>HistoryDetailClosedContent.json</string>
     <string>HistoryDetailOpenContent.json</string>
+    <string>LeaderboardScene.json</string>
+    <string>LeaderboardContent.json</string>
+    <string>LeaderboardSubContent.json</string>
+    <string>LeaderboardList.json</string>
+    <string>LeaderboardListContent.json</string>
   </JsonList>
   <imageFileList />
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>MatchListContent.json</CurrentUIJson>
+  <CurrentUIJson>LeaderboardList.json</CurrentUIJson>
   <CanvasSize>
     <Width>640</Width>
     <Height>1136</Height>

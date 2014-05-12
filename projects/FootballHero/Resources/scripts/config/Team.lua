@@ -48,6 +48,15 @@ end
 	Provide additional getters.
 --]]
 
+function getTeamId( id )
+	local config = getConfig( id )
+	if config ~= nil then
+		return config["Id"]
+	else
+		return 0
+	end
+end
+
 function getTeamName( id )
 	local config = getConfig( id )
 	if config ~= nil then

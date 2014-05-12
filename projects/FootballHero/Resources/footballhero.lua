@@ -34,6 +34,7 @@ local function main()
     --eventManager:postEvent( event.Enter_Match )
     --eventManager:postEvent( event.Enter_Prediction_Confirm, { 0, 0, 0 } )
     --eventManager:postEvent( event.Enter_History )
+    --eventManager:postEvent( event.Enter_Leaderboard )
 
 --[[
     local FileUtils = require("scripts.FileUtils")

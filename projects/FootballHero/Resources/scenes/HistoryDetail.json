@@ -309,7 +309,7 @@
         "options": {
           "__type": "ComGUILabelSurrogate:#EditorCommon.JsonModel.Component.GUI",
           "classname": "Label",
-          "name": "Label_327_0",
+          "name": "Label_327",
           "ZOrder": 2,
           "actiontag": 1325,
           "anchorPointX": 0.5,
@@ -358,7 +358,7 @@
         "options": {
           "__type": "ComGUILabelSurrogate:#EditorCommon.JsonModel.Component.GUI",
           "classname": "Label",
-          "name": "team1Name_0",
+          "name": "team1Name",
           "ZOrder": 2,
           "actiontag": 1326,
           "anchorPointX": 1,
@@ -407,7 +407,7 @@
         "options": {
           "__type": "ComGUILabelSurrogate:#EditorCommon.JsonModel.Component.GUI",
           "classname": "Label",
-          "name": "team2Name_0",
+          "name": "team2Name",
           "ZOrder": 2,
           "actiontag": 1327,
           "anchorPointX": 0,

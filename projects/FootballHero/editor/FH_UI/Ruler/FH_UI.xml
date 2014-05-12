@@ -124,4 +124,24 @@
     <Project>HistoryDetailOpenContent</Project>
     <GuidesList />
   </GuidesProject>
+  <GuidesProject>
+    <Project>LeaderboardScene</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>LeaderboardContent</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>LeaderboardSubContent</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>LeaderboardList</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>LeaderboardListContent</Project>
+    <GuidesList />
+  </GuidesProject>
 </ArrayOfGuidesProject>

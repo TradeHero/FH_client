@@ -30,12 +30,15 @@ EventNameList =
     "Enter_Next_Prediction",
     "Enter_History",
     "Enter_History_Detail",
+    "Enter_Leaderboard",
+    "Enter_Leaderboard_List",
 
     "Do_Register",
     "Do_Register_Name",
     "Do_Login",
     "Do_FB_Connect",
     "Do_Post_Predictions",
+    "Do_Post_Fav_Team",
 
     "Show_Error_Message",
 }

@@ -37,8 +37,11 @@ function action( param )
         ConnectingMessage.selfRemove()
         if status == RequestUtils.HTTP_200 then
             local sessionToken = jsonResponse["ProfileDto"]["SessionToken"]
+            local userId = jsonResponse["ProfileDto"]["UserId"]
             local configMd5Info = jsonResponse["ProfileDto"]["ConfigMd5Info"]
-            onRequestSuccess( sessionToken, configMd5Info )
+            local displayName = jsonResponse["ProfileDto"]["DisplayName"]
+            local startLeagueId = jsonResponse["ProfileDto"]["StartLeagueId"]
+            onRequestSuccess( sessionToken, userId, configMd5Info, displayName, startLeagueId )
         else
             onRequestFailed( jsonResponse["Message"] )
         end
@@ -56,10 +59,17 @@ function action( param )
     ConnectingMessage.loadFrame()
 end
 
-function onRequestSuccess( sessionToken, configMd5Info )
+function onRequestSuccess( sessionToken, userId, configMd5Info, displayName, startLeagueId )
     local Logic = require("scripts.Logic").getInstance()
-    Logic:setUserInfo( mEmail, mPassword, sessionToken )
-    EventManager:postEvent( Event.Check_File_Version, { configMd5Info, Event.Enter_Match_List } )
+    Logic:setUserInfo( mEmail, mPassword, sessionToken, userId )
+    Logic:setDisplayName( displayName )
+    Logic:setStartLeagueId( startLeagueId )
+
+    local finishEvent = Event.Enter_Match_List
+    if displayName == nil then
+        finishEvent = Event.Enter_Register_Name
+    end
+    EventManager:postEvent( Event.Check_File_Version, { configMd5Info, finishEvent } )
 end
 
 function onRequestFailed( errorBuffer )

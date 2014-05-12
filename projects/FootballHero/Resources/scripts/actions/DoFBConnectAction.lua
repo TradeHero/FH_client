@@ -43,9 +43,9 @@ function onFBConnectSuccess( accessToken )
         ConnectingMessage.selfRemove()
         if status == RequestUtils.HTTP_200 then
             local sessionToken = jsonResponse["SessionToken"]
-            local email = jsonResponse["email"]
+            local userId = jsonResponse["UserId"]
             local configMd5Info = jsonResponse["ConfigMd5Info"]
-            onRequestSuccess( sessionToken, email, configMd5Info )
+            onRequestSuccess( sessionToken, userId, configMd5Info )
         else
             onRequestFailed( jsonResponse["Message"] )
         end
@@ -63,9 +63,9 @@ function onFBConnectSuccess( accessToken )
     ConnectingMessage.loadFrame()
 end
 
-function onRequestSuccess( sessionToken, email, configMd5Info )
+function onRequestSuccess( sessionToken, userId, configMd5Info )
     local Logic = require("scripts.Logic").getInstance()
-    Logic:setUserInfo( "", "", sessionToken )
+    Logic:setUserInfo( "", "", sessionToken, userId )
     
     EventManager:postEvent( Event.Check_File_Version, { configMd5Info, Event.Enter_Register_Name } )
 end

@@ -4,13 +4,15 @@ local SceneManager = require("scripts.SceneManager")
 local Navigator = require("scripts.views.Navigator")
 local EventManager = require("scripts.events.EventManager").getInstance()
 local Event = require("scripts.events.Event").EventList
+local TeamConfig = require("scripts.config.Team")
 
 
 local CONTENT_FADEIN_TIME = 1
 
 local mWidget
 
-function loadFrame()
+-- DS for couponHistory see CouponHistoryData
+function loadFrame( couponHistory )
 	local widget = GUIReader:shareReader():widgetFromJsonFile("scenes/HistoryHome.json")
     mWidget = widget
     mWidget:registerScriptHandler( EnterOrExit )
@@ -18,7 +20,7 @@ function loadFrame()
 
     Navigator.loadFrame( widget )
 
-    initContent()
+    initContent( couponHistory )
 end
 
 function EnterOrExit( eventType )
@@ -28,7 +30,7 @@ function EnterOrExit( eventType )
     end
 end
 
-function initContent()
+function initContent( couponHistory )
 	local contentContainer = tolua.cast( mWidget:getChildByName("ScrollView"), "ScrollView" )
     contentContainer:removeAllChildrenWithCleanup( true )
 
@@ -53,10 +55,10 @@ function initContent()
     end ) )
     seqArray:addObject( CCDelayTime:create( 0.2 ) )
 
-    for i = 1, 3 do
+    for i = 1, table.getn( couponHistory:getOpenData() ) do
     	local eventHandler = function( sender, eventType )
             if eventType == TOUCH_EVENT_ENDED then
-                predictionClicked( true, i )
+                predictionClicked( true, couponHistory:getOpenData()[i] )
             end
         end
 
@@ -68,6 +70,8 @@ function initContent()
             contentHeight = contentHeight + content:getSize().height
             local bt = content:getChildByName("match")
             bt:addTouchEventListener( eventHandler )
+            helperInitPredictionCommon( content, couponHistory:getOpenData()[i] )
+            helperInitOpenPrediction( content, couponHistory:getOpenData()[i] )
 
             content:setOpacity( 0 )
             content:setCascadeOpacityEnabled( true )
@@ -91,10 +95,10 @@ function initContent()
     end ) )
     seqArray:addObject( CCDelayTime:create( 0.2 ) )
 
-    for i = 1, 3 do
+    for i = 1, table.getn( couponHistory:getClosedData() ) do
     	local eventHandler = function( sender, eventType )
             if eventType == TOUCH_EVENT_ENDED then
-                predictionClicked( false, i )
+                predictionClicked( false, couponHistory:getOpenData()[i] )
             end
         end
 
@@ -106,6 +110,8 @@ function initContent()
             contentHeight = contentHeight + content:getSize().height
             local bt = content:getChildByName("match")
             bt:addTouchEventListener( eventHandler )
+            helperInitPredictionCommon( content, couponHistory:getOpenData()[i] )
+            helperInitClosedPrediction( content, couponHistory:getOpenData()[i] )
 
             content:setOpacity( 0 )
             content:setCascadeOpacityEnabled( true )
@@ -123,6 +129,52 @@ function initContent()
     mWidget:runAction( CCSequence:create( seqArray ) )
 end
 
-function predictionClicked( isOpen, id )
-	EventManager:postEvent( Event.Enter_History_Detail, { isOpen, id } )
+function predictionClicked( isOpen, matchInfo )
+	EventManager:postEvent( Event.Enter_History_Detail, { isOpen, matchInfo } )
+end
+
+function helperInitPredictionCommon( content, matchInfo )
+    local team1 = tolua.cast( content:getChildByName("team1"), "ImageView" )
+    local team2 = tolua.cast( content:getChildByName("team2"), "ImageView" )
+    local team1Name = tolua.cast( content:getChildByName("team1Name"), "Label" )
+    local team2Name = tolua.cast( content:getChildByName("team2Name"), "Label" )
+    
+    team1:loadTexture( TeamConfig.getLogo( TeamConfig.getConfigIdByKey( matchInfo["HomeTeamId"] ) ) )
+    team2:loadTexture( TeamConfig.getLogo( TeamConfig.getConfigIdByKey( matchInfo["AwayTeamId"] ) ) )
+    team1Name:setText( TeamConfig.getTeamName( TeamConfig.getConfigIdByKey( matchInfo["HomeTeamId"] ) ) )
+    team2Name:setText( TeamConfig.getTeamName( TeamConfig.getConfigIdByKey( matchInfo["AwayTeamId"] ) ) )
+    team1Name:setFontName("fonts/Newgtbxc.ttf")
+    team2Name:setFontName("fonts/Newgtbxc.ttf")
+end
+
+function helperInitOpenPrediction( content, matchInfo )
+    local points = tolua.cast( content:getChildByName("points"), "Label" )
+    local roi = tolua.cast( content:getChildByName("roi"), "Label" )
+    local winPercentage = tolua.cast( content:getChildByName("winPercentage"), "Label" )
+    local pointWinInd = tolua.cast( content:getChildByName("pointWinInd"), "Button" )
+
+    points:setText( "-" )
+    roi:setText( string.format( roi:getStringValue(), "0 %" ) )
+    winPercentage:setText( string.format( winPercentage:getStringValue(), "%" ) )
+    pointWinInd:setEnabled( false )
+end
+
+function helperInitClosedPrediction( content, matchInfo )
+    local points = tolua.cast( content:getChildByName("points"), "Label" )
+    local roi = tolua.cast( content:getChildByName("roi"), "Label" )
+    local winPercentage = tolua.cast( content:getChildByName("winPercentage"), "Label" )
+    local vs = tolua.cast( content:getChildByName("vs"), "Label" )
+    local pointWinInd = tolua.cast( content:getChildByName("pointWinInd"), "Button" )
+    local statusBar = tolua.cast( content:getChildByName("statusBar"), "Button" )
+    
+    if matchInfo["Result"] then
+        statusBar:setHighlighted( true )
+    else
+        pointWinInd:setBright( false )
+        statusBar:setBright( false )
+    end
+
+    points:setText( 1000 )
+    roi:setText( string.format( roi:getStringValue(), "50 %" ) )
+    winPercentage:setText( string.format( winPercentage:getStringValue(), "50 %" ) )
 end

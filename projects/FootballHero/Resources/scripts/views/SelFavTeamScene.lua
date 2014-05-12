@@ -46,7 +46,7 @@ end
 function okEventHandler( sender, eventType )
     if eventType == TOUCH_EVENT_ENDED then
         print("Favourite Team is: "..mTeamId)
-        EventManager:postEvent( Event.Enter_Match_List )
+        EventManager:postEvent( Event.Do_Post_Fav_Team, { mTeamId } )
     end
 end
 
@@ -114,7 +114,7 @@ end
 
 function teamSelected( index )
     print("Team Selected: "..index)
-    mTeamId = index
+    mTeamId = TeamConfig.getTeamId( index )
     local leagueName = tolua.cast( mWidget:getChildByName("leagueName"), "Label" )
     leagueName:setText( "Your favourite team: "..TeamConfig.getTeamName( mTeamId ) )
 

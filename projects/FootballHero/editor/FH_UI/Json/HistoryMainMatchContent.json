@@ -16,59 +16,6 @@
     "name": null,
     "children": [
       {
-        "classname": "ImageView",
-        "name": null,
-        "children": [],
-        "options": {
-          "__type": "ComGUIImageViewSurrogate:#EditorCommon.JsonModel.Component.GUI",
-          "classname": "ImageView",
-          "name": "ImageView_1645",
-          "ZOrder": 0,
-          "actiontag": 1645,
-          "anchorPointX": 0.5,
-          "anchorPointY": 0.5,
-          "classType": null,
-          "colorB": 255,
-          "colorG": 255,
-          "colorR": 255,
-          "flipX": false,
-          "flipY": false,
-          "height": 1136,
-          "ignoreSize": true,
-          "layoutParameter": null,
-          "opacity": 100,
-          "positionPercentX": 0.5,
-          "positionPercentY": 0.7297297,
-          "positionType": 0,
-          "rotation": 0,
-          "scaleX": 1,
-          "scaleY": 1,
-          "sizePercentX": 0.125,
-          "sizePercentY": 0.432432443,
-          "sizeType": 0,
-          "tag": 297,
-          "touchAble": false,
-          "useMergedTexture": false,
-          "visible": false,
-          "width": 640,
-          "x": 320,
-          "y": 135,
-          "capInsetsHeight": 0,
-          "capInsetsWidth": 0,
-          "capInsetsX": 0,
-          "capInsetsY": 0,
-          "fileName": null,
-          "fileNameData": {
-            "path": "history/Prediction history.jpg",
-            "plistFile": null,
-            "resourceType": 0
-          },
-          "scale9Enable": false,
-          "scale9Height": 1136,
-          "scale9Width": 640
-        }
-      },
-      {
         "classname": "Label",
         "name": null,
         "children": [],
@@ -294,7 +241,7 @@
         "options": {
           "__type": "ComGUIImageViewSurrogate:#EditorCommon.JsonModel.Component.GUI",
           "classname": "ImageView",
-          "name": "team1Logo",
+          "name": "team1",
           "ZOrder": 1,
           "actiontag": 1283,
           "anchorPointX": 0.5,
@@ -347,7 +294,7 @@
         "options": {
           "__type": "ComGUIImageViewSurrogate:#EditorCommon.JsonModel.Component.GUI",
           "classname": "ImageView",
-          "name": "team2Logo",
+          "name": "team2",
           "ZOrder": 1,
           "actiontag": 1284,
           "anchorPointX": 0.5,
@@ -766,7 +713,7 @@
           "fontName": "微软雅黑",
           "fontSize": 20,
           "hAlignment": 0,
-          "text": "Win: %d %",
+          "text": "Win: %s",
           "touchScaleEnable": false,
           "vAlignment": 0
         }
@@ -887,7 +834,7 @@
           "fontName": "微软雅黑",
           "fontSize": 35,
           "hAlignment": 0,
-          "text": "%d %",
+          "text": "%s",
           "touchScaleEnable": false,
           "vAlignment": 0
         }
