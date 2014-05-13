@@ -30,6 +30,10 @@ function EnterOrExit( eventType )
     end
 end
 
+function isFrameShown()
+    return mWidget ~= nil
+end
+
 function initContent( couponHistory )
 	local contentContainer = tolua.cast( mWidget:getChildByName("ScrollView"), "ScrollView" )
     contentContainer:removeAllChildrenWithCleanup( true )

@@ -11,7 +11,8 @@ local LeaderboardConfig = require("scripts.config.Leaderboard")
 local mWidget
 local mLeaderboardId
 local mSubType
-
+local mStep
+local mCurrentTotalNum
 
 -- DS for subType see LeaderboardConfig
 function loadFrame( leaderboardInfo, leaderboardId, subType )
@@ -26,9 +27,10 @@ function loadFrame( leaderboardInfo, leaderboardId, subType )
 
     mLeaderboardId = leaderboardId
     mSubType = subType
-    
+
     initTitles()
     initContent( leaderboardInfo )
+    mStep = 1
 end
 
 function EnterOrExit( eventType )
@@ -73,10 +75,24 @@ function initContent( leaderboardInfo )
         contentHeight = contentHeight + content:getSize().height
         initLeaderboardContent( i, content, leaderboardInfo[i] )
     end
+    mCurrentTotalNum = table.getn( leaderboardInfo )
+
+    -- Add the "More" button
+    contentHeight = contentHeight + addMoreButton( contentContainer, layoutParameter )
 
     contentContainer:setInnerContainerSize( CCSize:new( 0, contentHeight ) )
     local layout = tolua.cast( contentContainer, "Layout" )
     layout:requestDoLayout()
+end
+
+function addMoreButton( contentContainer, layoutParameter )
+    local content = SceneManager.widgetFromJsonFile("scenes/MoreContent.json")
+    content:setLayoutParameter( layoutParameter )
+    contentContainer:addChild( content )
+    content:addTouchEventListener( loadMore )
+    content:setName("More")
+
+    return content:getSize().height
 end
 
 function initLeaderboardContent( i, content, info )
@@ -91,4 +107,51 @@ function initLeaderboardContent( i, content, info )
     end
     score:setText( string.format( mSubType["description"], info[mSubType["dataColumnId"]] ) )
     index:setText( i )
+end
+
+function loadMore( sender, eventType )
+    if eventType == TOUCH_EVENT_ENDED then
+        mStep = mStep + 1
+        EventManager:postEvent( Event.Load_More_In_Leaderboard, { leaderboardId, mSubType, mStep } )
+    end
+end
+
+function loadMoreContent( leaderboardInfo )
+    local contentContainer = tolua.cast( mWidget:getChildByName("ScrollView"), "ScrollView" )
+
+    -- Remove the "More" button
+    local moreButton = contentContainer:getChildByName("More")
+    moreButton:removeFromParent()
+
+    local layoutParameter = LinearLayoutParameter:create()
+    layoutParameter:setGravity(LINEAR_GRAVITY_CENTER_VERTICAL)
+    local contentHeight = contentContainer:getInnerContainerSize().height
+
+    for i = 1, table.getn( leaderboardInfo ) do
+        local eventHandler = function( sender, eventType )
+            if eventType == TOUCH_EVENT_ENDED then
+                contentClick( i )
+            end
+        end
+
+        local content = SceneManager.widgetFromJsonFile("scenes/LeaderboardListContent.json")
+        content:setLayoutParameter( layoutParameter )
+        contentContainer:addChild( content )
+        contentHeight = contentHeight + content:getSize().height
+        initLeaderboardContent( mCurrentTotalNum + i, content, leaderboardInfo[i] )
+    end
+    mCurrentTotalNum = mCurrentTotalNum + table.getn( leaderboardInfo )
+
+    -- Add back the "More" button
+    addMoreButton( contentContainer, layoutParameter )
+
+    contentContainer:setInnerContainerSize( CCSize:new( 0, contentHeight ) )
+    local layout = tolua.cast( contentContainer, "Layout" )
+    layout:requestDoLayout()
+end
+
+function contentClick( sender, eventType )
+    if eventType == TOUCH_EVENT_ENDED then
+
+    end
 end

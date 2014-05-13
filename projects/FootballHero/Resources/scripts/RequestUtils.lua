@@ -18,6 +18,20 @@ GET_MAIN_LEADERBOARD_REST_CALL = SERVER_IP.."/api/leaderboards/getMainLeaderboar
 POST_COUPONS_REST_CALL = SERVER_IP.."/api/coupons/placeCoupons"
 POST_FAV_TEAM_REST_CALL= SERVER_IP.."/api/user/setFavoriteTeam"
 
+function setServerIP( serverIp )
+    EMAIL_REGISTER_REST_CALL = serverIp.."/api/user/SignupWithEmail"
+    EMAIL_LOGIN_REST_CALL = serverIp.."/api/loginWithEmail"
+    SET_USER_METADATA_REST_CALL = serverIp.."/api/user/setUserMetaData"
+    FB_LOGIN_REST_CALL = serverIp.."/api/user/SignupWithFacebook"
+    GET_ALL_UPCOMING_GAMES_REST_CALL = serverIp.."/api/games/allUpcoming"
+    GET_UPCOMING_GAMES_BY_LEAGUE_REST_CALL = serverIp.."/api/games/upcomingByLeague"
+    GET_GAME_MARKETS_REST_CALL = serverIp.."/api/markets/getMarketsForGame"
+    GET_COUPON_HISTORY_REST_CALL = serverIp.."/api/couponHistory/getUserCouponHistory"
+    GET_MAIN_LEADERBOARD_REST_CALL = serverIp.."/api/leaderboards/getMainLeaderboard"
+    POST_COUPONS_REST_CALL = serverIp.."/api/coupons/placeCoupons"
+    POST_FAV_TEAM_REST_CALL= serverIp.."/api/user/setFavoriteTeam"
+end
+
 function createHeaderObject( headerStr )
 	local headerList = split( headerStr, "\n" )
     local headers = {}

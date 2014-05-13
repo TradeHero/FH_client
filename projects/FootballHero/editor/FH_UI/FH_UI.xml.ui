@@ -1,11 +1,10 @@
 <?xml version="1.0"?>
 <UIProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <filePath>Z:\FH_client\projects\FootballHero\editor\FH_UI\FH_UI.xml.ui</filePath>
-  <Version>1.2.0.1</Version>
-  <Name>FH_UI</Name>
   <ProjectDir>Z:\FH_client\projects\FootballHero\editor\FH_UI</ProjectDir>
-  <JsonFileName>FH_UI.json</JsonFileName>
+  <Version>1.4.0.1</Version>
   <Resources>Z:\FH_client\projects\FootballHero\editor\FH_UI\Resources</Resources>
+  <Name>FH_UI</Name>
+  <JsonFileName>FH_UI.json</JsonFileName>
   <JsonFolder>Z:\FH_client\projects\FootballHero\editor\FH_UI\Json</JsonFolder>
   <JsonList>
     <string>ConnectingMessage.json</string>
@@ -43,12 +42,17 @@
     <string>LeaderboardSubContent.json</string>
     <string>LeaderboardList.json</string>
     <string>LeaderboardListContent.json</string>
+    <string>MoreContent.json</string>
   </JsonList>
-  <imageFileList />
-  <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>LeaderboardScene.json</CurrentUIJson>
   <CanvasSize>
     <Width>640</Width>
     <Height>1136</Height>
   </CanvasSize>
+  <filePath>Z:\FH_client\projects\FootballHero\editor\FH_UI\FH_UI.xml.ui</filePath>
+  <ProjectType>UIProject</ProjectType>
+  <ResRelativePath />
+  <imageFileList />
+  <imagePngList />
+  <JsonSuffix>.json</JsonSuffix>
+  <CurrentUIJson>LoginNReg.json</CurrentUIJson>
 </UIProject>

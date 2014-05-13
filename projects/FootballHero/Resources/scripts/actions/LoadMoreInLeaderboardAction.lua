@@ -2,21 +2,21 @@ module(..., package.seeall)
 
 local Json = require("json")
 local ConnectingMessage = require("scripts.views.ConnectingMessage")
-local Logic = require("scripts.Logic").getInstance()
 local EventManager = require("scripts.events.EventManager").getInstance()
 local Event = require("scripts.events.Event").EventList
 local RequestUtils = require("scripts.RequestUtils")
+local LeaderboardConfig = require("scripts.config.Leaderboard")
+local Logic = require("scripts.Logic").getInstance()
+
+local mLeaderboardId
+local mSubType
 
 function action( param )
-    local historyMainScene = require("scripts.views.HistoryMainScene")
-    if historyMainScene.isFrameShown() then
-        return 
-    end                                                             
+	mLeaderboardId = param[1]
+	mSubType = param[2]
+	local step = param[3]
 
-	local step = 0
-	if param ~= nil and param[1] ~= nil then
-		step = param[1]
-	end
+	local url = RequestUtils.GET_MAIN_LEADERBOARD_REST_CALL
 
 	local handler = function( isSucceed, body, header, status, errorBuffer )
         print( "Http reponse: "..status.." and errorBuffer: "..errorBuffer )
@@ -38,17 +38,14 @@ function action( param )
 
     local httpRequest = HttpRequestForLua:create( CCHttpRequest.kHttpGet )
     httpRequest:addHeader( Logic:getAuthSessionString() )
-    httpRequest:sendHttpRequest( RequestUtils.GET_COUPON_HISTORY_REST_CALL.."?userId="..Logic:getUserId().."&step="..step, handler )
+    httpRequest:sendHttpRequest( url.."?sortType="..mSubType["sortType"].."&step="..step, handler )
 
     ConnectingMessage.loadFrame()
 end
 
 function onRequestSuccess( response )
-    local CouponHistoryData = require("scripts.data.CouponHistoryData").CouponHistoryData
-    local couponHistory = CouponHistoryData:new( response )
-    
-    local historyMainScene = require("scripts.views.HistoryMainScene")
-    historyMainScene.loadFrame( couponHistory )
+    local leaderboardListScene = require("scripts.views.LeaderboardListScene")
+    leaderboardListScene.loadMoreContent( response )
 end
 
 function onRequestFailed( errorBuffer )

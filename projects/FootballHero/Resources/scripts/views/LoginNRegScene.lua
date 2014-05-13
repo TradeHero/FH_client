@@ -15,10 +15,12 @@ function loadFrame()
     local signinBt = widget:getChildByName("signin")
     local registerBt = widget:getChildByName("register")
     local facebookBt = widget:getChildByName("facebookConnect")
+    local dev = widget:getChildByName("dev")
 
     signinBt:addTouchEventListener( signinEventHandler )
     registerBt:addTouchEventListener( registerEventHandler )
     facebookBt:addTouchEventListener( facebookEventHandler )
+    dev:addTouchEventListener( devEventHandler )
 end
 
 function EnterOrExit( eventType )
@@ -43,5 +45,12 @@ end
 function facebookEventHandler( sender,eventType )
     if eventType == TOUCH_EVENT_ENDED then
         EventManager:postEvent( Event.Do_FB_Connect ) 
+    end
+end
+
+function devEventHandler( sender,eventType )
+    if eventType == TOUCH_EVENT_ENDED then
+         local RequestUtils = require("scripts.RequestUtils")
+         RequestUtils.setServerIP("http://fhapi-dev1.cloudapp.net")
     end
 end

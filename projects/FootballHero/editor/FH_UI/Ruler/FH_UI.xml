@@ -144,4 +144,8 @@
     <Project>LeaderboardListContent</Project>
     <GuidesList />
   </GuidesProject>
+  <GuidesProject>
+    <Project>MoreContent</Project>
+    <GuidesList />
+  </GuidesProject>
 </ArrayOfGuidesProject>

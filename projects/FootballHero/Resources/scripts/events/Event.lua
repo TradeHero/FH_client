@@ -41,6 +41,8 @@ EventNameList =
     "Do_Post_Fav_Team",
 
     "Show_Error_Message",
+
+    "Load_More_In_Leaderboard",
 }
 
 EventList = CreatEnumTable( EventNameList )
