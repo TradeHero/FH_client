@@ -5,25 +5,27 @@ local ConnectingMessage = require("scripts.views.ConnectingMessage")
 local EventManager = require("scripts.events.EventManager").getInstance()
 local Event = require("scripts.events.Event").EventList
 local RequestUtils = require("scripts.RequestUtils")
+local LeaderboardConfig = require("scripts.config.Leaderboard")
 local Logic = require("scripts.Logic").getInstance()
 
-local mSortType = RequestUtils.LEADERBOARD_ROI
+local mLeaderboardId
+local mSubType = LeaderboardConfig.LeaderboardSubType[1]
 
 function action( param )
-	local leaderboardId = param[1]
+	mLeaderboardId = param[1]
 	local leaderboardType = param[2]
 	local step = 1
 
 	local url = RequestUtils.GET_MAIN_LEADERBOARD_REST_CALL
 	-- Todo change the url for friends leaderboard when that is done.
 	if leaderboardType == 1 then
-		mSortType = RequestUtils.LEADERBOARD_ROI
+		mSubType = LeaderboardConfig.LeaderboardSubType[1]
 	elseif leaderboardType == 2 then
 		-- Todo change to played type
 	elseif leaderboardType == 3 then
-		mSortType = RequestUtils.LEADERBOARD_PROFIT
+		mSubType = LeaderboardConfig.LeaderboardSubType[3]
 	elseif leaderboardType == 4 then
-		mSortType = RequestUtils.LEADERBOARD_PERCENTAGE
+		mSubType = LeaderboardConfig.LeaderboardSubType[2]
 	end
 
 	local handler = function( isSucceed, body, header, status, errorBuffer )
@@ -46,23 +48,14 @@ function action( param )
 
     local httpRequest = HttpRequestForLua:create( CCHttpRequest.kHttpGet )
     httpRequest:addHeader( Logic:getAuthSessionString() )
-    httpRequest:sendHttpRequest( url.."?sortType="..mSortType.."&step="..step, handler )
+    httpRequest:sendHttpRequest( url.."?sortType="..mSubType["sortType"].."&step="..step, handler )
 
     ConnectingMessage.loadFrame()
 end
 
 function onRequestSuccess( response )
-	local dataColumnId = "Roi"
-	if mSortType == RequestUtils.LEADERBOARD_ROI then
-		dataColumnId = "Roi"
-	elseif mSortType == RequestUtils.LEADERBOARD_PROFIT then
-		dataColumnId = "Profit"
-	elseif mSortType == RequestUtils.LEADERBOARD_PERCENTAGE then
-		dataColumnId = "WinPercentage"
-	end
-
     local leaderboardListScene = require("scripts.views.LeaderboardListScene")
-    leaderboardListScene.loadFrame( response, dataColumnId )
+    leaderboardListScene.loadFrame( response, mLeaderboardId, mSubType )
 end
 
 function onRequestFailed( errorBuffer )

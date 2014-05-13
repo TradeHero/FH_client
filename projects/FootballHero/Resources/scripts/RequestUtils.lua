@@ -3,10 +3,6 @@ module(..., package.seeall)
 HTTP_200 = 200
 HTTP_204 = 204
 
-LEADERBOARD_ROI = 1
-LEADERBOARD_PERCENTAGE = 2
-LEADERBOARD_PROFIT = 3
-
 SERVER_IP = "http://fhapi-prod1.cloudapp.net"
 CDN_SERVER_IP = "http://portalvhdss3c1vgx5mrzv.blob.core.windows.net/fhsettings/"
 

@@ -17,3 +17,9 @@ LeaderboardType = {
 	{ ["displayName"] = "Prediction Types", ["logo"] = Constants.LEADERBOARD_IMAGE_PATH.."prediction-types.png" },
 --]]
 }
+
+LeaderboardSubType = {
+	{ ["sortType"] = 1, ["dataColumnId"] = "Roi", ["title"] = "Roi", ["description"] = "%d%% won", },
+	{ ["sortType"] = 2, ["dataColumnId"] = "WinPercentage", ["title"] = "Win %", ["description"] = "%d%% won", },
+	{ ["sortType"] = 3, ["dataColumnId"] = "Profit", ["title"] = "Profit", ["description"] = "%d won", },
+}

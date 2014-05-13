@@ -46,7 +46,7 @@
   </JsonList>
   <imageFileList />
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>LeaderboardList.json</CurrentUIJson>
+  <CurrentUIJson>LeaderboardScene.json</CurrentUIJson>
   <CanvasSize>
     <Width>640</Width>
     <Height>1136</Height>

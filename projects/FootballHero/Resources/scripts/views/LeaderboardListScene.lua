@@ -9,9 +9,12 @@ local LeaderboardConfig = require("scripts.config.Leaderboard")
 
 
 local mWidget
-local mDataColumnId
+local mLeaderboardId
+local mSubType
 
-function loadFrame( leaderboardInfo, dataColumnId )
+
+-- DS for subType see LeaderboardConfig
+function loadFrame( leaderboardInfo, leaderboardId, subType )
 	local widget = GUIReader:shareReader():widgetFromJsonFile("scenes/LeaderboardList.json")
     mWidget = widget
     mWidget:registerScriptHandler( EnterOrExit )
@@ -21,7 +24,10 @@ function loadFrame( leaderboardInfo, dataColumnId )
     local backBt = mWidget:getChildByName("back")
     backBt:addTouchEventListener( backEventHandler )
 
-    mDataColumnId = dataColumnId
+    mLeaderboardId = leaderboardId
+    mSubType = subType
+    
+    initTitles()
     initContent( leaderboardInfo )
 end
 
@@ -36,6 +42,14 @@ function backEventHandler( sender,eventType )
     if eventType == TOUCH_EVENT_ENDED then
         EventManager:postEvent( Event.Enter_Leaderboard )
     end
+end
+
+function initTitles()
+    local title = tolua.cast( mWidget:getChildByName("title"), "Label" )
+    local subTitle = tolua.cast( mWidget:getChildByName("subTitle"), "Label" )
+
+    title:setText( LeaderboardConfig.LeaderboardType[mLeaderboardId]["displayName"] )
+    subTitle:setText( mSubType["title"] )
 end
 
 function initContent( leaderboardInfo )
@@ -75,6 +89,6 @@ function initLeaderboardContent( i, content, info )
     else
         name:setText( info["DisplayName"] )
     end
-    score:setText( info[mDataColumnId] )
+    score:setText( string.format( mSubType["description"], info[mSubType["dataColumnId"]] ) )
     index:setText( i )
 end
