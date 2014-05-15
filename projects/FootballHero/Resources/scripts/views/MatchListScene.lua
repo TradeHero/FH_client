@@ -141,6 +141,13 @@ function initMatchList( matchList )
     end
 
     seqArray:addObject( CCCallFuncN:create( function()
+        if contentContainer:getChildrenCount() == 0 then
+            local content = SceneManager.widgetFromJsonFile("scenes/MatchListEmptyIndi.json")
+            content:setLayoutParameter( layoutParameter )
+            contentContainer:addChild( content )
+            contentHeight = contentHeight + content:getSize().height
+        end
+
         contentContainer:setInnerContainerSize( CCSize:new( 0, contentHeight ) )
         local layout = tolua.cast( contentContainer, "Layout" )
         layout:requestDoLayout()

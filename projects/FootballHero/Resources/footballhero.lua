@@ -35,29 +35,6 @@ local function main()
     --eventManager:postEvent( event.Enter_Prediction_Confirm, { 0, 0, 0 } )
     --eventManager:postEvent( event.Enter_History )
     --eventManager:postEvent( event.Enter_Leaderboard )
-
---[[
-    local FileUtils = require("scripts.FileUtils")
-    FileUtils.writeStringToFile( "ppp/ddd/ccc/001.txt", "001001" )
---]]
-
---[[
-    local MD5 = require("MD5")
-    local Json = require("json")
-    local handler = function( isSucceed, body, header, status, errorBuffer )
-        print("MD5: ".. MD5.sumhexa( body ))
-    end
-    local httpRequest = HttpRequestForLua:create( CCHttpRequest.kHttpGet )
-    httpRequest:sendHttpRequest( "http://portalvhdss3c1vgx5mrzv.blob.core.windows.net/fhsettings/countries.txt", handler )
---]]
-
---[[
-    local handler = function( num )
-        cclog("Get login result "..num)
-    end
-
-    FacebookDelegate:sharedDelegate():login( handler, handler )
---]]
 end
 
 xpcall(main, __G__TRACKBACK__)

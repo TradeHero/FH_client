@@ -148,4 +148,8 @@
     <Project>MoreContent</Project>
     <GuidesList />
   </GuidesProject>
+  <GuidesProject>
+    <Project>MatchListEmptyIndi</Project>
+    <GuidesList />
+  </GuidesProject>
 </ArrayOfGuidesProject>

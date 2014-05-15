@@ -43,6 +43,7 @@
     <string>LeaderboardList.json</string>
     <string>LeaderboardListContent.json</string>
     <string>MoreContent.json</string>
+    <string>MatchListEmptyIndi.json</string>
   </JsonList>
   <CanvasSize>
     <Width>640</Width>
@@ -52,16 +53,7 @@
   <ProjectType>UIProject</ProjectType>
   <ResRelativePath />
   <imageFileList />
-  <imagePngList>
-    <string>LoginNReg/Account-bg.jpg</string>
-    <string>header/guangyun.png</string>
-    <string>LoginNReg/facebook-icon.png</string>
-    <string>LoginNReg/register-icon.png</string>
-    <string>LoginNReg/line.png</string>
-    <string>LoginNReg/sign-in-icon.png</string>
-    <string>header/footballhero-logo.png</string>
-    <string>GUI/button.png</string>
-  </imagePngList>
+  <imagePngList />
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>WBTSPrediction.json</CurrentUIJson>
+  <CurrentUIJson>MatchListEmptyIndi.json</CurrentUIJson>
 </UIProject>
