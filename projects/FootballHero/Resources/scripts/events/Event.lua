@@ -43,6 +43,7 @@ EventNameList =
     "Show_Error_Message",
 
     "Load_More_In_Leaderboard",
+    "Load_More_In_History",
 }
 
 EventList = CreatEnumTable( EventNameList )

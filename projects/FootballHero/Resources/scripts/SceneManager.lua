@@ -25,6 +25,7 @@ local DoPostPredictionsAction = require("scripts.actions.DoPostPredictionsAction
 local DoPostFavTeamAction = require("scripts.actions.DoPostFavTeamAction")
 local ShowErrorMessageAction = require("scripts.actions.ShowErrorMessageAction")
 local LoadMoreInLeaderboardAction = require("scripts.actions.LoadMoreInLeaderboardAction")
+local LoadMoreInHistoryAction = require("scripts.actions.LoadMoreInHistoryAction")
 
 TOUCH_PRIORITY_ZERO = 0
 TOUCH_PRIORITY_MINUS_ONE = -1
@@ -71,6 +72,7 @@ function initEvents()
 	EventManager:registerEventHandler( Event.Do_Post_Fav_Team, DoPostFavTeamAction )
 	EventManager:registerEventHandler( Event.Show_Error_Message, ShowErrorMessageAction )
 	EventManager:registerEventHandler( Event.Load_More_In_Leaderboard, LoadMoreInLeaderboardAction )
+	EventManager:registerEventHandler( Event.Load_More_In_History, LoadMoreInHistoryAction )
 end
 
 function clearNAddWidget( widget )

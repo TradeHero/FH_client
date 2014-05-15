@@ -78,7 +78,7 @@ function initContent( leaderboardInfo )
     mCurrentTotalNum = table.getn( leaderboardInfo )
 
     -- Add the "More" button
-    contentHeight = contentHeight + addMoreButton( contentContainer, layoutParameter )
+    contentHeight = contentHeight + addMoreButton( contentContainer, layoutParameter ):getSize().height
 
     contentContainer:setInnerContainerSize( CCSize:new( 0, contentHeight ) )
     local layout = tolua.cast( contentContainer, "Layout" )
@@ -92,7 +92,7 @@ function addMoreButton( contentContainer, layoutParameter )
     content:addTouchEventListener( loadMore )
     content:setName("More")
 
-    return content:getSize().height
+    return content
 end
 
 function initLeaderboardContent( i, content, info )
@@ -142,8 +142,10 @@ function loadMoreContent( leaderboardInfo )
     end
     mCurrentTotalNum = mCurrentTotalNum + table.getn( leaderboardInfo )
 
-    -- Add back the "More" button
-    addMoreButton( contentContainer, layoutParameter )
+    if table.getn( leaderboardInfo ) > 0 then
+        -- Add back the "More" button
+        addMoreButton( contentContainer, layoutParameter )
+    end
 
     contentContainer:setInnerContainerSize( CCSize:new( 0, contentHeight ) )
     local layout = tolua.cast( contentContainer, "Layout" )

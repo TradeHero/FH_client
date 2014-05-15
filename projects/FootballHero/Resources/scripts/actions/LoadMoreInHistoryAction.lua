@@ -8,14 +8,9 @@ local Event = require("scripts.events.Event").EventList
 local RequestUtils = require("scripts.RequestUtils")
 
 function action( param )
-    local historyMainScene = require("scripts.views.HistoryMainScene")
-    if historyMainScene.isFrameShown() then
-        return 
-    end                                                             
-
-	local step = 1
-
-	local handler = function( isSucceed, body, header, status, errorBuffer )
+    local step = param[1]
+    
+    local handler = function( isSucceed, body, header, status, errorBuffer )
         print( "Http reponse: "..status.." and errorBuffer: "..errorBuffer )
         print( "Http reponse body: "..body )
         
@@ -45,7 +40,7 @@ function onRequestSuccess( response )
     local couponHistory = CouponHistoryData:new( response )
     
     local historyMainScene = require("scripts.views.HistoryMainScene")
-    historyMainScene.loadFrame( couponHistory )
+    historyMainScene.loadMoreContent( couponHistory )
 end
 
 function onRequestFailed( errorBuffer )
