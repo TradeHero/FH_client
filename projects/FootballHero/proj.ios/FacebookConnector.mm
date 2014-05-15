@@ -38,7 +38,7 @@ void FacebookConnector::login()
         session = [[FBSession alloc] init];
     }
     
-    [FBSession openActiveSessionWithReadPermissions: @[@"basic_info", @"email", @"user_birthday"] allowLoginUI:YES completionHandler:^(FBSession *aSession, FBSessionState status, NSError *error) {
+    [FBSession openActiveSessionWithReadPermissions: @[@"public_profile", @"user_friends", @"email", @"user_birthday"] allowLoginUI:YES completionHandler:^(FBSession *aSession, FBSessionState status, NSError *error) {
         
         [FBSessionSingleton sharedInstance].session = aSession;
         const char* accessToken =[aSession.accessTokenData.accessToken UTF8String];

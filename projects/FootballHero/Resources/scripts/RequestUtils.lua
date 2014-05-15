@@ -4,6 +4,7 @@ HTTP_200 = 200
 HTTP_204 = 204
 
 SERVER_IP = "http://fhapi-prod1.cloudapp.net"
+FACEBOOK_GRAPH_IP = "https://graph.facebook.com"
 CDN_SERVER_IP = "http://portalvhdss3c1vgx5mrzv.blob.core.windows.net/fhsettings/"
 
 EMAIL_REGISTER_REST_CALL = SERVER_IP.."/api/user/SignupWithEmail"
@@ -16,7 +17,9 @@ GET_GAME_MARKETS_REST_CALL = SERVER_IP.."/api/markets/getMarketsForGame"
 GET_COUPON_HISTORY_REST_CALL = SERVER_IP.."/api/couponHistory/getUserCouponHistory"
 GET_MAIN_LEADERBOARD_REST_CALL = SERVER_IP.."/api/leaderboards/getMainLeaderboard"
 POST_COUPONS_REST_CALL = SERVER_IP.."/api/coupons/placeCoupons"
-POST_FAV_TEAM_REST_CALL= SERVER_IP.."/api/user/setFavoriteTeam"
+POST_FAV_TEAM_REST_CALL = SERVER_IP.."/api/user/setFavoriteTeam"
+
+FACEBOOK_FRIENDS_LIST_CALL = "/me/friends?access_token="
 
 function setServerIP( serverIp )
     EMAIL_REGISTER_REST_CALL = serverIp.."/api/user/SignupWithEmail"

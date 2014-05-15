@@ -49,6 +49,7 @@ function postPredictionData()
 end
 
 function onRequestSuccess()
+    Logic:resetPredictions()
     EventManager:postEvent( Event.Enter_Match_List )
 end
 

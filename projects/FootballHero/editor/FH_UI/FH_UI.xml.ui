@@ -52,7 +52,16 @@
   <ProjectType>UIProject</ProjectType>
   <ResRelativePath />
   <imageFileList />
-  <imagePngList />
+  <imagePngList>
+    <string>LoginNReg/Account-bg.jpg</string>
+    <string>header/guangyun.png</string>
+    <string>LoginNReg/facebook-icon.png</string>
+    <string>LoginNReg/register-icon.png</string>
+    <string>LoginNReg/line.png</string>
+    <string>LoginNReg/sign-in-icon.png</string>
+    <string>header/footballhero-logo.png</string>
+    <string>GUI/button.png</string>
+  </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>LoginNReg.json</CurrentUIJson>
+  <CurrentUIJson>WBTSPrediction.json</CurrentUIJson>
 </UIProject>

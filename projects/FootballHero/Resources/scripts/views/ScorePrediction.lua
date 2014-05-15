@@ -29,6 +29,11 @@ function loadFrame()
     mWidget:addTouchEventListener( onFrameTouch )
     SceneManager.clearNAddWidget( widget )
 
+    local backBt = widget:getChildByName("Back")
+    local skipBt = widget:getChildByName("skip")
+    backBt:addTouchEventListener( backEventHandler )
+    skipBt:addTouchEventListener( skipEventHandler )
+
     helperInitMarketInfo( widget )
 end
 
@@ -67,6 +72,13 @@ function selectNo()
         MarketsForGameData.getOddIdForType( mMarketsData, MarketConfig.ODDS_TYPE_TWO_OPTION ),
         helperGetTheAnswer( false ),
         no:getTextureFile() )
+end
+
+function skipEventHandler( sender, eventType )
+    if eventType == TOUCH_EVENT_ENDED then
+        SceneManager.clear()
+        EventManager:postEvent( Event.Enter_Next_Prediction )
+    end
 end
 
 function backEventHandler( sender, eventType )
