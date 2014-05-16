@@ -152,4 +152,16 @@
     <Project>MatchListEmptyIndi</Project>
     <GuidesList />
   </GuidesProject>
+  <GuidesProject>
+    <Project>PredFinalConfirm</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>PredFinalConfirmContent</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>LeaderboardContent_0</Project>
+    <GuidesList />
+  </GuidesProject>
 </ArrayOfGuidesProject>

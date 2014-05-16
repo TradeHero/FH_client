@@ -91,7 +91,11 @@ function makePrediction( rewards, oddId, answer, answerIcon )
     local seqArray = CCArray:create()
     seqArray:addObject( CCDelayTime:create( 0.1 ) )
     seqArray:addObject( CCCallFuncN:create( function()
-        EventManager:postEvent( Event.Enter_Prediction_Confirm, { answer, rewards, oddId, answerIcon } )
+        --EventManager:postEvent( Event.Enter_Prediction_Confirm, { answer, rewards, oddId, answerIcon } )
+
+        Logic:addPrediction( oddId, "", false, answer, rewards, answerIcon )
+        SceneManager.clear()
+        EventManager:postEvent( Event.Enter_Next_Prediction )
     end ) )
 
     mWidget:runAction( CCSequence:create( seqArray ) )

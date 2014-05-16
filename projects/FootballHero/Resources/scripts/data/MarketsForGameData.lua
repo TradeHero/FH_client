@@ -96,6 +96,28 @@ function MarketsForGameData:getMarketAt( index )
 	return self.marketList[index]
 end
 
+-- Get the market info which contains the given couponId
+function MarketsForGameData:getMarketInfoByCouponId( couponId )
+    for k, v in pairs( self.matchMarket["odds"] ) do
+        local odds = v
+        if odds["Id"] == couponId then
+            return self.matchMarket
+        end
+    end
+
+    for i = 1, self:getNum() do
+        local market = self:getMarketAt(i)
+        for k, v in pairs( market["odds"] ) do
+            local odds = v
+            if odds["Id"] == couponId then
+                return market
+            end
+        end
+    end
+
+    return nil
+end
+
 -- Getters for inner data structure
 
 function getMarketType( market )

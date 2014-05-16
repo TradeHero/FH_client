@@ -44,6 +44,8 @@
     <string>LeaderboardListContent.json</string>
     <string>MoreContent.json</string>
     <string>MatchListEmptyIndi.json</string>
+    <string>PredFinalConfirm.json</string>
+    <string>PredFinalConfirmContent.json</string>
   </JsonList>
   <CanvasSize>
     <Width>640</Width>
@@ -53,7 +55,12 @@
   <ProjectType>UIProject</ProjectType>
   <ResRelativePath />
   <imageFileList />
-  <imagePngList />
+  <imagePngList>
+    <string>MatchPrediction/confirm.png</string>
+    <string>MatchPrediction/cancel.png</string>
+    <string>PredictionConfirm/facebook-icon.png</string>
+    <string>PredictionConfirm/facebook2-icon.png</string>
+  </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>MatchListEmptyIndi.json</CurrentUIJson>
+  <CurrentUIJson>PredFinalConfirm.json</CurrentUIJson>
 </UIProject>

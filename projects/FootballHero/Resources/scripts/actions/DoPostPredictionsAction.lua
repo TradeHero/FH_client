@@ -28,14 +28,14 @@ function postPredictionData()
             jsonResponse["Message"] = errorBuffer
         end
         ConnectingMessage.selfRemove()
-        if status == RequestUtils.HTTP_204 then
+        if status == RequestUtils.HTTP_200 then
             onRequestSuccess()
         else
             onRequestFailed( jsonResponse["Message"] )
         end
     end
 
-    local requestContentText = Json.encode( Logic:getPredictions() )
+    local requestContentText = Logic:getPredictions():toString()
     print("Request content is "..requestContentText)
 
     local httpRequest = HttpRequestForLua:create( CCHttpRequest.kHttpPost )

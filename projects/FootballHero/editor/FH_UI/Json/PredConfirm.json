@@ -11,14 +11,12 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "LoginNReg/Account-bg.jpg",
-    "header/guangyun.png",
-    "LoginNReg/facebook-icon.png",
-    "LoginNReg/register-icon.png",
-    "LoginNReg/line.png",
-    "LoginNReg/sign-in-icon.png",
-    "header/footballhero-logo.png",
-    "GUI/button.png"
+    "MatchPrediction/Match-List-popup-bg.png",
+    "commonRes/Arsenal.png",
+    "MatchPrediction/email.jpg",
+    "MatchPrediction/facebook.jpg",
+    "MatchPrediction/confirm.png",
+    "MatchPrediction/cancel.png"
   ],
   "version": "1.4.0.1",
   "widgetTree": {
@@ -271,7 +269,7 @@
           "layoutParameter": null,
           "opacity": 255,
           "positionPercentX": 0.3453125,
-          "positionPercentY": 0.710387349,
+          "positionPercentY": 0.7112676,
           "positionType": 0,
           "rotation": 0,
           "scaleX": 1,
@@ -285,7 +283,7 @@
           "visible": true,
           "width": 360,
           "x": 221,
-          "y": 807,
+          "y": 808,
           "areaHeight": 60,
           "areaWidth": 360,
           "fontFile": null,
@@ -326,8 +324,8 @@
           "rotation": 0,
           "scaleX": 1,
           "scaleY": 1,
-          "sizePercentX": 0.1484375,
-          "sizePercentY": 0.0237676054,
+          "sizePercentX": 0.3046875,
+          "sizePercentY": 0.02640845,
           "sizeType": 0,
           "tag": 29,
           "touchAble": false,
@@ -553,8 +551,8 @@
           },
           "pressed": null,
           "pressedData": {
-            "path": null,
-            "plistFile": null,
+            "path": "MatchPrediction/confirm.png",
+            "plistFile": "",
             "resourceType": 0
           },
           "scale9Enable": false,
@@ -620,14 +618,14 @@
           "fontType": 0,
           "normal": null,
           "normalData": {
-            "path": "MatchPrediction/cancel.jpg",
+            "path": "MatchPrediction/cancel.png",
             "plistFile": "",
             "resourceType": 0
           },
           "pressed": null,
           "pressedData": {
-            "path": null,
-            "plistFile": null,
+            "path": "MatchPrediction/cancel.png",
+            "plistFile": "",
             "resourceType": 0
           },
           "scale9Enable": false,
@@ -645,7 +643,7 @@
       "classname": "Panel",
       "name": "Panel_167",
       "ZOrder": 0,
-      "actiontag": 1,
+      "actiontag": -1,
       "anchorPointX": 0,
       "anchorPointY": 0,
       "classType": "CocoStudio.EngineAdapterWrap.CSPanel",

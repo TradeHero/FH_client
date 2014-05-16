@@ -14,7 +14,7 @@ function action( param )
 	Logic:setCurDisplayMarketIndex( curDisplayMarketIndex )
 
 	if curDisplayMarketIndex > marketInfo:getNum() then
-		EventManager:postEvent( Event.Do_Post_Predictions )
+		EventManager:postEvent( Event.Enter_Pred_Total_Confirm )
 	else
 		print( "Display the next prediction: "..curDisplayMarketIndex )
 		local ScorePrediction = require("scripts.views.ScorePrediction")

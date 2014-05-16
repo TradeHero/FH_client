@@ -54,7 +54,7 @@ function confirmEventHandler( sender, eventType )
 		local comment = textDisplay:getStringValue()
 
 		SceneManager.clear()
-		Logic:addPrediction( mOddId, comment, false )
+		Logic:addPrediction( mOddId, comment, false, mAnswer, mReward, mAnswerIcon )
 	    EventManager:postEvent( Event.Enter_Next_Prediction )
 	end
 end

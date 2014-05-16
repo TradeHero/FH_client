@@ -26,6 +26,7 @@ EventNameList =
     "Enter_Match_List",
     "Enter_Match",
     "Enter_Prediction_Confirm",
+    "Enter_Pred_Total_Confirm",
     "Enter_Sel_Fav_Team",
     "Enter_Next_Prediction",
     "Enter_History",
