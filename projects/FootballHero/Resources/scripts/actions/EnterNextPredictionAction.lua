@@ -4,6 +4,7 @@ local Constants = require("scripts.Constants")
 local EventManager = require("scripts.events.EventManager").getInstance()
 local Event = require("scripts.events.Event").EventList
 local Logic = require("scripts.Logic").getInstance()
+local SceneManager = require("scripts.SceneManager")
 
 
 function action( param )
@@ -20,6 +21,7 @@ function action( param )
 		local ScorePrediction = require("scripts.views.ScorePrediction")
 		local matchMarketData = marketInfo:getMarketAt( curDisplayMarketIndex )
 
+		SceneManager.clear()
 		ScorePrediction.loadFrame( matchMarketData )
 	end
 end

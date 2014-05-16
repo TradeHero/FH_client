@@ -94,7 +94,6 @@ function makePrediction( rewards, oddId, answer, answerIcon )
         --EventManager:postEvent( Event.Enter_Prediction_Confirm, { answer, rewards, oddId, answerIcon } )
 
         Logic:addPrediction( oddId, "", false, answer, rewards, answerIcon )
-        SceneManager.clear()
         EventManager:postEvent( Event.Enter_Next_Prediction )
     end ) )
 
