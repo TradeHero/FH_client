@@ -58,7 +58,6 @@ function EventManager:addHistory( eventId, param )
 		}
 
 		table.insert( self.mEventHistory, history )
-
 	else
 		print("Does not track: "..eventName)
 	end

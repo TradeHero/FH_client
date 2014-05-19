@@ -19,10 +19,7 @@ function loadFrame()
     mWidget:registerScriptHandler( EnterOrExit )
     SceneManager.clearNAddWidget(widget)
 
-    local backBt = widget:getChildByName("back")
     local confirmBt = widget:getChildByName("confirm")
-
-    backBt:addTouchEventListener( backEventHandler )
     confirmBt:addTouchEventListener( confirmEventHandler )
 
     ViewUtils.createTextInput( mWidget:getChildByName( USERNAME_CONTAINER_NAME ), "Username" )
@@ -39,11 +36,6 @@ end
 
 function setUserName( name )
     mWidget:getChildByName( USERNAME_CONTAINER_NAME ):getNodeByTag( 1 ):setText( name )
-end
-
-function backEventHandler( sender,eventType )
-	if eventType == TOUCH_EVENT_ENDED then
-    end
 end
 
 function confirmEventHandler( sender,eventType )

@@ -13,10 +13,10 @@ Data need to be sent to server:
     {
       "OutcomeIds" : [2435033],
       "Stake" : 1000,
-      "Message" : "My first bet",
-      "ShareOnFacebook" : false
     }
-  ]  
+  ],
+  "Message" : "My first bet",
+  "ShareOnFacebook" : false  
 }
 
 Whole Data :
@@ -27,19 +27,21 @@ Whole Data :
     {
       "OutcomeIds" : [2435033],
       "Stake" : 1000,
-      "Message" : "My first bet",
-      "ShareOnFacebook" : false
       "Answer" : "Arsenal to win.", 
       "Reward": 4000, 
       "AnswerIcon": "XXXX.png"
     }
-  ]  
+  ],
+  "Message" : "My first bet",
+  "ShareOnFacebook" : false
 }
 --]]
 
 function Coupons:new()
 	local obj = {
-		CouponForms = {}
+		CouponForms = {},
+    Message = "",
+    ShareOnFacebook = false
 	}
 
 	setmetatable(obj, self)
@@ -50,15 +52,13 @@ function Coupons:new()
     return obj 
 end
 
-function Coupons:addCoupon( id, message, shareOnFacebook, answer, reward, answerIcon )
+function Coupons:addCoupon( id, answer, reward, answerIcon )
     local idList = {}
     table.insert( idList, id )
 
     local coupon = {
         OutcomeIds = idList,
         Stake = 1000,
-        Message = message,
-        ShareOnFacebook = shareOnFacebook,
         Answer = answer,
         Reward = reward,
         AnswerIcon = answerIcon
@@ -75,18 +75,24 @@ function Coupons:get( index )
     return self.CouponForms[index]
 end
 
+function Coupons:setMessage( message )
+    self.Message = message
+end
+
+function Coupons:setShareOnFacebook( share )
+    self.ShareOnFacebook = share
+end
+
 function Coupons:toString()
     local form = {}
     for i, v in ipairs( self.CouponForms ) do
         local coupon = {
             OutcomeIds = v["OutcomeIds"],
             Stake = v["Stake"],
-            Message = v["message"],
-            ShareOnFacebook = v["shareOnFacebook"]
         }
 
         table.insert( form, coupon )
     end
 
-    return "{\"CouponForms\":"..Json.encode( form ).."}"
+    return string.format( "{\"CouponForms\":%s, \"Message\":\"%s\", \"ShareOnFacebook\":%s}", Json.encode( form ), self.Message, self.ShareOnFacebook )
 end

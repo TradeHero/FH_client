@@ -131,9 +131,14 @@ function Logic:getUserId()
 	return self.userId
 end
 
-function Logic:addPrediction( prediciton, comment, facebookShare, answer, reward, answerIcon )
+function Logic:addPrediction( prediciton, answer, reward, answerIcon )
 	print( string.format( "Make Prediction: %d with answer[%s], reward[%d] and answerIcon[%s]", prediciton, answer, reward, answerIcon ) )
-	self.mCoupons:addCoupon( prediciton, comment, facebookShare, answer, reward, answerIcon )
+	self.mCoupons:addCoupon( prediciton, answer, reward, answerIcon )
+end
+
+function Logic:setPredictionMetadata( message, shareOnFacebook )
+	self.mCoupons:setMessage( message )
+	self.mCoupons:setShareOnFacebook( shareOnFacebook )
 end
 
 function Logic:getPredictions()

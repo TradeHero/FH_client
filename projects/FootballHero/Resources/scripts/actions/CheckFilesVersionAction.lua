@@ -85,6 +85,7 @@ function checkFile( fileIndex )
 	    end
 
 	    local httpRequest = HttpRequestForLua:create( CCHttpRequest.kHttpGet )
+	    print("Downloading from: "..RequestUtils.CDN_SERVER_IP..CDNFileNameList[fileIndex])
 	    httpRequest:sendHttpRequest( RequestUtils.CDN_SERVER_IP..CDNFileNameList[fileIndex], handler )
 
 	    ConnectingMessage.loadFrame( "Updating "..file.."..." )

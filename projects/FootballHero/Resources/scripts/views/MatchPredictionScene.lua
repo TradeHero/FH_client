@@ -74,7 +74,7 @@ function makePrediction( rewards, oddId, answer, answerIcon )
     seqArray:addObject( CCCallFuncN:create( function()
         --EventManager:postEvent( Event.Enter_Prediction_Confirm, { answer, rewards, oddId, answerIcon } )
 
-        Logic:addPrediction( oddId, "", false, answer, rewards, answerIcon )
+        Logic:addPrediction( oddId, answer, rewards, answerIcon )
         EventManager:postEvent( Event.Enter_Next_Prediction )
     end ) )
 

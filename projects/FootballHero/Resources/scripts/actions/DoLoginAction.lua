@@ -54,7 +54,8 @@ function action( param )
     local httpRequest = HttpRequestForLua:create( CCHttpRequest.kHttpPost )
     httpRequest:addHeader( Constants.CONTENT_TYPE_JSON )
     httpRequest:getRequest():setRequestData( requestContentText, string.len( requestContentText ) )
-    httpRequest:sendHttpRequest( RequestUtils.EMAIL_LOGIN_REST_CALL, handler )
+    print("Login with url:"..RequestUtils.EMAIL_LOGIN_REST_CALL.."?useDev="..RequestUtils.USE_DEV)
+    httpRequest:sendHttpRequest( RequestUtils.EMAIL_LOGIN_REST_CALL.."?useDev="..RequestUtils.USE_DEV, handler )
 
     ConnectingMessage.loadFrame()
 end

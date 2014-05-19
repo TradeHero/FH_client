@@ -38,6 +38,8 @@ end
 
 function confirmEventHandler( sender, eventType )
 	if eventType == TOUCH_EVENT_ENDED then
+		local facebook = tolua.cast( mWidget:getChildByName("facebook"), "CheckBox" )
+		Logic:setPredictionMetadata( "", facebook:getSelectedState() )
 	    EventManager:postEvent( Event.Do_Post_Predictions )
 	end
 end
