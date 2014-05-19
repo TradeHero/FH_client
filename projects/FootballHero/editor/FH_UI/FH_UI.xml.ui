@@ -62,5 +62,5 @@
     <string>PredictionConfirm/facebook2-icon.png</string>
   </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>PredFinalConfirm.json</CurrentUIJson>
+  <CurrentUIJson>LeaderboardScene.json</CurrentUIJson>
 </UIProject>

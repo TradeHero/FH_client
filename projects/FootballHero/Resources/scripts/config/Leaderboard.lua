@@ -1,11 +1,12 @@
 module(..., package.seeall)
 
 local Constants = require("scripts.Constants")
+local RequestUtils = require("scripts.RequestUtils")
 
 LeaderboardType = {
-	{ ["displayName"] = "Top Performers", ["logo"] = Constants.LEADERBOARD_IMAGE_PATH.."top-performers.png" },
+	{ ["displayName"] = "Top Performers", ["logo"] = Constants.LEADERBOARD_IMAGE_PATH.."top-performers.png", ["request"] = RequestUtils.GET_MAIN_LEADERBOARD_REST_CALL },
 	
-	{ ["displayName"] = "Friends", ["logo"] = Constants.LEADERBOARD_IMAGE_PATH.."friends.png" },
+	{ ["displayName"] = "Friends", ["logo"] = Constants.LEADERBOARD_IMAGE_PATH.."friends.png", ["request"] = RequestUtils.GET_FRIENDS_LEADERBOARD_REST_CALL },
 	
 --[[
 	{ ["displayName"] = "Followers", ["logo"] = Constants.LEADERBOARD_IMAGE_PATH.."followers.png" },

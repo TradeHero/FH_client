@@ -11,12 +11,10 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "MatchPrediction/Match-List-popup-bg.png",
-    "commonRes/Arsenal.png",
-    "MatchPrediction/email.jpg",
-    "MatchPrediction/facebook.jpg",
     "MatchPrediction/confirm.png",
-    "MatchPrediction/cancel.png"
+    "MatchPrediction/cancel.png",
+    "PredictionConfirm/facebook-icon.png",
+    "PredictionConfirm/facebook2-icon.png"
   ],
   "version": "1.4.0.1",
   "widgetTree": {

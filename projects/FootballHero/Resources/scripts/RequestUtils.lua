@@ -16,6 +16,7 @@ GET_UPCOMING_GAMES_BY_LEAGUE_REST_CALL = SERVER_IP.."/api/games/upcomingByLeague
 GET_GAME_MARKETS_REST_CALL = SERVER_IP.."/api/markets/getMarketsForGame"
 GET_COUPON_HISTORY_REST_CALL = SERVER_IP.."/api/couponHistory/getUserCouponHistory"
 GET_MAIN_LEADERBOARD_REST_CALL = SERVER_IP.."/api/leaderboards/getMainLeaderboard"
+GET_FRIENDS_LEADERBOARD_REST_CALL = SERVER_IP.."/api/leaderboards/getFriendsLeaderboard"
 POST_COUPONS_REST_CALL = SERVER_IP.."/api/coupons/placeCoupons"
 POST_FAV_TEAM_REST_CALL = SERVER_IP.."/api/user/setFavoriteTeam"
 
@@ -31,6 +32,7 @@ function setServerIP( serverIp )
     GET_GAME_MARKETS_REST_CALL = serverIp.."/api/markets/getMarketsForGame"
     GET_COUPON_HISTORY_REST_CALL = serverIp.."/api/couponHistory/getUserCouponHistory"
     GET_MAIN_LEADERBOARD_REST_CALL = serverIp.."/api/leaderboards/getMainLeaderboard"
+    GET_FRIENDS_LEADERBOARD_REST_CALL = serverIp.."/api/leaderboards/getFriendsLeaderboard"
     POST_COUPONS_REST_CALL = serverIp.."/api/coupons/placeCoupons"
     POST_FAV_TEAM_REST_CALL= serverIp.."/api/user/setFavoriteTeam"
 end

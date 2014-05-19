@@ -16,7 +16,7 @@ function action( param )
 	local leaderboardType = param[2]
 	local step = 1
 
-	local url = RequestUtils.GET_MAIN_LEADERBOARD_REST_CALL
+	local url = LeaderboardConfig.LeaderboardType[mLeaderboardId]["request"]
 	-- Todo change the url for friends leaderboard when that is done.
 	if leaderboardType == 1 then
 		mSubType = LeaderboardConfig.LeaderboardSubType[1]
