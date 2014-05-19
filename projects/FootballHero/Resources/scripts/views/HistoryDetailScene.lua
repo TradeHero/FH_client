@@ -45,7 +45,8 @@ end
 
 function backEventHandler( sender,eventType )
     if eventType == TOUCH_EVENT_ENDED then
-        EventManager:postEvent( Event.Enter_History )
+        --EventManager:postEvent( Event.Enter_History )
+        EventManager:popHistory()
     end
 end
 
@@ -105,6 +106,7 @@ end
 
 function initCouponInfo( content, info )
     local answer = tolua.cast( content:getChildByName("answer"), "Label" )
+    local winLoseLabel = tolua.cast( content:getChildByName("winLoseLabel"), "Label" )
     local points = tolua.cast( content:getChildByName("points"), "Label" )
     local stake = tolua.cast( content:getChildByName("stake"), "Label" )
     local choice = tolua.cast( content:getChildByName("choice"), "ImageView" )
@@ -151,14 +153,17 @@ function initCouponInfo( content, info )
 
     answer:setText( answerString )
     choice:loadTexture( choiceImage )
-    points:setText( string.format( points:getStringValue(), info["Stake"] * info["Odd"] ) )
     stake:setText( string.format( stake:getStringValue(), info["Stake"] ) )
 
     if mIsOpen == false then
         if info["Won"] then
-            statusBar:setHighlighted( true )
+            statusBar:setFocused( true )
+            winLoseLabel:setText("Won:")
+            points:setText( string.format( points:getStringValue(), info["Stake"] * ( info["Odd"] - 1 ) ) )
         else
             statusBar:setBright( false )
+            winLoseLabel:setText("Lost:")
+            points:setText( string.format( points:getStringValue(), info["Stake"] ) )
         end
     end
 end

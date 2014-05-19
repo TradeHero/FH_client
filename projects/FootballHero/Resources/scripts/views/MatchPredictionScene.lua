@@ -63,7 +63,8 @@ end
 
 function backEventHandler( sender, eventType )
     if eventType == TOUCH_EVENT_ENDED then
-        EventManager:postEvent( Event.Enter_Match_List )
+        --EventManager:postEvent( Event.Enter_Match_List )
+        EventManager:popHistory()
     end
 end
 

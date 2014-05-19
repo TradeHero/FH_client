@@ -11,10 +11,15 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "MatchPrediction/confirm.png",
-    "MatchPrediction/cancel.png",
-    "PredictionConfirm/facebook-icon.png",
-    "PredictionConfirm/facebook2-icon.png"
+    "MatchListContent/vs-button.png",
+    "commonRes/Arsenal.png",
+    "history/jiantou.png",
+    "history/hengxian.png",
+    "history/blue.png",
+    "history/green.png",
+    "history/red.png",
+    "history/shangsheng.png",
+    "history/xiajiang.png"
   ],
   "version": "1.4.0.1",
   "widgetTree": {
@@ -236,7 +241,7 @@
         "options": {
           "__type": "LabelSurrogate:#EditorCommon.JsonModel.Component.GUI",
           "classname": "Label",
-          "name": "index ",
+          "name": "index",
           "ZOrder": 0,
           "actiontag": 2009,
           "anchorPointX": 0.5,
@@ -309,7 +314,7 @@
       "sizePercentY": 1,
       "sizeType": 0,
       "tag": 3,
-      "touchAble": false,
+      "touchAble": true,
       "useMergedTexture": false,
       "visible": true,
       "width": 640,

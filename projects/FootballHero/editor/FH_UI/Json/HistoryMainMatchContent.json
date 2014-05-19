@@ -11,12 +11,15 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "MatchPrediction/Match-List-popup-bg.png",
+    "MatchListContent/vs-button.png",
     "commonRes/Arsenal.png",
-    "MatchPrediction/email.jpg",
-    "MatchPrediction/facebook.jpg",
-    "MatchPrediction/confirm.png",
-    "MatchPrediction/cancel.png"
+    "history/jiantou.png",
+    "history/hengxian.png",
+    "history/blue.png",
+    "history/green.png",
+    "history/red.png",
+    "history/shangsheng.png",
+    "history/xiajiang.png"
   ],
   "version": "1.4.0.1",
   "widgetTree": {
@@ -848,7 +851,7 @@
           "touchAble": false,
           "useMergedTexture": false,
           "visible": true,
-          "width": 47,
+          "width": 93,
           "x": 478,
           "y": 91,
           "areaHeight": 0,
@@ -857,7 +860,7 @@
           "fontName": "微软雅黑",
           "fontSize": 35,
           "hAlignment": 0,
-          "text": "%s",
+          "text": "%1.3f",
           "touchScaleEnable": false,
           "vAlignment": 0
         }

@@ -164,4 +164,8 @@
     <Project>LeaderboardContent_0</Project>
     <GuidesList />
   </GuidesProject>
+  <GuidesProject>
+    <Project>HistoryHomeForOthers</Project>
+    <GuidesList />
+  </GuidesProject>
 </ArrayOfGuidesProject>

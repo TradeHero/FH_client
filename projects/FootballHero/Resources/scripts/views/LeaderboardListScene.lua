@@ -42,7 +42,8 @@ end
 
 function backEventHandler( sender,eventType )
     if eventType == TOUCH_EVENT_ENDED then
-        EventManager:postEvent( Event.Enter_Leaderboard )
+        --EventManager:postEvent( Event.Enter_Leaderboard )
+        EventManager:popHistory()
     end
 end
 
@@ -65,7 +66,7 @@ function initContent( leaderboardInfo )
     for i = 1, table.getn( leaderboardInfo ) do
     	local eventHandler = function( sender, eventType )
             if eventType == TOUCH_EVENT_ENDED then
-                contentClick( i )
+                contentClick( leaderboardInfo[i] )
             end
         end
 
@@ -74,6 +75,7 @@ function initContent( leaderboardInfo )
         contentContainer:addChild( content )
         contentHeight = contentHeight + content:getSize().height
         initLeaderboardContent( i, content, leaderboardInfo[i] )
+        content:addTouchEventListener( eventHandler )
     end
     mCurrentTotalNum = table.getn( leaderboardInfo )
 
@@ -130,7 +132,7 @@ function loadMoreContent( leaderboardInfo )
     for i = 1, table.getn( leaderboardInfo ) do
         local eventHandler = function( sender, eventType )
             if eventType == TOUCH_EVENT_ENDED then
-                contentClick( i )
+                contentClick( leaderboardInfo[i] )
             end
         end
 
@@ -139,6 +141,7 @@ function loadMoreContent( leaderboardInfo )
         contentContainer:addChild( content )
         contentHeight = contentHeight + content:getSize().height
         initLeaderboardContent( mCurrentTotalNum + i, content, leaderboardInfo[i] )
+        content:addTouchEventListener( eventHandler )
     end
     mCurrentTotalNum = mCurrentTotalNum + table.getn( leaderboardInfo )
 
@@ -152,8 +155,11 @@ function loadMoreContent( leaderboardInfo )
     layout:requestDoLayout()
 end
 
-function contentClick( sender, eventType )
-    if eventType == TOUCH_EVENT_ENDED then
-
+function contentClick( info )
+    local id = info["Id"]
+    local name = "Unknow name"
+    if info["DisplayName"] ~= nil then
+        name = info["DisplayName"]
     end
+    EventManager:postEvent( Event.Enter_History, { id, name } )
 end

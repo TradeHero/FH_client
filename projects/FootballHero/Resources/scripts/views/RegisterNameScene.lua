@@ -43,7 +43,6 @@ end
 
 function backEventHandler( sender,eventType )
 	if eventType == TOUCH_EVENT_ENDED then
-        EventManager:postEvent( Event.Enter_Register )
     end
 end
 

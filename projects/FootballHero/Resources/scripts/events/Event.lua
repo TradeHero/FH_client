@@ -47,4 +47,13 @@ EventNameList =
     "Load_More_In_History",
 }
 
+EventNameDosenotTrackList = 
+{ 
+    "Check_File_Version",
+    "Show_Error_Message",
+    "Load_More_In_Leaderboard",
+    "Load_More_In_History",
+}
+
 EventList = CreatEnumTable( EventNameList )
+EventDosenotTrackList = CreatEnumTable( EventNameDosenotTrackList )

@@ -46,6 +46,7 @@
     <string>MatchListEmptyIndi.json</string>
     <string>PredFinalConfirm.json</string>
     <string>PredFinalConfirmContent.json</string>
+    <string>HistoryHomeForOthers.json</string>
   </JsonList>
   <CanvasSize>
     <Width>640</Width>
@@ -56,11 +57,11 @@
   <ResRelativePath />
   <imageFileList />
   <imagePngList>
-    <string>MatchPrediction/confirm.png</string>
-    <string>MatchPrediction/cancel.png</string>
-    <string>PredictionConfirm/facebook-icon.png</string>
-    <string>PredictionConfirm/facebook2-icon.png</string>
+    <string>LoginNReg/register-name-bg.jpg</string>
+    <string>LoginNReg/confirmation-icon.png</string>
+    <string>LoginNReg/photo.png</string>
+    <string>header/footballhero-logo.png</string>
   </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>LeaderboardScene.json</CurrentUIJson>
+  <CurrentUIJson>RegisterName.json</CurrentUIJson>
 </UIProject>

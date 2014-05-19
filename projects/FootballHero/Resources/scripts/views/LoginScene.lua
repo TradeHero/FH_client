@@ -45,7 +45,8 @@ end
 
 function backEventHandler( sender,eventType )
     if eventType == TOUCH_EVENT_ENDED then
-        EventManager:postEvent( Event.Enter_Login_N_Reg )
+        --EventManager:postEvent( Event.Enter_Login_N_Reg )
+        EventManager:popHistory()
     end
 end
 

@@ -5,6 +5,7 @@ local Navigator = require("scripts.views.Navigator")
 local EventManager = require("scripts.events.EventManager").getInstance()
 local Event = require("scripts.events.Event").EventList
 local TeamConfig = require("scripts.config.Team")
+local Logic = require("scripts.Logic").getInstance()
 
 
 local CONTENT_FADEIN_TIME = 1
@@ -13,13 +14,28 @@ local mWidget
 local mStep
 
 -- DS for couponHistory see CouponHistoryData
-function loadFrame( couponHistory )
-	local widget = GUIReader:shareReader():widgetFromJsonFile("scenes/HistoryHome.json")
-    mWidget = widget
-    mWidget:registerScriptHandler( EnterOrExit )
-    SceneManager.clearNAddWidget( widget )
+function loadFrame( userId, userName, couponHistory )
+    if userId == Logic:getUserId() then
+        mWidget = GUIReader:shareReader():widgetFromJsonFile("scenes/HistoryHome.json")
+    else
+        mWidget = GUIReader:shareReader():widgetFromJsonFile("scenes/HistoryHomeForOthers.json")
+        local name = tolua.cast( mWidget:getChildByName("name"), "Label" )
+        name:setText( userName )
 
-    Navigator.loadFrame( widget )
+        local backEventHandler = function( sender, eventType )
+            if eventType == TOUCH_EVENT_ENDED then
+                EventManager:popHistory()
+            end
+        end
+
+        local backBt = mWidget:getChildByName("Back")
+        backBt:addTouchEventListener( backEventHandler )
+    end
+	
+    mWidget:registerScriptHandler( EnterOrExit )
+    SceneManager.clearNAddWidget( mWidget )
+
+    Navigator.loadFrame( mWidget )
 
     initContent( couponHistory )
     mStep = 1
@@ -104,7 +120,7 @@ function initContent( couponHistory )
     for i = 1, table.getn( couponHistory:getClosedData() ) do
     	local eventHandler = function( sender, eventType )
             if eventType == TOUCH_EVENT_ENDED then
-                predictionClicked( false, couponHistory:getOpenData()[i] )
+                predictionClicked( false, couponHistory:getClosedData()[i] )
             end
         end
 
@@ -116,8 +132,8 @@ function initContent( couponHistory )
             contentHeight = contentHeight + content:getSize().height
             local bt = content:getChildByName("match")
             bt:addTouchEventListener( eventHandler )
-            helperInitPredictionCommon( content, couponHistory:getOpenData()[i] )
-            helperInitClosedPrediction( content, couponHistory:getOpenData()[i] )
+            helperInitPredictionCommon( content, couponHistory:getClosedData()[i] )
+            helperInitClosedPrediction( content, couponHistory:getClosedData()[i] )
 
             content:setOpacity( 0 )
             content:setCascadeOpacityEnabled( true )
@@ -175,7 +191,7 @@ function loadMoreContent( couponHistory )
     for i = 1, table.getn( couponHistory:getClosedData() ) do
         local eventHandler = function( sender, eventType )
             if eventType == TOUCH_EVENT_ENDED then
-                predictionClicked( false, couponHistory:getOpenData()[i] )
+                predictionClicked( false, couponHistory:getClosedData()[i] )
             end
         end
 
@@ -186,8 +202,8 @@ function loadMoreContent( couponHistory )
         contentHeight = contentHeight + content:getSize().height
         local bt = content:getChildByName("match")
         bt:addTouchEventListener( eventHandler )
-        helperInitPredictionCommon( content, couponHistory:getOpenData()[i] )
-        helperInitClosedPrediction( content, couponHistory:getOpenData()[i] )
+        helperInitPredictionCommon( content, couponHistory:getClosedData()[i] )
+        helperInitClosedPrediction( content, couponHistory:getClosedData()[i] )
     end
 
     if table.getn( couponHistory:getClosedData() ) > 0 then
@@ -234,14 +250,14 @@ function helperInitClosedPrediction( content, matchInfo )
     local pointWinInd = tolua.cast( content:getChildByName("pointWinInd"), "Button" )
     local statusBar = tolua.cast( content:getChildByName("statusBar"), "Button" )
     
-    if matchInfo["Result"] then
-        statusBar:setHighlighted( true )
+    if matchInfo["Profit"] >= 0 then
+        statusBar:setFocused( true )
     else
         pointWinInd:setBright( false )
         statusBar:setBright( false )
     end
 
-    points:setText( 1000 )
-    roi:setText( string.format( roi:getStringValue(), "50 %" ) )
-    winPercentage:setText( string.format( winPercentage:getStringValue(), "50 %" ) )
+    points:setText( matchInfo["Profit"] )
+    roi:setText( string.format( roi:getStringValue(), matchInfo["ROI"] ) )
+    winPercentage:setText( string.format( winPercentage:getStringValue(), matchInfo["WinPercentage"] ) )
 end

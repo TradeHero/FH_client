@@ -11,10 +11,8 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "MatchPrediction/confirm.png",
-    "MatchPrediction/cancel.png",
-    "PredictionConfirm/facebook-icon.png",
-    "PredictionConfirm/facebook2-icon.png"
+    "MatchListContent/guang-xia.png",
+    "LoginNReg/photo.png"
   ],
   "version": "1.4.0.1",
   "widgetTree": {

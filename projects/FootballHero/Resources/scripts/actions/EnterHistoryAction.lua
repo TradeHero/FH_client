@@ -7,6 +7,10 @@ local EventManager = require("scripts.events.EventManager").getInstance()
 local Event = require("scripts.events.Event").EventList
 local RequestUtils = require("scripts.RequestUtils")
 
+
+local mUserId = Logic:getUserId()
+local mUserName = ""
+
 function action( param )
     local historyMainScene = require("scripts.views.HistoryMainScene")
     if historyMainScene.isFrameShown() then
@@ -14,6 +18,12 @@ function action( param )
     end                                                             
 
 	local step = 1
+    
+    mUserId = Logic:getUserId()
+    if param ~= nil and param[1] ~= nil and param[2] ~= nil then
+        mUserId = param[1]
+        mUserName = param[2]
+    end
 
 	local handler = function( isSucceed, body, header, status, errorBuffer )
         print( "Http reponse: "..status.." and errorBuffer: "..errorBuffer )
@@ -35,7 +45,7 @@ function action( param )
 
     local httpRequest = HttpRequestForLua:create( CCHttpRequest.kHttpGet )
     httpRequest:addHeader( Logic:getAuthSessionString() )
-    httpRequest:sendHttpRequest( RequestUtils.GET_COUPON_HISTORY_REST_CALL.."?userId="..Logic:getUserId().."&step="..step, handler )
+    httpRequest:sendHttpRequest( RequestUtils.GET_COUPON_HISTORY_REST_CALL.."?userId="..mUserId.."&step="..step, handler )
 
     ConnectingMessage.loadFrame()
 end
@@ -45,7 +55,7 @@ function onRequestSuccess( response )
     local couponHistory = CouponHistoryData:new( response )
     
     local historyMainScene = require("scripts.views.HistoryMainScene")
-    historyMainScene.loadFrame( couponHistory )
+    historyMainScene.loadFrame( mUserId, mUserName, couponHistory )
 end
 
 function onRequestFailed( errorBuffer )

@@ -1,6 +1,6 @@
 /*
 ** Lua binding: CocoStudio
-** Generated automatically by tolua++-1.0.92 on 04/30/14 16:19:50.
+** Generated automatically by tolua++-1.0.92 on 05/19/14 14:40:50.
 */
 
 /****************************************************************************
@@ -10856,6 +10856,39 @@ static int tolua_CocoStudio_Button_getTitleFontName00(lua_State* tolua_S)
 #ifndef TOLUA_RELEASE
  tolua_lerror:
  tolua_error(tolua_S,"#ferror in function 'getTitleFontName'.",&tolua_err);
+ return 0;
+#endif
+}
+#endif //#ifndef TOLUA_DISABLE
+
+/* method: setBrightStyle of class  Button */
+#ifndef TOLUA_DISABLE_tolua_CocoStudio_Button_setBrightStyle00
+static int tolua_CocoStudio_Button_setBrightStyle00(lua_State* tolua_S)
+{
+#ifndef TOLUA_RELEASE
+ tolua_Error tolua_err;
+ if (
+     !tolua_isusertype(tolua_S,1,"Button",0,&tolua_err) ||
+     !tolua_isnumber(tolua_S,2,0,&tolua_err) ||
+     !tolua_isnoobj(tolua_S,3,&tolua_err)
+ )
+  goto tolua_lerror;
+ else
+#endif
+ {
+  Button* self = (Button*)  tolua_tousertype(tolua_S,1,0);
+  BrightStyle style = ((BrightStyle) (int)  tolua_tonumber(tolua_S,2,0));
+#ifndef TOLUA_RELEASE
+  if (!self) tolua_error(tolua_S,"invalid 'self' in function 'setBrightStyle'", NULL);
+#endif
+  {
+   self->setBrightStyle(style);
+  }
+ }
+ return 0;
+#ifndef TOLUA_RELEASE
+ tolua_lerror:
+ tolua_error(tolua_S,"#ferror in function 'setBrightStyle'.",&tolua_err);
  return 0;
 #endif
 }
@@ -23793,6 +23826,9 @@ TOLUA_API int tolua_CocoStudio_open (lua_State* tolua_S)
    tolua_function(tolua_S,"sortAllChildren",tolua_CocoStudio_Layout_sortAllChildren00);
    tolua_function(tolua_S,"requestDoLayout",tolua_CocoStudio_Layout_requestDoLayout00);
   tolua_endmodule(tolua_S);
+  tolua_constant(tolua_S,"BRIGHT_NONE",BRIGHT_NONE);
+  tolua_constant(tolua_S,"BRIGHT_NORMAL",BRIGHT_NORMAL);
+  tolua_constant(tolua_S,"BRIGHT_HIGHLIGHT",BRIGHT_HIGHLIGHT);
   #ifdef __cplusplus
   tolua_cclass(tolua_S,"Button","Button","Widget",tolua_collect_Button);
   #else
@@ -23832,6 +23868,7 @@ TOLUA_API int tolua_CocoStudio_open (lua_State* tolua_S)
    tolua_function(tolua_S,"getTitleFontSize",tolua_CocoStudio_Button_getTitleFontSize00);
    tolua_function(tolua_S,"setTitleFontName",tolua_CocoStudio_Button_setTitleFontName00);
    tolua_function(tolua_S,"getTitleFontName",tolua_CocoStudio_Button_getTitleFontName00);
+   tolua_function(tolua_S,"setBrightStyle",tolua_CocoStudio_Button_setBrightStyle00);
   tolua_endmodule(tolua_S);
   tolua_constant(tolua_S,"CHECKBOX_STATE_EVENT_SELECTED",CHECKBOX_STATE_EVENT_SELECTED);
   tolua_constant(tolua_S,"CHECKBOX_STATE_EVENT_UNSELECTED",CHECKBOX_STATE_EVENT_UNSELECTED);

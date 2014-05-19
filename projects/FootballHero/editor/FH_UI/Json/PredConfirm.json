@@ -11,12 +11,15 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "MatchPrediction/Match-List-popup-bg.png",
+    "MatchListContent/vs-button.png",
     "commonRes/Arsenal.png",
-    "MatchPrediction/email.jpg",
-    "MatchPrediction/facebook.jpg",
-    "MatchPrediction/confirm.png",
-    "MatchPrediction/cancel.png"
+    "history/jiantou.png",
+    "history/hengxian.png",
+    "history/blue.png",
+    "history/green.png",
+    "history/red.png",
+    "history/shangsheng.png",
+    "history/xiajiang.png"
   ],
   "version": "1.4.0.1",
   "widgetTree": {

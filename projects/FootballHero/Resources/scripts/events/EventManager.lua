@@ -21,7 +21,8 @@ function EventManager:new()
 	end
 	
 	local obj = {
-		mEventHandler = {}
+		mEventHandler = {},
+		mEventHistory = {}
 	}
     
     setmetatable(obj, self)
@@ -42,6 +43,33 @@ function EventManager:postEvent( eventId, param )
 		print( "Event id = "..Event.GetEventNameById( eventId ).." has no action." )
 	else
 		print( "Event id = "..Event.GetEventNameById( eventId ).." handled." )
+		self:addHistory( eventId, param )
 		self.mEventHandler[eventId].action( param )
+	end
+end
+
+function EventManager:addHistory( eventId, param )
+	local eventName = Event.GetEventNameById( eventId )
+	if Event.EventDosenotTrackList[eventName] == nil then
+		print("Track: "..eventName)
+		local history = {
+			["eventId"] = eventId,
+			["param"] = param
+		}
+
+		table.insert( self.mEventHistory, history )
+
+	else
+		print("Does not track: "..eventName)
+	end
+end
+
+function EventManager:popHistory()
+	table.remove( self.mEventHistory ) -- Throw away the current one.
+	local lastHistory = table.remove( self.mEventHistory ) 
+	if lastHistory ~= nil then
+		self:postEvent( lastHistory["eventId"], lastHistory["param"] )
+	else
+		print( "Dose not have history event." )
 	end
 end
