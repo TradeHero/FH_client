@@ -73,7 +73,7 @@ function onRequestSuccess( sessionToken, userId, configMd5Info, displayName, sta
     Logic:setStartLeagueId( startLeagueId )
     Logic:setBalance( balance )
     
-    local finishEvent = Event.Enter_Match_List
+    local finishEvent = Event.Enter_Sel_Fav_Team
     if displayName == nil then
         finishEvent = Event.Enter_Register_Name
     end

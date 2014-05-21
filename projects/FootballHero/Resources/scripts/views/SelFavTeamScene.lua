@@ -11,6 +11,8 @@ local LeagueListScene = require("scripts.views.LeagueListScene")
 
 local TEAM_NUM = 20
 local mWidget
+local mDisplayLeagueId
+local mLeagueId
 local mTeamId
 
 function loadFrame()
@@ -45,13 +47,14 @@ end
 
 function okEventHandler( sender, eventType )
     if eventType == TOUCH_EVENT_ENDED then
-        print("Favourite Team is: "..mTeamId)
-        EventManager:postEvent( Event.Do_Post_Fav_Team, { mTeamId } )
+        print("Favourite Team is: "..mTeamId.." in league: "..mLeagueId)
+        EventManager:postEvent( Event.Do_Post_Fav_Team, { mTeamId, mLeagueId } )
     end
 end
 
 function leagueSelected( leagueId )
-    print( "leagueSelected: "..LeagueConfig.getConfigId( leagueId ) )
+    mDisplayLeagueId = LeagueConfig.getConfigId( leagueId )
+    print( "leagueSelected: "..mDisplayLeagueId )
 --[[
     -- Update the country list
     local countryContainer = tolua.cast( mWidget:getChildByName("countryList"), "ScrollView" )
@@ -114,9 +117,10 @@ end
 
 function teamSelected( index )
     print("Team Selected: "..index)
+    mLeagueId = mDisplayLeagueId
     mTeamId = TeamConfig.getTeamId( index )
-    local leagueName = tolua.cast( mWidget:getChildByName("leagueName"), "Label" )
-    leagueName:setText( "Your favourite team: "..TeamConfig.getTeamName( mTeamId ) )
+    local teamSelected = tolua.cast( mWidget:getChildByName("leagueName"), "Label" )
+    teamSelected:setText( "Your favourite team: "..TeamConfig.getTeamName( index ) )
 
     local okBt = mWidget:getChildByName("ok")
     okBt:setBright( true )

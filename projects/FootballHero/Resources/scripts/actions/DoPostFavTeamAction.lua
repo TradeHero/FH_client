@@ -6,11 +6,14 @@ local ConnectingMessage = require("scripts.views.ConnectingMessage")
 local Logic = require("scripts.Logic").getInstance()
 
 
+local mStartLeague
+
 function action( param )
 	local Json = require("json")
 	local RequestUtils = require("scripts.RequestUtils")
 
-    favTeamID = param[1]
+    local favTeamID = param[1]
+    mStartLeague = param[2]
 
     local handler = function( isSucceed, body, header, status, errorBuffer )
         print( "Http reponse: "..status.." and errorBuffer: "..errorBuffer )
@@ -30,7 +33,7 @@ function action( param )
         end
     end
 
-    local requestContent = { TeamId = favTeamID }
+    local requestContent = { TeamId = favTeamID, LeagueId = mStartLeague }
     local requestContentText = Json.encode( requestContent )
     print("Request content is "..requestContentText)
 
@@ -44,6 +47,7 @@ function action( param )
 end
 
 function onRequestSuccess()
+    Logic:setStartLeagueId( mStartLeague )
     EventManager:postEvent( Event.Enter_Match_List )
 end
 
