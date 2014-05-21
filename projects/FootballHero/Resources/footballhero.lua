@@ -36,6 +36,9 @@ local function main()
     --eventManager:postEvent( event.Enter_History )
     --eventManager:postEvent( event.Enter_Leaderboard )
     --eventManager:postEvent( event.Enter_Pred_Total_Confirm )
+
+    --local ConnectingMessage = require("scripts.views.ConnectingMessage")
+    --ConnectingMessage.loadFrame()
 end
 
 xpcall(main, __G__TRACKBACK__)

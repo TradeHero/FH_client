@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<AnimationProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ProjectDir>Z:\FH_client\projects\FootballHero\editor\FH_ANIM\waiting</ProjectDir>
+  <Version>1.4.0.1</Version>
+  <Resources>Z:\FH_client\projects\FootballHero\editor\FH_ANIM\waiting\Resources</Resources>
+  <Name>waiting</Name>
+  <JsonFileName>waiting.json</JsonFileName>
+  <JsonFolder>Z:\FH_client\projects\FootballHero\editor\FH_ANIM\waiting\Json</JsonFolder>
+  <JsonList />
+  <CanvasSize>
+    <Width>0</Width>
+    <Height>0</Height>
+  </CanvasSize>
+  <filePath>Z:\FH_client\projects\FootballHero\editor\FH_ANIM\waiting\waiting.xml.animation</filePath>
+  <ProjectType>AnimationProject</ProjectType>
+  <ResRelativePath />
+  <ResourceFileList>
+    <string>waiting0.plist</string>
+  </ResourceFileList>
+  <bBatchImage>true</bBatchImage>
+</AnimationProject>

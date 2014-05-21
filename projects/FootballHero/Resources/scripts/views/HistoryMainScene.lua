@@ -239,7 +239,7 @@ function helperInitOpenPrediction( content, matchInfo )
     local pointWinInd = tolua.cast( content:getChildByName("pointWinInd"), "Button" )
 
     points:setText( "-" )
-    roi:setText( string.format( roi:getStringValue(), "0 %" ) )
+    roi:setText( string.format( roi:getStringValue(), 0 ) )
     winPercentage:setText( string.format( winPercentage:getStringValue(), "%" ) )
     pointWinInd:setEnabled( false )
 end
