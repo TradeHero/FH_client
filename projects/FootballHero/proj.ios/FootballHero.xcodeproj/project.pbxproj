@@ -227,9 +227,6 @@
 		73A89708192B2A1E0079AD05 /* SwrveResourceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 73A89700192B2A1E0079AD05 /* SwrveResourceManager.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		73A89709192B2A1E0079AD05 /* SwrveSignatureProtectedFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 73A89702192B2A1E0079AD05 /* SwrveSignatureProtectedFile.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		73A8970A192B2A1E0079AD05 /* SwrveTransactionListener.m in Sources */ = {isa = PBXBuildFile; fileRef = 73A89705192B2A1E0079AD05 /* SwrveTransactionListener.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		73A8970E192B33D00079AD05 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73A8970B192B33D00079AD05 /* CFNetwork.framework */; };
-		73A8970F192B33D00079AD05 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73A8970C192B33D00079AD05 /* Security.framework */; };
-		73A89710192B33D00079AD05 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73A8970D192B33D00079AD05 /* StoreKit.framework */; };
 		73BFF75A191779FB002F173A /* des56.c in Sources */ = {isa = PBXBuildFile; fileRef = 73BFF753191779FB002F173A /* des56.c */; };
 		73BFF75B191779FB002F173A /* ldes56.c in Sources */ = {isa = PBXBuildFile; fileRef = 73BFF755191779FB002F173A /* ldes56.c */; };
 		73BFF75C191779FB002F173A /* md5.c in Sources */ = {isa = PBXBuildFile; fileRef = 73BFF757191779FB002F173A /* md5.c */; };
@@ -237,6 +234,9 @@
 		73BFF75F19177A46002F173A /* MD5.lua in Resources */ = {isa = PBXBuildFile; fileRef = 73BFF75E19177A46002F173A /* MD5.lua */; };
 		73DCA12F192C4C4F008AC05D /* AnalyticsHandler.mm in Sources */ = {isa = PBXBuildFile; fileRef = 73DCA12E192C4C4F008AC05D /* AnalyticsHandler.mm */; };
 		73DCA133192C4EE7008AC05D /* Analytics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 73DCA131192C4EE7008AC05D /* Analytics.cpp */; };
+		73DCA155192C7EF9008AC05D /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73DCA152192C7EF9008AC05D /* CFNetwork.framework */; };
+		73DCA156192C7EFA008AC05D /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73DCA153192C7EF9008AC05D /* Security.framework */; };
+		73DCA157192C7EFA008AC05D /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73DCA154192C7EF9008AC05D /* StoreKit.framework */; };
 		73EDFC8018EBE69E00322624 /* FacebookDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 73EDFC7D18EBE69E00322624 /* FacebookDelegate.cpp */; };
 		73EDFC8518EC005700322624 /* LuaCocos2dExtension.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 73EDFC8318EC005700322624 /* LuaCocos2dExtension.cpp */; };
 		73EDFC8B18ECF85F00322624 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73EDFC8A18ECF85F00322624 /* FacebookSDK.framework */; };
@@ -761,9 +761,6 @@
 		73A89703192B2A1E0079AD05 /* SwrveTransactionCompleteListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SwrveTransactionCompleteListener.h; path = Sdk/Track/SwrveTransactionCompleteListener.h; sourceTree = "<group>"; };
 		73A89704192B2A1E0079AD05 /* SwrveTransactionListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SwrveTransactionListener.h; path = Sdk/Track/SwrveTransactionListener.h; sourceTree = "<group>"; };
 		73A89705192B2A1E0079AD05 /* SwrveTransactionListener.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SwrveTransactionListener.m; path = Sdk/Track/SwrveTransactionListener.m; sourceTree = "<group>"; };
-		73A8970B192B33D00079AD05 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
-		73A8970C192B33D00079AD05 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
-		73A8970D192B33D00079AD05 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		73BFF753191779FB002F173A /* des56.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = des56.c; path = crypt/des56.c; sourceTree = "<group>"; };
 		73BFF754191779FB002F173A /* des56.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = des56.h; path = crypt/des56.h; sourceTree = "<group>"; };
 		73BFF755191779FB002F173A /* ldes56.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ldes56.c; path = crypt/ldes56.c; sourceTree = "<group>"; };
@@ -777,6 +774,9 @@
 		73DCA12E192C4C4F008AC05D /* AnalyticsHandler.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AnalyticsHandler.mm; sourceTree = "<group>"; };
 		73DCA131192C4EE7008AC05D /* Analytics.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Analytics.cpp; path = Utils/Analytics.cpp; sourceTree = "<group>"; };
 		73DCA132192C4EE7008AC05D /* Analytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Analytics.h; path = Utils/Analytics.h; sourceTree = "<group>"; };
+		73DCA152192C7EF9008AC05D /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = swrve/CFNetwork.framework; sourceTree = "<group>"; };
+		73DCA153192C7EF9008AC05D /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = swrve/Security.framework; sourceTree = "<group>"; };
+		73DCA154192C7EF9008AC05D /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = swrve/StoreKit.framework; sourceTree = "<group>"; };
 		73EDFC7D18EBE69E00322624 /* FacebookDelegate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FacebookDelegate.cpp; path = Social/FacebookDelegate.cpp; sourceTree = "<group>"; };
 		73EDFC7E18EBE69E00322624 /* FacebookDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FacebookDelegate.h; path = Social/FacebookDelegate.h; sourceTree = "<group>"; };
 		73EDFC8318EC005700322624 /* LuaCocos2dExtension.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LuaCocos2dExtension.cpp; sourceTree = "<group>"; };
@@ -902,9 +902,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				73A8970E192B33D00079AD05 /* CFNetwork.framework in Frameworks */,
-				73A8970F192B33D00079AD05 /* Security.framework in Frameworks */,
-				73A89710192B33D00079AD05 /* StoreKit.framework in Frameworks */,
+				73DCA155192C7EF9008AC05D /* CFNetwork.framework in Frameworks */,
+				73DCA156192C7EFA008AC05D /* Security.framework in Frameworks */,
+				73DCA157192C7EFA008AC05D /* StoreKit.framework in Frameworks */,
 				73EDFC8B18ECF85F00322624 /* FacebookSDK.framework in Frameworks */,
 				15C1568E1683131500D239F2 /* libcurl.a in Frameworks */,
 				15C1568C168311EC00D239F2 /* libcocos2dx.a in Frameworks */,
@@ -2031,9 +2031,9 @@
 		F293B3CB15EB7BE500256477 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				73A8970B192B33D00079AD05 /* CFNetwork.framework */,
-				73A8970C192B33D00079AD05 /* Security.framework */,
-				73A8970D192B33D00079AD05 /* StoreKit.framework */,
+				73DCA152192C7EF9008AC05D /* CFNetwork.framework */,
+				73DCA153192C7EF9008AC05D /* Security.framework */,
+				73DCA154192C7EF9008AC05D /* StoreKit.framework */,
 				73EDFC8A18ECF85F00322624 /* FacebookSDK.framework */,
 				15C1568D1683131500D239F2 /* libcurl.a */,
 				F293B3CC15EB7BE500256477 /* QuartzCore.framework */,
@@ -2557,7 +2557,6 @@
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					/Users/trdehero/Documents/FacebookSDK,
 					"$(PROJECT_DIR)",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -2619,7 +2618,6 @@
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					/Users/trdehero/Documents/FacebookSDK,
 					"$(PROJECT_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;

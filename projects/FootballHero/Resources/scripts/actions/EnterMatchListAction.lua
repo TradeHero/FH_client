@@ -75,5 +75,14 @@ function onRequestSuccess( matchList )
 end
 
 function onRequestFailed( errorBuffer )
+    local MatchListData = require("scripts.data.MatchListData").MatchListData
+    local matchList = MatchListData:new()
+    local matchListScene = require("scripts.views.MatchListScene")
+    if matchListScene.isShown() then
+        matchListScene.initMatchList( matchList )
+    else
+        matchListScene.loadFrame( matchList )
+    end
+    
     EventManager:postEvent( Event.Show_Error_Message, { errorBuffer } )
 end

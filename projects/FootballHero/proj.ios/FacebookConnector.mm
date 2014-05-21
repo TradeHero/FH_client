@@ -46,7 +46,4 @@ void FacebookConnector::login()
         Social::FacebookDelegate::sharedDelegate()->loginResult(accessToken);
         
     }];
-    
-    [[Swrve sharedInstance] event:@"trigger_message_event"];
-    [[Swrve sharedInstance] sendQueuedEvents];
 }
