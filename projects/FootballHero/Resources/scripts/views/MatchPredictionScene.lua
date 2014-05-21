@@ -95,6 +95,8 @@ function helperInitMatchInfo( content, marketsData )
     local team2Name = tolua.cast( content:getChildByName("team2Name"), "Label" )
     local team1WinPoint = tolua.cast( team1:getChildByName("team1WinPoint"), "Label" )
     local team2WinPoint = tolua.cast( team2:getChildByName("team2WinPoint"), "Label" )
+    local stake = tolua.cast( content:getChildByName("stake"), "Label" )
+    local balance = tolua.cast( content:getChildByName("balance"), "Label" )
 
     team1:loadTexture( TeamConfig.getLogo( TeamConfig.getConfigIdByKey( mMatch["HomeTeamId"] ) ) )
     team2:loadTexture( TeamConfig.getLogo( TeamConfig.getConfigIdByKey( mMatch["AwayTeamId"] ) ) )
@@ -102,6 +104,9 @@ function helperInitMatchInfo( content, marketsData )
     team2Name:setText( TeamConfig.getTeamName( TeamConfig.getConfigIdByKey( mMatch["AwayTeamId"] ) ) )
     team1WinPoint:setText( MarketsForGameData.getOddsForType( mMarketsData, MarketConfig.ODDS_TYPE_ONE_OPTION ).." points" )
     team2WinPoint:setText( MarketsForGameData.getOddsForType( mMarketsData, MarketConfig.ODDS_TYPE_TWO_OPTION ).." points" )
+
+    stake:setText( string.format( stake:getStringValue(), Constants.STAKE ) )
+    balance:setText( string.format( balance:getStringValue(), Logic:getBalance() - Logic:getUncommitedBalance() ) )
 end
 
 

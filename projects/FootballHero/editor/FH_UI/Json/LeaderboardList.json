@@ -11,10 +11,9 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "LoginNReg/register-name-bg.jpg",
-    "LoginNReg/confirmation-icon.png",
-    "LoginNReg/photo.png",
-    "header/footballhero-logo.png"
+    "header/guangyun.png",
+    "history/bg.png",
+    "header/back.png"
   ],
   "version": "1.4.0.1",
   "widgetTree": {

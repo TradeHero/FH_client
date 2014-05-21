@@ -3,6 +3,7 @@ module(..., package.seeall)
 local Json = require("json")
 local FileUtils = require("scripts.FileUtils")
 local Coupons = require("scripts.data.Coupons").Coupons
+local Constants = require("scripts.Constants")
 
 -- Singleton of logic
 local MATCH_PREDICTION = "matchPrediction"
@@ -180,4 +181,8 @@ end
 
 function Logic:getBalance()
 	return self.balance
+end
+
+function Logic:getUncommitedBalance()
+	return self.mCoupons:getSize() * Constants.STAKE
 end

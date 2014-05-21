@@ -108,12 +108,16 @@ function helperInitMarketInfo( content )
     local no = tolua.cast( mWidget:getChildByName("no"), "ImageView" )
     local answer1Point = tolua.cast( yes:getChildByName("answer1Point"), "Label" )
     local answer2Point = tolua.cast( no:getChildByName("answer2Point"), "Label" )
+    local stake = tolua.cast( content:getChildByName("stake"), "Label" )
+    local balance = tolua.cast( content:getChildByName("balance"), "Label" )
     
     team1Name:setText( TeamConfig.getTeamName( TeamConfig.getConfigIdByKey( mMatch["HomeTeamId"] ) ) )
     team2Name:setText( TeamConfig.getTeamName( TeamConfig.getConfigIdByKey( mMatch["AwayTeamId"] ) ) )
     answer1Point:setText( MarketsForGameData.getOddsForType( mMarketsData, MarketConfig.ODDS_TYPE_ONE_OPTION ).." points" )
     answer2Point:setText( MarketsForGameData.getOddsForType( mMarketsData, MarketConfig.ODDS_TYPE_TWO_OPTION ).." points" )
-    
+    stake:setText( string.format( stake:getStringValue(), Constants.STAKE ) )
+    balance:setText( string.format( balance:getStringValue(), Logic:getBalance() - Logic:getUncommitedBalance() ) )
+
     helperInitQuestion( content )
 end
 

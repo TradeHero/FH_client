@@ -29,7 +29,8 @@ function postPredictionData()
         end
         ConnectingMessage.selfRemove()
         if status == RequestUtils.HTTP_200 then
-            onRequestSuccess()
+            local balance = jsonResponse["Balance"]
+            onRequestSuccess( balance )
         else
             onRequestFailed( jsonResponse["Message"] )
         end
@@ -48,8 +49,9 @@ function postPredictionData()
     ConnectingMessage.loadFrame()
 end
 
-function onRequestSuccess()
+function onRequestSuccess( balance )
     Logic:resetPredictions()
+    Logic:setBalance( balance )
     EventManager:postEvent( Event.Enter_Match_List )
 end
 

@@ -18,3 +18,5 @@ YES = 1
 NO = 2
 
 FONT_1 = "fonts/Newgtbxc.ttf"
+
+STAKE = 1000
