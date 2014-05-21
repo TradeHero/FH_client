@@ -100,6 +100,9 @@
     <Filter Include="Social">
       <UniqueIdentifier>{1ef6723c-1d80-42ed-b616-e7a966953fb2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Utils">
+      <UniqueIdentifier>{8024763a-7143-47c5-9e53-1386853defe8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\GUI\CCScrollView\CCScrollView.cpp">
@@ -488,6 +491,9 @@
     </ClCompile>
     <ClCompile Include="..\GUI\CCEditBox\EditBoxDelegateForLua.cpp">
       <Filter>GUI\CCEditBox</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Utils\Analytics.cpp">
+      <Filter>Utils</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -879,6 +885,9 @@
     </ClInclude>
     <ClInclude Include="..\GUI\CCEditBox\EditBoxDelegateForLua.h">
       <Filter>GUI\CCEditBox</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Utils\Analytics.h">
+      <Filter>Utils</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

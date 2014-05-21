@@ -21,7 +21,7 @@ POST_COUPONS_REST_CALL = SERVER_IP.."/api/coupons/placeCoupons"
 POST_FAV_TEAM_REST_CALL = SERVER_IP.."/api/user/setFavoriteTeam"
 
 FACEBOOK_FRIENDS_LIST_CALL = "/me/friends?access_token="
-USE_DEV = "false"
+USE_DEV = false
 
 function setServerIP( serverIp )
     EMAIL_REGISTER_REST_CALL = serverIp.."/api/user/SignupWithEmail"
@@ -39,7 +39,7 @@ function setServerIP( serverIp )
 
     CDN_SERVER_IP = "http://portalvhdss3c1vgx5mrzv.blob.core.windows.net/fhdevsettings/"
 
-    USE_DEV = "true"
+    USE_DEV = true
 end
 
 function createHeaderObject( headerStr )

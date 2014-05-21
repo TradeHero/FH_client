@@ -50,6 +50,7 @@ function Logic:new()
 		userId = "",
 		displayName = "",
 		startLeagueId = 0,
+		balance = 0,
 	}
     
     setmetatable(obj, self)
@@ -171,4 +172,12 @@ end
 
 function Logic:setStartLeagueId( id )
 	self.startLeagueId = id
+end
+
+function Logic:setBalance( balance )
+	self.balance = balance
+end
+
+function Logic:getBalance()
+	return self.balance
 end

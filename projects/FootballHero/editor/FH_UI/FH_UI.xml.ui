@@ -63,5 +63,5 @@
     <string>header/footballhero-logo.png</string>
   </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>PredFinalConfirmContent.json</CurrentUIJson>
+  <CurrentUIJson>LeaderboardList.json</CurrentUIJson>
 </UIProject>

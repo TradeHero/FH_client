@@ -51,13 +51,16 @@ function action( param )
             local sessionToken = jsonResponse["SessionToken"]
             local userId = jsonResponse["UserId"]
             local configMd5Info = jsonResponse["ConfigMd5Info"]
-            onRequestSuccess( sessionToken, userId, configMd5Info )
+            local displayName = jsonResponse["DisplayName"]
+            local startLeagueId = jsonResponse["StartLeagueId"]
+            local balance = jsonResponse["Balance"]
+            onRequestSuccess( sessionToken, userId, configMd5Info, displayName, startLeagueId, balance )
         else
             onRequestFailed( jsonResponse["Message"] )
         end
     end
 
-    local requestContent = { Email = mEmail, Password = mPassword }
+    local requestContent = { Email = mEmail, Password = mPassword, useDev = RequestUtils.USE_DEV }
     local requestContentText = Json.encode( requestContent )
     print("Request content is "..requestContentText)
 
@@ -69,9 +72,12 @@ function action( param )
     ConnectingMessage.loadFrame()
 end
 
-function onRequestSuccess( sessionToken, userId, configMd5Info )
+function onRequestSuccess( sessionToken, userId, configMd5Info, displayName, startLeagueId, balance )
     local Logic = require("scripts.Logic").getInstance()
     Logic:setUserInfo( mEmail, mPassword, sessionToken, userId )
+    Logic:setDisplayName( displayName )
+    Logic:setStartLeagueId( startLeagueId )
+    Logic:setBalance( balance )
 
     EventManager:postEvent( Event.Check_File_Version, { configMd5Info, Event.Enter_Register_Name } )
 end

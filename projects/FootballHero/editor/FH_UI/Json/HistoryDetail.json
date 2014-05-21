@@ -11,11 +11,10 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "MatchPrediction/Will-both-teams-score-no.png",
-    "history/hengxian.png",
-    "history/blue.png",
-    "history/green.png",
-    "history/red.png"
+    "LoginNReg/register-name-bg.jpg",
+    "LoginNReg/confirmation-icon.png",
+    "LoginNReg/photo.png",
+    "header/footballhero-logo.png"
   ],
   "version": "1.4.0.1",
   "widgetTree": {

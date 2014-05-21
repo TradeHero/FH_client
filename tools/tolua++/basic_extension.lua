@@ -298,10 +298,12 @@ extern "C" {
 #include "FacebookDelegate.h"
 #include "HttpRequestForLua.h"
 #include "EditBoxDelegateForLua.h"
+#include "Analytics.h"
 
 using namespace cocos2d;
 using namespace cocos2d::extension;
-using namespace Social;]])
+using namespace Social;
+using namespace Utils;]])
 
       replace([[/* Exported function */
 TOLUA_API int  tolua_Extension_open (lua_State* tolua_S);]], [[]])

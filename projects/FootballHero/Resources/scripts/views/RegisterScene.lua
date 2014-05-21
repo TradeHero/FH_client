@@ -54,7 +54,5 @@ function registerEventHandler( sender,eventType )
         local passConf = mWidget:getChildByName( PASSWORD_CONF_CONTAINER_NAME ):getNodeByTag( 1 ):getText()
 
         EventManager:postEvent( Event.Do_Register, { email, pass, passConf } )
-
-        --EventManager:postEvent( Event.Enter_Register_Name )
     end
 end

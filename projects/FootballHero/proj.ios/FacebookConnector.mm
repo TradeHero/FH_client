@@ -10,6 +10,7 @@
 #include "FacebookDelegate.h"
 #import <FacebookSDK/FacebookSDK.h>
 #import "FBSessionSingleton.h"
+#import "swrve.h"
 
 static FacebookConnector* instance;
 
@@ -45,4 +46,7 @@ void FacebookConnector::login()
         Social::FacebookDelegate::sharedDelegate()->loginResult(accessToken);
         
     }];
+    
+    [[Swrve sharedInstance] event:@"trigger_message_event"];
+    [[Swrve sharedInstance] sendQueuedEvents];
 }

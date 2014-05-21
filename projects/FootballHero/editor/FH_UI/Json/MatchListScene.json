@@ -11,14 +11,10 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "LoginNReg/Account-bg.jpg",
-    "header/guangyun.png",
-    "LoginNReg/facebook-icon.png",
-    "LoginNReg/register-icon.png",
-    "LoginNReg/line.png",
-    "LoginNReg/sign-in-icon.png",
-    "header/footballhero-logo.png",
-    "GUI/button.png"
+    "LoginNReg/register-name-bg.jpg",
+    "LoginNReg/confirmation-icon.png",
+    "LoginNReg/photo.png",
+    "header/footballhero-logo.png"
   ],
   "version": "1.4.0.1",
   "widgetTree": {
@@ -475,8 +471,8 @@
           "rotation": 0,
           "scaleX": 1,
           "scaleY": 1,
-          "sizePercentX": 0.1484375,
-          "sizePercentY": 0.0237676054,
+          "sizePercentX": 0.2796875,
+          "sizePercentY": 0.04049296,
           "sizeType": 0,
           "tag": 19,
           "touchAble": false,
@@ -570,7 +566,7 @@
       "classname": "Panel",
       "name": "Panel",
       "ZOrder": 0,
-      "actiontag": 1,
+      "actiontag": -1,
       "anchorPointX": 0,
       "anchorPointY": 0,
       "classType": "CocoStudio.EngineAdapterWrap.CSPanel",

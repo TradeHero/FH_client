@@ -17,6 +17,8 @@ local mStep
 function loadFrame( userId, userName, couponHistory )
     if userId == Logic:getUserId() then
         mWidget = GUIReader:shareReader():widgetFromJsonFile("scenes/HistoryHome.json")
+        local totalPoints = tolua.cast( mWidget:getChildByName("totalPoints"), "Label" )
+        totalPoints:setText( string.format( totalPoints:getStringValue(), Logic:getBalance() ) )
     else
         mWidget = GUIReader:shareReader():widgetFromJsonFile("scenes/HistoryHomeForOthers.json")
         local name = tolua.cast( mWidget:getChildByName("name"), "Label" )

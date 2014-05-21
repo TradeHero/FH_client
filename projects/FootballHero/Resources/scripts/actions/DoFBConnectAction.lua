@@ -45,29 +45,40 @@ function onFBConnectSuccess( accessToken )
             local sessionToken = jsonResponse["SessionToken"]
             local userId = jsonResponse["UserId"]
             local configMd5Info = jsonResponse["ConfigMd5Info"]
-            onRequestSuccess( sessionToken, userId, configMd5Info )
+            local displayName = jsonResponse["DisplayName"]
+            local startLeagueId = jsonResponse["StartLeagueId"]
+            local balance = jsonResponse["Balance"]
+            onRequestSuccess( sessionToken, userId, configMd5Info, displayName, startLeagueId, balance )
         else
             onRequestFailed( jsonResponse["Message"] )
         end
     end
 
-    local requestContent = { SocialNetworkType = 0, AuthToken = accessToken }
+    local requestContent = { SocialNetworkType = 0, AuthToken = accessToken, useDev = RequestUtils.USE_DEV }
     local requestContentText = Json.encode( requestContent )
     print("Request content is "..requestContentText)
 
     local httpRequest = HttpRequestForLua:create( CCHttpRequest.kHttpPost )
     httpRequest:addHeader( Constants.CONTENT_TYPE_JSON )
     httpRequest:getRequest():setRequestData( requestContentText, string.len( requestContentText ) )
-    httpRequest:sendHttpRequest( RequestUtils.FB_LOGIN_REST_CALL.."?useDev="..RequestUtils.USE_DEV, handler )
+    httpRequest:sendHttpRequest( RequestUtils.FB_LOGIN_REST_CALL, handler )
 
     ConnectingMessage.loadFrame()
 end
 
-function onRequestSuccess( sessionToken, userId, configMd5Info )
+function onRequestSuccess( sessionToken, userId, configMd5Info, displayName, startLeagueId, balance )
     local Logic = require("scripts.Logic").getInstance()
     Logic:setUserInfo( "", "", sessionToken, userId )
+    Logic:setDisplayName( displayName )
+    Logic:setStartLeagueId( startLeagueId )
+    Logic:setBalance( balance )
     
-    EventManager:postEvent( Event.Check_File_Version, { configMd5Info, Event.Enter_Register_Name } )
+    local finishEvent = Event.Enter_Match_List
+    if displayName == nil then
+        finishEvent = Event.Enter_Register_Name
+    end
+
+    EventManager:postEvent( Event.Check_File_Version, { configMd5Info, finishEvent } )
 end
 
 function onRequestFailed( errorBuffer )

@@ -11,10 +11,10 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "MatchPrediction/confirm.png",
-    "MatchPrediction/cancel.png",
-    "PredictionConfirm/facebook-icon.png",
-    "PredictionConfirm/facebook2-icon.png"
+    "LoginNReg/register-name-bg.jpg",
+    "LoginNReg/confirmation-icon.png",
+    "LoginNReg/photo.png",
+    "header/footballhero-logo.png"
   ],
   "version": "1.4.0.1",
   "widgetTree": {

@@ -26,6 +26,7 @@
 #import "cocos2d.h"
 #import "EAGLView.h"
 #import "AppDelegate.h"
+#import "swrve.h"
 
 #import "RootViewController.h"
 #import "FBSessionSingleton.h"
@@ -76,6 +77,19 @@ static AppDelegate s_sharedApplication;
     [[UIApplication sharedApplication] setStatusBarHidden: YES];
 
     cocos2d::CCApplication::sharedApplication()->run();
+    [Swrve sharedInstanceWithAppID:1440 apiKey:@"zGvMCt6LQBTb1CNmnl8N"];
+    return YES;
+}
+
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
+    
+    // Normally your app would handle url navigation here and go to the correct
+    // app location.  In this example we just print the url in an alert.
+    
+    UIAlertView *alertView;
+    NSString *text = [[url host] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    alertView = [[UIAlertView alloc] initWithTitle:@"Url navigation" message:text delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [alertView show];
     return YES;
 }
 
