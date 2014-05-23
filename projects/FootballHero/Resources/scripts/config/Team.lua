@@ -2,6 +2,7 @@ module(..., package.seeall)
 
 local Constants = require("scripts.Constants")
 local JsonConfigReader = require("scripts.config.JsonConfigReader")
+local DoLogReport = require("scripts.actions.DoLogReport")
 
 
 local FILE_NAME = "config/teams.txt"
@@ -22,7 +23,9 @@ function getConfig( id )
 		return nil
 	end
 	if mConfig[id] == nil then
-		print( FILE_NAME.." dosen't has "..id )
+		local log = FILE_NAME.." dosen't has "..id
+		print( log )
+		DoLogReport.reportConfigError( log )
 		return nil
 	end
 
@@ -34,7 +37,9 @@ function getConfigIdByKey( key )
 		return nil
 	end
 	if mIndex[key] == nil then
-		print( FILE_NAME.." dosen't has "..key )
+		local log = FILE_NAME.." dosen't has "..key
+		print( log )
+		DoLogReport.reportConfigError( log )
 	end
 
 	return mIndex[key]

@@ -11,6 +11,9 @@ function __G__TRACKBACK__(msg)
     local errorDesc = "\nLUA ERROR: "..msg .. "\n"
     errorDesc = errorDesc.."\n"..debug.traceback()
     CCMessageBox( errorDesc, "LUA ERROR: " )
+
+    local DoLogReport = require("scripts.actions.DoLogReport")
+    DoLogReport.reportError( errorDesc )
 end
 
 local cclog = function(...)
@@ -39,6 +42,9 @@ local function main()
 
     --local ConnectingMessage = require("scripts.views.ConnectingMessage")
     --ConnectingMessage.loadFrame()
+
+    local DoLogReport = require("scripts.actions.DoLogReport")
+    DoLogReport.reportError( "test" )
 end
 
 xpcall(main, __G__TRACKBACK__)

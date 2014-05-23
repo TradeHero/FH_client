@@ -45,8 +45,14 @@ void HttpRequestForLua::addHeader(const char* header)
 	getRequest()->setHeaders(headers);
 }
 
+void HttpRequestForLua::setUserpwd(const char* userpwd)
+{
+	getRequest()->setUserpwd(userpwd);
+}
+
 void HttpRequestForLua::sendHttpRequest(const char* url, int callbackFunc)
 {
+	CCLog("Requesting to %s", url);
 	mCallbackFunc = callbackFunc;
 	getRequest()->setUrl(url);
 	getRequest()->setResponseCallback(this, callfuncND_selector(HttpRequestForLua::onHttpRequestCompleted));

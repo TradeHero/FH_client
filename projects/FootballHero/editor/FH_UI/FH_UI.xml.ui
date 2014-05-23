@@ -58,5 +58,5 @@
   <imageFileList />
   <imagePngList />
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>HistoryMainTitle.json</CurrentUIJson>
+  <CurrentUIJson>ConnectingMessage.json</CurrentUIJson>
 </UIProject>

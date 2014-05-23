@@ -84,6 +84,10 @@ function initMatchList( matchList )
             content:setOpacity( 0 )
             content:setCascadeOpacityEnabled( true )
             mWidget:runAction( CCTargetedAction:create( content, CCFadeIn:create( CONTENT_FADEIN_TIME ) ) )
+
+            contentContainer:setInnerContainerSize( CCSize:new( 0, contentHeight ) )
+            local layout = tolua.cast( contentContainer, "Layout" )
+            layout:requestDoLayout()
         end ) )
         seqArray:addObject( CCDelayTime:create( CONTENT_DELAY_TIME ) )
 
@@ -97,6 +101,10 @@ function initMatchList( matchList )
 
             upper:setOpacity( 0 )
             mWidget:runAction( CCTargetedAction:create( upper, CCFadeIn:create( CONTENT_FADEIN_TIME ) ) )
+
+            contentContainer:setInnerContainerSize( CCSize:new( 0, contentHeight ) )
+            local layout = tolua.cast( contentContainer, "Layout" )
+            layout:requestDoLayout()
         end ) )
         seqArray:addObject( CCDelayTime:create( CONTENT_DELAY_TIME ) )
         
@@ -122,6 +130,10 @@ function initMatchList( matchList )
                 content:setOpacity( 0 )
                 content:setCascadeOpacityEnabled( true )
                 mWidget:runAction( CCTargetedAction:create( content, CCFadeIn:create( CONTENT_FADEIN_TIME ) ) )
+
+                contentContainer:setInnerContainerSize( CCSize:new( 0, contentHeight ) )
+                local layout = tolua.cast( contentContainer, "Layout" )
+                layout:requestDoLayout()
             end ) )
             seqArray:addObject( CCDelayTime:create( CONTENT_DELAY_TIME ) )
         end
@@ -136,6 +148,10 @@ function initMatchList( matchList )
 
             bottom:setOpacity( 0 )
             mWidget:runAction( CCTargetedAction:create( bottom, CCFadeIn:create( CONTENT_FADEIN_TIME ) ) )
+
+            contentContainer:setInnerContainerSize( CCSize:new( 0, contentHeight ) )
+            local layout = tolua.cast( contentContainer, "Layout" )
+            layout:requestDoLayout()
         end ) )
         seqArray:addObject( CCDelayTime:create( CONTENT_DELAY_TIME ) )
     end
@@ -146,11 +162,11 @@ function initMatchList( matchList )
             content:setLayoutParameter( layoutParameter )
             contentContainer:addChild( content )
             contentHeight = contentHeight + content:getSize().height
-        end
 
-        contentContainer:setInnerContainerSize( CCSize:new( 0, contentHeight ) )
-        local layout = tolua.cast( contentContainer, "Layout" )
-        layout:requestDoLayout()
+            contentContainer:setInnerContainerSize( CCSize:new( 0, contentHeight ) )
+            local layout = tolua.cast( contentContainer, "Layout" )
+            layout:requestDoLayout()
+        end
     end ) )
 
     mWidget:runAction( CCSequence:create( seqArray ) )

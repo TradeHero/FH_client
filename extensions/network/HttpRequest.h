@@ -68,6 +68,7 @@ public:
         _url.clear();
         _requestData.clear();
         _tag.clear();
+		_userpwd.clear();
         _pTarget = NULL;
         _pSelector = NULL;
         _pUserData = NULL;
@@ -116,6 +117,16 @@ public:
     {
         return _url.c_str();
     };
+
+	inline void setUserpwd(const char* userpwd)
+	{
+		_userpwd = userpwd;
+	};
+
+	inline const char* getUserpwd()
+	{
+		return _userpwd.c_str();
+	};
     
     /** Option field. You can set your post data here
      */
@@ -228,6 +239,7 @@ protected:
     SEL_HttpResponse            _pSelector;      /// callback function, e.g. MyLayer::onHttpResponse(CCHttpClient *sender, CCHttpResponse * response)
     void*                       _pUserData;      /// You can add your customed data here 
     std::vector<std::string>    _headers;		      /// custom http headers
+	std::string                 _userpwd;            /// user:password
 };
 
 NS_CC_EXT_END

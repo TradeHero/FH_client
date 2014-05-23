@@ -351,6 +351,7 @@ static int processPostTask(CCHttpRequest *request, write_callback callback, void
     CURLRaii curl;
     bool ok = curl.init(request, callback, stream, headerCallback, headerStream)
             && curl.setOption(CURLOPT_POST, 1)
+			&& curl.setOption(CURLOPT_USERPWD, request->getUserpwd())
             && curl.setOption(CURLOPT_POSTFIELDS, request->getRequestData())
             && curl.setOption(CURLOPT_POSTFIELDSIZE, request->getRequestDataSize())
             && curl.perform(responseCode);

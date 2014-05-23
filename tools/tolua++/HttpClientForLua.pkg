@@ -41,6 +41,7 @@ class HttpRequestForLua : CCObject
     static HttpRequestForLua * create(CCHttpRequest::HttpRequestType type);
 
     void addHeader(const char* header);
+    void setUserpwd(const char* userpwd);
 	void sendHttpRequest(const char* url, LUA_FUNCTION callbackFunc);
 	void onHttpRequestCompleted(cocos2d::CCNode *sender, void *data);
 	void setRequest(CCHttpRequest* request);

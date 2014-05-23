@@ -20,9 +20,9 @@ function loadFrame( message )
         CCArmatureDataManager:sharedArmatureDataManager():addArmatureFileInfo("anims/waiting0.png","anims/waiting0.plist","anims/waiting.ExportJson")
 
         mWaitingArmature = CCArmature:create("waiting")
-        mWaitingArmature:setPosition( ccp( 220, 646 ) )
+        mWaitingArmature:setPosition( ccp( 50, 50 ) )
         mWaitingArmature:getAnimation():playWithIndex(0)
-        mWidget:addNode(mWaitingArmature)
+        mWidget:getChildByName("animContainer"):addNode( mWaitingArmature )
 
     end
     setMessage( message )

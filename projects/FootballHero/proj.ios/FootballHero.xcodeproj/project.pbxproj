@@ -237,6 +237,7 @@
 		73DCA155192C7EF9008AC05D /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73DCA152192C7EF9008AC05D /* CFNetwork.framework */; };
 		73DCA156192C7EFA008AC05D /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73DCA153192C7EF9008AC05D /* Security.framework */; };
 		73DCA157192C7EFA008AC05D /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73DCA154192C7EF9008AC05D /* StoreKit.framework */; };
+		73DCA159192DCD95008AC05D /* anims in Resources */ = {isa = PBXBuildFile; fileRef = 73DCA158192DCD95008AC05D /* anims */; };
 		73EDFC8018EBE69E00322624 /* FacebookDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 73EDFC7D18EBE69E00322624 /* FacebookDelegate.cpp */; };
 		73EDFC8518EC005700322624 /* LuaCocos2dExtension.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 73EDFC8318EC005700322624 /* LuaCocos2dExtension.cpp */; };
 		73EDFC8B18ECF85F00322624 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73EDFC8A18ECF85F00322624 /* FacebookSDK.framework */; };
@@ -777,6 +778,7 @@
 		73DCA152192C7EF9008AC05D /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = swrve/CFNetwork.framework; sourceTree = "<group>"; };
 		73DCA153192C7EF9008AC05D /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = swrve/Security.framework; sourceTree = "<group>"; };
 		73DCA154192C7EF9008AC05D /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = swrve/StoreKit.framework; sourceTree = "<group>"; };
+		73DCA158192DCD95008AC05D /* anims */ = {isa = PBXFileReference; lastKnownFileType = folder; path = anims; sourceTree = "<group>"; };
 		73EDFC7D18EBE69E00322624 /* FacebookDelegate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FacebookDelegate.cpp; path = Social/FacebookDelegate.cpp; sourceTree = "<group>"; };
 		73EDFC7E18EBE69E00322624 /* FacebookDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FacebookDelegate.h; path = Social/FacebookDelegate.h; sourceTree = "<group>"; };
 		73EDFC8318EC005700322624 /* LuaCocos2dExtension.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LuaCocos2dExtension.cpp; sourceTree = "<group>"; };
@@ -2079,6 +2081,7 @@
 		F293BC4615EB859D00256477 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				73DCA158192DCD95008AC05D /* anims */,
 				73BFF75E19177A46002F173A /* MD5.lua */,
 				730D983318DC4316000CA5F9 /* AudioEngine.lua */,
 				730D983418DC4316000CA5F9 /* CCBReaderLoad.lua */,
@@ -2179,6 +2182,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				73DCA159192DCD95008AC05D /* anims in Resources */,
 				15C156981683138E00D239F2 /* Default-568h@2x.png in Resources */,
 				15C156991683138E00D239F2 /* Default.png in Resources */,
 				730D984D18DC4317000CA5F9 /* scenes in Resources */,
