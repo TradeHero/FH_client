@@ -1,6 +1,6 @@
 /*
 ** Lua binding: Extension
-** Generated automatically by tolua++-1.0.92 on 05/23/14 12:12:08.
+** Generated automatically by tolua++-1.0.92 on 05/23/14 16:59:49.
 */
 
 /****************************************************************************
@@ -39,6 +39,7 @@ extern "C" {
 #include "HttpRequestForLua.h"
 #include "EditBoxDelegateForLua.h"
 #include "Analytics.h"
+#include "WebviewDelegate.h"
 
 using namespace cocos2d;
 using namespace cocos2d::extension;
@@ -55,6 +56,7 @@ static void tolua_reg_types (lua_State* tolua_S)
  tolua_usertype(tolua_S,"CCLayer");
  tolua_usertype(tolua_S,"cocos2d::CCNode");
  tolua_usertype(tolua_S,"HttpRequestForLua");
+ tolua_usertype(tolua_S,"WebviewDelegate");
  tolua_usertype(tolua_S,"Analytics");
  tolua_usertype(tolua_S,"FacebookDelegate");
  tolua_usertype(tolua_S,"CCHttpRequest");
@@ -830,6 +832,106 @@ static int tolua_Extension_Analytics_postEvent00(lua_State* tolua_S)
 }
 #endif //#ifndef TOLUA_DISABLE
 
+/* method: sharedDelegate of class  WebviewDelegate */
+#ifndef TOLUA_DISABLE_tolua_Extension_WebviewDelegate_sharedDelegate00
+static int tolua_Extension_WebviewDelegate_sharedDelegate00(lua_State* tolua_S)
+{
+#ifndef TOLUA_RELEASE
+ tolua_Error tolua_err;
+ if (
+     !tolua_isusertable(tolua_S,1,"WebviewDelegate",0,&tolua_err) ||
+     !tolua_isnoobj(tolua_S,2,&tolua_err)
+ )
+  goto tolua_lerror;
+ else
+#endif
+ {
+  {
+   WebviewDelegate* tolua_ret = (WebviewDelegate*)  WebviewDelegate::sharedDelegate();
+    tolua_pushusertype(tolua_S,(void*)tolua_ret,"WebviewDelegate");
+  }
+ }
+ return 1;
+#ifndef TOLUA_RELEASE
+ tolua_lerror:
+ tolua_error(tolua_S,"#ferror in function 'sharedDelegate'.",&tolua_err);
+ return 0;
+#endif
+}
+#endif //#ifndef TOLUA_DISABLE
+
+/* method: openWebpage of class  WebviewDelegate */
+#ifndef TOLUA_DISABLE_tolua_Extension_WebviewDelegate_openWebpage00
+static int tolua_Extension_WebviewDelegate_openWebpage00(lua_State* tolua_S)
+{
+#ifndef TOLUA_RELEASE
+ tolua_Error tolua_err;
+ if (
+     !tolua_isusertype(tolua_S,1,"WebviewDelegate",0,&tolua_err) ||
+     !tolua_isstring(tolua_S,2,0,&tolua_err) ||
+     !tolua_isnumber(tolua_S,3,0,&tolua_err) ||
+     !tolua_isnumber(tolua_S,4,0,&tolua_err) ||
+     !tolua_isnumber(tolua_S,5,0,&tolua_err) ||
+     !tolua_isnumber(tolua_S,6,0,&tolua_err) ||
+     !tolua_isnoobj(tolua_S,7,&tolua_err)
+ )
+  goto tolua_lerror;
+ else
+#endif
+ {
+  WebviewDelegate* self = (WebviewDelegate*)  tolua_tousertype(tolua_S,1,0);
+  const char* url = ((const char*)  tolua_tostring(tolua_S,2,0));
+  int x = ((int)  tolua_tonumber(tolua_S,3,0));
+  int y = ((int)  tolua_tonumber(tolua_S,4,0));
+  int w = ((int)  tolua_tonumber(tolua_S,5,0));
+  int h = ((int)  tolua_tonumber(tolua_S,6,0));
+#ifndef TOLUA_RELEASE
+  if (!self) tolua_error(tolua_S,"invalid 'self' in function 'openWebpage'", NULL);
+#endif
+  {
+   self->openWebpage(url,x,y,w,h);
+  }
+ }
+ return 0;
+#ifndef TOLUA_RELEASE
+ tolua_lerror:
+ tolua_error(tolua_S,"#ferror in function 'openWebpage'.",&tolua_err);
+ return 0;
+#endif
+}
+#endif //#ifndef TOLUA_DISABLE
+
+/* method: closeWebpage of class  WebviewDelegate */
+#ifndef TOLUA_DISABLE_tolua_Extension_WebviewDelegate_closeWebpage00
+static int tolua_Extension_WebviewDelegate_closeWebpage00(lua_State* tolua_S)
+{
+#ifndef TOLUA_RELEASE
+ tolua_Error tolua_err;
+ if (
+     !tolua_isusertype(tolua_S,1,"WebviewDelegate",0,&tolua_err) ||
+     !tolua_isnoobj(tolua_S,2,&tolua_err)
+ )
+  goto tolua_lerror;
+ else
+#endif
+ {
+  WebviewDelegate* self = (WebviewDelegate*)  tolua_tousertype(tolua_S,1,0);
+#ifndef TOLUA_RELEASE
+  if (!self) tolua_error(tolua_S,"invalid 'self' in function 'closeWebpage'", NULL);
+#endif
+  {
+   self->closeWebpage();
+  }
+ }
+ return 0;
+#ifndef TOLUA_RELEASE
+ tolua_lerror:
+ tolua_error(tolua_S,"#ferror in function 'closeWebpage'.",&tolua_err);
+ return 0;
+#endif
+}
+#endif //#ifndef TOLUA_DISABLE
+
 /* Open function */
 TOLUA_API int tolua_Extension_open (lua_State* tolua_S)
 {
@@ -888,6 +990,12 @@ TOLUA_API int tolua_Extension_open (lua_State* tolua_S)
   tolua_beginmodule(tolua_S,"Analytics");
    tolua_function(tolua_S,"sharedDelegate",tolua_Extension_Analytics_sharedDelegate00);
    tolua_function(tolua_S,"postEvent",tolua_Extension_Analytics_postEvent00);
+  tolua_endmodule(tolua_S);
+  tolua_cclass(tolua_S,"WebviewDelegate","WebviewDelegate","",NULL);
+  tolua_beginmodule(tolua_S,"WebviewDelegate");
+   tolua_function(tolua_S,"sharedDelegate",tolua_Extension_WebviewDelegate_sharedDelegate00);
+   tolua_function(tolua_S,"openWebpage",tolua_Extension_WebviewDelegate_openWebpage00);
+   tolua_function(tolua_S,"closeWebpage",tolua_Extension_WebviewDelegate_closeWebpage00);
   tolua_endmodule(tolua_S);
  tolua_endmodule(tolua_S);
  return 1;

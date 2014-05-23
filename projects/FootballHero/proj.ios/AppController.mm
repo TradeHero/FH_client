@@ -27,6 +27,7 @@
 #import "EAGLView.h"
 #import "AppDelegate.h"
 #import "swrve.h"
+#import "WebviewController.h"
 
 #import "RootViewController.h"
 #import "FBSessionSingleton.h"
@@ -78,6 +79,7 @@ static AppDelegate s_sharedApplication;
 
     cocos2d::CCApplication::sharedApplication()->run();
     [Swrve sharedInstanceWithAppID:1440 apiKey:@"zGvMCt6LQBTb1CNmnl8N"];
+    
     return YES;
 }
 
@@ -153,6 +155,11 @@ static AppDelegate s_sharedApplication;
          annotation:(id)annotation {
     return [FBAppCall handleOpenURL:url
                   sourceApplication:sourceApplication];
+}
+
+- (RootViewController *)getViewController
+{
+    return viewController;
 }
 
 @end

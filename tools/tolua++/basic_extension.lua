@@ -299,6 +299,7 @@ extern "C" {
 #include "HttpRequestForLua.h"
 #include "EditBoxDelegateForLua.h"
 #include "Analytics.h"
+#include "WebviewDelegate.h"
 
 using namespace cocos2d;
 using namespace cocos2d::extension;

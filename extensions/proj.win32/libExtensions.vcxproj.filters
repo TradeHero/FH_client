@@ -495,6 +495,9 @@
     <ClCompile Include="..\Utils\Analytics.cpp">
       <Filter>Utils</Filter>
     </ClCompile>
+    <ClCompile Include="..\Utils\WebviewDelegate.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\GUI\CCScrollView\CCScrollView.h">
@@ -887,6 +890,9 @@
       <Filter>GUI\CCEditBox</Filter>
     </ClInclude>
     <ClInclude Include="..\Utils\Analytics.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Utils\WebviewDelegate.h">
       <Filter>Utils</Filter>
     </ClInclude>
   </ItemGroup>

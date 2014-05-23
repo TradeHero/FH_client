@@ -10,7 +10,6 @@
 #include "FacebookDelegate.h"
 #import <FacebookSDK/FacebookSDK.h>
 #import "FBSessionSingleton.h"
-#import "swrve.h"
 
 static FacebookConnector* instance;
 

@@ -1,0 +1,8 @@
+
+class WebviewDelegate
+{
+	static WebviewDelegate* sharedDelegate();
+
+	void openWebpage(const char* url, int x, int y, int w, int h);
+	void closeWebpage();
+};

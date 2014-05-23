@@ -232,6 +232,8 @@
 		73BFF75C191779FB002F173A /* md5.c in Sources */ = {isa = PBXBuildFile; fileRef = 73BFF757191779FB002F173A /* md5.c */; };
 		73BFF75D191779FB002F173A /* md5lib.c in Sources */ = {isa = PBXBuildFile; fileRef = 73BFF759191779FB002F173A /* md5lib.c */; };
 		73BFF75F19177A46002F173A /* MD5.lua in Resources */ = {isa = PBXBuildFile; fileRef = 73BFF75E19177A46002F173A /* MD5.lua */; };
+		73D51F25192F3082000A65AF /* WebviewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 73D51F24192F3082000A65AF /* WebviewController.mm */; };
+		73D51F28192F44A4000A65AF /* WebviewDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 73D51F26192F44A4000A65AF /* WebviewDelegate.cpp */; };
 		73DCA12F192C4C4F008AC05D /* AnalyticsHandler.mm in Sources */ = {isa = PBXBuildFile; fileRef = 73DCA12E192C4C4F008AC05D /* AnalyticsHandler.mm */; };
 		73DCA133192C4EE7008AC05D /* Analytics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 73DCA131192C4EE7008AC05D /* Analytics.cpp */; };
 		73DCA155192C7EF9008AC05D /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73DCA152192C7EF9008AC05D /* CFNetwork.framework */; };
@@ -729,7 +731,6 @@
 		730D984018DC4317000CA5F9 /* sounds */ = {isa = PBXFileReference; lastKnownFileType = folder; path = sounds; sourceTree = "<group>"; };
 		730F171D1918C8E6000DB5BE /* lfs.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lfs.c; path = lfs/lfs.c; sourceTree = "<group>"; };
 		730F171E1918C8E6000DB5BE /* lfs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = lfs.h; path = lfs/lfs.h; sourceTree = "<group>"; };
-		730F183C1918CC67000DB5BE /* FootballHero copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "FootballHero copy-Info.plist"; path = "/Users/trdehero/FH_client/projects/FootballHero/proj.ios/FootballHero copy-Info.plist"; sourceTree = "<absolute>"; };
 		7365C0D018FCE99200C39027 /* FBSessionSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBSessionSingleton.h; sourceTree = "<group>"; };
 		7365C0D118FCE99200C39027 /* FBSessionSingleton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBSessionSingleton.m; sourceTree = "<group>"; };
 		7388C03F18F4E2FF00CF667C /* HttpRequestForLua.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HttpRequestForLua.cpp; sourceTree = "<group>"; };
@@ -771,6 +772,10 @@
 		73BFF759191779FB002F173A /* md5lib.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = md5lib.c; path = crypt/md5lib.c; sourceTree = "<group>"; };
 		73BFF75E19177A46002F173A /* MD5.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MD5.lua; sourceTree = "<group>"; };
 		73C7D8E418E9119100D39A26 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		73D51F23192F3082000A65AF /* WebviewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebviewController.h; sourceTree = "<group>"; };
+		73D51F24192F3082000A65AF /* WebviewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = WebviewController.mm; sourceTree = "<group>"; };
+		73D51F26192F44A4000A65AF /* WebviewDelegate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = WebviewDelegate.cpp; path = Utils/WebviewDelegate.cpp; sourceTree = "<group>"; };
+		73D51F27192F44A4000A65AF /* WebviewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WebviewDelegate.h; path = Utils/WebviewDelegate.h; sourceTree = "<group>"; };
 		73DCA12B192C4C0E008AC05D /* AnalyticsHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnalyticsHandler.h; sourceTree = "<group>"; };
 		73DCA12E192C4C4F008AC05D /* AnalyticsHandler.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AnalyticsHandler.mm; sourceTree = "<group>"; };
 		73DCA131192C4EE7008AC05D /* Analytics.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Analytics.cpp; path = Utils/Analytics.cpp; sourceTree = "<group>"; };
@@ -1745,6 +1750,8 @@
 		73DCA130192C4EDA008AC05D /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				73D51F26192F44A4000A65AF /* WebviewDelegate.cpp */,
+				73D51F27192F44A4000A65AF /* WebviewDelegate.h */,
 				73DCA131192C4EE7008AC05D /* Analytics.cpp */,
 				73DCA132192C4EE7008AC05D /* Analytics.h */,
 			);
@@ -2018,7 +2025,6 @@
 				F293B6E815EB807E00256477 /* Other Sources */,
 				F293B3C915EB7BE500256477 /* Products */,
 				F293BC4615EB859D00256477 /* Resources */,
-				730F183C1918CC67000DB5BE /* FootballHero copy-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -2053,6 +2059,8 @@
 		F293B6E815EB807E00256477 /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
+				73D51F23192F3082000A65AF /* WebviewController.h */,
+				73D51F24192F3082000A65AF /* WebviewController.mm */,
 				7365C0D018FCE99200C39027 /* FBSessionSingleton.h */,
 				7365C0D118FCE99200C39027 /* FBSessionSingleton.m */,
 				73EDFC9418ECFE7400322624 /* FacebookConnector.h */,
@@ -2369,6 +2377,7 @@
 				ED35C0C718323498002A0750 /* CCArmatureAnimation.cpp in Sources */,
 				73A89706192B2A1E0079AD05 /* swrve.m in Sources */,
 				ED35C0F218323498002A0750 /* UILoadingBar.cpp in Sources */,
+				73D51F28192F44A4000A65AF /* WebviewDelegate.cpp in Sources */,
 				15C1553A1683118600D239F2 /* b2Contact.cpp in Sources */,
 				15C1553B1683118600D239F2 /* b2ContactSolver.cpp in Sources */,
 				15C1553C1683118600D239F2 /* b2EdgeAndCircleContact.cpp in Sources */,
@@ -2441,6 +2450,7 @@
 				1A40E7E41727C47E006D4861 /* Attachment.cpp in Sources */,
 				1A40E7E51727C47E006D4861 /* AttachmentLoader.cpp in Sources */,
 				1A40E7E61727C47E006D4861 /* Bone.cpp in Sources */,
+				73D51F25192F3082000A65AF /* WebviewController.mm in Sources */,
 				1A40E7E71727C47E006D4861 /* BoneData.cpp in Sources */,
 				ED35C0CF18323498002A0750 /* CCDisplayFactory.cpp in Sources */,
 				1A40E7E81727C47E006D4861 /* extension.cpp in Sources */,

@@ -43,8 +43,7 @@ local function main()
     --local ConnectingMessage = require("scripts.views.ConnectingMessage")
     --ConnectingMessage.loadFrame()
 
-    local DoLogReport = require("scripts.actions.DoLogReport")
-    DoLogReport.reportError( "test" )
+    --WebviewDelegate:sharedDelegate():openWebpage( "http://www.baidu.com", 0, 0, 320, 576 )
 end
 
 xpcall(main, __G__TRACKBACK__)

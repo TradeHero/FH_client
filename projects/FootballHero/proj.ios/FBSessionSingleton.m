@@ -1,10 +1,4 @@
-//
-//  abdf.m
-//  FootballHero
-//
-//  Created by trdehero on 14-4-15.
-//
-//
+
 
 #import "FBSessionSingleton.h"
 
