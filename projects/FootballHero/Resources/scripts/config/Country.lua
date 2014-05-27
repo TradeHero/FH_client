@@ -3,6 +3,7 @@ module(..., package.seeall)
 local JsonConfigReader = require("scripts.config.JsonConfigReader")
 local LeagueConfig = require("scripts.config.League")
 local Constants = require("scripts.Constants")
+local DoLogReport = require("scripts.actions.DoLogReport")
 
 
 local FILE_NAME = "config/countries.txt"
@@ -42,7 +43,12 @@ function getConfig( id )
 end
 
 function getConfigIdByKey( key )
-	assert( mIndex[key] ~= nil, FILE_NAME.." dosen't has "..key )
+	if mIndex[key] == nil then
+		local log = FILE_NAME.." dosen't has "..key
+		print( log )
+		DoLogReport.reportConfigError( log )
+		return nil
+	end
 
 	return mIndex[key]
 end

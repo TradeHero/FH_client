@@ -22,12 +22,7 @@ function getConfig( id )
 	if id == nil then
 		return nil
 	end
-	if mConfig[id] == nil then
-		local log = FILE_NAME.." dosen't has "..id
-		print( log )
-		DoLogReport.reportConfigError( log )
-		return nil
-	end
+	assert( mConfig[id] ~= nil, FILE_NAME.." dosen't has "..id )
 
 	return mConfig[id]
 end

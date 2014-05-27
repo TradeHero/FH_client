@@ -67,6 +67,11 @@ function checkFile( fileIndex )
 	local file = fileList[fileIndex]
 	local MD5ConfigId = MD5ConfigIDList[fileIndex]
 	local serverMD5 = mConfigMd5Info[MD5ConfigId]
+	if serverMD5 == nil then
+		print( "Checking "..file..", but server MD5 is nil." )
+		checkNext()
+		return
+	end
 
 	-- Compare the md5 value
 	-- Re-download the file if not match
