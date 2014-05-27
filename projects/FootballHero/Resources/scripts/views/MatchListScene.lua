@@ -191,12 +191,23 @@ function helperInitMatchInfo( content, matchInfo )
     local friendNum = tolua.cast( content:getChildByName("friendNum"), "Label" )
     local fhNum = tolua.cast( content:getChildByName("fhNum"), "Label" )
     local played = tolua.cast( content:getChildByName("played"), "Label" )
+    
+    -- Load the team logo
     team1:loadTexture( TeamConfig.getLogo( TeamConfig.getConfigIdByKey( matchInfo["HomeTeamId"] ) ) )
     team2:loadTexture( TeamConfig.getLogo( TeamConfig.getConfigIdByKey( matchInfo["AwayTeamId"] ) ) )
-    team1Name:setText( TeamConfig.getTeamName( TeamConfig.getConfigIdByKey( matchInfo["HomeTeamId"] ) ) )
-    team2Name:setText( TeamConfig.getTeamName( TeamConfig.getConfigIdByKey( matchInfo["AwayTeamId"] ) ) )
-    team1Name:setFontName("fonts/Newgtbxc.ttf")
-    team2Name:setFontName("fonts/Newgtbxc.ttf")
+
+    -- Load the team names
+    local teamName = TeamConfig.getTeamName( TeamConfig.getConfigIdByKey( matchInfo["HomeTeamId"] ) )
+    if string.len( teamName ) > 20 then
+        team1Name:setFontSize( 20 )
+    end
+    team1Name:setText( teamName )
+    teamName = TeamConfig.getTeamName( TeamConfig.getConfigIdByKey( matchInfo["AwayTeamId"] ) )
+    if string.len( teamName ) > 20 then
+        team2Name:setFontSize( 20 )
+    end
+    team2Name:setText( teamName )
+
     local time = tolua.cast( content:getChildByName("time"), "Label" )
     local score = tolua.cast( content:getChildByName("score"), "Label" )
     time:setFontName("fonts/Newgtbxc.ttf")

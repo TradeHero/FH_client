@@ -59,7 +59,10 @@
   <ProjectType>UIProject</ProjectType>
   <ResRelativePath />
   <imageFileList />
-  <imagePngList />
+  <imagePngList>
+    <string>Popup/Match-List-popup-bg.png</string>
+    <string>Popup/ok-popup_03.png</string>
+  </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>ErrorMessage.json</CurrentUIJson>
+  <CurrentUIJson>HistoryMainMatchContent.json</CurrentUIJson>
 </UIProject>

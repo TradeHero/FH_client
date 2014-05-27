@@ -11,7 +11,8 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "Settings/settings_03.png"
+    "Popup/Match-List-popup-bg.png",
+    "Popup/ok-popup_03.png"
   ],
   "version": "1.4.0.1",
   "widgetTree": {
@@ -541,7 +542,7 @@
       "classname": "Panel",
       "name": "Panel_817",
       "ZOrder": 0,
-      "actiontag": -1,
+      "actiontag": 1,
       "anchorPointX": 0,
       "anchorPointY": 0,
       "classType": "CocoStudio.EngineAdapterWrap.CSPanel",

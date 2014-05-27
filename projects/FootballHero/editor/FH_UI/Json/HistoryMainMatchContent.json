@@ -10,7 +10,10 @@
   "designHeight": 1136,
   "designWidth": 640,
   "textures": [],
-  "texturesPng": [],
+  "texturesPng": [
+    "Popup/Match-List-popup-bg.png",
+    "Popup/ok-popup_03.png"
+  ],
   "version": "1.4.0.1",
   "widgetTree": {
     "classname": "Panel",
@@ -718,7 +721,7 @@
           "touchAble": false,
           "useMergedTexture": false,
           "visible": true,
-          "width": 75,
+          "width": 111,
           "x": 416,
           "y": 38,
           "areaHeight": 0,
@@ -727,7 +730,7 @@
           "fontName": "微软雅黑",
           "fontSize": 20,
           "hAlignment": 0,
-          "text": "Win: %s",
+          "text": "Win: %s%%",
           "touchScaleEnable": false,
           "vAlignment": 0
         }
@@ -841,7 +844,7 @@
           "touchAble": false,
           "useMergedTexture": false,
           "visible": true,
-          "width": 93,
+          "width": 155,
           "x": 478,
           "y": 91,
           "areaHeight": 0,
@@ -850,7 +853,7 @@
           "fontName": "微软雅黑",
           "fontSize": 35,
           "hAlignment": 0,
-          "text": "%1.3f",
+          "text": "%1.2f%%",
           "touchScaleEnable": false,
           "vAlignment": 0
         }
@@ -861,7 +864,7 @@
       "classname": "Panel",
       "name": "Panel_38",
       "ZOrder": 0,
-      "actiontag": -1,
+      "actiontag": 1,
       "anchorPointX": 0,
       "anchorPointY": 0,
       "classType": "CocoStudio.EngineAdapterWrap.CSPanel",

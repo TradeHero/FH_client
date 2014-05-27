@@ -10,7 +10,10 @@
   "designHeight": 1136,
   "designWidth": 640,
   "textures": [],
-  "texturesPng": [],
+  "texturesPng": [
+    "Popup/Match-List-popup-bg.png",
+    "Popup/ok-popup_03.png"
+  ],
   "version": "1.4.0.1",
   "widgetTree": {
     "classname": "Panel",
