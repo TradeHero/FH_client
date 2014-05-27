@@ -10,12 +10,7 @@
   "designHeight": 1136,
   "designWidth": 640,
   "textures": [],
-  "texturesPng": [
-    "LoginNReg/register-name-bg.jpg",
-    "LoginNReg/confirmation-icon.png",
-    "LoginNReg/photo.png",
-    "header/footballhero-logo.png"
-  ],
+  "texturesPng": [],
   "version": "1.4.0.1",
   "widgetTree": {
     "classname": "Panel",
@@ -383,7 +378,7 @@
       "classname": "Panel",
       "name": "Panel_38",
       "ZOrder": 0,
-      "actiontag": -1,
+      "actiontag": 1,
       "anchorPointX": 0,
       "anchorPointY": 0,
       "classType": "CocoStudio.EngineAdapterWrap.CSPanel",

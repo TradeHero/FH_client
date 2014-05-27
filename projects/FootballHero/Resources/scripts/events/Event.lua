@@ -33,6 +33,7 @@ EventNameList =
     "Enter_History_Detail",
     "Enter_Leaderboard",
     "Enter_Leaderboard_List",
+    "Enter_Settings",
 
     "Do_Register",
     "Do_Register_Name",
@@ -40,6 +41,7 @@ EventNameList =
     "Do_FB_Connect",
     "Do_Post_Predictions",
     "Do_Post_Fav_Team",
+    "Do_Send_Feedback",
 
     "Show_Error_Message",
 

@@ -47,6 +47,8 @@
     <string>PredFinalConfirm.json</string>
     <string>PredFinalConfirmContent.json</string>
     <string>HistoryHomeForOthers.json</string>
+    <string>SettingsHome.json</string>
+    <string>SettingsHomeContent.json</string>
   </JsonList>
   <CanvasSize>
     <Width>640</Width>
@@ -56,7 +58,9 @@
   <ProjectType>UIProject</ProjectType>
   <ResRelativePath />
   <imageFileList />
-  <imagePngList />
+  <imagePngList>
+    <string>MatchListContent/guang-xia.png</string>
+  </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>ConnectingMessage.json</CurrentUIJson>
+  <CurrentUIJson>SettingsHomeContent.json</CurrentUIJson>
 </UIProject>

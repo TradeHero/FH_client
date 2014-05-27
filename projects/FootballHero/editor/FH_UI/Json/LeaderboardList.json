@@ -10,11 +10,7 @@
   "designHeight": 1136,
   "designWidth": 640,
   "textures": [],
-  "texturesPng": [
-    "header/guangyun.png",
-    "history/bg.png",
-    "header/back.png"
-  ],
+  "texturesPng": [],
   "version": "1.4.0.1",
   "widgetTree": {
     "classname": "Panel",
@@ -439,7 +435,7 @@
       "classname": "Panel",
       "name": "Panel_1943",
       "ZOrder": 0,
-      "actiontag": -1,
+      "actiontag": 1,
       "anchorPointX": 0,
       "anchorPointY": 0,
       "classType": "CocoStudio.EngineAdapterWrap.CSPanel",

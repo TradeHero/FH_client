@@ -43,7 +43,7 @@ function onFBConnectSuccess( accessToken )
         ConnectingMessage.selfRemove()
         if status == RequestUtils.HTTP_200 then
             local sessionToken = jsonResponse["SessionToken"]
-            local userId = jsonResponse["UserId"]
+            local userId = jsonResponse["Id"]
             local configMd5Info = jsonResponse["ConfigMd5Info"]
             local displayName = jsonResponse["DisplayName"]
             local startLeagueId = jsonResponse["StartLeagueId"]

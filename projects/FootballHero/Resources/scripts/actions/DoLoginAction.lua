@@ -37,7 +37,7 @@ function action( param )
         ConnectingMessage.selfRemove()
         if status == RequestUtils.HTTP_200 then
             local sessionToken = jsonResponse["ProfileDto"]["SessionToken"]
-            local userId = jsonResponse["ProfileDto"]["UserId"]
+            local userId = jsonResponse["ProfileDto"]["Id"]
             local configMd5Info = jsonResponse["ProfileDto"]["ConfigMd5Info"]
             local displayName = jsonResponse["ProfileDto"]["DisplayName"]
             local startLeagueId = jsonResponse["ProfileDto"]["StartLeagueId"]

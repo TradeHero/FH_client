@@ -168,4 +168,12 @@
     <Project>HistoryHomeForOthers</Project>
     <GuidesList />
   </GuidesProject>
+  <GuidesProject>
+    <Project>SettingsHome</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>SettingsHomeContent</Project>
+    <GuidesList />
+  </GuidesProject>
 </ArrayOfGuidesProject>

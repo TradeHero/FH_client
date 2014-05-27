@@ -14,7 +14,7 @@ local TAB_EVENT_LIST = {
 	Event.Enter_Match_List,
 	Event.Enter_Leaderboard,
 	Event.Enter_History,
-	Event.Enter_History,
+	Event.Enter_Settings,
 }
 
 function loadFrame( parent )
