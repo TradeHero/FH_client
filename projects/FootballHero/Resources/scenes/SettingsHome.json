@@ -11,7 +11,7 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "MatchPrediction/Match-List-bg.jpg",
+    "Settings/settings-bg.jpg",
     "header/guangyun.png"
   ],
   "version": "1.4.0.1",
@@ -294,7 +294,7 @@
       "adaptScreen": false,
       "backGroundImage": null,
       "backGroundImageData": {
-        "path": "MatchPrediction/Match-List-bg.jpg",
+        "path": "Settings/settings-bg.jpg",
         "plistFile": "",
         "resourceType": 0
       },

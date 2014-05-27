@@ -175,6 +175,25 @@
 				<key>offsetY</key>
 				<real>0</real>
 			</dict>
+			<key>w10.png</key>
+			<dict>
+				<key>width</key>
+				<integer>89</integer>
+				<key>height</key>
+				<integer>89</integer>
+				<key>originalWidth</key>
+				<integer>89</integer>
+				<key>originalHeight</key>
+				<integer>89</integer>
+				<key>x</key>
+				<integer>819</integer>
+				<key>y</key>
+				<integer>0</integer>
+				<key>offsetX</key>
+				<real>0</real>
+				<key>offsetY</key>
+				<real>0</real>
+			</dict>
 		</dict>
 		<key>metadata</key>
 		<dict>

@@ -34,6 +34,7 @@ EventNameList =
     "Enter_Leaderboard",
     "Enter_Leaderboard_List",
     "Enter_Settings",
+    "Enter_FAQ",
 
     "Do_Register",
     "Do_Register_Name",

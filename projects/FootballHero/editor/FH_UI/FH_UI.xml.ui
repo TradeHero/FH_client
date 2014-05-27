@@ -49,6 +49,7 @@
     <string>HistoryHomeForOthers.json</string>
     <string>SettingsHome.json</string>
     <string>SettingsHomeContent.json</string>
+    <string>FAQ.json</string>
   </JsonList>
   <CanvasSize>
     <Width>640</Width>
@@ -59,8 +60,10 @@
   <ResRelativePath />
   <imageFileList />
   <imagePngList>
-    <string>MatchListContent/guang-xia.png</string>
+    <string>commonRes/Arsenal.png</string>
+    <string>commonRes/Manchester United.png</string>
+    <string>MatchListContent/line.png</string>
   </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>SettingsHomeContent.json</CurrentUIJson>
+  <CurrentUIJson>MatchListContent.json</CurrentUIJson>
 </UIProject>

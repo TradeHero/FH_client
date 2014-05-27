@@ -124,8 +124,7 @@ function initMatchList( matchList )
                 contentContainer:addChild( content )
                 contentHeight = contentHeight + content:getSize().height
 
-                local vsBt = content:getChildByName("VS")
-                vsBt:addTouchEventListener( eventHandler )
+                content:addTouchEventListener( eventHandler )
 
                 content:setOpacity( 0 )
                 content:setCascadeOpacityEnabled( true )
@@ -141,7 +140,8 @@ function initMatchList( matchList )
         seqArray:addObject( CCCallFuncN:create( function() 
             -- Add the seprater
             local bottom = ImageView:create()
-            bottom:loadTexture("images/guang-xia.png")
+            bottom:loadTexture("images/guang.png")
+            bottom:setFlipY(true)
             bottom:setLayoutParameter( layoutParameter )
             contentContainer:addChild( bottom )
             contentHeight = contentHeight + bottom:getSize().height
@@ -188,6 +188,9 @@ function helperInitMatchInfo( content, matchInfo )
     local team2 = tolua.cast( content:getChildByName("team2"), "ImageView" )
     local team1Name = tolua.cast( content:getChildByName("team1Name"), "Label" )
     local team2Name = tolua.cast( content:getChildByName("team2Name"), "Label" )
+    local friendNum = tolua.cast( content:getChildByName("friendNum"), "Label" )
+    local fhNum = tolua.cast( content:getChildByName("fhNum"), "Label" )
+    local played = tolua.cast( content:getChildByName("played"), "Label" )
     team1:loadTexture( TeamConfig.getLogo( TeamConfig.getConfigIdByKey( matchInfo["HomeTeamId"] ) ) )
     team2:loadTexture( TeamConfig.getLogo( TeamConfig.getConfigIdByKey( matchInfo["AwayTeamId"] ) ) )
     team1Name:setText( TeamConfig.getTeamName( TeamConfig.getConfigIdByKey( matchInfo["HomeTeamId"] ) ) )
@@ -206,12 +209,19 @@ function helperInitMatchInfo( content, matchInfo )
         score:setEnabled( false )
     end
 
-    local isGameStart = matchInfo["StartTime"] > os.time()
-    local vsBt = tolua.cast( content:getChildByName("VS"), "Button" )
-    if isGameStart then
-        vsBt:setTouchEnabled( true )
+    if matchInfo["FriendsPlayed"] > 0 then
+        friendNum:setText( matchInfo["FriendsPlayed"] )
     else
-        vsBt:setTouchEnabled( false )
+        friendNum:setText("0")
+    end
+    fhNum:setText( matchInfo["TotalUsersPlayed"] )
+    played:setText( string.format( played:getStringValue(), matchInfo["PredictionsPlayed"], matchInfo["PredictionsAvailable"] ) )
+
+    local isGameStart = matchInfo["StartTime"] > os.time()
+    if isGameStart then
+        content:setTouchEnabled( true )
+    else
+        content:setTouchEnabled( false )
     end
 end
 

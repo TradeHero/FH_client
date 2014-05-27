@@ -11,7 +11,7 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "MatchListContent/guang-xia.png"
+    "Settings/settings_03.png"
   ],
   "version": "1.4.0.1",
   "widgetTree": {
@@ -37,7 +37,7 @@
           "customProperty": "",
           "flipX": false,
           "flipY": false,
-          "height": 46,
+          "height": 70,
           "ignoreSize": true,
           "layoutParameter": null,
           "opacity": 255,
@@ -54,7 +54,7 @@
           "touchAble": false,
           "useMergedTexture": false,
           "visible": true,
-          "width": 593,
+          "width": 582,
           "x": 320,
           "y": 22,
           "capInsetsHeight": 0,
@@ -63,13 +63,13 @@
           "capInsetsY": 0,
           "fileName": null,
           "fileNameData": {
-            "path": "MatchListContent/guang-xia.png",
+            "path": "Settings/settings_03.png",
             "plistFile": "",
             "resourceType": 0
           },
           "scale9Enable": false,
-          "scale9Height": 46,
-          "scale9Width": 593
+          "scale9Height": 70,
+          "scale9Width": 582
         }
       },
       {

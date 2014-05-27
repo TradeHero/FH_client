@@ -11,8 +11,9 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "MatchListContent/guang-xia.png",
-    "LoginNReg/photo.png"
+    "Settings/settings-bg.jpg",
+    "header/guangyun.png",
+    "header/back.png"
   ],
   "version": "1.4.0.1",
   "widgetTree": {
@@ -125,7 +126,7 @@
       "classname": "Panel",
       "name": "Panel_38",
       "ZOrder": 0,
-      "actiontag": 1,
+      "actiontag": -1,
       "anchorPointX": 0,
       "anchorPointY": 0,
       "classType": "CocoStudio.EngineAdapterWrap.CSPanel",

@@ -176,4 +176,8 @@
     <Project>SettingsHomeContent</Project>
     <GuidesList />
   </GuidesProject>
+  <GuidesProject>
+    <Project>FAQ</Project>
+    <GuidesList />
+  </GuidesProject>
 </ArrayOfGuidesProject>

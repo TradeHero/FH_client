@@ -11,7 +11,8 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "MatchListContent/guang-xia.png"
+    "Settings/settings-bg.jpg",
+    "header/guangyun.png"
   ],
   "version": "1.4.0.1",
   "widgetTree": {
@@ -293,7 +294,7 @@
       "adaptScreen": false,
       "backGroundImage": null,
       "backGroundImageData": {
-        "path": "MatchPrediction/Match-List-bg.jpg",
+        "path": "Settings/settings-bg.jpg",
         "plistFile": "",
         "resourceType": 0
       },

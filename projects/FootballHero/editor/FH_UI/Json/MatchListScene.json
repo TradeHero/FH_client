@@ -10,7 +10,14 @@
   "designHeight": 1136,
   "designWidth": 640,
   "textures": [],
-  "texturesPng": [],
+  "texturesPng": [
+    "MatchListScene/VS-bg.png",
+    "header/footballhero-logo.png",
+    "header/guangyun.png",
+    "MatchListScene/3xian.png",
+    "MatchListScene/liansaixuanze-bg.jpg",
+    "MatchListScene/photo.png"
+  ],
   "version": "1.4.0.1",
   "widgetTree": {
     "classname": "Panel",
@@ -561,7 +568,7 @@
       "classname": "Panel",
       "name": "Panel",
       "ZOrder": 0,
-      "actiontag": 1,
+      "actiontag": -1,
       "anchorPointX": 0,
       "anchorPointY": 0,
       "classType": "CocoStudio.EngineAdapterWrap.CSPanel",
@@ -593,7 +600,11 @@
       "y": 0,
       "adaptScreen": false,
       "backGroundImage": null,
-      "backGroundImageData": null,
+      "backGroundImageData": {
+        "path": "MatchListScene/VS-bg.png",
+        "plistFile": "",
+        "resourceType": 0
+      },
       "backGroundScale9Enable": false,
       "bgColorB": 0,
       "bgColorG": 0,
