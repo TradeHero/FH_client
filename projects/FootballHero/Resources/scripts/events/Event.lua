@@ -52,6 +52,14 @@ EventNameList =
 
 EventNameDosenotTrackList = 
 { 
+    "Do_Register",
+    "Do_Register_Name",
+    "Do_Login",
+    "Do_FB_Connect",
+    "Do_Post_Predictions",
+    "Do_Post_Fav_Team",
+    "Do_Send_Feedback",
+    
     "Check_File_Version",
     "Show_Error_Message",
     "Load_More_In_Leaderboard",
