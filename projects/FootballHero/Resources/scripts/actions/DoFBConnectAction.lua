@@ -30,43 +30,35 @@ function onFBConnectFailed()
 end
 
 function onFBConnectSuccess( accessToken )
-    local handler = function( isSucceed, body, header, status, errorBuffer )
-        print( "Http reponse: "..status.." and errorBuffer: "..errorBuffer )
-        print( "Http reponse body: "..body )
-        
-        local jsonResponse = {}
-        if string.len( body ) > 0 then
-            jsonResponse = Json.decode( body )
-        else
-            jsonResponse["Message"] = errorBuffer
-        end
-        ConnectingMessage.selfRemove()
-        if status == RequestUtils.HTTP_200 then
-            local sessionToken = jsonResponse["SessionToken"]
-            local userId = jsonResponse["Id"]
-            local configMd5Info = jsonResponse["ConfigMd5Info"]
-            local displayName = jsonResponse["DisplayName"]
-            local startLeagueId = jsonResponse["StartLeagueId"]
-            local balance = jsonResponse["Balance"]
-            onRequestSuccess( sessionToken, userId, configMd5Info, displayName, startLeagueId, balance )
-        else
-            onRequestFailed( jsonResponse["Message"] )
-        end
-    end
-
     local requestContent = { SocialNetworkType = 0, AuthToken = accessToken, useDev = RequestUtils.USE_DEV }
     local requestContentText = Json.encode( requestContent )
-    print("Request content is "..requestContentText)
+    
+    local url = RequestUtils.FB_LOGIN_REST_CALL
+    
+    local requestInfo = {}
+    requestInfo.requestData = requestContentText
+    requestInfo.url = url
+
+    local handler = function( isSucceed, body, header, status, errorBuffer )
+        RequestUtils.messageHandler( requestInfo, isSucceed, body, header, status, errorBuffer, RequestUtils.HTTP_200, onRequestSuccess )
+    end
 
     local httpRequest = HttpRequestForLua:create( CCHttpRequest.kHttpPost )
     httpRequest:addHeader( Constants.CONTENT_TYPE_JSON )
     httpRequest:getRequest():setRequestData( requestContentText, string.len( requestContentText ) )
-    httpRequest:sendHttpRequest( RequestUtils.FB_LOGIN_REST_CALL, handler )
+    httpRequest:sendHttpRequest( url, handler )
 
     ConnectingMessage.loadFrame()
 end
 
-function onRequestSuccess( sessionToken, userId, configMd5Info, displayName, startLeagueId, balance )
+function onRequestSuccess( jsonResponse )
+    local sessionToken = jsonResponse["SessionToken"]
+    local userId = jsonResponse["Id"]
+    local configMd5Info = jsonResponse["ConfigMd5Info"]
+    local displayName = jsonResponse["DisplayName"]
+    local startLeagueId = jsonResponse["StartLeagueId"]
+    local balance = jsonResponse["Balance"]
+
     local Logic = require("scripts.Logic").getInstance()
     Logic:setUserInfo( "", "", sessionToken, userId )
     Logic:setDisplayName( displayName )
@@ -79,8 +71,4 @@ function onRequestSuccess( sessionToken, userId, configMd5Info, displayName, sta
     end
 
     EventManager:postEvent( Event.Check_File_Version, { configMd5Info, finishEvent } )
-end
-
-function onRequestFailed( errorBuffer )
-    EventManager:postEvent( Event.Show_Error_Message, { errorBuffer } )
 end

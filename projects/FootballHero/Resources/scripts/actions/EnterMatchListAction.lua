@@ -1,5 +1,7 @@
 module(..., package.seeall)
 
+local Json = require("json")
+local RequestUtils = require("scripts.RequestUtils")
 local ConnectingMessage = require("scripts.views.ConnectingMessage")
 local EventManager = require("scripts.events.EventManager").getInstance()
 local Event = require("scripts.events.Event").EventList
@@ -17,30 +19,19 @@ function action( param )
 
     Logic:setPreviousLeagueSelected( leagueId )
 
-    local Json = require("json")
-	local RequestUtils = require("scripts.RequestUtils")
+    local url = RequestUtils.GET_UPCOMING_GAMES_BY_LEAGUE_REST_CALL.."?leagueId="..leagueId
+
+    local requestInfo = {}
+    requestInfo.requestData = ""
+    requestInfo.url = url
 
     local handler = function( isSucceed, body, header, status, errorBuffer )
-        print( "Http reponse: "..status.." and errorBuffer: "..errorBuffer )
-        print( "Http reponse body: "..body )
-        
-        local jsonResponse = {}
-        if string.len( body ) > 0 then
-            jsonResponse = Json.decode( body )
-        else
-            jsonResponse["Message"] = errorBuffer
-        end
-        ConnectingMessage.selfRemove()
-        if status == RequestUtils.HTTP_200 then
-            onRequestSuccess( jsonResponse )
-        else
-            onRequestFailed( jsonResponse["Message"] )
-        end
+        RequestUtils.messageHandler( requestInfo, isSucceed, body, header, status, errorBuffer, RequestUtils.HTTP_200, onRequestSuccess, onRequestFailed )
     end
 
     local httpRequest = HttpRequestForLua:create( CCHttpRequest.kHttpGet )
     httpRequest:addHeader( Logic:getAuthSessionString() )
-    httpRequest:sendHttpRequest( RequestUtils.GET_UPCOMING_GAMES_BY_LEAGUE_REST_CALL.."?leagueId="..leagueId, handler )
+    httpRequest:sendHttpRequest( url, handler )
 
     ConnectingMessage.loadFrame()
 
@@ -74,7 +65,8 @@ function onRequestSuccess( matchList )
     
 end
 
-function onRequestFailed( errorBuffer )
+function onRequestFailed( jsonResponse )
+    local errorBuffer = jsonResponse["Message"]
     local MatchListData = require("scripts.data.MatchListData").MatchListData
     local matchList = MatchListData:new()
     local matchListScene = require("scripts.views.MatchListScene")

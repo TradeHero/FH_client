@@ -1,5 +1,11 @@
 module(..., package.seeall)
 
+local Json = require("json")
+local EventManager = require("scripts.events.EventManager").getInstance()
+local Event = require("scripts.events.Event").EventList
+local ConnectingMessage = require("scripts.views.ConnectingMessage")
+local DoLogReport = require("scripts.actions.DoLogReport")
+
 HTTP_200 = 200
 HTTP_204 = 204
 
@@ -79,3 +85,40 @@ function split(str, delim, maxNb)
     end  
     return result   
 end 
+
+function messageHandler( requestInfo, isSucceed, body, header, status, errorBuffer, successRequestID, successHandler, failedHandler )
+    print( "Http reponse: "..status.." and errorBuffer: "..errorBuffer )
+    print( "Http reponse body: "..body )
+    
+    local jsonResponse = {}
+    if string.len( body ) > 0 then
+        jsonResponse = Json.decode( body )
+    else
+        jsonResponse["Message"] = errorBuffer
+    end
+    ConnectingMessage.selfRemove()
+    if status == successRequestID then
+        if successHandler ~= nil then
+            successHandler( jsonResponse )
+        end
+    else
+        reportRequestFailed( requestInfo, jsonResponse["Message"] )
+        if failedHandler ~= nil then
+            failedHandler( jsonResponse )
+        else
+            onRequestFailed( jsonResponse["Message"] )
+        end
+    end
+end
+
+function reportRequestFailed( requestInfo, errorBuffer )
+    if errorBuffer == "An error has occurred." then
+        local unknowErrorPostText = "Get "..errorBuffer.." with request: "..Json.encode( requestInfo )
+        print( unknowErrorPostText )
+        DoLogReport.reportNetworkError( unknowErrorPostText )
+    end
+end
+
+function onRequestFailed( errorBuffer )
+    EventManager:postEvent( Event.Show_Error_Message, { errorBuffer } )
+end

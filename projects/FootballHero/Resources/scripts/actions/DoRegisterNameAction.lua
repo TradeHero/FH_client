@@ -16,7 +16,7 @@ function action( param )
 
     mUserName, mFirstName, mLastName = param[1], param[2], param[3]
     if string.len( mUserName ) == 0 then
-        onRequestFailed( "User name is blank." )
+        RequestUtils.onRequestFailed( "User name is blank." )
         return
     end
     if mFirstName == nil then
@@ -27,41 +27,28 @@ function action( param )
         mLastName = ""
     end
 
-    local handler = function( isSucceed, body, header, status, errorBuffer )
-        print( "Http reponse: "..status.." and errorBuffer: "..errorBuffer )
-        print( "Http reponse body: "..body )
-        
-        local jsonResponse = {}
-        if string.len( body ) > 0 then
-            jsonResponse = Json.decode( body )
-        else
-            jsonResponse["Message"] = errorBuffer
-        end
-        ConnectingMessage.selfRemove()
-        if status == RequestUtils.HTTP_200 then
-            onRequestSuccess()
-        else
-            onRequestFailed( jsonResponse["Message"] )
-        end
-    end
-
     local requestContent = { DisplayName = mUserName, FirstName = mFirstName, LastName = mLastName, DoB = "" }
     local requestContentText = Json.encode( requestContent )
-    print("Request content is "..requestContentText)
+    
+    local url = RequestUtils.SET_USER_METADATA_REST_CALL
+
+    local requestInfo = {}
+    requestInfo.requestData = requestContentText
+    requestInfo.url = url
+
+    local handler = function( isSucceed, body, header, status, errorBuffer )
+        RequestUtils.messageHandler( requestInfo, isSucceed, body, header, status, errorBuffer, RequestUtils.HTTP_200, onRequestSuccess )
+    end
 
     local httpRequest = HttpRequestForLua:create( CCHttpRequest.kHttpPost )
     httpRequest:addHeader( "Content-Type: application/json" )
     httpRequest:addHeader( Logic:getAuthSessionString() )
     httpRequest:getRequest():setRequestData( requestContentText, string.len( requestContentText ) )
-    httpRequest:sendHttpRequest( RequestUtils.SET_USER_METADATA_REST_CALL, handler )
+    httpRequest:sendHttpRequest( url, handler )
 
     ConnectingMessage.loadFrame()
 end
 
-function onRequestSuccess()
+function onRequestSuccess( jsonResponse )
     EventManager:postEvent( Event.Enter_Sel_Fav_Team )
-end
-
-function onRequestFailed( errorBuffer )
-    EventManager:postEvent( Event.Show_Error_Message, { errorBuffer } )
 end

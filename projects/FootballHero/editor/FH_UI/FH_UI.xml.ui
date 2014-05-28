@@ -60,8 +60,15 @@
   <ResRelativePath />
   <imageFileList />
   <imagePngList>
-    <string>Popup/Match-List-popup-bg.png</string>
-    <string>Popup/ok-popup_03.png</string>
+    <string>MatchListContent/vs-button.png</string>
+    <string>commonRes/Arsenal.png</string>
+    <string>history/jiantou.png</string>
+    <string>history/hengxian.png</string>
+    <string>history/blue.png</string>
+    <string>history/green.png</string>
+    <string>history/red.png</string>
+    <string>history/shangsheng.png</string>
+    <string>history/xiajiang.png</string>
   </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
   <CurrentUIJson>HistoryMainMatchContent.json</CurrentUIJson>

@@ -5,34 +5,25 @@ local ConnectingMessage = require("scripts.views.ConnectingMessage")
 local Logic = require("scripts.Logic").getInstance()
 local EventManager = require("scripts.events.EventManager").getInstance()
 local Event = require("scripts.events.Event").EventList
+local RequestUtils = require("scripts.RequestUtils")
+
 
 function action( param )
-
-	local RequestUtils = require("scripts.RequestUtils")
-
     local matchId = Logic:getSelectedMatch()["Id"]
 
+    local url = RequestUtils.GET_GAME_MARKETS_REST_CALL.."?gameId="..matchId
+
+    local requestInfo = {}
+    requestInfo.requestData = ""
+    requestInfo.url = url
+
     local handler = function( isSucceed, body, header, status, errorBuffer )
-        print( "Http reponse: "..status.." and errorBuffer: "..errorBuffer )
-        print( "Http reponse body: "..body )
-        
-        local jsonResponse = {}
-        if string.len( body ) > 0 then
-            jsonResponse = Json.decode( body )
-        else
-            jsonResponse["Message"] = errorBuffer
-        end
-        ConnectingMessage.selfRemove()
-        if status == RequestUtils.HTTP_200 then
-            onRequestSuccess( jsonResponse )
-        else
-            onRequestFailed( jsonResponse["Message"] )
-        end
+        RequestUtils.messageHandler( requestInfo, isSucceed, body, header, status, errorBuffer, RequestUtils.HTTP_200, onRequestSuccess )
     end
 
     local httpRequest = HttpRequestForLua:create( CCHttpRequest.kHttpGet )
     httpRequest:addHeader( Logic:getAuthSessionString() )
-    httpRequest:sendHttpRequest( RequestUtils.GET_GAME_MARKETS_REST_CALL.."?gameId="..matchId, handler )
+    httpRequest:sendHttpRequest( url, handler )
 
     ConnectingMessage.loadFrame()
 
@@ -62,10 +53,6 @@ function onRequestSuccess( response )
     elseif marketInfo:getNum() > 0 then
         EventManager:postEvent( Event.Enter_Next_Prediction )
     else
-        onRequestFailed( "You have completed this match." )
+        RequestUtils.onRequestFailed( "You have completed this match." )
     end
-end
-
-function onRequestFailed( errorBuffer )
-    EventManager:postEvent( Event.Show_Error_Message, { errorBuffer } )
 end

@@ -17,44 +17,37 @@ function action( param )
 end
 
 function postPredictionData()
-	local handler = function( isSucceed, body, header, status, errorBuffer )
-        print( "Http reponse: "..status.." and errorBuffer: "..errorBuffer )
-        print( "Http reponse body: "..body )
-        
-        local jsonResponse = {}
-        if string.len( body ) > 0 then
-            jsonResponse = Json.decode( body )
-        else
-            jsonResponse["Message"] = errorBuffer
-        end
-        ConnectingMessage.selfRemove()
-        if status == RequestUtils.HTTP_200 then
-            local balance = jsonResponse["Balance"]
-            onRequestSuccess( balance )
-        else
-            onRequestFailed( jsonResponse["Message"] )
-        end
-    end
+	local requestContentText = Logic:getPredictions():toString()
 
-    local requestContentText = Logic:getPredictions():toString()
-    print("Request content is "..requestContentText)
+    local url = RequestUtils.POST_COUPONS_REST_CALL
+
+    local requestInfo = {}
+    requestInfo.requestData = requestContentText
+    requestInfo.url = url
+
+    local handler = function( isSucceed, body, header, status, errorBuffer )
+        RequestUtils.messageHandler( requestInfo, isSucceed, body, header, status, errorBuffer, RequestUtils.HTTP_200, onRequestSuccess, onRequestFailed )
+    end
 
     local httpRequest = HttpRequestForLua:create( CCHttpRequest.kHttpPost )
     httpRequest:addHeader( Constants.CONTENT_TYPE_JSON )
     httpRequest:addHeader( Logic:getAuthSessionString() )
     
     httpRequest:getRequest():setRequestData( requestContentText, string.len( requestContentText ) )
-    httpRequest:sendHttpRequest( RequestUtils.POST_COUPONS_REST_CALL, handler )
+    httpRequest:sendHttpRequest( url, handler )
 
     ConnectingMessage.loadFrame()
 end
 
-function onRequestSuccess( balance )
+function onRequestSuccess( jsonResponse )
+    local balance = jsonResponse["Balance"]
+
     Logic:resetPredictions()
     Logic:setBalance( balance )
     EventManager:postEvent( Event.Enter_Match_List )
 end
 
-function onRequestFailed( errorBuffer )
+function onRequestFailed( jsonResponse )
+    local errorBuffer = jsonResponse["Message"]
     EventManager:postEvent( Event.Show_Error_Message, { errorBuffer, postPredictionData } )
 end

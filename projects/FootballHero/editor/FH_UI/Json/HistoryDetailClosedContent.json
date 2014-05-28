@@ -11,8 +11,15 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "Popup/Match-List-popup-bg.png",
-    "Popup/ok-popup_03.png"
+    "MatchListContent/vs-button.png",
+    "commonRes/Arsenal.png",
+    "history/jiantou.png",
+    "history/hengxian.png",
+    "history/blue.png",
+    "history/green.png",
+    "history/red.png",
+    "history/shangsheng.png",
+    "history/xiajiang.png"
   ],
   "version": "1.4.0.1",
   "widgetTree": {
