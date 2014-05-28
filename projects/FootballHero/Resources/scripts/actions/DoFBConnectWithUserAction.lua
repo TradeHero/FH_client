@@ -6,9 +6,16 @@ local Event = require("scripts.events.Event").EventList
 local ConnectingMessage = require("scripts.views.ConnectingMessage")
 local Json = require("json")
 local RequestUtils = require("scripts.RequestUtils")
+local Logic = require("scripts.Logic").getInstance()
 
+
+local mSuccessHandler
+local mFailedHandler
 
 function action( param )
+    mSuccessHandler = param[1]
+    mFailedHandler = param[2]
+
 	local Json = require("json")
 	local RequestUtils = require("scripts.RequestUtils")
 
@@ -17,7 +24,7 @@ function action( param )
             -- To handle user reject to the oAuth.
             onFBConnectFailed()
         else
-            print("Get login result "..accessToken)
+            print("Get token "..accessToken)
             onFBConnectSuccess( accessToken )
         end
     end
@@ -26,25 +33,26 @@ function action( param )
 end
 
 function onFBConnectFailed()
-
+    mFailedHandler( true )
 end
 
 function onFBConnectSuccess( accessToken )
     local requestContent = { SocialNetworkType = 0, AuthToken = accessToken, useDev = RequestUtils.USE_DEV }
     local requestContentText = Json.encode( requestContent )
     
-    local url = RequestUtils.FB_LOGIN_REST_CALL
+    local url = RequestUtils.FB_CONNECT_REST_CALL
     
     local requestInfo = {}
     requestInfo.requestData = requestContentText
     requestInfo.url = url
 
     local handler = function( isSucceed, body, header, status, errorBuffer )
-        RequestUtils.messageHandler( requestInfo, isSucceed, body, header, status, errorBuffer, RequestUtils.HTTP_200, onRequestSuccess )
+        RequestUtils.messageHandler( requestInfo, isSucceed, body, header, status, errorBuffer, RequestUtils.HTTP_200, onRequestSuccess, onRequestFailed )
     end
 
     local httpRequest = HttpRequestForLua:create( CCHttpRequest.kHttpPost )
     httpRequest:addHeader( Constants.CONTENT_TYPE_JSON )
+    httpRequest:addHeader( Logic:getAuthSessionString() )
     httpRequest:getRequest():setRequestData( requestContentText, string.len( requestContentText ) )
     httpRequest:sendHttpRequest( url, handler )
 
@@ -52,25 +60,12 @@ function onFBConnectSuccess( accessToken )
 end
 
 function onRequestSuccess( jsonResponse )
-    local sessionToken = jsonResponse["SessionToken"]
-    local userId = jsonResponse["Id"]
-    local configMd5Info = jsonResponse["ConfigMd5Info"]
-    local displayName = jsonResponse["DisplayName"]
-    local startLeagueId = jsonResponse["StartLeagueId"]
-    local balance = jsonResponse["Balance"]
-    local FbLinked = jsonResponse["FbLinked"]
+    Logic:setFbLinked( true )
+    mSuccessHandler()
+end
 
-    local Logic = require("scripts.Logic").getInstance()
-    Logic:setUserInfo( "", "", sessionToken, userId )
-    Logic:setDisplayName( displayName )
-    Logic:setStartLeagueId( startLeagueId )
-    Logic:setBalance( balance )
-    Logic:setFbLinked( FbLinked )
-    
-    local finishEvent = Event.Enter_Sel_Fav_Team
-    if displayName == nil then
-        finishEvent = Event.Enter_Register_Name
-    end
-
-    EventManager:postEvent( Event.Check_File_Version, { configMd5Info, finishEvent } )
+function onRequestFailed( jsonResponse )
+    local errorBuffer = jsonResponse["Message"]
+    mFailedHandler( false )
+    EventManager:postEvent( Event.Show_Error_Message, { errorBuffer } )
 end

@@ -52,12 +52,14 @@ function onRequestSuccess( jsonResponse )
     local displayName = jsonResponse["ProfileDto"]["DisplayName"]
     local startLeagueId = jsonResponse["ProfileDto"]["StartLeagueId"]
     local balance = jsonResponse["ProfileDto"]["Balance"]
+    local FbLinked = jsonResponse["ProfileDto"]["FbLinked"]
 
     local Logic = require("scripts.Logic").getInstance()
     Logic:setUserInfo( mEmail, mPassword, sessionToken, userId )
     Logic:setDisplayName( displayName )
     Logic:setStartLeagueId( startLeagueId )
     Logic:setBalance( balance )
+    Logic:setFbLinked( FbLinked )
 
     local finishEvent = Event.Enter_Sel_Fav_Team
     if displayName == nil then

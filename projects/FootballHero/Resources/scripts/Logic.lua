@@ -52,6 +52,7 @@ function Logic:new()
 		displayName = "",
 		startLeagueId = 0,
 		balance = 0,
+		FbLinked = false,
 	}
     
     setmetatable(obj, self)
@@ -185,4 +186,12 @@ end
 
 function Logic:getUncommitedBalance()
 	return self.mCoupons:getSize() * Constants.STAKE
+end
+
+function Logic:setFbLinked( linked )
+	self.FbLinked = linked
+end
+
+function  Logic:getFbLinked()
+	return self.FbLinked
 end

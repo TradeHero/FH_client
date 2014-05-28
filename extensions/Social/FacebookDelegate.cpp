@@ -55,6 +55,9 @@ namespace Social
 			jmi.env->CallStaticVoidMethod(jmi.classID, jmi.methodID, arrs);
 		}
 #endif
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
+		loginResult(NULL);
+#endif
 	}
     
     void FacebookDelegate::loginResult(const char* accessToken)

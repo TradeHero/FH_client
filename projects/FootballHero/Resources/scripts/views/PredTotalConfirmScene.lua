@@ -23,6 +23,9 @@ function loadFrame()
 
     local cancelBt = widget:getChildByName("cancel")
     cancelBt:addTouchEventListener( cancelEventHandler )
+
+    local facebook = mWidget:getChildByName("facebook")
+    facebook:addTouchEventListener( facebookEventHandler )
 end
 
 function EnterOrExit( eventType )
@@ -48,6 +51,22 @@ function cancelEventHandler( sender, eventType )
 	if eventType == TOUCH_EVENT_ENDED then
 		Logic:resetPredictions()
     	EventManager:postEvent( Event.Enter_Match_List )
+	end
+end
+
+function facebookEventHandler( sender, eventType )
+	if eventType == TOUCH_EVENT_ENDED then
+		local facebook = tolua.cast( mWidget:getChildByName("facebook"), "CheckBox" )
+		if facebook:getSelectedState() == false and Logic:getFbLinked() == false then
+			local successHandler = function()
+				-- Nothing to do.
+			end
+			local failedHandler = function( selectedState )
+				facebook:setSelectedState( selectedState )
+			end
+
+			EventManager:postEvent( Event.Do_FB_Connect_With_User, { successHandler, failedHandler } )
+		end
 	end
 end
 

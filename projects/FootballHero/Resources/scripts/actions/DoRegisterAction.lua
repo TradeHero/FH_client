@@ -64,12 +64,14 @@ function onRequestSuccess( jsonResponse )
     local displayName = jsonResponse["DisplayName"]
     local startLeagueId = jsonResponse["StartLeagueId"]
     local balance = jsonResponse["Balance"]
+    local FbLinked = jsonResponse["FbLinked"]
 
     local Logic = require("scripts.Logic").getInstance()
     Logic:setUserInfo( mEmail, mPassword, sessionToken, userId )
     Logic:setDisplayName( displayName )
     Logic:setStartLeagueId( startLeagueId )
     Logic:setBalance( balance )
+    Logic:setFbLinked( FbLinked )
 
     EventManager:postEvent( Event.Check_File_Version, { configMd5Info, Event.Enter_Register_Name } )
 end
