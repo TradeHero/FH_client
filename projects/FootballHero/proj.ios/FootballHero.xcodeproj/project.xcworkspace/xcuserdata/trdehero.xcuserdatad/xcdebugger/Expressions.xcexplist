@@ -10,5 +10,13 @@
             </PersistentString>
          </PersistentStrings>
       </ContextState>
+      <ContextState
+         contextName = "WebviewController::openWebpage(char const*, int, int, int, int):WebviewController.mm">
+         <PersistentStrings>
+            <PersistentString
+               value = "currentDevice">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
    </ContextStates>
 </VariablesViewState>

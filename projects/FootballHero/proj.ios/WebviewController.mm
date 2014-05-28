@@ -7,6 +7,9 @@
 static WebviewController* instance;
 UIWebView *webView;
 
+#define IS_IPHONE ( [ [ [ UIDevice currentDevice ] model ] hasPrefix: @"iPhone" ] )
+#define IS_IPAD   ( [ [ [ UIDevice currentDevice ] model ] hasPrefix: @"iPad" ] )
+
 WebviewController* WebviewController::getInstance()
 {
     if (instance == NULL)
@@ -20,9 +23,21 @@ void WebviewController::openWebpage(const char* url, int x, int y, int w, int h)
 {
     if (webView == nil)
     {
-        webView = [[UIWebView alloc] initWithFrame:CGRectMake(x, y, w, h)];
         AppController *app = (AppController*) [[UIApplication sharedApplication] delegate];
-        [[app getViewController].view addSubview:webView];
+        UIView *mainView = [app getViewController].view;
+        NSString *m = [[UIDevice currentDevice] model];
+        if (IS_IPHONE)
+        {
+            webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 40, 320, 528)];
+        }
+        else if (IS_IPAD)
+        {
+            webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 80, 768, 984)];
+        }
+        
+        [mainView addSubview:webView];
+        
+       
     }
     
     NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithUTF8String:url]]];
