@@ -165,5 +165,7 @@ function initCouponInfo( content, info )
             winLoseLabel:setText("Lost:")
             points:setText( string.format( points:getStringValue(), info["Stake"] ) )
         end
+    else
+        points:setText( string.format( points:getStringValue(), info["Stake"] * ( info["Odd"] - 1 ) ) )
     end
 end
