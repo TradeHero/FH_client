@@ -87,5 +87,5 @@ class Layout : public Widget
     
     virtual void sortAllChildren();
     
-    void requestDoLayout();  
+    void requestDoLayout();
 };

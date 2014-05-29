@@ -212,6 +212,10 @@ public:
      */
     void jumpToPercentBothDirection(const CCPoint& percent);
     
+	/**
+	* Move inner container to both direction position of scrollview.
+	*/
+	void jumpToDestination(const CCPoint& des);
     /**
      * Changes inner container size of scrollview.
      *
@@ -322,7 +326,6 @@ protected:
     bool checkNeedBounce();
     void startAutoScrollChildrenWithOriginalSpeed(const CCPoint& dir, float v, bool attenuated, float acceleration);
     void startAutoScrollChildrenWithDestination(const CCPoint& des, float time, bool attenuated);
-    void jumpToDestination(const CCPoint& des);
     void stopAutoScrollChildren();
     void startBounceChildren(float v);
     void stopBounceChildren();

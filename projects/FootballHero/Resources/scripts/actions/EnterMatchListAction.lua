@@ -46,8 +46,28 @@ function onRequestSuccess( matchList )
     local MatchListData = require("scripts.data.MatchListData").MatchListData
 
     -- Sort the match according to its start time.
-    table.sort( matchList, function (n1, n2)
-        return n1["StartTime"] < n2["StartTime"]
+    local currentTime = os.time()
+    local currentDate = os.time{year=os.date("%Y", currentTime), month=os.date("%m", currentTime), day=os.date("%d", currentTime), hour=0}
+    table.sort( matchList, function ( n1, n2 )
+        if n1["StartTime"] < n2["StartTime"] then
+            if n2["StartTime"] < currentDate then
+                return false
+            elseif n1["StartTime"] < currentDate then
+                return false
+            else
+                return true
+            end
+        elseif  n1["StartTime"] > n2["StartTime"] then
+            if n1["StartTime"] < currentDate then
+                return true
+            elseif n2["StartTime"] < currentDate then
+                return true
+            else
+                return false
+            end
+        else
+            return false
+        end
     end )
 
     -- Group and sort.

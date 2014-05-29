@@ -11,12 +11,15 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "MatchListScene/VS-bg.png",
-    "header/footballhero-logo.png",
-    "header/guangyun.png",
-    "MatchListScene/3xian.png",
-    "MatchListScene/liansaixuanze-bg.jpg",
-    "MatchListScene/photo.png"
+    "MatchListContent/vs-button.png",
+    "commonRes/Arsenal.png",
+    "history/jiantou.png",
+    "history/hengxian.png",
+    "history/blue.png",
+    "history/green.png",
+    "history/red.png",
+    "history/shangsheng.png",
+    "history/xiajiang.png"
   ],
   "version": "1.4.0.1",
   "widgetTree": {
@@ -568,7 +571,7 @@
       "classname": "Panel",
       "name": "Panel",
       "ZOrder": 0,
-      "actiontag": -1,
+      "actiontag": 1,
       "anchorPointX": 0,
       "anchorPointY": 0,
       "classType": "CocoStudio.EngineAdapterWrap.CSPanel",

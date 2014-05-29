@@ -13,6 +13,7 @@ local Event = require("scripts.events.Event").EventList
 
 local mWidget
 local mTopLayer
+local mTheFirstDate = nil
 
 local MIN_MOVE_DISTANCE = 100
 local OPTION_MOVE_TIME = 0.5
@@ -68,26 +69,31 @@ function initMatchList( matchList )
     local contentHeight = 0
 
     local seqArray = CCArray:create()
-
+    
+    mTheFirstDate = nil
     for k,v in pairs( matchList:getMatchDateList() ) do
         local matchDate = v
 
+        local zOrder = matchDate["date"]
         seqArray:addObject( CCCallFuncN:create( function()
             -- Add the date
             local content = SceneManager.widgetFromJsonFile("scenes/MatchDate.json")
             local dateDisplay = tolua.cast( content:getChildByName("date"), "Label" )
             dateDisplay:setText( matchDate["dateDisplay"] )
             content:setLayoutParameter( layoutParameter )
+            content:setZOrder( zOrder )
             contentContainer:addChild( content )
             contentHeight = contentHeight + content:getSize().height
+
+            if mTheFirstDate == nil then
+                mTheFirstDate = content
+            end
 
             content:setOpacity( 0 )
             content:setCascadeOpacityEnabled( true )
             mWidget:runAction( CCTargetedAction:create( content, CCFadeIn:create( CONTENT_FADEIN_TIME ) ) )
 
-            contentContainer:setInnerContainerSize( CCSize:new( 0, contentHeight ) )
-            local layout = tolua.cast( contentContainer, "Layout" )
-            layout:requestDoLayout()
+            updateContentContainer( contentHeight, content )
         end ) )
         seqArray:addObject( CCDelayTime:create( CONTENT_DELAY_TIME ) )
 
@@ -96,15 +102,14 @@ function initMatchList( matchList )
             local upper = ImageView:create()
             upper:loadTexture("images/guang.png")
             upper:setLayoutParameter( layoutParameter )
+            upper:setZOrder( zOrder )
             contentContainer:addChild( upper )
             contentHeight = contentHeight + upper:getSize().height
 
             upper:setOpacity( 0 )
             mWidget:runAction( CCTargetedAction:create( upper, CCFadeIn:create( CONTENT_FADEIN_TIME ) ) )
 
-            contentContainer:setInnerContainerSize( CCSize:new( 0, contentHeight ) )
-            local layout = tolua.cast( contentContainer, "Layout" )
-            layout:requestDoLayout()
+            updateContentContainer( contentHeight, upper )
         end ) )
         seqArray:addObject( CCDelayTime:create( CONTENT_DELAY_TIME ) )
         
@@ -121,6 +126,7 @@ function initMatchList( matchList )
                 helperInitMatchInfo( content, inV )
 
                 content:setLayoutParameter( layoutParameter )
+                content:setZOrder( zOrder )
                 contentContainer:addChild( content )
                 contentHeight = contentHeight + content:getSize().height
 
@@ -130,9 +136,7 @@ function initMatchList( matchList )
                 content:setCascadeOpacityEnabled( true )
                 mWidget:runAction( CCTargetedAction:create( content, CCFadeIn:create( CONTENT_FADEIN_TIME ) ) )
 
-                contentContainer:setInnerContainerSize( CCSize:new( 0, contentHeight ) )
-                local layout = tolua.cast( contentContainer, "Layout" )
-                layout:requestDoLayout()
+                updateContentContainer( contentHeight, content )
             end ) )
             seqArray:addObject( CCDelayTime:create( CONTENT_DELAY_TIME ) )
         end
@@ -143,15 +147,14 @@ function initMatchList( matchList )
             bottom:loadTexture("images/guang.png")
             bottom:setFlipY(true)
             bottom:setLayoutParameter( layoutParameter )
+            bottom:setZOrder( zOrder )
             contentContainer:addChild( bottom )
             contentHeight = contentHeight + bottom:getSize().height
 
             bottom:setOpacity( 0 )
             mWidget:runAction( CCTargetedAction:create( bottom, CCFadeIn:create( CONTENT_FADEIN_TIME ) ) )
 
-            contentContainer:setInnerContainerSize( CCSize:new( 0, contentHeight ) )
-            local layout = tolua.cast( contentContainer, "Layout" )
-            layout:requestDoLayout()
+            updateContentContainer( contentHeight, bottom )
         end ) )
         seqArray:addObject( CCDelayTime:create( CONTENT_DELAY_TIME ) )
     end
@@ -162,14 +165,26 @@ function initMatchList( matchList )
             content:setLayoutParameter( layoutParameter )
             contentContainer:addChild( content )
             contentHeight = contentHeight + content:getSize().height
-
-            contentContainer:setInnerContainerSize( CCSize:new( 0, contentHeight ) )
-            local layout = tolua.cast( contentContainer, "Layout" )
-            layout:requestDoLayout()
+            updateContentContainer( contentHeight, content )
         end
     end ) )
 
     mWidget:runAction( CCSequence:create( seqArray ) )
+end
+
+function updateContentContainer( contentHeight, addContent )
+    local contentContainer = tolua.cast( mWidget:getChildByName("ScrollView"), "ScrollView" )
+
+    contentContainer:setInnerContainerSize( CCSize:new( 0, contentHeight ) )
+    local layout = tolua.cast( contentContainer, "Layout" )
+    layout:requestDoLayout()
+
+    if mTheFirstDate ~= nil then
+        if addContent:getZOrder() < mTheFirstDate:getZOrder() then
+            local y = contentContainer:getInnerContainer():getPositionY() + addContent:getSize().height
+            contentContainer:jumpToDestination( ccp( 0, y ) )
+        end
+    end
 end
 
 function enterMatch( match )

@@ -1,6 +1,6 @@
 /*
 ** Lua binding: CocoStudio
-** Generated automatically by tolua++-1.0.92 on 05/19/14 14:40:50.
+** Generated automatically by tolua++-1.0.92 on 05/29/14 16:34:19.
 */
 
 /****************************************************************************
@@ -16982,6 +16982,39 @@ static int tolua_CocoStudio_ScrollView_jumpToPercentBothDirection00(lua_State* t
 }
 #endif //#ifndef TOLUA_DISABLE
 
+/* method: jumpToDestination of class  ScrollView */
+#ifndef TOLUA_DISABLE_tolua_CocoStudio_ScrollView_jumpToDestination00
+static int tolua_CocoStudio_ScrollView_jumpToDestination00(lua_State* tolua_S)
+{
+#ifndef TOLUA_RELEASE
+ tolua_Error tolua_err;
+ if (
+     !tolua_isusertype(tolua_S,1,"ScrollView",0,&tolua_err) ||
+     (tolua_isvaluenil(tolua_S,2,&tolua_err) || !tolua_isusertype(tolua_S,2,"const CCPoint",0,&tolua_err)) ||
+     !tolua_isnoobj(tolua_S,3,&tolua_err)
+ )
+  goto tolua_lerror;
+ else
+#endif
+ {
+  ScrollView* self = (ScrollView*)  tolua_tousertype(tolua_S,1,0);
+  const CCPoint* des = ((const CCPoint*)  tolua_tousertype(tolua_S,2,0));
+#ifndef TOLUA_RELEASE
+  if (!self) tolua_error(tolua_S,"invalid 'self' in function 'jumpToDestination'", NULL);
+#endif
+  {
+   self->jumpToDestination(*des);
+  }
+ }
+ return 0;
+#ifndef TOLUA_RELEASE
+ tolua_lerror:
+ tolua_error(tolua_S,"#ferror in function 'jumpToDestination'.",&tolua_err);
+ return 0;
+#endif
+}
+#endif //#ifndef TOLUA_DISABLE
+
 /* method: setInnerContainerSize of class  ScrollView */
 #ifndef TOLUA_DISABLE_tolua_CocoStudio_ScrollView_setInnerContainerSize00
 static int tolua_CocoStudio_ScrollView_setInnerContainerSize00(lua_State* tolua_S)
@@ -24150,6 +24183,7 @@ TOLUA_API int tolua_CocoStudio_open (lua_State* tolua_S)
    tolua_function(tolua_S,"jumpToPercentVertical",tolua_CocoStudio_ScrollView_jumpToPercentVertical00);
    tolua_function(tolua_S,"jumpToPercentHorizontal",tolua_CocoStudio_ScrollView_jumpToPercentHorizontal00);
    tolua_function(tolua_S,"jumpToPercentBothDirection",tolua_CocoStudio_ScrollView_jumpToPercentBothDirection00);
+   tolua_function(tolua_S,"jumpToDestination",tolua_CocoStudio_ScrollView_jumpToDestination00);
    tolua_function(tolua_S,"setInnerContainerSize",tolua_CocoStudio_ScrollView_setInnerContainerSize00);
    tolua_function(tolua_S,"getInnerContainerSize",tolua_CocoStudio_ScrollView_getInnerContainerSize00);
    tolua_function(tolua_S,"addChild",tolua_CocoStudio_ScrollView_addChild00);
