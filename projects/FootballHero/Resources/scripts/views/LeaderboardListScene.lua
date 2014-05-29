@@ -6,6 +6,7 @@ local EventManager = require("scripts.events.EventManager").getInstance()
 local Event = require("scripts.events.Event").EventList
 local TeamConfig = require("scripts.config.Team")
 local LeaderboardConfig = require("scripts.config.Leaderboard")
+local SMIS = require("scripts.SMIS")
 
 
 local mWidget
@@ -101,6 +102,7 @@ function initLeaderboardContent( i, content, info )
     local name = tolua.cast( content:getChildByName("name"), "Label" )
     local score = tolua.cast( content:getChildByName("score"), "Label" )
     local index = tolua.cast( content:getChildByName("index"), "Label" )
+    local logo = tolua.cast( content:getChildByName("logo"), "ImageView" )
 
     if info["DisplayName"] == nil then
         name:setText( "Unknow name" )
@@ -109,6 +111,23 @@ function initLeaderboardContent( i, content, info )
     end
     score:setText( string.format( mSubType["description"], info[mSubType["dataColumnId"]] ) )
     index:setText( i )
+
+
+    local seqArray = CCArray:create()
+    seqArray:addObject( CCDelayTime:create( i * 0.2 ) )
+    seqArray:addObject( CCCallFuncN:create( function()
+        if info["PictureUrl"] ~= nil then
+            local handler = function( filePath )
+                if filePath ~= nil then
+                    logo:loadTexture( filePath )
+                    logo:setScale( 1 )
+                end
+            end
+            SMIS.getSMImagePath( info["PictureUrl"], handler )
+        end
+    end ) )
+
+    mWidget:runAction( CCSequence:create( seqArray ) )
 end
 
 function loadMore( sender, eventType )
