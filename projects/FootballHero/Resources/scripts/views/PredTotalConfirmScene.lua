@@ -57,7 +57,7 @@ end
 function facebookEventHandler( sender, eventType )
 	if eventType == TOUCH_EVENT_ENDED then
 		local facebook = tolua.cast( mWidget:getChildByName("facebook"), "CheckBox" )
-		if facebook:getSelectedState() == false and Logic:getFbLinked() == false then
+		if facebook:getSelectedState() == false and Logic:getFbId() == false then
 			local successHandler = function()
 				-- Nothing to do.
 			end

@@ -118,7 +118,7 @@ function initLeaderboardContent( i, content, info )
     seqArray:addObject( CCCallFuncN:create( function()
         if info["PictureUrl"] ~= nil then
             local handler = function( filePath )
-                if filePath ~= nil then
+                if filePath ~= nil and logo ~= nil then
                     logo:loadTexture( filePath )
                     logo:setScale( 1 )
                 end

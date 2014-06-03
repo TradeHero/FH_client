@@ -214,6 +214,8 @@
 		730F171F1918C8E6000DB5BE /* lfs.c in Sources */ = {isa = PBXBuildFile; fileRef = 730F171D1918C8E6000DB5BE /* lfs.c */; };
 		7365C0D218FCE99200C39027 /* FBSessionSingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 7365C0D118FCE99200C39027 /* FBSessionSingleton.m */; };
 		7388C04118F4E2FF00CF667C /* HttpRequestForLua.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7388C03F18F4E2FF00CF667C /* HttpRequestForLua.cpp */; };
+		738BA12A193D7FD2008A74F6 /* DES56.lua in Resources */ = {isa = PBXBuildFile; fileRef = 738BA129193D7FD2008A74F6 /* DES56.lua */; };
+		738BA12C193D7FD9008A74F6 /* game.bin in Resources */ = {isa = PBXBuildFile; fileRef = 738BA12B193D7FD9008A74F6 /* game.bin */; };
 		73A896F2192B2A050079AD05 /* SwrveButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 73A896E2192B2A050079AD05 /* SwrveButton.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		73A896F3192B2A050079AD05 /* SwrveCampaign.m in Sources */ = {isa = PBXBuildFile; fileRef = 73A896E4192B2A050079AD05 /* SwrveCampaign.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		73A896F4192B2A050079AD05 /* SwrveImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 73A896E6192B2A050079AD05 /* SwrveImage.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -735,6 +737,8 @@
 		7365C0D118FCE99200C39027 /* FBSessionSingleton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBSessionSingleton.m; sourceTree = "<group>"; };
 		7388C03F18F4E2FF00CF667C /* HttpRequestForLua.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HttpRequestForLua.cpp; sourceTree = "<group>"; };
 		7388C04018F4E2FF00CF667C /* HttpRequestForLua.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpRequestForLua.h; sourceTree = "<group>"; };
+		738BA129193D7FD2008A74F6 /* DES56.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = DES56.lua; sourceTree = "<group>"; };
+		738BA12B193D7FD9008A74F6 /* game.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = game.bin; sourceTree = "<group>"; };
 		73A896E1192B2A050079AD05 /* SwrveButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SwrveButton.h; path = Sdk/Talk/SwrveButton.h; sourceTree = "<group>"; };
 		73A896E2192B2A050079AD05 /* SwrveButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SwrveButton.m; path = Sdk/Talk/SwrveButton.m; sourceTree = "<group>"; };
 		73A896E3192B2A050079AD05 /* SwrveCampaign.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SwrveCampaign.h; path = Sdk/Talk/SwrveCampaign.h; sourceTree = "<group>"; };
@@ -2089,6 +2093,8 @@
 		F293BC4615EB859D00256477 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				738BA12B193D7FD9008A74F6 /* game.bin */,
+				738BA129193D7FD2008A74F6 /* DES56.lua */,
 				73DCA158192DCD95008AC05D /* anims */,
 				73BFF75E19177A46002F173A /* MD5.lua */,
 				730D983318DC4316000CA5F9 /* AudioEngine.lua */,
@@ -2206,10 +2212,12 @@
 				730D984418DC4317000CA5F9 /* Cocos2d.lua in Resources */,
 				15C1569C1683138E00D239F2 /* Icon-72.png in Resources */,
 				730D984B18DC4317000CA5F9 /* images in Resources */,
+				738BA12C193D7FD9008A74F6 /* game.bin in Resources */,
 				730D984E18DC4317000CA5F9 /* scripts in Resources */,
 				730D984518DC4317000CA5F9 /* CocoStudio.lua in Resources */,
 				15C1569D1683138E00D239F2 /* Icon-114.png in Resources */,
 				15C1569E1683138E00D239F2 /* Icon-144.png in Resources */,
+				738BA12A193D7FD2008A74F6 /* DES56.lua in Resources */,
 				730D984618DC4317000CA5F9 /* config in Resources */,
 				46C59AD317641FF300F43DC3 /* AudioEngine.lua in Resources */,
 				73BFF75F19177A46002F173A /* MD5.lua in Resources */,

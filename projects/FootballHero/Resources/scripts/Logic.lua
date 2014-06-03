@@ -9,11 +9,12 @@ local Constants = require("scripts.Constants")
 local MATCH_PREDICTION = "matchPrediction"
 local SCORE_PREDICTION = "scorePrediction"
 local SUB_PREDICTION = "sub"
-local instance
 
 local ACCOUNT_INFO_FILE = "ai.txt"
 local ACCOUNT_INFO_EMAIL = "email"
 local ACCOUNT_INFO_PASSWORD = "password"
+
+local instance
 
 function getInstance()
 	if instance == nil then
@@ -50,9 +51,10 @@ function Logic:new()
 		password = "",
 		userId = "",
 		displayName = "",
+		pictureUrl = nil,
 		startLeagueId = 0,
 		balance = 0,
-		FbLinked = false,
+		FbId = nil,
 	}
     
     setmetatable(obj, self)
@@ -168,6 +170,14 @@ function Logic:setDisplayName( name )
 	self.displayName = name
 end
 
+function Logic:getPictureUrl()
+	return self.pictureUrl
+end
+
+function Logic:setPictureUrl( url )
+	self.pictureUrl = url
+end
+
 function Logic:getStartLeagueId()
 	return self.startLeagueId
 end
@@ -188,10 +198,10 @@ function Logic:getUncommitedBalance()
 	return self.mCoupons:getSize() * Constants.STAKE
 end
 
-function Logic:setFbLinked( linked )
-	self.FbLinked = linked
+function Logic:setFbId( id )
+	self.FbId = id
 end
 
-function  Logic:getFbLinked()
-	return self.FbLinked
+function  Logic:getFbId()
+	return self.FbId
 end

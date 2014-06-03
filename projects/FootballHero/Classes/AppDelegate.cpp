@@ -50,6 +50,17 @@ bool AppDelegate::applicationDidFinishLaunching()
 	CCFileUtils::sharedFileUtils()->addSearchPath("script");
 #endif
 
+	CCFileUtils* pSharedFileUtils = CCFileUtils::sharedFileUtils();
+	const std::vector<std::string>& oldAllSearchPaths = pSharedFileUtils->getSearchPaths();
+	std::vector<std::string> newAllSearchPaths;
+	newAllSearchPaths.resize(1 + oldAllSearchPaths.size());
+	newAllSearchPaths[0] = pSharedFileUtils->getWritablePath();
+	for (int index = 1, size = newAllSearchPaths.size(); index < size; ++index)
+	{
+		newAllSearchPaths[index] = oldAllSearchPaths[index - 1];
+	}
+	pSharedFileUtils->setSearchPaths(newAllSearchPaths);
+
     std::string path = CCFileUtils::sharedFileUtils()->fullPathForFilename("footballhero.lua");
     pEngine->executeScriptFile(path.c_str());
 

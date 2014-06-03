@@ -10,6 +10,8 @@ local LeagueListScene = require("scripts.views.LeagueListScene")
 local Logic = require("scripts.Logic").getInstance()
 local EventManager = require("scripts.events.EventManager").getInstance()
 local Event = require("scripts.events.Event").EventList
+local SMIS = require("scripts.SMIS")
+
 
 local mWidget
 local mTopLayer
@@ -44,6 +46,20 @@ function loadFrame( matchList )
     -- Option button
     local optionBt = widget:getChildByName("option")
     optionBt:addTouchEventListener( optionEventHandler )
+
+    local userName = tolua.cast( widget:getChildByName("userName"), "Label" )
+    userName:setText( Logic:getDisplayName() )
+    
+    if Logic:getPictureUrl() ~= nil then
+        local handler = function( filePath )
+            if filePath ~= nil then
+                local userLogo = tolua.cast( widget:getChildByName("userPhoto"), "ImageView" )
+                userLogo:loadTexture( filePath )
+                userLogo:setScale( 1 )
+            end
+        end
+        SMIS.getSMImagePath( Logic:getPictureUrl(), handler )
+    end
 
     -- Init the toplayer to listen to the swap action.
     mTopLayer = CCLayer:create()

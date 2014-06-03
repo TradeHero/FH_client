@@ -60,7 +60,7 @@ function onFBConnectSuccess( accessToken )
 end
 
 function onRequestSuccess( jsonResponse )
-    Logic:setFbLinked( true )
+    Logic:setFbId( "" )
     mSuccessHandler()
 end
 
