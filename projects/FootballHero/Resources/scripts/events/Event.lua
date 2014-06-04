@@ -44,6 +44,7 @@ EventNameList =
     "Do_Post_Predictions",
     "Do_Post_Fav_Team",
     "Do_Send_Feedback",
+    "Do_Log_Out",
 
     "Show_Error_Message",
 

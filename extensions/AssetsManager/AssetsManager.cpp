@@ -529,6 +529,10 @@ AssetsManager::Helper::~Helper()
 void AssetsManager::Helper::sendMessage(Message *msg)
 {
     pthread_mutex_lock(&_messageQueueMutex);
+	while (_messageQueue->size() > 0)
+	{
+		_messageQueue->pop_front();
+	}
     _messageQueue->push_back(msg);
     pthread_mutex_unlock(&_messageQueueMutex);
 }

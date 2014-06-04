@@ -209,7 +209,6 @@
 		730D984B18DC4317000CA5F9 /* images in Resources */ = {isa = PBXBuildFile; fileRef = 730D983C18DC4316000CA5F9 /* images */; };
 		730D984C18DC4317000CA5F9 /* json.lua in Resources */ = {isa = PBXBuildFile; fileRef = 730D983D18DC4317000CA5F9 /* json.lua */; };
 		730D984D18DC4317000CA5F9 /* scenes in Resources */ = {isa = PBXBuildFile; fileRef = 730D983E18DC4317000CA5F9 /* scenes */; };
-		730D984E18DC4317000CA5F9 /* scripts in Resources */ = {isa = PBXBuildFile; fileRef = 730D983F18DC4317000CA5F9 /* scripts */; };
 		730D984F18DC4317000CA5F9 /* sounds in Resources */ = {isa = PBXBuildFile; fileRef = 730D984018DC4317000CA5F9 /* sounds */; };
 		730F171F1918C8E6000DB5BE /* lfs.c in Sources */ = {isa = PBXBuildFile; fileRef = 730F171D1918C8E6000DB5BE /* lfs.c */; };
 		733DE92B193DCB1D00361638 /* AssetsManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 733DE929193DCB1D00361638 /* AssetsManager.cpp */; };
@@ -729,7 +728,6 @@
 		730D983C18DC4316000CA5F9 /* images */ = {isa = PBXFileReference; lastKnownFileType = folder; path = images; sourceTree = "<group>"; };
 		730D983D18DC4317000CA5F9 /* json.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = json.lua; sourceTree = "<group>"; };
 		730D983E18DC4317000CA5F9 /* scenes */ = {isa = PBXFileReference; lastKnownFileType = folder; path = scenes; sourceTree = "<group>"; };
-		730D983F18DC4317000CA5F9 /* scripts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = scripts; sourceTree = "<group>"; };
 		730D984018DC4317000CA5F9 /* sounds */ = {isa = PBXFileReference; lastKnownFileType = folder; path = sounds; sourceTree = "<group>"; };
 		730F171D1918C8E6000DB5BE /* lfs.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lfs.c; path = lfs/lfs.c; sourceTree = "<group>"; };
 		730F171E1918C8E6000DB5BE /* lfs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = lfs.h; path = lfs/lfs.h; sourceTree = "<group>"; };
@@ -2119,7 +2117,6 @@
 				730D983C18DC4316000CA5F9 /* images */,
 				730D983D18DC4317000CA5F9 /* json.lua */,
 				730D983E18DC4317000CA5F9 /* scenes */,
-				730D983F18DC4317000CA5F9 /* scripts */,
 				730D984018DC4317000CA5F9 /* sounds */,
 				1AC3622916D47C5C000847F2 /* fonts */,
 				15C156911683138E00D239F2 /* Default-568h@2x.png */,
@@ -2222,7 +2219,6 @@
 				730D984418DC4317000CA5F9 /* Cocos2d.lua in Resources */,
 				15C1569C1683138E00D239F2 /* Icon-72.png in Resources */,
 				730D984B18DC4317000CA5F9 /* images in Resources */,
-				730D984E18DC4317000CA5F9 /* scripts in Resources */,
 				730D984518DC4317000CA5F9 /* CocoStudio.lua in Resources */,
 				15C1569D1683138E00D239F2 /* Icon-114.png in Resources */,
 				15C1569E1683138E00D239F2 /* Icon-144.png in Resources */,

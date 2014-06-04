@@ -177,8 +177,8 @@ AssetsManager* UpdateLayer::getAssetsManager()
 
 	if (!pAssetsManager)
 	{
-		pAssetsManager = new AssetsManager("http://portalvhdss3c1vgx5mrzv.blob.core.windows.net/fhres/res.zip",
-			"http://portalvhdss3c1vgx5mrzv.blob.core.windows.net/fhres/version",
+		pAssetsManager = new AssetsManager("https://raw.githubusercontent.com/lesliesam/fhres/master/res.zip",
+			"https://raw.githubusercontent.com/lesliesam/fhres/master/version",
 			pathToSave.c_str());
 		pAssetsManager->setDelegate(this);
 		pAssetsManager->setConnectionTimeout(10);
