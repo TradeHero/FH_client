@@ -47,7 +47,7 @@ NS_CC_EXT_BEGIN;
 
 #define KEY_OF_VERSION   "current-version-code"
 #define KEY_OF_DOWNLOADED_VERSION    "downloaded-version-code"
-#define TEMP_PACKAGE_FILE_NAME    "cocos2dx-update-temp-package.zip"
+#define TEMP_PACKAGE_FILE_NAME    "resources.zip"
 #define BUFFER_SIZE    8192
 #define MAX_FILENAME   512
 
@@ -134,7 +134,10 @@ bool AssetsManager::checkUpdate()
     if (_connectionTimeout) curl_easy_setopt(_curl, CURLOPT_CONNECTTIMEOUT, _connectionTimeout);
     res = curl_easy_perform(_curl);
     
-    if (res != 0)
+	int32_t responseCode = -1;
+	CURLcode code = curl_easy_getinfo(_curl, CURLINFO_RESPONSE_CODE, &responseCode);
+
+	if (res != 0 || responseCode != 200)
     {
         sendErrorMessage(kNetwork);
         CCLOG("can not get version file content, error code is %d", res);

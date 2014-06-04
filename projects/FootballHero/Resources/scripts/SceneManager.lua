@@ -45,7 +45,13 @@ function init()
 	eglView:setDesignResolutionSize( 640, 1136, kResolutionShowAll )
 
 	local sceneGame = CCScene:create()
-    CCDirector:sharedDirector():runWithScene( sceneGame )
+	local director = CCDirector:sharedDirector()
+    if director:getRunningScene() ~= nil then
+    	director:replaceScene( sceneGame )
+    else
+    	director:runWithScene( sceneGame )
+    end
+    
     mSceneGameLayer = TouchGroup:create()
     sceneGame:addChild( mSceneGameLayer )
 

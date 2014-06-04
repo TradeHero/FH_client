@@ -2,6 +2,7 @@
 #define __APP_DELEGATE_H__
 
 #include "cocos2d.h"
+#include "AssetsManager/AssetsManager.h"
 
 /**
 @brief    The cocos2d Application.
@@ -34,5 +35,34 @@ public:
     virtual void applicationWillEnterForeground();
 };
 
+
+class UpdateLayer : public cocos2d::CCLayer, public cocos2d::extension::AssetsManagerDelegateProtocol
+{
+public:
+	UpdateLayer();
+	~UpdateLayer();
+	virtual bool init();
+
+	void enter(cocos2d::CCObject *pSender);
+	void reset(cocos2d::CCObject *pSender);
+	void update(cocos2d::CCObject *pSender);
+	void loadGame();
+
+	virtual void onError(cocos2d::extension::AssetsManager::ErrorCode errorCode);
+	virtual void onProgress(int percent);
+	virtual void onSuccess();
+	
+
+private:
+	cocos2d::extension::AssetsManager* getAssetsManager();
+	void createDownloadedDir();
+
+	cocos2d::CCMenuItemFont *pItemEnter;
+	cocos2d::CCMenuItemFont *pItemReset;
+	cocos2d::CCMenuItemFont *pItemUpdate;
+	cocos2d::CCLabelTTF *pProgressLabel;
+	std::string pathToSave;
+	bool isUpdateItemClicked;
+};
 #endif  // __APP_DELEGATE_H__
 

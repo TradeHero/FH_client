@@ -29,8 +29,6 @@ local function main()
 
     cclog("Game start.")
     initPackageLoader()
-    --decrypt()
-    --encrypt()
 
     local sceneManager = require("scripts.SceneManager")
     sceneManager.init()
@@ -53,6 +51,43 @@ local function main()
 
 end
 
+function initPackageLoader()
+    local fileUtils = CCFileUtils:sharedFileUtils()
+    local filePath = fileUtils:fullPathForFilename( "game.bin" )
+    local Json = require("json")
+    if fileUtils:isFileExist( filePath ) then
+        print( filePath )
+        local fileHandler, errorCode = io.open( filePath, "r" )
+        if fileHandler == nil then
+            print( "Read failed from file"..filePath.." with error: "..errorCode )
+            return ""
+        end
+        
+        local text = fileHandler:read("*all")
+        fileHandler:close()
+        local gameContent = Json.decode( text )
+
+
+        local function loadFromCompact( path )
+            print( "loadFromCompact: "..path )
+            if gameContent == nil then
+                return
+            end
+            
+            local destLuaFile = gameContent[path]
+            if destLuaFile == nil then
+                return
+            end
+            
+            gameContent[path] = nil
+            return assert( loadstring( destLuaFile ) )
+        end
+
+        table.insert( package.loaders, 1, loadFromCompact )
+    end
+end
+
+--[[
 function encrypt()
     local fileUtils = CCFileUtils:sharedFileUtils()
     local filePath = fileUtils:fullPathForFilename( "game.bin" )
@@ -101,53 +136,9 @@ function decrypt()
         local key = 'gooddoggy'
         local decoded = DES56.decrypt( text, key )
         print(decoded)
-    end
-    
-    
-    --[[
-    local DES56 = require("DES56")
-    local key = 'footballhero'
-    local encoded = DES56.crypt( "SamYu", key )
-    print(encoded)
-    print(DES56.decrypt( encoded, key ))
-    --]]
+    end    
 end
+--]]
 
-function initPackageLoader()
-    local fileUtils = CCFileUtils:sharedFileUtils()
-    local filePath = fileUtils:fullPathForFilename( "game.bin" )
-    local Json = require("json")
-    if fileUtils:isFileExist( filePath ) then
-        print( filePath )
-        local fileHandler, errorCode = io.open( filePath, "r" )
-        if fileHandler == nil then
-            print( "Read failed from file"..filePath.." with error: "..errorCode )
-            return ""
-        end
-        
-        local text = fileHandler:read("*all")
-        fileHandler:close()
-        local gameContent = Json.decode( text )
-
-
-        local function loadFromCompact( path )
-            print( "loadFromCompact: "..path )
-            if gameContent == nil then
-                return
-            end
-            
-            local destLuaFile = gameContent[path]
-            if destLuaFile == nil then
-                return
-            end
-            
-            gameContent[path] = nil
-            return assert( loadstring( destLuaFile ) )
-        end
-
-        table.insert( package.loaders, 1, loadFromCompact )
-    end
-
-end
 
 xpcall(main, __G__TRACKBACK__)

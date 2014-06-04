@@ -35,24 +35,9 @@ end
 function readStringFromFile( fileName )
 	local text = ""
 	local fileUtils = CCFileUtils:sharedFileUtils()
-	local path = fileUtils:getWritablePath()..fileName
-	if fileUtils:isFileExist( path ) then
-		print("Read local file from: "..path)
-
-		local fileHandler, errorCode = io.open( path, "r" )
-		--print( "Read from: "..path )
-		if fileHandler == nil then
-			assert( false, "Read failed from file"..fileName.." with error: "..errorCode )
-			return ""
-		end
-		
-		text = fileHandler:read("*all")
-		fileHandler:close()
-	else
-		local fileName = fileUtils:fullPathForFilename( fileName )
-		print("Read file from package: "..fileName)
-		text = fileUtils:getFileData( fileName, "r", 0 )
-	end
+	local fileName = fileUtils:fullPathForFilename( fileName )
+	print("Read file from: "..fileName)
+	text = fileUtils:getFileData( fileName, "r", 0 )
 
 	return text
 end

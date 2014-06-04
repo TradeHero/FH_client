@@ -212,10 +212,10 @@
 		730D984E18DC4317000CA5F9 /* scripts in Resources */ = {isa = PBXBuildFile; fileRef = 730D983F18DC4317000CA5F9 /* scripts */; };
 		730D984F18DC4317000CA5F9 /* sounds in Resources */ = {isa = PBXBuildFile; fileRef = 730D984018DC4317000CA5F9 /* sounds */; };
 		730F171F1918C8E6000DB5BE /* lfs.c in Sources */ = {isa = PBXBuildFile; fileRef = 730F171D1918C8E6000DB5BE /* lfs.c */; };
+		733DE92B193DCB1D00361638 /* AssetsManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 733DE929193DCB1D00361638 /* AssetsManager.cpp */; };
 		7365C0D218FCE99200C39027 /* FBSessionSingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 7365C0D118FCE99200C39027 /* FBSessionSingleton.m */; };
 		7388C04118F4E2FF00CF667C /* HttpRequestForLua.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7388C03F18F4E2FF00CF667C /* HttpRequestForLua.cpp */; };
 		738BA12A193D7FD2008A74F6 /* DES56.lua in Resources */ = {isa = PBXBuildFile; fileRef = 738BA129193D7FD2008A74F6 /* DES56.lua */; };
-		738BA12C193D7FD9008A74F6 /* game.bin in Resources */ = {isa = PBXBuildFile; fileRef = 738BA12B193D7FD9008A74F6 /* game.bin */; };
 		73A896F2192B2A050079AD05 /* SwrveButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 73A896E2192B2A050079AD05 /* SwrveButton.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		73A896F3192B2A050079AD05 /* SwrveCampaign.m in Sources */ = {isa = PBXBuildFile; fileRef = 73A896E4192B2A050079AD05 /* SwrveCampaign.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		73A896F4192B2A050079AD05 /* SwrveImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 73A896E6192B2A050079AD05 /* SwrveImage.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -733,12 +733,13 @@
 		730D984018DC4317000CA5F9 /* sounds */ = {isa = PBXFileReference; lastKnownFileType = folder; path = sounds; sourceTree = "<group>"; };
 		730F171D1918C8E6000DB5BE /* lfs.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lfs.c; path = lfs/lfs.c; sourceTree = "<group>"; };
 		730F171E1918C8E6000DB5BE /* lfs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = lfs.h; path = lfs/lfs.h; sourceTree = "<group>"; };
+		733DE929193DCB1D00361638 /* AssetsManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AssetsManager.cpp; path = AssetsManager/AssetsManager.cpp; sourceTree = "<group>"; };
+		733DE92A193DCB1D00361638 /* AssetsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AssetsManager.h; path = AssetsManager/AssetsManager.h; sourceTree = "<group>"; };
 		7365C0D018FCE99200C39027 /* FBSessionSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBSessionSingleton.h; sourceTree = "<group>"; };
 		7365C0D118FCE99200C39027 /* FBSessionSingleton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBSessionSingleton.m; sourceTree = "<group>"; };
 		7388C03F18F4E2FF00CF667C /* HttpRequestForLua.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HttpRequestForLua.cpp; sourceTree = "<group>"; };
 		7388C04018F4E2FF00CF667C /* HttpRequestForLua.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpRequestForLua.h; sourceTree = "<group>"; };
 		738BA129193D7FD2008A74F6 /* DES56.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = DES56.lua; sourceTree = "<group>"; };
-		738BA12B193D7FD9008A74F6 /* game.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = game.bin; sourceTree = "<group>"; };
 		73A896E1192B2A050079AD05 /* SwrveButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SwrveButton.h; path = Sdk/Talk/SwrveButton.h; sourceTree = "<group>"; };
 		73A896E2192B2A050079AD05 /* SwrveButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SwrveButton.m; path = Sdk/Talk/SwrveButton.m; sourceTree = "<group>"; };
 		73A896E3192B2A050079AD05 /* SwrveCampaign.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SwrveCampaign.h; path = Sdk/Talk/SwrveCampaign.h; sourceTree = "<group>"; };
@@ -946,6 +947,7 @@
 		15C153791683112E00D239F2 /* extensions */ = {
 			isa = PBXGroup;
 			children = (
+				733DE928193DCB0A00361638 /* AssetsManager */,
 				73DCA130192C4EDA008AC05D /* Utils */,
 				73EDFC8118EBE6A600322624 /* Social */,
 				ED35C02A18323496002A0750 /* CocoStudio */,
@@ -1686,6 +1688,15 @@
 			name = lfs;
 			sourceTree = "<group>";
 		};
+		733DE928193DCB0A00361638 /* AssetsManager */ = {
+			isa = PBXGroup;
+			children = (
+				733DE929193DCB1D00361638 /* AssetsManager.cpp */,
+				733DE92A193DCB1D00361638 /* AssetsManager.h */,
+			);
+			name = AssetsManager;
+			sourceTree = "<group>";
+		};
 		73A896DF192B29A50079AD05 /* Sdk */ = {
 			isa = PBXGroup;
 			children = (
@@ -2093,7 +2104,6 @@
 		F293BC4615EB859D00256477 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				738BA12B193D7FD9008A74F6 /* game.bin */,
 				738BA129193D7FD2008A74F6 /* DES56.lua */,
 				73DCA158192DCD95008AC05D /* anims */,
 				73BFF75E19177A46002F173A /* MD5.lua */,
@@ -2212,7 +2222,6 @@
 				730D984418DC4317000CA5F9 /* Cocos2d.lua in Resources */,
 				15C1569C1683138E00D239F2 /* Icon-72.png in Resources */,
 				730D984B18DC4317000CA5F9 /* images in Resources */,
-				738BA12C193D7FD9008A74F6 /* game.bin in Resources */,
 				730D984E18DC4317000CA5F9 /* scripts in Resources */,
 				730D984518DC4317000CA5F9 /* CocoStudio.lua in Resources */,
 				15C1569D1683138E00D239F2 /* Icon-114.png in Resources */,
@@ -2456,6 +2465,7 @@
 				1A40E7E31727C47E006D4861 /* AtlasAttachmentLoader.cpp in Sources */,
 				ED35C0D318323498002A0750 /* CCArmatureDataManager.cpp in Sources */,
 				1A40E7E41727C47E006D4861 /* Attachment.cpp in Sources */,
+				733DE92B193DCB1D00361638 /* AssetsManager.cpp in Sources */,
 				1A40E7E51727C47E006D4861 /* AttachmentLoader.cpp in Sources */,
 				1A40E7E61727C47E006D4861 /* Bone.cpp in Sources */,
 				73D51F25192F3082000A65AF /* WebviewController.mm in Sources */,
