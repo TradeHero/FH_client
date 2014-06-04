@@ -204,6 +204,11 @@ function updateContentContainer( contentHeight, addContent )
 end
 
 function enterMatch( match )
+    if match["PredictionsPlayed"] == match["PredictionsAvailable"] then
+        EventManager:postEvent( Event.Show_Error_Message, { "You have completed this match." } )
+        return
+    end
+
     Logic:setSelectedMatch( match )
     EventManager:postEvent( Event.Enter_Match )
 end

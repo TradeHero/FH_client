@@ -71,5 +71,5 @@
     <string>history/xiajiang.png</string>
   </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>MatchListScene.json</CurrentUIJson>
+  <CurrentUIJson>HistoryMainMatchContent.json</CurrentUIJson>
 </UIProject>

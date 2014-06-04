@@ -18,11 +18,13 @@ function loadFrame( userId, userName, couponHistory )
     if userId == Logic:getUserId() then
         mWidget = GUIReader:shareReader():widgetFromJsonFile("scenes/HistoryHome.json")
         local totalPoints = tolua.cast( mWidget:getChildByName("totalPoints"), "Label" )
-        totalPoints:setText( string.format( totalPoints:getStringValue(), Logic:getBalance() ) )
+        totalPoints:setText( string.format( totalPoints:getStringValue(), couponHistory:getBalance() ) )
     else
         mWidget = GUIReader:shareReader():widgetFromJsonFile("scenes/HistoryHomeForOthers.json")
         local name = tolua.cast( mWidget:getChildByName("name"), "Label" )
         name:setText( userName )
+        local totalPoints = tolua.cast( mWidget:getChildByName("totalPoints"), "Label" )
+        totalPoints:setText( string.format( totalPoints:getStringValue(), couponHistory:getBalance() ) )
 
         local backEventHandler = function( sender, eventType )
             if eventType == TOUCH_EVENT_ENDED then
@@ -234,14 +236,21 @@ end
 
 function helperInitOpenPrediction( content, matchInfo )
     local points = tolua.cast( content:getChildByName("points"), "Label" )
+    local pointsTitle = tolua.cast( content:getChildByName("pointsTitle"), "Label" )
     local roi = tolua.cast( content:getChildByName("roi"), "Label" )
     local winPercentage = tolua.cast( content:getChildByName("winPercentage"), "Label" )
     local pointWinInd = tolua.cast( content:getChildByName("pointWinInd"), "Button" )
+    local score = tolua.cast( content:getChildByName("score"), "Label" )
 
-    points:setText( "-" )
-    roi:setText( string.format( roi:getStringValue(), 0 ) )
-    winPercentage:setText( string.format( winPercentage:getStringValue(), "%" ) )
+    --points:setText( "-" )
+    --roi:setText( string.format( roi:getStringValue(), 0 ) )
+    --winPercentage:setText( string.format( winPercentage:getStringValue(), "%" ) )
+    points:setEnabled( false )
+    pointsTitle:setEnabled( false )
+    roi:setEnabled( false )
+    winPercentage:setEnabled( false )
     pointWinInd:setEnabled( false )
+    score:setEnabled( false )
 end
 
 function helperInitClosedPrediction( content, matchInfo )
@@ -251,6 +260,7 @@ function helperInitClosedPrediction( content, matchInfo )
     local vs = tolua.cast( content:getChildByName("vs"), "Label" )
     local pointWinInd = tolua.cast( content:getChildByName("pointWinInd"), "Button" )
     local statusBar = tolua.cast( content:getChildByName("statusBar"), "Button" )
+    local score = tolua.cast( content:getChildByName("score"), "Label" )
     
     if matchInfo["Profit"] >= 0 then
         statusBar:setFocused( true )
@@ -262,4 +272,6 @@ function helperInitClosedPrediction( content, matchInfo )
     points:setText( matchInfo["Profit"] )
     roi:setText( string.format( roi:getStringValue(), matchInfo["ROI"] ) )
     winPercentage:setText( string.format( winPercentage:getStringValue(), matchInfo["WinPercentage"] ) )
+    vs:setEnabled( false )
+    score:setText( string.format( score:getStringValue(), matchInfo["HomeGoals"], matchInfo["AwayGoals"] ) )
 end

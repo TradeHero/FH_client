@@ -49,7 +49,8 @@ CouponHistoryData = {}
    ],
    "closed":[
 
-   ]
+   ],
+   "balance":1000
 }
 --]]
 
@@ -57,6 +58,7 @@ function CouponHistoryData:new( rawDataObj )
 	local obj = {
 		OpenCoupon = rawDataObj["open"],
     ClosedCoupon = rawDataObj["closed"],
+    Balance = rawDataObj["balance"],
 	}
 
 	setmetatable(obj, self)
@@ -73,4 +75,8 @@ end
 
 function CouponHistoryData:getClosedData()
   return self.ClosedCoupon
+end
+
+function CouponHistoryData:getBalance()
+  return self.Balance
 end

@@ -61,6 +61,7 @@ EventNameDosenotTrackList =
     "Do_Post_Predictions",
     "Do_Post_Fav_Team",
     "Do_Send_Feedback",
+    "Do_Log_Out",
 
     "Check_File_Version",
     "Show_Error_Message",
