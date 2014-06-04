@@ -212,6 +212,11 @@
 		730D984F18DC4317000CA5F9 /* sounds in Resources */ = {isa = PBXBuildFile; fileRef = 730D984018DC4317000CA5F9 /* sounds */; };
 		730F171F1918C8E6000DB5BE /* lfs.c in Sources */ = {isa = PBXBuildFile; fileRef = 730F171D1918C8E6000DB5BE /* lfs.c */; };
 		733DE92B193DCB1D00361638 /* AssetsManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 733DE929193DCB1D00361638 /* AssetsManager.cpp */; };
+		733DE92F193F262900361638 /* Icon-76.png in Resources */ = {isa = PBXBuildFile; fileRef = 733DE92C193F262900361638 /* Icon-76.png */; };
+		733DE930193F262900361638 /* Icon-120.png in Resources */ = {isa = PBXBuildFile; fileRef = 733DE92D193F262900361638 /* Icon-120.png */; };
+		733DE931193F262900361638 /* Icon-152.png in Resources */ = {isa = PBXBuildFile; fileRef = 733DE92E193F262900361638 /* Icon-152.png */; };
+		733DE934193F26C800361638 /* Default~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 733DE932193F26C800361638 /* Default~ipad.png */; };
+		733DE935193F26C800361638 /* Default-Portrait@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 733DE933193F26C800361638 /* Default-Portrait@2x~ipad.png */; };
 		7365C0D218FCE99200C39027 /* FBSessionSingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 7365C0D118FCE99200C39027 /* FBSessionSingleton.m */; };
 		7388C04118F4E2FF00CF667C /* HttpRequestForLua.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7388C03F18F4E2FF00CF667C /* HttpRequestForLua.cpp */; };
 		738BA12A193D7FD2008A74F6 /* DES56.lua in Resources */ = {isa = PBXBuildFile; fileRef = 738BA129193D7FD2008A74F6 /* DES56.lua */; };
@@ -733,6 +738,11 @@
 		730F171E1918C8E6000DB5BE /* lfs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = lfs.h; path = lfs/lfs.h; sourceTree = "<group>"; };
 		733DE929193DCB1D00361638 /* AssetsManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AssetsManager.cpp; path = AssetsManager/AssetsManager.cpp; sourceTree = "<group>"; };
 		733DE92A193DCB1D00361638 /* AssetsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AssetsManager.h; path = AssetsManager/AssetsManager.h; sourceTree = "<group>"; };
+		733DE92C193F262900361638 /* Icon-76.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-76.png"; sourceTree = SOURCE_ROOT; };
+		733DE92D193F262900361638 /* Icon-120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-120.png"; sourceTree = SOURCE_ROOT; };
+		733DE92E193F262900361638 /* Icon-152.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-152.png"; sourceTree = SOURCE_ROOT; };
+		733DE932193F26C800361638 /* Default~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default~ipad.png"; sourceTree = SOURCE_ROOT; };
+		733DE933193F26C800361638 /* Default-Portrait@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait@2x~ipad.png"; sourceTree = SOURCE_ROOT; };
 		7365C0D018FCE99200C39027 /* FBSessionSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBSessionSingleton.h; sourceTree = "<group>"; };
 		7365C0D118FCE99200C39027 /* FBSessionSingleton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBSessionSingleton.m; sourceTree = "<group>"; };
 		7388C03F18F4E2FF00CF667C /* HttpRequestForLua.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HttpRequestForLua.cpp; sourceTree = "<group>"; };
@@ -2102,6 +2112,11 @@
 		F293BC4615EB859D00256477 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				733DE932193F26C800361638 /* Default~ipad.png */,
+				733DE933193F26C800361638 /* Default-Portrait@2x~ipad.png */,
+				733DE92C193F262900361638 /* Icon-76.png */,
+				733DE92D193F262900361638 /* Icon-120.png */,
+				733DE92E193F262900361638 /* Icon-152.png */,
 				738BA129193D7FD2008A74F6 /* DES56.lua */,
 				73DCA158192DCD95008AC05D /* anims */,
 				73BFF75E19177A46002F173A /* MD5.lua */,
@@ -2204,6 +2219,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				73DCA159192DCD95008AC05D /* anims in Resources */,
+				733DE92F193F262900361638 /* Icon-76.png in Resources */,
 				15C156981683138E00D239F2 /* Default-568h@2x.png in Resources */,
 				15C156991683138E00D239F2 /* Default.png in Resources */,
 				730D984D18DC4317000CA5F9 /* scenes in Resources */,
@@ -2211,9 +2227,12 @@
 				730D984918DC4317000CA5F9 /* fonts in Resources */,
 				730D984F18DC4317000CA5F9 /* sounds in Resources */,
 				730D984A18DC4317000CA5F9 /* footballhero.lua in Resources */,
+				733DE935193F26C800361638 /* Default-Portrait@2x~ipad.png in Resources */,
+				733DE931193F262900361638 /* Icon-152.png in Resources */,
 				730D984818DC4317000CA5F9 /* extern.lua in Resources */,
 				15C1569B1683138E00D239F2 /* Icon-57.png in Resources */,
 				730D984718DC4317000CA5F9 /* example.lua in Resources */,
+				733DE934193F26C800361638 /* Default~ipad.png in Resources */,
 				730D984318DC4317000CA5F9 /* CCBReaderLoad.lua in Resources */,
 				730D984C18DC4317000CA5F9 /* json.lua in Resources */,
 				730D984418DC4317000CA5F9 /* Cocos2d.lua in Resources */,
@@ -2227,6 +2246,7 @@
 				46C59AD317641FF300F43DC3 /* AudioEngine.lua in Resources */,
 				73BFF75F19177A46002F173A /* MD5.lua in Resources */,
 				46C59AD417641FF300F43DC3 /* CCBReaderLoad.lua in Resources */,
+				733DE930193F262900361638 /* Icon-120.png in Resources */,
 				730D984218DC4317000CA5F9 /* AudioEngine.lua in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

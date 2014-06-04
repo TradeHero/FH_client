@@ -213,12 +213,12 @@ void UpdateLayer::onError(AssetsManager::ErrorCode errorCode)
 {
 	if (errorCode == AssetsManager::kNoNewVersion)
 	{
-		pProgressLabel->setString("no new version");
+		pProgressLabel->setString("");
 	}
 
 	if (errorCode == AssetsManager::kNetwork)
 	{
-		pProgressLabel->setString("network error");
+		pProgressLabel->setString("");
 	}
 	loadGame();
 }
@@ -226,13 +226,13 @@ void UpdateLayer::onError(AssetsManager::ErrorCode errorCode)
 void UpdateLayer::onProgress(int percent)
 {
 	char progress[20];
-	snprintf(progress, 20, "downloading %d%%", percent);
+	snprintf(progress, 20, "Refreshing... %d%%", percent);
 	pProgressLabel->setString(progress);
 }
 
 void UpdateLayer::onSuccess()
 {
-	pProgressLabel->setString("download ok");
+	pProgressLabel->setString("Refreshing done!");
 
 	loadGame();
 }

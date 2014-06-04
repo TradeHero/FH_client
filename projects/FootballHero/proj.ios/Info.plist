@@ -56,6 +56,8 @@
 		<string>fonts/Newgtbxc.ttf</string>
 		<string>fonts/SketchFlow Print.ttf</string>
 	</array>
+	<key>UILaunchImageFile~ipad</key>
+	<string>Default</string>
 	<key>UIPrerenderedIcon</key>
 	<true/>
 	<key>UIRequiredDeviceCapabilities</key>
