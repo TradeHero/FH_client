@@ -8,8 +8,15 @@ local FOLDER = "SMI/"
 -- Return the local file path if the file exist.
 -- Otherwise download it, save it locally and return the file path.
 function getSMImagePath( fileUrl, handler )
-	local list = RequestUtils.split( fileUrl, "/" )
-	local fileName = list[table.getn( list )]
+	local fileName = fileUrl
+	
+	local toBeRemove = string.find(fileName, "?")
+	if toBeRemove ~= nil then
+			fileName = string.sub(fileName, 1, toBeRemove - 1)
+	end
+
+	local list = RequestUtils.split( fileName, "/" )
+	fileName = list[table.getn( list )]
 
 	local fileUtils = CCFileUtils:sharedFileUtils()
 	local path = fileUtils:getWritablePath()..FOLDER..fileName

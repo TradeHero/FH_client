@@ -60,7 +60,7 @@ function initContent( couponHistory )
         initLeaderboardContent( content, LeaderboardConfig.LeaderboardType[i] )
 
         -- Add sub
-        local subContent = SceneManager.widgetFromJsonFile("scenes/LeaderboardSubContent.json")
+        local subContent = GUIReader:shareReader():widgetFromJsonFile("scenes/LeaderboardSubContent.json")
         subContent:setLayoutParameter( layoutParameter )
         contentContainer:addChild( subContent )
         subContent:setName( "subContent"..i )

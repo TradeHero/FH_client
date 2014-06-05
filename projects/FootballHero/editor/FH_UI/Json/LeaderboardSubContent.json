@@ -11,15 +11,9 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "MatchListContent/vs-button.png",
-    "commonRes/Arsenal.png",
-    "history/jiantou.png",
-    "history/hengxian.png",
-    "history/blue.png",
-    "history/green.png",
-    "history/red.png",
-    "history/shangsheng.png",
-    "history/xiajiang.png"
+    "header/guangyun.png",
+    "history/bg.png",
+    "header/back.png"
   ],
   "version": "1.4.0.1",
   "widgetTree": {
@@ -98,7 +92,7 @@
           "__type": "ButtonSurrogate:#EditorCommon.JsonModel.Component.GUI",
           "classname": "Button",
           "name": "button1",
-          "ZOrder": 1,
+          "ZOrder": 2,
           "actiontag": 1981,
           "anchorPointX": 0.5,
           "anchorPointY": 0.5,
@@ -388,7 +382,7 @@
       "classname": "Panel",
       "name": "Panel_38",
       "ZOrder": 0,
-      "actiontag": -1,
+      "actiontag": 1,
       "anchorPointX": 0,
       "anchorPointY": 0,
       "classType": "CocoStudio.EngineAdapterWrap.CSPanel",

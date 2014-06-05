@@ -11,15 +11,9 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "MatchListContent/vs-button.png",
-    "commonRes/Arsenal.png",
-    "history/jiantou.png",
-    "history/hengxian.png",
-    "history/blue.png",
-    "history/green.png",
-    "history/red.png",
-    "history/shangsheng.png",
-    "history/xiajiang.png"
+    "header/guangyun.png",
+    "history/bg.png",
+    "header/back.png"
   ],
   "version": "1.4.0.1",
   "widgetTree": {
@@ -352,7 +346,7 @@
           "touchAble": false,
           "useMergedTexture": false,
           "visible": true,
-          "width": 86,
+          "width": 79,
           "x": 320,
           "y": 1021,
           "areaHeight": 0,
@@ -361,7 +355,7 @@
           "fontName": "微软雅黑",
           "fontSize": 28,
           "hAlignment": 0,
-          "text": "Win %",
+          "text": "By %s",
           "touchScaleEnable": false,
           "vAlignment": 0
         }
@@ -445,7 +439,7 @@
       "classname": "Panel",
       "name": "Panel_1943",
       "ZOrder": 0,
-      "actiontag": -1,
+      "actiontag": 1,
       "anchorPointX": 0,
       "anchorPointY": 0,
       "classType": "CocoStudio.EngineAdapterWrap.CSPanel",

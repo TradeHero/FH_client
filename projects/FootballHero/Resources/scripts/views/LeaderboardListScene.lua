@@ -53,7 +53,7 @@ function initTitles()
     local subTitle = tolua.cast( mWidget:getChildByName("subTitle"), "Label" )
 
     title:setText( LeaderboardConfig.LeaderboardType[mLeaderboardId]["displayName"] )
-    subTitle:setText( mSubType["title"] )
+    subTitle:setText( string.format( subTitle:getStringValue(), mSubType["title"] ) )
 end
 
 function initContent( leaderboardInfo )

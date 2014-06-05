@@ -8,13 +8,13 @@ function __G__TRACKBACK__(msg)
     print(debug.traceback())
     print("----------------------------------------")
 
-    local errorDesc = "\nLUA ERROR: "..msg .. "\n"
-    errorDesc = errorDesc.."\n"..debug.traceback()
-    CCMessageBox( errorDesc, "LUA ERROR: " )
-
     if CCApplication:sharedApplication():getTargetPlatform() ~= kTargetWindows then
         local DoLogReport = require("scripts.actions.DoLogReport")
         DoLogReport.reportError( errorDesc )
+    else
+        local errorDesc = "\nLUA ERROR: "..msg .. "\n"
+        errorDesc = errorDesc.."\n"..debug.traceback()
+        CCMessageBox( errorDesc, "LUA ERROR: " )
     end
 end
 

@@ -59,7 +59,11 @@
   <ProjectType>UIProject</ProjectType>
   <ResRelativePath />
   <imageFileList />
-  <imagePngList />
+  <imagePngList>
+    <string>header/guangyun.png</string>
+    <string>history/bg.png</string>
+    <string>header/back.png</string>
+  </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>MatchListContent.json</CurrentUIJson>
+  <CurrentUIJson>LeaderboardSubContent.json</CurrentUIJson>
 </UIProject>
