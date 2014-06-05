@@ -15,12 +15,13 @@ function loadFrame()
     local signinBt = widget:getChildByName("signin")
     local registerBt = widget:getChildByName("register")
     local facebookBt = widget:getChildByName("facebookConnect")
-    local dev = widget:getChildByName("dev")
+    local dev = tolua.cast( widget:getChildByName("dev"), "Button" )
 
     signinBt:addTouchEventListener( signinEventHandler )
     registerBt:addTouchEventListener( registerEventHandler )
     facebookBt:addTouchEventListener( facebookEventHandler )
     dev:addTouchEventListener( devEventHandler )
+    dev:setEnabled( false )
 end
 
 function EnterOrExit( eventType )

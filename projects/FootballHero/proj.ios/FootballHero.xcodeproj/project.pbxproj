@@ -202,7 +202,6 @@
 		730D984418DC4317000CA5F9 /* Cocos2d.lua in Resources */ = {isa = PBXBuildFile; fileRef = 730D983518DC4316000CA5F9 /* Cocos2d.lua */; };
 		730D984518DC4317000CA5F9 /* CocoStudio.lua in Resources */ = {isa = PBXBuildFile; fileRef = 730D983618DC4316000CA5F9 /* CocoStudio.lua */; };
 		730D984618DC4317000CA5F9 /* config in Resources */ = {isa = PBXBuildFile; fileRef = 730D983718DC4316000CA5F9 /* config */; };
-		730D984718DC4317000CA5F9 /* example.lua in Resources */ = {isa = PBXBuildFile; fileRef = 730D983818DC4316000CA5F9 /* example.lua */; };
 		730D984818DC4317000CA5F9 /* extern.lua in Resources */ = {isa = PBXBuildFile; fileRef = 730D983918DC4316000CA5F9 /* extern.lua */; };
 		730D984918DC4317000CA5F9 /* fonts in Resources */ = {isa = PBXBuildFile; fileRef = 730D983A18DC4316000CA5F9 /* fonts */; };
 		730D984A18DC4317000CA5F9 /* footballhero.lua in Resources */ = {isa = PBXBuildFile; fileRef = 730D983B18DC4316000CA5F9 /* footballhero.lua */; };
@@ -727,7 +726,6 @@
 		730D983518DC4316000CA5F9 /* Cocos2d.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cocos2d.lua; sourceTree = "<group>"; };
 		730D983618DC4316000CA5F9 /* CocoStudio.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CocoStudio.lua; sourceTree = "<group>"; };
 		730D983718DC4316000CA5F9 /* config */ = {isa = PBXFileReference; lastKnownFileType = folder; path = config; sourceTree = "<group>"; };
-		730D983818DC4316000CA5F9 /* example.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = example.lua; sourceTree = "<group>"; };
 		730D983918DC4316000CA5F9 /* extern.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = extern.lua; sourceTree = "<group>"; };
 		730D983A18DC4316000CA5F9 /* fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = fonts; sourceTree = "<group>"; };
 		730D983B18DC4316000CA5F9 /* footballhero.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = footballhero.lua; sourceTree = "<group>"; };
@@ -2128,7 +2126,6 @@
 				730D983518DC4316000CA5F9 /* Cocos2d.lua */,
 				730D983618DC4316000CA5F9 /* CocoStudio.lua */,
 				730D983718DC4316000CA5F9 /* config */,
-				730D983818DC4316000CA5F9 /* example.lua */,
 				730D983918DC4316000CA5F9 /* extern.lua */,
 				730D983A18DC4316000CA5F9 /* fonts */,
 				730D983B18DC4316000CA5F9 /* footballhero.lua */,
@@ -2235,7 +2232,6 @@
 				730D984818DC4317000CA5F9 /* extern.lua in Resources */,
 				15C1569B1683138E00D239F2 /* Icon-57.png in Resources */,
 				739239EE19401A0900E3D0B3 /* game.bin in Resources */,
-				730D984718DC4317000CA5F9 /* example.lua in Resources */,
 				733DE934193F26C800361638 /* Default~ipad.png in Resources */,
 				730D984318DC4317000CA5F9 /* CCBReaderLoad.lua in Resources */,
 				730D984C18DC4317000CA5F9 /* json.lua in Resources */,
