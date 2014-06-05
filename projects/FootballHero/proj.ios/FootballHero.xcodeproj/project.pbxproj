@@ -220,6 +220,7 @@
 		7365C0D218FCE99200C39027 /* FBSessionSingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 7365C0D118FCE99200C39027 /* FBSessionSingleton.m */; };
 		7388C04118F4E2FF00CF667C /* HttpRequestForLua.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7388C03F18F4E2FF00CF667C /* HttpRequestForLua.cpp */; };
 		738BA12A193D7FD2008A74F6 /* DES56.lua in Resources */ = {isa = PBXBuildFile; fileRef = 738BA129193D7FD2008A74F6 /* DES56.lua */; };
+		739239EE19401A0900E3D0B3 /* game.bin in Resources */ = {isa = PBXBuildFile; fileRef = 739239ED19401A0900E3D0B3 /* game.bin */; };
 		73A896F2192B2A050079AD05 /* SwrveButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 73A896E2192B2A050079AD05 /* SwrveButton.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		73A896F3192B2A050079AD05 /* SwrveCampaign.m in Sources */ = {isa = PBXBuildFile; fileRef = 73A896E4192B2A050079AD05 /* SwrveCampaign.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		73A896F4192B2A050079AD05 /* SwrveImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 73A896E6192B2A050079AD05 /* SwrveImage.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -748,6 +749,7 @@
 		7388C03F18F4E2FF00CF667C /* HttpRequestForLua.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HttpRequestForLua.cpp; sourceTree = "<group>"; };
 		7388C04018F4E2FF00CF667C /* HttpRequestForLua.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpRequestForLua.h; sourceTree = "<group>"; };
 		738BA129193D7FD2008A74F6 /* DES56.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = DES56.lua; sourceTree = "<group>"; };
+		739239ED19401A0900E3D0B3 /* game.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = game.bin; sourceTree = "<group>"; };
 		73A896E1192B2A050079AD05 /* SwrveButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SwrveButton.h; path = Sdk/Talk/SwrveButton.h; sourceTree = "<group>"; };
 		73A896E2192B2A050079AD05 /* SwrveButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SwrveButton.m; path = Sdk/Talk/SwrveButton.m; sourceTree = "<group>"; };
 		73A896E3192B2A050079AD05 /* SwrveCampaign.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SwrveCampaign.h; path = Sdk/Talk/SwrveCampaign.h; sourceTree = "<group>"; };
@@ -2112,6 +2114,7 @@
 		F293BC4615EB859D00256477 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				739239ED19401A0900E3D0B3 /* game.bin */,
 				733DE932193F26C800361638 /* Default~ipad.png */,
 				733DE933193F26C800361638 /* Default-Portrait@2x~ipad.png */,
 				733DE92C193F262900361638 /* Icon-76.png */,
@@ -2231,6 +2234,7 @@
 				733DE931193F262900361638 /* Icon-152.png in Resources */,
 				730D984818DC4317000CA5F9 /* extern.lua in Resources */,
 				15C1569B1683138E00D239F2 /* Icon-57.png in Resources */,
+				739239EE19401A0900E3D0B3 /* game.bin in Resources */,
 				730D984718DC4317000CA5F9 /* example.lua in Resources */,
 				733DE934193F26C800361638 /* Default~ipad.png in Resources */,
 				730D984318DC4317000CA5F9 /* CCBReaderLoad.lua in Resources */,

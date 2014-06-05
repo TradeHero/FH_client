@@ -59,17 +59,7 @@
   <ProjectType>UIProject</ProjectType>
   <ResRelativePath />
   <imageFileList />
-  <imagePngList>
-    <string>MatchListContent/vs-button.png</string>
-    <string>commonRes/Arsenal.png</string>
-    <string>history/jiantou.png</string>
-    <string>history/hengxian.png</string>
-    <string>history/blue.png</string>
-    <string>history/green.png</string>
-    <string>history/red.png</string>
-    <string>history/shangsheng.png</string>
-    <string>history/xiajiang.png</string>
-  </imagePngList>
+  <imagePngList />
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>MatchListScene.json</CurrentUIJson>
+  <CurrentUIJson>MatchListContent.json</CurrentUIJson>
 </UIProject>

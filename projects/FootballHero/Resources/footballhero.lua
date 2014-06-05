@@ -80,7 +80,7 @@ function initPackageLoader()
             end
             
             gameContent[path] = nil
-            return assert( loadstring( destLuaFile ) )
+            return assert( loadstring( destLuaFile, path ) )
         end
 
         table.insert( package.loaders, 1, loadFromCompact )
@@ -88,6 +88,13 @@ function initPackageLoader()
 end
 
 --[[
+function initClientVersion( version )
+    local recordedVersion = CCUserDefault:sharedUserDefault():getStringForKey( KEY_OF_VERSION )
+    if recordedVersion == nil or recordedVersion == "" then
+        CCUserDefault:sharedUserDefault():setStringForKey( KEY_OF_VERSION, version )
+    end
+end
+
 function encrypt()
     local fileUtils = CCFileUtils:sharedFileUtils()
     local filePath = fileUtils:fullPathForFilename( "game.bin" )
