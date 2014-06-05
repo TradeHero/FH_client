@@ -11,10 +11,15 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "LoginNReg/register-name-bg.jpg",
-    "LoginNReg/confirmation-icon.png",
-    "LoginNReg/photo.png",
-    "header/footballhero-logo.png"
+    "MatchListContent/vs-button.png",
+    "commonRes/Arsenal.png",
+    "history/jiantou.png",
+    "history/hengxian.png",
+    "history/blue.png",
+    "history/green.png",
+    "history/red.png",
+    "history/shangsheng.png",
+    "history/xiajiang.png"
   ],
   "version": "1.4.0.1",
   "widgetTree": {
@@ -545,7 +550,7 @@
       "classname": "Panel",
       "name": "Panel_20",
       "ZOrder": 0,
-      "actiontag": 1,
+      "actiontag": -1,
       "anchorPointX": 0,
       "anchorPointY": 0,
       "classType": "CocoStudio.EngineAdapterWrap.CSPanel",

@@ -15,6 +15,7 @@ local SMIS = require("scripts.SMIS")
 
 local mWidget
 local mTopLayer
+local mOptionPanelShown
 local mTheFirstDate = nil
 
 local MIN_MOVE_DISTANCE = 100
@@ -64,8 +65,8 @@ function loadFrame( matchList )
     -- Init the toplayer to listen to the swap action.
     mTopLayer = CCLayer:create()
     mTopLayer:registerScriptTouchHandler( onTopLevelTouch, false, -100)
-    mTopLayer:setTouchEnabled( false )
     mWidget:addNode( mTopLayer )
+    mOptionPanelShown = false
 end
 
 function EnterOrExit( eventType )
@@ -274,15 +275,11 @@ end
 
 function optionEventHandler( sender, eventType )
     if eventType == TOUCH_EVENT_ENDED then
-        local optionBt = mWidget:getChildByName("option")
-        optionBt:setTouchEnabled( false )
-
-        local seqArray = CCArray:create()
-        seqArray:addObject( CCMoveBy:create( OPTION_MOVE_TIME, ccp( OPTION_VIEW_OFFSET_X, 0 ) ) )
-        seqArray:addObject( CCCallFuncN:create( function()
-            mTopLayer:setTouchEnabled( true )
-        end ) )
-        mWidget:runAction( CCSequence:create( seqArray ) )
+        if mOptionPanelShown then
+            hideOptionAnim()
+        else
+            showOptionAnim()
+        end
     end
 end
 
@@ -304,20 +301,46 @@ function onTopLevelTouch( eventType, x, y )
         startPosX, startPosY = x, y
         return true
     elseif eventType == "ended" then
-        if startPosX - x > MIN_MOVE_DISTANCE then
+        if startPosX - x > MIN_MOVE_DISTANCE and mOptionPanelShown == true then
             -- Swap to Left
-            hideOptionAnim( nil )
+            hideOptionAnim()
+        elseif x - startPosX > MIN_MOVE_DISTANCE and mOptionPanelShown == false then
+            -- Swap to Right
+            showOptionAnim()
         end
     end
 end
 
-function hideOptionAnim( callbackFunc )
+function showOptionAnim( callbackFunc )
+    local optionBt = mWidget:getChildByName("option")
+    optionBt:setTouchEnabled( false )
     mTopLayer:setTouchEnabled( false )
+
+    local seqArray = CCArray:create()
+    seqArray:addObject( CCMoveBy:create( OPTION_MOVE_TIME, ccp( OPTION_VIEW_OFFSET_X, 0 ) ) )
+    seqArray:addObject( CCCallFuncN:create( function()
+        optionBt:setTouchEnabled( true )
+        mTopLayer:setTouchEnabled( true )
+        mOptionPanelShown = true
+
+        if callbackFunc ~= nil then
+            callbackFunc()
+        end
+    end ) )
+    mWidget:runAction( CCSequence:create( seqArray ) )
+end
+
+function hideOptionAnim( callbackFunc )
+    local optionBt = mWidget:getChildByName("option")
+    optionBt:setTouchEnabled( false )
+    mTopLayer:setTouchEnabled( false )
+
     local seqArray = CCArray:create()
     seqArray:addObject( CCMoveBy:create( OPTION_MOVE_TIME, ccp( OPTION_VIEW_OFFSET_X * (-1), 0 ) ) )
     seqArray:addObject( CCCallFuncN:create( function()
-        local optionBt = mWidget:getChildByName("option")
         optionBt:setTouchEnabled( true )
+        mTopLayer:setTouchEnabled( true )
+        mOptionPanelShown = false
 
         if callbackFunc ~= nil then
             callbackFunc()
