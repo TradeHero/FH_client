@@ -7,24 +7,45 @@
   <JsonFileName>FH_UI.json</JsonFileName>
   <JsonFolder>Z:\FH_client\projects\FootballHero\editor\FH_UI\Json</JsonFolder>
   <JsonList>
+    <string>CompetitionCreate.json</string>
+    <string>CompetitionItem.json</string>
+    <string>CompetitionTitle.json</string>
     <string>ConnectingMessage.json</string>
     <string>CountryListContent.json</string>
     <string>ErrorMessage.json</string>
+    <string>FAQ.json</string>
     <string>FavouriteCountryContent.json</string>
     <string>FavouriteLeagueContent.json</string>
     <string>FavouriteTeam.json</string>
     <string>ForgotPassword.json</string>
+    <string>HistoryDetail.json</string>
+    <string>HistoryDetailClosedContent.json</string>
+    <string>HistoryDetailOpenContent.json</string>
     <string>HistoryHome.json</string>
+    <string>HistoryHomeForOthers.json</string>
+    <string>HistoryMainMatchContent.json</string>
+    <string>HistoryMainTitle.json</string>
+    <string>LeaderboardContent.json</string>
+    <string>LeaderboardList.json</string>
+    <string>LeaderboardListContent.json</string>
+    <string>LeaderboardScene.json</string>
+    <string>LeaderboardSubContent.json</string>
     <string>LeagueListContent.json</string>
     <string>LoginNReg.json</string>
     <string>MatchDate.json</string>
     <string>MatchListContent.json</string>
+    <string>MatchListEmptyIndi.json</string>
     <string>MatchListScene.json</string>
     <string>MatchPrediction.json</string>
+    <string>MoreContent.json</string>
     <string>Navigator.json</string>
     <string>PredConfirm.json</string>
+    <string>PredFinalConfirm.json</string>
+    <string>PredFinalConfirmContent.json</string>
     <string>Register.json</string>
     <string>RegisterName.json</string>
+    <string>SettingsHome.json</string>
+    <string>SettingsHomeContent.json</string>
     <string>Signin.json</string>
     <string>Team.json</string>
     <string>WBTSPrediction.json</string>
@@ -32,24 +53,10 @@
     <string>WTGBMTPrediction.json</string>
     <string>WTSPrediction.json</string>
     <string>WTWBEGPrediction.json</string>
-    <string>HistoryMainMatchContent.json</string>
-    <string>HistoryMainTitle.json</string>
-    <string>HistoryDetail.json</string>
-    <string>HistoryDetailClosedContent.json</string>
-    <string>HistoryDetailOpenContent.json</string>
-    <string>LeaderboardScene.json</string>
-    <string>LeaderboardContent.json</string>
-    <string>LeaderboardSubContent.json</string>
-    <string>LeaderboardList.json</string>
-    <string>LeaderboardListContent.json</string>
-    <string>MoreContent.json</string>
-    <string>MatchListEmptyIndi.json</string>
-    <string>PredFinalConfirm.json</string>
-    <string>PredFinalConfirmContent.json</string>
-    <string>HistoryHomeForOthers.json</string>
-    <string>SettingsHome.json</string>
-    <string>SettingsHomeContent.json</string>
-    <string>FAQ.json</string>
+    <string>CreateCompetition.json</string>
+    <string>CreateCompSelectLeague.json</string>
+    <string>CreateCompCountryListContent.json</string>
+    <string>CreateCompLeagueListContent.json</string>
   </JsonList>
   <CanvasSize>
     <Width>640</Width>
@@ -61,9 +68,9 @@
   <imageFileList />
   <imagePngList>
     <string>header/guangyun.png</string>
-    <string>history/bg.png</string>
+    <string>Competition/btn_yellow.png</string>
     <string>header/back.png</string>
   </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>LeaderboardSubContent.json</CurrentUIJson>
+  <CurrentUIJson>CreateCompSelectLeague.json</CurrentUIJson>
 </UIProject>

@@ -26,6 +26,7 @@ GET_MAIN_LEADERBOARD_REST_CALL = SERVER_IP.."/api/leaderboards/getMainLeaderboar
 GET_FRIENDS_LEADERBOARD_REST_CALL = SERVER_IP.."/api/leaderboards/getFriendsLeaderboard"
 POST_COUPONS_REST_CALL = SERVER_IP.."/api/coupons/placeCoupons"
 POST_FAV_TEAM_REST_CALL = SERVER_IP.."/api/user/setFavoriteTeam"
+POST_CREATE_COMPETITION_REST_CALL = SERVER_IP.."/api/competitions/createUserCompetition"
 
 FACEBOOK_FRIENDS_LIST_CALL = "/me/friends?access_token="
 USE_DEV = false
@@ -44,11 +45,14 @@ function setServerIP( serverIp )
     GET_FRIENDS_LEADERBOARD_REST_CALL = serverIp.."/api/leaderboards/getFriendsLeaderboard"
     POST_COUPONS_REST_CALL = serverIp.."/api/coupons/placeCoupons"
     POST_FAV_TEAM_REST_CALL= serverIp.."/api/user/setFavoriteTeam"
+    POST_CREATE_COMPETITION_REST_CALL = SERVER_IP.."/api/competitions/createUserCompetition"
 
     CDN_SERVER_IP = "http://portalvhdss3c1vgx5mrzv.blob.core.windows.net/fhdevsettings/"
 
     USE_DEV = true
 end
+
+setServerIP( "http://fhapi-dev1.cloudapp.net" )
 
 function createHeaderObject( headerStr )
 	local headerList = split( headerStr, "\n" )

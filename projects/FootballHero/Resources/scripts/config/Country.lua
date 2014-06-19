@@ -24,7 +24,9 @@ function init()
 
 	for i = 1, LeagueConfig.getConfigNum() do
 		local countryId = LeagueConfig.getCountryId( i )
-		addLeague( getConfigIdByKey( countryId ), i )
+		if getConfigIdByKey( countryId ) ~= nil then
+			addLeague( getConfigIdByKey( countryId ), i )
+		end
 	end
 
 	for i = 1, getConfigNum() do
@@ -108,6 +110,19 @@ function getLogo( id )
 	else
 		return Constants.COUNTRY_IMAGE_PATH.."default.png"
 	end
+end
+
+function getAllLeagues()
+	local leagues = {}
+
+    for i = 1, getConfigNum() do
+        local list = getLeagueList( i )
+        for j = 1, table.getn( list ) do
+            table.insert( leagues, list[j] )
+        end
+    end
+
+    return leagues
 end
 
 init()

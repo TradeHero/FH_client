@@ -10,17 +10,7 @@
   "designHeight": 1136,
   "designWidth": 640,
   "textures": [],
-  "texturesPng": [
-    "MatchListContent/vs-button.png",
-    "commonRes/Arsenal.png",
-    "history/jiantou.png",
-    "history/hengxian.png",
-    "history/blue.png",
-    "history/green.png",
-    "history/red.png",
-    "history/shangsheng.png",
-    "history/xiajiang.png"
-  ],
+  "texturesPng": [],
   "version": "1.4.0.1",
   "widgetTree": {
     "classname": "Panel",

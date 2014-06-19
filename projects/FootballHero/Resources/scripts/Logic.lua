@@ -46,6 +46,7 @@ function Logic:new()
 		mCurMarketInfo = nil,	-- DS: see MarketsForGameData
 		mCoupons = Coupons:new(),  -- DS: Coupons
 		mPreviousLeagueSelected = 0,
+		mSelectedLeagues = nil,
 		sessionToken = 0,
 		email = "",
 		password = "",
@@ -106,6 +107,14 @@ function Logic:consumePoint( v )
 	else
 		self:setPoint( 0 )
 	end
+end
+
+function Logic:getSelectedLeagues()
+	return self.mSelectedLeagues
+end
+
+function Logic:setSelectedLeagues( selectedLeagues )
+	self.mSelectedLeagues = selectedLeagues
 end
 
 function Logic:setUserInfo( email, password, sessionToken, userId )

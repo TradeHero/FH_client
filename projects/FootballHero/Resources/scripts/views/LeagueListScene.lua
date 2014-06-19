@@ -14,12 +14,14 @@ local mCountryWidget
 local mLeagueWidget
 local mLeagueListContainer
 local mLeagueSelectCallback
+local mLeagueInitCallback
 
-function loadFrame( countryWidget, leagueWidget, leagueListContainer, leagueSelectCallback )
+function loadFrame( countryWidget, leagueWidget, leagueListContainer, leagueSelectCallback, leagueInitCallback )
 	mCountryWidget = countryWidget
 	mLeagueWidget = leagueWidget
 	mLeagueListContainer = leagueListContainer
 	mLeagueSelectCallback = leagueSelectCallback
+    mLeagueInitCallback = leagueInitCallback
 
     local content = SceneManager.widgetFromJsonFile( mCountryWidget )
     COUNTRY_CONTENT_HEIGHT = content:getSize().height
@@ -27,6 +29,20 @@ function loadFrame( countryWidget, leagueWidget, leagueListContainer, leagueSele
     LEAGUE_CONTENT_HEIGHT = content:getSize().height
 
 	helperInitLeagueList()
+end
+
+function expendAll()
+    for i = 1, mCountryNum do
+        mCountryExpended[i] = true
+        helperUpdateLeagueList( i )
+    end
+end
+
+function unexpendAll()
+    for i = 1, mCountryNum do
+        mCountryExpended[i] = false
+        helperUpdateLeagueList( i )
+    end
 end
 
 function helperInitLeagueList()
@@ -111,7 +127,7 @@ function helperUpdateLeagueList( clickedCountryId )
 
             local eventHandler = function( sender, eventType )
                 if eventType == TOUCH_EVENT_ENDED then
-                    mLeagueSelectCallback( leagueId )
+                    mLeagueSelectCallback( leagueId, sender )
                 end
             end
 
@@ -123,6 +139,10 @@ function helperUpdateLeagueList( clickedCountryId )
             content:addTouchEventListener( eventHandler )
             local leagueName = tolua.cast( content:getChildByName("leagueName"), "Label" )
             leagueName:setText( LeagueConfig.getLeagueName( leagueId ) )
+            
+            if mLeagueInitCallback ~= nil then
+                mLeagueInitCallback( content, leagueId )
+            end
         end
     else
         for i = 1, leagueNum do

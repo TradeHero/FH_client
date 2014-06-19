@@ -11,15 +11,11 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "MatchListContent/vs-button.png",
-    "commonRes/Arsenal.png",
-    "history/jiantou.png",
-    "history/hengxian.png",
-    "history/blue.png",
-    "history/green.png",
-    "history/red.png",
-    "history/shangsheng.png",
-    "history/xiajiang.png"
+    "Competition/create_competition.png",
+    "Competition/btn_yellow.png",
+    "header/guangyun.png",
+    "Competition/btn_black_icon.png",
+    "header/back.png"
   ],
   "version": "1.4.0.1",
   "widgetTree": {
@@ -974,7 +970,7 @@
       "classname": "Panel",
       "name": "Panel_126",
       "ZOrder": 0,
-      "actiontag": -1,
+      "actiontag": 1,
       "anchorPointX": 0,
       "anchorPointY": 0,
       "classType": "CocoStudio.EngineAdapterWrap.CSPanel",

@@ -10,7 +10,9 @@
   "designHeight": 1136,
   "designWidth": 640,
   "textures": [],
-  "texturesPng": [],
+  "texturesPng": [
+    "Competition/icn_rank_green.png"
+  ],
   "version": "1.4.0.1",
   "widgetTree": {
     "classname": "Panel",

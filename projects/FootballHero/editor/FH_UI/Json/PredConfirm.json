@@ -11,7 +11,10 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "Settings/settings_03.png"
+    "Competition/Create-bg.png",
+    "Competition/Create_03.png",
+    "header/guangyun.png",
+    "Leaderboards/competition.png"
   ],
   "version": "1.4.0.1",
   "widgetTree": {

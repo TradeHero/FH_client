@@ -35,6 +35,8 @@ EventNameList =
     "Enter_Leaderboard_List",
     "Enter_Settings",
     "Enter_FAQ",
+    "Enter_Create_Competition",
+    "Enter_View_Selected_Leagues",
 
     "Do_Register",
     "Do_Register_Name",
@@ -45,6 +47,7 @@ EventNameList =
     "Do_Post_Fav_Team",
     "Do_Send_Feedback",
     "Do_Log_Out",
+    "Do_Create_Competition",
 
     "Show_Error_Message",
 
@@ -62,6 +65,7 @@ EventNameDosenotTrackList =
     "Do_Post_Fav_Team",
     "Do_Send_Feedback",
     "Do_Log_Out",
+    "Do_Create_Competition",
 
     "Check_File_Version",
     "Show_Error_Message",

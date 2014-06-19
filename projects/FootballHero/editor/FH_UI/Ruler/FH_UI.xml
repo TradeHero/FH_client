@@ -161,7 +161,7 @@
     <GuidesList />
   </GuidesProject>
   <GuidesProject>
-    <Project>LeaderboardContent_0</Project>
+    <Project>CompetitionTitle</Project>
     <GuidesList />
   </GuidesProject>
   <GuidesProject>
@@ -178,6 +178,30 @@
   </GuidesProject>
   <GuidesProject>
     <Project>FAQ</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>CompetitionItem</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>CompetitionCreate</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>CreateCompetition</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>CreateCompSelectLeague</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>CreateCompCountryListContent</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>CreateCompLeagueListContent</Project>
     <GuidesList />
   </GuidesProject>
 </ArrayOfGuidesProject>

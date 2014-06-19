@@ -10,10 +10,7 @@
   "designHeight": 1136,
   "designWidth": 640,
   "textures": [],
-  "texturesPng": [
-    "Settings/settings-bg.jpg",
-    "header/guangyun.png"
-  ],
+  "texturesPng": [],
   "version": "1.4.0.1",
   "widgetTree": {
     "classname": "Panel",
@@ -234,8 +231,8 @@
           "rotation": 0,
           "scaleX": 1,
           "scaleY": 1,
-          "sizePercentX": 0.1484375,
-          "sizePercentY": 0.0237676054,
+          "sizePercentX": 0.2453125,
+          "sizePercentY": 0.0457746461,
           "sizeType": 0,
           "tag": 1561,
           "touchAble": false,

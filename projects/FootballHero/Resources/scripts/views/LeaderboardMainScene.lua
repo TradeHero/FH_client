@@ -4,17 +4,15 @@ local SceneManager = require("scripts.SceneManager")
 local Navigator = require("scripts.views.Navigator")
 local EventManager = require("scripts.events.EventManager").getInstance()
 local Event = require("scripts.events.Event").EventList
-local TeamConfig = require("scripts.config.Team")
 local LeaderboardConfig = require("scripts.config.Leaderboard")
+local ViewUtils = require("scripts.views.ViewUtils")
 
 
 local SUB_CONTENT_HEIGHT = 187
 
 local mWidget
 
-
--- DS for couponHistory see CouponHistoryData
-function loadFrame( couponHistory )
+function loadFrame()
 	local widget = GUIReader:shareReader():widgetFromJsonFile("scenes/LeaderboardScene.json")
     mWidget = widget
     mWidget:registerScriptHandler( EnterOrExit )
@@ -22,7 +20,7 @@ function loadFrame( couponHistory )
 
     Navigator.loadFrame( widget )
 
-    initContent( couponHistory )
+    initContent()
 end
 
 function EnterOrExit( eventType )
@@ -36,14 +34,17 @@ function isFrameShown()
     return mWidget ~= nil
 end
 
-function initContent( couponHistory )
+function initContent()
 	local contentContainer = tolua.cast( mWidget:getChildByName("ScrollView"), "ScrollView" )
     contentContainer:removeAllChildrenWithCleanup( true )
 
     local layoutParameter = LinearLayoutParameter:create()
     layoutParameter:setGravity(LINEAR_GRAVITY_CENTER_VERTICAL)
-    local contentHeight = 0
 
+    -- Add Competition items
+    local contentHeight = initCompetition( layoutParameter, contentContainer )
+
+    -- Add leaderboard items
     for i = 1, table.getn( LeaderboardConfig.LeaderboardType ) do
     	local eventHandler = function( sender, eventType )
             if eventType == TOUCH_EVENT_ENDED then
@@ -63,6 +64,7 @@ function initContent( couponHistory )
         local subContent = GUIReader:shareReader():widgetFromJsonFile("scenes/LeaderboardSubContent.json")
         subContent:setLayoutParameter( layoutParameter )
         contentContainer:addChild( subContent )
+        contentHeight = contentHeight + subContent:getSize().height
         subContent:setName( "subContent"..i )
         for j = 1, 4 do
             local eventHandler = function( sender, eventType )
@@ -75,7 +77,7 @@ function initContent( couponHistory )
             button:addTouchEventListener( eventHandler )
         end
     end
-
+    
     contentContainer:setInnerContainerSize( CCSize:new( 0, contentHeight ) )
     local layout = tolua.cast( contentContainer, "Layout" )
     layout:requestDoLayout()
@@ -87,6 +89,51 @@ function initLeaderboardContent( content, info )
 
     name:setText( info["displayName"] )
     logo:loadTexture( info["logo"] )
+end
+
+function initCompetition( layoutParameter, contentContainer )
+    -- Add competition items
+    local competitionTitle = GUIReader:shareReader():widgetFromJsonFile("scenes/CompetitionTitle.json")
+    competitionTitle:setLayoutParameter( layoutParameter )
+    contentContainer:addChild( competitionTitle )
+    local height = competitionTitle:getSize().height
+
+    -- Add the create competition button
+    local create = GUIReader:shareReader():widgetFromJsonFile("scenes/CompetitionCreate.json")
+
+    local createEventHandler = function( sender, eventType )
+        if eventType == TOUCH_EVENT_ENDED then
+            EventManager:postEvent( Event.Enter_Create_Competition )
+        end
+    end
+    local joinEventHandler = function( sender, eventType )
+        if eventType == TOUCH_EVENT_ENDED then
+            --EventManager:postEvent( Event.Enter_Create_Competition )
+            local token = create:getChildByName( "tokenContainer" ):getNodeByTag( 1 ):getText()
+            print("Token is: "..token)
+        end
+    end
+
+    create:setLayoutParameter( layoutParameter )
+    contentContainer:addChild( create )
+    local createbt = create:getChildByName("Create")
+    createbt:addTouchEventListener( createEventHandler )
+    local joinBt = create:getChildByName("Join")
+    joinBt:addTouchEventListener( joinEventHandler )
+    local tokenInput = ViewUtils.createTextInput( create:getChildByName( "tokenContainer" ), "Enter Competition Code" )
+    tokenInput:setFontColor( ccc3( 0, 0, 0 ) )
+    tokenInput:setTouchPriority( SceneManager.TOUCH_PRIORITY_MINUS_ONE )
+    height = height + create:getSize().height
+
+    -- Add existing competions
+    for i = 1, 0 do
+        local content = SceneManager.widgetFromJsonFile("scenes/CompetitionItem.json")
+        content:setLayoutParameter( layoutParameter )
+        contentContainer:addChild( content )
+        height = height + content:getSize().height
+    end
+
+    return height
 end
 
 function contentClick( id )

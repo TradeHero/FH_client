@@ -9,6 +9,7 @@ function __G__TRACKBACK__(msg)
     print("----------------------------------------")
 
     if CCApplication:sharedApplication():getTargetPlatform() ~= kTargetWindows then
+        cclog( msg )
         local DoLogReport = require("scripts.actions.DoLogReport")
         DoLogReport.reportError( errorDesc )
     else
@@ -35,7 +36,7 @@ local function main()
 
     local eventManager = require("scripts.events.EventManager").getInstance()
     local event = require("scripts.events.Event").EventList
-    eventManager:postEvent( event.Enter_Login_N_Reg )
+    --eventManager:postEvent( event.Enter_Login_N_Reg )
     --eventManager:postEvent( event.Enter_Sel_Fav_Team )
     --eventManager:postEvent( event.Enter_Match_List )
     --eventManager:postEvent( event.Enter_Match )
@@ -43,6 +44,8 @@ local function main()
     --eventManager:postEvent( event.Enter_History )
     --eventManager:postEvent( event.Enter_Leaderboard )
     --eventManager:postEvent( event.Enter_Pred_Total_Confirm )
+    eventManager:postEvent( event.Enter_Create_Competition )
+    --eventManager:postEvent( event.Enter_View_Selected_Leagues )
 
     --local ConnectingMessage = require("scripts.views.ConnectingMessage")
     --ConnectingMessage.loadFrame()

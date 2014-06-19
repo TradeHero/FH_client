@@ -11,15 +11,10 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "MatchListContent/vs-button.png",
-    "commonRes/Arsenal.png",
-    "history/jiantou.png",
-    "history/hengxian.png",
-    "history/blue.png",
-    "history/green.png",
-    "history/red.png",
-    "history/shangsheng.png",
-    "history/xiajiang.png"
+    "Competition/Create-bg.png",
+    "Competition/Create_03.png",
+    "header/guangyun.png",
+    "Leaderboards/competition.png"
   ],
   "version": "1.4.0.1",
   "widgetTree": {

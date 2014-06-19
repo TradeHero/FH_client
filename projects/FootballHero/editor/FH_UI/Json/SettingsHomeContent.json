@@ -10,10 +10,7 @@
   "designHeight": 1136,
   "designWidth": 640,
   "textures": [],
-  "texturesPng": [
-    "Settings/settings-bg.jpg",
-    "header/guangyun.png"
-  ],
+  "texturesPng": [],
   "version": "1.4.0.1",
   "widgetTree": {
     "classname": "Panel",
@@ -38,7 +35,7 @@
           "customProperty": "",
           "flipX": false,
           "flipY": false,
-          "height": 70,
+          "height": 80,
           "ignoreSize": true,
           "layoutParameter": null,
           "opacity": 255,
@@ -48,14 +45,14 @@
           "rotation": 0,
           "scaleX": 1,
           "scaleY": 1,
-          "sizePercentX": 0.9265625,
-          "sizePercentY": 0.377049178,
+          "sizePercentX": 0.125,
+          "sizePercentY": 0.6557377,
           "sizeType": 0,
           "tag": 350,
           "touchAble": false,
           "useMergedTexture": false,
           "visible": true,
-          "width": 582,
+          "width": 80,
           "x": 320,
           "y": 22,
           "capInsetsHeight": 0,
@@ -64,13 +61,13 @@
           "capInsetsY": 0,
           "fileName": null,
           "fileNameData": {
-            "path": "Settings/settings_03.png",
+            "path": "C:\\Program Files\\CocoStudio1.4\\EditorDefaultRes\\GUI/image.png",
             "plistFile": "",
-            "resourceType": 0
+            "resourceType": 2
           },
           "scale9Enable": false,
-          "scale9Height": 70,
-          "scale9Width": 582
+          "scale9Height": 80,
+          "scale9Width": 80
         }
       },
       {
@@ -97,13 +94,13 @@
           "layoutParameter": null,
           "opacity": 255,
           "positionPercentX": 0.5,
-          "positionPercentY": 0.510432243,
+          "positionPercentY": 0.5081967,
           "positionType": 0,
           "rotation": 0,
           "scaleX": 1,
           "scaleY": 1,
-          "sizePercentX": 0.1109375,
-          "sizePercentY": 0.262295067,
+          "sizePercentX": 0.1796875,
+          "sizePercentY": 0.4262295,
           "sizeType": 0,
           "tag": 247,
           "touchAble": false,
@@ -129,7 +126,7 @@
       "classname": "Panel",
       "name": "Panel_38",
       "ZOrder": 0,
-      "actiontag": 1,
+      "actiontag": -1,
       "anchorPointX": 0,
       "anchorPointY": 0,
       "classType": "CocoStudio.EngineAdapterWrap.CSPanel",
