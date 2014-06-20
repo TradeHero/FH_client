@@ -232,6 +232,7 @@
 		73A89708192B2A1E0079AD05 /* SwrveResourceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 73A89700192B2A1E0079AD05 /* SwrveResourceManager.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		73A89709192B2A1E0079AD05 /* SwrveSignatureProtectedFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 73A89702192B2A1E0079AD05 /* SwrveSignatureProtectedFile.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		73A8970A192B2A1E0079AD05 /* SwrveTransactionListener.m in Sources */ = {isa = PBXBuildFile; fileRef = 73A89705192B2A1E0079AD05 /* SwrveTransactionListener.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		73B8CB0A1953EB5400E62B43 /* game.bin in Resources */ = {isa = PBXBuildFile; fileRef = 73B8CB091953EB5400E62B43 /* game.bin */; };
 		73BFF75A191779FB002F173A /* des56.c in Sources */ = {isa = PBXBuildFile; fileRef = 73BFF753191779FB002F173A /* des56.c */; };
 		73BFF75B191779FB002F173A /* ldes56.c in Sources */ = {isa = PBXBuildFile; fileRef = 73BFF755191779FB002F173A /* ldes56.c */; };
 		73BFF75C191779FB002F173A /* md5.c in Sources */ = {isa = PBXBuildFile; fileRef = 73BFF757191779FB002F173A /* md5.c */; };
@@ -774,6 +775,7 @@
 		73A89703192B2A1E0079AD05 /* SwrveTransactionCompleteListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SwrveTransactionCompleteListener.h; path = Sdk/Track/SwrveTransactionCompleteListener.h; sourceTree = "<group>"; };
 		73A89704192B2A1E0079AD05 /* SwrveTransactionListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SwrveTransactionListener.h; path = Sdk/Track/SwrveTransactionListener.h; sourceTree = "<group>"; };
 		73A89705192B2A1E0079AD05 /* SwrveTransactionListener.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SwrveTransactionListener.m; path = Sdk/Track/SwrveTransactionListener.m; sourceTree = "<group>"; };
+		73B8CB091953EB5400E62B43 /* game.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = game.bin; sourceTree = "<group>"; };
 		73BFF753191779FB002F173A /* des56.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = des56.c; path = crypt/des56.c; sourceTree = "<group>"; };
 		73BFF754191779FB002F173A /* des56.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = des56.h; path = crypt/des56.h; sourceTree = "<group>"; };
 		73BFF755191779FB002F173A /* ldes56.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ldes56.c; path = crypt/ldes56.c; sourceTree = "<group>"; };
@@ -2110,6 +2112,7 @@
 		F293BC4615EB859D00256477 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				73B8CB091953EB5400E62B43 /* game.bin */,
 				733DE932193F26C800361638 /* Default~ipad.png */,
 				733DE933193F26C800361638 /* Default-Portrait@2x~ipad.png */,
 				733DE92C193F262900361638 /* Icon-76.png */,
@@ -2228,6 +2231,7 @@
 				733DE931193F262900361638 /* Icon-152.png in Resources */,
 				730D984818DC4317000CA5F9 /* extern.lua in Resources */,
 				15C1569B1683138E00D239F2 /* Icon-57.png in Resources */,
+				73B8CB0A1953EB5400E62B43 /* game.bin in Resources */,
 				733DE934193F26C800361638 /* Default~ipad.png in Resources */,
 				730D984318DC4317000CA5F9 /* CCBReaderLoad.lua in Resources */,
 				730D984C18DC4317000CA5F9 /* json.lua in Resources */,
