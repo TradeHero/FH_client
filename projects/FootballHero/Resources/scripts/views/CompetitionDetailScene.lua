@@ -161,7 +161,7 @@ end
 function loadMore( sender, eventType )
     if eventType == TOUCH_EVENT_ENDED then
         mStep = mStep + 1
-        EventManager:postEvent( Event.Load_More_In_Leaderboard, { leaderboardId, mSubType, mStep } )
+        EventManager:postEvent( Event.Load_More_In_Competition_Detail, { mCompetitionId, mStep } )
     end
 end
 

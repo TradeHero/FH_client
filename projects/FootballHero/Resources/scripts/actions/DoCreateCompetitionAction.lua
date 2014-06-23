@@ -61,6 +61,6 @@ function onRequestSuccess( jsonResponse )
     local competitionId = jsonResponse["CompetitionId"]
     local joinToken = jsonResponse["JoinToken"]
 
-    EventManager:popHistoryWithoutExec()
+    EventManager:popHistoryWithoutExec()    -- Remove the create competition event in history. So that it can back direct to the Community scene.
     EventManager:postEvent( Event.Enter_Competition_Detail, { competitionId } )
 end

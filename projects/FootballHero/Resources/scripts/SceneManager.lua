@@ -36,6 +36,7 @@ local DoCreateCompetitionAction = require("scripts.actions.DoCreateCompetitionAc
 local ShowErrorMessageAction = require("scripts.actions.ShowErrorMessageAction")
 local LoadMoreInLeaderboardAction = require("scripts.actions.LoadMoreInLeaderboardAction")
 local LoadMoreInHistoryAction = require("scripts.actions.LoadMoreInHistoryAction")
+local LoadMoreInCompetitionDetailAction = require("scripts.actions.LoadMoreInCompetitionDetailAction")
 
 TOUCH_PRIORITY_ZERO = 0
 TOUCH_PRIORITY_MINUS_ONE = -1
@@ -99,6 +100,7 @@ function initEvents()
 	EventManager:registerEventHandler( Event.Show_Error_Message, ShowErrorMessageAction )
 	EventManager:registerEventHandler( Event.Load_More_In_Leaderboard, LoadMoreInLeaderboardAction )
 	EventManager:registerEventHandler( Event.Load_More_In_History, LoadMoreInHistoryAction )
+	EventManager:registerEventHandler( Event.Load_More_In_Competition_Detail, LoadMoreInCompetitionDetailAction )
 end
 
 function clearNAddWidget( widget )

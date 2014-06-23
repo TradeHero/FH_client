@@ -55,6 +55,7 @@ EventNameList =
 
     "Load_More_In_Leaderboard",
     "Load_More_In_History",
+    "Load_More_In_Competition_Detail",
 }
 
 EventNameDosenotTrackList = 
@@ -74,6 +75,7 @@ EventNameDosenotTrackList =
     "Show_Error_Message",
     "Load_More_In_Leaderboard",
     "Load_More_In_History",
+    "Load_More_In_Competition_Detail",
 }
 
 EventList = CreatEnumTable( EventNameList )
