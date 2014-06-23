@@ -6,10 +6,13 @@ local ConnectingMessage = require("scripts.views.ConnectingMessage")
 local EventManager = require("scripts.events.EventManager").getInstance()
 local Event = require("scripts.events.Event").EventList
 local Logic = require("scripts.Logic").getInstance()
-local Competitions = require("scripts.data.Competitions").Competitions
+
 
 function action( param )
-    local url = RequestUtils.GET_COMPETITION_LIST_REST_CALL
+    local competitionId = param[1]
+
+    local url = RequestUtils.GET_COMPETITION_LEAGUE_REST_CALL
+    url = url.."?competitionId="..competitionId
 
     local requestInfo = {}
     requestInfo.requestData = ""
@@ -27,11 +30,6 @@ function action( param )
 end
 
 function onRequestSuccess( jsonResponse )
-	local compList = Competitions:new( jsonResponse )
-
-    local leaderboardMainScene = require("scripts.views.LeaderboardMainScene")
-	if leaderboardMainScene.isFrameShown() then
-		return
-	end
-    leaderboardMainScene.loadFrame( compList )
+	local SelectedLeaguesScene = require("scripts.views.SelectedLeaguesScene")
+    SelectedLeaguesScene.loadFrame( jsonResponse )
 end

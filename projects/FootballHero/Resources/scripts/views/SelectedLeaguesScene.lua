@@ -14,7 +14,7 @@ local mWidget
 local mSelectedLeagues
 
 function loadFrame( selectedLeagues )
-    mSelectedLeagues = Logic:getSelectedLeagues() or CountryConfig.getAllLeagues()
+    mSelectedLeagues = selectedLeagues or Logic:getSelectedLeagues() or CountryConfig.getAllLeagues()
 
     local widget = GUIReader:shareReader():widgetFromJsonFile("scenes/CreateCompSelectLeague.json")
     mWidget = widget

@@ -6,10 +6,19 @@ local ConnectingMessage = require("scripts.views.ConnectingMessage")
 local EventManager = require("scripts.events.EventManager").getInstance()
 local Event = require("scripts.events.Event").EventList
 local Logic = require("scripts.Logic").getInstance()
-local Competitions = require("scripts.data.Competitions").Competitions
+local LeaderboardConfig = require("scripts.config.Leaderboard")
+local CompetitionDetail = require("scripts.data.CompetitionDetail").CompetitionDetail
+
+local competitionId
 
 function action( param )
-    local url = RequestUtils.GET_COMPETITION_LIST_REST_CALL
+    local url = RequestUtils.GET_COMPETITION_DETAIL_REST_CALL
+
+    local step = 1
+    local sortType = 1
+    competitionId = param[1]
+
+    url = url.."?competitionId="..competitionId.."&sortType="..sortType.."&step="..step
 
     local requestInfo = {}
     requestInfo.requestData = ""
@@ -27,11 +36,8 @@ function action( param )
 end
 
 function onRequestSuccess( jsonResponse )
-	local compList = Competitions:new( jsonResponse )
+    local competitionDetail = CompetitionDetail:new( jsonResponse )
 
-    local leaderboardMainScene = require("scripts.views.LeaderboardMainScene")
-	if leaderboardMainScene.isFrameShown() then
-		return
-	end
-    leaderboardMainScene.loadFrame( compList )
+    local CompetitionDetailScene = require("scripts.views.CompetitionDetailScene")
+    CompetitionDetailScene.loadFrame( competitionDetail, LeaderboardConfig.LeaderboardSubType[1], competitionId )
 end

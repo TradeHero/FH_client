@@ -72,25 +72,49 @@ end
 function confirmEventHandler( sender, eventType )
     if eventType == TOUCH_EVENT_ENDED then
         -- Check the date
+        local checkPass = true
         local checkDate = function()
-            local endTime = os.time{ year = tonumber( mWidget:getChildByName( "DayInput" ):getNodeByTag( 1 ):getText() ), 
-                                    month = tonumber( mWidget:getChildByName( "MonthInput" ):getNodeByTag( 1 ):getText() ), 
-                                    day = tonumber( mWidget:getChildByName( "YearInput" ):getNodeByTag( 1 ):getText() ),
-                                    hour = 0 }
-            local name = mWidget:getChildByName( "TitleInput" ):getNodeByTag( 1 ):getText()
-            local description = tolua.cast( mWidget:getChildByName( "DescriptionText" ), "Label" ):getStringValue()
-            local startTime = os.time()
-            local selectedLeagues = Logic:getSelectedLeagues() or {}
+            local endYear = tonumber( mWidget:getChildByName( "YearInput" ):getNodeByTag( 1 ):getText() )
+            local endMonth = tonumber( mWidget:getChildByName( "MonthInput" ):getNodeByTag( 1 ):getText() )
+            local endDay = tonumber( mWidget:getChildByName( "DayInput" ):getNodeByTag( 1 ):getText() )
+            local endTime = os.time{ year = endYear, month = endMonth, day = endDay, hour = 0 }
 
-            EventManager:postEvent( Event.Do_Create_Competition, { name, description, startTime, endTime, selectedLeagues } )
+            local checkYear = tonumber( os.date("%Y", endTime) )
+            local checkMonth = tonumber( os.date("%m", endTime) )
+            local checkDay = tonumber( os.date("%d", endTime) )
+            
+            if endYear ~= checkYear or endMonth ~= checkMonth or endDay ~= checkDay then
+                print( endYear.."/"..endMonth.."/"..endDay.." | "..checkYear.."/"..checkMonth.."/"..checkDay )
+                checkPass = false
+            end
         end
 
         local errorHandler = function( msg )
-            EventManager:postEvent( Event.Show_Error_Message, { "Date format is not correct." } )
+            print( msg )
+            print(debug.traceback())
+            checkPass = false
         end
 
         xpcall( checkDate, errorHandler )
+        
+        if checkPass then
+            sendCreateCompetition()
+        else
+            EventManager:postEvent( Event.Show_Error_Message, { "Date format is not correct." } )
+        end
     end
+end
+
+function sendCreateCompetition()
+    local endTime = os.time{ year = tonumber( mWidget:getChildByName( "YearInput" ):getNodeByTag( 1 ):getText() ), 
+                            month = tonumber( mWidget:getChildByName( "MonthInput" ):getNodeByTag( 1 ):getText() ), 
+                            day = tonumber( mWidget:getChildByName( "DayInput" ):getNodeByTag( 1 ):getText() ),
+                            hour = 0 }
+    local name = mWidget:getChildByName( "TitleInput" ):getNodeByTag( 1 ):getText()
+    local description = tolua.cast( mWidget:getChildByName( "DescriptionText" ), "Label" ):getStringValue()
+    local selectedLeagues = Logic:getSelectedLeagues() or {}
+
+    EventManager:postEvent( Event.Do_Create_Competition, { name, description, endTime, selectedLeagues } )
 end
 
 function backEventHandler( sender, eventType )

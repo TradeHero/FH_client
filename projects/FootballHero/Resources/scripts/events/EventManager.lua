@@ -72,3 +72,7 @@ function EventManager:popHistory()
 		print( "Dose not have history event." )
 	end
 end
+
+function EventManager:popHistoryWithoutExec()
+	table.remove( self.mEventHistory )
+end

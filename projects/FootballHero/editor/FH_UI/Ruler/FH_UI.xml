@@ -204,4 +204,12 @@
     <Project>CreateCompLeagueListContent</Project>
     <GuidesList />
   </GuidesProject>
+  <GuidesProject>
+    <Project>CompetitionLeaderboard</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>CompetitionLeaderboardInfo</Project>
+    <GuidesList />
+  </GuidesProject>
 </ArrayOfGuidesProject>

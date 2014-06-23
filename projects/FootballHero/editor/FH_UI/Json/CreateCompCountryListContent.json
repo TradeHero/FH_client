@@ -11,8 +11,9 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "MatchListContent/line.png",
-    "commonRes/England.png"
+    "Competition/code.png",
+    "Competition/btn_black_icon.png",
+    "Competition/btn_yellow.png"
   ],
   "version": "1.4.0.1",
   "widgetTree": {
@@ -96,8 +97,8 @@
           "ignoreSize": true,
           "layoutParameter": null,
           "opacity": 255,
-          "positionPercentX": 0.146093756,
-          "positionPercentY": 0.489436626,
+          "positionPercentX": 0.1453125,
+          "positionPercentY": 0.478873253,
           "positionType": 0,
           "rotation": 0,
           "scaleX": 0.5,
@@ -200,7 +201,7 @@
           "ignoreSize": false,
           "layoutParameter": null,
           "opacity": 255,
-          "positionPercentX": 0.06567142,
+          "positionPercentX": 0.065625,
           "positionPercentY": 0,
           "positionType": 0,
           "rotation": 0,

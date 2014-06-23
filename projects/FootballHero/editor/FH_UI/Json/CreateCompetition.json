@@ -11,9 +11,8 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "header/guangyun.png",
-    "Competition/btn_yellow.png",
-    "header/back.png"
+    "Competition/code.png",
+    "Competition/btn_black_icon.png"
   ],
   "version": "1.4.0.1",
   "widgetTree": {
@@ -781,8 +780,8 @@
           "ignoreSize": true,
           "layoutParameter": null,
           "opacity": 255,
-          "positionPercentX": 0.05624997,
-          "positionPercentY": 0.9621478,
+          "positionPercentX": 0.0546875,
+          "positionPercentY": 0.9612676,
           "positionType": 0,
           "rotation": 0,
           "scaleX": 1,
@@ -837,7 +836,7 @@
       "classname": "Panel",
       "name": "Panel_167",
       "ZOrder": 0,
-      "actiontag": -1,
+      "actiontag": 1,
       "anchorPointX": 0,
       "anchorPointY": 0,
       "classType": "CocoStudio.EngineAdapterWrap.CSPanel",

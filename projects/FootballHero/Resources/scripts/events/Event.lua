@@ -37,6 +37,8 @@ EventNameList =
     "Enter_FAQ",
     "Enter_Create_Competition",
     "Enter_View_Selected_Leagues",
+    "Enter_Competition_Leagues",
+    "Enter_Competition_Detail",
 
     "Do_Register",
     "Do_Register_Name",
@@ -61,6 +63,7 @@ EventNameDosenotTrackList =
     "Do_Register_Name",
     "Do_Login",
     "Do_FB_Connect",
+    "Do_FB_Connect_With_User",
     "Do_Post_Predictions",
     "Do_Post_Fav_Team",
     "Do_Send_Feedback",

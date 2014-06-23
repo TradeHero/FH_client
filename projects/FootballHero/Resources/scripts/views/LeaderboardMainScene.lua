@@ -12,7 +12,9 @@ local SUB_CONTENT_HEIGHT = 187
 
 local mWidget
 
-function loadFrame()
+
+-- DS, see Competitions.lua
+function loadFrame( compList )
 	local widget = GUIReader:shareReader():widgetFromJsonFile("scenes/LeaderboardScene.json")
     mWidget = widget
     mWidget:registerScriptHandler( EnterOrExit )
@@ -20,7 +22,7 @@ function loadFrame()
 
     Navigator.loadFrame( widget )
 
-    initContent()
+    initContent( compList )
 end
 
 function EnterOrExit( eventType )
@@ -34,7 +36,7 @@ function isFrameShown()
     return mWidget ~= nil
 end
 
-function initContent()
+function initContent( compList )
 	local contentContainer = tolua.cast( mWidget:getChildByName("ScrollView"), "ScrollView" )
     contentContainer:removeAllChildrenWithCleanup( true )
 
@@ -42,7 +44,7 @@ function initContent()
     layoutParameter:setGravity(LINEAR_GRAVITY_CENTER_VERTICAL)
 
     -- Add Competition items
-    local contentHeight = initCompetition( layoutParameter, contentContainer )
+    local contentHeight = initCompetition( layoutParameter, contentContainer, compList )
 
     -- Add leaderboard items
     for i = 1, table.getn( LeaderboardConfig.LeaderboardType ) do
@@ -91,7 +93,7 @@ function initLeaderboardContent( content, info )
     logo:loadTexture( info["logo"] )
 end
 
-function initCompetition( layoutParameter, contentContainer )
+function initCompetition( layoutParameter, contentContainer, compList )
     -- Add competition items
     local competitionTitle = GUIReader:shareReader():widgetFromJsonFile("scenes/CompetitionTitle.json")
     competitionTitle:setLayoutParameter( layoutParameter )
@@ -126,11 +128,25 @@ function initCompetition( layoutParameter, contentContainer )
     height = height + create:getSize().height
 
     -- Add existing competions
-    for i = 1, 0 do
+    for i = 1, compList:getSize() do
+        local eventHandler = function( sender, eventType )
+            if eventType == TOUCH_EVENT_ENDED then
+                enterCompetition( compList:get( i )["Id"] )
+            end
+        end
+
         local content = SceneManager.widgetFromJsonFile("scenes/CompetitionItem.json")
         content:setLayoutParameter( layoutParameter )
         contentContainer:addChild( content )
         height = height + content:getSize().height
+
+        local name = tolua.cast( content:getChildByName("name"), "Label" )
+        local rank = tolua.cast( content:getChildByName("rank"), "Label" )
+        name:setText( compList:get( i )["Name"] )
+        rank:setEnabled( false )
+
+        local bt = content:getChildByName("button")
+        bt:addTouchEventListener( eventHandler )
     end
 
     return height
@@ -155,4 +171,8 @@ end
 
 function subContentClick( id, subId )
     EventManager:postEvent( Event.Enter_Leaderboard_List, { id, subId } )
+end
+
+function enterCompetition( competitionId )
+    EventManager:postEvent( Event.Enter_Competition_Detail, { competitionId } )
 end

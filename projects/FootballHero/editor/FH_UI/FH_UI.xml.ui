@@ -57,6 +57,8 @@
     <string>CreateCompSelectLeague.json</string>
     <string>CreateCompCountryListContent.json</string>
     <string>CreateCompLeagueListContent.json</string>
+    <string>CompetitionLeaderboard.json</string>
+    <string>CompetitionLeaderboardInfo.json</string>
   </JsonList>
   <CanvasSize>
     <Width>640</Width>
@@ -68,9 +70,10 @@
   <imageFileList />
   <imagePngList>
     <string>header/guangyun.png</string>
-    <string>Competition/btn_yellow.png</string>
+    <string>history/bg.png</string>
     <string>header/back.png</string>
+    <string>Competition/btn_yellow.png</string>
   </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>CreateCompSelectLeague.json</CurrentUIJson>
+  <CurrentUIJson>CompetitionLeaderboardInfo.json</CurrentUIJson>
 </UIProject>
