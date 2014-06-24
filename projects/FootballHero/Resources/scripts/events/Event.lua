@@ -50,7 +50,9 @@ EventNameList =
     "Do_Send_Feedback",
     "Do_Log_Out",
     "Do_Create_Competition",
+    "Do_Join_Competition",
 
+    "Show_Info",
     "Show_Error_Message",
 
     "Load_More_In_Leaderboard",
@@ -70,8 +72,10 @@ EventNameDosenotTrackList =
     "Do_Send_Feedback",
     "Do_Log_Out",
     "Do_Create_Competition",
+    "Do_Join_Competition",
 
     "Check_File_Version",
+    "Show_Info",
     "Show_Error_Message",
     "Load_More_In_Leaderboard",
     "Load_More_In_History",

@@ -12,9 +12,13 @@ local CountryConfig = require("scripts.config.Country")
 
 local mWidget
 local mSelectedLeagues
+local mCheckEnabled
 
+-- If selectedLeagues is not Null, this is for review of the leagues selected.
+-- So disable all the checkboxes.
 function loadFrame( selectedLeagues )
     mSelectedLeagues = selectedLeagues or Logic:getSelectedLeagues() or CountryConfig.getAllLeagues()
+    mCheckEnabled = ( selectedLeagues == nil )
 
     local widget = GUIReader:shareReader():widgetFromJsonFile("scenes/CreateCompSelectLeague.json")
     mWidget = widget
@@ -58,7 +62,7 @@ function backEventHandler( sender, eventType )
 end
 
 function allEventHandler( sender, eventType )
-    if eventType == TOUCH_EVENT_ENDED then
+    if mCheckEnabled and eventType == TOUCH_EVENT_ENDED then
         mSelectedLeagues = CountryConfig.getAllLeagues()
         LeagueListScene.unexpendAll()
         LeagueListScene.expendAll()
@@ -66,18 +70,20 @@ function allEventHandler( sender, eventType )
 end
 
 function leagueSelected( leagueId, sender )
-    local tick = sender:getChildByName("ticked")
-    if tick:isEnabled() then
-        tick:setEnabled( false )
-        for i = 1, table.getn( mSelectedLeagues ) do
-            if mSelectedLeagues[i] == leagueId then
-                table.remove( mSelectedLeagues, i )
-                break
+    if mCheckEnabled then
+        local tick = sender:getChildByName("ticked")
+        if tick:isEnabled() then
+            tick:setEnabled( false )
+            for i = 1, table.getn( mSelectedLeagues ) do
+                if mSelectedLeagues[i] == leagueId then
+                    table.remove( mSelectedLeagues, i )
+                    break
+                end
             end
+        else
+            tick:setEnabled( true )
+            table.insert( mSelectedLeagues, leagueId )
         end
-    else
-        tick:setEnabled( true )
-        table.insert( mSelectedLeagues, leagueId )
     end
 end
 

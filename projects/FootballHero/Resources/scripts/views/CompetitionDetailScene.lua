@@ -12,6 +12,7 @@ local mCompetitionId
 local mSubType
 local mStep
 local mCurrentTotalNum
+local mCompetitionCodeString
 
 -- DS for competitionDetail see CompetitionDetail
 function loadFrame( competitionDetail, subType, competitionId )
@@ -68,7 +69,8 @@ function initContent( competitionDetail )
     time:setText( string.format( time:getStringValue(), 
                 os.date( "%m/%d/%Y", competitionDetail:getStartTime() ), 
                 os.date( "%m/%d/%Y", competitionDetail:getEndTime() ) ) )
-    codeText:setText( string.format( codeText:getStringValue(), competitionDetail:getJoinToken() ) )
+    mCompetitionCodeString = string.format( codeText:getStringValue(), competitionDetail:getJoinToken() )
+    codeText:setText( mCompetitionCodeString )
     description:setText( competitionDetail:getDescription() )
 
     content:setLayoutParameter( layoutParameter )
@@ -77,6 +79,8 @@ function initContent( competitionDetail )
 
     local showLeague = content:getChildByName("SelectLeague")
     showLeague:addTouchEventListener( showLeagueEventHandler )
+    local copyCodeBt = content:getChildByName("codeButton")
+    copyCodeBt:addTouchEventListener( copyCodeEventHandler )
 
     -- Add the leaderboard info
     local leaderboardInfo = competitionDetail:getDto()
@@ -107,6 +111,13 @@ end
 function showLeagueEventHandler( sender, eventType )
     if eventType == TOUCH_EVENT_ENDED then
         EventManager:postEvent( Event.Enter_Competition_Leagues, { mCompetitionId } )
+    end
+end
+
+function copyCodeEventHandler( sender, eventType )
+    if eventType == TOUCH_EVENT_ENDED then
+        Analytics:sharedDelegate():copyToPasteboard( mCompetitionCodeString )
+        EventManager:postEvent( Event.Show_Info, { "Join code is copied." } )
     end
 end
 

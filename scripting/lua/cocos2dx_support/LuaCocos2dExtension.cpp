@@ -1,6 +1,6 @@
 /*
 ** Lua binding: Extension
-** Generated automatically by tolua++-1.0.92 on 05/23/14 16:59:49.
+** Generated automatically by tolua++-1.0.92 on 06/24/14 12:01:37.
 */
 
 /****************************************************************************
@@ -832,6 +832,39 @@ static int tolua_Extension_Analytics_postEvent00(lua_State* tolua_S)
 }
 #endif //#ifndef TOLUA_DISABLE
 
+/* method: copyToPasteboard of class  Analytics */
+#ifndef TOLUA_DISABLE_tolua_Extension_Analytics_copyToPasteboard00
+static int tolua_Extension_Analytics_copyToPasteboard00(lua_State* tolua_S)
+{
+#ifndef TOLUA_RELEASE
+ tolua_Error tolua_err;
+ if (
+     !tolua_isusertype(tolua_S,1,"Analytics",0,&tolua_err) ||
+     !tolua_isstring(tolua_S,2,0,&tolua_err) ||
+     !tolua_isnoobj(tolua_S,3,&tolua_err)
+ )
+  goto tolua_lerror;
+ else
+#endif
+ {
+  Analytics* self = (Analytics*)  tolua_tousertype(tolua_S,1,0);
+  const char* content = ((const char*)  tolua_tostring(tolua_S,2,0));
+#ifndef TOLUA_RELEASE
+  if (!self) tolua_error(tolua_S,"invalid 'self' in function 'copyToPasteboard'", NULL);
+#endif
+  {
+   self->copyToPasteboard(content);
+  }
+ }
+ return 0;
+#ifndef TOLUA_RELEASE
+ tolua_lerror:
+ tolua_error(tolua_S,"#ferror in function 'copyToPasteboard'.",&tolua_err);
+ return 0;
+#endif
+}
+#endif //#ifndef TOLUA_DISABLE
+
 /* method: sharedDelegate of class  WebviewDelegate */
 #ifndef TOLUA_DISABLE_tolua_Extension_WebviewDelegate_sharedDelegate00
 static int tolua_Extension_WebviewDelegate_sharedDelegate00(lua_State* tolua_S)
@@ -990,6 +1023,7 @@ TOLUA_API int tolua_Extension_open (lua_State* tolua_S)
   tolua_beginmodule(tolua_S,"Analytics");
    tolua_function(tolua_S,"sharedDelegate",tolua_Extension_Analytics_sharedDelegate00);
    tolua_function(tolua_S,"postEvent",tolua_Extension_Analytics_postEvent00);
+   tolua_function(tolua_S,"copyToPasteboard",tolua_Extension_Analytics_copyToPasteboard00);
   tolua_endmodule(tolua_S);
   tolua_cclass(tolua_S,"WebviewDelegate","WebviewDelegate","",NULL);
   tolua_beginmodule(tolua_S,"WebviewDelegate");

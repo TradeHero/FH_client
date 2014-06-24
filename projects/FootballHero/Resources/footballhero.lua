@@ -51,7 +51,6 @@ local function main()
     --ConnectingMessage.loadFrame()
 
     --WebviewDelegate:sharedDelegate():openWebpage( "http://www.baidu.com", 0, 0, 320, 576 )
-
 end
 
 function initPackageLoader()

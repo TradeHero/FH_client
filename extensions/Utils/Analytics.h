@@ -13,6 +13,8 @@ namespace Utils
 
 		void postEvent(const char* eventName, const char* key, const char* value);
 
+		void copyToPasteboard(const char* content);
+
 	protected:
 		Analytics();
 	

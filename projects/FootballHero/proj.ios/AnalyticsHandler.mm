@@ -28,3 +28,9 @@ void AnalyticsHandler::postEvent(const char* eventName, const char* key, const c
     
     [[Swrve sharedInstance] sendQueuedEvents];
 }
+
+void AnalyticsHandler::copyToPasteboard(const char* content)
+{
+    UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+    pasteboard.string = [NSString stringWithUTF8String:content];
+}

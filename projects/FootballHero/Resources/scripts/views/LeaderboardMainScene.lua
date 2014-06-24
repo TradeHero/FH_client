@@ -112,7 +112,7 @@ function initCompetition( layoutParameter, contentContainer, compList )
         if eventType == TOUCH_EVENT_ENDED then
             --EventManager:postEvent( Event.Enter_Create_Competition )
             local token = create:getChildByName( "tokenContainer" ):getNodeByTag( 1 ):getText()
-            print("Token is: "..token)
+            EventManager:postEvent( Event.Do_Join_Competition, { token } )
         end
     end
 

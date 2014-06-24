@@ -28,6 +28,11 @@ function EnterOrExit( eventType )
     end
 end
 
+function setTitle( title )
+    local titleMessage = tolua.cast( mWidget:getChildByName("title"), "Label" )
+    titleMessage:setText( title )
+end
+
 function setErrorMessage( message, retryCall )
     local errorMessage = tolua.cast( mWidget:getChildByName("errorMessage"), "Label" )
     errorMessage:setText( message )
