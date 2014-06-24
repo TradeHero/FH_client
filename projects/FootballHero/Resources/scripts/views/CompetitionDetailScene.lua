@@ -219,5 +219,5 @@ function contentClick( info )
     if info["DisplayName"] ~= nil then
         name = info["DisplayName"]
     end
-    EventManager:postEvent( Event.Enter_History, { id, name } )
+    EventManager:postEvent( Event.Enter_History, { id, name, mCompetitionId } )
 end

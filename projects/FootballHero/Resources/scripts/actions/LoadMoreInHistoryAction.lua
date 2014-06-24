@@ -9,8 +9,12 @@ local RequestUtils = require("scripts.RequestUtils")
 
 function action( param )
     local step = param[1]
+    local competitionId = param[2]
     
     local url = RequestUtils.GET_COUPON_HISTORY_REST_CALL.."?userId="..Logic:getUserId().."&step="..step
+    if competitionId ~= nil then
+        url = url.."&competitionId="..competitionId
+    end
 
     local requestInfo = {}
     requestInfo.requestData = ""

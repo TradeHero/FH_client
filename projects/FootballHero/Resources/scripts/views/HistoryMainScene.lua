@@ -12,9 +12,12 @@ local CONTENT_FADEIN_TIME = 1
 
 local mWidget
 local mStep
+local mCompetitionId
 
 -- DS for couponHistory see CouponHistoryData
-function loadFrame( userId, userName, couponHistory )
+-- competitionId: The history only contains matches within the leagues in this competition.
+--                  if it is nil, then the history will show everything. 
+function loadFrame( userId, userName, competitionId, couponHistory )
     if userId == Logic:getUserId() then
         mWidget = GUIReader:shareReader():widgetFromJsonFile("scenes/HistoryHome.json")
         local totalPoints = tolua.cast( mWidget:getChildByName("totalPoints"), "Label" )
@@ -36,6 +39,8 @@ function loadFrame( userId, userName, couponHistory )
         backBt:addTouchEventListener( backEventHandler )
     end
 	
+    mCompetitionId = competitionId
+
     mWidget:registerScriptHandler( EnterOrExit )
     SceneManager.clearNAddWidget( mWidget )
 
@@ -177,7 +182,7 @@ end
 function loadMore( sender, eventType )
     if eventType == TOUCH_EVENT_ENDED then
         mStep = mStep + 1
-        EventManager:postEvent( Event.Load_More_In_History, { mStep } )
+        EventManager:postEvent( Event.Load_More_In_History, { mStep, mCompetitionId } )
     end
 end
 

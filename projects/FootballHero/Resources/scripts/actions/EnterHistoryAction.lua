@@ -10,6 +10,7 @@ local RequestUtils = require("scripts.RequestUtils")
 
 local mUserId = Logic:getUserId()
 local mUserName = ""
+local mCompetitionId = nil
 
 function action( param )
     local historyMainScene = require("scripts.views.HistoryMainScene")
@@ -26,6 +27,10 @@ function action( param )
     end
 
 	local url = RequestUtils.GET_COUPON_HISTORY_REST_CALL.."?userId="..mUserId.."&step="..step
+    if param ~= nil and param[3] ~= nil then
+        mCompetitionId = param[3]
+        url = url.."&competitionId="..mCompetitionId
+    end
 
     local requestInfo = {}
     requestInfo.requestData = ""
@@ -47,5 +52,5 @@ function onRequestSuccess( response )
     local couponHistory = CouponHistoryData:new( response )
     
     local historyMainScene = require("scripts.views.HistoryMainScene")
-    historyMainScene.loadFrame( mUserId, mUserName, couponHistory )
+    historyMainScene.loadFrame( mUserId, mUserName, mCompetitionId, couponHistory )
 end
