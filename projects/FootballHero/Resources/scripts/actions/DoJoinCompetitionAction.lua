@@ -40,7 +40,8 @@ function action( param )
 end
 
 function onRequestSuccess( jsonResponse )
-    if jsonResponse == true then
-        print(  )
-    end
+    local competitionId = jsonResponse["CompetitionId"]
+    local joinToken = jsonResponse["JoinToken"]
+    
+    EventManager:postEvent( Event.Enter_Competition_Detail, { competitionId } )
 end
