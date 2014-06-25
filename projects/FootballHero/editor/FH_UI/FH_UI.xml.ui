@@ -69,9 +69,9 @@
   <ResRelativePath />
   <imageFileList />
   <imagePngList>
-    <string>MatchListContent/guang-xia.png</string>
-    <string>LoginNReg/photo.png</string>
+    <string>Competition/code.png</string>
+    <string>Competition/btn_black_icon.png</string>
   </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>MatchListScene.json</CurrentUIJson>
+  <CurrentUIJson>CompetitionLeaderboardInfo.json</CurrentUIJson>
 </UIProject>

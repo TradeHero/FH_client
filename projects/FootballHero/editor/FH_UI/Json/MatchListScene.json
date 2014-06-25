@@ -11,8 +11,12 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "MatchListContent/guang-xia.png",
-    "LoginNReg/photo.png"
+    "MatchListScene/VS-bg.png",
+    "header/footballhero-logo.png",
+    "header/guangyun.png",
+    "MatchListScene/3xian.png",
+    "MatchListScene/liansaixuanze-bg.jpg",
+    "MatchListScene/photo.png"
   ],
   "version": "1.5.0.0",
   "widgetTree": {
