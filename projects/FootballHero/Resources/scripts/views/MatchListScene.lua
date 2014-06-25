@@ -56,7 +56,6 @@ function loadFrame( matchList )
             if filePath ~= nil then
                 local userLogo = tolua.cast( widget:getChildByName("userPhoto"), "ImageView" )
                 userLogo:loadTexture( filePath )
-                userLogo:setScale( 1 )
             end
         end
         SMIS.getSMImagePath( Logic:getPictureUrl(), handler )

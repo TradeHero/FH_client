@@ -179,7 +179,6 @@ function initLeaderboardContent( i, content, info )
             local handler = function( filePath )
                 if filePath ~= nil and mWidget ~= nil then
                     logo:loadTexture( filePath )
-                    logo:setScale( 1 )
                 end
             end
             SMIS.getSMImagePath( info["PictureUrl"], handler )

@@ -14,7 +14,7 @@
     "MatchListContent/guang-xia.png",
     "LoginNReg/photo.png"
   ],
-  "version": "1.4.0.1",
+  "version": "1.5.0.0",
   "widgetTree": {
     "classname": "Panel",
     "name": null,
@@ -93,7 +93,7 @@
           "flipX": false,
           "flipY": false,
           "height": 218,
-          "ignoreSize": true,
+          "ignoreSize": false,
           "layoutParameter": null,
           "opacity": 255,
           "positionPercentX": 0.1890625,
@@ -102,14 +102,14 @@
           "rotation": 0,
           "scaleX": 0.55,
           "scaleY": 0.55,
-          "sizePercentX": 0.3421875,
+          "sizePercentX": 0.340625,
           "sizePercentY": 1.11794877,
           "sizeType": 0,
           "tag": 244,
           "touchAble": false,
           "useMergedTexture": false,
           "visible": true,
-          "width": 219,
+          "width": 218,
           "x": 121,
           "y": 95,
           "capInsetsHeight": 0,
@@ -124,7 +124,7 @@
           },
           "scale9Enable": false,
           "scale9Height": 218,
-          "scale9Width": 219
+          "scale9Width": 218
         }
       },
       {
@@ -283,7 +283,7 @@
       "classname": "Panel",
       "name": "Panel_38",
       "ZOrder": 0,
-      "actiontag": 1,
+      "actiontag": -1,
       "anchorPointX": 0,
       "anchorPointY": 0,
       "classType": "CocoStudio.EngineAdapterWrap.CSPanel",
