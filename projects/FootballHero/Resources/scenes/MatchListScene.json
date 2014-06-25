@@ -18,7 +18,7 @@
     "MatchListScene/liansaixuanze-bg.jpg",
     "MatchListScene/photo.png"
   ],
-  "version": "1.4.0.1",
+  "version": "1.5.0.0",
   "widgetTree": {
     "classname": "Panel",
     "name": null,
@@ -409,8 +409,8 @@
           "customProperty": "",
           "flipX": false,
           "flipY": false,
-          "height": 243,
-          "ignoreSize": true,
+          "height": 242,
+          "ignoreSize": false,
           "layoutParameter": null,
           "opacity": 255,
           "positionPercentX": -0.6125,
@@ -420,7 +420,7 @@
           "scaleX": 0.6,
           "scaleY": 0.6,
           "sizePercentX": 0.378125,
-          "sizePercentY": 0.213908449,
+          "sizePercentY": 0.213028163,
           "sizeType": 0,
           "tag": 18,
           "touchAble": false,
@@ -440,7 +440,7 @@
             "resourceType": 0
           },
           "scale9Enable": false,
-          "scale9Height": 243,
+          "scale9Height": 242,
           "scale9Width": 242
         }
       },

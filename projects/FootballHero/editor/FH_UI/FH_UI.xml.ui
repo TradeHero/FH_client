@@ -68,7 +68,10 @@
   <ProjectType>UIProject</ProjectType>
   <ResRelativePath />
   <imageFileList />
-  <imagePngList />
+  <imagePngList>
+    <string>MatchListContent/guang-xia.png</string>
+    <string>LoginNReg/photo.png</string>
+  </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>LeaderboardListContent.json</CurrentUIJson>
+  <CurrentUIJson>MatchListScene.json</CurrentUIJson>
 </UIProject>

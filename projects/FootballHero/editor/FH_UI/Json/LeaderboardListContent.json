@@ -10,7 +10,10 @@
   "designHeight": 1136,
   "designWidth": 640,
   "textures": [],
-  "texturesPng": [],
+  "texturesPng": [
+    "MatchListContent/guang-xia.png",
+    "LoginNReg/photo.png"
+  ],
   "version": "1.5.0.0",
   "widgetTree": {
     "classname": "Panel",
