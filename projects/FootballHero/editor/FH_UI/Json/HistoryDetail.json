@@ -10,10 +10,8 @@
   "designHeight": 1136,
   "designWidth": 640,
   "textures": [],
-  "texturesPng": [
-    "Competition/icn_rank_green.png"
-  ],
-  "version": "1.4.0.1",
+  "texturesPng": [],
+  "version": "1.5.0.0",
   "widgetTree": {
     "classname": "Panel",
     "name": null,
@@ -541,7 +539,7 @@
       "classname": "Panel",
       "name": "Panel_817",
       "ZOrder": 0,
-      "actiontag": 1,
+      "actiontag": -1,
       "anchorPointX": 0,
       "anchorPointY": 0,
       "classType": "CocoStudio.EngineAdapterWrap.CSPanel",

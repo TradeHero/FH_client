@@ -11,10 +11,11 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "Competition/code.png",
-    "Competition/btn_black_icon.png"
+    "Competition/btn_yellow_createNew.png",
+    "Competition/code_input.png",
+    "Competition/btn_yellow_small.png"
   ],
-  "version": "1.4.0.1",
+  "version": "1.5.0.0",
   "widgetTree": {
     "classname": "Panel",
     "name": null,
@@ -437,7 +438,7 @@
           "__type": "PanelSurrogate:#EditorCommon.JsonModel.Component.GUI",
           "classname": "Panel",
           "name": "tokenContainer",
-          "ZOrder": 1,
+          "ZOrder": 2,
           "actiontag": 22,
           "anchorPointX": 0,
           "anchorPointY": 0,
@@ -487,7 +488,7 @@
           "capInsetsX": 0,
           "capInsetsY": 0,
           "clipAble": false,
-          "colorType": 1,
+          "colorType": 0,
           "layoutType": 0,
           "vectorX": 0,
           "vectorY": -0.5
@@ -499,7 +500,7 @@
       "classname": "Panel",
       "name": "Panel_38",
       "ZOrder": 0,
-      "actiontag": 1,
+      "actiontag": -1,
       "anchorPointX": 0,
       "anchorPointY": 0,
       "classType": "CocoStudio.EngineAdapterWrap.CSPanel",
@@ -548,7 +549,7 @@
       "capInsetsX": 0,
       "capInsetsY": 0,
       "clipAble": false,
-      "colorType": 1,
+      "colorType": 0,
       "layoutType": 0,
       "vectorX": 0,
       "vectorY": -0.5

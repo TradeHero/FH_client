@@ -591,6 +591,7 @@ void CCEditBoxImplIOS::openKeyboard()
 	m_pLabelPlaceHolder->setVisible(false);
 
 	m_systemControl.textField.hidden = NO;
+    adjustTextFieldPosition();
     [m_systemControl openKeyboard];
 }
 

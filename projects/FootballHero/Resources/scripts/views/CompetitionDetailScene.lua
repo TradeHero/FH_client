@@ -5,9 +5,11 @@ local Navigator = require("scripts.views.Navigator")
 local EventManager = require("scripts.events.EventManager").getInstance()
 local Event = require("scripts.events.Event").EventList
 local SMIS = require("scripts.SMIS")
+local ViewUtils = require("scripts.views.ViewUtils")
 
 
 local mWidget
+local mTokenInput
 local mCompetitionId
 local mSubType
 local mStep
@@ -64,15 +66,32 @@ function initContent( competitionDetail )
     local content = GUIReader:shareReader():widgetFromJsonFile("scenes/CompetitionLeaderboardInfo.json")
     local time = tolua.cast( content:getChildByName("time"), "Label" )
     local description = tolua.cast( content:getChildByName("description"), "Label" )
-    local codeText = tolua.cast( content:getChildByName("codeText"), "Label" )
-
     time:setText( string.format( time:getStringValue(), 
                 os.date( "%m/%d/%Y", competitionDetail:getStartTime() ), 
                 os.date( "%m/%d/%Y", competitionDetail:getEndTime() ) ) )
-    mCompetitionCodeString = string.format( codeText:getStringValue(), competitionDetail:getJoinToken() )
-    codeText:setText( mCompetitionCodeString )
     description:setText( competitionDetail:getDescription() )
 
+    -- Token
+    mCompetitionCodeString = competitionDetail:getJoinToken()
+    local inputDelegate = EditBoxDelegateForLua:create()
+    inputDelegate:registerEventScriptHandler( EDIT_BOX_EVENT_TEXT_CHANGED, function ( textBox, text )
+        mTokenInput:setText( mCompetitionCodeString )
+    end )
+    inputDelegate:registerEventScriptHandler( EDIT_BOX_EVENT_DID_BEGIN, function ( textBox )
+        -- In order not to change the object-c code, here is the work around.
+        -- recall the setPosition() to invoke the CCEditBoxImplIOS::adjustTextFieldPosition()
+        -- Todo remove this code after the object-c fix is pushed out.
+        mTokenInput:setPosition( mTokenInput:getPosition() )
+    end )
+    content:getChildByName( "token" ):addNode( tolua.cast( inputDelegate, "CCNode" ) )
+
+    mTokenInput = ViewUtils.createTextInput( content:getChildByName( "token" ), "", 200, 50 )
+    mTokenInput:setFontColor( ccc3( 0, 0, 0 ) )
+    mTokenInput:setTouchPriority( SceneManager.TOUCH_PRIORITY_MINUS_ONE )
+    mTokenInput:setText( mCompetitionCodeString )
+    mTokenInput:setDelegate( inputDelegate.__CCEditBoxDelegate__ )
+
+    -- Add and do layout
     content:setLayoutParameter( layoutParameter )
     contentContainer:addChild( content )
     contentHeight = contentHeight + content:getSize().height
@@ -116,8 +135,9 @@ end
 
 function copyCodeEventHandler( sender, eventType )
     if eventType == TOUCH_EVENT_ENDED then
-        Analytics:sharedDelegate():copyToPasteboard( mCompetitionCodeString )
-        EventManager:postEvent( Event.Show_Info, { "Join code is copied." } )
+        --Analytics:sharedDelegate():copyToPasteboard( mCompetitionCodeString )
+        --EventManager:postEvent( Event.Show_Info, { "Join code is copied." } )
+        mTokenInput:touchDownAction( sender, eventType )
     end
 end
 

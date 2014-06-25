@@ -125,6 +125,15 @@ function initCompetition( layoutParameter, contentContainer, compList )
     local tokenInput = ViewUtils.createTextInput( create:getChildByName( "tokenContainer" ), "Enter Competition Code" )
     tokenInput:setFontColor( ccc3( 0, 0, 0 ) )
     tokenInput:setTouchPriority( SceneManager.TOUCH_PRIORITY_MINUS_ONE )
+    local inputDelegate = EditBoxDelegateForLua:create()
+    inputDelegate:registerEventScriptHandler( EDIT_BOX_EVENT_DID_BEGIN, function ( textBox )
+        -- In order not to change the object-c code, here is the work around.
+        -- recall the setPosition() to invoke the CCEditBoxImplIOS::adjustTextFieldPosition()
+        -- Todo remove this code after the object-c fix is pushed out.
+        tokenInput:setPosition( tokenInput:getPosition() )
+    end )
+    create:getChildByName( "tokenContainer" ):addNode( tolua.cast( inputDelegate, "CCNode" ) )
+    tokenInput:setDelegate( inputDelegate.__CCEditBoxDelegate__ )
     height = height + create:getSize().height
 
     -- Add existing competions

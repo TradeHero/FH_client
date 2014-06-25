@@ -11,10 +11,11 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "Competition/code.png",
-    "Competition/btn_black_icon.png"
+    "Competition/btn_yellow_createNew.png",
+    "Competition/code_input.png",
+    "Competition/btn_yellow_small.png"
   ],
-  "version": "1.4.0.1",
+  "version": "1.5.0.0",
   "widgetTree": {
     "classname": "Panel",
     "name": null,
@@ -836,7 +837,7 @@
       "classname": "Panel",
       "name": "Panel_167",
       "ZOrder": 0,
-      "actiontag": 1,
+      "actiontag": -1,
       "anchorPointX": 0,
       "anchorPointY": 0,
       "classType": "CocoStudio.EngineAdapterWrap.CSPanel",
