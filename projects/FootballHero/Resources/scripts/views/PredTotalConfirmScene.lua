@@ -61,8 +61,8 @@ function facebookEventHandler( sender, eventType )
 			local successHandler = function()
 				-- Nothing to do.
 			end
-			local failedHandler = function( selectedState )
-				facebook:setSelectedState( selectedState )
+			local failedHandler = function()
+				facebook:setSelectedState( false )
 			end
 
 			EventManager:postEvent( Event.Do_FB_Connect_With_User, { successHandler, failedHandler } )

@@ -66,11 +66,6 @@ public class Main {
 
         File f = new File(TARGET_FILE_NAME);
         try {
-            //FileWriter fileWriter = new FileWriter(f);
-
-            //fileWriter.write(content);
-            //fileWriter.close();
-
             //create an object of FileOutputStream
             FileOutputStream fos = new FileOutputStream(new File(TARGET_FILE_NAME));
 

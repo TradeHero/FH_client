@@ -29,6 +29,7 @@ local function main()
     collectgarbage("setstepmul", 5000)
 
     cclog("Game start.")
+    --decrypt()
     initPackageLoader()
 
     local sceneManager = require("scripts.SceneManager")
@@ -110,11 +111,12 @@ function encrypt()
         fileHandler:close()
     end
 end
+--]]
 
 function decrypt()
     
     local fileUtils = CCFileUtils:sharedFileUtils()
-    local filePath = fileUtils:fullPathForFilename( "game.bin" )
+    local filePath = fileUtils:fullPathForFilename( "File2.txt" )
     if fileUtils:isFileExist( filePath ) then
         print( filePath )
         local fileHandler, errorCode = io.open( filePath, "rb" )
@@ -125,15 +127,14 @@ function decrypt()
         
         local text = fileHandler:read("*all")
         fileHandler:close()
-        print(text)
+        text = tostring( text )
         
         local DES56 = require("DES56")
-        local key = 'gooddoggy'
+        local key = tostring( "tuantuan" )
         local decoded = DES56.decrypt( text, key )
         print(decoded)
     end    
 end
---]]
 
 
 xpcall(main, __G__TRACKBACK__)

@@ -6,6 +6,7 @@ local EventManager = require("scripts.events.EventManager").getInstance()
 local Event = require("scripts.events.Event").EventList
 local SMIS = require("scripts.SMIS")
 local ViewUtils = require("scripts.views.ViewUtils")
+local Logic = require("scripts.Logic").getInstance()
 
 
 local mWidget
@@ -141,9 +142,19 @@ function copyCodeEventHandler( sender, eventType )
     end
 end
 
-function shareEventHandler( sender, eventTYpe )
+function shareEventHandler( sender, eventType )
     if eventType == TOUCH_EVENT_ENDED then
-        
+        if Logic:getFbId() == false then
+            local successHandler = function()
+                EventManager:postEvent( Event.Do_Share_Competition, { mCompetitionId } )
+            end
+            local failedHandler = function()
+                -- Nothing to do.
+            end
+            EventManager:postEvent( Event.Do_FB_Connect_With_User, { successHandler, failedHandler } )
+        else
+            EventManager:postEvent( Event.Do_Share_Competition, { mCompetitionId } )
+        end
     end
 end
 

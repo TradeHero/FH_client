@@ -68,10 +68,7 @@
   <ProjectType>UIProject</ProjectType>
   <ResRelativePath />
   <imageFileList />
-  <imagePngList>
-    <string>Competition/code.png</string>
-    <string>Competition/btn_black_icon.png</string>
-  </imagePngList>
+  <imagePngList />
   <JsonSuffix>.json</JsonSuffix>
   <CurrentUIJson>CompetitionLeaderboardInfo.json</CurrentUIJson>
 </UIProject>

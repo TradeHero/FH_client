@@ -31,6 +31,7 @@ POST_COUPONS_REST_CALL = SERVER_IP.."/api/coupons/placeCoupons"
 POST_FAV_TEAM_REST_CALL = SERVER_IP.."/api/user/setFavoriteTeam"
 POST_CREATE_COMPETITION_REST_CALL = SERVER_IP.."/api/competitions/createUserCompetition"
 POST_JOIN_COMPETITION_REST_CALL = SERVER_IP.."/api/competitions/joinCompetitionWithToken"
+POST_SHARE_COMPETITION_REST_CALL = SERVER_IP.."/api/competitions/shareCompetitionToFacebookWall"
 
 FACEBOOK_FRIENDS_LIST_CALL = "/me/friends?access_token="
 USE_DEV = false
@@ -54,6 +55,7 @@ function setServerIP( serverIp )
     POST_FAV_TEAM_REST_CALL= serverIp.."/api/user/setFavoriteTeam"
     POST_CREATE_COMPETITION_REST_CALL = serverIp.."/api/competitions/createUserCompetition"
     POST_JOIN_COMPETITION_REST_CALL = serverIp.."/api/competitions/joinCompetitionWithToken"
+    POST_SHARE_COMPETITION_REST_CALL = serverIp.."/api/competitions/shareCompetitionToFacebookWall"
 
     CDN_SERVER_IP = "http://portalvhdss3c1vgx5mrzv.blob.core.windows.net/fhdevsettings/"
 

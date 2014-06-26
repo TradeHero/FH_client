@@ -51,6 +51,7 @@ EventNameList =
     "Do_Log_Out",
     "Do_Create_Competition",
     "Do_Join_Competition",
+    "Do_Share_Competition",
 
     "Show_Info",
     "Show_Error_Message",
@@ -73,6 +74,7 @@ EventNameDosenotTrackList =
     "Do_Log_Out",
     "Do_Create_Competition",
     "Do_Join_Competition",
+    "Do_Share_Competition",
 
     "Check_File_Version",
     "Show_Info",

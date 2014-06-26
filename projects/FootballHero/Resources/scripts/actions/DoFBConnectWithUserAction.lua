@@ -66,6 +66,6 @@ end
 
 function onRequestFailed( jsonResponse )
     local errorBuffer = jsonResponse["Message"]
-    mFailedHandler( false )
+    mFailedHandler()
     EventManager:postEvent( Event.Show_Error_Message, { errorBuffer } )
 end
