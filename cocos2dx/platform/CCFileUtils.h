@@ -98,7 +98,7 @@ public:
      */
     virtual unsigned char* getFileData(const char* pszFileName, const char* pszMode, unsigned long * pSize);
 
-    /**
+	/**
      *  Gets resource file data from a zip file.
      *
      *  @param[in]  pszFileName The resource file name which contains the relative path of the zip file.

@@ -3,6 +3,14 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "des56_decrypt:ldes56.c">
+         <PersistentStrings>
+            <PersistentString
+               value = "KS">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "___ZN17FacebookConnector5loginEv_block_invoke:FacebookConnector.mm">
          <PersistentStrings>
             <PersistentString

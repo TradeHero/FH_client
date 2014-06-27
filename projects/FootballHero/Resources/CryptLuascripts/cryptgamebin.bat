@@ -1,0 +1,1 @@
+ResCrypt.exe ../game.bin
