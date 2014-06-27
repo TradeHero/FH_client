@@ -127,7 +127,7 @@ function helperUpdateLeagueList( clickedCountryId )
 
             local eventHandler = function( sender, eventType )
                 if eventType == TOUCH_EVENT_ENDED then
-                    mLeagueSelectCallback( leagueId, sender )
+                    mLeagueSelectCallback( LeagueConfig.getConfigId( leagueId ), sender )
                 end
             end
 
@@ -141,7 +141,7 @@ function helperUpdateLeagueList( clickedCountryId )
             leagueName:setText( LeagueConfig.getLeagueName( leagueId ) )
             
             if mLeagueInitCallback ~= nil then
-                mLeagueInitCallback( content, leagueId )
+                mLeagueInitCallback( content, LeagueConfig.getConfigId( leagueId ) )
             end
         end
     else

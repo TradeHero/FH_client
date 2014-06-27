@@ -118,7 +118,7 @@ function getAllLeagues()
     for i = 1, getConfigNum() do
         local list = getLeagueList( i )
         for j = 1, table.getn( list ) do
-            table.insert( leagues, list[j] )
+            table.insert( leagues, LeagueConfig.getConfigId( list[j] ) )
         end
     end
 
