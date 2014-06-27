@@ -215,7 +215,7 @@ end
 
 function leagueSelectedCallback( leagueId )
     hideOptionAnim( function()
-        EventManager:postEvent( Event.Enter_Match_List, { LeagueConfig.getConfigId( leagueId ) } )
+        EventManager:postEvent( Event.Enter_Match_List, { leagueId } )
     end )
 end
 

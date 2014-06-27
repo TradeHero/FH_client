@@ -32,7 +32,7 @@ function loadFrame()
     okBt:setBright( false )
 
     -- Set the default one.
-    leagueSelected( 1 )
+    leagueSelected( LeagueConfig.getConfigId( 1 ) )
 
     local leagueName = tolua.cast( mWidget:getChildByName("leagueName"), "Label" )
     leagueName:setText( "Please select your favourite team." )
@@ -53,7 +53,7 @@ function okEventHandler( sender, eventType )
 end
 
 function leagueSelected( leagueId )
-    mDisplayLeagueId = LeagueConfig.getConfigId( leagueId )
+    mDisplayLeagueId = leagueId
     print( "leagueSelected: "..mDisplayLeagueId )
 --[[
     -- Update the country list
@@ -69,7 +69,7 @@ function leagueSelected( leagueId )
 --]]
     
     -- Update the team list.
-    local teamList = LeagueTeamConfig.getConfig( LeagueConfig.getConfigId( leagueId ) )
+    local teamList = LeagueTeamConfig.getConfig( leagueId )
     local teamListLength = table.getn( teamList )
 
     local teamContainer = tolua.cast( mWidget:getChildByName("teamList"), "ScrollView" )
