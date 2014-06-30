@@ -166,7 +166,7 @@ end
 function onFrameTouch( sender, eventType )
     local yes = tolua.cast( mWidget:getChildByName("yes"), "ImageView" )
     local no = tolua.cast( mWidget:getChildByName("no"), "ImageView" )
-    if eventType == TOUCH_EVENT_ENDED then
+    if eventType == TOUCH_EVENT_ENDED or eventType == TOUCH_EVENT_CANCELED then
         local touchBeginPoint = sender:getTouchStartPos()
         local touchEndPoint = sender:getTouchEndPos()
         if touchBeginPoint.x - touchEndPoint.x > MIN_MOVE_DISTANCE then

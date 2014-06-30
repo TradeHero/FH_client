@@ -16,9 +16,9 @@ local mCheckEnabled
 
 -- If selectedLeagues is not Null, this is for review of the leagues selected.
 -- So disable all the checkboxes.
-function loadFrame( selectedLeagues )
-    mSelectedLeagues = selectedLeagues or Logic:getSelectedLeagues() or CountryConfig.getAllLeagues()
-    mCheckEnabled = ( selectedLeagues == nil )
+function loadFrame( selectedLeagues, checkEnabled )
+    mSelectedLeagues = selectedLeagues or Logic:getSelectedLeagues()
+    mCheckEnabled = checkEnabled
 
     local widget = GUIReader:shareReader():widgetFromJsonFile("scenes/CreateCompSelectLeague.json")
     mWidget = widget

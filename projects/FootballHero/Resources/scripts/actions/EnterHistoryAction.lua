@@ -15,7 +15,8 @@ local mCompetitionId = nil
 function action( param )
     local historyMainScene = require("scripts.views.HistoryMainScene")
     if historyMainScene.isFrameShown() then
-        return 
+        EventManager:popHistoryWithoutExec()
+        return
     end                                                             
 
 	local step = 1
@@ -30,6 +31,8 @@ function action( param )
     if param ~= nil and param[3] ~= nil then
         mCompetitionId = param[3]
         url = url.."&competitionId="..mCompetitionId
+    else
+        mCompetitionId = nil
     end
 
     local requestInfo = {}

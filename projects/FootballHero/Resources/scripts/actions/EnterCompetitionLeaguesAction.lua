@@ -31,5 +31,5 @@ end
 
 function onRequestSuccess( jsonResponse )
 	local SelectedLeaguesScene = require("scripts.views.SelectedLeaguesScene")
-    SelectedLeaguesScene.loadFrame( jsonResponse )
+    SelectedLeaguesScene.loadFrame( jsonResponse, false )
 end

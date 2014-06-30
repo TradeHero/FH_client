@@ -68,7 +68,7 @@ function initContent( compList )
         contentContainer:addChild( subContent )
         contentHeight = contentHeight + subContent:getSize().height
         subContent:setName( "subContent"..i )
-        for j = 1, 4 do
+        for j = 1, 3 do
             local eventHandler = function( sender, eventType )
                 if eventType == TOUCH_EVENT_ENDED then
                     subContentClick( i, j )

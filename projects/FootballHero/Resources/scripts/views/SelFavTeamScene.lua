@@ -30,6 +30,7 @@ function loadFrame()
     local okBt = widget:getChildByName("ok")
     okBt:addTouchEventListener( okEventHandler )
     okBt:setBright( false )
+    okBt:setTouchEnabled( false )
 
     -- Set the default one.
     leagueSelected( LeagueConfig.getConfigId( 1 ) )
@@ -124,5 +125,6 @@ function teamSelected( index )
 
     local okBt = mWidget:getChildByName("ok")
     okBt:setBright( true )
+    okBt:setTouchEnabled( true )
 end
 

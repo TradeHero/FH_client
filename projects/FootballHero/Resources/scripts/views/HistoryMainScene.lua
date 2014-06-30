@@ -18,10 +18,16 @@ local mCompetitionId
 -- competitionId: The history only contains matches within the leagues in this competition.
 --                  if it is nil, then the history will show everything. 
 function loadFrame( userId, userName, competitionId, couponHistory )
+    mCompetitionId = competitionId
+    local showBackButton = false
     if userId == Logic:getUserId() then
         mWidget = GUIReader:shareReader():widgetFromJsonFile("scenes/HistoryHome.json")
         local totalPoints = tolua.cast( mWidget:getChildByName("totalPoints"), "Label" )
         totalPoints:setText( string.format( totalPoints:getStringValue(), couponHistory:getBalance() ) )
+        
+        if mCompetitionId ~= nil then
+            showBackButton = true
+        end
     else
         mWidget = GUIReader:shareReader():widgetFromJsonFile("scenes/HistoryHomeForOthers.json")
         local name = tolua.cast( mWidget:getChildByName("name"), "Label" )
@@ -29,17 +35,22 @@ function loadFrame( userId, userName, competitionId, couponHistory )
         local totalPoints = tolua.cast( mWidget:getChildByName("totalPoints"), "Label" )
         totalPoints:setText( string.format( totalPoints:getStringValue(), couponHistory:getBalance() ) )
 
+        showBackButton = true
+    end
+
+    local backBt = mWidget:getChildByName("Back")
+    if showBackButton then
         local backEventHandler = function( sender, eventType )
             if eventType == TOUCH_EVENT_ENDED then
                 EventManager:popHistory()
             end
         end
 
-        local backBt = mWidget:getChildByName("Back")
+        
         backBt:addTouchEventListener( backEventHandler )
+    else
+        backBt:setEnabled( false )
     end
-	
-    mCompetitionId = competitionId
 
     mWidget:registerScriptHandler( EnterOrExit )
     SceneManager.clearNAddWidget( mWidget )

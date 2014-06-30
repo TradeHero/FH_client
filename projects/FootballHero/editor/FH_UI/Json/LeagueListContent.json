@@ -11,13 +11,12 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "Competition/create_competition.png",
-    "Competition/btn_yellow.png",
-    "header/guangyun.png",
-    "Competition/btn_black_icon.png",
-    "header/back.png"
+    "FavouriteTeam/favourites-bg.jpg",
+    "FavouriteTeam/ok-icon.png",
+    "FavouriteTeam/ok-icon-BF.png",
+    "header/footballhero-logo.png"
   ],
-  "version": "1.4.0.1",
+  "version": "1.5.0.0",
   "widgetTree": {
     "classname": "Panel",
     "name": null,
@@ -132,7 +131,7 @@
       "classname": "Panel",
       "name": "Panel_221",
       "ZOrder": 0,
-      "actiontag": 1,
+      "actiontag": -1,
       "anchorPointX": 0,
       "anchorPointY": 0,
       "classType": "CocoStudio.EngineAdapterWrap.CSPanel",

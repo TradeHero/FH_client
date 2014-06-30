@@ -21,10 +21,8 @@ function action( param )
 	if leaderboardType == 1 then
 		mSubType = LeaderboardConfig.LeaderboardSubType[1]
 	elseif leaderboardType == 2 then
-		-- Todo change to played type
-	elseif leaderboardType == 3 then
 		mSubType = LeaderboardConfig.LeaderboardSubType[3]
-	elseif leaderboardType == 4 then
+	elseif leaderboardType == 3 then
 		mSubType = LeaderboardConfig.LeaderboardSubType[2]
 	end
 

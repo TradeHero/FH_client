@@ -11,11 +11,12 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "Leaderboards/guangline.png",
-    "Competition/Friend's-View_07.png",
-    "Competition/Friend's-View_09.png"
+    "FavouriteTeam/favourites-bg.jpg",
+    "FavouriteTeam/ok-icon.png",
+    "FavouriteTeam/ok-icon-BF.png",
+    "header/footballhero-logo.png"
   ],
-  "version": "1.4.0.1",
+  "version": "1.5.0.0",
   "widgetTree": {
     "classname": "Panel",
     "name": null,
@@ -362,6 +363,79 @@
           "text": "Total Points: %d",
           "touchScaleEnable": false,
           "vAlignment": 0
+        }
+      },
+      {
+        "classname": "Button",
+        "name": null,
+        "children": [],
+        "options": {
+          "__type": "ButtonSurrogate:#EditorCommon.JsonModel.Component.GUI",
+          "classname": "Button",
+          "name": "Back",
+          "ZOrder": 3,
+          "actiontag": 1437940,
+          "anchorPointX": 0.5,
+          "anchorPointY": 0.5,
+          "classType": "CocoStudio.EngineAdapterWrap.CSButton",
+          "colorB": 255,
+          "colorG": 255,
+          "colorR": 255,
+          "customProperty": "",
+          "flipX": false,
+          "flipY": false,
+          "height": 34,
+          "ignoreSize": true,
+          "layoutParameter": null,
+          "opacity": 255,
+          "positionPercentX": 0.0546875,
+          "positionPercentY": 0.962148,
+          "positionType": 0,
+          "rotation": 0,
+          "scaleX": 1,
+          "scaleY": 1,
+          "sizePercentX": 0.065625,
+          "sizePercentY": 0.0299295783,
+          "sizeType": 0,
+          "tag": 3990,
+          "touchAble": true,
+          "useMergedTexture": false,
+          "visible": true,
+          "width": 42,
+          "x": 35,
+          "y": 1093,
+          "capInsetsHeight": 0,
+          "capInsetsWidth": 0,
+          "capInsetsX": 0,
+          "capInsetsY": 0,
+          "disabled": null,
+          "disabledData": {
+            "path": null,
+            "plistFile": null,
+            "resourceType": 0
+          },
+          "fontName": "微软雅黑",
+          "fontSize": 14,
+          "fontType": 0,
+          "normal": null,
+          "normalData": {
+            "path": "header/back.png",
+            "plistFile": "",
+            "resourceType": 0
+          },
+          "pressed": null,
+          "pressedData": {
+            "path": null,
+            "plistFile": null,
+            "resourceType": 0
+          },
+          "scale9Enable": false,
+          "scale9Height": 34,
+          "scale9Width": 42,
+          "text": "",
+          "textColorB": 255,
+          "textColorG": 255,
+          "textColorR": 255
         }
       }
     ],

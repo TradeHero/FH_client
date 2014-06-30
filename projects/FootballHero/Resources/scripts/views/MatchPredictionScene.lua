@@ -34,6 +34,9 @@ function loadFrame()
     mWidget = widget
     mWidget:registerScriptHandler( EnterOrExit )
     SceneManager.clearNAddWidget(widget)
+
+    local skipBt = widget:getChildByName("skip")
+    skipBt:addTouchEventListener( skipEventHandler )
 end
 
 function EnterOrExit( eventType )
@@ -65,6 +68,13 @@ function backEventHandler( sender, eventType )
     if eventType == TOUCH_EVENT_ENDED then
         --EventManager:postEvent( Event.Enter_Match_List )
         EventManager:popHistory()
+    end
+end
+
+function skipEventHandler( sender, eventType )
+    if eventType == TOUCH_EVENT_ENDED then
+        SceneManager.clear()
+        EventManager:postEvent( Event.Enter_Next_Prediction )
     end
 end
 
@@ -113,7 +123,8 @@ end
 function onFrameTouch( sender, eventType )
     local team1 = tolua.cast( mWidget:getChildByName("team1"), "ImageView" )
     local team2 = tolua.cast( mWidget:getChildByName("team2"), "ImageView" )
-    if eventType == TOUCH_EVENT_ENDED then
+    print( eventType )
+    if eventType == TOUCH_EVENT_ENDED or eventType == TOUCH_EVENT_CANCELED then
         local touchBeginPoint = sender:getTouchStartPos()
         local touchEndPoint = sender:getTouchEndPos()
         if touchBeginPoint.x - touchEndPoint.x > MIN_MOVE_DISTANCE then
