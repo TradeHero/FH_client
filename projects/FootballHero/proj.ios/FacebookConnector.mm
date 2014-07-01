@@ -43,6 +43,5 @@ void FacebookConnector::login()
         [FBSessionSingleton sharedInstance].session = aSession;
         const char* accessToken =[aSession.accessTokenData.accessToken UTF8String];
         Social::FacebookDelegate::sharedDelegate()->loginResult(accessToken);
-        
     }];
 }

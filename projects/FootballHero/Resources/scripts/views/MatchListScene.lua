@@ -59,6 +59,13 @@ function loadFrame( matchList )
             end
         end
         SMIS.getSMImagePath( Logic:getPictureUrl(), handler )
+    else
+        local fileUtils = CCFileUtils:sharedFileUtils()
+        local path = fileUtils:getWritablePath()..Constants.LOGO_IMAGE_PATH
+        if fileUtils:isFileExist( path ) then
+            local userLogo = tolua.cast( widget:getChildByName("userPhoto"), "ImageView" )
+            userLogo:loadTexture( path )
+        end
     end
 
     -- Init the toplayer to listen to the swap action.

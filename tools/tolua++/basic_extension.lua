@@ -300,6 +300,7 @@ extern "C" {
 #include "EditBoxDelegateForLua.h"
 #include "Analytics.h"
 #include "WebviewDelegate.h"
+#include "Misc.h"
 
 using namespace cocos2d;
 using namespace cocos2d::extension;

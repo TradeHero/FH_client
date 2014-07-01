@@ -35,7 +35,7 @@ end
 function readStringFromFile( fileName )
 	local text = ""
 	local fileUtils = CCFileUtils:sharedFileUtils()
-		local path = fileUtils:getWritablePath()..fileName
+	local path = fileUtils:getWritablePath()..fileName
 	if fileUtils:isFileExist( path ) then
 		print("Read local file from: "..path)
 

@@ -68,12 +68,7 @@
   <ProjectType>UIProject</ProjectType>
   <ResRelativePath />
   <imageFileList />
-  <imagePngList>
-    <string>FavouriteTeam/favourites-bg.jpg</string>
-    <string>FavouriteTeam/ok-icon.png</string>
-    <string>FavouriteTeam/ok-icon-BF.png</string>
-    <string>header/footballhero-logo.png</string>
-  </imagePngList>
+  <imagePngList />
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>HistoryHome.json</CurrentUIJson>
+  <CurrentUIJson>RegisterName.json</CurrentUIJson>
 </UIProject>

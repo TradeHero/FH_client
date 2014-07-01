@@ -42,14 +42,4 @@ namespace Utils
 
 #endif
 	}
-
-	void Analytics::copyToPasteboard(const char* content)
-	{
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-		AnalyticsHandler::getInstance()->copyToPasteboard(content);
-#endif
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
-
-#endif
-	}
 }

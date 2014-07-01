@@ -38,7 +38,7 @@ local function main()
     local event = require("scripts.events.Event").EventList
     eventManager:postEvent( event.Enter_Login_N_Reg )
 
-    --eventManager:postEvent( event.Enter_Sel_Fav_Team )
+    --eventManager:postEvent( event.Enter_Register_Name )
 end
 
 function initPackageLoader( decrypt )

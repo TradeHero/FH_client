@@ -24,9 +24,93 @@
  ****************************************************************************/
 
 #import "RootViewController.h"
+#include "MiscHandler.h"
 
 
 @implementation RootViewController
+
+- (void)selectImage {
+    UIActionSheet *myActionSheet = [[UIActionSheet alloc]
+                                    initWithTitle:nil
+                                    delegate:self
+                                    cancelButtonTitle:@"Cancel"
+                                    destructiveButtonTitle:nil
+                                    otherButtonTitles: @"Select a photo",nil];
+    
+    [myActionSheet showInView:self.view];
+    [myActionSheet release];
+}
+
+-(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
+    switch (buttonIndex)
+    {
+        case 0:
+            [self LocalPhoto];
+            break;
+        case 1:
+            [self takePhoto];
+            break;
+        default:
+            break;
+    }
+}
+
+-(void)LocalPhoto{
+    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+    
+    picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    picker.delegate = self;
+    
+    picker.allowsEditing = YES;
+    [self presentViewController:picker animated:true completion:Nil];
+    [picker release];
+}
+
+-(void)takePhoto{
+    UIImagePickerControllerSourceType sourceType = UIImagePickerControllerSourceTypeCamera;
+    if ([UIImagePickerController isSourceTypeAvailable: UIImagePickerControllerSourceTypeCamera])
+    {
+        UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+        picker.delegate = self;
+        picker.allowsEditing = YES;
+        picker.sourceType = sourceType;
+        [self presentViewController:picker animated:true completion:Nil];
+        [picker release];
+    }
+    else
+    {
+        NSLog(@"Does not has a camera.");
+    }
+}
+
+-(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(NSDictionary *)editingInfo{
+    
+    [picker dismissModalViewControllerAnimated:YES];
+    
+    NSArray *path = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentPath = [path objectAtIndex:0];
+    
+    NSString *imageDocPath = [documentPath stringByAppendingPathComponent:[NSString stringWithUTF8String:MiscHandler::getInstance()->getImagePath()]];
+    
+    NSLog(@"%@", imageDocPath);
+    
+    if (image != nil)
+    {
+        
+        NSData *data;
+        if (UIImagePNGRepresentation(image))
+        {
+            data = UIImagePNGRepresentation(image);
+        }
+        else
+        {
+            data = UIImageJPEGRepresentation(image, 1.0);
+        }
+
+        [[NSFileManager defaultManager] createFileAtPath:imageDocPath contents:data attributes:nil];
+        MiscHandler::getInstance()->selectImageResult(true);
+    }
+}
 
 /*
  // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.

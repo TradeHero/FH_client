@@ -26,8 +26,10 @@
 #import <UIKit/UIKit.h>
 
 
-@interface RootViewController : UIViewController {
+@interface RootViewController : UIViewController <UIActionSheetDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate> {
 
 }
+
+- (void)selectImage;
 
 @end

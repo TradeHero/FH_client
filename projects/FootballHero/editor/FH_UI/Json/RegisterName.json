@@ -10,9 +10,7 @@
   "designHeight": 1136,
   "designWidth": 640,
   "textures": [],
-  "texturesPng": [
-    "commonRes/Arsenal.png"
-  ],
+  "texturesPng": [],
   "version": "1.5.0.0",
   "widgetTree": {
     "classname": "Panel",
@@ -162,7 +160,7 @@
         "options": {
           "__type": "ImageViewSurrogate:#EditorCommon.JsonModel.Component.GUI",
           "classname": "ImageView",
-          "name": "ImageView_52",
+          "name": "logo",
           "ZOrder": 1,
           "actiontag": 52,
           "anchorPointX": 0.5,
@@ -175,7 +173,7 @@
           "flipX": false,
           "flipY": false,
           "height": 218,
-          "ignoreSize": true,
+          "ignoreSize": false,
           "layoutParameter": null,
           "opacity": 255,
           "positionPercentX": 0.5,
@@ -184,14 +182,14 @@
           "rotation": 0,
           "scaleX": 1,
           "scaleY": 1,
-          "sizePercentX": 0.3421875,
+          "sizePercentX": 0.340625,
           "sizePercentY": 0.191901416,
           "sizeType": 0,
           "tag": 27,
-          "touchAble": false,
+          "touchAble": true,
           "useMergedTexture": false,
           "visible": true,
-          "width": 219,
+          "width": 218,
           "x": 320,
           "y": 863,
           "capInsetsHeight": 0,
@@ -206,7 +204,7 @@
           },
           "scale9Enable": false,
           "scale9Height": 218,
-          "scale9Width": 219
+          "scale9Width": 218
         }
       },
       {

@@ -1,0 +1,9 @@
+
+class Misc
+{
+	static Misc* sharedDelegate();
+
+	void copyToPasteboard(const char* content);
+
+	void selectImage(char* path, LUA_FUNCTION handler);
+};

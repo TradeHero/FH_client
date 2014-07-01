@@ -210,6 +210,8 @@
 		730D984D18DC4317000CA5F9 /* scenes in Resources */ = {isa = PBXBuildFile; fileRef = 730D983E18DC4317000CA5F9 /* scenes */; };
 		730D984F18DC4317000CA5F9 /* sounds in Resources */ = {isa = PBXBuildFile; fileRef = 730D984018DC4317000CA5F9 /* sounds */; };
 		730F171F1918C8E6000DB5BE /* lfs.c in Sources */ = {isa = PBXBuildFile; fileRef = 730F171D1918C8E6000DB5BE /* lfs.c */; };
+		732E3ACA19625F0E0009E474 /* MiscHandler.mm in Sources */ = {isa = PBXBuildFile; fileRef = 732E3AC919625F0E0009E474 /* MiscHandler.mm */; };
+		732E3ACD196263A10009E474 /* Misc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 732E3ACB196263A10009E474 /* Misc.cpp */; };
 		733DE92B193DCB1D00361638 /* AssetsManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 733DE929193DCB1D00361638 /* AssetsManager.cpp */; };
 		733DE92F193F262900361638 /* Icon-76.png in Resources */ = {isa = PBXBuildFile; fileRef = 733DE92C193F262900361638 /* Icon-76.png */; };
 		733DE930193F262900361638 /* Icon-120.png in Resources */ = {isa = PBXBuildFile; fileRef = 733DE92D193F262900361638 /* Icon-120.png */; };
@@ -735,6 +737,10 @@
 		730D984018DC4317000CA5F9 /* sounds */ = {isa = PBXFileReference; lastKnownFileType = folder; path = sounds; sourceTree = "<group>"; };
 		730F171D1918C8E6000DB5BE /* lfs.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lfs.c; path = lfs/lfs.c; sourceTree = "<group>"; };
 		730F171E1918C8E6000DB5BE /* lfs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = lfs.h; path = lfs/lfs.h; sourceTree = "<group>"; };
+		732E3AC619625EBB0009E474 /* MiscHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MiscHandler.h; sourceTree = "<group>"; };
+		732E3AC919625F0E0009E474 /* MiscHandler.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MiscHandler.mm; sourceTree = "<group>"; };
+		732E3ACB196263A10009E474 /* Misc.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Misc.cpp; path = Utils/Misc.cpp; sourceTree = "<group>"; };
+		732E3ACC196263A10009E474 /* Misc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Misc.h; path = Utils/Misc.h; sourceTree = "<group>"; };
 		733DE929193DCB1D00361638 /* AssetsManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AssetsManager.cpp; path = AssetsManager/AssetsManager.cpp; sourceTree = "<group>"; };
 		733DE92A193DCB1D00361638 /* AssetsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AssetsManager.h; path = AssetsManager/AssetsManager.h; sourceTree = "<group>"; };
 		733DE92C193F262900361638 /* Icon-76.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-76.png"; sourceTree = SOURCE_ROOT; };
@@ -1773,6 +1779,8 @@
 		73DCA130192C4EDA008AC05D /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				732E3ACB196263A10009E474 /* Misc.cpp */,
+				732E3ACC196263A10009E474 /* Misc.h */,
 				73D51F26192F44A4000A65AF /* WebviewDelegate.cpp */,
 				73D51F27192F44A4000A65AF /* WebviewDelegate.h */,
 				73DCA131192C4EE7008AC05D /* Analytics.cpp */,
@@ -2096,6 +2104,8 @@
 				F293B6F815EB823D00256477 /* main.m */,
 				F293B6F915EB823D00256477 /* RootViewController.h */,
 				F293B6FA15EB823D00256477 /* RootViewController.mm */,
+				732E3AC619625EBB0009E474 /* MiscHandler.h */,
+				732E3AC919625F0E0009E474 /* MiscHandler.mm */,
 			);
 			name = "Other Sources";
 			sourceTree = "<group>";
@@ -2354,6 +2364,7 @@
 				15C1549B1683116B00D239F2 /* cpCollision.c in Sources */,
 				ED35C0F718323498002A0750 /* DictionaryHelper.cpp in Sources */,
 				15C1549C1683116B00D239F2 /* cpHashSet.c in Sources */,
+				732E3ACA19625F0E0009E474 /* MiscHandler.mm in Sources */,
 				375BD55F186846090024609E /* ObjectFactory.cpp in Sources */,
 				73A896F8192B2A050079AD05 /* SwrveMessageViewController.m in Sources */,
 				15C1549D1683116B00D239F2 /* cpPolyShape.c in Sources */,
@@ -2513,6 +2524,7 @@
 				150E36FF17F2B72B0021A6EA /* lua_cocos2dx_extensions_manual.cpp in Sources */,
 				ED35C0EF18323498002A0750 /* UILabel.cpp in Sources */,
 				1514E39018784113003FC4EE /* CCActionEaseEx.cpp in Sources */,
+				732E3ACD196263A10009E474 /* Misc.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

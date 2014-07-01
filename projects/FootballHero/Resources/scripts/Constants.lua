@@ -11,6 +11,8 @@ COUNTRY_IMAGE_PATH = IMAGE_PATH.."countries/"
 PREDICTION_CHOICE_IMAGE_PATH = "scenes/MatchPrediction/"
 LEADERBOARD_IMAGE_PATH = "scenes/Leaderboards/"
 
+LOGO_IMAGE_PATH = "myLogo.jpg"
+
 DRAW = 0
 TEAM1_WIN = 1
 TEAM2_WIN = 2
