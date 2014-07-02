@@ -70,5 +70,5 @@
   <imageFileList />
   <imagePngList />
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>RegisterName.json</CurrentUIJson>
+  <CurrentUIJson>MatchListScene.json</CurrentUIJson>
 </UIProject>
