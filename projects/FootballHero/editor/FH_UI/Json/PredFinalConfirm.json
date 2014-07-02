@@ -11,12 +11,14 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "Competition/Create-bg.png",
-    "Competition/Create_03.png",
+    "MatchListScene/VS-bg.png",
+    "header/footballhero-logo.png",
     "header/guangyun.png",
-    "Leaderboards/competition.png"
+    "MatchListScene/3xian.png",
+    "MatchListScene/liansaixuanze-bg.jpg",
+    "MatchListScene/photo.png"
   ],
-  "version": "1.4.0.1",
+  "version": "1.5.0.0",
   "widgetTree": {
     "classname": "Panel",
     "name": null,
@@ -258,8 +260,8 @@
           "ignoreSize": true,
           "layoutParameter": null,
           "opacity": 255,
-          "positionPercentX": 0.040625,
-          "positionPercentY": 0.19894366,
+          "positionPercentX": 0.0390625,
+          "positionPercentY": 0.2015845,
           "positionType": 0,
           "rotation": 0,
           "scaleX": 1,
@@ -272,8 +274,8 @@
           "useMergedTexture": false,
           "visible": true,
           "width": 590,
-          "x": 26,
-          "y": 226,
+          "x": 25,
+          "y": 229,
           "backGroundBox": null,
           "backGroundBoxData": {
             "path": "PredictionConfirm/facebook-icon.png",

@@ -11,12 +11,14 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "Competition/Create-bg.png",
-    "Competition/Create_03.png",
+    "MatchListScene/VS-bg.png",
+    "header/footballhero-logo.png",
     "header/guangyun.png",
-    "Leaderboards/competition.png"
+    "MatchListScene/3xian.png",
+    "MatchListScene/liansaixuanze-bg.jpg",
+    "MatchListScene/photo.png"
   ],
-  "version": "1.4.0.1",
+  "version": "1.5.0.0",
   "widgetTree": {
     "classname": "Panel",
     "name": null,
@@ -641,7 +643,7 @@
       "classname": "Panel",
       "name": "Panel_167",
       "ZOrder": 0,
-      "actiontag": 1,
+      "actiontag": -1,
       "anchorPointX": 0,
       "anchorPointY": 0,
       "classType": "CocoStudio.EngineAdapterWrap.CSPanel",

@@ -68,7 +68,14 @@
   <ProjectType>UIProject</ProjectType>
   <ResRelativePath />
   <imageFileList />
-  <imagePngList />
+  <imagePngList>
+    <string>MatchListScene/VS-bg.png</string>
+    <string>header/footballhero-logo.png</string>
+    <string>header/guangyun.png</string>
+    <string>MatchListScene/3xian.png</string>
+    <string>MatchListScene/liansaixuanze-bg.jpg</string>
+    <string>MatchListScene/photo.png</string>
+  </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>MatchListScene.json</CurrentUIJson>
+  <CurrentUIJson>PredFinalConfirm.json</CurrentUIJson>
 </UIProject>
