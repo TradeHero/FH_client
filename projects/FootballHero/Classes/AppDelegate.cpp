@@ -177,8 +177,8 @@ AssetsManager* UpdateLayer::getAssetsManager()
 
 	if (!pAssetsManager)
 	{
-		pAssetsManager = new AssetsManager("https://raw.githubusercontent.com/lesliesam/fhres/master/res.zip",
-			"https://raw.githubusercontent.com/lesliesam/fhres/master/version",
+		pAssetsManager = new AssetsManager("https://raw.githubusercontent.com/lesliesam/fhres/master/dev/res.zip",
+			"https://raw.githubusercontent.com/lesliesam/fhres/master/dev/version",
 			pathToSave.c_str());
 		pAssetsManager->setDelegate(this);
 		pAssetsManager->setConnectionTimeout(10);
