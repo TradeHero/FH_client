@@ -2,6 +2,7 @@ module(..., package.seeall)
 
 CONTENT_TYPE_JSON = "Content-Type: application/json"
 CONTENT_TYPE_PLAINTEXT = "Content-Type: text/plain"
+CONTENT_TYPE_JPG = "Content-Type: image/jpg"
 
 IMAGE_PATH = "images/"
 

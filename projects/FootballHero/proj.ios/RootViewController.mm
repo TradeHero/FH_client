@@ -35,7 +35,7 @@
                                     delegate:self
                                     cancelButtonTitle:@"Cancel"
                                     destructiveButtonTitle:nil
-                                    otherButtonTitles: @"Select a photo",nil];
+                                    otherButtonTitles: @"Select a photo","Take a photo",nil];
     
     [myActionSheet showInView:self.view];
     [myActionSheet release];
@@ -79,7 +79,7 @@
     }
     else
     {
-        NSLog(@"Does not has a camera.");
+        NSLog(@"You don't have a camera.");
     }
 }
 
