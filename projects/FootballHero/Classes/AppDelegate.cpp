@@ -170,7 +170,7 @@ bool UpdateLayer::init()
 
 	return true;
 }
-
+ 
 AssetsManager* UpdateLayer::getAssetsManager()
 {
 	static AssetsManager *pAssetsManager = NULL;
