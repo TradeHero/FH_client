@@ -78,12 +78,12 @@ function initContent( competitionDetail )
     inputDelegate:registerEventScriptHandler( EDIT_BOX_EVENT_TEXT_CHANGED, function ( textBox, text )
         mTokenInput:setText( mCompetitionCodeString )
     end )
-    inputDelegate:registerEventScriptHandler( EDIT_BOX_EVENT_DID_BEGIN, function ( textBox )
+    --[[inputDelegate:registerEventScriptHandler( EDIT_BOX_EVENT_DID_BEGIN, function ( textBox )
         -- In order not to change the object-c code, here is the work around.
         -- recall the setPosition() to invoke the CCEditBoxImplIOS::adjustTextFieldPosition()
         -- Todo remove this code after the object-c fix is pushed out.
         mTokenInput:setPosition( mTokenInput:getPosition() )
-    end )
+    end )--]]
     content:getChildByName( "token" ):addNode( tolua.cast( inputDelegate, "CCNode" ) )
 
     mTokenInput = ViewUtils.createTextInput( content:getChildByName( "token" ), "", 200, 50 )
@@ -91,6 +91,7 @@ function initContent( competitionDetail )
     mTokenInput:setTouchPriority( SceneManager.TOUCH_PRIORITY_MINUS_ONE )
     mTokenInput:setText( mCompetitionCodeString )
     mTokenInput:setDelegate( inputDelegate.__CCEditBoxDelegate__ )
+    mTokenInput:setTouchEnabled( false )
 
     -- Add and do layout
     content:setLayoutParameter( layoutParameter )
@@ -136,9 +137,9 @@ end
 
 function copyCodeEventHandler( sender, eventType )
     if eventType == TOUCH_EVENT_ENDED then
-        --Analytics:sharedDelegate():copyToPasteboard( mCompetitionCodeString )
-        --EventManager:postEvent( Event.Show_Info, { "Join code is copied." } )
-        mTokenInput:touchDownAction( sender, eventType )
+        Misc:sharedDelegate():copyToPasteboard( mCompetitionCodeString )
+        EventManager:postEvent( Event.Show_Info, { "Join code is copied." } )
+        --mTokenInput:touchDownAction( sender, eventType )
     end
 end
 
