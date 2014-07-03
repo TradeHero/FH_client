@@ -10,17 +10,8 @@
   "designHeight": 1136,
   "designWidth": 640,
   "textures": [],
-  "texturesPng": [
-    "LoginNReg/Account-bg.jpg",
-    "header/guangyun.png",
-    "LoginNReg/facebook-icon.png",
-    "LoginNReg/register-icon.png",
-    "LoginNReg/line.png",
-    "LoginNReg/sign-in-icon.png",
-    "header/footballhero-logo.png",
-    "GUI/button.png"
-  ],
-  "version": "1.4.0.1",
+  "texturesPng": [],
+  "version": "1.5.0.0",
   "widgetTree": {
     "classname": "Panel",
     "name": null,
@@ -524,7 +515,7 @@
           "fontType": 0,
           "normal": null,
           "normalData": {
-            "path": "C:\\Program Files\\CocoStudio1.4\\EditorDefaultRes\\GUI/button.png",
+            "path": "C:\\Program Files\\CocoStudio\\EditorDefaultRes\\GUI/button.png",
             "plistFile": "",
             "resourceType": 2
           },
@@ -549,7 +540,7 @@
       "classname": "Panel",
       "name": "Panel_20",
       "ZOrder": 0,
-      "actiontag": 1,
+      "actiontag": -1,
       "anchorPointX": 0,
       "anchorPointY": 0,
       "classType": "CocoStudio.EngineAdapterWrap.CSPanel",

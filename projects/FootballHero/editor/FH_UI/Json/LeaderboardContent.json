@@ -11,10 +11,8 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "FavouriteTeam/favourites-bg.jpg",
-    "FavouriteTeam/ok-icon.png",
-    "FavouriteTeam/ok-icon-BF.png",
-    "header/footballhero-logo.png"
+    "Competition/code.png",
+    "Competition/btn_black_icon.png"
   ],
   "version": "1.5.0.0",
   "widgetTree": {

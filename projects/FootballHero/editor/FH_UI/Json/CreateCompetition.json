@@ -11,9 +11,8 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "Competition/btn_yellow_createNew.png",
-    "Competition/code_input.png",
-    "Competition/btn_yellow_small.png"
+    "Competition/code.png",
+    "Competition/btn_black_icon.png"
   ],
   "version": "1.5.0.0",
   "widgetTree": {

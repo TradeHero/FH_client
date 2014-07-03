@@ -70,5 +70,5 @@
   <imageFileList />
   <imagePngList />
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>CompetitionLeaderboardInfo.json</CurrentUIJson>
+  <CurrentUIJson>CreateCompLeagueListContent.json</CurrentUIJson>
 </UIProject>
