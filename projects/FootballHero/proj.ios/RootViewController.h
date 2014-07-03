@@ -24,12 +24,15 @@
  ****************************************************************************/
 
 #import <UIKit/UIKit.h>
+#import <MessageUI/MFMailComposeViewController.h>
 
 
-@interface RootViewController : UIViewController <UIActionSheetDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate> {
+@interface RootViewController : UIViewController <UIActionSheetDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, MFMailComposeViewControllerDelegate> {
 
 }
 
 - (void)selectImage;
+
+- (void)sendMail:(NSString *)receiver withSubject:(NSString *)subject withBody:(NSString *)body;
 
 @end

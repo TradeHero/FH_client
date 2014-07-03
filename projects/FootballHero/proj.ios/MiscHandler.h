@@ -12,6 +12,8 @@ public:
     
     void selectImageResult(bool success);
     
+    void sendMail(char* receiver, char* subject, char* body);
+    
     
     // Getter and setter for local varibles.
     char* getImagePath() { return imagePath; }

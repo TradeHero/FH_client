@@ -34,3 +34,9 @@ void MiscHandler::selectImageResult(bool success)
 {
     Utils::Misc::sharedDelegate()->selectImageResult(success);
 }
+
+void MiscHandler::sendMail(char* receiver, char* subject, char* body)
+{
+    AppController *app = (AppController*) [[UIApplication sharedApplication] delegate];
+    [[app getViewController] sendMail:[NSString stringWithUTF8String:receiver] withSubject:[NSString stringWithUTF8String:subject] withBody:[NSString stringWithUTF8String:body]];
+}

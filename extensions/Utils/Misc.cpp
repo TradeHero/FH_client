@@ -69,4 +69,14 @@ namespace Utils
 		int ret = pStack->executeFunctionByHandler(mSelectImageHandler, 1);
 		pStack->clean();
 	}
+    
+    void Misc::sendMail(char* receiver, char* subject, char* body)
+    {
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+		MiscHandler::getInstance()->sendMail(receiver, subject, body);
+#endif
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+        
+#endif
+    }
 }

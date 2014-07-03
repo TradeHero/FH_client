@@ -29,7 +29,8 @@
 
 @implementation RootViewController
 
-- (void)selectImage {
+- (void)selectImage
+{
     UIActionSheet *myActionSheet = [[UIActionSheet alloc]
                                     initWithTitle:nil
                                     delegate:self
@@ -41,7 +42,8 @@
     [myActionSheet release];
 }
 
--(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
+-(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
     switch (buttonIndex)
     {
         case 0:
@@ -55,7 +57,8 @@
     }
 }
 
--(void)LocalPhoto{
+-(void)LocalPhoto
+{
     UIImagePickerController *picker = [[UIImagePickerController alloc] init];
     
     picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
@@ -66,7 +69,8 @@
     [picker release];
 }
 
--(void)takePhoto{
+-(void)takePhoto
+{
     UIImagePickerControllerSourceType sourceType = UIImagePickerControllerSourceTypeCamera;
     if ([UIImagePickerController isSourceTypeAvailable: UIImagePickerControllerSourceTypeCamera])
     {
@@ -83,7 +87,8 @@
     }
 }
 
--(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(NSDictionary *)editingInfo{
+-(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(NSDictionary *)editingInfo
+{
     
     [picker dismissModalViewControllerAnimated:YES];
     
@@ -110,6 +115,28 @@
         [[NSFileManager defaultManager] createFileAtPath:imageDocPath contents:data attributes:nil];
         MiscHandler::getInstance()->selectImageResult(true);
     }
+}
+
+
+- (void)sendMail:(NSString *)receiver withSubject:(NSString *)subject withBody:(NSString *)body
+{
+    MFMailComposeViewController* controller = [[MFMailComposeViewController alloc] init];
+    controller.mailComposeDelegate = self;
+    [controller setSubject:subject];
+    [controller setToRecipients:[NSArray arrayWithObject:receiver]];
+    [controller setMessageBody:body isHTML:NO];
+    
+    [self presentViewController:controller animated:YES completion:nil];
+    [controller release];
+}
+
+- (void)mailComposeController: (MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error;
+{
+    if (result == MFMailComposeResultSent)
+    {
+        // NSLog(@"It's away!");
+    }
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 /*

@@ -218,6 +218,7 @@
 		733DE931193F262900361638 /* Icon-152.png in Resources */ = {isa = PBXBuildFile; fileRef = 733DE92E193F262900361638 /* Icon-152.png */; };
 		733DE934193F26C800361638 /* Default~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 733DE932193F26C800361638 /* Default~ipad.png */; };
 		733DE935193F26C800361638 /* Default-Portrait@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 733DE933193F26C800361638 /* Default-Portrait@2x~ipad.png */; };
+		734532A71965056400E5D444 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 734532A31965028E00E5D444 /* MessageUI.framework */; };
 		7365C0D218FCE99200C39027 /* FBSessionSingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 7365C0D118FCE99200C39027 /* FBSessionSingleton.m */; };
 		7388C04118F4E2FF00CF667C /* HttpRequestForLua.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7388C03F18F4E2FF00CF667C /* HttpRequestForLua.cpp */; };
 		738BA12A193D7FD2008A74F6 /* DES56.lua in Resources */ = {isa = PBXBuildFile; fileRef = 738BA129193D7FD2008A74F6 /* DES56.lua */; };
@@ -748,6 +749,7 @@
 		733DE92E193F262900361638 /* Icon-152.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-152.png"; sourceTree = SOURCE_ROOT; };
 		733DE932193F26C800361638 /* Default~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default~ipad.png"; sourceTree = SOURCE_ROOT; };
 		733DE933193F26C800361638 /* Default-Portrait@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait@2x~ipad.png"; sourceTree = SOURCE_ROOT; };
+		734532A31965028E00E5D444 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		7365C0D018FCE99200C39027 /* FBSessionSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBSessionSingleton.h; sourceTree = "<group>"; };
 		7365C0D118FCE99200C39027 /* FBSessionSingleton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBSessionSingleton.m; sourceTree = "<group>"; };
 		7388C03F18F4E2FF00CF667C /* HttpRequestForLua.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HttpRequestForLua.cpp; sourceTree = "<group>"; };
@@ -928,6 +930,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				734532A71965056400E5D444 /* MessageUI.framework in Frameworks */,
 				73DCA155192C7EF9008AC05D /* CFNetwork.framework in Frameworks */,
 				73DCA156192C7EFA008AC05D /* Security.framework in Frameworks */,
 				73DCA157192C7EFA008AC05D /* StoreKit.framework in Frameworks */,
@@ -2070,6 +2073,7 @@
 		F293B3CB15EB7BE500256477 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				734532A31965028E00E5D444 /* MessageUI.framework */,
 				73DCA152192C7EF9008AC05D /* CFNetwork.framework */,
 				73DCA153192C7EF9008AC05D /* Security.framework */,
 				73DCA154192C7EF9008AC05D /* StoreKit.framework */,

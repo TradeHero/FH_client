@@ -16,6 +16,9 @@ namespace Utils
 		void selectImage(char* path, int handler);
 
 		void selectImageResult(bool success);
+        
+        void sendMail(char* receiver, char* subject, char* body);
+        
 
 	protected:
 		Misc();

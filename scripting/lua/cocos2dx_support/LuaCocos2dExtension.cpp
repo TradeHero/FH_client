@@ -1,6 +1,6 @@
 /*
 ** Lua binding: Extension
-** Generated automatically by tolua++-1.0.92 on 07/01/14 15:24:36.
+** Generated automatically by tolua++-1.0.92 on 07/03/14 12:10:47.
 */
 
 /****************************************************************************
@@ -1030,6 +1030,43 @@ static int tolua_Extension_Misc_selectImage00(lua_State* tolua_S)
 }
 #endif //#ifndef TOLUA_DISABLE
 
+/* method: sendMail of class  Misc */
+#ifndef TOLUA_DISABLE_tolua_Extension_Misc_sendMail00
+static int tolua_Extension_Misc_sendMail00(lua_State* tolua_S)
+{
+#ifndef TOLUA_RELEASE
+ tolua_Error tolua_err;
+ if (
+     !tolua_isusertype(tolua_S,1,"Misc",0,&tolua_err) ||
+     !tolua_isstring(tolua_S,2,0,&tolua_err) ||
+     !tolua_isstring(tolua_S,3,0,&tolua_err) ||
+     !tolua_isstring(tolua_S,4,0,&tolua_err) ||
+     !tolua_isnoobj(tolua_S,5,&tolua_err)
+ )
+  goto tolua_lerror;
+ else
+#endif
+ {
+  Misc* self = (Misc*)  tolua_tousertype(tolua_S,1,0);
+  char* receiver = ((char*)  tolua_tostring(tolua_S,2,0));
+  char* subject = ((char*)  tolua_tostring(tolua_S,3,0));
+  char* body = ((char*)  tolua_tostring(tolua_S,4,0));
+#ifndef TOLUA_RELEASE
+  if (!self) tolua_error(tolua_S,"invalid 'self' in function 'sendMail'", NULL);
+#endif
+  {
+   self->sendMail(receiver,subject,body);
+  }
+ }
+ return 0;
+#ifndef TOLUA_RELEASE
+ tolua_lerror:
+ tolua_error(tolua_S,"#ferror in function 'sendMail'.",&tolua_err);
+ return 0;
+#endif
+}
+#endif //#ifndef TOLUA_DISABLE
+
 /* Open function */
 TOLUA_API int tolua_Extension_open (lua_State* tolua_S)
 {
@@ -1100,6 +1137,7 @@ TOLUA_API int tolua_Extension_open (lua_State* tolua_S)
    tolua_function(tolua_S,"sharedDelegate",tolua_Extension_Misc_sharedDelegate00);
    tolua_function(tolua_S,"copyToPasteboard",tolua_Extension_Misc_copyToPasteboard00);
    tolua_function(tolua_S,"selectImage",tolua_Extension_Misc_selectImage00);
+   tolua_function(tolua_S,"sendMail",tolua_Extension_Misc_sendMail00);
   tolua_endmodule(tolua_S);
  tolua_endmodule(tolua_S);
  return 1;
