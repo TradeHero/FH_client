@@ -48,6 +48,7 @@ public:
 	void update(cocos2d::CCObject *pSender);
 	void loadGame();
 
+    virtual void onEnter();
 	virtual void onError(cocos2d::extension::AssetsManager::ErrorCode errorCode);
 	virtual void onProgress(int percent);
 	virtual void onSuccess();

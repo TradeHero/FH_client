@@ -71,7 +71,6 @@ bool AppDelegate::applicationDidFinishLaunching()
 	updateLayer->release();
 
 	pDirector->runWithScene(updateScene);
-	updateLayer->update(NULL);
 
     return true;
 }
@@ -106,6 +105,12 @@ UpdateLayer::~UpdateLayer()
 {
 	AssetsManager *pAssetsManager = getAssetsManager();
 	CC_SAFE_DELETE(pAssetsManager);
+}
+
+void UpdateLayer::onEnter()
+{
+	CCNode::onEnter();
+	this->scheduleOnce(schedule_selector(UpdateLayer::update), 0.2f);
 }
 
 void UpdateLayer::update(cocos2d::CCObject *pSender)
@@ -164,8 +169,13 @@ bool UpdateLayer::init()
 
 	createDownloadedDir();
 
-	pProgressLabel = CCLabelTTF::create("", "Arial", 40);
-	pProgressLabel->setPosition(ccp(320, 700));
+	CCSprite* background = CCSprite::create(CCFileUtils::sharedFileUtils()->fullPathForFilename("images/Default-568h@2x.png").c_str());
+	background->setPosition(ccp(320, 568));
+	addChild(background);
+
+	pProgressLabel = CCLabelTTF::create("Loading...", "Arial", 30);
+	pProgressLabel->setPosition(ccp(320, 300));
+    pProgressLabel->setFontFillColor(ccc3(0, 0, 0));
 	addChild(pProgressLabel);
 
 	return true;
