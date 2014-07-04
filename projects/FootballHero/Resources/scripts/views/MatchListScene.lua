@@ -72,6 +72,7 @@ function loadFrame( matchList )
     mTopLayer = CCLayer:create()
     mTopLayer:registerScriptTouchHandler( onTopLevelTouch, false, -100)
     mWidget:addNode( mTopLayer )
+    mTopLayer:setTouchEnabled( true )
     mOptionPanelShown = false
 end
 
@@ -289,18 +290,6 @@ function optionEventHandler( sender, eventType )
     end
 end
 
-function onTopLevelTouch( eventType, x, y )
-    print( "onTopLevelTouch" )
-
-    if eventType == TOUCH_EVENT_ENDED then
-        local touchBeginPoint = sender:getTouchStartPos()
-        local touchEndPoint = sender:getTouchEndPos()
-        print( touchBeginPoint.x - touchEndPoint.x )
-        
-    end
-end
-
-
 local startPosX, startPosY
 function onTopLevelTouch( eventType, x, y )
     if eventType == "began" then
@@ -310,7 +299,7 @@ function onTopLevelTouch( eventType, x, y )
         if startPosX - x > MIN_MOVE_DISTANCE and mOptionPanelShown == true then
             -- Swap to Left
             hideOptionAnim()
-        elseif x - startPosX > MIN_MOVE_DISTANCE and mOptionPanelShown == false then
+        elseif startPosX < 80 and x - startPosX > MIN_MOVE_DISTANCE and mOptionPanelShown == false then
             -- Swap to Right
             showOptionAnim()
         end

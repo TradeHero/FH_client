@@ -52,7 +52,7 @@ local mWidgets = {}		-- Store widget show in the list to save time loading the s
 function init()
 	local eglView = CCEGLView:sharedOpenGLView()
 	if CCApplication:sharedApplication():getTargetPlatform() == kTargetWindows then
-		eglView:setFrameSize( 640, 960 )
+		eglView:setFrameSize( 541, 960 )
 	end
 	eglView:setDesignResolutionSize( 640, 1136, kResolutionShowAll )
 
