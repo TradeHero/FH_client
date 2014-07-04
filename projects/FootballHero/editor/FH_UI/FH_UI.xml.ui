@@ -59,6 +59,7 @@
     <string>CreateCompLeagueListContent.json</string>
     <string>CompetitionLeaderboard.json</string>
     <string>CompetitionLeaderboardInfo.json</string>
+    <string>PredFinalConfirmButton.json</string>
   </JsonList>
   <CanvasSize>
     <Width>640</Width>
@@ -68,7 +69,10 @@
   <ProjectType>UIProject</ProjectType>
   <ResRelativePath />
   <imageFileList />
-  <imagePngList />
+  <imagePngList>
+    <string>PredictionConfirm/bg-2.png</string>
+    <string>MatchPrediction/Will-xx_team-score-a-goal-yes.png</string>
+  </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>CompetitionLeaderboard.json</CurrentUIJson>
+  <CurrentUIJson>PredFinalConfirmContent.json</CurrentUIJson>
 </UIProject>

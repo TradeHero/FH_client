@@ -8,6 +8,7 @@ local Event = require("scripts.events.Event").EventList
 
 
 local mWidget
+local mFacebookBt
 
 function loadFrame()
 	local widget = GUIReader:shareReader():widgetFromJsonFile("scenes/PredFinalConfirm.json")
@@ -17,21 +18,13 @@ function loadFrame()
     SceneManager.addWidget(widget)
 
 	initContent()
-
-    local confirmBt = widget:getChildByName("confirm")
-    confirmBt:addTouchEventListener( confirmEventHandler )
-
-    local cancelBt = widget:getChildByName("cancel")
-    cancelBt:addTouchEventListener( cancelEventHandler )
-
-    local facebook = mWidget:getChildByName("facebook")
-    facebook:addTouchEventListener( facebookEventHandler )
 end
 
 function EnterOrExit( eventType )
     if eventType == "enter" then
     elseif eventType == "exit" then
         mWidget = nil
+        mFacebookBt = nil
     end
 end
 
@@ -41,8 +34,7 @@ end
 
 function confirmEventHandler( sender, eventType )
 	if eventType == TOUCH_EVENT_ENDED then
-		local facebook = tolua.cast( mWidget:getChildByName("facebook"), "CheckBox" )
-		Logic:setPredictionMetadata( "", facebook:getSelectedState() )
+		Logic:setPredictionMetadata( "", mFacebookBt:getSelectedState() )
 	    EventManager:postEvent( Event.Do_Post_Predictions )
 	end
 end
@@ -56,13 +48,12 @@ end
 
 function facebookEventHandler( sender, eventType )
 	if eventType == TOUCH_EVENT_ENDED then
-		local facebook = tolua.cast( mWidget:getChildByName("facebook"), "CheckBox" )
-		if facebook:getSelectedState() == false and Logic:getFbId() == false then
+		if mFacebookBt:getSelectedState() == false and Logic:getFbId() == false then
 			local successHandler = function()
 				-- Nothing to do.
 			end
 			local failedHandler = function()
-				facebook:setSelectedState( false )
+				mFacebookBt:setSelectedState( false )
 			end
 
 			EventManager:postEvent( Event.Do_FB_Connect_With_User, { successHandler, failedHandler } )
@@ -105,10 +96,25 @@ function initContent()
         contentHeight = contentHeight + content:getSize().height
 	end
 
+	local buttonsWidget = SceneManager.widgetFromJsonFile("scenes/PredFinalConfirmButton.json")
+	buttonsWidget:setLayoutParameter( layoutParameter )
+    contentContainer:addChild( buttonsWidget )
+    contentHeight = contentHeight + buttonsWidget:getSize().height
+
+    local confirmBt = buttonsWidget:getChildByName("confirm")
+    confirmBt:addTouchEventListener( confirmEventHandler )
+    local cancelBt = buttonsWidget:getChildByName("cancel")
+    cancelBt:addTouchEventListener( cancelEventHandler )
+    mFacebookBt = tolua.cast( buttonsWidget:getChildByName("facebook"), "CheckBox" )
+    mFacebookBt:addTouchEventListener( facebookEventHandler )
+
 	-- Update the size of the scroll view so that it locate just above the facebook button.
 	local originSize = contentContainer:getSize()
+	print(originSize.height.." | "..contentHeight)
 	if originSize.height > contentHeight then
-		contentContainer:setSize( CCSize:new( originSize.width, contentHeight ) )
+		-- Put the dialog in the center
+		local newHeight = ( originSize.height + contentHeight ) / 2
+		contentContainer:setSize( CCSize:new( originSize.width, newHeight ) )
 		contentContainer:setTouchEnabled( false )
 	end
 

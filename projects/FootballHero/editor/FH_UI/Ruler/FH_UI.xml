@@ -212,4 +212,8 @@
     <Project>CompetitionLeaderboardInfo</Project>
     <GuidesList />
   </GuidesProject>
+  <GuidesProject>
+    <Project>PredFinalConfirmButton</Project>
+    <GuidesList />
+  </GuidesProject>
 </ArrayOfGuidesProject>
