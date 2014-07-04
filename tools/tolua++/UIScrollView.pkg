@@ -72,5 +72,4 @@ class ScrollView:public Layout,public UIScrollInterface
     virtual void setLayoutType(LayoutType type);
     virtual LayoutType getLayoutType() const;
     virtual std::string getDescription() const;
-
 };

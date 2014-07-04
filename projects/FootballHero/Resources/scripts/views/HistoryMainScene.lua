@@ -13,6 +13,7 @@ local CONTENT_FADEIN_TIME = 1
 local mWidget
 local mStep
 local mCompetitionId
+local mHasMoreToLoad
 
 -- DS for couponHistory see CouponHistoryData
 -- competitionId: The history only contains matches within the leagues in this competition.
@@ -57,8 +58,9 @@ function loadFrame( userId, userName, competitionId, couponHistory )
 
     Navigator.loadFrame( mWidget )
 
-    initContent( couponHistory )
     mStep = 1
+    mHasMoreToLoad = true
+    initContent( couponHistory )
 end
 
 function EnterOrExit( eventType )
@@ -137,40 +139,41 @@ function initContent( couponHistory )
     end ) )
     seqArray:addObject( CCDelayTime:create( 0.2 ) )
 
-    for i = 1, table.getn( couponHistory:getClosedData() ) do
-    	local eventHandler = function( sender, eventType )
-            if eventType == TOUCH_EVENT_ENDED then
-                predictionClicked( false, couponHistory:getClosedData()[i] )
+
+    if table.getn( couponHistory:getClosedData() ) == 0 then
+        mHasMoreToLoad = false
+    else
+        for i = 1, table.getn( couponHistory:getClosedData() ) do
+            local eventHandler = function( sender, eventType )
+                if eventType == TOUCH_EVENT_ENDED then
+                    predictionClicked( false, couponHistory:getClosedData()[i] )
+                end
             end
+
+            seqArray:addObject( CCCallFuncN:create( function()
+                -- Add the open matches
+                local content = SceneManager.widgetFromJsonFile("scenes/HistoryMainMatchContent.json")
+                content:setLayoutParameter( layoutParameter )
+                contentContainer:addChild( content )
+                contentHeight = contentHeight + content:getSize().height
+                local bt = content:getChildByName("match")
+                bt:addTouchEventListener( eventHandler )
+                helperInitPredictionCommon( content, couponHistory:getClosedData()[i] )
+                helperInitClosedPrediction( content, couponHistory:getClosedData()[i] )
+
+                content:setOpacity( 0 )
+                content:setCascadeOpacityEnabled( true )
+                mWidget:runAction( CCTargetedAction:create( content, CCFadeIn:create( CONTENT_FADEIN_TIME ) ) )
+            end ) )
+            seqArray:addObject( CCDelayTime:create( 0.2 ) )
         end
-
-        seqArray:addObject( CCCallFuncN:create( function()
-            -- Add the open matches
-            local content = SceneManager.widgetFromJsonFile("scenes/HistoryMainMatchContent.json")
-            content:setLayoutParameter( layoutParameter )
-            contentContainer:addChild( content )
-            contentHeight = contentHeight + content:getSize().height
-            local bt = content:getChildByName("match")
-            bt:addTouchEventListener( eventHandler )
-            helperInitPredictionCommon( content, couponHistory:getClosedData()[i] )
-            helperInitClosedPrediction( content, couponHistory:getClosedData()[i] )
-
-            content:setOpacity( 0 )
-            content:setCascadeOpacityEnabled( true )
-            mWidget:runAction( CCTargetedAction:create( content, CCFadeIn:create( CONTENT_FADEIN_TIME ) ) )
-        end ) )
-        seqArray:addObject( CCDelayTime:create( 0.2 ) )
     end
 
     seqArray:addObject( CCCallFuncN:create( function()
-        if table.getn( couponHistory:getClosedData() ) > 0 then
-            -- Add the "More" button
-            contentHeight = contentHeight + addMoreButton( contentContainer, layoutParameter ):getSize().height
-        end
-
         contentContainer:setInnerContainerSize( CCSize:new( 0, contentHeight ) )
         local layout = tolua.cast( contentContainer, "Layout" )
         layout:requestDoLayout()
+        contentContainer:addEventListenerScrollView( scrollViewEventHandler )
     end ) )
 
     mWidget:runAction( CCSequence:create( seqArray ) )
@@ -180,29 +183,13 @@ function predictionClicked( isOpen, matchInfo )
 	EventManager:postEvent( Event.Enter_History_Detail, { isOpen, matchInfo } )
 end
 
-function addMoreButton( contentContainer, layoutParameter )
-    local content = SceneManager.widgetFromJsonFile("scenes/MoreContent.json")
-    content:setLayoutParameter( layoutParameter )
-    contentContainer:addChild( content )
-    content:addTouchEventListener( loadMore )
-    content:setName("More")
-
-    return content
-end
-
-function loadMore( sender, eventType )
-    if eventType == TOUCH_EVENT_ENDED then
-        mStep = mStep + 1
-        EventManager:postEvent( Event.Load_More_In_History, { mStep, mCompetitionId } )
-    end
-end
-
 function loadMoreContent( couponHistory )
-    local contentContainer = tolua.cast( mWidget:getChildByName("ScrollView"), "ScrollView" )
+    if table.getn( couponHistory ) == 0 then
+        mHasMoreToLoad = false
+        return
+    end
 
-    -- Remove the "More" button
-    local moreButton = contentContainer:getChildByName("More")
-    moreButton:removeFromParent()
+    local contentContainer = tolua.cast( mWidget:getChildByName("ScrollView"), "ScrollView" )
 
     local layoutParameter = LinearLayoutParameter:create()
     layoutParameter:setGravity(LINEAR_GRAVITY_CENTER_VERTICAL)
@@ -226,14 +213,16 @@ function loadMoreContent( couponHistory )
         helperInitClosedPrediction( content, couponHistory:getClosedData()[i] )
     end
 
-    if table.getn( couponHistory:getClosedData() ) > 0 then
-        -- Add back the "More" button
-        addMoreButton( contentContainer, layoutParameter )
-    end
-
     contentContainer:setInnerContainerSize( CCSize:new( 0, contentHeight ) )
     local layout = tolua.cast( contentContainer, "Layout" )
     layout:requestDoLayout()
+end
+
+function scrollViewEventHandler( target, eventType )
+    if eventType == SCROLLVIEW_EVENT_BOUNCE_BOTTOM and mHasMoreToLoad then
+        mStep = mStep + 1
+        EventManager:postEvent( Event.Load_More_In_History, { mStep, mCompetitionId } )
+    end
 end
 
 function helperInitPredictionCommon( content, matchInfo )

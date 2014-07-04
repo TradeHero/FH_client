@@ -45,7 +45,7 @@ public:
 
 	void enter(cocos2d::CCObject *pSender);
 	void reset(cocos2d::CCObject *pSender);
-	void update(cocos2d::CCObject *pSender);
+	void update(float t);
 	void loadGame();
 
     virtual void onEnter();

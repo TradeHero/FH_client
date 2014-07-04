@@ -113,7 +113,7 @@ void UpdateLayer::onEnter()
 	this->scheduleOnce(schedule_selector(UpdateLayer::update), 0.2f);
 }
 
-void UpdateLayer::update(cocos2d::CCObject *pSender)
+void UpdateLayer::update(float t)
 {
 	pProgressLabel->setString("");
 
