@@ -138,7 +138,7 @@ end
 function copyCodeEventHandler( sender, eventType )
     if eventType == TOUCH_EVENT_ENDED then
         Misc:sharedDelegate():copyToPasteboard( mCompetitionCodeString )
-        EventManager:postEvent( Event.Show_Info, { "Join code is copied." } )
+        EventManager:postEvent( Event.Show_Info, { "Join code is copied to clipboard." } )
         --mTokenInput:touchDownAction( sender, eventType )
     end
 end

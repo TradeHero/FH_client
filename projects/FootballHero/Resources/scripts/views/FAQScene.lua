@@ -19,7 +19,7 @@ end
 
 function EnterOrExit( eventType )
     if eventType == "enter" then
-        WebviewDelegate:sharedDelegate():openWebpage( "http://fhwebsite.cloudapp.net/Faq", 0, 40, 320, 528 )
+        WebviewDelegate:sharedDelegate():openWebpage( "http://fhwebsite.cloudapp.net/Home/Faq", 0, 40, 320, 528 )
     elseif eventType == "exit" then
         mWidget = nil
     end

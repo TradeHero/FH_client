@@ -68,4 +68,5 @@ function onRequestSuccess( jsonResponse )
         finishEvent = Event.Enter_Register_Name
     end
     EventManager:postEvent( Event.Check_File_Version, { configMd5Info, finishEvent } )
+    --EventManager:postEvent( Event.Do_Post_Logo )
 end

@@ -29,7 +29,7 @@ local function main()
     collectgarbage("setstepmul", 5000)
 
     cclog("Game start.")
-    initPackageLoader( false )
+    initPackageLoader( true )
 
     local sceneManager = require("scripts.SceneManager")
     sceneManager.init()
@@ -37,6 +37,8 @@ local function main()
     local eventManager = require("scripts.events.EventManager").getInstance()
     local event = require("scripts.events.Event").EventList
     eventManager:postEvent( event.Enter_Login_N_Reg )
+
+    --eventManager:postEvent( event.Enter_Register_Name )
 end
 
 function initPackageLoader( decrypt )

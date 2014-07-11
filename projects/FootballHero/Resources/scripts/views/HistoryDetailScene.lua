@@ -131,7 +131,7 @@ function initCouponInfo( content, info )
             answerString = string.format( "Total goals will be %d or more.", math.ceil( line ) )
             choiceImage = Constants.PREDICTION_CHOICE_IMAGE_PATH.."Will-total-goals-be-more-than-xx-yes.png"
         else
-            answerString = string.format( "Total goals will less than %d.", math.ceil( line ) )
+            answerString = string.format( "Total goals will be less than %d.", math.ceil( line ) )
             choiceImage = Constants.PREDICTION_CHOICE_IMAGE_PATH.."Will-total-goals-be-more-than-xx-no.png"
         end
     elseif marketType == MarketConfig.MARKET_TYPE_ASIAN_HANDICAP then

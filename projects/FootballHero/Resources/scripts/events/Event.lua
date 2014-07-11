@@ -53,6 +53,7 @@ EventNameList =
     "Do_Create_Competition",
     "Do_Join_Competition",
     "Do_Share_Competition",
+    "Do_Password_Reset",
 
     "Show_Info",
     "Show_Error_Message",
@@ -77,6 +78,7 @@ EventNameDosenotTrackList =
     "Do_Create_Competition",
     "Do_Join_Competition",
     "Do_Share_Competition",
+    "Do_Password_Reset",
 
     "Check_File_Version",
     "Show_Info",

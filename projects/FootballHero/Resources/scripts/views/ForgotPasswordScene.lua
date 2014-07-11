@@ -34,7 +34,7 @@ end
 function okEventHandler( sender,eventType )
     if eventType == TOUCH_EVENT_ENDED then
         local email = mWidget:getChildByName( EMAIL_CONTAINER_NAME ):getNodeByTag( 1 ):getText()
-        EventManager:popHistory()
+        EventManager:postEvent( Event.Do_Password_Reset, { email } )
     end
 end
 

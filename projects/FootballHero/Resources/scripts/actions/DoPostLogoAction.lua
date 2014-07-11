@@ -10,15 +10,24 @@ local Constants = require("scripts.Constants")
 
 
 function action( param )
+    if true then
+        --return 
+    end
+
+    -- Todo later.
+
     local fileUtils = CCFileUtils:sharedFileUtils()
     local path = fileUtils:getWritablePath()..Constants.LOGO_IMAGE_PATH
     if not fileUtils:isFileExist( path ) then
         print( "File does not exist: "..path )
         return
     end
-    local requestContentText, fileSize = fileUtils:getFileData( path, "rb", 0 )
+    local beginStr = "------WebKitFormBoundary0RE40S3jy2bDPXOM\r\nContent-Disposition: form-data; name = \"picture\"; filename = \"myLogo.jpg\"\r\nContent-Type: image/jpeg"
+    local endStr = "\r\n------WebKitFormBoundary0RE40S3jy2bDPXOM--"
+    local requestContentText, fileSize = Misc:sharedDelegate():createFormWithFile( beginStr, endStr, path, "rb" )
     
     local url = RequestUtils.POST_LOGO_REST_CALL
+    --url = "http://127.0.0.1:8080/testServlet"
 
     local requestInfo = {}
     requestInfo.requestData = requestContentText
@@ -29,12 +38,10 @@ function action( param )
     end
 
     local httpRequest = HttpRequestForLua:create( CCHttpRequest.kHttpPost )
-    httpRequest:addHeader( Constants.CONTENT_TYPE_JPG )
+    httpRequest:addHeader( "Content-Type: multipart/form-data; boundary=------WebKitFormBoundary0RE40S3jy2bDPXOM" )
     httpRequest:addHeader( Logic:getAuthSessionString() )
     httpRequest:getRequest():setRequestData( requestContentText, fileSize )
     httpRequest:sendHttpRequest( url, handler )
-
-    ConnectingMessage.loadFrame()
 end
 
 function onRequestSuccess( jsonResponse )
