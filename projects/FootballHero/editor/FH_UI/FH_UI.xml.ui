@@ -9,9 +9,15 @@
   <JsonList>
     <string>CompetitionCreate.json</string>
     <string>CompetitionItem.json</string>
+    <string>CompetitionLeaderboard.json</string>
+    <string>CompetitionLeaderboardInfo.json</string>
     <string>CompetitionTitle.json</string>
     <string>ConnectingMessage.json</string>
     <string>CountryListContent.json</string>
+    <string>CreateCompCountryListContent.json</string>
+    <string>CreateCompetition.json</string>
+    <string>CreateCompLeagueListContent.json</string>
+    <string>CreateCompSelectLeague.json</string>
     <string>ErrorMessage.json</string>
     <string>FAQ.json</string>
     <string>FavouriteCountryContent.json</string>
@@ -41,6 +47,7 @@
     <string>Navigator.json</string>
     <string>PredConfirm.json</string>
     <string>PredFinalConfirm.json</string>
+    <string>PredFinalConfirmButton.json</string>
     <string>PredFinalConfirmContent.json</string>
     <string>Register.json</string>
     <string>RegisterName.json</string>
@@ -53,13 +60,9 @@
     <string>WTGBMTPrediction.json</string>
     <string>WTSPrediction.json</string>
     <string>WTWBEGPrediction.json</string>
-    <string>CreateCompetition.json</string>
-    <string>CreateCompSelectLeague.json</string>
-    <string>CreateCompCountryListContent.json</string>
-    <string>CreateCompLeagueListContent.json</string>
-    <string>CompetitionLeaderboard.json</string>
-    <string>CompetitionLeaderboardInfo.json</string>
-    <string>PredFinalConfirmButton.json</string>
+    <string>Chat.json</string>
+    <string>ChatMessageContent.json</string>
+    <string>ChatMyMessageContent.json</string>
   </JsonList>
   <CanvasSize>
     <Width>640</Width>
@@ -69,10 +72,7 @@
   <ProjectType>UIProject</ProjectType>
   <ResRelativePath />
   <imageFileList />
-  <imagePngList>
-    <string>PredictionConfirm/bg-2.png</string>
-    <string>MatchPrediction/Will-xx_team-score-a-goal-yes.png</string>
-  </imagePngList>
+  <imagePngList />
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>PredFinalConfirmContent.json</CurrentUIJson>
+  <CurrentUIJson>CompetitionLeaderboardInfo.json</CurrentUIJson>
 </UIProject>

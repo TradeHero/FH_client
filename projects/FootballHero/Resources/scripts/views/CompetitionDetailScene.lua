@@ -31,8 +31,6 @@ function loadFrame( competitionDetail, subType, competitionId )
     Navigator.loadFrame( widget )
     local backBt = mWidget:getChildByName("back")
     backBt:addTouchEventListener( backEventHandler )
-    local shareBt = mWidget:getChildByName("share")
-    shareBt:addTouchEventListener( shareEventHandler )
 
     -- Init the title
     local title = tolua.cast( mWidget:getChildByName("title"), "Label" )
@@ -102,8 +100,12 @@ function initContent( competitionDetail )
 
     local showLeague = content:getChildByName("SelectLeague")
     showLeague:addTouchEventListener( showLeagueEventHandler )
-    local copyCodeBt = content:getChildByName("codeButton")
+    local copyCodeBt = content:getChildByName("copy")
     copyCodeBt:addTouchEventListener( copyCodeEventHandler )
+    local shareBt = content:getChildByName("share")
+    shareBt:addTouchEventListener( shareEventHandler )
+    local chatBt = content:getChildByName("chatRoom")
+    chatBt:addTouchEventListener( chatRoomEventHandler )
 
     -- Add the leaderboard info
     local leaderboardInfo = competitionDetail:getDto()
@@ -156,6 +158,12 @@ function shareEventHandler( sender, eventType )
         else
             EventManager:postEvent( Event.Do_Share_Competition, { mCompetitionId } )
         end
+    end
+end
+
+function chatRoomEventHandler( sender, eventType )
+    if eventType == TOUCH_EVENT_ENDED then
+        EventManager:postEvent( Event.Enter_Competition_Chat )
     end
 end
 

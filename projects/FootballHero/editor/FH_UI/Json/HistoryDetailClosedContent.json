@@ -11,8 +11,7 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "Competition/code.png",
-    "Competition/btn_black_icon.png"
+    "chat/Friend_Chatbox.png"
   ],
   "version": "1.5.0.0",
   "widgetTree": {

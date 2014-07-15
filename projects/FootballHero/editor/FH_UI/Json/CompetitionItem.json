@@ -10,7 +10,9 @@
   "designHeight": 1136,
   "designWidth": 640,
   "textures": [],
-  "texturesPng": [],
+  "texturesPng": [
+    "chat/Friend_Chatbox.png"
+  ],
   "version": "1.5.0.0",
   "widgetTree": {
     "classname": "Panel",

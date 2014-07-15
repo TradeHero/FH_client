@@ -11,10 +11,10 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "Competition/code.png",
-    "Competition/btn_black_icon.png"
+    "PredictionConfirm/bg-2.png",
+    "MatchPrediction/Will-xx_team-score-a-goal-yes.png"
   ],
-  "version": "1.4.0.1",
+  "version": "1.5.0.0",
   "widgetTree": {
     "classname": "Panel",
     "name": null,
@@ -757,7 +757,7 @@
           "customProperty": "",
           "flipX": false,
           "flipY": false,
-          "height": 34,
+          "height": 51,
           "ignoreSize": true,
           "layoutParameter": null,
           "opacity": 255,
@@ -774,7 +774,7 @@
           "touchAble": true,
           "useMergedTexture": false,
           "visible": true,
-          "width": 42,
+          "width": 63,
           "x": 36,
           "y": 1093,
           "capInsetsHeight": 0,
@@ -803,8 +803,8 @@
             "resourceType": 0
           },
           "scale9Enable": false,
-          "scale9Height": 34,
-          "scale9Width": 42,
+          "scale9Height": 51,
+          "scale9Width": 63,
           "text": "",
           "textColorB": 255,
           "textColorG": 255,
@@ -967,7 +967,7 @@
       "classname": "Panel",
       "name": "Panel_126",
       "ZOrder": 0,
-      "actiontag": 1,
+      "actiontag": -1,
       "anchorPointX": 0,
       "anchorPointY": 0,
       "classType": "CocoStudio.EngineAdapterWrap.CSPanel",

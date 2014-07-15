@@ -11,11 +11,10 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "Leaderboards/guangline.png",
-    "Competition/Friend's-View_07.png",
-    "Competition/Friend's-View_09.png"
+    "PredictionConfirm/bg-2.png",
+    "MatchPrediction/Will-xx_team-score-a-goal-yes.png"
   ],
-  "version": "1.4.0.1",
+  "version": "1.5.0.0",
   "widgetTree": {
     "classname": "Panel",
     "name": null,
@@ -318,7 +317,7 @@
       "classname": "Panel",
       "name": "Panel_153",
       "ZOrder": 0,
-      "actiontag": 1,
+      "actiontag": -1,
       "anchorPointX": 0,
       "anchorPointY": 0,
       "classType": "CocoStudio.EngineAdapterWrap.CSPanel",

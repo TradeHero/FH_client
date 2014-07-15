@@ -10,7 +10,9 @@
   "designHeight": 1136,
   "designWidth": 640,
   "textures": [],
-  "texturesPng": [],
+  "texturesPng": [
+    "chat/Friend_Chatbox.png"
+  ],
   "version": "1.5.0.0",
   "widgetTree": {
     "classname": "Panel",
@@ -764,8 +766,8 @@
           "rotation": 0,
           "scaleX": 1,
           "scaleY": 1,
-          "sizePercentX": 0.065625,
-          "sizePercentY": 0.0299295783,
+          "sizePercentX": 0.0984375,
+          "sizePercentY": 0.0448943675,
           "sizeType": 0,
           "tag": 24,
           "touchAble": true,

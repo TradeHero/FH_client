@@ -39,6 +39,7 @@ EventNameList =
     "Enter_View_Selected_Leagues",
     "Enter_Competition_Leagues",
     "Enter_Competition_Detail",
+    "Enter_Competition_Chat",
 
     "Do_Register",
     "Do_Register_Name",

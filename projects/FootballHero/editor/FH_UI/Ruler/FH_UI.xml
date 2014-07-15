@@ -216,4 +216,16 @@
     <Project>PredFinalConfirmButton</Project>
     <GuidesList />
   </GuidesProject>
+  <GuidesProject>
+    <Project>Chat</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>ChatMessageContent</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>ChatMyMessageContent</Project>
+    <GuidesList />
+  </GuidesProject>
 </ArrayOfGuidesProject>
