@@ -27,6 +27,7 @@ GET_FRIENDS_LEADERBOARD_REST_CALL = SERVER_IP.."/api/leaderboards/getFriendsLead
 GET_COMPETITION_LIST_REST_CALL = SERVER_IP.."/api/competitions/getCompetitionsForUser"
 GET_COMPETITION_DETAIL_REST_CALL = SERVER_IP.."/api/leaderboards/getCompetitionInfoAndLeaderboard"
 GET_COMPETITION_LEAGUE_REST_CALL = SERVER_IP.."/api/competitions/getCompetitionLeagueIds"
+GET_CHAT_MESSAGE_REST_CALL = SERVER_IP.."/api/chat/getChatMessages"
 POST_COUPONS_REST_CALL = SERVER_IP.."/api/coupons/placeCoupons"
 POST_FAV_TEAM_REST_CALL = SERVER_IP.."/api/user/setFavoriteTeam"
 POST_LOGO_REST_CALL = SERVER_IP.."/api/user/uploadProfilePicture"
@@ -34,6 +35,7 @@ POST_CREATE_COMPETITION_REST_CALL = SERVER_IP.."/api/competitions/createUserComp
 POST_JOIN_COMPETITION_REST_CALL = SERVER_IP.."/api/competitions/joinCompetitionWithToken"
 POST_SHARE_COMPETITION_REST_CALL = SERVER_IP.."/api/competitions/shareCompetitionToFacebookWall"
 POST_PASSWORD_RESET_REST_CALL = SERVER_IP.."/api/user/requestPasswordResetLink"
+POST_CHAT_MESSAGE_REST_CALL = SERVER_IP.."/api/chat/postChatMessage"
 
 
 FACEBOOK_FRIENDS_LIST_CALL = "/me/friends?access_token="
@@ -54,6 +56,7 @@ function setServerIP( serverIp )
     GET_COMPETITION_LIST_REST_CALL = serverIp.."/api/competitions/getCompetitionsForUser"
     GET_COMPETITION_DETAIL_REST_CALL = serverIp.."/api/leaderboards/getCompetitionInfoAndLeaderboard"
     GET_COMPETITION_LEAGUE_REST_CALL = serverIp.."/api/competitions/getCompetitionLeagueIds"
+    GET_CHAT_MESSAGE_REST_CALL = serverIp.."/api/chat/getChatMessages"
     POST_COUPONS_REST_CALL = serverIp.."/api/coupons/placeCoupons"
     POST_FAV_TEAM_REST_CALL= serverIp.."/api/user/setFavoriteTeam"
     POST_LOGO_REST_CALL = serverIp.."/api/user/uploadProfilePicture"
@@ -61,6 +64,7 @@ function setServerIP( serverIp )
     POST_JOIN_COMPETITION_REST_CALL = serverIp.."/api/competitions/joinCompetitionWithToken"
     POST_SHARE_COMPETITION_REST_CALL = serverIp.."/api/competitions/shareCompetitionToFacebookWall"
     POST_PASSWORD_RESET_REST_CALL = serverIp.."/api/user/requestPasswordResetLink"
+    POST_CHAT_MESSAGE_REST_CALL = serverIp.."/api/chat/postChatMessage"
 
     CDN_SERVER_IP = "http://portalvhdss3c1vgx5mrzv.blob.core.windows.net/fhdevsettings/"
 

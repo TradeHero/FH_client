@@ -55,6 +55,8 @@ EventNameList =
     "Do_Join_Competition",
     "Do_Share_Competition",
     "Do_Password_Reset",
+    "Do_Send_Chat_Message",
+    "Do_Get_Chat_Message",
 
     "Show_Info",
     "Show_Error_Message",
@@ -80,6 +82,8 @@ EventNameDosenotTrackList =
     "Do_Join_Competition",
     "Do_Share_Competition",
     "Do_Password_Reset",
+    "Do_Send_Chat_Message",
+    "Do_Get_Chat_Message",
 
     "Check_File_Version",
     "Show_Info",

@@ -47,6 +47,7 @@ function Logic:new()
 		mCoupons = Coupons:new(),  -- DS: Coupons
 		mPreviousLeagueSelected = 0,
 		mSelectedLeagues = nil,
+		mLastChatMessageTimestamp = 0,
 		sessionToken = 0,
 		email = "",
 		password = "",
@@ -115,6 +116,14 @@ end
 
 function Logic:setSelectedLeagues( selectedLeagues )
 	self.mSelectedLeagues = selectedLeagues
+end
+
+function Logic:getLastChatMessageTimestamp()
+	return self.mLastChatMessageTimestamp
+end
+
+function Logic:setLastChatMessageTimestamp( timestamp )
+	self.mLastChatMessageTimestamp = timestamp
 end
 
 function Logic:setUserInfo( email, password, sessionToken, userId )

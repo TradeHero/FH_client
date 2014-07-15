@@ -228,4 +228,8 @@
     <Project>ChatMyMessageContent</Project>
     <GuidesList />
   </GuidesProject>
+  <GuidesProject>
+    <Project>ChatMessageDate</Project>
+    <GuidesList />
+  </GuidesProject>
 </ArrayOfGuidesProject>

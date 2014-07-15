@@ -4,21 +4,26 @@ local SceneManager = require("scripts.SceneManager")
 local EventManager = require("scripts.events.EventManager").getInstance()
 local Event = require("scripts.events.Event").EventList
 local ViewUtils = require("scripts.views.ViewUtils")
+local Logic = require("scripts.Logic").getInstance()
 
 
 local mWidget
+local mCompetitionId
 local mContainerHeight
+local mHasTodayMessage
 local MESSAGE_CONTAINER_NAME = "messageContainer"
 
-function loadFrame()
+-- DS for chatMessages: see ChatMessages
+function loadFrame( competitionId, chatMessages )
+    mCompetitionId = competitionId
+
     local widget = GUIReader:shareReader():widgetFromJsonFile("scenes/Chat.json")
     mWidget = widget
     mWidget:registerScriptHandler( EnterOrExit )
     SceneManager.clearNAddWidget( widget )
 
-    local messages = {}
-    table.insert( messages, { ["name"] = "Sam", ["message"] = "China will win." })
-    initMessage( messages )
+    mHasTodayMessage = false
+    initMessage( chatMessages )
 
     local backBt = widget:getChildByName("back")
     backBt:addTouchEventListener( backEventHandler )
@@ -54,14 +59,12 @@ function sendEventHandler( sender,eventType )
         local message = messageInput:getText()
         messageInput:setText("")
         if string.len( message ) > 0 then
-            local messages = {}
-            table.insert( messages, { ["name"] = "Seb", ["message"] = message })
-            addMessage( messages )
+            EventManager:postEvent( Event.Do_Send_Chat_Message, { mCompetitionId, message } )
         end
     end
 end
 
-function initMessage( messages )
+function initMessage( chatMessages )
     local contentContainer = tolua.cast( mWidget:getChildByName("ScrollView"), "ScrollView" )
     contentContainer:removeAllChildrenWithCleanup( true )
 
@@ -69,31 +72,65 @@ function initMessage( messages )
     layoutParameter:setGravity(LINEAR_GRAVITY_CENTER_VERTICAL)
     mContainerHeight = 0
 
-    for i = 1, table.getn( messages ) do
-        local content = createMessageContent( messages[i] )
+    for k,v in pairs( chatMessages:getMessageDateList() ) do
+        local content = SceneManager.widgetFromJsonFile("scenes/ChatMessageDate.json")
+        local dateDisplay = tolua.cast( content:getChildByName("date"), "Label" )
+        dateDisplay:setText( v["dateDisplay"] )
         
+        -- Record whether there is message of today. So no more today will be added for addMessages()
+        if v["dateDisplay"] == "Today" then
+            mHasTodayMessage = true
+        end
+
         content:setLayoutParameter( layoutParameter )
         contentContainer:addChild( content )
         mContainerHeight = mContainerHeight + content:getSize().height
+
+        local messages = v["messages"]
+        for i = 1, table.getn( messages ) do
+            local content = createMessageContent( messages[i] )
+            
+            content:setLayoutParameter( layoutParameter )
+            contentContainer:addChild( content )
+            mContainerHeight = mContainerHeight + content:getSize().height
+        end
     end
 
     contentContainer:setInnerContainerSize( CCSize:new( 0, mContainerHeight ) )
     local layout = tolua.cast( contentContainer, "Layout" )
     layout:requestDoLayout()
+
+    contentContainer:jumpToBottom()
 end
 
-function addMessage( messages )
+function addMessage( chatMessages )
     local contentContainer = tolua.cast( mWidget:getChildByName("ScrollView"), "ScrollView" )
 
     local layoutParameter = LinearLayoutParameter:create()
     layoutParameter:setGravity(LINEAR_GRAVITY_CENTER_VERTICAL)
 
-    for i = 1, table.getn( messages ) do
-        local content = createMessageContent( messages[i] )
-        
-        content:setLayoutParameter( layoutParameter )
-        contentContainer:addChild( content )
-        mContainerHeight = mContainerHeight + content:getSize().height
+    for k,v in pairs( chatMessages:getMessageDateList() ) do
+
+        -- Add message must be happened today.
+        -- There might be bug during mid-night, but who cares.
+        if not mHasTodayMessage then
+            local content = SceneManager.widgetFromJsonFile("scenes/ChatMessageDate.json")
+            local dateDisplay = tolua.cast( content:getChildByName("date"), "Label" )
+            dateDisplay:setText( v["dateDisplay"] )
+
+            content:setLayoutParameter( layoutParameter )
+            contentContainer:addChild( content )
+            mContainerHeight = mContainerHeight + content:getSize().height
+        end
+
+        local messages = v["messages"]
+        for i = 1, table.getn( messages ) do
+            local content = createMessageContent( messages[i] )
+            
+            content:setLayoutParameter( layoutParameter )
+            contentContainer:addChild( content )
+            mContainerHeight = mContainerHeight + content:getSize().height
+        end
     end
 
     contentContainer:setInnerContainerSize( CCSize:new( 0, mContainerHeight ) )
@@ -104,20 +141,18 @@ function addMessage( messages )
 end
 
 
-local index = 1
 function createMessageContent( message )
-    local name = message["name"]
+    local name = message["UserName"]
     -- Todo according to the name of the sender
     local content
-    if index % 2 == 0 then
-        content = SceneManager.widgetFromJsonFile("scenes/ChatMessageContent.json")
-        relayoutChatMessage( content, message, false )
-    else
+    if name == Logic:getDisplayName() then
         content = SceneManager.widgetFromJsonFile("scenes/ChatMyMessageContent.json")
         relayoutChatMessage( content, message, true )
+    else
+        content = SceneManager.widgetFromJsonFile("scenes/ChatMessageContent.json")
+        relayoutChatMessage( content, message, false )
     end
 
-    index = index + 1
     return content
 end
 
@@ -135,9 +170,9 @@ function relayoutChatMessage( content, message, isMe )
         messagePanelNTextOffset = ccp( 140, 50 )
     end
 
-    local name = message["name"]
-    local text = message["message"]
-    local time = message["time"]
+    local name = message["UserName"]
+    local text = message["MessageText"]
+    local time = message["UnixTimeStamp"]
 
     local messageBg = tolua.cast( content:getChildByName("bg"), "ImageView" )
     local messageLabel = tolua.cast( content:getChildByName("message"), "Label" )
@@ -145,6 +180,7 @@ function relayoutChatMessage( content, message, isMe )
     local messageTime = tolua.cast( content:getChildByName("time"), "Label" )
     messageName:setText( name )
     messageLabel:setText( text )
+    messageTime:setText( os.date( "%H:%M", time ) )
     local originSize = messageLabel:getSize()
 
     local messageNamePositionX = messageName:getPositionX()

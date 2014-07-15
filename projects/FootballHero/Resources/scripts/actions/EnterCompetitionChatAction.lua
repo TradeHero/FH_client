@@ -1,9 +1,7 @@
 module(..., package.seeall)
 
 function action( param )
-	local ChatScene = require("scripts.views.CompetitionChatScene")
-	if ChatScene.isFrameShown() then
-		return
-	end
-    ChatScene.loadFrame()
+	-- Do nothing. 
+	-- Just put an event into the queue to work with EventManager:popHistory().
+	-- Acutally logic is within DoGetChatMessageAction.lua
 end
