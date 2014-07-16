@@ -64,6 +64,7 @@
     <string>ChatMessageContent.json</string>
     <string>ChatMyMessageContent.json</string>
     <string>ChatMessageDate.json</string>
+    <string>ChatMessageEmptyIndi.json</string>
   </JsonList>
   <CanvasSize>
     <Width>640</Width>
@@ -73,14 +74,7 @@
   <ProjectType>UIProject</ProjectType>
   <ResRelativePath />
   <imageFileList />
-  <imagePngList>
-    <string>chat/Chat_Room_Box.png</string>
-    <string>Competition/btn_black_icon.png</string>
-    <string>chat/CopyCode.png</string>
-    <string>chat/Share_Icon.png</string>
-    <string>chat/Chat_Icon.png</string>
-    <string>chat/GreenArrow.png</string>
-  </imagePngList>
+  <imagePngList />
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>ChatMessageDate.json</CurrentUIJson>
+  <CurrentUIJson>ChatMessageEmptyIndi.json</CurrentUIJson>
 </UIProject>

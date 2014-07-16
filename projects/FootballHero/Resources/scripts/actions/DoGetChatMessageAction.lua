@@ -41,6 +41,7 @@ function action( param )
 end
 
 function onRequestSuccess( jsonResponse )
+    local ChatScene = require("scripts.views.CompetitionChatScene")
     local ChatMessages = require("scripts.data.ChatMessages").ChatMessages
 
     local chatMessages = ChatMessages:new()
@@ -50,10 +51,11 @@ function onRequestSuccess( jsonResponse )
 
     -- Get the time stamp for the last message.
     local lastMessage = jsonResponse[table.getn( jsonResponse )]
-    Logic:setLastChatMessageTimestamp( lastMessage["UnixTimeStamp"] )
+    if lastMessage ~= nil then
+        Logic:setLastChatMessageTimestamp( lastMessage["UnixTimeStamp"] )
+    end
 
     -- Display the messages.
-    local ChatScene = require("scripts.views.CompetitionChatScene")
     if ChatScene.isFrameShown() then
         ChatScene.addMessage( chatMessages )
     else

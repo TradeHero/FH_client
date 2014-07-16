@@ -10,13 +10,7 @@
   "designHeight": 1136,
   "designWidth": 640,
   "textures": [],
-  "texturesPng": [
-    "header/guangyun.png",
-    "history/bg.png",
-    "header/back.png",
-    "chat/Chat_Nosend.png",
-    "chat/Send_box.png"
-  ],
+  "texturesPng": [],
   "version": "1.5.0.0",
   "widgetTree": {
     "classname": "Panel",

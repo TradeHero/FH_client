@@ -10,14 +10,7 @@
   "designHeight": 1136,
   "designWidth": 640,
   "textures": [],
-  "texturesPng": [
-    "chat/Chat_Room_Box.png",
-    "Competition/btn_black_icon.png",
-    "chat/CopyCode.png",
-    "chat/Share_Icon.png",
-    "chat/Chat_Icon.png",
-    "chat/GreenArrow.png"
-  ],
+  "texturesPng": [],
   "version": "1.5.0.0",
   "widgetTree": {
     "classname": "Panel",

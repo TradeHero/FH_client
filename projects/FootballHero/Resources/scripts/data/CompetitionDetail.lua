@@ -42,6 +42,12 @@ CompetitionDetail = {}
 
       "OwningUserName": "Test001"
 
+   },
+
+   "LatestChatMessage": {
+      "MessageText":"111",
+      "UserName":"Test003",
+      "UnixTimeStamp":1405419592
    }
 
 }
@@ -59,6 +65,7 @@ function CompetitionDetail:new( detail )
       joinToken = detail.CompetitionInfoDTO.JoinToken,
       open = detail.CompetitionInfoDTO.Open,
       owningUserName = detail.CompetitionInfoDTO.OwningUserName,
+      latestChatMessage = detail.LatestChatMessage,
    }
 
    setmetatable(obj, self)
@@ -99,4 +106,8 @@ end
 
 function CompetitionDetail:getOwningUserName()
    return self.owningUserName
+end
+
+function CompetitionDetail:getLatestChatMessage()
+   return self.latestChatMessage
 end

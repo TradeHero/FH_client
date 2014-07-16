@@ -1,6 +1,7 @@
 module(..., package.seeall)
 
 local SceneManager = require("scripts.SceneManager")
+local Navigator = require("scripts.views.Navigator")
 local EventManager = require("scripts.events.EventManager").getInstance()
 local Event = require("scripts.events.Event").EventList
 local ViewUtils = require("scripts.views.ViewUtils")
@@ -8,6 +9,7 @@ local Logic = require("scripts.Logic").getInstance()
 
 
 local mWidget
+local mChatMessageEmptyIndi
 local mCompetitionId
 local mContainerHeight
 local mHasTodayMessage
@@ -22,6 +24,8 @@ function loadFrame( competitionId, chatMessages )
     mWidget:registerScriptHandler( EnterOrExit )
     SceneManager.clearNAddWidget( widget )
 
+    Navigator.loadFrame( widget )
+    
     mHasTodayMessage = false
     initMessage( chatMessages )
 
@@ -96,6 +100,13 @@ function initMessage( chatMessages )
         end
     end
 
+    if mContainerHeight == 0 then
+        mChatMessageEmptyIndi = SceneManager.widgetFromJsonFile("scenes/ChatMessageEmptyIndi.json")
+        mChatMessageEmptyIndi:setLayoutParameter( layoutParameter )
+        contentContainer:addChild( mChatMessageEmptyIndi )
+        mContainerHeight = mContainerHeight + mChatMessageEmptyIndi:getSize().height
+    end
+
     contentContainer:setInnerContainerSize( CCSize:new( 0, mContainerHeight ) )
     local layout = tolua.cast( contentContainer, "Layout" )
     layout:requestDoLayout()
@@ -108,6 +119,11 @@ function addMessage( chatMessages )
 
     local layoutParameter = LinearLayoutParameter:create()
     layoutParameter:setGravity(LINEAR_GRAVITY_CENTER_VERTICAL)
+
+    if mChatMessageEmptyIndi ~= nil then
+        mContainerHeight = mContainerHeight - mChatMessageEmptyIndi:getSize().height
+        mChatMessageEmptyIndi:removeFromParent()
+    end
 
     for k,v in pairs( chatMessages:getMessageDateList() ) do
 

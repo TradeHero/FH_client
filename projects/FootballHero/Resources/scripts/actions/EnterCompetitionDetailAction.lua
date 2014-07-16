@@ -19,6 +19,9 @@ function action( param )
     competitionId = param[1]
 
     url = url.."?competitionId="..competitionId.."&sortType="..sortType.."&step="..step
+    if RequestUtils.USE_DEV then
+        url = url.."&useDev=true"
+    end
 
     local requestInfo = {}
     requestInfo.requestData = ""

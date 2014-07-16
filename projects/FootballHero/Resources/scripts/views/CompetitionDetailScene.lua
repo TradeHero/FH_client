@@ -11,6 +11,7 @@ local Logic = require("scripts.Logic").getInstance()
 
 local mWidget
 local mTokenInput
+local mChatMessageContainer
 local mCompetitionId
 local mSubType
 local mStep
@@ -98,6 +99,10 @@ function initContent( competitionDetail )
     contentContainer:addChild( content )
     contentHeight = contentHeight + content:getSize().height
 
+    -- Add the latest chat message.
+    mChatMessageContainer = content:getChildByName("chatRoom")
+    updateLatestChatMessage( competitionDetail:getLatestChatMessage() )
+
     local showLeague = content:getChildByName("SelectLeague")
     showLeague:addTouchEventListener( showLeagueEventHandler )
     local copyCodeBt = content:getChildByName("copy")
@@ -129,6 +134,38 @@ function initContent( competitionDetail )
     local layout = tolua.cast( contentContainer, "Layout" )
     layout:requestDoLayout()
     contentContainer:addEventListenerScrollView( scrollViewEventHandler )
+end
+
+function updateLatestChatMessage( messageInfo )
+    local MAX_MESSAGE_WIDTH = 390
+
+    local name = tolua.cast( mChatMessageContainer:getChildByName("name"), "Label" )
+    local message = tolua.cast( mChatMessageContainer:getChildByName("message"), "Label" )
+    local time = tolua.cast( mChatMessageContainer:getChildByName("time"), "Label" )
+
+    if messageInfo ~= nil then
+        name:setEnabled( true )
+        time:setEnabled( true )
+        
+        name:setText( messageInfo["UserName"] )
+        message:setText( messageInfo["MessageText"] )
+        if message:getSize().width > MAX_MESSAGE_WIDTH then
+            local shortMessage = string.sub( messageInfo["MessageText"], 0, 39 ).."..."
+            message:setText( shortMessage )
+        end
+
+        local now = os.time()
+        local messageTime = messageInfo["UnixTimeStamp"]
+        if os.date( "%x", now ) == os.date( "%x", messageTime ) then
+            time:setText( os.date( "%H:%M", messageTime ) )
+        else
+            time:setText( os.date( "%d %B", messageTime ) )
+        end
+    else
+        name:setEnabled( false )
+        message:setText( "Be the first to chat!" )
+        time:setEnabled( false )
+    end
 end
 
 function showLeagueEventHandler( sender, eventType )
