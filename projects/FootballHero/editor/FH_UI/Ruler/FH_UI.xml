@@ -232,8 +232,4 @@
     <Project>ChatMessageDate</Project>
     <GuidesList />
   </GuidesProject>
-  <GuidesProject>
-    <Project>ChatMessageEmptyIndi</Project>
-    <GuidesList />
-  </GuidesProject>
 </ArrayOfGuidesProject>

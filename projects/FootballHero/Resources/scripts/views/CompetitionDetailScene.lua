@@ -68,9 +68,15 @@ function initContent( competitionDetail )
     local content = GUIReader:shareReader():widgetFromJsonFile("scenes/CompetitionLeaderboardInfo.json")
     local time = tolua.cast( content:getChildByName("time"), "Label" )
     local description = tolua.cast( content:getChildByName("description"), "Label" )
-    time:setText( string.format( time:getStringValue(), 
+    if competitionDetail:getEndTime() == 0 then
+        time:setText( string.format( "%s until forever", 
+                os.date( "%m/%d/%Y", competitionDetail:getStartTime() ) ) )
+    else
+        time:setText( string.format( "%s to %s", 
                 os.date( "%m/%d/%Y", competitionDetail:getStartTime() ), 
                 os.date( "%m/%d/%Y", competitionDetail:getEndTime() ) ) )
+    end
+    
     description:setText( competitionDetail:getDescription() )
 
     -- Token

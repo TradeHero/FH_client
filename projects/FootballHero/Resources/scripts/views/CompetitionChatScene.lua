@@ -140,6 +140,8 @@ function addMessage( chatMessages )
             content:setLayoutParameter( layoutParameter )
             contentContainer:addChild( content )
             mContainerHeight = mContainerHeight + content:getSize().height
+            
+            mHasTodayMessage = true
         end
 
         local messages = v["messages"]

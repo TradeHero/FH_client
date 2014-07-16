@@ -10,7 +10,7 @@ local Logic = require("scripts.Logic").getInstance()
 
 function action( param )
 
-    local name, description, endTime, selectedLeagues = param[1], param[2], param[3], param[4]
+    local name, description, numberOfMonth, selectedLeagues = param[1], param[2], param[3], param[4]
 
     if string.len( name ) == 0 then
         RequestUtils.onRequestFailed( "Title cannot blank." )
@@ -21,11 +21,6 @@ function action( param )
         return
     end
 
-    if endTime < os.time() then
-        RequestUtils.onRequestFailed( "The end date cannot be in the past." )
-        return
-    end
-
     if table.getn( selectedLeagues ) == 0 then
         RequestUtils.onRequestFailed( "Selected League cannot be blank." )
         return
@@ -33,7 +28,7 @@ function action( param )
 
     local requestContent = { Name = name, 
                             Description = description, 
-                            EndTime = endTime, 
+                            NumberOfMonth = numberOfMonth, 
                             AllowedLeaguesIds = selectedLeagues }
     local requestContentText = Json.encode( requestContent )
     print( requestContentText )
