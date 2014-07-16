@@ -163,7 +163,7 @@ function updateLatestChatMessage( messageInfo )
         end
     else
         name:setEnabled( false )
-        message:setText( "Be the first to chat!" )
+        message:setText( "Tap here to start chatting!" )
         time:setEnabled( false )
     end
 end

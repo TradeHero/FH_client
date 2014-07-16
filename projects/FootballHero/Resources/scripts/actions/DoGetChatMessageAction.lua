@@ -10,11 +10,14 @@ local Logic = require("scripts.Logic").getInstance()
 
 
 local mCompetitionId
+local mCallback
 
 function action( param )
 
     mCompetitionId = param[1]
     local last = param[2]
+    local silent = param[3]
+    mCallback = param[4]
 
     local requestContent = {}
     local requestContentText = Json.encode( requestContent )
@@ -37,7 +40,9 @@ function action( param )
     httpRequest:addHeader( Logic:getAuthSessionString() )
     httpRequest:sendHttpRequest( url, handler )
 
-    ConnectingMessage.loadFrame()
+    if not silent then
+        ConnectingMessage.loadFrame()
+    end
 end
 
 function onRequestSuccess( jsonResponse )
@@ -60,5 +65,9 @@ function onRequestSuccess( jsonResponse )
         ChatScene.addMessage( chatMessages )
     else
         ChatScene.loadFrame( mCompetitionId, chatMessages )
+    end
+
+    if mCallback ~= nil then
+        mCallback()
     end
 end

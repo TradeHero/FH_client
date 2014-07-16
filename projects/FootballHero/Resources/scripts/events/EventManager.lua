@@ -48,6 +48,14 @@ function EventManager:postEvent( eventId, param )
 	end
 end
 
+function EventManager:scheduledExecutor( func, time )
+	local taskArray = CCArray:create()
+	taskArray:addObject( CCDelayTime:create( time ) )
+	taskArray:addObject( CCCallFuncN:create( func ) )
+
+	CCDirector:sharedDirector():getRunningScene():runAction( CCSequence:create( taskArray ) )
+end
+
 function EventManager:addHistory( eventId, param )
 	local eventName = Event.GetEventNameById( eventId )
 	if Event.EventDosenotTrackList[eventName] == nil then

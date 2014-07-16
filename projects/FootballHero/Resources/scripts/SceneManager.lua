@@ -138,6 +138,10 @@ function removeWidget( widget )
 	mSceneGameLayer:removeWidget( widget )
 end
 
+function isWidgetShown( widget )
+	
+end
+
 function widgetFromJsonFile( fileName )
 	if mWidgets[fileName] == nil then
 		local content = GUIReader:shareReader():widgetFromJsonFile( fileName )

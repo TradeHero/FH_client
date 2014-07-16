@@ -9,11 +9,11 @@ local Logic = require("scripts.Logic").getInstance()
 
 
 local mWidget
-local mChatMessageEmptyIndi
 local mCompetitionId
 local mContainerHeight
 local mHasTodayMessage
 local MESSAGE_CONTAINER_NAME = "messageContainer"
+local RELOAD_DELAY_TIME = 5
 
 -- DS for chatMessages: see ChatMessages
 function loadFrame( competitionId, chatMessages )
@@ -25,7 +25,7 @@ function loadFrame( competitionId, chatMessages )
     SceneManager.clearNAddWidget( widget )
 
     Navigator.loadFrame( widget )
-    
+
     mHasTodayMessage = false
     initMessage( chatMessages )
 
@@ -37,6 +37,21 @@ function loadFrame( competitionId, chatMessages )
 
     local messageInput = ViewUtils.createTextInput( mWidget:getChildByName( MESSAGE_CONTAINER_NAME ), "", 470, 45 )
     messageInput:setFontColor( ccc3( 0, 0, 0 ) )
+
+    getLatestMessages()
+end
+
+function getLatestMessages()
+    EventManager:scheduledExecutor( doGetLatestMessages, RELOAD_DELAY_TIME )
+end
+
+local mLastGetLatestMessageTime = 0
+function doGetLatestMessages()
+    -- Only send the request when players are still in the chat UI.
+    if mWidget ~= nil and os.time() - mLastGetLatestMessageTime >= RELOAD_DELAY_TIME then
+        EventManager:postEvent( Event.Do_Get_Chat_Message, { mCompetitionId, Logic:getLastChatMessageTimestamp(), true, getLatestMessages } )
+        mLastGetLatestMessageTime = os.time()
+    end
 end
 
 function EnterOrExit( eventType )
@@ -100,13 +115,6 @@ function initMessage( chatMessages )
         end
     end
 
-    if mContainerHeight == 0 then
-        mChatMessageEmptyIndi = SceneManager.widgetFromJsonFile("scenes/ChatMessageEmptyIndi.json")
-        mChatMessageEmptyIndi:setLayoutParameter( layoutParameter )
-        contentContainer:addChild( mChatMessageEmptyIndi )
-        mContainerHeight = mContainerHeight + mChatMessageEmptyIndi:getSize().height
-    end
-
     contentContainer:setInnerContainerSize( CCSize:new( 0, mContainerHeight ) )
     local layout = tolua.cast( contentContainer, "Layout" )
     layout:requestDoLayout()
@@ -119,11 +127,6 @@ function addMessage( chatMessages )
 
     local layoutParameter = LinearLayoutParameter:create()
     layoutParameter:setGravity(LINEAR_GRAVITY_CENTER_VERTICAL)
-
-    if mChatMessageEmptyIndi ~= nil then
-        mContainerHeight = mContainerHeight - mChatMessageEmptyIndi:getSize().height
-        mChatMessageEmptyIndi:removeFromParent()
-    end
 
     for k,v in pairs( chatMessages:getMessageDateList() ) do
 
