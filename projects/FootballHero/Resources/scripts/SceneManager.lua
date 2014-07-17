@@ -3,6 +3,7 @@ module(..., package.seeall)
 local EventManager = require("scripts.events.EventManager").getInstance()
 local Event = require("scripts.events.Event").EventList
 local CheckFilesVersionAction = require("scripts.actions.CheckFilesVersionAction")
+local CheckStartTutorialAction = require("scripts.actions.CheckStartTutorialAction")
 local EnterMatchListAction = require("scripts.actions.EnterMatchListAction")
 local EnterMatchAction = require("scripts.actions.EnterMatchAction")
 local EnterPredictionConfirmAction = require("scripts.actions.EnterPredictionConfirmAction")
@@ -76,6 +77,7 @@ end
 
 function initEvents()
 	EventManager:registerEventHandler( Event.Check_File_Version, CheckFilesVersionAction )
+	EventManager:registerEventHandler( Event.Check_Start_Tutorial, CheckStartTutorialAction )
 	EventManager:registerEventHandler( Event.Enter_Login_N_Reg, EnterLoginNRegAction )
 	EventManager:registerEventHandler( Event.Enter_Register, EnterRegisterAction )
 	EventManager:registerEventHandler( Event.Enter_Register_Name, EnterRegisterNameAction )

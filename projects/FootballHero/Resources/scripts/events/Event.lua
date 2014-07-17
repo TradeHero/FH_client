@@ -16,6 +16,7 @@ end
 
 EventNameList = 
 { 
+    "Check_Start_Tutorial",
     "Check_File_Version",
 
     "Enter_Login_N_Reg",
@@ -85,6 +86,7 @@ EventNameDosenotTrackList =
     "Do_Send_Chat_Message",
     "Do_Get_Chat_Message",
 
+    "Check_Start_Tutorial",
     "Check_File_Version",
     "Show_Info",
     "Show_Error_Message",

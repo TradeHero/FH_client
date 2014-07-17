@@ -36,7 +36,7 @@ local function main()
 
     local eventManager = require("scripts.events.EventManager").getInstance()
     local event = require("scripts.events.Event").EventList
-    eventManager:postEvent( event.Enter_Login_N_Reg )
+    eventManager:postEvent( event.Check_Start_Tutorial )
 
     --eventManager:postEvent( event.Enter_Competition_Chat )
 end
