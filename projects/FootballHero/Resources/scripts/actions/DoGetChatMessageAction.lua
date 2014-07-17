@@ -9,10 +9,20 @@ local RequestUtils = require("scripts.RequestUtils")
 local Logic = require("scripts.Logic").getInstance()
 
 
+local mIsSending = false
 local mCompetitionId
 local mCallback
 
 function action( param )
+    if mIsSending then
+        print(" Is sending, skip... ")
+        local callback = param[4]
+        if callback ~= nil then
+            callback()
+        end
+        return
+    end
+    mIsSending = true
 
     mCompetitionId = param[1]
     local last = param[2]
@@ -33,7 +43,7 @@ function action( param )
     requestInfo.url = url
 
      local handler = function( isSucceed, body, header, status, errorBuffer )
-        RequestUtils.messageHandler( requestInfo, isSucceed, body, header, status, errorBuffer, RequestUtils.HTTP_200, onRequestSuccess )
+        RequestUtils.messageHandler( requestInfo, isSucceed, body, header, status, errorBuffer, RequestUtils.HTTP_200, onRequestSuccess, onRequestFailed )
     end
 
     local httpRequest = HttpRequestForLua:create( CCHttpRequest.kHttpGet )
@@ -70,4 +80,14 @@ function onRequestSuccess( jsonResponse )
     if mCallback ~= nil then
         mCallback()
     end
+
+    mIsSending = false
+end
+
+function onRequestFailed( errorBuffer )
+    if mCallback ~= nil then
+        mCallback()
+    end
+
+    mIsSending = false
 end

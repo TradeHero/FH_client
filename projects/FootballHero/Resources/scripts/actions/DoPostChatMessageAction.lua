@@ -46,5 +46,6 @@ function action( param )
 end
 
 function onRequestSuccess( jsonResponse )
-    EventManager:postEvent( Event.Do_Get_Chat_Message, { mCompetitionId, Logic:getLastChatMessageTimestamp(), true } )
+    local lastChatMesageTimestamp = Logic:getLastChatMessageTimestamp()
+    EventManager:postEvent( Event.Do_Get_Chat_Message, { mCompetitionId, lastChatMesageTimestamp, true } )
 end

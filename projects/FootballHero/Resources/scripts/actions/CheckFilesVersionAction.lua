@@ -100,15 +100,24 @@ function checkFile( fileIndex )
 end
 
 function onRequestSuccess( fileName, fileContent )
-	print("Update complete for file: "..fileName)
-    FileUtils.writeStringToFile( fileName, fileContent )
-
-    checkNext()
+    -- Compare the md5 for the new download file
+    local MD5ConfigId = MD5ConfigIDList[mCurrentFileIndex]
+	local serverMD5 = mConfigMd5Info[MD5ConfigId]
+	local localMD5 = MD5.sumhexa( fileContent )
+	if serverMD5 ~= nil and serverMD5 ~= localMD5 then
+		onRequestFailed("")
+	else
+		print("Update complete for file: "..fileName)
+		FileUtils.writeStringToFile( fileName, fileContent )
+		checkNext()
+	end
 end
 
 function onRequestFailed( errorBuffer )
 	if errorBuffer == "" then
-		errorBuffer = "Update file failed."
+		errorBuffer = "Update configurations failed. Please retry."
 	end
+
+	mCurrentFileIndex = mCurrentFileIndex - 1
     EventManager:postEvent( Event.Show_Error_Message, { errorBuffer, checkNext } )
 end
