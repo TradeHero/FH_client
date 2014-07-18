@@ -232,4 +232,12 @@
     <Project>ChatMessageDate</Project>
     <GuidesList />
   </GuidesProject>
+  <GuidesProject>
+    <Project>TutorialSelectFavourite</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>TutorialPrediction</Project>
+    <GuidesList />
+  </GuidesProject>
 </ArrayOfGuidesProject>

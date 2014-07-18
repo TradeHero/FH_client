@@ -8,6 +8,8 @@ local LeagueConfig = require("scripts.config.League")
 local TeamConfig = require("scripts.config.Team")
 local LeagueTeamConfig = require("scripts.config.LeagueTeams")
 local LeagueListScene = require("scripts.views.LeagueListScene")
+local TutorialManager = require("scripts.TutorialManager")
+
 
 local TEAM_NUM = 20
 local mWidget
@@ -37,6 +39,8 @@ function loadFrame()
 
     local leagueName = tolua.cast( mWidget:getChildByName("leagueName"), "Label" )
     leagueName:setText( "Please select your favourite team." )
+
+    TutorialManager.checkRunTutorial( TutorialManager.TUTORIAL_SEL_FAV_TEAM )
 end
 
 function EnterOrExit( eventType )

@@ -10,10 +10,7 @@
   "designHeight": 1136,
   "designWidth": 640,
   "textures": [],
-  "texturesPng": [
-    "PredictionConfirm/bg-2.png",
-    "MatchPrediction/Will-xx_team-score-a-goal-yes.png"
-  ],
+  "texturesPng": [],
   "version": "1.5.0.0",
   "widgetTree": {
     "classname": "Panel",
@@ -388,8 +385,8 @@
           "rotation": 0,
           "scaleX": 1.5,
           "scaleY": 1.5,
-          "sizePercentX": 0.065625,
-          "sizePercentY": 0.0299295783,
+          "sizePercentX": 0.0984375,
+          "sizePercentY": 0.0448943675,
           "sizeType": 0,
           "tag": 39,
           "touchAble": true,

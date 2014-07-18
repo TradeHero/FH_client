@@ -8,6 +8,7 @@ local Logic = require("scripts.Logic").getInstance()
 local EventManager = require("scripts.events.EventManager").getInstance()
 local Event = require("scripts.events.Event").EventList
 local MarketsForGameData = require("scripts.data.MarketsForGameData")
+local TutorialManager = require("scripts.TutorialManager")
 
 local mWidget
 local mMatch
@@ -37,6 +38,8 @@ function loadFrame()
 
     local skipBt = widget:getChildByName("skip")
     skipBt:addTouchEventListener( skipEventHandler )
+
+    TutorialManager.checkRunTutorial( TutorialManager.TUTORIAL_PREDICTION )
 end
 
 function EnterOrExit( eventType )

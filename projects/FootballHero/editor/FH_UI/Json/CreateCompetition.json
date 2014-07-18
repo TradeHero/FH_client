@@ -10,15 +10,7 @@
   "designHeight": 1136,
   "designWidth": 640,
   "textures": [],
-  "texturesPng": [
-    "Competition/create_competition.png",
-    "Competition/btn_yellow.png",
-    "header/guangyun.png",
-    "Competition/btn_black_icon.png",
-    "header/back.png",
-    "Competition/Ongoing_checkbox.png",
-    "Competition/icn_tick_green.png"
-  ],
+  "texturesPng": [],
   "version": "1.5.0.0",
   "widgetTree": {
     "classname": "Panel",

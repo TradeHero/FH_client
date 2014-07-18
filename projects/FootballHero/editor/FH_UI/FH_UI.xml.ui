@@ -64,6 +64,8 @@
     <string>ChatMessageContent.json</string>
     <string>ChatMyMessageContent.json</string>
     <string>ChatMessageDate.json</string>
+    <string>TutorialSelectFavourite.json</string>
+    <string>TutorialPrediction.json</string>
   </JsonList>
   <CanvasSize>
     <Width>640</Width>
@@ -74,14 +76,9 @@
   <ResRelativePath />
   <imageFileList />
   <imagePngList>
-    <string>Competition/create_competition.png</string>
-    <string>Competition/btn_yellow.png</string>
-    <string>header/guangyun.png</string>
-    <string>Competition/btn_black_icon.png</string>
-    <string>header/back.png</string>
-    <string>Competition/Ongoing_checkbox.png</string>
-    <string>Competition/icn_tick_green.png</string>
+    <string>Tutorial/Single_Tap.png</string>
+    <string>Tutorial/OK_grey.png</string>
   </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>CreateCompetition.json</CurrentUIJson>
+  <CurrentUIJson>TutorialPrediction.json</CurrentUIJson>
 </UIProject>
