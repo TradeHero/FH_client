@@ -71,10 +71,25 @@ namespace Utils
 		pStack->clean();
 	}
     
-    void Misc::sendMail(char* receiver, char* subject, char* body)
+    void Misc::sendMail(char* receiver, char* subject, char* body, int errorHandler)
     {
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-		MiscHandler::getInstance()->sendMail(receiver, subject, body);
+		bool result = MiscHandler::getInstance()->sendMail(receiver, subject, body);
+        if (!result)
+        {
+            CCScriptEngineProtocol* pScriptProtocol = CCScriptEngineManager::sharedManager()->getScriptEngine();
+            cocos2d::CCLuaEngine* pLuaEngine = dynamic_cast<CCLuaEngine*>(pScriptProtocol);
+            if (pLuaEngine == NULL)
+            {
+                assert(false);
+                return;
+            }
+            
+            CCLuaStack* pStack = pLuaEngine->getLuaStack();
+            pStack->pushBoolean(false);
+            int ret = pStack->executeFunctionByHandler(errorHandler, 1);
+            pStack->clean();
+        }
 #endif
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
         

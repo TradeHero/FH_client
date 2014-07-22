@@ -17,7 +17,7 @@ namespace Utils
 
 		void selectImageResult(bool success);
         
-        void sendMail(char* receiver, char* subject, char* body);
+        void sendMail(char* receiver, char* subject, char* body, int errorHandler);
         
 		char* createFormWithFile(const char* begin, const char* end, const char* filePath, const char* pszMode, unsigned long *pSize);
 	protected:

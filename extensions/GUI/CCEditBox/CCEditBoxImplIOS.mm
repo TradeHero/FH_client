@@ -79,6 +79,7 @@ static const int CC_EDIT_BOX_PADDING = 5;
         textField_.delegate = self;
         textField_.hidden = true;
 		textField_.returnKeyType = UIReturnKeyDefault;
+        textField_.adjustsFontSizeToFitWidth = YES;
         [textField_ addTarget:self action:@selector(textChanged) forControlEvents:UIControlEventEditingChanged];
         self.editBox = editBox;
         

@@ -33,6 +33,6 @@
 
 - (void)selectImage;
 
-- (void)sendMail:(NSString *)receiver withSubject:(NSString *)subject withBody:(NSString *)body;
+- (bool)sendMail:(NSString *)receiver withSubject:(NSString *)subject withBody:(NSString *)body;
 
 @end

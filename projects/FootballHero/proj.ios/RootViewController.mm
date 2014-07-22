@@ -118,16 +118,24 @@
 }
 
 
-- (void)sendMail:(NSString *)receiver withSubject:(NSString *)subject withBody:(NSString *)body
+- (bool)sendMail:(NSString *)receiver withSubject:(NSString *)subject withBody:(NSString *)body
 {
-    MFMailComposeViewController* controller = [[MFMailComposeViewController alloc] init];
-    controller.mailComposeDelegate = self;
-    [controller setSubject:subject];
-    [controller setToRecipients:[NSArray arrayWithObject:receiver]];
-    [controller setMessageBody:body isHTML:NO];
-    
-    [self presentViewController:controller animated:YES completion:nil];
-    [controller release];
+    if ([MFMailComposeViewController canSendMail])
+    {
+        MFMailComposeViewController* controller = [[MFMailComposeViewController alloc] init];
+        controller.mailComposeDelegate = self;
+        [controller setSubject:subject];
+        [controller setToRecipients:[NSArray arrayWithObject:receiver]];
+        [controller setMessageBody:body isHTML:NO];
+        
+        [self presentViewController:controller animated:YES completion:nil];
+        [controller release];
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 
 - (void)mailComposeController: (MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error;
