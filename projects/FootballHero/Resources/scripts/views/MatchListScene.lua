@@ -36,6 +36,7 @@ function loadFrame( matchList )
     SceneManager.clearNAddWidget( widget )
 
     Navigator.loadFrame( widget )
+    Navigator.chooseNav( 1 )
 
     -- Init the match list according to the data.
     initMatchList( matchList )
