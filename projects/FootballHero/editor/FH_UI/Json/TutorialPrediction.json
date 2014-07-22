@@ -11,7 +11,7 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "Tutorial/Single_Tap.png",
+    "Tutorial/Swipe_Right_Left.png",
     "Tutorial/OK_grey.png"
   ],
   "version": "1.5.0.0",
@@ -96,7 +96,7 @@
           "ignoreSize": true,
           "layoutParameter": null,
           "opacity": 255,
-          "positionPercentX": 0.5,
+          "positionPercentX": 0.5026041,
           "positionPercentY": 0.2596831,
           "positionType": 0,
           "rotation": 0,
@@ -110,7 +110,7 @@
           "useMergedTexture": false,
           "visible": true,
           "width": 447,
-          "x": 320,
+          "x": 321,
           "y": 295,
           "capInsetsHeight": 1,
           "capInsetsWidth": 1,

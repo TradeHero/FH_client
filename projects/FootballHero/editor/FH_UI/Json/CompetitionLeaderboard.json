@@ -10,7 +10,11 @@
   "designHeight": 1136,
   "designWidth": 640,
   "textures": [],
-  "texturesPng": [],
+  "texturesPng": [
+    "header/guangyun.png",
+    "history/bg.png",
+    "header/back.png"
+  ],
   "version": "1.5.0.0",
   "widgetTree": {
     "classname": "Panel",
@@ -446,7 +450,7 @@
           "scale9Enable": false,
           "scale9Height": 82,
           "scale9Width": 546,
-          "text": "Share",
+          "text": "Challenge",
           "textColorB": 0,
           "textColorG": 0,
           "textColorR": 0

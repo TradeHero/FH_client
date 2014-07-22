@@ -11,7 +11,9 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "chat/Friend_Chatbox.png"
+    "header/guangyun.png",
+    "history/bg.png",
+    "header/back.png"
   ],
   "version": "1.5.0.0",
   "widgetTree": {

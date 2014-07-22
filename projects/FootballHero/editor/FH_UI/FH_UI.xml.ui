@@ -7,6 +7,10 @@
   <JsonFileName>FH_UI.json</JsonFileName>
   <JsonFolder>Z:\FH_client\projects\FootballHero\editor\FH_UI\Json</JsonFolder>
   <JsonList>
+    <string>Chat.json</string>
+    <string>ChatMessageContent.json</string>
+    <string>ChatMessageDate.json</string>
+    <string>ChatMyMessageContent.json</string>
     <string>CompetitionCreate.json</string>
     <string>CompetitionItem.json</string>
     <string>CompetitionLeaderboard.json</string>
@@ -55,17 +59,13 @@
     <string>SettingsHomeContent.json</string>
     <string>Signin.json</string>
     <string>Team.json</string>
+    <string>TutorialPrediction.json</string>
+    <string>TutorialSelectFavourite.json</string>
     <string>WBTSPrediction.json</string>
     <string>WTCBMTPrediction.json</string>
     <string>WTGBMTPrediction.json</string>
     <string>WTSPrediction.json</string>
     <string>WTWBEGPrediction.json</string>
-    <string>Chat.json</string>
-    <string>ChatMessageContent.json</string>
-    <string>ChatMyMessageContent.json</string>
-    <string>ChatMessageDate.json</string>
-    <string>TutorialSelectFavourite.json</string>
-    <string>TutorialPrediction.json</string>
   </JsonList>
   <CanvasSize>
     <Width>640</Width>
@@ -76,9 +76,8 @@
   <ResRelativePath />
   <imageFileList />
   <imagePngList>
-    <string>Tutorial/Single_Tap.png</string>
-    <string>Tutorial/OK_grey.png</string>
+    <string>Leaderboards/xialalan.png</string>
   </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>TutorialPrediction.json</CurrentUIJson>
+  <CurrentUIJson>LeaderboardList.json</CurrentUIJson>
 </UIProject>

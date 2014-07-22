@@ -11,14 +11,8 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "LoginNReg/Account-bg.jpg",
-    "header/guangyun.png",
-    "LoginNReg/facebook-icon.png",
-    "LoginNReg/register-icon.png",
-    "LoginNReg/line.png",
-    "LoginNReg/sign-in-icon.png",
-    "header/footballhero-logo.png",
-    "GUI/button.png"
+    "Tutorial/Swipe_Right_Left.png",
+    "Tutorial/OK_grey.png"
   ],
   "version": "1.5.0.0",
   "widgetTree": {

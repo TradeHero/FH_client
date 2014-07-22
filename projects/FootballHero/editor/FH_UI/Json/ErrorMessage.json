@@ -11,8 +11,8 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "PredictionConfirm/bg-2.png",
-    "MatchPrediction/Will-xx_team-score-a-goal-yes.png"
+    "Tutorial/Swipe_Right_Left.png",
+    "Tutorial/OK_grey.png"
   ],
   "version": "1.5.0.0",
   "widgetTree": {

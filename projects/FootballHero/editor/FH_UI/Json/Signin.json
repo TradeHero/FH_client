@@ -11,7 +11,8 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "chat/Friend_Chatbox.png"
+    "Tutorial/Swipe_Right_Left.png",
+    "Tutorial/OK_grey.png"
   ],
   "version": "1.5.0.0",
   "widgetTree": {

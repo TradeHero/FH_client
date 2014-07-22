@@ -132,7 +132,7 @@
             "resourceType": 0
           },
           "fontName": "微软雅黑",
-          "fontSize": 30,
+          "fontSize": 24,
           "fontType": 0,
           "normal": null,
           "normalData": {
@@ -149,7 +149,7 @@
           "scale9Enable": false,
           "scale9Height": 79,
           "scale9Width": 256,
-          "text": "ROI",
+          "text": "Gain per Prediction",
           "textColorB": 0,
           "textColorG": 0,
           "textColorR": 0
@@ -222,7 +222,7 @@
           "scale9Enable": false,
           "scale9Height": 79,
           "scale9Width": 256,
-          "text": "Profit",
+          "text": "High Score",
           "textColorB": 0,
           "textColorG": 0,
           "textColorR": 0
@@ -295,7 +295,7 @@
           "scale9Enable": false,
           "scale9Height": 79,
           "scale9Width": 256,
-          "text": "Win %",
+          "text": "Win Ratio",
           "textColorB": 0,
           "textColorG": 0,
           "textColorR": 0

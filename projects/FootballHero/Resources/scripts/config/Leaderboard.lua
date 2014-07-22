@@ -20,7 +20,7 @@ LeaderboardType = {
 }
 
 LeaderboardSubType = {
-	{ ["sortType"] = 1, ["dataColumnId"] = "Roi", ["title"] = "Roi", ["description"] = "%d%% won", },
-	{ ["sortType"] = 2, ["dataColumnId"] = "WinPercentage", ["title"] = "Win %", ["description"] = "%d%% won", },
-	{ ["sortType"] = 3, ["dataColumnId"] = "Profit", ["title"] = "Profit", ["description"] = "%d won", },
+	{ ["sortType"] = 1, ["dataColumnId"] = "Roi", ["title"] = "Gain per Prediction", ["description"] = "%d%% won", },
+	{ ["sortType"] = 2, ["dataColumnId"] = "WinPercentage", ["title"] = "Win Ratio", ["description"] = "%d%% won", },
+	{ ["sortType"] = 3, ["dataColumnId"] = "Profit", ["title"] = "High Score", ["description"] = "%d won", },
 }

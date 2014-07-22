@@ -32,6 +32,8 @@ function loadFrame( competitionDetail, subType, competitionId )
     Navigator.loadFrame( widget )
     local backBt = mWidget:getChildByName("back")
     backBt:addTouchEventListener( backEventHandler )
+    local shareBt = mWidget:getChildByName("share")
+    shareBt:addTouchEventListener( shareEventHandler )
 
     -- Init the title
     local title = tolua.cast( mWidget:getChildByName("title"), "Label" )

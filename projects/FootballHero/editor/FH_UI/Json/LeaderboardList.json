@@ -10,7 +10,9 @@
   "designHeight": 1136,
   "designWidth": 640,
   "textures": [],
-  "texturesPng": [],
+  "texturesPng": [
+    "Leaderboards/xialalan.png"
+  ],
   "version": "1.5.0.0",
   "widgetTree": {
     "classname": "Panel",
@@ -342,7 +344,7 @@
           "touchAble": false,
           "useMergedTexture": false,
           "visible": true,
-          "width": 79,
+          "width": 38,
           "x": 320,
           "y": 1021,
           "areaHeight": 0,
@@ -351,7 +353,7 @@
           "fontName": "微软雅黑",
           "fontSize": 28,
           "hAlignment": 0,
-          "text": "By %s",
+          "text": "%s",
           "touchScaleEnable": false,
           "vAlignment": 0
         }
@@ -380,11 +382,11 @@
           "layoutParameter": null,
           "opacity": 255,
           "positionPercentX": 0.05625,
-          "positionPercentY": 0.9621479,
+          "positionPercentY": 0.96340543,
           "positionType": 0,
           "rotation": 0,
-          "scaleX": 1.5,
-          "scaleY": 1.5,
+          "scaleX": 1,
+          "scaleY": 1,
           "sizePercentX": 0.0984375,
           "sizePercentY": 0.0448943675,
           "sizeType": 0,
@@ -394,7 +396,7 @@
           "visible": true,
           "width": 63,
           "x": 36,
-          "y": 1093,
+          "y": 1094,
           "capInsetsHeight": 0,
           "capInsetsWidth": 0,
           "capInsetsX": 0,
