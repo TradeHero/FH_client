@@ -11,9 +11,7 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "header/guangyun.png",
-    "history/bg.png",
-    "header/back.png"
+    "commonRes/England.png"
   ],
   "version": "1.5.0.0",
   "widgetTree": {

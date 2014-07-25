@@ -11,8 +11,7 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "Tutorial/Swipe_Right_Left.png",
-    "Tutorial/OK_grey.png"
+    "commonRes/England.png"
   ],
   "version": "1.5.0.0",
   "widgetTree": {
@@ -38,7 +37,7 @@
           "customProperty": "",
           "flipX": false,
           "flipY": false,
-          "height": 119,
+          "height": 33,
           "ignoreSize": true,
           "layoutParameter": null,
           "opacity": 255,
@@ -55,7 +54,7 @@
           "touchAble": false,
           "useMergedTexture": false,
           "visible": true,
-          "width": 147,
+          "width": 50,
           "x": 80,
           "y": 66,
           "capInsetsHeight": 0,
@@ -69,8 +68,8 @@
             "resourceType": 0
           },
           "scale9Enable": false,
-          "scale9Height": 119,
-          "scale9Width": 147
+          "scale9Height": 33,
+          "scale9Width": 50
         }
       }
     ],

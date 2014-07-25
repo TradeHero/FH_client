@@ -66,6 +66,7 @@
     <string>WTGBMTPrediction.json</string>
     <string>WTSPrediction.json</string>
     <string>WTWBEGPrediction.json</string>
+    <string>LoginNRegEmail.json</string>
   </JsonList>
   <CanvasSize>
     <Width>640</Width>
@@ -75,9 +76,7 @@
   <ProjectType>UIProject</ProjectType>
   <ResRelativePath />
   <imageFileList />
-  <imagePngList>
-    <string>Leaderboards/xialalan.png</string>
-  </imagePngList>
+  <imagePngList />
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>LeaderboardList.json</CurrentUIJson>
+  <CurrentUIJson>ConnectingMessage.json</CurrentUIJson>
 </UIProject>

@@ -20,6 +20,7 @@ EventNameList =
     "Check_File_Version",
 
     "Enter_Login_N_Reg",
+    "Enter_Email_Login_N_Reg",
     "Enter_Register",
     "Enter_Register_Name",
     "Enter_Login",

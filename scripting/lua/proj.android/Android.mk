@@ -49,7 +49,8 @@ LOCAL_C_INCLUDES := $(LOCAL_PATH)/ \
                     $(LOCAL_PATH)/../../../CocosDenshion/include \
                     $(LOCAL_PATH)/../../../extensions \
                     $(LOCAL_PATH)/../../../extensions/GUI/CCEditBox \
-                    $(LOCAL_PATH)/../../../extensions/Social
+                    $(LOCAL_PATH)/../../../extensions/Social \
+                    $(LOCAL_PATH)/../../../extensions/Utils
 
 LOCAL_WHOLE_STATIC_LIBRARIES := luajit_static
 LOCAL_WHOLE_STATIC_LIBRARIES += cocos_extension_static

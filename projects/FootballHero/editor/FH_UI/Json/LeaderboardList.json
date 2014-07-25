@@ -11,7 +11,7 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "Leaderboards/xialalan.png"
+    "commonRes/England.png"
   ],
   "version": "1.5.0.0",
   "widgetTree": {
@@ -337,7 +337,7 @@
           "rotation": 0,
           "scaleX": 1,
           "scaleY": 1,
-          "sizePercentX": 0.1234375,
+          "sizePercentX": 0.059375,
           "sizePercentY": 0.03169014,
           "sizeType": 0,
           "tag": 340,
@@ -382,7 +382,7 @@
           "layoutParameter": null,
           "opacity": 255,
           "positionPercentX": 0.05625,
-          "positionPercentY": 0.96340543,
+          "positionPercentY": 0.9630282,
           "positionType": 0,
           "rotation": 0,
           "scaleX": 1,

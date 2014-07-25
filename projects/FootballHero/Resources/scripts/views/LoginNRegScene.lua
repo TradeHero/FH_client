@@ -12,16 +12,17 @@ function loadFrame()
     mWidget:registerScriptHandler( EnterOrExit )
     SceneManager.clearNAddWidget(widget)
 
-    local signinBt = widget:getChildByName("signin")
-    local registerBt = widget:getChildByName("register")
+    local loginNRegEmailBt = widget:getChildByName("loginNRegEmail")
     local facebookBt = widget:getChildByName("facebookConnect")
     local dev = tolua.cast( widget:getChildByName("dev"), "Button" )
 
-    signinBt:addTouchEventListener( signinEventHandler )
-    registerBt:addTouchEventListener( registerEventHandler )
+    loginNRegEmailBt:addTouchEventListener( loginNRegEmailEventHandler )
     facebookBt:addTouchEventListener( facebookEventHandler )
     dev:addTouchEventListener( devEventHandler )
     dev:setEnabled( false )
+
+    --local pProgram = CCShaderCache:sharedShaderCache():programForKey( 3 )
+    --mWidget:setShaderProgram( pProgram )
 end
 
 function EnterOrExit( eventType )
@@ -31,15 +32,9 @@ function EnterOrExit( eventType )
     end
 end
 
-function signinEventHandler( sender,eventType )
-	if eventType == TOUCH_EVENT_ENDED then
-        EventManager:postEvent( Event.Enter_Login )
-    end
-end
-
-function registerEventHandler( sender,eventType )
-	if eventType == TOUCH_EVENT_ENDED then
-        EventManager:postEvent( Event.Enter_Register )
+function loginNRegEmailEventHandler( sender,eventType )
+    if eventType == TOUCH_EVENT_ENDED then
+        EventManager:postEvent( Event.Enter_Email_Login_N_Reg )
     end
 end
 

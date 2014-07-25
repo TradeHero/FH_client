@@ -53,6 +53,9 @@ network/HttpClient.cpp \
 network/HttpRequestForLua.cpp \
 network/WebSocket.cpp \
 Social/FacebookDelegate.cpp \
+Utils/Analytics.cpp \
+Utils/Misc.cpp \
+Utils/WebviewDelegate.cpp \
 physics_nodes/CCPhysicsDebugNode.cpp \
 physics_nodes/CCPhysicsSprite.cpp \
 LocalStorage/LocalStorageAndroid.cpp \
@@ -153,7 +156,7 @@ LOCAL_EXPORT_C_INCLUDES := $(LOCAL_PATH) \
                            $(LOCAL_PATH)/GUI/CCScrollView \
                            $(LOCAL_PATH)/network \
                            $(LOCAL_PATH)/LocalStorage \
-						               $(LOCAL_PATH)/CocoStudio/Armature
+						   $(LOCAL_PATH)/CocoStudio/Armature
 
 LOCAL_CFLAGS := -fexceptions
                     

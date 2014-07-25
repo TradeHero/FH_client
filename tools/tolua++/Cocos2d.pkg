@@ -88,3 +88,5 @@ $pfile "CCEditBox.pkg"
 $pfile "CCInteger.pkg"
 $pfile "CCScrollView.pkg"
 $pfile "CCTableView.pkg"
+
+$pfile "CCShaderCache.pkg"

@@ -11,8 +11,13 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "Tutorial/Swipe_Right_Left.png",
-    "Tutorial/OK_grey.png"
+    "LoginNReg/Account-bg.jpg",
+    "header/guangyun.png",
+    "LoginNReg/Existing User.png",
+    "LoginNReg/New User.png",
+    "LoginNReg/line.png",
+    "header/footballhero-logo.png",
+    "header/back.png"
   ],
   "version": "1.5.0.0",
   "widgetTree": {
