@@ -42,6 +42,7 @@ EventNameList =
     "Enter_Competition_Leagues",
     "Enter_Competition_Detail",
     "Enter_Competition_Chat",
+    "Enter_Tutorial_Ui_With_Type",
 
     "Do_Register",
     "Do_Register_Name",

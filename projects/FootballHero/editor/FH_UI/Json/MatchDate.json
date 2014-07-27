@@ -10,15 +10,7 @@
   "designHeight": 1136,
   "designWidth": 640,
   "textures": [],
-  "texturesPng": [
-    "LoginNReg/Account-bg.jpg",
-    "header/guangyun.png",
-    "LoginNReg/Existing User.png",
-    "LoginNReg/New User.png",
-    "LoginNReg/line.png",
-    "header/footballhero-logo.png",
-    "header/back.png"
-  ],
+  "texturesPng": [],
   "version": "1.5.0.0",
   "widgetTree": {
     "classname": "Panel",

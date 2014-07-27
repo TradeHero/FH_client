@@ -10,7 +10,11 @@
   "designHeight": 1136,
   "designWidth": 640,
   "textures": [],
-  "texturesPng": [],
+  "texturesPng": [
+    "Tutorial/Default Button.png",
+    "Tutorial/email_icon.png",
+    "header/back.png"
+  ],
   "version": "1.5.0.0",
   "widgetTree": {
     "classname": "Panel",

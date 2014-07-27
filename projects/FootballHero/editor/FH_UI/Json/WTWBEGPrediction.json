@@ -10,15 +10,7 @@
   "designHeight": 1136,
   "designWidth": 640,
   "textures": [],
-  "texturesPng": [
-    "LoginNReg/Account-bg.jpg",
-    "header/guangyun.png",
-    "LoginNReg/Sign in with facebook.png",
-    "LoginNReg/Sign in with email.png",
-    "LoginNReg/line.png",
-    "header/footballhero-logo.png",
-    "GUI/button.png"
-  ],
+  "texturesPng": [],
   "version": "1.5.0.0",
   "widgetTree": {
     "classname": "Panel",
@@ -762,7 +754,7 @@
           "customProperty": "",
           "flipX": false,
           "flipY": false,
-          "height": 51,
+          "height": 79,
           "ignoreSize": true,
           "layoutParameter": null,
           "opacity": 255,
@@ -808,7 +800,7 @@
             "resourceType": 0
           },
           "scale9Enable": false,
-          "scale9Height": 51,
+          "scale9Height": 79,
           "scale9Width": 63,
           "text": "",
           "textColorB": 255,

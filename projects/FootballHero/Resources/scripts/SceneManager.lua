@@ -27,6 +27,7 @@ local EnterViewSelectedLeaguesAction = require("scripts.actions.EnterViewSelecte
 local EnterCompetitionLeaguesAction = require("scripts.actions.EnterCompetitionLeaguesAction")
 local EnterCompetitionDetailAction = require("scripts.actions.EnterCompetitionDetailAction")
 local EnterCompetitionChatAction = require("scripts.actions.EnterCompetitionChatAction")
+local EnterTutorialUiWithTypeAction = require("scripts.actions.EnterTutorialUiWithTypeAction")
 local DoRegisterAction = require("scripts.actions.DoRegisterAction")
 local DoLoginAction = require("scripts.actions.DoLoginAction")
 local DoRegisterNameAction = require("scripts.actions.DoRegisterNameAction")
@@ -58,7 +59,7 @@ local mWidgets = {}		-- Store widget show in the list to save time loading the s
 function init()
 	local eglView = CCEGLView:sharedOpenGLView()
 	if CCApplication:sharedApplication():getTargetPlatform() == kTargetWindows then
-		eglView:setFrameSize( 541, 960 )
+		eglView:setFrameSize( 451, 800 )
 	end
 	eglView:setDesignResolutionSize( 640, 1136, kResolutionShowAll )
 
@@ -102,6 +103,7 @@ function initEvents()
 	EventManager:registerEventHandler( Event.Enter_Competition_Leagues, EnterCompetitionLeaguesAction )
 	EventManager:registerEventHandler( Event.Enter_Competition_Detail, EnterCompetitionDetailAction )
 	EventManager:registerEventHandler( Event.Enter_Competition_Chat, EnterCompetitionChatAction )
+	EventManager:registerEventHandler( Event.Enter_Tutorial_Ui_With_Type, EnterTutorialUiWithTypeAction )
 	EventManager:registerEventHandler( Event.Do_Register, DoRegisterAction )
 	EventManager:registerEventHandler( Event.Do_Register_Name, DoRegisterNameAction )
 	EventManager:registerEventHandler( Event.Do_Login, DoLoginAction )

@@ -11,11 +11,9 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "LoginNReg/Account-bg.png",
-    "header/guangyun.png",
-    "LoginNReg/Sign in with facebook.png",
-    "LoginNReg/Sign in with email.png",
-    "GUI/button.png"
+    "Tutorial/Default Button.png",
+    "Tutorial/email_icon.png",
+    "header/back.png"
   ],
   "version": "1.5.0.0",
   "widgetTree": {
@@ -106,7 +104,7 @@
           "scaleX": 1,
           "scaleY": 1,
           "sizePercentX": 0.86875,
-          "sizePercentY": 0.09419014,
+          "sizePercentY": 0.08450704,
           "sizeType": 0,
           "tag": 2,
           "touchAble": true,

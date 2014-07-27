@@ -11,8 +11,9 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "Tutorial/Swipe_Right_Left.png",
-    "Tutorial/OK_grey.png"
+    "Tutorial/Default Button.png",
+    "Tutorial/email_icon.png",
+    "header/back.png"
   ],
   "version": "1.5.0.0",
   "widgetTree": {
@@ -482,7 +483,7 @@
           "customProperty": "",
           "flipX": false,
           "flipY": false,
-          "height": 51,
+          "height": 79,
           "ignoreSize": true,
           "layoutParameter": null,
           "opacity": 255,
@@ -493,7 +494,7 @@
           "scaleX": 1,
           "scaleY": 1,
           "sizePercentX": 0.0984375,
-          "sizePercentY": 0.0448943675,
+          "sizePercentY": 0.06954225,
           "sizeType": 0,
           "tag": 39,
           "touchAble": true,
@@ -528,7 +529,7 @@
             "resourceType": 0
           },
           "scale9Enable": false,
-          "scale9Height": 51,
+          "scale9Height": 79,
           "scale9Width": 63,
           "text": "",
           "textColorB": 255,

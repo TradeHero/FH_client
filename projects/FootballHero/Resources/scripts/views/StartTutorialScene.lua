@@ -10,12 +10,10 @@ local Event = require("scripts.events.Event").EventList
 local mWidget
 -- Children list:
 -- 1 to 5: page buttons
-
+local mHomepageWidget
 local mMovableContainer
 
 local mTopLayer
-local mOkButton
-local mExitButton
 local mTutorialImages = {
     "TutorialP1.png",
     "TutorialP2.png",
@@ -29,6 +27,7 @@ local mCallbackFunc
 
 local MIN_MOVE_DISTANCE = 100
 local MOVE_TIME = 0.2
+local SCALE_TIME = 0.3
 
 function loadFrame( callback )
     mCallbackFunc = callback
@@ -45,37 +44,21 @@ function loadFrame( callback )
 
     local fileUtils = CCFileUtils:sharedFileUtils()
     for i = 1, table.getn( mTutorialImages ) do
-        local image = ImageView:create()
-        local imagePath = fileUtils:fullPathForFilename( Constants.TUTORIAL_IMAGE_PATH..mTutorialImages[i] )
-        image:loadTexture( imagePath )
-        mMovableContainer:addChild( image )
-        image:setPosition( ccp( i * Constants.GAME_WIDTH - Constants.GAME_WIDTH / 2, Constants.GAME_HEIGHT / 2 ) )
-
-        if i == table.getn( mTutorialImages ) then
-            mOkButton = Button:create()
-            mOkButton:loadTextures( fileUtils:fullPathForFilename( Constants.TUTORIAL_IMAGE_PATH.."OK_grey.png" ),
-                                nil,
-                                nil )
-            image:addChild( mOkButton )
-            mOkButton:setPosition( ccp( 0, 130 - Constants.GAME_HEIGHT / 2 ) )
-            mOkButton:setTouchEnabled( true )
-            mOkButton:addTouchEventListener( okEventHandler )
-            mOkButton:setOpacity( 0 )
+        if i == 1 then
+            mHomepageWidget = GUIReader:shareReader():widgetFromJsonFile("scenes/TutorialHomepage.json")
+            mMovableContainer:addChild( mHomepageWidget )
+        else
+            local image = ImageView:create()
+            local imagePath = fileUtils:fullPathForFilename( Constants.TUTORIAL_IMAGE_PATH..mTutorialImages[i] )
+            image:loadTexture( imagePath )
+            mMovableContainer:addChild( image )
+            image:setPosition( ccp( i * Constants.GAME_WIDTH - Constants.GAME_WIDTH / 2, Constants.GAME_HEIGHT / 2 ) )
         end
     end
 
-    mExitButton = Button:create()
-    mExitButton:loadTextures( fileUtils:fullPathForFilename( Constants.TUTORIAL_IMAGE_PATH.."X_button.png" ),
-                            nil,
-                            nil )
-    mWidget:addChild( mExitButton )
-    mExitButton:setPosition( ccp( Constants.GAME_WIDTH - 120, Constants.GAME_HEIGHT - 120 ) )
-    mExitButton:setTouchEnabled( true )
-    mExitButton:addTouchEventListener( exitEventHandler )
-
-    local intervalX = 40
+    local intervalX = 30
     local startX = ( Constants.GAME_WIDTH - intervalX * ( table.getn( mTutorialImages ) - 1 ) ) / 2
-    local startY = 130
+    local startY = 350
     for i = 1, table.getn( mTutorialImages )  do
         local button = Button:create()
         button:loadTextures( fileUtils:fullPathForFilename( Constants.TUTORIAL_IMAGE_PATH.."dot_inactivepage.png" ),
@@ -87,6 +70,8 @@ function loadFrame( callback )
 
     mCurrentTutorialIndex = 1
     updatePageIndicator()
+
+    playStartAnim()
 end
 
 function EnterOrExit( eventType )
@@ -96,21 +81,26 @@ function EnterOrExit( eventType )
     end
 end
 
-function tutorialEnd()
-    EventManager:postEvent( Event.Enter_Login_N_Reg )
+function signinTypeEmailEventHandler( sender, eventType )
+    if eventType == TOUCH_EVENT_ENDED then
 
-    mCallbackFunc()
+    end
+end
+
+function signinTypeFacebookEventHandler( sender, eventType )
+    if eventType == TOUCH_EVENT_ENDED then
+        EventManager:postEvent( Event.Do_FB_Connect )
+    end
 end
 
 local originWidgetX
 function onFrameTouch( sender, eventType )
     if eventType == TOUCH_EVENT_BEGAN then
         originWidgetX = mMovableContainer:getPositionX()
-        mExitButton:setOpacity( 0 )
     elseif eventType == TOUCH_EVENT_ENDED or eventType == TOUCH_EVENT_CANCELED then
         local touchBeginPoint = sender:getTouchStartPos()
         local touchEndPoint = sender:getTouchEndPos()
-        if touchBeginPoint.x - touchEndPoint.x > MIN_MOVE_DISTANCE then
+        if touchBeginPoint.x - touchEndPoint.x > MIN_MOVE_DISTANCE and mCurrentTutorialIndex < table.getn( mTutorialImages ) then
             -- Swap to Left
             local seqArray = CCArray:create()
             seqArray:addObject( CCCallFunc:create( function()
@@ -118,13 +108,9 @@ function onFrameTouch( sender, eventType )
             end ) )
             seqArray:addObject( CCMoveTo:create( MOVE_TIME, ccp( mCurrentTutorialIndex * Constants.GAME_WIDTH * ( -1 ), 0 ) ) )
             seqArray:addObject( CCCallFunc:create( function()
-                if mCurrentTutorialIndex < table.getn( mTutorialImages ) then
-                    mCurrentTutorialIndex = mCurrentTutorialIndex + 1
-                    updatePageIndicator()
-                    mMovableContainer:setTouchEnabled( true )
-                else
-                    tutorialEnd()
-                end
+                mCurrentTutorialIndex = mCurrentTutorialIndex + 1
+                updatePageIndicator()
+                mMovableContainer:setTouchEnabled( true )
             end ) )
 
             mMovableContainer:runAction( CCSequence:create( seqArray ) )
@@ -167,36 +153,36 @@ function onFrameTouch( sender, eventType )
 end
 
 function updatePageIndicator()
-    if mCurrentTutorialIndex == table.getn( mTutorialImages ) then
-        for i = 1, table.getn( mTutorialImages ) do
-            local button = tolua.cast( mWidget:getChildByTag( i ), "Button" )
-            button:setEnabled( false )
+    for i = 1, table.getn( mTutorialImages ) do
+        local button = tolua.cast( mWidget:getChildByTag( i ), "Button" )
+        button:setEnabled( true )
+        if i == mCurrentTutorialIndex then
+            button:setBrightStyle( BRIGHT_HIGHLIGHT )
+        else
+            button:setBrightStyle( BRIGHT_NORMAL )
         end
-        mOkButton:runAction( CCFadeIn:create( 0.1 ) )
-        mExitButton:setOpacity( 0 )
-    else
-        for i = 1, table.getn( mTutorialImages ) do
-            local button = tolua.cast( mWidget:getChildByTag( i ), "Button" )
-            button:setEnabled( true )
-            if i == mCurrentTutorialIndex then
-                button:setBrightStyle( BRIGHT_HIGHLIGHT )
-            else
-                button:setBrightStyle( BRIGHT_NORMAL )
-            end
-        end
-        mOkButton:setOpacity( 0 )
-        mExitButton:runAction( CCFadeIn:create( 0.1 ) )
     end
 end
 
-function okEventHandler( sender, eventType )
-    if eventType == TOUCH_EVENT_ENDED then
-        tutorialEnd()
-    end
+function playStartAnim()
+    local homepageLogo = mHomepageWidget:getChildByName("Logo")
+    local bg = mHomepageWidget:getChildByName("bg")
+
+    local resultSeqArray = CCArray:create()
+
+    local spawnArray = CCArray:create()
+    spawnArray:addObject( CCTargetedAction:create( homepageLogo, CCScaleTo:create( SCALE_TIME, 0.7 ) ) )
+    spawnArray:addObject( CCTargetedAction:create( homepageLogo, CCMoveBy:create( SCALE_TIME, ccp( 0, 200 ) ) ) )
+    spawnArray:addObject( CCTargetedAction:create( bg, CCFadeTo:create( SCALE_TIME, 180 ) ) )
+    resultSeqArray:addObject( CCSpawn:create( spawnArray ) )
+
+    resultSeqArray:addObject( CCCallFunc:create( function() 
+        EventManager:postEvent( Event.Enter_Tutorial_Ui_With_Type, { Constants.TUTORIAL_SHOW_SIGNIN_TYPE } )
+    end ) )
+
+    mWidget:runAction( CCSequence:create( resultSeqArray ) )
 end
 
-function exitEventHandler( sender, eventType )
-    if eventType == TOUCH_EVENT_ENDED then
-        tutorialEnd()
-    end
+function playSwitchToEmailSignin()
+
 end

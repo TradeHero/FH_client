@@ -67,6 +67,12 @@
     <string>WTSPrediction.json</string>
     <string>WTWBEGPrediction.json</string>
     <string>LoginNRegEmail.json</string>
+    <string>TutorialHomepage.json</string>
+    <string>TutorialSigninType.json</string>
+    <string>TutorialEmail.json</string>
+    <string>TutorialEmailSignin.json</string>
+    <string>TutorialEmailRegister.json</string>
+    <string>TutorialForgotPassword.json</string>
   </JsonList>
   <CanvasSize>
     <Width>640</Width>
@@ -76,7 +82,11 @@
   <ProjectType>UIProject</ProjectType>
   <ResRelativePath />
   <imageFileList />
-  <imagePngList />
+  <imagePngList>
+    <string>LoginNReg/forgotPassword-bg.png</string>
+    <string>LoginNReg/ok-icon.png</string>
+    <string>LoginNReg/cancel-icon.png</string>
+  </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>ConnectingMessage.json</CurrentUIJson>
+  <CurrentUIJson>TutorialForgotPassword.json</CurrentUIJson>
 </UIProject>

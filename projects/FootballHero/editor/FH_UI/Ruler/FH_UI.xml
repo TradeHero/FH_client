@@ -244,4 +244,40 @@
     <Project>LoginNRegEmail</Project>
     <GuidesList />
   </GuidesProject>
+  <GuidesProject>
+    <Project>TutorialHomepage</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>TutorialSigninType</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>TutorialEmailSignin2</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>TutorialEmailSignin</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>TutorialEmail</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>TutorialEmail</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>TutorialEmailRegister</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>TutorialForgotPassword</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>ForgotPassword_0</Project>
+    <GuidesList />
+  </GuidesProject>
 </ArrayOfGuidesProject>
