@@ -10,7 +10,14 @@
   "designHeight": 1136,
   "designWidth": 640,
   "textures": [],
-  "texturesPng": [],
+  "texturesPng": [
+    "Tutorial/Default Button.png",
+    "header/back.png",
+    "LoginNReg/tos.png",
+    "Tutorial/email_icon.png",
+    "Tutorial/password_icon.png",
+    "LoginNReg/line.png"
+  ],
   "version": "1.5.0.0",
   "widgetTree": {
     "classname": "Panel",

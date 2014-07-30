@@ -4,5 +4,5 @@ local EventManager = require("scripts.events.EventManager").getInstance()
 local Event = require("scripts.events.Event").EventList
 
 function action( param )
-	EventManager:postEvent( Event.Enter_Login_N_Reg )
+	EventManager:postEvent( Event.Check_Start_Tutorial )
 end

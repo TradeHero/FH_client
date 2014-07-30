@@ -64,9 +64,12 @@ function onRequestSuccess( jsonResponse )
     Logic:setFbId( FbId )
 
     local finishEvent = Event.Enter_Sel_Fav_Team
+    local finishEventParam = {}
     if displayName == nil then
-        finishEvent = Event.Enter_Register_Name
+        --finishEvent = Event.Enter_Register_Name
+        finishEvent = Event.Enter_Tutorial_Ui_With_Type
+        finishEventParam = { Constants.TUTORIAL_SHOW_EMAIL_REGISTER_NAME }
     end
-    EventManager:postEvent( Event.Check_File_Version, { configMd5Info, finishEvent } )
+    EventManager:postEvent( Event.Check_File_Version, { configMd5Info, finishEvent, finishEventParam } )
     --EventManager:postEvent( Event.Do_Post_Logo )
 end

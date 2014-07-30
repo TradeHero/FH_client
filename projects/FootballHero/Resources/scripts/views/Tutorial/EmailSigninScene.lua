@@ -4,12 +4,20 @@ local SceneManager = require("scripts.SceneManager")
 local Constants = require("scripts.Constants")
 local EventManager = require("scripts.events.EventManager").getInstance()
 local Event = require("scripts.events.Event").EventList
+local ViewUtils = require("scripts.views.ViewUtils")
+local Logic = require("scripts.Logic")
 
 
 local mWidget
+local mEmailInput
 
 local FADEIN_TIME = 0.5
 local MOVE_TIME = 0.2
+local EMAIL_CONTAINER_NAME = "emailContainer"
+local PASSWORD_CONTAINER_NAME = "passwordContainer"
+
+local mInputFontColor = ccc3( 0, 0, 0 )
+local mInputPlaceholderFontColor = ccc3( 60, 58, 58 )
 
 function loadFrame()
     mWidget = GUIReader:shareReader():widgetFromJsonFile("scenes/TutorialEmailSignin.json")
@@ -27,6 +35,22 @@ function loadFrame()
     backBt:addTouchEventListener( backEventHandler )
 
     helperSetTouchEnabled( false )
+
+    mEmailInput = ViewUtils.createTextInput( mWidget:getChildByName( EMAIL_CONTAINER_NAME ), "E-mail Address" )
+    local passwordInput = ViewUtils.createTextInput( mWidget:getChildByName( PASSWORD_CONTAINER_NAME ), "Password" )
+    passwordInput:setInputFlag( kEditBoxInputFlagPassword )
+    
+    mEmailInput:setFontColor( mInputFontColor )
+    passwordInput:setFontColor( mInputFontColor )
+
+    mEmailInput:setPlaceholderFontColor( mInputPlaceholderFontColor )
+    passwordInput:setPlaceholderFontColor( mInputPlaceholderFontColor )
+
+    mEmailInput:setTouchPriority( SceneManager.TOUCH_PRIORITY_MINUS_ONE )
+    passwordInput:setTouchPriority( SceneManager.TOUCH_PRIORITY_MINUS_ONE )
+
+    mEmailInput:setText( Logic.getInstance():getEmail() )
+    passwordInput:setText( Logic.getInstance():getPassword() )
 end
 
 function isFrameShown()
@@ -50,7 +74,10 @@ end
 
 function signinEventHandler( sender, eventType )
     if eventType == TOUCH_EVENT_ENDED then
-        
+        local email = mWidget:getChildByName( EMAIL_CONTAINER_NAME ):getNodeByTag( 1 ):getText()
+        local pass = mWidget:getChildByName( PASSWORD_CONTAINER_NAME ):getNodeByTag( 1 ):getText()
+
+        EventManager:postEvent( Event.Do_Login, { email, pass } )
     end
 end
 
@@ -92,6 +119,10 @@ function helperSetTouchEnabled( enabled )
 
     local backBt = mWidget:getChildByName("back")
     backBt:setTouchEnabled( enabled )
+
+    if enabled then
+        mEmailInput:touchDownAction( nil, 0 )
+    end
 end
 
 function helperGetTouchEnabled()

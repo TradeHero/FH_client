@@ -219,6 +219,8 @@ public:
     virtual void onExit();
     
     virtual bool hitTest(const CCPoint &pt);
+
+	virtual void setOpacity(GLubyte opacity);
 protected:
     //override "init" method of widget.
     virtual bool init();

@@ -42,6 +42,7 @@
     <string>LeaderboardSubContent.json</string>
     <string>LeagueListContent.json</string>
     <string>LoginNReg.json</string>
+    <string>LoginNRegEmail.json</string>
     <string>MatchDate.json</string>
     <string>MatchListContent.json</string>
     <string>MatchListEmptyIndi.json</string>
@@ -59,20 +60,20 @@
     <string>SettingsHomeContent.json</string>
     <string>Signin.json</string>
     <string>Team.json</string>
+    <string>TutorialEmail.json</string>
+    <string>TutorialEmailRegister.json</string>
+    <string>TutorialEmailSignin.json</string>
+    <string>TutorialForgotPassword.json</string>
+    <string>TutorialHomepage.json</string>
     <string>TutorialPrediction.json</string>
+    <string>TutorialRegisterName.json</string>
     <string>TutorialSelectFavourite.json</string>
+    <string>TutorialSigninType.json</string>
     <string>WBTSPrediction.json</string>
     <string>WTCBMTPrediction.json</string>
     <string>WTGBMTPrediction.json</string>
     <string>WTSPrediction.json</string>
     <string>WTWBEGPrediction.json</string>
-    <string>LoginNRegEmail.json</string>
-    <string>TutorialHomepage.json</string>
-    <string>TutorialSigninType.json</string>
-    <string>TutorialEmail.json</string>
-    <string>TutorialEmailSignin.json</string>
-    <string>TutorialEmailRegister.json</string>
-    <string>TutorialForgotPassword.json</string>
   </JsonList>
   <CanvasSize>
     <Width>640</Width>
@@ -83,10 +84,9 @@
   <ResRelativePath />
   <imageFileList />
   <imagePngList>
-    <string>LoginNReg/forgotPassword-bg.png</string>
-    <string>LoginNReg/ok-icon.png</string>
-    <string>LoginNReg/cancel-icon.png</string>
+    <string>Tutorial/splash_bkg.png</string>
+    <string>Tutorial/Splashscreen_Logo.png</string>
   </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>TutorialForgotPassword.json</CurrentUIJson>
+  <CurrentUIJson>WTWBEGPrediction.json</CurrentUIJson>
 </UIProject>

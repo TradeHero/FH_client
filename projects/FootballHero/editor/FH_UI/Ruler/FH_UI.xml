@@ -280,4 +280,12 @@
     <Project>ForgotPassword_0</Project>
     <GuidesList />
   </GuidesProject>
+  <GuidesProject>
+    <Project>TutorialRegisterName</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>FH_UI_68</Project>
+    <GuidesList />
+  </GuidesProject>
 </ArrayOfGuidesProject>

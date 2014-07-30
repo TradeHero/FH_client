@@ -10,7 +10,10 @@
   "designHeight": 1136,
   "designWidth": 640,
   "textures": [],
-  "texturesPng": [],
+  "texturesPng": [
+    "Tutorial/splash_bkg.png",
+    "Tutorial/Splashscreen_Logo.png"
+  ],
   "version": "1.5.0.0",
   "widgetTree": {
     "classname": "Panel",
@@ -390,7 +393,7 @@
           "scaleX": 1,
           "scaleY": 1,
           "sizePercentX": 0.0984375,
-          "sizePercentY": 0.0448943675,
+          "sizePercentY": 0.06954225,
           "sizeType": 0,
           "tag": 3990,
           "touchAble": true,

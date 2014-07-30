@@ -4,12 +4,14 @@ local SceneManager = require("scripts.SceneManager")
 local Constants = require("scripts.Constants")
 local EventManager = require("scripts.events.EventManager").getInstance()
 local Event = require("scripts.events.Event").EventList
+local ViewUtils = require("scripts.views.ViewUtils")
 
 
 local mWidget
 
 local FADEIN_TIME = 0.5
 local MOVE_TIME = 0.2
+local EMAIL_CONTAINER_NAME = "emailContainer"
 
 function loadFrame()
     mWidget = GUIReader:shareReader():widgetFromJsonFile("scenes/TutorialForgotPassword.json")
@@ -27,6 +29,9 @@ function loadFrame()
     backBt:addTouchEventListener( backEventHandler )
 
     helperSetTouchEnabled( false )
+
+    local emailInput = ViewUtils.createTextInput( mWidget:getChildByName( EMAIL_CONTAINER_NAME ), "E-mail Address" )
+    emailInput:setTouchPriority( SceneManager.TOUCH_PRIORITY_MINUS_ONE )
 end
 
 function isFrameShown()
@@ -50,13 +55,15 @@ end
 
 function okEventHandler( sender, eventType )
     if eventType == TOUCH_EVENT_ENDED then
-        
+        local email = mWidget:getChildByName( EMAIL_CONTAINER_NAME ):getNodeByTag( 1 ):getText()
+        EventManager:postEvent( Event.Do_Password_Reset, { email } )
     end
 end
 
 function cancelEventHandler( sender, eventType )
     if eventType == TOUCH_EVENT_ENDED then
-        
+        EventManager:popHistory()
+        sender:setTouchEnabled( false )
     end
 end
 

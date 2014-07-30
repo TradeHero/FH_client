@@ -4,12 +4,23 @@ local SceneManager = require("scripts.SceneManager")
 local Constants = require("scripts.Constants")
 local EventManager = require("scripts.events.EventManager").getInstance()
 local Event = require("scripts.events.Event").EventList
+local ViewUtils = require("scripts.views.ViewUtils")
 
 
 local mWidget
+local mEmailInput
 
 local FADEIN_TIME = 0.5
 local MOVE_TIME = 0.2
+local EMAIL_CONTAINER_NAME = "emailContainer"
+local PASSWORD_CONTAINER_NAME = "passwordContainer1"
+local PASSWORD_CONF_CONTAINER_NAME = "passwordContainer2"
+local USERNAME_CONTAINER_NAME = "usernameContainer"
+local FIRSTNAME_CONTAINER_NAME = "firstnameContainer"
+local LASTNAME_CONTAINER_NAME = "lastnameContainer"
+
+local mInputFontColor = ccc3( 0, 0, 0 )
+local mInputPlaceholderFontColor = ccc3( 60, 58, 58 )
 
 function loadFrame()
     mWidget = GUIReader:shareReader():widgetFromJsonFile("scenes/TutorialEmailRegister.json")
@@ -24,6 +35,37 @@ function loadFrame()
     backBt:addTouchEventListener( backEventHandler )
 
     helperSetTouchEnabled( false )
+
+    mEmailInput = ViewUtils.createTextInput( mWidget:getChildByName( EMAIL_CONTAINER_NAME ), "E-mail Address" )
+    local passwordInput = ViewUtils.createTextInput( mWidget:getChildByName( PASSWORD_CONTAINER_NAME ), "Password" )
+    local passwordConfInput = ViewUtils.createTextInput( mWidget:getChildByName( PASSWORD_CONF_CONTAINER_NAME ), "Confirm Password" )
+    local userNameInput = ViewUtils.createTextInput( mWidget:getChildByName( USERNAME_CONTAINER_NAME ), "Username" )
+    local firstNameInput = ViewUtils.createTextInput( mWidget:getChildByName( FIRSTNAME_CONTAINER_NAME ), "First Name" )
+    local lastnameInput = ViewUtils.createTextInput( mWidget:getChildByName( LASTNAME_CONTAINER_NAME ), "Last Name" )
+
+    mEmailInput:setFontColor( mInputFontColor )
+    passwordInput:setFontColor( mInputFontColor )
+    passwordConfInput:setFontColor( mInputFontColor )
+    userNameInput:setFontColor( mInputFontColor )
+    firstNameInput:setFontColor( mInputFontColor )
+    lastnameInput:setFontColor( mInputFontColor )
+
+    mEmailInput:setPlaceholderFontColor( mInputPlaceholderFontColor )
+    passwordInput:setPlaceholderFontColor( mInputPlaceholderFontColor )
+    passwordConfInput:setPlaceholderFontColor( mInputPlaceholderFontColor )
+    userNameInput:setPlaceholderFontColor( mInputPlaceholderFontColor )
+    firstNameInput:setPlaceholderFontColor( mInputPlaceholderFontColor )
+    lastnameInput:setPlaceholderFontColor( mInputPlaceholderFontColor )
+
+    mEmailInput:setTouchPriority( SceneManager.TOUCH_PRIORITY_ZERO )
+    passwordInput:setTouchPriority( SceneManager.TOUCH_PRIORITY_ZERO )
+    passwordConfInput:setTouchPriority( SceneManager.TOUCH_PRIORITY_ZERO )
+    userNameInput:setTouchPriority( SceneManager.TOUCH_PRIORITY_ZERO )
+    firstNameInput:setTouchPriority( SceneManager.TOUCH_PRIORITY_ZERO )
+    lastnameInput:setTouchPriority( SceneManager.TOUCH_PRIORITY_ZERO )
+
+    passwordInput:setInputFlag( kEditBoxInputFlagPassword )
+    passwordConfInput:setInputFlag( kEditBoxInputFlagPassword )
 end
 
 function isFrameShown()
@@ -47,7 +89,14 @@ end
 
 function registerEventHandler( sender, eventType )
     if eventType == TOUCH_EVENT_ENDED then
-        
+        local email = mWidget:getChildByName( EMAIL_CONTAINER_NAME ):getNodeByTag( 1 ):getText()
+        local pass = mWidget:getChildByName( PASSWORD_CONTAINER_NAME ):getNodeByTag( 1 ):getText()
+        local passConf = mWidget:getChildByName( PASSWORD_CONF_CONTAINER_NAME ):getNodeByTag( 1 ):getText()
+        local userName = mWidget:getChildByName( USERNAME_CONTAINER_NAME ):getNodeByTag( 1 ):getText()
+        local firstName = mWidget:getChildByName( FIRSTNAME_CONTAINER_NAME ):getNodeByTag( 1 ):getText()
+        local lastName = mWidget:getChildByName( LASTNAME_CONTAINER_NAME ):getNodeByTag( 1 ):getText()
+
+        EventManager:postEvent( Event.Do_Register, { email, pass, passConf, userName, firstName, lastName } )
     end
 end
 
@@ -79,6 +128,10 @@ function helperSetTouchEnabled( enabled )
 
     local backBt = mWidget:getChildByName("back")
     backBt:setTouchEnabled( enabled )
+
+    if enabled then
+        mEmailInput:touchDownAction( nil, 0 )
+    end
 end
 
 function helperGetTouchEnabled()

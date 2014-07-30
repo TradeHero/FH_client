@@ -16,6 +16,7 @@ function action( param )
     local EmailSigninScene = require("scripts.views.Tutorial.EmailSigninScene")
     local EmailRegisterScene = require("scripts.views.Tutorial.EmailRegisterScene")
     local EmailForgotPasswordScene = require("scripts.views.Tutorial.EmailForgotPasswordScene")
+    local EmailRegisterNameScene = require("scripts.views.Tutorial.EmailRegisterNameScene")
 
     StartTutorialScene.loadFrame()
     SigninTypeSelectScene.loadFrame()
@@ -23,6 +24,7 @@ function action( param )
     EmailSigninScene.loadFrame()
     EmailRegisterScene.loadFrame()
     EmailForgotPasswordScene.loadFrame()
+    EmailRegisterNameScene.loadFrame()
 end
 
 function tutorialEnd()

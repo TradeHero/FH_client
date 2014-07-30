@@ -11,58 +11,84 @@ local mWidget
 -- Children list:
 -- 1 to 5: page buttons
 local mHomepageWidget
+local mBackgroundContainer
 local mMovableContainer
+local mBackgroundImages
 
 local mTopLayer
 local mTutorialImages = {
-    "TutorialP1.png",
-    "TutorialP2.png",
-    "TutorialP3.png",
-    "TutorialP4.png",
-    "TutorialP5.png",
+    "",
+    "Page1.png",
+    "Page2.png",
+    "Page3.png",
+    "Page4.png",
+    "Page5.png",
+}
+local mTutorialWords = {
+    "",
+    "Text1.png",
+    "Text2.png",
+    "Text3.png",
+    "Text4.png",
+    "Text5.png",
 }
 local mCurrentTutorialIndex
-local mCallbackFunc
 
-
+local ZORDER_CURRENT_SHOWN = 1
+local ZORDER_NOT_SHOWN = 0
+local TEXT_POSOTION_Y = 893
 local MIN_MOVE_DISTANCE = 100
 local MOVE_TIME = 0.2
-local SCALE_TIME = 0.3
+local FADE_TIME = 0.5
+local SCALE_TIME = 0.6
 
-function loadFrame( callback )
-    mCallbackFunc = callback
-
+function loadFrame()
     mWidget = Layout:create()
     mWidget:registerScriptHandler( EnterOrExit )
     SceneManager.clearNAddWidget( mWidget )
 
+    mBackgroundContainer = Layout:create()
+    mBackgroundContainer:setSize( CCSize:new( Constants.GAME_WIDTH, Constants.GAME_HEIGHT ) )
+    mWidget:addChild( mBackgroundContainer )
+
     mMovableContainer = Layout:create()
-    mMovableContainer:setSize( CCSize:new( Constants.GAME_WIDTH * table.getn( mTutorialImages ), Constants.GAME_HEIGHT ) )
+    mMovableContainer:setSize( CCSize:new( Constants.GAME_WIDTH * table.getn( mTutorialWords ), Constants.GAME_HEIGHT ) )
     mMovableContainer:setTouchEnabled( true )
     mMovableContainer:addTouchEventListener( onFrameTouch )
     mWidget:addChild( mMovableContainer )
 
+    mBackgroundImages = {}
     local fileUtils = CCFileUtils:sharedFileUtils()
-    for i = 1, table.getn( mTutorialImages ) do
+    for i = 1, table.getn( mTutorialWords ) do
         if i == 1 then
             mHomepageWidget = GUIReader:shareReader():widgetFromJsonFile("scenes/TutorialHomepage.json")
-            mMovableContainer:addChild( mHomepageWidget )
+            mHomepageWidget:setCascadeOpacityEnabled( true )
+            mBackgroundContainer:addChild( mHomepageWidget )
+            table.insert( mBackgroundImages, mHomepageWidget )
         else
+            local bg = ImageView:create()
+            local bgPath = fileUtils:fullPathForFilename( Constants.TUTORIAL_IMAGE_PATH..mTutorialImages[i] )
+            bg:loadTexture( bgPath )
+            mBackgroundContainer:addChild( bg )
+            bg:setPosition( ccp( Constants.GAME_WIDTH / 2, Constants.GAME_HEIGHT / 2 ) )
+            bg:setOpacity( 0 )
+            table.insert( mBackgroundImages, bg )
+
             local image = ImageView:create()
-            local imagePath = fileUtils:fullPathForFilename( Constants.TUTORIAL_IMAGE_PATH..mTutorialImages[i] )
+            local imagePath = fileUtils:fullPathForFilename( Constants.TUTORIAL_IMAGE_PATH..mTutorialWords[i] )
             image:loadTexture( imagePath )
             mMovableContainer:addChild( image )
-            image:setPosition( ccp( i * Constants.GAME_WIDTH - Constants.GAME_WIDTH / 2, Constants.GAME_HEIGHT / 2 ) )
+            image:setPosition( ccp( i * Constants.GAME_WIDTH - Constants.GAME_WIDTH / 2, TEXT_POSOTION_Y ) )
         end
     end
 
     local intervalX = 30
-    local startX = ( Constants.GAME_WIDTH - intervalX * ( table.getn( mTutorialImages ) - 1 ) ) / 2
+    local startX = ( Constants.GAME_WIDTH - intervalX * ( table.getn( mTutorialWords ) - 1 ) ) / 2
     local startY = 350
-    for i = 1, table.getn( mTutorialImages )  do
+    for i = 1, table.getn( mTutorialWords )  do
         local button = Button:create()
-        button:loadTextures( fileUtils:fullPathForFilename( Constants.TUTORIAL_IMAGE_PATH.."dot_inactivepage.png" ),
-                            fileUtils:fullPathForFilename( Constants.TUTORIAL_IMAGE_PATH.."dot_activepage.png" ),
+        button:loadTextures( fileUtils:fullPathForFilename( Constants.TUTORIAL_IMAGE_PATH.."dot_inactive.png" ),
+                            fileUtils:fullPathForFilename( Constants.TUTORIAL_IMAGE_PATH.."dot_active.png" ),
                             nil )
         mWidget:addChild( button, 0, i )
         button:setPosition( ccp( startX + ( i - 1 ) * intervalX, startY ) )
@@ -100,14 +126,22 @@ function onFrameTouch( sender, eventType )
     elseif eventType == TOUCH_EVENT_ENDED or eventType == TOUCH_EVENT_CANCELED then
         local touchBeginPoint = sender:getTouchStartPos()
         local touchEndPoint = sender:getTouchEndPos()
-        if touchBeginPoint.x - touchEndPoint.x > MIN_MOVE_DISTANCE and mCurrentTutorialIndex < table.getn( mTutorialImages ) then
+        if touchBeginPoint.x - touchEndPoint.x > MIN_MOVE_DISTANCE and mCurrentTutorialIndex < table.getn( mTutorialWords ) then
             -- Swap to Left
             local seqArray = CCArray:create()
             seqArray:addObject( CCCallFunc:create( function()
                 mMovableContainer:setTouchEnabled( false )
+                mBackgroundImages[mCurrentTutorialIndex]:setZOrder( ZORDER_NOT_SHOWN )
+                mBackgroundImages[mCurrentTutorialIndex + 1]:setZOrder( ZORDER_CURRENT_SHOWN )
             end ) )
-            seqArray:addObject( CCMoveTo:create( MOVE_TIME, ccp( mCurrentTutorialIndex * Constants.GAME_WIDTH * ( -1 ), 0 ) ) )
+
+            local transactionAnimSpawn = CCArray:create()
+            transactionAnimSpawn:addObject( CCMoveTo:create( MOVE_TIME, ccp( mCurrentTutorialIndex * Constants.GAME_WIDTH * ( -1 ), 0 ) ) )
+            transactionAnimSpawn:addObject( CCTargetedAction:create( mBackgroundImages[mCurrentTutorialIndex + 1], CCFadeIn:create( FADE_TIME ) ) )
+
+            seqArray:addObject( CCSpawn:create( transactionAnimSpawn ) )
             seqArray:addObject( CCCallFunc:create( function()
+                mBackgroundImages[mCurrentTutorialIndex]:setOpacity( 0 )
                 mCurrentTutorialIndex = mCurrentTutorialIndex + 1
                 updatePageIndicator()
                 mMovableContainer:setTouchEnabled( true )
@@ -120,9 +154,17 @@ function onFrameTouch( sender, eventType )
             local seqArray = CCArray:create()
             seqArray:addObject( CCCallFunc:create( function()
                 mMovableContainer:setTouchEnabled( false )
+                mBackgroundImages[mCurrentTutorialIndex]:setZOrder( ZORDER_NOT_SHOWN )
+                mBackgroundImages[mCurrentTutorialIndex - 1]:setZOrder( ZORDER_CURRENT_SHOWN )
             end ) )
-            seqArray:addObject( CCMoveTo:create( MOVE_TIME, ccp( ( mCurrentTutorialIndex - 2 ) * Constants.GAME_WIDTH * ( -1 ), 0 ) ) )
+
+            local transactionAnimSpawn = CCArray:create()
+            transactionAnimSpawn:addObject( CCMoveTo:create( MOVE_TIME, ccp( ( mCurrentTutorialIndex - 2 ) * Constants.GAME_WIDTH * ( -1 ), 0 ) ) )
+            transactionAnimSpawn:addObject( CCTargetedAction:create( mBackgroundImages[mCurrentTutorialIndex - 1], CCFadeIn:create( FADE_TIME ) ) )
+
+            seqArray:addObject( CCSpawn:create( transactionAnimSpawn ) )
             seqArray:addObject( CCCallFunc:create( function()
+                mBackgroundImages[mCurrentTutorialIndex]:setOpacity( 0 )
                 mCurrentTutorialIndex = mCurrentTutorialIndex - 1
                 updatePageIndicator()
                 mMovableContainer:setTouchEnabled( true )
@@ -153,7 +195,7 @@ function onFrameTouch( sender, eventType )
 end
 
 function updatePageIndicator()
-    for i = 1, table.getn( mTutorialImages ) do
+    for i = 1, table.getn( mTutorialWords ) do
         local button = tolua.cast( mWidget:getChildByTag( i ), "Button" )
         button:setEnabled( true )
         if i == mCurrentTutorialIndex then
@@ -169,6 +211,7 @@ function playStartAnim()
     local bg = mHomepageWidget:getChildByName("bg")
 
     local resultSeqArray = CCArray:create()
+    resultSeqArray:addObject( CCDelayTime:create( 1.5 ) )
 
     local spawnArray = CCArray:create()
     spawnArray:addObject( CCTargetedAction:create( homepageLogo, CCScaleTo:create( SCALE_TIME, 0.7 ) ) )
@@ -181,8 +224,4 @@ function playStartAnim()
     end ) )
 
     mWidget:runAction( CCSequence:create( resultSeqArray ) )
-end
-
-function playSwitchToEmailSignin()
-
 end

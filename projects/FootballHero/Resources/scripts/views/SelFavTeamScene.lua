@@ -23,7 +23,7 @@ function loadFrame()
 
     mWidget = widget
     mWidget:registerScriptHandler( EnterOrExit )
-    SceneManager.addWidget( widget )
+    SceneManager.clearNAddWidget( widget )
 
     LeagueListScene.loadFrame( "scenes/FavouriteCountryContent.json", "scenes/FavouriteLeagueContent.json", 
         tolua.cast( mWidget:getChildByName("countryList"), "ScrollView" ), leagueSelected )

@@ -52,6 +52,7 @@ local LoadMoreInCompetitionDetailAction = require("scripts.actions.LoadMoreInCom
 
 TOUCH_PRIORITY_ZERO = 0
 TOUCH_PRIORITY_MINUS_ONE = -1
+TOUCH_PRIORITY_MINUS_TWO = -2
 
 local mSceneGameLayer
 local mWidgets = {}		-- Store widget show in the list to save time loading the same json file.
@@ -59,7 +60,7 @@ local mWidgets = {}		-- Store widget show in the list to save time loading the s
 function init()
 	local eglView = CCEGLView:sharedOpenGLView()
 	if CCApplication:sharedApplication():getTargetPlatform() == kTargetWindows then
-		eglView:setFrameSize( 451, 800 )
+		eglView:setFrameSize( 541, 960 )
 	end
 	eglView:setDesignResolutionSize( 640, 1136, kResolutionShowAll )
 

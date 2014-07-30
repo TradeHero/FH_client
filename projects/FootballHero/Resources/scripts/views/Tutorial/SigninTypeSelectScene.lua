@@ -8,7 +8,7 @@ local Event = require("scripts.events.Event").EventList
 
 local mWidget
 
-local FADEIN_TIME = 0.5
+local FADEIN_TIME = 1.0
 local MOVE_TIME = 0.2
 
 function loadFrame()

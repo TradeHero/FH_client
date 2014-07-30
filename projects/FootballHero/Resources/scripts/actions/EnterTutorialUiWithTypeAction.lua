@@ -9,6 +9,7 @@ function action( param )
 	local EmailSigninScene = require("scripts.views.Tutorial.EmailSigninScene")
 	local EmailRegisterScene = require("scripts.views.Tutorial.EmailRegisterScene")
 	local EmailForgotPasswordScene = require("scripts.views.Tutorial.EmailForgotPasswordScene")
+	local EmailRegisterNameScene = require("scripts.views.Tutorial.EmailRegisterNameScene")
 
 	local uiType = param[1]
 	print( "uiType"..uiType )
@@ -47,6 +48,11 @@ function action( param )
 		if EmailSigninScene.isFrameShown() then
 			local delayTime = EmailSigninScene.playMoveAnim( -1 )
 	    	EmailForgotPasswordScene.playMoveAnim( -1, delayTime )
+		end
+	elseif uiType == Constants.TUTORIAL_SHOW_EMAIL_REGISTER_NAME then
+		if EmailRegisterScene.isFrameShown() then
+			local delayTime = EmailRegisterScene.playMoveAnim( -1 )
+			EmailRegisterNameScene.playMoveAnim( -1, delayTime )
 		end
 	end
 	

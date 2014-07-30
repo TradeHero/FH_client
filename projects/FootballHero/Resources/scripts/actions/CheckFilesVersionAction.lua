@@ -30,11 +30,13 @@ local CDNFileNameList = {
 
 local mConfigMd5Info
 local mFinishEvent
+local mFinishEventParam
 local mCurrentFileIndex
 
 function action( param )
 	mConfigMd5Info = param[1]
 	mFinishEvent = param[2]
+	mFinishEventParam = param[3]
 
 	mCurrentFileIndex = 0
 	checkNext()
@@ -56,7 +58,8 @@ function checkNext()
 	        local LeagueConfig = require("scripts.config.League")
 	        local TeamConfig = require("scripts.config.Team")
 
-	        EventManager:postEvent( mFinishEvent )
+	        ConnectingMessage.selfRemove()
+	        EventManager:postEvent( mFinishEvent, mFinishEventParam )
 		end ) )
 
 		CCDirector:sharedDirector():getRunningScene():runAction( CCSequence:create( loadDataTaskSeqArray ) )

@@ -152,6 +152,12 @@ bool Layout::hitTest(const CCPoint &pt)
     }
     return false;
 }
+
+void Layout::setOpacity(GLubyte opacity)
+{
+	Widget::setOpacity(opacity);
+	setBackGroundColorOpacity(opacity);
+}
     
 void Layout::visit()
 {

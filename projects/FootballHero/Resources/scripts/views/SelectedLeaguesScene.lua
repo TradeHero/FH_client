@@ -27,7 +27,7 @@ function loadFrame( selectedLeagues, checkEnabled )
 
     LeagueListScene.loadFrame( "scenes/CreateCompCountryListContent.json", "scenes/CreateCompLeagueListContent.json", 
         tolua.cast( mWidget:getChildByName("ScrollView"), "ScrollView" ), leagueSelected, leagueInit )
-    LeagueListScene.expendAll()
+    LeagueListScene.forceExpendAll()
 
     local okBt = widget:getChildByName("OK")
     okBt:addTouchEventListener( confirmEventHandler )
@@ -64,8 +64,8 @@ end
 function allEventHandler( sender, eventType )
     if mCheckEnabled and eventType == TOUCH_EVENT_ENDED then
         mSelectedLeagues = CountryConfig.getAllLeagues()
-        LeagueListScene.unexpendAll()
-        LeagueListScene.expendAll()
+        LeagueListScene.forceUnexpendAll()
+        LeagueListScene.forceExpendAll()
     end
 end
 
