@@ -4,16 +4,16 @@
 	<dict>
 		<key>frames</key>
 		<dict>
-			<key>1.png</key>
+			<key>ball1.png</key>
 			<dict>
 				<key>width</key>
-				<integer>66</integer>
+				<integer>61</integer>
 				<key>height</key>
-				<integer>64</integer>
+				<integer>61</integer>
 				<key>originalWidth</key>
-				<integer>66</integer>
+				<integer>61</integer>
 				<key>originalHeight</key>
-				<integer>64</integer>
+				<integer>61</integer>
 				<key>x</key>
 				<integer>0</integer>
 				<key>y</key>
@@ -23,18 +23,18 @@
 				<key>offsetY</key>
 				<real>0</real>
 			</dict>
-			<key>2.png</key>
+			<key>ball2.png</key>
 			<dict>
 				<key>width</key>
-				<integer>66</integer>
+				<integer>61</integer>
 				<key>height</key>
-				<integer>64</integer>
+				<integer>61</integer>
 				<key>originalWidth</key>
-				<integer>66</integer>
+				<integer>61</integer>
 				<key>originalHeight</key>
-				<integer>64</integer>
+				<integer>61</integer>
 				<key>x</key>
-				<integer>68</integer>
+				<integer>63</integer>
 				<key>y</key>
 				<integer>0</integer>
 				<key>offsetX</key>
@@ -42,18 +42,18 @@
 				<key>offsetY</key>
 				<real>0</real>
 			</dict>
-			<key>3.png</key>
+			<key>ball3.png</key>
 			<dict>
 				<key>width</key>
-				<integer>66</integer>
+				<integer>61</integer>
 				<key>height</key>
-				<integer>64</integer>
+				<integer>61</integer>
 				<key>originalWidth</key>
-				<integer>66</integer>
+				<integer>61</integer>
 				<key>originalHeight</key>
-				<integer>64</integer>
+				<integer>61</integer>
 				<key>x</key>
-				<integer>136</integer>
+				<integer>126</integer>
 				<key>y</key>
 				<integer>0</integer>
 				<key>offsetX</key>
@@ -61,18 +61,18 @@
 				<key>offsetY</key>
 				<real>0</real>
 			</dict>
-			<key>4.png</key>
+			<key>ball4.png</key>
 			<dict>
 				<key>width</key>
-				<integer>66</integer>
+				<integer>61</integer>
 				<key>height</key>
-				<integer>64</integer>
+				<integer>61</integer>
 				<key>originalWidth</key>
-				<integer>66</integer>
+				<integer>61</integer>
 				<key>originalHeight</key>
-				<integer>64</integer>
+				<integer>61</integer>
 				<key>x</key>
-				<integer>204</integer>
+				<integer>189</integer>
 				<key>y</key>
 				<integer>0</integer>
 				<key>offsetX</key>
@@ -80,18 +80,18 @@
 				<key>offsetY</key>
 				<real>0</real>
 			</dict>
-			<key>5.png</key>
+			<key>ball5.png</key>
 			<dict>
 				<key>width</key>
-				<integer>66</integer>
+				<integer>61</integer>
 				<key>height</key>
-				<integer>64</integer>
+				<integer>61</integer>
 				<key>originalWidth</key>
-				<integer>66</integer>
+				<integer>61</integer>
 				<key>originalHeight</key>
-				<integer>64</integer>
+				<integer>61</integer>
 				<key>x</key>
-				<integer>272</integer>
+				<integer>252</integer>
 				<key>y</key>
 				<integer>0</integer>
 				<key>offsetX</key>
@@ -99,18 +99,18 @@
 				<key>offsetY</key>
 				<real>0</real>
 			</dict>
-			<key>6.png</key>
+			<key>ball6.png</key>
 			<dict>
 				<key>width</key>
-				<integer>66</integer>
+				<integer>61</integer>
 				<key>height</key>
-				<integer>64</integer>
+				<integer>61</integer>
 				<key>originalWidth</key>
-				<integer>66</integer>
+				<integer>61</integer>
 				<key>originalHeight</key>
-				<integer>64</integer>
+				<integer>61</integer>
 				<key>x</key>
-				<integer>340</integer>
+				<integer>315</integer>
 				<key>y</key>
 				<integer>0</integer>
 				<key>offsetX</key>

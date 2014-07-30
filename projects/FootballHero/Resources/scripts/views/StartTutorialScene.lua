@@ -208,7 +208,7 @@ end
 
 function playStartAnim()
     local homepageLogo = mHomepageWidget:getChildByName("Logo")
-    local bg = mHomepageWidget:getChildByName("bg")
+    local mask = mHomepageWidget:getChildByName("mask")
 
     local resultSeqArray = CCArray:create()
     resultSeqArray:addObject( CCDelayTime:create( 1.5 ) )
@@ -216,7 +216,7 @@ function playStartAnim()
     local spawnArray = CCArray:create()
     spawnArray:addObject( CCTargetedAction:create( homepageLogo, CCScaleTo:create( SCALE_TIME, 0.7 ) ) )
     spawnArray:addObject( CCTargetedAction:create( homepageLogo, CCMoveBy:create( SCALE_TIME, ccp( 0, 200 ) ) ) )
-    spawnArray:addObject( CCTargetedAction:create( bg, CCFadeTo:create( SCALE_TIME, 180 ) ) )
+    spawnArray:addObject( CCTargetedAction:create( mask, CCFadeTo:create( SCALE_TIME, 100 ) ) )
     resultSeqArray:addObject( CCSpawn:create( spawnArray ) )
 
     resultSeqArray:addObject( CCCallFunc:create( function() 

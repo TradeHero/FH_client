@@ -88,5 +88,5 @@
     <string>Tutorial/Splashscreen_Logo.png</string>
   </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>WTWBEGPrediction.json</CurrentUIJson>
+  <CurrentUIJson>TutorialHomepage.json</CurrentUIJson>
 </UIProject>

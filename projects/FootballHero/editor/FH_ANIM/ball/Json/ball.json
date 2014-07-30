@@ -9,7 +9,7 @@
         {
           "name": "ball",
           "parent": "",
-          "dI": 1,
+          "dI": 4,
           "x": 0.0,
           "y": 0.0,
           "z": 1,
@@ -22,7 +22,7 @@
           "effectbyskeleton": false,
           "display_data": [
             {
-              "name": "1.png",
+              "name": "ball1.png",
               "displayType": 0,
               "skin_data": [
                 {
@@ -36,7 +36,7 @@
               ]
             },
             {
-              "name": "2.png",
+              "name": "ball2.png",
               "displayType": 0,
               "skin_data": [
                 {
@@ -50,7 +50,7 @@
               ]
             },
             {
-              "name": "3.png",
+              "name": "ball3.png",
               "displayType": 0,
               "skin_data": [
                 {
@@ -64,7 +64,7 @@
               ]
             },
             {
-              "name": "4.png",
+              "name": "ball4.png",
               "displayType": 0,
               "skin_data": [
                 {
@@ -78,7 +78,7 @@
               ]
             },
             {
-              "name": "5.png",
+              "name": "ball5.png",
               "displayType": 0,
               "skin_data": [
                 {
@@ -92,7 +92,7 @@
               ]
             },
             {
-              "name": "6.png",
+              "name": "ball6.png",
               "displayType": 0,
               "skin_data": [
                 {
@@ -227,49 +227,49 @@
   ],
   "texture_data": [
     {
-      "name": "1",
-      "width": 66.0,
-      "height": 64.0,
+      "name": "ball1",
+      "width": 61.0,
+      "height": 61.0,
       "pX": 0.5,
       "pY": 0.5,
       "plistFile": ""
     },
     {
-      "name": "2",
-      "width": 66.0,
-      "height": 64.0,
+      "name": "ball2",
+      "width": 61.0,
+      "height": 61.0,
       "pX": 0.5,
       "pY": 0.5,
       "plistFile": ""
     },
     {
-      "name": "3",
-      "width": 66.0,
-      "height": 64.0,
+      "name": "ball3",
+      "width": 61.0,
+      "height": 61.0,
       "pX": 0.5,
       "pY": 0.5,
       "plistFile": ""
     },
     {
-      "name": "4",
-      "width": 66.0,
-      "height": 64.0,
+      "name": "ball4",
+      "width": 61.0,
+      "height": 61.0,
       "pX": 0.5,
       "pY": 0.5,
       "plistFile": ""
     },
     {
-      "name": "5",
-      "width": 66.0,
-      "height": 64.0,
+      "name": "ball5",
+      "width": 61.0,
+      "height": 61.0,
       "pX": 0.5,
       "pY": 0.5,
       "plistFile": ""
     },
     {
-      "name": "6",
-      "width": 66.0,
-      "height": 64.0,
+      "name": "ball6",
+      "width": 61.0,
+      "height": 61.0,
       "pX": 0.5,
       "pY": 0.5,
       "plistFile": ""
