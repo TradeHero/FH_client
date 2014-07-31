@@ -7,6 +7,7 @@ local LeagueConfig = require("scripts.config.League")
 local TeamConfig = require("scripts.config.Team")
 local Navigator = require("scripts.views.Navigator")
 local LeagueListScene = require("scripts.views.LeagueListScene")
+local LeagueListSceneUnexpended = require("scripts.views.LeagueListSceneUnexpended")
 local Logic = require("scripts.Logic").getInstance()
 local EventManager = require("scripts.events.EventManager").getInstance()
 local Event = require("scripts.events.Event").EventList
@@ -42,7 +43,7 @@ function loadFrame( matchList )
     initMatchList( matchList )
 
     -- Init the league list
-    LeagueListScene.loadFrame( "scenes/CountryListContent.json", "scenes/LeagueListContent.json", 
+    LeagueListSceneUnexpended.loadFrame( "scenes/CountryListContent.json", "scenes/LeagueListContent.json", 
         tolua.cast( mWidget:getChildByName("leagueList"), "ScrollView" ), leagueSelectedCallback )
 
     -- Option button
@@ -247,6 +248,7 @@ function helperInitMatchInfo( content, matchInfo )
         team1Name:setFontSize( 20 )
     end
     team1Name:setText( teamName )
+    team1Name:setFontName( "fonts/Helvetica neue.ttf" )
     teamName = TeamConfig.getTeamName( TeamConfig.getConfigIdByKey( matchInfo["AwayTeamId"] ) )
     if string.len( teamName ) > 20 then
         team2Name:setFontSize( 20 )
@@ -255,8 +257,8 @@ function helperInitMatchInfo( content, matchInfo )
 
     local time = tolua.cast( content:getChildByName("time"), "Label" )
     local score = tolua.cast( content:getChildByName("score"), "Label" )
-    time:setFontName("fonts/Newgtbxc.ttf")
-    score:setFontName("fonts/Newgtbxc.ttf")
+    time:setFontName("fonts/Helvetica neue.ttf")
+    score:setFontName("fonts/Helvetica neue.ttf")
     if matchInfo["HomeGoals"] >= 0 and matchInfo["AwayGoals"] >= 0 then
         score:setText( string.format( score:getStringValue(), matchInfo["HomeGoals"], matchInfo["AwayGoals"] ) )
         time:setEnabled( false )

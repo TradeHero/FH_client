@@ -53,8 +53,8 @@
 	<true/>
 	<key>UIAppFonts</key>
 	<array>
-		<string>fonts/Newgtbxc.ttf</string>
-		<string>fonts/SketchFlow Print.ttf</string>
+		<string>Helvetica neue.ttf</string>
+		<string>SketchFlow Print.ttf</string>
 	</array>
 	<key>UILaunchImageFile~ipad</key>
 	<string>Default</string>

@@ -11,11 +11,8 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "MatchListScene/VS-bg.png",
-    "header/footballhero-logo.png",
-    "header/guangyun.png",
-    "MatchListScene/3xian.png",
-    "MatchListScene/photo.png"
+    "Tutorial/splash_bkg.png",
+    "Tutorial/Splashscreen_Logo.png"
   ],
   "version": "1.5.0.0",
   "widgetTree": {

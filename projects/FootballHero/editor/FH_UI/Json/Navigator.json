@@ -11,8 +11,14 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "Tutorial/splash_bkg.png",
-    "Tutorial/Splashscreen_Logo.png"
+    "Navigator/matches_inactive.png",
+    "Navigator/matches_active.png",
+    "Navigator/community_inactive.png",
+    "Navigator/community_active.png",
+    "Navigator/score_inactive.png",
+    "Navigator/score_active.png",
+    "Navigator/settings_inactive.png",
+    "Navigator/settings_active.png"
   ],
   "version": "1.5.0.0",
   "widgetTree": {
@@ -55,7 +61,7 @@
           "touchAble": true,
           "useMergedTexture": false,
           "visible": true,
-          "width": 158,
+          "width": 160,
           "x": 80,
           "y": 65,
           "capInsetsHeight": 0,
@@ -73,19 +79,19 @@
           "fontType": 0,
           "normal": null,
           "normalData": {
-            "path": "Navigator/matches-black.jpg",
+            "path": "Navigator/matches_inactive.png",
             "plistFile": "",
             "resourceType": 0
           },
           "pressed": null,
           "pressedData": {
-            "path": "Navigator/matches-yellow.jpg",
+            "path": "Navigator/matches_active.png",
             "plistFile": "",
             "resourceType": 0
           },
           "scale9Enable": false,
           "scale9Height": 130,
-          "scale9Width": 158,
+          "scale9Width": 160,
           "text": "",
           "textColorB": 255,
           "textColorG": 255,
@@ -146,13 +152,13 @@
           "fontType": 0,
           "normal": null,
           "normalData": {
-            "path": "Navigator/community-black.jpg",
+            "path": "Navigator/community_inactive.png",
             "plistFile": "",
             "resourceType": 0
           },
           "pressed": null,
           "pressedData": {
-            "path": "Navigator/community-yellow.jpg",
+            "path": "Navigator/community_active.png",
             "plistFile": "",
             "resourceType": 0
           },
@@ -201,7 +207,7 @@
           "touchAble": true,
           "useMergedTexture": false,
           "visible": true,
-          "width": 158,
+          "width": 160,
           "x": 400,
           "y": 65,
           "capInsetsHeight": 0,
@@ -219,19 +225,19 @@
           "fontType": 0,
           "normal": null,
           "normalData": {
-            "path": "Navigator/history-black.jpg",
+            "path": "Navigator/score_inactive.png",
             "plistFile": "",
             "resourceType": 0
           },
           "pressed": null,
           "pressedData": {
-            "path": "Navigator/history-yellow.jpg",
+            "path": "Navigator/score_active.png",
             "plistFile": "",
             "resourceType": 0
           },
           "scale9Enable": false,
           "scale9Height": 130,
-          "scale9Width": 158,
+          "scale9Width": 160,
           "text": "",
           "textColorB": 255,
           "textColorG": 255,
@@ -274,7 +280,7 @@
           "touchAble": true,
           "useMergedTexture": false,
           "visible": true,
-          "width": 162,
+          "width": 160,
           "x": 559,
           "y": 65,
           "capInsetsHeight": 0,
@@ -292,19 +298,19 @@
           "fontType": 0,
           "normal": null,
           "normalData": {
-            "path": "Navigator/management-black.jpg",
+            "path": "Navigator/settings_inactive.png",
             "plistFile": "",
             "resourceType": 0
           },
           "pressed": null,
           "pressedData": {
-            "path": "Navigator/management-yellow.png",
+            "path": "Navigator/settings_active.png",
             "plistFile": "",
             "resourceType": 0
           },
           "scale9Enable": false,
           "scale9Height": 130,
-          "scale9Width": 162,
+          "scale9Width": 160,
           "text": "",
           "textColorB": 255,
           "textColorG": 255,

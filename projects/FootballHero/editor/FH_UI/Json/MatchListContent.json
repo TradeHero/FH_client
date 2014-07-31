@@ -10,7 +10,16 @@
   "designHeight": 1136,
   "designWidth": 640,
   "textures": [],
-  "texturesPng": [],
+  "texturesPng": [
+    "Navigator/matches_inactive.png",
+    "Navigator/matches_active.png",
+    "Navigator/community_inactive.png",
+    "Navigator/community_active.png",
+    "Navigator/score_inactive.png",
+    "Navigator/score_active.png",
+    "Navigator/settings_inactive.png",
+    "Navigator/settings_active.png"
+  ],
   "version": "1.5.0.0",
   "widgetTree": {
     "classname": "Panel",

@@ -83,10 +83,7 @@
   <ProjectType>UIProject</ProjectType>
   <ResRelativePath />
   <imageFileList />
-  <imagePngList>
-    <string>Tutorial/splash_bkg.png</string>
-    <string>Tutorial/Splashscreen_Logo.png</string>
-  </imagePngList>
+  <imagePngList />
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>TutorialHomepage.json</CurrentUIJson>
+  <CurrentUIJson />
 </UIProject>

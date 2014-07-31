@@ -67,7 +67,7 @@
       <file leaf-file-name="Main.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="84" column="5" selection-start="2754" selection-end="2754" vertical-scroll-proportion="0.6917293" vertical-offset="984" max-vertical-offset="1665">
+            <state line="24" column="24" selection-start="705" selection-end="705" vertical-scroll-proportion="0.63909775" vertical-offset="105" max-vertical-offset="1665">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -175,6 +175,8 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -263,8 +265,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -857,13 +857,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.7.0_51.jdk/Contents/Home/src.zip!/java/io/FilterWriter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="76" column="16" selection-start="1592" selection-end="1592" vertical-scroll-proportion="0.0" vertical-offset="603" max-vertical-offset="1350">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.7.0_51.jdk/Contents/Home/jre/lib/jce.jar!/javax/crypto/Cipher.class">
       <provider selected="true" editor-type-id="text-editor">
         <state line="50" column="0" selection-start="2416" selection-end="2421" vertical-scroll-proportion="0.0" vertical-offset="561" max-vertical-offset="2640">
@@ -871,9 +864,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.7.0_51.jdk/Contents/Home/src.zip!/java/io/FilterWriter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="76" column="16" selection-start="1592" selection-end="1592" vertical-scroll-proportion="0.0" vertical-offset="603" max-vertical-offset="1350">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="84" column="5" selection-start="2754" selection-end="2754" vertical-scroll-proportion="0.6917293" vertical-offset="984" max-vertical-offset="1665">
+        <state line="24" column="24" selection-start="705" selection-end="705" vertical-scroll-proportion="0.63909775" vertical-offset="105" max-vertical-offset="1665">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
