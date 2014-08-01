@@ -41,6 +41,19 @@ POST_CHAT_MESSAGE_REST_CALL = SERVER_IP.."/api/chat/postChatMessage"
 FACEBOOK_FRIENDS_LIST_CALL = "/me/friends?access_token="
 USE_DEV = false
 
+--[[
+    DS:
+    {
+        "url": {
+            "timeStamp": 10000,
+            "body": "jsonResponse"
+        }
+    }
+
+--]]
+local mResponseCache = {}
+local RESPONSE_CACHE_TIME = 600
+
 function setServerIP( serverIp )
     EMAIL_REGISTER_REST_CALL = serverIp.."/api/user/SignupWithEmail"
     EMAIL_LOGIN_REST_CALL = serverIp.."/api/loginWithEmail"
@@ -123,6 +136,15 @@ function messageHandler( requestInfo, isSucceed, body, header, status, errorBuff
     end
     ConnectingMessage.selfRemove()
     if status == successRequestID then
+        -- Check to record the response
+        if requestInfo["recordResponse"] then
+            local response = {}
+            response["timeStamp"] = os.time()
+            response["body"] = jsonResponse
+
+            mResponseCache[requestInfo.url] = response
+        end
+
         if successHandler ~= nil then
             successHandler( jsonResponse )
         end
@@ -146,4 +168,24 @@ end
 
 function onRequestFailed( errorBuffer )
     EventManager:postEvent( Event.Show_Error_Message, { errorBuffer } )
+end
+
+function getResponseCache( url )
+    if mResponseCache[url] ~= nil then
+        local response = mResponseCache[url]
+        local now = os.time()
+        if now - response["timeStamp"] < RESPONSE_CACHE_TIME then
+            print( "Cache hit for "..url )
+            return response["body"]
+        else
+            print( "Cache hit but expired for "..url )
+            return nil
+        end
+    end
+    print( "Cache miss for "..url )
+    return nil
+end
+
+function clearResponseCache()
+    mResponseCache = {}
 end

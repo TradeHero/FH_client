@@ -30,7 +30,7 @@ function isShown()
     return mWidget ~= nil
 end
 
-function loadFrame( matchList )
+function loadFrame( matchList, leagueKey )
 	local widget = GUIReader:shareReader():widgetFromJsonFile("scenes/MatchListScene.json")
     mWidget = widget
     mWidget:registerScriptHandler( EnterOrExit )
@@ -39,16 +39,22 @@ function loadFrame( matchList )
     Navigator.loadFrame( widget )
     Navigator.chooseNav( 1 )
 
+    initLeagueList( leagueKey )
+
     -- Init the match list according to the data.
     initMatchList( matchList )
 
     -- Init the league list
+    --[[
     LeagueListSceneUnexpended.loadFrame( "scenes/CountryListContent.json", "scenes/LeagueListContent.json", 
         tolua.cast( mWidget:getChildByName("leagueList"), "ScrollView" ), leagueSelectedCallback )
+    --]]
 
     -- Option button
+    --[[
     local optionBt = widget:getChildByName("option")
     optionBt:addTouchEventListener( optionEventHandler )
+    --]]
 
     local userName = tolua.cast( widget:getChildByName("userName"), "Label" )
     userName:setText( Logic:getDisplayName() )
@@ -71,11 +77,13 @@ function loadFrame( matchList )
     end
 
     -- Init the toplayer to listen to the swap action.
+    --[[
     mTopLayer = CCLayer:create()
     mTopLayer:registerScriptTouchHandler( onTopLevelTouch, false, -100)
     mWidget:addNode( mTopLayer )
     mTopLayer:setTouchEnabled( true )
     mOptionPanelShown = false
+    --]]
 end
 
 function EnterOrExit( eventType )
@@ -83,6 +91,57 @@ function EnterOrExit( eventType )
     elseif eventType == "exit" then
         mWidget = nil
     end
+end
+
+function initLeagueList( leagueKey )
+    local content = SceneManager.widgetFromJsonFile("scenes/LeagueListDropDown.json")
+    mWidget:addChild( content )
+
+    local list = tolua.cast( content:getChildByName("leagueList"), "ScrollView" )
+    local expendedIndicator = content:getChildByName( "expendIndi" )
+    local mask = content:getChildByName("mask")
+    local buttonEventHandler = function( sender, eventType )
+        if eventType == TOUCH_EVENT_ENDED then
+            if list:isEnabled() then
+                list:setEnabled( false )
+                mask:setEnabled( false )
+                expendedIndicator:setBrightStyle( BRIGHT_NORMAL )
+            else
+                list:setEnabled( true )
+                mask:setEnabled( true )
+                expendedIndicator:setBrightStyle( BRIGHT_HIGHLIGHT )
+            end
+        end
+    end
+    local button = content:getChildByName("button")
+    button:addTouchEventListener( buttonEventHandler )
+    list:setEnabled( false )
+    mask:setEnabled( false )
+
+    local initCurrentLeague = function( leagueKey )
+        local logo = tolua.cast( content:getChildByName("countryLogo"), "ImageView" )
+        local leagueName = tolua.cast( content:getChildByName("countryName"), "Label" )
+
+        local leagueId = LeagueConfig.getConfigIdByKey( leagueKey )
+        local countryId = CountryConfig.getConfigIdByKey( LeagueConfig.getCountryId( leagueId ) )
+        leagueName:setText( CountryConfig.getCountryName( countryId ).." - "..LeagueConfig.getLeagueName( leagueId ) )
+        logo:loadTexture( CountryConfig.getLogo( countryId ) )
+    end
+
+    local leagueSelectedCallback = function( leagueKey )
+        list:setEnabled( false )
+        mask:setEnabled( false )
+        expendedIndicator:setBrightStyle( BRIGHT_NORMAL )
+        
+        initCurrentLeague( leagueKey )
+
+        EventManager:postEvent( Event.Enter_Match_List, { leagueKey } )
+    end
+
+    LeagueListSceneUnexpended.loadFrame( "scenes/LeagueContentInDropDown.json", "scenes/LeagueListContent.json", 
+        list, leagueSelectedCallback )
+
+    initCurrentLeague( leagueKey )
 end
 
 -- Param matchList is Object of MatchListData
@@ -112,6 +171,12 @@ function initMatchList( matchList )
             contentHeight = contentHeight + content:getSize().height
 
             if mTheFirstDate == nil then
+                local hintContent = SceneManager.widgetFromJsonFile("scenes/TapToMakePrediction.json")
+                hintContent:setLayoutParameter( layoutParameter )
+                hintContent:setZOrder( zOrder )
+                contentContainer:addChild( hintContent )
+                contentHeight = contentHeight + hintContent:getSize().height
+
                 mTheFirstDate = content
             end
 
@@ -122,23 +187,6 @@ function initMatchList( matchList )
             updateContentContainer( contentHeight, content )
         end ) )
         seqArray:addObject( CCDelayTime:create( CONTENT_DELAY_TIME ) )
-
-        seqArray:addObject( CCCallFuncN:create( function()
-            -- Add the seprater
-            local upper = ImageView:create()
-            upper:loadTexture("images/guang.png")
-            upper:setLayoutParameter( layoutParameter )
-            upper:setZOrder( zOrder )
-            contentContainer:addChild( upper )
-            contentHeight = contentHeight + upper:getSize().height
-
-            upper:setOpacity( 0 )
-            mWidget:runAction( CCTargetedAction:create( upper, CCFadeIn:create( CONTENT_FADEIN_TIME ) ) )
-
-            updateContentContainer( contentHeight, upper )
-        end ) )
-        seqArray:addObject( CCDelayTime:create( CONTENT_DELAY_TIME ) )
-        
 
         for inK, inV in pairs( matchDate["matches"] ) do
             local eventHandler = function( sender, eventType )
@@ -166,23 +214,6 @@ function initMatchList( matchList )
             end ) )
             seqArray:addObject( CCDelayTime:create( CONTENT_DELAY_TIME ) )
         end
-
-        seqArray:addObject( CCCallFuncN:create( function() 
-            -- Add the seprater
-            local bottom = ImageView:create()
-            bottom:loadTexture("images/guang.png")
-            bottom:setFlipY(true)
-            bottom:setLayoutParameter( layoutParameter )
-            bottom:setZOrder( zOrder )
-            contentContainer:addChild( bottom )
-            contentHeight = contentHeight + bottom:getSize().height
-
-            bottom:setOpacity( 0 )
-            mWidget:runAction( CCTargetedAction:create( bottom, CCFadeIn:create( CONTENT_FADEIN_TIME ) ) )
-
-            updateContentContainer( contentHeight, bottom )
-        end ) )
-        seqArray:addObject( CCDelayTime:create( CONTENT_DELAY_TIME ) )
     end
 
     seqArray:addObject( CCCallFuncN:create( function()
@@ -224,9 +255,7 @@ function enterMatch( match )
 end
 
 function leagueSelectedCallback( leagueId )
-    hideOptionAnim( function()
-        EventManager:postEvent( Event.Enter_Match_List, { leagueId } )
-    end )
+    EventManager:postEvent( Event.Enter_Match_List, { leagueId } )
 end
 
 function helperInitMatchInfo( content, matchInfo )
@@ -248,7 +277,6 @@ function helperInitMatchInfo( content, matchInfo )
         team1Name:setFontSize( 20 )
     end
     team1Name:setText( teamName )
-    team1Name:setFontName( "fonts/Helvetica neue.ttf" )
     teamName = TeamConfig.getTeamName( TeamConfig.getConfigIdByKey( matchInfo["AwayTeamId"] ) )
     if string.len( teamName ) > 20 then
         team2Name:setFontSize( 20 )
@@ -257,13 +285,11 @@ function helperInitMatchInfo( content, matchInfo )
 
     local time = tolua.cast( content:getChildByName("time"), "Label" )
     local score = tolua.cast( content:getChildByName("score"), "Label" )
-    time:setFontName("fonts/Helvetica neue.ttf")
-    score:setFontName("fonts/Helvetica neue.ttf")
     if matchInfo["HomeGoals"] >= 0 and matchInfo["AwayGoals"] >= 0 then
         score:setText( string.format( score:getStringValue(), matchInfo["HomeGoals"], matchInfo["AwayGoals"] ) )
         time:setEnabled( false )
     else
-        time:setText( os.date( "%H:%M", matchInfo["StartTime"] ) )
+        time:setText( os.date( "%b %d  %H:%M", matchInfo["StartTime"] ) )
         score:setEnabled( false )
     end
 

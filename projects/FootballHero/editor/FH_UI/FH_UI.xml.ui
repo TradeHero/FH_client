@@ -74,6 +74,9 @@
     <string>WTGBMTPrediction.json</string>
     <string>WTSPrediction.json</string>
     <string>WTWBEGPrediction.json</string>
+    <string>TapToMakePrediction.json</string>
+    <string>LeagueListDropDown.json</string>
+    <string>LeagueContentInDropDown.json</string>
   </JsonList>
   <CanvasSize>
     <Width>640</Width>
@@ -83,7 +86,11 @@
   <ProjectType>UIProject</ProjectType>
   <ResRelativePath />
   <imageFileList />
-  <imagePngList />
+  <imagePngList>
+    <string>MatchListScene/Arrow down.png</string>
+    <string>MatchListScene/Arrow Up.png</string>
+    <string>commonRes/England.png</string>
+  </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson />
+  <CurrentUIJson>LeagueListDropDown.json</CurrentUIJson>
 </UIProject>

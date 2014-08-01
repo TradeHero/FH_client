@@ -54,7 +54,9 @@
 	<key>UIAppFonts</key>
 	<array>
 		<string>Helvetica neue.ttf</string>
-		<string>SketchFlow Print.ttf</string>
+		<string>Helvetica Neue Bold.ttf</string>
+		<string>Helvetica Neue Medium.ttf</string>
+		<string>Helvetica Neue Light.ttf</string>
 	</array>
 	<key>UILaunchImageFile~ipad</key>
 	<string>Default</string>

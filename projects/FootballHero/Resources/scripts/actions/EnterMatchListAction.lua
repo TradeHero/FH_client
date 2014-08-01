@@ -7,6 +7,9 @@ local EventManager = require("scripts.events.EventManager").getInstance()
 local Event = require("scripts.events.Event").EventList
 local Logic = require("scripts.Logic").getInstance()
 
+
+local mLeagueId
+
 function action( param )
     local leagueId = Logic:getStartLeagueId()
     if Logic:getPreviousLeagueSelected() > 0 then
@@ -17,6 +20,8 @@ function action( param )
         leagueId = param[1]
     end
 
+    mLeagueId = leagueId
+
     Logic:setPreviousLeagueSelected( leagueId )
 
     local url = RequestUtils.GET_UPCOMING_GAMES_BY_LEAGUE_REST_CALL.."?leagueId="..leagueId
@@ -24,17 +29,23 @@ function action( param )
     local requestInfo = {}
     requestInfo.requestData = ""
     requestInfo.url = url
+    requestInfo.recordResponse = true
 
-    local handler = function( isSucceed, body, header, status, errorBuffer )
-        RequestUtils.messageHandler( requestInfo, isSucceed, body, header, status, errorBuffer, RequestUtils.HTTP_200, onRequestSuccess, onRequestFailed )
+    local jsonResponseCache = RequestUtils.getResponseCache( url )
+    if jsonResponseCache ~= nil then
+        onRequestSuccess( jsonResponseCache )
+    else
+
+        local handler = function( isSucceed, body, header, status, errorBuffer )
+            RequestUtils.messageHandler( requestInfo, isSucceed, body, header, status, errorBuffer, RequestUtils.HTTP_200, onRequestSuccess, onRequestFailed )
+        end
+
+        local httpRequest = HttpRequestForLua:create( CCHttpRequest.kHttpGet )
+        httpRequest:addHeader( Logic:getAuthSessionString() )
+        httpRequest:sendHttpRequest( url, handler )
+
+        ConnectingMessage.loadFrame()
     end
-
-    local httpRequest = HttpRequestForLua:create( CCHttpRequest.kHttpGet )
-    httpRequest:addHeader( Logic:getAuthSessionString() )
-    httpRequest:sendHttpRequest( url, handler )
-
-    ConnectingMessage.loadFrame()
-
 --[[
     local JsonConfigReader = require("scripts.config.JsonConfigReader")
     local config = JsonConfigReader.read( "config/matchList.json" )
@@ -80,7 +91,7 @@ function onRequestSuccess( matchList )
     if matchListScene.isShown() then
         matchListScene.initMatchList( sortedMatchList )
     else
-        matchListScene.loadFrame( sortedMatchList )
+        matchListScene.loadFrame( sortedMatchList, mLeagueId )
     end
     
 end
@@ -93,7 +104,7 @@ function onRequestFailed( jsonResponse )
     if matchListScene.isShown() then
         matchListScene.initMatchList( matchList )
     else
-        matchListScene.loadFrame( matchList )
+        matchListScene.loadFrame( matchList, mLeagueId )
     end
     
     EventManager:postEvent( Event.Show_Error_Message, { errorBuffer } )

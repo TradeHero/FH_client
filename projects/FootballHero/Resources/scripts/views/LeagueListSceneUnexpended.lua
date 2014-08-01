@@ -50,10 +50,14 @@ function helperInitLeagueList()
             local expendedIndicator = content:getChildByName( "expendIndi" )
             local selectedIndi = content:getChildByName("selectedIndi")
 
-            expendedIndicator:setEnabled( false )
+            if expendedIndicator ~= nil then
+                expendedIndicator:setEnabled( false )
+            end
             leagueName:setText( CountryConfig.getCountryName( i ).." - "..LeagueConfig.getLeagueName( leagueId ) )
             logo:loadTexture( CountryConfig.getLogo( i ) )
-            selectedIndi:setEnabled( false )
+            if selectedIndi ~= nil then
+                selectedIndi:setEnabled( false )
+            end
 
             ontentHeight = contentHeight + content:getSize().height
 
@@ -77,10 +81,14 @@ function selectOnLeague( selectedLeague )
         local child = mLeagueListContainer:getChildByTag( i )
         if child == selectedLeague then
             local selectedIndi = child:getChildByName("selectedIndi")
-            selectedIndi:setEnabled( true )
+            if selectedIndi ~= nil then
+                selectedIndi:setEnabled( true )
+            end
         else
             local selectedIndi = child:getChildByName("selectedIndi")
-            selectedIndi:setEnabled( false )
+            if selectedIndi ~= nil then
+                selectedIndi:setEnabled( false )
+            end
         end
     end
 end

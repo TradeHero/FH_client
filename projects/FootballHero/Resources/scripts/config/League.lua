@@ -17,7 +17,7 @@ function init()
 	local filter = function( v )
 		return v["isActive"]
 	end
-	mConfig, mConfigNum = JsonConfigReader.read( FILE_NAME, "Id", filter )
+	mConfig, mConfigNum, mIndex = JsonConfigReader.read( FILE_NAME, "Id", filter )
 	print( "Read active league number: "..mConfigNum )
 end
 

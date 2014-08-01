@@ -113,7 +113,7 @@ end
 function MatchListData:addMatch( match )
 	local startTimeNum = match["StartTime"]
     local startTimeDate = os.date("%y", startTimeNum) * 10000 + os.date("%m", startTimeNum) * 100 + os.date("%d", startTimeNum)
-    local startTimeDisplay = os.date( "%B %d, %A", startTimeNum )
+    local startTimeDisplay = os.date( "%b %d, %A", startTimeNum )
 
     local matchDate = self:getOrCreateMatchListOnDate( startTimeDate, startTimeDisplay )
     table.insert( matchDate["matches"], match )

@@ -288,4 +288,16 @@
     <Project>FH_UI_68</Project>
     <GuidesList />
   </GuidesProject>
+  <GuidesProject>
+    <Project>TapToMakePrediction</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>LeagueListDropDown</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>LeagueContentInDropDown</Project>
+    <GuidesList />
+  </GuidesProject>
 </ArrayOfGuidesProject>
