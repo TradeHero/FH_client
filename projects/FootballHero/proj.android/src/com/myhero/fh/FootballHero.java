@@ -22,6 +22,10 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
 package com.myhero.fh;
+import android.content.Intent;
+import android.view.View;
+import com.myhero.fh.auth.AuthenticationCallback;
+import com.myhero.fh.auth.FacebookAuth;
 import org.cocos2dx.lib.Cocos2dxActivity;
 import org.cocos2dx.lib.Cocos2dxGLSurfaceView;
 
@@ -36,12 +40,26 @@ import android.util.Base64;
 import android.util.Log;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Arrays;
 
 
 public class FootballHero extends Cocos2dxActivity{
+    private static final String TAG = "FacebookTestActivity";
+    private static FacebookAuth facebookAuth;
+
 	protected void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
+
+        facebookAuth = new FacebookAuth(this, "788386747851675", Arrays.asList(
+                "public_profile", "user_friends", "email", "user_birthday"));
+        facebookAuth.setActivity(this);
 	}
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        facebookAuth.onActivityResult(requestCode, resultCode, data);
+        super.onActivityResult(requestCode, resultCode, data);
+    }
 	
 	public Cocos2dxGLSurfaceView onCreateGLSurfaceView() {
 		
@@ -58,10 +76,30 @@ public class FootballHero extends Cocos2dxActivity{
         glSurfaceView.setEGLConfigChooser(5, 6, 5, 0, 16, 8); 
         return glSurfaceView; 
     }
-    
+
+    public static native void loginResult(String accessToken);
+
     public static void login()
     {
-    	System.out.println("C++ to java");
+        facebookAuth.authenticate(new FacebookAuthenticationCallback());
+    }
+
+    private static class FacebookAuthenticationCallback implements AuthenticationCallback {
+        @Override
+        public void onStart() {
+
+        }
+
+        @Override
+        public void onSuccess(String authenticationToken) {
+            Log.d(TAG, "authToken: " + authenticationToken);
+            loginResult(authenticationToken);
+        }
+
+        @Override
+        public void onError(Throwable error) {
+            Log.e(TAG, error.getMessage());
+        }
     }
 }
 

@@ -6,9 +6,21 @@
 #endif
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
 #include "platform/android/jni/JniHelper.h"
+#include <jni.h>
 #endif
 
 USING_NS_CC;
+
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+extern "C"
+{
+	void Java_com_myhero_fh_FootballHero_loginResult(JNIEnv *env, jobject thiz, jstring accessToken)
+	{
+		const char *token = env->GetStringUTFChars(accessToken, NULL);
+		Social::FacebookDelegate::sharedDelegate()->loginResult(token);
+	}
+}
+#endif
 
 namespace Social
 {
@@ -42,17 +54,10 @@ namespace Social
 #endif
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
 		JniMethodInfo jmi;
-		if (JniHelper::getStaticMethodInfo(jmi, "com/myhero/fh/FootballHero", "login", "([Ljava/lang/String;)V"))
+		if (JniHelper::getStaticMethodInfo(jmi, "com/myhero/fh/FootballHero", "login", "()V"))
 		{
-			jclass str_cls = jmi.env->FindClass("java/lang/String");
-			jstring str1 = jmi.env->NewStringUTF("I'm a titile");
-			jstring str2 = jmi.env->NewStringUTF("Are yor exit game?");
-			jobjectArray arrs = jmi.env->NewObjectArray(2, str_cls, 0);
-
-			jmi.env->SetObjectArrayElement(arrs, 0, str1);
-			jmi.env->SetObjectArrayElement(arrs, 1, str2);
-			
-			jmi.env->CallStaticVoidMethod(jmi.classID, jmi.methodID, arrs);
+			jmi.env->CallStaticVoidMethod(jmi.classID, jmi.methodID);
+			jmi.env->DeleteLocalRef(jmi.classID);
 		}
 #endif
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
