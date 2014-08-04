@@ -42,7 +42,7 @@ namespace Social
 #endif
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
 		JniMethodInfo jmi;
-		if (JniHelper::getStaticMethodInfo(jmi, "org/tradehero/th/FootballHero", "login", "([Ljava/lang/String;)V"))
+		if (JniHelper::getStaticMethodInfo(jmi, "com/myhero/fh/FootballHero", "login", "([Ljava/lang/String;)V"))
 		{
 			jclass str_cls = jmi.env->FindClass("java/lang/String");
 			jstring str1 = jmi.env->NewStringUTF("I'm a titile");

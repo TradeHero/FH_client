@@ -31,7 +31,7 @@ local STATUS_SELECTED_LEFT = 2
 local STATUS_SELECTED_RIGHT = 3
 
 local MIN_MOVE_DISTANCE = 100
-local SWITCH_MOVE_TIME = 0.3
+local SWITCH_MOVE_TIME = 0.4
 
 
 function loadFrame()
@@ -281,6 +281,11 @@ function updatePageIndicator()
             pending:setEnabled( true )
         elseif mPredictionStatus[i] == STATUS_SELECTED_LEFT or mPredictionStatus[i] == STATUS_SELECTED_RIGHT then
             selected:setEnabled( true )
+            if i == mCurrentPredictionIndex then
+                selected:setColor( ccc3( 255, 255, 255 ) )
+            else
+                selected:setColor( ccc3( 92, 200, 80 ) )
+            end
         elseif mPredictionStatus[i] == STATUS_SKIPPED then
             skipped:setEnabled( true )
         end

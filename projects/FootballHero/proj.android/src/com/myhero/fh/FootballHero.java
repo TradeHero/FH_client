@@ -29,13 +29,24 @@ import android.content.Context;
 import android.os.Bundle;
 import android.view.KeyEvent;
 
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
+import android.util.Base64;
+import android.util.Log;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
+
 public class FootballHero extends Cocos2dxActivity{
 	protected void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
 	}
 	
 	public Cocos2dxGLSurfaceView onCreateGLSurfaceView() {
-    	return new LuaGLSurfaceView(this);
+		
+		
+		return new LuaGLSurfaceView(this);
     }
 
     static {

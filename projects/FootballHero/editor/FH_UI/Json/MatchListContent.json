@@ -10,7 +10,11 @@
   "designHeight": 1136,
   "designWidth": 640,
   "textures": [],
-  "texturesPng": [],
+  "texturesPng": [
+    "MatchPrediction/indicator_inactive.png",
+    "MatchPrediction/indicator_active.png",
+    "Competition/icn_tick_green.png"
+  ],
   "version": "1.5.0.0",
   "widgetTree": {
     "classname": "Panel",

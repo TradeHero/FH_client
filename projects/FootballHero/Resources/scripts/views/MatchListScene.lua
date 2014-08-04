@@ -153,9 +153,10 @@ function initMatchList( matchList )
 
         if predictionConfirmScene ~= nil then
             SceneManager.removeWidget( predictionConfirmScene )
+        else
+            -- Skip the refresh and show directly
+            return
         end
-        -- Skip the refresh and show directly
-        return
     end
 
     local contentContainer = tolua.cast( mWidget:getChildByName("ScrollView"), "ScrollView" )
