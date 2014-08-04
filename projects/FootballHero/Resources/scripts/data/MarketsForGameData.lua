@@ -58,21 +58,7 @@ MarketsForGameData = {}
 --]]
 
 function MarketsForGameData:new( list )
-	local match = nil
-	local matchIndex = 0
-	for k, v in pairs( list ) do
-		local market = v
-		if market["marketTypeId"] == MarketConfig.MARKET_TYPE_MATCH then
-			match = market
-			matchIndex = k
-		end
-	end
-	if match ~= nil then
-		table.remove( list, matchIndex )
-	end
-
 	local obj = {
-		matchMarket = match,
 		marketList = list
 	}
 
@@ -84,9 +70,6 @@ function MarketsForGameData:new( list )
     return obj 
 end
 
-function MarketsForGameData:getMatchMarket()
-	return self.matchMarket
-end
 
 function MarketsForGameData:getNum()
 	return table.getn( self.marketList )
@@ -98,13 +81,6 @@ end
 
 -- Get the market info which contains the given couponId
 function MarketsForGameData:getMarketInfoByCouponId( couponId )
-    for k, v in pairs( self.matchMarket["odds"] ) do
-        local odds = v
-        if odds["Id"] == couponId then
-            return self.matchMarket
-        end
-    end
-
     for i = 1, self:getNum() do
         local market = self:getMarketAt(i)
         for k, v in pairs( market["odds"] ) do

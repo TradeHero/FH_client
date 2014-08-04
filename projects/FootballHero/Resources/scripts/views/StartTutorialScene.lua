@@ -7,9 +7,9 @@ local EventManager = require("scripts.events.EventManager").getInstance()
 local Event = require("scripts.events.Event").EventList
 
 
-local mWidget
 -- Children list:
 -- 1 to 5: page buttons
+local mWidget
 local mHomepageWidget
 local mBackgroundContainer
 local mMovableContainer

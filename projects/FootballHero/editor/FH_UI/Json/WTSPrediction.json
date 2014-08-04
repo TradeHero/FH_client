@@ -11,9 +11,8 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "MatchListScene/Arrow down.png",
-    "MatchListScene/Arrow Up.png",
-    "commonRes/England.png"
+    "MatchPrediction/Will-total-goals-be-more-than-xx-yes.png",
+    "MatchPrediction/Will-total-goals-be-more-than-xx-no.png"
   ],
   "version": "1.5.0.0",
   "widgetTree": {

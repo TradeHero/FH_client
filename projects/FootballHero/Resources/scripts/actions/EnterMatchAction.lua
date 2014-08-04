@@ -47,11 +47,9 @@ function onRequestSuccess( response )
 
     Logic:setCurMarketInfo( marketInfo )
     
-    if marketInfo:getMatchMarket() ~= nil then
-        local matchPredictionScene = require("scripts.views.MatchPredictionScene")
-        matchPredictionScene.loadFrame( marketInfo:getMatchMarket() )
-    elseif marketInfo:getNum() > 0 then
-        EventManager:postEvent( Event.Enter_Next_Prediction )
+    if marketInfo:getNum() > 0 then
+        local TappablePredictionScene = require("scripts.views.TappablePredictionScene")
+        TappablePredictionScene.loadFrame()
     else
         RequestUtils.onRequestFailed( "You have completed this match." )
     end

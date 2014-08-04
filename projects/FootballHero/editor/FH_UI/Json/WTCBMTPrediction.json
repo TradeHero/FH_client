@@ -11,8 +11,8 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "Tutorial/splash_bkg.png",
-    "Tutorial/Splashscreen_Logo.png"
+    "commonRes/Arsenal.png",
+    "commonRes/Manchester United.png"
   ],
   "version": "1.5.0.0",
   "widgetTree": {

@@ -300,4 +300,12 @@
     <Project>LeagueContentInDropDown</Project>
     <GuidesList />
   </GuidesProject>
+  <GuidesProject>
+    <Project>PredictionBG</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>PredictionStatus</Project>
+    <GuidesList />
+  </GuidesProject>
 </ArrayOfGuidesProject>

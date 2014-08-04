@@ -77,6 +77,8 @@
     <string>TapToMakePrediction.json</string>
     <string>LeagueListDropDown.json</string>
     <string>LeagueContentInDropDown.json</string>
+    <string>PredictionBG.json</string>
+    <string>PredictionStatus.json</string>
   </JsonList>
   <CanvasSize>
     <Width>640</Width>
@@ -87,10 +89,10 @@
   <ResRelativePath />
   <imageFileList />
   <imagePngList>
-    <string>MatchListScene/Arrow down.png</string>
-    <string>MatchListScene/Arrow Up.png</string>
-    <string>commonRes/England.png</string>
+    <string>MatchPrediction/indicator_inactive.png</string>
+    <string>MatchPrediction/indicator_active.png</string>
+    <string>Competition/icn_tick_green.png</string>
   </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>LeagueListDropDown.json</CurrentUIJson>
+  <CurrentUIJson>PredictionStatus.json</CurrentUIJson>
 </UIProject>
