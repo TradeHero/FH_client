@@ -145,7 +145,19 @@ function initLeagueList( leagueKey )
 end
 
 -- Param matchList is Object of MatchListData
-function initMatchList( matchList ) 
+function initMatchList( matchList )
+    local predictionScene = SceneManager.getWidgetByName( "TappablePredictionScene" )
+    local predictionConfirmScene = SceneManager.getWidgetByName( "PredTotalConfirmScene" )
+    if predictionScene ~= nil then
+        SceneManager.removeWidget( predictionScene )
+
+        if predictionConfirmScene ~= nil then
+            SceneManager.removeWidget( predictionConfirmScene )
+        end
+        -- Skip the refresh and show directly
+        return
+    end
+
     local contentContainer = tolua.cast( mWidget:getChildByName("ScrollView"), "ScrollView" )
     contentContainer:removeAllChildrenWithCleanup( true )
 

@@ -145,6 +145,10 @@ function removeWidget( widget )
 	mSceneGameLayer:removeWidget( widget )
 end
 
+function getWidgetByName( name )
+	return mSceneGameLayer:getWidgetByName( name )
+end
+
 function isWidgetShown( widget )
 	
 end

@@ -15,7 +15,8 @@ function loadFrame()
     mWidget = widget
     mWidget:registerScriptHandler( EnterOrExit )
     mWidget:addTouchEventListener( bgEventHandler )
-    SceneManager.addWidget(widget)
+    SceneManager.addWidget(mWidget)
+    mWidget:setName( "PredTotalConfirmScene" )
 
 	initContent()
 end

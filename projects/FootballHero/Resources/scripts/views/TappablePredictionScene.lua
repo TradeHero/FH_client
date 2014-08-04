@@ -40,7 +40,8 @@ function loadFrame()
 
 	mWidget = GUIReader:shareReader():widgetFromJsonFile("scenes/PredictionBG.json")
     mWidget:registerScriptHandler( EnterOrExit )
-    SceneManager.clearNAddWidget( mWidget )
+    SceneManager.addWidget( mWidget )
+    mWidget:setName( "TappablePredictionScene" )
 
     local team1 = tolua.cast( mWidget:getChildByName("team1"), "ImageView" )
     local team2 = tolua.cast( mWidget:getChildByName("team2"), "ImageView" )
