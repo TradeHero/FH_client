@@ -8,6 +8,7 @@ LOCAL_MODULE_FILENAME := libcocos2dlua
 
 LOCAL_SRC_FILES :=  hellolua/main.cpp \
                     hellolua/facebook.cpp \
+                    hellolua/analytics.cpp \
                     ../../Classes/AppDelegate.cpp
 
 

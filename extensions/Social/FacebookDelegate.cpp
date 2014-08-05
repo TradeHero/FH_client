@@ -1,5 +1,6 @@
 #include "cocos2d.h"
 #include "FacebookDelegate.h"
+#include "../Utils/Analytics.h"
 #include "CCLuaEngine.h"
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
 #include "FacebookConnector.h"
@@ -50,6 +51,10 @@ namespace Social
     
     void FacebookDelegate::loginResult(const char* accessToken)
 	{
+		if (accessToken != NULL) {
+			Utils::Analytics::sharedDelegate()->postEvent("FacebookLoginSuccess", "", "");
+		}
+
 		CCScriptEngineProtocol* pScriptProtocol = CCScriptEngineManager::sharedManager()->getScriptEngine();
 		cocos2d::CCLuaEngine* pLuaEngine = dynamic_cast<CCLuaEngine*>(pScriptProtocol);
 		if (pLuaEngine == NULL)

@@ -19,7 +19,7 @@ public class FootballApp extends Application {
     super.onCreate();
 
     // initialize analytics instance
-    Analytics.of(this);
+    Analytics.init(this);
   }
 
   public void showDeveloperKeyHash() {

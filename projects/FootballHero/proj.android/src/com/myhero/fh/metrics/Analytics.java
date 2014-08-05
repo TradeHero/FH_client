@@ -3,6 +3,7 @@ package com.myhero.fh.metrics;
 import android.content.Context;
 import com.myhero.fh.Constants;
 import com.myhero.fh.metrics.events.AnalyticsEvent;
+import com.myhero.fh.metrics.events.SingleAttributeEvent;
 import com.myhero.fh.metrics.localytics.LocalyticsAdapter;
 import java.util.Collections;
 import java.util.HashSet;
@@ -16,7 +17,7 @@ public class Analytics {
 
   public static Analytics instance;
 
-  public static Analytics of(Context context) {
+  public static void init(Context context) {
     if (instance == null) {
       LocalyticsAdapter localytics =
           new LocalyticsAdapter(context.getApplicationContext(), Constants.LOCALYTICS_APP_KEY);
@@ -24,6 +25,9 @@ public class Analytics {
           Collections.singleton((AnalyticsAdapter) localytics),
           Collections.<String>emptySet());
     }
+  }
+
+  public static Analytics getInstance() {
     return instance;
   }
 
@@ -40,6 +44,11 @@ public class Analytics {
   public final Analytics tagScreen(String screenName) {
     pendingActions.add(new TagScreenAction(screenName));
     return this;
+  }
+
+  /** Specially created for cocos2d */
+  public static void fireSingleAttributeEvent(String eventName, String key, String value) {
+    Analytics.getInstance().fireEvent(new SingleAttributeEvent(eventName, key, value));
   }
 
   public final void fireEvent(AnalyticsEvent analyticsEvent) {

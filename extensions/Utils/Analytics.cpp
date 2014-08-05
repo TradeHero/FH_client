@@ -5,7 +5,7 @@
 #include "AnalyticsHandler.h"
 #endif
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
-#include "platform/android/jni/JniHelper.h"
+#include "AnalyticsAndroid.h"
 #endif
 
 USING_NS_CC;
@@ -39,7 +39,7 @@ namespace Utils
 		AnalyticsHandler::getInstance()->postEvent(eventName, key, value);
 #endif
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
-
+		android_analytics_postEvent(eventName, key, value);
 #endif
 	}
 }

@@ -19,10 +19,10 @@ extern "C"
 
 void android_facebook_login()
 {
-		JniMethodInfo jmi;
-		if (JniHelper::getStaticMethodInfo(jmi, "com/myhero/fh/FootballHero", "login", "()V"))
-		{
-			jmi.env->CallStaticVoidMethod(jmi.classID, jmi.methodID);
-			jmi.env->DeleteLocalRef(jmi.classID);
-		}
+  JniMethodInfo jmi;
+  if (JniHelper::getStaticMethodInfo(jmi, "com/myhero/fh/FootballHero", "login", "()V"))
+  {
+    jmi.env->CallStaticVoidMethod(jmi.classID, jmi.methodID);
+    jmi.env->DeleteLocalRef(jmi.classID);
+  }
 }
