@@ -300,3 +300,6 @@ proguard/
 
 # Log Files
 *.log
+
+## For Football Hero
+**/libcocos2dlua.so
