@@ -11,17 +11,6 @@
 
 USING_NS_CC;
 
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
-extern "C"
-{
-	void Java_com_myhero_fh_FootballHero_loginResult(JNIEnv *env, jobject thiz, jstring accessToken)
-	{
-		const char *token = env->GetStringUTFChars(accessToken, NULL);
-		Social::FacebookDelegate::sharedDelegate()->loginResult(token);
-	}
-}
-#endif
-
 namespace Social
 {
 	static FacebookDelegate* s_sharedUtils;
