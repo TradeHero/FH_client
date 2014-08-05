@@ -27,6 +27,7 @@
 #import "EAGLView.h"
 #import "AppDelegate.h"
 #import "WebviewController.h"
+#import "LocalyticsSession.h"
 
 #import "RootViewController.h"
 #import "FBSessionSingleton.h"
@@ -77,6 +78,9 @@ static AppDelegate s_sharedApplication;
     [[UIApplication sharedApplication] setStatusBarHidden: YES];
 
     cocos2d::CCApplication::sharedApplication()->run();
+    
+    [[LocalyticsSession shared] integrateLocalytics:@"d16d149eabf971a5b376a43-aa0e6fc0-1c50-11e4-49cb-00a426b17dd8" launchOptions:launchOptions];
+    [[LocalyticsSession shared] setLoggingEnabled:YES];
     
     return YES;
 }

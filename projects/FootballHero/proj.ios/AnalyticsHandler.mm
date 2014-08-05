@@ -1,6 +1,7 @@
 
 
 #include "AnalyticsHandler.h"
+#import "LocalyticsSession.h"
 
 
 static AnalyticsHandler* instance;
@@ -18,13 +19,11 @@ void AnalyticsHandler::postEvent(const char* eventName, const char* key, const c
 {
     if (key != NULL && value != NULL)
     {
-        //NSDictionary * payload = [NSDictionary dictionaryWithObject:[NSString stringWithUTF8String:value] forKey:[NSString stringWithUTF8String:key]];
-        //[[Swrve sharedInstance] event:[NSString stringWithUTF8String:eventName] payload:payload];
+        NSDictionary * payload = [NSDictionary dictionaryWithObject:[NSString stringWithUTF8String:value] forKey:[NSString stringWithUTF8String:key]];
+        [[LocalyticsSession shared] tagEvent:[NSString stringWithUTF8String:eventName] attributes:payload];
     }
     else
     {
-        //[[Swrve sharedInstance] event:[NSString stringWithUTF8String:eventName]];
+        [[LocalyticsSession shared] tagEvent:[NSString stringWithUTF8String:eventName]];
     }
-    
-    //[[Swrve sharedInstance] sendQueuedEvents];
 }

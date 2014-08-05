@@ -89,10 +89,9 @@
   <ResRelativePath />
   <imageFileList />
   <imagePngList>
-    <string>MatchPrediction/indicator_inactive.png</string>
-    <string>MatchPrediction/indicator_active.png</string>
-    <string>Competition/Tick_White.png</string>
+    <string>MatchPrediction/Will-xx_team-score-a-goal-yes.png</string>
+    <string>MatchPrediction/Will-xx_team-score-a-goal-no.png</string>
   </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>MoreContent.json</CurrentUIJson>
+  <CurrentUIJson>SettingsHomeContent.json</CurrentUIJson>
 </UIProject>

@@ -11,8 +11,8 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "Tutorial/splash_bkg.png",
-    "Tutorial/Splashscreen_Logo.png"
+    "MatchPrediction/Will-xx_team-score-a-goal-yes.png",
+    "MatchPrediction/Will-xx_team-score-a-goal-no.png"
   ],
   "version": "1.5.0.0",
   "widgetTree": {
@@ -96,7 +96,7 @@
           "ignoreSize": true,
           "layoutParameter": null,
           "opacity": 0,
-          "positionPercentX": 0.49999994,
+          "positionPercentX": 0.4984375,
           "positionPercentY": 0.502640843,
           "positionType": 0,
           "rotation": 0,

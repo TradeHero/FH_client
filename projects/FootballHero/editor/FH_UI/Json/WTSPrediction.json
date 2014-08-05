@@ -11,8 +11,8 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "MatchPrediction/Will-total-goals-be-more-than-xx-yes.png",
-    "MatchPrediction/Will-total-goals-be-more-than-xx-no.png"
+    "MatchPrediction/Will-xx_team-score-a-goal-yes.png",
+    "MatchPrediction/Will-xx_team-score-a-goal-no.png"
   ],
   "version": "1.5.0.0",
   "widgetTree": {
@@ -89,7 +89,7 @@
           "customProperty": "",
           "flipX": false,
           "flipY": false,
-          "height": 387,
+          "height": 344,
           "ignoreSize": true,
           "layoutParameter": null,
           "opacity": 255,
@@ -106,7 +106,7 @@
           "touchAble": false,
           "useMergedTexture": false,
           "visible": true,
-          "width": 310,
+          "width": 396,
           "x": 485,
           "y": 600,
           "capInsetsHeight": 0,
@@ -120,8 +120,8 @@
             "resourceType": 0
           },
           "scale9Enable": false,
-          "scale9Height": 387,
-          "scale9Width": 310
+          "scale9Height": 344,
+          "scale9Width": 396
         }
       },
       {
@@ -151,14 +151,14 @@
               "ignoreSize": true,
               "layoutParameter": null,
               "opacity": 200,
-              "positionPercentX": 0.00884955749,
-              "positionPercentY": -0.7002584,
+              "positionPercentX": 0.0147783253,
+              "positionPercentY": -0.715039551,
               "positionType": 0,
               "rotation": 0,
               "scaleX": 1,
               "scaleY": 1,
-              "sizePercentX": 0.203539819,
-              "sizePercentY": 0.13436693,
+              "sizePercentX": 0.339901477,
+              "sizePercentY": 0.137203172,
               "sizeType": 0,
               "tag": 11,
               "touchAble": false,
@@ -194,7 +194,7 @@
           "customProperty": "",
           "flipX": false,
           "flipY": false,
-          "height": 387,
+          "height": 344,
           "ignoreSize": true,
           "layoutParameter": null,
           "opacity": 255,
@@ -204,14 +204,14 @@
           "rotation": 0,
           "scaleX": 0.6,
           "scaleY": 0.6,
-          "sizePercentX": 0.5296875,
-          "sizePercentY": 0.340669,
+          "sizePercentX": 0.3171875,
+          "sizePercentY": 0.333626747,
           "sizeType": 0,
           "tag": 5,
           "touchAble": false,
           "useMergedTexture": false,
           "visible": true,
-          "width": 339,
+          "width": 396,
           "x": 157,
           "y": 600,
           "capInsetsHeight": 0,
@@ -225,8 +225,8 @@
             "resourceType": 0
           },
           "scale9Enable": false,
-          "scale9Height": 387,
-          "scale9Width": 339
+          "scale9Height": 344,
+          "scale9Width": 396
         }
       },
       {

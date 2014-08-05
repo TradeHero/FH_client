@@ -10,12 +10,7 @@
   "designHeight": 1136,
   "designWidth": 640,
   "textures": [],
-  "texturesPng": [
-    "commonRes/Arsenal.png",
-    "commonRes/Manchester United.png",
-    "MatchListContent/line.png",
-    "MatchListContent/info_box.png"
-  ],
+  "texturesPng": [],
   "version": "1.5.0.0",
   "widgetTree": {
     "classname": "Panel",

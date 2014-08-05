@@ -242,6 +242,9 @@
 		73FC0A17199074B40006D0E2 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 73FC0A16199074B40006D0E2 /* libsqlite3.dylib */; };
 		73FC0A19199074C10006D0E2 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73FC0A18199074C10006D0E2 /* SystemConfiguration.framework */; };
 		73FC0A1A1990781F0006D0E2 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F293B3CC15EB7BE500256477 /* QuartzCore.framework */; };
+		73FC0A22199079630006D0E2 /* iOSa_2.60.0.version in Resources */ = {isa = PBXBuildFile; fileRef = 73FC0A1C199079630006D0E2 /* iOSa_2.60.0.version */; };
+		73FC0A24199079630006D0E2 /* libLocalyticsAMP.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 73FC0A1E199079630006D0E2 /* libLocalyticsAMP.a */; };
+		73FC0A25199079630006D0E2 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 73FC0A1F199079630006D0E2 /* LICENSE */; };
 		73FE377F1907C8BA0039A45C /* EditBoxDelegateForLua.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 73FE377D1907C8BA0039A45C /* EditBoxDelegateForLua.cpp */; };
 		ED35C0C718323498002A0750 /* CCArmatureAnimation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED35C03818323497002A0750 /* CCArmatureAnimation.cpp */; };
 		ED35C0C818323498002A0750 /* CCProcessBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED35C03A18323497002A0750 /* CCProcessBase.cpp */; };
@@ -776,6 +779,12 @@
 		73FC0A14199074A40006D0E2 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		73FC0A16199074B40006D0E2 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		73FC0A18199074C10006D0E2 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		73FC0A1C199079630006D0E2 /* iOSa_2.60.0.version */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = iOSa_2.60.0.version; path = "AMP-SDK/iOSa_2.60.0.version"; sourceTree = "<group>"; };
+		73FC0A1D199079630006D0E2 /* libLocalyticsAMP_x64.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libLocalyticsAMP_x64.a; path = "AMP-SDK/libLocalyticsAMP_x64.a"; sourceTree = "<group>"; };
+		73FC0A1E199079630006D0E2 /* libLocalyticsAMP.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libLocalyticsAMP.a; path = "AMP-SDK/libLocalyticsAMP.a"; sourceTree = "<group>"; };
+		73FC0A1F199079630006D0E2 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = LICENSE; path = "AMP-SDK/LICENSE"; sourceTree = "<group>"; };
+		73FC0A20199079630006D0E2 /* LocalyticsAmpSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LocalyticsAmpSession.h; path = "AMP-SDK/LocalyticsAmpSession.h"; sourceTree = "<group>"; };
+		73FC0A21199079630006D0E2 /* LocalyticsSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LocalyticsSession.h; path = "AMP-SDK/LocalyticsSession.h"; sourceTree = "<group>"; };
 		73FE377D1907C8BA0039A45C /* EditBoxDelegateForLua.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EditBoxDelegateForLua.cpp; sourceTree = "<group>"; };
 		73FE377E1907C8BA0039A45C /* EditBoxDelegateForLua.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditBoxDelegateForLua.h; sourceTree = "<group>"; };
 		ED35C03818323497002A0750 /* CCArmatureAnimation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCArmatureAnimation.cpp; sourceTree = "<group>"; };
@@ -910,6 +919,7 @@
 				F293B3D715EB7BE500256477 /* UIKit.framework in Frameworks */,
 				F293B3D915EB7BE500256477 /* Foundation.framework in Frameworks */,
 				F293B3DB15EB7BE500256477 /* CoreGraphics.framework in Frameworks */,
+				73FC0A24199079630006D0E2 /* libLocalyticsAMP.a in Frameworks */,
 				1A9D7E63171E38B2000B3B9A /* libluajit.a in Frameworks */,
 				1AB87031175E0A5B005D39BF /* libwebsockets.a in Frameworks */,
 			);
@@ -1715,6 +1725,19 @@
 			name = Social;
 			sourceTree = "<group>";
 		};
+		73FC0A1B199079450006D0E2 /* AMP-SDK */ = {
+			isa = PBXGroup;
+			children = (
+				73FC0A1C199079630006D0E2 /* iOSa_2.60.0.version */,
+				73FC0A1D199079630006D0E2 /* libLocalyticsAMP_x64.a */,
+				73FC0A1E199079630006D0E2 /* libLocalyticsAMP.a */,
+				73FC0A1F199079630006D0E2 /* LICENSE */,
+				73FC0A20199079630006D0E2 /* LocalyticsAmpSession.h */,
+				73FC0A21199079630006D0E2 /* LocalyticsSession.h */,
+			);
+			name = "AMP-SDK";
+			sourceTree = "<group>";
+		};
 		ED35C02A18323496002A0750 /* CocoStudio */ = {
 			isa = PBXGroup;
 			children = (
@@ -1960,6 +1983,7 @@
 		F293B3BD15EB7BE500256477 = {
 			isa = PBXGroup;
 			children = (
+				73FC0A1B199079450006D0E2 /* AMP-SDK */,
 				15C1533E168310C700D239F2 /* cocos2dx.xcodeproj */,
 				15C154A71683118600D239F2 /* Box2D */,
 				15C1542E1683116B00D239F2 /* chipmunk */,
@@ -2159,6 +2183,7 @@
 				730D984F18DC4317000CA5F9 /* sounds in Resources */,
 				730D984A18DC4317000CA5F9 /* footballhero.lua in Resources */,
 				733DE935193F26C800361638 /* Default-Portrait@2x~ipad.png in Resources */,
+				73FC0A25199079630006D0E2 /* LICENSE in Resources */,
 				733DE931193F262900361638 /* Icon-152.png in Resources */,
 				730D984818DC4317000CA5F9 /* extern.lua in Resources */,
 				15C1569B1683138E00D239F2 /* Icon-57.png in Resources */,
@@ -2169,6 +2194,7 @@
 				730D984418DC4317000CA5F9 /* Cocos2d.lua in Resources */,
 				15C1569C1683138E00D239F2 /* Icon-72.png in Resources */,
 				730D984B18DC4317000CA5F9 /* images in Resources */,
+				73FC0A22199079630006D0E2 /* iOSa_2.60.0.version in Resources */,
 				730D984518DC4317000CA5F9 /* CocoStudio.lua in Resources */,
 				15C1569D1683138E00D239F2 /* Icon-114.png in Resources */,
 				15C1569E1683138E00D239F2 /* Icon-144.png in Resources */,
@@ -2562,6 +2588,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/../../../scripting/lua/luajit/ios\"",
 					"\"$(SRCROOT)/../../../external/libwebsockets/ios/lib\"",
+					"\"$(PROJECT_DIR)/AMP-SDK\"",
 				);
 				OTHER_LDFLAGS = (
 					"-lxml2",
@@ -2621,6 +2648,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/../../../scripting/lua/luajit/ios\"",
 					"\"$(SRCROOT)/../../../external/libwebsockets/ios/lib\"",
+					"\"$(PROJECT_DIR)/AMP-SDK\"",
 				);
 				OTHER_LDFLAGS = (
 					"-lxml2",

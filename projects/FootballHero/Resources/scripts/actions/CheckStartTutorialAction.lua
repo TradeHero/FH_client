@@ -25,6 +25,8 @@ function action( param )
     EmailRegisterScene.loadFrame()
     EmailForgotPasswordScene.loadFrame()
     EmailRegisterNameScene.loadFrame()
+
+    --Analytics:sharedDelegate():postEvent( "Test001", "key", "value" )
 end
 
 function tutorialEnd()

@@ -11,9 +11,8 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "MatchListScene/Arrow down.png",
-    "MatchListScene/Arrow Up.png",
-    "commonRes/England.png"
+    "MatchPrediction/Will-xx_team-score-a-goal-yes.png",
+    "MatchPrediction/Will-xx_team-score-a-goal-no.png"
   ],
   "version": "1.5.0.0",
   "widgetTree": {
