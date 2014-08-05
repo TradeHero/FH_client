@@ -5,8 +5,7 @@
 #include "FacebookConnector.h"
 #endif
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
-#include "platform/android/jni/JniHelper.h"
-#include <jni.h>
+#include "FacebookAndroid.h"
 #endif
 
 USING_NS_CC;
@@ -42,12 +41,7 @@ namespace Social
         FacebookConnector::getInstance()->login();
 #endif
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
-		JniMethodInfo jmi;
-		if (JniHelper::getStaticMethodInfo(jmi, "com/myhero/fh/FootballHero", "login", "()V"))
-		{
-			jmi.env->CallStaticVoidMethod(jmi.classID, jmi.methodID);
-			jmi.env->DeleteLocalRef(jmi.classID);
-		}
+		android_facebook_login();
 #endif
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
 		loginResult(NULL);
