@@ -23,10 +23,11 @@ function action( param )
     end
 
     FacebookDelegate:sharedDelegate():login( successHandler, successHandler )
+    ConnectingMessage.loadFrame()
 end
 
 function onFBConnectFailed()
-
+    ConnectingMessage.selfRemove()
 end
 
 function onFBConnectSuccess( accessToken )
@@ -47,8 +48,6 @@ function onFBConnectSuccess( accessToken )
     httpRequest:addHeader( Constants.CONTENT_TYPE_JSON )
     httpRequest:getRequest():setRequestData( requestContentText, string.len( requestContentText ) )
     httpRequest:sendHttpRequest( url, handler )
-
-    ConnectingMessage.loadFrame()
 end
 
 function onRequestSuccess( jsonResponse )

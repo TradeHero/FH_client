@@ -222,19 +222,6 @@
 		7365C0D218FCE99200C39027 /* FBSessionSingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 7365C0D118FCE99200C39027 /* FBSessionSingleton.m */; };
 		7388C04118F4E2FF00CF667C /* HttpRequestForLua.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7388C03F18F4E2FF00CF667C /* HttpRequestForLua.cpp */; };
 		738BA12A193D7FD2008A74F6 /* DES56.lua in Resources */ = {isa = PBXBuildFile; fileRef = 738BA129193D7FD2008A74F6 /* DES56.lua */; };
-		73A896F2192B2A050079AD05 /* SwrveButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 73A896E2192B2A050079AD05 /* SwrveButton.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		73A896F3192B2A050079AD05 /* SwrveCampaign.m in Sources */ = {isa = PBXBuildFile; fileRef = 73A896E4192B2A050079AD05 /* SwrveCampaign.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		73A896F4192B2A050079AD05 /* SwrveImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 73A896E6192B2A050079AD05 /* SwrveImage.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		73A896F5192B2A050079AD05 /* SwrveMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 73A896E9192B2A050079AD05 /* SwrveMessage.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		73A896F6192B2A050079AD05 /* SwrveMessageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 73A896EB192B2A050079AD05 /* SwrveMessageController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		73A896F7192B2A050079AD05 /* SwrveMessageFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = 73A896ED192B2A050079AD05 /* SwrveMessageFormat.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		73A896F8192B2A050079AD05 /* SwrveMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 73A896EF192B2A050079AD05 /* SwrveMessageViewController.m */; };
-		73A896F9192B2A050079AD05 /* SwrveTalkQA.m in Sources */ = {isa = PBXBuildFile; fileRef = 73A896F1192B2A050079AD05 /* SwrveTalkQA.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		73A89706192B2A1E0079AD05 /* swrve.m in Sources */ = {isa = PBXBuildFile; fileRef = 73A896FC192B2A1E0079AD05 /* swrve.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		73A89707192B2A1E0079AD05 /* SwrveReceiptProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 73A896FE192B2A1E0079AD05 /* SwrveReceiptProvider.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		73A89708192B2A1E0079AD05 /* SwrveResourceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 73A89700192B2A1E0079AD05 /* SwrveResourceManager.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		73A89709192B2A1E0079AD05 /* SwrveSignatureProtectedFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 73A89702192B2A1E0079AD05 /* SwrveSignatureProtectedFile.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		73A8970A192B2A1E0079AD05 /* SwrveTransactionListener.m in Sources */ = {isa = PBXBuildFile; fileRef = 73A89705192B2A1E0079AD05 /* SwrveTransactionListener.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		73B8CB0A1953EB5400E62B43 /* game.bin in Resources */ = {isa = PBXBuildFile; fileRef = 73B8CB091953EB5400E62B43 /* game.bin */; };
 		73BFF75A191779FB002F173A /* des56.c in Sources */ = {isa = PBXBuildFile; fileRef = 73BFF753191779FB002F173A /* des56.c */; };
 		73BFF75B191779FB002F173A /* ldes56.c in Sources */ = {isa = PBXBuildFile; fileRef = 73BFF755191779FB002F173A /* ldes56.c */; };
@@ -245,14 +232,16 @@
 		73D51F28192F44A4000A65AF /* WebviewDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 73D51F26192F44A4000A65AF /* WebviewDelegate.cpp */; };
 		73DCA12F192C4C4F008AC05D /* AnalyticsHandler.mm in Sources */ = {isa = PBXBuildFile; fileRef = 73DCA12E192C4C4F008AC05D /* AnalyticsHandler.mm */; };
 		73DCA133192C4EE7008AC05D /* Analytics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 73DCA131192C4EE7008AC05D /* Analytics.cpp */; };
-		73DCA155192C7EF9008AC05D /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73DCA152192C7EF9008AC05D /* CFNetwork.framework */; };
-		73DCA156192C7EFA008AC05D /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73DCA153192C7EF9008AC05D /* Security.framework */; };
-		73DCA157192C7EFA008AC05D /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73DCA154192C7EF9008AC05D /* StoreKit.framework */; };
 		73DCA159192DCD95008AC05D /* anims in Resources */ = {isa = PBXBuildFile; fileRef = 73DCA158192DCD95008AC05D /* anims */; };
 		73EDFC8018EBE69E00322624 /* FacebookDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 73EDFC7D18EBE69E00322624 /* FacebookDelegate.cpp */; };
 		73EDFC8518EC005700322624 /* LuaCocos2dExtension.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 73EDFC8318EC005700322624 /* LuaCocos2dExtension.cpp */; };
 		73EDFC8B18ECF85F00322624 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73EDFC8A18ECF85F00322624 /* FacebookSDK.framework */; };
 		73EDFC9618ECFE7400322624 /* FacebookConnector.mm in Sources */ = {isa = PBXBuildFile; fileRef = 73EDFC9518ECFE7400322624 /* FacebookConnector.mm */; };
+		73FC0A13199074810006D0E2 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73FC0A12199074810006D0E2 /* AdSupport.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		73FC0A15199074A40006D0E2 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 73FC0A14199074A40006D0E2 /* libz.dylib */; };
+		73FC0A17199074B40006D0E2 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 73FC0A16199074B40006D0E2 /* libsqlite3.dylib */; };
+		73FC0A19199074C10006D0E2 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73FC0A18199074C10006D0E2 /* SystemConfiguration.framework */; };
+		73FC0A1A1990781F0006D0E2 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F293B3CC15EB7BE500256477 /* QuartzCore.framework */; };
 		73FE377F1907C8BA0039A45C /* EditBoxDelegateForLua.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 73FE377D1907C8BA0039A45C /* EditBoxDelegateForLua.cpp */; };
 		ED35C0C718323498002A0750 /* CCArmatureAnimation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED35C03818323497002A0750 /* CCArmatureAnimation.cpp */; };
 		ED35C0C818323498002A0750 /* CCProcessBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED35C03A18323497002A0750 /* CCProcessBase.cpp */; };
@@ -299,7 +288,6 @@
 		ED35C0F718323498002A0750 /* DictionaryHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED35C0A918323498002A0750 /* DictionaryHelper.cpp */; };
 		ED35C0FF18323498002A0750 /* GUIReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED35C0BE18323498002A0750 /* GUIReader.cpp */; };
 		ED35C10018323498002A0750 /* SceneReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED35C0C018323498002A0750 /* SceneReader.cpp */; };
-		F293B3CD15EB7BE500256477 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F293B3CC15EB7BE500256477 /* QuartzCore.framework */; };
 		F293B3CF15EB7BE500256477 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F293B3CE15EB7BE500256477 /* OpenGLES.framework */; };
 		F293B3D115EB7BE500256477 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F293B3D015EB7BE500256477 /* OpenAL.framework */; };
 		F293B3D315EB7BE500256477 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F293B3D215EB7BE500256477 /* AudioToolbox.framework */; };
@@ -755,34 +743,6 @@
 		7388C03F18F4E2FF00CF667C /* HttpRequestForLua.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HttpRequestForLua.cpp; sourceTree = "<group>"; };
 		7388C04018F4E2FF00CF667C /* HttpRequestForLua.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpRequestForLua.h; sourceTree = "<group>"; };
 		738BA129193D7FD2008A74F6 /* DES56.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = DES56.lua; sourceTree = "<group>"; };
-		73A896E1192B2A050079AD05 /* SwrveButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SwrveButton.h; path = Sdk/Talk/SwrveButton.h; sourceTree = "<group>"; };
-		73A896E2192B2A050079AD05 /* SwrveButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SwrveButton.m; path = Sdk/Talk/SwrveButton.m; sourceTree = "<group>"; };
-		73A896E3192B2A050079AD05 /* SwrveCampaign.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SwrveCampaign.h; path = Sdk/Talk/SwrveCampaign.h; sourceTree = "<group>"; };
-		73A896E4192B2A050079AD05 /* SwrveCampaign.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SwrveCampaign.m; path = Sdk/Talk/SwrveCampaign.m; sourceTree = "<group>"; };
-		73A896E5192B2A050079AD05 /* SwrveImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SwrveImage.h; path = Sdk/Talk/SwrveImage.h; sourceTree = "<group>"; };
-		73A896E6192B2A050079AD05 /* SwrveImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SwrveImage.m; path = Sdk/Talk/SwrveImage.m; sourceTree = "<group>"; };
-		73A896E7192B2A050079AD05 /* SwrveInterfaceOrientation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SwrveInterfaceOrientation.h; path = Sdk/Talk/SwrveInterfaceOrientation.h; sourceTree = "<group>"; };
-		73A896E8192B2A050079AD05 /* SwrveMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SwrveMessage.h; path = Sdk/Talk/SwrveMessage.h; sourceTree = "<group>"; };
-		73A896E9192B2A050079AD05 /* SwrveMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SwrveMessage.m; path = Sdk/Talk/SwrveMessage.m; sourceTree = "<group>"; };
-		73A896EA192B2A050079AD05 /* SwrveMessageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SwrveMessageController.h; path = Sdk/Talk/SwrveMessageController.h; sourceTree = "<group>"; };
-		73A896EB192B2A050079AD05 /* SwrveMessageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SwrveMessageController.m; path = Sdk/Talk/SwrveMessageController.m; sourceTree = "<group>"; };
-		73A896EC192B2A050079AD05 /* SwrveMessageFormat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SwrveMessageFormat.h; path = Sdk/Talk/SwrveMessageFormat.h; sourceTree = "<group>"; };
-		73A896ED192B2A050079AD05 /* SwrveMessageFormat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SwrveMessageFormat.m; path = Sdk/Talk/SwrveMessageFormat.m; sourceTree = "<group>"; };
-		73A896EE192B2A050079AD05 /* SwrveMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SwrveMessageViewController.h; path = Sdk/Talk/SwrveMessageViewController.h; sourceTree = "<group>"; };
-		73A896EF192B2A050079AD05 /* SwrveMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SwrveMessageViewController.m; path = Sdk/Talk/SwrveMessageViewController.m; sourceTree = "<group>"; };
-		73A896F0192B2A050079AD05 /* SwrveTalkQA.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SwrveTalkQA.h; path = Sdk/Talk/SwrveTalkQA.h; sourceTree = "<group>"; };
-		73A896F1192B2A050079AD05 /* SwrveTalkQA.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SwrveTalkQA.m; path = Sdk/Talk/SwrveTalkQA.m; sourceTree = "<group>"; };
-		73A896FB192B2A1E0079AD05 /* swrve.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = swrve.h; path = Sdk/Track/swrve.h; sourceTree = "<group>"; };
-		73A896FC192B2A1E0079AD05 /* swrve.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = swrve.m; path = Sdk/Track/swrve.m; sourceTree = "<group>"; };
-		73A896FD192B2A1E0079AD05 /* SwrveReceiptProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SwrveReceiptProvider.h; path = Sdk/Track/SwrveReceiptProvider.h; sourceTree = "<group>"; };
-		73A896FE192B2A1E0079AD05 /* SwrveReceiptProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SwrveReceiptProvider.m; path = Sdk/Track/SwrveReceiptProvider.m; sourceTree = "<group>"; };
-		73A896FF192B2A1E0079AD05 /* SwrveResourceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SwrveResourceManager.h; path = Sdk/Track/SwrveResourceManager.h; sourceTree = "<group>"; };
-		73A89700192B2A1E0079AD05 /* SwrveResourceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SwrveResourceManager.m; path = Sdk/Track/SwrveResourceManager.m; sourceTree = "<group>"; };
-		73A89701192B2A1E0079AD05 /* SwrveSignatureProtectedFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SwrveSignatureProtectedFile.h; path = Sdk/Track/SwrveSignatureProtectedFile.h; sourceTree = "<group>"; };
-		73A89702192B2A1E0079AD05 /* SwrveSignatureProtectedFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SwrveSignatureProtectedFile.m; path = Sdk/Track/SwrveSignatureProtectedFile.m; sourceTree = "<group>"; };
-		73A89703192B2A1E0079AD05 /* SwrveTransactionCompleteListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SwrveTransactionCompleteListener.h; path = Sdk/Track/SwrveTransactionCompleteListener.h; sourceTree = "<group>"; };
-		73A89704192B2A1E0079AD05 /* SwrveTransactionListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SwrveTransactionListener.h; path = Sdk/Track/SwrveTransactionListener.h; sourceTree = "<group>"; };
-		73A89705192B2A1E0079AD05 /* SwrveTransactionListener.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SwrveTransactionListener.m; path = Sdk/Track/SwrveTransactionListener.m; sourceTree = "<group>"; };
 		73B8CB091953EB5400E62B43 /* game.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = game.bin; sourceTree = "<group>"; };
 		73BFF753191779FB002F173A /* des56.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = des56.c; path = crypt/des56.c; sourceTree = "<group>"; };
 		73BFF754191779FB002F173A /* des56.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = des56.h; path = crypt/des56.h; sourceTree = "<group>"; };
@@ -812,6 +772,10 @@
 		73EDFC8A18ECF85F00322624 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
 		73EDFC9418ECFE7400322624 /* FacebookConnector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacebookConnector.h; sourceTree = "<group>"; };
 		73EDFC9518ECFE7400322624 /* FacebookConnector.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FacebookConnector.mm; sourceTree = "<group>"; };
+		73FC0A12199074810006D0E2 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		73FC0A14199074A40006D0E2 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		73FC0A16199074B40006D0E2 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		73FC0A18199074C10006D0E2 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		73FE377D1907C8BA0039A45C /* EditBoxDelegateForLua.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EditBoxDelegateForLua.cpp; sourceTree = "<group>"; };
 		73FE377E1907C8BA0039A45C /* EditBoxDelegateForLua.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditBoxDelegateForLua.h; sourceTree = "<group>"; };
 		ED35C03818323497002A0750 /* CCArmatureAnimation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCArmatureAnimation.cpp; sourceTree = "<group>"; };
@@ -930,14 +894,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				73FC0A19199074C10006D0E2 /* SystemConfiguration.framework in Frameworks */,
+				73FC0A17199074B40006D0E2 /* libsqlite3.dylib in Frameworks */,
+				73FC0A15199074A40006D0E2 /* libz.dylib in Frameworks */,
+				73FC0A13199074810006D0E2 /* AdSupport.framework in Frameworks */,
 				734532A71965056400E5D444 /* MessageUI.framework in Frameworks */,
-				73DCA155192C7EF9008AC05D /* CFNetwork.framework in Frameworks */,
-				73DCA156192C7EFA008AC05D /* Security.framework in Frameworks */,
-				73DCA157192C7EFA008AC05D /* StoreKit.framework in Frameworks */,
 				73EDFC8B18ECF85F00322624 /* FacebookSDK.framework in Frameworks */,
 				15C1568E1683131500D239F2 /* libcurl.a in Frameworks */,
 				15C1568C168311EC00D239F2 /* libcocos2dx.a in Frameworks */,
-				F293B3CD15EB7BE500256477 /* QuartzCore.framework in Frameworks */,
+				73FC0A1A1990781F0006D0E2 /* QuartzCore.framework in Frameworks */,
 				F293B3CF15EB7BE500256477 /* OpenGLES.framework in Frameworks */,
 				F293B3D115EB7BE500256477 /* OpenAL.framework in Frameworks */,
 				F293B3D315EB7BE500256477 /* AudioToolbox.framework in Frameworks */,
@@ -1714,57 +1679,6 @@
 			name = AssetsManager;
 			sourceTree = "<group>";
 		};
-		73A896DF192B29A50079AD05 /* Sdk */ = {
-			isa = PBXGroup;
-			children = (
-				73A896FA192B2A0A0079AD05 /* Track */,
-				73A896E0192B29AD0079AD05 /* Talk */,
-			);
-			name = Sdk;
-			sourceTree = "<group>";
-		};
-		73A896E0192B29AD0079AD05 /* Talk */ = {
-			isa = PBXGroup;
-			children = (
-				73A896E1192B2A050079AD05 /* SwrveButton.h */,
-				73A896E2192B2A050079AD05 /* SwrveButton.m */,
-				73A896E3192B2A050079AD05 /* SwrveCampaign.h */,
-				73A896E4192B2A050079AD05 /* SwrveCampaign.m */,
-				73A896E5192B2A050079AD05 /* SwrveImage.h */,
-				73A896E6192B2A050079AD05 /* SwrveImage.m */,
-				73A896E7192B2A050079AD05 /* SwrveInterfaceOrientation.h */,
-				73A896E8192B2A050079AD05 /* SwrveMessage.h */,
-				73A896E9192B2A050079AD05 /* SwrveMessage.m */,
-				73A896EA192B2A050079AD05 /* SwrveMessageController.h */,
-				73A896EB192B2A050079AD05 /* SwrveMessageController.m */,
-				73A896EC192B2A050079AD05 /* SwrveMessageFormat.h */,
-				73A896ED192B2A050079AD05 /* SwrveMessageFormat.m */,
-				73A896EE192B2A050079AD05 /* SwrveMessageViewController.h */,
-				73A896EF192B2A050079AD05 /* SwrveMessageViewController.m */,
-				73A896F0192B2A050079AD05 /* SwrveTalkQA.h */,
-				73A896F1192B2A050079AD05 /* SwrveTalkQA.m */,
-			);
-			name = Talk;
-			sourceTree = "<group>";
-		};
-		73A896FA192B2A0A0079AD05 /* Track */ = {
-			isa = PBXGroup;
-			children = (
-				73A896FB192B2A1E0079AD05 /* swrve.h */,
-				73A896FC192B2A1E0079AD05 /* swrve.m */,
-				73A896FD192B2A1E0079AD05 /* SwrveReceiptProvider.h */,
-				73A896FE192B2A1E0079AD05 /* SwrveReceiptProvider.m */,
-				73A896FF192B2A1E0079AD05 /* SwrveResourceManager.h */,
-				73A89700192B2A1E0079AD05 /* SwrveResourceManager.m */,
-				73A89701192B2A1E0079AD05 /* SwrveSignatureProtectedFile.h */,
-				73A89702192B2A1E0079AD05 /* SwrveSignatureProtectedFile.m */,
-				73A89703192B2A1E0079AD05 /* SwrveTransactionCompleteListener.h */,
-				73A89704192B2A1E0079AD05 /* SwrveTransactionListener.h */,
-				73A89705192B2A1E0079AD05 /* SwrveTransactionListener.m */,
-			);
-			name = Track;
-			sourceTree = "<group>";
-		};
 		73BFF750191779DE002F173A /* crypt */ = {
 			isa = PBXGroup;
 			children = (
@@ -2046,7 +1960,6 @@
 		F293B3BD15EB7BE500256477 = {
 			isa = PBXGroup;
 			children = (
-				73A896DF192B29A50079AD05 /* Sdk */,
 				15C1533E168310C700D239F2 /* cocos2dx.xcodeproj */,
 				15C154A71683118600D239F2 /* Box2D */,
 				15C1542E1683116B00D239F2 /* chipmunk */,
@@ -2073,6 +1986,10 @@
 		F293B3CB15EB7BE500256477 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				73FC0A18199074C10006D0E2 /* SystemConfiguration.framework */,
+				73FC0A16199074B40006D0E2 /* libsqlite3.dylib */,
+				73FC0A14199074A40006D0E2 /* libz.dylib */,
+				73FC0A12199074810006D0E2 /* AdSupport.framework */,
 				734532A31965028E00E5D444 /* MessageUI.framework */,
 				73DCA152192C7EF9008AC05D /* CFNetwork.framework */,
 				73DCA153192C7EF9008AC05D /* Security.framework */,
@@ -2323,8 +2240,6 @@
 				15C154141683112E00D239F2 /* CCControlSaturationBrightnessPicker.cpp in Sources */,
 				15C154151683112E00D239F2 /* CCControlSlider.cpp in Sources */,
 				15C154161683112E00D239F2 /* CCControlStepper.cpp in Sources */,
-				73A896F7192B2A050079AD05 /* SwrveMessageFormat.m in Sources */,
-				73A896F4192B2A050079AD05 /* SwrveImage.m in Sources */,
 				15C154171683112E00D239F2 /* CCControlSwitch.cpp in Sources */,
 				15C154181683112E00D239F2 /* CCControlUtils.cpp in Sources */,
 				15C154191683112E00D239F2 /* CCInvocation.cpp in Sources */,
@@ -2357,7 +2272,6 @@
 				15C154921683116B00D239F2 /* cpRatchetJoint.c in Sources */,
 				15C154931683116B00D239F2 /* cpRotaryLimitJoint.c in Sources */,
 				15C154941683116B00D239F2 /* cpSimpleMotor.c in Sources */,
-				73A89707192B2A1E0079AD05 /* SwrveReceiptProvider.m in Sources */,
 				15C154951683116B00D239F2 /* cpSlideJoint.c in Sources */,
 				15C154961683116B00D239F2 /* cpArbiter.c in Sources */,
 				15C154971683116B00D239F2 /* cpArray.c in Sources */,
@@ -2370,7 +2284,6 @@
 				15C1549C1683116B00D239F2 /* cpHashSet.c in Sources */,
 				732E3ACA19625F0E0009E474 /* MiscHandler.mm in Sources */,
 				375BD55F186846090024609E /* ObjectFactory.cpp in Sources */,
-				73A896F8192B2A050079AD05 /* SwrveMessageViewController.m in Sources */,
 				15C1549D1683116B00D239F2 /* cpPolyShape.c in Sources */,
 				ED35C0E518323498002A0750 /* UIHelper.cpp in Sources */,
 				15C1549E1683116B00D239F2 /* cpShape.c in Sources */,
@@ -2396,7 +2309,6 @@
 				15C155251683118600D239F2 /* b2DynamicTree.cpp in Sources */,
 				15C155261683118600D239F2 /* b2TimeOfImpact.cpp in Sources */,
 				15C155271683118600D239F2 /* b2ChainShape.cpp in Sources */,
-				73A896F2192B2A050079AD05 /* SwrveButton.m in Sources */,
 				15C155281683118600D239F2 /* b2CircleShape.cpp in Sources */,
 				15C155291683118600D239F2 /* b2EdgeShape.cpp in Sources */,
 				15C1552A1683118600D239F2 /* b2PolygonShape.cpp in Sources */,
@@ -2419,11 +2331,9 @@
 				7388C04118F4E2FF00CF667C /* HttpRequestForLua.cpp in Sources */,
 				15C155361683118600D239F2 /* b2WorldCallbacks.cpp in Sources */,
 				15C155371683118600D239F2 /* b2ChainAndCircleContact.cpp in Sources */,
-				73A896F6192B2A050079AD05 /* SwrveMessageController.m in Sources */,
 				15C155381683118600D239F2 /* b2ChainAndPolygonContact.cpp in Sources */,
 				15C155391683118600D239F2 /* b2CircleContact.cpp in Sources */,
 				ED35C0C718323498002A0750 /* CCArmatureAnimation.cpp in Sources */,
-				73A89706192B2A1E0079AD05 /* swrve.m in Sources */,
 				ED35C0F218323498002A0750 /* UILoadingBar.cpp in Sources */,
 				73D51F28192F44A4000A65AF /* WebviewDelegate.cpp in Sources */,
 				15C1553A1683118600D239F2 /* b2Contact.cpp in Sources */,
@@ -2436,7 +2346,6 @@
 				15C155401683118600D239F2 /* b2DistanceJoint.cpp in Sources */,
 				73FE377F1907C8BA0039A45C /* EditBoxDelegateForLua.cpp in Sources */,
 				15C155411683118600D239F2 /* b2FrictionJoint.cpp in Sources */,
-				73A8970A192B2A1E0079AD05 /* SwrveTransactionListener.m in Sources */,
 				373F99401869F07A0080E035 /* CCActionManager.cpp in Sources */,
 				15C155421683118600D239F2 /* b2GearJoint.cpp in Sources */,
 				ED35C0E218323498002A0750 /* UILayoutDefine.cpp in Sources */,
@@ -2463,8 +2372,6 @@
 				15CA8CF518696744000032AB /* lua_cocos2dx_cocostudio_manual.cpp in Sources */,
 				15C155DC168311AA00D239F2 /* CocosDenshion.m in Sources */,
 				15C155DD168311AA00D239F2 /* SimpleAudioEngine.mm in Sources */,
-				73A896F3192B2A050079AD05 /* SwrveCampaign.m in Sources */,
-				73A896F9192B2A050079AD05 /* SwrveTalkQA.m in Sources */,
 				15C155DE168311AA00D239F2 /* SimpleAudioEngine_objc.m in Sources */,
 				15C15685168311CB00D239F2 /* tolua_event.c in Sources */,
 				73EDFC8518EC005700322624 /* LuaCocos2dExtension.cpp in Sources */,
@@ -2484,12 +2391,10 @@
 				46C1009316BF786A00F74D54 /* tolua_fix.c in Sources */,
 				1A40E7DF1727C47E006D4861 /* Animation.cpp in Sources */,
 				ED35C0E118323498002A0750 /* UILayout.cpp in Sources */,
-				73A89709192B2A1E0079AD05 /* SwrveSignatureProtectedFile.m in Sources */,
 				ED35C10018323498002A0750 /* SceneReader.cpp in Sources */,
 				ED35C0D118323498002A0750 /* CCSkin.cpp in Sources */,
 				1A40E7E01727C47E006D4861 /* AnimationState.cpp in Sources */,
 				1A40E7E11727C47E006D4861 /* AnimationStateData.cpp in Sources */,
-				73A896F5192B2A050079AD05 /* SwrveMessage.m in Sources */,
 				ED35C0D418323498002A0750 /* CCArmatureDefine.cpp in Sources */,
 				ED35C0CA18323498002A0750 /* CCArmature.cpp in Sources */,
 				1A40E7E21727C47E006D4861 /* Atlas.cpp in Sources */,
@@ -2523,7 +2428,6 @@
 				ED35C0CC18323498002A0750 /* CCDatas.cpp in Sources */,
 				1A9CE91D1765A2C2000E3062 /* CCBProxy.cpp in Sources */,
 				1A9CE91E1765A2C2000E3062 /* Lua_extensions_CCB.cpp in Sources */,
-				73A89708192B2A1E0079AD05 /* SwrveResourceManager.m in Sources */,
 				1A9CE91F1765A2C2000E3062 /* Lua_web_socket.cpp in Sources */,
 				150E36FF17F2B72B0021A6EA /* lua_cocos2dx_extensions_manual.cpp in Sources */,
 				ED35C0EF18323498002A0750 /* UILabel.cpp in Sources */,

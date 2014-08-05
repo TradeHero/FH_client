@@ -26,7 +26,6 @@
 #import "cocos2d.h"
 #import "EAGLView.h"
 #import "AppDelegate.h"
-#import "swrve.h"
 #import "WebviewController.h"
 
 #import "RootViewController.h"
@@ -78,7 +77,6 @@ static AppDelegate s_sharedApplication;
     [[UIApplication sharedApplication] setStatusBarHidden: YES];
 
     cocos2d::CCApplication::sharedApplication()->run();
-    [Swrve sharedInstanceWithAppID:1440 apiKey:@"zGvMCt6LQBTb1CNmnl8N"];
     
     return YES;
 }

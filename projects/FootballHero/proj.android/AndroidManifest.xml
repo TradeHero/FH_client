@@ -13,7 +13,7 @@
             android:label="@string/app_name"
                  android:icon="@drawable/icon">
 
-        <activity android:name=".FootballHero"
+        <activity android:name="FootballHero"
                   android:label="@string/app_name"
                   android:screenOrientation="portrait"
                   android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
