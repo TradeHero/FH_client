@@ -26,6 +26,7 @@ package com.myhero.fh;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import com.crashlytics.android.Crashlytics;
 import com.myhero.fh.auth.AuthenticationCallback;
 import com.myhero.fh.auth.FacebookAuth;
 import java.util.Arrays;
@@ -38,6 +39,7 @@ public class FootballHero extends Cocos2dxActivity {
 
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    Crashlytics.start(this);
 
     facebookAuth = new FacebookAuth(this, "788386747851675",
         Arrays.asList("public_profile", "user_friends", "email", "user_birthday"));
