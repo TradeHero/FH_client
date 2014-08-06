@@ -235,8 +235,6 @@ function helperInitPredictionCommon( content, matchInfo )
     team2:loadTexture( TeamConfig.getLogo( TeamConfig.getConfigIdByKey( matchInfo["AwayTeamId"] ) ) )
     team1Name:setText( TeamConfig.getTeamName( TeamConfig.getConfigIdByKey( matchInfo["HomeTeamId"] ) ) )
     team2Name:setText( TeamConfig.getTeamName( TeamConfig.getConfigIdByKey( matchInfo["AwayTeamId"] ) ) )
-    team1Name:setFontName("fonts/Newgtbxc.ttf")
-    team2Name:setFontName("fonts/Newgtbxc.ttf")
 end
 
 function helperInitOpenPrediction( content, matchInfo )

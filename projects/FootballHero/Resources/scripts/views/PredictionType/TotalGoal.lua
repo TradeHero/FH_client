@@ -21,7 +21,7 @@ local mFinishCallback
 local FINISH_SCALE_TIME = 0.5
 local FINISH_DELAY_TIME = 0.5
 local SCALE_UP_VALUE = 1.1
-local SCALE_DOWN_VALUE = 0.8
+local SCALE_DOWN_VALUE = 0.7
 local FADE_OUT_VALUE = 80
 local MOVE_TIME = 0.2
 

@@ -300,3 +300,5 @@ proguard/
 
 # Log Files
 *.log
+projects/FootballHero/Tools/test001/pom.xml
+projects/FootballHero/Tools/test001/src/main/java/Main.java

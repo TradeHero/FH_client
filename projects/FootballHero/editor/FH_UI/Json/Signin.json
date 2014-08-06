@@ -11,8 +11,11 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "MatchPrediction/Will-xx_team-score-a-goal-yes.png",
-    "MatchPrediction/Will-xx_team-score-a-goal-no.png"
+    "MatchPrediction/prediction_bkg.png",
+    "header/back.png",
+    "header/footballhero-logo.png",
+    "commonRes/Arsenal.png",
+    "commonRes/Manchester United.png"
   ],
   "version": "1.5.0.0",
   "widgetTree": {

@@ -10,7 +10,13 @@
   "designHeight": 1136,
   "designWidth": 640,
   "textures": [],
-  "texturesPng": [],
+  "texturesPng": [
+    "PredictionConfirm/white_popup.png",
+    "PredictionConfirm/fb_icon.png",
+    "PredictionConfirm/off_button.png",
+    "PredictionConfirm/on_button.png",
+    "Tutorial/Default Button.png"
+  ],
   "version": "1.5.0.0",
   "widgetTree": {
     "classname": "Panel",

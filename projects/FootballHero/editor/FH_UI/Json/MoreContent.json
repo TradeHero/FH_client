@@ -11,9 +11,7 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "MatchPrediction/indicator_inactive.png",
-    "MatchPrediction/indicator_active.png",
-    "Competition/Tick_White.png"
+    "MatchPrediction/Will-both-teams-score-no.png"
   ],
   "version": "1.5.0.0",
   "widgetTree": {

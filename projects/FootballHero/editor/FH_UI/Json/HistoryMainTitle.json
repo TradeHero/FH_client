@@ -11,8 +11,11 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "Tutorial/splash_bkg.png",
-    "Tutorial/Splashscreen_Logo.png"
+    "PredictionConfirm/white_popup.png",
+    "PredictionConfirm/fb_icon.png",
+    "PredictionConfirm/off_button.png",
+    "PredictionConfirm/on_button.png",
+    "Tutorial/Default Button.png"
   ],
   "version": "1.5.0.0",
   "widgetTree": {

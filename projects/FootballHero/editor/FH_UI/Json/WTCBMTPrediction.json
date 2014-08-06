@@ -10,7 +10,9 @@
   "designHeight": 1136,
   "designWidth": 640,
   "textures": [],
-  "texturesPng": [],
+  "texturesPng": [
+    "MatchPrediction/Will-both-teams-score-no.png"
+  ],
   "version": "1.5.0.0",
   "widgetTree": {
     "classname": "Panel",

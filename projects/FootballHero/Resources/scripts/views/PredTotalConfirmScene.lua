@@ -73,19 +73,11 @@ function initContent()
     local predictions = Logic:getPredictions()
 	for i = 1, predictions:getSize() do
 		local content = SceneManager.widgetFromJsonFile("scenes/PredFinalConfirmContent.json")
-		if i == 1 then
-			local bg = tolua.cast( content:getChildByName("bg"), "ImageView" )
-			bg:loadTexture( "scenes/PredictionConfirm/bg-1.png" )
-		end
-
 		local coupon = predictions:get( i )
 		local question = tolua.cast( content:getChildByName("Question"), "Label" )
 		local reward = tolua.cast( content:getChildByName("Reward"), "Label" )
 		local stake = tolua.cast( content:getChildByName("stake"), "Label" )
 		local answerIcon = tolua.cast( content:getChildByName("answerIcon"), "ImageView" )
-
-		question:setFontName( "Newgtbxc" )
-		reward:setFontName( "Newgtbxc" )
 
 		question:setText( coupon["Answer"] )
 		reward:setText( string.format( reward:getStringValue(), coupon["Reward"] ) )
@@ -113,9 +105,6 @@ function initContent()
 	local originSize = contentContainer:getSize()
 	print(originSize.height.." | "..contentHeight)
 	if originSize.height > contentHeight then
-		-- Put the dialog in the center
-		local newHeight = ( originSize.height + contentHeight ) / 2
-		contentContainer:setSize( CCSize:new( originSize.width, newHeight ) )
 		contentContainer:setTouchEnabled( false )
 	end
 

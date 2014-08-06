@@ -99,9 +99,6 @@ function initContent()
 	local reward = tolua.cast( mWidget:getChildByName("Reward"), "Label" )
 	local answerIcon = tolua.cast( mWidget:getChildByName("answerIcon"), "ImageView" )
 
-	question:setFontName( "Newgtbxc" )
-	reward:setFontName( "Newgtbxc" )
-
 	question:setText( mAnswer )
 	reward:setText( string.format( reward:getStringValue(), mReward ) )
 	answerIcon:loadTexture( mAnswerIcon )

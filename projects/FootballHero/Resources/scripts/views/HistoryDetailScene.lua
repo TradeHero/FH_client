@@ -99,8 +99,6 @@ function helperInitMatchInfo( content, matchInfo )
 
     team1Name:setText( TeamConfig.getTeamName( mHomeTeamId ) )
     team2Name:setText( TeamConfig.getTeamName( mAwayTeamId ) )
-    team1Name:setFontName("fonts/Newgtbxc.ttf")
-    team2Name:setFontName("fonts/Newgtbxc.ttf")
 end
 
 function initCouponInfo( content, info )

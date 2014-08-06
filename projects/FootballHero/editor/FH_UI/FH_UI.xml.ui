@@ -89,9 +89,8 @@
   <ResRelativePath />
   <imageFileList />
   <imagePngList>
-    <string>MatchPrediction/Will-xx_team-score-a-goal-yes.png</string>
-    <string>MatchPrediction/Will-xx_team-score-a-goal-no.png</string>
+    <string>MatchPrediction/Will-both-teams-score-no.png</string>
   </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>SettingsHomeContent.json</CurrentUIJson>
+  <CurrentUIJson>LeaderboardListContent.json</CurrentUIJson>
 </UIProject>
