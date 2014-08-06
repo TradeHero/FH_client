@@ -301,5 +301,11 @@ proguard/
 # Log Files
 *.log
 
+## For proguard
+**/proguard_logs
+
+## For Crashlytics
+**/com_crashlytics_export_strings.xml
+
 ## For Football Hero
 **/libcocos2dlua.so
