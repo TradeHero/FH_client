@@ -6,7 +6,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.Signature;
 import android.util.Base64;
 import android.util.Log;
-
+import com.myhero.fh.metrics.Analytics;
 import java.security.MessageDigest;
 
 /**
@@ -17,6 +17,9 @@ public class FootballApp extends Application {
   public void onCreate() {
     showDeveloperKeyHash();
     super.onCreate();
+
+    // initialize analytics instance
+    Analytics.init(this);
   }
 
   public void showDeveloperKeyHash() {
