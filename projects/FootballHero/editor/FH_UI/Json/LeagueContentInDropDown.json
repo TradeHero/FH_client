@@ -10,7 +10,10 @@
   "designHeight": 1136,
   "designWidth": 640,
   "textures": [],
-  "texturesPng": [],
+  "texturesPng": [
+    "MatchListContent/info_box.png",
+    "Tutorial/Default Button.png"
+  ],
   "version": "1.5.0.0",
   "widgetTree": {
     "classname": "Panel",

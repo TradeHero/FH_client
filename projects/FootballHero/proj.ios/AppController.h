@@ -22,11 +22,11 @@
  THE SOFTWARE.
  ****************************************************************************/
 #import <FacebookSDK/FacebookSDK.h>
-#import "LocalyticsSession.h"
+
 
 @class RootViewController;
 
-@interface AppController : NSObject <UIAccelerometerDelegate, UIAlertViewDelegate, UITextFieldDelegate,UIApplicationDelegate, LocalyticsSessionDelegate> {
+@interface AppController : NSObject <UIAccelerometerDelegate, UIAlertViewDelegate, UITextFieldDelegate,UIApplicationDelegate> {
     UIWindow *window;
     RootViewController    *viewController;
 }

@@ -11,8 +11,7 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "MatchPrediction/Will-both-teams-score-yes.png",
-    "MatchPrediction/Will-both-teams-score-no.png"
+    "MatchListScene/Arrow down.png"
   ],
   "version": "1.5.0.0",
   "widgetTree": {
@@ -121,8 +120,8 @@
           "rotation": 0,
           "scaleX": 1,
           "scaleY": 1,
-          "sizePercentX": 9.708737E-05,
-          "sizePercentY": 9.708737E-05,
+          "sizePercentX": 0.135922328,
+          "sizePercentY": 0.2815534,
           "sizeType": 0,
           "tag": 8253,
           "touchAble": false,
@@ -171,8 +170,8 @@
           "rotation": 0,
           "scaleX": 1,
           "scaleY": 1,
-          "sizePercentX": 9.708737E-05,
-          "sizePercentY": 9.708737E-05,
+          "sizePercentX": 0.1262136,
+          "sizePercentY": 0.4563107,
           "sizeType": 0,
           "tag": 8254,
           "touchAble": false,
@@ -275,8 +274,8 @@
           "rotation": 0,
           "scaleX": 1,
           "scaleY": 1,
-          "sizePercentX": 9.708737E-05,
-          "sizePercentY": 9.708737E-05,
+          "sizePercentX": 0.184466019,
+          "sizePercentY": 0.572815537,
           "sizeType": 0,
           "tag": 8257,
           "touchAble": false,

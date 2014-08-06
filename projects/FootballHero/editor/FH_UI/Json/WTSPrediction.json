@@ -11,8 +11,8 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "MatchPrediction/Will-xx_team-score-a-goal-yes.png",
-    "MatchPrediction/Will-xx_team-score-a-goal-no.png"
+    "MatchListContent/info_box.png",
+    "Tutorial/Default Button.png"
   ],
   "version": "1.5.0.0",
   "widgetTree": {

@@ -79,6 +79,8 @@
     <string>LeagueContentInDropDown.json</string>
     <string>PredictionBG.json</string>
     <string>PredictionStatus.json</string>
+    <string>CompetitionEmpty.json</string>
+    <string>CreateCompetitionContent.json</string>
   </JsonList>
   <CanvasSize>
     <Width>640</Width>
@@ -88,9 +90,7 @@
   <ProjectType>UIProject</ProjectType>
   <ResRelativePath />
   <imageFileList />
-  <imagePngList>
-    <string>MatchPrediction/Will-both-teams-score-no.png</string>
-  </imagePngList>
+  <imagePngList />
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>LeaderboardListContent.json</CurrentUIJson>
+  <CurrentUIJson>CreateCompetitionContent.json</CurrentUIJson>
 </UIProject>

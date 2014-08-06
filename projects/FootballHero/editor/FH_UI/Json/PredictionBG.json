@@ -10,13 +10,7 @@
   "designHeight": 1136,
   "designWidth": 640,
   "textures": [],
-  "texturesPng": [
-    "MatchPrediction/prediction_bkg.png",
-    "header/back.png",
-    "header/footballhero-logo.png",
-    "commonRes/Arsenal.png",
-    "commonRes/Manchester United.png"
-  ],
+  "texturesPng": [],
   "version": "1.5.0.0",
   "widgetTree": {
     "classname": "Panel",
@@ -242,8 +236,8 @@
           "rotation": 0,
           "scaleX": 0.8,
           "scaleY": 0.8,
-          "sizePercentX": 1.56249989E-05,
-          "sizePercentY": 8.802816E-06,
+          "sizePercentX": 0.0578125,
+          "sizePercentY": 0.0308098588,
           "sizeType": 0,
           "tag": 146,
           "touchAble": false,
