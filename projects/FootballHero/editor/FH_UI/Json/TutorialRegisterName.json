@@ -11,7 +11,14 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "commonRes/England.png"
+    "MatchListScene/match_bkg.png",
+    "header/back.png",
+    "Tutorial/Default Button.png",
+    "chat/Chat_Icon.png",
+    "chat/GreenArrow.png",
+    "Competition/copy_icon.png",
+    "Competition/fbnobkg_icon.png",
+    "chat/More Button.png"
   ],
   "version": "1.5.0.0",
   "widgetTree": {

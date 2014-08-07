@@ -320,4 +320,8 @@
     <Project>LeagueContentWithTransparentBG</Project>
     <GuidesList />
   </GuidesProject>
+  <GuidesProject>
+    <Project>CompetitionInviteContent</Project>
+    <GuidesList />
+  </GuidesProject>
 </ArrayOfGuidesProject>

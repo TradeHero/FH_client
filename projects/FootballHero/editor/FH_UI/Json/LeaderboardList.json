@@ -11,7 +11,7 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "MatchListContent/info_box.png"
+    "LoginNReg/photo.png"
   ],
   "version": "1.5.0.0",
   "widgetTree": {

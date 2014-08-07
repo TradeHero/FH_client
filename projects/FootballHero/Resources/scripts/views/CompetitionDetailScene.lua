@@ -27,20 +27,17 @@ function loadFrame( competitionDetail, subType, competitionId )
 	local widget = GUIReader:shareReader():widgetFromJsonFile("scenes/CompetitionLeaderboard.json")
     mWidget = widget
     mWidget:registerScriptHandler( EnterOrExit )
-    SceneManager.clearNAddWidget( widget )
+    SceneManager.clearNAddWidget( mWidget )
 
-    Navigator.loadFrame( widget )
-    local backBt = mWidget:getChildByName("back")
-    backBt:addTouchEventListener( backEventHandler )
-    local shareBt = mWidget:getChildByName("share")
-    shareBt:addTouchEventListener( shareEventHandler )
+    Navigator.loadFrame( mWidget )
 
     -- Init the title
     local title = tolua.cast( mWidget:getChildByName("title"), "Label" )
     title:setText( competitionDetail:getName() )
 
-    -- Init the content
     initContent( competitionDetail )
+    initLeaderboard( competitionDetail )
+
     mStep = 1
     mHasMoreToLoad = true
 end
@@ -59,27 +56,8 @@ function backEventHandler( sender, eventType )
 end
 
 function initContent( competitionDetail )
-	local contentContainer = tolua.cast( mWidget:getChildByName("ScrollView"), "ScrollView" )
-    contentContainer:removeAllChildrenWithCleanup( true )
-
-    local layoutParameter = LinearLayoutParameter:create()
-    layoutParameter:setGravity(LINEAR_GRAVITY_CENTER_VERTICAL)
-    local contentHeight = 0
-
-    -- Add the competition detail info
-    local content = GUIReader:shareReader():widgetFromJsonFile("scenes/CompetitionLeaderboardInfo.json")
-    local time = tolua.cast( content:getChildByName("time"), "Label" )
-    local description = tolua.cast( content:getChildByName("description"), "Label" )
-    if competitionDetail:getEndTime() == 0 then
-        time:setText( string.format( "%s until forever", 
-                os.date( "%m/%d/%Y", competitionDetail:getStartTime() ) ) )
-    else
-        time:setText( string.format( "%s to %s", 
-                os.date( "%m/%d/%Y", competitionDetail:getStartTime() ), 
-                os.date( "%m/%d/%Y", competitionDetail:getEndTime() ) ) )
-    end
-    
-    description:setText( competitionDetail:getDescription() )
+    local backBt = mWidget:getChildByName("back")
+    backBt:addTouchEventListener( backEventHandler )
 
     -- Token
     mCompetitionCodeString = competitionDetail:getJoinToken()
@@ -93,32 +71,51 @@ function initContent( competitionDetail )
         -- Todo remove this code after the object-c fix is pushed out.
         mTokenInput:setPosition( mTokenInput:getPosition() )
     end )--]]
-    content:getChildByName( "token" ):addNode( tolua.cast( inputDelegate, "CCNode" ) )
+    mWidget:getChildByName( "token" ):addNode( tolua.cast( inputDelegate, "CCNode" ) )
 
-    mTokenInput = ViewUtils.createTextInput( content:getChildByName( "token" ), "", 200, 50 )
-    mTokenInput:setFontColor( ccc3( 0, 0, 0 ) )
+    mTokenInput = ViewUtils.createTextInput( mWidget:getChildByName( "token" ), "", 230, 40 )
     mTokenInput:setTouchPriority( SceneManager.TOUCH_PRIORITY_MINUS_ONE )
     mTokenInput:setText( mCompetitionCodeString )
     mTokenInput:setDelegate( inputDelegate.__CCEditBoxDelegate__ )
     mTokenInput:setTouchEnabled( false )
 
-    -- Add and do layout
-    content:setLayoutParameter( layoutParameter )
-    contentContainer:addChild( content )
-    contentHeight = contentHeight + content:getSize().height
-
     -- Add the latest chat message.
-    mChatMessageContainer = content:getChildByName("chatRoom")
+    mChatMessageContainer = mWidget:getChildByName("chatRoom")
     updateLatestChatMessage( competitionDetail:getLatestChatMessage() )
 
-    local showLeague = content:getChildByName("SelectLeague")
-    showLeague:addTouchEventListener( showLeagueEventHandler )
-    local copyCodeBt = content:getChildByName("copy")
+    local copyCodeBt = mWidget:getChildByName("copy")
     copyCodeBt:addTouchEventListener( copyCodeEventHandler )
-    local shareBt = content:getChildByName("share")
+    local shareBt = mWidget:getChildByName("share")
     shareBt:addTouchEventListener( shareEventHandler )
-    local chatBt = content:getChildByName("chatRoom")
+    local chatBt = mWidget:getChildByName("chatRoom")
     chatBt:addTouchEventListener( chatRoomEventHandler )
+end
+
+function initLeaderboard( competitionDetail )
+	local contentContainer = tolua.cast( mWidget:getChildByName("ScrollView"), "ScrollView" )
+    contentContainer:removeAllChildrenWithCleanup( true )
+
+    local layoutParameter = LinearLayoutParameter:create()
+    layoutParameter:setGravity(LINEAR_GRAVITY_CENTER_VERTICAL)
+    local contentHeight = 0
+
+    -- Add the competition detail info
+    --[[
+    local content = GUIReader:shareReader():widgetFromJsonFile("scenes/CompetitionLeaderboardInfo.json")
+    local time = tolua.cast( content:getChildByName("time"), "Label" )
+    local description = tolua.cast( content:getChildByName("description"), "Label" )
+    if competitionDetail:getEndTime() == 0 then
+        time:setText( string.format( "%s until forever", 
+                os.date( "%m/%d/%Y", competitionDetail:getStartTime() ) ) )
+    else
+        time:setText( string.format( "%s to %s", 
+                os.date( "%m/%d/%Y", competitionDetail:getStartTime() ), 
+                os.date( "%m/%d/%Y", competitionDetail:getEndTime() ) ) )
+    end
+    
+    description:setText( competitionDetail:getDescription() )
+    --]]
+    
 
     -- Add the leaderboard info
     local leaderboardInfo = competitionDetail:getDto()
@@ -135,8 +132,18 @@ function initContent( competitionDetail )
         contentHeight = contentHeight + content:getSize().height
         initLeaderboardContent( i, content, leaderboardInfo[i] )
         content:addTouchEventListener( eventHandler )
+
+        if i == table.getn( leaderboardInfo ) then
+            content:getChildByName("separater"):setEnabled( false )
+        end
     end
     mCurrentTotalNum = table.getn( leaderboardInfo )
+
+    local challengeContent = SceneManager.widgetFromJsonFile("scenes/CompetitionInviteContent.json")
+    challengeContent:setLayoutParameter( layoutParameter )
+    contentContainer:addChild( challengeContent )
+    contentHeight = contentHeight + challengeContent:getSize().height
+    challengeContent:getChildByName("challenge"):addTouchEventListener( shareEventHandler )
 
     contentContainer:setInnerContainerSize( CCSize:new( 0, contentHeight ) )
     local layout = tolua.cast( contentContainer, "Layout" )
