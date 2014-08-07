@@ -10,16 +10,7 @@
   "designHeight": 1136,
   "designWidth": 640,
   "textures": [],
-  "texturesPng": [
-    "MatchListScene/match_bkg.png",
-    "header/back.png",
-    "Tutorial/Default Button.png",
-    "chat/Chat_Icon.png",
-    "chat/GreenArrow.png",
-    "Competition/copy_icon.png",
-    "Competition/fbnobkg_icon.png",
-    "chat/More Button.png"
-  ],
+  "texturesPng": [],
   "version": "1.5.0.0",
   "widgetTree": {
     "classname": "Panel",
@@ -628,10 +619,10 @@
           "width": 556,
           "x": 320,
           "y": 1010,
-          "capInsetsHeight": 1,
+          "capInsetsHeight": 10,
           "capInsetsWidth": 1,
           "capInsetsX": 0,
-          "capInsetsY": 0,
+          "capInsetsY": 10,
           "disabled": null,
           "disabledData": {
             "path": null,
@@ -653,7 +644,7 @@
             "plistFile": null,
             "resourceType": 0
           },
-          "scale9Enable": false,
+          "scale9Enable": true,
           "scale9Height": 80,
           "scale9Width": 556,
           "text": "",

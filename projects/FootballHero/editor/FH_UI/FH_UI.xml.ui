@@ -83,6 +83,8 @@
     <string>CreateCompetitionContent.json</string>
     <string>LeagueContentWithTransparentBG.json</string>
     <string>CompetitionInviteContent.json</string>
+    <string>CompetitionMore.json</string>
+    <string>CompetitionMoreContent.json</string>
   </JsonList>
   <CanvasSize>
     <Width>640</Width>
@@ -92,16 +94,7 @@
   <ProjectType>UIProject</ProjectType>
   <ResRelativePath />
   <imageFileList />
-  <imagePngList>
-    <string>MatchListScene/match_bkg.png</string>
-    <string>header/back.png</string>
-    <string>Tutorial/Default Button.png</string>
-    <string>chat/Chat_Icon.png</string>
-    <string>chat/GreenArrow.png</string>
-    <string>Competition/copy_icon.png</string>
-    <string>Competition/fbnobkg_icon.png</string>
-    <string>chat/More Button.png</string>
-  </imagePngList>
+  <imagePngList />
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>CompetitionInviteContent.json</CurrentUIJson>
+  <CurrentUIJson>CompetitionLeaderboard.json</CurrentUIJson>
 </UIProject>

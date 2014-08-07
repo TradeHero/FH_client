@@ -39,7 +39,7 @@ function loadFrame()
 
     local existingContentHeight = mInputWidget:getSize().height + BLANK_AREA_HEIGHT
     print( existingContentHeight )
-    SelectedLeaguesScene.loadFrame( mWidget, Logic:getSelectedLeagues(), true, existingContentHeight )
+    SelectedLeaguesScene.loadFrame( contentContainer, Logic:getSelectedLeagues(), true, existingContentHeight )
 
     local confirmBt = mWidget:getChildByName("Create")
     confirmBt:addTouchEventListener( confirmEventHandler )

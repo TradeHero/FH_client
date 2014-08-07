@@ -35,6 +35,9 @@ function loadFrame( competitionId, chatMessages )
     local sendBt = widget:getChildByName("send")
     sendBt:addTouchEventListener( sendEventHandler )
 
+    local moreBt = widget:getChildByName("more")
+    moreBt:addTouchEventListener( moreEventHandler )
+
     local messageInput = ViewUtils.createTextInput( mWidget:getChildByName( MESSAGE_CONTAINER_NAME ), "Type your message here", 470, 50 )
 
     getLatestMessages()
@@ -68,6 +71,12 @@ function backEventHandler( sender,eventType )
     if eventType == TOUCH_EVENT_ENDED then
         WebviewDelegate:sharedDelegate():closeWebpage()
         EventManager:popHistory()
+    end
+end
+
+function moreEventHandler( sender, eventType )
+    if eventType == TOUCH_EVENT_ENDED then
+        EventManager:postEvent( Event.Enter_Competition_More, { mCompetitionId } )
     end
 end
 

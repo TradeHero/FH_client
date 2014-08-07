@@ -20,9 +20,10 @@ local mCompetitionCodeString
 local mHasMoreToLoad
 
 -- DS for competitionDetail see CompetitionDetail
-function loadFrame( competitionDetail, subType, competitionId )
+function loadFrame( subType, competitionId )
     mCompetitionId = competitionId
     mSubType = subType
+    competitionDetail = Logic:getCompetitionDetail()
 
 	local widget = GUIReader:shareReader():widgetFromJsonFile("scenes/CompetitionLeaderboard.json")
     mWidget = widget
@@ -34,6 +35,10 @@ function loadFrame( competitionDetail, subType, competitionId )
     -- Init the title
     local title = tolua.cast( mWidget:getChildByName("title"), "Label" )
     title:setText( competitionDetail:getName() )
+    local backBt = mWidget:getChildByName("back")
+    backBt:addTouchEventListener( backEventHandler )
+    local moreBt = mWidget:getChildByName("more")
+    moreBt:addTouchEventListener( moreEventHandler )
 
     initContent( competitionDetail )
     initLeaderboard( competitionDetail )
@@ -55,9 +60,13 @@ function backEventHandler( sender, eventType )
     end
 end
 
+function moreEventHandler( sender, eventType )
+    if eventType == TOUCH_EVENT_ENDED then
+        EventManager:postEvent( Event.Enter_Competition_More, { mCompetitionId } )
+    end
+end
+
 function initContent( competitionDetail )
-    local backBt = mWidget:getChildByName("back")
-    backBt:addTouchEventListener( backEventHandler )
 
     -- Token
     mCompetitionCodeString = competitionDetail:getJoinToken()

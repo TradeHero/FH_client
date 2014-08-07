@@ -9,18 +9,15 @@ local ViewUtils = require("scripts.views.ViewUtils")
 local LeagueListSceneUnexpended = require("scripts.views.LeagueListSceneUnexpended")
 
 
-local mWidget
 local mSelectedLeagues
 local mCheckEnabled
 
 -- If selectedLeagues is not Null, this is for review of the leagues selected.
 -- So disable all the checkboxes.
-function loadFrame( widget, selectedLeagues, checkEnabled, existingContentHeight )
-    mWidget = widget
+function loadFrame( contentContainer, selectedLeagues, checkEnabled, existingContentHeight )
     mSelectedLeagues = selectedLeagues or Logic:getSelectedLeagues()
     mCheckEnabled = checkEnabled
 
-    local contentContainer = tolua.cast( mWidget:getChildByName("ScrollView"), "ScrollView" )
     LeagueListSceneUnexpended.loadFrame( "scenes/LeagueContentWithTransparentBG.json", "", 
         contentContainer, leagueSelected, existingContentHeight, leagueInit )
 end

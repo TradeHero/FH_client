@@ -6,22 +6,13 @@ local ConnectingMessage = require("scripts.views.ConnectingMessage")
 local EventManager = require("scripts.events.EventManager").getInstance()
 local Event = require("scripts.events.Event").EventList
 local Logic = require("scripts.Logic").getInstance()
-local LeaderboardConfig = require("scripts.config.Leaderboard")
-local CompetitionDetail = require("scripts.data.CompetitionDetail").CompetitionDetail
 
-local competitionId
 
 function action( param )
-    local url = RequestUtils.GET_COMPETITION_DETAIL_REST_CALL
+    local competitionId = param[1]
 
-    local step = 1
-    local sortType = 1
-    competitionId = param[1]
-
-    url = url.."?competitionId="..competitionId.."&sortType="..sortType.."&step="..step
-    if RequestUtils.USE_DEV then
-        url = url.."&useDev=true"
-    end
+    local url = RequestUtils.GET_COMPETITION_LEAGUE_REST_CALL
+    url = url.."?competitionId="..competitionId
 
     local requestInfo = {}
     requestInfo.requestData = ""
@@ -39,9 +30,6 @@ function action( param )
 end
 
 function onRequestSuccess( jsonResponse )
-    local competitionDetail = CompetitionDetail:new( jsonResponse )
-    Logic:setCompetitionDetail( competitionDetail )
-
-    local CompetitionDetailScene = require("scripts.views.CompetitionDetailScene")
-    CompetitionDetailScene.loadFrame( LeaderboardConfig.LeaderboardSubType[1], competitionId )
+	local CompetitionMoreScene = require("scripts.views.CompetitionMoreScene")
+    CompetitionMoreScene.loadFrame( jsonResponse )
 end

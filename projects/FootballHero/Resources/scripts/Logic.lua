@@ -57,6 +57,8 @@ function Logic:new()
 		startLeagueId = 0,
 		balance = 0,
 		FbId = nil,
+
+		competitionDetail = nil,
 	}
     
     setmetatable(obj, self)
@@ -222,4 +224,12 @@ end
 
 function  Logic:getFbId()
 	return self.FbId
+end
+
+function Logic:setCompetitionDetail( competitionDetail )
+	self.competitionDetail = competitionDetail
+end
+
+function Logic:getCompetitionDetail()
+	return self.competitionDetail
 end

@@ -324,4 +324,12 @@
     <Project>CompetitionInviteContent</Project>
     <GuidesList />
   </GuidesProject>
+  <GuidesProject>
+    <Project>CompetitionMore</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>CompetitionMoreContent</Project>
+    <GuidesList />
+  </GuidesProject>
 </ArrayOfGuidesProject>

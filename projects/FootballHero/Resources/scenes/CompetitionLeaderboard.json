@@ -628,10 +628,10 @@
           "width": 556,
           "x": 320,
           "y": 1010,
-          "capInsetsHeight": 1,
+          "capInsetsHeight": 10,
           "capInsetsWidth": 1,
           "capInsetsX": 0,
-          "capInsetsY": 0,
+          "capInsetsY": 10,
           "disabled": null,
           "disabledData": {
             "path": null,
@@ -653,7 +653,7 @@
             "plistFile": null,
             "resourceType": 0
           },
-          "scale9Enable": false,
+          "scale9Enable": true,
           "scale9Height": 80,
           "scale9Width": 556,
           "text": "",
