@@ -39,6 +39,8 @@ extern void showEditTextDialogJNI(
 	int nMaxLength, 
 	float x,
 	float y,
+	float width,
+	float height,
 	EditTextCallback pfEditTextCallback, 
 	void* ctx);
 extern void terminateProcessJNI();

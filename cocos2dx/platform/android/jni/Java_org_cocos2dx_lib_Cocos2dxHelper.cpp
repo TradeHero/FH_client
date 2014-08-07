@@ -84,6 +84,8 @@ void showEditTextDialogJNI(
 	int nMaxLength, 
 	float x,
 	float y,
+    float width,
+    float height,
 	EditTextCallback pfEditTextCallback, 
 	void* ctx) {
     if (pszMessage == NULL) {
@@ -94,7 +96,7 @@ void showEditTextDialogJNI(
     s_ctx = ctx;
 
     JniMethodInfo t;
-    if (JniHelper::getStaticMethodInfo(t, CLASS_NAME, "showEditTextDialog", "(Ljava/lang/String;Ljava/lang/String;IIIIFF)V")) {
+    if (JniHelper::getStaticMethodInfo(t, CLASS_NAME, "showEditTextDialog", "(Ljava/lang/String;Ljava/lang/String;IIIIFFFF)V")) {
         jstring stringArg1;
 
         if (!pszTitle) {
@@ -105,7 +107,7 @@ void showEditTextDialogJNI(
 
         jstring stringArg2 = t.env->NewStringUTF(pszMessage);
 
-        t.env->CallStaticVoidMethod(t.classID, t.methodID, stringArg1, stringArg2, nInputMode, nInputFlag, nReturnType, nMaxLength, x, y);
+        t.env->CallStaticVoidMethod(t.classID, t.methodID, stringArg1, stringArg2, nInputMode, nInputFlag, nReturnType, nMaxLength, x, y, width, height);
 
         t.env->DeleteLocalRef(stringArg1);
         t.env->DeleteLocalRef(stringArg2);

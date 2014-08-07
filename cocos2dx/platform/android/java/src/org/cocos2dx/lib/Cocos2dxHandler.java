@@ -97,7 +97,7 @@ public class Cocos2dxHandler extends Handler {
 		EditBoxMessage editBoxMessage = (EditBoxMessage)msg.obj;
 
     final InPlaceEditText editText = new InPlaceEditText(mActivity.get(), null);
-    editText.setBackgroundColor(Color.TRANSPARENT);
+    editText.setBackgroundColor(Color.RED);
     editText.processNativeData(editBoxMessage);
 
     ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(
@@ -128,9 +128,11 @@ public class Cocos2dxHandler extends Handler {
 		public int maxLength;
     public final float x;
     public final float y;
+    public final float width;
+    public final float height;
 
     public EditBoxMessage(String title, String content, int inputMode, int inputFlag, int returnType, int maxLength,
-        float x, float y){
+        float x, float y, float width, float height){
 			this.content = content;
 			this.title = title;
 			this.inputMode = inputMode;
@@ -139,6 +141,8 @@ public class Cocos2dxHandler extends Handler {
 			this.maxLength = maxLength;
       this.x = x;
       this.y = y;
+      this.width = width;
+      this.height = height;
     }
 
     @Override public String toString() {
@@ -150,7 +154,9 @@ public class Cocos2dxHandler extends Handler {
           "\nreturnType: " + returnType +
           "\nmaxLength: " + maxLength +
           "\nx: " + x +
-          "\ny: " + y
+          "\ny: " + y +
+          "\nwidth: " + width +
+          "\nheight: " + height
           ;
     }
   }

@@ -38,6 +38,8 @@ public class InPlaceEditText extends EditText
     // TODO
     setX(editBoxMessage.x);
     setY(editBoxMessage.y);
+    setWidth((int) editBoxMessage.width);
+    setHeight((int) editBoxMessage.height);
   }
 
   @Override protected void onLayout(boolean changed, int left, int top, int right, int bottom) {

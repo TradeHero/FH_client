@@ -299,6 +299,8 @@ void CCEditBoxImplAndroid::openKeyboard()
 						  m_nMaxLength,
 						  screenGLPos.x, 
 						  viewH - screenGLPos.y,
+                          rect.size.width * eglView->getScaleX(), 
+                          rect.size.height * eglView->getScaleY(),
 						  editBoxCallbackFunc,
 						  (void*)this  );
 	
