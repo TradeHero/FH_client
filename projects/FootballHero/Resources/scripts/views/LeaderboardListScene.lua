@@ -50,6 +50,55 @@ function backEventHandler( sender,eventType )
     end
 end
 
+function initTypeList()
+    local content = SceneManager.widgetFromJsonFile("scenes/LeaderbaordDropDown.json")
+    mWidget:addChild( content )
+
+    local list = tolua.cast( content:getChildByName("leagueList"), "ScrollView" )
+    local expendedIndicator = content:getChildByName( "expendIndi" )
+    local mask = content:getChildByName("mask")
+    local buttonEventHandler = function( sender, eventType )
+        if eventType == TOUCH_EVENT_ENDED then
+            if list:isEnabled() then
+                list:setEnabled( false )
+                mask:setEnabled( false )
+                expendedIndicator:setBrightStyle( BRIGHT_NORMAL )
+            else
+                list:setEnabled( true )
+                mask:setEnabled( true )
+                expendedIndicator:setBrightStyle( BRIGHT_HIGHLIGHT )
+            end
+        end
+    end
+    local button = content:getChildByName("button")
+    button:addTouchEventListener( buttonEventHandler )
+    list:setEnabled( false )
+    mask:setEnabled( false )
+
+    local initCurrentLeague = function( leagueKey )
+        local leagueName = tolua.cast( content:getChildByName("countryName"), "Label" )
+
+        local leagueId = LeagueConfig.getConfigIdByKey( leagueKey )
+        local countryId = CountryConfig.getConfigIdByKey( LeagueConfig.getCountryId( leagueId ) )
+        leagueName:setText( CountryConfig.getCountryName( countryId ).." - "..LeagueConfig.getLeagueName( leagueId ) )
+    end
+
+    local leagueSelectedCallback = function( leagueKey )
+        list:setEnabled( false )
+        mask:setEnabled( false )
+        expendedIndicator:setBrightStyle( BRIGHT_NORMAL )
+        
+        initCurrentLeague( leagueKey )
+
+        EventManager:postEvent( Event.Enter_Match_List, { leagueKey } )
+    end
+
+    LeagueListSceneUnexpended.loadFrame( "scenes/LeaderbaordContentInDropDown.json", 
+        list, leagueSelectedCallback )
+
+    initCurrentLeague( leagueKey )
+end
+
 function initTitles()
     local title = tolua.cast( mWidget:getChildByName("title"), "Label" )
     local subTitle = tolua.cast( mWidget:getChildByName("subTitle"), "Label" )

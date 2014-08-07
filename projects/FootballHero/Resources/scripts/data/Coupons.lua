@@ -13,6 +13,7 @@ Data need to be sent to server:
     {
       "OutcomeIds" : [2435033],
       "Stake" : 1000,
+      "OutcomeText": "Arsenal to win."
     }
   ],
   "Message" : "My first bet",
@@ -89,6 +90,7 @@ function Coupons:toString()
         local coupon = {
             OutcomeIds = v["OutcomeIds"],
             Stake = v["Stake"],
+            OutcomeText = v["Answer"],
         }
 
         table.insert( form, coupon )

@@ -85,6 +85,8 @@
     <string>CompetitionInviteContent.json</string>
     <string>CompetitionMore.json</string>
     <string>CompetitionMoreContent.json</string>
+    <string>LeaderbaordDropDown.json</string>
+    <string>LeaderbaordContentInDropDown.json</string>
   </JsonList>
   <CanvasSize>
     <Width>640</Width>
@@ -96,5 +98,5 @@
   <imageFileList />
   <imagePngList />
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>CompetitionLeaderboard.json</CurrentUIJson>
+  <CurrentUIJson>LeaderbaordContentInDropDown.json</CurrentUIJson>
 </UIProject>

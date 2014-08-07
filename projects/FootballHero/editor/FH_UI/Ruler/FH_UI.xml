@@ -332,4 +332,12 @@
     <Project>CompetitionMoreContent</Project>
     <GuidesList />
   </GuidesProject>
+  <GuidesProject>
+    <Project>LeaderbaordDropDown</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>LeaderbaordContentInDropDown</Project>
+    <GuidesList />
+  </GuidesProject>
 </ArrayOfGuidesProject>
