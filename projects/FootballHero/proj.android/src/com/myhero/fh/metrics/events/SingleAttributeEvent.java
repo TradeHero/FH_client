@@ -4,6 +4,7 @@ import java.util.Collections;
 
 public class SingleAttributeEvent extends AnalyticsEvent {
   public SingleAttributeEvent(String name, String attributeKey, String attributeValue) {
-    super(name, Collections.singletonMap(attributeKey, attributeValue));
+    super(name, attributeKey == null || attributeKey.isEmpty() ? null :
+        Collections.singletonMap(attributeKey, attributeValue));
   }
 }
