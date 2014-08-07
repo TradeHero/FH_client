@@ -26,11 +26,8 @@ package org.cocos2dx.lib;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.graphics.Color;
 import android.os.Handler;
 import android.os.Message;
-import android.view.ViewGroup;
-import com.myhero.fh.widget.InPlaceEditText;
 import com.myhero.fh.widget.NativeData;
 import java.lang.ref.WeakReference;
 
@@ -44,7 +41,7 @@ public class Cocos2dxHandler extends Handler {
 	// ===========================================================
 	// Fields
 	// ===========================================================
-	private WeakReference<Cocos2dxActivity> mActivity;
+	protected WeakReference<Cocos2dxActivity> mActivity;
 	
 	// ===========================================================
 	// Constructors
@@ -92,20 +89,16 @@ public class Cocos2dxHandler extends Handler {
 					}
 				}).create().show();
 	}
-	
-	private void showEditBoxDialog(Message msg) {
-		EditBoxMessage editBoxMessage = (EditBoxMessage)msg.obj;
 
-    final InPlaceEditText editText = new InPlaceEditText(mActivity.get(), null);
-    editText.setBackgroundColor(Color.RED);
-    editText.processNativeData(editBoxMessage);
+  protected void showEditBoxDialog(Message msg) {
+    EditBoxMessage editBoxMessage = (EditBoxMessage) msg.obj;
 
-    ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(
-        ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-    mActivity.get().addContentView(editText, layoutParams);
-	}
-	
-	// ===========================================================
+    new Cocos2dxEditBoxDialog(this.mActivity.get(), editBoxMessage.title, editBoxMessage.content,
+        editBoxMessage.inputMode, editBoxMessage.inputFlag, editBoxMessage.returnType,
+        editBoxMessage.maxLength).show();
+  }
+
+  // ===========================================================
 	// Inner and Anonymous Classes
 	// ===========================================================
 	

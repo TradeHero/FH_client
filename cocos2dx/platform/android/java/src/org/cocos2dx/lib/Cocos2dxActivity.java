@@ -62,6 +62,8 @@ public abstract class Cocos2dxActivity extends Activity implements Cocos2dxHelpe
   protected void onCreate(final Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     sContext = this;
+
+    // TODO use FHCocos2dxHandler. Dependency injection can be helpful here.
     this.mHandler = new Cocos2dxHandler(this);
 
     this.init();
