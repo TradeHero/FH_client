@@ -279,12 +279,26 @@ void CCEditBoxImplAndroid::openKeyboard()
         pEngine->executeEvent(pEditBox->getScriptEditBoxHandler(), "began",pEditBox);
     }
 	
+	CCSize contentSize = m_pEditBox->getContentSize();
+	CCRect rect = CCRectMake(0, 0, contentSize.width, contentSize.height);
+    rect = CCRectApplyAffineTransform(rect, m_pEditBox->nodeToWorldTransform());
+	
+	CCPoint designCoord = ccp(rect.origin.x, rect.origin.y + rect.size.height);
+    
+    CCEGLViewProtocol* eglView = CCEGLView::sharedOpenGLView();
+    float viewH = getScreenHeightJNI();
+    
+    CCPoint visiblePos = ccp(designCoord.x * eglView->getScaleX(), designCoord.y * eglView->getScaleY());
+    CCPoint screenGLPos = ccpAdd(visiblePos, eglView->getViewPortRect().origin);
+    
     showEditTextDialogJNI(  m_strPlaceHolder.c_str(),
 						  m_strText.c_str(),
 						  m_eEditBoxInputMode,
 						  m_eEditBoxInputFlag,
 						  m_eKeyboardReturnType,
 						  m_nMaxLength,
+						  screenGLPos.x, 
+						  viewH - screenGLPos.y,
 						  editBoxCallbackFunc,
 						  (void*)this  );
 	

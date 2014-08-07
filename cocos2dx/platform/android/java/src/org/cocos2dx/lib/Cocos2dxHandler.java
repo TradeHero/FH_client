@@ -24,12 +24,15 @@ THE SOFTWARE.
 
 package org.cocos2dx.lib;
 
-import java.lang.ref.WeakReference;
-
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.os.Handler;
 import android.os.Message;
+import android.view.ViewGroup;
+import com.myhero.fh.widget.InPlaceEditText;
+import com.myhero.fh.widget.NativeData;
+import java.lang.ref.WeakReference;
 
 public class Cocos2dxHandler extends Handler {
 	// ===========================================================
@@ -92,13 +95,14 @@ public class Cocos2dxHandler extends Handler {
 	
 	private void showEditBoxDialog(Message msg) {
 		EditBoxMessage editBoxMessage = (EditBoxMessage)msg.obj;
-		new Cocos2dxEditBoxDialog(this.mActivity.get(),
-				editBoxMessage.title,
-				editBoxMessage.content,
-				editBoxMessage.inputMode,
-				editBoxMessage.inputFlag,
-				editBoxMessage.returnType,
-				editBoxMessage.maxLength).show();
+
+    final InPlaceEditText editText = new InPlaceEditText(mActivity.get(), null);
+    editText.setBackgroundColor(Color.TRANSPARENT);
+    editText.processNativeData(editBoxMessage);
+
+    ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(
+        ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+    mActivity.get().addContentView(editText, layoutParams);
 	}
 	
 	// ===========================================================
@@ -115,21 +119,39 @@ public class Cocos2dxHandler extends Handler {
 		}
 	}
 	
-	public static class EditBoxMessage {
+	public static class EditBoxMessage implements NativeData {
 		public String title;
 		public String content;
 		public int inputMode;
 		public int inputFlag;
 		public int returnType;
 		public int maxLength;
-		
-		public EditBoxMessage(String title, String content, int inputMode, int inputFlag, int returnType, int maxLength){
+    public final float x;
+    public final float y;
+
+    public EditBoxMessage(String title, String content, int inputMode, int inputFlag, int returnType, int maxLength,
+        float x, float y){
 			this.content = content;
 			this.title = title;
 			this.inputMode = inputMode;
 			this.inputFlag = inputFlag;
 			this.returnType = returnType;
 			this.maxLength = maxLength;
-		}
-	}
+      this.x = x;
+      this.y = y;
+    }
+
+    @Override public String toString() {
+      return
+          "\ncontent: " + content +
+          "\ntitle: " + title +
+          "\ninputMode: " + inputMode +
+          "\ninputFlag: " + inputFlag +
+          "\nreturnType: " + returnType +
+          "\nmaxLength: " + maxLength +
+          "\nx: " + x +
+          "\ny: " + y
+          ;
+    }
+  }
 }

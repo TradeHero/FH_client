@@ -75,7 +75,17 @@ void showDialogJNI(const char * pszMsg, const char * pszTitle) {
     }
 }
 
-void showEditTextDialogJNI(const char* pszTitle, const char* pszMessage, int nInputMode, int nInputFlag, int nReturnType, int nMaxLength, EditTextCallback pfEditTextCallback, void* ctx) {
+void showEditTextDialogJNI(
+	const char* pszTitle, 
+	const char* pszMessage, 
+	int nInputMode, 
+	int nInputFlag, 
+	int nReturnType, 
+	int nMaxLength, 
+	float x,
+	float y,
+	EditTextCallback pfEditTextCallback, 
+	void* ctx) {
     if (pszMessage == NULL) {
         return;
     }
@@ -84,7 +94,7 @@ void showEditTextDialogJNI(const char* pszTitle, const char* pszMessage, int nIn
     s_ctx = ctx;
 
     JniMethodInfo t;
-    if (JniHelper::getStaticMethodInfo(t, CLASS_NAME, "showEditTextDialog", "(Ljava/lang/String;Ljava/lang/String;IIII)V")) {
+    if (JniHelper::getStaticMethodInfo(t, CLASS_NAME, "showEditTextDialog", "(Ljava/lang/String;Ljava/lang/String;IIIIFF)V")) {
         jstring stringArg1;
 
         if (!pszTitle) {
@@ -95,7 +105,7 @@ void showEditTextDialogJNI(const char* pszTitle, const char* pszMessage, int nIn
 
         jstring stringArg2 = t.env->NewStringUTF(pszMessage);
 
-        t.env->CallStaticVoidMethod(t.classID, t.methodID, stringArg1, stringArg2, nInputMode, nInputFlag, nReturnType, nMaxLength);
+        t.env->CallStaticVoidMethod(t.classID, t.methodID, stringArg1, stringArg2, nInputMode, nInputFlag, nReturnType, nMaxLength, x, y);
 
         t.env->DeleteLocalRef(stringArg1);
         t.env->DeleteLocalRef(stringArg2);
@@ -336,4 +346,18 @@ void setStringForKeyJNI(const char* pKey, const char* value)
         t.env->DeleteLocalRef(stringArg1);
         t.env->DeleteLocalRef(stringArg2);
     }
+}
+
+int getScreenHeightJNI()
+{
+    JniMethodInfo t;
+    
+    if (JniHelper::getStaticMethodInfo(t, CLASS_NAME, "getScreenHeight", "()I")) {
+        jint ret = t.env->CallStaticIntMethod(t.classID, t.methodID);
+        
+        t.env->DeleteLocalRef(t.classID);
+
+        return ret;
+    }
+    return -1;
 }
