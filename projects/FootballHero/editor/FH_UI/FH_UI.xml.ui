@@ -81,6 +81,7 @@
     <string>PredictionStatus.json</string>
     <string>CompetitionEmpty.json</string>
     <string>CreateCompetitionContent.json</string>
+    <string>LeagueContentWithTransparentBG.json</string>
   </JsonList>
   <CanvasSize>
     <Width>640</Width>
@@ -90,7 +91,12 @@
   <ProjectType>UIProject</ProjectType>
   <ResRelativePath />
   <imageFileList />
-  <imagePngList />
+  <imagePngList>
+    <string>MatchListScene/match_bkg.png</string>
+    <string>header/back.png</string>
+    <string>chat/send_icon.png</string>
+    <string>chat/More Button.png</string>
+  </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>CreateCompetitionContent.json</CurrentUIJson>
+  <CurrentUIJson>CompetitionLeaderboardInfo.json</CurrentUIJson>
 </UIProject>

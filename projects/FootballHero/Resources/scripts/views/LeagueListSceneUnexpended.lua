@@ -15,18 +15,18 @@ local mLeagueInitCallback
 
 local mChildIndex
 
-function loadFrame( countryWidget, leagueWidget, leagueListContainer, leagueSelectCallback, leagueInitCallback )
+function loadFrame( countryWidget, leagueWidget, leagueListContainer, leagueSelectCallback, existingContentHeight, leagueInitCallback )
 	mCountryWidget = countryWidget
 	mLeagueWidget = leagueWidget
 	mLeagueListContainer = leagueListContainer
 	mLeagueSelectCallback = leagueSelectCallback
     mLeagueInitCallback = leagueInitCallback
 
-	helperInitLeagueList()
+	helperInitLeagueList( existingContentHeight or 0 )
 end
 
-function helperInitLeagueList()
-    local contentHeight = 0
+function helperInitLeagueList( existingContentHeight )
+    local contentHeight = existingContentHeight
     mChildIndex = 1
 
     for i = 1, mCountryNum do
@@ -59,7 +59,7 @@ function helperInitLeagueList()
                 selectedIndi:setEnabled( false )
             end
 
-            ontentHeight = contentHeight + content:getSize().height
+            contentHeight = contentHeight + content:getSize().height
 
             if mLeagueInitCallback ~= nil then
                 mLeagueInitCallback( content, LeagueConfig.getConfigId( leagueId ) )
@@ -76,7 +76,6 @@ function helperInitLeagueList()
 end
 
 function selectOnLeague( selectedLeague )
-    print( selectedLeague )
     for i = 1, mChildIndex - 1  do
         local child = mLeagueListContainer:getChildByTag( i )
         if child == selectedLeague then

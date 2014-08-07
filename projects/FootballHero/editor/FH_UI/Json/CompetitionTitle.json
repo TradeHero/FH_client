@@ -10,7 +10,12 @@
   "designHeight": 1136,
   "designWidth": 640,
   "textures": [],
-  "texturesPng": [],
+  "texturesPng": [
+    "MatchListScene/match_bkg.png",
+    "header/back.png",
+    "chat/send_icon.png",
+    "chat/More Button.png"
+  ],
   "version": "1.5.0.0",
   "widgetTree": {
     "classname": "Panel",
@@ -40,7 +45,7 @@
           "layoutParameter": null,
           "opacity": 255,
           "positionPercentX": 0.5,
-          "positionPercentY": 0.9518225,
+          "positionPercentY": 0.9505208,
           "positionType": 0,
           "rotation": 0,
           "scaleX": 1,
@@ -90,7 +95,7 @@
           "layoutParameter": null,
           "opacity": 255,
           "positionPercentX": 0,
-          "positionPercentY": 0.8984371,
+          "positionPercentY": 0.897135437,
           "positionType": 0,
           "rotation": 0,
           "scaleX": 1,

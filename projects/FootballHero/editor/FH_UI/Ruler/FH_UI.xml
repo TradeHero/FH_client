@@ -316,4 +316,8 @@
     <Project>CreateCompetitionContent</Project>
     <GuidesList />
   </GuidesProject>
+  <GuidesProject>
+    <Project>LeagueContentWithTransparentBG</Project>
+    <GuidesList />
+  </GuidesProject>
 </ArrayOfGuidesProject>

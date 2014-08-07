@@ -138,7 +138,7 @@ function initLeagueList( leagueKey )
         EventManager:postEvent( Event.Enter_Match_List, { leagueKey } )
     end
 
-    LeagueListSceneUnexpended.loadFrame( "scenes/LeagueContentInDropDown.json", "scenes/LeagueListContent.json", 
+    LeagueListSceneUnexpended.loadFrame( "scenes/LeagueContentInDropDown.json", "", 
         list, leagueSelectedCallback )
 
     initCurrentLeague( leagueKey )

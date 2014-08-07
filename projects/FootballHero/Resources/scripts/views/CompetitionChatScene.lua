@@ -35,8 +35,7 @@ function loadFrame( competitionId, chatMessages )
     local sendBt = widget:getChildByName("send")
     sendBt:addTouchEventListener( sendEventHandler )
 
-    local messageInput = ViewUtils.createTextInput( mWidget:getChildByName( MESSAGE_CONTAINER_NAME ), "", 470, 45 )
-    messageInput:setFontColor( ccc3( 0, 0, 0 ) )
+    local messageInput = ViewUtils.createTextInput( mWidget:getChildByName( MESSAGE_CONTAINER_NAME ), "Type your message here", 470, 50 )
 
     getLatestMessages()
 end
