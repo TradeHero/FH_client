@@ -19,7 +19,22 @@ public class LocalyticsAdapter implements AnalyticsAdapter {
   }
 
   @Override public void addEvent(AnalyticsEvent analyticsEvent) {
-    localytics.tagEvent(analyticsEvent.getName(), analyticsEvent.getAttributes());
+    if(analyticsEvent.getAttributes() == null) {
+      localytics.tagEvent(analyticsEvent.getName());
+      return;
+    }
+    // remove empty key
+    for (String key: analyticsEvent.getAttributes().keySet()) {
+      if (key.trim().length() == 0) {
+        analyticsEvent.getAttributes().remove(key);
+      }
+    }
+    
+    if (analyticsEvent.getAttributes().isEmpty()) {
+      localytics.tagEvent(analyticsEvent.getName());
+    } else {
+      localytics.tagEvent(analyticsEvent.getName(), analyticsEvent.getAttributes());
+    }
   }
 
   @Override public void tagScreen(String screenName) {
