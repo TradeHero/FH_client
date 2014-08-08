@@ -11,7 +11,8 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "Tutorial/Default Button.png"
+    "MatchListScene/match_bkg.png",
+    "header/back.png"
   ],
   "version": "1.5.0.0",
   "widgetTree": {

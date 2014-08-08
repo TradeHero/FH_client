@@ -5,26 +5,6 @@
     <GuidesList />
   </GuidesProject>
   <GuidesProject>
-    <Project>ForgotPassword</Project>
-    <GuidesList />
-  </GuidesProject>
-  <GuidesProject>
-    <Project>LoginNReg</Project>
-    <GuidesList />
-  </GuidesProject>
-  <GuidesProject>
-    <Project>Register</Project>
-    <GuidesList />
-  </GuidesProject>
-  <GuidesProject>
-    <Project>RegisterName</Project>
-    <GuidesList />
-  </GuidesProject>
-  <GuidesProject>
-    <Project>Signin</Project>
-    <GuidesList />
-  </GuidesProject>
-  <GuidesProject>
     <Project>ConnectingMessage</Project>
     <GuidesList />
   </GuidesProject>
@@ -66,10 +46,6 @@
   </GuidesProject>
   <GuidesProject>
     <Project>MatchListScene</Project>
-    <GuidesList />
-  </GuidesProject>
-  <GuidesProject>
-    <Project>PredConfirm</Project>
     <GuidesList />
   </GuidesProject>
   <GuidesProject>
@@ -133,19 +109,11 @@
     <GuidesList />
   </GuidesProject>
   <GuidesProject>
-    <Project>LeaderboardSubContent</Project>
-    <GuidesList />
-  </GuidesProject>
-  <GuidesProject>
     <Project>LeaderboardList</Project>
     <GuidesList />
   </GuidesProject>
   <GuidesProject>
     <Project>LeaderboardListContent</Project>
-    <GuidesList />
-  </GuidesProject>
-  <GuidesProject>
-    <Project>MoreContent</Project>
     <GuidesList />
   </GuidesProject>
   <GuidesProject>
@@ -193,23 +161,7 @@
     <GuidesList />
   </GuidesProject>
   <GuidesProject>
-    <Project>CreateCompSelectLeague</Project>
-    <GuidesList />
-  </GuidesProject>
-  <GuidesProject>
-    <Project>CreateCompCountryListContent</Project>
-    <GuidesList />
-  </GuidesProject>
-  <GuidesProject>
-    <Project>CreateCompLeagueListContent</Project>
-    <GuidesList />
-  </GuidesProject>
-  <GuidesProject>
     <Project>CompetitionLeaderboard</Project>
-    <GuidesList />
-  </GuidesProject>
-  <GuidesProject>
-    <Project>CompetitionLeaderboardInfo</Project>
     <GuidesList />
   </GuidesProject>
   <GuidesProject>
@@ -238,10 +190,6 @@
   </GuidesProject>
   <GuidesProject>
     <Project>TutorialPrediction</Project>
-    <GuidesList />
-  </GuidesProject>
-  <GuidesProject>
-    <Project>LoginNRegEmail</Project>
     <GuidesList />
   </GuidesProject>
   <GuidesProject>

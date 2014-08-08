@@ -14,20 +14,15 @@
     <string>CompetitionCreate.json</string>
     <string>CompetitionItem.json</string>
     <string>CompetitionLeaderboard.json</string>
-    <string>CompetitionLeaderboardInfo.json</string>
     <string>CompetitionTitle.json</string>
     <string>ConnectingMessage.json</string>
     <string>CountryListContent.json</string>
-    <string>CreateCompCountryListContent.json</string>
     <string>CreateCompetition.json</string>
-    <string>CreateCompLeagueListContent.json</string>
-    <string>CreateCompSelectLeague.json</string>
     <string>ErrorMessage.json</string>
     <string>FAQ.json</string>
     <string>FavouriteCountryContent.json</string>
     <string>FavouriteLeagueContent.json</string>
     <string>FavouriteTeam.json</string>
-    <string>ForgotPassword.json</string>
     <string>HistoryDetail.json</string>
     <string>HistoryDetailClosedContent.json</string>
     <string>HistoryDetailOpenContent.json</string>
@@ -39,26 +34,18 @@
     <string>LeaderboardList.json</string>
     <string>LeaderboardListContent.json</string>
     <string>LeaderboardScene.json</string>
-    <string>LeaderboardSubContent.json</string>
     <string>LeagueListContent.json</string>
-    <string>LoginNReg.json</string>
-    <string>LoginNRegEmail.json</string>
     <string>MatchDate.json</string>
     <string>MatchListContent.json</string>
     <string>MatchListEmptyIndi.json</string>
     <string>MatchListScene.json</string>
     <string>MatchPrediction.json</string>
-    <string>MoreContent.json</string>
     <string>Navigator.json</string>
-    <string>PredConfirm.json</string>
     <string>PredFinalConfirm.json</string>
     <string>PredFinalConfirmButton.json</string>
     <string>PredFinalConfirmContent.json</string>
-    <string>Register.json</string>
-    <string>RegisterName.json</string>
     <string>SettingsHome.json</string>
     <string>SettingsHomeContent.json</string>
-    <string>Signin.json</string>
     <string>Team.json</string>
     <string>TutorialEmail.json</string>
     <string>TutorialEmailRegister.json</string>
@@ -98,5 +85,5 @@
   <imageFileList />
   <imagePngList />
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>LeaderboardList.json</CurrentUIJson>
+  <CurrentUIJson />
 </UIProject>
