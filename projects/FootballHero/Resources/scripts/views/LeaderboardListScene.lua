@@ -6,6 +6,7 @@ local EventManager = require("scripts.events.EventManager").getInstance()
 local Event = require("scripts.events.Event").EventList
 local TeamConfig = require("scripts.config.Team")
 local LeaderboardConfig = require("scripts.config.Leaderboard")
+local LeaderboardListSceneUnexpended = require("scripts.views.LeaderboardListSceneUnexpended")
 local SMIS = require("scripts.SMIS")
 
 
@@ -32,8 +33,16 @@ function loadFrame( leaderboardInfo, leaderboardId, subType )
 
     initTitles()
     initContent( leaderboardInfo )
+    initTypeList()
     mStep = 1
     mHasMoreToLoad = true
+end
+
+function refreshFrame( leaderboardInfo, leaderboardId, subType )
+    mLeaderboardId = leaderboardId
+    mSubType = subType
+
+    initContent( leaderboardInfo )
 end
 
 function EnterOrExit( eventType )
@@ -41,6 +50,10 @@ function EnterOrExit( eventType )
     elseif eventType == "exit" then
         mWidget = nil
     end
+end
+
+function isShown()
+    return mWidget ~= nil
 end
 
 function backEventHandler( sender,eventType )
@@ -54,7 +67,7 @@ function initTypeList()
     local content = SceneManager.widgetFromJsonFile("scenes/LeaderbaordDropDown.json")
     mWidget:addChild( content )
 
-    local list = tolua.cast( content:getChildByName("leagueList"), "ScrollView" )
+    local list = tolua.cast( content:getChildByName("typeList"), "ScrollView" )
     local expendedIndicator = content:getChildByName( "expendIndi" )
     local mask = content:getChildByName("mask")
     local buttonEventHandler = function( sender, eventType )
@@ -75,36 +88,32 @@ function initTypeList()
     list:setEnabled( false )
     mask:setEnabled( false )
 
-    local initCurrentLeague = function( leagueKey )
-        local leagueName = tolua.cast( content:getChildByName("countryName"), "Label" )
-
-        local leagueId = LeagueConfig.getConfigIdByKey( leagueKey )
-        local countryId = CountryConfig.getConfigIdByKey( LeagueConfig.getCountryId( leagueId ) )
-        leagueName:setText( CountryConfig.getCountryName( countryId ).." - "..LeagueConfig.getLeagueName( leagueId ) )
+    local initCurrentType = function( typeKey )
+        local typeName = tolua.cast( content:getChildByName("currentType"), "Label" )
+        typeName:setText( LeaderboardConfig.LeaderboardSubType[typeKey]["title"] )
     end
 
-    local leagueSelectedCallback = function( leagueKey )
+    local leagueSelectedCallback = function( typeKey )
         list:setEnabled( false )
         mask:setEnabled( false )
         expendedIndicator:setBrightStyle( BRIGHT_NORMAL )
         
-        initCurrentLeague( leagueKey )
+        initCurrentType( typeKey )
 
-        EventManager:postEvent( Event.Enter_Match_List, { leagueKey } )
+        -- Stop the loading logo actions.
+        mWidget:stopAllActions()
+        EventManager:postEvent( Event.Enter_Leaderboard_List, { mLeaderboardId, typeKey } )
     end
 
-    LeagueListSceneUnexpended.loadFrame( "scenes/LeaderbaordContentInDropDown.json", 
+    LeaderboardListSceneUnexpended.loadFrame( "scenes/LeaderbaordContentInDropDown.json", 
         list, leagueSelectedCallback )
 
-    initCurrentLeague( leagueKey )
+    initCurrentType( 1 )
 end
 
 function initTitles()
     local title = tolua.cast( mWidget:getChildByName("title"), "Label" )
-    local subTitle = tolua.cast( mWidget:getChildByName("subTitle"), "Label" )
-
     title:setText( LeaderboardConfig.LeaderboardType[mLeaderboardId]["displayName"] )
-    subTitle:setText( string.format( subTitle:getStringValue(), mSubType["title"] ) )
 end
 
 function initContent( leaderboardInfo )
@@ -157,7 +166,7 @@ function initLeaderboardContent( i, content, info )
     seqArray:addObject( CCCallFuncN:create( function()
         if info["PictureUrl"] ~= nil then
             local handler = function( filePath )
-                if filePath ~= nil and mWidget ~= nil then
+                if filePath ~= nil and mWidget ~= nil and logo ~= nil then
                     logo:loadTexture( filePath )
                 end
             end

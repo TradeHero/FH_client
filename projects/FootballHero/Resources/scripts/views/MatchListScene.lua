@@ -135,6 +135,7 @@ function initLeagueList( leagueKey )
         
         initCurrentLeague( leagueKey )
 
+        mWidget:stopAllActions()
         EventManager:postEvent( Event.Enter_Match_List, { leagueKey } )
     end
 

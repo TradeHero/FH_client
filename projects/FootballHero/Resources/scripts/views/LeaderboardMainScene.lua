@@ -50,7 +50,7 @@ function initContent( compList )
     for i = 1, table.getn( LeaderboardConfig.LeaderboardType ) do
     	local eventHandler = function( sender, eventType )
             if eventType == TOUCH_EVENT_ENDED then
-                subContentClick( i, 0 )
+                subContentClick( i, 1 )
             end
         end
 

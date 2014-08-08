@@ -74,7 +74,7 @@
           "__type": "ScrollViewSurrogate:#EditorCommon.JsonModel.Component.GUI",
           "classname": "ScrollView",
           "name": "ScrollView",
-          "ZOrder": 2,
+          "ZOrder": 0,
           "actiontag": 1948,
           "anchorPointX": 0,
           "anchorPointY": 0,
