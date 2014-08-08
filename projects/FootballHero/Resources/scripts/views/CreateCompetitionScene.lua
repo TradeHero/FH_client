@@ -16,7 +16,7 @@ local mWidget
 local mInputWidget
 local mTextInput
 
-function loadFrame()
+function loadFrame( selectedLeagues )
     local widget = GUIReader:shareReader():widgetFromJsonFile("scenes/CreateCompetition.json")
     mWidget = widget
     mWidget:registerScriptHandler( EnterOrExit )
@@ -33,7 +33,9 @@ function loadFrame()
     local ongoingCheckBox = tolua.cast( mInputWidget:getChildByName("Ongoing"), "CheckBox" )
     ongoingCheckBox:addTouchEventListener( ongoingEventHandler )
 
-    if Logic:getSelectedLeagues() == nil then
+    if selectedLeagues ~= nil then
+        Logic:setSelectedLeagues( { selectedLeagues } )
+    elseif Logic:getSelectedLeagues() == nil then
         Logic:setSelectedLeagues( CountryConfig.getAllLeagues() )
     end
 
@@ -57,6 +59,16 @@ function EnterOrExit( eventType )
         mInputWidget = nil
         mTextInput = nil
     end
+end
+
+function preSetContent()
+    local description = "Predictions made in the selected league for the competition are automatically included in the competition."
+    local title = Logic:getDisplayName().."'s competition"
+
+    mInputWidget:getChildByName( "TitleInput" ):getNodeByTag( 1 ):setText( title )
+    tolua.cast( mInputWidget:getChildByName( "DescriptionText" ), "Label" ):setText( description )
+    mTextInput:setText( description )
+    tolua.cast( mInputWidget:getChildByName("Ongoing"), "CheckBox" ):setSelectedState( true )
 end
 
 function ongoingEventHandler( sender, eventType )
@@ -136,7 +148,6 @@ end
 function createTextInput( widget )
     -- Title
     local titleInput = ViewUtils.createTextInput( widget:getChildByName( "TitleInput" ), "Title", 520, 50 )
-    titleInput:setFontColor( ccc3( 0, 0, 0 ) )
     titleInput:setTouchPriority( SceneManager.TOUCH_PRIORITY_MINUS_ONE )
 
     -- Description
@@ -152,13 +163,11 @@ function createTextInput( widget )
     mTextInput = CCEditBox:create( CCSizeMake( 540, 35 ), CCScale9Sprite:create() )
     container:addNode( mTextInput )
     mTextInput:setPosition( 540 / 2, 35 / 2 )
-    mTextInput:setFontColor( ccc3( 0, 0, 0 ) )
     mTextInput:setVisible( false )
     mTextInput:setDelegate( inputDelegate.__CCEditBoxDelegate__ )
 
     -- DD/MM/YYYY
     local monthInput = ViewUtils.createTextInput( widget:getChildByName( "MonthInput" ), "Enter number of months", 520, 50 )
-    monthInput:setFontColor( ccc3( 0, 0, 0 ) )
     monthInput:setInputMode( kEditBoxInputModeNumeric )
     monthInput:setMaxLength( 2 )
     monthInput:setTouchPriority( SceneManager.TOUCH_PRIORITY_MINUS_ONE )

@@ -58,6 +58,7 @@ function onRequestSuccess( jsonResponse )
     local pictureUrl = jsonResponse["PictureUrl"]
     local startLeagueId = jsonResponse["StartLeagueId"]
     local balance = jsonResponse["Balance"]
+    local active = jsonResponse["ProfileDto"]["ActiveInCompetition"]
     local FbId = jsonResponse["FbId"]
 
     local Logic = require("scripts.Logic").getInstance()
@@ -66,6 +67,7 @@ function onRequestSuccess( jsonResponse )
     Logic:setPictureUrl( pictureUrl )
     Logic:setStartLeagueId( startLeagueId )
     Logic:setBalance( balance )
+    Logic:setActiveInCompetition( active )
     Logic:setFbId( FbId )
     
     local finishEvent = Event.Enter_Sel_Fav_Team

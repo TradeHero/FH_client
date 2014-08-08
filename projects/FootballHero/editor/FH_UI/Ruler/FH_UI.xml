@@ -288,4 +288,8 @@
     <Project>LeaderbaordContentInDropDown</Project>
     <GuidesList />
   </GuidesProject>
+  <GuidesProject>
+    <Project>MarketingMessage</Project>
+    <GuidesList />
+  </GuidesProject>
 </ArrayOfGuidesProject>

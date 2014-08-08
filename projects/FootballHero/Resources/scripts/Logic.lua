@@ -56,6 +56,7 @@ function Logic:new()
 		pictureUrl = nil,
 		startLeagueId = 0,
 		balance = 0,
+		ActiveInCompetition = false,
 		FbId = nil,
 
 		competitionDetail = nil,
@@ -212,6 +213,14 @@ end
 
 function Logic:getBalance()
 	return self.balance
+end
+
+function Logic:setActiveInCompetition( active )
+	self.ActiveInCompetition = active
+end
+
+function Logic:getActiveInCompetition()
+	return self.ActiveInCompetition
 end
 
 function Logic:getUncommitedBalance()

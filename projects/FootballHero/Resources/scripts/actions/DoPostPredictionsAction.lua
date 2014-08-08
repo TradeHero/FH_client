@@ -46,7 +46,7 @@ function onRequestSuccess( jsonResponse )
     Logic:setBalance( balance )
 
     RequestUtils.clearResponseCache()
-    EventManager:postEvent( Event.Enter_Match_List )
+    EventManager:postEvent( Event.Enter_Match_List, { nil, true } )
 end
 
 function onRequestFailed( jsonResponse )

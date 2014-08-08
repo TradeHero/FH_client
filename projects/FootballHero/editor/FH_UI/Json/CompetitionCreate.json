@@ -101,8 +101,7 @@
     "PredictionConfirm/on_button.png",
     "Tutorial/Default Button.png",
     "MatchPrediction/Will-both-teams-score-no.png",
-    "Settings/settings-bg.jpg",
-    "header/guangyun.png",
+    "MatchListScene/match_bkg.png",
     "Settings/settings_03.png",
     "commonRes/Arsenal.png",
     "Tutorial/Default Button.png",
@@ -183,7 +182,11 @@
     "MatchListScene/match_bkg.png",
     "header/back.png",
     "MatchListScene/Arrow down.png",
-    "MatchListScene/Arrow Up.png"
+    "MatchListScene/Arrow Up.png",
+    "Popup/popout_white.png",
+    "Tutorial/Default Button.png",
+    "Popup/popout_image.png",
+    "Popup/close_icon.png"
   ],
   "version": "1.5.0.0",
   "widgetTree": {

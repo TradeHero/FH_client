@@ -9,6 +9,7 @@ local Logic = require("scripts.Logic").getInstance()
 
 
 local mLeagueId
+local mCheckShowMarketingMessage
 
 function action( param )
     local leagueId = Logic:getStartLeagueId()
@@ -18,6 +19,11 @@ function action( param )
 
     if param ~= nil and param[1] ~= nil then
         leagueId = param[1]
+    end
+    if param ~= nil then
+        mCheckShowMarketingMessage = param[2]
+    else
+        mCheckShowMarketingMessage = false
     end
 
     mLeagueId = leagueId
@@ -94,6 +100,9 @@ function onRequestSuccess( matchList )
         matchListScene.loadFrame( sortedMatchList, mLeagueId )
     end
     
+    if mCheckShowMarketingMessage then
+        EventManager:postEvent( Event.Show_Marketing_Message, { mLeagueId } )
+    end
 end
 
 function onRequestFailed( jsonResponse )
