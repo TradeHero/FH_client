@@ -58,7 +58,7 @@ function onRequestSuccess( jsonResponse )
     local pictureUrl = jsonResponse["PictureUrl"]
     local startLeagueId = jsonResponse["StartLeagueId"]
     local balance = jsonResponse["Balance"]
-    local active = jsonResponse["ProfileDto"]["ActiveInCompetition"]
+    local active = jsonResponse["ActiveInCompetition"]
     local FbId = jsonResponse["FbId"]
 
     local Logic = require("scripts.Logic").getInstance()
