@@ -363,6 +363,55 @@ static void extendListView(lua_State* tolua_S)
     lua_pop(tolua_S, 1);
 }
 
+static int tolua_Cocos2dx_ScrollView_addEventListenerScrollView00(lua_State* tolua_S)
+{
+#ifndef TOLUA_RELEASE
+	tolua_Error tolua_err;
+	if (
+		!tolua_isusertype(tolua_S, 1, "ScrollView", 0, &tolua_err) ||
+		!toluafix_isfunction(tolua_S, 2, "LUA_FUNCTION", 0, &tolua_err) ||
+		!tolua_isnoobj(tolua_S, 3, &tolua_err)
+		)
+		goto tolua_lerror;
+	else
+#endif
+	{
+		ScrollView* self = (ScrollView*)tolua_tousertype(tolua_S, 1, 0);
+#ifndef TOLUA_RELEASE
+		if (!self) tolua_error(tolua_S, "invalid 'self' in function 'addTouchEventListener'", NULL);
+#endif
+		LuaCocoStudioEventListener* listener = LuaCocoStudioEventListener::create();
+		if (NULL == listener)
+		{
+			tolua_error(tolua_S, "LuaCocoStudioEventListener create fail\n", NULL);
+			return 0;
+		}
+
+		LUA_FUNCTION handler = (toluafix_ref_function(tolua_S, 2, 0));
+
+		listener->setHandler(handler);
+		self->setUserObject(listener);
+		self->addEventListenerScrollView(listener, scrollvieweventselector(LuaCocoStudioEventListener::eventCallbackFunc));
+	}
+	return 0;
+#ifndef TOLUA_RELEASE
+tolua_lerror :
+	tolua_error(tolua_S, "#ferror in function 'addEventListenerScrollView'.", &tolua_err);
+	return 0;
+#endif
+}
+
+static void extendScrollView(lua_State* tolua_S)
+{
+	lua_pushstring(tolua_S, "ScrollView");
+	lua_rawget(tolua_S, LUA_REGISTRYINDEX);
+	if (lua_istable(tolua_S, -1))
+	{
+		tolua_function(tolua_S, "addEventListenerScrollView", tolua_Cocos2dx_ScrollView_addEventListenerScrollView00);
+	}
+	lua_pop(tolua_S, 1);
+}
+
 static int tolua_Cocos2dx_LayoutParameter_setMargin00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
@@ -728,7 +777,8 @@ int register_all_cocos2dx_studio_manual(lua_State* tolua_S)
     extendTextFieldr(tolua_S);
     extendPageView(tolua_S);
     extendListView(tolua_S);
-    extendLayoutParameter(tolua_S);
+	extendScrollView(tolua_S);
+	extendLayoutParameter(tolua_S);
     extendCCArmatureAnimation(tolua_S);
     extendCCArmatureDataManager(tolua_S);
     return 0;

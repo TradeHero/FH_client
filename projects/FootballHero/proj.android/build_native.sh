@@ -1,3 +1,4 @@
+#!/bin/sh
 APPNAME="FootballHero"
 
 # options

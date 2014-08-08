@@ -6,4 +6,6 @@ class Misc
 	void copyToPasteboard(const char* content);
 
 	void selectImage(char* path, LUA_FUNCTION handler);
+
+	void sendMail(char* receiver, char* subject, char* body, LUA_FUNCTION errorHandler);
 };

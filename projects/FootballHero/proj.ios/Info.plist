@@ -29,7 +29,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0.0</string>
+	<string>1.10</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleURLTypes</key>
@@ -44,7 +44,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1.3.2</string>
+	<string>1.5.0</string>
 	<key>FacebookAppID</key>
 	<string>788386747851675</string>
 	<key>FacebookDisplayName</key>
@@ -53,11 +53,36 @@
 	<true/>
 	<key>UIAppFonts</key>
 	<array>
-		<string>fonts/Newgtbxc.ttf</string>
-		<string>fonts/SketchFlow Print.ttf</string>
+		<string>Helvetica neue.ttf</string>
+		<string>Helvetica Neue Bold.ttf</string>
+		<string>Helvetica Neue Medium.ttf</string>
+		<string>Helvetica Neue Light.ttf</string>
 	</array>
 	<key>UILaunchImageFile~ipad</key>
 	<string>Default</string>
+	<key>UILaunchImages</key>
+	<array>
+		<dict>
+			<key>UILaunchImageMinimumOSVersion</key>
+			<string>7.0</string>
+			<key>UILaunchImageName</key>
+			<string>Default</string>
+			<key>UILaunchImageOrientation</key>
+			<string>Portrait</string>
+			<key>UILaunchImageSize</key>
+			<string>{320, 568}</string>
+		</dict>
+		<dict>
+			<key>UILaunchImageMinimumOSVersion</key>
+			<string>7.0</string>
+			<key>UILaunchImageName</key>
+			<string>Default</string>
+			<key>UILaunchImageOrientation</key>
+			<string>Portrait</string>
+			<key>UILaunchImageSize</key>
+			<string>{320, 568}</string>
+		</dict>
+	</array>
 	<key>UIPrerenderedIcon</key>
 	<true/>
 	<key>UIRequiredDeviceCapabilities</key>

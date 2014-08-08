@@ -26,8 +26,8 @@
 #import "cocos2d.h"
 #import "EAGLView.h"
 #import "AppDelegate.h"
-#import "swrve.h"
 #import "WebviewController.h"
+#import "LocalyticsSession.h"
 
 #import "RootViewController.h"
 #import "FBSessionSingleton.h"
@@ -78,7 +78,9 @@ static AppDelegate s_sharedApplication;
     [[UIApplication sharedApplication] setStatusBarHidden: YES];
 
     cocos2d::CCApplication::sharedApplication()->run();
-    [Swrve sharedInstanceWithAppID:1440 apiKey:@"zGvMCt6LQBTb1CNmnl8N"];
+    
+    [[LocalyticsSession shared] LocalyticsSession:@"d16d149eabf971a5b376a43-aa0e6fc0-1c50-11e4-49cb-00a426b17dd8"];
+    [[LocalyticsSession shared] setLoggingEnabled:YES];
     
     return YES;
 }
@@ -88,11 +90,7 @@ static AppDelegate s_sharedApplication;
     // Normally your app would handle url navigation here and go to the correct
     // app location.  In this example we just print the url in an alert.
     
-    UIAlertView *alertView;
-    NSString *text = [[url host] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    alertView = [[UIAlertView alloc] initWithTitle:@"Url navigation" message:text delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    [alertView show];
-    return YES;
+   return NO;
 }
 
 
@@ -102,6 +100,9 @@ static AppDelegate s_sharedApplication;
      Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
      */
     cocos2d::CCDirector::sharedDirector()->pause();
+    
+    [[LocalyticsSession shared] close];
+    [[LocalyticsSession shared] upload];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
@@ -109,6 +110,13 @@ static AppDelegate s_sharedApplication;
      Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
      */
     cocos2d::CCDirector::sharedDirector()->resume();
+    
+    // Handle the user leaving the app while the Facebook login dialog is being shown
+    // For example: when the user presses the iOS "home" button while the login dialog is active
+    [FBAppCall handleDidBecomeActive];
+    
+    [[LocalyticsSession shared] resume];
+    [[LocalyticsSession shared] upload];
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
@@ -117,6 +125,9 @@ static AppDelegate s_sharedApplication;
      If your application supports background execution, called instead of applicationWillTerminate: when the user quits.
      */
     cocos2d::CCApplication::sharedApplication()->applicationDidEnterBackground();
+    
+    [[LocalyticsSession shared] close];
+    [[LocalyticsSession shared] upload];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
@@ -124,6 +135,9 @@ static AppDelegate s_sharedApplication;
      Called as part of  transition from the background to the inactive state: here you can undo many of the changes made on entering the background.
      */
     cocos2d::CCApplication::sharedApplication()->applicationWillEnterForeground();
+    
+    [[LocalyticsSession shared] resume];
+    [[LocalyticsSession shared] upload];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
@@ -131,6 +145,9 @@ static AppDelegate s_sharedApplication;
      Called when the application is about to terminate.
      See also applicationDidEnterBackground:.
      */
+    
+    [[LocalyticsSession shared] close];
+    [[LocalyticsSession shared] upload];
 }
 
 
@@ -153,6 +170,12 @@ static AppDelegate s_sharedApplication;
             openURL:(NSURL *)url
   sourceApplication:(NSString *)sourceApplication
          annotation:(id)annotation {
+    
+    if([[LocalyticsSession shared] handleURL:url])
+    {
+        return YES;
+    }
+    
     return [FBAppCall handleOpenURL:url
                   sourceApplication:sourceApplication];
 }
