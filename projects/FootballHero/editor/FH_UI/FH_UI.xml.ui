@@ -85,9 +85,182 @@
   <ResRelativePath />
   <imageFileList />
   <imagePngList>
+    <string>MatchListScene/match_bkg.png</string>
+    <string>header/back.png</string>
+    <string>chat/send_icon.png</string>
+    <string>chat/More Button.png</string>
+    <string>chat/Friend_Chatbox.png</string>
+    <string>chat/Friend_Chatbox.png</string>
+    <string>MatchListContent/info_box.png</string>
+    <string>Tutorial/Default Button.png</string>
+    <string>MatchListScene/Arrow down.png</string>
+    <string>MatchListScene/match_bkg.png</string>
+    <string>header/back.png</string>
+    <string>Tutorial/Default Button.png</string>
+    <string>chat/Chat_Icon.png</string>
+    <string>chat/GreenArrow.png</string>
+    <string>Competition/copy_icon.png</string>
+    <string>Competition/fbnobkg_icon.png</string>
+    <string>chat/More Button.png</string>
+    <string>commonRes/England.png</string>
+    <string>MatchListScene/Arrow down.png</string>
+    <string>MatchListScene/Arrow Up.png</string>
+    <string>MatchPrediction/prediction_bkg.png</string>
+    <string>Tutorial/Default Button.png</string>
+    <string>header/back.png</string>
+    <string>Popup/Match-List-popup-bg.png</string>
+    <string>Tutorial/Default Button.png</string>
+    <string>MatchListScene/match_bkg.png</string>
+    <string>header/back.png</string>
+    <string>commonRes/England.png</string>
+    <string>FavouriteTeam/favourites-bg.jpg</string>
+    <string>FavouriteTeam/ok-icon.png</string>
+    <string>FavouriteTeam/ok-icon-BF.png</string>
+    <string>header/footballhero-logo.png</string>
+    <string>MatchListScene/match_bkg.png</string>
+    <string>header/footballhero-logo.png</string>
+    <string>header/back.png</string>
+    <string>MatchPrediction/Will-both-teams-score-no.png</string>
+    <string>history/hengxian.png</string>
+    <string>history/blue.png</string>
+    <string>history/green.png</string>
+    <string>history/red.png</string>
+    <string>MatchPrediction/Will-both-teams-score-no.png</string>
+    <string>history/hengxian.png</string>
+    <string>history/blue.png</string>
+    <string>history/green.png</string>
+    <string>history/red.png</string>
+    <string>MatchListScene/match_bkg.png</string>
+    <string>header/footballhero-logo.png</string>
+    <string>header/back.png</string>
+    <string>MatchListScene/match_bkg.png</string>
+    <string>header/back.png</string>
+    <string>MatchListContent/vs-button.png</string>
+    <string>commonRes/Arsenal.png</string>
+    <string>history/jiantou.png</string>
+    <string>history/hengxian.png</string>
+    <string>history/blue.png</string>
+    <string>history/green.png</string>
+    <string>history/red.png</string>
+    <string>history/shangsheng.png</string>
+    <string>history/xiajiang.png</string>
+    <string>MatchListScene/Arrow down.png</string>
+    <string>MatchListScene/match_bkg.png</string>
+    <string>header/back.png</string>
+    <string>LoginNReg/photo.png</string>
+    <string>MatchListScene/match_bkg.png</string>
+    <string>header/footballhero-logo.png</string>
+    <string>commonRes/Arsenal.png</string>
+    <string>commonRes/Manchester United.png</string>
+    <string>MatchListContent/line.png</string>
+    <string>MatchListContent/info_box.png</string>
+    <string>MatchListScene/match_bkg.png</string>
+    <string>MatchListScene/SideMenu_bkg.png</string>
+    <string>header/footballhero-logo.png</string>
+    <string>MatchListScene/photo.png</string>
+    <string>commonRes/Arsenal.png</string>
+    <string>commonRes/Manchester United.png</string>
+    <string>Navigator/matches_inactive.png</string>
+    <string>Navigator/matches_active.png</string>
+    <string>Navigator/community_inactive.png</string>
+    <string>Navigator/community_active.png</string>
+    <string>Navigator/score_inactive.png</string>
+    <string>Navigator/score_active.png</string>
+    <string>Navigator/settings_inactive.png</string>
+    <string>Navigator/settings_active.png</string>
+    <string>PredictionConfirm/header.png</string>
+    <string>PredictionConfirm/white_popup.png</string>
+    <string>PredictionConfirm/fb_icon.png</string>
     <string>PredictionConfirm/off_button.png</string>
     <string>PredictionConfirm/on_button.png</string>
     <string>Tutorial/Default Button.png</string>
+    <string>MatchPrediction/Will-both-teams-score-no.png</string>
+    <string>MatchListScene/match_bkg.png</string>
+    <string>Settings/settings_03.png</string>
+    <string>commonRes/Arsenal.png</string>
+    <string>Tutorial/Default Button.png</string>
+    <string>Tutorial/email_icon.png</string>
+    <string>header/back.png</string>
+    <string>Tutorial/Default Button.png</string>
+    <string>header/back.png</string>
+    <string>Tutorial/email_icon.png</string>
+    <string>Tutorial/password_icon.png</string>
+    <string>Tutorial/username_icon.png</string>
+    <string>Tutorial/name_icon.png</string>
+    <string>LoginNReg/photo.png</string>
+    <string>Tutorial/Default Button.png</string>
+    <string>header/back.png</string>
+    <string>LoginNReg/tos.png</string>
+    <string>Tutorial/email_icon.png</string>
+    <string>Tutorial/password_icon.png</string>
+    <string>LoginNReg/line.png</string>
+    <string>Tutorial/Default Button.png</string>
+    <string>header/back.png</string>
+    <string>Tutorial/email_icon.png</string>
+    <string>Tutorial/splash_bkg.png</string>
+    <string>Tutorial/Splashscreen_Logo.png</string>
+    <string>Tutorial/Swipe_Right_Left.png</string>
+    <string>Tutorial/OK_grey.png</string>
+    <string>Tutorial/Default Button.png</string>
+    <string>LoginNReg/photo.png</string>
+    <string>Tutorial/email_icon.png</string>
+    <string>Tutorial/Single_Tap.png</string>
+    <string>Tutorial/OK_grey.png</string>
+    <string>Tutorial/Default Button.png</string>
+    <string>Tutorial/email_icon.png</string>
+    <string>Tutorial/facebook_icon.png</string>
+    <string>MatchPrediction/Match-List-bg.jpg</string>
+    <string>MatchPrediction/Will-both-teams-score-no.png</string>
+    <string>MatchPrediction/Will-both-teams-score-yes.png</string>
+    <string>MatchPrediction/skip-icon.png</string>
+    <string>header/guangyun.png</string>
+    <string>header/footballhero-logo.png</string>
+    <string>header/back.png</string>
+    <string>MatchPrediction/Match-List-bg.jpg</string>
+    <string>MatchPrediction/Will-total-corners-be-more-than-xx-no.png</string>
+    <string>MatchPrediction/Will-total-corners-be-more-than-xx-yes.png</string>
+    <string>MatchPrediction/skip-icon.png</string>
+    <string>header/guangyun.png</string>
+    <string>header/footballhero-logo.png</string>
+    <string>header/back.png</string>
+    <string>MatchPrediction/Will-both-teams-score-yes.png</string>
+    <string>MatchPrediction/Will-both-teams-score-no.png</string>
+    <string>MatchPrediction/Match-List-bg.jpg</string>
+    <string>MatchPrediction/Will-xx_team-score-a-goal-no.png</string>
+    <string>MatchPrediction/Will-xx_team-score-a-goal-yes.png</string>
+    <string>MatchPrediction/skip-icon.png</string>
+    <string>header/guangyun.png</string>
+    <string>header/footballhero-logo.png</string>
+    <string>header/back.png</string>
+    <string>MatchPrediction/Will-xx_team-score-a-goal-yes.png</string>
+    <string>MatchPrediction/Will-xx_team-score-a-goal-no.png</string>
+    <string>MatchListScene/Arrow down.png</string>
+    <string>MatchListScene/Arrow Up.png</string>
+    <string>commonRes/England.png</string>
+    <string>commonRes/England.png</string>
+    <string>MatchPrediction/prediction_bkg.png</string>
+    <string>header/back.png</string>
+    <string>header/footballhero-logo.png</string>
+    <string>commonRes/Arsenal.png</string>
+    <string>commonRes/Manchester United.png</string>
+    <string>MatchPrediction/indicator_inactive.png</string>
+    <string>MatchPrediction/indicator_active.png</string>
+    <string>Competition/Tick_White.png</string>
+    <string>MatchListContent/info_box.png</string>
+    <string>PredictionConfirm/off_button.png</string>
+    <string>PredictionConfirm/on_button.png</string>
+    <string>Tutorial/Default Button.png</string>
+    <string>commonRes/England.png</string>
+    <string>Competition/icn_tick_green.png</string>
+    <string>Tutorial/Default Button.png</string>
+    <string>MatchListScene/match_bkg.png</string>
+    <string>header/back.png</string>
+    <string>MatchListScene/Arrow down.png</string>
+    <string>MatchListScene/Arrow Up.png</string>
+    <string>Popup/popout_white.png</string>
+    <string>Tutorial/Default Button.png</string>
+    <string>Popup/popout_image.png</string>
+    <string>Popup/close_icon.png</string>
   </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
   <CurrentUIJson>MarketingMessage.json</CurrentUIJson>

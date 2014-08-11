@@ -27,15 +27,32 @@ GET_FRIENDS_LEADERBOARD_REST_CALL = SERVER_IP.."/api/leaderboards/getFriendsLead
 GET_COMPETITION_LIST_REST_CALL = SERVER_IP.."/api/competitions/getCompetitionsForUser"
 GET_COMPETITION_DETAIL_REST_CALL = SERVER_IP.."/api/leaderboards/getCompetitionInfoAndLeaderboard"
 GET_COMPETITION_LEAGUE_REST_CALL = SERVER_IP.."/api/competitions/getCompetitionLeagueIds"
+GET_CHAT_MESSAGE_REST_CALL = SERVER_IP.."/api/chat/getChatMessages"
 POST_COUPONS_REST_CALL = SERVER_IP.."/api/coupons/placeCoupons"
 POST_FAV_TEAM_REST_CALL = SERVER_IP.."/api/user/setFavoriteTeam"
-POST_LOGO_REST_CALL = SERVER_IP.."/api/user/setFavoriteTeam"
+POST_LOGO_REST_CALL = SERVER_IP.."/api/user/uploadProfilePicture"
 POST_CREATE_COMPETITION_REST_CALL = SERVER_IP.."/api/competitions/createUserCompetition"
 POST_JOIN_COMPETITION_REST_CALL = SERVER_IP.."/api/competitions/joinCompetitionWithToken"
 POST_SHARE_COMPETITION_REST_CALL = SERVER_IP.."/api/competitions/shareCompetitionToFacebookWall"
+POST_PASSWORD_RESET_REST_CALL = SERVER_IP.."/api/user/requestPasswordResetLink"
+POST_CHAT_MESSAGE_REST_CALL = SERVER_IP.."/api/chat/postChatMessage"
+
 
 FACEBOOK_FRIENDS_LIST_CALL = "/me/friends?access_token="
 USE_DEV = false
+
+--[[
+    DS:
+    {
+        "url": {
+            "timeStamp": 10000,
+            "body": "jsonResponse"
+        }
+    }
+
+--]]
+local mResponseCache = {}
+local RESPONSE_CACHE_TIME = 600
 
 function setServerIP( serverIp )
     EMAIL_REGISTER_REST_CALL = serverIp.."/api/user/SignupWithEmail"
@@ -52,19 +69,24 @@ function setServerIP( serverIp )
     GET_COMPETITION_LIST_REST_CALL = serverIp.."/api/competitions/getCompetitionsForUser"
     GET_COMPETITION_DETAIL_REST_CALL = serverIp.."/api/leaderboards/getCompetitionInfoAndLeaderboard"
     GET_COMPETITION_LEAGUE_REST_CALL = serverIp.."/api/competitions/getCompetitionLeagueIds"
+    GET_CHAT_MESSAGE_REST_CALL = serverIp.."/api/chat/getChatMessages"
     POST_COUPONS_REST_CALL = serverIp.."/api/coupons/placeCoupons"
     POST_FAV_TEAM_REST_CALL= serverIp.."/api/user/setFavoriteTeam"
-    POST_LOGO_REST_CALL = serverIp.."/api/user/setFavoriteTeam"
+    POST_LOGO_REST_CALL = serverIp.."/api/user/uploadProfilePicture"
     POST_CREATE_COMPETITION_REST_CALL = serverIp.."/api/competitions/createUserCompetition"
     POST_JOIN_COMPETITION_REST_CALL = serverIp.."/api/competitions/joinCompetitionWithToken"
     POST_SHARE_COMPETITION_REST_CALL = serverIp.."/api/competitions/shareCompetitionToFacebookWall"
+    POST_PASSWORD_RESET_REST_CALL = serverIp.."/api/user/requestPasswordResetLink"
+    POST_CHAT_MESSAGE_REST_CALL = serverIp.."/api/chat/postChatMessage"
 
     CDN_SERVER_IP = "http://portalvhdss3c1vgx5mrzv.blob.core.windows.net/fhdevsettings/"
 
     USE_DEV = true
 end
- 
+
+--setServerIP( "http://192.168.1.123" )
 --setServerIP( "http://fhapi-dev1.cloudapp.net" )
+
 
 function createHeaderObject( headerStr )
 	local headerList = split( headerStr, "\n" )
@@ -116,6 +138,15 @@ function messageHandler( requestInfo, isSucceed, body, header, status, errorBuff
     end
     ConnectingMessage.selfRemove()
     if status == successRequestID then
+        -- Check to record the response
+        if requestInfo["recordResponse"] then
+            local response = {}
+            response["timeStamp"] = os.time()
+            response["body"] = jsonResponse
+
+            mResponseCache[requestInfo.url] = response
+        end
+
         if successHandler ~= nil then
             successHandler( jsonResponse )
         end
@@ -139,4 +170,24 @@ end
 
 function onRequestFailed( errorBuffer )
     EventManager:postEvent( Event.Show_Error_Message, { errorBuffer } )
+end
+
+function getResponseCache( url )
+    if mResponseCache[url] ~= nil then
+        local response = mResponseCache[url]
+        local now = os.time()
+        if now - response["timeStamp"] < RESPONSE_CACHE_TIME then
+            print( "Cache hit for "..url )
+            return response["body"]
+        else
+            print( "Cache hit but expired for "..url )
+            return nil
+        end
+    end
+    print( "Cache miss for "..url )
+    return nil
+end
+
+function clearResponseCache()
+    mResponseCache = {}
 end
