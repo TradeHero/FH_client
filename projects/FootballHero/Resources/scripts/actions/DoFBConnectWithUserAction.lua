@@ -23,13 +23,17 @@ function action( param )
         if accessToken == nil then
             -- To handle user reject to the oAuth.
             onFBConnectFailed()
+            ConnectingMessage.selfRemove()
         else
             print("Get token "..accessToken)
             onFBConnectSuccess( accessToken )
+            ConnectingMessage.selfRemove()
         end
     end
 
+    ConnectingMessage.loadFrame()
     FacebookDelegate:sharedDelegate():login( successHandler, successHandler )
+
 end
 
 function onFBConnectFailed()

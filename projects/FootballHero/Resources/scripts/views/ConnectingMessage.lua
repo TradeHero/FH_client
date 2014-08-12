@@ -17,7 +17,8 @@ function loadFrame( message )
         mWidget:registerScriptHandler( EnterOrExit )
         SceneManager.addWidget( widget )
 
-        CCArmatureDataManager:sharedArmatureDataManager():addArmatureFileInfo("anims/ball0.png","anims/ball0.plist","anims/ball.ExportJson")
+        local armatureManager = CCArmatureDataManager:sharedArmatureDataManager()
+        armatureManager:addArmatureFileInfo("anims/ball0.png","anims/ball0.plist","anims/ball.ExportJson")
 
         mWaitingArmature = CCArmature:create("ball")
         mWaitingArmature:setPosition( ccp( 50, 50 ) )
