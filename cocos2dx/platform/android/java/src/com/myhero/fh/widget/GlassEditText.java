@@ -10,12 +10,12 @@ import android.widget.EditText;
 import org.cocos2dx.lib.Cocos2dxHandler;
 import org.cocos2dx.lib.Cocos2dxHelper;
 
-public class InPlaceEditText extends EditText
+public class GlassEditText extends EditText
   implements NativeAdapter<Cocos2dxHandler.EditBoxMessage> {
   private static final String TAG = "InPlaceEditText";
   private NativeData nativeData;
 
-  public InPlaceEditText(Context context, AttributeSet attrs) {
+  public GlassEditText(Context context, AttributeSet attrs) {
     super(context, attrs);
 
     super.addTextChangedListener(new TextWatcher() {

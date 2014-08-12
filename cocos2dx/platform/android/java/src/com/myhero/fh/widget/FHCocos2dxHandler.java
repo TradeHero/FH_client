@@ -24,11 +24,11 @@ public class FHCocos2dxHandler extends Cocos2dxHandler {
     Cocos2dxActivity activity = mActivity.get();
     if (activity != null && editBoxMessage.getSource() != 0) {
       WeakReference<View> cachedViewWeak = cachedBindingView.get(editBoxMessage.getSource());
-      InPlaceEditText editText = null;
+      GlassEditText editText = null;
       if (cachedViewWeak != null) {
         View cachedView = cachedViewWeak.get();
-        if (cachedView instanceof InPlaceEditText) {
-          editText = (InPlaceEditText) cachedView;
+        if (cachedView instanceof GlassEditText) {
+          editText = (GlassEditText) cachedView;
           editText.setVisibility(View.VISIBLE);
         }
       }
@@ -40,8 +40,8 @@ public class FHCocos2dxHandler extends Cocos2dxHandler {
     }
   }
 
-  private InPlaceEditText spawnAndroidEditText(Cocos2dxActivity activity) {
-    final InPlaceEditText editText = new InPlaceEditText(activity, null);
+  private GlassEditText spawnAndroidEditText(Cocos2dxActivity activity) {
+    final GlassEditText editText = new GlassEditText(activity, null);
     editText.setBackgroundColor(Color.TRANSPARENT);
 
     ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(
