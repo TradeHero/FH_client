@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.os.Message;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import java.lang.ref.WeakReference;
 import java.util.HashMap;
 import java.util.Map;
@@ -43,11 +44,11 @@ public class FHCocos2dxHandler extends Cocos2dxHandler {
   private GlassEditText spawnAndroidEditText(Cocos2dxActivity activity) {
     final GlassEditText editText = new GlassEditText(activity, null);
     editText.setBackgroundColor(Color.TRANSPARENT);
+    editText.setImeOptions(EditorInfo.IME_FLAG_NO_EXTRACT_UI);
 
     ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(
         ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
     activity.addContentView(editText, layoutParams);
-    //editText.setTextColor(Color.TRANSPARENT);
     return editText;
   }
 }
