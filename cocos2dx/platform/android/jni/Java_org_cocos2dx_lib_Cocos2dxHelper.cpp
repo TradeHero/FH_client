@@ -26,7 +26,7 @@ extern "C" {
         g_apkPath = JniHelper::jstring2string(apkPath);
     }
 
-    JNIEXPORT void JNICALL Java_org_cocos2dx_lib_Cocos2dxHelper_nativeSetEditTextDialogResult(JNIEnv * env, jobject obj, jbyteArray text) {
+    JNIEXPORT void JNICALL Java_org_cocos2dx_lib_Cocos2dxHelper_nativeSetEditTextDialogResult(JNIEnv * env, jobject obj, jlong source, jbyteArray text) {
         jsize  size = env->GetArrayLength(text);
 
         if (size > 0) {
@@ -96,7 +96,7 @@ void showEditTextDialogJNI(
     s_ctx = ctx;
 
     JniMethodInfo t;
-    if (JniHelper::getStaticMethodInfo(t, CLASS_NAME, "showEditTextDialog", "(Ljava/lang/String;Ljava/lang/String;IIIIFFFF)V")) {
+    if (JniHelper::getStaticMethodInfo(t, CLASS_NAME, "showEditTextDialog", "(JLjava/lang/String;Ljava/lang/String;IIIIFFFF)V")) {
         jstring stringArg1;
 
         if (!pszTitle) {
@@ -107,7 +107,20 @@ void showEditTextDialogJNI(
 
         jstring stringArg2 = t.env->NewStringUTF(pszMessage);
 
-        t.env->CallStaticVoidMethod(t.classID, t.methodID, stringArg1, stringArg2, nInputMode, nInputFlag, nReturnType, nMaxLength, x, y, width, height);
+        t.env->CallStaticVoidMethod(
+            t.classID, 
+            t.methodID,
+            (long long) ctx,
+            stringArg1, 
+            stringArg2, 
+            nInputMode, 
+            nInputFlag, 
+            nReturnType, 
+            nMaxLength, 
+            x, 
+            y, 
+            width, 
+            height);
 
         t.env->DeleteLocalRef(stringArg1);
         t.env->DeleteLocalRef(stringArg2);

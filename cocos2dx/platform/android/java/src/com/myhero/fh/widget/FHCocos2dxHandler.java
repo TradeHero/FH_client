@@ -17,7 +17,8 @@ public class FHCocos2dxHandler extends Cocos2dxHandler {
     Cocos2dxActivity activity = mActivity.get();
     if (activity != null) {
       final InPlaceEditText editText = new InPlaceEditText(activity, null);
-      editText.setBackgroundColor(Color.RED);
+      editText.setBackgroundColor(Color.TRANSPARENT);
+      //editText.setTextColor(Color.TRANSPARENT);
       editText.processNativeData(editBoxMessage);
 
       ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(

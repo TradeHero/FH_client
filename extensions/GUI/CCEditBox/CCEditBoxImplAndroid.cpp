@@ -314,7 +314,7 @@ void CCEditBoxImplAndroid::openKeyboard()
     CCPoint visiblePos = ccp(designCoord.x * eglView->getScaleX(), designCoord.y * eglView->getScaleY());
     CCPoint screenGLPos = ccpAdd(visiblePos, eglView->getViewPortRect().origin);
     
-    showEditTextDialogJNI(  m_strPlaceHolder.c_str(),
+    showEditTextDialogJNI(m_strPlaceHolder.c_str(),
 						  m_strText.c_str(),
 						  m_eEditBoxInputMode,
 						  m_eEditBoxInputFlag,

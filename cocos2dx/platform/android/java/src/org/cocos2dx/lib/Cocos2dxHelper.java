@@ -92,7 +92,7 @@ public class Cocos2dxHelper {
 
   private static native void nativeSetApkPath(final String pApkPath);
 
-  private static native void nativeSetEditTextDialogResult(final byte[] pBytes);
+  private static native void nativeSetEditTextDialogResult(long source, final byte[] pBytes);
 
   public static String getCocos2dxPackageName() {
     return Cocos2dxHelper.sPackageName;
@@ -233,21 +233,22 @@ public class Cocos2dxHelper {
     Cocos2dxHelper.sCocos2dxHelperListener.showDialog(pTitle, pMessage);
   }
 
-  private static void showEditTextDialog(final String pTitle, final String pMessage,
+  private static void showEditTextDialog(long source, final String pTitle,
+      final String pMessage,
       final int pInputMode, final int pInputFlag, final int pReturnType, final int pMaxLength,
       final float x, final float y, float width, float height) {
-    Cocos2dxHelper.sCocos2dxHelperListener.showEditTextDialog(pTitle, pMessage, pInputMode,
+    Cocos2dxHelper.sCocos2dxHelperListener.showEditTextDialog(source, pTitle, pMessage, pInputMode,
         pInputFlag, pReturnType, pMaxLength, x, y, width, height);
   }
 
-  public static void setEditTextDialogResult(final String pResult) {
+  public static void setEditTextDialogResult(final long source, final String pResult) {
     try {
       final byte[] bytesUTF8 = pResult.getBytes("UTF8");
 
       Cocos2dxHelper.sCocos2dxHelperListener.runOnGLThread(new Runnable() {
         @Override
         public void run() {
-          Cocos2dxHelper.nativeSetEditTextDialogResult(bytesUTF8);
+          Cocos2dxHelper.nativeSetEditTextDialogResult(source, bytesUTF8);
         }
       });
     } catch (UnsupportedEncodingException pUnsupportedEncodingException) {
@@ -384,7 +385,8 @@ public class Cocos2dxHelper {
   public static interface Cocos2dxHelperListener {
     public void showDialog(final String pTitle, final String pMessage);
 
-    public void showEditTextDialog(final String pTitle, final String pMessage, final int pInputMode,
+    public void showEditTextDialog(final long source, final String pTitle, final String pMessage,
+        final int pInputMode,
         final int pInputFlag, final int pReturnType, final int pMaxLength, float x, float y,
         float width, float height);
 

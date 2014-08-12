@@ -77,7 +77,7 @@ public class Cocos2dxHandler extends Handler {
 		Cocos2dxActivity theActivity = this.mActivity.get();
 		DialogMessage dialogMessage = (DialogMessage)msg.obj;
 		new AlertDialog.Builder(theActivity)
-		.setTitle(dialogMessage.titile)
+		.setTitle(dialogMessage.title)
 		.setMessage(dialogMessage.message)
 		.setPositiveButton("Ok", 
 				new DialogInterface.OnClickListener() {
@@ -103,30 +103,34 @@ public class Cocos2dxHandler extends Handler {
 	// ===========================================================
 	
 	public static class DialogMessage {
-		public String titile;
+		public String title;
 		public String message;
 		
 		public DialogMessage(String title, String message) {
-			this.titile = title;
+			this.title = title;
 			this.message = message;
 		}
 	}
 	
-	public static class EditBoxMessage implements NativeData {
-		public String title;
-		public String content;
-		public int inputMode;
-		public int inputFlag;
-		public int returnType;
-		public int maxLength;
+	public static class EditBoxMessage
+      implements NativeData {
+    private final long source;
+		public final String title;
+    public final String content;
+		public final int inputMode;
+		public final int inputFlag;
+		public final int returnType;
+		public final int maxLength;
     public final float x;
     public final float y;
     public final float width;
     public final float height;
 
-    public EditBoxMessage(String title, String content, int inputMode, int inputFlag, int returnType, int maxLength,
+    public EditBoxMessage(long source, String title, String content, int inputMode, int inputFlag,
+        int returnType, int maxLength,
         float x, float y, float width, float height){
-			this.content = content;
+      this.source = source;
+      this.content = content;
 			this.title = title;
 			this.inputMode = inputMode;
 			this.inputFlag = inputFlag;
@@ -151,6 +155,10 @@ public class Cocos2dxHandler extends Handler {
           "\nwidth: " + width +
           "\nheight: " + height
           ;
+    }
+
+    @Override public long getSource() {
+      return source;
     }
   }
 }

@@ -23,17 +23,17 @@
  ****************************************************************************/
 package org.cocos2dx.lib;
 
-import android.os.Handler;
-import org.cocos2dx.lib.Cocos2dxHelper.Cocos2dxHelperListener;
-
 import android.app.Activity;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.Message;
-import android.view.ViewGroup;
 import android.util.Log;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import com.myhero.fh.widget.FHCocos2dxHandler;
+import org.cocos2dx.lib.Cocos2dxHelper.Cocos2dxHelperListener;
 
 public abstract class Cocos2dxActivity extends Activity implements Cocos2dxHelperListener {
   // ===========================================================
@@ -64,7 +64,7 @@ public abstract class Cocos2dxActivity extends Activity implements Cocos2dxHelpe
     sContext = this;
 
     // TODO use FHCocos2dxHandler. Dependency injection can be helpful here.
-    this.mHandler = new Cocos2dxHandler(this);
+    this.mHandler = new FHCocos2dxHandler(this);
 
     this.init();
 
@@ -104,14 +104,15 @@ public abstract class Cocos2dxActivity extends Activity implements Cocos2dxHelpe
   }
 
   @Override
-  public void showEditTextDialog(final String pTitle, final String pContent, final int pInputMode,
+  public void showEditTextDialog(final long source, final String pTitle, final String pContent,
+      final int pInputMode,
       final int pInputFlag, final int pReturnType, final int pMaxLength, float x, float y,
       float width, float height) {
     Message msg = new Message();
     msg.what = Cocos2dxHandler.HANDLER_SHOW_EDITBOX_DIALOG;
     msg.obj =
-        new Cocos2dxHandler.EditBoxMessage(pTitle, pContent, pInputMode, pInputFlag, pReturnType,
-            pMaxLength, x, y, width, height);
+        new Cocos2dxHandler.EditBoxMessage(source, pTitle, pContent, pInputMode, pInputFlag,
+            pReturnType, pMaxLength, x, y, width, height);
     this.mHandler.sendMessage(msg);
   }
 
@@ -127,14 +128,14 @@ public abstract class Cocos2dxActivity extends Activity implements Cocos2dxHelpe
 
     // FrameLayout
     ViewGroup.LayoutParams framelayout_params =
-        new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT,
-            ViewGroup.LayoutParams.FILL_PARENT);
+        new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+            ViewGroup.LayoutParams.MATCH_PARENT);
     FrameLayout framelayout = new FrameLayout(this);
     framelayout.setLayoutParams(framelayout_params);
 
     // Cocos2dxEditText layout
     ViewGroup.LayoutParams edittext_layout_params =
-        new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT,
+        new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
             ViewGroup.LayoutParams.WRAP_CONTENT);
     Cocos2dxEditText edittext = new Cocos2dxEditText(this);
     edittext.setLayoutParams(edittext_layout_params);
