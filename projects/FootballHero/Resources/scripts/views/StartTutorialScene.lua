@@ -107,18 +107,6 @@ function EnterOrExit( eventType )
     end
 end
 
-function signinTypeEmailEventHandler( sender, eventType )
-    if eventType == TOUCH_EVENT_ENDED then
-
-    end
-end
-
-function signinTypeFacebookEventHandler( sender, eventType )
-    if eventType == TOUCH_EVENT_ENDED then
-        EventManager:postEvent( Event.Do_FB_Connect )
-    end
-end
-
 local originWidgetX
 function onFrameTouch( sender, eventType )
     if eventType == TOUCH_EVENT_BEGAN then

@@ -57,6 +57,7 @@ TOUCH_PRIORITY_MINUS_ONE = -1
 TOUCH_PRIORITY_MINUS_TWO = -2
 
 local mSceneGameLayer
+local mKeypadBackListener = nil
 local mWidgets = {}		-- Store widget show in the list to save time loading the same json file.
 
 function init()
@@ -76,6 +77,9 @@ function init()
     
     mSceneGameLayer = TouchGroup:create()
     sceneGame:addChild( mSceneGameLayer )
+
+    mSceneGameLayer:setKeypadEnabled( true )
+    mSceneGameLayer:registerScriptKeypadHandler( keypadEventHandler )
 
     initEvents()
 end
@@ -132,6 +136,14 @@ function initEvents()
 	EventManager:registerEventHandler( Event.Load_More_In_Competition_Detail, LoadMoreInCompetitionDetailAction )
 end
 
+function keypadEventHandler( eventType )
+    if eventType == "backClicked" then
+        if mKeypadBackListener ~= nil then
+        	mKeypadBackListener()
+        end
+    end
+end
+
 function clearNAddWidget( widget )
 	mSceneGameLayer:clear()
 	addWidget( widget )
@@ -155,6 +167,14 @@ end
 
 function isWidgetShown( widget )
 	
+end
+
+function setKeypadBackListener( func )
+	mKeypadBackListener = func
+end
+
+function clearKeypadBackListener()
+	mKeypadBackListener = nil
 end
 
 function widgetFromJsonFile( fileName )
