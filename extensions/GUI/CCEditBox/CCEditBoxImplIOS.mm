@@ -373,6 +373,36 @@ void CCEditBoxImplIOS::setFont(const char* pFontName, int fontSize)
 	m_pLabelPlaceHolder->setFontSize(fontSize);
 }
 
+const char* CCEditBoxImplIOS::getFontName()
+{
+    if (m_pLabel != nil)
+    {
+        return m_pLabel->getFontName();
+    }
+    
+    if (m_pLabelPlaceHolder != nil)
+    {
+        return m_pLabelPlaceHolder->getFontName();
+    }
+    
+    return nil;
+}
+
+float CCEditBoxImplIOS::getFontSize()
+{
+    if (m_pLabel != nil)
+    {
+        return m_pLabel->getFontSize();
+    }
+    
+    if (m_pLabelPlaceHolder != nil)
+    {
+        return m_pLabelPlaceHolder->getFontSize();
+    }
+    
+    return 0;
+}
+
 void CCEditBoxImplIOS::setFontColor(const ccColor3B& color)
 {
     m_systemControl.textField.textColor = [UIColor colorWithRed:color.r / 255.0f green:color.g / 255.0f blue:color.b / 255.0f alpha:1.0f];

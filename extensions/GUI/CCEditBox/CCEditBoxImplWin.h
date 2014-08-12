@@ -48,6 +48,8 @@ public:
     
     virtual bool initWithSize(const CCSize& size);
 	virtual void setFont(const char* pFontName, int fontSize);
+	virtual const char* getFontName();
+	virtual float getFontSize();
     virtual void setFontColor(const ccColor3B& color);
     virtual void setPlaceholderFont(const char* pFontName, int fontSize);
     virtual void setPlaceholderFontColor(const ccColor3B& color);

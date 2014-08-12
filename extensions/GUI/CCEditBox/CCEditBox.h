@@ -269,12 +269,22 @@ public:
 	 * @param pFontName The font name.
 	 */
 	void setFontName(const char* pFontName);
+
+	/*
+	* Get the font name.
+	*/
+	const char* getFontname();
     
     /**
 	 * Set the font size.
 	 * @param fontSize The font size.
 	 */
 	void setFontSize(int fontSize);
+
+	/*
+	* Get the font size.
+	*/
+	float getFontSize();
     
     /**
      * Set the font color of the widget's text.

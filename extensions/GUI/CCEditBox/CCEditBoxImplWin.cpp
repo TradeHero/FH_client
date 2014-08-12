@@ -93,6 +93,28 @@ void CCEditBoxImplWin::setFont(const char* pFontName, int fontSize)
 	}
 }
 
+const char* CCEditBoxImplWin::getFontName()
+{
+	if (m_pLabel != NULL) {
+		return m_pLabel->getFontName();
+	}
+
+	if (m_pLabelPlaceHolder != NULL) {
+		return m_pLabelPlaceHolder->getFontName();
+	}
+	return NULL;
+}
+float CCEditBoxImplWin::getFontSize()
+{
+	if (m_pLabel != NULL) {
+		return m_pLabel->getFontSize();
+	}
+	if (m_pLabelPlaceHolder != NULL) {
+		return m_pLabelPlaceHolder->getFontSize();
+	}
+	return 0;
+}
+
 void CCEditBoxImplWin::setFontColor(const ccColor3B& color)
 {
     m_colText = color;

@@ -149,6 +149,15 @@ void CCEditBox::setFont(const char* pFontName, int fontSize)
     }
 }
 
+const char* CCEditBox::getFontname()
+{
+	if (m_pEditBoxImpl != NULL)
+	{
+		m_pEditBoxImpl->getFontName();
+	}
+	return NULL;
+}
+
 void CCEditBox::setFontName(const char* pFontName)
 {
     m_strFontName = pFontName;
@@ -156,6 +165,15 @@ void CCEditBox::setFontName(const char* pFontName)
     {
         m_pEditBoxImpl->setFont(pFontName, m_nFontSize);
     }
+}
+
+float CCEditBox::getFontSize()
+{
+	if (m_pEditBoxImpl != NULL)
+	{
+		m_pEditBoxImpl->getFontSize();
+	}
+	return 0;
 }
 
 void CCEditBox::setFontSize(int fontSize)

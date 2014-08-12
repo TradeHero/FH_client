@@ -100,6 +100,29 @@ void CCEditBoxImplAndroid::setFont(const char* pFontName, int fontSize)
 	}
 }
 
+const char* CCEditBoxImplAndroid::getFontName()
+{
+	if (m_pLabel != NULL) {
+		return m_pLabel->getFontName();
+	}
+
+	if (m_pLabelPlaceHolder != NULL) {
+		return m_pLabelPlaceHolder->getFontName();
+	}
+	return NULL;
+}
+float CCEditBoxImplAndroid::getFontSize()
+{
+	if (m_pLabel != NULL) {
+		return m_pLabel->getFontSize();
+	}
+
+	if (m_pLabelPlaceHolder != NULL) {
+		return m_pLabelPlaceHolder->getFontSize();
+	}
+	return 0;
+}
+
 void CCEditBoxImplAndroid::setFontColor(const ccColor3B& color)
 {
     m_colText = color;
