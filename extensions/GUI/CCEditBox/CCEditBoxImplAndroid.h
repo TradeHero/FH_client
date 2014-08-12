@@ -73,6 +73,7 @@ public:
     virtual void openKeyboard();
     virtual void closeKeyboard();
 
+	CCLabelTTF* getLabel();
 	CCLabelTTF* getLabelPlaceHolder();
     
 private:

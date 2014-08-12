@@ -335,6 +335,11 @@ void CCEditBoxImplAndroid::closeKeyboard()
 	
 }
 
+CCLabelTTF* CCEditBoxImplAndroid::getLabel()
+{
+	return m_pLabel;
+}
+
 CCLabelTTF* CCEditBoxImplAndroid::getLabelPlaceHolder()
 {
 	return m_pLabelPlaceHolder;
