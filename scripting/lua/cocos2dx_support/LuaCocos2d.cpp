@@ -1,6 +1,6 @@
 /*
 ** Lua binding: Cocos2d
-** Generated automatically by tolua++-1.0.92 on 07/25/14 15:59:27.
+** Generated automatically by tolua++-1.0.92 on 08/12/14 17:52:00.
 */
 
 /****************************************************************************
@@ -64069,6 +64069,37 @@ static int tolua_Cocos2d_CCEditBox_onExit00(lua_State* tolua_S)
 }
 #endif //#ifndef TOLUA_DISABLE
 
+/* method: closeKeyboard of class  CCEditBox */
+#ifndef TOLUA_DISABLE_tolua_Cocos2d_CCEditBox_closeKeyboard00
+static int tolua_Cocos2d_CCEditBox_closeKeyboard00(lua_State* tolua_S)
+{
+#ifndef TOLUA_RELEASE
+ tolua_Error tolua_err;
+ if (
+     !tolua_isusertype(tolua_S,1,"CCEditBox",0,&tolua_err) ||
+     !tolua_isnoobj(tolua_S,2,&tolua_err)
+ )
+  goto tolua_lerror;
+ else
+#endif
+ {
+  CCEditBox* self = (CCEditBox*)  tolua_tousertype(tolua_S,1,0);
+#ifndef TOLUA_RELEASE
+  if (!self) tolua_error(tolua_S,"invalid 'self' in function 'closeKeyboard'", NULL);
+#endif
+  {
+   self->closeKeyboard();
+  }
+ }
+ return 0;
+#ifndef TOLUA_RELEASE
+ tolua_lerror:
+ tolua_error(tolua_S,"#ferror in function 'closeKeyboard'.",&tolua_err);
+ return 0;
+#endif
+}
+#endif //#ifndef TOLUA_DISABLE
+
 /* method: touchDownAction of class  CCEditBox */
 #ifndef TOLUA_DISABLE_tolua_Cocos2d_CCEditBox_touchDownAction00
 static int tolua_Cocos2d_CCEditBox_touchDownAction00(lua_State* tolua_S)
@@ -70088,6 +70119,7 @@ TOLUA_API int tolua_Cocos2d_open (lua_State* tolua_S)
    tolua_function(tolua_S,"visit",tolua_Cocos2d_CCEditBox_visit00);
    tolua_function(tolua_S,"onEnter",tolua_Cocos2d_CCEditBox_onEnter00);
    tolua_function(tolua_S,"onExit",tolua_Cocos2d_CCEditBox_onExit00);
+   tolua_function(tolua_S,"closeKeyboard",tolua_Cocos2d_CCEditBox_closeKeyboard00);
    tolua_function(tolua_S,"touchDownAction",tolua_Cocos2d_CCEditBox_touchDownAction00);
    tolua_function(tolua_S,"setDelegate",tolua_Cocos2d_CCEditBox_setDelegate00);
   tolua_endmodule(tolua_S);

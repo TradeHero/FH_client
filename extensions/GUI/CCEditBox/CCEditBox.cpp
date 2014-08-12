@@ -56,6 +56,11 @@ void CCEditBox::touchDownAction(CCObject *sender, CCControlEvent controlEvent)
     m_pEditBoxImpl->openKeyboard();
 }
 
+void CCEditBox::closeKeyboard()
+{
+	m_pEditBoxImpl->closeKeyboard();
+}
+
 CCEditBox* CCEditBox::create(const CCSize& size, CCScale9Sprite* pNormal9SpriteBg, CCScale9Sprite* pPressed9SpriteBg/* = NULL*/, CCScale9Sprite* pDisabled9SpriteBg/* = NULL*/)
 {
     CCEditBox* pRet = new CCEditBox();

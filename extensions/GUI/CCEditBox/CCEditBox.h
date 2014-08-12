@@ -403,6 +403,11 @@ public:
      */
     virtual void keyboardDidHide(CCIMEKeyboardNotificationInfo& info);
     
+	/*
+	* Close the keyboard.
+	*/
+	void closeKeyboard();
+
     /** callback funtions 
      *  @js NA
      */

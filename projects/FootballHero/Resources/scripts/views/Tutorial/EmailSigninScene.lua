@@ -10,6 +10,7 @@ local Logic = require("scripts.Logic")
 
 local mWidget
 local mEmailInput
+local mPasswordInput
 
 local FADEIN_TIME = 0.5
 local MOVE_TIME = 0.2
@@ -37,20 +38,20 @@ function loadFrame()
     helperSetTouchEnabled( false )
 
     mEmailInput = ViewUtils.createTextInput( mWidget:getChildByName( EMAIL_CONTAINER_NAME ), "E-mail Address" )
-    local passwordInput = ViewUtils.createTextInput( mWidget:getChildByName( PASSWORD_CONTAINER_NAME ), "Password" )
-    passwordInput:setInputFlag( kEditBoxInputFlagPassword )
+    mPasswordInput = ViewUtils.createTextInput( mWidget:getChildByName( PASSWORD_CONTAINER_NAME ), "Password" )
+    mPasswordInput:setInputFlag( kEditBoxInputFlagPassword )
     
     mEmailInput:setFontColor( mInputFontColor )
-    passwordInput:setFontColor( mInputFontColor )
+    mPasswordInput:setFontColor( mInputFontColor )
 
     mEmailInput:setPlaceholderFontColor( mInputPlaceholderFontColor )
-    passwordInput:setPlaceholderFontColor( mInputPlaceholderFontColor )
+    mPasswordInput:setPlaceholderFontColor( mInputPlaceholderFontColor )
 
     mEmailInput:setTouchPriority( SceneManager.TOUCH_PRIORITY_MINUS_ONE )
-    passwordInput:setTouchPriority( SceneManager.TOUCH_PRIORITY_MINUS_ONE )
+    mPasswordInput:setTouchPriority( SceneManager.TOUCH_PRIORITY_MINUS_ONE )
 
     mEmailInput:setText( Logic.getInstance():getEmail() )
-    passwordInput:setText( Logic.getInstance():getPassword() )
+    mPasswordInput:setText( Logic.getInstance():getPassword() )
 end
 
 function isFrameShown()
@@ -68,6 +69,8 @@ function backEventHandler( sender,eventType )
     if eventType == TOUCH_EVENT_ENDED then
         EventManager:popHistory()
         sender:setTouchEnabled( false )
+        mEmailInput:closeKeyboard()
+        mPasswordInput:closeKeyboard()
     end
 end
 
