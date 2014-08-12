@@ -24,7 +24,8 @@
  ****************************************************************************/
 
 #include "CCEditBoxImplAndroid.h"
-
+#include "CCEditBoxImplAndroidJNI.h"
+ 
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
 
 #include "CCEditBox.h"

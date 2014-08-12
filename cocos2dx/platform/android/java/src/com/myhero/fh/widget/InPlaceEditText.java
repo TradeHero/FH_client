@@ -24,16 +24,15 @@ public class InPlaceEditText extends EditText
       }
 
       @Override public void onTextChanged(CharSequence s, int start, int before, int count) {
-        //Cocos2dxHelper.setEditTextDialogResult(getText().toString());
       }
 
       @Override public void afterTextChanged(Editable s) {
-        Cocos2dxHelper.setEditTextDialogResult(nativeData.getSource(), getText().toString());
       }
     });
     super.setOnFocusChangeListener(new View.OnFocusChangeListener() {
       @Override public void onFocusChange(View v, boolean hasFocus) {
         if (!hasFocus) {
+          Cocos2dxHelper.setEditTextDialogResult(nativeData.getSource(), getText().toString());
           setVisibility(GONE);
         }
       }
@@ -49,7 +48,7 @@ public class InPlaceEditText extends EditText
     nativeData = editBoxMessage;
 
     setText(editBoxMessage.content);
-    //setHint(editBoxMessage.title);
+    setHint(editBoxMessage.title);
 
     // TODO
     setX(editBoxMessage.x);
@@ -57,6 +56,7 @@ public class InPlaceEditText extends EditText
     setWidth((int) editBoxMessage.width);
     setHeight((int) editBoxMessage.height);
 
+    setSingleLine();
     setPadding(0, 0, 0, 0);
   }
 }
