@@ -14,10 +14,6 @@ import org.cocos2dx.lib.Cocos2dxHelper;
 public class GlassEditText extends EditText
   implements NativeAdapter<Cocos2dxHandler.EditBoxMessage> {
   private static final String TAG = "InPlaceEditText";
-  // ===========================================================
-  // Constants
-  // ===========================================================
-
   /**
    * The user is allowed to enter any text, including line breaks.
    */
@@ -89,17 +85,6 @@ public class GlassEditText extends EditText
   public GlassEditText(Context context, AttributeSet attrs) {
     super(context, attrs);
 
-    super.addTextChangedListener(new TextWatcher() {
-      @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-        Cocos2dxHelper.setEditTextDialogResult(nativeData.getSource(), " ");
-      }
-
-      @Override public void onTextChanged(CharSequence s, int start, int before, int count) {
-      }
-
-      @Override public void afterTextChanged(Editable s) {
-      }
-    });
     super.setOnFocusChangeListener(new View.OnFocusChangeListener() {
       @Override public void onFocusChange(View v, boolean hasFocus) {
         if (!hasFocus) {
@@ -113,6 +98,8 @@ public class GlassEditText extends EditText
   @Override public final void setOnFocusChangeListener(OnFocusChangeListener l) {
     throw new IllegalAccessError("This method is not supposed to be called");
   }
+
+  private static native void nativeEvent(long source, int eventId);
 
   @Override public void processNativeData(Cocos2dxHandler.EditBoxMessage editBoxMessage) {
     Log.d(TAG, String.format("Data [%s]", editBoxMessage));
@@ -171,15 +158,14 @@ public class GlassEditText extends EditText
       case kEditBoxInputFlagInitialCapsWord:
         inputFlagConstraints |= InputType.TYPE_TEXT_FLAG_CAP_WORDS;
         break;
-      case kEditBoxInputFlagInitialCapsSentence:
-        inputFlagConstraints |= InputType.TYPE_TEXT_FLAG_CAP_SENTENCES;
-        break;
-      case kEditBoxInputFlagInitialCapsAllCharacters:
-        inputFlagConstraints |= InputType.TYPE_TEXT_FLAG_CAP_CHARACTERS;
-        break;
+      //case kEditBoxInputFlagInitialCapsSentence:
+      //  inputFlagConstraints |= InputType.TYPE_TEXT_FLAG_CAP_SENTENCES;
+      //  break;
+      //case kEditBoxInputFlagInitialCapsAllCharacters:
+      //  inputFlagConstraints |= InputType.TYPE_TEXT_FLAG_CAP_CHARACTERS;
+      //  break;
     }
 
-    // | inputFlagConstraints
-    setInputType(inputModeConstraints);
+    setInputType(inputModeConstraints | inputFlagConstraints);
   }
 }

@@ -271,22 +271,28 @@ void CCEditBoxImplAndroid::onEnter(void)
 static void editBoxCallbackFunc(const char* pText, void* ctx)
 {
     CCEditBoxImplAndroid* thiz = (CCEditBoxImplAndroid*)ctx;
-    thiz->setText(pText);
-	
-    if (thiz->getDelegate() != NULL)
+    thiz->updateText(pText);
+}
+
+void CCEditBoxImplAndroid::updateText(const char* pText) 
+{
+    setText(pText);
+    m_pLabelPlaceHolder->setVisible(strlen(pText) == 0);
+    m_pLabel->setVisible(true);
+    
+    if (m_pDelegate != NULL)
     {
-        thiz->getDelegate()->editBoxTextChanged(thiz->getCCEditBox(), thiz->getText());
-        thiz->getDelegate()->editBoxEditingDidEnd(thiz->getCCEditBox());
-        thiz->getDelegate()->editBoxReturn(thiz->getCCEditBox());
+        m_pDelegate->editBoxTextChanged(m_pEditBox, pText);
+        m_pDelegate->editBoxEditingDidEnd(m_pEditBox);
+        m_pDelegate->editBoxReturn(m_pEditBox);
     }
     
-    CCEditBox* pEditBox = thiz->getCCEditBox();
-    if (NULL != pEditBox && 0 != pEditBox->getScriptEditBoxHandler())
+    if (NULL != m_pEditBox && 0 != m_pEditBox->getScriptEditBoxHandler())
     {
         cocos2d::CCScriptEngineProtocol* pEngine = cocos2d::CCScriptEngineManager::sharedManager()->getScriptEngine();
-        pEngine->executeEvent(pEditBox->getScriptEditBoxHandler(), "changed",pEditBox);
-        pEngine->executeEvent(pEditBox->getScriptEditBoxHandler(), "ended",pEditBox);
-        pEngine->executeEvent(pEditBox->getScriptEditBoxHandler(), "return",pEditBox);
+        pEngine->executeEvent(m_pEditBox->getScriptEditBoxHandler(), "changed", m_pEditBox);
+        pEngine->executeEvent(m_pEditBox->getScriptEditBoxHandler(), "ended", m_pEditBox);
+        pEngine->executeEvent(m_pEditBox->getScriptEditBoxHandler(), "return", m_pEditBox);
     }
 }
 
@@ -315,6 +321,8 @@ void CCEditBoxImplAndroid::openKeyboard()
     CCPoint visiblePos = ccp(designCoord.x * eglView->getScaleX(), designCoord.y * eglView->getScaleY());
     CCPoint screenGLPos = ccpAdd(visiblePos, eglView->getViewPortRect().origin);
     
+	m_pLabelPlaceHolder->setVisible(false);
+    m_pLabel->setVisible(false);
     showEditTextDialogJNI(m_strPlaceHolder.c_str(),
 						  m_strText.c_str(),
 						  m_eEditBoxInputMode,
@@ -333,16 +341,6 @@ void CCEditBoxImplAndroid::openKeyboard()
 void CCEditBoxImplAndroid::closeKeyboard()
 {
 	
-}
-
-CCLabelTTF* CCEditBoxImplAndroid::getLabel()
-{
-	return m_pLabel;
-}
-
-CCLabelTTF* CCEditBoxImplAndroid::getLabelPlaceHolder()
-{
-	return m_pLabelPlaceHolder;
 }
 
 NS_CC_EXT_END
