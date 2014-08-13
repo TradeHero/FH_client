@@ -11,7 +11,7 @@ import org.cocos2dx.lib.Cocos2dxHelper;
 
 public class GlassEditText extends EditText
   implements NativeAdapter<Cocos2dxHandler.EditBoxMessage> {
-  private static final String TAG = "InPlaceEditText";
+  private static final String TAG = "GlassEditText";
   /**
    * The user is allowed to enter any text, including line breaks.
    */
@@ -85,6 +85,7 @@ public class GlassEditText extends EditText
 
     super.setOnFocusChangeListener(new View.OnFocusChangeListener() {
       @Override public void onFocusChange(View v, boolean hasFocus) {
+        Log.d(TAG, String.format("hasFocus: %b", hasFocus));
         if (!hasFocus) {
           invalidateNative();
         }

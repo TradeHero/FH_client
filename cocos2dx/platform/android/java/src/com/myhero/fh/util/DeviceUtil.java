@@ -10,4 +10,10 @@ public class DeviceUtil {
         (Context.INPUT_METHOD_SERVICE);
     imm.hideSoftInputFromWindow(focusedView.getWindowToken(), 0);
   }
+
+  public static void showKeyboard(View focusingView) {
+    InputMethodManager imm = (InputMethodManager) focusingView.getContext().getSystemService
+        (Context.INPUT_METHOD_SERVICE);
+    imm.showSoftInput(focusingView, 0);
+  }
 }

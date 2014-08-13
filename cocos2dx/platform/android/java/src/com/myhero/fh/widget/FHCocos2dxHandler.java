@@ -7,6 +7,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
+import com.myhero.fh.util.DeviceUtil;
 import java.lang.ref.WeakReference;
 import java.util.HashMap;
 import java.util.Map;
@@ -53,6 +54,8 @@ public class FHCocos2dxHandler extends Cocos2dxHandler {
         cachedBindingView.put(editBoxMessage.getSource(), new WeakReference<View>(editText));
       }
       editText.processNativeData(editBoxMessage);
+      editText.requestFocus();
+      DeviceUtil.showKeyboard(editText);
     }
   }
 
