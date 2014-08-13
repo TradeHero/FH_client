@@ -10,7 +10,7 @@ using namespace cocos2d;
 
 extern "C"
 {
-	void Java_com_myhero_fh_FootballHero_loginResult(JNIEnv *env, jobject thiz, jstring accessToken)
+	void Java_com_myhero_fh_MainActivity_loginResult(JNIEnv *env, jobject thiz, jstring accessToken)
 	{
 		const char *token = env->GetStringUTFChars(accessToken, NULL);
 		Social::FacebookDelegate::sharedDelegate()->loginResult(token);
