@@ -3,6 +3,7 @@ package com.myhero.fh.widget;
 import android.graphics.Color;
 import android.graphics.Rect;
 import android.os.Message;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,7 +24,8 @@ public class FHCocos2dxHandler extends Cocos2dxHandler {
     super(activity);
   }
 
-  public static void unfocusIfNecessary(MotionEvent event) {
+  public static void unfocusIfNecessary(View currentFocusedView, MotionEvent event) {
+    boolean hasNewFocus = false;
     for (WeakReference<View> weakView: cachedBindingView.values()) {
       View focusedView = weakView.get();
       if (focusedView != null && focusedView.getVisibility() == View.VISIBLE) {
@@ -31,8 +33,14 @@ public class FHCocos2dxHandler extends Cocos2dxHandler {
         focusedView.getGlobalVisibleRect(outRect);
         if (!outRect.contains((int) event.getRawX(), (int) event.getRawY())) {
           focusedView.clearFocus();
+        } else {
+          hasNewFocus = true;
         }
       }
+    }
+
+    if (!hasNewFocus) {
+      DeviceUtil.hideKeyboard(currentFocusedView);
     }
   }
 

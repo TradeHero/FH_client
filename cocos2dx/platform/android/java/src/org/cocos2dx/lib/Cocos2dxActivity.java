@@ -74,7 +74,7 @@ public abstract class Cocos2dxActivity extends Activity implements Cocos2dxHelpe
 
   @Override public boolean dispatchTouchEvent(MotionEvent event) {
     if (event.getAction() == MotionEvent.ACTION_DOWN) {
-      FHCocos2dxHandler.unfocusIfNecessary(event);
+      FHCocos2dxHandler.unfocusIfNecessary(getCurrentFocus(), event);
     }
     return super.dispatchTouchEvent(event);
   }
