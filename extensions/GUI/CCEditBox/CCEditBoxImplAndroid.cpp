@@ -25,6 +25,7 @@
 
 #include "CCEditBoxImplAndroid.h"
 #include "CCEditBoxImplAndroidJNI.h"
+#include "../Android/DeviceJNI.h"
  
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
 
@@ -346,7 +347,7 @@ void CCEditBoxImplAndroid::openKeyboard()
 
 void CCEditBoxImplAndroid::closeKeyboard()
 {
-	
+    closeKeyboardJNI((void *) this);
 }
 
 NS_CC_EXT_END

@@ -10,6 +10,7 @@ LOCAL_SRC_FILES :=  hellolua/main.cpp \
                     hellolua/facebook.cpp \
                     hellolua/analytics.cpp \
                     hellolua/CCEditBoxImplAndroidJNI.cpp \
+                    hellolua/device.cpp \
                     ../../Classes/AppDelegate.cpp
 
 

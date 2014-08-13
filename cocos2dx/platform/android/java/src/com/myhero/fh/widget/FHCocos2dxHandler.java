@@ -15,7 +15,8 @@ import org.cocos2dx.lib.Cocos2dxActivity;
 import org.cocos2dx.lib.Cocos2dxHandler;
 
 public class FHCocos2dxHandler extends Cocos2dxHandler {
-  private static Map<Long, WeakReference<View>> cachedBindingView = new HashMap<Long,
+  // TODO make this private, singleton ... for now, it is public :(
+  public static Map<Long, WeakReference<View>> cachedBindingView = new HashMap<Long,
       WeakReference<View>>();
 
   public FHCocos2dxHandler(Cocos2dxActivity activity) {
