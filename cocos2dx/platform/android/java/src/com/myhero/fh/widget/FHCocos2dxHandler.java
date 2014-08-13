@@ -1,7 +1,9 @@
 package com.myhero.fh.widget;
 
 import android.graphics.Color;
+import android.graphics.Rect;
 import android.os.Message;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
@@ -17,6 +19,19 @@ public class FHCocos2dxHandler extends Cocos2dxHandler {
 
   public FHCocos2dxHandler(Cocos2dxActivity activity) {
     super(activity);
+  }
+
+  public static void unfocusIfNecessary(MotionEvent event) {
+    for (WeakReference<View> weakView: cachedBindingView.values()) {
+      View focusedView = weakView.get();
+      if (focusedView != null && focusedView.getVisibility() == View.VISIBLE) {
+        Rect outRect = new Rect();
+        focusedView.getGlobalVisibleRect(outRect);
+        if (!outRect.contains((int) event.getRawX(), (int) event.getRawY())) {
+          focusedView.clearFocus();
+        }
+      }
+    }
   }
 
   @Override protected void showEditBoxDialog(Message msg) {

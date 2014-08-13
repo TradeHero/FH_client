@@ -25,17 +25,14 @@ package org.cocos2dx.lib;
 
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.Rect;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.view.MotionEvent;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
-import com.myhero.fh.util.DeviceUtil;
 import com.myhero.fh.widget.FHCocos2dxHandler;
 import org.cocos2dx.lib.Cocos2dxHelper.Cocos2dxHelperListener;
 
@@ -77,15 +74,7 @@ public abstract class Cocos2dxActivity extends Activity implements Cocos2dxHelpe
 
   @Override public boolean dispatchTouchEvent(MotionEvent event) {
     if (event.getAction() == MotionEvent.ACTION_DOWN) {
-      View focusedView = getCurrentFocus();
-      if (focusedView != null && focusedView.isFocused()) {
-        Rect outRect = new Rect();
-        focusedView.getGlobalVisibleRect(outRect);
-        if (!outRect.contains((int) event.getRawX(), (int) event.getRawY())) {
-          focusedView.clearFocus();
-          DeviceUtil.hideKeyboard(focusedView);
-        }
-      }
+      FHCocos2dxHandler.unfocusIfNecessary(event);
     }
     return super.dispatchTouchEvent(event);
   }

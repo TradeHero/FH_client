@@ -309,3 +309,4 @@ proguard/
 
 ## For Football Hero
 **/libcocos2dlua.so
+**/Resources/game.bin

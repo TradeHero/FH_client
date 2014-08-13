@@ -1,9 +1,7 @@
 package com.myhero.fh.widget;
 
 import android.content.Context;
-import android.text.Editable;
 import android.text.InputType;
-import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
@@ -88,18 +86,25 @@ public class GlassEditText extends EditText
     super.setOnFocusChangeListener(new View.OnFocusChangeListener() {
       @Override public void onFocusChange(View v, boolean hasFocus) {
         if (!hasFocus) {
-          Cocos2dxHelper.setEditTextDialogResult(nativeData.getSource(), getText().toString());
-          setVisibility(GONE);
+          invalidateNative();
         }
       }
     });
+  }
+
+  private void invalidateNative() {
+    Cocos2dxHelper.setEditTextDialogResult(nativeData.getSource(), getText().toString());
+    setVisibility(GONE);
   }
 
   @Override public final void setOnFocusChangeListener(OnFocusChangeListener l) {
     throw new IllegalAccessError("This method is not supposed to be called");
   }
 
-  private static native void nativeEvent(long source, int eventId);
+  @Override public void clearFocus() {
+    super.clearFocus();
+    invalidateNative();
+  }
 
   @Override public void processNativeData(Cocos2dxHandler.EditBoxMessage editBoxMessage) {
     Log.d(TAG, String.format("Data [%s]", editBoxMessage));
