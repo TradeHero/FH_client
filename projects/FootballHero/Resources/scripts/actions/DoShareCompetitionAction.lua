@@ -10,8 +10,9 @@ local RequestUtils = require("scripts.RequestUtils")
 
 function action( param )
     local competitionId = param[1]
+    local accessToken = param[2]
 
-    local requestContent = { CompetitionId = competitionId }
+    local requestContent = { CompetitionId = competitionId, AuthToken = accessToken }
     local requestContentText = Json.encode( requestContent )
     
     local url = RequestUtils.POST_SHARE_COMPETITION_REST_CALL

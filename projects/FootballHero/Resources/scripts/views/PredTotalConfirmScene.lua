@@ -5,10 +5,12 @@ local SceneManager = require("scripts.SceneManager")
 local Logic = require("scripts.Logic").getInstance()
 local EventManager = require("scripts.events.EventManager").getInstance()
 local Event = require("scripts.events.Event").EventList
+local ConnectingMessage = require("scripts.views.ConnectingMessage")
 
 
 local mWidget
 local mFacebookBt
+local mAccessToken
 
 function loadFrame()
 	local widget = GUIReader:shareReader():widgetFromJsonFile("scenes/PredFinalConfirm.json")
@@ -16,9 +18,12 @@ function loadFrame()
     mWidget:registerScriptHandler( EnterOrExit )
     mWidget:addTouchEventListener( bgEventHandler )
     SceneManager.addWidget(mWidget)
+    SceneManager.clearKeypadBackListener()
     mWidget:setName( "PredTotalConfirmScene" )
 
 	initContent()
+
+	mAccessToken = nil
 end
 
 function EnterOrExit( eventType )
@@ -36,7 +41,7 @@ end
 function confirmEventHandler( sender, eventType )
 	if eventType == TOUCH_EVENT_ENDED then
 		Logic:setPredictionMetadata( "", mFacebookBt:getSelectedState() )
-	    EventManager:postEvent( Event.Do_Post_Predictions )
+	    EventManager:postEvent( Event.Do_Post_Predictions, { mAccessToken } )
 	end
 end
 
@@ -49,15 +54,34 @@ end
 
 function facebookEventHandler( sender, eventType )
 	if eventType == TOUCH_EVENT_ENDED then
-		if mFacebookBt:getSelectedState() == false and Logic:getFbId() == false then
-			local successHandler = function()
-				-- Nothing to do.
-			end
-			local failedHandler = function()
-				mFacebookBt:setSelectedState( false )
-			end
+		if mFacebookBt:getSelectedState() == false then
+			local doShare = function()
+				print("Do Share")
+	            local handler = function( accessToken, success )
+	            	if success then
+	            		mAccessToken = accessToken
+	            	else
+	            		mFacebookBt:setSelectedState( false )
+	            	end
+	                
+	                ConnectingMessage.selfRemove()
+	            end
+	            ConnectingMessage.loadFrame()
+	            FacebookDelegate:sharedDelegate():grantPublishPermission( "publish_actions", handler )
+	        end
 
-			EventManager:postEvent( Event.Do_FB_Connect_With_User, { successHandler, failedHandler } )
+	        if Logic:getFbId() == false then
+	            local successHandler = function()
+	                doShare()
+	            end
+	            local failedHandler = function()
+	            	print("FB connect failed.")
+	                mFacebookBt:setSelectedState( false )
+	            end
+	            EventManager:postEvent( Event.Do_FB_Connect_With_User, { successHandler, failedHandler } )
+	        else
+	            doShare()
+	        end
 		end
 	end
 end

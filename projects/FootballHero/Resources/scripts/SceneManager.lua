@@ -140,6 +140,8 @@ function keypadEventHandler( eventType )
     if eventType == "backClicked" then
         if mKeypadBackListener ~= nil then
         	mKeypadBackListener()
+        else
+        	-- Todo exit the app
         end
     end
 end
@@ -163,10 +165,6 @@ end
 
 function getWidgetByName( name )
 	return mSceneGameLayer:getWidgetByName( name )
-end
-
-function isWidgetShown( widget )
-	
 end
 
 function setKeypadBackListener( func )

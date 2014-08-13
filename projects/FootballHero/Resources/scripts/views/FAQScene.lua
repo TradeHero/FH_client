@@ -12,6 +12,7 @@ function loadFrame()
     mWidget = widget
     mWidget:registerScriptHandler( EnterOrExit )
     SceneManager.clearNAddWidget( widget )
+    SceneManager.setKeypadBackListener( keypadBackEventHandler )
 
     local backBt = widget:getChildByName("back")
     backBt:addTouchEventListener( backEventHandler )
@@ -31,7 +32,11 @@ end
 
 function backEventHandler( sender,eventType )
     if eventType == TOUCH_EVENT_ENDED then
-        WebviewDelegate:sharedDelegate():closeWebpage()
-        EventManager:popHistory()
+        keypadBackEventHandler()
     end
+end
+
+function keypadBackEventHandler()
+    WebviewDelegate:sharedDelegate():closeWebpage()
+    EventManager:popHistory()
 end

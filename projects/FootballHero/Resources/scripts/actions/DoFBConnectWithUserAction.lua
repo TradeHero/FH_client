@@ -19,20 +19,19 @@ function action( param )
 	local Json = require("json")
 	local RequestUtils = require("scripts.RequestUtils")
 
-    local successHandler = function( accessToken )
+    local handler = function( accessToken )
         if accessToken == nil then
             -- To handle user reject to the oAuth.
             onFBConnectFailed()
-            ConnectingMessage.selfRemove()
         else
             print("Get token "..accessToken)
             onFBConnectSuccess( accessToken )
-            ConnectingMessage.selfRemove()
         end
+        ConnectingMessage.selfRemove()
     end
 
     ConnectingMessage.loadFrame()
-    FacebookDelegate:sharedDelegate():login( successHandler, successHandler )
+    FacebookDelegate:sharedDelegate():login( handler )
 
 end
 

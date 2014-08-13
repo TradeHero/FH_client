@@ -76,6 +76,7 @@ public:
     
 	virtual void onExit(void) = 0;
     
+    
     void setDelegate(CCEditBoxDelegate* pDelegate) { m_pDelegate = pDelegate; };
     CCEditBoxDelegate* getDelegate() { return m_pDelegate; };
     CCEditBox* getCCEditBox() { return m_pEditBox; };

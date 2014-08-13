@@ -42,6 +42,26 @@ void FacebookConnector::login()
         
         [FBSessionSingleton sharedInstance].session = aSession;
         const char* accessToken =[aSession.accessTokenData.accessToken UTF8String];
-        Social::FacebookDelegate::sharedDelegate()->loginResult(accessToken);
+        Social::FacebookDelegate::sharedDelegate()->accessTokenUpdate(accessToken);
     }];
+}
+
+void FacebookConnector::grantPublishPermission(const char* permission)
+{
+    NSString *publishPermission = [NSString stringWithUTF8String:permission];
+    FBSession* session = [FBSessionSingleton sharedInstance].session;
+    if ([session hasGranted:publishPermission])
+    {
+        Social::FacebookDelegate::sharedDelegate()->permissionUpdate(nil, true);
+    }
+    else
+    {
+        [session requestNewPublishPermissions:@[publishPermission] defaultAudience:FBSessionDefaultAudienceFriends completionHandler:^(FBSession *aSession, NSError *error)
+         {
+             __strong typeof(NSString*)permission = publishPermission;
+             [FBSessionSingleton sharedInstance].session = aSession;
+             const char* accessToken =[aSession.accessTokenData.accessToken UTF8String];
+             Social::FacebookDelegate::sharedDelegate()->permissionUpdate(accessToken, [aSession hasGranted:permission]);
+         }];
+    }
 }

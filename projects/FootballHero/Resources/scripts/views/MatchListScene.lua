@@ -35,6 +35,7 @@ function loadFrame( matchList, leagueKey )
     mWidget = widget
     mWidget:registerScriptHandler( EnterOrExit )
     SceneManager.clearNAddWidget( widget )
+    SceneManager.clearKeypadBackListener()
 
     Navigator.loadFrame( widget )
     Navigator.chooseNav( 1 )

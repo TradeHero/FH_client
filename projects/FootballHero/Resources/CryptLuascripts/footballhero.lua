@@ -12,11 +12,11 @@ function __G__TRACKBACK__(msg)
         cclog( msg )
         local DoLogReport = require("scripts.actions.DoLogReport")
         DoLogReport.reportError( errorDesc )
-    else
-        local errorDesc = "\nLUA ERROR: "..msg .. "\n"
-        errorDesc = errorDesc.."\n"..debug.traceback()
-        CCMessageBox( errorDesc, "LUA ERROR: " )
     end
+
+    local errorDesc = "\nLUA ERROR: "..msg .. "\n"
+    errorDesc = errorDesc.."\n"..debug.traceback()
+    CCMessageBox( errorDesc, "LUA ERROR: " )
 end
 
 local cclog = function(...)

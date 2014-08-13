@@ -23,6 +23,7 @@ function loadFrame( competitionId, chatMessages )
     mWidget = widget
     mWidget:registerScriptHandler( EnterOrExit )
     SceneManager.clearNAddWidget( widget )
+    SceneManager.setKeypadBackListener( keypadBackEventHandler )
 
     Navigator.loadFrame( widget )
 
@@ -69,9 +70,12 @@ end
 
 function backEventHandler( sender,eventType )
     if eventType == TOUCH_EVENT_ENDED then
-        WebviewDelegate:sharedDelegate():closeWebpage()
-        EventManager:popHistory()
+        keypadBackEventHandler()
     end
+end
+
+function keypadBackEventHandler()
+    EventManager:popHistory()
 end
 
 function moreEventHandler( sender, eventType )

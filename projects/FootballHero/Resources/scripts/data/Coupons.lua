@@ -96,5 +96,5 @@ function Coupons:toString()
         table.insert( form, coupon )
     end
 
-    return string.format( "{\"CouponForms\":%s, \"Message\":\"%s\", \"ShareOnFacebook\":%s}", Json.encode( form ), self.Message, self.ShareOnFacebook )
+    return string.format( "\"CouponForms\":%s, \"Message\":\"%s\", \"ShareOnFacebook\":%s", Json.encode( form ), self.Message, self.ShareOnFacebook )
 end

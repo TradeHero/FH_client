@@ -100,6 +100,7 @@ public:
 	virtual void setAnchorPoint(const CCPoint& anchorPoint);
     virtual void visit(void);
 	virtual void onEnter(void);
+    virtual void onExit(void);
     virtual void doAnimationWhenKeyboardMove(float duration, float distance);
     virtual void openKeyboard();
     virtual void closeKeyboard();

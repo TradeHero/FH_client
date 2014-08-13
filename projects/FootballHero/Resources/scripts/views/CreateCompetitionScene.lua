@@ -21,6 +21,7 @@ function loadFrame( selectedLeagues )
     mWidget = widget
     mWidget:registerScriptHandler( EnterOrExit )
     SceneManager.clearNAddWidget(mWidget)
+    SceneManager.setKeypadBackListener( keypadBackEventHandler )
 
     local contentContainer = tolua.cast( mWidget:getChildByName("ScrollView"), "ScrollView" )
     contentContainer:removeAllChildrenWithCleanup( true )
@@ -129,8 +130,12 @@ end
 
 function backEventHandler( sender, eventType )
     if eventType == TOUCH_EVENT_ENDED then
-        EventManager:popHistory()
+        keypadBackEventHandler()
     end
+end
+
+function keypadBackEventHandler()
+    EventManager:popHistory()
 end
 
 function cancelEventHandler( sender, eventType )

@@ -7,6 +7,7 @@ local Event = require("scripts.events.Event").EventList
 local SMIS = require("scripts.SMIS")
 local ViewUtils = require("scripts.views.ViewUtils")
 local Logic = require("scripts.Logic").getInstance()
+local ConnectingMessage = require("scripts.views.ConnectingMessage")
 
 
 local mWidget
@@ -29,6 +30,7 @@ function loadFrame( subType, competitionId )
     mWidget = widget
     mWidget:registerScriptHandler( EnterOrExit )
     SceneManager.clearNAddWidget( mWidget )
+    SceneManager.setKeypadBackListener( keypadBackEventHandler )
 
     Navigator.loadFrame( mWidget )
 
@@ -56,8 +58,12 @@ end
 
 function backEventHandler( sender, eventType )
     if eventType == TOUCH_EVENT_ENDED then
-        EventManager:popHistory()
+        keypadBackEventHandler()
     end
+end
+
+function keypadBackEventHandler()
+    EventManager:popHistory()
 end
 
 function moreEventHandler( sender, eventType )
@@ -208,16 +214,27 @@ end
 
 function shareEventHandler( sender, eventType )
     if eventType == TOUCH_EVENT_ENDED then
+        local doShare = function()
+            local handler = function( accessToken, success )
+                if success then
+                    EventManager:postEvent( Event.Do_Share_Competition, { mCompetitionId, accessToken } )
+                end
+                ConnectingMessage.selfRemove()
+            end
+            ConnectingMessage.loadFrame()
+            FacebookDelegate:sharedDelegate():grantPublishPermission( "publish_actions", handler )
+        end
+
         if Logic:getFbId() == false then
             local successHandler = function()
-                EventManager:postEvent( Event.Do_Share_Competition, { mCompetitionId } )
+                doShare()
             end
             local failedHandler = function()
                 -- Nothing to do.
             end
             EventManager:postEvent( Event.Do_FB_Connect_With_User, { successHandler, failedHandler } )
         else
-            EventManager:postEvent( Event.Do_Share_Competition, { mCompetitionId } )
+            doShare()
         end
     end
 end

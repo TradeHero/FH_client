@@ -26,6 +26,7 @@ function loadFrame( isOpen, matchInfo )
     mWidget = widget
     mWidget:registerScriptHandler( EnterOrExit )
     SceneManager.clearNAddWidget( widget )
+    SceneManager.setKeypadBackListener( keypadBackEventHandler )
 
     Navigator.loadFrame( widget )
 
@@ -45,8 +46,12 @@ end
 
 function backEventHandler( sender,eventType )
     if eventType == TOUCH_EVENT_ENDED then
-        EventManager:popHistory()
+        keypadBackEventHandler()
     end
+end
+
+function keypadBackEventHandler()
+    EventManager:popHistory()
 end
 
 function initContent()

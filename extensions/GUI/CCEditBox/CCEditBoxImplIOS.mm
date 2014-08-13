@@ -606,6 +606,11 @@ void CCEditBoxImplIOS::onEnter(void)
     }
 }
 
+void CCEditBoxImplIOS::onExit(void)
+{
+    
+}
+
 void CCEditBoxImplIOS::adjustTextFieldPosition()
 {
 	CCSize contentSize = m_pEditBox->getContentSize();

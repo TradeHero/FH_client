@@ -41,6 +41,7 @@ function loadFrame()
 	mWidget = GUIReader:shareReader():widgetFromJsonFile("scenes/PredictionBG.json")
     mWidget:registerScriptHandler( EnterOrExit )
     SceneManager.addWidget( mWidget )
+    SceneManager.setKeypadBackListener( keypadBackEventHandler )
     mWidget:setName( "TappablePredictionScene" )
 
     local team1 = tolua.cast( mWidget:getChildByName("team1"), "ImageView" )
@@ -77,8 +78,12 @@ end
 
 function backEventHandler( sender, eventType )
     if eventType == TOUCH_EVENT_ENDED then
-        EventManager:popHistory()
+        keypadBackEventHandler()
     end
+end
+
+function keypadBackEventHandler()
+    EventManager:popHistory()
 end
 
 function initPredictionStatus()

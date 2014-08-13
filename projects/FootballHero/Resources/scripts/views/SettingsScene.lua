@@ -14,6 +14,7 @@ function loadFrame()
     mWidget = widget
     mWidget:registerScriptHandler( EnterOrExit )
     SceneManager.clearNAddWidget( widget )
+    SceneManager.clearKeypadBackListener()
 
     Navigator.loadFrame( widget )
 

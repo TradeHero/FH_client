@@ -8,4 +8,5 @@ public:
     
     void initSession();
     void login();
+    void grantPublishPermission(const char* permission);
 };

@@ -1,6 +1,6 @@
 /*
 ** Lua binding: Extension
-** Generated automatically by tolua++-1.0.92 on 07/18/14 18:14:25.
+** Generated automatically by tolua++-1.0.92 on 08/14/14 11:24:03.
 */
 
 /****************************************************************************
@@ -105,6 +105,39 @@ static int tolua_Extension_FacebookDelegate_login00(lua_State* tolua_S)
  if (
      !tolua_isusertype(tolua_S,1,"FacebookDelegate",0,&tolua_err) ||
      (tolua_isvaluenil(tolua_S,2,&tolua_err) || !toluafix_isfunction(tolua_S,2,"LUA_FUNCTION",0,&tolua_err)) ||
+     !tolua_isnoobj(tolua_S,3,&tolua_err)
+ )
+  goto tolua_lerror;
+ else
+#endif
+ {
+  FacebookDelegate* self = (FacebookDelegate*)  tolua_tousertype(tolua_S,1,0);
+  LUA_FUNCTION handler = (  toluafix_ref_function(tolua_S,2,0));
+#ifndef TOLUA_RELEASE
+  if (!self) tolua_error(tolua_S,"invalid 'self' in function 'login'", NULL);
+#endif
+  {
+   self->login(handler);
+  }
+ }
+ return 0;
+#ifndef TOLUA_RELEASE
+ tolua_lerror:
+ tolua_error(tolua_S,"#ferror in function 'login'.",&tolua_err);
+ return 0;
+#endif
+}
+#endif //#ifndef TOLUA_DISABLE
+
+/* method: grantPublishPermission of class  FacebookDelegate */
+#ifndef TOLUA_DISABLE_tolua_Extension_FacebookDelegate_grantPublishPermission00
+static int tolua_Extension_FacebookDelegate_grantPublishPermission00(lua_State* tolua_S)
+{
+#ifndef TOLUA_RELEASE
+ tolua_Error tolua_err;
+ if (
+     !tolua_isusertype(tolua_S,1,"FacebookDelegate",0,&tolua_err) ||
+     !tolua_isstring(tolua_S,2,0,&tolua_err) ||
      (tolua_isvaluenil(tolua_S,3,&tolua_err) || !toluafix_isfunction(tolua_S,3,"LUA_FUNCTION",0,&tolua_err)) ||
      !tolua_isnoobj(tolua_S,4,&tolua_err)
  )
@@ -113,19 +146,19 @@ static int tolua_Extension_FacebookDelegate_login00(lua_State* tolua_S)
 #endif
  {
   FacebookDelegate* self = (FacebookDelegate*)  tolua_tousertype(tolua_S,1,0);
-  LUA_FUNCTION successHandler = (  toluafix_ref_function(tolua_S,2,0));
-  LUA_FUNCTION errorHandler = (  toluafix_ref_function(tolua_S,3,0));
+  const char* permission = ((const char*)  tolua_tostring(tolua_S,2,0));
+  LUA_FUNCTION handler = (  toluafix_ref_function(tolua_S,3,0));
 #ifndef TOLUA_RELEASE
-  if (!self) tolua_error(tolua_S,"invalid 'self' in function 'login'", NULL);
+  if (!self) tolua_error(tolua_S,"invalid 'self' in function 'grantPublishPermission'", NULL);
 #endif
   {
-   self->login(successHandler,errorHandler);
+   self->grantPublishPermission(permission,handler);
   }
  }
  return 0;
 #ifndef TOLUA_RELEASE
  tolua_lerror:
- tolua_error(tolua_S,"#ferror in function 'login'.",&tolua_err);
+ tolua_error(tolua_S,"#ferror in function 'grantPublishPermission'.",&tolua_err);
  return 0;
 #endif
 }
@@ -1080,6 +1113,7 @@ TOLUA_API int tolua_Extension_open (lua_State* tolua_S)
   tolua_beginmodule(tolua_S,"FacebookDelegate");
    tolua_function(tolua_S,"sharedDelegate",tolua_Extension_FacebookDelegate_sharedDelegate00);
    tolua_function(tolua_S,"login",tolua_Extension_FacebookDelegate_login00);
+   tolua_function(tolua_S,"grantPublishPermission",tolua_Extension_FacebookDelegate_grantPublishPermission00);
   tolua_endmodule(tolua_S);
   tolua_cclass(tolua_S,"CCHttpRequest","CCHttpRequest","CCObject",NULL);
   tolua_beginmodule(tolua_S,"CCHttpRequest");

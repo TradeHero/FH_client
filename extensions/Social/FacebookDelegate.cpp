@@ -16,7 +16,8 @@ namespace Social
 
 	FacebookDelegate::FacebookDelegate()
 	{
-
+		mAccessTokenUpdateHandler = 0;
+		mPermissionUpdateHandler = 0;
 	}
 
 	FacebookDelegate::~FacebookDelegate()
@@ -33,10 +34,9 @@ namespace Social
 		return s_sharedUtils;
 	}
 
-	void FacebookDelegate::login(int successHandler, int errorHandler)
+	void FacebookDelegate::login(int handler)
 	{
-		mSuccessHandler = successHandler;
-		mErrorHandler = errorHandler;
+		mAccessTokenUpdateHandler = handler;
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
         FacebookConnector::getInstance()->login();
 #endif
@@ -44,12 +44,32 @@ namespace Social
 		android_facebook_login();
 #endif
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
-		loginResult(NULL);
+		accessTokenUpdate(NULL);
+#endif
+	}
+
+	void FacebookDelegate::grantPublishPermission(const char* permission, int handler)
+	{
+		mPermissionUpdateHandler = handler;
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+		FacebookConnector::getInstance()->grantPublishPermission(permission);
+#endif
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+		// Todo
+		permissionUpdate(NULL, false);
+#endif
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
+		permissionUpdate(NULL, false);
 #endif
 	}
     
-    void FacebookDelegate::loginResult(const char* accessToken)
+	void FacebookDelegate::accessTokenUpdate(const char* accessToken)
 	{
+		if (mAccessTokenUpdateHandler == 0)
+		{
+			return;
+		}
+
 		CCScriptEngineProtocol* pScriptProtocol = CCScriptEngineManager::sharedManager()->getScriptEngine();
 		cocos2d::CCLuaEngine* pLuaEngine = dynamic_cast<CCLuaEngine*>(pScriptProtocol);
 		if (pLuaEngine == NULL)
@@ -60,8 +80,33 @@ namespace Social
 
 		CCLuaStack* pStack = pLuaEngine->getLuaStack();
 		pStack->pushString(accessToken);
-		int ret = pStack->executeFunctionByHandler(mSuccessHandler, 1);
+		int ret = pStack->executeFunctionByHandler(mAccessTokenUpdateHandler, 1);
 		pStack->clean();
+
+		mAccessTokenUpdateHandler = 0;
 	}
     
+	void FacebookDelegate::permissionUpdate(const char* accessToken, bool success)
+	{
+		if (mPermissionUpdateHandler == 0)
+		{
+			return;
+		}
+
+		CCScriptEngineProtocol* pScriptProtocol = CCScriptEngineManager::sharedManager()->getScriptEngine();
+		cocos2d::CCLuaEngine* pLuaEngine = dynamic_cast<CCLuaEngine*>(pScriptProtocol);
+		if (pLuaEngine == NULL)
+		{
+			assert(false);
+			return;
+		}
+
+		CCLuaStack* pStack = pLuaEngine->getLuaStack();
+		pStack->pushString(accessToken);
+		pStack->pushBoolean(success);
+		int ret = pStack->executeFunctionByHandler(mPermissionUpdateHandler, 2);
+		pStack->clean();
+
+		mPermissionUpdateHandler = 0;
+	}
 }

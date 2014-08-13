@@ -20,6 +20,7 @@ function loadFrame( selectedLeagues )
     mWidget = widget
     mWidget:registerScriptHandler( EnterOrExit )
     SceneManager.clearNAddWidget( mWidget )
+    SceneManager.setKeypadBackListener( keypadBackEventHandler )
 
     Navigator.loadFrame( mWidget )
 
@@ -41,8 +42,12 @@ end
 
 function backEventHandler( sender, eventType )
     if eventType == TOUCH_EVENT_ENDED then
-        EventManager:popHistory()
+        keypadBackEventHandler()
     end
+end
+
+function keypadBackEventHandler()
+    EventManager:popHistory()
 end
 
 function initContent( competitionDetail, selectedLeagues )

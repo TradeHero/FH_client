@@ -10,14 +10,20 @@ local ConnectingMessage = require("scripts.views.ConnectingMessage")
 
 function action( param )
     if Logic:getPredictions():getSize() > 0 then
-        postPredictionData()
+        postPredictionData( param )
     else
         EventManager:postEvent( Event.Enter_Match_List )
     end
 end
 
-function postPredictionData()
-	local requestContentText = Logic:getPredictions():toString()
+function postPredictionData( param )
+	local requestContentText = "{"..Logic:getPredictions():toString()
+    local accessToken = param[1]
+    if accessToken ~= nil then
+        local accessTokenString = ", AuthToken: \""..accessToken.."\""
+        requestContentText = requestContentText..accessTokenString
+    end
+    requestContentText = requestContentText.."}"
 
     local url = RequestUtils.POST_COUPONS_REST_CALL
 

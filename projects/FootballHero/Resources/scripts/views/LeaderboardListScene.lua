@@ -23,6 +23,7 @@ function loadFrame( leaderboardInfo, leaderboardId, subType )
     mWidget = widget
     mWidget:registerScriptHandler( EnterOrExit )
     SceneManager.clearNAddWidget( widget )
+    SceneManager.setKeypadBackListener( keypadBackEventHandler )
 
     Navigator.loadFrame( widget )
     local backBt = mWidget:getChildByName("back")
@@ -58,9 +59,12 @@ end
 
 function backEventHandler( sender,eventType )
     if eventType == TOUCH_EVENT_ENDED then
-        --EventManager:postEvent( Event.Enter_Leaderboard )
-        EventManager:popHistory()
+        keypadBackEventHandler()
     end
+end
+
+function keypadBackEventHandler()
+    EventManager:popHistory()
 end
 
 function initTypeList()
