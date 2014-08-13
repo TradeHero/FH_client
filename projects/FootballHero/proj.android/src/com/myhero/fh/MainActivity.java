@@ -34,7 +34,7 @@ import java.util.Arrays;
 import org.cocos2dx.lib.Cocos2dxActivity;
 import org.cocos2dx.lib.Cocos2dxGLSurfaceView;
 
-public class FootballHero extends Cocos2dxActivity {
+public class MainActivity extends Cocos2dxActivity {
   private static final String TAG = "FacebookTestActivity";
   private static FacebookAuth facebookAuth;
 
