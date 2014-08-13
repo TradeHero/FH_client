@@ -241,6 +241,10 @@ public class Cocos2dxHelper {
         pInputFlag, pReturnType, pMaxLength, x, y, width, height);
   }
 
+  private static void destroyEditText(long source) {
+    Cocos2dxHelper.sCocos2dxHelperListener.destroyBindingView(source);
+  }
+
   public static void setEditTextDialogResult(final long source, final String pResult) {
     try {
       final byte[] bytesUTF8 = pResult.getBytes("UTF8");
@@ -391,5 +395,7 @@ public class Cocos2dxHelper {
         float width, float height);
 
     public void runOnGLThread(final Runnable pRunnable);
+
+    void destroyBindingView(long source);
   }
 }

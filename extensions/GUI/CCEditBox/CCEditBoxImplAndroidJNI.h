@@ -48,6 +48,7 @@ void showEditTextDialogJNI(
     float height,
     EditTextCallback pfEditTextCallback, 
     void* ctx);
+void destroyEditTextJNI(void *ctx);
 
 #endif /* #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID) */
 

@@ -29,6 +29,7 @@ import android.util.Log;
 import com.crashlytics.android.Crashlytics;
 import com.myhero.fh.auth.AuthenticationCallback;
 import com.myhero.fh.auth.FacebookAuth;
+import com.myhero.fh.widget.FHCocos2dxHandler;
 import java.util.Arrays;
 import org.cocos2dx.lib.Cocos2dxActivity;
 import org.cocos2dx.lib.Cocos2dxGLSurfaceView;
@@ -36,6 +37,10 @@ import org.cocos2dx.lib.Cocos2dxGLSurfaceView;
 public class FootballHero extends Cocos2dxActivity {
   private static final String TAG = "FacebookTestActivity";
   private static FacebookAuth facebookAuth;
+
+  static {
+    System.loadLibrary("cocos2dlua");
+  }
 
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -53,12 +58,7 @@ public class FootballHero extends Cocos2dxActivity {
   }
 
   public Cocos2dxGLSurfaceView onCreateGLSurfaceView() {
-
     return new LuaGLSurfaceView(this);
-  }
-
-  static {
-    System.loadLibrary("cocos2dlua");
   }
 
   public Cocos2dxGLSurfaceView onCreateView() {
@@ -71,6 +71,14 @@ public class FootballHero extends Cocos2dxActivity {
 
   public static void login() {
     facebookAuth.authenticate(new FacebookAuthenticationCallback());
+  }
+
+  @Override public void destroyBindingView(final long source) {
+    runOnUiThread(new Runnable() {
+      @Override public void run() {
+        FHCocos2dxHandler.destroyBindingView(source);
+      }
+    });
   }
 
   private static class FacebookAuthenticationCallback implements AuthenticationCallback {

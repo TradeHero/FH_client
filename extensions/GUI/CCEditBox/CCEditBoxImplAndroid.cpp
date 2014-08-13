@@ -268,6 +268,12 @@ void CCEditBoxImplAndroid::onEnter(void)
     
 }
 
+void CCEditBoxImplAndroid::onExit(void)
+{    
+    // signal to destroy binded view
+    destroyEditTextJNI((void*) this);
+}
+
 static void editBoxCallbackFunc(const char* pText, void* ctx)
 {
     CCEditBoxImplAndroid* thiz = (CCEditBoxImplAndroid*)ctx;

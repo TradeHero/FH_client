@@ -66,4 +66,16 @@ public class FHCocos2dxHandler extends Cocos2dxHandler {
     activity.addContentView(editText, layoutParams);
     return editText;
   }
+
+  public static void destroyBindingView(long source) {
+    WeakReference<View> weakView = cachedBindingView.get(source);
+    if (weakView != null) {
+      View view = weakView.get();
+      if (view != null && view.getParent() instanceof ViewGroup) {
+        ViewGroup vg = (ViewGroup)(view.getParent());
+        vg.removeView(view);
+        cachedBindingView.remove(source);
+      }
+    }
+  }
 }

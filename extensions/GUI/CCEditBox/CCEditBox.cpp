@@ -357,6 +357,7 @@ void CCEditBox::onExit(void)
     CCControlButton::onExit();
     if (m_pEditBoxImpl != NULL)
     {
+        m_pEditBoxImpl->onExit();
         // remove system edit control
         m_pEditBoxImpl->closeKeyboard();
     }

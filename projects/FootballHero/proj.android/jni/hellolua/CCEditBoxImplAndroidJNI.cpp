@@ -42,6 +42,15 @@ JNIEXPORT void JNICALL Java_org_cocos2dx_lib_Cocos2dxHelper_nativeSetEditTextDia
 }
 }
 
+void destroyEditTextJNI(void* ctx) {
+  long long editTextSource = (long long) ctx;
+
+  JniMethodInfo t;
+  if (JniHelper::getStaticMethodInfo(t, CLASS_NAME, "destroyEditText", "(J)V")) {
+    t.env->CallStaticVoidMethod(t.classID, t.methodID, editTextSource);
+  }
+}
+
 void showEditTextDialogJNI(
 	const char* pszTitle,
 	const char* pszMessage,
@@ -51,8 +60,8 @@ void showEditTextDialogJNI(
 	int nMaxLength,
 	float x,
 	float y,
-    float width,
-    float height,
+  float width,
+  float height,
 	EditTextCallback pfEditTextCallback,
 	void* ctx) {
     if (pszMessage == NULL) {
