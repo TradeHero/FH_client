@@ -67,7 +67,8 @@ public class FHCocos2dxHandler extends Cocos2dxHandler {
 
     ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(
         ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-    activity.addContentView(editText, layoutParams);
+    ((ViewGroup) activity.getWindow().getDecorView()).addView(editText,
+        layoutParams);
     return editText;
   }
 
