@@ -50,11 +50,11 @@ public class FHCocos2dxHandler extends Cocos2dxHandler {
     Cocos2dxActivity activity = mActivity.get();
     if (activity != null && editBoxMessage.getSource() != 0) {
       WeakReference<View> cachedViewWeak = cachedBindingView.get(editBoxMessage.getSource());
-      GlassEditText editText = null;
+      OverlayEditText editText = null;
       if (cachedViewWeak != null) {
         View cachedView = cachedViewWeak.get();
-        if (cachedView instanceof GlassEditText) {
-          editText = (GlassEditText) cachedView;
+        if (cachedView instanceof OverlayEditText) {
+          editText = (OverlayEditText) cachedView;
           editText.setVisibility(View.VISIBLE);
         }
       }
@@ -75,9 +75,9 @@ public class FHCocos2dxHandler extends Cocos2dxHandler {
    * screen up
    * @param editText current focused EditText view
    */
-  private void hackToPushScreenUp(GlassEditText editText) {
+  private void hackToPushScreenUp(OverlayEditText editText) {
     if (editText.getText().toString().length() == 0) {
-      final GlassEditText finalEditText = editText;
+      final OverlayEditText finalEditText = editText;
       editText.postDelayed(new Runnable() {
         @Override public void run() {
           if (finalEditText.getVisibility() == View.VISIBLE) {
@@ -89,8 +89,8 @@ public class FHCocos2dxHandler extends Cocos2dxHandler {
     }
   }
 
-  private GlassEditText spawnAndroidEditText(Cocos2dxActivity activity) {
-    final GlassEditText editText = new GlassEditText(activity, null);
+  private OverlayEditText spawnAndroidEditText(Cocos2dxActivity activity) {
+    final OverlayEditText editText = new OverlayEditText(activity, null);
     editText.setBackgroundColor(Color.TRANSPARENT);
     editText.setImeOptions(EditorInfo.IME_FLAG_NO_EXTRACT_UI);
 

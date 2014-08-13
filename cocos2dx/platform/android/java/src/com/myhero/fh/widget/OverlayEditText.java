@@ -9,9 +9,9 @@ import android.widget.EditText;
 import org.cocos2dx.lib.Cocos2dxHandler;
 import org.cocos2dx.lib.Cocos2dxHelper;
 
-public class GlassEditText extends EditText
+public class OverlayEditText extends EditText
   implements NativeAdapter<Cocos2dxHandler.EditBoxMessage> {
-  private static final String TAG = "GlassEditText";
+  private static final String TAG = OverlayEditText.class.getSimpleName();
   /**
    * The user is allowed to enter any text, including line breaks.
    */
@@ -80,7 +80,7 @@ public class GlassEditText extends EditText
 
   private NativeData nativeData;
 
-  public GlassEditText(Context context, AttributeSet attrs) {
+  public OverlayEditText(Context context, AttributeSet attrs) {
     super(context, attrs);
 
     super.setOnFocusChangeListener(new View.OnFocusChangeListener() {
