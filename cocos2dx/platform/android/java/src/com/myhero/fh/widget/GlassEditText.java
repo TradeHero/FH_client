@@ -88,6 +88,8 @@ public class GlassEditText extends EditText
         Log.d(TAG, String.format("hasFocus: %b", hasFocus));
         if (!hasFocus) {
           invalidateNative();
+        } else {
+          setSelection(getText().length());
         }
       }
     });

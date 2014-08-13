@@ -65,6 +65,27 @@ public class FHCocos2dxHandler extends Cocos2dxHandler {
       editText.processNativeData(editBoxMessage);
       editText.requestFocus();
       DeviceUtil.showKeyboard(editText);
+
+      hackToPushScreenUp(editText);
+    }
+  }
+
+  /**
+   * Simulate entering text action to current focused EditTextView, so that the system will move the
+   * screen up
+   * @param editText current focused EditText view
+   */
+  private void hackToPushScreenUp(GlassEditText editText) {
+    if (editText.getText().toString().length() == 0) {
+      final GlassEditText finalEditText = editText;
+      editText.postDelayed(new Runnable() {
+        @Override public void run() {
+          if (finalEditText.getVisibility() == View.VISIBLE) {
+            finalEditText.dispatchKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_0));
+            finalEditText.setText("");
+          }
+        }
+      }, 500);
     }
   }
 
