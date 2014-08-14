@@ -20,6 +20,7 @@ function action( param )
 		else
 			SigninTypeSelectScene.playFadeInAnim()
 		end
+		SigninTypeSelectScene.onShown()
 	elseif uiType == Constants.TUTORIAL_SHOW_EMAIL_SELECT then
 		if SigninTypeSelectScene.isFrameShown() then
 			local delayTime = SigninTypeSelectScene.playMoveAnim( -1 )
@@ -31,6 +32,7 @@ function action( param )
 	    	local delayTime = EmailRegisterScene.playMoveAnim( 1 )
 	    	EmailSelectScene.playMoveAnim( 1, delayTime )
 		end
+		EmailSelectScene.onShown()
 	elseif uiType == Constants.TUTORIAL_SHOW_EMAIL_SIGNIN then
 		if EmailSelectScene.isFrameShown() then
 			local delayTime = EmailSelectScene.playMoveAnim( -1 )
@@ -39,16 +41,19 @@ function action( param )
 			local delayTime = EmailForgotPasswordScene.playMoveAnim( 1 )
 	    	EmailSigninScene.playMoveAnim( 1, delayTime )
 		end
+		EmailSigninScene.onShown()
 	elseif uiType == Constants.TUTORIAL_SHOW_EMAIL_REGISTER then
 		if EmailSelectScene.isFrameShown() then
 			local delayTime = EmailSelectScene.playMoveAnim( -1 )
 	    	EmailRegisterScene.playMoveAnim( -1, delayTime )
 		end
+		EmailRegisterScene.onShown()
 	elseif uiType == Constants.TUTORIAL_SHOW_FORGOT_PASSWORD then
 		if EmailSigninScene.isFrameShown() then
 			local delayTime = EmailSigninScene.playMoveAnim( -1 )
 	    	EmailForgotPasswordScene.playMoveAnim( -1, delayTime )
 		end
+		EmailForgotPasswordScene.onShown()
 	elseif uiType == Constants.TUTORIAL_SHOW_EMAIL_REGISTER_NAME then
 		if EmailRegisterScene.isFrameShown() then
 			local delayTime = EmailRegisterScene.playMoveAnim( -1 )

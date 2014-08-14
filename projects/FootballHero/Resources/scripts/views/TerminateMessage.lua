@@ -6,20 +6,30 @@ local EventManager = require("scripts.events.EventManager").getInstance()
 local Event = require("scripts.events.Event").EventList
 
 local mWidget
-local mRetryCall
 
 function loadFrame()
 
 	local widget = GUIReader:shareReader():widgetFromJsonFile("scenes/ErrorMessage.json")
+    mWidget = widget
+    mWidget:addTouchEventListener( onFrameTouch )
+    mWidget:registerScriptHandler( EnterOrExit )
 
-    local okBt = widget:getChildByName("ok")
+    local okBt = tolua.cast( widget:getChildByName("ok"), "Button" )
     okBt:addTouchEventListener( okEventHandler )
 
-    widget:addTouchEventListener( onFrameTouch )
-    mWidget = widget
-    mWidget:registerScriptHandler( EnterOrExit )
-    SceneManager.addWidget( widget )
-    SceneManager.setKeyPadBackEnabled( false )
+    setTitle("Are you sure you want to quit?")
+    setErrorMessage("Tap back again to quit.")
+    okBt:setTitleText("Stay")
+    
+    SceneManager.addWidget( mWidget )
+end
+
+function isShown()
+    return mWidget ~= nil
+end
+
+function selfRemove()
+    SceneManager.removeWidget( mWidget )
 end
 
 function EnterOrExit( eventType )
@@ -34,20 +44,14 @@ function setTitle( title )
     titleMessage:setText( title )
 end
 
-function setErrorMessage( message, retryCall )
+function setErrorMessage( message )
     local errorMessage = tolua.cast( mWidget:getChildByName("errorMessage"), "Label" )
     errorMessage:setText( message )
-    mRetryCall = retryCall
 end
 
 function okEventHandler( sender, eventType )
     if eventType == TOUCH_EVENT_ENDED then
         SceneManager.removeWidget( mWidget )
-        SceneManager.setKeyPadBackEnabled( true )
-        if mRetryCall ~= nil then
-            mRetryCall()
-            mRetryCall = nil
-        end
     end
 end
 

@@ -37,6 +37,10 @@ function EnterOrExit( eventType )
     end
 end
 
+function onShown()
+    SceneManager.clearKeypadBackListener()
+end
+
 function signinTypeEmailEventHandler( sender, eventType )
     if eventType == TOUCH_EVENT_ENDED then
         EventManager:postEvent( Event.Enter_Tutorial_Ui_With_Type, { Constants.TUTORIAL_SHOW_EMAIL_SELECT } )

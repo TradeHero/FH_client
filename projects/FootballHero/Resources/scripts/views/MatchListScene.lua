@@ -95,6 +95,8 @@ function EnterOrExit( eventType )
 end
 
 function initLeagueList( leagueKey )
+    SceneManager.clearKeypadBackListener()
+    
     local content = SceneManager.widgetFromJsonFile("scenes/LeagueListDropDown.json")
     mWidget:addChild( content )
 

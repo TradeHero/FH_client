@@ -65,15 +65,22 @@ function EnterOrExit( eventType )
     end
 end
 
+function onShown()
+    SceneManager.setKeypadBackListener( keypadBackEventHandler )
+end
+
 function backEventHandler( sender,eventType )
     if eventType == TOUCH_EVENT_ENDED then
-        EventManager:popHistory()
+        keypadBackEventHandler()
         sender:setTouchEnabled( false )
-        mEmailInput:closeKeyboard()
-        mPasswordInput:closeKeyboard()
     end
 end
 
+function keypadBackEventHandler()
+    EventManager:popHistory()
+    mEmailInput:closeKeyboard()
+    mPasswordInput:closeKeyboard()
+end
 
 function signinEventHandler( sender, eventType )
     if eventType == TOUCH_EVENT_ENDED then

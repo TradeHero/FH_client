@@ -57,6 +57,7 @@ TOUCH_PRIORITY_MINUS_ONE = -1
 TOUCH_PRIORITY_MINUS_TWO = -2
 
 local mSceneGameLayer
+local mKeyPadBackEnabled = true
 local mKeypadBackListener = nil
 local mWidgets = {}		-- Store widget show in the list to save time loading the same json file.
 
@@ -137,11 +138,22 @@ function initEvents()
 end
 
 function keypadEventHandler( eventType )
-    if eventType == "backClicked" then
+    if mKeyPadBackEnabled and eventType == "backClicked" then
         if mKeypadBackListener ~= nil then
         	mKeypadBackListener()
         else
         	-- Todo exit the app
+        	local TerminateMessage = require("scripts.views.TerminateMessage")
+
+        	if TerminateMessage.isShown() then
+        		if CCApplication:sharedApplication():getTargetPlatform() == kTargetAndroid then
+			        Misc:sharedDelegate():terminate()
+			    else
+			        TerminateMessage.selfRemove()
+			    end
+        	else
+        		TerminateMessage.loadFrame()
+        	end
         end
     end
 end
@@ -167,12 +179,18 @@ function getWidgetByName( name )
 	return mSceneGameLayer:getWidgetByName( name )
 end
 
+function setKeyPadBackEnabled( enabled )
+	mKeyPadBackEnabled = enabled
+end
+
 function setKeypadBackListener( func )
 	mKeypadBackListener = func
+	mKeyPadBackEnabled = true
 end
 
 function clearKeypadBackListener()
 	mKeypadBackListener = nil
+	mKeyPadBackEnabled = true
 end
 
 function widgetFromJsonFile( fileName )

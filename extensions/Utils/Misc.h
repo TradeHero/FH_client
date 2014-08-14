@@ -20,6 +20,8 @@ namespace Utils
         void sendMail(char* receiver, char* subject, char* body, int errorHandler);
         
 		char* createFormWithFile(const char* begin, const char* end, const char* filePath, const char* pszMode, unsigned long *pSize);
+
+		void terminate();
 	protected:
 		Misc();
 		int mSelectImageHandler;

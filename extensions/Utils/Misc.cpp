@@ -110,4 +110,16 @@ namespace Utils
 		*pSize += strlen(begin) + strlen(end);
 		return buffer;
 	}
+
+	void Misc::terminate()
+	{
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+		JniMethodInfo jmi;
+		if (JniHelper::getStaticMethodInfo(jmi, "org/cocos2dx/lib/Cocos2dxHelper", "terminateProcess", "()V"))
+		{
+			jmi.env->CallStaticVoidMethod(jmi.classID, jmi.methodID);
+			jmi.env->DeleteLocalRef(jmi.classID);
+		}
+#endif
+	}
 }

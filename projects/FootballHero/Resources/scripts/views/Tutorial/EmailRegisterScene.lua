@@ -79,13 +79,20 @@ function EnterOrExit( eventType )
     end
 end
 
+function onShown()
+    SceneManager.setKeypadBackListener( keypadBackEventHandler )
+end
+
 function backEventHandler( sender,eventType )
     if eventType == TOUCH_EVENT_ENDED then
-        EventManager:popHistory()
+        keypadBackEventHandler()
         sender:setTouchEnabled( false )
     end
 end
 
+function keypadBackEventHandler()
+    EventManager:popHistory()
+end
 
 function registerEventHandler( sender, eventType )
     if eventType == TOUCH_EVENT_ENDED then

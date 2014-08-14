@@ -16,6 +16,7 @@ function loadFrame( message )
         mWidget = widget
         mWidget:registerScriptHandler( EnterOrExit )
         SceneManager.addWidget( widget )
+        SceneManager.setKeyPadBackEnabled( false )
 
         local armatureManager = CCArmatureDataManager:sharedArmatureDataManager()
         armatureManager:addArmatureFileInfo("anims/ball0.png","anims/ball0.plist","anims/ball.ExportJson")
@@ -48,6 +49,7 @@ end
 
 function selfRemove()
     SceneManager.removeWidget( mWidget )
+    SceneManager.setKeyPadBackEnabled( true )
 end
 
 function onFrameTouch( sender, eventType )

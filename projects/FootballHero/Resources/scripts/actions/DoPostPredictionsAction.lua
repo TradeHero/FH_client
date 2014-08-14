@@ -20,7 +20,7 @@ function postPredictionData( param )
 	local requestContentText = "{"..Logic:getPredictions():toString()
     local accessToken = param[1]
     if accessToken ~= nil then
-        local accessTokenString = ", AuthToken: \""..accessToken.."\""
+        local accessTokenString = ", FacebookToken: \""..accessToken.."\""
         requestContentText = requestContentText..accessTokenString
     end
     requestContentText = requestContentText.."}"
