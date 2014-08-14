@@ -58,10 +58,9 @@ void FacebookConnector::grantPublishPermission(const char* permission)
     {
         [session requestNewPublishPermissions:@[publishPermission] defaultAudience:FBSessionDefaultAudienceFriends completionHandler:^(FBSession *aSession, NSError *error)
          {
-             __strong typeof(NSString*)permission = publishPermission;
              [FBSessionSingleton sharedInstance].session = aSession;
              const char* accessToken =[aSession.accessTokenData.accessToken UTF8String];
-             Social::FacebookDelegate::sharedDelegate()->permissionUpdate(accessToken, [aSession hasGranted:permission]);
+             Social::FacebookDelegate::sharedDelegate()->permissionUpdate(accessToken, [aSession hasGranted:publishPermission]);
          }];
     }
 }
