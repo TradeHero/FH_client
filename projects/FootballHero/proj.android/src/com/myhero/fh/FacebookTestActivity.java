@@ -18,6 +18,10 @@ public class FacebookTestActivity extends Activity {
   private static final String TAG = "FacebookTestActivity";
   private FacebookAuth facebookAuth;
 
+  static {
+    System.loadLibrary("cocos2dlua");
+  }
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -29,10 +33,17 @@ public class FacebookTestActivity extends Activity {
     setContentView(R.layout.facebook_view);
 
     Button clickMeButton = (Button) findViewById(R.id.click_me);
+    Button extendFacebookPermission = (Button) findViewById(R.id.extend_facebook_perms);
     clickMeButton.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
         facebookAuth.authenticate(new FacebookAuthenticationCallback());
+      }
+    });
+
+    extendFacebookPermission.setOnClickListener(new View.OnClickListener() {
+      @Override public void onClick(View v) {
+        facebookAuth.requestPublishPermissions("public_profile");
       }
     });
   }

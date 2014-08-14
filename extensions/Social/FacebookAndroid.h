@@ -2,4 +2,5 @@
 
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
 void android_facebook_login();
+void android_facebook_requestPublishPermissions(const char* newPermission);
 #endif

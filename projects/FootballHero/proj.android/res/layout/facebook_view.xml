@@ -4,6 +4,14 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
-    <Button android:layout_width="match_parent" android:layout_height="wrap_content"
-            android:id="@+id/click_me"/>
+    <Button
+        android:id="@+id/click_me"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Authenticate with Facebook"/>
+  <Button
+      android:id="@+id/extend_facebook_perms"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="Extend Facebook Permission"/>
 </LinearLayout>

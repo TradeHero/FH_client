@@ -10,11 +10,20 @@ using namespace cocos2d;
 
 extern "C"
 {
-	void Java_com_myhero_fh_MainActivity_accessTokenUpdate(JNIEnv *env, jobject thiz, jstring accessToken)
+	JNIEXPORT void JNICALL Java_com_myhero_fh_auth_FacebookAuth_accessTokenUpdate(JNIEnv *env,
+	  jobject thiz, jstring accessToken)
 	{
 		const char *token = env->GetStringUTFChars(accessToken, NULL);
 		Social::FacebookDelegate::sharedDelegate()->accessTokenUpdate(token);
 	}
+
+  JNIEXPORT void JNICALL Java_com_myhero_fh_auth_FacebookAuth_permissionUpdate(JNIEnv *env,
+    jobject thiz, jstring accessToken, jboolean granted)
+  {
+    const char *token = env->GetStringUTFChars(accessToken, NULL);
+    Social::FacebookDelegate::sharedDelegate()->permissionUpdate(
+      strlen(token) != 0 ? token : NULL, granted == JNI_TRUE);
+  }
 }
 
 void android_facebook_login()
@@ -23,6 +32,19 @@ void android_facebook_login()
   if (JniHelper::getStaticMethodInfo(jmi, "com/myhero/fh/MainActivity", "login", "()V"))
   {
     jmi.env->CallStaticVoidMethod(jmi.classID, jmi.methodID);
+    jmi.env->DeleteLocalRef(jmi.classID);
+  }
+}
+
+void android_facebook_requestPublishPermissions(
+	const char* newPermission)
+{
+  JniMethodInfo jmi;
+  if (JniHelper::getStaticMethodInfo(jmi, "com/myhero/fh/MainActivity", "requestPublishPermissions", "(Ljava/lang/String;)V"))
+  {
+    jstring jNewPermission = jmi.env->NewStringUTF(newPermission);
+    jmi.env->CallStaticVoidMethod(jmi.classID, jmi.methodID, jNewPermission);
+    jmi.env->DeleteLocalRef(jNewPermission);
     jmi.env->DeleteLocalRef(jmi.classID);
   }
 }

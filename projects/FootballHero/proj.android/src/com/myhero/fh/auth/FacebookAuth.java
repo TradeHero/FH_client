@@ -4,10 +4,15 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import com.facebook.*;
+import android.util.Log;
+import com.facebook.Request;
+import com.facebook.Response;
+import com.facebook.Session;
+import com.facebook.SessionDefaultAudience;
+import com.facebook.SessionState;
+import com.facebook.SharedPreferencesTokenCachingStrategy;
 import com.facebook.android.Facebook;
 import com.facebook.android.FacebookError;
-
 import java.lang.ref.WeakReference;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -19,6 +24,7 @@ import java.util.SimpleTimeZone;
 public class FacebookAuth implements Auth {
   public static final DateFormat PRECISE_DATE_FORMAT =
       new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault());
+  private static final String TAG = FacebookAuth.class.getSimpleName();
 
   private Facebook facebook;
   private Session session;
@@ -192,4 +198,33 @@ public class FacebookAuth implements Auth {
   public String getUserId() {
     return this.userId;
   }
+
+  public void requestPublishPermissions(final String newPermission) {
+    Activity activity = baseActivity.get();
+    if (activity != null && session != null) {
+      // already has this permission
+      if (session.getPermissions().contains(newPermission)) {
+        FacebookAuth.permissionUpdate("", true);
+        Log.d(TAG, "Already has requesting permission");
+        return;
+      }
+      // request for permissions
+      session.addCallback(new Session.StatusCallback() {
+        @Override public void call(Session session, SessionState state, Exception exception) {
+          boolean granted = session.getPermissions().contains(newPermission);
+          FacebookAuth.permissionUpdate(session.getAccessToken(), granted);
+          Log.d(TAG, String.format("Granted?: %b", granted));
+        }
+      });
+      session.requestNewPublishPermissions(new Session.NewPermissionsRequest(activity, newPermission));
+    } else {
+      // unexpected
+      Log.d(TAG, String.format("Unexpected: activity=%s, session=%s", activity, session));
+      FacebookAuth.permissionUpdate("", false);
+    }
+  }
+
+  // Native callback for Cocos2D
+  public static native void accessTokenUpdate(String accessToken);
+  public static native void permissionUpdate(String accessToken, boolean granted);
 }

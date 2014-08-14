@@ -67,10 +67,11 @@ public class MainActivity extends Cocos2dxActivity {
     return glSurfaceView;
   }
 
-  public static native void accessTokenUpdate(String accessToken);
-
   public static void login() {
     facebookAuth.authenticate(new FacebookAuthenticationCallback());
+  }
+  public static void requestPublishPermissions(String newPermission) {
+    facebookAuth.requestPublishPermissions(newPermission);
   }
 
   @Override public void destroyBindingView(final long source) {
@@ -90,7 +91,7 @@ public class MainActivity extends Cocos2dxActivity {
     @Override
     public void onSuccess(String authenticationToken) {
       Log.d(TAG, "authToken: " + authenticationToken);
-        accessTokenUpdate(authenticationToken);
+      FacebookAuth.accessTokenUpdate(authenticationToken);
     }
 
     @Override
