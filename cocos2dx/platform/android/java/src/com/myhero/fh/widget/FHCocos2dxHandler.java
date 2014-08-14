@@ -92,6 +92,8 @@ public class FHCocos2dxHandler extends Cocos2dxHandler {
   private OverlayEditText spawnAndroidEditText(Cocos2dxActivity activity) {
     final OverlayEditText editText = new OverlayEditText(activity, null);
     editText.setBackgroundColor(Color.TRANSPARENT);
+    // TODO get text color from Cocos2Dx
+    editText.setTextColor(activity.getResources().getColor(android.R.color.white));
     editText.setImeOptions(EditorInfo.IME_FLAG_NO_EXTRACT_UI);
 
     ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(
