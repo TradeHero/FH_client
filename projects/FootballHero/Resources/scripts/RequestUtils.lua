@@ -79,13 +79,17 @@ function setServerIP( serverIp )
     POST_PASSWORD_RESET_REST_CALL = serverIp.."/api/user/requestPasswordResetLink"
     POST_CHAT_MESSAGE_REST_CALL = serverIp.."/api/chat/postChatMessage"
 
-    CDN_SERVER_IP = "http://portalvhdss3c1vgx5mrzv.blob.core.windows.net/fhdevsettings/"
-
-    USE_DEV = true
+    if USE_DEV then 
+		CDN_SERVER_IP = "http://portalvhdss3c1vgx5mrzv.blob.core.windows.net/fhdevsettings/"
+	end
 end
 
 --setServerIP( "http://192.168.1.123" )
-setServerIP( "http://fhapi-dev1.cloudapp.net" )
+if USE_DEV then
+	setServerIP( "http://fhapi-dev1.cloudapp.net" )
+else
+	setServerIP( SERVER_IP )
+end
 
 
 function createHeaderObject( headerStr )
