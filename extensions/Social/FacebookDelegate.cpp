@@ -55,8 +55,7 @@ namespace Social
 		FacebookConnector::getInstance()->grantPublishPermission(permission);
 #endif
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
-		// Todo
-		permissionUpdate(NULL, false);
+		android_facebook_requestPublishPermissions(permission);
 #endif
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
 		permissionUpdate(NULL, false);
