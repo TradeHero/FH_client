@@ -72,6 +72,7 @@ public:
     virtual void openKeyboard();
     virtual void closeKeyboard();
     virtual void onEnter(void);
+	virtual void onExit(void);
 private:
 
     CCLabelTTF* m_pLabel;

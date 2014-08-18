@@ -312,6 +312,11 @@ void CCEditBoxImplWin::onEnter(void)
 
 }
 
+void CCEditBoxImplWin::onExit(void)
+{
+
+}
+
 NS_CC_EXT_END
 
 #endif /* (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32) */
