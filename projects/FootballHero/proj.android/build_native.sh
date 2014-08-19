@@ -66,6 +66,9 @@ if [ -f "$file" ]; then
 fi
 done
 
+# remove the source lua files.
+rm -rf "$APP_ANDROID_ROOT"/assets/scripts
+
 # copy common luaScript
 for file in "$APP_ROOT"/../../scripting/lua/script/*
 do

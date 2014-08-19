@@ -145,7 +145,7 @@ static int tolua_Cocos2dx_Misc_createFormWithFile(lua_State* tolua_S)
 	return 2;
 #ifndef TOLUA_RELEASE
 tolua_lerror :
-	tolua_error(tolua_S, "#ferror in function 'registerScriptHandler'.", &tolua_err);
+	tolua_error(tolua_S, "#ferror in function 'createFormWithFile'.", &tolua_err);
 	return 0;
 #endif
 }

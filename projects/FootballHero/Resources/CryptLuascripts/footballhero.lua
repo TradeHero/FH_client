@@ -46,6 +46,7 @@ function initPackageLoader( decrypt )
     local filePath = fileUtils:fullPathForFilename( "game.bin" )
     local Json = require("json")
     if fileUtils:isFileExist( filePath ) then
+        --[[
         local fileHandler, errorCode = io.open( filePath, "rb" )
         if fileHandler == nil then
             print( "Read failed from file "..filePath.." with error: "..errorCode )
@@ -54,12 +55,19 @@ function initPackageLoader( decrypt )
         
         local text = fileHandler:read("*all")
         fileHandler:close()
-
+        
         -- For crypted file.
         if decrypt then
             local DES56 = require("DES56")
             local key = tostring( "tuantuan" )
             text = DES56.decrypt( text, key )
+        end
+        --]]
+        local text
+        if decrypt then
+            text = fileUtils:getDecryptedFileData( filePath, "rb" )
+        else
+            text = fileUtils:getFileData( filePath, "r", 0 )
         end
 
         local gameContent = Json.decode( text )
