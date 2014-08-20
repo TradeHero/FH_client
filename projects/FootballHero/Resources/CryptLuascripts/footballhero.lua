@@ -37,8 +37,6 @@ local function main()
     local eventManager = require("scripts.events.EventManager").getInstance()
     local event = require("scripts.events.Event").EventList
     eventManager:postEvent( event.Check_Start_Tutorial )
-
-    --eventManager:postEvent( event.Enter_Competition_Chat )
 end
 
 function initPackageLoader( decrypt )
@@ -46,23 +44,6 @@ function initPackageLoader( decrypt )
     local filePath = fileUtils:fullPathForFilename( "game.bin" )
     local Json = require("json")
     if fileUtils:isFileExist( filePath ) then
-        --[[
-        local fileHandler, errorCode = io.open( filePath, "rb" )
-        if fileHandler == nil then
-            print( "Read failed from file "..filePath.." with error: "..errorCode )
-            return ""
-        end
-        
-        local text = fileHandler:read("*all")
-        fileHandler:close()
-        
-        -- For crypted file.
-        if decrypt then
-            local DES56 = require("DES56")
-            local key = tostring( "tuantuan" )
-            text = DES56.decrypt( text, key )
-        end
-        --]]
         local text
         if decrypt then
             text = fileUtils:getDecryptedFileData( filePath, "rb" )
@@ -96,57 +77,6 @@ function initClientVersion( version )
     if recordedVersion == nil or recordedVersion == "" then
         CCUserDefault:sharedUserDefault():setStringForKey( KEY_OF_VERSION, version )
     end
-end
-
-function encrypt()
-    local fileUtils = CCFileUtils:sharedFileUtils()
-    local filePath = fileUtils:fullPathForFilename( "game.bin" )
-    if fileUtils:isFileExist( filePath ) then
-        print( "crypt "..filePath )
-        local fileHandler, errorCode = io.open( filePath, "rb" )
-        if fileHandler == nil then
-            print( "Read failed from file"..filePath.." with error: "..errorCode )
-            return ""
-        end
-        
-        local text = fileHandler:read("*all")
-        fileHandler:close()
-        
-        local DES56 = require("DES56")
-        local key = 'gooddoggy'
-        local encoded = DES56.crypt( text, key )
-
-        fileHandler, errorCode = io.open( "gameEncodec.bin", "wb" )
-        if fileHandler == nil then
-            print( "Read failed from file".."gameEncodec.bin".." with error: "..errorCode )
-            return ""
-        end
-        fileHandler:write( encoded )
-        fileHandler:close()
-    end
-end
-
-function decrypt()
-    
-    local fileUtils = CCFileUtils:sharedFileUtils()
-    local filePath = fileUtils:fullPathForFilename( "ttt.txt" )
-    if fileUtils:isFileExist( filePath ) then
-        print( filePath )
-        local fileHandler, errorCode = io.open( filePath, "rb" )
-        if fileHandler == nil then
-            print( "Read failed from file"..filePath.." with error: "..errorCode )
-            return ""
-        end
-        
-        local text = fileHandler:read("*all")
-        fileHandler:close()
-        text = tostring( text )
-        
-        local DES56 = require("DES56")
-        local key = tostring( "tuantuan" )
-        local decoded = DES56.decrypt( text, key )
-        print(decoded)
-    end    
 end
 --]]
 

@@ -39,7 +39,7 @@
           "ignoreSize": true,
           "layoutParameter": null,
           "opacity": 255,
-          "positionPercentX": 0.5,
+          "positionPercentX": 0.496875,
           "positionPercentY": 0.386443675,
           "positionType": 0,
           "rotation": 0,
@@ -53,7 +53,7 @@
           "useMergedTexture": false,
           "visible": true,
           "width": 556,
-          "x": 320,
+          "x": 318,
           "y": 439,
           "capInsetsHeight": 1,
           "capInsetsWidth": 1,
@@ -417,7 +417,7 @@
           "hAlignment": 1,
           "text": "Congratulations on making your first prediction!",
           "touchScaleEnable": false,
-          "vAlignment": 1
+          "vAlignment": 0
         }
       },
       {
@@ -467,7 +467,7 @@
           "hAlignment": 1,
           "text": "Now challenge your friends in your own mini-competition!",
           "touchScaleEnable": false,
-          "vAlignment": 1
+          "vAlignment": 0
         }
       },
       {

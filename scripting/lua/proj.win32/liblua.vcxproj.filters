@@ -96,6 +96,9 @@
     <ClCompile Include="..\lfs\lfs.c">
       <Filter>lfs</Filter>
     </ClCompile>
+    <ClCompile Include="..\crypt\lua_zlib.c">
+      <Filter>crypt</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\tolua\tolua++.h">
@@ -172,6 +175,9 @@
     </ClInclude>
     <ClInclude Include="..\lfs\lfs.h">
       <Filter>lfs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\crypt\lua_zlib.h">
+      <Filter>crypt</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

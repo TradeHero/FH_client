@@ -84,10 +84,7 @@
   <ProjectType>UIProject</ProjectType>
   <ResRelativePath />
   <imageFileList />
-  <imagePngList>
-    <string>Popup/Match-List-popup-bg.png</string>
-    <string>Tutorial/Default Button.png</string>
-  </imagePngList>
+  <imagePngList />
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>ErrorMessage.json</CurrentUIJson>
+  <CurrentUIJson>MarketingMessage.json</CurrentUIJson>
 </UIProject>

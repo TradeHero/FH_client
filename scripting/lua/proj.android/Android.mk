@@ -28,6 +28,7 @@ LOCAL_SRC_FILES := ../cocos2dx_support/CCLuaBridge.cpp \
           ../crypt/md5.c \
           ../crypt/ldes56.c \
           ../crypt/des56.c \
+		  ../crypt/lua_zlib.c \
           ../lfs/lfs.c \
           ../cocos2dx_support/tolua_fix.c
           

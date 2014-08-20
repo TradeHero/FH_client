@@ -222,6 +222,7 @@
 		7365C0D218FCE99200C39027 /* FBSessionSingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 7365C0D118FCE99200C39027 /* FBSessionSingleton.m */; };
 		7388C04118F4E2FF00CF667C /* HttpRequestForLua.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7388C03F18F4E2FF00CF667C /* HttpRequestForLua.cpp */; };
 		738BA12A193D7FD2008A74F6 /* DES56.lua in Resources */ = {isa = PBXBuildFile; fileRef = 738BA129193D7FD2008A74F6 /* DES56.lua */; };
+		73B455CF19A48B2D0097A722 /* lua_zlib.c in Sources */ = {isa = PBXBuildFile; fileRef = 73B455CD19A48B2D0097A722 /* lua_zlib.c */; };
 		73B8CB0A1953EB5400E62B43 /* game.bin in Resources */ = {isa = PBXBuildFile; fileRef = 73B8CB091953EB5400E62B43 /* game.bin */; };
 		73BFF75A191779FB002F173A /* des56.c in Sources */ = {isa = PBXBuildFile; fileRef = 73BFF753191779FB002F173A /* des56.c */; };
 		73BFF75B191779FB002F173A /* ldes56.c in Sources */ = {isa = PBXBuildFile; fileRef = 73BFF755191779FB002F173A /* ldes56.c */; };
@@ -746,6 +747,8 @@
 		7388C03F18F4E2FF00CF667C /* HttpRequestForLua.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HttpRequestForLua.cpp; sourceTree = "<group>"; };
 		7388C04018F4E2FF00CF667C /* HttpRequestForLua.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpRequestForLua.h; sourceTree = "<group>"; };
 		738BA129193D7FD2008A74F6 /* DES56.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = DES56.lua; sourceTree = "<group>"; };
+		73B455CD19A48B2D0097A722 /* lua_zlib.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lua_zlib.c; path = crypt/lua_zlib.c; sourceTree = "<group>"; };
+		73B455CE19A48B2D0097A722 /* lua_zlib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = lua_zlib.h; path = crypt/lua_zlib.h; sourceTree = "<group>"; };
 		73B8CB091953EB5400E62B43 /* game.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = game.bin; sourceTree = "<group>"; };
 		73BFF753191779FB002F173A /* des56.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = des56.c; path = crypt/des56.c; sourceTree = "<group>"; };
 		73BFF754191779FB002F173A /* des56.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = des56.h; path = crypt/des56.h; sourceTree = "<group>"; };
@@ -1692,6 +1695,8 @@
 		73BFF750191779DE002F173A /* crypt */ = {
 			isa = PBXGroup;
 			children = (
+				73B455CD19A48B2D0097A722 /* lua_zlib.c */,
+				73B455CE19A48B2D0097A722 /* lua_zlib.h */,
 				73BFF753191779FB002F173A /* des56.c */,
 				73BFF754191779FB002F173A /* des56.h */,
 				73BFF755191779FB002F173A /* ldes56.c */,
@@ -2255,6 +2260,7 @@
 				15C1540C1683112E00D239F2 /* CCScale9SpriteLoader.cpp in Sources */,
 				15C1540D1683112E00D239F2 /* CCScrollViewLoader.cpp in Sources */,
 				15C1540E1683112E00D239F2 /* CCSpriteLoader.cpp in Sources */,
+				73B455CF19A48B2D0097A722 /* lua_zlib.c in Sources */,
 				ED35C0D918323498002A0750 /* CCUtilMath.cpp in Sources */,
 				15C1540F1683112E00D239F2 /* CCControl.cpp in Sources */,
 				15C154101683112E00D239F2 /* CCControlButton.cpp in Sources */,

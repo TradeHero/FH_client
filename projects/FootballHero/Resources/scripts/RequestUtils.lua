@@ -39,7 +39,7 @@ POST_CHAT_MESSAGE_REST_CALL = SERVER_IP.."/api/chat/postChatMessage"
 
 
 FACEBOOK_FRIENDS_LIST_CALL = "/me/friends?access_token="
-USE_DEV = false
+USE_DEV = true
 
 --[[
     DS:
@@ -131,8 +131,15 @@ function split(str, delim, maxNb)
 end 
 
 function messageHandler( requestInfo, isSucceed, body, header, status, errorBuffer, successRequestID, successHandler, failedHandler )
-    print( "Http reponse: "..status.." and errorBuffer: "..errorBuffer )
-    print( "Http reponse body: "..body )
+    CCLuaLog( "Http reponse: "..status.." and errorBuffer: "..errorBuffer )
+    --[[
+        to (de-)compress deflate format, use wbits = -zlib.MAX_WBITS
+        to (de-)compress zlib format, use wbits = zlib.MAX_WBITS
+        to (de-)compress gzip format, use wbits = zlib.MAX_WBITS | 16
+    --]]
+    local wbits = -15
+    body = zlib.inflate( wbits )( body )
+    CCLuaLog( "Http reponse body: "..body )
     
     local jsonResponse = {}
     if string.len( body ) > 0 then

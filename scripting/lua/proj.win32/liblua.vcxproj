@@ -67,7 +67,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\..\..\cocos2dx;$(ProjectDir)..\..\..\cocos2dx\include;$(ProjectDir)..\..\..\cocos2dx\kazmath\include;$(ProjectDir)..\..\..\cocos2dx\platform\win32\;$(ProjectDir)..\..\..\cocos2dx\platform\third_party\win32\OGLES;$(ProjectDir)..\..\..\cocos2dx\platform\third_party\win32\pthread;$(ProjectDir)..\..\..\CocosDenshion\include;$(ProjectDir)..\..\..\extensions\GUI\CCEditBox;$(ProjectDir)..\..\..\extensions;$(ProjectDir)..\..\..\extensions\network;$(ProjectDir)..\..\..\extensions\Utils;$(ProjectDir)..\..\..\extensions\Social;$(ProjectDir)..\..\..\external\libwebsockets\win32\include;$(ProjectDir)..\tolua;$(ProjectDir)..\crypt;$(ProjectDir)..\lfs;$(ProjectDir)..\luajit\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\..\cocos2dx;$(ProjectDir)..\..\..\cocos2dx\include;$(ProjectDir)..\..\..\cocos2dx\kazmath\include;$(ProjectDir)..\..\..\cocos2dx\platform\win32\;$(ProjectDir)..\..\..\cocos2dx\platform\third_party\win32\zlib;$(ProjectDir)..\..\..\cocos2dx\platform\third_party\win32\OGLES;$(ProjectDir)..\..\..\cocos2dx\platform\third_party\win32\pthread;$(ProjectDir)..\..\..\CocosDenshion\include;$(ProjectDir)..\..\..\extensions\GUI\CCEditBox;$(ProjectDir)..\..\..\extensions;$(ProjectDir)..\..\..\extensions\network;$(ProjectDir)..\..\..\extensions\Utils;$(ProjectDir)..\..\..\extensions\Social;$(ProjectDir)..\..\..\external\libwebsockets\win32\include;$(ProjectDir)..\tolua;$(ProjectDir)..\crypt;$(ProjectDir)..\lfs;$(ProjectDir)..\luajit\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_WINDOWS;%(PreprocessorDefinitions);COCOS2D_DEBUG</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -83,7 +83,8 @@
       <DisableSpecificWarnings>4996;4800;4267;4251;4244;%(DisableSpecificWarnings)</DisableSpecificWarnings>
     </ClCompile>
     <Lib>
-      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(OutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>libzlib.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
     <PreLinkEvent>
       <Command>
@@ -93,6 +94,10 @@
       <Command>if not exist "$(OutDir)" mkdir "$(OutDir)"
 xcopy /Y /Q "$(ProjectDir)..\luajit\win32\*.*" "$(OutDir)"</Command>
     </PreBuildEvent>
+    <Link>
+      <AdditionalDependencies>libzlib.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(OutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -142,6 +147,7 @@ xcopy /Y /Q "$(ProjectDir)..\luajit\win32\*.*" "$(OutDir)"</Command>
     <ClCompile Include="..\cocos2dx_support\tolua_fix.c" />
     <ClCompile Include="..\crypt\des56.c" />
     <ClCompile Include="..\crypt\ldes56.c" />
+    <ClCompile Include="..\crypt\lua_zlib.c" />
     <ClCompile Include="..\crypt\md5.c" />
     <ClCompile Include="..\crypt\md5lib.c" />
     <ClCompile Include="..\lfs\lfs.c" />
@@ -169,6 +175,7 @@ xcopy /Y /Q "$(ProjectDir)..\luajit\win32\*.*" "$(OutDir)"</Command>
     <ClInclude Include="..\cocos2dx_support\tolua_fix.h" />
     <ClInclude Include="..\crypt\des56.h" />
     <ClInclude Include="..\crypt\ldes56.h" />
+    <ClInclude Include="..\crypt\lua_zlib.h" />
     <ClInclude Include="..\crypt\md5.h" />
     <ClInclude Include="..\lfs\lfs.h" />
     <ClInclude Include="..\luajit\include\lauxlib.h" />
