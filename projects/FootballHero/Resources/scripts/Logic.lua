@@ -141,6 +141,10 @@ function Logic:setUserInfo( email, password, sessionToken, userId )
 	FileUtils.writeStringToFile( ACCOUNT_INFO_FILE, Json.encode( accountInfo ) )
 end
 
+function Logic:clearAccountInfoFile()
+	self:setUserInfo( "", "", 0, "" )
+end
+
 function Logic:getEmail()
 	return self.email
 end

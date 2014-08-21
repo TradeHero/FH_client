@@ -93,7 +93,7 @@ end
 
 
 function createHeaderObject( headerStr )
-	local headerList = split( headerStr, "\n" )
+	local headerList = split( headerStr, "\r\n" )
     local headers = {}
     for k, v in pairs( headerList ) do
         local headerObj = split( v, ": " )
@@ -132,13 +132,22 @@ end
 
 function messageHandler( requestInfo, isSucceed, body, header, status, errorBuffer, successRequestID, successHandler, failedHandler )
     CCLuaLog( "Http reponse: "..status.." and errorBuffer: "..errorBuffer )
+    local headers = createHeaderObject( header )
+    local responseEncoding = headers["Content-Encoding"]
+    print("Response encoding: "..responseEncoding)
+    
     --[[
         to (de-)compress deflate format, use wbits = -zlib.MAX_WBITS
         to (de-)compress zlib format, use wbits = zlib.MAX_WBITS
         to (de-)compress gzip format, use wbits = zlib.MAX_WBITS | 16
     --]]
-    local wbits = -15
-    body = zlib.inflate( wbits )( body )
+    if responseEncoding == "deflate" then
+        local wbits = -15
+        body = zlib.inflate( wbits )( body )
+    elseif responseEncoding == nil then
+        -- no encoding
+    end
+    
     CCLuaLog( "Http reponse body: "..body )
     
     local jsonResponse = {}
