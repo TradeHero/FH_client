@@ -11,7 +11,7 @@ namespace Utils
 		~Analytics();
 		static Analytics* sharedDelegate();
 
-		void postEvent(const char* eventName, const char* key, const char* value);
+		void postEvent(const char* eventName, const char* paramString);
 
 	protected:
 		Analytics();

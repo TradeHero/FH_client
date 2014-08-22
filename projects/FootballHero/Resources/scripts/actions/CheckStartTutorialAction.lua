@@ -26,7 +26,11 @@ function action( param )
     EmailForgotPasswordScene.loadFrame()
     EmailRegisterNameScene.loadFrame()
 
-    --Analytics:sharedDelegate():postEvent( "Test001", "key", "value" )
+    local params = {}
+    params["p1"] = "v1"
+    params["p2"] = 5
+    params["p3"] = true
+    Analytics:sharedDelegate():postEvent( "Test001", Json.encode( params ) )
 end
 
 function tutorialEnd()

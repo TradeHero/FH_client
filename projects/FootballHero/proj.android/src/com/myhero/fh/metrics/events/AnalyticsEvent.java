@@ -5,7 +5,7 @@ import java.util.Map;
 
 public abstract class AnalyticsEvent {
   private final String name;
-  private final Map<String, String> attributes;
+  private Map<String, String> attributes;
 
   public AnalyticsEvent(String name) {
     this(name, new HashMap<String, String>());
@@ -23,4 +23,6 @@ public abstract class AnalyticsEvent {
   public Map<String, String> getAttributes() {
     return attributes;
   }
+
+  public void setAttributes(Map<String, String> attr) { attributes = attr; }
 }

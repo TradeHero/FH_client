@@ -3,6 +3,7 @@ package com.myhero.fh.metrics;
 import android.content.Context;
 import com.myhero.fh.Constants;
 import com.myhero.fh.metrics.events.AnalyticsEvent;
+import com.myhero.fh.metrics.events.ParamStringEvent;
 import com.myhero.fh.metrics.events.SingleAttributeEvent;
 import com.myhero.fh.metrics.localytics.LocalyticsAdapter;
 import java.util.Collections;
@@ -47,8 +48,8 @@ public class Analytics {
   }
 
   /** Specially created for cocos2d */
-  public static void fireSingleAttributeEvent(String eventName, String key, String value) {
-    Analytics.getInstance().fireEvent(new SingleAttributeEvent(eventName, key, value));
+  public static void fireEventWithParamString(String eventName, String paramString) {
+    Analytics.getInstance().fireEvent(new ParamStringEvent(eventName, paramString));
   }
 
   public final void fireEvent(AnalyticsEvent analyticsEvent) {

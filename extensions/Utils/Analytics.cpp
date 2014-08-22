@@ -33,13 +33,13 @@ namespace Utils
 		return s_sharedUtils;
 	}
 
-	void Analytics::postEvent(const char* eventName, const char* key, const char* value)
+	void Analytics::postEvent(const char* eventName, const char* paramString)
 	{
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-		AnalyticsHandler::getInstance()->postEvent(eventName, key, value);
+		AnalyticsHandler::getInstance()->postEvent(eventName, paramString);
 #endif
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
-		android_analytics_postEvent(eventName, key, value);
+		android_analytics_postEvent(eventName, paramString);
 #endif
 	}
 }

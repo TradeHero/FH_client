@@ -6,20 +6,18 @@
 
 using namespace cocos2d;
 
-void android_analytics_postEvent(const char* eventName, const char* key, const char* value)
+void android_analytics_postEvent(const char* eventName, const char* paramString)
 {
   JniMethodInfo jmi;
   if (JniHelper::getStaticMethodInfo(jmi, "com/myhero/fh/metrics/Analytics",
-        "fireSingleAttributeEvent", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V"))
+        "fireEventWithParamString", "(Ljava/lang/String;Ljava/lang/String;)V"))
   {
     jstring eventNameArg = jmi.env->NewStringUTF(eventName);
-    jstring keyArg = jmi.env->NewStringUTF(key);
-    jstring valueArg = jmi.env->NewStringUTF(value);
+    jstring paramStringArg = jmi.env->NewStringUTF(paramString);
     jmi.env->CallStaticVoidMethod(jmi.classID, jmi.methodID,
-        eventNameArg, keyArg, valueArg);
+        eventNameArg, paramStringArg);
     jmi.env->DeleteLocalRef(eventNameArg);
-    jmi.env->DeleteLocalRef(keyArg);
-    jmi.env->DeleteLocalRef(valueArg);
+    jmi.env->DeleteLocalRef(paramStringArg);
     jmi.env->DeleteLocalRef(jmi.classID);
   }
 }
