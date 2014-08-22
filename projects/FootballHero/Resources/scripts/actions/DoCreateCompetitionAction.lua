@@ -10,7 +10,7 @@ local Logic = require("scripts.Logic").getInstance()
 
 function action( param )
 
-    local name, description, numberOfMonth, selectedLeagues = param[1], param[2], param[3], param[4]
+    local name, description, numberOfMonth, selectedLeagues, facebookShare, accessToken = param[1], param[2], param[3], param[4], param[5], param[6]
 
     if string.len( name ) == 0 then
         RequestUtils.onRequestFailed( "Title cannot blank." )
@@ -29,7 +29,9 @@ function action( param )
     local requestContent = { Name = name, 
                             Description = description, 
                             NumberOfMonth = numberOfMonth, 
-                            AllowedLeaguesIds = selectedLeagues }
+                            AllowedLeaguesIds = selectedLeagues,
+                            ShareOnFacebook = facebookShare,
+                            FacebookToken = accessToken, }
     local requestContentText = Json.encode( requestContent )
     print( requestContentText )
     

@@ -86,5 +86,5 @@
   <imageFileList />
   <imagePngList />
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>MarketingMessage.json</CurrentUIJson>
+  <CurrentUIJson>CompetitionInviteContent.json</CurrentUIJson>
 </UIProject>

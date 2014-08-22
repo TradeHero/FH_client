@@ -15,6 +15,7 @@ local BLANK_AREA_HEIGHT = 120
 local mWidget
 local mInputWidget
 local mTextInput
+local mAccessToken
 
 function loadFrame( selectedLeagues )
     local widget = GUIReader:shareReader():widgetFromJsonFile("scenes/CreateCompetition.json")
@@ -34,6 +35,9 @@ function loadFrame( selectedLeagues )
     local ongoingCheckBox = tolua.cast( mInputWidget:getChildByName("Ongoing"), "CheckBox" )
     ongoingCheckBox:addTouchEventListener( ongoingEventHandler )
 
+    local facebookCheckBox = tolua.cast( mInputWidget:getChildByName("Facebook"), "CheckBox" )
+    facebookCheckBox:addTouchEventListener( facebookEventHandler )
+
     if selectedLeagues ~= nil then
         Logic:setSelectedLeagues( { selectedLeagues } )
     elseif Logic:getSelectedLeagues() == nil then
@@ -51,6 +55,8 @@ function loadFrame( selectedLeagues )
 
     local desTextDisplay = mInputWidget:getChildByName("DescriptionText")
     desTextDisplay:addTouchEventListener( desInputEventHandler )
+
+    mAccessToken = nil
 end
 
 function EnterOrExit( eventType )
@@ -86,6 +92,41 @@ function ongoingEventHandler( sender, eventType )
     end
 end
 
+function facebookEventHandler( sender, eventType )
+    if eventType == TOUCH_EVENT_ENDED then
+        local facebookCheckBox = tolua.cast( sender, "CheckBox" )
+        if facebookCheckBox:getSelectedState() == false then
+            local doShare = function()
+                print("Do Share")
+                local handler = function( accessToken, success )
+                    if success then
+                        mAccessToken = accessToken
+                    else
+                        facebookCheckBox:setSelectedState( false )
+                    end
+                    
+                    ConnectingMessage.selfRemove()
+                end
+                ConnectingMessage.loadFrame()
+                FacebookDelegate:sharedDelegate():grantPublishPermission( "publish_actions", handler )
+            end
+
+            if Logic:getFbId() == false then
+                local successHandler = function()
+                    doShare()
+                end
+                local failedHandler = function()
+                    print("FB connect failed.")
+                    facebookCheckBox:setSelectedState( false )
+                end
+                EventManager:postEvent( Event.Do_FB_Connect_With_User, { successHandler, failedHandler } )
+            else
+                doShare()
+            end
+        end
+    end
+end
+
 function confirmEventHandler( sender, eventType )
     if eventType == TOUCH_EVENT_ENDED then
         -- Check the date
@@ -117,6 +158,7 @@ end
 function sendCreateCompetition()
     local numberOfMonth = mInputWidget:getChildByName( "MonthInput" ):getNodeByTag( 1 ):getText()
     local ongoingCheckBox = tolua.cast( mInputWidget:getChildByName("Ongoing"), "CheckBox" )
+    local facebookCheckBox = tolua.cast( mInputWidget:getChildByName("Facebook"), "CheckBox" )
     if ongoingCheckBox:getSelectedState() then
         numberOfMonth = -1
     end
@@ -125,7 +167,7 @@ function sendCreateCompetition()
     local description = tolua.cast( mInputWidget:getChildByName( "DescriptionText" ), "Label" ):getStringValue()
     local selectedLeagues = Logic:getSelectedLeagues() or {}
 
-    EventManager:postEvent( Event.Do_Create_Competition, { name, description, numberOfMonth, selectedLeagues } )
+    EventManager:postEvent( Event.Do_Create_Competition, { name, description, numberOfMonth, selectedLeagues, facebookCheckBox:getSelectedState(), mAccessToken } )
 end
 
 function backEventHandler( sender, eventType )

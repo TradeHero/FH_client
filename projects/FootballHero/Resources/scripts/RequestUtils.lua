@@ -39,7 +39,7 @@ POST_CHAT_MESSAGE_REST_CALL = SERVER_IP.."/api/chat/postChatMessage"
 
 
 FACEBOOK_FRIENDS_LIST_CALL = "/me/friends?access_token="
-USE_DEV = true
+USE_DEV = false
 
 --[[
     DS:
@@ -134,8 +134,6 @@ function messageHandler( requestInfo, isSucceed, body, header, status, errorBuff
     CCLuaLog( "Http reponse: "..status.." and errorBuffer: "..errorBuffer )
     local headers = createHeaderObject( header )
     local responseEncoding = headers["Content-Encoding"]
-    print("Response encoding: "..responseEncoding)
-    
     --[[
         to (de-)compress deflate format, use wbits = -zlib.MAX_WBITS
         to (de-)compress zlib format, use wbits = zlib.MAX_WBITS
