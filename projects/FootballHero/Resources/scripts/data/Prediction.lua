@@ -10,16 +10,18 @@ oddId, answer, rewards, selected:getTextureFile()
     "Answer": "Answer",
     "Rewards": 100,
     "AnswerImagePath": "path"
+    "PredictionType": "AH"
 }
 
 --]]
 
-function Prediction:new( oddId, answer, rewards, answerImagePath )
+function Prediction:new( oddId, answer, rewards, answerImagePath, type )
 	local obj = {
 		OddId = oddId,
         Answer = answer,
         Rewards = rewards,
-        AnswerImagePath = answerImagePath
+        AnswerImagePath = answerImagePath,
+        PredictionType = type,
 	}
 
 	setmetatable(obj, self)

@@ -31,6 +31,12 @@ Whole Data :
       "Answer" : "Arsenal to win.", 
       "Reward": 4000, 
       "AnswerIcon": "XXXX.png"
+
+      -- Below are for Analyze usage.
+      "Type": "WL" or "TG" or "AH"
+      "LeagueId": 100
+      "TeamId1": 100
+      "TeamId2": 200
     }
   ],
   "Message" : "My first bet",
@@ -53,7 +59,7 @@ function Coupons:new()
     return obj 
 end
 
-function Coupons:addCoupon( id, answer, reward, answerIcon )
+function Coupons:addCoupon( id, answer, reward, answerIcon, predictionType, leagueId, teamid1, teamid2 )
     local idList = {}
     table.insert( idList, id )
 
@@ -62,7 +68,11 @@ function Coupons:addCoupon( id, answer, reward, answerIcon )
         Stake = 1000,
         Answer = answer,
         Reward = reward,
-        AnswerIcon = answerIcon
+        AnswerIcon = answerIcon,
+        PredictionType = predictionType,
+        LeagueId = leagueId,
+        TeamId1 = teamid1,
+        TeamId2 = teamid2,
     }
 
     table.insert( self.CouponForms, coupon )

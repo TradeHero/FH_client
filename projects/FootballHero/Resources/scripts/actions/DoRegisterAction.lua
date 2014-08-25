@@ -125,5 +125,8 @@ function onRegisterNameRequestSuccess( jsonResponse )
     local finishEvent = Event.Enter_Sel_Fav_Team
     local finishEventParam = {}
 
+    local params = { Platform = "email" }
+    Analytics:sharedDelegate():postEvent( Constants.ANALYTICS_EVENT_LOGIN, Json.encode( params ) )
+
     EventManager:postEvent( Event.Check_File_Version, { mConfigMd5Info, finishEvent, finishEventParam } )
 end

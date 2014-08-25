@@ -18,6 +18,7 @@ local mMatch
 local mMarketInfo
 local mFinishCallback
 
+local TYPE_STRING = "AH"
 local FINISH_SCALE_TIME = 0.5
 local FINISH_DELAY_TIME = 0.5
 local SCALE_UP_VALUE = 1.1
@@ -145,7 +146,7 @@ function makePrediction( rewards, oddId, answer, selectLeft )
 
     resultSeqArray:addObject( CCDelayTime:create( FINISH_DELAY_TIME ) )
     resultSeqArray:addObject( CCCallFuncN:create( function()
-        local prediction = Prediction:new( oddId, answer, rewards, selected:getTextureFile() )
+        local prediction = Prediction:new( oddId, answer, rewards, selected:getTextureFile(), TYPE_STRING )
         mFinishCallback( selectLeft, prediction )
     end ) )
 

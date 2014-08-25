@@ -48,6 +48,18 @@ end
 function onRequestSuccess( jsonResponse )
     local balance = jsonResponse["Balance"]
 
+    local predictions = Logic:getPredictions()
+    for i = 1, predictions:getSize() do
+        local prediction = predictions:get( i )
+
+        local params = { Type = prediction["PredictionType"],
+                        Leagueid = prediction["LeagueId"],
+                        Teamid1 = prediction["TeamId1"],
+                        Teamid2 = prediction["TeamId2"], }
+        CCLuaLog("Send ANALYTICS_EVENT_PREDICTION: "..Json.encode( params ) )
+        Analytics:sharedDelegate():postEvent( Constants.ANALYTICS_EVENT_PREDICTION, Json.encode( params ) )
+    end
+
     Logic:resetPredictions()
     Logic:setBalance( balance )
 

@@ -76,5 +76,8 @@ function onRequestSuccess( jsonResponse )
         finishEvent = Event.Enter_Register_Name
     end
 
+    local params = { Platform = "facebook" }
+    Analytics:sharedDelegate():postEvent( Constants.ANALYTICS_EVENT_LOGIN, Json.encode( params ) )
+
     EventManager:postEvent( Event.Check_File_Version, { configMd5Info, finishEvent } )
 end
