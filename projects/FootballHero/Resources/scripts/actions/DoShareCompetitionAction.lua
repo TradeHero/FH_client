@@ -35,5 +35,12 @@ function action( param )
 end
 
 function onRequestSuccess( jsonResponse )
+    local params = { Platform = "facebook", 
+                    Content = "competition code", 
+                    Action = "wall share", 
+                    Location = "competition share button" }
+    CCLuaLog("Send ANALYTICS_EVENT_SOCIAL_ACTION: "..Json.encode( params ) )
+    Analytics:sharedDelegate():postEvent( Constants.ANALYTICS_EVENT_SOCIAL_ACTION, Json.encode( params ) )
+
     EventManager:postEvent( Event.Show_Info, { "Competition is Shared to Facebook." } )
 end

@@ -8,9 +8,12 @@ local ConnectingMessage = require("scripts.views.ConnectingMessage")
 local RequestUtils = require("scripts.RequestUtils")
 local Logic = require("scripts.Logic").getInstance()
 
+local mFacebookShare
+
 function action( param )
 
     local name, description, numberOfMonth, selectedLeagues, facebookShare, accessToken = param[1], param[2], param[3], param[4], param[5], param[6]
+    mFacebookShare = facebookShare
 
     if string.len( name ) == 0 then
         RequestUtils.onRequestFailed( "Title cannot blank." )
@@ -57,6 +60,19 @@ end
 function onRequestSuccess( jsonResponse )
     local competitionId = jsonResponse["CompetitionId"]
     local joinToken = jsonResponse["JoinToken"]
+
+    if mFacebookShare then
+        local params = { Platform = "facebook", 
+                        Content = "competition code", 
+                        Action = "wall share", 
+                        Location = "competition creation" }
+        CCLuaLog("Send ANALYTICS_EVENT_SOCIAL_ACTION: "..Json.encode( params ) )
+        Analytics:sharedDelegate():postEvent( Constants.ANALYTICS_EVENT_SOCIAL_ACTION, Json.encode( params ) )
+    end
+
+    local params = { Action = "create"}
+    CCLuaLog("Send ANALYTICS_EVENT_COMPETITION: "..Json.encode( params ) )
+    Analytics:sharedDelegate():postEvent( Constants.ANALYTICS_EVENT_COMPETITION, Json.encode( params ) )
 
     EventManager:popHistoryWithoutExec()    -- Remove the create competition event in history. So that it can back direct to the Community scene.
     EventManager:postEvent( Event.Enter_Competition_Detail, { competitionId } )

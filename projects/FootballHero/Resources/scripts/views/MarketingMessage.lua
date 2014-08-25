@@ -1,5 +1,6 @@
 module(..., package.seeall)
 
+local Json = require("json")
 local Constants = require("scripts.Constants")
 local SceneManager = require("scripts.SceneManager")
 local EventManager = require("scripts.events.EventManager").getInstance()
@@ -34,12 +35,26 @@ end
 function okEventHandler( sender, eventType )
     if eventType == TOUCH_EVENT_ENDED then
         SceneManager.removeWidget( mWidget )
+
+        local params = { Content = "competition creation", 
+                        Action = "accept", 
+                        Location = "after prediction" }
+        CCLuaLog("Send ANALYTICS_EVENT_POPUP: "..Json.encode( params ) )
+        Analytics:sharedDelegate():postEvent( Constants.ANALYTICS_EVENT_POPUP, Json.encode( params ) )
+
         EventManager:postEvent( Event.Enter_Create_Competition, { true, mLeagueId } )
     end
 end
 
 function closeEventHandler( sender, eventType )
     if eventType == TOUCH_EVENT_ENDED then
+        
+        local params = { Content = "competition creation", 
+                        Action = "cancel/close", 
+                        Location = "after prediction" }
+        CCLuaLog("Send ANALYTICS_EVENT_POPUP: "..Json.encode( params ) )
+        Analytics:sharedDelegate():postEvent( Constants.ANALYTICS_EVENT_POPUP, Json.encode( params ) )
+
         SceneManager.removeWidget( mWidget )
     end
 end

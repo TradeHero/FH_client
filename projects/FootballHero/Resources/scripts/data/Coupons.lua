@@ -94,6 +94,10 @@ function Coupons:setShareOnFacebook( share )
     self.ShareOnFacebook = share
 end
 
+function Coupons:getShareOnFacebook()
+    return self.ShareOnFacebook
+end
+
 function Coupons:toString()
     local form = {}
     for i, v in ipairs( self.CouponForms ) do

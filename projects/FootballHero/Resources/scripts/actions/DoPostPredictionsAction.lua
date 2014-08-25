@@ -60,6 +60,15 @@ function onRequestSuccess( jsonResponse )
         Analytics:sharedDelegate():postEvent( Constants.ANALYTICS_EVENT_PREDICTION, Json.encode( params ) )
     end
 
+    if predictions:getShareOnFacebook() then
+        local params = { Platform = "facebook", 
+                        Content = "prediction", 
+                        Action = "wall share", 
+                        Location = "prediction summary" }
+        CCLuaLog("Send ANALYTICS_EVENT_SOCIAL_ACTION: "..Json.encode( params ) )
+        Analytics:sharedDelegate():postEvent( Constants.ANALYTICS_EVENT_SOCIAL_ACTION, Json.encode( params ) )
+    end
+
     Logic:resetPredictions()
     Logic:setBalance( balance )
 

@@ -43,5 +43,9 @@ function onRequestSuccess( jsonResponse )
     local competitionId = jsonResponse["CompetitionId"]
     local joinToken = jsonResponse["JoinToken"]
     
+    local params = { Action = "join"}
+    CCLuaLog("Send ANALYTICS_EVENT_COMPETITION: "..Json.encode( params ) )
+    Analytics:sharedDelegate():postEvent( Constants.ANALYTICS_EVENT_COMPETITION, Json.encode( params ) )
+
     EventManager:postEvent( Event.Enter_Competition_Detail, { competitionId } )
 end
