@@ -17,7 +17,13 @@ namespace Utils
 
 		void selectImageResult(bool success);
         
-        void sendMail(char* receiver, char* subject, char* body, int errorHandler);
+        void sendMail(char* receiver, char* subject, char* body, int handler);
+
+		void sendMailResult(int resultCode);
+
+		void sendSMS(char* body, int handler);
+
+		void sendSMSResult(int resultCode);
         
 		char* createFormWithFile(const char* begin, const char* end, const char* filePath, const char* pszMode, unsigned long *pSize);
 
@@ -25,7 +31,8 @@ namespace Utils
 	protected:
 		Misc();
 		int mSelectImageHandler;
-	
+		int mSendMailHandler;
+		int mSendSMSHandler;
 	};
 };
 

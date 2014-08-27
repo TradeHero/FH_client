@@ -1,0 +1,8 @@
+<html>
+<head>
+<title>Here is my title</title>
+</head>
+Hello world, from cocos2dx. %s
+<body>
+</body>
+</html>

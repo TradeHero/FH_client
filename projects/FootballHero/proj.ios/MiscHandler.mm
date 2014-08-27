@@ -35,8 +35,33 @@ void MiscHandler::selectImageResult(bool success)
     Utils::Misc::sharedDelegate()->selectImageResult(success);
 }
 
-bool MiscHandler::sendMail(char* receiver, char* subject, char* body)
+void MiscHandler::sendMail(char* receiver, char* subject, char* body)
 {
     AppController *app = (AppController*) [[UIApplication sharedApplication] delegate];
-    return [[app getViewController] sendMail:[NSString stringWithUTF8String:receiver] withSubject:[NSString stringWithUTF8String:subject] withBody:[NSString stringWithUTF8String:body]];
+    bool result = [[app getViewController] sendMail:[NSString stringWithUTF8String:receiver] withSubject:[NSString stringWithUTF8String:subject] withBody:[NSString stringWithUTF8String:body]];
+    // The phone dose not support sending mail.
+    if (result == false)
+    {
+        sendMailResult( -1 );
+    }
+}
+
+void MiscHandler::sendMailResult(int resultCode)
+{
+    Utils::Misc::sharedDelegate()->sendMailResult(resultCode);
+}
+
+void MiscHandler::sendSMS(char *body)
+{
+    AppController *app = (AppController*) [[UIApplication sharedApplication] delegate];
+    bool result = [[app getViewController] sendSMS:[NSString stringWithUTF8String:body]];
+    if (result == false)
+    {
+        sendSMSResult( -1 );
+    }
+}
+
+void MiscHandler::sendSMSResult(int resultCode)
+{
+    Utils::Misc::sharedDelegate()->sendSMSResult(resultCode);
 }

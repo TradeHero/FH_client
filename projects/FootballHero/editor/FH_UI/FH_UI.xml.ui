@@ -75,6 +75,7 @@
     <string>LeaderbaordDropDown.json</string>
     <string>LeaderbaordContentInDropDown.json</string>
     <string>MarketingMessage.json</string>
+    <string>ShareTypeSelection.json</string>
   </JsonList>
   <CanvasSize>
     <Width>640</Width>
@@ -84,7 +85,14 @@
   <ProjectType>UIProject</ProjectType>
   <ResRelativePath />
   <imageFileList />
-  <imagePngList />
+  <imagePngList>
+    <string>Popup/close_icon.png</string>
+    <string>Competition/header.png</string>
+    <string>Tutorial/Default Button.png</string>
+    <string>Tutorial/facebook_icon.png</string>
+    <string>Tutorial/email_icon.png</string>
+    <string>Tutorial/phone_icon.png</string>
+  </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>CreateCompetitionContent.json</CurrentUIJson>
+  <CurrentUIJson>CompetitionLeaderboard.json</CurrentUIJson>
 </UIProject>

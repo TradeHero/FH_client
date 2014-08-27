@@ -61,6 +61,8 @@ EventNameList =
     "Do_Password_Reset",
     "Do_Send_Chat_Message",
     "Do_Get_Chat_Message",
+    "Do_Share_By_SMS",
+    "Do_Share_By_Email",
 
     "Show_Info",
     "Show_Error_Message",
@@ -89,6 +91,8 @@ EventNameDosenotTrackList =
     "Do_Password_Reset",
     "Do_Send_Chat_Message",
     "Do_Get_Chat_Message",
+    "Do_Share_By_SMS",
+    "Do_Share_By_Email",
 
     "Check_Start_Tutorial",
     "Check_File_Version",

@@ -9,5 +9,7 @@ class Misc
 
 	void sendMail(char* receiver, char* subject, char* body, LUA_FUNCTION errorHandler);
 
+	void sendSMS(char* body, LUA_FUNCTION errorHandler);
+
 	void terminate();
 };

@@ -12,7 +12,13 @@ public:
     
     void selectImageResult(bool success);
     
-    bool sendMail(char* receiver, char* subject, char* body);
+    void sendMail(char* receiver, char* subject, char* body);
+    
+    void sendMailResult(int resultCode);
+    
+    void sendSMS(char* body);
+    
+    void sendSMSResult(int resultCode);
     
     
     // Getter and setter for local varibles.

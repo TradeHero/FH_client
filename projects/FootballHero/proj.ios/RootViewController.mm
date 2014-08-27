@@ -138,13 +138,61 @@
     }
 }
 
+- (bool) sendSMS:(NSString *)body
+{
+    if([MFMessageComposeViewController canSendText]){
+        MFMessageComposeViewController *picker = [[MFMessageComposeViewController alloc] init];
+        picker.messageComposeDelegate = self;
+        
+        picker.body = body;
+        [self presentViewController:picker
+                           animated:YES
+                         completion:NULL];
+        return true;
+    }else{
+        NSLog(@"Device not configured to send SMS.");
+        return false;
+    }
+}
+
 - (void)mailComposeController: (MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error;
 {
     if (result == MFMailComposeResultSent)
     {
         // NSLog(@"It's away!");
+        MiscHandler::getInstance()->sendMailResult(1);
+    }
+    else
+    {
+        MiscHandler::getInstance()->sendMailResult(0);
     }
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+-(void) messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result{
+    
+    // Notifies users about errors associated with the interface
+    switch (result)
+    {
+        case MessageComposeResultCancelled:
+            NSLog(@"Result: SMS sending canceled");
+            MiscHandler::getInstance()->sendSMSResult(0);
+            break;
+        case MessageComposeResultSent:
+            NSLog(@"Result: SMS sent");
+            MiscHandler::getInstance()->sendSMSResult(1);
+            break;
+        case MessageComposeResultFailed:
+            NSLog(@"Result: SMS sending failed");
+            MiscHandler::getInstance()->sendSMSResult(0);
+            break;
+        default:
+            NSLog(@"Result: SMS not sent");
+            MiscHandler::getInstance()->sendSMSResult(0);
+            break;
+    }
+    
+    [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
 /*

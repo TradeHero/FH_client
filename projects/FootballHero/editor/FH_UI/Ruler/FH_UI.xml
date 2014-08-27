@@ -292,4 +292,8 @@
     <Project>MarketingMessage</Project>
     <GuidesList />
   </GuidesProject>
+  <GuidesProject>
+    <Project>ShareTypeSelection</Project>
+    <GuidesList />
+  </GuidesProject>
 </ArrayOfGuidesProject>
