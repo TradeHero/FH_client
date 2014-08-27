@@ -5,6 +5,7 @@ local Event = require("scripts.events.Event").EventList
 local ConnectingMessage = require("scripts.views.ConnectingMessage")
 local Logic = require("scripts.Logic").getInstance()
 local Json = require("json")
+local Constants = require("scripts.Constants")
 local RequestUtils = require("scripts.RequestUtils")
 
 
