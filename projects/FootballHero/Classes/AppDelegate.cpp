@@ -16,6 +16,8 @@ USING_NS_CC;
 USING_NS_CC_EXT;
 using namespace CocosDenshion;
 
+#define KEY_OF_VERSION   "current-version-code"
+
 AppDelegate::AppDelegate()
 {
 }
@@ -64,6 +66,36 @@ bool AppDelegate::applicationDidFinishLaunching()
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
 	eglView->setFrameSize(541, 960);
 #endif
+
+	std::string assetsVersion = CCUserDefault::sharedUserDefault()->getStringForKey(KEY_OF_VERSION);
+	unsigned long pSize = 0;
+	std::string appVersionFilePath = CCFileUtils::sharedFileUtils()->fullPathForFilename("version");
+	char* appVersionFileContent = (char*)CCFileUtils::sharedFileUtils()->getFileData(appVersionFilePath.c_str(), "r", &pSize);
+	std::string appVersion(appVersionFileContent, pSize);
+	if (assetsVersion == "")
+	{
+		// For new install, set the currentVersion.
+		CCUserDefault::sharedUserDefault()->setStringForKey(KEY_OF_VERSION, appVersion);
+		CCLOG("New app installed.");
+	}
+	else
+	{
+		// If App upgrade, rename the old local assets folder. 
+		if (appVersion > assetsVersion)
+		{
+			std::string localAssetsPath = CCFileUtils::sharedFileUtils()->getWritablePath() + "local";
+			std::string localAssetsPathNew = localAssetsPath + assetsVersion;
+			CCLOG("App upgraded. Rename old local assets folder: %s", localAssetsPathNew.c_str());
+			if (rename(localAssetsPath.c_str(), localAssetsPathNew.c_str()) != 0)
+			{
+				CCLOG("Can not rename old local assets folder.");
+			}
+			else
+			{
+				CCUserDefault::sharedUserDefault()->setStringForKey(KEY_OF_VERSION, appVersion);
+			}
+		}
+	}
 
 	CCScene *updateScene = CCScene::create();
 	UpdateLayer *updateLayer = new UpdateLayer();

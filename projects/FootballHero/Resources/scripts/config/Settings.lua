@@ -2,6 +2,7 @@ module(..., package.seeall)
 
 local Event = require("scripts.events.Event").EventList
 
+
 SettingsItem = {
 	{ ["itemName"] = "Send feedback", ["event"] = Event.Do_Send_Feedback, },
 	--{ ["itemName"] = "Profile", ["event"] = Event.Do_Send_Feedback, },

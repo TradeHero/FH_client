@@ -146,10 +146,10 @@ bool AssetsManager::checkUpdate()
     }
     
     string recordedVersion = CCUserDefault::sharedUserDefault()->getStringForKey(KEY_OF_VERSION);
-    if (recordedVersion == _version)
+    if (recordedVersion >= _version)
     {
         sendErrorMessage(kNoNewVersion);
-        CCLOG("there is not new version");
+        CCLOG("there is no new version");
         // Set resource search path.
         setSearchPath();
         return false;

@@ -11,12 +11,14 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "Popup/close_icon.png",
-    "Competition/header.png",
+    "MatchListScene/match_bkg.png",
+    "header/back.png",
     "Tutorial/Default Button.png",
-    "Tutorial/facebook_icon.png",
-    "Tutorial/email_icon.png",
-    "Tutorial/phone_icon.png"
+    "chat/Chat_Icon.png",
+    "chat/GreenArrow.png",
+    "Competition/copy_icon.png",
+    "Competition/share_icon.png",
+    "chat/More Button.png"
   ],
   "version": "1.5.0.0",
   "widgetTree": {
@@ -870,8 +872,8 @@
           "ignoreSize": true,
           "layoutParameter": null,
           "opacity": 255,
-          "positionPercentX": 0.85625,
-          "positionPercentY": 0.164612681,
+          "positionPercentX": 0.8540179,
+          "positionPercentY": 0.162852108,
           "positionType": 0,
           "rotation": 0,
           "scaleX": 1,
@@ -884,8 +886,8 @@
           "useMergedTexture": false,
           "visible": true,
           "width": 63,
-          "x": 548,
-          "y": 187,
+          "x": 546,
+          "y": 185,
           "capInsetsHeight": 1,
           "capInsetsWidth": 1,
           "capInsetsX": 0,
@@ -901,13 +903,13 @@
           "fontType": 0,
           "normal": null,
           "normalData": {
-            "path": "Competition/fbnobkg_icon.png",
+            "path": "Competition/share_icon.png",
             "plistFile": "",
             "resourceType": 0
           },
           "pressed": null,
           "pressedData": {
-            "path": "Competition/fbnobkg_icon.png",
+            "path": "Competition/share_icon.png",
             "plistFile": "",
             "resourceType": 0
           },

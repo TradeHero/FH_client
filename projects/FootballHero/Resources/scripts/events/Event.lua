@@ -44,6 +44,7 @@ EventNameList =
     "Enter_Competition_More",
     "Enter_Competition_Chat",
     "Enter_Tutorial_Ui_With_Type",
+    "Enter_Share",
 
     "Do_Register",
     "Do_Register_Name",
@@ -75,6 +76,8 @@ EventNameList =
 
 EventNameDosenotTrackList = 
 { 
+    "Enter_Share",
+    
     "Do_Register",
     "Do_Register_Name",
     "Do_Login",

@@ -223,6 +223,7 @@
 		7388C04118F4E2FF00CF667C /* HttpRequestForLua.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7388C03F18F4E2FF00CF667C /* HttpRequestForLua.cpp */; };
 		738BA12A193D7FD2008A74F6 /* DES56.lua in Resources */ = {isa = PBXBuildFile; fileRef = 738BA129193D7FD2008A74F6 /* DES56.lua */; };
 		73B455CF19A48B2D0097A722 /* lua_zlib.c in Sources */ = {isa = PBXBuildFile; fileRef = 73B455CD19A48B2D0097A722 /* lua_zlib.c */; };
+		73B455D319B085FE0097A722 /* version in Resources */ = {isa = PBXBuildFile; fileRef = 73B455D219B085FE0097A722 /* version */; };
 		73B8CB0A1953EB5400E62B43 /* game.bin in Resources */ = {isa = PBXBuildFile; fileRef = 73B8CB091953EB5400E62B43 /* game.bin */; };
 		73BFF75A191779FB002F173A /* des56.c in Sources */ = {isa = PBXBuildFile; fileRef = 73BFF753191779FB002F173A /* des56.c */; };
 		73BFF75B191779FB002F173A /* ldes56.c in Sources */ = {isa = PBXBuildFile; fileRef = 73BFF755191779FB002F173A /* ldes56.c */; };
@@ -749,6 +750,7 @@
 		738BA129193D7FD2008A74F6 /* DES56.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = DES56.lua; sourceTree = "<group>"; };
 		73B455CD19A48B2D0097A722 /* lua_zlib.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lua_zlib.c; path = crypt/lua_zlib.c; sourceTree = "<group>"; };
 		73B455CE19A48B2D0097A722 /* lua_zlib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = lua_zlib.h; path = crypt/lua_zlib.h; sourceTree = "<group>"; };
+		73B455D219B085FE0097A722 /* version */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = version; sourceTree = "<group>"; };
 		73B8CB091953EB5400E62B43 /* game.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = game.bin; sourceTree = "<group>"; };
 		73BFF753191779FB002F173A /* des56.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = des56.c; path = crypt/des56.c; sourceTree = "<group>"; };
 		73BFF754191779FB002F173A /* des56.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = des56.h; path = crypt/des56.h; sourceTree = "<group>"; };
@@ -2072,6 +2074,7 @@
 		F293BC4615EB859D00256477 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				73B455D219B085FE0097A722 /* version */,
 				73B8CB091953EB5400E62B43 /* game.bin */,
 				733DE932193F26C800361638 /* Default~ipad.png */,
 				733DE933193F26C800361638 /* Default-Portrait@2x~ipad.png */,
@@ -2136,7 +2139,7 @@
 				LastUpgradeCheck = 0510;
 				TargetAttributes = {
 					F293B3C715EB7BE500256477 = {
-						DevelopmentTeam = RSLW4S7XVW;
+						DevelopmentTeam = CLAS2G6QPJ;
 					};
 				};
 			};
@@ -2190,6 +2193,7 @@
 				733DE935193F26C800361638 /* Default-Portrait@2x~ipad.png in Resources */,
 				73FC0A25199079630006D0E2 /* LICENSE in Resources */,
 				733DE931193F262900361638 /* Icon-152.png in Resources */,
+				73B455D319B085FE0097A722 /* version in Resources */,
 				730D984818DC4317000CA5F9 /* extern.lua in Resources */,
 				15C1569B1683138E00D239F2 /* Icon-57.png in Resources */,
 				73B8CB0A1953EB5400E62B43 /* game.bin in Resources */,

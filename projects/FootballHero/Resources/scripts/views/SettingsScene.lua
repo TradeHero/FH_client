@@ -43,7 +43,7 @@ function initContent()
     for i = 1, table.getn( SettingsConfig.SettingsItem ) do
     	local eventHandler = function( sender, eventType )
             if eventType == TOUCH_EVENT_ENDED then
-                EventManager:postEvent( SettingsConfig.SettingsItem[i]["event"] )
+                EventManager:postEvent( SettingsConfig.SettingsItem[i]["event"], SettingsConfig.SettingsItem[i]["eventParam"] )
             end
         end
 

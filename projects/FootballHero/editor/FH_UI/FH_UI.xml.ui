@@ -85,14 +85,7 @@
   <ProjectType>UIProject</ProjectType>
   <ResRelativePath />
   <imageFileList />
-  <imagePngList>
-    <string>Popup/close_icon.png</string>
-    <string>Competition/header.png</string>
-    <string>Tutorial/Default Button.png</string>
-    <string>Tutorial/facebook_icon.png</string>
-    <string>Tutorial/email_icon.png</string>
-    <string>Tutorial/phone_icon.png</string>
-  </imagePngList>
+  <imagePngList />
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>CompetitionLeaderboard.json</CurrentUIJson>
+  <CurrentUIJson>ShareTypeSelection.json</CurrentUIJson>
 </UIProject>

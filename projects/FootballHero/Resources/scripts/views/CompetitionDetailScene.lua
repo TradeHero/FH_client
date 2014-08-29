@@ -7,15 +7,12 @@ local Event = require("scripts.events.Event").EventList
 local SMIS = require("scripts.SMIS")
 local ViewUtils = require("scripts.views.ViewUtils")
 local Logic = require("scripts.Logic").getInstance()
-local ConnectingMessage = require("scripts.views.ConnectingMessage")
-local FileUtils = require("scripts.FileUtils")
 
 
-local SHARE_BODY = "Can you beat me? Join my competition on FootballHero. Code: %s  www.footballheroapp.com/Download.html"
+local SHARE_BODY = "Can you beat me? Join my competition on FootballHero. Code: %s  www.footballheroapp.com/download"
 local SHARE_TITLE = "Join %s's competition on FootballHero"
 
 local mWidget
-local mShareTypeSelectionWidget
 local mTokenInput
 local mChatMessageContainer
 local mCompetitionId
@@ -50,7 +47,6 @@ function loadFrame( subType, competitionId )
     initContent( competitionDetail )
     initLeaderboard( competitionDetail )
 
-    mShareTypeSelectionWidget = nil
     mStep = 1
     mHasMoreToLoad = true
 end
@@ -107,7 +103,7 @@ function initContent( competitionDetail )
     local copyCodeBt = mWidget:getChildByName("copy")
     copyCodeBt:addTouchEventListener( copyCodeEventHandler )
     local shareBt = mWidget:getChildByName("share")
-    shareBt:addTouchEventListener( shareByFacebook )
+    shareBt:addTouchEventListener( shareTypeSelectEventHandler )
     local chatBt = mWidget:getChildByName("chatRoom")
     chatBt:addTouchEventListener( chatRoomEventHandler )
 end
@@ -244,49 +240,11 @@ function shareByFacebook( sender, eventType )
     end
 end
 
-function shareByEmail( sender, eventType )
-    if eventType == TOUCH_EVENT_ENDED then
-        EventManager:postEvent( Event.Do_Share_By_Email, { string.format( SHARE_BODY, mCompetitionCodeString ), 
-                                                            string.format( SHARE_TITLE, Logic:getDisplayName() ) } )
-    end
-end
-
-function shareBySMS( sender, eventType )
-    if eventType == TOUCH_EVENT_ENDED then
-        EventManager:postEvent( Event.Do_Share_By_SMS, { string.format( SHARE_BODY, mCompetitionCodeString ) } )
-    end
-end
-
-function closeShareTypeSelectionHandler( sender, eventType )
-    if eventType == TOUCH_EVENT_ENDED then
-        if mShareTypeSelectionWidget ~= nil then
-            mShareTypeSelectionWidget:setEnabled( false )
-        end
-    end
-end
-
 function shareTypeSelectEventHandler( sender, eventType )
     if eventType == TOUCH_EVENT_ENDED then
-        if mShareTypeSelectionWidget == nil then
-            mShareTypeSelectionWidget = GUIReader:shareReader():widgetFromJsonFile("scenes/ShareTypeSelection.json")
-            mWidget:addChild( mShareTypeSelectionWidget )
-
-            mShareTypeSelectionWidget:addTouchEventListener( function ( sender, eventType )
-                -- Do nothing, just block touch event.
-            end )
-
-            local byFacebook = mShareTypeSelectionWidget:getChildByName("facebook")
-            local byEmail = mShareTypeSelectionWidget:getChildByName("email")
-            local bySMS = mShareTypeSelectionWidget:getChildByName("sms")
-            local close = mShareTypeSelectionWidget:getChildByName("close")
-
-            byFacebook:addTouchEventListener( shareByFacebook )
-            byEmail:addTouchEventListener( shareByEmail )
-            bySMS:addTouchEventListener( shareBySMS )
-            close:addTouchEventListener( closeShareTypeSelectionHandler )
-        end
-
-        mShareTypeSelectionWidget:setEnabled( true )
+        EventManager:postEvent( Event.Enter_Share, { string.format( SHARE_TITLE, Logic:getDisplayName() ),
+                                                    string.format( SHARE_BODY, mCompetitionCodeString ),
+                                                    shareByFacebook } )
     end
 end
 
