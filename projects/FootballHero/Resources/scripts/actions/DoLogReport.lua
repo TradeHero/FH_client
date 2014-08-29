@@ -10,7 +10,7 @@ local SPLUNK_LOG_IP = "https://api.p3js-eqtr.data.splunkstorm.com/1/inputs/http"
 
 function reportConfigError( log )
     if not RequestUtils.USE_DEV then
-        report( log, "configError" )
+        --report( log, "configError" )
     end
 end
 

@@ -85,7 +85,17 @@
   <ProjectType>UIProject</ProjectType>
   <ResRelativePath />
   <imageFileList />
-  <imagePngList />
+  <imagePngList>
+    <string>MatchListContent/vs-button.png</string>
+    <string>commonRes/Arsenal.png</string>
+    <string>history/jiantou.png</string>
+    <string>history/hengxian.png</string>
+    <string>history/blue.png</string>
+    <string>history/green.png</string>
+    <string>history/red.png</string>
+    <string>history/shangsheng.png</string>
+    <string>history/xiajiang.png</string>
+  </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>ShareTypeSelection.json</CurrentUIJson>
+  <CurrentUIJson>HistoryMainMatchContent.json</CurrentUIJson>
 </UIProject>
