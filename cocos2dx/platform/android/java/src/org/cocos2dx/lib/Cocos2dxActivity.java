@@ -24,6 +24,7 @@
 package org.cocos2dx.lib;
 
 import android.app.Activity;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
@@ -189,13 +190,13 @@ public abstract class Cocos2dxActivity extends Activity implements Cocos2dxHelpe
     return isEmulator;
   }
 
-  public static void sendMail(Intent intent) {
+  public static void sendMail(Intent intent) throws ActivityNotFoundException {
     Cocos2dxActivity activity = ((Cocos2dxActivity) sContext);
     activity.startActivityForResult(intent, MiscUtil.REQUEST_CODE_SEND_EMAIL);
     activity.setResult(RESULT_OK);
   }
 
-  public static void sendSms(Intent intent) {
+  public static void sendSms(Intent intent) throws ActivityNotFoundException {
     Cocos2dxActivity activity = ((Cocos2dxActivity) sContext);
     activity.startActivityForResult(intent, MiscUtil.REQUEST_CODE_SEND_SMS);
     activity.setResult(RESULT_OK);

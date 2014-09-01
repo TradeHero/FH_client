@@ -1,5 +1,6 @@
 package com.myhero.fh.util;
 
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
 import android.util.Log;
@@ -17,7 +18,12 @@ public class MiscUtil {
     intent.putExtra(Intent.EXTRA_EMAIL, new String[] { receiver });
     intent.putExtra(Intent.EXTRA_SUBJECT, subject);
     intent.putExtra(Intent.EXTRA_TEXT, body);
-    Cocos2dxActivity.sendMail(Intent.createChooser(intent, ""));
+    try {
+      Cocos2dxActivity.sendMail(Intent.createChooser(intent, ""));
+    }
+    catch (ActivityNotFoundException ignored) {
+      sendMailResult(-1);
+    }
   }
 
   public static void sendSms(String body) {
@@ -26,7 +32,12 @@ public class MiscUtil {
     intent.putExtra("sms_body", body);
     intent.setType("vnd.android-dir/mms-sms");
 
-    Cocos2dxActivity.sendSms(intent);
+    try {
+      Cocos2dxActivity.sendSms(intent);
+    }
+    catch (ActivityNotFoundException ignored) {
+      sendMailResult(-1);
+    }
   }
 
   public static void onActivityResult(int requestCode, int resultCode, Intent data) {
