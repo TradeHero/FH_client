@@ -7,6 +7,7 @@
 #endif
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
 #include "platform/android/jni/JniHelper.h"
+#include "MiscAndroid.h"
 #endif
 
 USING_NS_CC;
@@ -78,7 +79,7 @@ namespace Utils
 		MiscHandler::getInstance()->sendMail(receiver, subject, body);
 #endif
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
-        
+        misc_send_mail(receiver, subject, body);
 #endif
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
 		sendMailResult(-1);
@@ -108,7 +109,7 @@ namespace Utils
 		MiscHandler::getInstance()->sendSMS(body);
 #endif
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
-
+		misc_send_sms(body);
 #endif
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
 		sendSMSResult(-1);

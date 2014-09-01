@@ -25,6 +25,7 @@ package org.cocos2dx.lib;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -33,6 +34,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import com.myhero.fh.util.MiscUtil;
 import com.myhero.fh.widget.FHCocos2dxHandler;
 import org.cocos2dx.lib.Cocos2dxHelper.Cocos2dxHelperListener;
 
@@ -185,6 +187,24 @@ public abstract class Cocos2dxActivity extends Activity implements Cocos2dxHelpe
     }
     Log.d(TAG, "isEmulator=" + isEmulator);
     return isEmulator;
+  }
+
+  public static void sendMail(Intent intent) {
+    Cocos2dxActivity activity = ((Cocos2dxActivity) sContext);
+    activity.startActivityForResult(intent, MiscUtil.REQUEST_CODE_SEND_EMAIL);
+    activity.setResult(RESULT_OK);
+  }
+
+  public static void sendSms(Intent intent) {
+    Cocos2dxActivity activity = ((Cocos2dxActivity) sContext);
+    activity.startActivityForResult(intent, MiscUtil.REQUEST_CODE_SEND_SMS);
+    activity.setResult(RESULT_OK);
+  }
+
+  @Override protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    super.onActivityResult(requestCode, resultCode, data);
+
+    MiscUtil.onActivityResult(requestCode, resultCode, data);
   }
 
   // ===========================================================
