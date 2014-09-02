@@ -8,6 +8,7 @@ local SelectedLeaguesScene = require("scripts.views.SelectedLeaguesScene")
 local Event = require("scripts.events.Event").EventList
 local ViewUtils = require("scripts.views.ViewUtils")
 local CountryConfig = require("scripts.config.Country")
+local ConnectingMessage = require("scripts.views.ConnectingMessage")
 
 
 local BLANK_AREA_HEIGHT = 120

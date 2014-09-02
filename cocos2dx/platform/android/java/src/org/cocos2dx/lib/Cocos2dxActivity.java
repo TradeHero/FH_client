@@ -118,12 +118,12 @@ public abstract class Cocos2dxActivity extends Activity implements Cocos2dxHelpe
   public void showEditTextDialog(final long source, final String pTitle, final String pContent,
       final int pInputMode,
       final int pInputFlag, final int pReturnType, final int pMaxLength, float x, float y,
-      float width, float height) {
+      float width, float height, int color) {
     Message msg = new Message();
     msg.what = Cocos2dxHandler.HANDLER_SHOW_EDITBOX_DIALOG;
     msg.obj =
         new Cocos2dxHandler.EditBoxMessage(source, pTitle, pContent, pInputMode, pInputFlag,
-            pReturnType, pMaxLength, x, y, width, height);
+            pReturnType, pMaxLength, x, y, width, height, color);
     this.mHandler.sendMessage(msg);
   }
 

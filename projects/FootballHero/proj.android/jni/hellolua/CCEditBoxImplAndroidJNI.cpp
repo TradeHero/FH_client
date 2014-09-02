@@ -62,6 +62,7 @@ void showEditTextDialogJNI(
 	float y,
   float width,
   float height,
+    int color,
 	EditTextCallback pfEditTextCallback,
 	void* ctx) {
     if (pszMessage == NULL) {
@@ -69,11 +70,11 @@ void showEditTextDialogJNI(
     }
 
     long long editTextSource = (long long) ctx;
-    LOGD("original source: %lld", editTextSource);
+    LOGD("color: %d", color);
     s_editTextCallbackRepo[editTextSource] = pfEditTextCallback;
 
     JniMethodInfo t;
-    if (JniHelper::getStaticMethodInfo(t, CLASS_NAME, "showEditTextDialog", "(JLjava/lang/String;Ljava/lang/String;IIIIFFFF)V")) {
+    if (JniHelper::getStaticMethodInfo(t, CLASS_NAME, "showEditTextDialog", "(JLjava/lang/String;Ljava/lang/String;IIIIFFFFI)V")) {
         jstring stringArg1;
 
         if (!pszTitle) {
@@ -97,7 +98,8 @@ void showEditTextDialogJNI(
             x,
             y,
             width,
-            height);
+            height,
+            color);
 
         t.env->DeleteLocalRef(stringArg1);
         t.env->DeleteLocalRef(stringArg2);

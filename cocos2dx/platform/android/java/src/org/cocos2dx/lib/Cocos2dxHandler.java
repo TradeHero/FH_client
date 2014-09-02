@@ -125,10 +125,11 @@ public class Cocos2dxHandler extends Handler {
     public final float y;
     public final float width;
     public final float height;
+        public final int color;
 
     public EditBoxMessage(long source, String title, String content, int inputMode, int inputFlag,
         int returnType, int maxLength,
-        float x, float y, float width, float height){
+        float x, float y, float width, float height, int color){
       this.source = source;
       this.content = content;
 			this.title = title;
@@ -140,6 +141,7 @@ public class Cocos2dxHandler extends Handler {
       this.y = y;
       this.width = width;
       this.height = height;
+        this.color = color;
     }
 
     @Override public String toString() {

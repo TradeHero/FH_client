@@ -7,8 +7,6 @@ local Json = require("json")
 local RequestUtils = require("scripts.RequestUtils")
 
 
-local KEY_OF_START_TUTORIAL = "start_tutorial_1.0"
-
 function action( param )
     local StartTutorialScene = require("scripts.views.StartTutorialScene")
     local SigninTypeSelectScene = require("scripts.views.Tutorial.SigninTypeSelectScene")
@@ -18,16 +16,19 @@ function action( param )
     local EmailForgotPasswordScene = require("scripts.views.Tutorial.EmailForgotPasswordScene")
     local EmailRegisterNameScene = require("scripts.views.Tutorial.EmailRegisterNameScene")
 
-    StartTutorialScene.loadFrame()
+    if string.len( Logic:getEmail() ) > 0 and string.len( Logic:getPassword() ) > 0 then
+        StartTutorialScene.loadFrame( true )
+        EventManager:postEvent( Event.Do_Login, { Logic:getEmail(), Logic:getPassword() } )
+    elseif string.len( Logic:getFBAccessToken() ) > 0 then
+        StartTutorialScene.loadFrame( true )
+        EventManager:postEvent( Event.Do_FB_Connect )
+    else
+        StartTutorialScene.loadFrame( true )
+    end
     SigninTypeSelectScene.loadFrame()
     EmailSelectScene.loadFrame()
     EmailSigninScene.loadFrame()
     EmailRegisterScene.loadFrame()
     EmailForgotPasswordScene.loadFrame()
     EmailRegisterNameScene.loadFrame()
-end
-
-function tutorialEnd()
-	CCUserDefault:sharedUserDefault():setBoolForKey( KEY_OF_START_TUTORIAL, true )
-    EventManager:postEvent( Event.Enter_Login_N_Reg )
 end

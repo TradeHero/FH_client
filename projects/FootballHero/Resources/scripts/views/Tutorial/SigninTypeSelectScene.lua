@@ -51,7 +51,6 @@ end
 function signinTypeFacebookEventHandler( sender, eventType )
     if eventType == TOUCH_EVENT_ENDED then
         EventManager:postEvent( Event.Do_FB_Connect )
-        sender:setTouchEnabled( false )
     end
 end
 

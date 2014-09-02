@@ -7,6 +7,7 @@ local Event = require("scripts.events.Event").EventList
 local SMIS = require("scripts.SMIS")
 local ViewUtils = require("scripts.views.ViewUtils")
 local Logic = require("scripts.Logic").getInstance()
+local ConnectingMessage = require("scripts.views.ConnectingMessage")
 
 
 local SHARE_BODY = "Can you beat me? Join my competition on FootballHero. Code: %s  www.footballheroapp.com/download"

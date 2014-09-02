@@ -122,6 +122,7 @@ public class OverlayEditText extends EditText
     setY(editBoxMessage.y);
     setWidth((int) editBoxMessage.width);
     setHeight((int) editBoxMessage.height);
+    setTextColor(editBoxMessage.color);
 
     setSingleLine();
     setPadding(0, 0, 0, 0);

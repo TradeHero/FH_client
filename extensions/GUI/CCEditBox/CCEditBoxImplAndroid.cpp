@@ -328,6 +328,10 @@ void CCEditBoxImplAndroid::openKeyboard()
     CCPoint visiblePos = ccp(designCoord.x * eglView->getScaleX(), designCoord.y * eglView->getScaleY());
     CCPoint screenGLPos = ccpAdd(visiblePos, eglView->getViewPortRect().origin);
     
+	ccColor3B textColor = m_pEditBox->getFontColor();
+	int textColorValue = (0xff << 24) + (textColor.r << 16) + (textColor.g << 8) + textColor.b;
+	CCLOG("New app installed. %d", textColorValue);
+
 	m_pLabelPlaceHolder->setVisible(false);
     m_pLabel->setVisible(false);
     showEditTextDialogJNI(m_strPlaceHolder.c_str(),
@@ -340,6 +344,7 @@ void CCEditBoxImplAndroid::openKeyboard()
 						  viewH - screenGLPos.y,
                           rect.size.width * eglView->getScaleX(), 
                           rect.size.height * eglView->getScaleY(),
+						  textColorValue,
 						  editBoxCallbackFunc,
 						  (void*)this  );
 	

@@ -42,7 +42,7 @@ local MOVE_TIME = 0.2
 local FADE_TIME = 0.5
 local SCALE_TIME = 0.6
 
-function loadFrame()
+function loadFrame( startAnim )
     mWidget = Layout:create()
     mWidget:registerScriptHandler( EnterOrExit )
     SceneManager.clearNAddWidget( mWidget )
@@ -97,7 +97,9 @@ function loadFrame()
     mCurrentTutorialIndex = 1
     updatePageIndicator()
 
-    playStartAnim()
+    if startAnim then
+        playStartAnim()
+    end
 end
 
 function EnterOrExit( eventType )

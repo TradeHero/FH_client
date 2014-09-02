@@ -292,6 +292,10 @@ public:
     void setFontColor(const ccColor3B& color);
     
 	/**
+	* Get the font color fot he widget's text.
+	*/
+	ccColor3B getFontColor();
+	/**
 	 * Set the placeholder's font.
 	 * @param pFontName The font name.
 	 * @param fontSize The font size.

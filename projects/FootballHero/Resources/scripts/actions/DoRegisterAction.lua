@@ -87,7 +87,7 @@ function onRegisterRequestSuccess( jsonResponse )
 
     mConfigMd5Info = configMd5Info
 
-    Logic:setUserInfo( mEmail, mPassword, sessionToken, userId )
+    Logic:setUserInfo( mEmail, mPassword, "", sessionToken, userId )
     Logic:setDisplayName( displayName )
     Logic:setPictureUrl( pictureUrl )
     Logic:setStartLeagueId( startLeagueId )

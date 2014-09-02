@@ -13,7 +13,7 @@ end
 function handler( resultCode )
 	if resultCode == -1 then
 		EventManager:postEvent( Event.Show_Error_Message, { "You have no SMS set up." } )
-	elseif resultCode == 1 then
+	else
 		local params = { Platform = "sms", 
 	                    Content = "competition code", 
 	                    Action = "share", 

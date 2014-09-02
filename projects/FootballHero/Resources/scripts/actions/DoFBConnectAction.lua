@@ -6,7 +6,9 @@ local Event = require("scripts.events.Event").EventList
 local ConnectingMessage = require("scripts.views.ConnectingMessage")
 local Json = require("json")
 local RequestUtils = require("scripts.RequestUtils")
+local Logic = require("scripts.Logic").getInstance()
 
+local mAccessToken
 
 function action( param )
 	local Json = require("json")
@@ -17,10 +19,9 @@ function action( param )
             -- To handle user reject to the oAuth.
             onFBConnectFailed()
         else
-            print("Get login result "..accessToken)
+            CCLuaLog("Get login result "..accessToken)
             onFBConnectSuccess( accessToken )
         end
-        ConnectingMessage.selfRemove()
     end
 
     ConnectingMessage.loadFrame()
@@ -28,10 +29,11 @@ function action( param )
 end
 
 function onFBConnectFailed()
-    
+    ConnectingMessage.selfRemove()
 end
 
 function onFBConnectSuccess( accessToken )
+    mAccessToken = accessToken
     local requestContent = { SocialNetworkType = 0, AuthToken = accessToken, useDev = RequestUtils.USE_DEV }
     local requestContentText = Json.encode( requestContent )
     
@@ -42,13 +44,15 @@ function onFBConnectSuccess( accessToken )
     requestInfo.url = url
 
     local handler = function( isSucceed, body, header, status, errorBuffer )
-        RequestUtils.messageHandler( requestInfo, isSucceed, body, header, status, errorBuffer, RequestUtils.HTTP_200, onRequestSuccess )
+        RequestUtils.messageHandler( requestInfo, isSucceed, body, header, status, errorBuffer, RequestUtils.HTTP_200, onRequestSuccess, onRequestFailed )
     end
 
     local httpRequest = HttpRequestForLua:create( CCHttpRequest.kHttpPost )
     httpRequest:addHeader( Constants.CONTENT_TYPE_JSON )
     httpRequest:getRequest():setRequestData( requestContentText, string.len( requestContentText ) )
     httpRequest:sendHttpRequest( url, handler )
+
+    ConnectingMessage.loadFrame()
 end
 
 function onRequestSuccess( jsonResponse )
@@ -62,8 +66,7 @@ function onRequestSuccess( jsonResponse )
     local active = jsonResponse["ActiveInCompetition"]
     local FbId = jsonResponse["FbId"]
 
-    local Logic = require("scripts.Logic").getInstance()
-    Logic:setUserInfo( "", "", sessionToken, userId )
+    Logic:setUserInfo( "", "", mAccessToken, sessionToken, userId )
     Logic:setDisplayName( displayName )
     Logic:setPictureUrl( pictureUrl )
     Logic:setStartLeagueId( startLeagueId )
@@ -80,4 +83,14 @@ function onRequestSuccess( jsonResponse )
     Analytics:sharedDelegate():postEvent( Constants.ANALYTICS_EVENT_LOGIN, Json.encode( params ) )
 
     EventManager:postEvent( Event.Check_File_Version, { configMd5Info, finishEvent } )
+end
+
+function onRequestFailed( jsonResponse )
+    local errorBuffer = jsonResponse["Message"]
+    if errorBuffer == "" then
+        errorBuffer = "Login failed. Please retry."
+    end
+
+    Logic:clearAccountInfoFile()
+    EventManager:postEvent( Event.Show_Error_Message, { errorBuffer } )
 end

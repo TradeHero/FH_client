@@ -3,10 +3,10 @@ require "Cocos2d"
 
 -- for CCLuaEngine traceback
 function __G__TRACKBACK__(msg)
-    print("----------------------------------------")
-    print("LUA ERROR: " .. tostring(msg) .. "\n")
-    print(debug.traceback())
-    print("----------------------------------------")
+    CCLuaLog("----------------------------------------")
+    CCLuaLog("LUA ERROR: " .. tostring(msg) .. "\n")
+    CCLuaLog(debug.traceback())
+    CCLuaLog("----------------------------------------")
 
     if CCApplication:sharedApplication():getTargetPlatform() ~= kTargetWindows then
         cclog( msg )

@@ -199,6 +199,11 @@ void CCEditBox::setFontColor(const ccColor3B& color)
     }
 }
 
+ccColor3B CCEditBox::getFontColor()
+{
+	return m_colText;
+}
+
 void CCEditBox::setPlaceholderFont(const char* pFontName, int fontSize)
 {
     m_strPlaceholderFontName = pFontName;
@@ -232,7 +237,7 @@ void CCEditBox::setPlaceholderFontSize(int fontSize)
 
 void CCEditBox::setPlaceholderFontColor(const ccColor3B& color)
 {
-    m_colText = color;
+	m_colPlaceHolder = color;
     if (m_pEditBoxImpl != NULL)
     {
         m_pEditBoxImpl->setPlaceholderFontColor(color);

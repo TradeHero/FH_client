@@ -6,6 +6,7 @@ local EventManager = require("scripts.events.EventManager").getInstance()
 local Event = require("scripts.events.Event").EventList
 local ConnectingMessage = require("scripts.views.ConnectingMessage")
 local RequestUtils = require("scripts.RequestUtils")
+local Logic = require("scripts.Logic").getInstance()
 
 local mEmail = "test126@abc.com"
 local mPassword = "test126"
@@ -34,7 +35,7 @@ function action( param )
     requestInfo.url = url
 
      local handler = function( isSucceed, body, header, status, errorBuffer )
-        RequestUtils.messageHandler( requestInfo, isSucceed, body, header, status, errorBuffer, RequestUtils.HTTP_200, onRequestSuccess )
+        RequestUtils.messageHandler( requestInfo, isSucceed, body, header, status, errorBuffer, RequestUtils.HTTP_200, onRequestSuccess, onRequestFailed )
     end
 
     local httpRequest = HttpRequestForLua:create( CCHttpRequest.kHttpPost )
@@ -56,8 +57,7 @@ function onRequestSuccess( jsonResponse )
     local active = jsonResponse["ProfileDto"]["ActiveInCompetition"]
     local FbId = jsonResponse["ProfileDto"]["FbId"]
 
-    local Logic = require("scripts.Logic").getInstance()
-    Logic:setUserInfo( mEmail, mPassword, sessionToken, userId )
+    Logic:setUserInfo( mEmail, mPassword, "", sessionToken, userId )
     Logic:setDisplayName( displayName )
     Logic:setPictureUrl( pictureUrl )
     Logic:setStartLeagueId( startLeagueId )
@@ -78,4 +78,14 @@ function onRequestSuccess( jsonResponse )
 
     EventManager:postEvent( Event.Check_File_Version, { configMd5Info, finishEvent, finishEventParam } )
     --EventManager:postEvent( Event.Do_Post_Logo )
+end
+
+function onRequestFailed( jsonResponse )
+    local errorBuffer = jsonResponse["Message"]
+    if errorBuffer == "" then
+        errorBuffer = "Login failed. Please retry."
+    end
+
+    Logic:clearAccountInfoFile()
+    EventManager:postEvent( Event.Show_Error_Message, { errorBuffer } )
 end

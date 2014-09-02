@@ -46,6 +46,7 @@ void showEditTextDialogJNI(
     float y,
     float width,
     float height,
+	int color,
     EditTextCallback pfEditTextCallback, 
     void* ctx);
 

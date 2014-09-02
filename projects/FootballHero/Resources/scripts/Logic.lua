@@ -13,6 +13,7 @@ local SUB_PREDICTION = "sub"
 local ACCOUNT_INFO_FILE = "ai.txt"
 local ACCOUNT_INFO_EMAIL = "email"
 local ACCOUNT_INFO_PASSWORD = "password"
+local ACCOUNT_INFO_FB_ACCESSTOKEN = "fbAccessToken"
 
 local instance
 
@@ -24,7 +25,9 @@ function getInstance()
 		if savedAccountInfo ~= nil and string.len( savedAccountInfo ) > 0 then
 			local accountInfo = Json.decode( savedAccountInfo )
 			print( savedAccountInfo )
-			instance:setUserInfo( accountInfo[ACCOUNT_INFO_EMAIL], accountInfo[ACCOUNT_INFO_PASSWORD], 0, "" )
+			instance:setUserInfo( accountInfo[ACCOUNT_INFO_EMAIL], 
+				accountInfo[ACCOUNT_INFO_PASSWORD], 
+				accountInfo[ACCOUNT_INFO_FB_ACCESSTOKEN], 0, "" )
 		end
 	end
 
@@ -51,6 +54,7 @@ function Logic:new()
 		sessionToken = 0,
 		email = "",
 		password = "",
+		fbAccessToken = "",
 		userId = "",
 		displayName = "",
 		pictureUrl = nil,
@@ -129,20 +133,22 @@ function Logic:setLastChatMessageTimestamp( timestamp )
 	self.mLastChatMessageTimestamp = timestamp
 end
 
-function Logic:setUserInfo( email, password, sessionToken, userId )
+function Logic:setUserInfo( email, password, fbAccessToken, sessionToken, userId )
 	self.email = email
 	self.password = password
+	self.fbAccessToken = fbAccessToken
 	self.sessionToken = sessionToken
 	self.userId = userId
 
 	local accountInfo = {}
 	accountInfo[ACCOUNT_INFO_EMAIL] = email
 	accountInfo[ACCOUNT_INFO_PASSWORD] = password
+	accountInfo[ACCOUNT_INFO_FB_ACCESSTOKEN] = fbAccessToken
 	FileUtils.writeStringToFile( ACCOUNT_INFO_FILE, Json.encode( accountInfo ) )
 end
 
 function Logic:clearAccountInfoFile()
-	self:setUserInfo( "", "", 0, "" )
+	self:setUserInfo( "", "", "", 0, "" )
 end
 
 function Logic:getEmail()
@@ -151,6 +157,10 @@ end
 
 function Logic:getPassword()
 	return self.password
+end
+
+function Logic:getFBAccessToken()
+	return self.fbAccessToken
 end
 
 function Logic:getAuthSessionString()
