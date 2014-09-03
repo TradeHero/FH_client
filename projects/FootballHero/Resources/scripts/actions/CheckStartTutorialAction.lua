@@ -16,10 +16,11 @@ function action( param )
     local EmailForgotPasswordScene = require("scripts.views.Tutorial.EmailForgotPasswordScene")
     local EmailRegisterNameScene = require("scripts.views.Tutorial.EmailRegisterNameScene")
 
-    if string.len( Logic:getEmail() ) > 0 and string.len( Logic:getPassword() ) > 0 then
+    if Logic:getEmail() ~= nil and string.len( Logic:getEmail() ) > 0 and
+         Logic:getPassword() ~= nil and string.len( Logic:getPassword() ) > 0 then
         StartTutorialScene.loadFrame( true )
         EventManager:postEvent( Event.Do_Login, { Logic:getEmail(), Logic:getPassword() } )
-    elseif string.len( Logic:getFBAccessToken() ) > 0 then
+    elseif Logic:getFBAccessToken() ~= nil and string.len( Logic:getFBAccessToken() ) > 0 then
         StartTutorialScene.loadFrame( true )
         EventManager:postEvent( Event.Do_FB_Connect )
     else
