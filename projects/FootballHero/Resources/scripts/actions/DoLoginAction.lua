@@ -6,7 +6,6 @@ local EventManager = require("scripts.events.EventManager").getInstance()
 local Event = require("scripts.events.Event").EventList
 local ConnectingMessage = require("scripts.views.ConnectingMessage")
 local RequestUtils = require("scripts.RequestUtils")
-local Logic = require("scripts.Logic").getInstance()
 
 local mEmail = "test126@abc.com"
 local mPassword = "test126"
@@ -35,7 +34,7 @@ function action( param )
     requestInfo.url = url
 
      local handler = function( isSucceed, body, header, status, errorBuffer )
-        RequestUtils.messageHandler( requestInfo, isSucceed, body, header, status, errorBuffer, RequestUtils.HTTP_200, onRequestSuccess, onRequestFailed )
+        RequestUtils.messageHandler( requestInfo, isSucceed, body, header, status, errorBuffer, RequestUtils.HTTP_200, onRequestSuccess )
     end
 
     local httpRequest = HttpRequestForLua:create( CCHttpRequest.kHttpPost )
@@ -54,38 +53,19 @@ function onRequestSuccess( jsonResponse )
     local pictureUrl = jsonResponse["ProfileDto"]["PictureUrl"]
     local startLeagueId = jsonResponse["ProfileDto"]["StartLeagueId"]
     local balance = jsonResponse["ProfileDto"]["Balance"]
-    local active = jsonResponse["ProfileDto"]["ActiveInCompetition"]
     local FbId = jsonResponse["ProfileDto"]["FbId"]
 
-    Logic:setUserInfo( mEmail, mPassword, "", sessionToken, userId )
+    local Logic = require("scripts.Logic").getInstance()
+    Logic:setUserInfo( mEmail, mPassword, sessionToken, userId )
     Logic:setDisplayName( displayName )
     Logic:setPictureUrl( pictureUrl )
     Logic:setStartLeagueId( startLeagueId )
     Logic:setBalance( balance )
-    Logic:setActiveInCompetition( active )
     Logic:setFbId( FbId )
 
     local finishEvent = Event.Enter_Sel_Fav_Team
-    local finishEventParam = {}
     if displayName == nil then
-        --finishEvent = Event.Enter_Register_Name
-        finishEvent = Event.Enter_Tutorial_Ui_With_Type
-        finishEventParam = { Constants.TUTORIAL_SHOW_EMAIL_REGISTER_NAME }
+        finishEvent = Event.Enter_Register_Name
     end
-
-    local params = { Platform = "email" }
-    Analytics:sharedDelegate():postEvent( Constants.ANALYTICS_EVENT_LOGIN, Json.encode( params ) )
-
-    EventManager:postEvent( Event.Check_File_Version, { configMd5Info, finishEvent, finishEventParam } )
-    --EventManager:postEvent( Event.Do_Post_Logo )
-end
-
-function onRequestFailed( jsonResponse )
-    local errorBuffer = jsonResponse["Message"]
-    if errorBuffer == "" then
-        errorBuffer = "Login failed. Please retry."
-    end
-
-    Logic:clearAccountInfoFile()
-    EventManager:postEvent( Event.Show_Error_Message, { errorBuffer } )
+    EventManager:postEvent( Event.Check_File_Version, { configMd5Info, finishEvent } )
 end

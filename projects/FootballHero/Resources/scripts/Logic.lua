@@ -13,7 +13,6 @@ local SUB_PREDICTION = "sub"
 local ACCOUNT_INFO_FILE = "ai.txt"
 local ACCOUNT_INFO_EMAIL = "email"
 local ACCOUNT_INFO_PASSWORD = "password"
-local ACCOUNT_INFO_FB_ACCESSTOKEN = "fbAccessToken"
 
 local instance
 
@@ -25,9 +24,7 @@ function getInstance()
 		if savedAccountInfo ~= nil and string.len( savedAccountInfo ) > 0 then
 			local accountInfo = Json.decode( savedAccountInfo )
 			print( savedAccountInfo )
-			instance:setUserInfo( accountInfo[ACCOUNT_INFO_EMAIL], 
-				accountInfo[ACCOUNT_INFO_PASSWORD], 
-				accountInfo[ACCOUNT_INFO_FB_ACCESSTOKEN], 0, "" )
+			instance:setUserInfo( accountInfo[ACCOUNT_INFO_EMAIL], accountInfo[ACCOUNT_INFO_PASSWORD], 0, "" )
 		end
 	end
 
@@ -50,20 +47,15 @@ function Logic:new()
 		mCoupons = Coupons:new(),  -- DS: Coupons
 		mPreviousLeagueSelected = 0,
 		mSelectedLeagues = nil,
-		mLastChatMessageTimestamp = 0,
 		sessionToken = 0,
 		email = "",
 		password = "",
-		fbAccessToken = "",
 		userId = "",
 		displayName = "",
 		pictureUrl = nil,
 		startLeagueId = 0,
 		balance = 0,
-		ActiveInCompetition = false,
 		FbId = nil,
-
-		competitionDetail = nil,
 	}
     
     setmetatable(obj, self)
@@ -125,30 +117,16 @@ function Logic:setSelectedLeagues( selectedLeagues )
 	self.mSelectedLeagues = selectedLeagues
 end
 
-function Logic:getLastChatMessageTimestamp()
-	return self.mLastChatMessageTimestamp
-end
-
-function Logic:setLastChatMessageTimestamp( timestamp )
-	self.mLastChatMessageTimestamp = timestamp
-end
-
-function Logic:setUserInfo( email, password, fbAccessToken, sessionToken, userId )
+function Logic:setUserInfo( email, password, sessionToken, userId )
 	self.email = email
 	self.password = password
-	self.fbAccessToken = fbAccessToken
 	self.sessionToken = sessionToken
 	self.userId = userId
 
 	local accountInfo = {}
 	accountInfo[ACCOUNT_INFO_EMAIL] = email
 	accountInfo[ACCOUNT_INFO_PASSWORD] = password
-	accountInfo[ACCOUNT_INFO_FB_ACCESSTOKEN] = fbAccessToken
 	FileUtils.writeStringToFile( ACCOUNT_INFO_FILE, Json.encode( accountInfo ) )
-end
-
-function Logic:clearAccountInfoFile()
-	self:setUserInfo( "", "", "", 0, "" )
 end
 
 function Logic:getEmail()
@@ -159,10 +137,6 @@ function Logic:getPassword()
 	return self.password
 end
 
-function Logic:getFBAccessToken()
-	return self.fbAccessToken
-end
-
 function Logic:getAuthSessionString()
 	return "Authorization: FH-Token "..self.sessionToken
 end
@@ -171,10 +145,9 @@ function Logic:getUserId()
 	return self.userId
 end
 
-function Logic:addPrediction( prediciton, answer, reward, answerIcon, predictionType, leagueId, teamid1, teamid2 )
-	print( string.format( "Make Prediction: %d with answer[%s], reward[%d] and answerIcon[%s]", 
-							prediciton, answer, reward, answerIcon ) )
-	self.mCoupons:addCoupon( prediciton, answer, reward, answerIcon, predictionType, leagueId, teamid1, teamid2 )
+function Logic:addPrediction( prediciton, answer, reward, answerIcon )
+	print( string.format( "Make Prediction: %d with answer[%s], reward[%d] and answerIcon[%s]", prediciton, answer, reward, answerIcon ) )
+	self.mCoupons:addCoupon( prediciton, answer, reward, answerIcon )
 end
 
 function Logic:setPredictionMetadata( message, shareOnFacebook )
@@ -230,14 +203,6 @@ function Logic:getBalance()
 	return self.balance
 end
 
-function Logic:setActiveInCompetition( active )
-	self.ActiveInCompetition = active
-end
-
-function Logic:getActiveInCompetition()
-	return self.ActiveInCompetition
-end
-
 function Logic:getUncommitedBalance()
 	return self.mCoupons:getSize() * Constants.STAKE
 end
@@ -248,12 +213,4 @@ end
 
 function  Logic:getFbId()
 	return self.FbId
-end
-
-function Logic:setCompetitionDetail( competitionDetail )
-	self.competitionDetail = competitionDetail
-end
-
-function Logic:getCompetitionDetail()
-	return self.competitionDetail
 end

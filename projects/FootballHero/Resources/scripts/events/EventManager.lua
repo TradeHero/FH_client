@@ -43,18 +43,9 @@ function EventManager:postEvent( eventId, param )
 		print( "Event id = "..Event.GetEventNameById( eventId ).." has no action." )
 	else
 		print( "Event id = "..Event.GetEventNameById( eventId ).." handled." )
-		CCTextureCache:sharedTextureCache():removeUnusedTextures()
 		self:addHistory( eventId, param )
 		self.mEventHandler[eventId].action( param )
 	end
-end
-
-function EventManager:scheduledExecutor( func, time )
-	local taskArray = CCArray:create()
-	taskArray:addObject( CCDelayTime:create( time ) )
-	taskArray:addObject( CCCallFuncN:create( func ) )
-
-	CCDirector:sharedDirector():getRunningScene():runAction( CCSequence:create( taskArray ) )
 end
 
 function EventManager:addHistory( eventId, param )

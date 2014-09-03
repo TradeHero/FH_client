@@ -30,13 +30,11 @@ local CDNFileNameList = {
 
 local mConfigMd5Info
 local mFinishEvent
-local mFinishEventParam
 local mCurrentFileIndex
 
 function action( param )
 	mConfigMd5Info = param[1]
 	mFinishEvent = param[2]
-	mFinishEventParam = param[3]
 
 	mCurrentFileIndex = 0
 	checkNext()
@@ -58,8 +56,7 @@ function checkNext()
 	        local LeagueConfig = require("scripts.config.League")
 	        local TeamConfig = require("scripts.config.Team")
 
-	        ConnectingMessage.selfRemove()
-	        EventManager:postEvent( mFinishEvent, mFinishEventParam )
+	        EventManager:postEvent( mFinishEvent )
 		end ) )
 
 		CCDirector:sharedDirector():getRunningScene():runAction( CCSequence:create( loadDataTaskSeqArray ) )
@@ -103,24 +100,15 @@ function checkFile( fileIndex )
 end
 
 function onRequestSuccess( fileName, fileContent )
-    -- Compare the md5 for the new download file
-    local MD5ConfigId = MD5ConfigIDList[mCurrentFileIndex]
-	local serverMD5 = mConfigMd5Info[MD5ConfigId]
-	local localMD5 = MD5.sumhexa( fileContent )
-	if serverMD5 ~= nil and serverMD5 ~= localMD5 then
-		onRequestFailed("")
-	else
-		print("Update complete for file: "..fileName)
-		FileUtils.writeStringToFile( fileName, fileContent )
-		checkNext()
-	end
+	print("Update complete for file: "..fileName)
+    FileUtils.writeStringToFile( fileName, fileContent )
+
+    checkNext()
 end
 
 function onRequestFailed( errorBuffer )
 	if errorBuffer == "" then
-		errorBuffer = "Update configurations failed. Please retry."
+		errorBuffer = "Update file failed."
 	end
-
-	mCurrentFileIndex = mCurrentFileIndex - 1
     EventManager:postEvent( Event.Show_Error_Message, { errorBuffer, checkNext } )
 end

@@ -4,127 +4,68 @@ local Constants = require("scripts.Constants")
 local SceneManager = require("scripts.SceneManager")
 local Logic = require("scripts.Logic").getInstance()
 local EventManager = require("scripts.events.EventManager").getInstance()
-local SelectedLeaguesScene = require("scripts.views.SelectedLeaguesScene")
 local Event = require("scripts.events.Event").EventList
 local ViewUtils = require("scripts.views.ViewUtils")
 local CountryConfig = require("scripts.config.Country")
-local ConnectingMessage = require("scripts.views.ConnectingMessage")
 
-
-local BLANK_AREA_HEIGHT = 120
 
 local mWidget
-local mInputWidget
 local mTextInput
-local mAccessToken
 
-function loadFrame( selectedLeagues )
+local mTitleText
+local mDescriptionText
+local mDay
+local mMonth
+local mYear
+
+function loadFrame()
     local widget = GUIReader:shareReader():widgetFromJsonFile("scenes/CreateCompetition.json")
     mWidget = widget
     mWidget:registerScriptHandler( EnterOrExit )
-    SceneManager.clearNAddWidget(mWidget)
-    SceneManager.setKeypadBackListener( keypadBackEventHandler )
+    SceneManager.clearNAddWidget(widget)
 
-    local contentContainer = tolua.cast( mWidget:getChildByName("ScrollView"), "ScrollView" )
-    contentContainer:removeAllChildrenWithCleanup( true )
+    createTextInput()
 
-    mInputWidget = GUIReader:shareReader():widgetFromJsonFile("scenes/CreateCompetitionContent.json")
-    contentContainer:addChild( mInputWidget )
+    if mTitleText ~= nil then
+        mWidget:getChildByName( "TitleInput" ):getNodeByTag( 1 ):setText( mTitleText )
+    end
 
-    createTextInput( mInputWidget )
+    if mDescriptionText ~= nil then
+        tolua.cast( mWidget:getChildByName( "DescriptionText" ), "Label" ):setText( mDescriptionText )
+    end
 
-    local ongoingCheckBox = tolua.cast( mInputWidget:getChildByName("Ongoing"), "CheckBox" )
-    ongoingCheckBox:addTouchEventListener( ongoingEventHandler )
+    if mDay ~= nil then
+        mWidget:getChildByName( "DayInput" ):getNodeByTag( 1 ):setText( mDay )
+    end
 
-    local facebookCheckBox = tolua.cast( mInputWidget:getChildByName("Facebook"), "CheckBox" )
-    facebookCheckBox:addTouchEventListener( facebookEventHandler )
+    if mMonth ~= nil then
+        mWidget:getChildByName( "MonthInput" ):getNodeByTag( 1 ):setText( mMonth )
+    end
 
-    if selectedLeagues ~= nil then
-        Logic:setSelectedLeagues( { selectedLeagues } )
-    elseif Logic:getSelectedLeagues() == nil then
+    if mYear ~= nil then
+        mWidget:getChildByName( "YearInput" ):getNodeByTag( 1 ):setText( mYear )
+    end
+
+    if Logic:getSelectedLeagues() == nil then
         Logic:setSelectedLeagues( CountryConfig.getAllLeagues() )
     end
 
-    local existingContentHeight = mInputWidget:getSize().height + BLANK_AREA_HEIGHT
-    print( existingContentHeight )
-    SelectedLeaguesScene.loadFrame( contentContainer, Logic:getSelectedLeagues(), true, existingContentHeight )
-
-    local confirmBt = mWidget:getChildByName("Create")
+    local confirmBt = widget:getChildByName("Create")
     confirmBt:addTouchEventListener( confirmEventHandler )
-    local backBt = mWidget:getChildByName("Back")
+    local backBt = widget:getChildByName("Back")
     backBt:addTouchEventListener( backEventHandler )
+    local selectLeagueBt = widget:getChildByName("SelectLeague")
+    selectLeagueBt:addTouchEventListener( selectLeagueEventHandler )
 
-    local desTextDisplay = mInputWidget:getChildByName("DescriptionText")
+    local desTextDisplay = mWidget:getChildByName("DescriptionText")
     desTextDisplay:addTouchEventListener( desInputEventHandler )
-
-    mAccessToken = nil
 end
 
 function EnterOrExit( eventType )
     if eventType == "enter" then
     elseif eventType == "exit" then
         mWidget = nil
-        mInputWidget = nil
         mTextInput = nil
-    end
-end
-
-function preSetContent()
-    local description = "Predictions made in the selected league for the competition are automatically included in the competition."
-    local title = Logic:getDisplayName().."'s competition"
-
-    mInputWidget:getChildByName( "TitleInput" ):getNodeByTag( 1 ):setText( title )
-    tolua.cast( mInputWidget:getChildByName( "DescriptionText" ), "Label" ):setText( description )
-    mTextInput:setText( description )
-    tolua.cast( mInputWidget:getChildByName("Ongoing"), "CheckBox" ):setSelectedState( true )
-end
-
-function ongoingEventHandler( sender, eventType )
-    if eventType == TOUCH_EVENT_ENDED then
-        local ongoingCheckBox = tolua.cast( sender, "CheckBox" )
-        local monthInput = tolua.cast( mInputWidget:getChildByName( "MonthInput" ):getNodeByTag( 1 ), "CCEditBox" )
-        if ongoingCheckBox:getSelectedState() == true then
-            monthInput:setEnabled( true )
-            monthInput:setFontColor( ccc3( 0, 0, 0 ) )
-        else
-            monthInput:setEnabled( false )
-            monthInput:setFontColor( ccc3( 125, 125, 125 ) )
-        end
-    end
-end
-
-function facebookEventHandler( sender, eventType )
-    if eventType == TOUCH_EVENT_ENDED then
-        local facebookCheckBox = tolua.cast( sender, "CheckBox" )
-        if facebookCheckBox:getSelectedState() == false then
-            local doShare = function()
-                print("Do Share")
-                local handler = function( accessToken, success )
-                    if success then
-                        mAccessToken = accessToken
-                    else
-                        facebookCheckBox:setSelectedState( false )
-                    end
-                    
-                    ConnectingMessage.selfRemove()
-                end
-                ConnectingMessage.loadFrame()
-                FacebookDelegate:sharedDelegate():grantPublishPermission( "publish_actions", handler )
-            end
-
-            if Logic:getFbId() == false then
-                local successHandler = function()
-                    doShare()
-                end
-                local failedHandler = function()
-                    print("FB connect failed.")
-                    facebookCheckBox:setSelectedState( false )
-                end
-                EventManager:postEvent( Event.Do_FB_Connect_With_User, { successHandler, failedHandler } )
-            else
-                doShare()
-            end
-        end
     end
 end
 
@@ -133,9 +74,17 @@ function confirmEventHandler( sender, eventType )
         -- Check the date
         local checkPass = true
         local checkDate = function()
-            local numberOfMonth = tonumber( mInputWidget:getChildByName( "MonthInput" ):getNodeByTag( 1 ):getText() )
-            local ongoingCheckBox = tolua.cast( mInputWidget:getChildByName("Ongoing"), "CheckBox" )
-            if ongoingCheckBox:getSelectedState() == false and numberOfMonth == nil then
+            local endYear = tonumber( mWidget:getChildByName( "YearInput" ):getNodeByTag( 1 ):getText() )
+            local endMonth = tonumber( mWidget:getChildByName( "MonthInput" ):getNodeByTag( 1 ):getText() )
+            local endDay = tonumber( mWidget:getChildByName( "DayInput" ):getNodeByTag( 1 ):getText() )
+            local endTime = os.time{ year = endYear, month = endMonth, day = endDay, hour = 0 }
+
+            local checkYear = tonumber( os.date("%Y", endTime) )
+            local checkMonth = tonumber( os.date("%m", endTime) )
+            local checkDay = tonumber( os.date("%d", endTime) )
+            
+            if endYear ~= checkYear or endMonth ~= checkMonth or endDay ~= checkDay then
+                print( endYear.."/"..endMonth.."/"..endDay.." | "..checkYear.."/"..checkMonth.."/"..checkDay )
                 checkPass = false
             end
         end
@@ -151,39 +100,45 @@ function confirmEventHandler( sender, eventType )
         if checkPass then
             sendCreateCompetition()
         else
-            EventManager:postEvent( Event.Show_Error_Message, { "Number of month is not number." } )
+            EventManager:postEvent( Event.Show_Error_Message, { "Date format is not correct." } )
         end
     end
 end
 
 function sendCreateCompetition()
-    local numberOfMonth = mInputWidget:getChildByName( "MonthInput" ):getNodeByTag( 1 ):getText()
-    local ongoingCheckBox = tolua.cast( mInputWidget:getChildByName("Ongoing"), "CheckBox" )
-    local facebookCheckBox = tolua.cast( mInputWidget:getChildByName("Facebook"), "CheckBox" )
-    if ongoingCheckBox:getSelectedState() then
-        numberOfMonth = -1
-    end
-
-    local name = mInputWidget:getChildByName( "TitleInput" ):getNodeByTag( 1 ):getText()
-    local description = tolua.cast( mInputWidget:getChildByName( "DescriptionText" ), "Label" ):getStringValue()
+    local endTime = os.time{ year = tonumber( mWidget:getChildByName( "YearInput" ):getNodeByTag( 1 ):getText() ), 
+                            month = tonumber( mWidget:getChildByName( "MonthInput" ):getNodeByTag( 1 ):getText() ), 
+                            day = tonumber( mWidget:getChildByName( "DayInput" ):getNodeByTag( 1 ):getText() ),
+                            hour = 0 }
+    local name = mWidget:getChildByName( "TitleInput" ):getNodeByTag( 1 ):getText()
+    local description = tolua.cast( mWidget:getChildByName( "DescriptionText" ), "Label" ):getStringValue()
     local selectedLeagues = Logic:getSelectedLeagues() or {}
 
-    EventManager:postEvent( Event.Do_Create_Competition, { name, description, numberOfMonth, selectedLeagues, facebookCheckBox:getSelectedState(), mAccessToken } )
+    EventManager:postEvent( Event.Do_Create_Competition, { name, description, endTime, selectedLeagues } )
 end
 
 function backEventHandler( sender, eventType )
     if eventType == TOUCH_EVENT_ENDED then
-        keypadBackEventHandler()
+        EventManager:popHistory()
     end
-end
-
-function keypadBackEventHandler()
-    EventManager:popHistory()
 end
 
 function cancelEventHandler( sender, eventType )
     if eventType == TOUCH_EVENT_ENDED then
         SceneManager.removeWidget( mWidget )
+    end
+end
+
+function selectLeagueEventHandler( sender, eventType )
+    if eventType == TOUCH_EVENT_ENDED then
+        -- Cache the content so that they will not got missing back from the league select UI.
+        mTitleText = mWidget:getChildByName( "TitleInput" ):getNodeByTag( 1 ):getText()
+        mDescriptionText = tolua.cast( mWidget:getChildByName( "DescriptionText" ), "Label" ):getStringValue()
+        mDay = mWidget:getChildByName( "DayInput" ):getNodeByTag( 1 ):getText()
+        mMonth = mWidget:getChildByName( "MonthInput" ):getNodeByTag( 1 ):getText()
+        mYear = mWidget:getChildByName( "YearInput" ):getNodeByTag( 1 ):getText()
+
+        EventManager:postEvent( Event.Enter_View_Selected_Leagues )
     end
 end
 
@@ -193,30 +148,45 @@ function desInputEventHandler( sender, eventType )
     end
 end
 
-function createTextInput( widget )
+function createTextInput()
     -- Title
-    local titleInput = ViewUtils.createTextInput( widget:getChildByName( "TitleInput" ), "Title", 520, 50 )
+    local titleInput = ViewUtils.createTextInput( mWidget:getChildByName( "TitleInput" ), "Title", 520, 50 )
+    titleInput:setFontColor( ccc3( 0, 0, 0 ) )
     titleInput:setTouchPriority( SceneManager.TOUCH_PRIORITY_MINUS_ONE )
 
     -- Description
-    local container = widget:getChildByName("DescriptionInput")
+    local container = mWidget:getChildByName("DescriptionInput")
 
     local inputDelegate = EditBoxDelegateForLua:create()
     inputDelegate:registerEventScriptHandler( EDIT_BOX_EVENT_TEXT_CHANGED, function ( textBox, text )
-        local textDisplay = tolua.cast( widget:getChildByName("DescriptionText"), "Label" )
+        local textDisplay = tolua.cast( mWidget:getChildByName("DescriptionText"), "Label" )
         textDisplay:setText( text )
     end )
     container:addNode( tolua.cast( inputDelegate, "CCNode" ) )
 
-    mTextInput = CCEditBox:create( CCSizeMake( 540, 35 ), CCScale9Sprite:create() )
+    mTextInput = CCEditBox:create( CCSizeMake( 550, 35 ), CCScale9Sprite:create() )
     container:addNode( mTextInput )
-    mTextInput:setPosition( 540 / 2, 35 / 2 )
+    mTextInput:setPosition( 550 / 2, 35 / 2 )
+    mTextInput:setFontColor( ccc3( 0, 0, 0 ) )
     mTextInput:setVisible( false )
     mTextInput:setDelegate( inputDelegate.__CCEditBoxDelegate__ )
 
     -- DD/MM/YYYY
-    local monthInput = ViewUtils.createTextInput( widget:getChildByName( "MonthInput" ), "Enter number of months", 520, 50 )
+    local dayInput = ViewUtils.createTextInput( mWidget:getChildByName( "DayInput" ), "DD", 110, 50 )
+    dayInput:setFontColor( ccc3( 0, 0, 0 ) )
+    dayInput:setInputMode( kEditBoxInputModeNumeric )
+    dayInput:setMaxLength( 2 )
+    dayInput:setTouchPriority( SceneManager.TOUCH_PRIORITY_MINUS_ONE )
+
+    local monthInput = ViewUtils.createTextInput( mWidget:getChildByName( "MonthInput" ), "MM", 110, 50 )
+    monthInput:setFontColor( ccc3( 0, 0, 0 ) )
     monthInput:setInputMode( kEditBoxInputModeNumeric )
     monthInput:setMaxLength( 2 )
     monthInput:setTouchPriority( SceneManager.TOUCH_PRIORITY_MINUS_ONE )
+
+    local yearInput = ViewUtils.createTextInput( mWidget:getChildByName( "YearInput" ), "YYYY", 150, 50 )
+    yearInput:setFontColor( ccc3( 0, 0, 0 ) )
+    yearInput:setInputMode( kEditBoxInputModeNumeric )
+    yearInput:setMaxLength( 4 )
+    yearInput:setTouchPriority( SceneManager.TOUCH_PRIORITY_MINUS_ONE )
 end

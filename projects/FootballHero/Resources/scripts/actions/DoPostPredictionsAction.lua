@@ -71,9 +71,7 @@ function onRequestSuccess( jsonResponse )
 
     Logic:resetPredictions()
     Logic:setBalance( balance )
-
-    RequestUtils.clearResponseCache()
-    EventManager:postEvent( Event.Enter_Match_List, { nil, true } )
+    EventManager:postEvent( Event.Enter_Match_List )
 end
 
 function onRequestFailed( jsonResponse )

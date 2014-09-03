@@ -16,15 +16,14 @@ function loadFrame( message )
         mWidget = widget
         mWidget:registerScriptHandler( EnterOrExit )
         SceneManager.addWidget( widget )
-        SceneManager.setKeyPadBackEnabled( false )
 
-        local armatureManager = CCArmatureDataManager:sharedArmatureDataManager()
-        armatureManager:addArmatureFileInfo("anims/ball0.png","anims/ball0.plist","anims/ball.ExportJson")
+        CCArmatureDataManager:sharedArmatureDataManager():addArmatureFileInfo("anims/waiting0.png","anims/waiting0.plist","anims/waiting.ExportJson")
 
-        mWaitingArmature = CCArmature:create("ball")
+        mWaitingArmature = CCArmature:create("waiting")
         mWaitingArmature:setPosition( ccp( 50, 50 ) )
         mWaitingArmature:getAnimation():playWithIndex(0)
         mWidget:getChildByName("animContainer"):addNode( mWaitingArmature )
+
     end
     setMessage( message )
 end
@@ -39,17 +38,14 @@ function EnterOrExit( eventType )
 end
 
 function setMessage( message )
-    --[[
     message = message or "Connecting..."
     print( "Load connecting message scene:"..message )
     local messageLabel = tolua.cast( mWidget:getChildByName("connectMessage"), "Label" )
     messageLabel:setText( message )
-    --]]
 end
 
 function selfRemove()
     SceneManager.removeWidget( mWidget )
-    SceneManager.setKeyPadBackEnabled( true )
 end
 
 function onFrameTouch( sender, eventType )

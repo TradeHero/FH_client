@@ -3,20 +3,20 @@ require "Cocos2d"
 
 -- for CCLuaEngine traceback
 function __G__TRACKBACK__(msg)
-    CCLuaLog("----------------------------------------")
-    CCLuaLog("LUA ERROR: " .. tostring(msg) .. "\n")
-    CCLuaLog(debug.traceback())
-    CCLuaLog("----------------------------------------")
+    print("----------------------------------------")
+    print("LUA ERROR: " .. tostring(msg) .. "\n")
+    print(debug.traceback())
+    print("----------------------------------------")
 
-    local errorDesc = "\nLUA ERROR: "..msg .. "\n"
-    errorDesc = errorDesc.."\n"..debug.traceback()
     if CCApplication:sharedApplication():getTargetPlatform() ~= kTargetWindows then
         cclog( msg )
         local DoLogReport = require("scripts.actions.DoLogReport")
         DoLogReport.reportError( errorDesc )
+    else
+        local errorDesc = "\nLUA ERROR: "..msg .. "\n"
+        errorDesc = errorDesc.."\n"..debug.traceback()
+        CCMessageBox( errorDesc, "LUA ERROR: " )
     end
-
-    CCMessageBox( errorDesc, "LUA ERROR: " )
 end
 
 local cclog = function(...)
@@ -29,14 +29,14 @@ local function main()
     collectgarbage("setstepmul", 5000)
 
     cclog("Game start.")
-    initPackageLoader( true )
+    initPackageLoader( false )
 
     local sceneManager = require("scripts.SceneManager")
     sceneManager.init()
 
     local eventManager = require("scripts.events.EventManager").getInstance()
     local event = require("scripts.events.Event").EventList
-    eventManager:postEvent( event.Check_Start_Tutorial )
+    eventManager:postEvent( event.Enter_Login_N_Reg )
 end
 
 function initPackageLoader( decrypt )
@@ -44,11 +44,20 @@ function initPackageLoader( decrypt )
     local filePath = fileUtils:fullPathForFilename( "game.bin" )
     local Json = require("json")
     if fileUtils:isFileExist( filePath ) then
-        local text
+        local fileHandler, errorCode = io.open( filePath, "rb" )
+        if fileHandler == nil then
+            print( "Read failed from file"..filePath.." with error: "..errorCode )
+            return ""
+        end
+        
+        local text = fileHandler:read("*all")
+        fileHandler:close()
+
+        -- For crypted file.
         if decrypt then
-            text = fileUtils:getDecryptedFileData( filePath, "rb" )
-        else
-            text = fileUtils:getFileData( filePath, "r", 0 )
+            local DES56 = require("DES56")
+            local key = tostring( "tuantuan" )
+            text = DES56.decrypt( text, key )
         end
 
         local gameContent = Json.decode( text )
@@ -77,6 +86,57 @@ function initClientVersion( version )
     if recordedVersion == nil or recordedVersion == "" then
         CCUserDefault:sharedUserDefault():setStringForKey( KEY_OF_VERSION, version )
     end
+end
+
+function encrypt()
+    local fileUtils = CCFileUtils:sharedFileUtils()
+    local filePath = fileUtils:fullPathForFilename( "game.bin" )
+    if fileUtils:isFileExist( filePath ) then
+        print( "crypt "..filePath )
+        local fileHandler, errorCode = io.open( filePath, "rb" )
+        if fileHandler == nil then
+            print( "Read failed from file"..filePath.." with error: "..errorCode )
+            return ""
+        end
+        
+        local text = fileHandler:read("*all")
+        fileHandler:close()
+        
+        local DES56 = require("DES56")
+        local key = 'gooddoggy'
+        local encoded = DES56.crypt( text, key )
+
+        fileHandler, errorCode = io.open( "gameEncodec.bin", "wb" )
+        if fileHandler == nil then
+            print( "Read failed from file".."gameEncodec.bin".." with error: "..errorCode )
+            return ""
+        end
+        fileHandler:write( encoded )
+        fileHandler:close()
+    end
+end
+
+function decrypt()
+    
+    local fileUtils = CCFileUtils:sharedFileUtils()
+    local filePath = fileUtils:fullPathForFilename( "ttt.txt" )
+    if fileUtils:isFileExist( filePath ) then
+        print( filePath )
+        local fileHandler, errorCode = io.open( filePath, "rb" )
+        if fileHandler == nil then
+            print( "Read failed from file"..filePath.." with error: "..errorCode )
+            return ""
+        end
+        
+        local text = fileHandler:read("*all")
+        fileHandler:close()
+        text = tostring( text )
+        
+        local DES56 = require("DES56")
+        local key = tostring( "tuantuan" )
+        local decoded = DES56.decrypt( text, key )
+        print(decoded)
+    end    
 end
 --]]
 

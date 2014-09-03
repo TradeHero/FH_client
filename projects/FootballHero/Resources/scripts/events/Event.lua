@@ -16,11 +16,9 @@ end
 
 EventNameList = 
 { 
-    "Check_Start_Tutorial",
     "Check_File_Version",
 
     "Enter_Login_N_Reg",
-    "Enter_Email_Login_N_Reg",
     "Enter_Register",
     "Enter_Register_Name",
     "Enter_Login",
@@ -41,10 +39,6 @@ EventNameList =
     "Enter_View_Selected_Leagues",
     "Enter_Competition_Leagues",
     "Enter_Competition_Detail",
-    "Enter_Competition_More",
-    "Enter_Competition_Chat",
-    "Enter_Tutorial_Ui_With_Type",
-    "Enter_Share",
 
     "Do_Register",
     "Do_Register_Name",
@@ -59,15 +53,9 @@ EventNameList =
     "Do_Create_Competition",
     "Do_Join_Competition",
     "Do_Share_Competition",
-    "Do_Password_Reset",
-    "Do_Send_Chat_Message",
-    "Do_Get_Chat_Message",
-    "Do_Share_By_SMS",
-    "Do_Share_By_Email",
 
     "Show_Info",
     "Show_Error_Message",
-    "Show_Marketing_Message",
 
     "Load_More_In_Leaderboard",
     "Load_More_In_History",
@@ -76,8 +64,6 @@ EventNameList =
 
 EventNameDosenotTrackList = 
 { 
-    "Enter_Share",
-    
     "Do_Register",
     "Do_Register_Name",
     "Do_Login",
@@ -91,17 +77,10 @@ EventNameDosenotTrackList =
     "Do_Create_Competition",
     "Do_Join_Competition",
     "Do_Share_Competition",
-    "Do_Password_Reset",
-    "Do_Send_Chat_Message",
-    "Do_Get_Chat_Message",
-    "Do_Share_By_SMS",
-    "Do_Share_By_Email",
 
-    "Check_Start_Tutorial",
     "Check_File_Version",
     "Show_Info",
     "Show_Error_Message",
-    "Show_Marketing_Message",
     "Load_More_In_Leaderboard",
     "Load_More_In_History",
     "Load_More_In_Competition_Detail",

@@ -50,8 +50,5 @@ function action( param )
 end
 
 function onRequestSuccess( jsonResponse )
-    Logic:setDisplayName( mUserName )
-    
-    EventManager:postEvent( Event.Do_Post_Logo )
     EventManager:postEvent( Event.Enter_Sel_Fav_Team )
 end

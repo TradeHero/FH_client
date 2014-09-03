@@ -5,17 +5,12 @@ local EventManager = require("scripts.events.EventManager").getInstance()
 local Event = require("scripts.events.Event").EventList
 local ConnectingMessage = require("scripts.views.ConnectingMessage")
 local Json = require("json")
-local Logic = require("scripts.Logic").getInstance()
 local RequestUtils = require("scripts.RequestUtils")
 
 local mEmail = "test126@abc.com"
 local mPassword = "test126"
 local mPasswordConf = "test126"
-local mUserName = "SamYu"
-local mFirstName = "Yu"
-local mLastName = "Zheng"
 
-local mConfigMd5Info
 
 function action( param )
 
@@ -41,19 +36,6 @@ function action( param )
         return
     end
 
-    mUserName, mFirstName, mLastName = param[4], param[5], param[6]
-    if string.len( mUserName ) == 0 then
-        RequestUtils.onRequestFailed( "User name is blank." )
-        return
-    end
-    if mFirstName == nil then
-        mFirstName = ""
-    end
-
-    if mLastName == nil then
-        mLastName = ""
-    end
-
     local requestContent = { Email = mEmail, Password = mPassword, useDev = RequestUtils.USE_DEV }
     local requestContentText = Json.encode( requestContent )
     
@@ -64,7 +46,7 @@ function action( param )
     requestInfo.url = url
 
     local handler = function( isSucceed, body, header, status, errorBuffer )
-        RequestUtils.messageHandler( requestInfo, isSucceed, body, header, status, errorBuffer, RequestUtils.HTTP_200, onRegisterRequestSuccess )
+        RequestUtils.messageHandler( requestInfo, isSucceed, body, header, status, errorBuffer, RequestUtils.HTTP_200, onRequestSuccess )
     end
 
     local httpRequest = HttpRequestForLua:create( CCHttpRequest.kHttpPost )
@@ -75,7 +57,7 @@ function action( param )
     ConnectingMessage.loadFrame()
 end
 
-function onRegisterRequestSuccess( jsonResponse )
+function onRequestSuccess( jsonResponse )
     local sessionToken = jsonResponse["SessionToken"]
     local userId = jsonResponse["Id"]
     local configMd5Info = jsonResponse["ConfigMd5Info"]
@@ -85,48 +67,13 @@ function onRegisterRequestSuccess( jsonResponse )
     local balance = jsonResponse["Balance"]
     local FbId = jsonResponse["FbId"]
 
-    mConfigMd5Info = configMd5Info
-
-    Logic:setUserInfo( mEmail, mPassword, "", sessionToken, userId )
+    local Logic = require("scripts.Logic").getInstance()
+    Logic:setUserInfo( mEmail, mPassword, sessionToken, userId )
     Logic:setDisplayName( displayName )
     Logic:setPictureUrl( pictureUrl )
     Logic:setStartLeagueId( startLeagueId )
     Logic:setBalance( balance )
     Logic:setFbId( FbId )
 
-
-    local requestContent = { DisplayName = mUserName, FirstName = mFirstName, LastName = mLastName, DoB = "" }
-    local requestContentText = Json.encode( requestContent )
-    
-    local url = RequestUtils.SET_USER_METADATA_REST_CALL
-
-    local requestInfo = {}
-    requestInfo.requestData = requestContentText
-    requestInfo.url = url
-
-    local handler = function( isSucceed, body, header, status, errorBuffer )
-        RequestUtils.messageHandler( requestInfo, isSucceed, body, header, status, errorBuffer, RequestUtils.HTTP_200, onRegisterNameRequestSuccess )
-    end
-
-    local httpRequest = HttpRequestForLua:create( CCHttpRequest.kHttpPost )
-    httpRequest:addHeader( "Content-Type: application/json" )
-    httpRequest:addHeader( Logic:getAuthSessionString() )
-    httpRequest:getRequest():setRequestData( requestContentText, string.len( requestContentText ) )
-    httpRequest:sendHttpRequest( url, handler )
-
-    ConnectingMessage.loadFrame()
-end
-
-function onRegisterNameRequestSuccess( jsonResponse )
-    Logic:setDisplayName( mUserName )
-    
-    --EventManager:postEvent( Event.Do_Post_Logo )
-
-    local finishEvent = Event.Enter_Sel_Fav_Team
-    local finishEventParam = {}
-
-    local params = { Platform = "email" }
-    Analytics:sharedDelegate():postEvent( Constants.ANALYTICS_EVENT_LOGIN, Json.encode( params ) )
-
-    EventManager:postEvent( Event.Check_File_Version, { mConfigMd5Info, finishEvent, finishEventParam } )
+    EventManager:postEvent( Event.Check_File_Version, { configMd5Info, Event.Enter_Register_Name } )
 end

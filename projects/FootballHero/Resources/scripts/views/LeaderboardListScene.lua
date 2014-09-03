@@ -6,7 +6,6 @@ local EventManager = require("scripts.events.EventManager").getInstance()
 local Event = require("scripts.events.Event").EventList
 local TeamConfig = require("scripts.config.Team")
 local LeaderboardConfig = require("scripts.config.Leaderboard")
-local LeaderboardListSceneUnexpended = require("scripts.views.LeaderboardListSceneUnexpended")
 local SMIS = require("scripts.SMIS")
 
 
@@ -15,7 +14,6 @@ local mLeaderboardId
 local mSubType
 local mStep
 local mCurrentTotalNum
-local mHasMoreToLoad
 
 -- DS for subType see LeaderboardConfig
 function loadFrame( leaderboardInfo, leaderboardId, subType )
@@ -23,7 +21,6 @@ function loadFrame( leaderboardInfo, leaderboardId, subType )
     mWidget = widget
     mWidget:registerScriptHandler( EnterOrExit )
     SceneManager.clearNAddWidget( widget )
-    SceneManager.setKeypadBackListener( keypadBackEventHandler )
 
     Navigator.loadFrame( widget )
     local backBt = mWidget:getChildByName("back")
@@ -34,16 +31,7 @@ function loadFrame( leaderboardInfo, leaderboardId, subType )
 
     initTitles()
     initContent( leaderboardInfo )
-    initTypeList()
     mStep = 1
-    mHasMoreToLoad = true
-end
-
-function refreshFrame( leaderboardInfo, leaderboardId, subType )
-    mLeaderboardId = leaderboardId
-    mSubType = subType
-
-    initContent( leaderboardInfo )
 end
 
 function EnterOrExit( eventType )
@@ -53,71 +41,19 @@ function EnterOrExit( eventType )
     end
 end
 
-function isShown()
-    return mWidget ~= nil
-end
-
 function backEventHandler( sender,eventType )
     if eventType == TOUCH_EVENT_ENDED then
-        keypadBackEventHandler()
+        --EventManager:postEvent( Event.Enter_Leaderboard )
+        EventManager:popHistory()
     end
-end
-
-function keypadBackEventHandler()
-    EventManager:popHistory()
-end
-
-function initTypeList()
-    local content = SceneManager.widgetFromJsonFile("scenes/LeaderbaordDropDown.json")
-    mWidget:addChild( content )
-
-    local list = tolua.cast( content:getChildByName("typeList"), "ScrollView" )
-    local expendedIndicator = content:getChildByName( "expendIndi" )
-    local mask = content:getChildByName("mask")
-    local buttonEventHandler = function( sender, eventType )
-        if eventType == TOUCH_EVENT_ENDED then
-            if list:isEnabled() then
-                list:setEnabled( false )
-                mask:setEnabled( false )
-                expendedIndicator:setBrightStyle( BRIGHT_NORMAL )
-            else
-                list:setEnabled( true )
-                mask:setEnabled( true )
-                expendedIndicator:setBrightStyle( BRIGHT_HIGHLIGHT )
-            end
-        end
-    end
-    local button = content:getChildByName("button")
-    button:addTouchEventListener( buttonEventHandler )
-    list:setEnabled( false )
-    mask:setEnabled( false )
-
-    local initCurrentType = function( typeKey )
-        local typeName = tolua.cast( content:getChildByName("currentType"), "Label" )
-        typeName:setText( LeaderboardConfig.LeaderboardSubType[typeKey]["title"] )
-    end
-
-    local leagueSelectedCallback = function( typeKey )
-        list:setEnabled( false )
-        mask:setEnabled( false )
-        expendedIndicator:setBrightStyle( BRIGHT_NORMAL )
-        
-        initCurrentType( typeKey )
-
-        -- Stop the loading logo actions.
-        mWidget:stopAllActions()
-        EventManager:postEvent( Event.Enter_Leaderboard_List, { mLeaderboardId, typeKey } )
-    end
-
-    LeaderboardListSceneUnexpended.loadFrame( "scenes/LeaderbaordContentInDropDown.json", 
-        list, leagueSelectedCallback )
-
-    initCurrentType( 1 )
 end
 
 function initTitles()
     local title = tolua.cast( mWidget:getChildByName("title"), "Label" )
+    local subTitle = tolua.cast( mWidget:getChildByName("subTitle"), "Label" )
+
     title:setText( LeaderboardConfig.LeaderboardType[mLeaderboardId]["displayName"] )
+    subTitle:setText( string.format( subTitle:getStringValue(), mSubType["title"] ) )
 end
 
 function initContent( leaderboardInfo )
@@ -144,10 +80,22 @@ function initContent( leaderboardInfo )
     end
     mCurrentTotalNum = table.getn( leaderboardInfo )
 
+    -- Add the "More" button
+    contentHeight = contentHeight + addMoreButton( contentContainer, layoutParameter ):getSize().height
+
     contentContainer:setInnerContainerSize( CCSize:new( 0, contentHeight ) )
     local layout = tolua.cast( contentContainer, "Layout" )
     layout:requestDoLayout()
-    contentContainer:addEventListenerScrollView( scrollViewEventHandler )
+end
+
+function addMoreButton( contentContainer, layoutParameter )
+    local content = SceneManager.widgetFromJsonFile("scenes/MoreContent.json")
+    content:setLayoutParameter( layoutParameter )
+    contentContainer:addChild( content )
+    content:addTouchEventListener( loadMore )
+    content:setName("More")
+
+    return content
 end
 
 function initLeaderboardContent( i, content, info )
@@ -170,7 +118,7 @@ function initLeaderboardContent( i, content, info )
     seqArray:addObject( CCCallFuncN:create( function()
         if info["PictureUrl"] ~= nil then
             local handler = function( filePath )
-                if filePath ~= nil and mWidget ~= nil and logo ~= nil then
+                if filePath ~= nil and mWidget ~= nil then
                     logo:loadTexture( filePath )
                 end
             end
@@ -181,13 +129,19 @@ function initLeaderboardContent( i, content, info )
     mWidget:runAction( CCSequence:create( seqArray ) )
 end
 
-function loadMoreContent( leaderboardInfo )
-    if table.getn( leaderboardInfo ) == 0 then
-        mHasMoreToLoad = false
-        return
+function loadMore( sender, eventType )
+    if eventType == TOUCH_EVENT_ENDED then
+        mStep = mStep + 1
+        EventManager:postEvent( Event.Load_More_In_Leaderboard, { leaderboardId, mSubType, mStep } )
     end
+end
 
+function loadMoreContent( leaderboardInfo )
     local contentContainer = tolua.cast( mWidget:getChildByName("ScrollView"), "ScrollView" )
+
+    -- Remove the "More" button
+    local moreButton = contentContainer:getChildByName("More")
+    moreButton:removeFromParent()
 
     local layoutParameter = LinearLayoutParameter:create()
     layoutParameter:setGravity(LINEAR_GRAVITY_CENTER_VERTICAL)
@@ -209,6 +163,11 @@ function loadMoreContent( leaderboardInfo )
     end
     mCurrentTotalNum = mCurrentTotalNum + table.getn( leaderboardInfo )
 
+    if table.getn( leaderboardInfo ) > 0 then
+        -- Add back the "More" button
+        addMoreButton( contentContainer, layoutParameter )
+    end
+
     contentContainer:setInnerContainerSize( CCSize:new( 0, contentHeight ) )
     local layout = tolua.cast( contentContainer, "Layout" )
     layout:requestDoLayout()
@@ -221,11 +180,4 @@ function contentClick( info )
         name = info["DisplayName"]
     end
     EventManager:postEvent( Event.Enter_History, { id, name } )
-end
-
-function scrollViewEventHandler( target, eventType )
-    if eventType == SCROLLVIEW_EVENT_BOUNCE_BOTTOM and mHasMoreToLoad then
-        mStep = mStep + 1
-        EventManager:postEvent( Event.Load_More_In_Leaderboard, { leaderboardId, mSubType, mStep } )
-    end
 end

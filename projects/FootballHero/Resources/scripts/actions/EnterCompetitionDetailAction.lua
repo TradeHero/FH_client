@@ -19,9 +19,6 @@ function action( param )
     competitionId = param[1]
 
     url = url.."?competitionId="..competitionId.."&sortType="..sortType.."&step="..step
-    if RequestUtils.USE_DEV then
-        url = url.."&useDev=true"
-    end
 
     local requestInfo = {}
     requestInfo.requestData = ""
@@ -40,8 +37,7 @@ end
 
 function onRequestSuccess( jsonResponse )
     local competitionDetail = CompetitionDetail:new( jsonResponse )
-    Logic:setCompetitionDetail( competitionDetail )
 
     local CompetitionDetailScene = require("scripts.views.CompetitionDetailScene")
-    CompetitionDetailScene.loadFrame( LeaderboardConfig.LeaderboardSubType[1], competitionId )
+    CompetitionDetailScene.loadFrame( competitionDetail, LeaderboardConfig.LeaderboardSubType[1], competitionId )
 end

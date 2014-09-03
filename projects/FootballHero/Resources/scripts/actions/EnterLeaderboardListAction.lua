@@ -17,8 +17,13 @@ function action( param )
 	local step = 1
 
 	local url = LeaderboardConfig.LeaderboardType[mLeaderboardId]["request"]
-	if LeaderboardConfig.LeaderboardSubType[leaderboardType] ~= nil then
-		mSubType = LeaderboardConfig.LeaderboardSubType[leaderboardType]
+	-- Todo change the url for friends leaderboard when that is done.
+	if leaderboardType == 1 then
+		mSubType = LeaderboardConfig.LeaderboardSubType[1]
+	elseif leaderboardType == 2 then
+		mSubType = LeaderboardConfig.LeaderboardSubType[3]
+	elseif leaderboardType == 3 then
+		mSubType = LeaderboardConfig.LeaderboardSubType[2]
 	end
 
 	url = url.."?sortType="..mSubType["sortType"].."&step="..step
@@ -40,10 +45,5 @@ end
 
 function onRequestSuccess( response )
     local leaderboardListScene = require("scripts.views.LeaderboardListScene")
-
-    if leaderboardListScene.isShown() then
-    	leaderboardListScene.refreshFrame( response, mLeaderboardId, mSubType )
-    else
-    	leaderboardListScene.loadFrame( response, mLeaderboardId, mSubType )
-    end
+    leaderboardListScene.loadFrame( response, mLeaderboardId, mSubType )
 end

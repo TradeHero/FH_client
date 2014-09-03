@@ -24,12 +24,12 @@ THE SOFTWARE.
 
 package org.cocos2dx.lib;
 
+import java.lang.ref.WeakReference;
+
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Handler;
 import android.os.Message;
-import com.myhero.fh.widget.NativeData;
-import java.lang.ref.WeakReference;
 
 public class Cocos2dxHandler extends Handler {
 	// ===========================================================
@@ -41,7 +41,7 @@ public class Cocos2dxHandler extends Handler {
 	// ===========================================================
 	// Fields
 	// ===========================================================
-	protected WeakReference<Cocos2dxActivity> mActivity;
+	private WeakReference<Cocos2dxActivity> mActivity;
 	
 	// ===========================================================
 	// Constructors
@@ -77,7 +77,7 @@ public class Cocos2dxHandler extends Handler {
 		Cocos2dxActivity theActivity = this.mActivity.get();
 		DialogMessage dialogMessage = (DialogMessage)msg.obj;
 		new AlertDialog.Builder(theActivity)
-		.setTitle(dialogMessage.title)
+		.setTitle(dialogMessage.titile)
 		.setMessage(dialogMessage.message)
 		.setPositiveButton("Ok", 
 				new DialogInterface.OnClickListener() {
@@ -89,78 +89,47 @@ public class Cocos2dxHandler extends Handler {
 					}
 				}).create().show();
 	}
-
-  protected void showEditBoxDialog(Message msg) {
-    EditBoxMessage editBoxMessage = (EditBoxMessage) msg.obj;
-
-    new Cocos2dxEditBoxDialog(this.mActivity.get(), editBoxMessage.title, editBoxMessage.content,
-        editBoxMessage.inputMode, editBoxMessage.inputFlag, editBoxMessage.returnType,
-        editBoxMessage.maxLength).show();
-  }
-
-  // ===========================================================
+	
+	private void showEditBoxDialog(Message msg) {
+		EditBoxMessage editBoxMessage = (EditBoxMessage)msg.obj;
+		new Cocos2dxEditBoxDialog(this.mActivity.get(),
+				editBoxMessage.title,
+				editBoxMessage.content,
+				editBoxMessage.inputMode,
+				editBoxMessage.inputFlag,
+				editBoxMessage.returnType,
+				editBoxMessage.maxLength).show();
+	}
+	
+	// ===========================================================
 	// Inner and Anonymous Classes
 	// ===========================================================
 	
 	public static class DialogMessage {
-		public String title;
+		public String titile;
 		public String message;
 		
 		public DialogMessage(String title, String message) {
-			this.title = title;
+			this.titile = title;
 			this.message = message;
 		}
 	}
 	
-	public static class EditBoxMessage
-      implements NativeData {
-    private final long source;
-		public final String title;
-    public final String content;
-		public final int inputMode;
-		public final int inputFlag;
-		public final int returnType;
-		public final int maxLength;
-    public final float x;
-    public final float y;
-    public final float width;
-    public final float height;
-        public final int color;
-
-    public EditBoxMessage(long source, String title, String content, int inputMode, int inputFlag,
-        int returnType, int maxLength,
-        float x, float y, float width, float height, int color){
-      this.source = source;
-      this.content = content;
+	public static class EditBoxMessage {
+		public String title;
+		public String content;
+		public int inputMode;
+		public int inputFlag;
+		public int returnType;
+		public int maxLength;
+		
+		public EditBoxMessage(String title, String content, int inputMode, int inputFlag, int returnType, int maxLength){
+			this.content = content;
 			this.title = title;
 			this.inputMode = inputMode;
 			this.inputFlag = inputFlag;
 			this.returnType = returnType;
 			this.maxLength = maxLength;
-      this.x = x;
-      this.y = y;
-      this.width = width;
-      this.height = height;
-        this.color = color;
-    }
-
-    @Override public String toString() {
-      return
-          "\ncontent: " + content +
-          "\ntitle: " + title +
-          "\ninputMode: " + inputMode +
-          "\ninputFlag: " + inputFlag +
-          "\nreturnType: " + returnType +
-          "\nmaxLength: " + maxLength +
-          "\nx: " + x +
-          "\ny: " + y +
-          "\nwidth: " + width +
-          "\nheight: " + height
-          ;
-    }
-
-    @Override public long getSource() {
-      return source;
-    }
-  }
+		}
+	}
 }

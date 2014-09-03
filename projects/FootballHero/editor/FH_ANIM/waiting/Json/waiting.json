@@ -2,8 +2,8 @@
   "content_scale": 1.0,
   "armature_data": [
     {
-      "strVersion": "1.5.0.0",
-      "version": 1.5,
+      "strVersion": "1.4.0.1",
+      "version": 1.401,
       "name": "waiting",
       "bone_data": [
         {
@@ -395,8 +395,8 @@
     },
     {
       "name": "w10",
-      "width": 297.0,
-      "height": 297.0,
+      "width": 0.0,
+      "height": 0.0,
       "pX": 0.5,
       "pY": 0.5,
       "plistFile": ""

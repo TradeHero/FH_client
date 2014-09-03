@@ -1,17 +1,13 @@
 module(..., package.seeall)
 
 local Constants = require("scripts.Constants")
-local RequestUtils = require("scripts.RequestUtils")
-
 
 local PROJECT_ID = "544021a2e18b11e3923422000ab5bb50"
 local ACCOUNT_ID = "sXq6y8k3RoWKE8pyCSEJfZH9LsTc3MmCv9wjNMVjx3zhSFZN-H9Vu0_VveSM2ITwFMxJF5nYlD4="
 local SPLUNK_LOG_IP = "https://api.p3js-eqtr.data.splunkstorm.com/1/inputs/http"
 
 function reportConfigError( log )
-    if not RequestUtils.USE_DEV then
-        --report( log, "configError" )
-    end
+    report( log, "configError" )
 end
 
 function reportNetworkError( log )

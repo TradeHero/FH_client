@@ -31,26 +31,17 @@ function loadFrame( countryWidget, leagueWidget, leagueListContainer, leagueSele
 	helperInitLeagueList()
 end
 
-function forceExpendAll()
+function expendAll()
     for i = 1, mCountryNum do
         mCountryExpended[i] = true
         helperUpdateLeagueList( i )
     end
 end
 
-function forceUnexpendAll()
+function unexpendAll()
     for i = 1, mCountryNum do
         mCountryExpended[i] = false
         helperUpdateLeagueList( i )
-    end
-end
-
-function checkNUnexpendAll()
-    for i = 1, mCountryNum do
-        if mCountryExpended[i] == true then
-            mCountryExpended[i] = false
-            helperUpdateLeagueList( i )
-        end
     end
 end
 
@@ -65,7 +56,6 @@ function helperInitLeagueList()
                 if mCountryExpended[i] == true then
                     mCountryExpended[i] = false
                 else
-                    checkNUnexpendAll()
                     mCountryExpended[i] = true
                 end
                 helperUpdateLeagueList( i )
@@ -149,14 +139,6 @@ function helperUpdateLeagueList( clickedCountryId )
             content:addTouchEventListener( eventHandler )
             local leagueName = tolua.cast( content:getChildByName("leagueName"), "Label" )
             leagueName:setText( LeagueConfig.getLeagueName( leagueId ) )
-
-            -- Get rid of the last separate
-            if i == leagueNum then
-                local separate = content:getChildByName("separate")
-                if separate ~= nil then
-                    separate:setEnabled( false )
-                end
-            end
             
             if mLeagueInitCallback ~= nil then
                 mLeagueInitCallback( content, LeagueConfig.getConfigId( leagueId ) )
@@ -174,16 +156,4 @@ function helperUpdateLeagueList( clickedCountryId )
     mLeagueListContainer:setInnerContainerSize( CCSize:new( 0, originHeight + moveOffsetX ) )
     local layout = tolua.cast( mLeagueListContainer, "Layout" )
     layout:requestDoLayout()
-
-    -- Change the expended indicator
-    local countryLogo = mLeagueListContainer:getChildByName( "country"..clickedCountryId )
-    local expendedIndicator = countryLogo:getChildByName( "expendIndi" )
-    if expendedIndicator ~= nil then
-        expendedIndicator = tolua.cast( expendedIndicator, "Button" )
-        if mCountryExpended[clickedCountryId] == true then
-            expendedIndicator:setBrightStyle( BRIGHT_HIGHLIGHT )
-        else
-            expendedIndicator:setBrightStyle( BRIGHT_NORMAL )
-        end
-    end
 end

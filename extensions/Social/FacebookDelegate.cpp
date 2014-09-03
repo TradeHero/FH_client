@@ -5,7 +5,7 @@
 #include "FacebookConnector.h"
 #endif
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
-#include "FacebookAndroid.h"
+#include "platform/android/jni/JniHelper.h"
 #endif
 
 USING_NS_CC;
@@ -16,8 +16,7 @@ namespace Social
 
 	FacebookDelegate::FacebookDelegate()
 	{
-		mAccessTokenUpdateHandler = 0;
-		mPermissionUpdateHandler = 0;
+
 	}
 
 	FacebookDelegate::~FacebookDelegate()
@@ -34,41 +33,35 @@ namespace Social
 		return s_sharedUtils;
 	}
 
-	void FacebookDelegate::login(int handler)
+	void FacebookDelegate::login(int successHandler, int errorHandler)
 	{
-		mAccessTokenUpdateHandler = handler;
+		mSuccessHandler = successHandler;
+		mErrorHandler = errorHandler;
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
         FacebookConnector::getInstance()->login();
 #endif
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
-		android_facebook_login();
-#endif
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
-		accessTokenUpdate(NULL);
-#endif
-	}
+		JniMethodInfo jmi;
+		if (JniHelper::getStaticMethodInfo(jmi, "org/tradehero/th/FootballHero", "login", "([Ljava/lang/String;)V"))
+		{
+			jclass str_cls = jmi.env->FindClass("java/lang/String");
+			jstring str1 = jmi.env->NewStringUTF("I'm a titile");
+			jstring str2 = jmi.env->NewStringUTF("Are yor exit game?");
+			jobjectArray arrs = jmi.env->NewObjectArray(2, str_cls, 0);
 
-	void FacebookDelegate::grantPublishPermission(const char* permission, int handler)
-	{
-		mPermissionUpdateHandler = handler;
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-		FacebookConnector::getInstance()->grantPublishPermission(permission);
-#endif
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
-		android_facebook_requestPublishPermissions(permission);
+			jmi.env->SetObjectArrayElement(arrs, 0, str1);
+			jmi.env->SetObjectArrayElement(arrs, 1, str2);
+			
+			jmi.env->CallStaticVoidMethod(jmi.classID, jmi.methodID, arrs);
+		}
 #endif
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
-		permissionUpdate(NULL, false);
+		loginResult(NULL);
 #endif
 	}
     
-	void FacebookDelegate::accessTokenUpdate(const char* accessToken)
+    void FacebookDelegate::loginResult(const char* accessToken)
 	{
-		if (mAccessTokenUpdateHandler == 0)
-		{
-			return;
-		}
-
 		CCScriptEngineProtocol* pScriptProtocol = CCScriptEngineManager::sharedManager()->getScriptEngine();
 		cocos2d::CCLuaEngine* pLuaEngine = dynamic_cast<CCLuaEngine*>(pScriptProtocol);
 		if (pLuaEngine == NULL)
@@ -79,33 +72,8 @@ namespace Social
 
 		CCLuaStack* pStack = pLuaEngine->getLuaStack();
 		pStack->pushString(accessToken);
-		int ret = pStack->executeFunctionByHandler(mAccessTokenUpdateHandler, 1);
+		int ret = pStack->executeFunctionByHandler(mSuccessHandler, 1);
 		pStack->clean();
-
-		mAccessTokenUpdateHandler = 0;
 	}
     
-	void FacebookDelegate::permissionUpdate(const char* accessToken, bool success)
-	{
-		if (mPermissionUpdateHandler == 0)
-		{
-			return;
-		}
-
-		CCScriptEngineProtocol* pScriptProtocol = CCScriptEngineManager::sharedManager()->getScriptEngine();
-		cocos2d::CCLuaEngine* pLuaEngine = dynamic_cast<CCLuaEngine*>(pScriptProtocol);
-		if (pLuaEngine == NULL)
-		{
-			assert(false);
-			return;
-		}
-
-		CCLuaStack* pStack = pLuaEngine->getLuaStack();
-		pStack->pushString(accessToken);
-		pStack->pushBoolean(success);
-		int ret = pStack->executeFunctionByHandler(mPermissionUpdateHandler, 2);
-		pStack->clean();
-
-		mPermissionUpdateHandler = 0;
-	}
 }

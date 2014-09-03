@@ -103,6 +103,7 @@ bool AppDelegate::applicationDidFinishLaunching()
 	updateLayer->release();
 
 	pDirector->runWithScene(updateScene);
+	updateLayer->update(NULL);
 
     return true;
 }
@@ -139,13 +140,7 @@ UpdateLayer::~UpdateLayer()
 	CC_SAFE_DELETE(pAssetsManager);
 }
 
-void UpdateLayer::onEnter()
-{
-	CCNode::onEnter();
-	this->scheduleOnce(schedule_selector(UpdateLayer::update), 0.2f);
-}
-
-void UpdateLayer::update(float t)
+void UpdateLayer::update(cocos2d::CCObject *pSender)
 {
 	pProgressLabel->setString("");
 
@@ -201,13 +196,8 @@ bool UpdateLayer::init()
 
 	createDownloadedDir();
 
-	CCSprite* background = CCSprite::create(CCFileUtils::sharedFileUtils()->fullPathForFilename("images/Default-568h@2x.png").c_str());
-	background->setPosition(ccp(320, 568));
-	addChild(background);
-
-	pProgressLabel = CCLabelTTF::create("Loading...", "Arial", 30);
-	pProgressLabel->setPosition(ccp(320, 300));
-    pProgressLabel->setFontFillColor(ccc3(0, 0, 0));
+	pProgressLabel = CCLabelTTF::create("", "Arial", 40);
+	pProgressLabel->setPosition(ccp(320, 700));
 	addChild(pProgressLabel);
 
 	return true;
@@ -219,8 +209,8 @@ AssetsManager* UpdateLayer::getAssetsManager()
 
 	if (!pAssetsManager)
 	{
-		pAssetsManager = new AssetsManager("https://raw.githubusercontent.com/lesliesam/fhres/master/dev/res.zip",
-			"https://raw.githubusercontent.com/lesliesam/fhres/master/dev/version",
+		pAssetsManager = new AssetsManager("https://raw.githubusercontent.com/lesliesam/fhres/master/res.zip",
+			"https://raw.githubusercontent.com/lesliesam/fhres/master/version",
 			pathToSave.c_str());
 		pAssetsManager->setDelegate(this);
 		pAssetsManager->setConnectionTimeout(10);

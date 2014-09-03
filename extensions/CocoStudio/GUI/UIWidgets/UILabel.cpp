@@ -101,26 +101,8 @@ void Label::setFontSize(int size)
 
 void Label::setFontName(const std::string& name)
 {
-	std::string newName;
-#if ((CC_TARGET_PLATFORM == CC_PLATFORM_IOS) || (CC_TARGET_PLATFORM == CC_PLATFORM_MAC))
-	int nFindttf = name.find(".ttf");
-	int nFindTTF = name.find(".TTF");
-	if (nFindttf >= 0 || nFindTTF >= 0)
-	{
-		int nFindPos = name.rfind("/");
-		newName = &name[nFindPos + 1];
-		nFindPos = newName.rfind(".");
-		newName = newName.substr(0, nFindPos);
-	}
-	else
-	{
-		newName = name;
-	}
-#else
-	newName = name;
-#endif
-    _fontName = newName;
-    _labelRenderer->setFontName(newName.c_str());
+    _fontName = name;
+    _labelRenderer->setFontName(name.c_str());
     labelScaleChangedWithSize();
 }
 
