@@ -7,6 +7,12 @@ import android.content.pm.Signature;
 import android.util.Base64;
 import android.util.Log;
 import com.myhero.fh.metrics.Analytics;
+import com.urbanairship.AirshipConfigOptions;
+import com.urbanairship.Logger;
+import com.urbanairship.UAirship;
+import com.urbanairship.location.UALocationManager;
+import com.urbanairship.push.PushManager;
+
 import java.security.MessageDigest;
 
 /**
@@ -20,6 +26,14 @@ public class FootballApp extends Application {
 
     // initialize analytics instance
     Analytics.init(this);
+
+    AirshipConfigOptions options = AirshipConfigOptions.loadDefaultOptions(this);
+    UAirship.takeOff(this, options);
+    PushManager.enablePush();
+    Logger.logLevel = Log.VERBOSE;
+
+    PushManager.shared().setIntentReceiver(IntentReceiver.class);
+    UALocationManager.shared().setIntentReceiver(IntentReceiver.class);
   }
 
   public void showDeveloperKeyHash() {

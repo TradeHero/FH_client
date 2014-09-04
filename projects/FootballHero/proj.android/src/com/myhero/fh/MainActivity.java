@@ -31,6 +31,7 @@ import com.myhero.fh.auth.AuthenticationCallback;
 import com.myhero.fh.auth.FacebookAuth;
 import com.myhero.fh.widget.FHCocos2dxHandler;
 import java.util.Arrays;
+
 import org.cocos2dx.lib.Cocos2dxActivity;
 import org.cocos2dx.lib.Cocos2dxGLSurfaceView;
 
