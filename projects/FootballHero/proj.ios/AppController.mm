@@ -29,6 +29,11 @@
 #import "WebviewController.h"
 #import "LocalyticsSession.h"
 
+#import "UAConfig.h"
+#import "UAirship.h"
+#import "UAPush.h"
+
+
 #import "RootViewController.h"
 #import "FBSessionSingleton.h"
 #import <FacebookSDK/FacebookSDK.h>
@@ -81,6 +86,14 @@ static AppDelegate s_sharedApplication;
     
     [[LocalyticsSession shared] LocalyticsSession:@"d16d149eabf971a5b376a43-aa0e6fc0-1c50-11e4-49cb-00a426b17dd8"];
     [[LocalyticsSession shared] setLoggingEnabled:YES];
+    
+    [UAirship setLogLevel:UALogLevelTrace];
+    UAConfig *config = [UAConfig defaultConfig];
+    [UAirship takeOff:config];
+    [UAPush shared].notificationTypes = (UIRemoteNotificationTypeBadge |
+                                         UIRemoteNotificationTypeSound |
+                                         UIRemoteNotificationTypeAlert);
+
     
     return YES;
 }
