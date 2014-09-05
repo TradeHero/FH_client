@@ -126,4 +126,11 @@ public class IntentReceiver extends BroadcastReceiver {
             Log.i(logTag, "Push Notification Extra: ["+key+" : " + intent.getStringExtra(key) + "]");
         }
     }
+
+    public static void getUADeviceToken() {
+        String token = PushManager.shared().getAPID();
+        responseUADeviceToken(token);
+    }
+
+    public static native void responseUADeviceToken(String token);
 }

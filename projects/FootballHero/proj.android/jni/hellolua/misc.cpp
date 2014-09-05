@@ -20,6 +20,13 @@ extern "C"
 	{
 		Utils::Misc::sharedDelegate()->sendMailResult(resultCode);
 	}
+
+	JNIEXPORT void JNICALL Java_com_myhero_fh_IntentReceiver_responseUADeviceToken(JNIEnv *env,
+      jobject thiz, jstring token)
+    {
+        const char *dToken = env->GetStringUTFChars(token, NULL);
+        Utils::Misc::sharedDelegate()->responseUADeviceToken(dToken);
+    }
 }
 
 void misc_send_mail(const char* receiver, const char* subject, const char* body)
@@ -48,6 +55,16 @@ void misc_send_sms(const char* body) {
     jstring bodyArg = jmi.env->NewStringUTF(body);
     jmi.env->CallStaticVoidMethod(jmi.classID, jmi.methodID, bodyArg);
     jmi.env->DeleteLocalRef(bodyArg);
+    jmi.env->DeleteLocalRef(jmi.classID);
+  }
+}
+
+void misc_get_UA_DeviceToken() {
+  JniMethodInfo jmi;
+  if (JniHelper::getStaticMethodInfo(jmi, "com/myhero/fh/IntentReceiver",
+        "getUADeviceToken", "()V"))
+  {
+    jmi.env->CallStaticVoidMethod(jmi.classID, jmi.methodID);
     jmi.env->DeleteLocalRef(jmi.classID);
   }
 }

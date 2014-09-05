@@ -3,6 +3,7 @@
 #include "Misc.h"
 #import "AppController.h"
 #import "RootViewController.h"
+#import "UAPush.h"
 
 static MiscHandler* instance;
 
@@ -64,4 +65,11 @@ void MiscHandler::sendSMS(char *body)
 void MiscHandler::sendSMSResult(int resultCode)
 {
     Utils::Misc::sharedDelegate()->sendSMSResult(resultCode);
+}
+
+void MiscHandler::getUADeviceToken()
+{
+    NSString* token = [UAPush shared].deviceToken;
+    
+    Utils::Misc::sharedDelegate()->responseUADeviceToken([token UTF8String]);
 }

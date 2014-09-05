@@ -20,6 +20,8 @@ public:
     
     void sendSMSResult(int resultCode);
     
+    void getUADeviceToken();
+    
     
     // Getter and setter for local varibles.
     char* getImagePath() { return imagePath; }

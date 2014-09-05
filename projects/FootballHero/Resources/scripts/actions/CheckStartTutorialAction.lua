@@ -16,6 +16,8 @@ function action( param )
     local EmailForgotPasswordScene = require("scripts.views.Tutorial.EmailForgotPasswordScene")
     local EmailRegisterNameScene = require("scripts.views.Tutorial.EmailRegisterNameScene")
 
+    CCLuaLog( "Device Token is: "..Logic:getDeviceToken() )
+
     if Logic:getEmail() ~= nil and string.len( Logic:getEmail() ) > 0 and
          Logic:getPassword() ~= nil and string.len( Logic:getPassword() ) > 0 then
         StartTutorialScene.loadFrame( true )

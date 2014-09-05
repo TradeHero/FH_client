@@ -4,6 +4,7 @@ local SceneManager = require("scripts.SceneManager")
 local Constants = require("scripts.Constants")
 local EventManager = require("scripts.events.EventManager").getInstance()
 local Event = require("scripts.events.Event").EventList
+local Logic = require("scripts.Logic").getInstance()
 
 
 local mWidget

@@ -34,7 +34,8 @@ end
 
 function onFBConnectSuccess( accessToken )
     mAccessToken = accessToken
-    local requestContent = { SocialNetworkType = 0, AuthToken = accessToken, GMTOffset = RequestUtils.getTimezoneOffset(),
+    local requestContent = { SocialNetworkType = 0, AuthToken = accessToken, 
+                            GMTOffset = RequestUtils.getTimezoneOffset(), DeviceToken = Logic:getDeviceToken(),
                             useDev = RequestUtils.USE_DEV }
     local requestContentText = Json.encode( requestContent )
     

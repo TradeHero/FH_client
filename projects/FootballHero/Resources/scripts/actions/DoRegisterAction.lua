@@ -54,7 +54,8 @@ function action( param )
         mLastName = ""
     end
 
-    local requestContent = { Email = mEmail, Password = mPassword, GMTOffset = RequestUtils.getTimezoneOffset(),
+    local requestContent = { Email = mEmail, Password = mPassword, 
+                            GMTOffset = RequestUtils.getTimezoneOffset(), DeviceToken = Logic:getDeviceToken(),
                             useDev = RequestUtils.USE_DEV }
     local requestContentText = Json.encode( requestContent )
     print( requestContentText )

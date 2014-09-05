@@ -27,12 +27,17 @@ namespace Utils
         
 		char* createFormWithFile(const char* begin, const char* end, const char* filePath, const char* pszMode, unsigned long *pSize);
 
+		void getUADeviceToken( int handler );
+
+		void responseUADeviceToken(const char* token);
+
 		void terminate();
 	protected:
 		Misc();
 		int mSelectImageHandler;
 		int mSendMailHandler;
 		int mSendSMSHandler;
+		int mUADeviceTokenHandler;
 	};
 };
 

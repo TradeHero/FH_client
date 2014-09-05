@@ -25,8 +25,11 @@ function action( param )
         return
     end
 
-    local requestContent = { Email = mEmail, Password = mPassword, useDev = RequestUtils.USE_DEV }
+    local requestContent = { Email = mEmail, Password = mPassword, 
+                            DeviceToken = Logic:getDeviceToken(),
+                            useDev = RequestUtils.USE_DEV }
     local requestContentText = Json.encode( requestContent )
+    CCLuaLog("Email Login data: "..requestContentText)
     
     local url = RequestUtils.EMAIL_LOGIN_REST_CALL
 

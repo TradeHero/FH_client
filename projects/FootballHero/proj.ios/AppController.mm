@@ -94,7 +94,7 @@ static AppDelegate s_sharedApplication;
                                          UIRemoteNotificationTypeSound |
                                          UIRemoteNotificationTypeAlert);
 
-    
+    NSLog(@"UA device token is %@", [UAPush shared].deviceToken);
     return YES;
 }
 
@@ -197,6 +197,15 @@ static AppDelegate s_sharedApplication;
 {
     return viewController;
 }
+
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    UA_LINFO(@"APNS device token: %@", deviceToken);
+    
+    // Updates the device token and registers the token with UA. This won't occur until
+    // push is enabled if the outlined process is followed. This call is required.
+    [[UAPush shared] registerDeviceToken:deviceToken];
+}
+
 
 @end
 

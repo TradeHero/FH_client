@@ -62,6 +62,7 @@ function Logic:new()
 		balance = 0,
 		ActiveInCompetition = false,
 		FbId = nil,
+		deviceToken = "",
 
 		competitionDetail = nil,
 	}
@@ -248,6 +249,17 @@ end
 
 function  Logic:getFbId()
 	return self.FbId
+end
+
+function Logic:getDeviceToken()
+	if self.deviceToken == "" then
+		Misc:sharedDelegate():getUADeviceToken( function( token )
+			self.deviceToken = token
+		end )
+		return ""
+	else
+		return self.deviceToken
+	end
 end
 
 function Logic:setCompetitionDetail( competitionDetail )

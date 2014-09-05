@@ -147,6 +147,36 @@ namespace Utils
 		return buffer;
 	}
 
+	void Misc::getUADeviceToken(int handler)
+	{
+		mUADeviceTokenHandler = handler;
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+		MiscHandler::getInstance()->getUADeviceToken();
+#endif
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+		misc_get_UA_DeviceToken();
+#endif
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
+		responseUADeviceToken("-1");
+#endif
+	}
+
+	void Misc::responseUADeviceToken(const char* token)
+	{
+		CCScriptEngineProtocol* pScriptProtocol = CCScriptEngineManager::sharedManager()->getScriptEngine();
+		cocos2d::CCLuaEngine* pLuaEngine = dynamic_cast<CCLuaEngine*>(pScriptProtocol);
+		if (pLuaEngine == NULL)
+		{
+			assert(false);
+			return;
+		}
+
+		CCLuaStack* pStack = pLuaEngine->getLuaStack();
+		pStack->pushString(token);
+		int ret = pStack->executeFunctionByHandler(mUADeviceTokenHandler, 1);
+		pStack->clean();
+	}
+
 	void Misc::terminate()
 	{
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)

@@ -11,5 +11,7 @@ class Misc
 
 	void sendSMS(char* body, LUA_FUNCTION errorHandler);
 
+	void getUADeviceToken( LUA_FUNCTION handler );
+
 	void terminate();
-};
+};	
