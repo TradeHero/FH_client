@@ -54,8 +54,10 @@ function action( param )
         mLastName = ""
     end
 
-    local requestContent = { Email = mEmail, Password = mPassword, useDev = RequestUtils.USE_DEV }
+    local requestContent = { Email = mEmail, Password = mPassword, GMTOffset = RequestUtils.getTimezoneOffset(),
+                            useDev = RequestUtils.USE_DEV }
     local requestContentText = Json.encode( requestContent )
+    print( requestContentText )
     
     local url = RequestUtils.EMAIL_REGISTER_REST_CALL
 

@@ -79,18 +79,11 @@ function setServerIP( serverIp )
     POST_PASSWORD_RESET_REST_CALL = serverIp.."/api/user/requestPasswordResetLink"
     POST_CHAT_MESSAGE_REST_CALL = serverIp.."/api/chat/postChatMessage"
 
-    if USE_DEV then 
-		CDN_SERVER_IP = "http://portalvhdss3c1vgx5mrzv.blob.core.windows.net/fhdevsettings/"
-	end
+	CDN_SERVER_IP = "http://portalvhdss3c1vgx5mrzv.blob.core.windows.net/fhdevsettings/"
+    USE_DEV = true
 end
 
---setServerIP( "http://192.168.1.123" )
-if USE_DEV then
-	setServerIP( "http://fhapi-dev1.cloudapp.net" )
-else
-	setServerIP( SERVER_IP )
-end
-
+setServerIP( "http://fhapi-dev1.cloudapp.net" )
 
 function createHeaderObject( headerStr )
 	local headerList = split( headerStr, "\r\n" )
@@ -103,6 +96,19 @@ function createHeaderObject( headerStr )
     end
 
     return headers
+end
+
+local mTimezoneOffset = nil
+function getTimezoneOffset()
+    if mTimezoneOffset == nil then
+        local ts = os.time()
+        local utcDate   = os.date( "!*t", ts )
+        local localDate = os.date( "*t", ts )
+        localDate.isdst = false
+        mTimezoneOffset =  os.difftime( os.time( localDate ), os.time( utcDate ) ) / 60 / 60
+    end
+
+    return mTimezoneOffset
 end
 
 function split(str, delim, maxNb)   
