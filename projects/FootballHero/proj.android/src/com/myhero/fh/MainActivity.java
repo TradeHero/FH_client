@@ -27,9 +27,18 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import com.crashlytics.android.Crashlytics;
+import com.mobileapptracker.MobileAppTracker;
+import com.mobileapptracker.MobileAppTracker;
+import com.google.android.gms.ads.identifier.AdvertisingIdClient;
+import com.google.android.gms.ads.identifier.AdvertisingIdClient.Info;
+import com.google.android.gms.common.GooglePlayServicesRepairableException;
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
+import android.provider.Settings.Secure;
 import com.myhero.fh.auth.AuthenticationCallback;
 import com.myhero.fh.auth.FacebookAuth;
 import com.myhero.fh.widget.FHCocos2dxHandler;
+
+import java.io.IOException;
 import java.util.Arrays;
 
 import org.cocos2dx.lib.Cocos2dxActivity;
@@ -38,6 +47,7 @@ import org.cocos2dx.lib.Cocos2dxGLSurfaceView;
 public class MainActivity extends Cocos2dxActivity {
   private static final String TAG = "FacebookTestActivity";
   private static FacebookAuth facebookAuth;
+  public MobileAppTracker mobileAppTracker = null;
 
   static {
     System.loadLibrary("cocos2dlua");
@@ -47,10 +57,48 @@ public class MainActivity extends Cocos2dxActivity {
     super.onCreate(savedInstanceState);
     Crashlytics.start(this);
 
+      // Initialize MAT
+    MobileAppTracker.init(getApplicationContext(), "19686", "c65b99d5b751944e3637593edd04ce01");
+    mobileAppTracker = MobileAppTracker.getInstance();
+
+      // Collect Google Play Advertising ID; REQUIRED for attribution of Android apps distributed via Google Play
+      new Thread(new Runnable() {
+          @Override public void run() {
+              // See sample code at http://developer.android.com/google/play-services/id.html
+              try {
+                  Info adInfo = AdvertisingIdClient.getAdvertisingIdInfo(getApplicationContext());
+                  mobileAppTracker.setGoogleAdvertisingId(adInfo.getId(), adInfo.isLimitAdTrackingEnabled());
+              } catch (IOException e) {
+                  // Unrecoverable error connecting to Google Play services (e.g.,
+                  // the old version of the service doesn't support getting AdvertisingId).
+                  mobileAppTracker.setAndroidId(Secure.getString(getContentResolver(), Secure.ANDROID_ID));
+              } catch (GooglePlayServicesNotAvailableException e) {
+                  // Google Play services is not available entirely.
+                  mobileAppTracker.setAndroidId(Secure.getString(getContentResolver(), Secure.ANDROID_ID));
+              } catch (GooglePlayServicesRepairableException e) {
+                  // Encountered a recoverable error connecting to Google Play services.
+                  mobileAppTracker.setAndroidId(Secure.getString(getContentResolver(), Secure.ANDROID_ID));
+              } catch (NullPointerException e) {
+                  // getId() is sometimes null
+                  mobileAppTracker.setAndroidId(Secure.getString(getContentResolver(), Secure.ANDROID_ID));
+              }
+          }
+      }).start();
+
+    // Facebook init
     facebookAuth = new FacebookAuth(this, "788386747851675",
         Arrays.asList("public_profile", "user_friends", "email", "user_birthday"));
     facebookAuth.setActivity(this);
   }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        // Get source of open for app re-engagement
+        mobileAppTracker.setReferralSources(this);
+        // MAT will not function unless the measureSession call is included
+        mobileAppTracker.measureSession();
+    }
 
   @Override
   protected void onActivityResult(int requestCode, int resultCode, Intent data) {
