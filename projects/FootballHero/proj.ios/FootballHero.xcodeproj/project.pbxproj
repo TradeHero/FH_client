@@ -262,6 +262,8 @@
 		7365C0D218FCE99200C39027 /* FBSessionSingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 7365C0D118FCE99200C39027 /* FBSessionSingleton.m */; };
 		7388C04118F4E2FF00CF667C /* HttpRequestForLua.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7388C03F18F4E2FF00CF667C /* HttpRequestForLua.cpp */; };
 		738BA12A193D7FD2008A74F6 /* DES56.lua in Resources */ = {isa = PBXBuildFile; fileRef = 738BA129193D7FD2008A74F6 /* DES56.lua */; };
+		73B0326919BED7620034452A /* MobileAppTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73B0326819BED7620034452A /* MobileAppTracker.framework */; };
+		73B0326B19BED7B20034452A /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73B0326A19BED7B20034452A /* iAd.framework */; };
 		73B455CF19A48B2D0097A722 /* lua_zlib.c in Sources */ = {isa = PBXBuildFile; fileRef = 73B455CD19A48B2D0097A722 /* lua_zlib.c */; };
 		73B455D319B085FE0097A722 /* version in Resources */ = {isa = PBXBuildFile; fileRef = 73B455D219B085FE0097A722 /* version */; };
 		73B8CB0A1953EB5400E62B43 /* game.bin in Resources */ = {isa = PBXBuildFile; fileRef = 73B8CB091953EB5400E62B43 /* game.bin */; };
@@ -842,6 +844,8 @@
 		7388C03F18F4E2FF00CF667C /* HttpRequestForLua.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HttpRequestForLua.cpp; sourceTree = "<group>"; };
 		7388C04018F4E2FF00CF667C /* HttpRequestForLua.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpRequestForLua.h; sourceTree = "<group>"; };
 		738BA129193D7FD2008A74F6 /* DES56.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = DES56.lua; sourceTree = "<group>"; };
+		73B0326819BED7620034452A /* MobileAppTracker.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MobileAppTracker.framework; sourceTree = "<group>"; };
+		73B0326A19BED7B20034452A /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 		73B455CD19A48B2D0097A722 /* lua_zlib.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lua_zlib.c; path = crypt/lua_zlib.c; sourceTree = "<group>"; };
 		73B455CE19A48B2D0097A722 /* lua_zlib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = lua_zlib.h; path = crypt/lua_zlib.h; sourceTree = "<group>"; };
 		73B455D219B085FE0097A722 /* version */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = version; sourceTree = "<group>"; };
@@ -1002,6 +1006,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				73B0326B19BED7B20034452A /* iAd.framework in Frameworks */,
 				7314B4C719B717A00065D927 /* MapKit.framework in Frameworks */,
 				7314B4C519B717870065D927 /* CoreLocation.framework in Frameworks */,
 				7314B4C319B7177D0065D927 /* CoreTelephony.framework in Frameworks */,
@@ -1026,6 +1031,7 @@
 				F293B3DB15EB7BE500256477 /* CoreGraphics.framework in Frameworks */,
 				73FC0A24199079630006D0E2 /* libLocalyticsAMP.a in Frameworks */,
 				1A9D7E63171E38B2000B3B9A /* libluajit.a in Frameworks */,
+				73B0326919BED7620034452A /* MobileAppTracker.framework in Frameworks */,
 				7314B46519B714BC0065D927 /* libUAirship-4.0.3.a in Frameworks */,
 				1AB87031175E0A5B005D39BF /* libwebsockets.a in Frameworks */,
 			);
@@ -2229,6 +2235,8 @@
 		F293B3CB15EB7BE500256477 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				73B0326A19BED7B20034452A /* iAd.framework */,
+				73B0326819BED7620034452A /* MobileAppTracker.framework */,
 				7314B4C619B717A00065D927 /* MapKit.framework */,
 				7314B4C419B717870065D927 /* CoreLocation.framework */,
 				7314B4C219B7177D0065D927 /* CoreTelephony.framework */,

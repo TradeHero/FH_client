@@ -254,7 +254,11 @@ end
 function Logic:getDeviceToken()
 	if self.deviceToken == "" then
 		Misc:sharedDelegate():getUADeviceToken( function( token )
-			self.deviceToken = token
+			if token == nil then
+				self.deviceToken = ""
+			else
+				self.deviceToken = token	
+			end
 		end )
 		return ""
 	else

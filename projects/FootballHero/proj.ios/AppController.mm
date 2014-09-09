@@ -37,6 +37,8 @@
 #import "RootViewController.h"
 #import "FBSessionSingleton.h"
 #import <FacebookSDK/FacebookSDK.h>
+#import <MobileAppTracker/MobileAppTracker.h>
+#import <AdSupport/AdSupport.h>
 
 @implementation AppController
 
@@ -84,9 +86,17 @@ static AppDelegate s_sharedApplication;
 
     cocos2d::CCApplication::sharedApplication()->run();
     
+    // Localytics
     [[LocalyticsSession shared] LocalyticsSession:@"d16d149eabf971a5b376a43-aa0e6fc0-1c50-11e4-49cb-00a426b17dd8"];
     [[LocalyticsSession shared] setLoggingEnabled:YES];
     
+    // MAT
+    [MobileAppTracker initializeWithMATAdvertiserId:@"19686"
+                                   MATConversionKey:@"c65b99d5b751944e3637593edd04ce01"];
+    [MobileAppTracker setAppleAdvertisingIdentifier:[[ASIdentifierManager sharedManager] advertisingIdentifier]
+                         advertisingTrackingEnabled:[[ASIdentifierManager sharedManager] isAdvertisingTrackingEnabled]];
+    
+    //UrbanAirship
     [UAirship setLogLevel:UALogLevelTrace];
     UAConfig *config = [UAConfig defaultConfig];
     [UAirship takeOff:config];
@@ -130,6 +140,8 @@ static AppDelegate s_sharedApplication;
     
     [[LocalyticsSession shared] resume];
     [[LocalyticsSession shared] upload];
+    
+    [MobileAppTracker measureSession];
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
@@ -183,6 +195,8 @@ static AppDelegate s_sharedApplication;
             openURL:(NSURL *)url
   sourceApplication:(NSString *)sourceApplication
          annotation:(id)annotation {
+    
+    [MobileAppTracker applicationDidOpenURL:[url absoluteString] sourceApplication:sourceApplication];
     
     if([[LocalyticsSession shared] handleURL:url])
     {
