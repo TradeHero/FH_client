@@ -177,6 +177,13 @@ namespace Utils
 		pStack->clean();
 	}
 
+	void Misc::requestPushNotification()
+	{
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+		MiscHandler::getInstance()->requestPushNotification();
+#endif
+	}
+
 	void Misc::terminate()
 	{
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)

@@ -18,7 +18,9 @@
     "chat/GreenArrow.png",
     "Competition/copy_icon.png",
     "Competition/share_icon.png",
-    "chat/More Button.png"
+    "chat/More Button.png",
+    "Competition/btn-alertOff.png",
+    "Competition/btn-alertOn.png"
   ],
   "version": "1.5.0.0",
   "widgetTree": {
@@ -872,7 +874,7 @@
           "ignoreSize": true,
           "layoutParameter": null,
           "opacity": 255,
-          "positionPercentX": 0.8540179,
+          "positionPercentX": 0.853125,
           "positionPercentY": 0.162852108,
           "positionType": 0,
           "rotation": 0,
@@ -1207,6 +1209,78 @@
           "text": "Top Performers",
           "touchScaleEnable": false,
           "vAlignment": 0
+        }
+      },
+      {
+        "classname": "CheckBox",
+        "name": null,
+        "children": [],
+        "options": {
+          "__type": "CheckBoxSurrogate:#EditorCommon.JsonModel.Component.GUI",
+          "classname": "CheckBox",
+          "name": "pushEnabled",
+          "ZOrder": 1,
+          "actiontag": 49725882,
+          "anchorPointX": 0.5,
+          "anchorPointY": 0.5,
+          "classType": "CocoStudio.EngineAdapterWrap.CSCheckBox",
+          "colorB": 255,
+          "colorG": 255,
+          "colorR": 255,
+          "customProperty": "",
+          "flipX": false,
+          "flipY": false,
+          "height": 79,
+          "ignoreSize": true,
+          "layoutParameter": null,
+          "opacity": 255,
+          "positionPercentX": 0.8544626,
+          "positionPercentY": 0.964595437,
+          "positionType": 0,
+          "rotation": 0,
+          "scaleX": 1,
+          "scaleY": 1,
+          "sizePercentX": 0.0875,
+          "sizePercentY": 0.0492957756,
+          "sizeType": 0,
+          "tag": 10374,
+          "touchAble": true,
+          "useMergedTexture": false,
+          "visible": true,
+          "width": 63,
+          "x": 546,
+          "y": 1095,
+          "backGroundBox": null,
+          "backGroundBoxData": {
+            "path": "Competition/btn-alertOff.png",
+            "plistFile": "",
+            "resourceType": 0
+          },
+          "backGroundBoxDisabled": null,
+          "backGroundBoxDisabledData": {
+            "path": null,
+            "plistFile": null,
+            "resourceType": 0
+          },
+          "backGroundBoxSelected": null,
+          "backGroundBoxSelectedData": {
+            "path": null,
+            "plistFile": null,
+            "resourceType": 0
+          },
+          "frontCross": null,
+          "frontCrossData": {
+            "path": "Competition/btn-alertOn.png",
+            "plistFile": "",
+            "resourceType": 0
+          },
+          "frontCrossDisabled": null,
+          "frontCrossDisabledData": {
+            "path": null,
+            "plistFile": null,
+            "resourceType": 0
+          },
+          "selectedState": false
         }
       }
     ],

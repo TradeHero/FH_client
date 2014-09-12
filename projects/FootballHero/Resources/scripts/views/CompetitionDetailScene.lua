@@ -8,6 +8,7 @@ local SMIS = require("scripts.SMIS")
 local ViewUtils = require("scripts.views.ViewUtils")
 local Logic = require("scripts.Logic").getInstance()
 local ConnectingMessage = require("scripts.views.ConnectingMessage")
+local PushNotificationManager = require("scripts.PushNotificationManager")
 
 
 local SHARE_BODY = "Can you beat me? Join my competition on FootballHero. Code: %s  www.footballheroapp.com/download"
@@ -24,7 +25,7 @@ local mCompetitionCodeString
 local mHasMoreToLoad
 
 -- DS for competitionDetail see CompetitionDetail
-function loadFrame( subType, competitionId )
+function loadFrame( subType, competitionId, showRequestPush )
     mCompetitionId = competitionId
     mSubType = subType
     competitionDetail = Logic:getCompetitionDetail()
@@ -44,12 +45,32 @@ function loadFrame( subType, competitionId )
     backBt:addTouchEventListener( backEventHandler )
     local moreBt = mWidget:getChildByName("more")
     moreBt:addTouchEventListener( moreEventHandler )
+    local pushEnabledCheck = tolua.cast( mWidget:getChildByName("pushEnabled"), "CheckBox" )
+    pushEnabledCheck:addTouchEventListener( pushEnabledHandler )
+    if competitionDetail:getPNSetting() then
+        pushEnabledCheck:setSelectedState( true )
+    end
 
     initContent( competitionDetail )
     initLeaderboard( competitionDetail )
 
     mStep = 1
     mHasMoreToLoad = true
+
+    if showRequestPush then
+        local pushEnabledCheck = tolua.cast( mWidget:getChildByName("pushEnabled"), "CheckBox" )
+        local yesCallback = function()
+            pushEnabledCheck:setSelectedState( true )
+            postSettings( true )
+        end
+
+        local noCallback = function()
+           pushEnabledCheck:setSelectedState( false ) 
+           postSettings( false )
+        end
+
+        PushNotificationManager.checkShowCompetitionSwitch( yesCallback, noCallback )
+    end
 end
 
 function EnterOrExit( eventType )
@@ -67,6 +88,18 @@ end
 
 function keypadBackEventHandler()
     EventManager:popHistory()
+end
+
+function pushEnabledHandler( sender, eventType )
+    if eventType == TOUCH_EVENT_ENDED then
+        -- Todo send to server
+        local pushEnabledCheck = tolua.cast( sender, "CheckBox" )
+        postSettings( not pushEnabledCheck:getSelectedState() )
+    end
+end
+
+function postSettings( setting )
+    EventManager:postEvent( Event.Do_Post_PN_Comp_Settings, { mCompetitionId, setting } )
 end
 
 function moreEventHandler( sender, eventType )

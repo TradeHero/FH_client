@@ -32,7 +32,8 @@
 #import "UAConfig.h"
 #import "UAirship.h"
 #import "UAPush.h"
-
+#import "UAInbox.h"
+#import "UAInboxUI.h"
 
 #import "RootViewController.h"
 #import "FBSessionSingleton.h"
@@ -98,13 +99,17 @@ static AppDelegate s_sharedApplication;
     
     //UrbanAirship
     [UAirship setLogLevel:UALogLevelTrace];
-    UAConfig *config = [UAConfig defaultConfig];
-    [UAirship takeOff:config];
+    [UAirship takeOff:[UAConfig defaultConfig]];
+    [UAPush setDefaultPushEnabledValue:NO];
+    [[UAPush shared] resetBadge];
     [UAPush shared].notificationTypes = (UIRemoteNotificationTypeBadge |
                                          UIRemoteNotificationTypeSound |
                                          UIRemoteNotificationTypeAlert);
-
+    [UAInbox useCustomUI:[UAInboxUI class]];
+    [UAInbox shared].pushHandler.delegate = [UAInboxUI shared];
+    [UAInboxUI shared].inboxParentController = viewController;
     NSLog(@"UA device token is %@", [UAPush shared].deviceToken);
+
     return YES;
 }
 

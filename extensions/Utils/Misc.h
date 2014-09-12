@@ -31,6 +31,8 @@ namespace Utils
 
 		void responseUADeviceToken(const char* token);
 
+		void requestPushNotification();
+
 		void terminate();
 	protected:
 		Misc();

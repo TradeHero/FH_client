@@ -13,6 +13,7 @@ function loadFrame( message )
         local widget = GUIReader:shareReader():widgetFromJsonFile("scenes/ConnectingMessage.json")
 
         widget:addTouchEventListener( onFrameTouch )
+        widget:setZOrder( 100 )
         mWidget = widget
         mWidget:registerScriptHandler( EnterOrExit )
         SceneManager.addWidget( widget )

@@ -6,6 +6,7 @@ local Logic = require("scripts.Logic").getInstance()
 local EventManager = require("scripts.events.EventManager").getInstance()
 local Event = require("scripts.events.Event").EventList
 local ConnectingMessage = require("scripts.views.ConnectingMessage")
+local PushNotificationManager = require("scripts.PushNotificationManager")
 
 
 local mWidget
@@ -40,8 +41,12 @@ end
 
 function confirmEventHandler( sender, eventType )
 	if eventType == TOUCH_EVENT_ENDED then
-		Logic:setPredictionMetadata( "", mFacebookBt:getSelectedState() )
-	    EventManager:postEvent( Event.Do_Post_Predictions, { mAccessToken } )
+		local callback = function()
+			Logic:setPredictionMetadata( "", mFacebookBt:getSelectedState() )
+	    	EventManager:postEvent( Event.Do_Post_Predictions, { mAccessToken } )
+		end
+
+		PushNotificationManager.checkShowPredictionSwitch( callback, callback )	
 	end
 end
 

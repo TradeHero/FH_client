@@ -73,3 +73,8 @@ void MiscHandler::getUADeviceToken()
     
     Utils::Misc::sharedDelegate()->responseUADeviceToken([token UTF8String]);
 }
+
+void MiscHandler::requestPushNotification()
+{
+    [[UAPush shared] setPushEnabled:YES];
+}

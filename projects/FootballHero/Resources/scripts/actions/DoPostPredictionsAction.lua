@@ -8,6 +8,7 @@ local Logic = require("scripts.Logic").getInstance()
 local RequestUtils = require("scripts.RequestUtils")
 local ConnectingMessage = require("scripts.views.ConnectingMessage")
 
+
 function action( param )
     if Logic:getPredictions():getSize() > 0 then
         postPredictionData( param )

@@ -8,19 +8,16 @@ local ConnectingMessage = require("scripts.views.ConnectingMessage")
 local RequestUtils = require("scripts.RequestUtils")
 local Logic = require("scripts.Logic").getInstance()
 
+
 function action( param )
+    local competitionId = param[1]
+    local active = param[2]
 
-    local token = param[1]
-
-    if string.len( token ) == 0 then
-        RequestUtils.onRequestFailed( "Token cannot be blank." )
-        return
-    end
-
-    local requestContent = { JoinToken = token }
+    local requestContent = { CompetitionId = competitionId,  Active = active }
     local requestContentText = Json.encode( requestContent )
+    print( requestContentText )
     
-    local url = RequestUtils.POST_JOIN_COMPETITION_REST_CALL
+    local url = RequestUtils.POST_COMPETITION_PUSH_SETTING_REST_CALL
 
     local requestInfo = {}
     requestInfo.requestData = requestContentText
@@ -40,12 +37,5 @@ function action( param )
 end
 
 function onRequestSuccess( jsonResponse )
-    local competitionId = jsonResponse["CompetitionId"]
-    local joinToken = jsonResponse["JoinToken"]
-    
-    local params = { Action = "join"}
-    CCLuaLog("Send ANALYTICS_EVENT_COMPETITION: "..Json.encode( params ) )
-    Analytics:sharedDelegate():postEvent( Constants.ANALYTICS_EVENT_COMPETITION, Json.encode( params ) )
-
-    EventManager:postEvent( Event.Enter_Competition_Detail, { competitionId, true } )
+    -- Nothing needed
 end

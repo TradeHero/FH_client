@@ -48,7 +48,9 @@ CompetitionDetail = {}
       "MessageText":"111",
       "UserName":"Test003",
       "UnixTimeStamp":1405419592
-   }
+   },
+
+   "PushNotificationsEnabled":false
 
 }
 
@@ -66,6 +68,7 @@ function CompetitionDetail:new( detail )
       open = detail.CompetitionInfoDTO.Open,
       owningUserName = detail.CompetitionInfoDTO.OwningUserName,
       latestChatMessage = detail.LatestChatMessage,
+      pnSetting = detail.PushNotificationsEnabled
    }
 
    setmetatable(obj, self)
@@ -110,4 +113,8 @@ end
 
 function CompetitionDetail:getLatestChatMessage()
    return self.latestChatMessage
+end
+
+function CompetitionDetail:getPNSetting()
+   return self.pnSetting
 end

@@ -19,7 +19,7 @@ function action( param )
     CCLuaLog( "Device Token is: "..Logic:getDeviceToken() )
 
     if Logic:getEmail() ~= nil and string.len( Logic:getEmail() ) > 0 and
-         Logic:getPassword() ~= nil and string.len( Logic:getPassword() ) > 0 then
+        Logic:getPassword() ~= nil and string.len( Logic:getPassword() ) > 0 then
         StartTutorialScene.loadFrame( true )
         EventManager:postEvent( Event.Do_Login, { Logic:getEmail(), Logic:getPassword() } )
     elseif Logic:getFBAccessToken() ~= nil and string.len( Logic:getFBAccessToken() ) > 0 then

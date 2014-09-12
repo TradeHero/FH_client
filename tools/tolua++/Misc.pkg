@@ -13,5 +13,7 @@ class Misc
 
 	void getUADeviceToken( LUA_FUNCTION handler );
 
+	void requestPushNotification();
+
 	void terminate();
-};	
+};		

@@ -7,6 +7,8 @@ local Event = require("scripts.events.Event").EventList
 local ConnectingMessage = require("scripts.views.ConnectingMessage")
 local RequestUtils = require("scripts.RequestUtils")
 local Logic = require("scripts.Logic").getInstance()
+local PushNotificationManager = require("scripts.PushNotificationManager")
+
 
 local mEmail = "test126@abc.com"
 local mPassword = "test126"
@@ -50,15 +52,19 @@ function action( param )
 end
 
 function onRequestSuccess( jsonResponse )
-    local sessionToken = jsonResponse["ProfileDto"]["SessionToken"]
-    local userId = jsonResponse["ProfileDto"]["Id"]
-    local configMd5Info = jsonResponse["ProfileDto"]["ConfigMd5Info"]
-    local displayName = jsonResponse["ProfileDto"]["DisplayName"]
-    local pictureUrl = jsonResponse["ProfileDto"]["PictureUrl"]
-    local startLeagueId = jsonResponse["ProfileDto"]["StartLeagueId"]
-    local balance = jsonResponse["ProfileDto"]["Balance"]
-    local active = jsonResponse["ProfileDto"]["ActiveInCompetition"]
-    local FbId = jsonResponse["ProfileDto"]["FbId"]
+    local profileDto = jsonResponse["ProfileDto"]
+
+    local sessionToken = profileDto["SessionToken"]
+    local userId = profileDto["Id"]
+    local configMd5Info = profileDto["ConfigMd5Info"]
+    local displayName = profileDto["DisplayName"]
+    local pictureUrl = profileDto["PictureUrl"]
+    local startLeagueId = profileDto["StartLeagueId"]
+    local balance = profileDto["Balance"]
+    local active = profileDto["ActiveInCompetition"]
+    local FbId = profileDto["FbId"]
+    local pushForPredictionsEnabled = profileDto["PushForPredictionsEnabled"]
+    local pushGenerallyEnabled = profileDto["PushGenerallyEnabled"]
 
     Logic:setUserInfo( mEmail, mPassword, "", sessionToken, userId )
     Logic:setDisplayName( displayName )
@@ -67,6 +73,8 @@ function onRequestSuccess( jsonResponse )
     Logic:setBalance( balance )
     Logic:setActiveInCompetition( active )
     Logic:setFbId( FbId )
+
+    PushNotificationManager.initFromServer( pushGenerallyEnabled, pushForPredictionsEnabled )
 
     local finishEvent = Event.Enter_Sel_Fav_Team
     local finishEventParam = {}

@@ -259,6 +259,19 @@
 		733DE934193F26C800361638 /* Default~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 733DE932193F26C800361638 /* Default~ipad.png */; };
 		733DE935193F26C800361638 /* Default-Portrait@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 733DE933193F26C800361638 /* Default-Portrait@2x~ipad.png */; };
 		734532A71965056400E5D444 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 734532A31965028E00E5D444 /* MessageUI.framework */; };
+		73495B8419C048D300626812 /* UADateUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 73495B6F19C048D300626812 /* UADateUtils.m */; };
+		73495B8519C048D300626812 /* UAInboxAlertHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 73495B7119C048D300626812 /* UAInboxAlertHandler.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		73495B8619C048D300626812 /* UAInboxMessageListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 73495B7319C048D300626812 /* UAInboxMessageListCell.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		73495B8719C048D300626812 /* UAInboxMessageListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 73495B7519C048D300626812 /* UAInboxMessageListController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		73495B8819C048D300626812 /* UAInboxMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 73495B7719C048D300626812 /* UAInboxMessageViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		73495B8919C048D300626812 /* UAInboxNavUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 73495B7919C048D300626812 /* UAInboxNavUI.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		73495B8A19C048D300626812 /* UAInboxUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 73495B7B19C048D300626812 /* UAInboxUI.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		73495B8B19C048D300626812 /* list-image-placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 73495B7E19C048D300626812 /* list-image-placeholder.png */; };
+		73495B8C19C048D300626812 /* list-image-placeholder@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 73495B7F19C048D300626812 /* list-image-placeholder@2x.png */; };
+		73495B8D19C048D300626812 /* UAInboxLocalization.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 73495B8019C048D300626812 /* UAInboxLocalization.bundle */; };
+		73495B8E19C048D300626812 /* UAInboxMessageListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73495B8119C048D300626812 /* UAInboxMessageListCell.xib */; };
+		73495B8F19C048D300626812 /* UAInboxMessageListController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73495B8219C048D300626812 /* UAInboxMessageListController.xib */; };
+		73495B9019C048D300626812 /* UAInboxMessageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73495B8319C048D300626812 /* UAInboxMessageViewController.xib */; };
 		7365C0D218FCE99200C39027 /* FBSessionSingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 7365C0D118FCE99200C39027 /* FBSessionSingleton.m */; };
 		7388C04118F4E2FF00CF667C /* HttpRequestForLua.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7388C03F18F4E2FF00CF667C /* HttpRequestForLua.cpp */; };
 		738BA12A193D7FD2008A74F6 /* DES56.lua in Resources */ = {isa = PBXBuildFile; fileRef = 738BA129193D7FD2008A74F6 /* DES56.lua */; };
@@ -839,6 +852,26 @@
 		733DE932193F26C800361638 /* Default~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default~ipad.png"; sourceTree = SOURCE_ROOT; };
 		733DE933193F26C800361638 /* Default-Portrait@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait@2x~ipad.png"; sourceTree = SOURCE_ROOT; };
 		734532A31965028E00E5D444 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		73495B6E19C048D300626812 /* UADateUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UADateUtils.h; sourceTree = "<group>"; };
+		73495B6F19C048D300626812 /* UADateUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UADateUtils.m; sourceTree = "<group>"; };
+		73495B7019C048D300626812 /* UAInboxAlertHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UAInboxAlertHandler.h; sourceTree = "<group>"; };
+		73495B7119C048D300626812 /* UAInboxAlertHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UAInboxAlertHandler.m; sourceTree = "<group>"; };
+		73495B7219C048D300626812 /* UAInboxMessageListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UAInboxMessageListCell.h; sourceTree = "<group>"; };
+		73495B7319C048D300626812 /* UAInboxMessageListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UAInboxMessageListCell.m; sourceTree = "<group>"; };
+		73495B7419C048D300626812 /* UAInboxMessageListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UAInboxMessageListController.h; sourceTree = "<group>"; };
+		73495B7519C048D300626812 /* UAInboxMessageListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UAInboxMessageListController.m; sourceTree = "<group>"; };
+		73495B7619C048D300626812 /* UAInboxMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UAInboxMessageViewController.h; sourceTree = "<group>"; };
+		73495B7719C048D300626812 /* UAInboxMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UAInboxMessageViewController.m; sourceTree = "<group>"; };
+		73495B7819C048D300626812 /* UAInboxNavUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UAInboxNavUI.h; sourceTree = "<group>"; };
+		73495B7919C048D300626812 /* UAInboxNavUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UAInboxNavUI.m; sourceTree = "<group>"; };
+		73495B7A19C048D300626812 /* UAInboxUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UAInboxUI.h; sourceTree = "<group>"; };
+		73495B7B19C048D300626812 /* UAInboxUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UAInboxUI.m; sourceTree = "<group>"; };
+		73495B7E19C048D300626812 /* list-image-placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "list-image-placeholder.png"; sourceTree = "<group>"; };
+		73495B7F19C048D300626812 /* list-image-placeholder@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "list-image-placeholder@2x.png"; sourceTree = "<group>"; };
+		73495B8019C048D300626812 /* UAInboxLocalization.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = UAInboxLocalization.bundle; sourceTree = "<group>"; };
+		73495B8119C048D300626812 /* UAInboxMessageListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UAInboxMessageListCell.xib; sourceTree = "<group>"; };
+		73495B8219C048D300626812 /* UAInboxMessageListController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UAInboxMessageListController.xib; sourceTree = "<group>"; };
+		73495B8319C048D300626812 /* UAInboxMessageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UAInboxMessageViewController.xib; sourceTree = "<group>"; };
 		7365C0D018FCE99200C39027 /* FBSessionSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBSessionSingleton.h; sourceTree = "<group>"; };
 		7365C0D118FCE99200C39027 /* FBSessionSingleton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBSessionSingleton.m; sourceTree = "<group>"; };
 		7388C03F18F4E2FF00CF667C /* HttpRequestForLua.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HttpRequestForLua.cpp; sourceTree = "<group>"; };
@@ -1812,6 +1845,7 @@
 		7314B46719B714D50065D927 /* Default */ = {
 			isa = PBXGroup;
 			children = (
+				73495B6B19C048D300626812 /* Inbox */,
 				7314B46819B714E10065D927 /* Push */,
 			);
 			name = Default;
@@ -1909,6 +1943,66 @@
 				733DE92A193DCB1D00361638 /* AssetsManager.h */,
 			);
 			name = AssetsManager;
+			sourceTree = "<group>";
+		};
+		73495B6B19C048D300626812 /* Inbox */ = {
+			isa = PBXGroup;
+			children = (
+				73495B6C19C048D300626812 /* Classes */,
+				73495B7C19C048D300626812 /* Resources */,
+			);
+			name = Inbox;
+			path = Airship/UI/Default/Inbox;
+			sourceTree = "<group>";
+		};
+		73495B6C19C048D300626812 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				73495B6D19C048D300626812 /* Shared */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		73495B6D19C048D300626812 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				73495B6E19C048D300626812 /* UADateUtils.h */,
+				73495B6F19C048D300626812 /* UADateUtils.m */,
+				73495B7019C048D300626812 /* UAInboxAlertHandler.h */,
+				73495B7119C048D300626812 /* UAInboxAlertHandler.m */,
+				73495B7219C048D300626812 /* UAInboxMessageListCell.h */,
+				73495B7319C048D300626812 /* UAInboxMessageListCell.m */,
+				73495B7419C048D300626812 /* UAInboxMessageListController.h */,
+				73495B7519C048D300626812 /* UAInboxMessageListController.m */,
+				73495B7619C048D300626812 /* UAInboxMessageViewController.h */,
+				73495B7719C048D300626812 /* UAInboxMessageViewController.m */,
+				73495B7819C048D300626812 /* UAInboxNavUI.h */,
+				73495B7919C048D300626812 /* UAInboxNavUI.m */,
+				73495B7A19C048D300626812 /* UAInboxUI.h */,
+				73495B7B19C048D300626812 /* UAInboxUI.m */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		73495B7C19C048D300626812 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				73495B7D19C048D300626812 /* Shared */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		73495B7D19C048D300626812 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				73495B7E19C048D300626812 /* list-image-placeholder.png */,
+				73495B7F19C048D300626812 /* list-image-placeholder@2x.png */,
+				73495B8019C048D300626812 /* UAInboxLocalization.bundle */,
+				73495B8119C048D300626812 /* UAInboxMessageListCell.xib */,
+				73495B8219C048D300626812 /* UAInboxMessageListController.xib */,
+				73495B8319C048D300626812 /* UAInboxMessageViewController.xib */,
+			);
+			path = Shared;
 			sourceTree = "<group>";
 		};
 		73BFF750191779DE002F173A /* crypt */ = {
@@ -2410,6 +2504,7 @@
 			files = (
 				73DCA159192DCD95008AC05D /* anims in Resources */,
 				733DE92F193F262900361638 /* Icon-76.png in Resources */,
+				73495B8E19C048D300626812 /* UAInboxMessageListCell.xib in Resources */,
 				15C156981683138E00D239F2 /* Default-568h@2x.png in Resources */,
 				7314B4CB19B718240065D927 /* AirshipConfig.plist in Resources */,
 				15C156991683138E00D239F2 /* Default.png in Resources */,
@@ -2435,11 +2530,14 @@
 				733DE934193F26C800361638 /* Default~ipad.png in Resources */,
 				730D984318DC4317000CA5F9 /* CCBReaderLoad.lua in Resources */,
 				7314B4B619B715350065D927 /* UAPushSettingsSoundsViewController.xib in Resources */,
+				73495B9019C048D300626812 /* UAInboxMessageViewController.xib in Resources */,
 				7314B4AF19B715350065D927 /* UALocationSettingsViewController.xib in Resources */,
 				730D984C18DC4317000CA5F9 /* json.lua in Resources */,
 				730D984418DC4317000CA5F9 /* Cocos2d.lua in Resources */,
+				73495B8C19C048D300626812 /* list-image-placeholder@2x.png in Resources */,
 				7314B4B519B715350065D927 /* UAPushSettingsChannelInfoViewController.xib in Resources */,
 				15C1569C1683138E00D239F2 /* Icon-72.png in Resources */,
+				73495B8F19C048D300626812 /* UAInboxMessageListController.xib in Resources */,
 				7314B4B919B715350065D927 /* UAPushSettingsUserInfoView.xib in Resources */,
 				7314B4A919B715350065D927 /* bottom-detail.png in Resources */,
 				7314B4B119B715350065D927 /* UAPushLocalization.bundle in Resources */,
@@ -2447,6 +2545,7 @@
 				730D984B18DC4317000CA5F9 /* images in Resources */,
 				73FC0A22199079630006D0E2 /* iOSa_2.60.0.version in Resources */,
 				730D984518DC4317000CA5F9 /* CocoStudio.lua in Resources */,
+				73495B8B19C048D300626812 /* list-image-placeholder.png in Resources */,
 				15C1569D1683138E00D239F2 /* Icon-114.png in Resources */,
 				15C1569E1683138E00D239F2 /* Icon-144.png in Resources */,
 				738BA12A193D7FD2008A74F6 /* DES56.lua in Resources */,
@@ -2460,6 +2559,7 @@
 				46C59AD417641FF300F43DC3 /* CCBReaderLoad.lua in Resources */,
 				733DE930193F262900361638 /* Icon-120.png in Resources */,
 				730D984218DC4317000CA5F9 /* AudioEngine.lua in Resources */,
+				73495B8D19C048D300626812 /* UAInboxLocalization.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2472,6 +2572,7 @@
 			files = (
 				F293B6FC15EB823D00256477 /* AppController.mm in Sources */,
 				F293B6FD15EB823D00256477 /* main.m in Sources */,
+				73495B8519C048D300626812 /* UAInboxAlertHandler.m in Sources */,
 				373F993F1869F07A0080E035 /* CCActionFrameEasing.cpp in Sources */,
 				F293B6FE15EB823D00256477 /* RootViewController.mm in Sources */,
 				F293BB9C15EB831F00256477 /* AppDelegate.cpp in Sources */,
@@ -2560,6 +2661,7 @@
 				15C154951683116B00D239F2 /* cpSlideJoint.c in Sources */,
 				15C154961683116B00D239F2 /* cpArbiter.c in Sources */,
 				15C154971683116B00D239F2 /* cpArray.c in Sources */,
+				73495B8819C048D300626812 /* UAInboxMessageViewController.m in Sources */,
 				15C154981683116B00D239F2 /* cpBB.c in Sources */,
 				ED35C0F118323498002A0750 /* UILabelBMFont.cpp in Sources */,
 				15C154991683116B00D239F2 /* cpBBTree.c in Sources */,
@@ -2675,12 +2777,15 @@
 				15CA8CF718696744000032AB /* LuaCocoStudio.cpp in Sources */,
 				7314B48E19B7150F0065D927 /* UAPushSettingsChannelInfoViewController.m in Sources */,
 				46C1008C16BF786A00F74D54 /* CCLuaBridge.cpp in Sources */,
+				73495B8719C048D300626812 /* UAInboxMessageListController.m in Sources */,
+				73495B8419C048D300626812 /* UADateUtils.m in Sources */,
 				46C1008D16BF786A00F74D54 /* CCLuaEngine.cpp in Sources */,
 				46C1008E16BF786A00F74D54 /* CCLuaStack.cpp in Sources */,
 				46C1008F16BF786A00F74D54 /* CCLuaValue.cpp in Sources */,
 				46C1009016BF786A00F74D54 /* Cocos2dxLuaLoader.cpp in Sources */,
 				ED35C0F318323498002A0750 /* UISlider.cpp in Sources */,
 				46C1009116BF786A00F74D54 /* LuaCocos2d.cpp in Sources */,
+				73495B8919C048D300626812 /* UAInboxNavUI.m in Sources */,
 				46C1009216BF786A00F74D54 /* CCLuaObjcBridge.mm in Sources */,
 				46C1009316BF786A00F74D54 /* tolua_fix.c in Sources */,
 				1A40E7DF1727C47E006D4861 /* Animation.cpp in Sources */,
@@ -2698,12 +2803,14 @@
 				733DE92B193DCB1D00361638 /* AssetsManager.cpp in Sources */,
 				1A40E7E51727C47E006D4861 /* AttachmentLoader.cpp in Sources */,
 				1A40E7E61727C47E006D4861 /* Bone.cpp in Sources */,
+				73495B8619C048D300626812 /* UAInboxMessageListCell.m in Sources */,
 				73D51F25192F3082000A65AF /* WebviewController.mm in Sources */,
 				1A40E7E71727C47E006D4861 /* BoneData.cpp in Sources */,
 				ED35C0CF18323498002A0750 /* CCDisplayFactory.cpp in Sources */,
 				1A40E7E81727C47E006D4861 /* extension.cpp in Sources */,
 				375BD560186846090024609E /* TriggerBase.cpp in Sources */,
 				1A40E7E91727C47E006D4861 /* Json.cpp in Sources */,
+				73495B8A19C048D300626812 /* UAInboxUI.m in Sources */,
 				1A40E7EA1727C47E006D4861 /* RegionAttachment.cpp in Sources */,
 				1A40E7EB1727C47E006D4861 /* Skeleton.cpp in Sources */,
 				73BFF75B191779FB002F173A /* ldes56.c in Sources */,

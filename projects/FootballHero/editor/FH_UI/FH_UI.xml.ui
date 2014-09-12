@@ -76,6 +76,9 @@
     <string>LeaderbaordContentInDropDown.json</string>
     <string>MarketingMessage.json</string>
     <string>ShareTypeSelection.json</string>
+    <string>PNPredictionMessage.json</string>
+    <string>PNCompetitionMessage.json</string>
+    <string>PushNotification.json</string>
   </JsonList>
   <CanvasSize>
     <Width>640</Width>
@@ -86,16 +89,11 @@
   <ResRelativePath />
   <imageFileList />
   <imagePngList>
-    <string>MatchListContent/vs-button.png</string>
-    <string>commonRes/Arsenal.png</string>
-    <string>history/jiantou.png</string>
-    <string>history/hengxian.png</string>
-    <string>history/blue.png</string>
-    <string>history/green.png</string>
-    <string>history/red.png</string>
-    <string>history/shangsheng.png</string>
-    <string>history/xiajiang.png</string>
+    <string>MatchListScene/match_bkg.png</string>
+    <string>header/back.png</string>
+    <string>PredictionConfirm/off_button.png</string>
+    <string>PredictionConfirm/on_button.png</string>
   </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>HistoryMainMatchContent.json</CurrentUIJson>
+  <CurrentUIJson>PNCompetitionMessage.json</CurrentUIJson>
 </UIProject>

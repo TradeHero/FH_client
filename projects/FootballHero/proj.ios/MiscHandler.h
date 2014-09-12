@@ -22,6 +22,8 @@ public:
     
     void getUADeviceToken();
     
+    void requestPushNotification();
+    
     
     // Getter and setter for local varibles.
     char* getImagePath() { return imagePath; }
