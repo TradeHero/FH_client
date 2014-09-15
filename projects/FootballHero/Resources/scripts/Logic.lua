@@ -266,6 +266,19 @@ function Logic:getDeviceToken()
 	end
 end
 
+function Logic:checkNUploadDeviceToken()
+	Misc:sharedDelegate():setUADeviceTokenHandler( function( token )
+		if token ~= nil and token ~= "" and self.deviceToken ~= token then
+			self.deviceToken = token
+
+			-- Todo upload to server
+			local EventManager = require("scripts.events.EventManager").getInstance()
+			local Event = require("scripts.events.Event").EventList
+			EventManager:postEvent( Event.Do_Post_Device_Token, { self.deviceToken } )
+		end
+	end )
+end
+
 function Logic:setCompetitionDetail( competitionDetail )
 	self.competitionDetail = competitionDetail
 end

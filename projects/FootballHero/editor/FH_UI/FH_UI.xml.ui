@@ -89,11 +89,11 @@
   <ResRelativePath />
   <imageFileList />
   <imagePngList>
-    <string>MatchListScene/match_bkg.png</string>
-    <string>header/back.png</string>
-    <string>PredictionConfirm/off_button.png</string>
-    <string>PredictionConfirm/on_button.png</string>
+    <string>commonRes/Arsenal.png</string>
+    <string>commonRes/Manchester United.png</string>
+    <string>MatchListContent/line.png</string>
+    <string>MatchListContent/info_box.png</string>
   </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>PNCompetitionMessage.json</CurrentUIJson>
+  <CurrentUIJson>MatchListContent.json</CurrentUIJson>
 </UIProject>

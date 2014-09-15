@@ -27,7 +27,9 @@ namespace Utils
         
 		char* createFormWithFile(const char* begin, const char* end, const char* filePath, const char* pszMode, unsigned long *pSize);
 
-		void getUADeviceToken( int handler );
+		void getUADeviceToken(int handler);
+
+		void setUADeviceTokenHandler(int handler);
 
 		void responseUADeviceToken(const char* token);
 

@@ -10,7 +10,12 @@
   "designHeight": 1136,
   "designWidth": 640,
   "textures": [],
-  "texturesPng": [],
+  "texturesPng": [
+    "commonRes/Arsenal.png",
+    "commonRes/Manchester United.png",
+    "MatchListContent/line.png",
+    "MatchListContent/info_box.png"
+  ],
   "version": "1.5.0.0",
   "widgetTree": {
     "classname": "Panel",
@@ -410,7 +415,7 @@
           "touchAble": false,
           "useMergedTexture": false,
           "visible": true,
-          "width": 39,
+          "width": 33,
           "x": 288,
           "y": 50,
           "areaHeight": 0,
@@ -419,7 +424,7 @@
           "fontName": "fonts/Helvetica neue.ttf",
           "fontSize": 30,
           "hAlignment": 0,
-          "text": "FH",
+          "text": "All",
           "touchScaleEnable": false,
           "vAlignment": 0
         }

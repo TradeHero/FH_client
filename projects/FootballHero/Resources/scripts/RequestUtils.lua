@@ -38,6 +38,7 @@ POST_PASSWORD_RESET_REST_CALL = SERVER_IP.."/api/user/requestPasswordResetLink"
 POST_CHAT_MESSAGE_REST_CALL = SERVER_IP.."/api/chat/postChatMessage"
 POST_COMPETITION_PUSH_SETTING_REST_CALL = SERVER_IP.."/api/competitions/setPushNotificationSettings"
 POST_USER_PUSH_SETTING_REST_CALL = SERVER_IP.."/api/user/setPushNotificationSettings"
+POST_UPDATE_DEVICD_TOKEN_REST_CALL = SERVER_IP.."/api/user/updateDeviceToken"
 
 
 FACEBOOK_FRIENDS_LIST_CALL = "/me/friends?access_token="
@@ -82,6 +83,7 @@ function setServerIP( serverIp )
     POST_CHAT_MESSAGE_REST_CALL = serverIp.."/api/chat/postChatMessage"
     POST_COMPETITION_PUSH_SETTING_REST_CALL = serverIp.."/api/competitions/setPushNotificationSettings"
     POST_USER_PUSH_SETTING_REST_CALL = serverIp.."/api/user/setPushNotificationSettings"
+    POST_UPDATE_DEVICD_TOKEN_REST_CALL = serverIp.."/api/user/updateDeviceToken"
 
 	CDN_SERVER_IP = "http://portalvhdss3c1vgx5mrzv.blob.core.windows.net/fhdevsettings/"
     USE_DEV = true

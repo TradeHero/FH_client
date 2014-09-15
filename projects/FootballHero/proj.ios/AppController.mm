@@ -40,6 +40,7 @@
 #import <FacebookSDK/FacebookSDK.h>
 #import <MobileAppTracker/MobileAppTracker.h>
 #import <AdSupport/AdSupport.h>
+#include "MiscHandler.h"
 
 @implementation AppController
 
@@ -223,6 +224,9 @@ static AppDelegate s_sharedApplication;
     // Updates the device token and registers the token with UA. This won't occur until
     // push is enabled if the outlined process is followed. This call is required.
     [[UAPush shared] registerDeviceToken:deviceToken];
+    
+    NSString* token = [UAPush shared].deviceToken;
+    MiscHandler::getInstance()->responseUADeviceToken([token UTF8String]);
 }
 
 

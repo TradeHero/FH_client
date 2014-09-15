@@ -4,6 +4,8 @@ local Constants = require("scripts.Constants")
 local SceneManager = require("scripts.SceneManager")
 local EventManager = require("scripts.events.EventManager").getInstance()
 local Event = require("scripts.events.Event").EventList
+local Logic = require("scripts.Logic").getInstance()
+
 
 -- General and prediction switch status is stored here.
 -- Competition switch statis is stored in competition info.
@@ -40,6 +42,10 @@ function setPredictionSwitch( switch )
 	if switch ~= mPredictionSwitch then
 		mPredictionSwitch = switch
 		EventManager:postEvent( Event.Do_Post_PN_User_Settings )
+		if mPredictionSwitch then
+			uploadDeviceToken()
+    		Misc:sharedDelegate():requestPushNotification()
+		end
 	end
 end
 
@@ -50,6 +56,7 @@ function checkShowPredictionSwitch( yesCallback, noCallback )
 	end
 
 	local chooseYesCallback = function()
+		uploadDeviceToken()
     	Misc:sharedDelegate():requestPushNotification()
     	setPredictionSwitch( true )
     	yesCallback()
@@ -65,6 +72,20 @@ function checkShowPredictionSwitch( yesCallback, noCallback )
 end
 
 function checkShowCompetitionSwitch( yesCallback, noCallback )
+	local chooseYesCallback = function()
+    	uploadDeviceToken()
+    	Misc:sharedDelegate():requestPushNotification()
+    	yesCallback()
+    end
+
+    local chooseNoCallback = function()
+    	noCallback()
+    end
+
 	local PNCompetitionScene = require("scripts.views.PNCompetitionScene")
-    PNCompetitionScene.loadFrame( yesCallback, noCallback )
+    PNCompetitionScene.loadFrame( chooseYesCallback, chooseNoCallback )
+end
+
+function uploadDeviceToken()
+	Logic:checkNUploadDeviceToken()
 end

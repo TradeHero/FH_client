@@ -161,6 +161,13 @@ namespace Utils
 #endif
 	}
 
+	void Misc::setUADeviceTokenHandler(int handler)
+	{
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+		mUADeviceTokenHandler = handler;
+#endif
+	}
+
 	void Misc::responseUADeviceToken(const char* token)
 	{
 		CCScriptEngineProtocol* pScriptProtocol = CCScriptEngineManager::sharedManager()->getScriptEngine();

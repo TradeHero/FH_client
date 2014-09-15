@@ -22,6 +22,8 @@ public:
     
     void getUADeviceToken();
     
+    void responseUADeviceToken(const char* token);
+    
     void requestPushNotification();
     
     

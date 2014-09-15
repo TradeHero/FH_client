@@ -26,7 +26,7 @@ function loadFrame()
 
     local predictionCheck = tolua.cast( mWidget:getChildByName("predictionCheck"), "CheckBox" )
     predictionCheck:addTouchEventListener( predictionCheckHandler )
-    if PushNotificationManager.getGeneralSwitch() then
+    if PushNotificationManager.getPredictionSwitch() then
         predictionCheck:setSelectedState( true )
     end
 end
