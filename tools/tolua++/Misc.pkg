@@ -17,5 +17,7 @@ class Misc
 
 	void requestPushNotification();
 
+	void openUrl(char* url);
+
 	void terminate();
 };		

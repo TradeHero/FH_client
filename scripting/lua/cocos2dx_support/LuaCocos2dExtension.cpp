@@ -1,6 +1,6 @@
 /*
 ** Lua binding: Extension
-** Generated automatically by tolua++-1.0.92 on 09/15/14 15:06:13.
+** Generated automatically by tolua++-1.0.92 on 09/15/14 18:29:40.
 */
 
 /****************************************************************************
@@ -1232,6 +1232,39 @@ static int tolua_Extension_Misc_requestPushNotification00(lua_State* tolua_S)
 }
 #endif //#ifndef TOLUA_DISABLE
 
+/* method: openUrl of class  Misc */
+#ifndef TOLUA_DISABLE_tolua_Extension_Misc_openUrl00
+static int tolua_Extension_Misc_openUrl00(lua_State* tolua_S)
+{
+#ifndef TOLUA_RELEASE
+ tolua_Error tolua_err;
+ if (
+     !tolua_isusertype(tolua_S,1,"Misc",0,&tolua_err) ||
+     !tolua_isstring(tolua_S,2,0,&tolua_err) ||
+     !tolua_isnoobj(tolua_S,3,&tolua_err)
+ )
+  goto tolua_lerror;
+ else
+#endif
+ {
+  Misc* self = (Misc*)  tolua_tousertype(tolua_S,1,0);
+  char* url = ((char*)  tolua_tostring(tolua_S,2,0));
+#ifndef TOLUA_RELEASE
+  if (!self) tolua_error(tolua_S,"invalid 'self' in function 'openUrl'", NULL);
+#endif
+  {
+   self->openUrl(url);
+  }
+ }
+ return 0;
+#ifndef TOLUA_RELEASE
+ tolua_lerror:
+ tolua_error(tolua_S,"#ferror in function 'openUrl'.",&tolua_err);
+ return 0;
+#endif
+}
+#endif //#ifndef TOLUA_DISABLE
+
 /* method: terminate of class  Misc */
 #ifndef TOLUA_DISABLE_tolua_Extension_Misc_terminate00
 static int tolua_Extension_Misc_terminate00(lua_State* tolua_S)
@@ -1339,6 +1372,7 @@ TOLUA_API int tolua_Extension_open (lua_State* tolua_S)
    tolua_function(tolua_S,"getUADeviceToken",tolua_Extension_Misc_getUADeviceToken00);
    tolua_function(tolua_S,"setUADeviceTokenHandler",tolua_Extension_Misc_setUADeviceTokenHandler00);
    tolua_function(tolua_S,"requestPushNotification",tolua_Extension_Misc_requestPushNotification00);
+   tolua_function(tolua_S,"openUrl",tolua_Extension_Misc_openUrl00);
    tolua_function(tolua_S,"terminate",tolua_Extension_Misc_terminate00);
   tolua_endmodule(tolua_S);
  tolua_endmodule(tolua_S);

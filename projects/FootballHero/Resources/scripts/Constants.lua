@@ -1,5 +1,8 @@
 module(..., package.seeall)
 
+local FileUtils = require("scripts.FileUtils")
+
+
 GAME_WIDTH = 640
 GAME_HEIGHT = 1136
 
@@ -41,3 +44,27 @@ ANALYTICS_EVENT_PREDICTION = "Prediction"
 ANALYTICS_EVENT_SOCIAL_ACTION = "Social_Action"
 ANALYTICS_EVENT_POPUP = "Pop-Up"
 ANALYTICS_EVENT_COMPETITION = "Competition"
+
+
+local mClientVersion = ""
+
+function getClientVersion()
+	if mClientVersion == "" then
+		local fileName = "version"
+		fileName = CCFileUtils:sharedFileUtils():fullPathForFilename( fileName )
+		local fileHandler, errorCode = io.open( fileName, "r" )
+		if fileHandler == nil then
+			assert( false, "Read failed from file"..fileName.." with error: "..errorCode )
+			return ""
+		end
+		
+		mClientVersion = fileHandler:read("*all")
+		fileHandler:close()
+
+		CCLuaLog("Client version: "..mClientVersion)
+	end
+
+	return mClientVersion
+end
+
+getClientVersion()

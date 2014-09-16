@@ -29,7 +29,8 @@ function action( param )
 
     local requestContent = { Email = mEmail, Password = mPassword, 
                             DeviceToken = Logic:getDeviceToken(),
-                            useDev = RequestUtils.USE_DEV }
+                            useDev = RequestUtils.USE_DEV,
+                            Version = Constants.getClientVersion() }
     local requestContentText = Json.encode( requestContent )
     CCLuaLog("Email Login data: "..requestContentText)
     
@@ -92,11 +93,20 @@ function onRequestSuccess( jsonResponse )
 end
 
 function onRequestFailed( jsonResponse )
+    local needUpdate = jsonResponse["Update"]
     local errorBuffer = jsonResponse["Message"]
-    if errorBuffer == "" then
-        errorBuffer = "Login failed. Please retry."
-    end
+    if needUpdate then
+        if errorBuffer == nil or errorBuffer == "" then
+            errorBuffer = "Please download new version and update!"
+        end
 
-    Logic:clearAccountInfoFile()
-    EventManager:postEvent( Event.Show_Error_Message, { errorBuffer } )
+        EventManager:postEvent( Event.Show_Please_Update, { errorBuffer } )
+    else
+        if errorBuffer == nil or errorBuffer == "" then
+            errorBuffer = "Login failed. Please retry."
+        end
+
+        Logic:clearAccountInfoFile()
+        EventManager:postEvent( Event.Show_Error_Message, { errorBuffer } )
+    end
 end

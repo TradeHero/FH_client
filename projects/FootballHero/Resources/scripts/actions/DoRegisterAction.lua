@@ -56,7 +56,8 @@ function action( param )
 
     local requestContent = { Email = mEmail, Password = mPassword, 
                             GMTOffset = RequestUtils.getTimezoneOffset(), DeviceToken = Logic:getDeviceToken(),
-                            useDev = RequestUtils.USE_DEV }
+                            useDev = RequestUtils.USE_DEV,
+                            Version = Constants.getClientVersion() }
     local requestContentText = Json.encode( requestContent )
     print( requestContentText )
     

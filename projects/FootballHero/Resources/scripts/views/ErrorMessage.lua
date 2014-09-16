@@ -40,6 +40,11 @@ function setErrorMessage( message, retryCall )
     mRetryCall = retryCall
 end
 
+function setButtonText( text )
+    local okBt = tolua.cast( mWidget:getChildByName("ok"), "Button" )
+    okBt:setTitleText( text )
+end
+
 function okEventHandler( sender, eventType )
     if eventType == TOUCH_EVENT_ENDED then
         SceneManager.removeWidget( mWidget )

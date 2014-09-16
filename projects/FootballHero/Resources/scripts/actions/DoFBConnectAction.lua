@@ -36,7 +36,8 @@ function onFBConnectSuccess( accessToken )
     mAccessToken = accessToken
     local requestContent = { SocialNetworkType = 0, AuthToken = accessToken, 
                             GMTOffset = RequestUtils.getTimezoneOffset(), DeviceToken = Logic:getDeviceToken(),
-                            useDev = RequestUtils.USE_DEV }
+                            useDev = RequestUtils.USE_DEV,
+                            Version = Constants.getClientVersion() }
     local requestContentText = Json.encode( requestContent )
     
     local url = RequestUtils.FB_LOGIN_REST_CALL

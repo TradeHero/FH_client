@@ -72,6 +72,7 @@ EventNameList =
     "Show_Info",
     "Show_Error_Message",
     "Show_Marketing_Message",
+    "Show_Please_Update",
 
     "Load_More_In_Leaderboard",
     "Load_More_In_History",
@@ -109,6 +110,7 @@ EventNameDosenotTrackList =
     "Show_Info",
     "Show_Error_Message",
     "Show_Marketing_Message",
+    "Show_Please_Update",
     "Load_More_In_Leaderboard",
     "Load_More_In_History",
     "Load_More_In_Competition_Detail",

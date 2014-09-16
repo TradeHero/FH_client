@@ -191,6 +191,16 @@ namespace Utils
 #endif
 	}
 
+	void Misc::openUrl(char* url)
+	{
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+		MiscHandler::getInstance()->openUrl(url);
+#endif
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+		
+#endif
+	}
+
 	void Misc::terminate()
 	{
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)

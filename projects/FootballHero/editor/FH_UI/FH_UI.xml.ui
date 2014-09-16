@@ -88,12 +88,7 @@
   <ProjectType>UIProject</ProjectType>
   <ResRelativePath />
   <imageFileList />
-  <imagePngList>
-    <string>commonRes/Arsenal.png</string>
-    <string>commonRes/Manchester United.png</string>
-    <string>MatchListContent/line.png</string>
-    <string>MatchListContent/info_box.png</string>
-  </imagePngList>
+  <imagePngList />
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>MatchListContent.json</CurrentUIJson>
+  <CurrentUIJson>PushNotification.json</CurrentUIJson>
 </UIProject>

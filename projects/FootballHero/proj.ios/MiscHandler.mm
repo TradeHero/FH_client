@@ -83,3 +83,8 @@ void MiscHandler::requestPushNotification()
 {
     [[UAPush shared] setPushEnabled:YES];
 }
+
+void MiscHandler::openUrl(char *url)
+{
+    [[UIApplication sharedApplication]openURL:[NSURL URLWithString:[NSString stringWithUTF8String:url]]];
+}

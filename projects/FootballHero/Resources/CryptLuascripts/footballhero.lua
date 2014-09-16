@@ -29,6 +29,7 @@ local function main()
     collectgarbage("setstepmul", 5000)
 
     cclog("Game start.")
+
     initPackageLoader( true )
 
     local sceneManager = require("scripts.SceneManager")

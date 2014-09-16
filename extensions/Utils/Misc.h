@@ -35,6 +35,8 @@ namespace Utils
 
 		void requestPushNotification();
 
+		void openUrl(char* url);
+
 		void terminate();
 	protected:
 		Misc();

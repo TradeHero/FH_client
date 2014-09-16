@@ -26,6 +26,8 @@ public:
     
     void requestPushNotification();
     
+    void openUrl(char* url);
+    
     
     // Getter and setter for local varibles.
     char* getImagePath() { return imagePath; }
