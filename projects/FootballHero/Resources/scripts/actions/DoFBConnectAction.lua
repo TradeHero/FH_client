@@ -7,6 +7,8 @@ local ConnectingMessage = require("scripts.views.ConnectingMessage")
 local Json = require("json")
 local RequestUtils = require("scripts.RequestUtils")
 local Logic = require("scripts.Logic").getInstance()
+local PushNotificationManager = require("scripts.PushNotificationManager")
+
 
 local mAccessToken
 
@@ -68,24 +70,33 @@ function onRequestSuccess( jsonResponse )
     local balance = jsonResponse["Balance"]
     local active = jsonResponse["ActiveInCompetition"]
     local FbId = jsonResponse["FbId"]
+    local pushForPredictionsEnabled = jsonResponse["PushForPredictionsEnabled"]
+    local pushGenerallyEnabled = jsonResponse["PushGenerallyEnabled"]
+    local needUpdate = jsonResponse["Update"]
 
-    Logic:setUserInfo( "", "", mAccessToken, sessionToken, userId )
-    Logic:setDisplayName( displayName )
-    Logic:setPictureUrl( pictureUrl )
-    Logic:setStartLeagueId( startLeagueId )
-    Logic:setBalance( balance )
-    Logic:setActiveInCompetition( active )
-    Logic:setFbId( FbId )
-    
-    local finishEvent = Event.Enter_Sel_Fav_Team
-    if displayName == nil then
-        finishEvent = Event.Enter_Register_Name
+    if needUpdate then
+        EventManager:postEvent( Event.Show_Please_Update, { "Please download new version and update!" } )
+    else
+        Logic:setUserInfo( "", "", mAccessToken, sessionToken, userId )
+        Logic:setDisplayName( displayName )
+        Logic:setPictureUrl( pictureUrl )
+        Logic:setStartLeagueId( startLeagueId )
+        Logic:setBalance( balance )
+        Logic:setActiveInCompetition( active )
+        Logic:setFbId( FbId )
+
+        PushNotificationManager.initFromServer( pushGenerallyEnabled, pushForPredictionsEnabled )
+        
+        local finishEvent = Event.Enter_Sel_Fav_Team
+        if displayName == nil then
+            finishEvent = Event.Enter_Register_Name
+        end
+
+        local params = { Platform = "facebook" }
+        Analytics:sharedDelegate():postEvent( Constants.ANALYTICS_EVENT_LOGIN, Json.encode( params ) )
+
+        EventManager:postEvent( Event.Check_File_Version, { configMd5Info, finishEvent } )
     end
-
-    local params = { Platform = "facebook" }
-    Analytics:sharedDelegate():postEvent( Constants.ANALYTICS_EVENT_LOGIN, Json.encode( params ) )
-
-    EventManager:postEvent( Event.Check_File_Version, { configMd5Info, finishEvent } )
 end
 
 function onRequestFailed( jsonResponse )

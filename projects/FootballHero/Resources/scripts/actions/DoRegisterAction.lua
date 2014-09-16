@@ -88,37 +88,42 @@ function onRegisterRequestSuccess( jsonResponse )
     local startLeagueId = jsonResponse["StartLeagueId"]
     local balance = jsonResponse["Balance"]
     local FbId = jsonResponse["FbId"]
+    local needUpdate = jsonResponse["Update"]
 
-    mConfigMd5Info = configMd5Info
+    if needUpdate then
+        EventManager:postEvent( Event.Show_Please_Update, { "Please download new version and update!" } )
+    else
+        mConfigMd5Info = configMd5Info
 
-    Logic:setUserInfo( mEmail, mPassword, "", sessionToken, userId )
-    Logic:setDisplayName( displayName )
-    Logic:setPictureUrl( pictureUrl )
-    Logic:setStartLeagueId( startLeagueId )
-    Logic:setBalance( balance )
-    Logic:setFbId( FbId )
+        Logic:setUserInfo( mEmail, mPassword, "", sessionToken, userId )
+        Logic:setDisplayName( displayName )
+        Logic:setPictureUrl( pictureUrl )
+        Logic:setStartLeagueId( startLeagueId )
+        Logic:setBalance( balance )
+        Logic:setFbId( FbId )
 
 
-    local requestContent = { DisplayName = mUserName, FirstName = mFirstName, LastName = mLastName, DoB = "" }
-    local requestContentText = Json.encode( requestContent )
-    
-    local url = RequestUtils.SET_USER_METADATA_REST_CALL
+        local requestContent = { DisplayName = mUserName, FirstName = mFirstName, LastName = mLastName, DoB = "" }
+        local requestContentText = Json.encode( requestContent )
+        
+        local url = RequestUtils.SET_USER_METADATA_REST_CALL
 
-    local requestInfo = {}
-    requestInfo.requestData = requestContentText
-    requestInfo.url = url
+        local requestInfo = {}
+        requestInfo.requestData = requestContentText
+        requestInfo.url = url
 
-    local handler = function( isSucceed, body, header, status, errorBuffer )
-        RequestUtils.messageHandler( requestInfo, isSucceed, body, header, status, errorBuffer, RequestUtils.HTTP_200, onRegisterNameRequestSuccess )
+        local handler = function( isSucceed, body, header, status, errorBuffer )
+            RequestUtils.messageHandler( requestInfo, isSucceed, body, header, status, errorBuffer, RequestUtils.HTTP_200, onRegisterNameRequestSuccess )
+        end
+
+        local httpRequest = HttpRequestForLua:create( CCHttpRequest.kHttpPost )
+        httpRequest:addHeader( "Content-Type: application/json" )
+        httpRequest:addHeader( Logic:getAuthSessionString() )
+        httpRequest:getRequest():setRequestData( requestContentText, string.len( requestContentText ) )
+        httpRequest:sendHttpRequest( url, handler )
+
+        ConnectingMessage.loadFrame()
     end
-
-    local httpRequest = HttpRequestForLua:create( CCHttpRequest.kHttpPost )
-    httpRequest:addHeader( "Content-Type: application/json" )
-    httpRequest:addHeader( Logic:getAuthSessionString() )
-    httpRequest:getRequest():setRequestData( requestContentText, string.len( requestContentText ) )
-    httpRequest:sendHttpRequest( url, handler )
-
-    ConnectingMessage.loadFrame()
 end
 
 function onRegisterNameRequestSuccess( jsonResponse )

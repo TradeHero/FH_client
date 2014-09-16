@@ -66,47 +66,43 @@ function onRequestSuccess( jsonResponse )
     local FbId = profileDto["FbId"]
     local pushForPredictionsEnabled = profileDto["PushForPredictionsEnabled"]
     local pushGenerallyEnabled = profileDto["PushGenerallyEnabled"]
+    local needUpdate = profileDto["Update"]
 
-    Logic:setUserInfo( mEmail, mPassword, "", sessionToken, userId )
-    Logic:setDisplayName( displayName )
-    Logic:setPictureUrl( pictureUrl )
-    Logic:setStartLeagueId( startLeagueId )
-    Logic:setBalance( balance )
-    Logic:setActiveInCompetition( active )
-    Logic:setFbId( FbId )
+    if needUpdate then
+        EventManager:postEvent( Event.Show_Please_Update, { "Please download new version and update!" } )
+    else
+        Logic:setUserInfo( mEmail, mPassword, "", sessionToken, userId )
+        Logic:setDisplayName( displayName )
+        Logic:setPictureUrl( pictureUrl )
+        Logic:setStartLeagueId( startLeagueId )
+        Logic:setBalance( balance )
+        Logic:setActiveInCompetition( active )
+        Logic:setFbId( FbId )
 
-    PushNotificationManager.initFromServer( pushGenerallyEnabled, pushForPredictionsEnabled )
+        PushNotificationManager.initFromServer( pushGenerallyEnabled, pushForPredictionsEnabled )
 
-    local finishEvent = Event.Enter_Sel_Fav_Team
-    local finishEventParam = {}
-    if displayName == nil then
-        --finishEvent = Event.Enter_Register_Name
-        finishEvent = Event.Enter_Tutorial_Ui_With_Type
-        finishEventParam = { Constants.TUTORIAL_SHOW_EMAIL_REGISTER_NAME }
+        local finishEvent = Event.Enter_Sel_Fav_Team
+        local finishEventParam = {}
+        if displayName == nil then
+            --finishEvent = Event.Enter_Register_Name
+            finishEvent = Event.Enter_Tutorial_Ui_With_Type
+            finishEventParam = { Constants.TUTORIAL_SHOW_EMAIL_REGISTER_NAME }
+        end
+
+        local params = { Platform = "email" }
+        Analytics:sharedDelegate():postEvent( Constants.ANALYTICS_EVENT_LOGIN, Json.encode( params ) )
+
+        EventManager:postEvent( Event.Check_File_Version, { configMd5Info, finishEvent, finishEventParam } )
+        --EventManager:postEvent( Event.Do_Post_Logo )
     end
-
-    local params = { Platform = "email" }
-    Analytics:sharedDelegate():postEvent( Constants.ANALYTICS_EVENT_LOGIN, Json.encode( params ) )
-
-    EventManager:postEvent( Event.Check_File_Version, { configMd5Info, finishEvent, finishEventParam } )
-    --EventManager:postEvent( Event.Do_Post_Logo )
 end
 
 function onRequestFailed( jsonResponse )
-    local needUpdate = jsonResponse["Update"]
     local errorBuffer = jsonResponse["Message"]
-    if needUpdate then
-        if errorBuffer == nil or errorBuffer == "" then
-            errorBuffer = "Please download new version and update!"
-        end
-
-        EventManager:postEvent( Event.Show_Please_Update, { errorBuffer } )
-    else
-        if errorBuffer == nil or errorBuffer == "" then
-            errorBuffer = "Login failed. Please retry."
-        end
-
-        Logic:clearAccountInfoFile()
-        EventManager:postEvent( Event.Show_Error_Message, { errorBuffer } )
+    if errorBuffer == nil or errorBuffer == "" then
+        errorBuffer = "Login failed. Please retry."
     end
+
+    Logic:clearAccountInfoFile()
+    EventManager:postEvent( Event.Show_Error_Message, { errorBuffer } )
 end
