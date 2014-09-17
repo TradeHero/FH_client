@@ -41,14 +41,14 @@ function loadFrame( userId, userName, competitionId, couponHistory )
 
     local backBt = mWidget:getChildByName("Back")
     if showBackButton then
+        local keypadBackEventHandler = function()
+            EventManager:popHistory()
+        end
+
         local backEventHandler = function( sender, eventType )
             if eventType == TOUCH_EVENT_ENDED then
                 keypadBackEventHandler()
             end
-        end
-
-        local keypadBackEventHandler = function()
-            EventManager:popHistory()
         end
         
         backBt:addTouchEventListener( backEventHandler )

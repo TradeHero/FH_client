@@ -89,7 +89,7 @@ function setServerIP( serverIp )
     USE_DEV = true
 end
 
-setServerIP( "http://fhapi-dev1.cloudapp.net" )
+--setServerIP( "http://fhapi-dev1.cloudapp.net" )
 
 function createHeaderObject( headerStr )
 	local headerList = split( headerStr, "\r\n" )

@@ -161,7 +161,10 @@ function initLeaderboardContent( i, content, info )
     else
         name:setText( info["DisplayName"] )
     end
-    score:setText( string.format( mSubType["description"], info[mSubType["dataColumnId"]] ) )
+    score:setText( string.format( mSubType["description"], info[mSubType["dataColumnId"]], info["NumberOfCoupons"] ) )
+    if info[mSubType["dataColumnId"]] < 0 then
+        score:setColor( ccc3( 240, 75, 79 ) )
+    end
     index:setText( i )
 
 
