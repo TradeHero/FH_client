@@ -88,7 +88,12 @@
   <ProjectType>UIProject</ProjectType>
   <ResRelativePath />
   <imageFileList />
-  <imagePngList />
+  <imagePngList>
+    <string>Popup/popout_white.png</string>
+    <string>Tutorial/Default Button.png</string>
+    <string>Popup/alert_bkg.png</string>
+    <string>Popup/close_icon.png</string>
+  </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>LeaderboardList.json</CurrentUIJson>
+  <CurrentUIJson>PNPredictionMessage.json</CurrentUIJson>
 </UIProject>

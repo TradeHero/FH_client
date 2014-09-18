@@ -59,6 +59,18 @@ void misc_send_sms(const char* body) {
   }
 }
 
+void misc_open_url(const char* url) {
+  JniMethodInfo jmi;
+  if (JniHelper::getStaticMethodInfo(jmi, "com/myhero/fh/util/MiscUtil",
+        "openUrl", "(Ljava/lang/String;)V"))
+  {
+    jstring bodyArg = jmi.env->NewStringUTF(url);
+    jmi.env->CallStaticVoidMethod(jmi.classID, jmi.methodID, bodyArg);
+    jmi.env->DeleteLocalRef(bodyArg);
+    jmi.env->DeleteLocalRef(jmi.classID);
+  }
+}
+
 void misc_get_UA_DeviceToken() {
   JniMethodInfo jmi;
   if (JniHelper::getStaticMethodInfo(jmi, "com/myhero/fh/IntentReceiver",

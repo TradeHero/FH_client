@@ -197,7 +197,7 @@ namespace Utils
 		MiscHandler::getInstance()->openUrl(url);
 #endif
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
-		
+		misc_open_url(url);
 #endif
 	}
 

@@ -13,9 +13,9 @@ function __G__TRACKBACK__(msg)
     if CCApplication:sharedApplication():getTargetPlatform() ~= kTargetWindows then
         local DoLogReport = require("scripts.actions.DoLogReport")
         DoLogReport.reportError( errorDesc )
+    else
+        CCMessageBox( errorDesc, "LUA ERROR: " )    
     end
-
-    CCMessageBox( errorDesc, "LUA ERROR: " )
 end
 
 local cclog = function(...)

@@ -79,5 +79,5 @@ end
 
 function onRequestFailed( jsonResponse )
     local errorBuffer = jsonResponse["Message"]
-    EventManager:postEvent( Event.Show_Error_Message, { errorBuffer, postPredictionData } )
+    EventManager:postEvent( Event.Show_Error_Message, { errorBuffer } )
 end

@@ -40,6 +40,17 @@ public class MiscUtil {
     }
   }
 
+  public static void openUrl(String url) {
+      try {
+          Uri uri = Uri.parse(url);
+          Intent intent = new Intent (Intent.ACTION_VIEW, uri);
+          Cocos2dxActivity.openUrl(intent);
+      }
+      catch (ActivityNotFoundException ignored) {
+
+      }
+  }
+
   public static void onActivityResult(int requestCode, int resultCode, Intent data) {
     Log.d(TAG, String.format("requestCode(%d), resultCode(%d), data(%s)", requestCode,
         resultCode, data));

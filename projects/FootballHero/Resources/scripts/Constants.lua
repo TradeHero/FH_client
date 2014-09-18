@@ -50,17 +50,7 @@ local mClientVersion = ""
 
 function getClientVersion()
 	if mClientVersion == "" then
-		local fileName = "version"
-		fileName = CCFileUtils:sharedFileUtils():fullPathForFilename( fileName )
-		local fileHandler, errorCode = io.open( fileName, "r" )
-		if fileHandler == nil then
-			assert( false, "Read failed from file"..fileName.." with error: "..errorCode )
-			return ""
-		end
-		
-		mClientVersion = fileHandler:read("*all")
-		fileHandler:close()
-
+		mClientVersion = FileUtils.readStringFromFile( "version" )
 		CCLuaLog("Client version: "..mClientVersion)
 	end
 

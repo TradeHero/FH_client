@@ -142,6 +142,8 @@ function split(str, delim, maxNb)
     return result   
 end 
 
+
+
 function messageHandler( requestInfo, isSucceed, body, header, status, errorBuffer, successRequestID, successHandler, failedHandler )
     CCLuaLog( "Http reponse: "..status.." and errorBuffer: "..errorBuffer )
     local headers = createHeaderObject( header )

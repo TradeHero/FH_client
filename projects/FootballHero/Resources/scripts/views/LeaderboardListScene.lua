@@ -174,7 +174,15 @@ function initLeaderboardContent( i, content, info )
         if info["PictureUrl"] ~= nil then
             local handler = function( filePath )
                 if filePath ~= nil and mWidget ~= nil and logo ~= nil then
-                    logo:loadTexture( filePath )
+                    local safeLoadTexture = function()
+                        logo:loadTexture( filePath )
+                    end
+
+                    local errorHandler = function( msg )
+                        -- Do nothing
+                    end
+
+                    xpcall( safeLoadTexture, errorHandler )
                 end
             end
             SMIS.getSMImagePath( info["PictureUrl"], handler )

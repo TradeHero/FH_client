@@ -10,7 +10,12 @@
   "designHeight": 1136,
   "designWidth": 640,
   "textures": [],
-  "texturesPng": [],
+  "texturesPng": [
+    "Popup/popout_white.png",
+    "Tutorial/Default Button.png",
+    "Popup/alert_bkg.png",
+    "Popup/close_icon.png"
+  ],
   "version": "1.5.0.0",
   "widgetTree": {
     "classname": "Panel",

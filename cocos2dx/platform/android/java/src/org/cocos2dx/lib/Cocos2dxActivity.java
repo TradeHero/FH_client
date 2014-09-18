@@ -202,6 +202,11 @@ public abstract class Cocos2dxActivity extends Activity implements Cocos2dxHelpe
     activity.setResult(RESULT_OK);
   }
 
+    public static void openUrl(Intent intent) throws ActivityNotFoundException {
+        Cocos2dxActivity activity = ((Cocos2dxActivity) sContext);
+        activity.startActivity(intent);
+    }
+
   @Override protected void onActivityResult(int requestCode, int resultCode, Intent data) {
     super.onActivityResult(requestCode, resultCode, data);
 

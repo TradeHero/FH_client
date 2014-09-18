@@ -34,6 +34,7 @@ end
 -- 2. check the file in the package
 function readStringFromFile( fileName )
 	local text = ""
+	local textLength = 0
 	local fileUtils = CCFileUtils:sharedFileUtils()
 	local path = fileUtils:getWritablePath()..fileName
 	if fileUtils:isFileExist( path ) then
@@ -51,7 +52,10 @@ function readStringFromFile( fileName )
 	else
 		local fileName = fileUtils:fullPathForFilename( fileName )
 		print("Read file from package: "..fileName)
-		text = fileUtils:getFileData( fileName, "r", 0 )
+		text, textLength = fileUtils:getFileData( fileName, "r", 0 )
+		if text ~= nil and textLength > 0 then
+			text = string.sub( text, 1, textLength )
+		end
 	end
 
 
