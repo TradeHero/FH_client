@@ -1,0 +1,18 @@
+Checklist for release
+1. Check version 
+2. Check server 
+3. Check UrbanAirship config 
+4. Make sure game.bin is up-to-date
+
+
+Server config for connecting to dev:
+{"serverURL":"http://fhapi-dev1.cloudapp.net", "CDNserverURL":"http://portalvhdss3c1vgx5mrzv.blob.core.windows.net/fhdevsettings/", "useDev":true}
+
+Server config for connecting to prod:
+{"serverURL":"http://fhapi-prod1.cloudapp.net", "CDNserverURL":"http://portalvhdss3c1vgx5mrzv.blob.core.windows.net/fhsettings/", "useDev":false}
+
+
+For Apple review:
+1. Set the server connect to dev and apply for Apple review. Since the version number is increased, the self-update won't be triggered.
+2. Create the Android version and have it fully tested and ready for release.
+3. After review is finished, create a self-update patch which will set the server to prod. Then release both the IOS and Android version.
