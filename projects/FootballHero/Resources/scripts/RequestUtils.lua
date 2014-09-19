@@ -5,6 +5,8 @@ local EventManager = require("scripts.events.EventManager").getInstance()
 local Event = require("scripts.events.Event").EventList
 local ConnectingMessage = require("scripts.views.ConnectingMessage")
 local DoLogReport = require("scripts.actions.DoLogReport")
+local FileUtils = require("scripts.FileUtils")
+
 
 HTTP_200 = 200
 HTTP_204 = 204
@@ -57,7 +59,7 @@ USE_DEV = false
 local mResponseCache = {}
 local RESPONSE_CACHE_TIME = 600
 
-function setServerIP( serverIp )
+function setServerIP( serverIp, cdnServerIp, useDev )
     EMAIL_REGISTER_REST_CALL = serverIp.."/api/user/SignupWithEmail"
     EMAIL_LOGIN_REST_CALL = serverIp.."/api/loginWithEmail"
     SET_USER_METADATA_REST_CALL = serverIp.."/api/user/setUserMetaData"
@@ -85,11 +87,18 @@ function setServerIP( serverIp )
     POST_USER_PUSH_SETTING_REST_CALL = serverIp.."/api/user/setPushNotificationSettings"
     POST_UPDATE_DEVICD_TOKEN_REST_CALL = serverIp.."/api/user/updateDeviceToken"
 
-	CDN_SERVER_IP = "http://portalvhdss3c1vgx5mrzv.blob.core.windows.net/fhdevsettings/"
-    USE_DEV = true
+	CDN_SERVER_IP = cdnServerIp
+    USE_DEV = useDev
 end
 
---setServerIP( "http://fhapi-dev1.cloudapp.net" )
+function initServer()
+    local serverContextText = FileUtils.readStringFromFile("server")
+    CCLuaLog("Server context: "..serverContextText)
+    local serverContext = Json.decode( serverContextText )
+    setServerIP( serverContext.serverURL, serverContext.CDNserverURL, serverContext.useDev )
+end
+
+initServer()
 
 function createHeaderObject( headerStr )
 	local headerList = split( headerStr, "\r\n" )
