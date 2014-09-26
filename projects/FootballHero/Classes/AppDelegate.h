@@ -42,10 +42,6 @@ public:
 	UpdateLayer();
 	~UpdateLayer();
 	virtual bool init();
-
-	void enter(cocos2d::CCObject *pSender);
-	void reset(cocos2d::CCObject *pSender);
-	void update(float t);
 	void loadGame();
 
     virtual void onEnter();
@@ -63,7 +59,6 @@ private:
 	cocos2d::CCMenuItemFont *pItemUpdate;
 	cocos2d::CCLabelTTF *pProgressLabel;
 	std::string pathToSave;
-	bool isUpdateItemClicked;
 };
 #endif  // __APP_DELEGATE_H__
 

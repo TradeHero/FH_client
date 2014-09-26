@@ -12,22 +12,34 @@
 	<dict>
 		<key>0C30A0D2-764E-45BE-A4C6-BA56566C5552</key>
 		<string>https://github.com/TradeHero/FH_client.git</string>
+		<key>407B8C11486A385BB1D7D6EFC2DF43945CD7DD0D</key>
+		<string>https://github.com/TradeHero/FH_client.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>proj.ios/FootballHero.xcodeproj/project.xcworkspace</string>
+	<string>projects/FootballHero/proj.ios/FootballHero.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>0C30A0D2-764E-45BE-A4C6-BA56566C5552</key>
-		<string>../../..</string>
+		<string>../../../../../../FootballHero</string>
+		<key>407B8C11486A385BB1D7D6EFC2DF43945CD7DD0D</key>
+		<string>../../../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/TradeHero/FH_client.git</string>
 	<key>IDESourceControlProjectVersion</key>
-	<integer>110</integer>
+	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>0C30A0D2-764E-45BE-A4C6-BA56566C5552</string>
+	<string>407B8C11486A385BB1D7D6EFC2DF43945CD7DD0D</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>407B8C11486A385BB1D7D6EFC2DF43945CD7DD0D</string>
+			<key>IDESourceControlWCCName</key>
+			<string>FH_client</string>
+		</dict>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>

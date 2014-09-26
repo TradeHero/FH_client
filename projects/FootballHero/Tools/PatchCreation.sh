@@ -80,7 +80,9 @@ function diffVersionWithTags()
 		if [ "`ls -A $1_$2`" == "" ]; then
 			echo "$1.needUpdate = false" >> $WORKING_PATH/$PATCH_CONFIG_FILE
 		else
-			zip -r -q $1_$2.zip $1_$2
+			cd $1_$2
+			zip -r -q ../$1_$2.zip *
+			cd ..
 			fileSizeInfo=$(du -sh $1_$2.zip)
 			fileSize=(${fileSizeInfo//	/ })
 			echo "$1.needUpdate = true" >> $WORKING_PATH/$PATCH_CONFIG_FILE

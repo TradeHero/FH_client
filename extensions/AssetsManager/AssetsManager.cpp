@@ -24,7 +24,6 @@
 
 #include "AssetsManager.h"
 #include "cocos2d.h"
-
 #if (CC_TARGET_PLATFORM != CC_PLATFORM_WINRT) && (CC_TARGET_PLATFORM != CC_PLATFORM_WP8)
 #include <curl/curl.h>
 #include <curl/easy.h>
@@ -120,17 +119,19 @@ bool AssetsManager::checkUpdate()
     if (! _curl)
     {
         CCLOG("can not init curl");
+		sendErrorMessage(kNetwork);
         return false;
     }
     
     // Clear _version before assign new value.
     _version.clear();
-    
+	std::string response;
+
     CURLcode res;
     curl_easy_setopt(_curl, CURLOPT_URL, _versionFileUrl.c_str());
     curl_easy_setopt(_curl, CURLOPT_SSL_VERIFYPEER, 0L);
     curl_easy_setopt(_curl, CURLOPT_WRITEFUNCTION, getVersionCode);
-    curl_easy_setopt(_curl, CURLOPT_WRITEDATA, &_version);
+	curl_easy_setopt(_curl, CURLOPT_WRITEDATA, &response);
     if (_connectionTimeout) curl_easy_setopt(_curl, CURLOPT_CONNECTTIMEOUT, _connectionTimeout);
     res = curl_easy_perform(_curl);
     
@@ -139,22 +140,36 @@ bool AssetsManager::checkUpdate()
 
 	if (res != 0 || responseCode != 200)
     {
-        sendErrorMessage(kNetwork);
         CCLOG("can not get version file content, error code is %d", res);
-        curl_easy_cleanup(_curl);
+		sendErrorMessage(kNetwork);
+		curl_easy_cleanup(_curl);
         return false;
     }
     
-    string recordedVersion = CCUserDefault::sharedUserDefault()->getStringForKey(KEY_OF_VERSION);
-    if (recordedVersion >= _version)
-    {
-        sendErrorMessage(kNoNewVersion);
-        CCLOG("there is no new version");
-        // Set resource search path.
-        setSearchPath();
-        return false;
-    }
-    
+	// Parse the json response
+	rapidjson::Document jsonDict;
+	jsonDict.Parse<0>(response.c_str());
+	if (jsonDict.HasParseError())
+	{
+		CCLOG("GetParseError %s\n", jsonDict.GetParseError());
+		sendErrorMessage(kNetwork);
+		_version = response;
+		return true;
+	}
+
+	bool needUpdate = DICTOOL->getBooleanValue_json(jsonDict, "needUpdate");
+	const char* newVersionChar = DICTOOL->getStringValue_json(jsonDict, "version");
+	const char* packageToDownload = DICTOOL->getStringValue_json(jsonDict, "package");
+
+	if (!needUpdate)
+	{
+		CCLOG("No need to update.");
+		sendErrorMessage(kNoNewVersion);
+		return false;
+	}
+
+	_version.assign(&newVersionChar[0], &newVersionChar[strlen(newVersionChar)]);
+	_packageUrl.assign(&packageToDownload[0], &packageToDownload[strlen(packageToDownload)]);
     CCLOG("there is a new version: %s", _version.c_str());
     
     return true;
@@ -601,9 +616,6 @@ void AssetsManager::Helper::handleUpdateSucceed(Message *msg)
     // Unrecord downloaded version code.
     CCUserDefault::sharedUserDefault()->setStringForKey(KEY_OF_DOWNLOADED_VERSION, "");
     CCUserDefault::sharedUserDefault()->flush();
-    
-    // Set resource search path.
-    manager->setSearchPath();
     
     // Delete unloaded zip file.
     string zipfileName = manager->_storagePath + TEMP_PACKAGE_FILE_NAME;

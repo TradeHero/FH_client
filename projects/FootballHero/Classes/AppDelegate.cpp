@@ -128,7 +128,6 @@ UpdateLayer::UpdateLayer()
 , pItemReset(NULL)
 , pItemUpdate(NULL)
 , pProgressLabel(NULL)
-, isUpdateItemClicked(false)
 {
 	init();
 }
@@ -142,57 +141,7 @@ UpdateLayer::~UpdateLayer()
 void UpdateLayer::onEnter()
 {
 	CCNode::onEnter();
-	this->scheduleOnce(schedule_selector(UpdateLayer::update), 0.2f);
-}
-
-void UpdateLayer::update(float t)
-{
-	pProgressLabel->setString("");
-
-	// update resources
-	if (!getAssetsManager()->checkUpdate())
-	{
-		// Do nothing.
-	}
-	else
-	{
-		getAssetsManager()->update();
-	}
-	isUpdateItemClicked = true;
-}
-
-void UpdateLayer::reset(cocos2d::CCObject *pSender)
-{
-	pProgressLabel->setString(" ");
-
-	// Remove downloaded files
-#if (CC_TARGET_PLATFORM != CC_PLATFORM_WIN32)
-    std::string command = "rm -r ";
-	// Path may include space.
-	command += "\"" + pathToSave + "\"";
-	system(command.c_str());
-#else
-	std::string command = "rd /s /q ";
-	// Path may include space.
-	command += "\"" + pathToSave + "\"";
-	system(command.c_str());
-#endif
-	// Delete recorded version codes.
-	getAssetsManager()->deleteVersion();
-
-	createDownloadedDir();
-}
-
-void UpdateLayer::enter(cocos2d::CCObject *pSender)
-{
-	// Should set search resource path before running script if "update" is not clicked.
-	// Because AssetsManager will set 
-	if (!isUpdateItemClicked)
-	{
-		std::vector<std::string> searchPaths = CCFileUtils::sharedFileUtils()->getSearchPaths();
-		searchPaths.insert(searchPaths.begin(), pathToSave);
-		CCFileUtils::sharedFileUtils()->setSearchPaths(searchPaths);
-	}
+	getAssetsManager()->update();
 }
 
 bool UpdateLayer::init()
@@ -220,7 +169,7 @@ AssetsManager* UpdateLayer::getAssetsManager()
 	if (!pAssetsManager)
 	{
 		pAssetsManager = new AssetsManager("https://raw.githubusercontent.com/lesliesam/fhres/master/dev/res.zip",
-			"https://raw.githubusercontent.com/lesliesam/fhres/master/dev/version",
+			"https://raw.githubusercontent.com/lesliesam/fhres/master/version",
 			pathToSave.c_str());
 		pAssetsManager->setDelegate(this);
 		pAssetsManager->setConnectionTimeout(10);
@@ -281,6 +230,10 @@ void UpdateLayer::onSuccess()
 
 void UpdateLayer::loadGame()
 {
+	std::vector<std::string> searchPaths = CCFileUtils::sharedFileUtils()->getSearchPaths();
+	searchPaths.insert(searchPaths.begin(), pathToSave);
+	CCFileUtils::sharedFileUtils()->setSearchPaths(searchPaths);
+
 	std::string path = CCFileUtils::sharedFileUtils()->fullPathForFilename("footballhero.lua");
 	CCScriptEngineManager::sharedManager()->getScriptEngine()->executeScriptFile(path.c_str());
 }
