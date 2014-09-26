@@ -43,9 +43,10 @@ function diffVersionWithTags()
 	    	if [[ $filePath == projects/FootballHero/Resources/scripts/* ]]; then
 	    		# Check lua updates
 	    		luaUpdated=true
-	    	elif [[ $filePath == *.cpp ]]; then
+	    	elif [[ $filePath == *.cpp ]] || [[ $filePath == *.h ]] || [[ $filePath == *.java ]] || [[ $filePath == *.mm ]] || [[ $filePath == *.m ]]; then
 	    		# Check code updates
 	    		codeUpdated=true
+	    		break
 	    	elif [[ $filePath == projects/FootballHero/Resources/CryptLuascripts/* ]]; then
 	    		# Ignore some files.
 	    		continue

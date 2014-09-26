@@ -1,4 +1,2 @@
-testVersion001
-testVersion002
-testVersion003
-testVersion004
+ios1.12
+v1.11
