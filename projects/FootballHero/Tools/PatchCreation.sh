@@ -105,3 +105,5 @@ while read -r v
 do
     diffVersionWithTags $v $1
 done < $VERSION_FILE
+
+echo "$1.needUpdate = false" >> $WORKING_PATH/$PATCH_CONFIG_FILE
