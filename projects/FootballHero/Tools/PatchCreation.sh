@@ -13,8 +13,14 @@ echo "Source path: $SOURCE_PATH"
 if [ ! -n "$1" ] ;then
 	echo "Error: No target version defined."
 	echo "Check each version is listed in $VERSION_FILE before run."
-	echo "Usage: ./PatchCreation.sh ios1.13"
+	echo "Usage: ./PatchCreation.sh 1.15"
+	echo "Usage: ./PatchCreation.sh 1.15 dev"
 	exit
+fi
+
+ENV=$2
+if [ ! -n "$1" ] ;then
+	echo "Create patch against env: $2"
 fi
 
 # Clear history
@@ -86,7 +92,8 @@ function diffVersionWithTags()
 			fileSizeInfo=$(du -sh $1_$2.zip)
 			fileSize=(${fileSizeInfo//	/ })
 			echo "$1.needUpdate = true" >> $WORKING_PATH/$PATCH_CONFIG_FILE
-			echo "$1.package = $1_$2.zip" >> $WORKING_PATH/$PATCH_CONFIG_FILE
+			echo "$1.updateTo = $2" >> $WORKING_PATH/$PATCH_CONFIG_FILE
+			echo "$1.package = http://portalvhdss3c1vgx5mrzv.blob.core.windows.net/autoupdates$ENV/$1_$2.zip" >> $WORKING_PATH/$PATCH_CONFIG_FILE
 			echo "$1.size = $fileSize" >> $WORKING_PATH/$PATCH_CONFIG_FILE
 		fi
 	fi
