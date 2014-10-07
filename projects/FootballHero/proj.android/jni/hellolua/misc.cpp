@@ -29,6 +29,37 @@ extern "C"
     }
 }
 
+// @@ADD Vincent: copy to paste board function for Android
+void misc_copy_to_paste_board(const char* content)
+{
+	// Get Android activity in MainActivity.java
+	JniMethodInfo minfo;
+
+	bool isHave = JniHelper::getStaticMethodInfo(minfo,
+		"com/myhero/fh/MainActivity",
+		"getJavaActivity",
+		"()Ljava/lang/Object;");
+	jobject activityObj;
+	if (isHave)
+	{
+		activityObj = minfo.env->CallStaticObjectMethod(minfo.classID, minfo.methodID);
+	}
+
+	// Find method 'copyToPasteBoard' in MainActivity.java
+	isHave = JniHelper::getMethodInfo(minfo, "com/myhero/fh/MainActivity", "copyToPasteBoard", "(Ljava/lang/String;)V");
+
+	if (!isHave)
+	{
+		CCLog("jni:copyToPasteBoard does not exist!");
+	}
+	else
+	{
+		// Copy the data
+		jstring jmsg = minfo.env->NewStringUTF(content);
+		minfo.env->CallVoidMethod(activityObj, minfo.methodID, jmsg);
+	}
+}
+
 void misc_send_mail(const char* receiver, const char* subject, const char* body)
 {
   JniMethodInfo jmi;
