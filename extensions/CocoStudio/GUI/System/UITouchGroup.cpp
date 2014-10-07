@@ -176,8 +176,17 @@ void TouchGroup::ccTouchEnded(CCTouch *pTouch, CCEvent *pEvent)
     for (int i=0; i<length; ++i)
     {
         Widget* hitWidget = (Widget*)(selectedWidgetArray->arr[0]);
+        
+		/* 	@@EDIT Vincent: 
+			reverse order of 
+			- m_pSelectedWidgets->removeObject(hitWidget);
+			- hitWidget->onTouchEnded(pTouch, pEvent);
+
+			hitWidget object partially deleted by removeObject statement, result in onTouchEnded storing rubbish data
+			and app crashing on rapid touches
+		*/
+		hitWidget->onTouchEnded(pTouch, pEvent);
         m_pSelectedWidgets->removeObject(hitWidget);
-        hitWidget->onTouchEnded(pTouch, pEvent);
     }
 }
 
