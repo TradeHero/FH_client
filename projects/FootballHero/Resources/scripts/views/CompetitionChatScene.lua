@@ -7,7 +7,6 @@ local Event = require("scripts.events.Event").EventList
 local ViewUtils = require("scripts.views.ViewUtils")
 local Logic = require("scripts.Logic").getInstance()
 
-
 local mWidget
 local mCompetitionId
 local mContainerHeight
@@ -41,7 +40,14 @@ function loadFrame( competitionId, chatMessages )
 
     local messageInput = ViewUtils.createTextInput( mWidget:getChildByName( MESSAGE_CONTAINER_NAME ), "Type your message here", 470, 50 )
 
+    initTitle();
     getLatestMessages()
+end
+
+function initTitle()    
+    local title = tolua.cast( mWidget:getChildByName("title"), "Label" )
+    local competitionDetail = Logic:getCompetitionDetail()
+    title:setText( competitionDetail:getName() )
 end
 
 function getLatestMessages()
