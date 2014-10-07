@@ -198,6 +198,7 @@ end
 function relayoutChatMessage( content, message, isMe )
     local messageTextMaxWidth = 500
     local messageTextHeight = 28
+    local messageTextPaddingY = 8
     local messageTextMinWidth = 170
     local messageBgNTextOffset = ccp( 50, 70 )
     local messagePanelNTextOffset = ccp( 140, 90 )
@@ -221,17 +222,19 @@ function relayoutChatMessage( content, message, isMe )
     messageLabel:setText( text )
     messageTime:setText( os.date( "%H:%M", time ) )
     local originSize = messageLabel:getSize()
-
     local messageNamePositionX = messageName:getPositionX()
     local messageTimePositionY = messageTime:getPositionY()
     if originSize.width > messageTextMaxWidth then
-        local messageBlockHeight = math.ceil( originSize.width / messageTextMaxWidth ) * messageTextHeight
+        -- Vincent: fix multi-line messages getting cut
+        local messageBlockHeight = math.ceil( originSize.width / messageTextMaxWidth ) * ( messageTextHeight + messageTextPaddingY )
         messageLabel:setTextAreaSize( CCSize:new( messageTextMaxWidth, messageBlockHeight ) )
         messageBg:setSize( CCSize:new( messageTextMaxWidth + messageBgNTextOffset.x, messageBlockHeight + messageBgNTextOffset.y ) )
         content:setSize( CCSize:new( messageTextMaxWidth + messagePanelNTextOffset.x, messageBlockHeight + messagePanelNTextOffset.y ) )
         messageName:setPosition( ccp( messageNamePositionX, messageBlockHeight + messageNameNTextOffsetY ) )
     else
         local textWidth = math.max( originSize.width, messageTextMinWidth )
+        --Vincent: increase textWidth if name is longer than message 
+        textWidth = math.max( textWidth, messageName:getSize().width )
 
         messageBg:setSize( CCSize:new( textWidth + messageBgNTextOffset.x, messageTextHeight + messageBgNTextOffset.y ) )
         content:setSize( CCSize:new( textWidth + messagePanelNTextOffset.x, messageTextHeight + messagePanelNTextOffset.y ) )
