@@ -225,7 +225,6 @@ function relayoutChatMessage( content, message, isMe )
     local messageNamePositionX = messageName:getPositionX()
     local messageTimePositionY = messageTime:getPositionY()
     if originSize.width > messageTextMaxWidth then
-        -- Vincent: fix multi-line messages getting cut
         local messageBlockHeight = math.ceil( originSize.width / messageTextMaxWidth ) * ( messageTextHeight + messageTextPaddingY )
         messageLabel:setTextAreaSize( CCSize:new( messageTextMaxWidth, messageBlockHeight ) )
         messageBg:setSize( CCSize:new( messageTextMaxWidth + messageBgNTextOffset.x, messageBlockHeight + messageBgNTextOffset.y ) )
@@ -233,7 +232,6 @@ function relayoutChatMessage( content, message, isMe )
         messageName:setPosition( ccp( messageNamePositionX, messageBlockHeight + messageNameNTextOffsetY ) )
     else
         local textWidth = math.max( originSize.width, messageTextMinWidth )
-        --Vincent: increase textWidth if name is longer than message 
         textWidth = math.max( textWidth, messageName:getSize().width )
 
         messageBg:setSize( CCSize:new( textWidth + messageBgNTextOffset.x, messageTextHeight + messageBgNTextOffset.y ) )
