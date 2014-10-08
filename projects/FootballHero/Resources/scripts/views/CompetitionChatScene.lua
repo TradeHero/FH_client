@@ -146,7 +146,8 @@ function addMessage( chatMessages )
     local layoutParameter = LinearLayoutParameter:create()
     layoutParameter:setGravity(LINEAR_GRAVITY_CENTER_VERTICAL)
 
-    for k,v in pairs( chatMessages:getMessageDateList() ) do
+    local chatMessageList = chatMessages:getMessageDateList()
+    for k,v in pairs( chatMessageList ) do
 
         -- Add message must be happened today.
         -- There might be bug during mid-night, but who cares.
@@ -165,7 +166,6 @@ function addMessage( chatMessages )
         local messages = v["messages"]
         for i = 1, table.getn( messages ) do
             local content = createMessageContent( messages[i] )
-            
             content:setLayoutParameter( layoutParameter )
             contentContainer:addChild( content )
             mContainerHeight = mContainerHeight + content:getSize().height
@@ -176,7 +176,9 @@ function addMessage( chatMessages )
     local layout = tolua.cast( contentContainer, "Layout" )
     layout:requestDoLayout()
 
-    contentContainer:jumpToBottom()
+    if next( chatMessageList ) then
+        contentContainer:jumpToBottom()
+    end
 end
 
 
