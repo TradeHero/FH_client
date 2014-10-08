@@ -94,6 +94,7 @@ end
 
 function selectYes( sender, eventType )
     if eventType == TOUCH_EVENT_ENDED then
+        local question = tolua.cast( mWidget:getChildByName("question"), "Label" )
         local line = MarketsForGameData.getMarketLine( mMarketInfo )
         local teamName = TeamConfig.getTeamName( TeamConfig.getConfigIdByKey( mMatch["AwayTeamId"] ) )
         if line < 0 then
@@ -103,13 +104,14 @@ function selectYes( sender, eventType )
         makePrediction(
             MarketsForGameData.getOddsForType( mMarketInfo, MarketConfig.ODDS_TYPE_ONE_OPTION ),
             MarketsForGameData.getOddIdForType( mMarketInfo, MarketConfig.ODDS_TYPE_ONE_OPTION ),
-            string.format( "%s will win by %d goals or more.", teamName, math.ceil( line ) ),
+            question:getStringValue(),
             true )
     end
 end
 
 function selectNo( sender, eventType )
     if eventType == TOUCH_EVENT_ENDED then
+        local question = tolua.cast( mWidget:getChildByName("question"), "Label" )
         local line = MarketsForGameData.getMarketLine( mMarketInfo )
         local teamName = TeamConfig.getTeamName( TeamConfig.getConfigIdByKey( mMatch["AwayTeamId"] ) )
         if line < 0 then
@@ -119,7 +121,7 @@ function selectNo( sender, eventType )
         makePrediction(
             MarketsForGameData.getOddsForType( mMarketInfo, MarketConfig.ODDS_TYPE_TWO_OPTION ),
             MarketsForGameData.getOddIdForType( mMarketInfo, MarketConfig.ODDS_TYPE_TWO_OPTION ),
-            string.format( "%s will not win by %d goals or more.", teamName, math.ceil( line ) ),
+            question:getStringValue(),
             false )
     end
 end
