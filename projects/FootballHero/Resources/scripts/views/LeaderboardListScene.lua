@@ -16,6 +16,8 @@ local mSubType
 local mStep
 local mCurrentTotalNum
 local mHasMoreToLoad
+local maTypeStack
+local mDropDown
 
 -- DS for subType see LeaderboardConfig
 function loadFrame( leaderboardInfo, leaderboardId, subType )
@@ -64,16 +66,29 @@ function backEventHandler( sender,eventType )
 end
 
 function keypadBackEventHandler()
+    -- Vincent: change the dropdown title to the previous one when going back
+    initPreviousType()
     EventManager:popHistory()
+    end
+
+-- @@ADD Vincent: update the dropbox title with a previously saved string stored in a stack
+function initPreviousType()    
+    local previousText = table.remove(maTypeStack)
+    if next(maTypeStack) == nil then
+        -- no more previous type, do nothing
+    else
+        local typeName = tolua.cast( mDropDown:getChildByName("currentType"), "Label" )
+        typeName:setText( previousText )
+    end
 end
 
 function initTypeList()
-    local content = SceneManager.widgetFromJsonFile("scenes/LeaderbaordDropDown.json")
-    mWidget:addChild( content )
-
-    local list = tolua.cast( content:getChildByName("typeList"), "ScrollView" )
-    local expendedIndicator = content:getChildByName( "expendIndi" )
-    local mask = content:getChildByName("mask")
+    mDropDown = SceneManager.widgetFromJsonFile("scenes/LeaderbaordDropDown.json")
+    mWidget:addChild( mDropDown )
+    
+    local list = tolua.cast( mDropDown:getChildByName("typeList"), "ScrollView" )
+    local expendedIndicator = mDropDown:getChildByName( "expendIndi" )
+    local mask = mDropDown:getChildByName("mask")
     local buttonEventHandler = function( sender, eventType )
         if eventType == TOUCH_EVENT_ENDED then
             if list:isEnabled() then
@@ -87,13 +102,15 @@ function initTypeList()
             end
         end
     end
-    local button = content:getChildByName("button")
+    local button = mDropDown:getChildByName("button")
     button:addTouchEventListener( buttonEventHandler )
     list:setEnabled( false )
     mask:setEnabled( false )
 
-    local initCurrentType = function( typeKey )
-        local typeName = tolua.cast( content:getChildByName("currentType"), "Label" )
+    local initCurrentType = function( typeKey )        
+        local typeName = tolua.cast( mDropDown:getChildByName("currentType"), "Label" )
+        -- insert previous string value into stack
+        table.insert(maTypeStack, typeName:getStringValue())
         typeName:setText( LeaderboardConfig.LeaderboardSubType[typeKey]["title"] )
     end
 
@@ -112,6 +129,7 @@ function initTypeList()
     LeaderboardListSceneUnexpended.loadFrame( "scenes/LeaderbaordContentInDropDown.json", 
         list, leagueSelectedCallback )
 
+    maTypeStack = {}
     initCurrentType( 1 )
 end
 
@@ -157,7 +175,7 @@ function initLeaderboardContent( i, content, info )
     local logo = tolua.cast( content:getChildByName("logo"), "ImageView" )
 
     if info["DisplayName"] == nil then
-        name:setText( "Unknow name" )
+        name:setText( "Unknown name" )
     else
         name:setText( info["DisplayName"] )
     end
