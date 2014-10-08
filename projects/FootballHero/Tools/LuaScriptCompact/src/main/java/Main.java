@@ -9,8 +9,8 @@ import java.util.HashMap;
 
 public class Main {
 
-    private static final String SOURCE_FOLDER = "../../Resources/scripts";
-    private static final String TARGET_FILE_NAME = "../../Resources/game.bin";
+    private static final String SOURCE_FOLDER = "../scripts";
+    private static final String TARGET_FILE_NAME = "../game.bin";
 
     private HashMap<String, String> mContent = new HashMap<String, String>();
     private byte[] encryptedContent;
@@ -19,6 +19,7 @@ public class Main {
 
     public static void main(String[] arr) {
         Main m = new Main();
+
         File f = new File(SOURCE_FOLDER);
         m.loadContentFromFile(f);
         m.decrypt();
@@ -35,6 +36,7 @@ public class Main {
                 String fileKey = file.getAbsolutePath().substring(file.getAbsolutePath().lastIndexOf("scripts"));
                 fileKey = fileKey.substring(0, fileKey.lastIndexOf("."));
                 fileKey = fileKey.replaceAll("/", ".");
+                fileKey = fileKey.replaceAll("\\\\", ".");
 
                 try {
                     FileReader reader = new FileReader(file);
@@ -65,6 +67,7 @@ public class Main {
         String content = new String(encryptedContent);
 
         File f = new File(TARGET_FILE_NAME);
+        System.out.println(f.getAbsolutePath());
         try {
             //create an object of FileOutputStream
             FileOutputStream fos = new FileOutputStream(new File(TARGET_FILE_NAME));
