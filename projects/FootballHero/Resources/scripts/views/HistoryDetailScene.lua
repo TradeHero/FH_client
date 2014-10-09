@@ -122,20 +122,18 @@ function initCouponInfo( content, info )
     local answerString
     local choiceImage
     if marketType == MarketConfig.MARKET_TYPE_MATCH then
+        answerString = "Which team will win?"
         if answerId then
-            answerString = TeamConfig.getTeamName( mHomeTeamId ).." to win."
             choiceImage = TeamConfig.getLogo( mHomeTeamId )
         else
-            answerString = TeamConfig.getTeamName( mAwayTeamId ).." to win."
             choiceImage = TeamConfig.getLogo( mAwayTeamId )
         end
     elseif marketType == MarketConfig.MARKET_TYPE_TOTAL_GOAL then
+        answerString = string.format( "Will total goals be %d or more?", math.ceil( line ) )
         if answerId then
-            answerString = string.format( "Total goals will be %d or more.", math.ceil( line ) )
-            choiceImage = Constants.PREDICTION_CHOICE_IMAGE_PATH.."Will-total-goals-be-more-than-xx-yes.png"
+            choiceImage = Constants.PREDICTION_CHOICE_IMAGE_PATH.."Will-both-teams-score-yes.png"
         else
-            answerString = string.format( "Total goals will be less than %d.", math.ceil( line ) )
-            choiceImage = Constants.PREDICTION_CHOICE_IMAGE_PATH.."Will-total-goals-be-more-than-xx-no.png"
+            choiceImage = Constants.PREDICTION_CHOICE_IMAGE_PATH.."Will-both-teams-score-no.png"
         end
     elseif marketType == MarketConfig.MARKET_TYPE_ASIAN_HANDICAP then
         local teamName = TeamConfig.getTeamName( mAwayTeamId )
@@ -144,11 +142,10 @@ function initCouponInfo( content, info )
             line = line * ( -1 )
         end 
         
+        answerString = string.format( "Will %s win by %d goals or more?", teamName, math.ceil( line ) )
         if answerId then
-            answerString = string.format( "%s will win by %d goals or more.", teamName, math.ceil( line ) )
             choiceImage = Constants.PREDICTION_CHOICE_IMAGE_PATH.."Will-xx_team-score-a-goal-yes.png"
         else
-            answerString = string.format( "%s will not win by %d goals or more.", teamName, math.ceil( line ) )
             choiceImage = Constants.PREDICTION_CHOICE_IMAGE_PATH.."Will-xx_team-score-a-goal-no.png"
         end
     end
