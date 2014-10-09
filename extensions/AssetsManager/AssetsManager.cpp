@@ -154,7 +154,7 @@ bool AssetsManager::checkUpdate()
 		CCLOG("GetParseError %s\n", jsonDict.GetParseError());
 		sendErrorMessage(kNetwork);
 		_version = response;
-		return true;
+		return false;
 	}
 
 	bool needUpdate = DICTOOL->getBooleanValue_json(jsonDict, "NeedUpdate");
