@@ -41,7 +41,7 @@ namespace Utils
 		MiscHandler::getInstance()->copyToPasteboard(content);
 #endif
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
-
+		misc_copy_to_paste_board(content);
 #endif
 	}
 

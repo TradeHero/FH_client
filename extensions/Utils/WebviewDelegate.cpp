@@ -6,6 +6,7 @@
 #endif
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
 #include "platform/android/jni/JniHelper.h"
+#include "MiscAndroid.h"
 #endif
 
 USING_NS_CC;
@@ -39,7 +40,7 @@ namespace Utils
 		WebviewController::getInstance()->openWebpage(url, x, y, w, h);
 #endif
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
-
+		openWebPageAndroid(url, x, y, w, h);
 #endif
 	}
 
@@ -49,7 +50,7 @@ namespace Utils
 		WebviewController::getInstance()->closeWebpage();
 #endif
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
-
+		closeWebPageAndroid();
 #endif
 	}
 }

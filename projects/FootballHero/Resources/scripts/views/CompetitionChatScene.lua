@@ -7,7 +7,6 @@ local Event = require("scripts.events.Event").EventList
 local ViewUtils = require("scripts.views.ViewUtils")
 local Logic = require("scripts.Logic").getInstance()
 
-
 local mWidget
 local mCompetitionId
 local mContainerHeight
@@ -41,7 +40,14 @@ function loadFrame( competitionId, chatMessages )
 
     local messageInput = ViewUtils.createTextInput( mWidget:getChildByName( MESSAGE_CONTAINER_NAME ), "Type your message here", 470, 50 )
 
+    initTitle();
     getLatestMessages()
+end
+
+function initTitle()    
+    local title = tolua.cast( mWidget:getChildByName("title"), "Label" )
+    local competitionDetail = Logic:getCompetitionDetail()
+    title:setText( competitionDetail:getName() )
 end
 
 function getLatestMessages()
@@ -140,7 +146,8 @@ function addMessage( chatMessages )
     local layoutParameter = LinearLayoutParameter:create()
     layoutParameter:setGravity(LINEAR_GRAVITY_CENTER_VERTICAL)
 
-    for k,v in pairs( chatMessages:getMessageDateList() ) do
+    local chatMessageList = chatMessages:getMessageDateList()
+    for k,v in pairs( chatMessageList ) do
 
         -- Add message must be happened today.
         -- There might be bug during mid-night, but who cares.
@@ -159,7 +166,6 @@ function addMessage( chatMessages )
         local messages = v["messages"]
         for i = 1, table.getn( messages ) do
             local content = createMessageContent( messages[i] )
-            
             content:setLayoutParameter( layoutParameter )
             contentContainer:addChild( content )
             mContainerHeight = mContainerHeight + content:getSize().height
@@ -170,7 +176,9 @@ function addMessage( chatMessages )
     local layout = tolua.cast( contentContainer, "Layout" )
     layout:requestDoLayout()
 
-    contentContainer:jumpToBottom()
+    if next( chatMessageList ) then
+        contentContainer:jumpToBottom()
+    end
 end
 
 
@@ -192,6 +200,7 @@ end
 function relayoutChatMessage( content, message, isMe )
     local messageTextMaxWidth = 500
     local messageTextHeight = 28
+    local messageTextPaddingY = 8
     local messageTextMinWidth = 170
     local messageBgNTextOffset = ccp( 50, 70 )
     local messagePanelNTextOffset = ccp( 140, 90 )
@@ -215,17 +224,17 @@ function relayoutChatMessage( content, message, isMe )
     messageLabel:setText( text )
     messageTime:setText( os.date( "%H:%M", time ) )
     local originSize = messageLabel:getSize()
-
     local messageNamePositionX = messageName:getPositionX()
     local messageTimePositionY = messageTime:getPositionY()
     if originSize.width > messageTextMaxWidth then
-        local messageBlockHeight = math.ceil( originSize.width / messageTextMaxWidth ) * messageTextHeight
+        local messageBlockHeight = math.ceil( originSize.width / messageTextMaxWidth ) * ( messageTextHeight + messageTextPaddingY )
         messageLabel:setTextAreaSize( CCSize:new( messageTextMaxWidth, messageBlockHeight ) )
         messageBg:setSize( CCSize:new( messageTextMaxWidth + messageBgNTextOffset.x, messageBlockHeight + messageBgNTextOffset.y ) )
         content:setSize( CCSize:new( messageTextMaxWidth + messagePanelNTextOffset.x, messageBlockHeight + messagePanelNTextOffset.y ) )
         messageName:setPosition( ccp( messageNamePositionX, messageBlockHeight + messageNameNTextOffsetY ) )
     else
         local textWidth = math.max( originSize.width, messageTextMinWidth )
+        textWidth = math.max( textWidth, messageName:getSize().width )
 
         messageBg:setSize( CCSize:new( textWidth + messageBgNTextOffset.x, messageTextHeight + messageBgNTextOffset.y ) )
         content:setSize( CCSize:new( textWidth + messagePanelNTextOffset.x, messageTextHeight + messagePanelNTextOffset.y ) )

@@ -263,7 +263,7 @@ end
 
 function enterMatch( match )
     if match["PredictionsPlayed"] == match["PredictionsAvailable"] then
-        EventManager:postEvent( Event.Show_Error_Message, { "You have completed this match." } )
+        EventManager:postEvent( Event.Show_Info, { "Predictions already entered. Please select another match." } )
         return
     end
 

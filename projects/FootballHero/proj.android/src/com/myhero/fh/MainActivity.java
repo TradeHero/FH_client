@@ -23,11 +23,17 @@
  ****************************************************************************/
 package com.myhero.fh;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.PointF;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.View;
+
 import com.crashlytics.android.Crashlytics;
-import com.mobileapptracker.MobileAppTracker;
 import com.mobileapptracker.MobileAppTracker;
 import com.google.android.gms.ads.identifier.AdvertisingIdClient;
 import com.google.android.gms.ads.identifier.AdvertisingIdClient.Info;
@@ -44,10 +50,22 @@ import java.util.Arrays;
 import org.cocos2dx.lib.Cocos2dxActivity;
 import org.cocos2dx.lib.Cocos2dxGLSurfaceView;
 
+import android.app.Activity;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
+import android.widget.LinearLayout;
+import android.widget.LinearLayout.LayoutParams;
+
 public class MainActivity extends Cocos2dxActivity {
   private static final String TAG = "FacebookTestActivity";
   private static FacebookAuth facebookAuth;
   public MobileAppTracker mobileAppTracker = null;
+
+  private static Activity actInstance;
+  private LinearLayout m_webLayout;
+  private WebView m_webView;
+  private ClipboardManager m_clipboard;
 
   static {
     System.loadLibrary("cocos2dlua");
@@ -56,7 +74,10 @@ public class MainActivity extends Cocos2dxActivity {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     Crashlytics.start(this);
-
+    
+    // Gets a handler to the clipboard
+    m_clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+    
       // Initialize MAT
     MobileAppTracker.init(getApplicationContext(), "19686", "c65b99d5b751944e3637593edd04ce01");
     mobileAppTracker = MobileAppTracker.getInstance();
@@ -89,6 +110,11 @@ public class MainActivity extends Cocos2dxActivity {
     facebookAuth = new FacebookAuth(this, "788386747851675",
         Arrays.asList("public_profile", "user_friends", "email", "user_birthday"));
     facebookAuth.setActivity(this);
+
+    // @@ADD Vincent: Webview
+    actInstance = this;
+    m_webLayout = new LinearLayout(this);
+    this.addContentView(m_webLayout, new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
   }
 
     @Override
@@ -148,5 +174,67 @@ public class MainActivity extends Cocos2dxActivity {
       Log.e(TAG, error.getMessage());
     }
   }
+
+  public static Object getJavaActivity() {
+	  return actInstance;
+  }
+  
+  public void openWebPage(final String url, final int x, final int y, final int width, final int height) {
+
+      this.runOnUiThread(new Runnable() {        
+        public void run() {
+          m_webView = new WebView(actInstance);
+          m_webLayout.addView(m_webView);
+          
+          DisplayMetrics metrics = new DisplayMetrics();
+          getWindowManager().getDefaultDisplay().getMetrics(metrics);
+          
+          PointF ratio = new PointF();
+          ratio.x = (float)metrics.heightPixels / 568;
+          ratio.y = (float)metrics.widthPixels / 320;
+          Log.d(TAG, "height = " + metrics.heightPixels + " width = " + metrics.widthPixels +
+        		  " ratio = (" + ratio.x + ", " + ratio.y + ")");
+          
+          LinearLayout.LayoutParams linearParams = (LinearLayout.LayoutParams) m_webView.getLayoutParams();
+          linearParams.leftMargin = (int) (x * ratio.x);
+          linearParams.topMargin = (int) (y * ratio.y);
+          linearParams.width = (int) (width * ratio.x);
+          linearParams.height = (int) (height * ratio.y);
+          m_webView.setLayoutParams(linearParams);
+
+          m_webView.setBackgroundColor(0);
+          m_webView.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
+          m_webView.getSettings().setAppCacheEnabled(false);
+          m_webView.setOverScrollMode(View.OVER_SCROLL_NEVER);              
+          m_webView.setWebViewClient(new WebViewClient(){
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url){                      
+              return false;                      
+            }
+          });
+
+          m_webView.loadUrl(url);          
+        }
+    });
+  }
+    
+  public void closeWebPage() {
+    this.runOnUiThread(new Runnable() {
+      public void run() {
+        m_webLayout.removeView(m_webView);
+        m_webView.destroy();
+      }
+    });
+  }
+  
+  //@@ADD Vincent: copy to paste board function for Android
+  public void copyToPasteBoard(String content)
+  {
+	  // Vincent: does not work here.. libc crashes
+	  //ClipboardManager clipboard = (android.content.ClipboardManager) this.getSystemService(Context.CLIPBOARD_SERVICE); 
+	  ClipData clip = ClipData.newPlainText("copied content", content);
+	  m_clipboard.setPrimaryClip(clip);
+  }
+    
 }
 
