@@ -89,22 +89,24 @@ end
 
 function selectYes( sender, eventType )
     if eventType == TOUCH_EVENT_ENDED then
+        local question = tolua.cast( mWidget:getChildByName("question"), "Label" )
         local line = MarketsForGameData.getMarketLine( mMarketInfo )
         makePrediction(
             MarketsForGameData.getOddsForType( mMarketInfo, MarketConfig.ODDS_TYPE_ONE_OPTION ),
             MarketsForGameData.getOddIdForType( mMarketInfo, MarketConfig.ODDS_TYPE_ONE_OPTION ),
-            string.format( "Total goals will be %d or more.", math.ceil( line ) ),
+            question:getStringValue(),
             true )
     end
 end
 
 function selectNo( sender, eventType )
     if eventType == TOUCH_EVENT_ENDED then
+        local question = tolua.cast( mWidget:getChildByName("question"), "Label" )
         local line = MarketsForGameData.getMarketLine( mMarketInfo )
         makePrediction(
             MarketsForGameData.getOddsForType( mMarketInfo, MarketConfig.ODDS_TYPE_TWO_OPTION ),
             MarketsForGameData.getOddIdForType( mMarketInfo, MarketConfig.ODDS_TYPE_TWO_OPTION ),
-            string.format( "Total goals will less than %d.", math.ceil( line ) ),
+            question:getStringValue(),
             false )
     end
 end

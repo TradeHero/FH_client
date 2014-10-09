@@ -15,6 +15,7 @@
 USING_NS_CC;
 USING_NS_CC_EXT;
 using namespace CocosDenshion;
+using namespace std;
 
 #define KEY_OF_VERSION   "current-version-code"
 
@@ -56,7 +57,7 @@ bool AppDelegate::applicationDidFinishLaunching()
 	CCFileUtils::sharedFileUtils()->addSearchPath("script");
 #endif
 
-	std::vector<std::string> searchPaths = CCFileUtils::sharedFileUtils()->getSearchPaths();
+	vector<string> searchPaths = CCFileUtils::sharedFileUtils()->getSearchPaths();
 	searchPaths.insert(searchPaths.begin(), CCFileUtils::sharedFileUtils()->getWritablePath() + "local");
 	searchPaths.insert(searchPaths.begin(), CCFileUtils::sharedFileUtils()->getWritablePath());
 	CCFileUtils::sharedFileUtils()->setSearchPaths(searchPaths);
@@ -67,11 +68,11 @@ bool AppDelegate::applicationDidFinishLaunching()
 	eglView->setFrameSize(541, 960);
 #endif
 
-	std::string assetsVersion = CCUserDefault::sharedUserDefault()->getStringForKey(KEY_OF_VERSION);
+	string assetsVersion = CCUserDefault::sharedUserDefault()->getStringForKey(KEY_OF_VERSION);
 	unsigned long pSize = 0;
-	std::string appVersionFilePath = CCFileUtils::sharedFileUtils()->fullPathForFilename("version");
+	string appVersionFilePath = CCFileUtils::sharedFileUtils()->fullPathForFilename("version");
 	char* appVersionFileContent = (char*)CCFileUtils::sharedFileUtils()->getFileData(appVersionFilePath.c_str(), "r", &pSize);
-	std::string appVersion(appVersionFileContent, pSize);
+	string appVersion(appVersionFileContent, pSize);
 	if (assetsVersion == "")
 	{
 		// For new install, set the currentVersion.
@@ -83,8 +84,8 @@ bool AppDelegate::applicationDidFinishLaunching()
 		// If App upgrade, rename the old local assets folder. 
 		if (appVersion > assetsVersion)
 		{
-			std::string localAssetsPath = CCFileUtils::sharedFileUtils()->getWritablePath() + "local";
-			std::string localAssetsPathNew = localAssetsPath + assetsVersion;
+			string localAssetsPath = CCFileUtils::sharedFileUtils()->getWritablePath() + "local";
+			string localAssetsPathNew = localAssetsPath + assetsVersion;
 			CCLOG("App upgraded. Rename old local assets folder: %s", localAssetsPathNew.c_str());
 			if (rename(localAssetsPath.c_str(), localAssetsPathNew.c_str()) != 0)
 			{
@@ -168,9 +169,36 @@ AssetsManager* UpdateLayer::getAssetsManager()
 
 	if (!pAssetsManager)
 	{
+		unsigned long pSize = 0;
+		char* serverConfigChar = (char*)CCFileUtils::sharedFileUtils()->getFileData("server", "r", &pSize);
+		string serverConfig(serverConfigChar, pSize);
+		rapidjson::Document jsonDict;
+		jsonDict.Parse<0>(serverConfig.c_str());
+		if (jsonDict.HasParseError())
+		{
+			CCLOG("GetParseError %s\n", jsonDict.GetParseError());
+		}
+
+		string assetsVersion = CCUserDefault::sharedUserDefault()->getStringForKey(KEY_OF_VERSION);
+
+		bool useDev = DICTOOL->getBooleanValue_json(jsonDict, "useDev");
+		string selfUpdateURL(DICTOOL->getStringValue_json(jsonDict, "selfUpdateURL"));
+		selfUpdateURL.append("?version=").append(assetsVersion)
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+			.append("&deviceType=IOS")
+#endif
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+			.append("&deviceType=ANDROID")
+#endif
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
+			.append("&deviceType=WINDOWS")
+#endif
+			.append("&useDev=").append(useDev ? "true" : "false");
+
+		const char* versionAPI = selfUpdateURL.c_str();
+
 		pAssetsManager = new AssetsManager("https://raw.githubusercontent.com/lesliesam/fhres/master/dev/res.zip",
-			"https://raw.githubusercontent.com/lesliesam/fhres/master/version",
-			pathToSave.c_str());
+			versionAPI, pathToSave.c_str());
 		pAssetsManager->setDelegate(this);
 		pAssetsManager->setConnectionTimeout(10);
 	}
@@ -230,10 +258,10 @@ void UpdateLayer::onSuccess()
 
 void UpdateLayer::loadGame()
 {
-	std::vector<std::string> searchPaths = CCFileUtils::sharedFileUtils()->getSearchPaths();
+	vector<string> searchPaths = CCFileUtils::sharedFileUtils()->getSearchPaths();
 	searchPaths.insert(searchPaths.begin(), pathToSave);
 	CCFileUtils::sharedFileUtils()->setSearchPaths(searchPaths);
 
-	std::string path = CCFileUtils::sharedFileUtils()->fullPathForFilename("footballhero.lua");
+	string path = CCFileUtils::sharedFileUtils()->fullPathForFilename("footballhero.lua");
 	CCScriptEngineManager::sharedManager()->getScriptEngine()->executeScriptFile(path.c_str());
 }

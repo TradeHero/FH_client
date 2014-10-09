@@ -154,12 +154,12 @@ bool AssetsManager::checkUpdate()
 		CCLOG("GetParseError %s\n", jsonDict.GetParseError());
 		sendErrorMessage(kNetwork);
 		_version = response;
-		return true;
+		return false;
 	}
 
-	bool needUpdate = DICTOOL->getBooleanValue_json(jsonDict, "needUpdate");
-	const char* newVersionChar = DICTOOL->getStringValue_json(jsonDict, "version");
-	const char* packageToDownload = DICTOOL->getStringValue_json(jsonDict, "package");
+	bool needUpdate = DICTOOL->getBooleanValue_json(jsonDict, "NeedUpdate");
+	const char* newVersionChar = DICTOOL->getStringValue_json(jsonDict, "UpdateTo");
+	const char* packageToDownload = DICTOOL->getStringValue_json(jsonDict, "Package");
 
 	if (!needUpdate)
 	{

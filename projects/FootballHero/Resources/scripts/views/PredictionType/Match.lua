@@ -88,20 +88,22 @@ end
 
 function selectTeam1Win( sender, eventType )
     if eventType == TOUCH_EVENT_ENDED then
+        local question = tolua.cast( mWidget:getChildByName("question"), "Label" )
         makePrediction(
             MarketsForGameData.getOddsForType( mMarketInfo, MarketConfig.ODDS_TYPE_ONE_OPTION ),
             MarketsForGameData.getOddIdForType( mMarketInfo, MarketConfig.ODDS_TYPE_ONE_OPTION ),
-            TeamConfig.getTeamName( TeamConfig.getConfigIdByKey( mMatch["HomeTeamId"] ) ).." to win.",
+            question:getStringValue(),
             true )
     end
 end
 
 function selectTeam2Win( sender, eventType )
     if eventType == TOUCH_EVENT_ENDED then
+        local question = tolua.cast( mWidget:getChildByName("question"), "Label" )
         makePrediction(
             MarketsForGameData.getOddsForType( mMarketInfo, MarketConfig.ODDS_TYPE_TWO_OPTION ),
             MarketsForGameData.getOddIdForType( mMarketInfo, MarketConfig.ODDS_TYPE_TWO_OPTION ),
-            TeamConfig.getTeamName( TeamConfig.getConfigIdByKey( mMatch["AwayTeamId"] ) ).." to win.",
+            question:getStringValue(),
             false )
     end
 end
