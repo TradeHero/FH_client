@@ -125,10 +125,16 @@ function initLeagueList( leagueKey )
         local logo = tolua.cast( content:getChildByName("countryLogo"), "ImageView" )
         local leagueName = tolua.cast( content:getChildByName("countryName"), "Label" )
 
-        local leagueId = LeagueConfig.getConfigIdByKey( leagueKey )
-        local countryId = CountryConfig.getConfigIdByKey( LeagueConfig.getCountryId( leagueId ) )
-        leagueName:setText( CountryConfig.getCountryName( countryId ).." - "..LeagueConfig.getLeagueName( leagueId ) )
-        logo:loadTexture( CountryConfig.getLogo( countryId ) )
+        -- Hardcode Popular League texts and logo
+        if leagueKey == 0 then
+            leagueName:setText( "Most Popular" )
+            logo:loadTexture( Constants.COUNTRY_IMAGE_PATH.."favorite.png" )
+        else
+            local leagueId = LeagueConfig.getConfigIdByKey( leagueKey )
+            local countryId = CountryConfig.getConfigIdByKey( LeagueConfig.getCountryId( leagueId ) )
+            leagueName:setText( CountryConfig.getCountryName( countryId ).." - "..LeagueConfig.getLeagueName( leagueId ) )
+            logo:loadTexture( CountryConfig.getLogo( countryId ) )
+        end
     end
 
     local leagueSelectedCallback = function( leagueKey )

@@ -30,7 +30,13 @@ function action( param )
 
     Logic:setPreviousLeagueSelected( leagueId )
 
-    local url = RequestUtils.GET_UPCOMING_GAMES_BY_LEAGUE_REST_CALL.."?leagueId="..leagueId
+    -- Use a different URL for popular leagues (id == 0)
+    local url;
+    if mLeagueId == 0 then
+        url = RequestUtils.GET_POPULAR_UPCOMING_REST_CALL
+    else
+        url = RequestUtils.GET_UPCOMING_GAMES_BY_LEAGUE_REST_CALL.."?leagueId="..leagueId
+    end
 
     local requestInfo = {}
     requestInfo.requestData = ""
