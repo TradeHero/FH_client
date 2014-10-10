@@ -12,15 +12,7 @@
   "textures": [],
   "texturesPng": [
     "MatchListScene/match_bkg.png",
-    "header/back.png",
-    "Tutorial/Default Button.png",
-    "chat/Chat_Icon.png",
-    "chat/GreenArrow.png",
-    "Competition/copy_icon.png",
-    "Competition/share_icon.png",
-    "chat/More Button.png",
-    "Competition/btn-alertOff.png",
-    "Competition/btn-alertOn.png"
+    "header/back.png"
   ],
   "version": "1.5.0.0",
   "widgetTree": {

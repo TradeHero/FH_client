@@ -7,12 +7,13 @@ local EventManager = require("scripts.events.EventManager").getInstance()
 local Event = require("scripts.events.Event").EventList
 local Logic = require("scripts.Logic").getInstance()
 
+local mCompetitionId
 
 function action( param )
-    local competitionId = param[1]
+    mCompetitionId = param[1]
 
     local url = RequestUtils.GET_COMPETITION_LEAGUE_REST_CALL
-    url = url.."?competitionId="..competitionId
+    url = url.."?competitionId="..mCompetitionId
 
     local requestInfo = {}
     requestInfo.requestData = ""
@@ -31,5 +32,5 @@ end
 
 function onRequestSuccess( jsonResponse )
 	local CompetitionMoreScene = require("scripts.views.CompetitionMoreScene")
-    CompetitionMoreScene.loadFrame( jsonResponse )
+    CompetitionMoreScene.loadFrame( jsonResponse, mCompetitionId )
 end

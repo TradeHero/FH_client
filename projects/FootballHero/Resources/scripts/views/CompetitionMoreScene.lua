@@ -11,10 +11,12 @@ local Logic = require("scripts.Logic").getInstance()
 
 
 local mWidget
+local mCompetitionId
 
 -- DS for competitionDetail see CompetitionDetail
-function loadFrame( selectedLeagues )
+function loadFrame( selectedLeagues, competitionId )
     competitionDetail = Logic:getCompetitionDetail()
+    mCompetitionId = competitionId
 
 	local widget = GUIReader:shareReader():widgetFromJsonFile("scenes/CompetitionMore.json")
     mWidget = widget
@@ -29,6 +31,8 @@ function loadFrame( selectedLeagues )
     title:setText( competitionDetail:getName() )
     local backBt = mWidget:getChildByName("back")
     backBt:addTouchEventListener( backEventHandler )
+    local leaveBt = mWidget:getChildByName("leave")
+    leaveBt:addTouchEventListener( leaveEventHandler )
 
     initContent( competitionDetail, selectedLeagues )
 end
@@ -43,6 +47,12 @@ end
 function backEventHandler( sender, eventType )
     if eventType == TOUCH_EVENT_ENDED then
         keypadBackEventHandler()
+    end
+end
+
+function leaveEventHandler( sender, eventType )
+    if eventType == TOUCH_EVENT_ENDED then
+        EventManager:postEvent( Event.Do_Leave_Competition, { mCompetitionId } )
     end
 end
 

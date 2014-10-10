@@ -63,6 +63,7 @@ EventNameList =
     "Do_Create_Competition",
     "Do_Join_Competition",
     "Do_Share_Competition",
+    "Do_Leave_Competition",
     "Do_Password_Reset",
     "Do_Send_Chat_Message",
     "Do_Get_Chat_Message",

@@ -88,7 +88,11 @@
   <ProjectType>UIProject</ProjectType>
   <ResRelativePath />
   <imageFileList />
-  <imagePngList />
+  <imagePngList>
+    <string>MatchListScene/match_bkg.png</string>
+    <string>header/back.png</string>
+    <string>Tutorial/Default Button.png</string>
+  </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>TapToMakePrediction.json</CurrentUIJson>
+  <CurrentUIJson>HistoryDetail.json</CurrentUIJson>
 </UIProject>
