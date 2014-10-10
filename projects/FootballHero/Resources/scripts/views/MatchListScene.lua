@@ -126,7 +126,8 @@ function initLeagueList( leagueKey )
         local leagueName = tolua.cast( content:getChildByName("countryName"), "Label" )
 
         -- Hardcode Popular League texts and logo
-        if leagueKey == 0 then
+
+        if leagueKey == Constants.MOST_POPULAR_LEAGUE_ID then
             leagueName:setText( "Most Popular" )
             logo:loadTexture( Constants.COUNTRY_IMAGE_PATH.."favorite.png" )
         else
