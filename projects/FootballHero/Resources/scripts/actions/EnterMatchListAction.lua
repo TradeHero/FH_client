@@ -6,7 +6,7 @@ local ConnectingMessage = require("scripts.views.ConnectingMessage")
 local EventManager = require("scripts.events.EventManager").getInstance()
 local Event = require("scripts.events.Event").EventList
 local Logic = require("scripts.Logic").getInstance()
-
+local Constants = require("scripts.Constants")
 
 local mLeagueId
 local mCheckShowMarketingMessage
@@ -30,7 +30,13 @@ function action( param )
 
     Logic:setPreviousLeagueSelected( leagueId )
 
-    local url = RequestUtils.GET_UPCOMING_GAMES_BY_LEAGUE_REST_CALL.."?leagueId="..leagueId
+    -- Use a different URL for popular leagues (id == MOST_POPULAR_LEAGUE_ID)
+    local url;
+    if mLeagueId == Constants.MOST_POPULAR_LEAGUE_ID then
+        url = RequestUtils.GET_POPULAR_UPCOMING_REST_CALL
+    else
+        url = RequestUtils.GET_UPCOMING_GAMES_BY_LEAGUE_REST_CALL.."?leagueId="..leagueId
+    end
 
     local requestInfo = {}
     requestInfo.requestData = ""
