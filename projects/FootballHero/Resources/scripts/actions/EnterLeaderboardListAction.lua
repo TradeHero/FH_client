@@ -14,6 +14,7 @@ local mSubType = LeaderboardConfig.LeaderboardSubType[1]
 function action( param )
 	mLeaderboardId = param[1]
 	local leaderboardType = param[2]
+    local minPrediction = param[3] or 1
 	local step = 1
 
 	local url = LeaderboardConfig.LeaderboardType[mLeaderboardId]["request"]
@@ -22,6 +23,9 @@ function action( param )
 	end
 
 	url = url.."?sortType="..mSubType["sortType"].."&step="..step
+    if minPrediction > 1 then
+        url = url.."&numberOfCouponsRequired="..minPrediction
+    end
 
     local requestInfo = {}
     requestInfo.requestData = ""
