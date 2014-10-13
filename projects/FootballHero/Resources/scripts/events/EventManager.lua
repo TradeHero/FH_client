@@ -34,8 +34,9 @@ function EventManager:new()
     return obj 
 end
 
-function EventManager:registerEventHandler( eventId, action )
-	self.mEventHandler[eventId] = action
+function EventManager:registerEventHandler( eventId, actionName )
+	local handler = require( actionName )
+	self.mEventHandler[eventId] = handler
 end
 
 function EventManager:postEvent( eventId, param )

@@ -308,4 +308,8 @@
     <Project>PushNotification</Project>
     <GuidesList />
   </GuidesProject>
+  <GuidesProject>
+    <Project>ChoiceMessage</Project>
+    <GuidesList />
+  </GuidesProject>
 </ArrayOfGuidesProject>

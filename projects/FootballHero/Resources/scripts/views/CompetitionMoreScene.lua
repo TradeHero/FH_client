@@ -52,7 +52,14 @@ end
 
 function leaveEventHandler( sender, eventType )
     if eventType == TOUCH_EVENT_ENDED then
-        EventManager:postEvent( Event.Do_Leave_Competition, { mCompetitionId } )
+        local yesCallback = function()
+            EventManager:postEvent( Event.Do_Leave_Competition, { mCompetitionId } )
+        end
+
+        local noCallback = function()
+        end
+
+        EventManager:postEvent( Event.Show_Choice_Message, { "Leave Competition", "Are you sure to leave from the competition?", yesCallback, noCallback } )
     end
 end
 

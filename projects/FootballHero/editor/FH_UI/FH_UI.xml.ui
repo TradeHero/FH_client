@@ -79,6 +79,7 @@
     <string>PNPredictionMessage.json</string>
     <string>PNCompetitionMessage.json</string>
     <string>PushNotification.json</string>
+    <string>ChoiceMessage.json</string>
   </JsonList>
   <CanvasSize>
     <Width>640</Width>
@@ -89,10 +90,10 @@
   <ResRelativePath />
   <imageFileList />
   <imagePngList>
-    <string>MatchListScene/match_bkg.png</string>
-    <string>header/back.png</string>
+    <string>Popup/img-popupbox.png</string>
+    <string>Popup/img-toppopup.png</string>
     <string>Tutorial/Default Button.png</string>
   </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>HistoryDetail.json</CurrentUIJson>
+  <CurrentUIJson>ErrorMessage.json</CurrentUIJson>
 </UIProject>

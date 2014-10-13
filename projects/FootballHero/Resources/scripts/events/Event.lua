@@ -72,6 +72,7 @@ EventNameList =
 
     "Show_Info",
     "Show_Error_Message",
+    "Show_Choice_Message",
     "Show_Marketing_Message",
     "Show_Please_Update",
 
@@ -110,6 +111,7 @@ EventNameDosenotTrackList =
     "Check_File_Version",
     "Show_Info",
     "Show_Error_Message",
+    "Show_Choice_Message",
     "Show_Marketing_Message",
     "Show_Please_Update",
     "Load_More_In_Leaderboard",
