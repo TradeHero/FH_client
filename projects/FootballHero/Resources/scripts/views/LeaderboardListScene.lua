@@ -8,6 +8,7 @@ local TeamConfig = require("scripts.config.Team")
 local LeaderboardConfig = require("scripts.config.Leaderboard")
 local LeaderboardListSceneUnexpended = require("scripts.views.LeaderboardListSceneUnexpended")
 local SMIS = require("scripts.SMIS")
+local Constants = require("scripts.Constants")
 
 
 local mWidget
@@ -18,6 +19,7 @@ local mCurrentTotalNum
 local mHasMoreToLoad
 local maTypeStack
 local mDropDown
+local mFilter
 
 -- DS for subType see LeaderboardConfig
 function loadFrame( leaderboardInfo, leaderboardId, subType )
@@ -34,9 +36,11 @@ function loadFrame( leaderboardInfo, leaderboardId, subType )
     mLeaderboardId = leaderboardId
     mSubType = subType
 
+    mFilter = false
     initTitles()
     initContent( leaderboardInfo )
     initTypeList()
+    initFilter()
     mStep = 1
     mHasMoreToLoad = true
 end
@@ -71,14 +75,20 @@ function keypadBackEventHandler()
     EventManager:popHistory()
     end
 
--- @@ADD Vincent: update the dropbox title with a previously saved string stored in a stack
-function initPreviousType()    
-    local previousText = table.remove(maTypeStack)
+-- @@ADD Vincent: update the dropbox title and checkbox display with a previously saved value stored in a stack
+function initPreviousType()
+    local previousType = table.remove(maTypeStack)
     if next(maTypeStack) == nil then
         -- no more previous type, do nothing
     else
         local typeName = tolua.cast( mDropDown:getChildByName("currentType"), "Label" )
-        typeName:setText( previousText )
+        typeName:setText( previousType.text )
+
+        local minCheckbox = tolua.cast( mWidget:getChildByName("Check_min_prediction"), "CheckBox" )
+        if minCheckbox:getSelectedState() ~= previousType.filter then
+            minCheckbox:setSelectedState(previousType.filter)
+            mFilter = previousType.filter
+        end
     end
 end
 
@@ -109,8 +119,8 @@ function initTypeList()
 
     local initCurrentType = function( typeKey )        
         local typeName = tolua.cast( mDropDown:getChildByName("currentType"), "Label" )
-        -- insert previous string value into stack
-        table.insert(maTypeStack, typeName:getStringValue())
+        -- insert previous title and filter into stack
+        table.insert(maTypeStack, {text = typeName:getStringValue(), filter = mFilter})
         typeName:setText( LeaderboardConfig.LeaderboardSubType[typeKey]["title"] )
     end
 
@@ -123,7 +133,11 @@ function initTypeList()
 
         -- Stop the loading logo actions.
         mWidget:stopAllActions()
-        EventManager:postEvent( Event.Enter_Leaderboard_List, { mLeaderboardId, typeKey } )
+        if mFilter == true then
+            EventManager:postEvent( Event.Enter_Leaderboard_List, { mLeaderboardId, typeKey, Constants.FILTER_MIN_PREDICTION } )
+        else
+            EventManager:postEvent( Event.Enter_Leaderboard_List, { mLeaderboardId, typeKey } )
+        end
     end
 
     LeaderboardListSceneUnexpended.loadFrame( "scenes/LeaderbaordContentInDropDown.json", 
@@ -132,6 +146,31 @@ function initTypeList()
     maTypeStack = {}
     initCurrentType( 1 )
 end
+
+function initFilter()
+    local minCheckboxEventHandler = function( sender, eventType )
+        if eventType == TOUCH_EVENT_ENDED then
+            local minCheckBox = tolua.cast( sender, "CheckBox" )
+            
+            mWidget:stopAllActions()
+            local typeName = tolua.cast( mDropDown:getChildByName("currentType"), "Label" )
+            -- insert previous title and filter into stack
+            table.insert(maTypeStack, {text = typeName:getStringValue(), filter = mFilter})
+
+            if minCheckBox:getSelectedState() == true then                
+                EventManager:postEvent( Event.Enter_Leaderboard_List, { mLeaderboardId, typeKey } )
+                mFilter = false
+            else                
+                EventManager:postEvent( Event.Enter_Leaderboard_List, { mLeaderboardId, typeKey, Constants.FILTER_MIN_PREDICTION } )
+                mFilter = true
+            end
+        end
+    end
+    local minCheckbox = tolua.cast( mWidget:getChildByName("Check_min_prediction"), "CheckBox" )
+
+    minCheckbox:addTouchEventListener( minCheckboxEventHandler )
+end
+
 
 function initTitles()
     local title = tolua.cast( mWidget:getChildByName("title"), "Label" )
