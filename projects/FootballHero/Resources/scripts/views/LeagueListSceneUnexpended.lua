@@ -31,7 +31,10 @@ function helperInitLeagueList( existingContentHeight )
     mChildIndex = 1
 
     -- Add in the "Most Popular" league - top 25 upcoming games
-    contentHeight = contentHeight + addPopularLeague()
+    -- Do not add "Most Popular" league in "Create Competition"
+    if mLeagueInitCallback == nil then
+        contentHeight = contentHeight + addPopularLeague()
+    end
 
     for i = 1, mCountryNum do
         local leagueNum = table.getn( CountryConfig.getLeagueList( i ) )
