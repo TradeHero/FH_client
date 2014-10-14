@@ -18,6 +18,7 @@ LEAGUE_IMAGE_PATH = IMAGE_PATH.."leagues/"
 COUNTRY_IMAGE_PATH = IMAGE_PATH.."countries/"
 PREDICTION_CHOICE_IMAGE_PATH = "scenes/MatchPrediction/"
 LEADERBOARD_IMAGE_PATH = "scenes/Leaderboards/"
+MATCH_LIST_CONTENT_IMAGE_PATH = "scenes/MatchListContent/"
 
 LOGO_IMAGE_PATH = "myLogo.jpg"
 

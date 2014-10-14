@@ -290,6 +290,8 @@ function helperInitMatchInfo( content, matchInfo )
     local friendNum = tolua.cast( content:getChildByName("friendNum"), "Label" )
     local fhNum = tolua.cast( content:getChildByName("fhNum"), "Label" )
     local played = tolua.cast( content:getChildByName("played"), "Label" )
+    local points = tolua.cast( content:getChildByName("Points"), "Label")
+    local stamp = tolua.cast( content:getChildByName("Stamp"), "ImageView" )
     
     -- Load the team logo
     team1:loadTexture( TeamConfig.getLogo( TeamConfig.getConfigIdByKey( matchInfo["HomeTeamId"] ) ) )
@@ -312,9 +314,24 @@ function helperInitMatchInfo( content, matchInfo )
     if matchInfo["HomeGoals"] >= 0 and matchInfo["AwayGoals"] >= 0 then
         score:setText( string.format( score:getStringValue(), matchInfo["HomeGoals"], matchInfo["AwayGoals"] ) )
         time:setEnabled( false )
+
+        if matchInfo["PredictionsPlayed"] == 0 then
+            stamp:loadTexture( Constants.MATCH_LIST_CONTENT_IMAGE_PATH.."stamp-ended.png" )
+            points:setEnabled( false )
+        elseif matchInfo["Profit"] >= 0 then
+            stamp:loadTexture( Constants.MATCH_LIST_CONTENT_IMAGE_PATH.."stamp-won.png" )
+            points:setText( matchInfo["Profit"] )
+            points:setColor( ccc3( 92, 200, 80 ) )
+        else
+            stamp:loadTexture( Constants.MATCH_LIST_CONTENT_IMAGE_PATH.."stamp-lost.png" )
+            points:setText( math.abs( matchInfo["Profit"] ) )
+            points:setColor( ccc3( 238, 56, 47 ) )
+        end
     else
         time:setText( os.date( "%b %d  %H:%M", matchInfo["StartTime"] ) )
         score:setEnabled( false )
+        stamp:setEnabled( false )
+        points:setEnabled( false )
     end
 
     if matchInfo["FriendsPlayed"] > 0 then
