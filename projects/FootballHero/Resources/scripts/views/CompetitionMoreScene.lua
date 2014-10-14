@@ -31,9 +31,7 @@ function loadFrame( selectedLeagues, competitionId )
     title:setText( competitionDetail:getName() )
     local backBt = mWidget:getChildByName("back")
     backBt:addTouchEventListener( backEventHandler )
-    local leaveBt = mWidget:getChildByName("leave")
-    leaveBt:addTouchEventListener( leaveEventHandler )
-
+    
     initContent( competitionDetail, selectedLeagues )
 end
 
@@ -59,7 +57,7 @@ function leaveEventHandler( sender, eventType )
         local noCallback = function()
         end
 
-        EventManager:postEvent( Event.Show_Choice_Message, { "Leave Competition", "Are you sure to leave from the competition?", yesCallback, noCallback } )
+        EventManager:postEvent( Event.Show_Choice_Message, { "Leave Competition", "Are you sure you want to leave the competition?", yesCallback, noCallback } )
     end
 end
 
@@ -95,4 +93,16 @@ function initContent( competitionDetail, selectedLeagues )
     description:setText( competitionDetail:getDescription() )
 
     SelectedLeaguesScene.loadFrame( contentContainer, selectedLeagues, false, mContainerHeight )
+
+    content = SceneManager.widgetFromJsonFile("scenes/CompetitionLeave.json")
+    content:setLayoutParameter( layoutParameter )
+    contentContainer:addChild( content )
+    mContainerHeight = contentContainer:getInnerContainerSize().height + content:getSize().height
+    contentContainer:setInnerContainerSize( CCSize:new( 0, mContainerHeight ) )
+    local layout = tolua.cast( contentContainer, "Layout" )
+    layout:requestDoLayout()
+
+    local leaveBtn = content:getChildByName("leave")
+    leaveBtn:addTouchEventListener( leaveEventHandler )
+
 end

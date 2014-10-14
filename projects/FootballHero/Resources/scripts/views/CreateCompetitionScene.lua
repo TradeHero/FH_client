@@ -215,7 +215,7 @@ function createTextInput( widget )
     mTextInput:setDelegate( inputDelegate.__CCEditBoxDelegate__ )
 
     -- DD/MM/YYYY
-    local monthInput = ViewUtils.createTextInput( widget:getChildByName( "MonthInput" ), "Enter number of months", 520, 50 )
+    local monthInput = ViewUtils.createTextInput( widget:getChildByName( "MonthInput" ), "", 520, 50 )
     monthInput:setInputMode( kEditBoxInputModeNumeric )
     monthInput:setMaxLength( 2 )
     monthInput:setTouchPriority( SceneManager.TOUCH_PRIORITY_MINUS_ONE )
