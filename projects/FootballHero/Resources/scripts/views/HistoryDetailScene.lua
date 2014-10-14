@@ -131,9 +131,9 @@ function initCouponInfo( content, info )
     elseif marketType == MarketConfig.MARKET_TYPE_TOTAL_GOAL then
         answerString = string.format( "Will total goals be %d or more?", math.ceil( line ) )
         if answerId then
-            choiceImage = Constants.PREDICTION_CHOICE_IMAGE_PATH.."Will-both-teams-score-yes.png"
+            choiceImage = Constants.PREDICTION_CHOICE_IMAGE_PATH.."prediction-yes.png"
         else
-            choiceImage = Constants.PREDICTION_CHOICE_IMAGE_PATH.."Will-both-teams-score-no.png"
+            choiceImage = Constants.PREDICTION_CHOICE_IMAGE_PATH.."prediction-no.png"
         end
     elseif marketType == MarketConfig.MARKET_TYPE_ASIAN_HANDICAP then
         local teamName = TeamConfig.getTeamName( mAwayTeamId )
@@ -144,9 +144,9 @@ function initCouponInfo( content, info )
         
         answerString = string.format( "Will %s win by %d goals or more?", teamName, math.ceil( line ) )
         if answerId then
-            choiceImage = Constants.PREDICTION_CHOICE_IMAGE_PATH.."Will-xx_team-score-a-goal-yes.png"
+            choiceImage = Constants.PREDICTION_CHOICE_IMAGE_PATH.."prediction-yes.png"
         else
-            choiceImage = Constants.PREDICTION_CHOICE_IMAGE_PATH.."Will-xx_team-score-a-goal-no.png"
+            choiceImage = Constants.PREDICTION_CHOICE_IMAGE_PATH.."prediction-no.png"
         end
     end
 
