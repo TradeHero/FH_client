@@ -11,9 +11,7 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "MatchListScene/match_bkg.png",
-    "header/back.png",
-    "Tutorial/Default Button.png"
+    "MatchPrediction/prediction-no.png"
   ],
   "version": "1.5.0.0",
   "widgetTree": {
@@ -103,25 +101,25 @@
           "customProperty": "",
           "flipX": false,
           "flipY": false,
-          "height": 180,
+          "height": 165,
           "ignoreSize": false,
           "layoutParameter": null,
           "opacity": 255,
-          "positionPercentX": 0.2234375,
+          "positionPercentX": 0.215625,
           "positionPercentY": 0.5024155,
           "positionType": 0,
           "rotation": 0,
           "scaleX": 1,
           "scaleY": 1,
-          "sizePercentX": 0.28125,
-          "sizePercentY": 0.8695652,
+          "sizePercentX": 0.2578125,
+          "sizePercentY": 0.797101438,
           "sizeType": 0,
           "tag": 882,
           "touchAble": false,
           "useMergedTexture": false,
           "visible": true,
-          "width": 180,
-          "x": 143,
+          "width": 165,
+          "x": 138,
           "y": 104,
           "capInsetsHeight": 1,
           "capInsetsWidth": 1,
@@ -129,13 +127,13 @@
           "capInsetsY": 0,
           "fileName": null,
           "fileNameData": {
-            "path": "MatchPrediction/Will-both-teams-score-no.png",
+            "path": "MatchPrediction/prediction-no.png",
             "plistFile": "",
             "resourceType": 0
           },
           "scale9Enable": false,
-          "scale9Height": 180,
-          "scale9Width": 180
+          "scale9Height": 165,
+          "scale9Width": 165
         }
       },
       {

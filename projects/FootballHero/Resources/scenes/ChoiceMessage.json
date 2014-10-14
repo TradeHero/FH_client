@@ -173,7 +173,7 @@
           "fontName": "fonts/Helvetica Neue Bold.ttf",
           "fontSize": 30,
           "hAlignment": 1,
-          "text": "Are you sure to leave from the competition?",
+          "text": "Are you sure you want to leave the competition?",
           "touchScaleEnable": false,
           "vAlignment": 1
         }
@@ -280,7 +280,7 @@
           "rotation": 0,
           "scaleX": 1,
           "scaleY": 1,
-          "sizePercentX": 0.496875,
+          "sizePercentX": 0.340625,
           "sizePercentY": 0.0272887331,
           "sizeType": 0,
           "tag": 1910,
