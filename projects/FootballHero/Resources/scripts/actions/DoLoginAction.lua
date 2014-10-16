@@ -60,7 +60,7 @@ function onRequestSuccess( jsonResponse )
     local configMd5Info = profileDto["ConfigMd5Info"]
     local displayName = profileDto["DisplayName"]
     local pictureUrl = profileDto["PictureUrl"]
-    local startLeagueId = profileDto["StartLeagueId"]
+    local startLeagueId = Constants.MOST_POPULAR_LEAGUE_ID --profileDto["StartLeagueId"]
     local balance = profileDto["Balance"]
     local active = profileDto["ActiveInCompetition"]
     local FbId = profileDto["FbId"]
