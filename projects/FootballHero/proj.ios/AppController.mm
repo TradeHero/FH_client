@@ -35,6 +35,9 @@
 #import "UAInbox.h"
 #import "UAInboxUI.h"
 
+#import <ShareSDK/ShareSDK.h>
+#import "WXApi.h"
+
 #import "RootViewController.h"
 #import "FBSessionSingleton.h"
 #import <FacebookSDK/FacebookSDK.h>
@@ -113,6 +116,13 @@ static AppDelegate s_sharedApplication;
     [UAInbox shared].pushHandler.delegate = [UAInboxUI shared];
     [UAInboxUI shared].inboxParentController = viewController;
     NSLog(@"UA device token is %@", [UAPush shared].deviceToken);
+    
+    [ShareSDK registerApp:@"api20"];
+    [ShareSDK connectFacebookWithAppKey:@"788386747851675"
+                              appSecret:@"698e7f99acc954691bb0250b4dd9d6d2"];
+    [ShareSDK connectWeChatWithAppId:@"wx4868b35061f87885"
+                           appSecret:@"64020361b8ec4c99936c0e3999a9f249"
+                           wechatCls:[WXApi class]];
 
     NSTimeInterval timeInterval = [startTime timeIntervalSinceNow];
     NSLog(@"Interval:%f",timeInterval);
@@ -214,6 +224,8 @@ static AppDelegate s_sharedApplication;
     {
         return YES;
     }
+    
+    [ShareSDK handleOpenURL:url wxDelegate:self];
     
     return [FBAppCall handleOpenURL:url
                   sourceApplication:sourceApplication];

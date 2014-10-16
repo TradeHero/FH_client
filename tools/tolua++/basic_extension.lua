@@ -296,6 +296,7 @@ extern "C" {
 #include "cocos2d.h"
 #include "CCLuaEngine.h"
 #include "FacebookDelegate.h"
+#include "ShareSDKDelegate.h"
 #include "HttpRequestForLua.h"
 #include "EditBoxDelegateForLua.h"
 #include "Analytics.h"

@@ -501,6 +501,9 @@
     <ClCompile Include="..\Utils\Misc.cpp">
       <Filter>Utils</Filter>
     </ClCompile>
+    <ClCompile Include="..\Social\ShareSDKDelegate.cpp">
+      <Filter>Social</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\GUI\CCScrollView\CCScrollView.h">
@@ -900,6 +903,9 @@
     </ClInclude>
     <ClInclude Include="..\Utils\Misc.h">
       <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Social\ShareSDKDelegate.h">
+      <Filter>Social</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

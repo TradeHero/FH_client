@@ -6,7 +6,6 @@ local Logic = require("scripts.Logic").getInstance()
 local Json = require("json")
 local RequestUtils = require("scripts.RequestUtils")
 
-
 function action( param )
     local StartTutorialScene = require("scripts.views.StartTutorialScene")
     local SigninTypeSelectScene = require("scripts.views.Tutorial.SigninTypeSelectScene")

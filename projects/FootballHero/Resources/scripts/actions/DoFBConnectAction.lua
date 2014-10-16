@@ -18,22 +18,22 @@ function action( param )
     local handler = function( accessToken )
         if accessToken == nil then
             -- To handle user reject to the oAuth.
-            onFBConnectFailed()
+            onSocialConnectFailed()
         else
             CCLuaLog("Get login result "..accessToken)
-            onFBConnectSuccess( accessToken )
+            onSocialConnectSuccess( accessToken )
         end
     end
 
     ConnectingMessage.loadFrame()
-    FacebookDelegate:sharedDelegate():login( handler )
+    ShareSDKDelegate:sharedDelegate():login( handler )
 end
 
-function onFBConnectFailed()
+function onSocialConnectFailed()
     ConnectingMessage.selfRemove()
 end
 
-function onFBConnectSuccess( accessToken )
+function onSocialConnectSuccess( accessToken )
     mAccessToken = accessToken
     local requestContent = { SocialNetworkType = 0, AuthToken = accessToken, 
                             GMTOffset = RequestUtils.getTimezoneOffset(), DeviceToken = Logic:getDeviceToken(),

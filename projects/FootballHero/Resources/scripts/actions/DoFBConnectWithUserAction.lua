@@ -21,10 +21,10 @@ function action( param )
     local handler = function( accessToken )
         if accessToken == nil then
             -- To handle user reject to the oAuth.
-            onFBConnectFailed()
+            onSocialConnectFailed()
         else
             print("Get token "..accessToken)
-            onFBConnectSuccess( accessToken )
+            onSocialConnectSuccess( accessToken )
         end
         ConnectingMessage.selfRemove()
     end
@@ -34,11 +34,11 @@ function action( param )
 
 end
 
-function onFBConnectFailed()
+function onSocialConnectFailed()
     mFailedHandler( true )
 end
 
-function onFBConnectSuccess( accessToken )
+function onSocialConnectSuccess( accessToken )
     local requestContent = { SocialNetworkType = 0, AuthToken = accessToken, useDev = RequestUtils.USE_DEV }
     local requestContentText = Json.encode( requestContent )
     

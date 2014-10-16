@@ -11,6 +11,11 @@
 #import <FacebookSDK/FacebookSDK.h>
 #import "FBSessionSingleton.h"
 
+
+#import <ShareSDK/ShareSDK.h>
+#import <ShareSDK/ISSPlatformCredential.h>
+
+
 static FacebookConnector* instance;
 
 FacebookConnector* FacebookConnector::getInstance()
@@ -32,18 +37,7 @@ void FacebookConnector::initSession()
 
 void FacebookConnector::login()
 {
-    FBSession* session = [FBSessionSingleton sharedInstance].session;
-    if (session.state != FBSessionStateCreated) {
-        // Create a new, logged out session.
-        session = [[FBSession alloc] init];
-    }
     
-    [FBSession openActiveSessionWithReadPermissions: @[@"public_profile", @"user_friends", @"email", @"user_birthday"] allowLoginUI:YES completionHandler:^(FBSession *aSession, FBSessionState status, NSError *error) {
-        
-        [FBSessionSingleton sharedInstance].session = aSession;
-        const char* accessToken =[aSession.accessTokenData.accessToken UTF8String];
-        Social::FacebookDelegate::sharedDelegate()->accessTokenUpdate(accessToken);
-    }];
 }
 
 void FacebookConnector::grantPublishPermission(const char* permission)

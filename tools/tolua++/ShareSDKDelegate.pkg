@@ -1,0 +1,8 @@
+
+class ShareSDKDelegate
+{
+	static ShareSDKDelegate* sharedDelegate();
+
+	void login(LUA_FUNCTION handler);
+	void doShare(const char* title, const char* content, LUA_FUNCTION handler);
+};

@@ -18,16 +18,12 @@ function __G__TRACKBACK__(msg)
     end
 end
 
-local cclog = function(...)
-    print(string.format(...))
-end
-
 local function main()
     -- avoid memory leak
     collectgarbage("setpause", 100)
     collectgarbage("setstepmul", 5000)
 
-    cclog("Game start.")
+    CCLuaLog("Game start.")
 
     --local st = os.clock()
     --initPackageLoader( false )
@@ -74,14 +70,5 @@ function initPackageLoader( decrypt )
         table.insert( package.loaders, 1, loadFromCompact )
     end
 end
-
---[[
-function initClientVersion( version )
-    local recordedVersion = CCUserDefault:sharedUserDefault():getStringForKey( KEY_OF_VERSION )
-    if recordedVersion == nil or recordedVersion == "" then
-        CCUserDefault:sharedUserDefault():setStringForKey( KEY_OF_VERSION, version )
-    end
-end
---]]
 
 xpcall(main, __G__TRACKBACK__)
