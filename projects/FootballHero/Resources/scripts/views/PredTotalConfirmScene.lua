@@ -46,10 +46,8 @@ function confirmEventHandler( sender, eventType )
 	    	EventManager:postEvent( Event.Do_Post_Predictions, { mAccessToken } )
 		end
 
-	    if CCUserDefault:sharedUserDefault():getBoolForKey( Constants.NOTIFICATION_KEY_SFX ) == true then
-	        AudioEngine.playEffect( AudioEngine.SUBMIT_PREDICTION )
-	    end
-
+	    AudioEngine.playEffect( AudioEngine.SUBMIT_PREDICTION )
+	    
 		PushNotificationManager.checkShowPredictionSwitch( callback, callback )	
 	end
 end

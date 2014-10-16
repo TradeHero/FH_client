@@ -42,7 +42,6 @@ function backEventHandler( sender,eventType )
 end
 
 function keypadBackEventHandler()
-    WebviewDelegate:sharedDelegate():closeWebpage()
     EventManager:popHistory()
 end
 
@@ -51,8 +50,6 @@ function sfxCheckHandler( sender,eventType )
         local check = tolua.cast( sender, "CheckBox" )
         CCUserDefault:sharedUserDefault():setBoolForKey( Constants.NOTIFICATION_KEY_SFX, not check:getSelectedState() )
 
-        if not check:getSelectedState() then
-            AudioEngine.playEffect( AudioEngine.SETTINGS_ON_OFF )
-        end
+        AudioEngine.playEffect( AudioEngine.SETTINGS_ON_OFF )
     end
 end

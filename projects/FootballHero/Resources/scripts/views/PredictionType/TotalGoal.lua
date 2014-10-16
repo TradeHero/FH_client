@@ -139,9 +139,7 @@ function makePrediction( rewards, oddId, answer, selectLeft )
 
     mWidget:runAction( CCSequence:create( resultSeqArray ) )
 
-    if CCUserDefault:sharedUserDefault():getBoolForKey( Constants.NOTIFICATION_KEY_SFX ) == true then
-        AudioEngine.playEffect( AudioEngine.SELECT_PREDICTION )
-    end
+    AudioEngine.playEffect( AudioEngine.SELECT_PREDICTION )
 end
 
 function playMoveAnim( moveDirection, delayTime )
