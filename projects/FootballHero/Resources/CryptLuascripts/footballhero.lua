@@ -29,6 +29,10 @@ local function main()
 
     cclog("Game start.")
 
+    if CCUserDefault:sharedUserDefault():getBoolForKey( require("scripts.Constants").NOTIFICATION_KEY_SFX ) == true then
+        AudioEngine.playEffect( AudioEngine.INTRO )
+    end
+
     initPackageLoader( true )
 
     local sceneManager = require("scripts.SceneManager")

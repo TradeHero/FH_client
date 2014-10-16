@@ -2,6 +2,11 @@
 local M = {}
 local sharedEngine = SimpleAudioEngine:sharedEngine()
 
+M.INTRO             = "sounds/fh_intro.mp3"
+M.SELECT_PREDICTION = "sounds/fh_select_prediction.mp3"
+M.SUBMIT_PREDICTION = "sounds/fh_submit_prediction.mp3"
+M.SETTINGS_ON_OFF   = "sounds/fh_settings_on_off.mp3"
+
 function M.stopAllEffects()
     sharedEngine:stopAllEffects()
 end

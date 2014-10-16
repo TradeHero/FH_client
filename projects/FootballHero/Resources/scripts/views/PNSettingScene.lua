@@ -4,7 +4,7 @@ local SceneManager = require("scripts.SceneManager")
 local EventManager = require("scripts.events.EventManager").getInstance()
 local Event = require("scripts.events.Event").EventList
 local PushNotificationManager = require("scripts.PushNotificationManager")
-
+local Constants = require("scripts.Constants")
 
 local mWidget
 
@@ -55,6 +55,10 @@ end
 
 function generalCheckHandler( sender,eventType )
     if eventType == TOUCH_EVENT_ENDED then
+        if CCUserDefault:sharedUserDefault():getBoolForKey( Constants.NOTIFICATION_KEY_SFX ) == true then
+            AudioEngine.playEffect( AudioEngine.SETTINGS_ON_OFF )
+        end
+
         local check = tolua.cast( sender, "CheckBox" )
         PushNotificationManager.setGeneralSwitch( not check:getSelectedState() )
     end
@@ -62,6 +66,10 @@ end
 
 function predictionCheckHandler( sender,eventType )
     if eventType == TOUCH_EVENT_ENDED then
+        if CCUserDefault:sharedUserDefault():getBoolForKey( Constants.NOTIFICATION_KEY_SFX ) == true then
+            AudioEngine.playEffect( AudioEngine.SETTINGS_ON_OFF )
+        end
+
         local check = tolua.cast( sender, "CheckBox" )
         PushNotificationManager.setPredictionSwitch( not check:getSelectedState() )
     end
