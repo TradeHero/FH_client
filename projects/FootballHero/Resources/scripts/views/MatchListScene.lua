@@ -318,6 +318,9 @@ function helperInitMatchInfo( content, matchInfo )
         if matchInfo["PredictionsPlayed"] == 0 then
             stamp:loadTexture( Constants.MATCH_LIST_CONTENT_IMAGE_PATH.."stamp-ended.png" )
             points:setEnabled( false )
+        elseif matchInfo["Profit"] == nil then
+            stamp:setEnabled( false )
+            points:setEnabled( false )
         elseif matchInfo["Profit"] >= 0 then
             stamp:loadTexture( Constants.MATCH_LIST_CONTENT_IMAGE_PATH.."stamp-won.png" )
             points:setText( matchInfo["Profit"] )
