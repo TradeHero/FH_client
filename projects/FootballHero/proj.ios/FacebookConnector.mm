@@ -37,21 +37,6 @@ void FacebookConnector::initSession()
 
 void FacebookConnector::login()
 {
-    /*
-    FBSession* session = [FBSessionSingleton sharedInstance].session;
-    if (session.state != FBSessionStateCreated) {
-        // Create a new, logged out session.
-        session = [[FBSession alloc] init];
-    }
-    
-    [FBSession openActiveSessionWithReadPermissions: @[@"public_profile", @"user_friends", @"email", @"user_birthday"] allowLoginUI:YES completionHandler:^(FBSession *aSession, FBSessionState status, NSError *error) {
-        
-        [FBSessionSingleton sharedInstance].session = aSession;
-        const char* accessToken =[aSession.accessTokenData.accessToken UTF8String];
-        Social::FacebookDelegate::sharedDelegate()->accessTokenUpdate(accessToken);
-    }];
-    */
-    
     id<ISSAuthOptions> authOptions = [ShareSDK authOptionsWithAutoAuth:YES
                                                          allowCallback:YES
                                                          authViewStyle:SSAuthViewStyleFullScreenPopup
@@ -59,9 +44,9 @@ void FacebookConnector::login()
                                                authManagerViewDelegate:nil];
     [authOptions setScopes:[NSDictionary dictionaryWithObjectsAndKeys: @[@"public_profile", @"user_friends", @"email", @"publish_actions"],
                             [NSNumber numberWithInt:ShareTypeFacebook], nil]];
-    
+    /*
     [ShareSDK authWithType:ShareTypeFacebook
-                   options:authOptions                                          //授权选项，包括视图定制，自动授权
+                   options:authOptions
                     result:^(SSAuthState state, id<ICMErrorInfo> error) {
                         if (state == SSAuthStateSuccess)
                         {
@@ -77,7 +62,25 @@ void FacebookConnector::login()
                             Social::FacebookDelegate::sharedDelegate()->accessTokenUpdate(nil);
                         }
                     }];
+    */
     
+    [ShareSDK authWithType:ShareTypeWeixiSession
+                   options:nil
+                    result:^(SSAuthState state, id<ICMErrorInfo> error) {
+                        if (state == SSAuthStateSuccess)
+                        {
+                            id<ISSPlatformCredential> credential = [ShareSDK getCredentialWithType:ShareTypeWeixiSession];
+                            NSLog(@"成功 %@ ", [credential token]);
+                            const char* accessToken =[[credential token] UTF8String];
+                            Social::FacebookDelegate::sharedDelegate()->accessTokenUpdate(accessToken);
+                            share("Match share", "Content");
+                        }
+                        else if (state == SSAuthStateFail or state == SSAuthStateCancel)
+                        {
+                            NSLog(@"失败 %@", error.errorDescription);
+                            Social::FacebookDelegate::sharedDelegate()->accessTokenUpdate(nil);
+                        }
+                    }];
 }
 
 void FacebookConnector::share(const char* title, const char* content)
