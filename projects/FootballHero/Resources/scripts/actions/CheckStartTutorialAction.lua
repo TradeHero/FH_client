@@ -34,4 +34,11 @@ function action( param )
     EmailRegisterScene.loadFrame()
     EmailForgotPasswordScene.loadFrame()
     EmailRegisterNameScene.loadFrame()
+
+    local function videoFinish()
+        CCLuaLog("================videoFinish")
+    end
+
+    CCLuaLog("================video start")
+    VideoView:play("video2.mp4",videoFinish)
 end
