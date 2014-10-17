@@ -16,7 +16,7 @@ function action( param )
 	mSubType = param[2]
 	local step = param[3]
 
-	local url = RequestUtils.GET_MAIN_LEADERBOARD_REST_CALL.."?sortType="..mSubType["sortType"].."&step="..step
+    local url = LeaderboardConfig.LeaderboardType[mLeaderboardId]["request"].."?sortType="..mSubType["sortType"].."&step="..step
 
     local requestInfo = {}
     requestInfo.requestData = ""
