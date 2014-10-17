@@ -60,7 +60,7 @@ function M.resumeMusic()
 end
 
 function M.playEffect(filename, isLoop)
-    if CCUserDefault:sharedUserDefault():getBoolForKey( require("scripts.Constants").NOTIFICATION_KEY_SFX ) ~= true then
+    if CCUserDefault:sharedUserDefault():getBoolForKey( require("scripts.Constants").NOTIFICATION_KEY_SFX ) == true then
         return
     end
 

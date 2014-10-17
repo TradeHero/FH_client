@@ -19,7 +19,7 @@ function loadFrame()
     local sfxCheck = tolua.cast( mWidget:getChildByName("sfxCheck"), "CheckBox" )
     sfxCheck:addTouchEventListener( sfxCheckHandler )
 
-    if CCUserDefault:sharedUserDefault():getBoolForKey( Constants.NOTIFICATION_KEY_SFX ) == true then
+    if CCUserDefault:sharedUserDefault():getBoolForKey( Constants.NOTIFICATION_KEY_SFX ) ~= true then
         sfxCheck:setSelectedState( true )
     end
 end
@@ -48,7 +48,7 @@ end
 function sfxCheckHandler( sender,eventType )
     if eventType == TOUCH_EVENT_ENDED then
         local check = tolua.cast( sender, "CheckBox" )
-        CCUserDefault:sharedUserDefault():setBoolForKey( Constants.NOTIFICATION_KEY_SFX, not check:getSelectedState() )
+        CCUserDefault:sharedUserDefault():setBoolForKey( Constants.NOTIFICATION_KEY_SFX, check:getSelectedState() )
 
         AudioEngine.playEffect( AudioEngine.SETTINGS_ON_OFF )
     end
