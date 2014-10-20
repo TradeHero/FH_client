@@ -28,7 +28,7 @@ function action( param )
     httpRequest:addHeader( Logic:getAuthSessionString() )
     httpRequest:sendHttpRequest( url, handler )
 
-    ConnectingMessage.loadFrame()
+    --ConnectingMessage.loadFrame()
 end
 
 function onRequestSuccess( response )

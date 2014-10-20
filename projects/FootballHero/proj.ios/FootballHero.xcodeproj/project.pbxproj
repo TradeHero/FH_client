@@ -276,6 +276,7 @@
 		7388C04118F4E2FF00CF667C /* HttpRequestForLua.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7388C03F18F4E2FF00CF667C /* HttpRequestForLua.cpp */; };
 		738BA12A193D7FD2008A74F6 /* DES56.lua in Resources */ = {isa = PBXBuildFile; fileRef = 738BA129193D7FD2008A74F6 /* DES56.lua */; };
 		73A0739119CC106500EA3519 /* server in Resources */ = {isa = PBXBuildFile; fileRef = 73A0739019CC106500EA3519 /* server */; };
+		73A4D4DE19F5180A00433A04 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 73A4D4DD19F5180A00433A04 /* Images.xcassets */; };
 		73B0326919BED7620034452A /* MobileAppTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73B0326819BED7620034452A /* MobileAppTracker.framework */; };
 		73B0326B19BED7B20034452A /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73B0326A19BED7B20034452A /* iAd.framework */; };
 		73B455CF19A48B2D0097A722 /* lua_zlib.c in Sources */ = {isa = PBXBuildFile; fileRef = 73B455CD19A48B2D0097A722 /* lua_zlib.c */; };
@@ -879,6 +880,7 @@
 		7388C04018F4E2FF00CF667C /* HttpRequestForLua.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpRequestForLua.h; sourceTree = "<group>"; };
 		738BA129193D7FD2008A74F6 /* DES56.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = DES56.lua; sourceTree = "<group>"; };
 		73A0739019CC106500EA3519 /* server */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = server; sourceTree = "<group>"; };
+		73A4D4DD19F5180A00433A04 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = FootballHero/Images.xcassets; sourceTree = SOURCE_ROOT; };
 		73B0326819BED7620034452A /* MobileAppTracker.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MobileAppTracker.framework; sourceTree = "<group>"; };
 		73B0326A19BED7B20034452A /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 		73B455CD19A48B2D0097A722 /* lua_zlib.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lua_zlib.c; path = crypt/lua_zlib.c; sourceTree = "<group>"; };
@@ -2397,11 +2399,12 @@
 		F293BC4615EB859D00256477 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				73A4D4DD19F5180A00433A04 /* Images.xcassets */,
 				73A0739019CC106500EA3519 /* server */,
+				733DE933193F26C800361638 /* Default-Portrait@2x~ipad.png */,
 				73B455D219B085FE0097A722 /* version */,
 				73B8CB091953EB5400E62B43 /* game.bin */,
 				733DE932193F26C800361638 /* Default~ipad.png */,
-				733DE933193F26C800361638 /* Default-Portrait@2x~ipad.png */,
 				733DE92C193F262900361638 /* Icon-76.png */,
 				733DE92D193F262900361638 /* Icon-120.png */,
 				733DE92E193F262900361638 /* Icon-152.png */,
@@ -2526,6 +2529,7 @@
 				733DE931193F262900361638 /* Icon-152.png in Resources */,
 				7314B4AA19B715350065D927 /* bottom-detail@2x.png in Resources */,
 				7314B4BA19B715350065D927 /* UAPushSettingsView.xib in Resources */,
+				73A4D4DE19F5180A00433A04 /* Images.xcassets in Resources */,
 				73B455D319B085FE0097A722 /* version in Resources */,
 				730D984818DC4317000CA5F9 /* extern.lua in Resources */,
 				15C1569B1683138E00D239F2 /* Icon-57.png in Resources */,
@@ -2926,6 +2930,8 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_OBJC_ARC = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -2991,6 +2997,8 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_OBJC_ARC = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
