@@ -2,8 +2,7 @@ package cn.sharedream.game;
 
 import java.io.IOException;
 
-import org.cocos2dx.lib.Cocos2dxLuaJavaBridge;
-import org.cocos2dx.lua.AppActivity;
+import com.myhero.fh.MainActivity;
 
 import android.app.Activity;
 import android.content.res.AssetFileDescriptor;
@@ -161,7 +160,7 @@ public class VideoView extends SurfaceView implements SurfaceHolder.Callback,
 			e.printStackTrace();
 		}
 		try {
-			final AppActivity instance = AppActivity.instance;
+			final MainActivity instance = (MainActivity) MainActivity.getJavaActivity();
 			instance.runOnUiThread(new Runnable() {
 				@Override
 				public void run() {
@@ -180,10 +179,12 @@ public class VideoView extends SurfaceView implements SurfaceHolder.Callback,
 					@Override
 					public void run() {
 						try{
+                            /*
 							Cocos2dxLuaJavaBridge.callLuaFunctionWithString(
 									luaOnFinishCallback, "FINISH");
 							Cocos2dxLuaJavaBridge
 									.releaseLuaFunction(luaOnFinishCallback);
+							*/
 						}catch(Exception e){
 							e.printStackTrace();
 						}
@@ -200,7 +201,7 @@ public class VideoView extends SurfaceView implements SurfaceHolder.Callback,
 	}
 
 	public static void playVideo(final String name, final int luaCallback) {
-		final AppActivity instance = AppActivity.instance;
+		final MainActivity instance = (MainActivity) MainActivity.getJavaActivity();
 		videoStartTime = System.currentTimeMillis();
 		if (instance != null) {
 			instance.runOnUiThread(new Runnable() {
