@@ -2,6 +2,7 @@
 // Created by liangwei on 14-7-21.
 //
 #include "VideoView.h"
+#include "CCLuaEngine.h"
 #import "VideoViewIOSImp.h"
 #import <MediaPlayer/MediaPlayer.h>
 

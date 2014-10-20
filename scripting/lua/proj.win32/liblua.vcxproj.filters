@@ -99,6 +99,9 @@
     <ClCompile Include="..\crypt\lua_zlib.c">
       <Filter>crypt</Filter>
     </ClCompile>
+    <ClCompile Include="..\cocos2dx_support\lua_videoview_extends.cpp">
+      <Filter>cocos2dx_support</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\tolua\tolua++.h">
@@ -178,6 +181,9 @@
     </ClInclude>
     <ClInclude Include="..\crypt\lua_zlib.h">
       <Filter>crypt</Filter>
+    </ClInclude>
+    <ClInclude Include="..\cocos2dx_support\lua_videoview_extends.h">
+      <Filter>cocos2dx_support</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -12,7 +12,8 @@ LOCAL_SRC_FILES :=  hellolua/main.cpp \
                     hellolua/CCEditBoxImplAndroidJNI.cpp \
                     hellolua/device.cpp \
                     hellolua/misc.cpp \
-                    ../../Classes/AppDelegate.cpp
+                    ../../Classes/AppDelegate.cpp \
+                    VideoViewAndroidImp.cpp
 
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../Classes
@@ -32,6 +33,7 @@ $(call import-module,cocos2dx)
 $(call import-module,CocosDenshion/android)
 $(call import-module,scripting/lua/proj.android)
 $(call import-module,cocos2dx/platform/third_party/android/prebuilt/libcurl)
+$(call import-module,extensions)
 $(call import-module,extensions)
 $(call import-module,external/Box2D)
 $(call import-module,external/chipmunk)

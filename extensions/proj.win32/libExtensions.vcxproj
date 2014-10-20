@@ -225,6 +225,7 @@
     <ClCompile Include="..\spine\spine-cocos2dx.cpp" />
     <ClCompile Include="..\Utils\Analytics.cpp" />
     <ClCompile Include="..\Utils\Misc.cpp" />
+    <ClCompile Include="..\Utils\VideoView.cpp" />
     <ClCompile Include="..\Utils\WebviewDelegate.cpp" />
     <ClCompile Include="Win32InputBox.cpp" />
   </ItemGroup>
@@ -384,6 +385,7 @@
     <ClInclude Include="..\spine\spine.h" />
     <ClInclude Include="..\Utils\Analytics.h" />
     <ClInclude Include="..\Utils\Misc.h" />
+    <ClInclude Include="..\Utils\VideoView.h" />
     <ClInclude Include="..\Utils\WebviewDelegate.h" />
     <ClInclude Include="Win32InputBox.h" />
   </ItemGroup>

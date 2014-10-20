@@ -19,6 +19,7 @@ LOCAL_SRC_FILES := ../cocos2dx_support/CCLuaBridge.cpp \
           ../cocos2dx_support/lua_cocos2dx_manual.cpp \
           ../cocos2dx_support/lua_cocos2dx_extensions_manual.cpp \
           ../cocos2dx_support/lua_cocos2dx_cocostudio_manual.cpp \
+          ../cocos2dx_support/lua_videoview_extends.cpp \
           ../tolua/tolua_event.c \
           ../tolua/tolua_is.c \
           ../tolua/tolua_map.c \
