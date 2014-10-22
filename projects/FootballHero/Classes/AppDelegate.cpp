@@ -142,6 +142,11 @@ UpdateLayer::~UpdateLayer()
 void UpdateLayer::onEnter()
 {
 	CCNode::onEnter();
+	this->scheduleOnce(schedule_selector(UpdateLayer::update), 0.1f);
+}
+
+void UpdateLayer::update(float t)
+{
 	getAssetsManager()->update();
 }
 
@@ -232,12 +237,12 @@ void UpdateLayer::onError(AssetsManager::ErrorCode errorCode)
 {
 	if (errorCode == AssetsManager::kNoNewVersion)
 	{
-		pProgressLabel->setString("");
+		//pProgressLabel->setString("");
 	}
 
 	if (errorCode == AssetsManager::kNetwork)
 	{
-		pProgressLabel->setString("");
+		//pProgressLabel->setString("");
 	}
 	loadGame();
 }
