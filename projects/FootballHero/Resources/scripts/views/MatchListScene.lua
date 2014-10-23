@@ -282,7 +282,9 @@ function leagueSelectedCallback( leagueId )
     EventManager:postEvent( Event.Enter_Match_List, { leagueId } )
 end
 
-function helperInitMatchInfo( content, matchInfo )
+function helperInitMatchInfo( topContent, matchInfo )
+    local content = topContent:getChildByName("fade_panel")
+
     local team1 = tolua.cast( content:getChildByName("team1"), "ImageView" )
     local team2 = tolua.cast( content:getChildByName("team2"), "ImageView" )
     local team1Name = tolua.cast( content:getChildByName("team1Name"), "Label" )
@@ -290,8 +292,9 @@ function helperInitMatchInfo( content, matchInfo )
     local friendNum = tolua.cast( content:getChildByName("friendNum"), "Label" )
     local fhNum = tolua.cast( content:getChildByName("fhNum"), "Label" )
     local played = tolua.cast( content:getChildByName("played"), "Label" )
-    local points = tolua.cast( content:getChildByName("Points"), "Label")
-    local stamp = tolua.cast( content:getChildByName("Stamp"), "ImageView" )
+    local label_played = tolua.cast( content:getChildByName("label_played"), "Label" )
+    local points = tolua.cast( topContent:getChildByName("Points"), "Label")
+    local stamp = tolua.cast( topContent:getChildByName("Stamp"), "ImageView" )
     
     -- Load the team logo
     team1:loadTexture( TeamConfig.getLogo( TeamConfig.getConfigIdByKey( matchInfo["HomeTeamId"] ) ) )
@@ -316,19 +319,28 @@ function helperInitMatchInfo( content, matchInfo )
         time:setEnabled( false )
 
         if matchInfo["PredictionsPlayed"] == 0 then
+            content:setOpacity( 127 )
             stamp:loadTexture( Constants.MATCH_LIST_CONTENT_IMAGE_PATH.."stamp-ended.png" )
             points:setEnabled( false )
+            played:setEnabled( false )
+            label_played:setEnabled( false )
         elseif matchInfo["Profit"] == nil then
             stamp:setEnabled( false )
             points:setEnabled( false )
         elseif matchInfo["Profit"] >= 0 then
+            content:setOpacity( 127 )
             stamp:loadTexture( Constants.MATCH_LIST_CONTENT_IMAGE_PATH.."stamp-won.png" )
             points:setText( matchInfo["Profit"] )
             points:setColor( ccc3( 92, 200, 80 ) )
+            played:setEnabled( false )
+            label_played:setEnabled( false )
         else
+            content:setOpacity( 127 )
             stamp:loadTexture( Constants.MATCH_LIST_CONTENT_IMAGE_PATH.."stamp-lost.png" )
             points:setText( math.abs( matchInfo["Profit"] ) )
             points:setColor( ccc3( 238, 56, 47 ) )
+            played:setEnabled( false )
+            label_played:setEnabled( false )
         end
     else
         time:setText( os.date( "%b %d  %H:%M", matchInfo["StartTime"] ) )
