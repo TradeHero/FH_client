@@ -313,7 +313,7 @@ function helperInitMatchInfo( topContent, matchInfo )
     team2Name:setText( teamName )
 
     local time = tolua.cast( content:getChildByName("time"), "Label" )
-    local score = tolua.cast( content:getChildByName("score"), "Label" )
+    local score = tolua.cast( topContent:getChildByName("score"), "Label" )
     if matchInfo["HomeGoals"] >= 0 and matchInfo["AwayGoals"] >= 0 then
         score:setText( string.format( score:getStringValue(), matchInfo["HomeGoals"], matchInfo["AwayGoals"] ) )
         time:setEnabled( false )
@@ -359,9 +359,9 @@ function helperInitMatchInfo( topContent, matchInfo )
 
     local isGameStart = matchInfo["StartTime"] > os.time()
     if isGameStart then
-        content:setTouchEnabled( true )
+        topContent:setTouchEnabled( true )
     else
-        content:setTouchEnabled( false )
+        topContent:setTouchEnabled( false )
     end
 end
 
