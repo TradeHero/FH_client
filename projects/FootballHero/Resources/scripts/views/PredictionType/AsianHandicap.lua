@@ -153,6 +153,8 @@ function makePrediction( rewards, oddId, answer, selectLeft )
     end ) )
 
     mWidget:runAction( CCSequence:create( resultSeqArray ) )
+
+    AudioEngine.playEffect( AudioEngine.SELECT_PREDICTION )
 end
 
 function playMoveAnim( moveDirection, delayTime )

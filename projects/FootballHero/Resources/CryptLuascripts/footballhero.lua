@@ -29,7 +29,11 @@ local function main()
 
     cclog("Game start.")
 
+    local st = os.clock()
     initPackageLoader( true )
+    CCLuaLog( "initPackageLoader took: "..( os.clock() - st ) )
+
+    AudioEngine.playEffect( AudioEngine.INTRO )
 
     local sceneManager = require("scripts.SceneManager")
     sceneManager.init()

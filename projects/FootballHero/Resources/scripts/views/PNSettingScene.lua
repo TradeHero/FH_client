@@ -4,7 +4,7 @@ local SceneManager = require("scripts.SceneManager")
 local EventManager = require("scripts.events.EventManager").getInstance()
 local Event = require("scripts.events.Event").EventList
 local PushNotificationManager = require("scripts.PushNotificationManager")
-
+local Constants = require("scripts.Constants")
 
 local mWidget
 
@@ -49,7 +49,6 @@ function backEventHandler( sender,eventType )
 end
 
 function keypadBackEventHandler()
-    WebviewDelegate:sharedDelegate():closeWebpage()
     EventManager:popHistory()
 end
 
@@ -57,6 +56,8 @@ function generalCheckHandler( sender,eventType )
     if eventType == TOUCH_EVENT_ENDED then
         local check = tolua.cast( sender, "CheckBox" )
         PushNotificationManager.setGeneralSwitch( not check:getSelectedState() )
+        
+        AudioEngine.playEffect( AudioEngine.SETTINGS_ON_OFF )
     end
 end
 
@@ -64,5 +65,7 @@ function predictionCheckHandler( sender,eventType )
     if eventType == TOUCH_EVENT_ENDED then
         local check = tolua.cast( sender, "CheckBox" )
         PushNotificationManager.setPredictionSwitch( not check:getSelectedState() )
+
+        AudioEngine.playEffect( AudioEngine.SETTINGS_ON_OFF )
     end
 end

@@ -71,18 +71,6 @@ rm -rf "$APP_ANDROID_ROOT"/assets/scripts
 # remove the tool files
 rm -rf "$APP_ANDROID_ROOT"/assets/CryptLuascripts
 
-# copy common luaScript
-for file in "$APP_ROOT"/../../scripting/lua/script/*
-do
-if [ -d "$file" ]; then
-    cp -rf "$file" "$APP_ANDROID_ROOT"/assets
-fi
-
-if [ -f "$file" ]; then
-    cp "$file" "$APP_ANDROID_ROOT"/assets
-fi
-done
-
 if [[ "$buildexternalsfromsource" ]]; then
     echo "Building external dependencies from source"
     "$NDK_ROOT"/ndk-build -C "$APP_ANDROID_ROOT" $* \

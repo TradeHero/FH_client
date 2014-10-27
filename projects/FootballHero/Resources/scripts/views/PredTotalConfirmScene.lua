@@ -46,6 +46,8 @@ function confirmEventHandler( sender, eventType )
 	    	EventManager:postEvent( Event.Do_Post_Predictions, { mAccessToken } )
 		end
 
+	    AudioEngine.playEffect( AudioEngine.SUBMIT_PREDICTION )
+	    
 		PushNotificationManager.checkShowPredictionSwitch( callback, callback )	
 	end
 end

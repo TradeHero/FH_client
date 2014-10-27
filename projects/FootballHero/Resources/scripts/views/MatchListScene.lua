@@ -282,16 +282,20 @@ function leagueSelectedCallback( leagueId )
     EventManager:postEvent( Event.Enter_Match_List, { leagueId } )
 end
 
-function helperInitMatchInfo( content, matchInfo )
+function helperInitMatchInfo( topContent, matchInfo )
+    local content = topContent:getChildByName("fade_panel")
+
     local team1 = tolua.cast( content:getChildByName("team1"), "ImageView" )
     local team2 = tolua.cast( content:getChildByName("team2"), "ImageView" )
     local team1Name = tolua.cast( content:getChildByName("team1Name"), "Label" )
     local team2Name = tolua.cast( content:getChildByName("team2Name"), "Label" )
-    local friendNum = tolua.cast( content:getChildByName("friendNum"), "Label" )
     local fhNum = tolua.cast( content:getChildByName("fhNum"), "Label" )
     local played = tolua.cast( content:getChildByName("played"), "Label" )
-    local points = tolua.cast( content:getChildByName("Points"), "Label")
-    local stamp = tolua.cast( content:getChildByName("Stamp"), "ImageView" )
+    local label_fhNum = tolua.cast( content:getChildByName("Label_total_fans"), "Label" )
+    local homePercent = tolua.cast( content:getChildByName("home_percent"), "Label" )
+    local awayPercent = tolua.cast( content:getChildByName("away_percent"), "Label" )
+    local points = tolua.cast( topContent:getChildByName("Points"), "Label")
+    local stamp = tolua.cast( topContent:getChildByName("Stamp"), "ImageView" )
     
     -- Load the team logo
     team1:loadTexture( TeamConfig.getLogo( TeamConfig.getConfigIdByKey( matchInfo["HomeTeamId"] ) ) )
@@ -310,22 +314,34 @@ function helperInitMatchInfo( content, matchInfo )
     team2Name:setText( teamName )
 
     local time = tolua.cast( content:getChildByName("time"), "Label" )
-    local score = tolua.cast( content:getChildByName("score"), "Label" )
+    local score = tolua.cast( topContent:getChildByName("score"), "Label" )
     if matchInfo["HomeGoals"] >= 0 and matchInfo["AwayGoals"] >= 0 then
         score:setText( string.format( score:getStringValue(), matchInfo["HomeGoals"], matchInfo["AwayGoals"] ) )
         time:setEnabled( false )
 
         if matchInfo["PredictionsPlayed"] == 0 then
+            content:setOpacity( 127 )
             stamp:loadTexture( Constants.MATCH_LIST_CONTENT_IMAGE_PATH.."stamp-ended.png" )
             points:setEnabled( false )
+            fhNum:setEnabled( false )
+            label_fhNum:setEnabled( false )
+        elseif matchInfo["Profit"] == nil then
+            stamp:setEnabled( false )
+            points:setEnabled( false )
         elseif matchInfo["Profit"] >= 0 then
+            content:setOpacity( 127 )
             stamp:loadTexture( Constants.MATCH_LIST_CONTENT_IMAGE_PATH.."stamp-won.png" )
-            points:setText( matchInfo["Profit"] )
+            points:setText( string.format( points:getStringValue(), math.abs( matchInfo["Profit"] ) ) )
             points:setColor( ccc3( 92, 200, 80 ) )
+            fhNum:setEnabled( false )
+            label_fhNum:setEnabled( false )
         else
+            content:setOpacity( 127 )
             stamp:loadTexture( Constants.MATCH_LIST_CONTENT_IMAGE_PATH.."stamp-lost.png" )
-            points:setText( math.abs( matchInfo["Profit"] ) )
+            points:setText( string.format( points:getStringValue(), math.abs( matchInfo["Profit"] ) ) )
             points:setColor( ccc3( 238, 56, 47 ) )
+            fhNum:setEnabled( false )
+            label_fhNum:setEnabled( false )
         end
     else
         time:setText( os.date( "%b %d  %H:%M", matchInfo["StartTime"] ) )
@@ -334,19 +350,19 @@ function helperInitMatchInfo( content, matchInfo )
         points:setEnabled( false )
     end
 
-    if matchInfo["FriendsPlayed"] > 0 then
-        friendNum:setText( matchInfo["FriendsPlayed"] )
-    else
-        friendNum:setText("0")
-    end
+    local totalWinPredictions = matchInfo["HomePredictions"] + matchInfo["AwayPredictions"]
+    local homeWinPercent = matchInfo["HomePredictions"] / totalWinPredictions * 100
+    local awayWinPercent = matchInfo["AwayPredictions"] / totalWinPredictions * 100
+    homePercent:setText( string.format( homePercent:getStringValue(), homeWinPercent ) )
+    awayPercent:setText( string.format( awayPercent:getStringValue(), awayWinPercent ) )
     fhNum:setText( matchInfo["TotalUsersPlayed"] )
     played:setText( string.format( played:getStringValue(), matchInfo["PredictionsPlayed"], matchInfo["PredictionsAvailable"] ) )
 
     local isGameStart = matchInfo["StartTime"] > os.time()
     if isGameStart then
-        content:setTouchEnabled( true )
+        topContent:setTouchEnabled( true )
     else
-        content:setTouchEnabled( false )
+        topContent:setTouchEnabled( false )
     end
 end
 

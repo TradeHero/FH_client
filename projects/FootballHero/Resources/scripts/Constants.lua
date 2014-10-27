@@ -50,6 +50,7 @@ ANALYTICS_EVENT_SOCIAL_ACTION = "Social_Action"
 ANALYTICS_EVENT_POPUP = "Pop-Up"
 ANALYTICS_EVENT_COMPETITION = "Competition"
 
+NOTIFICATION_KEY_SFX = "soundEffects"
 
 local mClientVersion = ""
 

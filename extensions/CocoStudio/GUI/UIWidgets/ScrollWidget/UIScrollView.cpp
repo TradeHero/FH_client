@@ -204,7 +204,7 @@ void ScrollView::setInnerContainerSize(const CCSize &size)
     {
          _innerContainer->setPosition(CCPoint(_size.width - ((1.0f - _innerContainer->getAnchorPoint().x) * _innerContainer->getSize().width), _innerContainer->getPosition().y));
     }
-    if (_innerContainer->getPosition().y > 0.0f)
+	if (_innerContainer->getBottomInParent() > 0.0f)
     {
         _innerContainer->setPosition(CCPoint(_innerContainer->getPosition().x, _innerContainer->getAnchorPoint().y * _innerContainer->getSize().height));
     }

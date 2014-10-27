@@ -273,13 +273,10 @@
 		73495B8F19C048D300626812 /* UAInboxMessageListController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73495B8219C048D300626812 /* UAInboxMessageListController.xib */; };
 		73495B9019C048D300626812 /* UAInboxMessageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73495B8319C048D300626812 /* UAInboxMessageViewController.xib */; };
 		7365C0D218FCE99200C39027 /* FBSessionSingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 7365C0D118FCE99200C39027 /* FBSessionSingleton.m */; };
-		737E7E1919EFD1550058818B /* lua_videoview_extends.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 737E7E1719EFD1550058818B /* lua_videoview_extends.cpp */; };
-		737E7E1C19EFD1680058818B /* VideoViewIOSImp.mm in Sources */ = {isa = PBXBuildFile; fileRef = 737E7E1B19EFD1680058818B /* VideoViewIOSImp.mm */; };
-		737E7E1F19EFD5390058818B /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 737E7E1E19EFD5390058818B /* MediaPlayer.framework */; };
-		737E7E2119EFD77D0058818B /* video2.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 737E7E2019EFD77D0058818B /* video2.mp4 */; };
 		7388C04118F4E2FF00CF667C /* HttpRequestForLua.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7388C03F18F4E2FF00CF667C /* HttpRequestForLua.cpp */; };
 		738BA12A193D7FD2008A74F6 /* DES56.lua in Resources */ = {isa = PBXBuildFile; fileRef = 738BA129193D7FD2008A74F6 /* DES56.lua */; };
 		73A0739119CC106500EA3519 /* server in Resources */ = {isa = PBXBuildFile; fileRef = 73A0739019CC106500EA3519 /* server */; };
+		73A4D4DE19F5180A00433A04 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 73A4D4DD19F5180A00433A04 /* Images.xcassets */; };
 		73B0326919BED7620034452A /* MobileAppTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73B0326819BED7620034452A /* MobileAppTracker.framework */; };
 		73B0326B19BED7B20034452A /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73B0326A19BED7B20034452A /* iAd.framework */; };
 		73B455CF19A48B2D0097A722 /* lua_zlib.c in Sources */ = {isa = PBXBuildFile; fileRef = 73B455CD19A48B2D0097A722 /* lua_zlib.c */; };
@@ -879,17 +876,11 @@
 		73495B8319C048D300626812 /* UAInboxMessageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UAInboxMessageViewController.xib; sourceTree = "<group>"; };
 		7365C0D018FCE99200C39027 /* FBSessionSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBSessionSingleton.h; sourceTree = "<group>"; };
 		7365C0D118FCE99200C39027 /* FBSessionSingleton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBSessionSingleton.m; sourceTree = "<group>"; };
-		737E7E1719EFD1550058818B /* lua_videoview_extends.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = lua_videoview_extends.cpp; sourceTree = "<group>"; };
-		737E7E1819EFD1550058818B /* lua_videoview_extends.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lua_videoview_extends.h; sourceTree = "<group>"; };
-		737E7E1A19EFD1680058818B /* VideoViewIOSImp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoViewIOSImp.h; sourceTree = "<group>"; };
-		737E7E1B19EFD1680058818B /* VideoViewIOSImp.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = VideoViewIOSImp.mm; sourceTree = "<group>"; };
-		737E7E1D19EFD1D00058818B /* VideoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VideoView.h; path = Utils/VideoView.h; sourceTree = "<group>"; };
-		737E7E1E19EFD5390058818B /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
-		737E7E2019EFD77D0058818B /* video2.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = video2.mp4; sourceTree = "<group>"; };
 		7388C03F18F4E2FF00CF667C /* HttpRequestForLua.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HttpRequestForLua.cpp; sourceTree = "<group>"; };
 		7388C04018F4E2FF00CF667C /* HttpRequestForLua.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpRequestForLua.h; sourceTree = "<group>"; };
 		738BA129193D7FD2008A74F6 /* DES56.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = DES56.lua; sourceTree = "<group>"; };
 		73A0739019CC106500EA3519 /* server */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = server; sourceTree = "<group>"; };
+		73A4D4DD19F5180A00433A04 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = FootballHero/Images.xcassets; sourceTree = SOURCE_ROOT; };
 		73B0326819BED7620034452A /* MobileAppTracker.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MobileAppTracker.framework; sourceTree = "<group>"; };
 		73B0326A19BED7B20034452A /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 		73B455CD19A48B2D0097A722 /* lua_zlib.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lua_zlib.c; path = crypt/lua_zlib.c; sourceTree = "<group>"; };
@@ -1052,7 +1043,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				737E7E1F19EFD5390058818B /* MediaPlayer.framework in Frameworks */,
 				73B0326B19BED7B20034452A /* iAd.framework in Frameworks */,
 				7314B4C719B717A00065D927 /* MapKit.framework in Frameworks */,
 				7314B4C519B717870065D927 /* CoreLocation.framework in Frameworks */,
@@ -1769,8 +1759,6 @@
 		46C1007916BF786A00F74D54 /* cocos2dx_support */ = {
 			isa = PBXGroup;
 			children = (
-				737E7E1719EFD1550058818B /* lua_videoview_extends.cpp */,
-				737E7E1819EFD1550058818B /* lua_videoview_extends.h */,
 				73EDFC8318EC005700322624 /* LuaCocos2dExtension.cpp */,
 				73EDFC8418EC005700322624 /* LuaCocos2dExtension.h */,
 				15CA8CEF18696743000032AB /* lua_cocos2dx_cocostudio_manual.cpp */,
@@ -2040,7 +2028,6 @@
 		73DCA130192C4EDA008AC05D /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				737E7E1D19EFD1D00058818B /* VideoView.h */,
 				732E3ACB196263A10009E474 /* Misc.cpp */,
 				732E3ACC196263A10009E474 /* Misc.h */,
 				73D51F26192F44A4000A65AF /* WebviewDelegate.cpp */,
@@ -2346,7 +2333,6 @@
 		F293B3CB15EB7BE500256477 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				737E7E1E19EFD5390058818B /* MediaPlayer.framework */,
 				73B0326A19BED7B20034452A /* iAd.framework */,
 				73B0326819BED7620034452A /* MobileAppTracker.framework */,
 				7314B4C619B717A00065D927 /* MapKit.framework */,
@@ -2380,8 +2366,6 @@
 		F293B6E815EB807E00256477 /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
-				737E7E1A19EFD1680058818B /* VideoViewIOSImp.h */,
-				737E7E1B19EFD1680058818B /* VideoViewIOSImp.mm */,
 				7314B4CA19B718240065D927 /* AirshipConfig.plist */,
 				73D51F23192F3082000A65AF /* WebviewController.h */,
 				73D51F24192F3082000A65AF /* WebviewController.mm */,
@@ -2415,12 +2399,12 @@
 		F293BC4615EB859D00256477 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				737E7E2019EFD77D0058818B /* video2.mp4 */,
+				73A4D4DD19F5180A00433A04 /* Images.xcassets */,
 				73A0739019CC106500EA3519 /* server */,
+				733DE933193F26C800361638 /* Default-Portrait@2x~ipad.png */,
 				73B455D219B085FE0097A722 /* version */,
 				73B8CB091953EB5400E62B43 /* game.bin */,
 				733DE932193F26C800361638 /* Default~ipad.png */,
-				733DE933193F26C800361638 /* Default-Portrait@2x~ipad.png */,
 				733DE92C193F262900361638 /* Icon-76.png */,
 				733DE92D193F262900361638 /* Icon-120.png */,
 				733DE92E193F262900361638 /* Icon-152.png */,
@@ -2545,6 +2529,7 @@
 				733DE931193F262900361638 /* Icon-152.png in Resources */,
 				7314B4AA19B715350065D927 /* bottom-detail@2x.png in Resources */,
 				7314B4BA19B715350065D927 /* UAPushSettingsView.xib in Resources */,
+				73A4D4DE19F5180A00433A04 /* Images.xcassets in Resources */,
 				73B455D319B085FE0097A722 /* version in Resources */,
 				730D984818DC4317000CA5F9 /* extern.lua in Resources */,
 				15C1569B1683138E00D239F2 /* Icon-57.png in Resources */,
@@ -2562,7 +2547,6 @@
 				73495B8F19C048D300626812 /* UAInboxMessageListController.xib in Resources */,
 				7314B4B919B715350065D927 /* UAPushSettingsUserInfoView.xib in Resources */,
 				7314B4A919B715350065D927 /* bottom-detail.png in Resources */,
-				737E7E2119EFD77D0058818B /* video2.mp4 in Resources */,
 				7314B4B119B715350065D927 /* UAPushLocalization.bundle in Resources */,
 				7314B4AB19B715350065D927 /* middle-detail.png in Resources */,
 				730D984B18DC4317000CA5F9 /* images in Resources */,
@@ -2608,7 +2592,6 @@
 				15C153F91683112E00D239F2 /* CCBKeyframe.cpp in Sources */,
 				ED35C0D618323498002A0750 /* CCSpriteFrameCacheHelper.cpp in Sources */,
 				730F171F1918C8E6000DB5BE /* lfs.c in Sources */,
-				737E7E1919EFD1550058818B /* lua_videoview_extends.cpp in Sources */,
 				15C153FA1683112E00D239F2 /* CCBReader.cpp in Sources */,
 				73DCA133192C4EE7008AC05D /* Analytics.cpp in Sources */,
 				15C153FB1683112E00D239F2 /* CCBSequence.cpp in Sources */,
@@ -2635,7 +2618,6 @@
 				15C1540A1683112E00D239F2 /* CCNodeLoaderLibrary.cpp in Sources */,
 				15C1540B1683112E00D239F2 /* CCParticleSystemQuadLoader.cpp in Sources */,
 				15C1540C1683112E00D239F2 /* CCScale9SpriteLoader.cpp in Sources */,
-				737E7E1C19EFD1680058818B /* VideoViewIOSImp.mm in Sources */,
 				15C1540D1683112E00D239F2 /* CCScrollViewLoader.cpp in Sources */,
 				15C1540E1683112E00D239F2 /* CCSpriteLoader.cpp in Sources */,
 				73B455CF19A48B2D0097A722 /* lua_zlib.c in Sources */,
@@ -2948,6 +2930,8 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_OBJC_ARC = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -3013,6 +2997,8 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_OBJC_ARC = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";

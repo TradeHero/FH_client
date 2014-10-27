@@ -46,6 +46,7 @@ EventNameList =
     "Enter_Tutorial_Ui_With_Type",
     "Enter_Share",
     "Enter_Push_Notification",
+    "Enter_Sound_Settings",
 
     "Do_Register",
     "Do_Register_Name",

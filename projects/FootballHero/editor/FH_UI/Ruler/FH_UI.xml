@@ -157,6 +157,10 @@
     <GuidesList />
   </GuidesProject>
   <GuidesProject>
+    <Project>CompetitionLeave</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
     <Project>CreateCompetition</Project>
     <GuidesList />
   </GuidesProject>
@@ -310,6 +314,10 @@
   </GuidesProject>
   <GuidesProject>
     <Project>ChoiceMessage</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>SoundSettings</Project>
     <GuidesList />
   </GuidesProject>
 </ArrayOfGuidesProject>

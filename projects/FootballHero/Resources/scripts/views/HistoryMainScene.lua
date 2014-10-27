@@ -64,7 +64,7 @@ function loadFrame( userId, userName, competitionId, couponHistory )
     Navigator.loadFrame( mWidget )
 
     mStep = 1
-    mHasMoreToLoad = true
+    mHasMoreToLoad = false
     initContent( couponHistory )
 end
 
@@ -127,6 +127,12 @@ function initContent( couponHistory )
             mWidget:runAction( CCTargetedAction:create( content, CCFadeIn:create( CONTENT_FADEIN_TIME ) ) )
         end ) )
         seqArray:addObject( CCDelayTime:create( 0.2 ) )
+        seqArray:addObject( CCCallFuncN:create( function()
+            contentContainer:setInnerContainerSize( CCSize:new( 0, contentHeight ) )
+            local layout = tolua.cast( contentContainer, "Layout" )
+            layout:requestDoLayout()
+            contentContainer:addEventListenerScrollView( scrollViewEventHandler )
+        end ) )
     end
 
     -- Add the closed predictions
@@ -171,15 +177,18 @@ function initContent( couponHistory )
                 mWidget:runAction( CCTargetedAction:create( content, CCFadeIn:create( CONTENT_FADEIN_TIME ) ) )
             end ) )
             seqArray:addObject( CCDelayTime:create( 0.2 ) )
+            seqArray:addObject( CCCallFuncN:create( function()
+                contentContainer:setInnerContainerSize( CCSize:new( 0, contentHeight ) )
+                local layout = tolua.cast( contentContainer, "Layout" )
+                layout:requestDoLayout()
+                contentContainer:addEventListenerScrollView( scrollViewEventHandler )
+            end ) )
         end
+        seqArray:addObject( CCCallFuncN:create( function()
+            -- Set the flag after loading everything.
+            mHasMoreToLoad = true
+        end ) )
     end
-
-    seqArray:addObject( CCCallFuncN:create( function()
-        contentContainer:setInnerContainerSize( CCSize:new( 0, contentHeight ) )
-        local layout = tolua.cast( contentContainer, "Layout" )
-        layout:requestDoLayout()
-        contentContainer:addEventListenerScrollView( scrollViewEventHandler )
-    end ) )
 
     mWidget:runAction( CCSequence:create( seqArray ) )
 end

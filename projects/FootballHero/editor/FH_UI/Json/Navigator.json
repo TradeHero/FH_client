@@ -11,9 +11,14 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "MatchListScene/match_bkg.png",
-    "header/back.png",
-    "Tutorial/Default Button.png"
+    "Navigator/matches_inactive.png",
+    "Navigator/matches_active.png",
+    "Navigator/community_inactive.png",
+    "Navigator/community_active.png",
+    "Navigator/profile_inactive.png",
+    "Navigator/profile_active.png",
+    "Navigator/settings_inactive.png",
+    "Navigator/settings_active.png"
   ],
   "version": "1.5.0.0",
   "widgetTree": {
@@ -220,13 +225,13 @@
           "fontType": 0,
           "normal": null,
           "normalData": {
-            "path": "Navigator/score_inactive.png",
+            "path": "Navigator/profile_inactive.png",
             "plistFile": "",
             "resourceType": 0
           },
           "pressed": null,
           "pressedData": {
-            "path": "Navigator/score_active.png",
+            "path": "Navigator/profile_active.png",
             "plistFile": "",
             "resourceType": 0
           },
