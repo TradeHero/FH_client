@@ -13,7 +13,7 @@ function action( param )
     local token = param[1]
 
     if string.len( token ) == 0 then
-        RequestUtils.onRequestFailed( "Token cannot be blank." )
+        RequestUtils.onRequestFailed( Constants.String.error.blank_token )
         return
     end
 

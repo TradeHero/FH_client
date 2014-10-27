@@ -36,12 +36,12 @@ function loadFrame()
 
     helperSetTouchEnabled( false )
 
-    mEmailInput = ViewUtils.createTextInput( mWidget:getChildByName( EMAIL_CONTAINER_NAME ), "E-mail Address" )
-    local passwordInput = ViewUtils.createTextInput( mWidget:getChildByName( PASSWORD_CONTAINER_NAME ), "Password" )
-    local passwordConfInput = ViewUtils.createTextInput( mWidget:getChildByName( PASSWORD_CONF_CONTAINER_NAME ), "Confirm Password" )
-    local userNameInput = ViewUtils.createTextInput( mWidget:getChildByName( USERNAME_CONTAINER_NAME ), "Username" )
-    local firstNameInput = ViewUtils.createTextInput( mWidget:getChildByName( FIRSTNAME_CONTAINER_NAME ), "First Name" )
-    local lastnameInput = ViewUtils.createTextInput( mWidget:getChildByName( LASTNAME_CONTAINER_NAME ), "Last Name" )
+    mEmailInput = ViewUtils.createTextInput( mWidget:getChildByName( EMAIL_CONTAINER_NAME ), Constants.String.email )
+    local passwordInput = ViewUtils.createTextInput( mWidget:getChildByName( PASSWORD_CONTAINER_NAME ), Constants.String.password )
+    local passwordConfInput = ViewUtils.createTextInput( mWidget:getChildByName( PASSWORD_CONF_CONTAINER_NAME ), Constants.String.password_confirm )
+    local userNameInput = ViewUtils.createTextInput( mWidget:getChildByName( USERNAME_CONTAINER_NAME ), Constants.String.user_name )
+    local firstNameInput = ViewUtils.createTextInput( mWidget:getChildByName( FIRSTNAME_CONTAINER_NAME ), Constants.String.first_name )
+    local lastnameInput = ViewUtils.createTextInput( mWidget:getChildByName( LASTNAME_CONTAINER_NAME ), Constants.String.last_name )
 
     mEmailInput:setFontColor( mInputFontColor )
     passwordInput:setFontColor( mInputFontColor )

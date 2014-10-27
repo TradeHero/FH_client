@@ -214,7 +214,7 @@ function initLeaderboardContent( i, content, info )
     local logo = tolua.cast( content:getChildByName("logo"), "ImageView" )
 
     if info["DisplayName"] == nil then
-        name:setText( "Unknown name" )
+        name:setText( Constants.String.unknown_name )
     else
         name:setText( info["DisplayName"] )
     end
@@ -284,7 +284,7 @@ end
 
 function contentClick( info )
     local id = info["Id"]
-    local name = "Unknow name"
+    local name = Constants.String.unknown_name
     if info["DisplayName"] ~= nil then
         name = info["DisplayName"]
     end

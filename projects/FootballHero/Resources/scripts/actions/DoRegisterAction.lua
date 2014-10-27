@@ -21,29 +21,29 @@ function action( param )
 
     mEmail, mPassword, mPasswordConf = param[1], param[2], param[3]
     if string.len( mEmail ) == 0 then
-        RequestUtils.onRequestFailed( "Email is blank." )
+        RequestUtils.onRequestFailed( Constants.String.error.blank_email )
         return
     end
     if mPassword ~= mPasswordConf then
-        RequestUtils.onRequestFailed( "Two passwords are not the same." )
+        RequestUtils.onRequestFailed( Constants.String.error.password_not_match )
         return
     end
     if string.len( mPassword ) < 6 then
-        RequestUtils.onRequestFailed( "Password too short." )
+        RequestUtils.onRequestFailed( Constants.String.error.password_short )
         return
     end
     if string.len( mPassword ) > 160 then
-        RequestUtils.onRequestFailed( "Password too long." )
+        RequestUtils.onRequestFailed( Constants.String.error.password_long )
         return
     end
     if string.find( mEmail, "([-%a%d%._]+)@([-%a%d.]+)" ) == nil then
-        RequestUtils.onRequestFailed( "Bad email format." )
+        RequestUtils.onRequestFailed( Constants.String.error.bad_email_format )
         return
     end
 
     mUserName, mFirstName, mLastName = param[4], param[5], param[6]
     if string.len( mUserName ) == 0 then
-        RequestUtils.onRequestFailed( "User name is blank." )
+        RequestUtils.onRequestFailed( Constants.String.error.blank_user_name )
         return
     end
     if mFirstName == nil then
@@ -91,7 +91,7 @@ function onRegisterRequestSuccess( jsonResponse )
     local needUpdate = jsonResponse["Update"]
 
     if needUpdate then
-        EventManager:postEvent( Event.Show_Please_Update, { "Please download new version and update!" } )
+        EventManager:postEvent( Event.Show_Please_Update, { Constants.String.info.new_version } )
     else
         mConfigMd5Info = configMd5Info
 

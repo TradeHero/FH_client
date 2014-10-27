@@ -13,7 +13,6 @@ local PushNotificationManager = require("scripts.PushNotificationManager")
 local mAccessToken
 
 function action( param )
-	local Json = require("json")
 	local RequestUtils = require("scripts.RequestUtils")
 
     local handler = function( accessToken )
@@ -75,7 +74,7 @@ function onRequestSuccess( jsonResponse )
     local needUpdate = jsonResponse["Update"]
 
     if needUpdate then
-        EventManager:postEvent( Event.Show_Please_Update, { "Please download new version and update!" } )
+        EventManager:postEvent( Event.Show_Please_Update, { Constants.String.info.new_version } )
     else
         Logic:setUserInfo( "", "", mAccessToken, sessionToken, userId )
         Logic:setDisplayName( displayName )
@@ -102,7 +101,7 @@ end
 function onRequestFailed( jsonResponse )
     local errorBuffer = jsonResponse["Message"]
     if errorBuffer == "" then
-        errorBuffer = "Login failed. Please retry."
+        errorBuffer = Constants.String.error.login_failed
     end
 
     Logic:clearAccountInfoFile()

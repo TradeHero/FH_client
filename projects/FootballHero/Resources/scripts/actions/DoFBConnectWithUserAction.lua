@@ -16,7 +16,6 @@ function action( param )
     mSuccessHandler = param[1]
     mFailedHandler = param[2]
 
-	local Json = require("json")
 	local RequestUtils = require("scripts.RequestUtils")
 
     local handler = function( accessToken )

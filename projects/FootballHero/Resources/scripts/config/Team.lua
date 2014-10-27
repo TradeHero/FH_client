@@ -63,9 +63,9 @@ function getTeamName( id )
 		return config["teamName"]
 	else
 		if id ~= nil then
-			return "Unknow team: "..id
+			return Constants.String.unknown_team..": "..id
 		else
-			return "Unknow team"
+			return Constants.String.unknown_team
 		end
 	end
 end

@@ -28,9 +28,9 @@ function loadFrame()
 
     helperSetTouchEnabled( false )
 
-    local userNameInput = ViewUtils.createTextInput( mWidget:getChildByName( USERNAME_CONTAINER_NAME ), "Username" )
-    local firstNameInput = ViewUtils.createTextInput( mWidget:getChildByName( FIRSTNAME_CONTAINER_NAME ), "First Name (Optional)" )
-    local lastnameInput = ViewUtils.createTextInput( mWidget:getChildByName( LASTNAME_CONTAINER_NAME ), "Last Name (Optional)" )
+    local userNameInput = ViewUtils.createTextInput( mWidget:getChildByName( USERNAME_CONTAINER_NAME ), Constants.String.user_name )
+    local firstNameInput = ViewUtils.createTextInput( mWidget:getChildByName( FIRSTNAME_CONTAINER_NAME ), Constants.String.first_name_optional )
+    local lastnameInput = ViewUtils.createTextInput( mWidget:getChildByName( LASTNAME_CONTAINER_NAME ), Constants.String.last_name_optional )
 
     userNameInput:setTouchPriority( SceneManager.TOUCH_PRIORITY_MINUS_ONE )
     firstNameInput:setTouchPriority( SceneManager.TOUCH_PRIORITY_MINUS_ONE )

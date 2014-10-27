@@ -19,11 +19,11 @@ function action( param )
     mEmail, mPassword = param[1], param[2]
 
     if string.len( mEmail ) == 0 then
-        RequestUtils.onRequestFailed( "Email is blank." )
+        RequestUtils.onRequestFailed( Constants.String.error.blank_email )
         return
     end
     if string.len( mPassword ) == 0 then
-        RequestUtils.onRequestFailed( "Password is blank." )
+        RequestUtils.onRequestFailed( Constants.String.error.blank_password )
         return
     end
 
@@ -69,7 +69,7 @@ function onRequestSuccess( jsonResponse )
     local needUpdate = profileDto["Update"]
 
     if needUpdate then
-        EventManager:postEvent( Event.Show_Please_Update, { "Please download new version and update!" } )
+        EventManager:postEvent( Event.Show_Please_Update, { Constants.String.info.new_version } )
     else
         Logic:setUserInfo( mEmail, mPassword, "", sessionToken, userId )
         Logic:setDisplayName( displayName )
@@ -100,7 +100,7 @@ end
 function onRequestFailed( jsonResponse )
     local errorBuffer = jsonResponse["Message"]
     if errorBuffer == nil or errorBuffer == "" then
-        errorBuffer = "Login failed. Please retry."
+        errorBuffer = Constants.String.error.login_failed
     end
 
     Logic:clearAccountInfoFile()

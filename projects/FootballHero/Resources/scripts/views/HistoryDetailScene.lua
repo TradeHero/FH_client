@@ -122,14 +122,14 @@ function initCouponInfo( content, info )
     local answerString
     local choiceImage
     if marketType == MarketConfig.MARKET_TYPE_MATCH then
-        answerString = "Which team will win?"
+        answerString = Constants.String.history.which_team
         if answerId then
             choiceImage = TeamConfig.getLogo( mHomeTeamId )
         else
             choiceImage = TeamConfig.getLogo( mAwayTeamId )
         end
     elseif marketType == MarketConfig.MARKET_TYPE_TOTAL_GOAL then
-        answerString = string.format( "Will total goals be %d or more?", math.ceil( line ) )
+        answerString = string.format( Constants.String.history.total_goals, math.ceil( line ) )
         if answerId then
             choiceImage = Constants.PREDICTION_CHOICE_IMAGE_PATH.."prediction-yes.png"
         else
@@ -142,7 +142,7 @@ function initCouponInfo( content, info )
             line = line * ( -1 )
         end 
         
-        answerString = string.format( "Will %s win by %d goals or more?", teamName, math.ceil( line ) )
+        answerString = string.format( Constants.String.history.win_by, teamName, math.ceil( line ) )
         if answerId then
             choiceImage = Constants.PREDICTION_CHOICE_IMAGE_PATH.."prediction-yes.png"
         else
@@ -157,11 +157,11 @@ function initCouponInfo( content, info )
     if mIsOpen == false then
         if info["Won"] then
             statusBar:setFocused( true )
-            winLoseLabel:setText("Won:")
+            winLoseLabel:setText(Constants.String.history.won)
             points:setText( string.format( points:getStringValue(), info["Profit"] ) )
         else
             statusBar:setBright( false )
-            winLoseLabel:setText("Lost:")
+            winLoseLabel:setText(Constants.String.history.lost)
             points:setText( string.format( points:getStringValue(), info["Stake"] ) )
         end
     else

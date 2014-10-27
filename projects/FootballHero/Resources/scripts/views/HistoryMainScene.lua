@@ -6,7 +6,7 @@ local EventManager = require("scripts.events.EventManager").getInstance()
 local Event = require("scripts.events.Event").EventList
 local TeamConfig = require("scripts.config.Team")
 local Logic = require("scripts.Logic").getInstance()
-
+local Constants = require("scripts.Constants")
 
 local CONTENT_FADEIN_TIME = 1
 
@@ -93,7 +93,7 @@ function initContent( couponHistory )
     seqArray:addObject( CCCallFuncN:create( function()
         local content = GUIReader:shareReader():widgetFromJsonFile("scenes/HistoryMainTitle.json")
         local titleText = tolua.cast( content:getChildByName("titleText"), "Label" )
-        titleText:setText( "Open Predictions" )
+        titleText:setText( Constants.String.history.predictions_open )
         content:setLayoutParameter( layoutParameter )
         contentContainer:addChild( content )
         contentHeight = contentHeight + content:getSize().height
@@ -139,7 +139,7 @@ function initContent( couponHistory )
     seqArray:addObject( CCCallFuncN:create( function()
         local content = GUIReader:shareReader():widgetFromJsonFile("scenes/HistoryMainTitle.json")
         local titleText = tolua.cast( content:getChildByName("titleText"), "Label" )
-        titleText:setText( "Closed Predictions" )
+        titleText:setText( Constants.String.history.predictions_closed )
         content:setLayoutParameter( layoutParameter )
         contentContainer:addChild( content )
         contentHeight = contentHeight + content:getSize().height

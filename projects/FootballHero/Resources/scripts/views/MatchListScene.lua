@@ -128,7 +128,7 @@ function initLeagueList( leagueKey )
         -- Hardcode Popular League texts and logo
 
         if leagueKey == Constants.MOST_POPULAR_LEAGUE_ID then
-            leagueName:setText( "Most Popular" )
+            leagueName:setText( Constants.String.most_popular )
             logo:loadTexture( Constants.COUNTRY_IMAGE_PATH.."favorite.png" )
         else
             local leagueId = LeagueConfig.getConfigIdByKey( leagueKey )
@@ -270,7 +270,7 @@ end
 
 function enterMatch( match )
     if match["PredictionsPlayed"] == match["PredictionsAvailable"] then
-        EventManager:postEvent( Event.Show_Info, { "Predictions already entered. Please select another match." } )
+        EventManager:postEvent( Event.Show_Info, { Constants.String.info.predictions_entered } )
         return
     end
 

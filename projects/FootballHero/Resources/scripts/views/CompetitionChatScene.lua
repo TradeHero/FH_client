@@ -6,6 +6,7 @@ local EventManager = require("scripts.events.EventManager").getInstance()
 local Event = require("scripts.events.Event").EventList
 local ViewUtils = require("scripts.views.ViewUtils")
 local Logic = require("scripts.Logic").getInstance()
+local Constants = require("scripts.Constants")
 
 local mWidget
 local mCompetitionId
@@ -38,7 +39,7 @@ function loadFrame( competitionId, chatMessages )
     local moreBt = widget:getChildByName("more")
     moreBt:addTouchEventListener( moreEventHandler )
 
-    local messageInput = ViewUtils.createTextInput( mWidget:getChildByName( MESSAGE_CONTAINER_NAME ), "Type your message here", 470, 50 )
+    local messageInput = ViewUtils.createTextInput( mWidget:getChildByName( MESSAGE_CONTAINER_NAME ), Constants.String.message_hint, 470, 50 )
 
     initTitle();
     getLatestMessages()

@@ -119,7 +119,7 @@ function addPopularLeague()
     if expendedIndicator ~= nil then
         expendedIndicator:setEnabled( false )
     end
-    leagueName:setText( "Most Popular" )
+    leagueName:setText( Constants.String.most_popular )
     logo:loadTexture( Constants.COUNTRY_IMAGE_PATH.."favorite.png" )
     if selectedIndi ~= nil then
         selectedIndi:setEnabled( false )

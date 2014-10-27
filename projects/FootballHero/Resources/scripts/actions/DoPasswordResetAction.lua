@@ -12,7 +12,7 @@ function action( param )
     local email = param[1]
 
     if string.len( email ) == 0 then
-        RequestUtils.onRequestFailed( "Email is blank." )
+        RequestUtils.onRequestFailed( Constants.String.error.blank_email )
         return
     end
 
