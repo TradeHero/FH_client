@@ -1,2 +1,2 @@
 java -jar LuaScriptCompact.jar
-ResCrypt.exe ../game.bin
+#ResCrypt.exe ../game.bin
