@@ -54,6 +54,9 @@ xcschememanagement.*
 # Ignore files by Cocostuiod
 Backup/
 
+#Ignore patch files
+patches*/
+
 ## Added by Tho
 ## ===========================
 ## Ignore Visual Studio temporary files, build results, and

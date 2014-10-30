@@ -23,13 +23,13 @@ ENV=""
 MANUAL_GIT_DIFF=false
 for arg in "$@"; do
 	if [ $arg == "--dev" ]; then
-		ENV=$arg
+		ENV="dev"
 	elif [ $arg == "--manual-git-diff" ]; then
 		MANUAL_GIT_DIFF=true
 	fi
 done
 
-if [ $ENV == "--dev" ]; then
+if [ $ENV == "dev" ]; then
 	echo "Create patch against dev."
 else
 	echo "Create patch against prod."
