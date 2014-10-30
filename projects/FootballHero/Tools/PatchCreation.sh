@@ -10,32 +10,50 @@ echo "Working path: $WORKING_PATH"
 echo "Source path: $SOURCE_PATH"
 
 # Make sure the target version is selected
-if [ ! -n "$1" ] ;then
+if [ ! -n "$1" ]; then
 	echo "Error: No target version defined."
 	echo "Check each version is listed in $VERSION_FILE before run."
-	echo "Usage: ./PatchCreation.sh 1.15"
-	echo "Usage: ./PatchCreation.sh 1.15 dev"
+	echo "Usage: ./PatchCreation.sh newVersionCode [--dev] [--manual-git-diff]"
+	echo "Example: ./PatchCreation.sh 1.15 --dev --manual-git-diff"
 	exit
 fi
 
-ENV=$2
-if [ ! -n "$1" ] ;then
-	echo "Create patch against env: $2"
+# Process the arguments
+ENV=""
+MANUAL_GIT_DIFF=false
+for arg in "$@"; do
+	if [ $arg == "--dev" ]; then
+		ENV=$arg
+	elif [ $arg == "--manual-git-diff" ]; then
+		MANUAL_GIT_DIFF=true
+	fi
+done
+
+if [ $ENV == "--dev" ]; then
+	echo "Create patch against dev."
+else
+	echo "Create patch against prod."
+fi
+if [ $MANUAL_GIT_DIFF == true ]; then
+	echo "Use manual git diff file."
 fi
 
+
 # Clear history
-rm -rf "$WORKING_PATH"
-mkdir "$WORKING_PATH"
+if [ $MANUAL_GIT_DIFF == false ]; then
+	rm -rf "$WORKING_PATH"
+	mkdir "$WORKING_PATH"
+fi
 
 function diffVersionWithTags()
 {
 	echo "Create patch from $1 to $2"
 	patchDir=$WORKING_PATH/$1_$2
 	mkdir "$patchDir"
-	git diff --name-status $1..$2 > "$patchDir/gitDiff"
+	if [ $MANUAL_GIT_DIFF == false ]; then
+		git diff --name-status $1..$2 > "$patchDir/gitDiff"
+	fi
 
-	# If a lua file is updated, we need to add the game.bin.
-	luaUpdated=false
 	# If code is changed, no self-update is support for this.
 	codeUpdated=false
 
@@ -46,10 +64,7 @@ function diffVersionWithTags()
 	    filePath="${diffInfoArr[1]}"
 
 	    if [ $status = "A" ] || [ $status = "M" ]; then
-	    	if [[ $filePath == projects/FootballHero/Resources/scripts/* ]]; then
-	    		# Check lua updates
-	    		luaUpdated=true
-	    	elif [[ $filePath == *.cpp ]] || [[ $filePath == *.h ]] || [[ $filePath == *.java ]] || [[ $filePath == *.mm ]] || [[ $filePath == *.m ]]; then
+			if [[ $filePath == *.cpp ]] || [[ $filePath == *.h ]] || [[ $filePath == *.java ]] || [[ $filePath == *.mm ]] || [[ $filePath == *.m ]]; then
 	    		# Check code updates
 	    		codeUpdated=true
 	    		break
@@ -59,7 +74,7 @@ function diffVersionWithTags()
 	    	elif [[ $filePath == projects/FootballHero/Resources/game.bin ]]; then
 	    		# Ignore some files.
 	    		continue
-	    	elif [[ $filePath == projects/FootballHero/Resources/* ]]; then
+	    	elif [[ $filePath == projects/FootballHero/Resources/* ]] || [[ $filePath == projects/FootballHero/Resources/scripts/* ]]; then
 	    		# Put in resource files.
 	    		shortFilePath=${filePath#projects/FootballHero/Resources/}
 	    		newDir=$(dirname $patchDir/$shortFilePath)
@@ -68,11 +83,6 @@ function diffVersionWithTags()
 	    	fi
 	    fi
 	done < "$patchDir/gitDiff"
-
-	# Add the game.bin if necessary
-	if [ $luaUpdated == true ]; then
-		cp -R $SOURCE_PATH/projects/FootballHero/Resources/game.bin $patchDir/game.bin
-	fi
 
 	# Create the zip package and update the patchConfig.
 	if [ $codeUpdated == true ]; then
