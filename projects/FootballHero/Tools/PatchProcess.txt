@@ -1,0 +1,13 @@
+Prerequisite
+1. Install "Azure Storage Explorer" and get account & password from Seb
+2. Save "http://fhadminpanel.cloudapp.net/UploadAUConfig" into your browser bookmark and password is "password99"
+
+
+Steps
+1. Switch dev branch to the target branch (for example, r1.14)
+2. Merge your change to the target branch and submit after test.
+3. Add a tag to the changelist (for example 1.14.2)
+4. Add this tag into file "\FootballHero\Tools\versionList.txt"
+5. Run "\FootballHero\Tools\PatchCreation.sh" <tag> --dev for test.
+6. Upload the config file with the adminpanel and upload zip files with Azure Storage Explorer.
+7. Run the app and test the self-update funciton. If everything is good, then run without --dev parameter.
