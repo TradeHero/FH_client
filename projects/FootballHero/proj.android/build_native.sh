@@ -67,7 +67,7 @@ fi
 done
 
 # remove the source lua files.
-rm -rf "$APP_ANDROID_ROOT"/assets/scripts
+#rm -rf "$APP_ANDROID_ROOT"/assets/scripts
 # remove the tool files
 rm -rf "$APP_ANDROID_ROOT"/assets/CryptLuascripts
 

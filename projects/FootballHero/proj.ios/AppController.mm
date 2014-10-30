@@ -88,6 +88,9 @@ static AppDelegate s_sharedApplication;
 
     cocos2d::CCApplication::sharedApplication()->run();
     
+    NSDate *startTime = [NSDate date];
+    NSLog(@"Start date:%@",startTime);
+    
     // Localytics
     [[LocalyticsSession shared] LocalyticsSession:@"d16d149eabf971a5b376a43-aa0e6fc0-1c50-11e4-49cb-00a426b17dd8"];
     [[LocalyticsSession shared] setLoggingEnabled:YES];
@@ -111,6 +114,9 @@ static AppDelegate s_sharedApplication;
     [UAInboxUI shared].inboxParentController = viewController;
     NSLog(@"UA device token is %@", [UAPush shared].deviceToken);
 
+    NSTimeInterval timeInterval = [startTime timeIntervalSinceNow];
+    NSLog(@"Interval:%f",timeInterval);
+    
     return YES;
 }
 

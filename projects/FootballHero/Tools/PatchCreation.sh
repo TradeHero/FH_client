@@ -34,8 +34,6 @@ function diffVersionWithTags()
 	mkdir "$patchDir"
 	git diff --name-status $1..$2 > "$patchDir/gitDiff"
 
-	# If a lua file is updated, we need to add the game.bin.
-	luaUpdated=false
 	# If code is changed, no self-update is support for this.
 	codeUpdated=false
 
@@ -46,10 +44,7 @@ function diffVersionWithTags()
 	    filePath="${diffInfoArr[1]}"
 
 	    if [ $status = "A" ] || [ $status = "M" ]; then
-	    	if [[ $filePath == projects/FootballHero/Resources/scripts/* ]]; then
-	    		# Check lua updates
-	    		luaUpdated=true
-	    	elif [[ $filePath == *.cpp ]] || [[ $filePath == *.h ]] || [[ $filePath == *.java ]] || [[ $filePath == *.mm ]] || [[ $filePath == *.m ]]; then
+			if [[ $filePath == *.cpp ]] || [[ $filePath == *.h ]] || [[ $filePath == *.java ]] || [[ $filePath == *.mm ]] || [[ $filePath == *.m ]]; then
 	    		# Check code updates
 	    		codeUpdated=true
 	    		break
@@ -59,7 +54,7 @@ function diffVersionWithTags()
 	    	elif [[ $filePath == projects/FootballHero/Resources/game.bin ]]; then
 	    		# Ignore some files.
 	    		continue
-	    	elif [[ $filePath == projects/FootballHero/Resources/* ]]; then
+	    	elif [[ $filePath == projects/FootballHero/Resources/* ]] || [[ $filePath == projects/FootballHero/Resources/scripts/* ]]; then
 	    		# Put in resource files.
 	    		shortFilePath=${filePath#projects/FootballHero/Resources/}
 	    		newDir=$(dirname $patchDir/$shortFilePath)
