@@ -34,6 +34,6 @@ function action( param )
 end
 
 function onRequestSuccess( response )
-    local leaderboardListScene = require("scripts.views.LeaderboardListScene")
-    leaderboardListScene.loadMoreContent( response )
+    local communityLeaderboardFrame = require("scripts.views.CommunityLeaderboardFrame")
+    communityLeaderboardFrame.loadMoreContent( response )
 end

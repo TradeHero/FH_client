@@ -22,5 +22,5 @@ LeaderboardType = {
 LeaderboardSubType = {
 	{ ["sortType"] = 1, ["dataColumnId"] = "Roi", ["title"] = Constants.String.leaderboard.gain_per_prediction_title, ["description"] = Constants.String.leaderboard.gain_per_prediction_desc, },
 	{ ["sortType"] = 2, ["dataColumnId"] = "WinPercentage", ["title"] = Constants.String.leaderboard.win_ratio_title, ["description"] = Constants.String.leaderboard.win_ratio_desc, },
-	{ ["sortType"] = 3, ["dataColumnId"] = "Profit", ["title"] = Constants.String.leaderboard.high_score_title, ["description"] = Constants.String.leaderboard.high_score_title, },
+	{ ["sortType"] = 3, ["dataColumnId"] = "Profit", ["title"] = Constants.String.leaderboard.high_score_title, ["description"] = Constants.String.leaderboard.high_score_desc, },
 }
