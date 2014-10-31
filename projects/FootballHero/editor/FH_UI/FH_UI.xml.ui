@@ -88,6 +88,7 @@
     <string>CommunityLeaderboardFrame.json</string>
     <string>CommunityLeaderboardDropdownFrame.json</string>
     <string>CommunityLeaderboardDropdownContentFrame.json</string>
+    <string>CommunityLeaderboardListContentFrame.json</string>
   </JsonList>
   <CanvasSize>
     <Width>640</Width>
@@ -98,14 +99,12 @@
   <ResRelativePath />
   <imageFileList />
   <imagePngList>
-    <string>community/img-title.png</string>
-    <string>community/btn-goarrow.png</string>
-    <string>community/btn-goarrow-down.png</string>
+    <string>LoginNReg/photo.png</string>
     <string>MatchListScene/Arrow down.png</string>
     <string>MatchListScene/Arrow Up.png</string>
-    <string>PredictionConfirm/off_button.png</string>
-    <string>PredictionConfirm/on_button.png</string>
+    <string>community/img-wininfo.png</string>
+    <string>mockups/community/leaderboard-stat box.png</string>
   </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>CommunityLeaderboardFrame.json</CurrentUIJson>
+  <CurrentUIJson>CommunityLeaderboardListContentFrame.json</CurrentUIJson>
 </UIProject>

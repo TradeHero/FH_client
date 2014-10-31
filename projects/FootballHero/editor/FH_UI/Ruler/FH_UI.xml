@@ -344,4 +344,8 @@
     <Project>CommunityLeaderboardDropdownContentFrame</Project>
     <GuidesList />
   </GuidesProject>
+  <GuidesProject>
+    <Project>CommunityLeaderboardListContentFrame</Project>
+    <GuidesList />
+  </GuidesProject>
 </ArrayOfGuidesProject>

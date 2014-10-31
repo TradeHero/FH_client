@@ -11,8 +11,11 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "community/img-dropdownbox.png",
-    "community/img-separator.png"
+    "LoginNReg/photo.png",
+    "MatchListScene/Arrow down.png",
+    "MatchListScene/Arrow Up.png",
+    "community/img-wininfo.png",
+    "mockups/community/leaderboard-stat box.png"
   ],
   "version": "1.5.0.0",
   "widgetTree": {
@@ -48,8 +51,8 @@
           "rotation": 0,
           "scaleX": 1,
           "scaleY": 1,
-          "sizePercentX": 0.244648322,
-          "sizePercentY": 1.06666672,
+          "sizePercentX": 0.9938838,
+          "sizePercentY": 1,
           "sizeType": 0,
           "tag": 14245,
           "touchAble": false,
@@ -152,8 +155,8 @@
           "rotation": 0,
           "scaleX": 1,
           "scaleY": 1,
-          "sizePercentX": 0.244648322,
-          "sizePercentY": 1.06666672,
+          "sizePercentX": 1,
+          "sizePercentY": 0.0133333337,
           "sizeType": 0,
           "tag": 14244,
           "touchAble": false,

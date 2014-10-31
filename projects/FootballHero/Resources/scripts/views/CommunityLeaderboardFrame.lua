@@ -182,8 +182,6 @@ function initFilter( bRefreshed )
     end
 end
 
-
-
 function initContent( leaderboardInfo )
 	local contentContainer = tolua.cast( mWidget:getChildByName("ScrollView_Leaderboard"), "ScrollView" )
     contentContainer:removeAllChildrenWithCleanup( true )
@@ -193,18 +191,11 @@ function initContent( leaderboardInfo )
     local contentHeight = 0
 
     for i = 1, table.getn( leaderboardInfo ) do
-    	local eventHandler = function( sender, eventType )
-            if eventType == TOUCH_EVENT_ENDED then
-                contentClick( leaderboardInfo[i] )
-            end
-        end
-
-        local content = SceneManager.widgetFromJsonFile("scenes/LeaderboardListContent.json")
+        local content = SceneManager.widgetFromJsonFile("scenes/CommunityLeaderboardListContentFrame.json")
         content:setLayoutParameter( layoutParameter )
         contentContainer:addChild( content )
         contentHeight = contentHeight + content:getSize().height
         initLeaderboardContent( i, content, leaderboardInfo[i] )
-        content:addTouchEventListener( eventHandler )
     end
     mCurrentTotalNum = table.getn( leaderboardInfo )
 
@@ -215,16 +206,64 @@ function initContent( leaderboardInfo )
 end
 
 function initLeaderboardContent( i, content, info )
-    local name = tolua.cast( content:getChildByName("name"), "Label" )
-    local score = tolua.cast( content:getChildByName("score"), "Label" )
-    local index = tolua.cast( content:getChildByName("index"), "Label" )
-    local logo = tolua.cast( content:getChildByName("logo"), "ImageView" )
+    local top  = content:getChildByName("Panel_Top")
+    local name = tolua.cast( top:getChildByName("Label_Name"), "Label" )
+    local score = tolua.cast( top:getChildByName("Label_Score"), "Label" )
+    local index = tolua.cast( top:getChildByName("Label_Index"), "Label" )
+    local logo = tolua.cast( top:getChildByName("Image_Logo"), "ImageView" )
+    local click = top:getChildByName("Panel_Click")
+    local drop = top:getChildByName("Panel_Dropdown")
+    local btn = tolua.cast( drop:getChildByName("Button_Dropdown"), "Button" )
+    local stats = top:getChildByName("Panel_Stats")
+    stats:setEnabled( false )
+
+    local eventHandler = function( sender, eventType )
+        if eventType == TOUCH_EVENT_ENDED then
+            contentClick( info )
+        end
+    end
+    click:addTouchEventListener( eventHandler )
+
+    local dropHandler = function( sender, eventType )
+        if eventType == TOUCH_EVENT_ENDED then
+            
+            local deltaY = stats:getSize().height
+            local contentContainer = tolua.cast( mWidget:getChildByName("ScrollView_Leaderboard"), "ScrollView" )
+            local contentHeight = contentContainer:getInnerContainerSize().height
+
+            if stats:isEnabled() then
+                stats:setEnabled( false )
+                btn:setBrightStyle( BRIGHT_NORMAL )
+
+                content:setSize( CCSize:new( content:getSize().width, content:getSize().height - deltaY ) )
+                top:setPositionY( top:getPositionY() - deltaY )
+
+                contentHeight = contentHeight - deltaY
+            else
+                stats:setEnabled( true )
+                btn:setBrightStyle( BRIGHT_HIGHLIGHT )
+                
+                content:setSize( CCSize:new( content:getSize().width, content:getSize().height + deltaY ) )
+                top:setPositionY( top:getPositionY() + deltaY )
+
+                contentHeight = contentHeight + deltaY
+            end
+
+            contentContainer:setInnerContainerSize( CCSize:new( 0, contentHeight ) )
+            local layout = tolua.cast( contentContainer, "Layout" )
+            layout:requestDoLayout()
+            contentContainer:addEventListenerScrollView( scrollViewEventHandler )
+        end
+    end
+    drop:addTouchEventListener( dropHandler )
+    btn:addTouchEventListener( dropHandler )
 
     if info["DisplayName"] == nil then
         name:setText( Constants.String.unknown_name )
     else
         name:setText( info["DisplayName"] )
     end
+
     score:setText( string.format( mSubType["description"], info[mSubType["dataColumnId"]], info["NumberOfCoupons"] ) )
     if info[mSubType["dataColumnId"]] < 0 then
         score:setColor( ccc3( 240, 75, 79 ) )
@@ -232,6 +271,28 @@ function initLeaderboardContent( i, content, info )
 
     string.format( mSubType["description"], info[mSubType["dataColumnId"]], info["NumberOfCoupons"] )
     index:setText( i )
+
+    -- stat box
+    local stat_win = tolua.cast( stats:getChildByName("Label_Win"), "Label" )
+    local stat_lose = tolua.cast( stats:getChildByName("Label_Lose"), "Label" )
+    local stat_win_percent = tolua.cast( stats:getChildByName("Label_Win_Percent"), "Label" )
+    local stat_gain_percent = tolua.cast( stats:getChildByName("Label_Gain_Percent"), "Label" )
+    local stat_last_10_win = tolua.cast( stats:getChildByName("Label_W"), "Label" )
+    local stat_last_10_lose = tolua.cast( stats:getChildByName("Label_L"), "Label" )
+
+    stat_win:setText( info["NumberOfCouponsWon"] )
+    stat_lose:setText( info["NumberOfCouponsLost"] )
+    stat_win_percent:setText( info["WinPercentage"] )
+    stat_gain_percent:setText( info["Roi"] )
+    stat_last_10_win:setText( info["WinStreakCouponsWon"] )
+    stat_last_10_lose:setText( info["WinStreakCouponsLost"] )
+
+    if info["WinPercentage"] < 0 then
+        stat_win_percent:setColor( ccc3( 240, 75, 79 ) )
+    end
+    if info["Roi"] < 0 then
+        stat_gain_percent:setColor( ccc3( 240, 75, 79 ) )
+    end
 
     local seqArray = CCArray:create()
     seqArray:addObject( CCDelayTime:create( i * 0.2 ) )
