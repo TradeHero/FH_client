@@ -196,7 +196,7 @@ AssetsManager* UpdateLayer::getAssetsManager()
 			.append("&deviceType=ANDROID")
 #endif
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
-			.append("&deviceType=WINDOWS")
+			.append("&deviceType=IOS")
 #endif
 			.append("&useDev=").append(useDev ? "true" : "false");
 
