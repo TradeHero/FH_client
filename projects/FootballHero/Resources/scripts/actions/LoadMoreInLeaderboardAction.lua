@@ -7,6 +7,7 @@ local Event = require("scripts.events.Event").EventList
 local RequestUtils = require("scripts.RequestUtils")
 local LeaderboardConfig = require("scripts.config.Leaderboard")
 local Logic = require("scripts.Logic").getInstance()
+local Constants = require("scripts.Constants")
 
 local mLeaderboardId
 local mSubType
@@ -16,7 +17,7 @@ function action( param )
 	mSubType = param[2]
 	local step = param[3]
 
-    local url = LeaderboardConfig.LeaderboardType[mLeaderboardId]["request"].."?sortType="..mSubType["sortType"].."&step="..step
+    local url = LeaderboardConfig.LeaderboardType[mLeaderboardId]["request"].."?sortType="..mSubType["sortType"].."&step="..step.."&perPage="..Constants.RANKINGS_PER_PAGE
 
     local requestInfo = {}
     requestInfo.requestData = ""

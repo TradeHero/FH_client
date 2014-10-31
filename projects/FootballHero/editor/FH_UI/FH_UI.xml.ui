@@ -106,5 +106,5 @@
     <string>mockups/community/leaderboard-stat box.png</string>
   </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>CommunityLeaderboardListContentFrame.json</CurrentUIJson>
+  <CurrentUIJson>CommunityLeaderboardDropdownFrame.json</CurrentUIJson>
 </UIProject>

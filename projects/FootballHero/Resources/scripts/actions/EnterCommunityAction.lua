@@ -31,7 +31,7 @@ function action( param )
             mSubType = LeaderboardConfig.LeaderboardSubType[leaderboardType]
         end
 
-        url = url.."?sortType="..mSubType["sortType"].."&step="..step
+        url = url.."?sortType="..mSubType["sortType"].."&step="..step.."&perPage="..Constants.RANKINGS_PER_PAGE
         if minPrediction > 1 then
             url = url.."&numberOfCouponsRequired="..minPrediction
         end

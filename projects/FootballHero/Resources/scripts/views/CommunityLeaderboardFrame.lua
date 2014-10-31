@@ -324,7 +324,7 @@ function loadMoreContent( leaderboardInfo )
         return
     end
 
-    local contentContainer = tolua.cast( mWidget:getChildByName("ScrollView_TypeList"), "ScrollView" )
+    local contentContainer = tolua.cast( mWidget:getChildByName("ScrollView_Leaderboard"), "ScrollView" )
 
     local layoutParameter = LinearLayoutParameter:create()
     layoutParameter:setGravity(LINEAR_GRAVITY_CENTER_VERTICAL)
@@ -337,7 +337,7 @@ function loadMoreContent( leaderboardInfo )
             end
         end
 
-        local content = SceneManager.widgetFromJsonFile("scenes/LeaderboardListContent.json")
+        local content = SceneManager.widgetFromJsonFile("scenes/CommunityLeaderboardListContentFrame.json")
         content:setLayoutParameter( layoutParameter )
         contentContainer:addChild( content )
         contentHeight = contentHeight + content:getSize().height
