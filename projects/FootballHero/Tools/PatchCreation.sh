@@ -47,6 +47,10 @@ fi
 
 function diffVersionWithTags()
 {
+    if [ $1 == $2 ]; then
+        return
+    fi
+
 	echo "Create patch from $1 to $2"
 	patchDir=$WORKING_PATH/$1_$2
 	mkdir "$patchDir"
@@ -101,10 +105,10 @@ function diffVersionWithTags()
 			cd ..
 			fileSizeInfo=$(du -sh $1_$2.zip)
 			fileSize=(${fileSizeInfo//	/ })
-			echo "$1.needUpdate = true" >> $WORKING_PATH/$PATCH_CONFIG_FILE
-			echo "$1.updateTo = $2" >> $WORKING_PATH/$PATCH_CONFIG_FILE
-			echo "$1.package = http://portalvhdss3c1vgx5mrzv.blob.core.windows.net/autoupdates$ENV/$1_$2.zip" >> $WORKING_PATH/$PATCH_CONFIG_FILE
-			echo "$1.size = $fileSize" >> $WORKING_PATH/$PATCH_CONFIG_FILE
+			echo "$1_needUpdate = true" >> $WORKING_PATH/$PATCH_CONFIG_FILE
+			echo "$1_updateTo = $2" >> $WORKING_PATH/$PATCH_CONFIG_FILE
+			echo "$1_package = http://portalvhdss3c1vgx5mrzv.blob.core.windows.net/autoupdates$ENV/$1_$2.zip" >> $WORKING_PATH/$PATCH_CONFIG_FILE
+			echo "$1_size = $fileSize" >> $WORKING_PATH/$PATCH_CONFIG_FILE
 		fi
 	fi
 
