@@ -305,6 +305,7 @@
 		73FC0A24199079630006D0E2 /* libLocalyticsAMP.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 73FC0A1E199079630006D0E2 /* libLocalyticsAMP.a */; };
 		73FC0A25199079630006D0E2 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 73FC0A1F199079630006D0E2 /* LICENSE */; };
 		73FE377F1907C8BA0039A45C /* EditBoxDelegateForLua.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 73FE377D1907C8BA0039A45C /* EditBoxDelegateForLua.cpp */; };
+		BFA3732919F8E6AB001FCA85 /* LocalizedString.lua in Resources */ = {isa = PBXBuildFile; fileRef = BFA3732819F8E6AA001FCA85 /* LocalizedString.lua */; };
 		ED35C0C718323498002A0750 /* CCArmatureAnimation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED35C03818323497002A0750 /* CCArmatureAnimation.cpp */; };
 		ED35C0C818323498002A0750 /* CCProcessBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED35C03A18323497002A0750 /* CCProcessBase.cpp */; };
 		ED35C0C918323498002A0750 /* CCTween.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED35C03C18323497002A0750 /* CCTween.cpp */; };
@@ -927,6 +928,7 @@
 		73FC0A21199079630006D0E2 /* LocalyticsSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LocalyticsSession.h; path = "AMP-SDK/LocalyticsSession.h"; sourceTree = "<group>"; };
 		73FE377D1907C8BA0039A45C /* EditBoxDelegateForLua.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EditBoxDelegateForLua.cpp; sourceTree = "<group>"; };
 		73FE377E1907C8BA0039A45C /* EditBoxDelegateForLua.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditBoxDelegateForLua.h; sourceTree = "<group>"; };
+		BFA3732819F8E6AA001FCA85 /* LocalizedString.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LocalizedString.lua; sourceTree = "<group>"; };
 		ED35C03818323497002A0750 /* CCArmatureAnimation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCArmatureAnimation.cpp; sourceTree = "<group>"; };
 		ED35C03918323497002A0750 /* CCArmatureAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCArmatureAnimation.h; sourceTree = "<group>"; };
 		ED35C03A18323497002A0750 /* CCProcessBase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCProcessBase.cpp; sourceTree = "<group>"; };
@@ -2412,6 +2414,7 @@
 				73DCA158192DCD95008AC05D /* anims */,
 				73BFF75E19177A46002F173A /* MD5.lua */,
 				730D983318DC4316000CA5F9 /* AudioEngine.lua */,
+				BFA3732819F8E6AA001FCA85 /* LocalizedString.lua */,
 				730D983418DC4316000CA5F9 /* CCBReaderLoad.lua */,
 				730D983518DC4316000CA5F9 /* Cocos2d.lua */,
 				730D983618DC4316000CA5F9 /* CocoStudio.lua */,
@@ -2521,6 +2524,7 @@
 				7314B4B419B715350065D927 /* UAPushSettingsAliasView.xib in Resources */,
 				730D984918DC4317000CA5F9 /* fonts in Resources */,
 				7314B4AC19B715350065D927 /* middle-detail@2x.png in Resources */,
+				BFA3732919F8E6AB001FCA85 /* LocalizedString.lua in Resources */,
 				7314B4B219B715350065D927 /* UAPushMoreSettingsView.xib in Resources */,
 				7314B4B319B715350065D927 /* UAPushSettingsAddTagViewController.xib in Resources */,
 				730D984F18DC4317000CA5F9 /* sounds in Resources */,

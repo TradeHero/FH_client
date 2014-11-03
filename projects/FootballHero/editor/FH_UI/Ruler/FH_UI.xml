@@ -77,7 +77,7 @@
     <GuidesList />
   </GuidesProject>
   <GuidesProject>
-    <Project>HistoryHome</Project>
+    <Project>MyHeroHome</Project>
     <GuidesList />
   </GuidesProject>
   <GuidesProject>
@@ -346,6 +346,10 @@
   </GuidesProject>
   <GuidesProject>
     <Project>CommunityLeaderboardListContentFrame</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>MyHeroEmptyFrame</Project>
     <GuidesList />
   </GuidesProject>
 </ArrayOfGuidesProject>

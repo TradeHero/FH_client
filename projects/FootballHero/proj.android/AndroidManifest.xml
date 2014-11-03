@@ -4,7 +4,7 @@
     android:versionCode="26"
     android:versionName="1.14">
 
-  <uses-sdk android:minSdkVersion="15" android:targetSdkVersion="17"/>
+  <uses-sdk android:minSdkVersion="15" android:targetSdkVersion="19"/>
   <uses-feature android:glEsVersion="0x00020000"/>
   <permission android:name="com.myhero.fh.permission.UA_DATA" android:protectionLevel="signature" />
   <uses-permission android:name="com.myhero.fh.permission.UA_DATA" />

@@ -157,11 +157,11 @@ function initCouponInfo( content, info )
     if mIsOpen == false then
         if info["Won"] then
             statusBar:setFocused( true )
-            winLoseLabel:setText(Constants.String.history.won)
+            winLoseLabel:setText(Constants.String.history.won_colon)
             points:setText( string.format( points:getStringValue(), info["Profit"] ) )
         else
             statusBar:setBright( false )
-            winLoseLabel:setText(Constants.String.history.lost)
+            winLoseLabel:setText(Constants.String.history.lost_colon)
             points:setText( string.format( points:getStringValue(), info["Stake"] ) )
         end
     else

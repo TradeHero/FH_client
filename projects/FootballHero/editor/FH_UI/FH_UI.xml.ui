@@ -12,11 +12,19 @@
     <string>ChatMessageDate.json</string>
     <string>ChatMyMessageContent.json</string>
     <string>ChoiceMessage.json</string>
+    <string>CommunityBaseScene.json</string>
+    <string>CommunityCompetitionFrame.json</string>
+    <string>CommunityLeaderboardDropdownContentFrame.json</string>
+    <string>CommunityLeaderboardDropdownFrame.json</string>
+    <string>CommunityLeaderboardFrame.json</string>
+    <string>CommunityLeaderboardListContentFrame.json</string>
     <string>CompetitionCreate.json</string>
     <string>CompetitionEmpty.json</string>
     <string>CompetitionInviteContent.json</string>
     <string>CompetitionItem.json</string>
+    <string>CompetitionItemNew.json</string>
     <string>CompetitionLeaderboard.json</string>
+    <string>CompetitionLeave.json</string>
     <string>CompetitionMore.json</string>
     <string>CompetitionMoreContent.json</string>
     <string>CompetitionTitle.json</string>
@@ -32,7 +40,6 @@
     <string>HistoryDetail.json</string>
     <string>HistoryDetailClosedContent.json</string>
     <string>HistoryDetailOpenContent.json</string>
-    <string>HistoryHome.json</string>
     <string>HistoryHomeForOthers.json</string>
     <string>HistoryMainMatchContent.json</string>
     <string>HistoryMainTitle.json</string>
@@ -52,6 +59,8 @@
     <string>MatchListEmptyIndi.json</string>
     <string>MatchListScene.json</string>
     <string>MatchPrediction.json</string>
+    <string>MyHeroEmptyFrame.json</string>
+    <string>MyHeroHome.json</string>
     <string>Navigator.json</string>
     <string>PNCompetitionMessage.json</string>
     <string>PNPredictionMessage.json</string>
@@ -64,6 +73,7 @@
     <string>SettingsHome.json</string>
     <string>SettingsHomeContent.json</string>
     <string>ShareTypeSelection.json</string>
+    <string>SoundSettings.json</string>
     <string>TapToMakePrediction.json</string>
     <string>Team.json</string>
     <string>TutorialEmail.json</string>
@@ -80,15 +90,6 @@
     <string>WTGBMTPrediction.json</string>
     <string>WTSPrediction.json</string>
     <string>WTWBEGPrediction.json</string>
-    <string>CompetitionLeave.json</string>
-    <string>SoundSettings.json</string>
-    <string>CommunityBaseScene.json</string>
-    <string>CommunityCompetitionFrame.json</string>
-    <string>CompetitionItemNew.json</string>
-    <string>CommunityLeaderboardFrame.json</string>
-    <string>CommunityLeaderboardDropdownFrame.json</string>
-    <string>CommunityLeaderboardDropdownContentFrame.json</string>
-    <string>CommunityLeaderboardListContentFrame.json</string>
   </JsonList>
   <CanvasSize>
     <Width>640</Width>
@@ -99,12 +100,9 @@
   <ResRelativePath />
   <imageFileList />
   <imagePngList>
-    <string>LoginNReg/photo.png</string>
-    <string>MatchListScene/Arrow down.png</string>
-    <string>MatchListScene/Arrow Up.png</string>
-    <string>community/img-wininfo.png</string>
-    <string>mockups/community/leaderboard-stat box.png</string>
+    <string>community/img-leaguebox.png</string>
+    <string>community/btn-CTA.png</string>
   </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>CommunityLeaderboardDropdownFrame.json</CurrentUIJson>
+  <CurrentUIJson>MyHeroEmptyFrame.json</CurrentUIJson>
 </UIProject>
