@@ -288,7 +288,7 @@ function predictionClicked( isOpen, matchInfo )
 end
 
 function loadMoreContent( couponHistory )
-    if table.getn( couponHistory ) == 0 then
+    if table.getn( couponHistory:getClosedData() ) == 0 then
         mHasMoreToLoad = false
         return
     end
