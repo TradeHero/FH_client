@@ -7,13 +7,14 @@ local Event = require("scripts.events.Event").EventList
 local ConnectingMessage = require("scripts.views.ConnectingMessage")
 local RequestUtils = require("scripts.RequestUtils")
 local Logic = require("scripts.Logic").getInstance()
+local CommunityConfig = require("scripts.config.Community")
 
 function action( param )
 
     local id = param[1]
 
     if string.len( id ) == 0 then
-        RequestUtils.onRequestFailed( "CompetitionId cannot be blank." )
+        RequestUtils.onRequestFailed( Constants.String.error.blank_comp_id )
         return
     end
 
@@ -40,5 +41,5 @@ function action( param )
 end
 
 function onRequestSuccess( jsonResponse )
-    EventManager:postEvent( Event.Enter_Leaderboard )
+    EventManager:postEvent( Event.Enter_Community, { CommunityConfig.COMMUNITY_TAB_ID_COMPETITION } )
 end

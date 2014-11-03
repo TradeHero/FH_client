@@ -4,18 +4,19 @@ local Constants = require("scripts.Constants")
 local SceneManager = require("scripts.SceneManager")
 local EventManager = require("scripts.events.EventManager").getInstance()
 local Event = require("scripts.events.Event").EventList
-
+local CommunityConfig = require("scripts.config.Community")
 
 local mWidget
 local mLastSelectedId = 0
 local NAV_BT_NUM = 4
 
 local TAB_EVENT_LIST = {
-	Event.Enter_Match_List,
-	Event.Enter_Leaderboard,
-	Event.Enter_History,
-	Event.Enter_Settings,
+	{ Event.Enter_Match_List, nil },
+	{ Event.Enter_Community, { CommunityConfig.COMMUNITY_TAB_ID_COMPETITION } },
+	{ Event.Enter_History, nil },
+	{ Event.Enter_Settings, nil },
 }
+
 
 function loadFrame( parent )
 	local widget = GUIReader:shareReader():widgetFromJsonFile("scenes/Navigator.json")
@@ -67,6 +68,6 @@ function chooseNav( index, postMessage )
 	end
 
 	if postMessage then
-		EventManager:postEvent( TAB_EVENT_LIST[index] )
+		EventManager:postEvent( TAB_EVENT_LIST[index][1], TAB_EVENT_LIST[index][2] )
 	end
 end

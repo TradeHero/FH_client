@@ -33,7 +33,7 @@ EventNameList =
     "Enter_Next_Prediction",
     "Enter_History",
     "Enter_History_Detail",
-    "Enter_Leaderboard",
+    "Enter_Community",
     "Enter_Leaderboard_List",
     "Enter_Settings",
     "Enter_FAQ",

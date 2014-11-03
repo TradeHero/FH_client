@@ -6,6 +6,7 @@ local ConnectingMessage = require("scripts.views.ConnectingMessage")
 local RequestUtils = require("scripts.RequestUtils")
 local FileUtils = require("scripts.FileUtils")
 local MD5 = require("MD5")
+local Constants = require("scripts.Constants")
 
 local fileList = {
 	"config/countries.txt",
@@ -48,7 +49,7 @@ function checkNext()
 		checkFile( mCurrentFileIndex )	
 	else
 		-- Init the configure files.
-		ConnectingMessage.loadFrame( "Login success.\nLoading data, please wait..." )
+		ConnectingMessage.loadFrame( Constants.String.login_success )
 
 		local loadDataTaskSeqArray = CCArray:create()
 		loadDataTaskSeqArray:addObject( CCDelayTime:create( 1 ) )
@@ -96,7 +97,7 @@ function checkFile( fileIndex )
 	    print("Downloading from: "..RequestUtils.CDN_SERVER_IP..CDNFileNameList[fileIndex])
 	    httpRequest:sendHttpRequest( RequestUtils.CDN_SERVER_IP..CDNFileNameList[fileIndex], handler )
 
-	    ConnectingMessage.loadFrame( "Updating "..file.."..." )
+	    ConnectingMessage.loadFrame( string.format( Constants.String.updating_files, files ) )
 	else
 		checkNext()
 	end
@@ -118,7 +119,7 @@ end
 
 function onRequestFailed( errorBuffer )
 	if errorBuffer == "" then
-		errorBuffer = "Update configurations failed. Please retry."
+		errorBuffer = Constants.String.error.updating_failed
 	end
 
 	mCurrentFileIndex = mCurrentFileIndex - 1

@@ -8,7 +8,7 @@ local SMIS = require("scripts.SMIS")
 local ViewUtils = require("scripts.views.ViewUtils")
 local SelectedLeaguesScene = require("scripts.views.SelectedLeaguesScene")
 local Logic = require("scripts.Logic").getInstance()
-
+local Constants = require("scripts.Constants")
 
 local mWidget
 local mCompetitionId
@@ -57,7 +57,7 @@ function leaveEventHandler( sender, eventType )
         local noCallback = function()
         end
 
-        EventManager:postEvent( Event.Show_Choice_Message, { "Leave Competition", "Are you sure you want to leave the competition?", yesCallback, noCallback } )
+        EventManager:postEvent( Event.Show_Choice_Message, { Constants.String.choice.leave_comp_title, Constants.String.choice.leave_comp_desc, yesCallback, noCallback } )
     end
 end
 
@@ -82,10 +82,10 @@ function initContent( competitionDetail, selectedLeagues )
     local time = tolua.cast( content:getChildByName("time"), "Label" )
     local description = tolua.cast( content:getChildByName("description"), "Label" )
     if competitionDetail:getEndTime() == 0 then
-        time:setText( string.format( "%s until forever", 
+        time:setText( string.format( Constants.String.duration_forever, 
                 os.date( "%m/%d/%Y", competitionDetail:getStartTime() ) ) )
     else
-        time:setText( string.format( "%s to %s", 
+        time:setText( string.format( Constants.String.duration_to, 
                 os.date( "%m/%d/%Y", competitionDetail:getStartTime() ), 
                 os.date( "%m/%d/%Y", competitionDetail:getEndTime() ) ) )
     end

@@ -9,10 +9,10 @@ local ViewUtils = require("scripts.views.ViewUtils")
 local Logic = require("scripts.Logic").getInstance()
 local ConnectingMessage = require("scripts.views.ConnectingMessage")
 local PushNotificationManager = require("scripts.PushNotificationManager")
+local Constants = require("scripts.Constants")
 
-
-local SHARE_BODY = "Can you beat me? Join my competition on FootballHero. Code: %s  www.footballheroapp.com/download"
-local SHARE_TITLE = "Join %s's competition on FootballHero"
+local SHARE_BODY = Constants.String.share_body
+local SHARE_TITLE = Constants.String.share_title
 
 local mWidget
 local mTokenInput
@@ -229,7 +229,7 @@ function updateLatestChatMessage( messageInfo )
         end
     else
         name:setEnabled( false )
-        message:setText( "Tap here to start chatting!" )
+        message:setText( Constants.String.chat_hint )
         time:setEnabled( false )
     end
 end
@@ -243,7 +243,7 @@ end
 function copyCodeEventHandler( sender, eventType )
     if eventType == TOUCH_EVENT_ENDED then
         Misc:sharedDelegate():copyToPasteboard( mCompetitionCodeString )
-        EventManager:postEvent( Event.Show_Info, { "Join code is copied to clipboard." } )
+        EventManager:postEvent( Event.Show_Info, { Constants.String.join_code_copied } )
     end
 end
 
@@ -296,7 +296,7 @@ function initLeaderboardContent( i, content, info )
     local logo = tolua.cast( content:getChildByName("logo"), "ImageView" )
 
     if info["DisplayName"] == nil then
-        name:setText( "Unknow name" )
+        name:setText( Constants.String.unknown_name )
     else
         name:setText( info["DisplayName"] )
     end
@@ -358,7 +358,7 @@ end
 
 function contentClick( info )
     local id = info["Id"]
-    local name = "Unknow name"
+    local name = Constants.String.unknown_name
     if info["DisplayName"] ~= nil then
         name = info["DisplayName"]
     end

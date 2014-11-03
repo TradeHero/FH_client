@@ -6,7 +6,7 @@ local Logic = require("scripts.Logic").getInstance()
 local EventManager = require("scripts.events.EventManager").getInstance()
 local Event = require("scripts.events.Event").EventList
 local RequestUtils = require("scripts.RequestUtils")
-
+local Constants = require("scripts.Constants")
 
 function action( param )
     local matchId = Logic:getSelectedMatch()["Id"]
@@ -51,6 +51,6 @@ function onRequestSuccess( response )
         local TappablePredictionScene = require("scripts.views.TappablePredictionScene")
         TappablePredictionScene.loadFrame()
     else
-        RequestUtils.onRequestFailed( "You have completed this match." )
+        RequestUtils.onRequestFailed( Constants.String.error.match_completed )
     end
 end

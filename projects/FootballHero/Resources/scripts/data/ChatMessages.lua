@@ -1,5 +1,7 @@
 module(..., package.seeall)
 
+local Constants = require("scripts.Constants")
+
 ChatMessages = {}
 
 --[[
@@ -98,7 +100,7 @@ function ChatMessages:addMessage( message )
     local timeDate = year * 10000 + month * 100 + day
     local timeDisplay
     if todayYear == year and todayMonth == month and todayDay == day then
-        timeDisplay = "Today"
+        timeDisplay = Constants.String.today
     else
         timeDisplay = os.date( "%d %B", time )
     end

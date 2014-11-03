@@ -77,7 +77,7 @@
     <GuidesList />
   </GuidesProject>
   <GuidesProject>
-    <Project>HistoryHome</Project>
+    <Project>MyHeroHome</Project>
     <GuidesList />
   </GuidesProject>
   <GuidesProject>
@@ -318,6 +318,38 @@
   </GuidesProject>
   <GuidesProject>
     <Project>SoundSettings</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>CommunityBaseScene</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>CommunityCompetitionFrame</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>CompetitionItemNew</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>CommunityLeaderboardFrame</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>CommunityLeaderboardDropdownFrame</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>CommunityLeaderboardDropdownContentFrame</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>CommunityLeaderboardListContentFrame</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>MyHeroEmptyFrame</Project>
     <GuidesList />
   </GuidesProject>
 </ArrayOfGuidesProject>

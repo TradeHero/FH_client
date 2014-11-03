@@ -37,8 +37,8 @@ function loadFrame()
 
     helperSetTouchEnabled( false )
 
-    mEmailInput = ViewUtils.createTextInput( mWidget:getChildByName( EMAIL_CONTAINER_NAME ), "E-mail Address" )
-    mPasswordInput = ViewUtils.createTextInput( mWidget:getChildByName( PASSWORD_CONTAINER_NAME ), "Password" )
+    mEmailInput = ViewUtils.createTextInput( mWidget:getChildByName( EMAIL_CONTAINER_NAME ), Constants.String.email )
+    mPasswordInput = ViewUtils.createTextInput( mWidget:getChildByName( PASSWORD_CONTAINER_NAME ), Constants.String.password )
     mPasswordInput:setInputFlag( kEditBoxInputFlagPassword )
     
     mEmailInput:setFontColor( mInputFontColor )

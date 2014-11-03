@@ -38,7 +38,7 @@ function loadFrame()
     leagueSelected( LeagueConfig.getConfigId( 1 ) )
 
     local leagueName = tolua.cast( mWidget:getChildByName("leagueName"), "Label" )
-    leagueName:setText( "Please select your favourite team." )
+    leagueName:setText( Constants.String.select_fav_team )
 
     TutorialManager.checkRunTutorial( TutorialManager.TUTORIAL_SEL_FAV_TEAM )
 end
@@ -125,7 +125,7 @@ function teamSelected( index )
     mLeagueId = mDisplayLeagueId
     mTeamId = TeamConfig.getTeamId( index )
     local teamSelected = tolua.cast( mWidget:getChildByName("leagueName"), "Label" )
-    teamSelected:setText( "Your favourite team: "..TeamConfig.getTeamName( index ) )
+    teamSelected:setText( Constants.String.favourite_team..TeamConfig.getTeamName( index ) )
 
     local okBt = mWidget:getChildByName("ok")
     okBt:setBright( true )

@@ -16,16 +16,16 @@ function action( param )
     mFacebookShare = facebookShare
 
     if string.len( name ) == 0 then
-        RequestUtils.onRequestFailed( "Title cannot blank." )
+        RequestUtils.onRequestFailed( Constants.String.error.blank_title )
         return
     end
     if string.len( description ) == 0 then
-        RequestUtils.onRequestFailed( "Description cannot be blank." )
+        RequestUtils.onRequestFailed( Constants.String.error.blank_desc )
         return
     end
 
     if table.getn( selectedLeagues ) == 0 then
-        RequestUtils.onRequestFailed( "Selected League cannot be blank." )
+        RequestUtils.onRequestFailed( Constants.String.error.blank_league )
         return
     end
 

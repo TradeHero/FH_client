@@ -33,7 +33,7 @@ function helperInitLeagueList()
         mContainer:addChild( content, 0, mChildIndex )
         content:addTouchEventListener( eventHandler )
 
-        local name = tolua.cast( content:getChildByName("name"), "Label" )
+        local name = tolua.cast( content:getChildByName("Label_Name"), "Label" )
         name:setText( LeaderboardConfig.LeaderboardSubType[i]["title"] )
 
         contentHeight = contentHeight + content:getSize().height

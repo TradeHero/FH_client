@@ -50,7 +50,20 @@ CouponHistoryData = {}
    "closed":[
 
    ],
-   "balance":1000
+   "balance":1000,
+   "stats": {
+        "Id": 246,
+        "DisplayName": "vincent",
+        "NumberOfCoupons": 57,
+        "NumberOfCouponsWon": 36,
+        "NumberOfCouponsLost": 19,
+        "WinPercentage": 65.45,
+        "Roi": 235.69,
+        "Profit": 129630,
+        "WinStreakCouponsWon": 0,
+        "WinStreakCouponsLost": 0,
+        "PictureUrl": ""
+    }
 }
 --]]
 
@@ -59,6 +72,7 @@ function CouponHistoryData:new( rawDataObj )
 		OpenCoupon = rawDataObj["open"],
     ClosedCoupon = rawDataObj["closed"],
     Balance = rawDataObj["balance"],
+    Stats = rawDataObj["stats"]
 	}
 
 	setmetatable(obj, self)
@@ -79,4 +93,8 @@ end
 
 function CouponHistoryData:getBalance()
   return self.Balance
+end
+
+function CouponHistoryData:getStats()
+  return self.Stats
 end

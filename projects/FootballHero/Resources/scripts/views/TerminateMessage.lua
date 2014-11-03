@@ -17,9 +17,9 @@ function loadFrame()
     local okBt = tolua.cast( widget:getChildByName("ok"), "Button" )
     okBt:addTouchEventListener( okEventHandler )
 
-    setTitle("Are you sure you want to quit?")
-    setErrorMessage("Tap back again to quit.")
-    okBt:setTitleText("Stay")
+    setTitle( Constants.String.quit_title )
+    setErrorMessage( Constants.String.quit_desc )
+    okBt:setTitleText( Constants.String.quit_cancel )
     
     SceneManager.addWidget( mWidget )
 end

@@ -6,7 +6,7 @@ local EventManager = require("scripts.events.EventManager").getInstance()
 local Event = require("scripts.events.Event").EventList
 local LeaderboardConfig = require("scripts.config.Leaderboard")
 local ViewUtils = require("scripts.views.ViewUtils")
-
+local Constants = require("scripts.Constants")
 
 local SUB_CONTENT_HEIGHT = 187
 
@@ -108,7 +108,7 @@ function initCompetition( layoutParameter, contentContainer, compList )
     createbt:addTouchEventListener( createEventHandler )
     local joinBt = create:getChildByName("Join")
     joinBt:addTouchEventListener( joinEventHandler )
-    local tokenInput = ViewUtils.createTextInput( create:getChildByName( "tokenContainer" ), "Enter Competition Code" )
+    local tokenInput = ViewUtils.createTextInput( create:getChildByName( "tokenContainer" ), Constants.String.enter_comp_code )
     tokenInput:setFontColor( ccc3( 0, 0, 0 ) )
     tokenInput:setTouchPriority( SceneManager.TOUCH_PRIORITY_MINUS_ONE )
     local inputDelegate = EditBoxDelegateForLua:create()

@@ -70,8 +70,8 @@ function EnterOrExit( eventType )
 end
 
 function preSetContent()
-    local description = "Predictions made in the selected league for the competition are automatically included in the competition."
-    local title = Logic:getDisplayName().."'s competition"
+    local description = Constants.String.create_comp_desc
+    local title = Logic:getDisplayName()..Constants.String.create_comp_title
 
     mInputWidget:getChildByName( "TitleInput" ):getNodeByTag( 1 ):setText( title )
     tolua.cast( mInputWidget:getChildByName( "DescriptionText" ), "Label" ):setText( description )
@@ -151,7 +151,7 @@ function confirmEventHandler( sender, eventType )
         if checkPass then
             sendCreateCompetition()
         else
-            EventManager:postEvent( Event.Show_Error_Message, { "Number of month is not number." } )
+            EventManager:postEvent( Event.Show_Error_Message, { Constants.String.error.invalid_month } )
         end
     end
 end

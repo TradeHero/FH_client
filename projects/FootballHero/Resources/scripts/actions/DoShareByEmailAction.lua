@@ -13,7 +13,7 @@ end
 
 function handler( resultCode )
 	if resultCode == -1 then
-		EventManager:postEvent( Event.Show_Error_Message, { "You have no email account set up." } )
+		EventManager:postEvent( Event.Show_Error_Message, { Constants.String.error.no_email } )
 	else
 		local params = { Platform = "email", 
 	                    Content = "competition code", 

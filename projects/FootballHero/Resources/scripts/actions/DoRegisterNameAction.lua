@@ -16,7 +16,7 @@ function action( param )
 
     mUserName, mFirstName, mLastName = param[1], param[2], param[3]
     if string.len( mUserName ) == 0 then
-        RequestUtils.onRequestFailed( "User name is blank." )
+        RequestUtils.onRequestFailed( Constants.String.error.blank_user_name )
         return
     end
     if mFirstName == nil then

@@ -30,7 +30,7 @@ function loadFrame()
 
     helperSetTouchEnabled( false )
 
-    local emailInput = ViewUtils.createTextInput( mWidget:getChildByName( EMAIL_CONTAINER_NAME ), "E-mail Address" )
+    local emailInput = ViewUtils.createTextInput( mWidget:getChildByName( EMAIL_CONTAINER_NAME ), Constants.String.email )
     emailInput:setTouchPriority( SceneManager.TOUCH_PRIORITY_MINUS_ONE )
 end
 
