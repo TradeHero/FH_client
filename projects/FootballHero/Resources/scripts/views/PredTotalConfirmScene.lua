@@ -109,11 +109,16 @@ function initContent()
 		local reward = tolua.cast( content:getChildByName("Reward"), "Label" )
 		local stake = tolua.cast( content:getChildByName("stake"), "Label" )
 		local answerIcon = tolua.cast( content:getChildByName("answerIcon"), "ImageView" )
+		local bigBet = content:getChildByName("Image_BigBet")
 
 		question:setText( coupon["Answer"] )
 		reward:setText( string.format( reward:getStringValue(), coupon["Reward"] ) )
 		stake:setText( string.format( stake:getStringValue(), coupon["Stake"] ) )
 		answerIcon:loadTexture( coupon["AnswerIcon"] )
+
+		if coupon["Stake"] ~= Constants.STAKE_BIGBET then
+			bigBet:setEnabled( false )
+		end
 
         content:setLayoutParameter( layoutParameter )
         contentContainer:addChild( content )
