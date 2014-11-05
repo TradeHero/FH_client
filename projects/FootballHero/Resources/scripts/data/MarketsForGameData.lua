@@ -8,6 +8,7 @@ MarketsForGameData = {}
 [
     {
         "marketTypeId": 25,
+        "LastBigBetTimeUtc": -2147483648,
         "Line": null,
         "odds": [
             {
@@ -94,6 +95,17 @@ function MarketsForGameData:getMarketInfoByCouponId( couponId )
     return nil
 end
 
+
+function MarketsForGameData:getNextBigBetRemainingTime()
+    local market = self:getMarketAt(1)
+
+    if market ~= nil then
+        return market["LastBigBetTimeUtc"] + 3600 * 12 - os.time()
+    end
+
+    return nil
+end
+
 -- Getters for inner data structure
 
 function getMarketType( market )
@@ -127,7 +139,7 @@ function getOddsForType( market, oddsType )
 	local oddsConfig = getOddConfigForType( market, oddsType )
 	
 	if oddsConfig ~= nil then
-		return oddsConfig["Odd"] * 1000
+		return oddsConfig["Odd"]
 	end
 	return 0
 end

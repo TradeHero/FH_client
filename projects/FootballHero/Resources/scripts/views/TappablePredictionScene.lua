@@ -33,11 +33,13 @@ local STATUS_SELECTED_RIGHT = 3
 local MIN_MOVE_DISTANCE = 100
 local SWITCH_MOVE_TIME = 0.4
 
+local mBigBetStatus = {}
 
 function loadFrame()
     mMatch = Logic:getSelectedMatch()
     mMarketsInfo = Logic:getCurMarketInfo()
-
+    mBigBetStatus["currBigBet"] = MarketConfig.MARKET_TYPE_INVALID
+   
 	mWidget = GUIReader:shareReader():widgetFromJsonFile("scenes/PredictionBG.json")
     mWidget:registerScriptHandler( EnterOrExit )
     SceneManager.addWidget( mWidget )
@@ -127,12 +129,17 @@ function initCurrentPredictionUI()
         mPredictionWidget = AsianHandicapPrediction
     end
 
-    mPredictionWidget.loadFrame( mMovableContainer, mMatch, marketInfo, makePredictionCallback )
+    mBigBetStatus["timeToNextBet"] = mMarketsInfo:getNextBigBetRemainingTime()
+    mPredictionWidget.loadFrame( mMovableContainer, mMatch, marketInfo, makePredictionCallback, mBigBetStatus, makeBigBetCallback )
     if mPredictionStatus[mCurrentPredictionIndex] == STATUS_SELECTED_LEFT then
         mPredictionWidget.choose( true )
     elseif mPredictionStatus[mCurrentPredictionIndex] == STATUS_SELECTED_RIGHT then
         mPredictionWidget.choose( false )
     end
+end
+
+function makeBigBetCallback( mIndex )
+    mBigBetStatus["currBigBet"] = mIndex
 end
 
 function makePredictionCallback( selectLeft, prediction )
@@ -156,7 +163,7 @@ function goToConfirm()
         if mPredictionAnswers[i] ~= nil then
             local p = mPredictionAnswers[i]
             Logic:addPrediction( p["OddId"], p["Answer"], p["Rewards"], p["AnswerImagePath"], p["PredictionType"],
-                                Logic:getPreviousLeagueSelected(), mMatch["HomeTeamId"], mMatch["AwayTeamId"] )
+                                Logic:getPreviousLeagueSelected(), mMatch["HomeTeamId"], mMatch["AwayTeamId"], p["Stake"] )
         end
     end
     
