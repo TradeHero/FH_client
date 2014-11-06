@@ -243,7 +243,7 @@ end
 function copyCodeEventHandler( sender, eventType )
     if eventType == TOUCH_EVENT_ENDED then
         Misc:sharedDelegate():copyToPasteboard( mCompetitionCodeString )
-        EventManager:postEvent( Event.Show_Info, { Constants.String.join_code_copied } )
+        EventManager:postEvent( Event.Show_Info, { Constants.String.info.join_code_copied } )
     end
 end
 

@@ -252,7 +252,7 @@ function updateTimer()
     local labelTime = tolua.cast( countdown:getChildByName("Label_Time"), "Label" )
 
     mRemainingTime = mRemainingTime - 1
-    if mRemainingTime < 10 * 3600 + 50 * 60 then
+    if mRemainingTime < 0 then
         local bigBet = tolua.cast( mWidget:getChildByName("CheckBox_BigBet"), "CheckBox" ) 
         --inactive
         bigBet:setOpacity( 127 )
