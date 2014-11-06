@@ -98,10 +98,14 @@ function initContent( couponHistory )
     local info = couponHistory:getStats()
     stat_win:setText( info["NumberOfCouponsWon"] )
     stat_lose:setText( info["NumberOfCouponsLost"] )
-    stat_win_percent:setText( info["WinPercentage"] )
+    stat_win_percent:setText( string.format( "%d", info["WinPercentage"] ) )
     stat_gain_percent:setText( info["Roi"] )
     stat_last_10_win:setText( info["WinStreakCouponsWon"] )
     stat_last_10_lose:setText( info["WinStreakCouponsLost"] )
+
+    if info["Roi"] < 0 then
+        stat_gain_percent:setColor( ccc3( 240, 75, 79 ) )
+    end
 
     local name = tolua.cast( mWidget:getChildByName("Label_Name"), "Label" )
     if info["DisplayName"] == nil then

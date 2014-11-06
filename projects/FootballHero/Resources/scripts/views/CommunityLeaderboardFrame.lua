@@ -282,14 +282,11 @@ function initLeaderboardContent( i, content, info )
 
     stat_win:setText( info["NumberOfCouponsWon"] )
     stat_lose:setText( info["NumberOfCouponsLost"] )
-    stat_win_percent:setText( info["WinPercentage"] )
+    stat_win_percent:setText( string.format( "%d", info["WinPercentage"] ) )
     stat_gain_percent:setText( info["Roi"] )
     stat_last_10_win:setText( info["WinStreakCouponsWon"] )
     stat_last_10_lose:setText( info["WinStreakCouponsLost"] )
 
-    if info["WinPercentage"] < 0 then
-        stat_win_percent:setColor( ccc3( 240, 75, 79 ) )
-    end
     if info["Roi"] < 0 then
         stat_gain_percent:setColor( ccc3( 240, 75, 79 ) )
     end
@@ -363,6 +360,10 @@ end
 function scrollViewEventHandler( target, eventType )
     if eventType == SCROLLVIEW_EVENT_BOUNCE_BOTTOM and mHasMoreToLoad then
         mStep = mStep + 1
-        EventManager:postEvent( Event.Load_More_In_Leaderboard, { mLeaderboardId, mSubType, mStep } )
+        if mFilter == true then
+            EventManager:postEvent( Event.Load_More_In_Leaderboard, { mLeaderboardId, mSubType, mStep, Constants.FILTER_MIN_PREDICTION } )
+        else
+            EventManager:postEvent( Event.Load_More_In_Leaderboard, { mLeaderboardId, mSubType, mStep } )
+        end
     end
 end
