@@ -80,7 +80,7 @@ M.en = {
     shared_to_fb = "Competition is shared to Facebook.",
     title = "Info",
     join_code_copied = "Join code is copied to clipboard.",
-    predictions_entered = "Predictions already entered. Please select another match.",
+    predictions_entered = "You have completed this match.",
   },
   last_name = "Last Name",
   last_name_optional = "Last Name (Optional)",
