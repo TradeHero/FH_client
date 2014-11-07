@@ -172,8 +172,16 @@ function selectBigBet( sender, eventType )
             mBigBetCallback( MarketConfig.MARKET_TYPE_ASIAN_HANDICAP )
             mStake = Constants.STAKE_BIGBET
         end
+        
         local stake = tolua.cast( mWidget:getChildByName("stake"), "Label" )
-        stake:setText( string.format( stake:getStringValue(), mStake ) )
+        local yes = tolua.cast( mWidget:getChildByName("yes"), "ImageView" )
+        local no = tolua.cast( mWidget:getChildByName("no"), "ImageView" )
+        local yesWinPoint = tolua.cast( yes:getChildByName("yesWinPoint"), "Label" )
+        local noWinPoint = tolua.cast( no:getChildByName("noWinPoint"), "Label" )
+
+        stake:setText( string.format( Constants.String.num_of_points, mStake ) )
+        yesWinPoint:setText( string.format( Constants.String.num_of_points, MarketsForGameData.getOddsForType( mMarketInfo, MarketConfig.ODDS_TYPE_ONE_OPTION ) * mStake ) )
+        noWinPoint:setText( string.format( Constants.String.num_of_points, MarketsForGameData.getOddsForType( mMarketInfo, MarketConfig.ODDS_TYPE_TWO_OPTION ) * mStake ) )
     end
 end
 

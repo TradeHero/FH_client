@@ -95,6 +95,7 @@ M.en = {
   login_success = "Login success.\nLoading data, please wait...",
   message_hint = "Type your message here",
   most_popular = "Most Popular",
+  num_of_points = "%d Points",
   password = "Password",
   password_confirm = "Confirm Password",
   quit_title = "Are you sure you want to quit?",
