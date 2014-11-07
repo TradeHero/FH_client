@@ -103,7 +103,7 @@ function onRequestSuccess( matchList )
 
 	local matchListScene = require("scripts.views.MatchListScene")
     if matchListScene.isShown() then
-        matchListScene.initMatchList( sortedMatchList )
+        matchListScene.initMatchList( sortedMatchList, mLeagueId )
     else
         matchListScene.loadFrame( sortedMatchList, mLeagueId )
     end
