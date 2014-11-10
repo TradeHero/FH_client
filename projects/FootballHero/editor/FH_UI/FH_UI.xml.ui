@@ -90,6 +90,7 @@
     <string>WTGBMTPrediction.json</string>
     <string>WTSPrediction.json</string>
     <string>WTWBEGPrediction.json</string>
+    <string>CommunityCompetitionWelcome.json</string>
   </JsonList>
   <CanvasSize>
     <Width>640</Width>
@@ -100,13 +101,13 @@
   <ResRelativePath />
   <imageFileList />
   <imagePngList>
-    <string>MatchPrediction/prediction-yes.png</string>
-    <string>MatchPrediction/prediction-no.png</string>
-    <string>MatchPrediction/btn-inactivestake.png</string>
-    <string>MatchPrediction/btn-disabledstake.png</string>
-    <string>MatchPrediction/btn-activestake.png</string>
-    <string>MatchPrediction/btn-countdown.png</string>
+    <string>MatchListContent/stamp-won.png</string>
+    <string>commonRes/Arsenal.png</string>
+    <string>commonRes/Manchester United.png</string>
+    <string>MatchListContent/icn-fans.png</string>
+    <string>MatchListContent/icn-played.png</string>
+    <string>community/img-leaguebox.png</string>
   </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>MatchPrediction.json</CurrentUIJson>
+  <CurrentUIJson>MyHeroHome.json</CurrentUIJson>
 </UIProject>

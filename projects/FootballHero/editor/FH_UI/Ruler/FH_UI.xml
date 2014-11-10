@@ -352,4 +352,8 @@
     <Project>MyHeroEmptyFrame</Project>
     <GuidesList />
   </GuidesProject>
+  <GuidesProject>
+    <Project>CommunityCompetitionWelcome</Project>
+    <GuidesList />
+  </GuidesProject>
 </ArrayOfGuidesProject>

@@ -1,5 +1,9 @@
 module(..., package.seeall)
 
+SpecialCompetitions = {
+  [12737] = true
+}
+
 Competitions = {}
 
 --[[
@@ -50,4 +54,21 @@ end
 
 function Competitions:get( index )
     return self.List[index]
+end
+
+function Competitions:hasSpecialCompetition()
+
+  for i = 1, table.getn( self.List ) do
+    local competition = self.List[i]
+    if competition ~= nil then
+
+      -- TODO: Check which field to use to identify
+      if SpecialCompetitions[competition["Id"]] ~= nil then
+          print( "Special Competition! ID = "..competition["Id"] )
+          return competition["Id"]
+      end
+    end
+  end
+
+  return 0
 end
