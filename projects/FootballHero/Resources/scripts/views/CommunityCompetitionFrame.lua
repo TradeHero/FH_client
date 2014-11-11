@@ -95,19 +95,20 @@ function initCompetitionScene( competitionFrame, compList )
                 end
             end
             
+            local competition = compList:get(i)
             local content = SceneManager.widgetFromJsonFile("scenes/CompetitionItemNew.json")
             content:setLayoutParameter( layoutParameter )
             scrollViewJoined:addChild( content )
             height = height + content:getSize().height
 
             local name = tolua.cast( content:getChildByName("Label_Name"), "Label" )
-            name:setText( compList:get( i )["Name"] )
+            name:setText( competition["Name"] )
 
             local bt = tolua.cast( content:getChildByName("Panel_Button"), "Layout" )
             bt:addTouchEventListener( eventHandler )
-
-            if compList:get( i )["CompetitionStatus"] == CompetitionStatus["Joined"] then
-                bt:setBackGroundImage( Constants.COMPETITION_IMAGE_PATH..Constants.EntryPrefix..compList:get( i )["Id"]..".png" )
+            
+            if competition["CompetitionType"] ~=CompetitionType["Private"] and competition["CompetitionStatus"] == CompetitionStatus["Joined"] then
+                bt:setBackGroundImage( Constants.COMPETITION_IMAGE_PATH..Constants.EntryPrefix..competition["Id"]..".png" )
             end
 
             --[[if i == compList:getSize() then
