@@ -55,6 +55,7 @@ end
 function EnterOrExit( eventType )
     if eventType == "enter" then
     elseif eventType == "exit" then
+        mWidget:stopAllActions()
         mWidget = nil
     end
 end
