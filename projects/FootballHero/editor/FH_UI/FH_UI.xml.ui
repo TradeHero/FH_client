@@ -91,6 +91,9 @@
     <string>WTSPrediction.json</string>
     <string>WTWBEGPrediction.json</string>
     <string>CommunityCompetitionWelcome.json</string>
+    <string>CommunityNewCompetitionFrame.json</string>
+    <string>CommunityJoinedCompetitionFrame.json</string>
+    <string>CommunityCompetitionBannerFrame.json</string>
   </JsonList>
   <CanvasSize>
     <Width>640</Width>
@@ -101,13 +104,9 @@
   <ResRelativePath />
   <imageFileList />
   <imagePngList>
-    <string>MatchListContent/stamp-won.png</string>
-    <string>commonRes/Arsenal.png</string>
-    <string>commonRes/Manchester United.png</string>
-    <string>MatchListContent/icn-fans.png</string>
-    <string>MatchListContent/icn-played.png</string>
-    <string>community/img-leaguebox.png</string>
+    <string>MatchListScene/Arrow down.png</string>
+    <string>community/img-separator.png</string>
   </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>MyHeroHome.json</CurrentUIJson>
+  <CurrentUIJson>CommunityJoinedCompetitionFrame.json</CurrentUIJson>
 </UIProject>

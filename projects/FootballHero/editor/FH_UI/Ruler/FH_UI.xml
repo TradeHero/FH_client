@@ -356,4 +356,16 @@
     <Project>CommunityCompetitionWelcome</Project>
     <GuidesList />
   </GuidesProject>
+  <GuidesProject>
+    <Project>CommunityNewCompetitionFrame</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>CommunityJoinedCompetitionFrame</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>CommunityCompetitionBannerFrame</Project>
+    <GuidesList />
+  </GuidesProject>
 </ArrayOfGuidesProject>

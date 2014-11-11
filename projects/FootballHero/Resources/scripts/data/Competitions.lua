@@ -1,7 +1,18 @@
 module(..., package.seeall)
 
-SpecialCompetitions = {
-  [12737] = true
+
+
+CompetitionType = {
+  ["Private"] = 1,
+  ["DetailedRanking"] = 2,  -- FH Championship, with weekly, monthly rankings
+  ["SimpleRanking"] = 3,  -- Special competitions with only a single ranking
+}
+
+CompetitionStatus = {
+  ["Preview"] = 1,    -- can view information but cannot join
+  ["Available"] = 2,  -- can start joining competition
+  ["Joined"] = 3,     -- already joined competition
+  ["Ended"] = 4,      -- competition ended, can view rankings
 }
 
 Competitions = {}
@@ -56,19 +67,20 @@ function Competitions:get( index )
     return self.List[index]
 end
 
-function Competitions:hasSpecialCompetition()
+function Competitions:getSpecialCompetitions()
+
+  local specialCompetitions = {}
 
   for i = 1, table.getn( self.List ) do
     local competition = self.List[i]
     if competition ~= nil then
-
-      -- TODO: Check which field to use to identify
-      if SpecialCompetitions[competition["Id"]] ~= nil then
+      if competition["CompetitionType"] ~= CompetitionType["Private"] then
           print( "Special Competition! ID = "..competition["Id"] )
-          return competition["Id"]
+          table.insert( specialCompetitions, competition )
+          
       end
     end
   end
 
-  return 0
+  return specialCompetitions
 end
