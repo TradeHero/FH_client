@@ -14,6 +14,7 @@ local CONTENT_FADEIN_TIME = 1
 local mWidget
 local mStep
 local mCompetitionId
+local mUserId
 local mHasMoreToLoad
 
 -- DS for couponHistory see CouponHistoryData
@@ -28,7 +29,8 @@ function loadFrame( userId, userName, competitionId, couponHistory )
     local totalPoints = tolua.cast( mWidget:getChildByName("Label_Total_Points"), "Label" )
     totalPoints:setText( string.format( totalPoints:getStringValue(), couponHistory:getBalance() ) )
     
-    if userId == Logic:getUserId() then
+    mUserId = userId
+    if mUserId == Logic:getUserId() then
         if mCompetitionId ~= nil then
             showBackButton = true
         end
@@ -329,7 +331,7 @@ end
 function scrollViewEventHandler( target, eventType )
     if eventType == SCROLLVIEW_EVENT_BOUNCE_BOTTOM and mHasMoreToLoad then
         mStep = mStep + 1
-        EventManager:postEvent( Event.Load_More_In_History, { mStep, mCompetitionId } )
+        EventManager:postEvent( Event.Load_More_In_History, { mStep, mCompetitionId, mUserId } )
     end
 end
 
