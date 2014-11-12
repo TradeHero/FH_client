@@ -91,14 +91,14 @@ function diffVersionWithTags()
 	# Create the zip package and update the patchConfig.
 	if [ $codeUpdated == true ]; then
 		echo "Since the code is change, no self update."
-		echo "$1.needUpdate = false" >> $WORKING_PATH/$PATCH_CONFIG_FILE
+		echo "$1_needUpdate = false" >> $WORKING_PATH/$PATCH_CONFIG_FILE
 	else
 		rm -f $patchDir/gitDiff
 		cd $WORKING_PATH
 		
 		# Check if the patch folder is empty
 		if [ "`ls -A $1_$2`" == "" ]; then
-			echo "$1.needUpdate = false" >> $WORKING_PATH/$PATCH_CONFIG_FILE
+			echo "$1_needUpdate = false" >> $WORKING_PATH/$PATCH_CONFIG_FILE
 		else
 			cd $1_$2
 			zip -r -q ../$1_$2.zip *
