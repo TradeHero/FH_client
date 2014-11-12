@@ -482,7 +482,12 @@ function initLeaderboardContent( i, content, info )
         name:setText( info["DisplayName"] )
     end
 
-    score:setText( string.format( mSubType["description"], info[mSubType["dataColumnId"]], info["NumberOfCoupons"] ) )
+
+    if competitionDetail:getCompetitionType() == CompetitionType["Private"] then
+        score:setText( string.format( mSubType["description"], info[mSubType["dataColumnId"]], info["NumberOfCoupons"] ) )
+    else
+        score:setText( string.format( score:getStringValue(), info["Profit"] ) )
+    end
     if info[mSubType["dataColumnId"]] < 0 then
         score:setColor( ccc3( 240, 75, 79 ) )
     end
