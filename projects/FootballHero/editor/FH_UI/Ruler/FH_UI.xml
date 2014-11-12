@@ -368,4 +368,8 @@
     <Project>CommunityCompetitionBannerFrame</Project>
     <GuidesList />
   </GuidesProject>
+  <GuidesProject>
+    <Project>CompetitionPrize</Project>
+    <GuidesList />
+  </GuidesProject>
 </ArrayOfGuidesProject>
