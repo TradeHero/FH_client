@@ -5,6 +5,20 @@ CompetitionDetail = {}
 --[[
 
 {
+   "Me": {
+        "Id": 10724,
+        "DisplayName": "boro84",
+        "NumberOfCoupons": 27,
+        "NumberOfCouponsWon": 12,
+        "NumberOfCouponsLost": 15,
+        "WinPercentage": 44.44,
+        "Roi": -28.12,
+        "Profit": -12090,
+        "Position": 12,
+        "WinStreakCouponsWon": 3,
+        "WinStreakCouponsLost": 7,
+        "PictureUrl": ""
+    },
 
    "LeaderboardUserBaseDtos": [
 
@@ -25,24 +39,18 @@ CompetitionDetail = {}
    ],
 
    "CompetitionInfoDTO": {
-
-      "Id": 3,
-
-      "Name": "2222",
-
-      "Description": "2222",
-
-      "StartTimeStamp": "2014-06-20T08:30:36",
-
-      "EndTimeStamp": "2014-09-11T16:00:00",
-
-      "JoinToken":"5i7o0izr",
-
-      "Open": true,
-
-      "OwningUserName": "Test001"
-
-   },
+        "Id": 12737,
+        "Name": "Team Football Hero",
+        "Description": "My Hero company challenge ",
+        "StartTimeStamp": 1414650801,
+        "EndTimeStamp": 0,
+        "JoinToken": "779dpc",
+        "Open": true,
+        "OwningUserName": "Adrian Lam",
+        "OwnedByMe": false,
+        "CompetitionStatus": 0,
+        "CompetitionType": 3
+    },
 
    "LatestChatMessage": {
       "MessageText":"111",
@@ -67,8 +75,10 @@ function CompetitionDetail:new( detail )
       joinToken = detail.CompetitionInfoDTO.JoinToken,
       open = detail.CompetitionInfoDTO.Open,
       owningUserName = detail.CompetitionInfoDTO.OwningUserName,
+      competitionType = detail.CompetitionInfoDTO.CompetitionType,
       latestChatMessage = detail.LatestChatMessage,
-      pnSetting = detail.PushNotificationsEnabled
+      pnSetting = detail.PushNotificationsEnabled,
+      selfInfo = detail.Me
    }
 
    setmetatable(obj, self)
@@ -107,6 +117,10 @@ function CompetitionDetail:getOpen()
    return self.open
 end
 
+function CompetitionDetail:getCompetitionType()
+   return self.competitionType
+end
+
 function CompetitionDetail:getOwningUserName()
    return self.owningUserName
 end
@@ -117,4 +131,8 @@ end
 
 function CompetitionDetail:getPNSetting()
    return self.pnSetting
+end
+
+function CompetitionDetail:getSelfInfo()
+   return self.selfInfo
 end

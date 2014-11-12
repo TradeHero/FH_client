@@ -14,10 +14,10 @@ local mCompetitionId = nil
 
 function action( param )
     local historyMainScene = require("scripts.views.HistoryMainScene")
-    if historyMainScene.isFrameShown() then
-        EventManager:popHistoryWithoutExec()
-        return
-    end                                                             
+    -- if historyMainScene.isFrameShown() then
+    --     EventManager:popHistoryWithoutExec()
+    --     return
+    -- end                                                             
 
 	local step = 1
     
@@ -55,5 +55,9 @@ function onRequestSuccess( response )
     local couponHistory = CouponHistoryData:new( response )
     
     local historyMainScene = require("scripts.views.HistoryMainScene")
-    historyMainScene.loadFrame( mUserId, mUserName, mCompetitionId, couponHistory )
+    if historyMainScene:isFrameShown() then
+        historyMainScene.refreshFrame( mUserId, mUserName, mCompetitionId, couponHistory )
+    else
+        historyMainScene.loadFrame( mUserId, mUserName, mCompetitionId, couponHistory )
+    end
 end

@@ -15,6 +15,7 @@ CONTENT_TYPE_JPG = "Content-Type: image/jpg"
 
 IMAGE_PATH = "images/"
 TUTORIAL_IMAGE_PATH = IMAGE_PATH.."tutorial/"
+COMPETITION_IMAGE_PATH = IMAGE_PATH.."competitions/"
 
 TEAM_IMAGE_PATH = IMAGE_PATH.."teams/"
 LEAGUE_IMAGE_PATH = IMAGE_PATH.."leagues/"
@@ -22,8 +23,15 @@ COUNTRY_IMAGE_PATH = IMAGE_PATH.."countries/"
 PREDICTION_CHOICE_IMAGE_PATH = "scenes/MatchPrediction/"
 LEADERBOARD_IMAGE_PATH = "scenes/Leaderboards/"
 MATCH_LIST_CONTENT_IMAGE_PATH = "scenes/MatchListContent/"
-
+COMPETITION_SCENE_IMAGE_PATH = "scenes/Competition/"
 LOGO_IMAGE_PATH = "myLogo.jpg"
+
+BannerPrefix = "banner_"
+WelcomePrefix = "welcome_"
+EntryPrefix = "entry_"
+PrizesPrefix = "prizes_"
+
+ZORDER_POPUP = 65535
 
 DRAW = 0
 TEAM1_WIN = 1
@@ -58,6 +66,17 @@ ANALYTICS_EVENT_POPUP = "Pop-Up"
 ANALYTICS_EVENT_COMPETITION = "Competition"
 
 NOTIFICATION_KEY_SFX = "soundEffects"
+EVENT_WELCOME_KEY = "event"
+
+COMPETITION_PRIZE_WEEKLY = "weekly"
+COMPETITION_PRIZE_MONTHLY = "monthly"
+COMPETITION_PRIZE_OVERALL = "overall"
+
+STATUS_PENDING = 0
+STATUS_SKIPPED = 1
+STATUS_SELECTED_LEFT = 2
+STATUS_SELECTED_RIGHT = 3
+STATUS_SELECTED_THIRD = 4
 
 local mClientVersion = ""
 

@@ -23,8 +23,8 @@ local mStake
 local TYPE_STRING = "WL"
 local FINISH_SCALE_TIME = 0.5
 local FINISH_DELAY_TIME = 0.5
-local SCALE_UP_VALUE = 1.1
-local SCALE_DOWN_VALUE = 0.7
+local SCALE_UP_VALUE = 0.95
+local SCALE_DOWN_VALUE = 0.6
 local FADE_OUT_VALUE = 80
 local MOVE_TIME = 0.2
 
@@ -41,8 +41,10 @@ function loadFrame( parent, matchInfo, marketInfo, finishCallback, bigBetStatus,
 
     local team1 = tolua.cast( mWidget:getChildByName("team1"), "ImageView" )
     local team2 = tolua.cast( mWidget:getChildByName("team2"), "ImageView" )
+    local draw = tolua.cast( mWidget:getChildByName("draw"), "ImageView" )
     local team1WinPoint = tolua.cast( team1:getChildByName("team1WinPoint"), "Label" )
     local team2WinPoint = tolua.cast( team2:getChildByName("team2WinPoint"), "Label" )
+    local drawWinPoint = tolua.cast( draw:getChildByName("drawWinPoint"), "Label" )
     local stake = tolua.cast( mWidget:getChildByName("stake"), "Label" )
     local balance = tolua.cast( mWidget:getChildByName("balance"), "Label" )
     local bigBet = tolua.cast( mWidget:getChildByName("CheckBox_BigBet"), "CheckBox" )
@@ -77,13 +79,15 @@ function loadFrame( parent, matchInfo, marketInfo, finishCallback, bigBetStatus,
 
     team1:loadTexture( TeamConfig.getLogo( TeamConfig.getConfigIdByKey( mMatch["HomeTeamId"] ) ) )
     team2:loadTexture( TeamConfig.getLogo( TeamConfig.getConfigIdByKey( mMatch["AwayTeamId"] ) ) )
-    team1WinPoint:setText( string.format( team1WinPoint:getStringValue(), MarketsForGameData.getOddsForType( mMarketInfo, MarketConfig.ODDS_TYPE_ONE_OPTION ) * mStake ) )
-    team2WinPoint:setText( string.format( team2WinPoint:getStringValue(), MarketsForGameData.getOddsForType( mMarketInfo, MarketConfig.ODDS_TYPE_TWO_OPTION ) * mStake ) )
+    team1WinPoint:setText( string.format( Constants.String.num_of_points, MarketsForGameData.getOddsForType( mMarketInfo, MarketConfig.ODDS_TYPE_ONE_OPTION ) * mStake ) )
+    team2WinPoint:setText( string.format( Constants.String.num_of_points, MarketsForGameData.getOddsForType( mMarketInfo, MarketConfig.ODDS_TYPE_TWO_OPTION ) * mStake ) )
+    drawWinPoint:setText( string.format( Constants.String.num_of_points, MarketsForGameData.getOddsForType( mMarketInfo, MarketConfig.ODDS_TYPE_THREE_OPTION ) * mStake ) )
     stake:setText( string.format( stake:getStringValue(), mStake ) )
     balance:setText( string.format( balance:getStringValue(), Logic:getBalance() - Logic:getUncommitedBalance() ) )
 
     team1:addTouchEventListener( selectTeam1Win )
     team2:addTouchEventListener( selectTeam2Win )
+    draw:addTouchEventListener( selectDraw )
 
     helperSetTouchEnabled( false )
 
@@ -96,21 +100,30 @@ function releaseFrame()
     end
 end
 
-function choose( selectLeft )
+function choose( selectedIndex )
     local selected
     local notSelected
-    if selectLeft then
+    local notSelected2
+    if selectedIndex == Constants.STATUS_SELECTED_LEFT then
         selected = tolua.cast( mWidget:getChildByName("team1"), "ImageView" )
         notSelected = tolua.cast( mWidget:getChildByName("team2"), "ImageView" )
-    else
+        notSelected2 = tolua.cast( mWidget:getChildByName("draw"), "ImageView" )
+    elseif selectedIndex == Constants.STATUS_SELECTED_RIGHT then
         selected = tolua.cast( mWidget:getChildByName("team2"), "ImageView" )
         notSelected = tolua.cast( mWidget:getChildByName("team1"), "ImageView" )
+        notSelected2 = tolua.cast( mWidget:getChildByName("draw"), "ImageView" )
+    elseif selectedIndex == Constants.STATUS_SELECTED_THIRD then
+        selected = tolua.cast( mWidget:getChildByName("draw"), "ImageView" )
+        notSelected = tolua.cast( mWidget:getChildByName("team1"), "ImageView" )
+        notSelected2 = tolua.cast( mWidget:getChildByName("team2"), "ImageView" )
     end
 
     selected:setScale( SCALE_UP_VALUE )
     selected:setOpacity( 255 )
     notSelected:setScale( SCALE_DOWN_VALUE )
     notSelected:setOpacity( FADE_OUT_VALUE )
+    notSelected2:setScale( SCALE_DOWN_VALUE )
+    notSelected2:setOpacity( FADE_OUT_VALUE )
 end
 
 function EnterOrExit( eventType )
@@ -127,7 +140,7 @@ function selectTeam1Win( sender, eventType )
             MarketsForGameData.getOddsForType( mMarketInfo, MarketConfig.ODDS_TYPE_ONE_OPTION ) * mStake,
             MarketsForGameData.getOddIdForType( mMarketInfo, MarketConfig.ODDS_TYPE_ONE_OPTION ),
             question:getStringValue(),
-            true )
+            Constants.STATUS_SELECTED_LEFT )
     end
 end
 
@@ -138,7 +151,18 @@ function selectTeam2Win( sender, eventType )
             MarketsForGameData.getOddsForType( mMarketInfo, MarketConfig.ODDS_TYPE_TWO_OPTION ) * mStake,
             MarketsForGameData.getOddIdForType( mMarketInfo, MarketConfig.ODDS_TYPE_TWO_OPTION ),
             question:getStringValue(),
-            false )
+            Constants.STATUS_SELECTED_RIGHT )
+    end
+end
+
+function selectDraw( sender, eventType )
+    if eventType == TOUCH_EVENT_ENDED then
+        local question = tolua.cast( mWidget:getChildByName("question"), "Label" )
+        makePrediction(
+            MarketsForGameData.getOddsForType( mMarketInfo, MarketConfig.ODDS_TYPE_THREE_OPTION ) * mStake,
+            MarketsForGameData.getOddIdForType( mMarketInfo, MarketConfig.ODDS_TYPE_THREE_OPTION ),
+            question:getStringValue(),
+            Constants.STATUS_SELECTED_THIRD )
     end
 end
 
@@ -158,24 +182,34 @@ function selectBigBet( sender, eventType )
         local stake = tolua.cast( mWidget:getChildByName("stake"), "Label" )
         local team1 = tolua.cast( mWidget:getChildByName("team1"), "ImageView" )
         local team2 = tolua.cast( mWidget:getChildByName("team2"), "ImageView" )
+        local draw = tolua.cast( mWidget:getChildByName("draw"), "ImageView" )
         local team1WinPoint = tolua.cast( team1:getChildByName("team1WinPoint"), "Label" )
         local team2WinPoint = tolua.cast( team2:getChildByName("team2WinPoint"), "Label" )
+        local drawWinPoint = tolua.cast( draw:getChildByName("drawWinPoint"), "Label" )
 
         stake:setText( string.format( Constants.String.num_of_points, mStake ) )
         team1WinPoint:setText( string.format( Constants.String.num_of_points, MarketsForGameData.getOddsForType( mMarketInfo, MarketConfig.ODDS_TYPE_ONE_OPTION ) * mStake ) )
         team2WinPoint:setText( string.format( Constants.String.num_of_points, MarketsForGameData.getOddsForType( mMarketInfo, MarketConfig.ODDS_TYPE_TWO_OPTION ) * mStake ) )
+        drawWinPoint:setText( string.format( Constants.String.num_of_points, MarketsForGameData.getOddsForType( mMarketInfo, MarketConfig.ODDS_TYPE_THREE_OPTION ) * mStake ) )
     end
 end
 
-function makePrediction( rewards, oddId, answer, selectLeft )
+function makePrediction( rewards, oddId, answer, selectedIndex )
     local selected
     local notSelected
-    if selectLeft then
+    local notSelected2
+    if selectedIndex == Constants.STATUS_SELECTED_LEFT then
         selected = tolua.cast( mWidget:getChildByName("team1"), "ImageView" )
         notSelected = tolua.cast( mWidget:getChildByName("team2"), "ImageView" )
-    else
+        notSelected2 = tolua.cast( mWidget:getChildByName("draw"), "ImageView" )
+    elseif selectedIndex == Constants.STATUS_SELECTED_RIGHT then
         selected = tolua.cast( mWidget:getChildByName("team2"), "ImageView" )
         notSelected = tolua.cast( mWidget:getChildByName("team1"), "ImageView" )
+        notSelected2 = tolua.cast( mWidget:getChildByName("draw"), "ImageView" )
+    elseif selectedIndex == Constants.STATUS_SELECTED_THIRD then
+        selected = tolua.cast( mWidget:getChildByName("draw"), "ImageView" )
+        notSelected = tolua.cast( mWidget:getChildByName("team1"), "ImageView" )
+        notSelected2 = tolua.cast( mWidget:getChildByName("team2"), "ImageView" )
     end
     
     local resultSeqArray = CCArray:create()
@@ -185,12 +219,14 @@ function makePrediction( rewards, oddId, answer, selectLeft )
     spawnArray:addObject( CCTargetedAction:create( selected, CCFadeTo:create( FINISH_SCALE_TIME, 255 ) ) )
     spawnArray:addObject( CCTargetedAction:create( notSelected, CCScaleTo:create( FINISH_SCALE_TIME, SCALE_DOWN_VALUE ) ) )
     spawnArray:addObject( CCTargetedAction:create( notSelected, CCFadeTo:create( FINISH_SCALE_TIME, FADE_OUT_VALUE ) ) )
+    spawnArray:addObject( CCTargetedAction:create( notSelected2, CCScaleTo:create( FINISH_SCALE_TIME, SCALE_DOWN_VALUE ) ) )
+    spawnArray:addObject( CCTargetedAction:create( notSelected2, CCFadeTo:create( FINISH_SCALE_TIME, FADE_OUT_VALUE ) ) )
     resultSeqArray:addObject( CCSpawn:create( spawnArray ) )
 
     resultSeqArray:addObject( CCDelayTime:create( FINISH_DELAY_TIME ) )
     resultSeqArray:addObject( CCCallFuncN:create( function()
         local prediction = Prediction:new( oddId, answer, rewards, selected:getTextureFile(), TYPE_STRING, mStake )
-        mFinishCallback( selectLeft, prediction )
+        mFinishCallback( selectedIndex, prediction )
     end ) )
 
     mWidget:runAction( CCSequence:create( resultSeqArray ) )
