@@ -67,6 +67,7 @@ function CompetitionDetail:new( detail )
       joinToken = detail.CompetitionInfoDTO.JoinToken,
       open = detail.CompetitionInfoDTO.Open,
       owningUserName = detail.CompetitionInfoDTO.OwningUserName,
+      competitionType = detail.CompetitionInfoDTO.CompetitionType,
       latestChatMessage = detail.LatestChatMessage,
       pnSetting = detail.PushNotificationsEnabled
    }
@@ -105,6 +106,10 @@ end
 
 function CompetitionDetail:getOpen()
    return self.open
+end
+
+function CompetitionDetail:getCompetitionType()
+   return self.competitionType
 end
 
 function CompetitionDetail:getOwningUserName()

@@ -157,10 +157,6 @@
     <GuidesList />
   </GuidesProject>
   <GuidesProject>
-    <Project>CompetitionLeave</Project>
-    <GuidesList />
-  </GuidesProject>
-  <GuidesProject>
     <Project>CreateCompetition</Project>
     <GuidesList />
   </GuidesProject>

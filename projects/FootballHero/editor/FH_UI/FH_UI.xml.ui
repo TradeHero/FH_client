@@ -24,7 +24,6 @@
     <string>CompetitionItem.json</string>
     <string>CompetitionItemNew.json</string>
     <string>CompetitionLeaderboard.json</string>
-    <string>CompetitionLeave.json</string>
     <string>CompetitionMore.json</string>
     <string>CompetitionMoreContent.json</string>
     <string>CompetitionTitle.json</string>
@@ -104,9 +103,12 @@
   <ResRelativePath />
   <imageFileList />
   <imagePngList>
-    <string>MatchListScene/Arrow down.png</string>
-    <string>community/img-separator.png</string>
+    <string>MatchListScene/match_bkg.png</string>
+    <string>header/back.png</string>
+    <string>Competition/icn-quit.png</string>
+    <string>Competition/icn-rules.png</string>
+    <string>Competition/icn-TandC.png</string>
   </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>CommunityJoinedCompetitionFrame.json</CurrentUIJson>
+  <CurrentUIJson />
 </UIProject>
