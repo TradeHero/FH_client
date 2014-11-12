@@ -15,6 +15,8 @@ local CompetitionType = require("scripts.data.Competitions").CompetitionType
 local SHARE_BODY = Constants.String.share_body
 local SHARE_TITLE = Constants.String.share_title
 
+local INFO_MOVE_TIME = 0.2
+
 local mWidget
 local mTokenInput
 local mChatMessageContainer
@@ -346,15 +348,21 @@ function initSelfContent( info )
 
     local infoHandler = function( sender, eventType )
         if eventType == TOUCH_EVENT_ENDED then
+            local deltaX
             if mSelfInfoOpen then
-                qualified:setPositionX( 560 )
                 click:setSize( CCSize:new( 560, click:getSize().height ) )
                 mSelfInfoOpen = false
+                deltaX = 205
             else
-                qualified:setPositionX( 355 )
                 click:setSize( CCSize:new( 355, click:getSize().height ) )
                 mSelfInfoOpen = true
+                deltaX = -205
             end
+
+            local resultSeqArray = CCArray:create()
+            resultSeqArray:addObject( CCMoveBy:create( INFO_MOVE_TIME, ccp( deltaX, 0 ) ) )
+            qualified:runAction( CCSequence:create( resultSeqArray ) )
+
         end
     end
     qualified:addTouchEventListener( infoHandler )
