@@ -12,6 +12,7 @@
   "textures": [],
   "texturesPng": [
     "LoginNReg/photo.png",
+    "Competition/icn-unqualified.png",
     "MatchListScene/Arrow down.png",
     "MatchListScene/Arrow Up.png",
     "community/img-wininfo.png"
@@ -141,6 +142,60 @@
               "scale9Enable": false,
               "scale9Height": 150,
               "scale9Width": 150
+            }
+          },
+          {
+            "classname": "ImageView",
+            "name": null,
+            "children": [],
+            "options": {
+              "__type": "ImageViewSurrogate:#EditorCommon.JsonModel.Component.GUI",
+              "classname": "ImageView",
+              "name": "Image_Check",
+              "ZOrder": 2,
+              "actiontag": 20401771,
+              "anchorPointX": 0.5,
+              "anchorPointY": 0.5,
+              "classType": "CocoStudio.EngineAdapterWrap.CSImageView",
+              "colorB": 255,
+              "colorG": 255,
+              "colorR": 255,
+              "customProperty": "",
+              "flipX": false,
+              "flipY": false,
+              "height": 26,
+              "ignoreSize": true,
+              "layoutParameter": null,
+              "opacity": 255,
+              "positionPercentX": 0.265625,
+              "positionPercentY": 0.21,
+              "positionType": 0,
+              "rotation": 0,
+              "scaleX": 1,
+              "scaleY": 1,
+              "sizePercentX": 0.125,
+              "sizePercentY": 0.8,
+              "sizeType": 0,
+              "tag": 17353,
+              "touchAble": false,
+              "useMergedTexture": false,
+              "visible": true,
+              "width": 26,
+              "x": 170,
+              "y": 21,
+              "capInsetsHeight": 1,
+              "capInsetsWidth": 1,
+              "capInsetsX": 0,
+              "capInsetsY": 0,
+              "fileName": null,
+              "fileNameData": {
+                "path": "Competition/icn-unqualified.png",
+                "plistFile": "",
+                "resourceType": 0
+              },
+              "scale9Enable": false,
+              "scale9Height": 26,
+              "scale9Width": 26
             }
           },
           {

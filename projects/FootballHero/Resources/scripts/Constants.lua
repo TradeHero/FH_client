@@ -23,7 +23,7 @@ COUNTRY_IMAGE_PATH = IMAGE_PATH.."countries/"
 PREDICTION_CHOICE_IMAGE_PATH = "scenes/MatchPrediction/"
 LEADERBOARD_IMAGE_PATH = "scenes/Leaderboards/"
 MATCH_LIST_CONTENT_IMAGE_PATH = "scenes/MatchListContent/"
-
+COMPETITION_SCENE_IMAGE_PATH = "scenes/Competition/"
 LOGO_IMAGE_PATH = "myLogo.jpg"
 
 BannerPrefix = "banner_"

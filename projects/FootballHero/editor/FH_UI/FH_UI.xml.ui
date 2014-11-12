@@ -18,10 +18,7 @@
     <string>CommunityLeaderboardDropdownFrame.json</string>
     <string>CommunityLeaderboardFrame.json</string>
     <string>CommunityLeaderboardListContentFrame.json</string>
-    <string>CompetitionCreate.json</string>
-    <string>CompetitionEmpty.json</string>
     <string>CompetitionInviteContent.json</string>
-    <string>CompetitionItem.json</string>
     <string>CompetitionItemNew.json</string>
     <string>CompetitionLeaderboard.json</string>
     <string>CompetitionMore.json</string>
@@ -93,6 +90,7 @@
     <string>CommunityNewCompetitionFrame.json</string>
     <string>CommunityJoinedCompetitionFrame.json</string>
     <string>CommunityCompetitionBannerFrame.json</string>
+    <string>SpecialCompetitionLeaderboard.json</string>
   </JsonList>
   <CanvasSize>
     <Width>640</Width>
@@ -104,11 +102,20 @@
   <imageFileList />
   <imagePngList>
     <string>MatchListScene/match_bkg.png</string>
+    <string>Competition/btn-alertOff.png</string>
+    <string>Competition/btn-alertOn.png</string>
+    <string>chat/More Button.png</string>
     <string>header/back.png</string>
-    <string>Competition/icn-quit.png</string>
-    <string>Competition/icn-rules.png</string>
-    <string>Competition/icn-TandC.png</string>
+    <string>Tutorial/Default Button.png</string>
+    <string>chat/Chat_Icon.png</string>
+    <string>chat/GreenArrow.png</string>
+    <string>GUI/image.png</string>
+    <string>community/btn-CTA.png</string>
+    <string>Competition/img-userposition.png</string>
+    <string>LoginNReg/photo.png</string>
+    <string>Competition/icn-unqualified.png</string>
+    <string>Competition/icn-expandinfo.png</string>
   </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson />
+  <CurrentUIJson>SpecialCompetitionLeaderboard.json</CurrentUIJson>
 </UIProject>

@@ -149,14 +149,6 @@
     <GuidesList />
   </GuidesProject>
   <GuidesProject>
-    <Project>CompetitionItem</Project>
-    <GuidesList />
-  </GuidesProject>
-  <GuidesProject>
-    <Project>CompetitionCreate</Project>
-    <GuidesList />
-  </GuidesProject>
-  <GuidesProject>
     <Project>CreateCompetition</Project>
     <GuidesList />
   </GuidesProject>
@@ -257,19 +249,11 @@
     <GuidesList />
   </GuidesProject>
   <GuidesProject>
-    <Project>CompetitionEmpty</Project>
-    <GuidesList />
-  </GuidesProject>
-  <GuidesProject>
     <Project>CreateCompetitionContent</Project>
     <GuidesList />
   </GuidesProject>
   <GuidesProject>
     <Project>LeagueContentWithTransparentBG</Project>
-    <GuidesList />
-  </GuidesProject>
-  <GuidesProject>
-    <Project>CompetitionInviteContent</Project>
     <GuidesList />
   </GuidesProject>
   <GuidesProject>
@@ -362,6 +346,14 @@
   </GuidesProject>
   <GuidesProject>
     <Project>CommunityCompetitionBannerFrame</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>SpecialCompetitionLeaderboard</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>CompetitionLeaderboard_0</Project>
     <GuidesList />
   </GuidesProject>
 </ArrayOfGuidesProject>
