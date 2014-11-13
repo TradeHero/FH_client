@@ -61,11 +61,12 @@ function loadFrame( userId, userName, competitionId, couponHistory )
     mWidget:registerScriptHandler( EnterOrExit )
     SceneManager.clearNAddWidget( mWidget )
 
+    initContent( couponHistory )
+
     Navigator.loadFrame( mWidget )
 
     mStep = 1
     mHasMoreToLoad = false
-    initContent( couponHistory )
 end
 
 function refreshFrame( userId, userName, competitionId, couponHistory )

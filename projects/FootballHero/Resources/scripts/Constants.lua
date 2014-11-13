@@ -67,6 +67,10 @@ ANALYTICS_EVENT_COMPETITION = "Competition"
 NOTIFICATION_KEY_SFX = "soundEffects"
 EVENT_WELCOME_KEY = "event"
 
+COMPETITION_PRIZE_WEEKLY = "weekly"
+COMPETITION_PRIZE_MONTHLY = "monthly"
+COMPETITION_PRIZE_OVERALL = "overall"
+
 local mClientVersion = ""
 
 function getClientVersion()

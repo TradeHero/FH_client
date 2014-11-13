@@ -93,6 +93,7 @@ end
 function EnterOrExit( eventType )
     if eventType == "enter" then
     elseif eventType == "exit" then
+        mWidget:stopAllActions()
         mWidget = nil
     end
 end
@@ -184,7 +185,9 @@ function initContent( competitionDetail )
     else
         local banner = mWidget:getChildByName("Panel_Banner")
         local shareBt = banner:getChildByName("Button_Share")
+        local prizeBt = banner:getChildByName("Button_Learn")
         shareBt:addTouchEventListener( shareTypeSelectEventHandler )
+        prizeBt:addTouchEventListener( competitionPrizeEventHandler )
 
         local bannerBG = tolua.cast( banner:getChildByName("Image_BannerBG"), "ImageView" )
         bannerBG:loadTexture( Constants.COMPETITION_IMAGE_PATH..Constants.BannerPrefix..competitionDetail:getJoinToken()..".png" )
@@ -303,6 +306,14 @@ function shareTypeSelectEventHandler( sender, eventType )
         EventManager:postEvent( Event.Enter_Share, { string.format( SHARE_TITLE, Logic:getDisplayName() ),
                                                     string.format( SHARE_BODY, mCompetitionCodeString ),
                                                     shareByFacebook } )
+    end
+end
+
+function competitionPrizeEventHandler( sender, eventType )
+    if eventType == TOUCH_EVENT_ENDED then
+        local title = tolua.cast( mWidget:getChildByName("title"), "Label" )
+        local titleText = title:getStringValue()
+        EventManager:postEvent( Event.Enter_Competition_Prize, { titleText, mCompetitionId, Constants.COMPETITION_PRIZE_OVERALL, 0 } )
     end
 end
 

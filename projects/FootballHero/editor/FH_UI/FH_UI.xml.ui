@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
 <UIProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <ProjectDir>Z:\workspace\FH_client\projects\FootballHero\editor\FH_UI</ProjectDir>
+  <ProjectDir>Z:\FH_client\projects\FootballHero\editor\FH_UI</ProjectDir>
   <Version>1.5.0.0</Version>
-  <Resources>Z:\workspace\FH_client\projects\FootballHero\editor\FH_UI\Resources</Resources>
+  <Resources>Z:\FH_client\projects\FootballHero\editor\FH_UI\Resources</Resources>
   <Name>FH_UI</Name>
   <JsonFileName>FH_UI.json</JsonFileName>
-  <JsonFolder>Z:\workspace\FH_client\projects\FootballHero\editor\FH_UI\Json</JsonFolder>
+  <JsonFolder>Z:\FH_client\projects\FootballHero\editor\FH_UI\Json</JsonFolder>
   <JsonList>
     <string>Chat.json</string>
     <string>ChatMessageContent.json</string>
@@ -56,7 +56,7 @@
     <string>MatchListScene.json</string>
     <string>MatchPrediction.json</string>
     <string>MyHeroEmptyFrame.json</string>
-    <string>MyPicksHome.json</string>
+    <string>MyHeroHome.json</string>
     <string>Navigator.json</string>
     <string>PNCompetitionMessage.json</string>
     <string>PNPredictionMessage.json</string>
@@ -97,7 +97,7 @@
     <Width>640</Width>
     <Height>1136</Height>
   </CanvasSize>
-  <filePath>Z:\workspace\FH_client\projects\FootballHero\editor\FH_UI\FH_UI.xml.ui</filePath>
+  <filePath>Z:\FH_client\projects\FootballHero\editor\FH_UI\FH_UI.xml.ui</filePath>
   <ProjectType>UIProject</ProjectType>
   <ResRelativePath />
   <imageFileList />
@@ -107,8 +107,7 @@
     <string>header/back.png</string>
     <string>MyHero/img-profbox.png</string>
     <string>MyHero/img-photo.png</string>
-    <string>Competition/btn-learnmore.png</string>
   </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>CompetitionMore.json</CurrentUIJson>
+  <CurrentUIJson>MyHeroHome.json</CurrentUIJson>
 </UIProject>

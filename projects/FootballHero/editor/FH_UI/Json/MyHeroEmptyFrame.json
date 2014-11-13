@@ -11,8 +11,14 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "community/img-leaguebox.png",
-    "community/btn-CTA.png"
+    "Navigator/matches_inactive.png",
+    "Navigator/matches_active.png",
+    "Navigator/community_inactive.png",
+    "Navigator/community_active.png",
+    "Navigator/profile_inactive.png",
+    "Navigator/profile_active.png",
+    "Navigator/settings_inactive.png",
+    "Navigator/settings_active.png"
   ],
   "version": "1.5.0.0",
   "widgetTree": {
