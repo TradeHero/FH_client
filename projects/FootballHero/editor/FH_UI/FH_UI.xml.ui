@@ -18,13 +18,9 @@
     <string>CommunityLeaderboardDropdownFrame.json</string>
     <string>CommunityLeaderboardFrame.json</string>
     <string>CommunityLeaderboardListContentFrame.json</string>
-    <string>CompetitionCreate.json</string>
-    <string>CompetitionEmpty.json</string>
     <string>CompetitionInviteContent.json</string>
-    <string>CompetitionItem.json</string>
     <string>CompetitionItemNew.json</string>
     <string>CompetitionLeaderboard.json</string>
-    <string>CompetitionLeave.json</string>
     <string>CompetitionMore.json</string>
     <string>CompetitionMoreContent.json</string>
     <string>CompetitionTitle.json</string>
@@ -95,6 +91,7 @@
     <string>CommunityJoinedCompetitionFrame.json</string>
     <string>CommunityCompetitionBannerFrame.json</string>
     <string>CompetitionPrize.json</string>
+    <string>SpecialCompetitionLeaderboard.json</string>
   </JsonList>
   <CanvasSize>
     <Width>640</Width>

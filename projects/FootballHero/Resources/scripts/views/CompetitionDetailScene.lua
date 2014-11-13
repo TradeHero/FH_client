@@ -10,9 +10,12 @@ local Logic = require("scripts.Logic").getInstance()
 local ConnectingMessage = require("scripts.views.ConnectingMessage")
 local PushNotificationManager = require("scripts.PushNotificationManager")
 local Constants = require("scripts.Constants")
+local CompetitionType = require("scripts.data.Competitions").CompetitionType
 
 local SHARE_BODY = Constants.String.share_body
 local SHARE_TITLE = Constants.String.share_title
+
+local INFO_MOVE_TIME = 0.2
 
 local mWidget
 local mTokenInput
@@ -23,6 +26,7 @@ local mStep
 local mCurrentTotalNum
 local mCompetitionCodeString
 local mHasMoreToLoad
+local mSelfInfoOpen
 
 -- DS for competitionDetail see CompetitionDetail
 function loadFrame( subType, competitionId, showRequestPush )
@@ -30,7 +34,12 @@ function loadFrame( subType, competitionId, showRequestPush )
     mSubType = subType
     competitionDetail = Logic:getCompetitionDetail()
 
-	local widget = GUIReader:shareReader():widgetFromJsonFile("scenes/CompetitionLeaderboard.json")
+    local widget
+    if competitionDetail:getCompetitionType() == CompetitionType["Private"] then
+        widget = GUIReader:shareReader():widgetFromJsonFile("scenes/CompetitionLeaderboard.json")
+    else
+        widget = GUIReader:shareReader():widgetFromJsonFile("scenes/SpecialCompetitionLeaderboard.json")
+    end
     mWidget = widget
     mWidget:registerScriptHandler( EnterOrExit )
     SceneManager.clearNAddWidget( mWidget )
@@ -56,6 +65,7 @@ function loadFrame( subType, competitionId, showRequestPush )
 
     mStep = 1
     mHasMoreToLoad = true
+    mSelfInfoOpen = false
 
     if showRequestPush then
         local pushEnabledCheck = tolua.cast( mWidget:getChildByName("pushEnabled"), "CheckBox" )
@@ -110,40 +120,50 @@ end
 
 function initContent( competitionDetail )
 
-    -- Token
-    mCompetitionCodeString = competitionDetail:getJoinToken()
-    local inputDelegate = EditBoxDelegateForLua:create()
-    inputDelegate:registerEventScriptHandler( EDIT_BOX_EVENT_TEXT_CHANGED, function ( textBox, text )
-        mTokenInput:setText( mCompetitionCodeString )
-    end )
-    --[[inputDelegate:registerEventScriptHandler( EDIT_BOX_EVENT_DID_BEGIN, function ( textBox )
-        -- In order not to change the object-c code, here is the work around.
-        -- recall the setPosition() to invoke the CCEditBoxImplIOS::adjustTextFieldPosition()
-        -- Todo remove this code after the object-c fix is pushed out.
-        mTokenInput:setPosition( mTokenInput:getPosition() )
-    end )--]]
-    mWidget:getChildByName( "token" ):addNode( tolua.cast( inputDelegate, "CCNode" ) )
+    if competitionDetail:getCompetitionType() == CompetitionType["Private"] then
+        -- Token
+        mCompetitionCodeString = competitionDetail:getJoinToken()
+        local inputDelegate = EditBoxDelegateForLua:create()
+        inputDelegate:registerEventScriptHandler( EDIT_BOX_EVENT_TEXT_CHANGED, function ( textBox, text )
+            mTokenInput:setText( mCompetitionCodeString )
+        end )
+        --[[inputDelegate:registerEventScriptHandler( EDIT_BOX_EVENT_DID_BEGIN, function ( textBox )
+            -- In order not to change the object-c code, here is the work around.
+            -- recall the setPosition() to invoke the CCEditBoxImplIOS::adjustTextFieldPosition()
+            -- Todo remove this code after the object-c fix is pushed out.
+            mTokenInput:setPosition( mTokenInput:getPosition() )
+        end )--]]
+        mWidget:getChildByName( "token" ):addNode( tolua.cast( inputDelegate, "CCNode" ) )
 
-    mTokenInput = ViewUtils.createTextInput( mWidget:getChildByName( "token" ), "", 230, 40 )
-    mTokenInput:setTouchPriority( SceneManager.TOUCH_PRIORITY_MINUS_ONE )
-    mTokenInput:setText( mCompetitionCodeString )
-    mTokenInput:setDelegate( inputDelegate.__CCEditBoxDelegate__ )
-    mTokenInput:setTouchEnabled( false )
+        mTokenInput = ViewUtils.createTextInput( mWidget:getChildByName( "token" ), "", 230, 40 )
+        mTokenInput:setTouchPriority( SceneManager.TOUCH_PRIORITY_MINUS_ONE )
+        mTokenInput:setText( mCompetitionCodeString )
+        mTokenInput:setDelegate( inputDelegate.__CCEditBoxDelegate__ )
+        mTokenInput:setTouchEnabled( false )
+
+        local copyCodeBt = mWidget:getChildByName("copy")
+        copyCodeBt:addTouchEventListener( copyCodeEventHandler )
+        local shareBt = mWidget:getChildByName("share")
+        shareBt:addTouchEventListener( shareTypeSelectEventHandler )
+    else
+        local banner = mWidget:getChildByName("Panel_Banner")
+        local shareBt = banner:getChildByName("Button_Share")
+        shareBt:addTouchEventListener( shareTypeSelectEventHandler )
+
+        local selfInfo = competitionDetail:getSelfInfo()
+        initSelfContent( selfInfo )
+    end
 
     -- Add the latest chat message.
     mChatMessageContainer = mWidget:getChildByName("chatRoom")
     updateLatestChatMessage( competitionDetail:getLatestChatMessage() )
 
-    local copyCodeBt = mWidget:getChildByName("copy")
-    copyCodeBt:addTouchEventListener( copyCodeEventHandler )
-    local shareBt = mWidget:getChildByName("share")
-    shareBt:addTouchEventListener( shareTypeSelectEventHandler )
     local chatBt = mWidget:getChildByName("chatRoom")
     chatBt:addTouchEventListener( chatRoomEventHandler )
 end
 
 function initLeaderboard( competitionDetail )
-	local contentContainer = tolua.cast( mWidget:getChildByName("ScrollView"), "ScrollView" )
+	local contentContainer = tolua.cast( mWidget:getChildByName("ScrollView_Leaderboard"), "ScrollView" )
     contentContainer:removeAllChildrenWithCleanup( true )
 
     local layoutParameter = LinearLayoutParameter:create()
@@ -167,34 +187,16 @@ function initLeaderboard( competitionDetail )
     description:setText( competitionDetail:getDescription() )
     --]]
     
-
     -- Add the leaderboard info
     local leaderboardInfo = competitionDetail:getDto()
     for i = 1, table.getn( leaderboardInfo ) do
-    	local eventHandler = function( sender, eventType )
-            if eventType == TOUCH_EVENT_ENDED then
-                contentClick( leaderboardInfo[i] )
-            end
-        end
-
-        local content = SceneManager.widgetFromJsonFile("scenes/LeaderboardListContent.json")
+        local content = SceneManager.widgetFromJsonFile("scenes/CommunityLeaderboardListContentFrame.json")
         content:setLayoutParameter( layoutParameter )
         contentContainer:addChild( content )
         contentHeight = contentHeight + content:getSize().height
         initLeaderboardContent( i, content, leaderboardInfo[i] )
-        content:addTouchEventListener( eventHandler )
-
-        if i == table.getn( leaderboardInfo ) then
-            content:getChildByName("separater"):setEnabled( false )
-        end
     end
     mCurrentTotalNum = table.getn( leaderboardInfo )
-
-    local challengeContent = SceneManager.widgetFromJsonFile("scenes/CompetitionInviteContent.json")
-    challengeContent:setLayoutParameter( layoutParameter )
-    contentContainer:addChild( challengeContent )
-    contentHeight = contentHeight + challengeContent:getSize().height
-    challengeContent:getChildByName("challenge"):addTouchEventListener( shareTypeSelectEventHandler )
 
     contentContainer:setInnerContainerSize( CCSize:new( 0, contentHeight ) )
     local layout = tolua.cast( contentContainer, "Layout" )
@@ -289,31 +291,244 @@ function chatRoomEventHandler( sender, eventType )
     end
 end
 
+-- function initLeaderboardContent( i, content, info )
+--     local name = tolua.cast( content:getChildByName("name"), "Label" )
+--     local score = tolua.cast( content:getChildByName("score"), "Label" )
+--     local index = tolua.cast( content:getChildByName("index"), "Label" )
+--     local logo = tolua.cast( content:getChildByName("logo"), "ImageView" )
+
+--     if info["DisplayName"] == nil then
+--         name:setText( Constants.String.unknown_name )
+--     else
+--         name:setText( info["DisplayName"] )
+--     end
+--     score:setText( string.format( mSubType["description"], info[mSubType["dataColumnId"]], info["NumberOfCoupons"] ) )
+--     if info[mSubType["dataColumnId"]] < 0 then
+--         score:setColor( ccc3( 240, 75, 79 ) )
+--     end
+--     index:setText( i )
+
+
+--     local seqArray = CCArray:create()
+--     seqArray:addObject( CCDelayTime:create( i * 0.2 ) )
+--     seqArray:addObject( CCCallFuncN:create( function()
+--         if info["PictureUrl"] ~= nil then
+--             local handler = function( filePath )
+--                 if filePath ~= nil and mWidget ~= nil then
+--                     logo:loadTexture( filePath )
+--                 end
+--             end
+--             SMIS.getSMImagePath( info["PictureUrl"], handler )
+--         end
+--     end ) )
+
+--     mWidget:runAction( CCSequence:create( seqArray ) )
+-- end
+
+function initSelfContent( info )
+    local top  = mWidget:getChildByName("Panel_Top")
+    local name = tolua.cast( top:getChildByName("Label_Name"), "Label" )
+    local score = tolua.cast( top:getChildByName("Label_Score"), "Label" )
+    local index = tolua.cast( top:getChildByName("Label_Index"), "Label" )
+    local logo = tolua.cast( top:getChildByName("Image_Logo"), "ImageView" )
+    local click = top:getChildByName("Panel_Click")
+    local check = tolua.cast( top:getChildByName("Image_Check"), "ImageView" )
+    local qualified = top:getChildByName("Panel_Info")
+    
+    local infoCheck = tolua.cast( qualified:getChildByName("Image_Check"), "ImageView" )
+    local infoHint = tolua.cast( qualified:getChildByName("Label_Hint"), "Label" )
+    local infoQualified = tolua.cast( qualified:getChildByName("Label_Qualified"), "Label" )
+
+    local eventHandler = function( sender, eventType )
+        if eventType == TOUCH_EVENT_ENDED then
+            contentClick( info )
+        end
+    end
+    click:addTouchEventListener( eventHandler )    
+
+    local infoHandler = function( sender, eventType )
+        if eventType == TOUCH_EVENT_ENDED then
+            local deltaX
+            if mSelfInfoOpen then
+                click:setSize( CCSize:new( 560, click:getSize().height ) )
+                mSelfInfoOpen = false
+                deltaX = 205
+            else
+                click:setSize( CCSize:new( 355, click:getSize().height ) )
+                mSelfInfoOpen = true
+                deltaX = -205
+            end
+
+            local resultSeqArray = CCArray:create()
+            resultSeqArray:addObject( CCMoveBy:create( INFO_MOVE_TIME, ccp( deltaX, 0 ) ) )
+            qualified:runAction( CCSequence:create( resultSeqArray ) )
+
+        end
+    end
+    qualified:addTouchEventListener( infoHandler )
+    if info["DisplayName"] == nil then
+        name:setText( Constants.String.unknown_name )
+    else
+        name:setText( info["DisplayName"] )
+    end
+
+    score:setText( string.format( score:getStringValue(), info["Profit"] ) )
+    if info["Profit"] < 0 then
+        score:setColor( ccc3( 240, 75, 79 ) )
+    end
+
+    index:setText( info["Position"] )
+
+    if info["NumberOfUserGamesLeftToQualify"] <= 0 then
+        check:loadTexture( Constants.COMPETITION_SCENE_IMAGE_PATH.."icn-qualified.png" )
+        infoCheck:loadTexture( Constants.COMPETITION_SCENE_IMAGE_PATH.."icn-qualified.png" )
+        infoQualified:setText( Constants.String.event.status_qualified )
+        infoHint:setText( Constants.String.event.hint_qualified )
+    else
+        infoQualified:setText( Constants.String.event.status_unqualified )
+        infoHint:setText( string.format( Constants.String.event.hint_unqualified, info["NumberOfUserGamesLeftToQualify"] ) )
+    end
+    
+    local seqArray = CCArray:create()
+    seqArray:addObject( CCDelayTime:create( 0.2 ) )
+    seqArray:addObject( CCCallFuncN:create( function()
+        if info["PictureUrl"] ~= nil then
+            local handler = function( filePath )
+                if filePath ~= nil and mWidget ~= nil and logo ~= nil then
+                    local safeLoadTexture = function()
+                        logo:loadTexture( filePath )
+                    end
+
+                    local errorHandler = function( msg )
+                        -- Do nothing
+                    end
+
+                    xpcall( safeLoadTexture, errorHandler )
+                end
+            end
+            SMIS.getSMImagePath( info["PictureUrl"], handler )
+        end
+    end ) )
+
+    mWidget:runAction( CCSequence:create( seqArray ) )
+
+end
+
 function initLeaderboardContent( i, content, info )
-    local name = tolua.cast( content:getChildByName("name"), "Label" )
-    local score = tolua.cast( content:getChildByName("score"), "Label" )
-    local index = tolua.cast( content:getChildByName("index"), "Label" )
-    local logo = tolua.cast( content:getChildByName("logo"), "ImageView" )
+    local top  = content:getChildByName("Panel_Top")
+    local name = tolua.cast( top:getChildByName("Label_Name"), "Label" )
+    local score = tolua.cast( top:getChildByName("Label_Score"), "Label" )
+    local index = tolua.cast( top:getChildByName("Label_Index"), "Label" )
+    local logo = tolua.cast( top:getChildByName("Image_Logo"), "ImageView" )
+    local click = top:getChildByName("Panel_Click")
+    local drop = top:getChildByName("Panel_Dropdown")
+    local btn = tolua.cast( drop:getChildByName("Button_Dropdown"), "Button" )
+    local stats = top:getChildByName("Panel_Stats")
+    stats:setEnabled( false )
+
+    local check = tolua.cast( top:getChildByName("Image_Check"), "ImageView" )
+    if competitionDetail:getCompetitionType() == CompetitionType["Private"] then
+        check:setEnabled( false )
+    else
+        if info["NumberOfUserGamesLeftToQualify"] <= 0 then
+            check:loadTexture( Constants.COMPETITION_SCENE_IMAGE_PATH.."icn-qualified.png" )
+        end
+    end
+
+    local eventHandler = function( sender, eventType )
+        if eventType == TOUCH_EVENT_ENDED then
+            contentClick( info )
+        end
+    end
+    click:addTouchEventListener( eventHandler )
+
+    local dropHandler = function( sender, eventType )
+        if eventType == TOUCH_EVENT_ENDED then
+            
+            local deltaY = stats:getSize().height
+            local contentContainer = tolua.cast( mWidget:getChildByName("ScrollView_Leaderboard"), "ScrollView" )
+            local contentHeight = contentContainer:getInnerContainerSize().height
+
+            if stats:isEnabled() then
+                stats:setEnabled( false )
+                btn:setBrightStyle( BRIGHT_NORMAL )
+
+                content:setSize( CCSize:new( content:getSize().width, content:getSize().height - deltaY ) )
+                top:setPositionY( top:getPositionY() - deltaY )
+
+                contentHeight = contentHeight - deltaY
+            else
+                stats:setEnabled( true )
+                btn:setBrightStyle( BRIGHT_HIGHLIGHT )
+                
+                content:setSize( CCSize:new( content:getSize().width, content:getSize().height + deltaY ) )
+                top:setPositionY( top:getPositionY() + deltaY )
+
+                contentHeight = contentHeight + deltaY
+            end
+
+            contentContainer:setInnerContainerSize( CCSize:new( 0, contentHeight ) )
+            local layout = tolua.cast( contentContainer, "Layout" )
+            layout:requestDoLayout()
+            contentContainer:addEventListenerScrollView( scrollViewEventHandler )
+        end
+    end
+    drop:addTouchEventListener( dropHandler )
+    btn:addTouchEventListener( dropHandler )
 
     if info["DisplayName"] == nil then
         name:setText( Constants.String.unknown_name )
     else
         name:setText( info["DisplayName"] )
     end
-    score:setText( string.format( mSubType["description"], info[mSubType["dataColumnId"]], info["NumberOfCoupons"] ) )
+
+
+    if competitionDetail:getCompetitionType() == CompetitionType["Private"] then
+        score:setText( string.format( mSubType["description"], info[mSubType["dataColumnId"]], info["NumberOfCoupons"] ) )
+    else
+        score:setText( string.format( score:getStringValue(), info["Profit"] ) )
+    end
     if info[mSubType["dataColumnId"]] < 0 then
         score:setColor( ccc3( 240, 75, 79 ) )
     end
+
+    string.format( mSubType["description"], info[mSubType["dataColumnId"]], info["NumberOfCoupons"] )
     index:setText( i )
 
+    -- stat box
+    local stat_win = tolua.cast( stats:getChildByName("Label_Win"), "Label" )
+    local stat_lose = tolua.cast( stats:getChildByName("Label_Lose"), "Label" )
+    local stat_win_percent = tolua.cast( stats:getChildByName("Label_Win_Percent"), "Label" )
+    local stat_gain_percent = tolua.cast( stats:getChildByName("Label_Gain_Percent"), "Label" )
+    local stat_last_10_win = tolua.cast( stats:getChildByName("Label_W"), "Label" )
+    local stat_last_10_lose = tolua.cast( stats:getChildByName("Label_L"), "Label" )
+
+    stat_win:setText( info["NumberOfCouponsWon"] )
+    stat_lose:setText( info["NumberOfCouponsLost"] )
+    stat_win_percent:setText( string.format( "%d", info["WinPercentage"] ) )
+    stat_gain_percent:setText( info["Roi"] )
+    stat_last_10_win:setText( info["WinStreakCouponsWon"] )
+    stat_last_10_lose:setText( info["WinStreakCouponsLost"] )
+
+    if info["Roi"] < 0 then
+        stat_gain_percent:setColor( ccc3( 240, 75, 79 ) )
+    end
 
     local seqArray = CCArray:create()
     seqArray:addObject( CCDelayTime:create( i * 0.2 ) )
     seqArray:addObject( CCCallFuncN:create( function()
         if info["PictureUrl"] ~= nil then
             local handler = function( filePath )
-                if filePath ~= nil and mWidget ~= nil then
-                    logo:loadTexture( filePath )
+                if filePath ~= nil and mWidget ~= nil and logo ~= nil then
+                    local safeLoadTexture = function()
+                        logo:loadTexture( filePath )
+                    end
+
+                    local errorHandler = function( msg )
+                        -- Do nothing
+                    end
+
+                    xpcall( safeLoadTexture, errorHandler )
                 end
             end
             SMIS.getSMImagePath( info["PictureUrl"], handler )
@@ -329,7 +544,7 @@ function loadMoreContent( leaderboardInfo )
         return
     end
     
-    local contentContainer = tolua.cast( mWidget:getChildByName("ScrollView"), "ScrollView" )
+    local contentContainer = tolua.cast( mWidget:getChildByName("ScrollView_Leaderboard"), "ScrollView" )
 
     local layoutParameter = LinearLayoutParameter:create()
     layoutParameter:setGravity(LINEAR_GRAVITY_CENTER_VERTICAL)
@@ -342,7 +557,7 @@ function loadMoreContent( leaderboardInfo )
             end
         end
 
-        local content = SceneManager.widgetFromJsonFile("scenes/LeaderboardListContent.json")
+        local content = SceneManager.widgetFromJsonFile("scenes/CommunityLeaderboardListContentFrame.json")
         content:setLayoutParameter( layoutParameter )
         contentContainer:addChild( content )
         contentHeight = contentHeight + content:getSize().height
