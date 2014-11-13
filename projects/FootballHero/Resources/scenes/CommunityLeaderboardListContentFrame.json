@@ -173,8 +173,8 @@
               "rotation": 0,
               "scaleX": 1,
               "scaleY": 1,
-              "sizePercentX": 0.125,
-              "sizePercentY": 0.8,
+              "sizePercentX": 0.040625,
+              "sizePercentY": 0.26,
               "sizeType": 0,
               "tag": 17353,
               "touchAble": false,
@@ -284,7 +284,7 @@
               "touchAble": false,
               "useMergedTexture": false,
               "visible": true,
-              "width": 119,
+              "width": 102,
               "x": 204,
               "y": 28,
               "areaHeight": 0,
@@ -293,7 +293,7 @@
               "fontName": "fonts/Helvetica neue.ttf",
               "fontSize": 27,
               "hAlignment": 0,
-              "text": "6500 won",
+              "text": "%d won",
               "touchScaleEnable": false,
               "vAlignment": 0
             }
