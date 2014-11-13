@@ -90,31 +90,36 @@ function initCompetitionScene( competitionFrame, compList )
         layoutParameter:setGravity(LINEAR_GRAVITY_CENTER_VERTICAL)
         for i = 1, compList:getSize() do
             local competition = compList:get(i)
-            local eventHandler = function( sender, eventType )
-                if eventType == TOUCH_EVENT_ENDED then
-                    enterCompetition( competition["Id"],  competition["CompetitionType"] ~=CompetitionType["Private"] )
+
+            if competition["CompetitionStatus"] == CompetitionStatus["Joined"] then
+
+                local eventHandler = function( sender, eventType )
+                    if eventType == TOUCH_EVENT_ENDED then
+                        enterCompetition( competition["Id"],  competition["CompetitionType"] ~=CompetitionType["Private"] )
+                    end
                 end
+                
+                local content = SceneManager.widgetFromJsonFile("scenes/CompetitionItemNew.json")
+                content:setLayoutParameter( layoutParameter )
+                scrollViewJoined:addChild( content )
+                height = height + content:getSize().height
+
+                local name = tolua.cast( content:getChildByName("Label_Name"), "Label" )
+                name:setText( competition["Name"] )
+
+                local bt = tolua.cast( content:getChildByName("Panel_Button"), "Layout" )
+                bt:addTouchEventListener( eventHandler )
+                
+                if competition["CompetitionType"] ~=CompetitionType["Private"] then
+                    bt:setBackGroundImage( Constants.COMPETITION_IMAGE_PATH..Constants.EntryPrefix..competition["JoinToken"]..".png" )
+                    name:setEnabled( false )
+                end
+
+                --[[if i == compList:getSize() then
+                    local separator = content:getChildByName("Image_Separator")
+                    separator:setEnabled( false )
+                end]]--
             end
-            
-            local content = SceneManager.widgetFromJsonFile("scenes/CompetitionItemNew.json")
-            content:setLayoutParameter( layoutParameter )
-            scrollViewJoined:addChild( content )
-            height = height + content:getSize().height
-
-            local name = tolua.cast( content:getChildByName("Label_Name"), "Label" )
-            name:setText( competition["Name"] )
-
-            local bt = tolua.cast( content:getChildByName("Panel_Button"), "Layout" )
-            bt:addTouchEventListener( eventHandler )
-            
-            if competition["CompetitionType"] ~=CompetitionType["Private"] and competition["CompetitionStatus"] == CompetitionStatus["Joined"] then
-                bt:setBackGroundImage( Constants.COMPETITION_IMAGE_PATH..Constants.EntryPrefix..competition["Id"]..".png" )
-            end
-
-            --[[if i == compList:getSize() then
-                local separator = content:getChildByName("Image_Separator")
-                separator:setEnabled( false )
-            end]]--
         end
 
         local originalHeight = scrollViewJoined:getInnerContainerSize().height
@@ -170,11 +175,11 @@ function initSpecialCompetitions( parent, compList )
             local bannerFrame = SceneManager.widgetFromJsonFile("scenes/CommunityCompetitionBannerFrame.json")
             
             local bannerBG = tolua.cast( bannerFrame:getChildByName( "Image_BannerBG" ), "ImageView" )
-            bannerBG:loadTexture(  Constants.COMPETITION_IMAGE_PATH..Constants.BannerPrefix..competition["Id"]..".png" )
+            bannerBG:loadTexture(  Constants.COMPETITION_IMAGE_PATH..Constants.BannerPrefix..competition["JoinToken"]..".png" )
 
             local joinEventHandler = function( sender, eventType )
                 if eventType == TOUCH_EVENT_ENDED then
-                    EventManager:postEvent( Event.Do_Join_Competition, { competition["Id"] } )
+                    EventManager:postEvent( Event.Do_Join_Competition, { competition["JoinToken"] } )
                 end
             end
             local joinBtn = bannerFrame:getChildByName( "Button_Join" )

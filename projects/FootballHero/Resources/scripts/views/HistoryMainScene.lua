@@ -8,6 +8,7 @@ local TeamConfig = require("scripts.config.Team")
 local Logic = require("scripts.Logic").getInstance()
 local Constants = require("scripts.Constants")
 local SMIS = require("scripts.SMIS")
+local CompetitionType = require("scripts.data.Competitions").CompetitionType
 
 local CONTENT_FADEIN_TIME = 1
 
@@ -24,7 +25,7 @@ function loadFrame( userId, userName, competitionId, couponHistory )
     mCompetitionId = competitionId
     local showBackButton = false
 
-    mWidget = GUIReader:shareReader():widgetFromJsonFile("scenes/MyHeroHome.json")
+    mWidget = GUIReader:shareReader():widgetFromJsonFile("scenes/MyPicksHome.json")
 
     local totalPoints = tolua.cast( mWidget:getChildByName("Label_Total_Points"), "Label" )
     totalPoints:setText( string.format( totalPoints:getStringValue(), couponHistory:getBalance() ) )
@@ -67,6 +68,29 @@ function loadFrame( userId, userName, competitionId, couponHistory )
     initContent( couponHistory )
 end
 
+function refreshFrame( userId, userName, competitionId, couponHistory )
+    mCompetitionId = competitionId
+    local showBackButton = false
+
+    local totalPoints = tolua.cast( mWidget:getChildByName("Label_Total_Points"), "Label" )
+    totalPoints:setText( string.format( totalPoints:getStringValue(), couponHistory:getBalance() ) )
+
+    mUserId = userId
+    if mUserId == Logic:getUserId() then
+        if mCompetitionId ~= nil then
+            showBackButton = true
+        end
+    else
+        showBackButton = true
+    end
+
+    mStep = 1
+    mHasMoreToLoad = false
+    initContent( couponHistory )
+
+end
+
+
 function EnterOrExit( eventType )
     if eventType == "enter" then
     elseif eventType == "exit" then
@@ -87,6 +111,26 @@ function initContent( couponHistory )
     local contentHeight = 0
 
     local seqArray = CCArray:create()
+
+    local competitionDetail = Logic:getCompetitionDetail()
+    
+    local label = tolua.cast( mWidget:getChildByName("Label_CompTitle"), "Label" )
+    local show = tolua.cast( mWidget:getChildByName("Button_Show"), "Button" )
+    if mCompetitionId ~= nil then
+        label:setText( competitionDetail:getName() )
+        show:setTitleText( Constants.String.history.show_all )
+        local eventHandler = function( sender, eventType )
+            if eventType == TOUCH_EVENT_ENDED then
+                EventManager:postEvent( Event.Enter_History )
+            end
+        end
+        show:addTouchEventListener( eventHandler )
+        show:setEnabled( true )
+    else
+        label:setText( Constants.String.history.predictions_all )
+        show:setEnabled( false )
+    end
+
 
     -- Stats
     local stats = mWidget:getChildByName("Panel_Stats")

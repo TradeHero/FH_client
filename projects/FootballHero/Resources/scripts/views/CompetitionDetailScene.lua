@@ -186,6 +186,9 @@ function initContent( competitionDetail )
         local shareBt = banner:getChildByName("Button_Share")
         shareBt:addTouchEventListener( shareTypeSelectEventHandler )
 
+        local bannerBG = tolua.cast( banner:getChildByName("Image_BannerBG"), "ImageView" )
+        bannerBG:loadTexture( Constants.COMPETITION_IMAGE_PATH..Constants.BannerPrefix..competitionDetail:getJoinToken()..".png" )
+
         local selfInfo = competitionDetail:getSelfInfo()
         initSelfContent( selfInfo )
     end

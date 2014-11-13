@@ -56,7 +56,7 @@
     <string>MatchListScene.json</string>
     <string>MatchPrediction.json</string>
     <string>MyHeroEmptyFrame.json</string>
-    <string>MyHeroHome.json</string>
+    <string>MyPicksHome.json</string>
     <string>Navigator.json</string>
     <string>PNCompetitionMessage.json</string>
     <string>PNPredictionMessage.json</string>
@@ -102,9 +102,13 @@
   <ResRelativePath />
   <imageFileList />
   <imagePngList>
-    <string>Competition/img-popupimg.png</string>
-    <string>Tutorial/Default Button.png</string>
+    <string>MatchListScene/match_bkg.png</string>
+    <string>header/footballhero-logo.png</string>
+    <string>header/back.png</string>
+    <string>MyHero/img-profbox.png</string>
+    <string>MyHero/img-photo.png</string>
+    <string>Competition/btn-learnmore.png</string>
   </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>CommunityLeaderboardListContentFrame.json</CurrentUIJson>
+  <CurrentUIJson>CompetitionMore.json</CurrentUIJson>
 </UIProject>

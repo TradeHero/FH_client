@@ -39,24 +39,18 @@ CompetitionDetail = {}
    ],
 
    "CompetitionInfoDTO": {
-
-      "Id": 3,
-
-      "Name": "2222",
-
-      "Description": "2222",
-
-      "StartTimeStamp": "2014-06-20T08:30:36",
-
-      "EndTimeStamp": "2014-09-11T16:00:00",
-
-      "JoinToken":"5i7o0izr",
-
-      "Open": true,
-
-      "OwningUserName": "Test001"
-
-   },
+        "Id": 12737,
+        "Name": "Team Football Hero",
+        "Description": "My Hero company challenge ",
+        "StartTimeStamp": 1414650801,
+        "EndTimeStamp": 0,
+        "JoinToken": "779dpc",
+        "Open": true,
+        "OwningUserName": "Adrian Lam",
+        "OwnedByMe": false,
+        "CompetitionStatus": 0,
+        "CompetitionType": 3
+    },
 
    "LatestChatMessage": {
       "MessageText":"111",

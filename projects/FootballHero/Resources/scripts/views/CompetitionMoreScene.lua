@@ -86,17 +86,18 @@ function initContent( competitionDetail, selectedLeagues )
     layoutParameter:setGravity(LINEAR_GRAVITY_CENTER_VERTICAL)
     mContainerHeight = 0
 
-    -- Competition Banner
-    local banner = GUIReader:shareReader():widgetFromJsonFile("scenes/CommunityCompetitionBannerFrame.json")
-    local joinBtn = banner:getChildByName("Button_Join")
-    joinBtn:setEnabled( false )
-    local bannerBG = banner:getChildByName("Image_BannerBG")
-    -- TODO
-    -- bannerBG:loadTexture()
-
-    banner:setLayoutParameter( layoutParameter )
-    contentContainer:addChild( banner )
-    mContainerHeight = mContainerHeight + banner:getSize().height
+    if competitionDetail:getCompetitionType() ~=CompetitionType["Private"] then
+        -- Competition Banner
+        local banner = GUIReader:shareReader():widgetFromJsonFile("scenes/CommunityCompetitionBannerFrame.json")
+        local joinBtn = banner:getChildByName("Button_Join")
+        joinBtn:setEnabled( false )
+        local bannerBG = tolua.cast( banner:getChildByName("Image_BannerBG"), "ImageView" )
+        bannerBG:loadTexture( Constants.COMPETITION_IMAGE_PATH..Constants.BannerPrefix..competitionDetail:getJoinToken()..".png" )
+        
+        banner:setLayoutParameter( layoutParameter )
+        contentContainer:addChild( banner )
+        mContainerHeight = mContainerHeight + banner:getSize().height
+    end
 
     -- Add the competition detail info
     local content = GUIReader:shareReader():widgetFromJsonFile("scenes/CompetitionMoreContent.json")
