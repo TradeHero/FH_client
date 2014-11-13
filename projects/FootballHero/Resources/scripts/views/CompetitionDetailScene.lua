@@ -28,6 +28,7 @@ local mCompetitionCodeString
 local mHasMoreToLoad
 local mSelfInfoOpen
 local mCompetitionType
+local mCompetitionToken
 
 -- DS for competitionDetail see CompetitionDetail
 function loadFrame( subType, competitionId, showRequestPush )
@@ -35,6 +36,7 @@ function loadFrame( subType, competitionId, showRequestPush )
     mSubType = subType
     competitionDetail = Logic:getCompetitionDetail()
     mCompetitionType = competitionDetail:getCompetitionType()
+    mCompetitionToken = competitionDetail:getJoinToken()
 
     local widget
     if mCompetitionType == CompetitionType["Private"] then
@@ -313,7 +315,7 @@ function competitionPrizeEventHandler( sender, eventType )
     if eventType == TOUCH_EVENT_ENDED then
         local title = tolua.cast( mWidget:getChildByName("title"), "Label" )
         local titleText = title:getStringValue()
-        EventManager:postEvent( Event.Enter_Competition_Prize, { titleText, mCompetitionId, Constants.COMPETITION_PRIZE_OVERALL, 0 } )
+        EventManager:postEvent( Event.Enter_Competition_Prize, { titleText, mCompetitionToken, Constants.COMPETITION_PRIZE_OVERALL, 0 } )
     end
 end
 
