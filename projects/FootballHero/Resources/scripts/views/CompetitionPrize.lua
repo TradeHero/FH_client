@@ -22,7 +22,7 @@ function loadFrame( name, id, type, index )
     local title = tolua.cast( widget:getChildByName("title"), "Label" )
     title:setText( name )
 
-    mURL = "http://fhwebsite.cloudapp.net/prize/"..id.."/"..type
+    mURL = "http://footballheroapp.com/prize/"..id.."/"..type
     if type ~= Constants.COMPETITION_PRIZE_OVERALL then
         mURL = mURL.."_"..index
     end
