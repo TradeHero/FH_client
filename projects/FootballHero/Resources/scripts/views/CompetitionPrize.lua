@@ -4,6 +4,8 @@ local SceneManager = require("scripts.SceneManager")
 local EventManager = require("scripts.events.EventManager").getInstance()
 local Event = require("scripts.events.Event").EventList
 local Navigator = require("scripts.views.Navigator")
+local Constants = require("scripts.Constants")
+
 
 local mWidget
 local mURL
@@ -15,20 +17,22 @@ function loadFrame( name, id, type, index )
     SceneManager.clearNAddWidget( widget )
     SceneManager.setKeypadBackListener( keypadBackEventHandler )
 
-    Navigator.loadFrame( widget )
-
     local backBt = widget:getChildByName("back")
     backBt:addTouchEventListener( backEventHandler )
     local title = tolua.cast( widget:getChildByName("title"), "Label" )
     title:setText( name )
 
-    mURL = "http://fhwebsite.cloudapp.net/prize/"..id.."/"..type.."_"..index..".html"
+    mURL = "http://fhwebsite.cloudapp.net/prize/"..id.."/"..type
+    if type ~= Constants.COMPETITION_PRIZE_OVERALL then
+        mURL = mURL.."_"..index
+    end
+    mURL = mURL..".html"
+    CCLuaLog( "Prize url is: "..mURL )
+    WebviewDelegate:sharedDelegate():openWebpage( mURL, 0, 40, 320, 528 )
 end
 
 function EnterOrExit( eventType )
     if eventType == "enter" then
-        CCLuaLog( "Prize url is: "..mURL )
-        WebviewDelegate:sharedDelegate():openWebpage( "http://fhwebsite.cloudapp.net/Home/Faq", 0, 40, 320, 528 )
     elseif eventType == "exit" then
         mWidget = nil
     end
