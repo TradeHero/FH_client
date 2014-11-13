@@ -29,6 +29,7 @@ LOGO_IMAGE_PATH = "myLogo.jpg"
 BannerPrefix = "banner_"
 WelcomePrefix = "welcome_"
 EntryPrefix = "entry_"
+PrizesPrefix = "prizes_"
 
 ZORDER_POPUP = 65535
 

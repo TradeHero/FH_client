@@ -190,7 +190,7 @@ function initContent( competitionDetail )
         prizeBt:addTouchEventListener( competitionPrizeEventHandler )
 
         local bannerBG = tolua.cast( banner:getChildByName("Image_BannerBG"), "ImageView" )
-        bannerBG:loadTexture( Constants.COMPETITION_IMAGE_PATH..Constants.BannerPrefix..competitionDetail:getJoinToken()..".png" )
+        bannerBG:loadTexture( Constants.COMPETITION_IMAGE_PATH..Constants.PrizesPrefix..competitionDetail:getJoinToken()..".png" )
 
         local selfInfo = competitionDetail:getSelfInfo()
         initSelfContent( selfInfo )
