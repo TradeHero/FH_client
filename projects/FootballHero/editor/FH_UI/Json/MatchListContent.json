@@ -11,14 +11,11 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "Navigator/matches_inactive.png",
-    "Navigator/matches_active.png",
-    "Navigator/community_inactive.png",
-    "Navigator/community_active.png",
-    "Navigator/profile_inactive.png",
-    "Navigator/profile_active.png",
-    "Navigator/settings_inactive.png",
-    "Navigator/settings_active.png"
+    "MatchListScene/match_bkg.png",
+    "header/footballhero-logo.png",
+    "header/back.png",
+    "MyHero/img-profbox.png",
+    "MyHero/img-photo.png"
   ],
   "version": "1.5.0.0",
   "widgetTree": {
