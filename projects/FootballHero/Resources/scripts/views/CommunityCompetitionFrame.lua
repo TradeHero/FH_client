@@ -89,13 +89,13 @@ function initCompetitionScene( competitionFrame, compList )
         local layoutParameter = LinearLayoutParameter:create()
         layoutParameter:setGravity(LINEAR_GRAVITY_CENTER_VERTICAL)
         for i = 1, compList:getSize() do
+            local competition = compList:get(i)
             local eventHandler = function( sender, eventType )
                 if eventType == TOUCH_EVENT_ENDED then
-                    enterCompetition( compList:get( i )["Id"] )
+                    enterCompetition( competition["Id"],  competition["CompetitionType"] ~=CompetitionType["Private"] )
                 end
             end
             
-            local competition = compList:get(i)
             local content = SceneManager.widgetFromJsonFile("scenes/CompetitionItemNew.json")
             content:setLayoutParameter( layoutParameter )
             scrollViewJoined:addChild( content )
@@ -188,6 +188,11 @@ function initSpecialCompetitions( parent, compList )
 end
 
 
-function enterCompetition( competitionId )
-    EventManager:postEvent( Event.Enter_Competition_Detail, { competitionId } )
+function enterCompetition( competitionId, isSpecialComp )
+
+    if isSpecialComp then
+        EventManager:postEvent( Event.Enter_Competition_Detail, { competitionId, false, 3 } )
+    else
+        EventManager:postEvent( Event.Enter_Competition_Detail, { competitionId } )
+    end
 end

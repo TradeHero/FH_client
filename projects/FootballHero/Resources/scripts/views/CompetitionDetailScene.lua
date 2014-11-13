@@ -27,15 +27,17 @@ local mCurrentTotalNum
 local mCompetitionCodeString
 local mHasMoreToLoad
 local mSelfInfoOpen
+local mCompetitionType
 
 -- DS for competitionDetail see CompetitionDetail
 function loadFrame( subType, competitionId, showRequestPush )
     mCompetitionId = competitionId
     mSubType = subType
     competitionDetail = Logic:getCompetitionDetail()
+    mCompetitionType = competitionDetail:getCompetitionType()
 
     local widget
-    if competitionDetail:getCompetitionType() == CompetitionType["Private"] then
+    if mCompetitionType == CompetitionType["Private"] then
         widget = GUIReader:shareReader():widgetFromJsonFile("scenes/CompetitionLeaderboard.json")
     else
         widget = GUIReader:shareReader():widgetFromJsonFile("scenes/SpecialCompetitionLeaderboard.json")
@@ -62,6 +64,11 @@ function loadFrame( subType, competitionId, showRequestPush )
 
     initContent( competitionDetail )
     initLeaderboard( competitionDetail )
+
+    if mCompetitionType ~= CompetitionType["Private"] and isNewToCompetition() then
+        initWelcome()
+    end
+
 
     mStep = 1
     mHasMoreToLoad = true
@@ -118,9 +125,38 @@ function moreEventHandler( sender, eventType )
     end
 end
 
+function isNewToCompetition()
+    if CCUserDefault:sharedUserDefault():getBoolForKey( Constants.EVENT_WELCOME_KEY..mCompetitionId ) ~= true then
+        CCUserDefault:sharedUserDefault():setBoolForKey( Constants.EVENT_WELCOME_KEY..mCompetitionId, true )
+        return true
+    end
+    
+    return false
+end
+
+function initWelcome()
+    local seqArray = CCArray:create()
+    seqArray:addObject( CCDelayTime:create( 0.2 ) )
+    seqArray:addObject( CCCallFuncN:create( function()
+        local popup = GUIReader:shareReader():widgetFromJsonFile("scenes/CommunityCompetitionWelcome.json")
+        popup:setZOrder( Constants.ZORDER_POPUP )
+        mWidget:addChild(popup)
+
+        local start = popup:getChildByName( "Button_Play" )
+        local eventHandler = function( sender, eventType )
+            if eventType == TOUCH_EVENT_ENDED then
+                mWidget:removeChild(popup)
+            end
+        end
+        start:addTouchEventListener( eventHandler )
+    end ) )
+
+    mWidget:runAction( CCSequence:create( seqArray ) )
+end
+
 function initContent( competitionDetail )
 
-    if competitionDetail:getCompetitionType() == CompetitionType["Private"] then
+    if mCompetitionType == CompetitionType["Private"] then
         -- Token
         mCompetitionCodeString = competitionDetail:getJoinToken()
         local inputDelegate = EditBoxDelegateForLua:create()
@@ -170,23 +206,6 @@ function initLeaderboard( competitionDetail )
     layoutParameter:setGravity(LINEAR_GRAVITY_CENTER_VERTICAL)
     local contentHeight = 0
 
-    -- Add the competition detail info
-    --[[
-    local content = GUIReader:shareReader():widgetFromJsonFile("scenes/CompetitionLeaderboardInfo.json")
-    local time = tolua.cast( content:getChildByName("time"), "Label" )
-    local description = tolua.cast( content:getChildByName("description"), "Label" )
-    if competitionDetail:getEndTime() == 0 then
-        time:setText( string.format( "%s until forever", 
-                os.date( "%m/%d/%Y", competitionDetail:getStartTime() ) ) )
-    else
-        time:setText( string.format( "%s to %s", 
-                os.date( "%m/%d/%Y", competitionDetail:getStartTime() ), 
-                os.date( "%m/%d/%Y", competitionDetail:getEndTime() ) ) )
-    end
-    
-    description:setText( competitionDetail:getDescription() )
-    --]]
-    
     -- Add the leaderboard info
     local leaderboardInfo = competitionDetail:getDto()
     for i = 1, table.getn( leaderboardInfo ) do
@@ -291,40 +310,6 @@ function chatRoomEventHandler( sender, eventType )
     end
 end
 
--- function initLeaderboardContent( i, content, info )
---     local name = tolua.cast( content:getChildByName("name"), "Label" )
---     local score = tolua.cast( content:getChildByName("score"), "Label" )
---     local index = tolua.cast( content:getChildByName("index"), "Label" )
---     local logo = tolua.cast( content:getChildByName("logo"), "ImageView" )
-
---     if info["DisplayName"] == nil then
---         name:setText( Constants.String.unknown_name )
---     else
---         name:setText( info["DisplayName"] )
---     end
---     score:setText( string.format( mSubType["description"], info[mSubType["dataColumnId"]], info["NumberOfCoupons"] ) )
---     if info[mSubType["dataColumnId"]] < 0 then
---         score:setColor( ccc3( 240, 75, 79 ) )
---     end
---     index:setText( i )
-
-
---     local seqArray = CCArray:create()
---     seqArray:addObject( CCDelayTime:create( i * 0.2 ) )
---     seqArray:addObject( CCCallFuncN:create( function()
---         if info["PictureUrl"] ~= nil then
---             local handler = function( filePath )
---                 if filePath ~= nil and mWidget ~= nil then
---                     logo:loadTexture( filePath )
---                 end
---             end
---             SMIS.getSMImagePath( info["PictureUrl"], handler )
---         end
---     end ) )
-
---     mWidget:runAction( CCSequence:create( seqArray ) )
--- end
-
 function initSelfContent( info )
     local top  = mWidget:getChildByName("Panel_Top")
     local name = tolua.cast( top:getChildByName("Label_Name"), "Label" )
@@ -427,7 +412,7 @@ function initLeaderboardContent( i, content, info )
     stats:setEnabled( false )
 
     local check = tolua.cast( top:getChildByName("Image_Check"), "ImageView" )
-    if competitionDetail:getCompetitionType() == CompetitionType["Private"] then
+    if mCompetitionType == CompetitionType["Private"] then
         check:setEnabled( false )
     else
         if info["NumberOfUserGamesLeftToQualify"] <= 0 then
@@ -483,7 +468,7 @@ function initLeaderboardContent( i, content, info )
     end
 
 
-    if competitionDetail:getCompetitionType() == CompetitionType["Private"] then
+    if mCompetitionType == CompetitionType["Private"] then
         score:setText( string.format( mSubType["description"], info[mSubType["dataColumnId"]], info["NumberOfCoupons"] ) )
     else
         score:setText( string.format( score:getStringValue(), info["Profit"] ) )

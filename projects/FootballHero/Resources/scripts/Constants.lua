@@ -30,6 +30,8 @@ BannerPrefix = "banner_"
 WelcomePrefix = "welcome_"
 EntryPrefix = "entry_"
 
+ZORDER_POPUP = 65535
+
 DRAW = 0
 TEAM1_WIN = 1
 TEAM2_WIN = 2
@@ -63,6 +65,7 @@ ANALYTICS_EVENT_POPUP = "Pop-Up"
 ANALYTICS_EVENT_COMPETITION = "Competition"
 
 NOTIFICATION_KEY_SFX = "soundEffects"
+EVENT_WELCOME_KEY = "event"
 
 local mClientVersion = ""
 

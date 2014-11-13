@@ -16,7 +16,7 @@ function action( param )
     local url = RequestUtils.GET_COMPETITION_DETAIL_REST_CALL
 
     local step = 1
-    local sortType = 1
+    local sortType = param[3] or 1
     competitionId = param[1]
     showRequestPush = param[2] or false
 
