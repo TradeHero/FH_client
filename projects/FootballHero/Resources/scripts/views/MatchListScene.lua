@@ -306,10 +306,12 @@ function helperInitMatchInfo( topContent, matchInfo )
     local team2Name = tolua.cast( topContent:getChildByName("team2Name"), "Label" )
     local homePercent = tolua.cast( topContent:getChildByName("home_percent"), "Label" )
     local awayPercent = tolua.cast( topContent:getChildByName("away_percent"), "Label" )
+
     local points = tolua.cast( topContent:getChildByName("Points"), "Label")
     local stamp = tolua.cast( topContent:getChildByName("Stamp"), "ImageView" )
     
     local content = topContent:getChildByName("fade_panel")
+    local drawPercent = tolua.cast( content:getChildByName("draw_percent"), "Label" )
     local fhNum = tolua.cast( content:getChildByName("fhNum"), "Label" )
     local played = tolua.cast( content:getChildByName("played"), "Label" )
     
@@ -357,11 +359,13 @@ function helperInitMatchInfo( topContent, matchInfo )
         points:setEnabled( false )
     end
 
-    local totalWinPredictions = matchInfo["HomePredictions"] + matchInfo["AwayPredictions"]
+    local totalWinPredictions = matchInfo["HomePredictions"] + matchInfo["AwayPredictions"] + matchInfo["DrawPredictions"]
     local homeWinPercent = matchInfo["HomePredictions"] / totalWinPredictions * 100
     local awayWinPercent = matchInfo["AwayPredictions"] / totalWinPredictions * 100
+    local drawWinPercent = matchInfo["DrawPredictions"] / totalWinPredictions * 100
     homePercent:setText( string.format( homePercent:getStringValue(), homeWinPercent ) )
     awayPercent:setText( string.format( awayPercent:getStringValue(), awayWinPercent ) )
+    drawPercent:setText( string.format( drawPercent:getStringValue(), drawWinPercent ) )
     fhNum:setText( matchInfo["TotalUsersPlayed"] )
     played:setText( string.format( played:getStringValue(), matchInfo["PredictionsPlayed"], matchInfo["PredictionsAvailable"] ) )
 

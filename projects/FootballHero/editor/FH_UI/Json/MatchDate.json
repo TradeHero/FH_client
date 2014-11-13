@@ -11,14 +11,11 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "MatchListContent/stamp-won.png",
-    "MatchListContent/line.png",
-    "commonRes/Arsenal.png",
-    "commonRes/Manchester United.png",
-    "MatchListContent/icn-played.png",
-    "MatchListContent/icn-fans.png",
-    "mockup/01-match-list.png",
-    "mockup/02-match-result.png"
+    "MatchListScene/match_bkg.png",
+    "header/footballhero-logo.png",
+    "header/back.png",
+    "MyHero/img-profbox.png",
+    "MyHero/img-photo.png"
   ],
   "version": "1.5.0.0",
   "widgetTree": {
