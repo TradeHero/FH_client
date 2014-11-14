@@ -306,12 +306,12 @@ function helperInitMatchInfo( topContent, matchInfo )
     local team2Name = tolua.cast( topContent:getChildByName("team2Name"), "Label" )
     local homePercent = tolua.cast( topContent:getChildByName("home_percent"), "Label" )
     local awayPercent = tolua.cast( topContent:getChildByName("away_percent"), "Label" )
+    local drawPercent = tolua.cast( topContent:getChildByName("draw_percent"), "Label" )
 
     local points = tolua.cast( topContent:getChildByName("Points"), "Label")
     local stamp = tolua.cast( topContent:getChildByName("Stamp"), "ImageView" )
     
     local content = topContent:getChildByName("fade_panel")
-    local drawPercent = tolua.cast( content:getChildByName("draw_percent"), "Label" )
     local fhNum = tolua.cast( content:getChildByName("fhNum"), "Label" )
     local played = tolua.cast( content:getChildByName("played"), "Label" )
     
@@ -354,7 +354,7 @@ function helperInitMatchInfo( topContent, matchInfo )
             points:setColor( ccc3( 238, 56, 47 ) )
         end
     else
-        score:setEnabled( false )
+        score:setText( "-:-" )
         stamp:setEnabled( false )
         points:setEnabled( false )
     end
