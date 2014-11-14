@@ -48,7 +48,7 @@ function loadFrame( parent, matchInfo, marketInfo, finishCallback, bigBetStatus,
     local stake = tolua.cast( mWidget:getChildByName("stake"), "Label" )
     local balance = tolua.cast( mWidget:getChildByName("balance"), "Label" )
     local bigBet = tolua.cast( mWidget:getChildByName("CheckBox_BigBet"), "CheckBox" )
-    local countdown = mWidget:getChildByName("Image_Countdown")
+    local countdown = mWidget:getChildByName("Button_Countdown")
 
     mStake = Constants.STAKE
     if bigBetStatus["timeToNextBet"] > 0 then
@@ -59,6 +59,13 @@ function loadFrame( parent, matchInfo, marketInfo, finishCallback, bigBetStatus,
         local labelTime = tolua.cast( countdown:getChildByName("Label_Time"), "Label" )
         labelTime:setText( os.date( "!%X", mRemainingTime ) )
         performWithDelay( mWidget, doCountdown, 1 )
+
+        local eventHandler = function( sender, eventType )
+            if eventType == TOUCH_EVENT_ENDED then
+                EventManager:postEvent( Event.Show_Info, { Constants.String.info.star_bet } )
+            end
+        end
+        countdown:addTouchEventListener( eventHandler )
     else
         countdown:setEnabled( false )
         if bigBetStatus["currBigBet"] == MarketConfig.MARKET_TYPE_MATCH then
@@ -274,7 +281,7 @@ function doCountdown()
 end
 
 function updateTimer()
-    local countdown = mWidget:getChildByName("Image_Countdown")
+    local countdown = mWidget:getChildByName("Button_Countdown")
     local labelTime = tolua.cast( countdown:getChildByName("Label_Time"), "Label" )
 
     mRemainingTime = mRemainingTime - 1
