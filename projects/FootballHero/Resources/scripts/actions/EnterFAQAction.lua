@@ -1,5 +1,5 @@
 module(..., package.seeall)
 
 function action( param )
-	Misc:sharedDelegate():openUrl("http://fhwebsite.cloudapp.net/Home/Faq")
+	Misc:sharedDelegate():openUrl("http://footballheroapp.com/faq.html")
 end
