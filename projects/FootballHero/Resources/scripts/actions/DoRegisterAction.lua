@@ -85,7 +85,7 @@ function onRegisterRequestSuccess( jsonResponse )
     local configMd5Info = jsonResponse["ConfigMd5Info"]
     local displayName = jsonResponse["DisplayName"]
     local pictureUrl = jsonResponse["PictureUrl"]
-    local startLeagueId = jsonResponse["StartLeagueId"]
+    local startLeagueId = Constants.MOST_POPULAR_LEAGUE_ID --jsonResponse["StartLeagueId"]
     local balance = jsonResponse["Balance"]
     local FbId = jsonResponse["FbId"]
     local needUpdate = jsonResponse["Update"]
