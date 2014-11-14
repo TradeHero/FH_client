@@ -97,13 +97,13 @@ function releaseFrame()
     end
 end
 
-function choose( selectedIndex )
+function choose( selectLeft )
     local selected
     local notSelected
-    if selectedIndex == Constants.STATUS_SELECTED_LEFT then
+    if selectLeft then
         selected = tolua.cast( mWidget:getChildByName("yes"), "ImageView" )
         notSelected = tolua.cast( mWidget:getChildByName("no"), "ImageView" )
-    elseif selectedIndex == Constants.STATUS_SELECTED_RIGHT then
+    else
         selected = tolua.cast( mWidget:getChildByName("no"), "ImageView" )
         notSelected = tolua.cast( mWidget:getChildByName("yes"), "ImageView" )
     end
@@ -129,7 +129,7 @@ function selectYes( sender, eventType )
             MarketsForGameData.getOddsForType( mMarketInfo, MarketConfig.ODDS_TYPE_ONE_OPTION ) * mStake,
             MarketsForGameData.getOddIdForType( mMarketInfo, MarketConfig.ODDS_TYPE_ONE_OPTION ),
             question:getStringValue(),
-            Constants.STATUS_SELECTED_LEFT )
+            true )
     end
 end
 
@@ -141,7 +141,7 @@ function selectNo( sender, eventType )
             MarketsForGameData.getOddsForType( mMarketInfo, MarketConfig.ODDS_TYPE_TWO_OPTION ) * mStake,
             MarketsForGameData.getOddIdForType( mMarketInfo, MarketConfig.ODDS_TYPE_TWO_OPTION ),
             question:getStringValue(),
-            Constants.STATUS_SELECTED_RIGHT )
+            false )
     end
 end
 
@@ -170,13 +170,13 @@ function selectBigBet( sender, eventType )
     end
 end
 
-function makePrediction( rewards, oddId, answer, selectedIndex )
+function makePrediction( rewards, oddId, answer, selectLeft )
     local selected
     local notSelected
-    if selectedIndex == Constants.STATUS_SELECTED_LEFT then
+    if selectLeft then
         selected = tolua.cast( mWidget:getChildByName("yes"), "ImageView" )
         notSelected = tolua.cast( mWidget:getChildByName("no"), "ImageView" )
-    elseif selectedIndex == Constants.STATUS_SELECTED_RIGHT then
+    else
         selected = tolua.cast( mWidget:getChildByName("no"), "ImageView" )
         notSelected = tolua.cast( mWidget:getChildByName("yes"), "ImageView" )
     end
@@ -193,7 +193,7 @@ function makePrediction( rewards, oddId, answer, selectedIndex )
     resultSeqArray:addObject( CCDelayTime:create( FINISH_DELAY_TIME ) )
     resultSeqArray:addObject( CCCallFuncN:create( function()
         local prediction = Prediction:new( oddId, answer, rewards, selected:getTextureFile(), TYPE_STRING, mStake )
-        mFinishCallback( selectedIndex, prediction )
+        mFinishCallback( selectLeft, prediction )
     end ) )
 
     mWidget:runAction( CCSequence:create( resultSeqArray ) )

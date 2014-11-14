@@ -44,7 +44,7 @@ function isShown()
 end
 
 function initContent( jsonResponse, leaderboardId, subType )
-	local contentContainer = tolua.cast( mWidget:getChildByName("ScrollView_Content"), "ScrollView" )
+	local contentContainer = mWidget:getChildByName("list")
     contentContainer:removeAllChildrenWithCleanup( true )
 
     -- init header tab

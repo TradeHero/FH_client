@@ -95,7 +95,7 @@ function MatchListData:new()
     return obj 
 end
 
-function MatchListData:getOrCreateMatchListOnDate( date, dateDisplay, timeDisplay )
+function MatchListData:getOrCreateMatchListOnDate( date, dateDisplay )
 	for k,v in pairs( self.matchDateList ) do
 		if v["date"] == date then
 			return v
@@ -105,7 +105,6 @@ function MatchListData:getOrCreateMatchListOnDate( date, dateDisplay, timeDispla
 	local matchDate = {}
 	matchDate["date"] = date
 	matchDate["dateDisplay"] = dateDisplay
-    matchDate["timeDisplay"] = timeDisplay
 	matchDate["matches"] = {}
 	table.insert( self.matchDateList, matchDate )
 	return matchDate
@@ -113,10 +112,10 @@ end
 
 function MatchListData:addMatch( match )
 	local startTimeNum = match["StartTime"]
-    --local startTimeDate = os.date("%y", startTimeNum) * 10000 + os.date("%m", startTimeNum) * 100 + os.date("%d", startTimeNum)
-    local dateDisplay = os.date( "%b %d, %A", startTimeNum )
-    local timeDisplay = os.date( "%H:%M", startTimeNum )
-    local matchDate = self:getOrCreateMatchListOnDate( startTimeNum, dateDisplay, timeDisplay )
+    local startTimeDate = os.date("%y", startTimeNum) * 10000 + os.date("%m", startTimeNum) * 100 + os.date("%d", startTimeNum)
+    local startTimeDisplay = os.date( "%b %d, %A", startTimeNum )
+
+    local matchDate = self:getOrCreateMatchListOnDate( startTimeDate, startTimeDisplay )
     table.insert( matchDate["matches"], match )
 end
 

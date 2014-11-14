@@ -149,6 +149,18 @@
     <GuidesList />
   </GuidesProject>
   <GuidesProject>
+    <Project>CompetitionItem</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>CompetitionCreate</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>CompetitionLeave</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
     <Project>CreateCompetition</Project>
     <GuidesList />
   </GuidesProject>
@@ -249,6 +261,10 @@
     <GuidesList />
   </GuidesProject>
   <GuidesProject>
+    <Project>CompetitionEmpty</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
     <Project>CreateCompetitionContent</Project>
     <GuidesList />
   </GuidesProject>
@@ -334,30 +350,6 @@
   </GuidesProject>
   <GuidesProject>
     <Project>MyHeroEmptyFrame</Project>
-    <GuidesList />
-  </GuidesProject>
-  <GuidesProject>
-    <Project>CommunityCompetitionWelcome</Project>
-    <GuidesList />
-  </GuidesProject>
-  <GuidesProject>
-    <Project>CommunityNewCompetitionFrame</Project>
-    <GuidesList />
-  </GuidesProject>
-  <GuidesProject>
-    <Project>CommunityJoinedCompetitionFrame</Project>
-    <GuidesList />
-  </GuidesProject>
-  <GuidesProject>
-    <Project>CommunityCompetitionBannerFrame</Project>
-    <GuidesList />
-  </GuidesProject>
-  <GuidesProject>
-    <Project>CompetitionPrize</Project>
-    <GuidesList />
-  </GuidesProject>
-  <GuidesProject>
-    <Project>SpecialCompetitionLeaderboard</Project>
     <GuidesList />
   </GuidesProject>
 </ArrayOfGuidesProject>

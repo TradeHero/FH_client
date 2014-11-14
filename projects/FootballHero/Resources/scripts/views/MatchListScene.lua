@@ -43,7 +43,7 @@ function loadFrame( matchList, leagueKey )
     initLeagueList( leagueKey )
 
     -- Init the match list according to the data.
-    initMatchList( matchList, leagueKey )
+    initMatchList( matchList )
 
     -- Init the league list
     --[[
@@ -156,7 +156,7 @@ function initLeagueList( leagueKey )
 end
 
 -- Param matchList is Object of MatchListData
-function initMatchList( matchList, leagueKey )
+function initMatchList( matchList )
     local predictionScene = SceneManager.getWidgetByName( "TappablePredictionScene" )
     local predictionConfirmScene = SceneManager.getWidgetByName( "PredTotalConfirmScene" )
     if predictionScene ~= nil then
@@ -183,21 +183,16 @@ function initMatchList( matchList, leagueKey )
     for k,v in pairs( matchList:getMatchDateList() ) do
         local matchDate = v
 
-        -- Vincent: for most popular leagues, there are no matches before the "Tap to make a prediction!" hint, thus there is no need for zOrder position shifting
         local zOrder = matchDate["date"]
-        if leagueKey == Constants.MOST_POPULAR_LEAGUE_ID then
-            zOrder = 1
-        end
-
         seqArray:addObject( CCCallFuncN:create( function()
-
+            -- Add the date
             local content = SceneManager.widgetFromJsonFile("scenes/MatchDate.json")
-            local dateDisplay = tolua.cast( content:getChildByName("Label_Date"), "Label" )
-            local timeDisplay = tolua.cast( content:getChildByName("Label_Time"), "Label" )
+            local dateDisplay = tolua.cast( content:getChildByName("date"), "Label" )
             dateDisplay:setText( matchDate["dateDisplay"] )
-            timeDisplay:setText( matchDate["timeDisplay"] )
             content:setLayoutParameter( layoutParameter )
             content:setZOrder( zOrder )
+            contentContainer:addChild( content )
+            contentHeight = contentHeight + content:getSize().height
 
             if mTheFirstDate == nil then
                 local hintContent = SceneManager.widgetFromJsonFile("scenes/TapToMakePrediction.json")
@@ -209,10 +204,6 @@ function initMatchList( matchList, leagueKey )
                 mTheFirstDate = content
             end
 
-            -- Add the date
-            contentContainer:addChild( content )
-            contentHeight = contentHeight + content:getSize().height
-
             content:setOpacity( 0 )
             content:setCascadeOpacityEnabled( true )
             mWidget:runAction( CCTargetedAction:create( content, CCFadeIn:create( CONTENT_FADEIN_TIME ) ) )
@@ -221,7 +212,6 @@ function initMatchList( matchList, leagueKey )
         end ) )
         seqArray:addObject( CCDelayTime:create( CONTENT_DELAY_TIME ) )
 
-        local i = 1
         for inK, inV in pairs( matchDate["matches"] ) do
             local eventHandler = function( sender, eventType )
                 if eventType == TOUCH_EVENT_ENDED then
@@ -240,18 +230,11 @@ function initMatchList( matchList, leagueKey )
 
                 content:addTouchEventListener( eventHandler )
 
-                if i == table.getn( matchDate["matches"] ) then
-                    local separator = content:getChildByName("Panel_Separator")
-                    separator:setEnabled( false )
-                end
-
                 content:setOpacity( 0 )
                 content:setCascadeOpacityEnabled( true )
                 mWidget:runAction( CCTargetedAction:create( content, CCFadeIn:create( CONTENT_FADEIN_TIME ) ) )
-                
-                updateContentContainer( contentHeight, content )
 
-                i = i + 1
+                updateContentContainer( contentHeight, content )
             end ) )
             seqArray:addObject( CCDelayTime:create( CONTENT_DELAY_TIME ) )
         end
@@ -300,20 +283,19 @@ function leagueSelectedCallback( leagueId )
 end
 
 function helperInitMatchInfo( topContent, matchInfo )
-    local team1 = tolua.cast( topContent:getChildByName("team1"), "ImageView" )
-    local team2 = tolua.cast( topContent:getChildByName("team2"), "ImageView" )
-    local team1Name = tolua.cast( topContent:getChildByName("team1Name"), "Label" )
-    local team2Name = tolua.cast( topContent:getChildByName("team2Name"), "Label" )
-    local homePercent = tolua.cast( topContent:getChildByName("home_percent"), "Label" )
-    local awayPercent = tolua.cast( topContent:getChildByName("away_percent"), "Label" )
-    local drawPercent = tolua.cast( topContent:getChildByName("draw_percent"), "Label" )
-
-    local points = tolua.cast( topContent:getChildByName("Points"), "Label")
-    local stamp = tolua.cast( topContent:getChildByName("Stamp"), "ImageView" )
-    
     local content = topContent:getChildByName("fade_panel")
+
+    local team1 = tolua.cast( content:getChildByName("team1"), "ImageView" )
+    local team2 = tolua.cast( content:getChildByName("team2"), "ImageView" )
+    local team1Name = tolua.cast( content:getChildByName("team1Name"), "Label" )
+    local team2Name = tolua.cast( content:getChildByName("team2Name"), "Label" )
     local fhNum = tolua.cast( content:getChildByName("fhNum"), "Label" )
     local played = tolua.cast( content:getChildByName("played"), "Label" )
+    local label_fhNum = tolua.cast( content:getChildByName("Label_total_fans"), "Label" )
+    local homePercent = tolua.cast( content:getChildByName("home_percent"), "Label" )
+    local awayPercent = tolua.cast( content:getChildByName("away_percent"), "Label" )
+    local points = tolua.cast( topContent:getChildByName("Points"), "Label")
+    local stamp = tolua.cast( topContent:getChildByName("Stamp"), "ImageView" )
     
     -- Load the team logo
     team1:loadTexture( TeamConfig.getLogo( TeamConfig.getConfigIdByKey( matchInfo["HomeTeamId"] ) ) )
@@ -331,41 +313,48 @@ function helperInitMatchInfo( topContent, matchInfo )
     end
     team2Name:setText( teamName )
 
+    local time = tolua.cast( content:getChildByName("time"), "Label" )
     local score = tolua.cast( topContent:getChildByName("score"), "Label" )
     if matchInfo["HomeGoals"] >= 0 and matchInfo["AwayGoals"] >= 0 then
         score:setText( string.format( score:getStringValue(), matchInfo["HomeGoals"], matchInfo["AwayGoals"] ) )
-    
+        time:setEnabled( false )
+
         if matchInfo["PredictionsPlayed"] == 0 then
-            content:setEnabled( false )
+            content:setOpacity( 127 )
             stamp:loadTexture( Constants.MATCH_LIST_CONTENT_IMAGE_PATH.."stamp-ended.png" )
             points:setEnabled( false )
+            fhNum:setEnabled( false )
+            label_fhNum:setEnabled( false )
         elseif matchInfo["Profit"] == nil then
             stamp:setEnabled( false )
             points:setEnabled( false )
         elseif matchInfo["Profit"] >= 0 then
-            content:setEnabled( false )
+            content:setOpacity( 127 )
             stamp:loadTexture( Constants.MATCH_LIST_CONTENT_IMAGE_PATH.."stamp-won.png" )
             points:setText( string.format( points:getStringValue(), math.abs( matchInfo["Profit"] ) ) )
             points:setColor( ccc3( 92, 200, 80 ) )
+            fhNum:setEnabled( false )
+            label_fhNum:setEnabled( false )
         else
-            content:setEnabled( false )
+            content:setOpacity( 127 )
             stamp:loadTexture( Constants.MATCH_LIST_CONTENT_IMAGE_PATH.."stamp-lost.png" )
             points:setText( string.format( points:getStringValue(), math.abs( matchInfo["Profit"] ) ) )
             points:setColor( ccc3( 238, 56, 47 ) )
+            fhNum:setEnabled( false )
+            label_fhNum:setEnabled( false )
         end
     else
-        score:setText( "-:-" )
+        time:setText( os.date( "%b %d  %H:%M", matchInfo["StartTime"] ) )
+        score:setEnabled( false )
         stamp:setEnabled( false )
         points:setEnabled( false )
     end
 
-    local totalWinPredictions = matchInfo["HomePredictions"] + matchInfo["AwayPredictions"] + matchInfo["DrawPredictions"]
+    local totalWinPredictions = matchInfo["HomePredictions"] + matchInfo["AwayPredictions"]
     local homeWinPercent = matchInfo["HomePredictions"] / totalWinPredictions * 100
     local awayWinPercent = matchInfo["AwayPredictions"] / totalWinPredictions * 100
-    local drawWinPercent = matchInfo["DrawPredictions"] / totalWinPredictions * 100
     homePercent:setText( string.format( homePercent:getStringValue(), homeWinPercent ) )
     awayPercent:setText( string.format( awayPercent:getStringValue(), awayWinPercent ) )
-    drawPercent:setText( string.format( drawPercent:getStringValue(), drawWinPercent ) )
     fhNum:setText( matchInfo["TotalUsersPlayed"] )
     played:setText( string.format( played:getStringValue(), matchInfo["PredictionsPlayed"], matchInfo["PredictionsAvailable"] ) )
 

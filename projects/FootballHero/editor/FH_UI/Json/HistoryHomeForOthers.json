@@ -12,9 +12,8 @@
   "textures": [],
   "texturesPng": [
     "MatchListScene/match_bkg.png",
-    "MatchListScene/SideMenu_bkg.png",
-    "header/footballhero-logo.png",
-    "MatchListScene/photo.png"
+    "header/back.png",
+    "Tutorial/Default Button.png"
   ],
   "version": "1.5.0.0",
   "widgetTree": {

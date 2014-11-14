@@ -25,6 +25,11 @@ local mCurrentPredictionIndex
 local mPredictionStatus
 local mPredictionAnswers
 
+local STATUS_PENDING = 0
+local STATUS_SKIPPED = 1
+local STATUS_SELECTED_LEFT = 2
+local STATUS_SELECTED_RIGHT = 3
+
 local MIN_MOVE_DISTANCE = 100
 local SWITCH_MOVE_TIME = 0.4
 
@@ -99,7 +104,7 @@ function initPredictionStatus()
         local index = tolua.cast( statusIndi:getChildByName("index"), "Label" )
         index:setText( i )
 
-        mPredictionStatus[i] = Constants.STATUS_PENDING
+        mPredictionStatus[i] = STATUS_PENDING
     end
 
     updatePageIndicator()
@@ -126,10 +131,10 @@ function initCurrentPredictionUI()
 
     mBigBetStatus["timeToNextBet"] = mMarketsInfo:getNextBigBetRemainingTime()
     mPredictionWidget.loadFrame( mMovableContainer, mMatch, marketInfo, makePredictionCallback, mBigBetStatus, makeBigBetCallback )
-    
-    if mPredictionStatus[mCurrentPredictionIndex] ~= Constants.STATUS_PENDING 
-        and mPredictionStatus[mCurrentPredictionIndex] ~= Constants.STATUS_SKIPPED then
-        mPredictionWidget.choose( mPredictionStatus[mCurrentPredictionIndex] )
+    if mPredictionStatus[mCurrentPredictionIndex] == STATUS_SELECTED_LEFT then
+        mPredictionWidget.choose( true )
+    elseif mPredictionStatus[mCurrentPredictionIndex] == STATUS_SELECTED_RIGHT then
+        mPredictionWidget.choose( false )
     end
 end
 
@@ -137,8 +142,12 @@ function makeBigBetCallback( mIndex )
     mBigBetStatus["currBigBet"] = mIndex
 end
 
-function makePredictionCallback( selectedIndex, prediction )
-    mPredictionStatus[mCurrentPredictionIndex] = selectedIndex
+function makePredictionCallback( selectLeft, prediction )
+    if selectLeft then
+        mPredictionStatus[mCurrentPredictionIndex] = STATUS_SELECTED_LEFT
+    else
+        mPredictionStatus[mCurrentPredictionIndex] = STATUS_SELECTED_RIGHT
+    end
     mPredictionAnswers[mCurrentPredictionIndex] = prediction
 
     if mCurrentPredictionIndex < mMarketsInfo:getNum() then
@@ -215,8 +224,8 @@ function onFrameTouch( sender, eventType )
         local reset = false
         if touchBeginPoint.x - touchEndPoint.x > MIN_MOVE_DISTANCE then
             -- Swap to Left
-            if mPredictionStatus[mCurrentPredictionIndex] == Constants.STATUS_PENDING then
-                mPredictionStatus[mCurrentPredictionIndex] = Constants.STATUS_SKIPPED
+            if mPredictionStatus[mCurrentPredictionIndex] == STATUS_PENDING then
+                mPredictionStatus[mCurrentPredictionIndex] = STATUS_SKIPPED
             end
 
             if mCurrentPredictionIndex < mMarketsInfo:getNum() then
@@ -281,18 +290,16 @@ function updatePageIndicator()
         pending:setEnabled( false )
         selected:setEnabled( false )
         skipped:setEnabled( false )
-        if mPredictionStatus[i] == Constants.STATUS_PENDING then
+        if mPredictionStatus[i] == STATUS_PENDING then
             pending:setEnabled( true )
-        elseif mPredictionStatus[i] == Constants.STATUS_SELECTED_LEFT 
-            or mPredictionStatus[i] == Constants.STATUS_SELECTED_RIGHT 
-            or mPredictionStatus[i] == Constants.STATUS_SELECTED_THIRD then
+        elseif mPredictionStatus[i] == STATUS_SELECTED_LEFT or mPredictionStatus[i] == STATUS_SELECTED_RIGHT then
             selected:setEnabled( true )
             if i == mCurrentPredictionIndex then
                 selected:setColor( ccc3( 255, 255, 255 ) )
             else
                 selected:setColor( ccc3( 92, 200, 80 ) )
             end
-        elseif mPredictionStatus[i] == Constants.STATUS_SKIPPED then
+        elseif mPredictionStatus[i] == STATUS_SKIPPED then
             skipped:setEnabled( true )
         end
     end

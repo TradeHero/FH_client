@@ -9,7 +9,6 @@ local ViewUtils = require("scripts.views.ViewUtils")
 local SelectedLeaguesScene = require("scripts.views.SelectedLeaguesScene")
 local Logic = require("scripts.Logic").getInstance()
 local Constants = require("scripts.Constants")
-local CompetitionType = require("scripts.data.Competitions").CompetitionType
 
 local mWidget
 local mCompetitionId
@@ -62,18 +61,6 @@ function leaveEventHandler( sender, eventType )
     end
 end
 
-function rulesEventHandler( sender, eventType )
-    if eventType == TOUCH_EVENT_ENDED then
-        print("clicked rules")
-    end
-end
-
-function termsEventHandler( sender, eventType )
-    if eventType == TOUCH_EVENT_ENDED then
-        print( "clicked terms")
-    end
-end
-
 function keypadBackEventHandler()
     EventManager:popHistory()
 end
@@ -85,19 +72,6 @@ function initContent( competitionDetail, selectedLeagues )
     local layoutParameter = LinearLayoutParameter:create()
     layoutParameter:setGravity(LINEAR_GRAVITY_CENTER_VERTICAL)
     mContainerHeight = 0
-
-    if competitionDetail:getCompetitionType() ~=CompetitionType["Private"] then
-        -- Competition Banner
-        local banner = GUIReader:shareReader():widgetFromJsonFile("scenes/CommunityCompetitionBannerFrame.json")
-        local joinBtn = banner:getChildByName("Button_Join")
-        joinBtn:setEnabled( false )
-        local bannerBG = tolua.cast( banner:getChildByName("Image_BannerBG"), "ImageView" )
-        bannerBG:loadTexture( Constants.COMPETITION_IMAGE_PATH..Constants.BannerPrefix..competitionDetail:getJoinToken()..".png" )
-        
-        banner:setLayoutParameter( layoutParameter )
-        contentContainer:addChild( banner )
-        mContainerHeight = mContainerHeight + banner:getSize().height
-    end
 
     -- Add the competition detail info
     local content = GUIReader:shareReader():widgetFromJsonFile("scenes/CompetitionMoreContent.json")
@@ -120,32 +94,15 @@ function initContent( competitionDetail, selectedLeagues )
 
     SelectedLeaguesScene.loadFrame( contentContainer, selectedLeagues, false, mContainerHeight )
 
-    mContainerHeight = contentContainer:getInnerContainerSize().height
+    content = SceneManager.widgetFromJsonFile("scenes/CompetitionLeave.json")
+    content:setLayoutParameter( layoutParameter )
+    contentContainer:addChild( content )
+    mContainerHeight = contentContainer:getInnerContainerSize().height + content:getSize().height
     contentContainer:setInnerContainerSize( CCSize:new( 0, mContainerHeight ) )
     local layout = tolua.cast( contentContainer, "Layout" )
     layout:requestDoLayout()
 
-    local normalPanel = mWidget:getChildByName("Panel_Normal")
-    local specialPanel = mWidget:getChildByName("Panel_Special")
-
-    if competitionDetail:getCompetitionType() == CompetitionType["Private"] then
-        specialPanel:setEnabled( false )
-
-        local quitBtn = normalPanel:getChildByName("Button_Quit")
-        quitBtn:addTouchEventListener( leaveEventHandler )
-    else
-        normalPanel:setEnabled( false )
-
-        local quitBtn = specialPanel:getChildByName("Button_Quit")
-        quitBtn:addTouchEventListener( leaveEventHandler )
-
-        local termsBtn = specialPanel:getChildByName("Button_TnC")
-        termsBtn:addTouchEventListener( termsEventHandler )
-
-        local rulesBtn = specialPanel:getChildByName("Button_Rules")
-        rulesBtn:addTouchEventListener( rulesEventHandler )
-    end
-    
-
+    local leaveBtn = content:getChildByName("leave")
+    leaveBtn:addTouchEventListener( leaveEventHandler )
 
 end
