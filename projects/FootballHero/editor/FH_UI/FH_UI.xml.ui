@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
 <UIProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <ProjectDir>Z:\FH_client\projects\FootballHero\editor\FH_UI</ProjectDir>
+  <ProjectDir>Z:\workspace\FH_client\projects\FootballHero\editor\FH_UI</ProjectDir>
   <Version>1.5.0.0</Version>
-  <Resources>Z:\FH_client\projects\FootballHero\editor\FH_UI\Resources</Resources>
+  <Resources>Z:\workspace\FH_client\projects\FootballHero\editor\FH_UI\Resources</Resources>
   <Name>FH_UI</Name>
   <JsonFileName>FH_UI.json</JsonFileName>
-  <JsonFolder>Z:\FH_client\projects\FootballHero\editor\FH_UI\Json</JsonFolder>
+  <JsonFolder>Z:\workspace\FH_client\projects\FootballHero\editor\FH_UI\Json</JsonFolder>
   <JsonList>
     <string>Chat.json</string>
     <string>ChatMessageContent.json</string>
@@ -56,7 +56,7 @@
     <string>MatchListScene.json</string>
     <string>MatchPrediction.json</string>
     <string>MyHeroEmptyFrame.json</string>
-    <string>MyHeroHome.json</string>
+    <string>MyPicksHome.json</string>
     <string>Navigator.json</string>
     <string>PNCompetitionMessage.json</string>
     <string>PNPredictionMessage.json</string>
@@ -97,18 +97,16 @@
     <Width>640</Width>
     <Height>1136</Height>
   </CanvasSize>
-  <filePath>Z:\FH_client\projects\FootballHero\editor\FH_UI\FH_UI.xml.ui</filePath>
+  <filePath>Z:\workspace\FH_client\projects\FootballHero\editor\FH_UI\FH_UI.xml.ui</filePath>
   <ProjectType>UIProject</ProjectType>
   <ResRelativePath />
   <imageFileList />
   <imagePngList>
-    <string>MatchListContent/stamp-won.png</string>
-    <string>commonRes/Arsenal.png</string>
-    <string>commonRes/Manchester United.png</string>
-    <string>MatchListContent/icn-fans.png</string>
-    <string>MatchListContent/icn-played.png</string>
-    <string>community/img-leaguebox.png</string>
+    <string>community/img-compbox.png</string>
+    <string>community/btn-newcomp.png</string>
+    <string>community/btn-CTA.png</string>
+    <string>community/img-inputcode.png</string>
   </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>MatchListContent.json</CurrentUIJson>
+  <CurrentUIJson>CommunityCompetitionBannerFrame.json</CurrentUIJson>
 </UIProject>

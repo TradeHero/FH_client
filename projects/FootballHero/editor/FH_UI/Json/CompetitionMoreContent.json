@@ -10,10 +10,7 @@
   "designHeight": 1136,
   "designWidth": 640,
   "textures": [],
-  "texturesPng": [
-    "MatchListScene/match_bkg.png",
-    "header/back.png"
-  ],
+  "texturesPng": [],
   "version": "1.5.0.0",
   "widgetTree": {
     "classname": "Panel",
@@ -179,7 +176,7 @@
           "name": "Text003",
           "ZOrder": 1,
           "actiontag": 54993420,
-          "anchorPointX": 0.5,
+          "anchorPointX": 0,
           "anchorPointY": 0.5,
           "classType": "CocoStudio.EngineAdapterWrap.CSLabel",
           "colorB": 255,
@@ -192,7 +189,7 @@
           "ignoreSize": true,
           "layoutParameter": null,
           "opacity": 150,
-          "positionPercentX": 0.196875,
+          "positionPercentX": 0.0421875,
           "positionPercentY": 0.06989247,
           "positionType": 0,
           "rotation": 0,
@@ -205,8 +202,8 @@
           "touchAble": false,
           "useMergedTexture": false,
           "visible": true,
-          "width": 203,
-          "x": 126,
+          "width": 271,
+          "x": 27,
           "y": 26,
           "areaHeight": 0,
           "areaWidth": 0,
@@ -214,7 +211,7 @@
           "fontName": "fonts/Helvetica Neue Light.ttf",
           "fontSize": 28,
           "hAlignment": 0,
-          "text": "Qualified League",
+          "text": "Eligible Leagues/Cups",
           "touchScaleEnable": false,
           "vAlignment": 0
         }
