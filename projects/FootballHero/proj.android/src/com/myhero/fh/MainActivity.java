@@ -212,6 +212,7 @@ public class MainActivity extends Cocos2dxActivity {
               return false;                      
             }
           });
+          m_webView.getSettings().setJavaScriptEnabled(true);
 
           m_webView.loadUrl(url);          
         }

@@ -657,7 +657,7 @@
         }
       },
       {
-        "classname": "ImageView",
+        "classname": "Button",
         "name": null,
         "children": [
           {
@@ -679,7 +679,7 @@
               "customProperty": "",
               "flipX": false,
               "flipY": false,
-              "height": 52,
+              "height": 45,
               "ignoreSize": true,
               "layoutParameter": null,
               "opacity": 255,
@@ -689,14 +689,14 @@
               "rotation": 0,
               "scaleX": 1,
               "scaleY": 1,
-              "sizePercentX": 0.587786257,
-              "sizePercentY": 0.46875,
+              "sizePercentX": 0.603053451,
+              "sizePercentY": 0.5416667,
               "sizeType": 0,
               "tag": 14987,
               "touchAble": false,
               "useMergedTexture": false,
               "visible": true,
-              "width": 158,
+              "width": 154,
               "x": 160,
               "y": 1,
               "areaHeight": 0,
@@ -712,14 +712,14 @@
           }
         ],
         "options": {
-          "__type": "ImageViewSurrogate:#EditorCommon.JsonModel.Component.GUI",
-          "classname": "ImageView",
-          "name": "Image_Countdown",
+          "__type": "ButtonSurrogate:#EditorCommon.JsonModel.Component.GUI",
+          "classname": "Button",
+          "name": "Button_Countdown",
           "ZOrder": 1,
-          "actiontag": 56794338,
+          "actiontag": 29186801,
           "anchorPointX": 0,
           "anchorPointY": 0.5,
-          "classType": "CocoStudio.EngineAdapterWrap.CSImageView",
+          "classType": "CocoStudio.EngineAdapterWrap.CSButton",
           "colorB": 255,
           "colorG": 255,
           "colorR": 255,
@@ -736,11 +736,11 @@
           "rotation": 0,
           "scaleX": 1,
           "scaleY": 1,
-          "sizePercentX": 0.409375,
-          "sizePercentY": 0.08450704,
+          "sizePercentX": 0.1609375,
+          "sizePercentY": 0.03521127,
           "sizeType": 0,
-          "tag": 14981,
-          "touchAble": false,
+          "tag": 18570,
+          "touchAble": true,
           "useMergedTexture": false,
           "visible": true,
           "width": 262,
@@ -750,15 +750,34 @@
           "capInsetsWidth": 1,
           "capInsetsX": 0,
           "capInsetsY": 0,
-          "fileName": null,
-          "fileNameData": {
+          "disabled": null,
+          "disabledData": {
+            "path": null,
+            "plistFile": null,
+            "resourceType": 0
+          },
+          "fontName": "微软雅黑",
+          "fontSize": 14,
+          "fontType": 0,
+          "normal": null,
+          "normalData": {
             "path": "MatchPrediction/btn-countdown.png",
             "plistFile": "",
             "resourceType": 0
           },
+          "pressed": null,
+          "pressedData": {
+            "path": null,
+            "plistFile": null,
+            "resourceType": 0
+          },
           "scale9Enable": false,
           "scale9Height": 96,
-          "scale9Width": 262
+          "scale9Width": 262,
+          "text": "",
+          "textColorB": 255,
+          "textColorG": 255,
+          "textColorR": 255
         }
       },
       {
