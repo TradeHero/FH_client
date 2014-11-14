@@ -6,10 +6,11 @@ local EventManager = require("scripts.events.EventManager").getInstance()
 local Event = require("scripts.events.Event").EventList
 local SMIS = require("scripts.SMIS")
 local ViewUtils = require("scripts.views.ViewUtils")
-local SelectedLeaguesScene = require("scripts.views.SelectedLeaguesScene")
 local Logic = require("scripts.Logic").getInstance()
 local Constants = require("scripts.Constants")
 local CompetitionType = require("scripts.data.Competitions").CompetitionType
+local CountryConfig = require("scripts.config.Country")
+local LeagueConfig = require("scripts.config.League")
 
 local mWidget
 local mCompetitionId
@@ -118,7 +119,7 @@ function initContent( competitionDetail, selectedLeagues )
     
     description:setText( competitionDetail:getDescription() )
 
-    SelectedLeaguesScene.loadFrame( contentContainer, selectedLeagues, false, mContainerHeight )
+    initSelectedLeagues( contentContainer, selectedLeagues )
 
     mContainerHeight = contentContainer:getInnerContainerSize().height
     contentContainer:setInnerContainerSize( CCSize:new( 0, mContainerHeight ) )
@@ -145,7 +146,43 @@ function initContent( competitionDetail, selectedLeagues )
         local rulesBtn = specialPanel:getChildByName("Button_Rules")
         rulesBtn:addTouchEventListener( rulesEventHandler )
     end
-    
+end
 
+function isInSelectedLeague( leagueId, selectedLeagues )
+    for i = 1, table.getn( selectedLeagues ) do
+        if selectedLeagues[i] == leagueId then
+            return true
+        end
+    end
 
+    return false
+end
+
+function initSelectedLeagues( contentContainer, selectedLeagues )
+    local childIndex = 1
+    for i = 1, CountryConfig.getConfigNum() do
+        local leagueNum = table.getn( CountryConfig.getLeagueList( i ) )
+        for j = 1, leagueNum do
+            local leagueId = CountryConfig.getLeagueList( i )[j]
+
+            if isInSelectedLeague( LeagueConfig.getConfigId( leagueId ), selectedLeagues ) then
+                local content = SceneManager.widgetFromJsonFile( "scenes/LeagueContentWithTransparentBG.json" )
+                contentContainer:addChild( content, 0, childIndex )
+                
+                local logo = tolua.cast( content:getChildByName("countryLogo"), "ImageView" )
+                local leagueName = tolua.cast( content:getChildByName("countryName"), "Label" )
+                
+                leagueName:setText( CountryConfig.getCountryName( i ).." - "..LeagueConfig.getLeagueName( leagueId ) )
+                logo:loadTexture( CountryConfig.getLogo( i ) )
+
+                mContainerHeight = mContainerHeight + content:getSize().height
+                childIndex = childIndex + 1
+            end
+        end
+    end
+
+    contentContainer:setInnerContainerSize( CCSize:new( 0, mContainerHeight ) )
+    local layout = tolua.cast( contentContainer, "Layout" )
+    layout:requestDoLayout()
+    layout:setLayoutType(LAYOUT_LINEAR_VERTICAL)
 end
