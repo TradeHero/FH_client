@@ -70,12 +70,13 @@ function diffVersionWithTags()
 	    if [ $status = "A" ] || [ $status = "M" ]; then
 			if [[ $filePath == *.cpp ]] || [[ $filePath == *.h ]] || [[ $filePath == *.java ]] || [[ $filePath == *.mm ]] || [[ $filePath == *.m ]]; then
 	    		# Check code updates
+	    		
 	    		codeUpdated=true
 	    		break
 	    	elif [[ $filePath == projects/FootballHero/Resources/CryptLuascripts/* ]]; then
 	    		# Ignore some files.
 	    		continue
-	    	elif [[ $filePath == projects/FootballHero/Resources/game.bin ]]; then
+	    	elif [[ $filePath == projects/FootballHero/Resources/game.bin ]] || [[ $filePath == projects/FootballHero/Resources/server ]]; then
 	    		# Ignore some files.
 	    		continue
 	    	elif [[ $filePath == projects/FootballHero/Resources/* ]] || [[ $filePath == projects/FootballHero/Resources/scripts/* ]]; then
