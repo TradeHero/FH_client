@@ -243,8 +243,8 @@ function relayoutChatMessage( content, message, isMe, i )
         messageBg:setSize( CCSize:new( textWidth + messageBgNTextOffset.x, messageTextHeight + messageBgNTextOffset.y ) )
         content:setSize( CCSize:new( textWidth + messagePanelNTextOffset.x, messageTextHeight + messagePanelNTextOffset.y ) )
         messageName:setPosition( ccp( messageNamePositionX, messageTextHeight + messageNameNTextOffsetY ) )
-        logo:setPosition( ccp( logo:getPositionX(), messageTextHeight + messageNameNTextOffsetY ) )
         if not isMe then
+            logo:setPosition( ccp( logo:getPositionX(), messageTextHeight + messageNameNTextOffsetY ) )
             messageTime:setPosition( ccp( textWidth + messageTimeNTextOffsetX, messageTimePositionY ) )
         end
     end
