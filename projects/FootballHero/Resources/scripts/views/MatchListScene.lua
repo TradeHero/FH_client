@@ -286,12 +286,8 @@ function updateContentContainer( contentHeight, addContent )
 end
 
 function enterMatch( match )
-    if match["PredictionsPlayed"] == match["PredictionsAvailable"] then
-        if match["PredictionsAvailable"] == 0 then
-            EventManager:postEvent( Event.Show_Info, { Constants.String.info.upcoming_bet, nil, Constants.String.info.title_announcement } )
-        else
-            EventManager:postEvent( Event.Show_Info, { Constants.String.info.predictions_entered } )
-        end
+    if match["PredictionsAvailable"] > 0 and match["PredictionsPlayed"] == match["PredictionsAvailable"] then
+        EventManager:postEvent( Event.Show_Info, { Constants.String.info.predictions_entered } )
         return
     end
 
