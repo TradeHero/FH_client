@@ -24,7 +24,6 @@ local mCompetitionId
 local mSubType
 local mStep
 local mCurrentTotalNum
-local mCompetitionCodeString
 local mHasMoreToLoad
 local mSelfInfoOpen
 local mCompetitionType
@@ -161,10 +160,9 @@ function initContent( competitionDetail )
 
     if mCompetitionType == CompetitionType["Private"] then
         -- Token
-        mCompetitionCodeString = competitionDetail:getJoinToken()
         local inputDelegate = EditBoxDelegateForLua:create()
         inputDelegate:registerEventScriptHandler( EDIT_BOX_EVENT_TEXT_CHANGED, function ( textBox, text )
-            mTokenInput:setText( mCompetitionCodeString )
+            mTokenInput:setText( mCompetitionToken )
         end )
         --[[inputDelegate:registerEventScriptHandler( EDIT_BOX_EVENT_DID_BEGIN, function ( textBox )
             -- In order not to change the object-c code, here is the work around.
@@ -176,7 +174,7 @@ function initContent( competitionDetail )
 
         mTokenInput = ViewUtils.createTextInput( mWidget:getChildByName( "token" ), "", 230, 40 )
         mTokenInput:setTouchPriority( SceneManager.TOUCH_PRIORITY_MINUS_ONE )
-        mTokenInput:setText( mCompetitionCodeString )
+        mTokenInput:setText( mCompetitionToken )
         mTokenInput:setDelegate( inputDelegate.__CCEditBoxDelegate__ )
         mTokenInput:setTouchEnabled( false )
 
@@ -271,7 +269,7 @@ end
 
 function copyCodeEventHandler( sender, eventType )
     if eventType == TOUCH_EVENT_ENDED then
-        Misc:sharedDelegate():copyToPasteboard( mCompetitionCodeString )
+        Misc:sharedDelegate():copyToPasteboard( mCompetitionToken )
         EventManager:postEvent( Event.Show_Info, { Constants.String.info.join_code_copied } )
     end
 end
@@ -306,7 +304,7 @@ end
 function shareTypeSelectEventHandler( sender, eventType )
     if eventType == TOUCH_EVENT_ENDED then
         EventManager:postEvent( Event.Enter_Share, { string.format( SHARE_TITLE, Logic:getDisplayName() ),
-                                                    string.format( SHARE_BODY, mCompetitionCodeString ),
+                                                    string.format( SHARE_BODY, mCompetitionToken ),
                                                     shareByFacebook } )
     end
 end
