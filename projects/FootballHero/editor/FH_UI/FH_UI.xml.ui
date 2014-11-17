@@ -102,9 +102,9 @@
   <ResRelativePath />
   <imageFileList />
   <imagePngList>
-    <string>MatchListScene/match_bkg.png</string>
-    <string>header/back.png</string>
+    <string>chat/Friend_Chatbox.png</string>
+    <string>LoginNReg/photo.png</string>
   </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>CompetitionWebview.json</CurrentUIJson>
+  <CurrentUIJson>ChatMessageContent.json</CurrentUIJson>
 </UIProject>
