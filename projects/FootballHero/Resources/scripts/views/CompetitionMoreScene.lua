@@ -14,11 +14,13 @@ local LeagueConfig = require("scripts.config.League")
 
 local mWidget
 local mCompetitionId
+local mCompetitionToken
 
 -- DS for competitionDetail see CompetitionDetail
 function loadFrame( selectedLeagues, competitionId )
     competitionDetail = Logic:getCompetitionDetail()
     mCompetitionId = competitionId
+    mCompetitionToken = competitionDetail:getJoinToken()
 
 	local widget = GUIReader:shareReader():widgetFromJsonFile("scenes/CompetitionMore.json")
     mWidget = widget
@@ -65,13 +67,17 @@ end
 
 function rulesEventHandler( sender, eventType )
     if eventType == TOUCH_EVENT_ENDED then
-        print("clicked rules")
+        local title = tolua.cast( mWidget:getChildByName("title"), "Label" )
+        local titleText = title:getStringValue()
+        EventManager:postEvent( Event.Enter_Competition_Rules, { titleText, mCompetitionToken } )
     end
 end
 
 function termsEventHandler( sender, eventType )
     if eventType == TOUCH_EVENT_ENDED then
-        print( "clicked terms")
+        local title = tolua.cast( mWidget:getChildByName("title"), "Label" )
+        local titleText = title:getStringValue()
+        EventManager:postEvent( Event.Enter_Competition_Terms, { titleText, mCompetitionToken } )
     end
 end
 
@@ -93,7 +99,7 @@ function initContent( competitionDetail, selectedLeagues )
         local joinBtn = banner:getChildByName("Button_Join")
         joinBtn:setEnabled( false )
         local bannerBG = tolua.cast( banner:getChildByName("Image_BannerBG"), "ImageView" )
-        bannerBG:loadTexture( Constants.COMPETITION_IMAGE_PATH..Constants.BannerPrefix..competitionDetail:getJoinToken()..".png" )
+        bannerBG:loadTexture( Constants.COMPETITION_IMAGE_PATH..Constants.BannerPrefix..mCompetitionToken..".png" )
         
         banner:setLayoutParameter( layoutParameter )
         contentContainer:addChild( banner )

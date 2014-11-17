@@ -10,7 +10,7 @@ local Constants = require("scripts.Constants")
 local mWidget
 local mURL
 
-function loadFrame( name, token, type, index )
+function loadFrame( name, token )
 	local widget = GUIReader:shareReader():widgetFromJsonFile("scenes/CompetitionWebview.json")
     mWidget = widget
     mWidget:registerScriptHandler( EnterOrExit )
@@ -22,12 +22,8 @@ function loadFrame( name, token, type, index )
     local title = tolua.cast( widget:getChildByName("title"), "Label" )
     title:setText( name )
 
-    mURL = "http://footballheroapp.com/prize/"..token.."/"..type
-    if type ~= Constants.COMPETITION_PRIZE_OVERALL then
-        mURL = mURL.."_"..index
-    end
-    mURL = mURL..".html"
-    CCLuaLog( "Prize url is: "..mURL )
+    mURL = "http://footballheroapp.com/terms/"..token.."/".."terms.html"
+    CCLuaLog( "T&C url is: "..mURL )
     WebviewDelegate:sharedDelegate():openWebpage( mURL, 0, 40, 320, 528 )
 end
 
