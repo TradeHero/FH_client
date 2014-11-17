@@ -90,7 +90,7 @@
     <string>CommunityNewCompetitionFrame.json</string>
     <string>CommunityJoinedCompetitionFrame.json</string>
     <string>CommunityCompetitionBannerFrame.json</string>
-    <string>CompetitionPrize.json</string>
+    <string>CompetitionWebview.json</string>
     <string>SpecialCompetitionLeaderboard.json</string>
   </JsonList>
   <CanvasSize>
@@ -102,11 +102,9 @@
   <ResRelativePath />
   <imageFileList />
   <imagePngList>
-    <string>community/img-compbox.png</string>
-    <string>community/btn-newcomp.png</string>
-    <string>community/btn-CTA.png</string>
-    <string>community/img-inputcode.png</string>
+    <string>MatchListScene/match_bkg.png</string>
+    <string>header/back.png</string>
   </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>CommunityCompetitionBannerFrame.json</CurrentUIJson>
+  <CurrentUIJson>CompetitionWebview.json</CurrentUIJson>
 </UIProject>
