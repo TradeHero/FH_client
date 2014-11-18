@@ -353,11 +353,19 @@
     <GuidesList />
   </GuidesProject>
   <GuidesProject>
-    <Project>CompetitionPrize</Project>
+    <Project>CompetitionWebview</Project>
     <GuidesList />
   </GuidesProject>
   <GuidesProject>
     <Project>SpecialCompetitionLeaderboard</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>SpecialDetailedCompetitionLeaderboard</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>SpecialDetailedCompetitionDropdownFrame</Project>
     <GuidesList />
   </GuidesProject>
 </ArrayOfGuidesProject>

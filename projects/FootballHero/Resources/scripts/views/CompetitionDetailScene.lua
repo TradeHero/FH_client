@@ -40,8 +40,12 @@ function loadFrame( subType, competitionId, showRequestPush )
     local widget
     if mCompetitionType == CompetitionType["Private"] then
         widget = GUIReader:shareReader():widgetFromJsonFile("scenes/CompetitionLeaderboard.json")
-    else
+    elseif mCompetitionType == CompetitionType["SimpleRanking"] then
         widget = GUIReader:shareReader():widgetFromJsonFile("scenes/SpecialCompetitionLeaderboard.json")
+    else
+        -- CompetitionType["DetailedRanking"]
+        -- Overall / Monthly / Weekly
+        widget = GUIReader:shareReader():widgetFromJsonFile("scenes/SpecialDetailedCompetitionLeaderboard.json")
     end
     mWidget = widget
     mWidget:registerScriptHandler( EnterOrExit )
@@ -57,11 +61,13 @@ function loadFrame( subType, competitionId, showRequestPush )
     backBt:addTouchEventListener( backEventHandler )
     local moreBt = mWidget:getChildByName("more")
     moreBt:addTouchEventListener( moreEventHandler )
-    local pushEnabledCheck = tolua.cast( mWidget:getChildByName("pushEnabled"), "CheckBox" )
-    pushEnabledCheck:addTouchEventListener( pushEnabledHandler )
-    if competitionDetail:getPNSetting() then
-        pushEnabledCheck:setSelectedState( true )
-    end
+    
+
+    --local pushEnabledCheck = tolua.cast( mWidget:getChildByName("pushEnabled"), "CheckBox" )
+    --pushEnabledCheck:addTouchEventListener( pushEnabledHandler )
+    --if competitionDetail:getPNSetting() then
+    --    pushEnabledCheck:setSelectedState( true )
+    --end
 
     initContent( competitionDetail )
     initLeaderboard( competitionDetail )
@@ -197,10 +203,11 @@ function initContent( competitionDetail )
     end
 
     -- Add the latest chat message.
-    mChatMessageContainer = mWidget:getChildByName("chatRoom")
-    updateLatestChatMessage( competitionDetail:getLatestChatMessage() )
+    --mChatMessageContainer = mWidget:getChildByName("chatRoom")
+    --updateLatestChatMessage( competitionDetail:getLatestChatMessage() )
 
-    local chatBt = mWidget:getChildByName("chatRoom")
+    --local chatBt = mWidget:getChildByName("chatRoom")
+    local chatBt = mWidget:getChildByName("Button_Chat")
     chatBt:addTouchEventListener( chatRoomEventHandler )
 end
 
