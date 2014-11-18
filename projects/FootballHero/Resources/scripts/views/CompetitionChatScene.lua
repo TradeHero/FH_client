@@ -7,6 +7,7 @@ local Event = require("scripts.events.Event").EventList
 local ViewUtils = require("scripts.views.ViewUtils")
 local Logic = require("scripts.Logic").getInstance()
 local Constants = require("scripts.Constants")
+local SMIS = require("scripts.SMIS")
 
 local mWidget
 local mCompetitionId
@@ -126,7 +127,7 @@ function initMessage( chatMessages )
 
         local messages = v["messages"]
         for i = 1, table.getn( messages ) do
-            local content = createMessageContent( messages[i] )
+            local content = createMessageContent( i, messages[i] )
             
             content:setLayoutParameter( layoutParameter )
             contentContainer:addChild( content )
@@ -166,7 +167,7 @@ function addMessage( chatMessages )
 
         local messages = v["messages"]
         for i = 1, table.getn( messages ) do
-            local content = createMessageContent( messages[i] )
+            local content = createMessageContent( i, messages[i] )
             content:setLayoutParameter( layoutParameter )
             contentContainer:addChild( content )
             mContainerHeight = mContainerHeight + content:getSize().height
@@ -183,7 +184,7 @@ function addMessage( chatMessages )
 end
 
 
-function createMessageContent( message )
+function createMessageContent( i, message )
     local name = message["UserName"]
     -- Todo according to the name of the sender
     local content
@@ -192,13 +193,13 @@ function createMessageContent( message )
         relayoutChatMessage( content, message, true )
     else
         content = SceneManager.widgetFromJsonFile("scenes/ChatMessageContent.json")
-        relayoutChatMessage( content, message, false )
+        relayoutChatMessage( content, message, false, i )
     end
 
     return content
 end
 
-function relayoutChatMessage( content, message, isMe )
+function relayoutChatMessage( content, message, isMe, i )
     local messageTextMaxWidth = 500
     local messageTextHeight = 28
     local messageTextPaddingY = 8
@@ -221,6 +222,7 @@ function relayoutChatMessage( content, message, isMe )
     local messageLabel = tolua.cast( content:getChildByName("message"), "Label" )
     local messageName = tolua.cast( content:getChildByName("name"), "Label" )
     local messageTime = tolua.cast( content:getChildByName("time"), "Label" )
+    local logo = tolua.cast( content:getChildByName("Image_Profile"), "ImageView" )
     messageName:setText( name )
     messageLabel:setText( text )
     messageTime:setText( os.date( "%H:%M", time ) )
@@ -233,6 +235,7 @@ function relayoutChatMessage( content, message, isMe )
         messageBg:setSize( CCSize:new( messageTextMaxWidth + messageBgNTextOffset.x, messageBlockHeight + messageBgNTextOffset.y ) )
         content:setSize( CCSize:new( messageTextMaxWidth + messagePanelNTextOffset.x, messageBlockHeight + messagePanelNTextOffset.y ) )
         messageName:setPosition( ccp( messageNamePositionX, messageBlockHeight + messageNameNTextOffsetY ) )
+        logo:setPosition( ccp( logo:getPositionX(), messageBlockHeight + messageNameNTextOffsetY ) )
     else
         local textWidth = math.max( originSize.width, messageTextMinWidth )
         textWidth = math.max( textWidth, messageName:getSize().width )
@@ -241,7 +244,33 @@ function relayoutChatMessage( content, message, isMe )
         content:setSize( CCSize:new( textWidth + messagePanelNTextOffset.x, messageTextHeight + messagePanelNTextOffset.y ) )
         messageName:setPosition( ccp( messageNamePositionX, messageTextHeight + messageNameNTextOffsetY ) )
         if not isMe then
+            logo:setPosition( ccp( logo:getPositionX(), messageTextHeight + messageNameNTextOffsetY ) )
             messageTime:setPosition( ccp( textWidth + messageTimeNTextOffsetX, messageTimePositionY ) )
         end
+    end
+
+    if not isMe then
+        local seqArray = CCArray:create()
+        seqArray:addObject( CCDelayTime:create( i * 0.2 ) )
+        seqArray:addObject( CCCallFuncN:create( function()
+            if message["PictureUrl"] ~= nil then
+                local handler = function( filePath )
+                    if filePath ~= nil and mWidget ~= nil and logo ~= nil then
+                        local safeLoadTexture = function()
+                            logo:loadTexture( filePath )
+                        end
+
+                        local errorHandler = function( msg )
+                            -- Do nothing
+                        end
+
+                        xpcall( safeLoadTexture, errorHandler )
+                    end
+                end
+                SMIS.getSMImagePath( message["PictureUrl"], handler )
+            end
+        end ) )
+
+        mWidget:runAction( CCSequence:create( seqArray ) )
     end
 end

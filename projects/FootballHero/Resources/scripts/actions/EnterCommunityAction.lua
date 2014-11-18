@@ -19,6 +19,7 @@ function action( param )
     local url
     if mTabID == CommunityConfig.COMMUNITY_TAB_ID_COMPETITION then
         url = RequestUtils.GET_COMPETITION_LIST_REST_CALL
+        url = url.."?showSpecial=true"
     elseif mTabID == CommunityConfig.COMMUNITY_TAB_ID_LEADERBOARD then
 
         mLeaderboardId = param[2]

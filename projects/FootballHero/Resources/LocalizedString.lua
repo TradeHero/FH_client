@@ -89,7 +89,9 @@ M.en = {
     title = "Info",
     join_code_copied = "Join code is copied to clipboard.",
     predictions_entered = "You have completed this match.",
-    star_bet = "You can use 3 star stakes every 12 hours"
+    star_bet = "You can use 3 star stakes every 12 hours",
+    upcoming_bet = "Odds will be updated soon.\n Please check again later.",
+    title_announcement = "Announcement"
   },
   last_name = "Last Name",
   last_name_optional = "Last Name (Optional)",

@@ -44,6 +44,8 @@ EventNameList =
     "Enter_Competition_More",
     "Enter_Competition_Chat",
     "Enter_Competition_Prize",
+    "Enter_Competition_Rules",
+    "Enter_Competition_Terms",
     "Enter_Tutorial_Ui_With_Type",
     "Enter_Share",
     "Enter_Push_Notification",
