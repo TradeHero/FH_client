@@ -114,7 +114,7 @@ function initContent( couponHistory )
     local seqArray = CCArray:create()
 
     local competitionDetail = Logic:getCompetitionDetail()
-    
+    local info = couponHistory:getStats()
     local label = tolua.cast( mWidget:getChildByName("Label_CompTitle"), "Label" )
     local show = tolua.cast( mWidget:getChildByName("Button_Show"), "Button" )
     if mCompetitionId ~= nil then
@@ -122,7 +122,7 @@ function initContent( couponHistory )
         show:setTitleText( Constants.String.history.show_all )
         local eventHandler = function( sender, eventType )
             if eventType == TOUCH_EVENT_ENDED then
-                EventManager:postEvent( Event.Enter_History )
+                EventManager:postEvent( Event.Enter_History, { mUserId, info["DisplayName"] } )
             end
         end
         show:addTouchEventListener( eventHandler )
@@ -131,7 +131,6 @@ function initContent( couponHistory )
         label:setText( Constants.String.history.predictions_all )
         show:setEnabled( false )
     end
-
 
     -- Stats
     local stats = mWidget:getChildByName("Panel_Stats")
@@ -142,7 +141,6 @@ function initContent( couponHistory )
     local stat_last_10_win = tolua.cast( stats:getChildByName("Label_W"), "Label" )
     local stat_last_10_lose = tolua.cast( stats:getChildByName("Label_L"), "Label" )
 
-    local info = couponHistory:getStats()
     stat_win:setText( info["NumberOfCouponsWon"] )
     stat_lose:setText( info["NumberOfCouponsLost"] )
     stat_win_percent:setText( string.format( "%d", info["WinPercentage"] ) )
