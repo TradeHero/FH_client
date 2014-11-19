@@ -103,5 +103,5 @@
   <imageFileList />
   <imagePngList />
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>CompetitionMore.json</CurrentUIJson>
+  <CurrentUIJson>CommunityCompetitionWelcome.json</CurrentUIJson>
 </UIProject>

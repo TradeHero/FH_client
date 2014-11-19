@@ -643,7 +643,7 @@
               "customProperty": "",
               "flipX": false,
               "flipY": false,
-              "height": 18,
+              "height": 21,
               "ignoreSize": true,
               "layoutParameter": null,
               "opacity": 255,
@@ -654,7 +654,7 @@
               "scaleX": 1,
               "scaleY": 1,
               "sizePercentX": 0.07194245,
-              "sizePercentY": 0.2625,
+              "sizePercentY": 0.225,
               "sizeType": 0,
               "tag": 9744,
               "touchAble": false,
@@ -847,7 +847,7 @@
               "capInsetsY": 0,
               "fileName": null,
               "fileNameData": {
-                "path": "C:\\Program Files (x86)\\CocoStudio\\EditorDefaultRes\\GUI/image.png",
+                "path": "C:\\Program Files\\CocoStudio\\EditorDefaultRes\\GUI/image.png",
                 "plistFile": "",
                 "resourceType": 2
               },
