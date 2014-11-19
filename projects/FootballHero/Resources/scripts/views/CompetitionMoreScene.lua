@@ -147,7 +147,10 @@ function initContent( competitionDetail, selectedLeagues )
         quitBtn:addTouchEventListener( leaveEventHandler )
 
         local termsBtn = specialPanel:getChildByName("Button_TnC")
-        termsBtn:addTouchEventListener( termsEventHandler )
+        --termsBtn:addTouchEventListener( termsEventHandler )
+        termsBtn:setEnabled( false )
+        local termsLbl = specialPanel:getChildByName("LabelTnC")
+        termsLbl:setEnabled( false )
 
         local rulesBtn = specialPanel:getChildByName("Button_Rules")
         rulesBtn:addTouchEventListener( rulesEventHandler )

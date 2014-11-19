@@ -10,4 +10,5 @@ Steps
 4. Add this tag into file "\FootballHero\Tools\versionList.txt"
 5. Run "\FootballHero\Tools\PatchCreation.sh" <tag> --dev for test.
 6. Upload the config file with the adminpanel and upload zip files with Azure Storage Explorer.
-7. Run the app and test the self-update funciton. If everything is good, then run without --dev parameter.
+7. Checkout the previous version, make sure that /server is pointing to dev
+8. Run the app and test the self-update function. If everything is good, then run without --dev parameter.
