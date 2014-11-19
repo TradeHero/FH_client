@@ -28,6 +28,7 @@ local mHasMoreToLoad
 local mSelfInfoOpen
 local mCompetitionType
 local mCompetitionToken
+local mTabID
 
 -- DS for competitionDetail see CompetitionDetail
 function loadFrame( subType, competitionId, showRequestPush )
@@ -40,12 +41,15 @@ function loadFrame( subType, competitionId, showRequestPush )
     local widget
     if mCompetitionType == CompetitionType["Private"] then
         widget = GUIReader:shareReader():widgetFromJsonFile("scenes/CompetitionLeaderboard.json")
+    --elseif mCompetitionType == CompetitionType["DetailedRanking"] then
     elseif mCompetitionType == CompetitionType["SimpleRanking"] then
-        widget = GUIReader:shareReader():widgetFromJsonFile("scenes/SpecialCompetitionLeaderboard.json")
+        --widget = GUIReader:shareReader():widgetFromJsonFile("scenes/SpecialCompetitionLeaderboard.json")
+        widget = GUIReader:shareReader():widgetFromJsonFile("scenes/SpecialDetailedCompetitionLeaderboard.json")
+        
     else
         -- CompetitionType["DetailedRanking"]
         -- Overall / Monthly / Weekly
-        widget = GUIReader:shareReader():widgetFromJsonFile("scenes/SpecialDetailedCompetitionLeaderboard.json")
+        widget = GUIReader:shareReader():widgetFromJsonFile("scenes/SpecialCompetitionLeaderboard.json")
     end
     mWidget = widget
     mWidget:registerScriptHandler( EnterOrExit )
@@ -68,6 +72,11 @@ function loadFrame( subType, competitionId, showRequestPush )
     --if competitionDetail:getPNSetting() then
     --    pushEnabledCheck:setSelectedState( true )
     --end
+
+    --if mCompetitionType == CompetitionType["DetailedRanking"] then
+    if mCompetitionType == CompetitionType["SimpleRanking"] then
+        setupRankingDropdown()
+    end
 
     initContent( competitionDetail )
     initLeaderboard( competitionDetail )
@@ -140,6 +149,37 @@ function isNewToCompetition()
     end
     
     return false
+end
+
+function setupRankingDropdown()
+    local dropdown = GUIReader:shareReader():widgetFromJsonFile("scenes/SpecialDetailedCompetitionDropdownFrame.json")
+    local mask = dropdown:getChildByName( "Panel_Mask" )
+    mask:setEnabled( false )
+    mWidget:addChild( dropdown )
+end
+
+function initRankingTab( tabInfo, tabId )
+    local tab = tolua.cast( mWidget:getChildByName( tabInfo["id"] ), "Button" )
+    tab:setTitleText( tabInfo["displayName"] )
+
+    local isActive = mTabID == tabId
+
+    if isActive then
+        tab:setBright( false )
+        tab:setTouchEnabled( false )
+        tab:setTitleColor( ccc3( 255, 255, 255 ) )
+    else
+        local eventHandler = function( sender, eventType )
+            if eventType == TOUCH_EVENT_ENDED then
+
+                onSelectTab( tabId )
+            end
+        end
+        tab:setBright( true )
+        tab:setTouchEnabled( true )
+        tab:setTitleColor( ccc3( 127, 127, 127 ) )
+        tab:addTouchEventListener( eventHandler )
+    end
 end
 
 function initWelcome()

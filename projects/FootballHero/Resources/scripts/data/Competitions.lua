@@ -1,6 +1,8 @@
 module(..., package.seeall)
 
-
+COMPETITION_TAB_ID_OVERALL = 1
+COMPETITION_TAB_ID_MONTHLY = 2
+COMPETITION_TAB_ID_WEEKLY = 3
 
 CompetitionType = {
   ["Private"] = 1,
