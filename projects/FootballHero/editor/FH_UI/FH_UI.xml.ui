@@ -103,5 +103,5 @@
   <imageFileList />
   <imagePngList />
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>LeagueListDropDown.json</CurrentUIJson>
+  <CurrentUIJson>CompetitionMore.json</CurrentUIJson>
 </UIProject>
