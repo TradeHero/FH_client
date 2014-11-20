@@ -59,10 +59,11 @@ M.en = {
   event = {
     hint_qualified = "Qualified for prizes",
     hint_unqualified = "Predict on %d more matches to qualify",
+    ranking_monthly = "Monthly",
+    ranking_overall = "Overall",
+    ranking_weekly = "Weekly",
     status_qualified = "- qualified",
     status_unqualified = "- unqualified",
-    ranking_overall = "Overall",
-    ranking_week = "Week"
   },
   favourite_team = "Your favourite team: ",
   first_name = "First Name",

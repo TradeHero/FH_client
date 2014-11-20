@@ -11,6 +11,7 @@ local ConnectingMessage = require("scripts.views.ConnectingMessage")
 local PushNotificationManager = require("scripts.PushNotificationManager")
 local Constants = require("scripts.Constants")
 local CompetitionType = require("scripts.data.Competitions").CompetitionType
+local CompetitionConfig = require("scripts.data.Competitions")
 
 local SHARE_BODY = Constants.String.share_body
 local SHARE_TITLE = Constants.String.share_title
@@ -29,14 +30,30 @@ local mSelfInfoOpen
 local mCompetitionType
 local mCompetitionToken
 local mTabID
+local mCompetitionStart
 
 -- DS for competitionDetail see CompetitionDetail
-function loadFrame( subType, competitionId, showRequestPush )
+function loadFrame( subType, competitionId, showRequestPush, tabID )
     mCompetitionId = competitionId
     mSubType = subType
+    mTabID = tabID
     competitionDetail = Logic:getCompetitionDetail()
     mCompetitionType = competitionDetail:getCompetitionType()
     mCompetitionToken = competitionDetail:getJoinToken()
+    
+    print( "COMP START TIME = "..competitionDetail["startTimeStamp"] )
+    print( "Start date = ", os.date( "%c", competitionDetail:getStartTime()) )
+    print( "Start year = ", os.date( "%Y", competitionDetail:getStartTime()) )
+    print( "Start month = ", os.date( "%m", competitionDetail:getStartTime()) )
+    print( "Start week = ", os.date( "%W", competitionDetail:getStartTime()) )
+    print( "Start day = ", os.date( "%d", competitionDetail:getStartTime()) )
+    print( "Start wday = ", os.date( "%w", competitionDetail:getStartTime()) )
+    print( "Start hr = ", os.date( "%H", competitionDetail:getStartTime()) )
+    print( "Start min = ", os.date( "%M", competitionDetail:getStartTime()) )
+    print( "Start sec = ", os.date( "%S", competitionDetail:getStartTime()) )
+
+    local startOfWeek = competitionDetail:getStartTime() - tonumber(  )
+    --print( "COMP START DAY = "..competitionDetail["startTimeStamp"] -  )
 
     local widget
     if mCompetitionType == CompetitionType["Private"] then
@@ -75,7 +92,7 @@ function loadFrame( subType, competitionId, showRequestPush )
 
     --if mCompetitionType == CompetitionType["DetailedRanking"] then
     if mCompetitionType == CompetitionType["SimpleRanking"] then
-        setupRankingDropdown()
+        setupRankingDropdown( true )
     end
 
     initContent( competitionDetail )
@@ -104,6 +121,29 @@ function loadFrame( subType, competitionId, showRequestPush )
 
         PushNotificationManager.checkShowCompetitionSwitch( yesCallback, noCallback )
     end
+end
+
+-- refreshing of frame means that the competition id, type is not going to change, ie. within the same competition
+-- and that it is a detailed competition
+function refreshFrame( tabID )
+    mTabID = tabID
+    competitionDetail = Logic:getCompetitionDetail()
+    
+    --if mCompetitionType == CompetitionType["DetailedRanking"] then
+    if mCompetitionType == CompetitionType["SimpleRanking"] then
+        setupRankingDropdown( false )
+    end
+
+    initContent( competitionDetail )
+    initLeaderboard( competitionDetail )
+
+    mStep = 1
+    mHasMoreToLoad = true
+    mSelfInfoOpen = false
+end
+
+function isShown()
+    return mWidget ~= nil
 end
 
 function EnterOrExit( eventType )
@@ -151,35 +191,50 @@ function isNewToCompetition()
     return false
 end
 
-function setupRankingDropdown()
-    local dropdown = GUIReader:shareReader():widgetFromJsonFile("scenes/SpecialDetailedCompetitionDropdownFrame.json")
-    local mask = dropdown:getChildByName( "Panel_Mask" )
-    mask:setEnabled( false )
-    mWidget:addChild( dropdown )
+function setupRankingDropdown( bInit )
+    if bInit then
+        local dropdown = GUIReader:shareReader():widgetFromJsonFile("scenes/SpecialDetailedCompetitionDropdownFrame.json")
+        local mask = dropdown:getChildByName( "Panel_Mask" )
+        mask:setEnabled( false )
+        mWidget:addChild( dropdown )
+    end
+
+    -- init header tab
+    for i = 1, table.getn( CompetitionConfig.CompetitionTabs ) do
+        initRankingTab( dropdown, CompetitionConfig.CompetitionTabs[i], i, bInit )
+    end
 end
 
-function initRankingTab( tabInfo, tabId )
+function initRankingTab( dropdown, tabInfo, tabId, bInit )
     local tab = tolua.cast( mWidget:getChildByName( tabInfo["id"] ), "Button" )
     tab:setTitleText( tabInfo["displayName"] )
 
     local isActive = mTabID == tabId
 
+    local eventHandler = function( sender, eventType )
+        if eventType == TOUCH_EVENT_ENDED then
+
+            onSelectTab( tabId )
+        end
+    end
+    if bInit then
+            tab:addTouchEventListener( eventHandler )
+        end
+    
     if isActive then
         tab:setBright( false )
         tab:setTouchEnabled( false )
         tab:setTitleColor( ccc3( 255, 255, 255 ) )
     else
-        local eventHandler = function( sender, eventType )
-            if eventType == TOUCH_EVENT_ENDED then
-
-                onSelectTab( tabId )
-            end
-        end
+        
         tab:setBright( true )
         tab:setTouchEnabled( true )
         tab:setTitleColor( ccc3( 127, 127, 127 ) )
-        tab:addTouchEventListener( eventHandler )
     end
+end
+
+function onSelectTab( tabID )
+    EventManager:postEvent( Event.Enter_Competition_Detail, { mCompetitionId, false, 3, tabID } )
 end
 
 function initWelcome()

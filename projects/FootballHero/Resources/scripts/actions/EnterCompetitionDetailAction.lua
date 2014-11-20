@@ -8,19 +8,23 @@ local Event = require("scripts.events.Event").EventList
 local Logic = require("scripts.Logic").getInstance()
 local LeaderboardConfig = require("scripts.config.Leaderboard")
 local CompetitionDetail = require("scripts.data.CompetitionDetail").CompetitionDetail
+local CompetitionConfig = require("scripts.data.Competitions")
 
 local competitionId
 local showRequestPush
+local mTabID
+local mSortType
 
 function action( param )
     local url = RequestUtils.GET_COMPETITION_DETAIL_REST_CALL
 
     local step = 1
-    local sortType = param[3] or 1
+    mSortType = param[3] or 1
     competitionId = param[1]
     showRequestPush = param[2] or false
+    mTabID = param[4] or CompetitionConfig.COMPETITION_TAB_ID_OVERALL
 
-    url = url.."?competitionId="..competitionId.."&sortType="..sortType.."&step="..step
+    url = url.."?competitionId="..competitionId.."&sortType="..mSortType.."&step="..step
     if RequestUtils.USE_DEV then
         url = url.."&useDev=true"
     end
@@ -45,5 +49,9 @@ function onRequestSuccess( jsonResponse )
     Logic:setCompetitionDetail( competitionDetail )
 
     local CompetitionDetailScene = require("scripts.views.CompetitionDetailScene")
-    CompetitionDetailScene.loadFrame( LeaderboardConfig.LeaderboardSubType[1], competitionId, showRequestPush )
+    if CompetitionDetailScene:isShown() then
+        CompetitionDetailScene.refreshFrame( mTabID )
+    else
+        CompetitionDetailScene.loadFrame( LeaderboardConfig.LeaderboardSubType[mSortType], competitionId, showRequestPush, mTabID )
+    end
 end
