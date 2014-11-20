@@ -30,7 +30,7 @@ local mSelfInfoOpen
 local mCompetitionType
 local mCompetitionToken
 local mTabID
-local mCompetitionStart
+local mCompetitionDurations
 
 -- DS for competitionDetail see CompetitionDetail
 function loadFrame( subType, competitionId, showRequestPush, tabID )
@@ -40,19 +40,8 @@ function loadFrame( subType, competitionId, showRequestPush, tabID )
     competitionDetail = Logic:getCompetitionDetail()
     mCompetitionType = competitionDetail:getCompetitionType()
     mCompetitionToken = competitionDetail:getJoinToken()
-    
-    print( "COMP START TIME = "..competitionDetail["startTimeStamp"] )
-    print( "Start date = ", os.date( "%c", competitionDetail:getStartTime()) )
-    print( "Start year = ", os.date( "%Y", competitionDetail:getStartTime()) )
-    print( "Start month = ", os.date( "%m", competitionDetail:getStartTime()) )
-    print( "Start week = ", os.date( "%W", competitionDetail:getStartTime()) )
-    print( "Start day = ", os.date( "%d", competitionDetail:getStartTime()) )
-    print( "Start wday = ", os.date( "%w", competitionDetail:getStartTime()) )
-    print( "Start hr = ", os.date( "%H", competitionDetail:getStartTime()) )
-    print( "Start min = ", os.date( "%M", competitionDetail:getStartTime()) )
-    print( "Start sec = ", os.date( "%S", competitionDetail:getStartTime()) )
 
-    local startOfWeek = competitionDetail:getStartTime() - tonumber(  )
+    
     --print( "COMP START DAY = "..competitionDetail["startTimeStamp"] -  )
 
     local widget
@@ -91,7 +80,8 @@ function loadFrame( subType, competitionId, showRequestPush, tabID )
     --end
 
     --if mCompetitionType == CompetitionType["DetailedRanking"] then
-    if mCompetitionType == CompetitionType["SimpleRanking"] then
+    if mCompetitionType == CompetitionType["SimpleRanking"] and mTabID ~= CompetitionConfig.COMPETITION_TAB_ID_OVERALL then
+        initCompetitionDuration( competitionDetail:getStartTime() )
         setupRankingDropdown( true )
     end
 
@@ -130,7 +120,8 @@ function refreshFrame( tabID )
     competitionDetail = Logic:getCompetitionDetail()
     
     --if mCompetitionType == CompetitionType["DetailedRanking"] then
-    if mCompetitionType == CompetitionType["SimpleRanking"] then
+    if mCompetitionType == CompetitionType["SimpleRanking"] and mTabID ~= CompetitionConfig.COMPETITION_TAB_ID_OVERALL then
+        initCompetitionDuration( competitionDetail:getStartTime() )
         setupRankingDropdown( false )
     end
 
@@ -189,6 +180,54 @@ function isNewToCompetition()
     end
     
     return false
+end
+
+function initCompetitionDuration( startTimeStamp )
+    
+    --mCompetitionDurations
+    local nowTimeStamp = os.time()
+
+    local startWeek = os.date( "%W", startTimeStamp ) 
+    local currentWeek = os.data( "%W", nowTimeStamp )
+    local startDayOfWeek = startTimeStamp - ( tonumber( os.date( "%w", startTimeStamp ) ) - 1 ) * 3600 * 24 
+                                            - tonumber( os.date( "%H", startTimeStamp ) ) * 3600
+                                            - tonumber( os.date( "%M", startTimeStamp ) ) * 60
+                                            - tonumber( os.date( "%S", startTimeStamp ) )
+
+    local startMth = os.date( "%m", startTimeStamp )
+    local currentMth = os.date( "%m", nowTimeStamp )
+
+    for i = startWeek, currentWeek do
+
+
+        table.insert( mCompetitionDurations, { [""]})
+    end
+    print( "Start date = ", os.date( "%c", competitionDetail:getStartTime()) )
+    print( "Start year = ", os.date( "%Y", competitionDetail:getStartTime()) )
+    print( "Start month = ", os.date( "%m", competitionDetail:getStartTime()) )
+    print( "Start week = ", os.date( "%W", competitionDetail:getStartTime()) )
+    print( "Start day = ", os.date( "%d", competitionDetail:getStartTime()) )
+    print( "Start wday = ", os.date( "%w", competitionDetail:getStartTime()) )
+    print( "Start hr = ", os.date( "%H", competitionDetail:getStartTime()) )
+    print( "Start min = ", os.date( "%M", competitionDetail:getStartTime()) )
+    print( "Start sec = ", os.date( "%S", competitionDetail:getStartTime()) )
+
+    local startOfWeek = competitionDetail:getStartTime() - ( tonumber( os.date( "%w", competitionDetail:getStartTime() ) ) - 1 ) * 3600 * 24 
+                                                        - tonumber( os.date( "%H", competitionDetail:getStartTime()) ) * 3600
+                                                        - tonumber( os.date( "%M", competitionDetail:getStartTime()) ) * 60
+                                                        - tonumber( os.date( "%S", competitionDetail:getStartTime()) ) - 1
+
+    print( "COMP START WEEK = "..startOfWeek )
+    print( "Start date = ", os.date( "%c", startOfWeek ) )
+    print( "Start year = ", os.date( "%Y", startOfWeek ) )
+    print( "Start month = ", os.date( "%m", startOfWeek ) )
+    print( "Start week = ", os.date( "%W", startOfWeek ) )
+    print( "Start day = ", os.date( "%d", startOfWeek ) )
+    print( "Start wday = ", os.date( "%w", startOfWeek ) )
+    print( "Start hr = ", os.date( "%H", startOfWeek ) )
+    print( "Start min = ", os.date( "%M", startOfWeek ) )
+    print( "Start sec = ", os.date( "%S", startOfWeek ) )
+    print( "Start wday name = ", os.date( "%a", startOfWeek ) )
 end
 
 function setupRankingDropdown( bInit )
