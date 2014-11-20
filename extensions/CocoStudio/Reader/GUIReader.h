@@ -72,6 +72,7 @@ public:
     virtual cocos2d::gui::Widget* widgetFromJsonDictionary(const rapidjson::Value& data) = 0;
 protected:
     std::string m_strFilePath;
+	std::string m_strFileName;
 };
 
 
