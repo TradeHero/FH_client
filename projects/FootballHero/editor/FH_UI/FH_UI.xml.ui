@@ -113,11 +113,13 @@
     <string>GUI/image.png</string>
     <string>Competition/btn-learnmore.png</string>
     <string>Competition/btn-share.png</string>
+    <string>Competition/btn-predictnow.png</string>
+    <string>Competition/img-counter.png</string>
     <string>Competition/img-userposition.png</string>
     <string>LoginNReg/photo.png</string>
     <string>Competition/icn-unqualified.png</string>
     <string>Competition/icn-expandinfo.png</string>
   </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>CommunityJoinedCompetitionFrame.json</CurrentUIJson>
+  <CurrentUIJson>SpecialCompetitionLeaderboard.json</CurrentUIJson>
 </UIProject>

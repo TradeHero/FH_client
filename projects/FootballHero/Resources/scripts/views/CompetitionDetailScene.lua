@@ -28,6 +28,7 @@ local mHasMoreToLoad
 local mSelfInfoOpen
 local mCompetitionType
 local mCompetitionToken
+local mLinkedLeagueId
 
 -- DS for competitionDetail see CompetitionDetail
 function loadFrame( subType, competitionId, showRequestPush )
@@ -36,6 +37,7 @@ function loadFrame( subType, competitionId, showRequestPush )
     competitionDetail = Logic:getCompetitionDetail()
     mCompetitionType = competitionDetail:getCompetitionType()
     mCompetitionToken = competitionDetail:getJoinToken()
+    mLinkedLeagueId = competitionDetail:getLinkedLeagueId()
 
     local widget
     if mCompetitionType == CompetitionType["Private"] then
@@ -184,10 +186,14 @@ function initContent( competitionDetail )
         shareBt:addTouchEventListener( shareTypeSelectEventHandler )
     else
         local banner = mWidget:getChildByName("Panel_Banner")
+        local predictBt = banner:getChildByName("Button_Predict")
         local shareBt = banner:getChildByName("Button_Share")
         local prizeBt = banner:getChildByName("Button_Learn")
+        local playerNum = tolua.cast( banner:getChildByName("Label_PlayerNum"), "Label" )
+        predictBt:addTouchEventListener( predictNowEventHandler )
         shareBt:addTouchEventListener( shareTypeSelectEventHandler )
         prizeBt:addTouchEventListener( competitionPrizeEventHandler )
+        playerNum:setText( competitionDetail:getPlayerNum() )
 
         local bannerBG = tolua.cast( banner:getChildByName("Image_BannerBG"), "ImageView" )
         bannerBG:loadTexture( Constants.COMPETITION_IMAGE_PATH..Constants.PrizesPrefix..competitionDetail:getJoinToken()..".png" )
@@ -300,6 +306,12 @@ function shareByFacebook( sender, eventType )
         end
     end
 end
+
+function predictNowEventHandler( sender, eventType )
+    if eventType == TOUCH_EVENT_ENDED then
+        EventManager:postEvent( Event.Enter_Match_List, { mLinkedLeagueId } )
+    end
+end 
 
 function shareTypeSelectEventHandler( sender, eventType )
     if eventType == TOUCH_EVENT_ENDED then
