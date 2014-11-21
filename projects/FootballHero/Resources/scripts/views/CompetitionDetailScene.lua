@@ -351,11 +351,11 @@ function initSelfContent( info )
             if mSelfInfoOpen then
                 click:setSize( CCSize:new( 560, click:getSize().height ) )
                 mSelfInfoOpen = false
-                deltaX = 205
+                deltaX = 287
             else
                 click:setSize( CCSize:new( 355, click:getSize().height ) )
                 mSelfInfoOpen = true
-                deltaX = -205
+                deltaX = -287
             end
 
             local resultSeqArray = CCArray:create()

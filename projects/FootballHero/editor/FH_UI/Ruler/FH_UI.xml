@@ -360,4 +360,8 @@
     <Project>SpecialCompetitionLeaderboard</Project>
     <GuidesList />
   </GuidesProject>
+  <GuidesProject>
+    <Project>CompetitionWebview</Project>
+    <GuidesList />
+  </GuidesProject>
 </ArrayOfGuidesProject>

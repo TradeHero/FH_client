@@ -168,10 +168,11 @@ end
 
 function initSpecialCompetitions( parent, compList )
     local contentHeight = 0
+    -- Add the available ones.
     for i = 1, table.getn( compList ) do
         local competition = compList[i]
 
-        if competition["CompetitionStatus"] == CompetitionStatus["Available"] then
+        if competition["CompetitionType"] ~= CompetitionType["Preview"] and competition["CompetitionStatus"] == CompetitionStatus["Available"] then
             local bannerFrame = SceneManager.widgetFromJsonFile("scenes/CommunityCompetitionBannerFrame.json")
             
             local bannerBG = tolua.cast( bannerFrame:getChildByName( "Image_BannerBG" ), "ImageView" )
@@ -184,6 +185,23 @@ function initSpecialCompetitions( parent, compList )
             end
             local joinBtn = bannerFrame:getChildByName( "Button_Join" )
             joinBtn:addTouchEventListener( joinEventHandler )
+            parent:addChild( bannerFrame )
+            contentHeight = contentHeight + bannerFrame:getSize().height
+        end
+    end
+
+    -- Add the preview ones.
+    for i = 1, table.getn( compList ) do
+        local competition = compList[i]
+
+        if competition["CompetitionType"] == CompetitionType["Preview"] then
+            local bannerFrame = SceneManager.widgetFromJsonFile("scenes/CommunityCompetitionBannerFrame.json")
+            
+            local bannerBG = tolua.cast( bannerFrame:getChildByName( "Image_BannerBG" ), "ImageView" )
+            bannerBG:loadTexture(  Constants.COMPETITION_IMAGE_PATH..Constants.BannerPreviewPrefix..competition["JoinToken"]..".png" )
+
+            local joinBtn = bannerFrame:getChildByName( "Button_Join" )
+            joinBtn:setEnabled( false )
             parent:addChild( bannerFrame )
             contentHeight = contentHeight + bannerFrame:getSize().height
         end

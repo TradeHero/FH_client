@@ -101,7 +101,23 @@
   <ProjectType>UIProject</ProjectType>
   <ResRelativePath />
   <imageFileList />
-  <imagePngList />
+  <imagePngList>
+    <string>MatchListScene/match_bkg.png</string>
+    <string>Competition/btn-alertOff.png</string>
+    <string>Competition/btn-alertOn.png</string>
+    <string>chat/More Button.png</string>
+    <string>header/back.png</string>
+    <string>Tutorial/Default Button.png</string>
+    <string>chat/Chat_Icon.png</string>
+    <string>chat/GreenArrow.png</string>
+    <string>GUI/image.png</string>
+    <string>Competition/btn-learnmore.png</string>
+    <string>Competition/btn-share.png</string>
+    <string>Competition/img-userposition.png</string>
+    <string>LoginNReg/photo.png</string>
+    <string>Competition/icn-unqualified.png</string>
+    <string>Competition/icn-expandinfo.png</string>
+  </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>CommunityCompetitionWelcome.json</CurrentUIJson>
+  <CurrentUIJson>CommunityJoinedCompetitionFrame.json</CurrentUIJson>
 </UIProject>

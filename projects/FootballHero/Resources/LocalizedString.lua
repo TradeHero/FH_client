@@ -58,7 +58,7 @@ M.en = {
   },
   event = {
     hint_qualified = "Qualified for prizes",
-    hint_unqualified = "Predict on %d more matches to qualify",
+    hint_unqualified = "You must predict on %d more matches in this competition to qualify for prizes.",
     status_qualified = "- qualified",
     status_unqualified = "- unqualified",
   },
