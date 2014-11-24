@@ -143,8 +143,9 @@ function makePredictionCallback( selectedIndex, prediction )
 
     if mCurrentPredictionIndex < mMarketsInfo:getNum() then
         gotoPredictionByOffset( 1 )
-    else
+    elseif mCurrentPredictionIndex == mMarketsInfo:getNum() then
         goToConfirm()
+        mCurrentPredictionIndex = mCurrentPredictionIndex + 1
     end
 end
 
@@ -162,7 +163,7 @@ function goToConfirm()
 end
 
 function gotoPredictionByOffset( offset )
-    if mCurrentPredictionIndex + offset <= 0 or mCurrentPredictionIndex + offset > mMarketsInfo:getNum() or not mPredictionWidget.helperGetTouchEnabled() then
+    if mCurrentPredictionIndex + offset <= 0 or mCurrentPredictionIndex + offset > mMarketsInfo:getNum() then
         return
     end
 
@@ -172,9 +173,6 @@ function gotoPredictionByOffset( offset )
     end
 
     local resultSeqArray = CCArray:create()
-    resultSeqArray:addObject( CCCallFunc:create( function()
-        mPredictionWidget.helperSetTouchEnabled( false )
-    end ) )
     resultSeqArray:addObject( CCMoveBy:create( SWITCH_MOVE_TIME, ccp( Constants.GAME_WIDTH * moveDirection * 2, 0 ) ) )
     resultSeqArray:addObject( CCCallFunc:create( function()
         mCurrentPredictionIndex = mCurrentPredictionIndex + offset
@@ -207,6 +205,10 @@ end
 
 local originWidgetX
 function onFrameTouch( sender, eventType )
+    if not mPredictionWidget.helperGetTouchEnabled() then
+        return
+    end
+
     if eventType == TOUCH_EVENT_BEGAN then
         originWidgetX = mMovableContainer:getPositionX()
     elseif eventType == TOUCH_EVENT_ENDED or eventType == TOUCH_EVENT_CANCELED then
