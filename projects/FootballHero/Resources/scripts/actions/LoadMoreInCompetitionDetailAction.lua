@@ -13,7 +13,7 @@ function action( param )
 
     local competitionId = param[1]
     local step = param[2]
-    local sortType = 1
+    local sortType = 1 or param[3]
     
 
     url = url.."?competitionId="..competitionId.."&sortType="..sortType.."&step="..step
