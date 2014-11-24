@@ -81,6 +81,7 @@ M.en = {
     won_colon = "Won:",
     won_small = "won",
     no_open_prediction = "You have no\n open predictions yet.",
+    no_open_prediction_others = "No open predictions",
     no_closed_prediction = "You have no\n closed predictions yet.",
     total_points = "Total Points: %d"
   },

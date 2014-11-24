@@ -103,6 +103,14 @@ function isFrameShown()
     return mWidget ~= nil
 end
 
+function isSelf()
+    if mUserId == Logic:getUserId() then
+        return true
+    else
+        return false
+    end
+end
+
 function initContent( couponHistory )
 	local contentContainer = tolua.cast( mWidget:getChildByName("ScrollView"), "ScrollView" )
     contentContainer:removeAllChildrenWithCleanup( true )
@@ -205,15 +213,21 @@ function initContent( couponHistory )
             
             local openPredictionContent = content:getChildByName( "Panel_OpenPrediction" )
             local CTA = tolua.cast( openPredictionContent:getChildByName("Label_CTA"), "Label" )
-            CTA:setText( Constants.String.history.no_open_prediction )
-
-            local eventHandler = function( sender, eventType )
-                if eventType == TOUCH_EVENT_ENDED then
-                    EventManager:postEvent( Event.Enter_Match_List )
-                end
-            end
             local button = openPredictionContent:getChildByName("Button_Create")
-            button:addTouchEventListener( eventHandler ) 
+
+            if isSelf() then
+                CTA:setText( Constants.String.history.no_open_prediction )
+
+                local eventHandler = function( sender, eventType )
+                    if eventType == TOUCH_EVENT_ENDED then
+                        EventManager:postEvent( Event.Enter_Match_List )
+                    end
+                end
+                button:addTouchEventListener( eventHandler ) 
+            else
+                CTA:setText(( Constants.String.history.no_open_prediction_others )
+                button:setEnabled( false )
+            end
 
             content:setLayoutParameter( layoutParameter )
             contentContainer:addChild( content )
