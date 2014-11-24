@@ -225,7 +225,7 @@ function initContent( couponHistory )
                 end
                 button:addTouchEventListener( eventHandler ) 
             else
-                CTA:setText(( Constants.String.history.no_open_prediction_others )
+                CTA:setText( Constants.String.history.no_open_prediction_others )
                 button:setEnabled( false )
             end
 
