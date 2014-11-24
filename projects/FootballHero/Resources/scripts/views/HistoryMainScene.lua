@@ -28,7 +28,7 @@ function loadFrame( userId, userName, competitionId, couponHistory )
     mWidget = GUIReader:shareReader():widgetFromJsonFile("scenes/MyPicksHome.json")
 
     local totalPoints = tolua.cast( mWidget:getChildByName("Label_Total_Points"), "Label" )
-    totalPoints:setText( string.format( totalPoints:getStringValue(), couponHistory:getBalance() ) )
+    totalPoints:setText( string.format( Constants.String.history.total_points, couponHistory:getBalance() ) )
     
     mUserId = userId
     if mUserId == Logic:getUserId() then
@@ -74,7 +74,7 @@ function refreshFrame( userId, userName, competitionId, couponHistory )
     local showBackButton = false
 
     local totalPoints = tolua.cast( mWidget:getChildByName("Label_Total_Points"), "Label" )
-    totalPoints:setText( string.format( totalPoints:getStringValue(), couponHistory:getBalance() ) )
+    totalPoints:setText( string.format( Constants.String.history.total_points, couponHistory:getBalance() ) )
 
     mUserId = userId
     if mUserId == Logic:getUserId() then
