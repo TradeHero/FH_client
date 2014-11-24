@@ -594,7 +594,7 @@ end
 function scrollViewEventHandler( target, eventType )
     if eventType == SCROLLVIEW_EVENT_BOUNCE_BOTTOM and mHasMoreToLoad then
         mStep = mStep + 1
-        if mCompetitionType ~= CompetitionType["Private"]
+        if mCompetitionType ~= CompetitionType["Private"] then
             EventManager:postEvent( Event.Load_More_In_Competition_Detail, { mCompetitionId, mStep, 3 } )
         else
             EventManager:postEvent( Event.Load_More_In_Competition_Detail, { mCompetitionId, mStep } )
