@@ -31,6 +31,10 @@ local mCompetitionType
 local mCompetitionToken
 local mTabID
 local mCompetitionDurations
+local mDropdown
+local mYearNumber
+local mMonthNumber
+local mWeekNumber
 
 -- DS for competitionDetail see CompetitionDetail
 function loadFrame( subType, competitionId, showRequestPush, tabID )
@@ -40,21 +44,19 @@ function loadFrame( subType, competitionId, showRequestPush, tabID )
     competitionDetail = Logic:getCompetitionDetail()
     mCompetitionType = competitionDetail:getCompetitionType()
     mCompetitionToken = competitionDetail:getJoinToken()
-
+    mYearNumber = nil
+    mMonthNumber = nil
+    mWeekNumber = nil
     
-    --print( "COMP START DAY = "..competitionDetail["startTimeStamp"] -  )
-
     local widget
     if mCompetitionType == CompetitionType["Private"] then
         widget = GUIReader:shareReader():widgetFromJsonFile("scenes/CompetitionLeaderboard.json")
     --elseif mCompetitionType == CompetitionType["DetailedRanking"] then
     elseif mCompetitionType == CompetitionType["SimpleRanking"] then
-        --widget = GUIReader:shareReader():widgetFromJsonFile("scenes/SpecialCompetitionLeaderboard.json")
-        widget = GUIReader:shareReader():widgetFromJsonFile("scenes/SpecialDetailedCompetitionLeaderboard.json")
-        
-    else
         -- CompetitionType["DetailedRanking"]
         -- Overall / Monthly / Weekly
+        widget = GUIReader:shareReader():widgetFromJsonFile("scenes/SpecialDetailedCompetitionLeaderboard.json")
+    else
         widget = GUIReader:shareReader():widgetFromJsonFile("scenes/SpecialCompetitionLeaderboard.json")
     end
     mWidget = widget
@@ -80,9 +82,8 @@ function loadFrame( subType, competitionId, showRequestPush, tabID )
     --end
 
     --if mCompetitionType == CompetitionType["DetailedRanking"] then
-    if mCompetitionType == CompetitionType["SimpleRanking"] and mTabID ~= CompetitionConfig.COMPETITION_TAB_ID_OVERALL then
-        initCompetitionDuration( competitionDetail:getStartTime() )
-        setupRankingDropdown( true )
+    if mCompetitionType == CompetitionType["SimpleRanking"] then
+        setupRankingHeader( true, competitionDetail:getStartTime() )
     end
 
     initContent( competitionDetail )
@@ -91,7 +92,6 @@ function loadFrame( subType, competitionId, showRequestPush, tabID )
     if mCompetitionType ~= CompetitionType["Private"] and isNewToCompetition() then
         initWelcome()
     end
-
 
     mStep = 1
     mHasMoreToLoad = true
@@ -115,14 +115,16 @@ end
 
 -- refreshing of frame means that the competition id, type is not going to change, ie. within the same competition
 -- and that it is a detailed competition
-function refreshFrame( tabID )
+function refreshFrame( tabID, yearNumber, monthNumber, weekNumber )
     mTabID = tabID
+    mYearNumber = tonumber( yearNumber )
+    mMonthNumber = tonumber( monthNumber )
+    mWeekNumber = tonumber( weekNumber )
     competitionDetail = Logic:getCompetitionDetail()
     
     --if mCompetitionType == CompetitionType["DetailedRanking"] then
-    if mCompetitionType == CompetitionType["SimpleRanking"] and mTabID ~= CompetitionConfig.COMPETITION_TAB_ID_OVERALL then
-        initCompetitionDuration( competitionDetail:getStartTime() )
-        setupRankingDropdown( false )
+    if mCompetitionType == CompetitionType["SimpleRanking"] then
+        setupRankingHeader( false, competitionDetail:getStartTime() )
     end
 
     initContent( competitionDetail )
@@ -142,6 +144,7 @@ function EnterOrExit( eventType )
     elseif eventType == "exit" then
         mWidget:stopAllActions()
         mWidget = nil
+        mDropdown = nil
     end
 end
 
@@ -182,69 +185,23 @@ function isNewToCompetition()
     return false
 end
 
-function initCompetitionDuration( startTimeStamp )
+function setupRankingHeader( bInit, startTimeStamp )
     
-    --mCompetitionDurations
-    local nowTimeStamp = os.time()
-
-    local startWeek = os.date( "%W", startTimeStamp ) 
-    local currentWeek = os.data( "%W", nowTimeStamp )
-    local startDayOfWeek = startTimeStamp - ( tonumber( os.date( "%w", startTimeStamp ) ) - 1 ) * 3600 * 24 
-                                            - tonumber( os.date( "%H", startTimeStamp ) ) * 3600
-                                            - tonumber( os.date( "%M", startTimeStamp ) ) * 60
-                                            - tonumber( os.date( "%S", startTimeStamp ) )
-
-    local startMth = os.date( "%m", startTimeStamp )
-    local currentMth = os.date( "%m", nowTimeStamp )
-
-    for i = startWeek, currentWeek do
-
-
-        table.insert( mCompetitionDurations, { [""]})
-    end
-    print( "Start date = ", os.date( "%c", competitionDetail:getStartTime()) )
-    print( "Start year = ", os.date( "%Y", competitionDetail:getStartTime()) )
-    print( "Start month = ", os.date( "%m", competitionDetail:getStartTime()) )
-    print( "Start week = ", os.date( "%W", competitionDetail:getStartTime()) )
-    print( "Start day = ", os.date( "%d", competitionDetail:getStartTime()) )
-    print( "Start wday = ", os.date( "%w", competitionDetail:getStartTime()) )
-    print( "Start hr = ", os.date( "%H", competitionDetail:getStartTime()) )
-    print( "Start min = ", os.date( "%M", competitionDetail:getStartTime()) )
-    print( "Start sec = ", os.date( "%S", competitionDetail:getStartTime()) )
-
-    local startOfWeek = competitionDetail:getStartTime() - ( tonumber( os.date( "%w", competitionDetail:getStartTime() ) ) - 1 ) * 3600 * 24 
-                                                        - tonumber( os.date( "%H", competitionDetail:getStartTime()) ) * 3600
-                                                        - tonumber( os.date( "%M", competitionDetail:getStartTime()) ) * 60
-                                                        - tonumber( os.date( "%S", competitionDetail:getStartTime()) ) - 1
-
-    print( "COMP START WEEK = "..startOfWeek )
-    print( "Start date = ", os.date( "%c", startOfWeek ) )
-    print( "Start year = ", os.date( "%Y", startOfWeek ) )
-    print( "Start month = ", os.date( "%m", startOfWeek ) )
-    print( "Start week = ", os.date( "%W", startOfWeek ) )
-    print( "Start day = ", os.date( "%d", startOfWeek ) )
-    print( "Start wday = ", os.date( "%w", startOfWeek ) )
-    print( "Start hr = ", os.date( "%H", startOfWeek ) )
-    print( "Start min = ", os.date( "%M", startOfWeek ) )
-    print( "Start sec = ", os.date( "%S", startOfWeek ) )
-    print( "Start wday name = ", os.date( "%a", startOfWeek ) )
-end
-
-function setupRankingDropdown( bInit )
-    if bInit then
-        local dropdown = GUIReader:shareReader():widgetFromJsonFile("scenes/SpecialDetailedCompetitionDropdownFrame.json")
-        local mask = dropdown:getChildByName( "Panel_Mask" )
-        mask:setEnabled( false )
-        mWidget:addChild( dropdown )
-    end
-
-    -- init header tab
+    -- init header tab (Overall, Monthly, Weekly)
     for i = 1, table.getn( CompetitionConfig.CompetitionTabs ) do
-        initRankingTab( dropdown, CompetitionConfig.CompetitionTabs[i], i, bInit )
+        initRankingTab( CompetitionConfig.CompetitionTabs[i], i, bInit )
+    end
+
+    -- init dropdown box
+    if mTabID ~= CompetitionConfig.COMPETITION_TAB_ID_OVERALL then
+        initRankingDropdown( startTimeStamp )
+    else
+        removeRankingDropdown()
     end
 end
 
-function initRankingTab( dropdown, tabInfo, tabId, bInit )
+
+function initRankingTab( tabInfo, tabId, bInit )
     local tab = tolua.cast( mWidget:getChildByName( tabInfo["id"] ), "Button" )
     tab:setTitleText( tabInfo["displayName"] )
 
@@ -272,8 +229,253 @@ function initRankingTab( dropdown, tabInfo, tabId, bInit )
     end
 end
 
+function removeRankingDropdown()
+    local dropdown
+    local bDropDownVisible = true 
+
+    if mDropdown ~= nil then
+        bDropDownVisible = mDropdown:isEnabled()
+        mDropdown:setEnabled( false )
+        dropdown = mDropdown
+    else
+        dropdown = GUIReader:shareReader():widgetFromJsonFile("scenes/SpecialDetailedCompetitionDropdownFrame.json")
+    end
+
+    if bDropDownVisible then
+        local dropButton = dropdown:getChildByName( "Panel_Button" )
+        local height = dropButton:getSize().height
+
+        local selfPanel = mWidget:getChildByName( "Panel_Top" )
+        selfPanel:setPositionY( selfPanel:getPositionY() + height )
+        local separator = mWidget:getChildByName( "Panel_Separator" )
+        separator:setPositionY( separator:getPositionY() + height )
+
+        local scrollView = mWidget:getChildByName( "ScrollView_Leaderboard" )
+        scrollView:setSize( CCSize:new( scrollView:getSize().width, scrollView:getSize().height + height ) )
+    end
+end
+
+function initRankingDropdown( startTimeStamp )
+
+    local mask
+    local contentContainer
+    local bDropDownVisible = true
+
+    initCompetitionDuration( startTimeStamp )
+
+    if mDropdown ~= nil then
+        bDropDownVisible = mDropdown:isEnabled()
+        mDropdown:setEnabled( true )
+        mask = mDropdown:getChildByName( "Panel_Mask" )
+        contentContainer = tolua.cast( mDropdown:getChildByName( "ScrollView_Date" ), "ScrollView" )
+    else
+        bDropDownVisible = false
+
+        local dropdown = GUIReader:shareReader():widgetFromJsonFile("scenes/SpecialDetailedCompetitionDropdownFrame.json")
+        mDropdown = dropdown
+        mWidget:addChild( dropdown )
+
+        mask = mDropdown:getChildByName( "Panel_Mask" )
+        contentContainer = tolua.cast( mDropdown:getChildByName( "ScrollView_Date" ), "ScrollView" )
+
+        local button = dropdown:getChildByName( "Panel_Button" )
+        local button_dropdown =  dropdown:getChildByName( "Button_Dropdown" )
+
+        local eventHandler = function( sender, eventType )
+            if eventType == TOUCH_EVENT_ENDED then
+                if mask:isEnabled() then
+                    mask:setEnabled( false )
+                    contentContainer:setEnabled( false )
+                    button_dropdown:setBrightStyle( BRIGHT_NORMAL )
+                else
+                    mask:setEnabled( true )
+                    contentContainer:setEnabled( true )
+                    button_dropdown:setBrightStyle( BRIGHT_HIGHLIGHT )
+                end
+            end
+        end
+        button:addTouchEventListener( eventHandler )
+        button_dropdown:addTouchEventListener( eventHandler )
+    end
+
+    if not bDropDownVisible then
+        local dropButton = mDropdown:getChildByName( "Panel_Button" )
+        local height = dropButton:getSize().height
+        
+        local selfPanel = mWidget:getChildByName( "Panel_Top" )
+        selfPanel:setPositionY( selfPanel:getPositionY() - height )
+        local separator = mWidget:getChildByName( "Panel_Separator" )
+        separator:setPositionY( separator:getPositionY() - height )
+
+        local scrollView = mWidget:getChildByName( "ScrollView_Leaderboard" )
+        scrollView:setSize( CCSize:new( scrollView:getSize().width, scrollView:getSize().height - height ) )
+    end
+    local dateLabel = tolua.cast( mDropdown:getChildByName( "Label_DateFilter" ), "Label" )
+    
+    mask:setEnabled( false )
+    contentContainer:removeAllChildrenWithCleanup( true )
+    contentContainer:setEnabled( false )
+
+    local layoutParameter = LinearLayoutParameter:create()
+    layoutParameter:setGravity(LINEAR_GRAVITY_CENTER_VERTICAL)
+    
+    local contentHeight = 0
+    for i = 1, table.getn( mCompetitionDurations ) do
+
+        local content = GUIReader:shareReader():widgetFromJsonFile("scenes/SpecialDetailedCompetitionDropdownContent.json")
+        content:setLayoutParameter( layoutParameter )
+        contentContainer:addChild( content )
+        contentHeight = contentHeight + content:getSize().height
+
+        local displayText = mCompetitionDurations[i]["displayDate"]
+        local dateText = tolua.cast( content:getChildByName( "Label_Name" ), "Label" )
+        dateText:setText( displayText )
+        
+        if mCompetitionDurations[i]["monthNumber"] ~= nil then
+            if mCompetitionDurations[i]["monthNumber"] == mMonthNumber then
+                dateLabel:setText( displayText )
+            end
+        else
+            if mCompetitionDurations[i]["weekNumber"] == mWeekNumber then
+                dateLabel:setText( displayText )
+            end
+        end
+
+        local eventHandler = function( sender, eventType )
+            if eventType == TOUCH_EVENT_ENDED then
+                 if mTabID == CompetitionConfig.COMPETITION_TAB_ID_MONTHLY then
+                    EventManager:postEvent( Event.Enter_Competition_Detail, { mCompetitionId, false, 3, mTabID, mCompetitionDurations[i]["yearNumber"], mCompetitionDurations[i]["monthNumber"] } )
+                else
+                    EventManager:postEvent( Event.Enter_Competition_Detail, { mCompetitionId, false, 3, mTabID, mCompetitionDurations[i]["yearNumber"], mCompetitionDurations[i]["weekNumber"] } )
+                end
+            end
+        end
+        content:addTouchEventListener( eventHandler )
+
+    end
+
+    contentContainer:setInnerContainerSize( CCSize:new( 0, contentHeight ) )
+    local layout = tolua.cast( contentContainer, "Layout" )
+    layout:requestDoLayout()
+end
+
+function initCompetitionDuration( startTimeStamp )
+    
+    -- DEBUG - go back 1 year
+    --startTimeStamp = startTimeStamp - 365 * 24 * 3600
+
+    mCompetitionDurations = {}
+    local nowTimeStamp = os.time()
+    local startYear = tonumber( os.date( "%Y", startTimeStamp ) )
+    local currYear = tonumber( os.date( "%Y", nowTimeStamp ) )
+    
+    if mTabID == CompetitionConfig.COMPETITION_TAB_ID_MONTHLY then
+        local startMth = os.date( "%m", startTimeStamp )
+        local endMth = os.date( "%m", nowTimeStamp )
+        
+        local months = Constants.String.month
+
+        if currYear > startYear then
+            local tempEndMth
+
+            while currYear >= startYear do
+                if currYear == startYear then
+                    tempEndMth = endMth
+                else
+                    tempEndMth = 12
+                end
+                for i = startMth, tempEndMth do
+                    local displayDate = months[i].." "..startYear
+                    table.insert( mCompetitionDurations, { ["displayDate"] = displayDate, ["monthNumber"] = i, ["yearNumber"] = startYear } )
+                end
+
+                startYear = startYear + 1
+                startMth = 1
+            end
+        else
+            for i = startMth, endMth do
+
+                local displayDate = months[i].." "..startYear
+                table.insert( mCompetitionDurations, { ["displayDate"] = displayDate, ["monthNumber"] = i, ["yearNumber"] = startYear } )
+            end
+        end
+    else
+        local startWeek = os.date( "%W", startTimeStamp )
+        local endWeek = os.date( "%W", nowTimeStamp )
+
+        local currWeek = startTimeStamp - ( tonumber( os.date( "%w", startTimeStamp ) ) - 1 ) * 3600 * 24 
+                                            - tonumber( os.date( "%H", startTimeStamp ) ) * 3600
+                                            - tonumber( os.date( "%M", startTimeStamp ) ) * 60
+                                            - tonumber( os.date( "%S", startTimeStamp ) )
+
+        if currYear > startYear then
+            local tempEndWeek
+            while currYear >= startYear do
+                if currYear == startYear then
+                    tempEndWeek = endWeek
+                else
+                    tempEndWeek = 53
+                end
+                for i = startWeek, tempEndWeek do
+
+                    if i == 53 then
+                        local currMth = os.date( "%m", currWeek )
+                        if currMth == "01" then
+                            break
+                        end
+                    end
+
+                    local startDay = os.date( "%d", currWeek )
+                    local startMth = os.date( "%b", currWeek )
+
+                    currWeek = currWeek + 7 * 24 * 3600
+
+                    local endDay = os.date( "%d", currWeek )
+                    local endMth = os.date( "%b", currWeek )
+
+                    local displayDate = string.format( Constants.String.event.ranking_dropdown_week, i, startDay, startMth, endDay, endMth )
+                    --print( "DISPLAY DATE = "..displayDate )
+                    table.insert( mCompetitionDurations, { ["displayDate"] = displayDate , ["weekNumber"] = i, ["yearNumber"] = startYear } )
+                end
+
+                startYear = startYear + 1
+                startWeek = 1
+            end
+        else
+            for i = startWeek, endWeek do
+                local startDay = os.date( "%d", currWeek )
+                local startMth = os.date( "%b", currWeek )
+
+                currWeek = currWeek + 7 * 24 * 3600
+
+                local endDay = os.date( "%d", currWeek )
+                local endMth = os.date( "%b", currWeek )
+
+                local displayDate = string.format( Constants.String.event.ranking_dropdown_week, i, startDay, startMth, endDay, endMth )
+                --print( "DISPLAY DATE = "..displayDate )
+                table.insert( mCompetitionDurations, { ["displayDate"] = displayDate , ["weekNumber"] = i, ["yearNumber"] = startYear } )
+            end
+        end
+    end
+
+    -- print( "Start date = ", os.date( "%c", competitionDetail:getStartTime()) )
+    -- print( "Start year = ", os.date( "%Y", competitionDetail:getStartTime()) )
+    -- print( "Start month = ", os.date( "%m", competitionDetail:getStartTime()) )
+    -- print( "Start week = ", os.date( "%W", competitionDetail:getStartTime()) )
+    -- print( "Start day = ", os.date( "%d", competitionDetail:getStartTime()) )
+    -- print( "Start wday = ", os.date( "%w", competitionDetail:getStartTime()) )
+    -- print( "Start hr = ", os.date( "%H", competitionDetail:getStartTime()) )
+    -- print( "Start min = ", os.date( "%M", competitionDetail:getStartTime()) )
+    -- print( "Start sec = ", os.date( "%S", competitionDetail:getStartTime()) )
+
+end
+
 function onSelectTab( tabID )
-    EventManager:postEvent( Event.Enter_Competition_Detail, { mCompetitionId, false, 3, tabID } )
+    if tabID == CompetitionConfig.COMPETITION_TAB_ID_MONTHLY then
+        EventManager:postEvent( Event.Enter_Competition_Detail, { mCompetitionId, false, 3, tabID, mYearNumber, mMonthNumber } )
+    else
+        EventManager:postEvent( Event.Enter_Competition_Detail, { mCompetitionId, false, 3, tabID, mYearNumber, mWeekNumber } )
+    end
 end
 
 function initWelcome()

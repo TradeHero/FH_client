@@ -14,6 +14,9 @@ local competitionId
 local showRequestPush
 local mTabID
 local mSortType
+local mWeekNumber
+local mMonthNumber
+local mYearNumber
 
 function action( param )
     local url = RequestUtils.GET_COMPETITION_DETAIL_REST_CALL
@@ -27,6 +30,31 @@ function action( param )
     url = url.."?competitionId="..competitionId.."&sortType="..mSortType.."&step="..step
     if RequestUtils.USE_DEV then
         url = url.."&useDev=true"
+    end
+
+    local nowTime = os.time()
+    mYearNumber = os.date( "%Y", nowTime )
+    mMonthNumber = os.date( "%m", nowTime )
+    mWeekNumber = os.date( "%W", nowTime )
+
+    if mTabID == CompetitionConfig.COMPETITION_TAB_ID_MONTHLY then
+        if param[5] ~= nil then
+            print ("monthly param 5 not nil")
+            mYearNumber = param[5]
+            mMonthNumber = param[6]
+        end
+
+        url = url.."&yearNumber="..mYearNumber.."&monthNumber="..mMonthNumber
+
+    elseif mTabID == CompetitionConfig.COMPETITION_TAB_ID_WEEKLY then
+        
+        if param[5] ~= nil then
+            print ("weekly param 5 not nil")
+            mYearNumber = param[5]
+            mWeekNumber = param[6]
+        end
+
+        url = url.."&yearNumber="..mYearNumber.."&weekNumber="..mWeekNumber
     end
 
     local requestInfo = {}
@@ -49,8 +77,8 @@ function onRequestSuccess( jsonResponse )
     Logic:setCompetitionDetail( competitionDetail )
 
     local CompetitionDetailScene = require("scripts.views.CompetitionDetailScene")
-    if CompetitionDetailScene:isShown() then
-        CompetitionDetailScene.refreshFrame( mTabID )
+    if CompetitionDetailScene.isShown() then
+        CompetitionDetailScene.refreshFrame( mTabID, mYearNumber, mMonthNumber, mWeekNumber )
     else
         CompetitionDetailScene.loadFrame( LeaderboardConfig.LeaderboardSubType[mSortType], competitionId, showRequestPush, mTabID )
     end

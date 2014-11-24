@@ -368,4 +368,12 @@
     <Project>SpecialDetailedCompetitionDropdownFrame</Project>
     <GuidesList />
   </GuidesProject>
+  <GuidesProject>
+    <Project>SpecialDetailedCompetitionDropdownContent</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>CommunityLeaderboardDropdownContentFrame_1</Project>
+    <GuidesList />
+  </GuidesProject>
 </ArrayOfGuidesProject>

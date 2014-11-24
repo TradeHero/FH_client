@@ -94,6 +94,7 @@
     <string>SpecialCompetitionLeaderboard.json</string>
     <string>SpecialDetailedCompetitionLeaderboard.json</string>
     <string>SpecialDetailedCompetitionDropdownFrame.json</string>
+    <string>SpecialDetailedCompetitionDropdownContent.json</string>
   </JsonList>
   <CanvasSize>
     <Width>640</Width>
@@ -104,19 +105,8 @@
   <ResRelativePath />
   <imageFileList />
   <imagePngList>
-    <string>MatchListScene/match_bkg.png</string>
-    <string>chat/More Button.png</string>
-    <string>header/back.png</string>
-    <string>Competition/prizes_affcup14.png</string>
-    <string>Competition/btn-learnmore.png</string>
-    <string>Competition/btn-share.png</string>
-    <string>Competition/img-userposition.png</string>
-    <string>LoginNReg/photo.png</string>
-    <string>Competition/icn-unqualified.png</string>
-    <string>Competition/icn-expandinfo.png</string>
-    <string>community/img-inactivepage.png</string>
-    <string>community/img-activepage.png</string>
-    <string>community/icn-no-message.png</string>
+    <string>community/img-dropdownbox.png</string>
+    <string>community/img-separator.png</string>
   </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
   <CurrentUIJson>SpecialDetailedCompetitionDropdownFrame.json</CurrentUIJson>
