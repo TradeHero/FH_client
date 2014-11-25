@@ -222,14 +222,14 @@ function getResponseCache( url )
         local response = mResponseCache[url]
         local now = os.time()
         if now - response["timeStamp"] < RESPONSE_CACHE_TIME then
-            print( "Cache hit for "..url )
+            CCLuaLog( "Cache hit for "..url )
             return response["body"]
         else
-            print( "Cache hit but expired for "..url )
+            CCLuaLog( "Cache hit but expired for "..url )
             return nil
         end
     end
-    print( "Cache miss for "..url )
+    CCLuaLog( "Cache miss for "..url )
     return nil
 end
 
