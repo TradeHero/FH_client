@@ -7,6 +7,7 @@ local EventManager = require("scripts.events.EventManager").getInstance()
 local Event = require("scripts.events.Event").EventList
 local RequestUtils = require("scripts.RequestUtils")
 local CompetitionDetail = require("scripts.data.CompetitionDetail").CompetitionDetail
+local Constants = require("scripts.Constants")
 
 function action( param )
     local url = RequestUtils.GET_COMPETITION_DETAIL_REST_CALL
@@ -16,7 +17,7 @@ function action( param )
     local sortType = param[3] or 1
     
 
-    url = url.."?competitionId="..competitionId.."&sortType="..sortType.."&step="..step
+    url = url.."?competitionId="..competitionId.."&sortType="..sortType.."&step="..step.."&perPage="..Constants.RANKINGS_PER_PAGE
 
     local requestInfo = {}
     requestInfo.requestData = ""

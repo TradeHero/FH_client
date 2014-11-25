@@ -10,7 +10,23 @@
   "designHeight": 1136,
   "designWidth": 640,
   "textures": [],
-  "texturesPng": [],
+  "texturesPng": [
+    "MatchListScene/match_bkg.png",
+    "chat/More Button.png",
+    "header/back.png",
+    "Competition/prizes_affcup14.png",
+    "Competition/btn-predictnow.png",
+    "Competition/img-counter.png",
+    "Competition/btn-learnmore.png",
+    "Competition/btn-share.png",
+    "Competition/img-userposition.png",
+    "LoginNReg/photo.png",
+    "Competition/icn-unqualified.png",
+    "Competition/icn-expandinfo.png",
+    "community/img-inactivepage.png",
+    "community/img-activepage.png",
+    "community/icn-no-message.png"
+  ],
   "version": "1.5.0.0",
   "widgetTree": {
     "classname": "Panel",
@@ -628,7 +644,7 @@
             "options": {
               "__type": "ImageViewSurrogate:#EditorCommon.JsonModel.Component.GUI",
               "classname": "ImageView",
-              "name": "Image_36",
+              "name": "Image_PlayerNumBG",
               "ZOrder": 2,
               "actiontag": 31232974,
               "anchorPointX": 0.5,
@@ -682,7 +698,7 @@
             "options": {
               "__type": "LabelSurrogate:#EditorCommon.JsonModel.Component.GUI",
               "classname": "Label",
-              "name": "Label_33",
+              "name": "Label_HeaderPlayerNum",
               "ZOrder": 2,
               "actiontag": 2073328,
               "anchorPointX": 0.5,

@@ -32,6 +32,9 @@ local mCompetitionToken
 local mTabID
 local mCompetitionDurations
 local mDropdown
+local mSelfPanelOriginY
+local mScrollViewOriginHeight
+
 local mYearNumber
 local mMonthNumber
 local mWeekNumber
@@ -40,7 +43,7 @@ local mLinkedLeagueId
 
 
 -- DS for competitionDetail see CompetitionDetail
-function loadFrame( subType, competitionId, showRequestPush, tabID )
+function loadFrame( subType, competitionId, showRequestPush, tabID, mYearNumber, mMonthNumber, mWeekNumber )
     mCompetitionId = competitionId
     mSubType = subType
     mTabID = tabID
@@ -57,9 +60,7 @@ function loadFrame( subType, competitionId, showRequestPush, tabID )
     local widget
     if mCompetitionType == CompetitionType["Private"] then
         widget = GUIReader:shareReader():widgetFromJsonFile("scenes/CompetitionLeaderboard.json")
-    --elseif mCompetitionType == CompetitionType["DetailedRanking"] then
-    elseif mCompetitionType == CompetitionType["SimpleRanking"] then
-        -- CompetitionType["DetailedRanking"]
+    elseif mCompetitionType == CompetitionType["DetailedRanking"] then
         -- Overall / Monthly / Weekly
         widget = GUIReader:shareReader():widgetFromJsonFile("scenes/SpecialDetailedCompetitionLeaderboard.json")
     else
@@ -80,15 +81,7 @@ function loadFrame( subType, competitionId, showRequestPush, tabID )
     local moreBt = mWidget:getChildByName("more")
     moreBt:addTouchEventListener( moreEventHandler )
     
-
-    --local pushEnabledCheck = tolua.cast( mWidget:getChildByName("pushEnabled"), "CheckBox" )
-    --pushEnabledCheck:addTouchEventListener( pushEnabledHandler )
-    --if competitionDetail:getPNSetting() then
-    --    pushEnabledCheck:setSelectedState( true )
-    --end
-
-    --if mCompetitionType == CompetitionType["DetailedRanking"] then
-    if mCompetitionType == CompetitionType["SimpleRanking"] then
+    if mCompetitionType == CompetitionType["DetailedRanking"] then
         setupRankingHeader( true, competitionDetail:getStartTime() )
     end
 
@@ -103,15 +96,18 @@ function loadFrame( subType, competitionId, showRequestPush, tabID )
     mHasMoreToLoad = true
     mSelfInfoOpen = false
 
+    local leaderboardInfo = competitionDetail:getDto()
+    local numOfUsers = table.getn( leaderboardInfo )
+    if numOfUsers < Constants.RANKINGS_PER_PAGE then
+        mHasMoreToLoad = false
+    end
+
     if showRequestPush then
-        local pushEnabledCheck = tolua.cast( mWidget:getChildByName("pushEnabled"), "CheckBox" )
         local yesCallback = function()
-            pushEnabledCheck:setSelectedState( true )
             postSettings( true )
         end
 
         local noCallback = function()
-           pushEnabledCheck:setSelectedState( false ) 
            postSettings( false )
         end
 
@@ -128,8 +124,7 @@ function refreshFrame( tabID, yearNumber, monthNumber, weekNumber )
     mWeekNumber = tonumber( weekNumber )
     competitionDetail = Logic:getCompetitionDetail()
     
-    --if mCompetitionType == CompetitionType["DetailedRanking"] then
-    if mCompetitionType == CompetitionType["SimpleRanking"] then
+    if mCompetitionType == CompetitionType["DetailedRanking"] then
         setupRankingHeader( false, competitionDetail:getStartTime() )
     end
 
@@ -198,6 +193,15 @@ function setupRankingHeader( bInit, startTimeStamp )
         initRankingTab( CompetitionConfig.CompetitionTabs[i], i, bInit )
     end
 
+    -- save header position
+    if bInit then
+        local selfPanel = mWidget:getChildByName( "Panel_Top" )
+        mSelfPanelOriginY = selfPanel:getPositionY()
+
+        local scrollView = mWidget:getChildByName( "ScrollView_Leaderboard" )
+        mScrollViewOriginHeight = scrollView:getSize().height
+    end
+
     -- init dropdown box
     if mTabID ~= CompetitionConfig.COMPETITION_TAB_ID_OVERALL then
         initRankingDropdown( startTimeStamp )
@@ -237,85 +241,70 @@ end
 
 function removeRankingDropdown()
     local dropdown
-    local bDropDownVisible = true 
-
     if mDropdown ~= nil then
-        bDropDownVisible = mDropdown:isEnabled()
         mDropdown:setEnabled( false )
         dropdown = mDropdown
     else
         dropdown = GUIReader:shareReader():widgetFromJsonFile("scenes/SpecialDetailedCompetitionDropdownFrame.json")
     end
 
-    if bDropDownVisible then
-        local dropButton = dropdown:getChildByName( "Panel_Button" )
-        local height = dropButton:getSize().height
+    local dropButton = dropdown:getChildByName( "Panel_Button" )
+    local height = dropButton:getSize().height
 
-        local selfPanel = mWidget:getChildByName( "Panel_Top" )
-        selfPanel:setPositionY( selfPanel:getPositionY() + height )
-        local separator = mWidget:getChildByName( "Panel_Separator" )
-        separator:setPositionY( separator:getPositionY() + height )
-
-        local scrollView = mWidget:getChildByName( "ScrollView_Leaderboard" )
-        scrollView:setSize( CCSize:new( scrollView:getSize().width, scrollView:getSize().height + height ) )
-    end
+    local selfPanel = mWidget:getChildByName( "Panel_Top" )
+    local separator = mWidget:getChildByName( "Panel_Separator" )
+    local scrollView = mWidget:getChildByName( "ScrollView_Leaderboard" )
+    
+    selfPanel:setPositionY( mSelfPanelOriginY + height )
+    separator:setPositionY( mSelfPanelOriginY + height )
+    scrollView:setSize( CCSize:new( scrollView:getSize().width, mScrollViewOriginHeight + height ) )
 end
 
 function initRankingDropdown( startTimeStamp )
 
-    local mask
-    local contentContainer
-    local bDropDownVisible = true
-
     initCompetitionDuration( startTimeStamp )
 
-    if mDropdown ~= nil then
-        bDropDownVisible = mDropdown:isEnabled()
-        mDropdown:setEnabled( true )
-        mask = mDropdown:getChildByName( "Panel_Mask" )
-        contentContainer = tolua.cast( mDropdown:getChildByName( "ScrollView_Date" ), "ScrollView" )
-    else
-        bDropDownVisible = false
+    -- add dropdown to scene if not already added
+    if mDropdown == nil then
+        mDropdown = GUIReader:shareReader():widgetFromJsonFile("scenes/SpecialDetailedCompetitionDropdownFrame.json")
+        mWidget:addChild( mDropdown )
+    end
 
-        local dropdown = GUIReader:shareReader():widgetFromJsonFile("scenes/SpecialDetailedCompetitionDropdownFrame.json")
-        mDropdown = dropdown
-        mWidget:addChild( dropdown )
+    mDropdown:setEnabled( true )
 
-        mask = mDropdown:getChildByName( "Panel_Mask" )
-        contentContainer = tolua.cast( mDropdown:getChildByName( "ScrollView_Date" ), "ScrollView" )
+    local mask = mDropdown:getChildByName( "Panel_Mask" )
+    local contentContainer = tolua.cast( mDropdown:getChildByName( "ScrollView_Date" ), "ScrollView" )
 
-        local button = dropdown:getChildByName( "Panel_Button" )
-        local button_dropdown =  dropdown:getChildByName( "Button_Dropdown" )
+    local button = mDropdown:getChildByName( "Panel_Button" )
+    local button_dropdown =  mDropdown:getChildByName( "Button_Dropdown" )
 
-        local eventHandler = function( sender, eventType )
-            if eventType == TOUCH_EVENT_ENDED then
-                if mask:isEnabled() then
-                    mask:setEnabled( false )
-                    contentContainer:setEnabled( false )
-                    button_dropdown:setBrightStyle( BRIGHT_NORMAL )
-                else
-                    mask:setEnabled( true )
-                    contentContainer:setEnabled( true )
-                    button_dropdown:setBrightStyle( BRIGHT_HIGHLIGHT )
-                end
+    local eventHandler = function( sender, eventType )
+        if eventType == TOUCH_EVENT_ENDED then
+            if mask:isEnabled() then
+                mask:setEnabled( false )
+                contentContainer:setEnabled( false )
+                button_dropdown:setBrightStyle( BRIGHT_NORMAL )
+            else
+                mask:setEnabled( true )
+                contentContainer:setEnabled( true )
+                button_dropdown:setBrightStyle( BRIGHT_HIGHLIGHT )
             end
         end
-        button:addTouchEventListener( eventHandler )
-        button_dropdown:addTouchEventListener( eventHandler )
     end
+    button:addTouchEventListener( eventHandler )
+    button_dropdown:addTouchEventListener( eventHandler )
 
-    if not bDropDownVisible then
-        local dropButton = mDropdown:getChildByName( "Panel_Button" )
-        local height = dropButton:getSize().height
-        
-        local selfPanel = mWidget:getChildByName( "Panel_Top" )
-        selfPanel:setPositionY( selfPanel:getPositionY() - height )
-        local separator = mWidget:getChildByName( "Panel_Separator" )
-        separator:setPositionY( separator:getPositionY() - height )
+    local dropButton = mDropdown:getChildByName( "Panel_Button" )
+    local height = dropButton:getSize().height
 
-        local scrollView = mWidget:getChildByName( "ScrollView_Leaderboard" )
-        scrollView:setSize( CCSize:new( scrollView:getSize().width, scrollView:getSize().height - height ) )
-    end
+    local selfPanel = mWidget:getChildByName( "Panel_Top" )
+    local separator = mWidget:getChildByName( "Panel_Separator" )
+    local scrollView = mWidget:getChildByName( "ScrollView_Leaderboard" )
+
+    selfPanel:setPositionY( mSelfPanelOriginY )
+    separator:setPositionY( mSelfPanelOriginY )
+    scrollView:setSize( CCSize:new( scrollView:getSize().width, mScrollViewOriginHeight ) )
+
     local dateLabel = tolua.cast( mDropdown:getChildByName( "Label_DateFilter" ), "Label" )
     
     mask:setEnabled( false )
@@ -479,8 +468,10 @@ end
 function onSelectTab( tabID )
     if tabID == CompetitionConfig.COMPETITION_TAB_ID_MONTHLY then
         EventManager:postEvent( Event.Enter_Competition_Detail, { mCompetitionId, false, 3, tabID, mYearNumber, mMonthNumber } )
-    else
+    elseif tabID == CompetitionConfig.COMPETITION_TAB_ID_WEEKLY then
         EventManager:postEvent( Event.Enter_Competition_Detail, { mCompetitionId, false, 3, tabID, mYearNumber, mWeekNumber } )
+    else
+        EventManager:postEvent( Event.Enter_Competition_Detail, { mCompetitionId, false, 3, tabID } )
     end
 end
 
@@ -712,7 +703,7 @@ function initSelfContent( info )
                 mSelfInfoOpen = false
                 deltaX = 287
             else
-                click:setSize( CCSize:new( 355, click:getSize().height ) )
+                click:setSize( CCSize:new( 283, click:getSize().height ) )
                 mSelfInfoOpen = true
                 deltaX = -287
             end

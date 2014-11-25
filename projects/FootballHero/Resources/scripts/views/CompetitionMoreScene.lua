@@ -73,12 +73,15 @@ function rulesEventHandler( sender, eventType )
     end
 end
 
-function termsEventHandler( sender, eventType )
+function pushEventHandler( sender, eventType )
     if eventType == TOUCH_EVENT_ENDED then
-        local title = tolua.cast( mWidget:getChildByName("title"), "Label" )
-        local titleText = title:getStringValue()
-        EventManager:postEvent( Event.Enter_Competition_Terms, { titleText, mCompetitionToken } )
+        local pushBtn = tolua.cast( sender, "CheckBox" )
+        postSettings( not pushBtn:getSelectedState() )
     end
+end
+
+function postSettings( setting )
+    EventManager:postEvent( Event.Do_Post_PN_Comp_Settings, { mCompetitionId, setting } )
 end
 
 function keypadBackEventHandler()
@@ -135,25 +138,30 @@ function initContent( competitionDetail, selectedLeagues )
     local normalPanel = mWidget:getChildByName("Panel_Normal")
     local specialPanel = mWidget:getChildByName("Panel_Special")
 
+    local pushBtn
     if competitionDetail:getCompetitionType() == CompetitionType["Private"] then
         specialPanel:setEnabled( false )
 
         local quitBtn = normalPanel:getChildByName("Button_Quit")
         quitBtn:addTouchEventListener( leaveEventHandler )
+
+        pushBtn = tolua.cast( normalPanel:getChildByName("CheckBox_Push"), "CheckBox" )
+        pushBtn:addTouchEventListener( pushEventHandler )
     else
         normalPanel:setEnabled( false )
 
         local quitBtn = specialPanel:getChildByName("Button_Quit")
         quitBtn:addTouchEventListener( leaveEventHandler )
 
-        local termsBtn = specialPanel:getChildByName("Button_TnC")
-        --termsBtn:addTouchEventListener( termsEventHandler )
-        termsBtn:setEnabled( false )
-        local termsLbl = specialPanel:getChildByName("LabelTnC")
-        termsLbl:setEnabled( false )
-
+        pushBtn = tolua.cast( specialPanel:getChildByName("CheckBox_Push"), "CheckBox" )
+        pushBtn:addTouchEventListener( pushEventHandler )
+        
         local rulesBtn = specialPanel:getChildByName("Button_Rules")
         rulesBtn:addTouchEventListener( rulesEventHandler )
+    end
+    
+    if competitionDetail:getPNSetting() then
+        pushBtn:setSelectedState( true )
     end
 end
 
