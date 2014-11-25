@@ -173,23 +173,22 @@ function initMatchList( matchList, leagueKey )
     local contentContainer = tolua.cast( mWidget:getChildByName("ScrollView"), "ScrollView" )
     contentContainer:removeAllChildrenWithCleanup( true )
 
-    local layoutParameter = LinearLayoutParameter:create()
-    layoutParameter:setGravity(LINEAR_GRAVITY_CENTER_VERTICAL)
-    local contentHeight = 0
-
     local seqArray = CCArray:create()
-    
-    mTheFirstDate = nil
-    for k,v in pairs( matchList:getMatchDateList() ) do
-        local matchDate = v
+    seqArray:addObject( CCDelayTime:create( 0.3 ) )
+    seqArray:addObject( CCCallFunc:create( function()
+        local layoutParameter = LinearLayoutParameter:create()
+        layoutParameter:setGravity(LINEAR_GRAVITY_CENTER_VERTICAL)
+        local contentHeight = 0
+        
+        mTheFirstDate = nil
+        for k,v in pairs( matchList:getMatchDateList() ) do
+            local matchDate = v
 
-        -- Vincent: for most popular leagues, there are no matches before the "Tap to make a prediction!" hint, thus there is no need for zOrder position shifting
-        local zOrder = matchDate["date"]
-        if leagueKey == Constants.MOST_POPULAR_LEAGUE_ID then
-            zOrder = 1
-        end
-
-        seqArray:addObject( CCCallFuncN:create( function()
+            -- Vincent: for most popular leagues, there are no matches before the "Tap to make a prediction!" hint, thus there is no need for zOrder position shifting
+            local zOrder = matchDate["date"]
+            if leagueKey == Constants.MOST_POPULAR_LEAGUE_ID then
+                zOrder = 1
+            end
 
             local content = SceneManager.widgetFromJsonFile("scenes/MatchDate.json")
             local dateDisplay = tolua.cast( content:getChildByName("Label_Date"), "Label" )
@@ -217,19 +216,14 @@ function initMatchList( matchList, leagueKey )
             content:setCascadeOpacityEnabled( true )
             mWidget:runAction( CCTargetedAction:create( content, CCFadeIn:create( CONTENT_FADEIN_TIME ) ) )
 
-            updateContentContainer( contentHeight, content )
-        end ) )
-        seqArray:addObject( CCDelayTime:create( CONTENT_DELAY_TIME ) )
-
-        local i = 1
-        for inK, inV in pairs( matchDate["matches"] ) do
-            local eventHandler = function( sender, eventType )
-                if eventType == TOUCH_EVENT_ENDED then
-                    enterMatch( inV )
+            local i = 1
+            for inK, inV in pairs( matchDate["matches"] ) do
+                local eventHandler = function( sender, eventType )
+                    if eventType == TOUCH_EVENT_ENDED then
+                        enterMatch( inV )
+                    end
                 end
-            end
 
-            seqArray:addObject( CCCallFuncN:create( function() 
                 local content = SceneManager.widgetFromJsonFile("scenes/MatchListContent.json")
                 helperInitMatchInfo( content, inV )
 
@@ -252,12 +246,9 @@ function initMatchList( matchList, leagueKey )
                 updateContentContainer( contentHeight, content )
 
                 i = i + 1
-            end ) )
-            seqArray:addObject( CCDelayTime:create( CONTENT_DELAY_TIME ) )
+            end
         end
-    end
 
-    seqArray:addObject( CCCallFuncN:create( function()
         if contentContainer:getChildrenCount() == 0 then
             local content = SceneManager.widgetFromJsonFile("scenes/MatchListEmptyIndi.json")
             content:setLayoutParameter( layoutParameter )

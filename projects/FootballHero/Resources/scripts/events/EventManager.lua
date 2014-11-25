@@ -41,9 +41,9 @@ end
 
 function EventManager:postEvent( eventId, param )
 	if self.mEventHandler[eventId] == nil then
-		print( "Event id = "..Event.GetEventNameById( eventId ).." has no action." )
+		CCLuaLog( "Event id = "..Event.GetEventNameById( eventId ).." has no action." )
 	else
-		print( "Event id = "..Event.GetEventNameById( eventId ).." handled." )
+		CCLuaLog( "Event id = "..Event.GetEventNameById( eventId ).." handled." )
 		CCTextureCache:sharedTextureCache():removeUnusedTextures()
 		self:addHistory( eventId, param )
 		self.mEventHandler[eventId].action( param )
@@ -61,7 +61,7 @@ end
 function EventManager:addHistory( eventId, param )
 	local eventName = Event.GetEventNameById( eventId )
 	if Event.EventDosenotTrackList[eventName] == nil then
-		print("Track: "..eventName)
+		CCLuaLog("Track: "..eventName)
 		local history = {
 			["eventId"] = eventId,
 			["param"] = param
@@ -69,7 +69,7 @@ function EventManager:addHistory( eventId, param )
 
 		table.insert( self.mEventHistory, history )
 	else
-		print("Does not track: "..eventName)
+		CCLuaLog("Does not track: "..eventName)
 	end
 end
 
@@ -79,7 +79,7 @@ function EventManager:popHistory()
 	if lastHistory ~= nil then
 		self:postEvent( lastHistory["eventId"], lastHistory["param"] )
 	else
-		print( "Dose not have history event." )
+		CCLuaLog( "Dose not have history event." )
 	end
 end
 
