@@ -174,6 +174,7 @@ cocos2d::gui::Widget* GUIReader::widgetFromJsonFile(const char *fileName)
 cocos2d::gui::Widget* WidgetPropertiesReader0250::createWidget(const rapidjson::Value& data, const char* fullPath, const char* fileName)
 {
     m_strFilePath = fullPath;
+	m_strFileName = fileName;
     int texturesCount = DICTOOL->getArrayCount_json(data, "textures");
     
     for (int i=0; i<texturesCount; i++)
@@ -870,6 +871,7 @@ void WidgetPropertiesReader0250::setPropsForLabelBMFontFromJsonDictionary(cocos2
 cocos2d::gui::Widget* WidgetPropertiesReader0300::createWidget(const rapidjson::Value& data, const char* fullPath, const char* fileName)
 {
     m_strFilePath = fullPath;
+	m_strFileName = fileName;
     
     int texturesCount = DICTOOL->getArrayCount_json(data, "textures");
     
@@ -1390,7 +1392,8 @@ void WidgetPropertiesReader0300::setPropsForImageViewFromJsonDictionary(cocos2d:
     {
         case 0:
         {
-            std::string tp_i = m_strFilePath;
+			int pos = m_strFileName.find_last_of('/');
+			std::string tp_i = m_strFileName.substr(0, pos + 1);
             const char* imageFileName = DICTOOL->getStringValue_json(imageFileNameDic, "path");
             const char* imageFileName_tp = NULL;
             if (imageFileName && (strcmp(imageFileName, "") != 0))
@@ -1554,7 +1557,8 @@ void WidgetPropertiesReader0300::setPropsForLayoutFromJsonDictionary(cocos2d::gu
     {
         case 0:
         {
-            std::string tp_b = m_strFilePath;
+			int pos = m_strFileName.find_last_of('/');
+			std::string tp_b = m_strFileName.substr(0, pos + 1);
             const char* imageFileName = DICTOOL->getStringValue_json(imageFileNameDic, "path");
             const char* imageFileName_tp = (imageFileName && (strcmp(imageFileName, "") != 0))?tp_b.append(imageFileName).c_str():NULL;
             panel->setBackGroundImage(imageFileName_tp);
@@ -1615,7 +1619,8 @@ void WidgetPropertiesReader0300::setPropsForSliderFromJsonDictionary(cocos2d::gu
             {
                 case 0:
                 {
-                    std::string tp_b = m_strFilePath;
+					int pos = m_strFileName.find_last_of('/');
+					std::string tp_b = m_strFileName.substr(0, pos + 1);
                     const char* imageFileName = DICTOOL->getStringValue_json(imageFileNameDic, "path");
                     const char* imageFileName_tp = (imageFileName && (strcmp(imageFileName, "") != 0))?tp_b.append(imageFileName).c_str():NULL;
                     slider->loadBarTexture(imageFileName_tp);
@@ -1641,7 +1646,8 @@ void WidgetPropertiesReader0300::setPropsForSliderFromJsonDictionary(cocos2d::gu
             {
                 case 0:
                 {
-                    std::string tp_b = m_strFilePath;
+					int pos = m_strFileName.find_last_of('/');
+					std::string tp_b = m_strFileName.substr(0, pos + 1);
                     const char*imageFileName =  DICTOOL->getStringValue_json(imageFileNameDic, "path");
                     const char* imageFileName_tp = (imageFileName && (strcmp(imageFileName, "") != 0))?tp_b.append(imageFileName).c_str():NULL;
                     slider->loadBarTexture(imageFileName_tp);
@@ -1733,7 +1739,8 @@ void WidgetPropertiesReader0300::setPropsForSliderFromJsonDictionary(cocos2d::gu
     {
         case 0:
         {
-            std::string tp_b = m_strFilePath;
+			int pos = m_strFileName.find_last_of('/');
+			std::string tp_b = m_strFileName.substr(0, pos + 1);
             const char* imageFileName = DICTOOL->getStringValue_json(progressBarDic, "path");
             const char* imageFileName_tp = (imageFileName && (strcmp(imageFileName, "") != 0))?tp_b.append(imageFileName).c_str():NULL;
             slider->loadProgressBarTexture(imageFileName_tp);
@@ -1812,7 +1819,8 @@ void WidgetPropertiesReader0300::setPropsForLoadingBarFromJsonDictionary(cocos2d
     {
         case 0:
         {
-            std::string tp_i = m_strFilePath;
+			int pos = m_strFileName.find_last_of('/');
+			std::string tp_i = m_strFileName.substr(0, pos + 1);
             const char* imageFileName = DICTOOL->getStringValue_json(imageFileNameDic, "path");
             const char* imageFileName_tp = NULL;
             if (imageFileName && (strcmp(imageFileName, "") != 0))
