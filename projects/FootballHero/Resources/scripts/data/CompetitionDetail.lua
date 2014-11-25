@@ -49,7 +49,9 @@ CompetitionDetail = {}
         "OwningUserName": "Adrian Lam",
         "OwnedByMe": false,
         "CompetitionStatus": 0,
-        "CompetitionType": 3
+        "CompetitionType": 3,
+        "NumberOfEnrolledUsers":20,
+        "LinkedLeagueId": -1
     },
 
    "LatestChatMessage": {
@@ -73,9 +75,11 @@ function CompetitionDetail:new( detail )
       startTimeStamp = detail.CompetitionInfoDTO.StartTimeStamp,
       endTimeStamp = detail.CompetitionInfoDTO.EndTimeStamp,
       joinToken = detail.CompetitionInfoDTO.JoinToken,
+      NumberOfEnrolledUsers = detail.CompetitionInfoDTO.NumberOfEnrolledUsers,
       open = detail.CompetitionInfoDTO.Open,
       owningUserName = detail.CompetitionInfoDTO.OwningUserName,
       competitionType = detail.CompetitionInfoDTO.CompetitionType,
+      linkedLeagueId = detail.CompetitionInfoDTO.LinkedLeagueId,
       latestChatMessage = detail.LatestChatMessage,
       pnSetting = detail.PushNotificationsEnabled,
       selfInfo = detail.Me
@@ -113,6 +117,10 @@ function CompetitionDetail:getJoinToken()
    return self.joinToken
 end
 
+function CompetitionDetail:getPlayerNum()
+    return self.NumberOfEnrolledUsers
+end
+
 function CompetitionDetail:getOpen()
    return self.open
 end
@@ -135,4 +143,8 @@ end
 
 function CompetitionDetail:getSelfInfo()
    return self.selfInfo
+end
+
+function CompetitionDetail:getLinkedLeagueId()
+    return self.linkedLeagueId
 end

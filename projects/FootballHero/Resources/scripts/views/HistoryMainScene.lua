@@ -28,7 +28,7 @@ function loadFrame( userId, userName, competitionId, couponHistory )
     mWidget = GUIReader:shareReader():widgetFromJsonFile("scenes/MyPicksHome.json")
 
     local totalPoints = tolua.cast( mWidget:getChildByName("Label_Total_Points"), "Label" )
-    totalPoints:setText( string.format( totalPoints:getStringValue(), couponHistory:getBalance() ) )
+    totalPoints:setText( string.format( Constants.String.history.total_points, couponHistory:getBalance() ) )
     
     mUserId = userId
     if mUserId == Logic:getUserId() then
@@ -74,7 +74,7 @@ function refreshFrame( userId, userName, competitionId, couponHistory )
     local showBackButton = false
 
     local totalPoints = tolua.cast( mWidget:getChildByName("Label_Total_Points"), "Label" )
-    totalPoints:setText( string.format( totalPoints:getStringValue(), couponHistory:getBalance() ) )
+    totalPoints:setText( string.format( Constants.String.history.total_points, couponHistory:getBalance() ) )
 
     mUserId = userId
     if mUserId == Logic:getUserId() then
@@ -103,6 +103,14 @@ function isFrameShown()
     return mWidget ~= nil
 end
 
+function isSelf()
+    if mUserId == Logic:getUserId() then
+        return true
+    else
+        return false
+    end
+end
+
 function initContent( couponHistory )
 	local contentContainer = tolua.cast( mWidget:getChildByName("ScrollView"), "ScrollView" )
     contentContainer:removeAllChildrenWithCleanup( true )
@@ -114,7 +122,7 @@ function initContent( couponHistory )
     local seqArray = CCArray:create()
 
     local competitionDetail = Logic:getCompetitionDetail()
-    
+    local info = couponHistory:getStats()
     local label = tolua.cast( mWidget:getChildByName("Label_CompTitle"), "Label" )
     local show = tolua.cast( mWidget:getChildByName("Button_Show"), "Button" )
     if mCompetitionId ~= nil then
@@ -122,7 +130,7 @@ function initContent( couponHistory )
         show:setTitleText( Constants.String.history.show_all )
         local eventHandler = function( sender, eventType )
             if eventType == TOUCH_EVENT_ENDED then
-                EventManager:postEvent( Event.Enter_History )
+                EventManager:postEvent( Event.Enter_History, { mUserId, info["DisplayName"] } )
             end
         end
         show:addTouchEventListener( eventHandler )
@@ -131,7 +139,6 @@ function initContent( couponHistory )
         label:setText( Constants.String.history.predictions_all )
         show:setEnabled( false )
     end
-
 
     -- Stats
     local stats = mWidget:getChildByName("Panel_Stats")
@@ -142,7 +149,6 @@ function initContent( couponHistory )
     local stat_last_10_win = tolua.cast( stats:getChildByName("Label_W"), "Label" )
     local stat_last_10_lose = tolua.cast( stats:getChildByName("Label_L"), "Label" )
 
-    local info = couponHistory:getStats()
     stat_win:setText( info["NumberOfCouponsWon"] )
     stat_lose:setText( info["NumberOfCouponsLost"] )
     stat_win_percent:setText( string.format( "%d", info["WinPercentage"] ) )
@@ -207,15 +213,21 @@ function initContent( couponHistory )
             
             local openPredictionContent = content:getChildByName( "Panel_OpenPrediction" )
             local CTA = tolua.cast( openPredictionContent:getChildByName("Label_CTA"), "Label" )
-            CTA:setText( Constants.String.history.no_open_prediction )
-
-            local eventHandler = function( sender, eventType )
-                if eventType == TOUCH_EVENT_ENDED then
-                    EventManager:postEvent( Event.Enter_Match_List )
-                end
-            end
             local button = openPredictionContent:getChildByName("Button_Create")
-            button:addTouchEventListener( eventHandler ) 
+
+            if isSelf() then
+                CTA:setText( Constants.String.history.no_open_prediction )
+
+                local eventHandler = function( sender, eventType )
+                    if eventType == TOUCH_EVENT_ENDED then
+                        EventManager:postEvent( Event.Enter_Match_List )
+                    end
+                end
+                button:addTouchEventListener( eventHandler ) 
+            else
+                CTA:setText( Constants.String.history.no_open_prediction_others )
+                button:setEnabled( false )
+            end
 
             content:setLayoutParameter( layoutParameter )
             contentContainer:addChild( content )

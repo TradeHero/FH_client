@@ -202,6 +202,7 @@ function makePrediction( rewards, oddId, answer, selectedIndex )
         selected = tolua.cast( mWidget:getChildByName("no"), "ImageView" )
         notSelected = tolua.cast( mWidget:getChildByName("yes"), "ImageView" )
     end
+    helperSetTouchEnabled( false )
     
     local resultSeqArray = CCArray:create()
     
@@ -221,28 +222,6 @@ function makePrediction( rewards, oddId, answer, selectedIndex )
     mWidget:runAction( CCSequence:create( resultSeqArray ) )
 
     AudioEngine.playEffect( AudioEngine.SELECT_PREDICTION )
-end
-
-function playMoveAnim( moveDirection, delayTime )
-    local resultSeqArray = CCArray:create()
-    if delayTime ~= nil and delayTime > 0 then
-        resultSeqArray:addObject( CCDelayTime:create( delayTime ) )
-    end
-    if helperGetTouchEnabled() then
-        resultSeqArray:addObject( CCCallFunc:create( function()
-            helperSetTouchEnabled( false )
-        end ) )
-    end
-    resultSeqArray:addObject( CCMoveBy:create( MOVE_TIME, ccp( Constants.GAME_WIDTH * moveDirection, 0 ) ) )
-    if not helperGetTouchEnabled() then
-        resultSeqArray:addObject( CCCallFunc:create( function()
-            helperSetTouchEnabled( true )
-        end ) )
-    end
-
-    mWidget:runAction( CCSequence:create( resultSeqArray ) )
-
-    return MOVE_TIME
 end
 
 function helperSetTouchEnabled( enabled )

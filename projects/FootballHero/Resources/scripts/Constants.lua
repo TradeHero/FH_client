@@ -27,6 +27,7 @@ COMPETITION_SCENE_IMAGE_PATH = "scenes/Competition/"
 LOGO_IMAGE_PATH = "myLogo.jpg"
 
 BannerPrefix = "banner_"
+BannerPreviewPrefix = "banner_prev_"
 WelcomePrefix = "welcome_"
 EntryPrefix = "entry_"
 PrizesPrefix = "prizes_"
