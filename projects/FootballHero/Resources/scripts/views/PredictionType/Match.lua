@@ -218,7 +218,8 @@ function makePrediction( rewards, oddId, answer, selectedIndex )
         notSelected = tolua.cast( mWidget:getChildByName("team1"), "ImageView" )
         notSelected2 = tolua.cast( mWidget:getChildByName("team2"), "ImageView" )
     end
-    
+    helperSetTouchEnabled( false )
+
     local resultSeqArray = CCArray:create()
     
     local spawnArray = CCArray:create()
@@ -241,34 +242,15 @@ function makePrediction( rewards, oddId, answer, selectedIndex )
     AudioEngine.playEffect( AudioEngine.SELECT_PREDICTION )
 end
 
-function playMoveAnim( moveDirection, delayTime )
-    local resultSeqArray = CCArray:create()
-    if delayTime ~= nil and delayTime > 0 then
-        resultSeqArray:addObject( CCDelayTime:create( delayTime ) )
-    end
-    if helperGetTouchEnabled() then
-        resultSeqArray:addObject( CCCallFunc:create( function()
-            helperSetTouchEnabled( false )
-        end ) )
-    end
-    resultSeqArray:addObject( CCMoveBy:create( MOVE_TIME, ccp( Constants.GAME_WIDTH * moveDirection, 0 ) ) )
-    if not helperGetTouchEnabled() then
-        resultSeqArray:addObject( CCCallFunc:create( function()
-            helperSetTouchEnabled( true )
-        end ) )
-    end
-
-    mWidget:runAction( CCSequence:create( resultSeqArray ) )
-
-    return MOVE_TIME
-end
-
 function helperSetTouchEnabled( enabled )
     local team1 = mWidget:getChildByName("team1")
     team1:setTouchEnabled( enabled )
 
     local team2 = mWidget:getChildByName("team2")
     team2:setTouchEnabled( enabled )
+
+    local draw = mWidget:getChildByName("draw")
+    draw:setTouchEnabled( enabled )
 end
 
 function helperGetTouchEnabled()

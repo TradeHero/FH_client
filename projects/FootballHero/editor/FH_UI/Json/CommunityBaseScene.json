@@ -10,12 +10,7 @@
   "designHeight": 1136,
   "designWidth": 640,
   "textures": [],
-  "texturesPng": [
-    "MatchListScene/match_bkg.png",
-    "header/footballhero-logo.png",
-    "community/img-inactivepage.png",
-    "community/img-activepage.png"
-  ],
+  "texturesPng": [],
   "version": "1.5.0.0",
   "widgetTree": {
     "classname": "Panel",
@@ -162,8 +157,8 @@
           "ignoreSize": false,
           "layoutParameter": null,
           "opacity": 255,
-          "positionPercentX": -6.50890675E-09,
-          "positionPercentY": 0.114436634,
+          "positionPercentX": 0,
+          "positionPercentY": 0.114436619,
           "positionType": 0,
           "rotation": 0,
           "scaleX": 1,

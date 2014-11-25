@@ -16,10 +16,10 @@ CompetitionType = {
   ["Private"] = 1,
   ["DetailedRanking"] = 2,  -- FH Championship, with weekly, monthly rankings
   ["SimpleRanking"] = 3,  -- Special competitions with only a single ranking
+  ["Preview"] = 4,    -- can view information but cannot join
 }
 
 CompetitionStatus = {
-  ["Preview"] = 1,    -- can view information but cannot join
   ["Available"] = 2,  -- can start joining competition
   ["Joined"] = 3,     -- already joined competition
   ["Ended"] = 4,      -- competition ended, can view rankings

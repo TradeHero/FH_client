@@ -10,10 +10,7 @@
   "designHeight": 1136,
   "designWidth": 640,
   "textures": [],
-  "texturesPng": [
-    "MatchListScene/match_bkg.png",
-    "header/back.png"
-  ],
+  "texturesPng": [],
   "version": "1.5.0.0",
   "widgetTree": {
     "classname": "Panel",
@@ -112,8 +109,8 @@
           "rotation": 0,
           "scaleX": 1,
           "scaleY": 1,
-          "sizePercentX": 0.34375,
-          "sizePercentY": 0.041373238,
+          "sizePercentX": 0.3078125,
+          "sizePercentY": 0.03697183,
           "sizeType": 0,
           "tag": 1561,
           "touchAble": false,

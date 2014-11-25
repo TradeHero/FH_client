@@ -36,6 +36,9 @@ local mYearNumber
 local mMonthNumber
 local mWeekNumber
 
+local mLinkedLeagueId
+
+
 -- DS for competitionDetail see CompetitionDetail
 function loadFrame( subType, competitionId, showRequestPush, tabID )
     mCompetitionId = competitionId
@@ -44,10 +47,13 @@ function loadFrame( subType, competitionId, showRequestPush, tabID )
     competitionDetail = Logic:getCompetitionDetail()
     mCompetitionType = competitionDetail:getCompetitionType()
     mCompetitionToken = competitionDetail:getJoinToken()
+
     mYearNumber = nil
     mMonthNumber = nil
     mWeekNumber = nil
-    
+
+    mLinkedLeagueId = competitionDetail:getLinkedLeagueId()
+
     local widget
     if mCompetitionType == CompetitionType["Private"] then
         widget = GUIReader:shareReader():widgetFromJsonFile("scenes/CompetitionLeaderboard.json")
@@ -526,10 +532,14 @@ function initContent( competitionDetail )
         shareBt:addTouchEventListener( shareTypeSelectEventHandler )
     else
         local banner = mWidget:getChildByName("Panel_Banner")
+        local predictBt = banner:getChildByName("Button_Predict")
         local shareBt = banner:getChildByName("Button_Share")
         local prizeBt = banner:getChildByName("Button_Learn")
+        local playerNum = tolua.cast( banner:getChildByName("Label_PlayerNum"), "Label" )
+        predictBt:addTouchEventListener( predictNowEventHandler )
         shareBt:addTouchEventListener( shareTypeSelectEventHandler )
         prizeBt:addTouchEventListener( competitionPrizeEventHandler )
+        playerNum:setText( competitionDetail:getPlayerNum() )
 
         local bannerBG = tolua.cast( banner:getChildByName("Image_BannerBG"), "ImageView" )
         bannerBG:loadTexture( Constants.COMPETITION_IMAGE_PATH..Constants.PrizesPrefix..competitionDetail:getJoinToken()..".png" )
@@ -644,6 +654,12 @@ function shareByFacebook( sender, eventType )
     end
 end
 
+function predictNowEventHandler( sender, eventType )
+    if eventType == TOUCH_EVENT_ENDED then
+        EventManager:postEvent( Event.Enter_Match_List, { mLinkedLeagueId } )
+    end
+end 
+
 function shareTypeSelectEventHandler( sender, eventType )
     if eventType == TOUCH_EVENT_ENDED then
         EventManager:postEvent( Event.Enter_Share, { string.format( SHARE_TITLE, Logic:getDisplayName() ),
@@ -694,11 +710,11 @@ function initSelfContent( info )
             if mSelfInfoOpen then
                 click:setSize( CCSize:new( 560, click:getSize().height ) )
                 mSelfInfoOpen = false
-                deltaX = 205
+                deltaX = 287
             else
                 click:setSize( CCSize:new( 355, click:getSize().height ) )
                 mSelfInfoOpen = true
-                deltaX = -205
+                deltaX = -287
             end
 
             local resultSeqArray = CCArray:create()
@@ -925,6 +941,10 @@ end
 function scrollViewEventHandler( target, eventType )
     if eventType == SCROLLVIEW_EVENT_BOUNCE_BOTTOM and mHasMoreToLoad then
         mStep = mStep + 1
-        EventManager:postEvent( Event.Load_More_In_Competition_Detail, { mCompetitionId, mStep } )
+        if mCompetitionType ~= CompetitionType["Private"] then
+            EventManager:postEvent( Event.Load_More_In_Competition_Detail, { mCompetitionId, mStep, 3 } )
+        else
+            EventManager:postEvent( Event.Load_More_In_Competition_Detail, { mCompetitionId, mStep } )
+        end
     end
 end
