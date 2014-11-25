@@ -83,6 +83,7 @@ function CompetitionDetail:new( detail )
       latestChatMessage = detail.LatestChatMessage,
       pnSetting = detail.PushNotificationsEnabled,
       selfInfo = detail.Me
+      newChatMessages = detail.NewChatMessages
    }
 
    setmetatable(obj, self)
@@ -147,4 +148,8 @@ end
 
 function CompetitionDetail:getLinkedLeagueId()
     return self.linkedLeagueId
+end
+
+function CompetitionDetail:getNewChatMessages()
+    return self.newChatMessages
 end

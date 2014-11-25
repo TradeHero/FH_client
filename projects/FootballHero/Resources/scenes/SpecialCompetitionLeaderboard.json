@@ -23,7 +23,8 @@
     "LoginNReg/photo.png",
     "Competition/icn-unqualified.png",
     "Competition/icn-expandinfo.png",
-    "community/icn-no-message.png"
+    "community/icn-no-message.png",
+    "community/icn-new-message.png"
   ],
   "version": "1.5.0.0",
   "widgetTree": {
@@ -642,7 +643,7 @@
             "options": {
               "__type": "ImageViewSurrogate:#EditorCommon.JsonModel.Component.GUI",
               "classname": "ImageView",
-              "name": "Image_36",
+              "name": "Image_PlayerNumBG",
               "ZOrder": 2,
               "actiontag": 31232974,
               "anchorPointX": 0.5,
@@ -696,7 +697,7 @@
             "options": {
               "__type": "LabelSurrogate:#EditorCommon.JsonModel.Component.GUI",
               "classname": "Label",
-              "name": "Label_33",
+              "name": "Label_HeaderPlayerNum",
               "ZOrder": 2,
               "actiontag": 2073328,
               "anchorPointX": 0.5,
@@ -1588,8 +1589,8 @@
           },
           "pressed": null,
           "pressedData": {
-            "path": null,
-            "plistFile": null,
+            "path": "community/icn-new-message.png",
+            "plistFile": "",
             "resourceType": 0
           },
           "scale9Enable": false,

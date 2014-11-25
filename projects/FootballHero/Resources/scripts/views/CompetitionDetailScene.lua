@@ -43,7 +43,7 @@ local mLinkedLeagueId
 
 
 -- DS for competitionDetail see CompetitionDetail
-function loadFrame( subType, competitionId, showRequestPush, tabID, mYearNumber, mMonthNumber, mWeekNumber )
+function loadFrame( subType, competitionId, showRequestPush, tabID, yearNumber, monthNumber, weekNumber )
     mCompetitionId = competitionId
     mSubType = subType
     mTabID = tabID
@@ -51,9 +51,9 @@ function loadFrame( subType, competitionId, showRequestPush, tabID, mYearNumber,
     mCompetitionType = competitionDetail:getCompetitionType()
     mCompetitionToken = competitionDetail:getJoinToken()
 
-    mYearNumber = nil
-    mMonthNumber = nil
-    mWeekNumber = nil
+    mYearNumber = yearNumber
+    mMonthNumber = monthNumber
+    mWeekNumber = weekNumber
 
     mLinkedLeagueId = competitionDetail:getLinkedLeagueId()
 
@@ -544,8 +544,12 @@ function initContent( competitionDetail )
     --updateLatestChatMessage( competitionDetail:getLatestChatMessage() )
 
     --local chatBt = mWidget:getChildByName("chatRoom")
-    local chatBt = mWidget:getChildByName("Button_Chat")
+    local chatBt = tolua.cast( mWidget:getChildByName("Button_Chat"), "Button" )
     chatBt:addTouchEventListener( chatRoomEventHandler )
+
+    if competitionDetail:getNewChatMessages() then
+        chatBt:loadTextureNormal( Constants.COMMUNITY_IMAGE_PATH.."icn-new-message.png" )
+    end
 end
 
 function initLeaderboard( competitionDetail )

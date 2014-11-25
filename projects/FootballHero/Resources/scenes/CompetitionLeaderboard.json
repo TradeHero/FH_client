@@ -16,7 +16,8 @@
     "Competition/copy_icon.png",
     "Competition/share_icon.png",
     "chat/More Button.png",
-    "community/icn-no-message.png"
+    "community/icn-no-message.png",
+    "community/icn-new-message.png"
   ],
   "version": "1.5.0.0",
   "widgetTree": {
@@ -885,8 +886,8 @@
           },
           "pressed": null,
           "pressedData": {
-            "path": null,
-            "plistFile": null,
+            "path": "community/icn-new-message.png",
+            "plistFile": "",
             "resourceType": 0
           },
           "scale9Enable": false,

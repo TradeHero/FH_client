@@ -25,6 +25,7 @@ LEADERBOARD_IMAGE_PATH = "scenes/Leaderboards/"
 MATCH_LIST_CONTENT_IMAGE_PATH = "scenes/MatchListContent/"
 COMPETITION_SCENE_IMAGE_PATH = "scenes/Competition/"
 LOGO_IMAGE_PATH = "myLogo.jpg"
+COMMUNITY_IMAGE_PATH = "scenes/community/"
 
 BannerPrefix = "banner_"
 BannerPreviewPrefix = "banner_prev_"
