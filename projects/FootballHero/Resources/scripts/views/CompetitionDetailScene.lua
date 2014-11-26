@@ -484,14 +484,6 @@ function initWelcome( competitionDetail )
         popup:setZOrder( Constants.ZORDER_POPUP )
         mWidget:addChild(popup)
 
-        local start = popup:getChildByName( "Button_Play" )
-        local eventHandler = function( sender, eventType )
-            if eventType == TOUCH_EVENT_ENDED then
-                mWidget:removeChild(popup)
-            end
-        end
-        start:addTouchEventListener( eventHandler )
-
         local joinToken = competitionDetail:getJoinToken()
         local bgImage = tolua.cast( popup:getChildByName( "Image_BG"), "ImageView" )
         bgImage:loadTexture( Constants.COMPETITION_IMAGE_PATH..Constants.WelcomePrefix..joinToken..".png" )
@@ -505,6 +497,28 @@ function initWelcome( competitionDetail )
 
         local body = tolua.cast( popup:getChildByName( "Label_Desc" ), "Label" )
         body:setText( CompetitionsConfig.getBody( competitionConfigID ) )
+
+        local eventHandler = function( sender, eventType )
+            if eventType == TOUCH_EVENT_ENDED then
+                mWidget:removeChild(popup)
+            end
+        end
+
+        local close = popup:getChildByName( "Button_Close" )
+        close:addTouchEventListener( eventHandler )
+
+        local start = popup:getChildByName( "Button_Play" )
+        local share = popup:getChildByName( "Button_Share" )
+        local isShare = CompetitionsConfig.getIsShare( competitionConfigID )
+        if isShare then
+            start:setEnabled( false )
+
+            share:addTouchEventListener( shareByFacebook )
+        else
+            
+            start:addTouchEventListener( eventHandler )
+            share:setEnabled( false )
+        end
     end ) )
 
     mWidget:runAction( CCSequence:create( seqArray ) )

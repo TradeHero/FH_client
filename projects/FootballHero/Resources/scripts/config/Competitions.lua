@@ -68,4 +68,9 @@ function getBody( id )
 	return config["body"]
 end
 
+function getIsShare( id )
+	local config = getConfig( id )
+	return config["isShare"]
+end
+
 init()
