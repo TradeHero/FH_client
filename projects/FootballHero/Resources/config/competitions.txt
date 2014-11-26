@@ -1,0 +1,1 @@
+[{"token":"affcup14", "title1":"Welcome to", "title2":"Goal AFF Suzuki Cup Challenge", "body":"Compete against Goal.com's expert editors and friends for bragging rights and win prizes!"}, {"token":"fhchamp", "title1":"FootballHero Championship", "title2":"2014/15", "body":"Compete for weekly, monthly and Season prizes in our first ever FootballHero Championship!"}]

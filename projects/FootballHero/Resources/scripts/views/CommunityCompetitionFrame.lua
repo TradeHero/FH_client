@@ -10,6 +10,7 @@ local Constants = require("scripts.Constants")
 local Competitions = require("scripts.data.Competitions").Competitions
 local CompetitionType = require("scripts.data.Competitions").CompetitionType
 local CompetitionStatus = require("scripts.data.Competitions").CompetitionStatus
+local CompetitionConfig = require("scripts.data.Competitions")
 
 local MAX_CONTAINER_HEIGHT = 560
 
@@ -214,7 +215,7 @@ end
 function enterCompetition( competitionId, isSpecialComp )
 
     if isSpecialComp then
-        EventManager:postEvent( Event.Enter_Competition_Detail, { competitionId, false, 3 } )
+        EventManager:postEvent( Event.Enter_Competition_Detail, { competitionId, false, 3, CompetitionConfig.COMPETITION_TAB_ID_OVERALL } )
     else
         EventManager:postEvent( Event.Enter_Competition_Detail, { competitionId } )
     end

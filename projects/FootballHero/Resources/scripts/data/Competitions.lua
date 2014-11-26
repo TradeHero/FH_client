@@ -1,6 +1,16 @@
 module(..., package.seeall)
 
+local Constants = require("scripts.Constants")
 
+COMPETITION_TAB_ID_OVERALL = 1
+COMPETITION_TAB_ID_MONTHLY = 2
+COMPETITION_TAB_ID_WEEKLY = 3
+
+CompetitionTabs = {
+  { ["id"] = "Button_Overall", ["displayName"] = Constants.String.event.ranking_overall },
+  { ["id"] = "Button_Monthly", ["displayName"] = Constants.String.event.ranking_monthly },
+  { ["id"] = "Button_Weekly", ["displayName"] = Constants.String.event.ranking_weekly },
+}
 
 CompetitionType = {
   ["Private"] = 1,
@@ -21,27 +31,19 @@ Competitions = {}
 Data structure:
 
 [
-
    {
-
-      "Id": 2,
-
-      "Name": "tttt",
-
-      "Description": "tttt",
-
-      "StartTime": "1403249853",
-
-      "EndTime": "1418313600",
-
-      "Open": true,
-
-      "OwnedByMe": true,
-
-      "OwningUserName": "Test001"
-
-   }
-
+        "Id": 12737,
+        "Name": "Team Football Hero",
+        "Description": "My Hero company challenge ",
+        "StartTimeStamp": 1414650801,
+        "EndTimeStamp": 0,
+        "JoinToken": "779dpc",
+        "Open": true,
+        "OwningUserName": "Adrian Lam",
+        "OwnedByMe": false,
+        "CompetitionStatus": 0,
+        "CompetitionType": 1
+    }
 ]
 
 --]]

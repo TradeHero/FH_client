@@ -316,3 +316,5 @@ proguard/
 projects/FootballHero/proj.ios/FootballHero.xcodeproj/project.xcworkspace/xcuserdata/vincent.xcuserdatad/xcdebugger/Expressions.xcexplist
 
 projects/FootballHero/proj.ios/FootballHero.xcodeproj/xcuserdata/vincent.xcuserdatad/xcdebugger/Breakpoints_v2.xcbkptlist
+cryptgamebin_new.bat
+*.ipa

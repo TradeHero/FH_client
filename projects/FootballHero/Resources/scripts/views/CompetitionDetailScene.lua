@@ -11,6 +11,8 @@ local ConnectingMessage = require("scripts.views.ConnectingMessage")
 local PushNotificationManager = require("scripts.PushNotificationManager")
 local Constants = require("scripts.Constants")
 local CompetitionType = require("scripts.data.Competitions").CompetitionType
+local CompetitionsData = require("scripts.data.Competitions")
+local CompetitionsConfig = require("scripts.config.Competitions")
 
 local SHARE_BODY = Constants.String.share_body
 local SHARE_TITLE = Constants.String.share_title
@@ -28,20 +30,40 @@ local mHasMoreToLoad
 local mSelfInfoOpen
 local mCompetitionType
 local mCompetitionToken
+local mTabID
+local mCompetitionDurations
+local mDropdown
+local mSelfPanelOriginY
+local mScrollViewOriginHeight
+
+local mYearNumber
+local mMonthNumber
+local mWeekNumber
+
 local mLinkedLeagueId
 
+
 -- DS for competitionDetail see CompetitionDetail
-function loadFrame( subType, competitionId, showRequestPush )
+function loadFrame( subType, competitionId, showRequestPush, tabID, yearNumber, monthNumber, weekNumber )
     mCompetitionId = competitionId
     mSubType = subType
+    mTabID = tabID
     competitionDetail = Logic:getCompetitionDetail()
     mCompetitionType = competitionDetail:getCompetitionType()
     mCompetitionToken = competitionDetail:getJoinToken()
+
+    mYearNumber = yearNumber
+    mMonthNumber = monthNumber
+    mWeekNumber = weekNumber
+
     mLinkedLeagueId = competitionDetail:getLinkedLeagueId()
 
     local widget
     if mCompetitionType == CompetitionType["Private"] then
         widget = GUIReader:shareReader():widgetFromJsonFile("scenes/CompetitionLeaderboard.json")
+    elseif mCompetitionType == CompetitionType["DetailedRanking"] then
+        -- Overall / Monthly / Weekly
+        widget = GUIReader:shareReader():widgetFromJsonFile("scenes/SpecialDetailedCompetitionLeaderboard.json")
     else
         widget = GUIReader:shareReader():widgetFromJsonFile("scenes/SpecialCompetitionLeaderboard.json")
     end
@@ -59,33 +81,34 @@ function loadFrame( subType, competitionId, showRequestPush )
     backBt:addTouchEventListener( backEventHandler )
     local moreBt = mWidget:getChildByName("more")
     moreBt:addTouchEventListener( moreEventHandler )
-    local pushEnabledCheck = tolua.cast( mWidget:getChildByName("pushEnabled"), "CheckBox" )
-    pushEnabledCheck:addTouchEventListener( pushEnabledHandler )
-    if competitionDetail:getPNSetting() then
-        pushEnabledCheck:setSelectedState( true )
+    
+    if mCompetitionType == CompetitionType["DetailedRanking"] then
+        setupRankingHeader( true, competitionDetail:getStartTime() )
     end
 
     initContent( competitionDetail )
     initLeaderboard( competitionDetail )
 
     if mCompetitionType ~= CompetitionType["Private"] and isNewToCompetition() then
-        initWelcome()
+        initWelcome( competitionDetail )
     end
-
 
     mStep = 1
     mHasMoreToLoad = true
     mSelfInfoOpen = false
 
+    local leaderboardInfo = competitionDetail:getDto()
+    local numOfUsers = table.getn( leaderboardInfo )
+    if numOfUsers < Constants.RANKINGS_PER_PAGE then
+        mHasMoreToLoad = false
+    end
+
     if showRequestPush then
-        local pushEnabledCheck = tolua.cast( mWidget:getChildByName("pushEnabled"), "CheckBox" )
         local yesCallback = function()
-            pushEnabledCheck:setSelectedState( true )
             postSettings( true )
         end
 
         local noCallback = function()
-           pushEnabledCheck:setSelectedState( false ) 
            postSettings( false )
         end
 
@@ -93,11 +116,37 @@ function loadFrame( subType, competitionId, showRequestPush )
     end
 end
 
+-- refreshing of frame means that the competition id, type is not going to change, ie. within the same competition
+-- and that it is a detailed competition
+function refreshFrame( tabID, yearNumber, monthNumber, weekNumber )
+    mTabID = tabID
+    mYearNumber = tonumber( yearNumber )
+    mMonthNumber = tonumber( monthNumber )
+    mWeekNumber = tonumber( weekNumber )
+    competitionDetail = Logic:getCompetitionDetail()
+    
+    if mCompetitionType == CompetitionType["DetailedRanking"] then
+        setupRankingHeader( false, competitionDetail:getStartTime() )
+    end
+
+    initContent( competitionDetail )
+    initLeaderboard( competitionDetail )
+
+    mStep = 1
+    mHasMoreToLoad = true
+    mSelfInfoOpen = false
+end
+
+function isShown()
+    return mWidget ~= nil
+end
+
 function EnterOrExit( eventType )
     if eventType == "enter" then
     elseif eventType == "exit" then
         mWidget:stopAllActions()
         mWidget = nil
+        mDropdown = nil
     end
 end
 
@@ -138,7 +187,296 @@ function isNewToCompetition()
     return false
 end
 
-function initWelcome()
+function setupRankingHeader( bInit, startTimeStamp )
+    
+    -- init header tab (Overall, Monthly, Weekly)
+    for i = 1, table.getn( CompetitionsData.CompetitionTabs ) do
+        initRankingTab( CompetitionsData.CompetitionTabs[i], i, bInit )
+    end
+
+    -- save header position
+    if bInit then
+        local selfPanel = mWidget:getChildByName( "Panel_Top" )
+        mSelfPanelOriginY = selfPanel:getPositionY()
+
+        local scrollView = mWidget:getChildByName( "ScrollView_Leaderboard" )
+        mScrollViewOriginHeight = scrollView:getSize().height
+    end
+
+    -- init dropdown box
+    if mTabID ~= CompetitionsData.COMPETITION_TAB_ID_OVERALL then
+        initRankingDropdown( startTimeStamp )
+    else
+        removeRankingDropdown()
+    end
+end
+
+
+function initRankingTab( tabInfo, tabId, bInit )
+    local tab = tolua.cast( mWidget:getChildByName( tabInfo["id"] ), "Button" )
+    tab:setTitleText( tabInfo["displayName"] )
+
+    local isActive = mTabID == tabId
+
+    local eventHandler = function( sender, eventType )
+        if eventType == TOUCH_EVENT_ENDED then
+
+            onSelectTab( tabId )
+        end
+    end
+    if bInit then
+            tab:addTouchEventListener( eventHandler )
+        end
+    
+    if isActive then
+        tab:setBright( false )
+        tab:setTouchEnabled( false )
+        tab:setTitleColor( ccc3( 255, 255, 255 ) )
+    else
+        
+        tab:setBright( true )
+        tab:setTouchEnabled( true )
+        tab:setTitleColor( ccc3( 127, 127, 127 ) )
+    end
+end
+
+function removeRankingDropdown()
+    local dropdown
+    if mDropdown ~= nil then
+        mDropdown:setEnabled( false )
+        dropdown = mDropdown
+    else
+        dropdown = GUIReader:shareReader():widgetFromJsonFile("scenes/SpecialDetailedCompetitionDropdownFrame.json")
+    end
+
+    local dropButton = dropdown:getChildByName( "Panel_Button" )
+    local height = dropButton:getSize().height
+
+    local selfPanel = mWidget:getChildByName( "Panel_Top" )
+    local separator = mWidget:getChildByName( "Panel_Separator" )
+    local scrollView = mWidget:getChildByName( "ScrollView_Leaderboard" )
+    
+    selfPanel:setPositionY( mSelfPanelOriginY + height )
+    separator:setPositionY( mSelfPanelOriginY + height )
+    scrollView:setSize( CCSize:new( scrollView:getSize().width, mScrollViewOriginHeight + height ) )
+end
+
+function initRankingDropdown( startTimeStamp )
+
+    initCompetitionDuration( startTimeStamp )
+
+    -- add dropdown to scene if not already added
+    if mDropdown == nil then
+        mDropdown = GUIReader:shareReader():widgetFromJsonFile("scenes/SpecialDetailedCompetitionDropdownFrame.json")
+        mWidget:addChild( mDropdown )
+    end
+
+    mDropdown:setEnabled( true )
+
+    local mask = mDropdown:getChildByName( "Panel_Mask" )
+    local contentContainer = tolua.cast( mDropdown:getChildByName( "ScrollView_Date" ), "ScrollView" )
+
+    local button = mDropdown:getChildByName( "Panel_Button" )
+    local button_dropdown =  mDropdown:getChildByName( "Button_Dropdown" )
+
+    local eventHandler = function( sender, eventType )
+        if eventType == TOUCH_EVENT_ENDED then
+            if mask:isEnabled() then
+                mask:setEnabled( false )
+                contentContainer:setEnabled( false )
+                button_dropdown:setBrightStyle( BRIGHT_NORMAL )
+            else
+                mask:setEnabled( true )
+                contentContainer:setEnabled( true )
+                button_dropdown:setBrightStyle( BRIGHT_HIGHLIGHT )
+            end
+        end
+    end
+    button:addTouchEventListener( eventHandler )
+    button_dropdown:addTouchEventListener( eventHandler )
+
+    local dropButton = mDropdown:getChildByName( "Panel_Button" )
+    local height = dropButton:getSize().height
+
+    local selfPanel = mWidget:getChildByName( "Panel_Top" )
+    local separator = mWidget:getChildByName( "Panel_Separator" )
+    local scrollView = mWidget:getChildByName( "ScrollView_Leaderboard" )
+
+    selfPanel:setPositionY( mSelfPanelOriginY )
+    separator:setPositionY( mSelfPanelOriginY )
+    scrollView:setSize( CCSize:new( scrollView:getSize().width, mScrollViewOriginHeight ) )
+
+    local dateLabel = tolua.cast( mDropdown:getChildByName( "Label_DateFilter" ), "Label" )
+    
+    mask:setEnabled( false )
+    contentContainer:removeAllChildrenWithCleanup( true )
+    contentContainer:setEnabled( false )
+
+    local layoutParameter = LinearLayoutParameter:create()
+    layoutParameter:setGravity(LINEAR_GRAVITY_CENTER_VERTICAL)
+    
+    local contentHeight = 0
+    for i = 1, table.getn( mCompetitionDurations ) do
+
+        local content = GUIReader:shareReader():widgetFromJsonFile("scenes/SpecialDetailedCompetitionDropdownContent.json")
+        content:setLayoutParameter( layoutParameter )
+        contentContainer:addChild( content )
+        contentHeight = contentHeight + content:getSize().height
+
+        local displayText = mCompetitionDurations[i]["displayDate"]
+        local dateText = tolua.cast( content:getChildByName( "Label_Name" ), "Label" )
+        dateText:setText( displayText )
+        
+        if mCompetitionDurations[i]["monthNumber"] ~= nil then
+            if mCompetitionDurations[i]["monthNumber"] == mMonthNumber then
+                dateLabel:setText( displayText )
+            end
+        else
+            if mCompetitionDurations[i]["weekNumber"] == mWeekNumber then
+                dateLabel:setText( displayText )
+            end
+        end
+
+        local eventHandler = function( sender, eventType )
+            if eventType == TOUCH_EVENT_ENDED then
+                 if mTabID == CompetitionsData.COMPETITION_TAB_ID_MONTHLY then
+                    EventManager:postEvent( Event.Enter_Competition_Detail, { mCompetitionId, false, 3, mTabID, mCompetitionDurations[i]["yearNumber"], mCompetitionDurations[i]["monthNumber"] } )
+                else
+                    EventManager:postEvent( Event.Enter_Competition_Detail, { mCompetitionId, false, 3, mTabID, mCompetitionDurations[i]["yearNumber"], mCompetitionDurations[i]["weekNumber"] } )
+                end
+            end
+        end
+        content:addTouchEventListener( eventHandler )
+
+    end
+
+    contentContainer:setInnerContainerSize( CCSize:new( 0, contentHeight ) )
+    local layout = tolua.cast( contentContainer, "Layout" )
+    layout:requestDoLayout()
+end
+
+function initCompetitionDuration( startTimeStamp )
+    
+    -- DEBUG - go back 1 year
+    --startTimeStamp = startTimeStamp - 365 * 24 * 3600
+
+    mCompetitionDurations = {}
+    local nowTimeStamp = os.time()
+    local startYear = tonumber( os.date( "%Y", startTimeStamp ) )
+    local currYear = tonumber( os.date( "%Y", nowTimeStamp ) )
+    
+    if mTabID == CompetitionsData.COMPETITION_TAB_ID_MONTHLY then
+        local startMth = os.date( "%m", startTimeStamp )
+        local endMth = os.date( "%m", nowTimeStamp )
+        
+        local months = Constants.String.month
+
+        if currYear > startYear then
+            local tempEndMth
+
+            while currYear >= startYear do
+                if currYear == startYear then
+                    tempEndMth = endMth
+                else
+                    tempEndMth = 12
+                end
+                for i = startMth, tempEndMth do
+                    local displayDate = months[i].." "..startYear
+                    table.insert( mCompetitionDurations, { ["displayDate"] = displayDate, ["monthNumber"] = i, ["yearNumber"] = startYear } )
+                end
+
+                startYear = startYear + 1
+                startMth = 1
+            end
+        else
+            for i = startMth, endMth do
+
+                local displayDate = months[i].." "..startYear
+                table.insert( mCompetitionDurations, { ["displayDate"] = displayDate, ["monthNumber"] = i, ["yearNumber"] = startYear } )
+            end
+        end
+    else
+        local startWeek = os.date( "%W", startTimeStamp )
+        local endWeek = os.date( "%W", nowTimeStamp )
+
+        local currWeek = startTimeStamp - ( tonumber( os.date( "%w", startTimeStamp ) ) - 1 ) * 3600 * 24 
+                                            - tonumber( os.date( "%H", startTimeStamp ) ) * 3600
+                                            - tonumber( os.date( "%M", startTimeStamp ) ) * 60
+                                            - tonumber( os.date( "%S", startTimeStamp ) )
+
+        if currYear > startYear then
+            local tempEndWeek
+            while currYear >= startYear do
+                if currYear == startYear then
+                    tempEndWeek = endWeek
+                else
+                    tempEndWeek = 53
+                end
+                for i = startWeek, tempEndWeek do
+
+                    if i == 53 then
+                        local currMth = os.date( "%m", currWeek )
+                        if currMth == "01" then
+                            break
+                        end
+                    end
+
+                    local startDay = os.date( "%d", currWeek )
+                    local startMth = os.date( "%b", currWeek )
+
+                    currWeek = currWeek + 7 * 24 * 3600
+
+                    local endDay = os.date( "%d", currWeek )
+                    local endMth = os.date( "%b", currWeek )
+
+                    local displayDate = string.format( Constants.String.event.ranking_dropdown_week, i, startDay, startMth, endDay, endMth )
+                    --print( "DISPLAY DATE = "..displayDate )
+                    table.insert( mCompetitionDurations, { ["displayDate"] = displayDate , ["weekNumber"] = i, ["yearNumber"] = startYear } )
+                end
+
+                startYear = startYear + 1
+                startWeek = 1
+            end
+        else
+            for i = startWeek, endWeek do
+                local startDay = os.date( "%d", currWeek )
+                local startMth = os.date( "%b", currWeek )
+
+                currWeek = currWeek + 7 * 24 * 3600
+
+                local endDay = os.date( "%d", currWeek )
+                local endMth = os.date( "%b", currWeek )
+
+                local displayDate = string.format( Constants.String.event.ranking_dropdown_week, i, startDay, startMth, endDay, endMth )
+                --print( "DISPLAY DATE = "..displayDate )
+                table.insert( mCompetitionDurations, { ["displayDate"] = displayDate , ["weekNumber"] = i, ["yearNumber"] = startYear } )
+            end
+        end
+    end
+
+    -- print( "Start date = ", os.date( "%c", competitionDetail:getStartTime()) )
+    -- print( "Start year = ", os.date( "%Y", competitionDetail:getStartTime()) )
+    -- print( "Start month = ", os.date( "%m", competitionDetail:getStartTime()) )
+    -- print( "Start week = ", os.date( "%W", competitionDetail:getStartTime()) )
+    -- print( "Start day = ", os.date( "%d", competitionDetail:getStartTime()) )
+    -- print( "Start wday = ", os.date( "%w", competitionDetail:getStartTime()) )
+    -- print( "Start hr = ", os.date( "%H", competitionDetail:getStartTime()) )
+    -- print( "Start min = ", os.date( "%M", competitionDetail:getStartTime()) )
+    -- print( "Start sec = ", os.date( "%S", competitionDetail:getStartTime()) )
+
+end
+
+function onSelectTab( tabID )
+    if tabID == CompetitionsData.COMPETITION_TAB_ID_MONTHLY then
+        EventManager:postEvent( Event.Enter_Competition_Detail, { mCompetitionId, false, 3, tabID, mYearNumber, mMonthNumber } )
+    elseif tabID == CompetitionsData.COMPETITION_TAB_ID_WEEKLY then
+        EventManager:postEvent( Event.Enter_Competition_Detail, { mCompetitionId, false, 3, tabID, mYearNumber, mWeekNumber } )
+    else
+        EventManager:postEvent( Event.Enter_Competition_Detail, { mCompetitionId, false, 3, tabID } )
+    end
+end
+
+function initWelcome( competitionDetail )
     local seqArray = CCArray:create()
     seqArray:addObject( CCDelayTime:create( 0.2 ) )
     seqArray:addObject( CCCallFuncN:create( function()
@@ -153,6 +491,20 @@ function initWelcome()
             end
         end
         start:addTouchEventListener( eventHandler )
+
+        local joinToken = competitionDetail:getJoinToken()
+        local bgImage = tolua.cast( popup:getChildByName( "Image_BG"), "ImageView" )
+        bgImage:loadTexture( Constants.COMPETITION_IMAGE_PATH..Constants.WelcomePrefix..joinToken..".png" )
+
+        local competitionConfigID = CompetitionsConfig.getConfigIdByKey( joinToken )
+        local title1 = tolua.cast( popup:getChildByName( "Label_Title1" ), "Label" )
+        title1:setText( CompetitionsConfig.getTitle1( competitionConfigID ) )
+
+        local title2 = tolua.cast( popup:getChildByName( "Label_Title2" ), "Label" )
+        title2:setText( CompetitionsConfig.getTitle2( competitionConfigID ) )
+
+        local body = tolua.cast( popup:getChildByName( "Label_Desc" ), "Label" )
+        body:setText( CompetitionsConfig.getBody( competitionConfigID ) )
     end ) )
 
     mWidget:runAction( CCSequence:create( seqArray ) )
@@ -203,11 +555,16 @@ function initContent( competitionDetail )
     end
 
     -- Add the latest chat message.
-    mChatMessageContainer = mWidget:getChildByName("chatRoom")
-    updateLatestChatMessage( competitionDetail:getLatestChatMessage() )
+    --mChatMessageContainer = mWidget:getChildByName("chatRoom")
+    --updateLatestChatMessage( competitionDetail:getLatestChatMessage() )
 
-    local chatBt = mWidget:getChildByName("chatRoom")
+    --local chatBt = mWidget:getChildByName("chatRoom")
+    local chatBt = tolua.cast( mWidget:getChildByName("Button_Chat"), "Button" )
     chatBt:addTouchEventListener( chatRoomEventHandler )
+
+    if competitionDetail:getNewChatMessages() then
+        chatBt:loadTextureNormal( Constants.COMMUNITY_IMAGE_PATH.."icn-new-message.png" )
+    end
 end
 
 function initLeaderboard( competitionDetail )
@@ -365,7 +722,7 @@ function initSelfContent( info )
                 mSelfInfoOpen = false
                 deltaX = 287
             else
-                click:setSize( CCSize:new( 355, click:getSize().height ) )
+                click:setSize( CCSize:new( 283, click:getSize().height ) )
                 mSelfInfoOpen = true
                 deltaX = -287
             end

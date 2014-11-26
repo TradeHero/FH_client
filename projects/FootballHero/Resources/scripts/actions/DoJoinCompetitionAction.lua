@@ -7,6 +7,7 @@ local Event = require("scripts.events.Event").EventList
 local ConnectingMessage = require("scripts.views.ConnectingMessage")
 local RequestUtils = require("scripts.RequestUtils")
 local Logic = require("scripts.Logic").getInstance()
+local CompetitionType = require("scripts.data.Competitions").CompetitionType
 
 function action( param )
 
@@ -42,10 +43,15 @@ end
 function onRequestSuccess( jsonResponse )
     local competitionId = jsonResponse["CompetitionId"]
     local joinToken = jsonResponse["JoinToken"]
+    local competitionType = jsonResponse["CompetitionType"]
     
     local params = { Action = "join"}
     CCLuaLog("Send ANALYTICS_EVENT_COMPETITION: "..Json.encode( params ) )
     Analytics:sharedDelegate():postEvent( Constants.ANALYTICS_EVENT_COMPETITION, Json.encode( params ) )
 
-    EventManager:postEvent( Event.Enter_Competition_Detail, { competitionId, true } )
+    local sortType = 1
+    if competitionType ~= CompetitionType["Private"] then
+        sortType = 3
+    end
+    EventManager:postEvent( Event.Enter_Competition_Detail, { competitionId, true, sortType } )
 end
