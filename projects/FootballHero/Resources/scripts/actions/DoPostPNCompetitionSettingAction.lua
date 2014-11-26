@@ -9,9 +9,12 @@ local RequestUtils = require("scripts.RequestUtils")
 local Logic = require("scripts.Logic").getInstance()
 
 
+local pnSetting
+
 function action( param )
     local competitionId = param[1]
     local active = param[2]
+    pnSetting = active
 
     local requestContent = { CompetitionId = competitionId,  Active = active }
     local requestContentText = Json.encode( requestContent )
@@ -38,4 +41,6 @@ end
 
 function onRequestSuccess( jsonResponse )
     -- Nothing needed
+    competitionDetail = Logic:getCompetitionDetail()
+    competitionDetail:setPNSetting( pnSetting )
 end

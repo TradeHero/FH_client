@@ -153,3 +153,7 @@ end
 function CompetitionDetail:getNewChatMessages()
     return self.newChatMessages
 end
+
+function CompetitionDetail:setPNSetting( setting )
+    self.pnSetting = setting
+end

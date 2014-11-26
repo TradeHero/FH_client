@@ -17,6 +17,7 @@ function action( param )
     mTabID = param[1]
 
     local url
+    local record = false
     if mTabID == CommunityConfig.COMMUNITY_TAB_ID_COMPETITION then
         url = RequestUtils.GET_COMPETITION_LIST_REST_CALL
         url = url.."?showSpecial=true"
@@ -36,6 +37,7 @@ function action( param )
         if minPrediction > 1 then
             url = url.."&numberOfCouponsRequired="..minPrediction
         end
+        record = true
     else
         url = RequestUtils.GET_COMPETITION_LIST_REST_CALL
     end
@@ -43,7 +45,7 @@ function action( param )
     local requestInfo = {}
     requestInfo.requestData = ""
     requestInfo.url = url
-    requestInfo.recordResponse = true
+    requestInfo.recordResponse = record
 
     local jsonResponseCache = RequestUtils.getResponseCache( url )
     if jsonResponseCache ~= nil then
