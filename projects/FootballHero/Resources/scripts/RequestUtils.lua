@@ -233,6 +233,17 @@ function getResponseCache( url )
     return nil
 end
 
+function invalidResponseCacheContainsUrl( urlKey )
+    for url, _ in pairs( mResponseCache ) do
+        local lengthOfUrlKey = string.len( urlKey )
+
+        if string.sub( url, 1, lengthOfUrlKey ) == urlKey then
+            mResponseCache[url] = nil
+            CCLuaLog("Cleared cache for url: "..url)
+        end
+    end
+end
+
 function clearResponseCache()
     mResponseCache = {}
 end

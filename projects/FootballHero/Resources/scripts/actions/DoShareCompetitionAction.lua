@@ -43,5 +43,16 @@ function onRequestSuccess( jsonResponse )
     CCLuaLog("Send ANALYTICS_EVENT_SOCIAL_ACTION: "..Json.encode( params ) )
     Analytics:sharedDelegate():postEvent( Constants.ANALYTICS_EVENT_SOCIAL_ACTION, Json.encode( params ) )
 
-    EventManager:postEvent( Event.Show_Info, { Constants.String.info.shared_to_fb } )
+    local callback = nil
+    local refreshLeaderboard = jsonResponse["refreshLeaderboard"]
+    if refreshLeaderboard then
+        callback = function()
+            -- Invalid the cache.
+            RequestUtils.invalidResponseCacheContainsUrl( RequestUtils.GET_COMPETITION_DETAIL_REST_CALL )
+            -- Reload the current page.
+            EventManager:reloadCurrent()
+        end
+    end
+
+    EventManager:postEvent( Event.Show_Info, { Constants.String.info.shared_to_fb, callback } )
 end

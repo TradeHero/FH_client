@@ -11,10 +11,12 @@ local Logic = require("scripts.Logic").getInstance()
 local mWidget
 local mShareTitle
 local mShareBody
+local mShareByFacebookCallback
 
-function loadFrame( title, body, shareByFacebook )
+function loadFrame( title, body, shareByFacebookCallback )
 	mShareTitle = title
 	mShareBody = body
+    mShareByFacebookCallback = shareByFacebookCallback
 
     local widget = GUIReader:shareReader():widgetFromJsonFile("scenes/ShareTypeSelection.json")
 
@@ -45,15 +47,24 @@ function onFrameTouch( sender, eventType )
     -- Do nothing, just block touch event.
 end
 
+function shareByFacebook(sender, eventType)
+    if eventType == TOUCH_EVENT_ENDED then
+        mShareByFacebookCallback( sender, eventType )
+        SceneManager.removeWidget( mWidget )
+    end
+end
+
 function shareByEmail( sender, eventType )
     if eventType == TOUCH_EVENT_ENDED then
         EventManager:postEvent( Event.Do_Share_By_Email, { mShareBody, mShareTitle } )
+        SceneManager.removeWidget( mWidget )
     end
 end
 
 function shareBySMS( sender, eventType )
     if eventType == TOUCH_EVENT_ENDED then
         EventManager:postEvent( Event.Do_Share_By_SMS, { mShareBody } )
+        SceneManager.removeWidget( mWidget )
     end
 end
 

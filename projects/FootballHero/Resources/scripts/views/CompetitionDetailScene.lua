@@ -13,6 +13,8 @@ local Constants = require("scripts.Constants")
 local CompetitionType = require("scripts.data.Competitions").CompetitionType
 local CompetitionsData = require("scripts.data.Competitions")
 local CompetitionsConfig = require("scripts.config.Competitions")
+local RequestUtils = require("scripts.RequestUtils")
+
 
 local SHARE_BODY = Constants.String.share_body
 local SHARE_TITLE = Constants.String.share_title
@@ -513,7 +515,13 @@ function initWelcome( competitionDetail )
         if isShare then
             start:setEnabled( false )
 
-            share:addTouchEventListener( shareByFacebook )
+            local shareNClose = function( sender, eventType )
+                if eventType == TOUCH_EVENT_ENDED then
+                    mWidget:removeChild(popup)
+                    shareByFacebook( sender, eventType )
+                end
+            end
+            share:addTouchEventListener( shareNClose )
         else
             
             start:addTouchEventListener( eventHandler )

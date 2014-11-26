@@ -73,6 +73,11 @@ function EventManager:addHistory( eventId, param )
 	end
 end
 
+function EventManager:reloadCurrent()
+	local currentEvent = table.remove( self.mEventHistory )
+	self:postEvent( currentEvent["eventId"], currentEvent["param"] )
+end
+
 function EventManager:popHistory()
 	table.remove( self.mEventHistory ) -- Throw away the current one.
 	local lastHistory = table.remove( self.mEventHistory ) 
