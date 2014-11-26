@@ -82,7 +82,7 @@ function CompetitionDetail:new( detail )
       linkedLeagueId = detail.CompetitionInfoDTO.LinkedLeagueId,
       latestChatMessage = detail.LatestChatMessage,
       pnSetting = detail.PushNotificationsEnabled,
-      selfInfo = detail.Me
+      selfInfo = detail.Me,
       newChatMessages = detail.NewChatMessages
    }
 

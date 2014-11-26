@@ -11,7 +11,8 @@ local ConnectingMessage = require("scripts.views.ConnectingMessage")
 local PushNotificationManager = require("scripts.PushNotificationManager")
 local Constants = require("scripts.Constants")
 local CompetitionType = require("scripts.data.Competitions").CompetitionType
-local CompetitionConfig = require("scripts.data.Competitions")
+local CompetitionsData = require("scripts.data.Competitions")
+local CompetitionsConfig = require("scripts.config.Competitions")
 
 local SHARE_BODY = Constants.String.share_body
 local SHARE_TITLE = Constants.String.share_title
@@ -89,7 +90,7 @@ function loadFrame( subType, competitionId, showRequestPush, tabID, yearNumber, 
     initLeaderboard( competitionDetail )
 
     if mCompetitionType ~= CompetitionType["Private"] and isNewToCompetition() then
-        initWelcome()
+        initWelcome( competitionDetail )
     end
 
     mStep = 1
@@ -189,8 +190,8 @@ end
 function setupRankingHeader( bInit, startTimeStamp )
     
     -- init header tab (Overall, Monthly, Weekly)
-    for i = 1, table.getn( CompetitionConfig.CompetitionTabs ) do
-        initRankingTab( CompetitionConfig.CompetitionTabs[i], i, bInit )
+    for i = 1, table.getn( CompetitionsData.CompetitionTabs ) do
+        initRankingTab( CompetitionsData.CompetitionTabs[i], i, bInit )
     end
 
     -- save header position
@@ -203,7 +204,7 @@ function setupRankingHeader( bInit, startTimeStamp )
     end
 
     -- init dropdown box
-    if mTabID ~= CompetitionConfig.COMPETITION_TAB_ID_OVERALL then
+    if mTabID ~= CompetitionsData.COMPETITION_TAB_ID_OVERALL then
         initRankingDropdown( startTimeStamp )
     else
         removeRankingDropdown()
@@ -338,7 +339,7 @@ function initRankingDropdown( startTimeStamp )
 
         local eventHandler = function( sender, eventType )
             if eventType == TOUCH_EVENT_ENDED then
-                 if mTabID == CompetitionConfig.COMPETITION_TAB_ID_MONTHLY then
+                 if mTabID == CompetitionsData.COMPETITION_TAB_ID_MONTHLY then
                     EventManager:postEvent( Event.Enter_Competition_Detail, { mCompetitionId, false, 3, mTabID, mCompetitionDurations[i]["yearNumber"], mCompetitionDurations[i]["monthNumber"] } )
                 else
                     EventManager:postEvent( Event.Enter_Competition_Detail, { mCompetitionId, false, 3, mTabID, mCompetitionDurations[i]["yearNumber"], mCompetitionDurations[i]["weekNumber"] } )
@@ -364,7 +365,7 @@ function initCompetitionDuration( startTimeStamp )
     local startYear = tonumber( os.date( "%Y", startTimeStamp ) )
     local currYear = tonumber( os.date( "%Y", nowTimeStamp ) )
     
-    if mTabID == CompetitionConfig.COMPETITION_TAB_ID_MONTHLY then
+    if mTabID == CompetitionsData.COMPETITION_TAB_ID_MONTHLY then
         local startMth = os.date( "%m", startTimeStamp )
         local endMth = os.date( "%m", nowTimeStamp )
         
@@ -466,16 +467,16 @@ function initCompetitionDuration( startTimeStamp )
 end
 
 function onSelectTab( tabID )
-    if tabID == CompetitionConfig.COMPETITION_TAB_ID_MONTHLY then
+    if tabID == CompetitionsData.COMPETITION_TAB_ID_MONTHLY then
         EventManager:postEvent( Event.Enter_Competition_Detail, { mCompetitionId, false, 3, tabID, mYearNumber, mMonthNumber } )
-    elseif tabID == CompetitionConfig.COMPETITION_TAB_ID_WEEKLY then
+    elseif tabID == CompetitionsData.COMPETITION_TAB_ID_WEEKLY then
         EventManager:postEvent( Event.Enter_Competition_Detail, { mCompetitionId, false, 3, tabID, mYearNumber, mWeekNumber } )
     else
         EventManager:postEvent( Event.Enter_Competition_Detail, { mCompetitionId, false, 3, tabID } )
     end
 end
 
-function initWelcome()
+function initWelcome( competitionDetail )
     local seqArray = CCArray:create()
     seqArray:addObject( CCDelayTime:create( 0.2 ) )
     seqArray:addObject( CCCallFuncN:create( function()
@@ -490,6 +491,20 @@ function initWelcome()
             end
         end
         start:addTouchEventListener( eventHandler )
+
+        local joinToken = competitionDetail:getJoinToken()
+        local bgImage = tolua.cast( popup:getChildByName( "Image_BG"), "ImageView" )
+        bgImage:loadTexture( Constants.COMPETITION_IMAGE_PATH..Constants.WelcomePrefix..joinToken..".png" )
+
+        local competitionConfigID = CompetitionsConfig.getConfigIdByKey( joinToken )
+        local title1 = tolua.cast( popup:getChildByName( "Label_Title1" ), "Label" )
+        title1:setText( CompetitionsConfig.getTitle1( competitionConfigID ) )
+
+        local title2 = tolua.cast( popup:getChildByName( "Label_Title2" ), "Label" )
+        title2:setText( CompetitionsConfig.getTitle2( competitionConfigID ) )
+
+        local body = tolua.cast( popup:getChildByName( "Label_Desc" ), "Label" )
+        body:setText( CompetitionsConfig.getBody( competitionConfigID ) )
     end ) )
 
     mWidget:runAction( CCSequence:create( seqArray ) )
