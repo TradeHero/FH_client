@@ -44,7 +44,10 @@ function onRequestSuccess( jsonResponse )
     Analytics:sharedDelegate():postEvent( Constants.ANALYTICS_EVENT_SOCIAL_ACTION, Json.encode( params ) )
 
     local callback = nil
-    local refreshLeaderboard = jsonResponse["refreshLeaderboard"]
+    local refreshLeaderboard = false
+    if type( jsonResponse ) == "table" and jsonResponse["refreshLeaderboard"] then
+
+    end
     if refreshLeaderboard then
         callback = function()
             -- Invalid the cache.

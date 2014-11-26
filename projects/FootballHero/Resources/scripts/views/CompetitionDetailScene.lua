@@ -663,10 +663,10 @@ function shareByFacebook( sender, eventType )
     if eventType == TOUCH_EVENT_ENDED then
         local doShare = function()
             local handler = function( accessToken, success )
+                ConnectingMessage.selfRemove()
                 if success then
                     EventManager:postEvent( Event.Do_Share_Competition, { mCompetitionId, accessToken } )
                 end
-                ConnectingMessage.selfRemove()
             end
             ConnectingMessage.loadFrame()
             FacebookDelegate:sharedDelegate():grantPublishPermission( "publish_actions", handler )
