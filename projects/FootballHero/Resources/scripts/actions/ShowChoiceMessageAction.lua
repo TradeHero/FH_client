@@ -6,4 +6,5 @@ function action( param )
     choiceMessage.setTitle( param[1] )
     choiceMessage.setMessage( param[2] )
     choiceMessage.setCallbacks( param[3], param[4] )
+    choiceMessage.setButtonText( param[5], param[6] )
 end

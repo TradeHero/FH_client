@@ -376,4 +376,8 @@
     <Project>CommunityLeaderboardDropdownContentFrame_1</Project>
     <GuidesList />
   </GuidesProject>
+  <GuidesProject>
+    <Project>MinigamePopup</Project>
+    <GuidesList />
+  </GuidesProject>
 </ArrayOfGuidesProject>

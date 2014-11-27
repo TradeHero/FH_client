@@ -23,6 +23,8 @@ M.en = {
   choice = {
     leave_comp_desc = "Are you sure you want to leave the competition?",
     leave_comp_title = "Leave Competition",
+    leave_comp_yes = "Leave",
+    leave_comp_no = "Stay"
   },
   community = {
     title_competition = "Competitions",
