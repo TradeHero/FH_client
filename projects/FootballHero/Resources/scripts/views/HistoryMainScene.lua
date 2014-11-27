@@ -296,7 +296,12 @@ function initContent( couponHistory )
             local closedPredictionContent = content:getChildByName( "Panel_ClosedPrediction" )
             closedPredictionContent:setEnabled( true )
             local CTA = tolua.cast( closedPredictionContent:getChildByName("Label_CTA"), "Label" )
-            CTA:setText( Constants.String.history.no_closed_prediction )
+
+            if isSelf() then
+                CTA:setText( Constants.String.history.no_closed_prediction )
+            else
+                CTA:setText( Constants.String.history.no_closed_prediction_others )
+            end
             
             content:setLayoutParameter( layoutParameter )
             contentContainer:addChild( content )
