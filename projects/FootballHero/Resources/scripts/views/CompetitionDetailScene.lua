@@ -16,6 +16,8 @@ local CompetitionsConfig = require("scripts.config.Competitions")
 local RequestUtils = require("scripts.RequestUtils")
 
 
+local INFO_MOVE_OFFSET = 287
+
 local SHARE_BODY = Constants.String.share_body
 local SHARE_TITLE = Constants.String.share_title
 
@@ -136,7 +138,13 @@ function refreshFrame( tabID, yearNumber, monthNumber, weekNumber )
 
     mStep = 1
     mHasMoreToLoad = true
-    mSelfInfoOpen = false
+
+    if mSelfInfoOpen then
+        local top  = mWidget:getChildByName("Panel_Top")
+        local qualified = top:getChildByName("Panel_Info")
+        qualified:setPositionX( qualified:getPositionX() + INFO_MOVE_OFFSET )
+        mSelfInfoOpen = false
+    end
 end
 
 function isShown()
@@ -742,11 +750,11 @@ function initSelfContent( info )
             if mSelfInfoOpen then
                 click:setSize( CCSize:new( 560, click:getSize().height ) )
                 mSelfInfoOpen = false
-                deltaX = 287
+                deltaX = INFO_MOVE_OFFSET
             else
                 click:setSize( CCSize:new( 283, click:getSize().height ) )
                 mSelfInfoOpen = true
-                deltaX = -287
+                deltaX = INFO_MOVE_OFFSET * (-1)
             end
 
             local resultSeqArray = CCArray:create()
@@ -762,7 +770,7 @@ function initSelfContent( info )
         name:setText( info["DisplayName"] )
     end
 
-    score:setText( string.format( score:getStringValue(), info["Profit"] ) )
+    score:setText( string.format( Constants.String.leaderboard.me_score, info["Profit"] ) )
     if info["Profit"] < 0 then
         score:setColor( ccc3( 240, 75, 79 ) )
     end

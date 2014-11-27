@@ -45,8 +45,8 @@ function onRequestSuccess( jsonResponse )
 
     local callback = nil
     local refreshLeaderboard = false
-    if type( jsonResponse ) == "table" and jsonResponse["refreshLeaderboard"] then
-
+    if type( jsonResponse ) == "table" and jsonResponse["RefreshLeaderboard"] then
+        refreshLeaderboard = true
     end
     if refreshLeaderboard then
         callback = function()

@@ -12,7 +12,7 @@ local mCompetitionId
 function action( param )
     mCompetitionId = param[1]
 
-    local url = RequestUtils.GET_COMPETITION_LEAGUE_REST_CALL
+    local url = RequestUtils.GET_COMPETITION_DETAILS_REST_CALL
     url = url.."?competitionId="..mCompetitionId
 
     local requestInfo = {}
@@ -31,6 +31,9 @@ function action( param )
 end
 
 function onRequestSuccess( jsonResponse )
+    local competitionLeagueIds = jsonResponse["CompetitionLeagueIds"]
+    local pushNotificationsEnabled = jsonResponse["PushNotificationsEnabled"]
+
 	local CompetitionMoreScene = require("scripts.views.CompetitionMoreScene")
-    CompetitionMoreScene.loadFrame( jsonResponse, mCompetitionId )
+    CompetitionMoreScene.loadFrame( competitionLeagueIds, mCompetitionId, pushNotificationsEnabled )
 end

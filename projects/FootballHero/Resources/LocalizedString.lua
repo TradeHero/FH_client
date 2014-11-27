@@ -103,6 +103,7 @@ M.en = {
   last_name = "Last Name",
   last_name_optional = "Last Name (Optional)",
   leaderboard = {
+    me_score = "%d won",
     gain_per_prediction_desc = "%d%% gain (%d predictions)",
     gain_per_prediction_title = "Gain per Prediction",
     high_score_desc = "%d won (%d predictions)",

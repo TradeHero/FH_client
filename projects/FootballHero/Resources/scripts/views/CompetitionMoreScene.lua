@@ -16,7 +16,7 @@ local mCompetitionId
 local mCompetitionToken
 
 -- DS for competitionDetail see CompetitionDetail
-function loadFrame( selectedLeagues, competitionId )
+function loadFrame( selectedLeagues, competitionId, pushNotificationEnabled )
     competitionDetail = Logic:getCompetitionDetail()
     mCompetitionId = competitionId
     mCompetitionToken = competitionDetail:getJoinToken()
@@ -35,7 +35,7 @@ function loadFrame( selectedLeagues, competitionId )
     local backBt = mWidget:getChildByName("back")
     backBt:addTouchEventListener( backEventHandler )
     
-    initContent( competitionDetail, selectedLeagues )
+    initContent( competitionDetail, selectedLeagues, pushNotificationEnabled )
 end
 
 function EnterOrExit( eventType )
@@ -87,7 +87,7 @@ function keypadBackEventHandler()
     EventManager:popHistory()
 end
 
-function initContent( competitionDetail, selectedLeagues )
+function initContent( competitionDetail, selectedLeagues, pushNotificationEnabled )
     local contentContainer = tolua.cast( mWidget:getChildByName("ScrollView"), "ScrollView" )
     contentContainer:removeAllChildrenWithCleanup( true )
 
@@ -159,7 +159,7 @@ function initContent( competitionDetail, selectedLeagues )
         rulesBtn:addTouchEventListener( rulesEventHandler )
     end
     
-    if competitionDetail:getPNSetting() then
+    if pushNotificationEnabled then
         pushBtn:setSelectedState( true )
     end
 end
