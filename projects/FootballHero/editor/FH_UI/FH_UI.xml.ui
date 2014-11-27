@@ -105,23 +105,9 @@
   <ResRelativePath />
   <imageFileList />
   <imagePngList>
-    <string>MatchListScene/match_bkg.png</string>
-    <string>chat/More Button.png</string>
-    <string>header/back.png</string>
-    <string>Competition/prizes_affcup14.png</string>
-    <string>Competition/btn-predictnow.png</string>
-    <string>Competition/img-counter.png</string>
-    <string>Competition/btn-learnmore.png</string>
-    <string>Competition/btn-share.png</string>
-    <string>Competition/img-userposition.png</string>
-    <string>LoginNReg/photo.png</string>
-    <string>Competition/icn-unqualified.png</string>
-    <string>Competition/icn-expandinfo.png</string>
-    <string>community/img-inactivepage.png</string>
-    <string>community/img-activepage.png</string>
-    <string>community/icn-no-message.png</string>
-    <string>community/icn-new-message.png</string>
+    <string>MatchListScene/Arrow down.png</string>
+    <string>MatchListScene/Arrow Up.png</string>
   </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>SpecialDetailedCompetitionDropdownContent.json</CurrentUIJson>
+  <CurrentUIJson>SpecialDetailedCompetitionDropdownFrame.json</CurrentUIJson>
 </UIProject>

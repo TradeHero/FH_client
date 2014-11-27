@@ -99,6 +99,7 @@ M.en = {
     star_bet = "You can use 3 star stakes every 12 hours",
     announcement_title = "Announcement",
     odds_not_ready = "Odds will be updated soon.\nPlease check again later.",
+    competition_not_started = "Competition begins 8th Dec 2014.",
   },
   last_name = "Last Name",
   last_name_optional = "Last Name (Optional)",

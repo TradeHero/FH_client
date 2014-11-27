@@ -703,7 +703,15 @@ end
 
 function predictNowEventHandler( sender, eventType )
     if eventType == TOUCH_EVENT_ENDED then
-        EventManager:postEvent( Event.Enter_Match_List, { mLinkedLeagueId } )
+        local competitionDetail = Logic:getCompetitionDetail()
+        local startTimeStamp = competitionDetail:getStartTime()
+        local nowTimeStamp = os.time()
+
+        if nowTimeStamp < startTimeStamp then
+            EventManager:postEvent( Event.Show_Info, { Constants.String.info.competition_not_started } )
+        else
+            EventManager:postEvent( Event.Enter_Match_List, { mLinkedLeagueId } )
+        end
     end
 end 
 

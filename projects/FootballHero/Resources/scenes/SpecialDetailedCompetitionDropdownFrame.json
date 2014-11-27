@@ -324,7 +324,7 @@
           "touchAble": false,
           "useMergedTexture": false,
           "visible": true,
-          "width": 273,
+          "width": 480,
           "x": 320,
           "y": 776,
           "areaHeight": 0,
@@ -333,7 +333,7 @@
           "fontName": "fonts/Helvetica neue.ttf",
           "fontSize": 32,
           "hAlignment": 0,
-          "text": "Week 3: 18-22 Nov",
+          "text": "Competition begins 8th Dec 2014",
           "touchScaleEnable": false,
           "vAlignment": 1
         }

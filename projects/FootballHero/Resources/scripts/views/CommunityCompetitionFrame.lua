@@ -215,7 +215,7 @@ end
 function enterCompetition( competitionId, isSpecialComp )
 
     if isSpecialComp then
-        EventManager:postEvent( Event.Enter_Competition_Detail, { competitionId, false, 3, CompetitionConfig.COMPETITION_TAB_ID_OVERALL } )
+        EventManager:postEvent( Event.Enter_Competition_Detail, { competitionId, false, 3, CompetitionConfig.COMPETITION_TAB_ID_MONTHLY } )
     else
         EventManager:postEvent( Event.Enter_Competition_Detail, { competitionId } )
     end

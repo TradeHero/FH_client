@@ -26,7 +26,7 @@ function action( param )
     mSortType = param[3] or 1
     competitionId = param[1]
     showRequestPush = param[2] or false
-    mTabID = param[4] or CompetitionConfig.COMPETITION_TAB_ID_OVERALL
+    mTabID = param[4] or CompetitionConfig.COMPETITION_TAB_ID_MONTHLY
 
     url = url.."?competitionId="..competitionId.."&sortType="..mSortType.."&step="..step.."&perPage="..Constants.RANKINGS_PER_PAGE
     if RequestUtils.USE_DEV then

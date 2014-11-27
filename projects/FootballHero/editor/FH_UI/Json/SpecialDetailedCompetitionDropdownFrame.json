@@ -11,22 +11,8 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "MatchListScene/match_bkg.png",
-    "chat/More Button.png",
-    "header/back.png",
-    "Competition/prizes_affcup14.png",
-    "Competition/btn-predictnow.png",
-    "Competition/img-counter.png",
-    "Competition/btn-learnmore.png",
-    "Competition/btn-share.png",
-    "Competition/img-userposition.png",
-    "LoginNReg/photo.png",
-    "Competition/icn-unqualified.png",
-    "Competition/icn-expandinfo.png",
-    "community/img-inactivepage.png",
-    "community/img-activepage.png",
-    "community/icn-no-message.png",
-    "community/icn-new-message.png"
+    "MatchListScene/Arrow down.png",
+    "MatchListScene/Arrow Up.png"
   ],
   "version": "1.5.0.0",
   "widgetTree": {
@@ -338,7 +324,7 @@
           "touchAble": false,
           "useMergedTexture": false,
           "visible": true,
-          "width": 273,
+          "width": 480,
           "x": 320,
           "y": 776,
           "areaHeight": 0,
@@ -347,7 +333,7 @@
           "fontName": "fonts/Helvetica neue.ttf",
           "fontSize": 32,
           "hAlignment": 0,
-          "text": "Week 3: 18-22 Nov",
+          "text": "Competition begins 8th Dec 2014",
           "touchScaleEnable": false,
           "vAlignment": 1
         }
