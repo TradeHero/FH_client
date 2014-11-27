@@ -11,8 +11,22 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "community/img-dropdownbox.png",
-    "community/img-separator.png"
+    "MatchListScene/match_bkg.png",
+    "chat/More Button.png",
+    "header/back.png",
+    "Competition/prizes_affcup14.png",
+    "Competition/btn-predictnow.png",
+    "Competition/img-counter.png",
+    "Competition/btn-learnmore.png",
+    "Competition/btn-share.png",
+    "Competition/img-userposition.png",
+    "LoginNReg/photo.png",
+    "Competition/icn-unqualified.png",
+    "Competition/icn-expandinfo.png",
+    "community/img-inactivepage.png",
+    "community/img-activepage.png",
+    "community/icn-no-message.png",
+    "community/icn-new-message.png"
   ],
   "version": "1.5.0.0",
   "widgetTree": {

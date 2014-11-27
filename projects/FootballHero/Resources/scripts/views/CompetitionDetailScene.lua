@@ -338,12 +338,14 @@ function initRankingDropdown( startTimeStamp )
         dateText:setText( displayText )
         
         if mCompetitionDurations[i]["monthNumber"] ~= nil then
-            if mCompetitionDurations[i]["monthNumber"] == mMonthNumber then
+            if mCompetitionDurations[i]["monthNumber"] == tonumber( mMonthNumber ) then
                 dateLabel:setText( displayText )
+                break
             end
         else
-            if mCompetitionDurations[i]["weekNumber"] == mWeekNumber then
+            if mCompetitionDurations[i]["weekNumber"] == tonumber( mWeekNumber ) then
                 dateLabel:setText( displayText )
+                break
             end
         end
 
