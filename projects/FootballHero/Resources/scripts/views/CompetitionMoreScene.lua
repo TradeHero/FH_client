@@ -60,7 +60,8 @@ function leaveEventHandler( sender, eventType )
         local noCallback = function()
         end
 
-        EventManager:postEvent( Event.Show_Choice_Message, { Constants.String.choice.leave_comp_title, Constants.String.choice.leave_comp_desc, yesCallback, noCallback } )
+        EventManager:postEvent( Event.Show_Choice_Message, { Constants.String.choice.leave_comp_title, Constants.String.choice.leave_comp_desc, 
+            yesCallback, noCallback, Constants.String.choice.leave_comp_yes, Constants.String.choice.leave_comp_no } )
     end
 end
 

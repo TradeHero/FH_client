@@ -37,6 +37,7 @@ EventNameList =
     "Enter_Leaderboard_List",
     "Enter_Settings",
     "Enter_FAQ",
+    "Enter_Minigame",
     "Enter_Create_Competition",
     "Enter_View_Selected_Leagues",
     "Enter_Competition_Leagues",

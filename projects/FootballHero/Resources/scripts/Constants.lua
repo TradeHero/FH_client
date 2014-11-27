@@ -69,6 +69,19 @@ ANALYTICS_EVENT_COMPETITION = "Competition"
 
 NOTIFICATION_KEY_SFX = "soundEffects"
 EVENT_WELCOME_KEY = "event"
+EVENT_NEXT_MINIGAME_TIME_KEY = "next_minigame_time"
+EVENT_NEXT_MINIGAME_STAGE = "next_minigame_stage"
+
+MinigameStages = {
+	"1",
+	"1",
+	"1",
+	"1",
+	"1",
+	"1",
+	"1",
+}
+MINIGAME_STAGE_ENDED = -1
 
 COMPETITION_PRIZE_WEEKLY = "weekly"
 COMPETITION_PRIZE_MONTHLY = "monthly"
