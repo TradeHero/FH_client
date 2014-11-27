@@ -406,8 +406,9 @@ function initCompetitionDuration( startTimeStamp )
             end
         end
     else
-        local startWeek = os.date( "%W", startTimeStamp )
-        local endWeek = os.date( "%W", nowTimeStamp )
+        -- Since 2014/01/01 is week 1 on server, but week 0 on client, so client need to add one.
+        local startWeek = os.date( "%W", startTimeStamp ) + 1
+        local endWeek = os.date( "%W", nowTimeStamp ) + 1
 
         local currWeek = startTimeStamp - ( tonumber( os.date( "%w", startTimeStamp ) ) - 1 ) * 3600 * 24 
                                             - tonumber( os.date( "%H", startTimeStamp ) ) * 3600
@@ -416,6 +417,7 @@ function initCompetitionDuration( startTimeStamp )
 
         if currYear > startYear then
             local tempEndWeek
+            local displyWeekIndex = 1
             while currYear >= startYear do
                 if currYear == startYear then
                     tempEndWeek = endWeek
@@ -439,7 +441,8 @@ function initCompetitionDuration( startTimeStamp )
                     local endDay = os.date( "%d", currWeek )
                     local endMth = os.date( "%b", currWeek )
 
-                    local displayDate = string.format( Constants.String.event.ranking_dropdown_week, i, startDay, startMth, endDay, endMth )
+                    local displayDate = string.format( Constants.String.event.ranking_dropdown_week, displyWeekIndex, startDay, startMth, endDay, endMth )
+                    displyWeekIndex = displyWeekIndex + 1
                     --print( "DISPLAY DATE = "..displayDate )
                     table.insert( mCompetitionDurations, { ["displayDate"] = displayDate , ["weekNumber"] = i, ["yearNumber"] = startYear } )
                 end
@@ -448,6 +451,7 @@ function initCompetitionDuration( startTimeStamp )
                 startWeek = 1
             end
         else
+            local displyWeekIndex = 1
             for i = startWeek, endWeek do
                 local startDay = os.date( "%d", currWeek )
                 local startMth = os.date( "%b", currWeek )
@@ -457,7 +461,8 @@ function initCompetitionDuration( startTimeStamp )
                 local endDay = os.date( "%d", currWeek )
                 local endMth = os.date( "%b", currWeek )
 
-                local displayDate = string.format( Constants.String.event.ranking_dropdown_week, i, startDay, startMth, endDay, endMth )
+                local displayDate = string.format( Constants.String.event.ranking_dropdown_week, displyWeekIndex, startDay, startMth, endDay, endMth )
+                displyWeekIndex = displyWeekIndex + 1
                 --print( "DISPLAY DATE = "..displayDate )
                 table.insert( mCompetitionDurations, { ["displayDate"] = displayDate , ["weekNumber"] = i, ["yearNumber"] = startYear } )
             end
@@ -975,7 +980,16 @@ function contentClick( info )
     if info["DisplayName"] ~= nil then
         name = info["DisplayName"]
     end
-    EventManager:postEvent( Event.Enter_History, { id, name, mCompetitionId } )
+
+    local additionalParam
+    if mTabID == CompetitionsData.COMPETITION_TAB_ID_MONTHLY then
+        additionalParam = "&yearNumber="..mYearNumber.."&monthNumber="..mMonthNumber
+    elseif mTabID == CompetitionsData.COMPETITION_TAB_ID_WEEKLY then
+        additionalParam = "&yearNumber="..mYearNumber.."&weekNumber="..mWeekNumber
+    else
+        additionalParam = ""
+    end
+    EventManager:postEvent( Event.Enter_History, { id, name, mCompetitionId, additionalParam } )
 end
 
 function scrollViewEventHandler( target, eventType )

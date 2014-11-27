@@ -17,12 +17,14 @@ local mStep
 local mCompetitionId
 local mUserId
 local mHasMoreToLoad
+local mAdditionalParam
 
 -- DS for couponHistory see CouponHistoryData
 -- competitionId: The history only contains matches within the leagues in this competition.
 --                  if it is nil, then the history will show everything. 
-function loadFrame( userId, userName, competitionId, couponHistory )
+function loadFrame( userId, userName, competitionId, couponHistory, additionalParam )
     mCompetitionId = competitionId
+    mAdditionalParam = additionalParam
     local showBackButton = false
 
     mWidget = GUIReader:shareReader():widgetFromJsonFile("scenes/MyPicksHome.json")
@@ -69,8 +71,9 @@ function loadFrame( userId, userName, competitionId, couponHistory )
     mHasMoreToLoad = false
 end
 
-function refreshFrame( userId, userName, competitionId, couponHistory )
+function refreshFrame( userId, userName, competitionId, couponHistory, additionalParam )
     mCompetitionId = competitionId
+    mAdditionalParam = additionalParam
     local showBackButton = false
 
     local totalPoints = tolua.cast( mWidget:getChildByName("Label_Total_Points"), "Label" )
@@ -393,7 +396,7 @@ end
 function scrollViewEventHandler( target, eventType )
     if eventType == SCROLLVIEW_EVENT_BOUNCE_BOTTOM and mHasMoreToLoad then
         mStep = mStep + 1
-        EventManager:postEvent( Event.Load_More_In_History, { mStep, mCompetitionId, mUserId } )
+        EventManager:postEvent( Event.Load_More_In_History, { mStep, mCompetitionId, mUserId, mAdditionalParam } )
     end
 end
 

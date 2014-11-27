@@ -11,10 +11,14 @@ function action( param )
     local step = param[1]
     local competitionId = param[2]
     local userId = param[3]
+    local additionalParam = param[4]
     
     local url = RequestUtils.GET_COUPON_HISTORY_REST_CALL.."?userId="..userId.."&step="..step
     if competitionId ~= nil then
         url = url.."&competitionId="..competitionId
+    end
+    if additionalParam ~= nil then
+        url = url..additionalParam
     end
 
     local requestInfo = {}

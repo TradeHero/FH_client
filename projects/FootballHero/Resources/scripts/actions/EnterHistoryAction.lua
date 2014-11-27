@@ -11,6 +11,7 @@ local RequestUtils = require("scripts.RequestUtils")
 local mUserId = Logic:getUserId()
 local mUserName = ""
 local mCompetitionId = nil
+local mAdditionalParam
 
 function action( param )
     local historyMainScene = require("scripts.views.HistoryMainScene")
@@ -35,6 +36,11 @@ function action( param )
         mCompetitionId = nil
     end
 
+    if param ~= nil and param[4] ~= nil then
+        mAdditionalParam = param[4]
+        url = url..mAdditionalParam
+    end
+
     local requestInfo = {}
     requestInfo.requestData = ""
     requestInfo.url = url
@@ -56,8 +62,8 @@ function onRequestSuccess( response )
     
     local historyMainScene = require("scripts.views.HistoryMainScene")
     if historyMainScene:isFrameShown() then
-        historyMainScene.refreshFrame( mUserId, mUserName, mCompetitionId, couponHistory )
+        historyMainScene.refreshFrame( mUserId, mUserName, mCompetitionId, couponHistory, mAdditionalParam )
     else
-        historyMainScene.loadFrame( mUserId, mUserName, mCompetitionId, couponHistory )
+        historyMainScene.loadFrame( mUserId, mUserName, mCompetitionId, couponHistory, mAdditionalParam )
     end
 end
