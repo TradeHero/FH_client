@@ -289,8 +289,8 @@ function checkMiniGame()
             end
         end
 
-        local close = minigamePopup:getChildByName( "Button_Close" )
-        close:addTouchEventListener( closeEventHandler )
+        --local close = minigamePopup:getChildByName( "Button_Close" )
+        --close:addTouchEventListener( closeEventHandler )
 
         local later = minigamePopup:getChildByName( "Button_Later" )
         later:addTouchEventListener( closeEventHandler )
@@ -300,20 +300,22 @@ function checkMiniGame()
 
         -- Set Background Image, reposition buttons
         local BG = tolua.cast( minigamePopup:getChildByName( "Image_BG" ), "ImageView" )
-        -- DEBUG
-        -- print( CCUserDefault:sharedUserDefault():getIntegerForKey( Constants.EVENT_NEXT_MINIGAME_STAGE ) % 2 )
-        -- if CCUserDefault:sharedUserDefault():getIntegerForKey( Constants.EVENT_NEXT_MINIGAME_STAGE ) % 2 == 0 then
-        --     BG:loadTexture( Constants.COMPETITION_IMAGE_PATH.."prizes_affcup14.png" )
-        -- end
+        
+        -- TODO -  track A/B test
+        if math.random() > 0.5 then
+        --if CCUserDefault:sharedUserDefault():getIntegerForKey( Constants.EVENT_NEXT_MINIGAME_STAGE ) % 2 == 0 then
+            BG:loadTexture( Constants.MINIGAME_IMAGE_PATH.."pop-out-2.png" )
+        else
+
+        end
 
         local bgPos = ccp( BG:getPositionX(), BG:getPositionY() )
         local bgSize = BG:getSize()
         
-        close:setPosition( ccp( bgPos.x + bgSize.width / 2, bgPos.y + bgSize.height / 2 ) )
+        --close:setPosition( ccp( bgPos.x + bgSize.width / 2, bgPos.y + bgSize.height / 2 ) )
 
-        later:setPositionY( bgPos.y - bgSize.height / 2 + 60 )
-        play:setPositionY( bgPos.y - bgSize.height / 2 + 60 )
-        -- TODO
+        later:setPositionY( bgPos.y - bgSize.height / 2 + 75 )
+        play:setPositionY( bgPos.y - bgSize.height / 2 + 75 )
     end
 
 end

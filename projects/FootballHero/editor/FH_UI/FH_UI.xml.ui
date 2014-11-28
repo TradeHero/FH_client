@@ -105,11 +105,7 @@
   <ProjectType>UIProject</ProjectType>
   <ResRelativePath />
   <imageFileList />
-  <imagePngList>
-    <string>Competition/img-popupimg.png</string>
-    <string>Tutorial/Default Button.png</string>
-    <string>community/btn-close.png</string>
-  </imagePngList>
+  <imagePngList />
   <JsonSuffix>.json</JsonSuffix>
   <CurrentUIJson>MinigamePopup.json</CurrentUIJson>
 </UIProject>
