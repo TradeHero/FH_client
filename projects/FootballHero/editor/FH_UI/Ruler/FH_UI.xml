@@ -233,11 +233,11 @@
     <GuidesList />
   </GuidesProject>
   <GuidesProject>
-    <Project>LeagueListDropDown</Project>
+    <Project>MatchListDropDown</Project>
     <GuidesList />
   </GuidesProject>
   <GuidesProject>
-    <Project>LeagueContentInDropDown</Project>
+    <Project>LeagueDropdownContent</Project>
     <GuidesList />
   </GuidesProject>
   <GuidesProject>
@@ -374,6 +374,10 @@
   </GuidesProject>
   <GuidesProject>
     <Project>CommunityLeaderboardDropdownContentFrame_1</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>CountryDropdownContent</Project>
     <GuidesList />
   </GuidesProject>
 </ArrayOfGuidesProject>
