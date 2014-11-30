@@ -67,22 +67,23 @@ ANALYTICS_EVENT_PREDICTION = "Prediction"
 ANALYTICS_EVENT_SOCIAL_ACTION = "Social_Action"
 ANALYTICS_EVENT_POPUP = "Pop-Up"
 ANALYTICS_EVENT_COMPETITION = "Competition"
+ANALYTICS_EVENT_MINIGAME = "Minigame"
 
 NOTIFICATION_KEY_SFX = "soundEffects"
 EVENT_WELCOME_KEY = "event"
 EVENT_NEXT_MINIGAME_TIME_KEY = "next_minigame_time"
 EVENT_NEXT_MINIGAME_STAGE = "next_minigame_stage"
+EVENT_MINIGAME_NEXT_IMAGE = "next_minigame_image"
 
 MinigameStages = {
-	"1",
-	"1",
-	"1",
-	"1",
-	"1",
-	"1",
-	"1",
+	"3",
+	"6",
+	"12",
+	"30",
 }
 MINIGAME_STAGE_ENDED = -1
+MINIGAME_IMAGE_ONE = 1
+MINIGAME_IMAGE_TWO = 2
 
 COMPETITION_PRIZE_WEEKLY = "weekly"
 COMPETITION_PRIZE_MONTHLY = "monthly"

@@ -12,7 +12,7 @@ local Logic = require("scripts.Logic").getInstance()
 local EventManager = require("scripts.events.EventManager").getInstance()
 local Event = require("scripts.events.Event").EventList
 local SMIS = require("scripts.SMIS")
-
+local Json = require("json")
 
 local mWidget
 local mTopLayer
@@ -262,6 +262,18 @@ function initMatchList( matchList, leagueKey )
     mWidget:runAction( CCSequence:create( seqArray ) )
 end
 
+function sendAnalytics( nextImageID, shared )
+    local params
+    if nextImageID == Constants.MINIGAME_IMAGE_ONE then
+        params = { ImageOne = shared }
+    else
+        params = { ImageTwo = shared }
+    end
+    
+    CCLuaLog("Send ANALYTICS_EVENT_MINIGAME_ACTION: "..Json.encode( params ) )
+    Analytics:sharedDelegate():postEvent( Constants.ANALYTICS_EVENT_MINIGAME, Json.encode( params ) )
+end
+
 function checkMiniGame()
     -- check if popup should appear
     local bAppear = shouldShowMiniGame()
@@ -271,12 +283,14 @@ function checkMiniGame()
         minigamePopup:setZOrder( Constants.ZORDER_POPUP )
         mWidget:addChild( minigamePopup )
 
+        local nextImage = getNextMiniGameImage()
         local closeEventHandler = function( sender, eventType )
             if eventType == TOUCH_EVENT_ENDED then
                 -- save in localDB
                 local stage = CCUserDefault:sharedUserDefault():getIntegerForKey( Constants.EVENT_NEXT_MINIGAME_STAGE )
                 setMiniGameNextStage( stage )
                 mWidget:removeChild(minigamePopup)
+                sendAnalytics( nextImage, "closed" )
             end
         end
 
@@ -286,38 +300,63 @@ function checkMiniGame()
                 setMiniGameNextStage( Constants.MINIGAME_STAGE_ENDED )
                 mWidget:removeChild(minigamePopup)
                 checkFacebookAndOpenWebview()
+                sendAnalytics( nextImage, "shared" )
             end
         end
 
-        --local close = minigamePopup:getChildByName( "Button_Close" )
-        --close:addTouchEventListener( closeEventHandler )
+        local close = minigamePopup:getChildByName( "Button_Close" )
+        close:addTouchEventListener( closeEventHandler )
+        
+        --local later = minigamePopup:getChildByName( "Button_Later" )
+        --later:addTouchEventListener( closeEventHandler )
 
-        local later = minigamePopup:getChildByName( "Button_Later" )
-        later:addTouchEventListener( closeEventHandler )
+        --local play = minigamePopup:getChildByName( "Button_Play" )
+        --play:addTouchEventListener( playEventHandler )
 
-        local play = minigamePopup:getChildByName( "Button_Play" )
-        play:addTouchEventListener( playEventHandler )
+        local mask = minigamePopup:getChildByName( "Panel_Mask" )
+        mask:addTouchEventListener( closeEventHandler )
 
         -- Set Background Image, reposition buttons
         local BG = tolua.cast( minigamePopup:getChildByName( "Image_BG" ), "ImageView" )
-        
-        -- TODO -  track A/B test
-        if math.random() > 0.5 then
-        --if CCUserDefault:sharedUserDefault():getIntegerForKey( Constants.EVENT_NEXT_MINIGAME_STAGE ) % 2 == 0 then
-            BG:loadTexture( Constants.MINIGAME_IMAGE_PATH.."pop-out-2.png" )
-        else
-
-        end
+        BG:loadTexture( Constants.MINIGAME_IMAGE_PATH.."pop-out-"..nextImage..".png" )
+        BG:addTouchEventListener( playEventHandler )
 
         local bgPos = ccp( BG:getPositionX(), BG:getPositionY() )
+        local bgScale = BG:getScale()
         local bgSize = BG:getSize()
         
-        --close:setPosition( ccp( bgPos.x + bgSize.width / 2, bgPos.y + bgSize.height / 2 ) )
+        close:setPosition( ccp( bgPos.x + bgSize.width / 2 * bgScale, bgPos.y + bgSize.height / 2 * bgScale ) )
 
-        later:setPositionY( bgPos.y - bgSize.height / 2 + 75 )
-        play:setPositionY( bgPos.y - bgSize.height / 2 + 75 )
+        --later:setPositionY( bgPos.y - bgSize.height / 2 + 75 )
+        --play:setPositionY( bgPos.y - bgSize.height / 2 + 75 )
     end
 
+end
+
+function getNextMiniGameImage()
+    local nextImage = CCUserDefault:sharedUserDefault():getIntegerForKey( Constants.EVENT_MINIGAME_NEXT_IMAGE )
+    
+    local image_id
+    if nextImage == 0 then
+        -- first image
+        if Logic:getUserId() % 2 == 0 then
+            image_id = Constants.MINIGAME_IMAGE_TWO 
+            CCUserDefault:sharedUserDefault():setIntegerForKey( Constants.EVENT_MINIGAME_NEXT_IMAGE, Constants.MINIGAME_IMAGE_ONE )
+        else
+            image_id = Constants.MINIGAME_IMAGE_ONE 
+            CCUserDefault:sharedUserDefault():setIntegerForKey( Constants.EVENT_MINIGAME_NEXT_IMAGE, Constants.MINIGAME_IMAGE_TWO )
+        end
+    else
+        if nextImage == Constants.MINIGAME_IMAGE_ONE then
+            image_id = Constants.MINIGAME_IMAGE_ONE 
+            CCUserDefault:sharedUserDefault():setIntegerForKey( Constants.EVENT_MINIGAME_NEXT_IMAGE, Constants.MINIGAME_IMAGE_TWO )
+        else
+            image_id = Constants.MINIGAME_IMAGE_TWO 
+            CCUserDefault:sharedUserDefault():setIntegerForKey( Constants.EVENT_MINIGAME_NEXT_IMAGE, Constants.MINIGAME_IMAGE_ONE )
+        end
+    end
+
+    return image_id
 end
 
 function shouldShowMiniGame()
@@ -369,7 +408,7 @@ end
 function checkFacebookAndOpenWebview()
     
     local openWebview = function()
-        EventManager:postEvent( Event.Enter_Minigame, { 1, "fbtoken" } )
+        EventManager:postEvent( Event.Enter_Minigame, { Logic:getFBAccessToken() } )
     end
 
     if Logic:getFbId() == false then
