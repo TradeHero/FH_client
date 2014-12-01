@@ -18,8 +18,7 @@ function action( param )
 	    MinigameWebview.loadFrame( fbToken )
 
 	else
-		--local URL = "http://fhwebsite.cloudapp.net/api/PenaltyKick/fhpenalty/FacebookShare?req=true&access_token="..fbToken
-		local URL = "http://192.168.1.100:44333/api/PenaltyKick/fhpenalty/FHFBRedirect?access_token="..fbToken
+		local URL = "http://fhwebsite.cloudapp.net/api/PenaltyKick/fhpenalty/FHFBRedirect?access_token="..fbToken
 	    local requestContent = {}
 	    local requestContentText = Json.encode( requestContent )
 
