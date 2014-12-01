@@ -8,7 +8,7 @@ local Json = require("json")
 local Constants = require("scripts.Constants")
 local ConnectingMessage = require("scripts.views.ConnectingMessage")
 
-local LOAD_WEBVIEW = true
+local LOAD_WEBVIEW = false
 
 function action( param )
     local fbToken = param[1]
@@ -18,8 +18,8 @@ function action( param )
 	    MinigameWebview.loadFrame( fbToken )
 
 	else
-		local URL = "http://fhwebsite.cloudapp.net/api/PenaltyKick/fhpenalty/FacebookShare?req=true&access_token="..fbToken
-
+		--local URL = "http://fhwebsite.cloudapp.net/api/PenaltyKick/fhpenalty/FacebookShare?req=true&access_token="..fbToken
+		local URL = "http://192.168.1.100:44333/api/PenaltyKick/fhpenalty/FHFBRedirect?access_token="..fbToken
 	    local requestContent = {}
 	    local requestContentText = Json.encode( requestContent )
 
@@ -40,5 +40,8 @@ function action( param )
 end
 
 function onRequestSuccess( jsonResponse )
-    EventManager:postEvent( Event.Show_Info, { Constants.String.info.shared_to_fb_minigame, callback } )
+	local MinigameWebview = require("scripts.views.MinigameWebview")
+	--MinigameWebview.loadFrame( jsonResponse )
+	Misc:sharedDelegate():openUrl( jsonResponse )
+    --EventManager:postEvent( Event.Show_Info, { Constants.String.info.shared_to_fb_minigame, callback } )
 end

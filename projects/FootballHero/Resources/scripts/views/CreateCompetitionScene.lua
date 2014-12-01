@@ -101,7 +101,12 @@ function facebookEventHandler( sender, eventType )
                 print("Do Share")
                 local handler = function( accessToken, success )
                     if success then
-                        mAccessToken = accessToken
+                        -- already has permission
+                        if accessToken == nil then
+                            mAccessToken = Logic:getFBAccessToken()
+                        else
+                            mAccessToken = accessToken
+                        end
                     else
                         facebookCheckBox:setSelectedState( false )
                     end

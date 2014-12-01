@@ -13,6 +13,7 @@ local EventManager = require("scripts.events.EventManager").getInstance()
 local Event = require("scripts.events.Event").EventList
 local SMIS = require("scripts.SMIS")
 local Json = require("json")
+local ConnectingMessage = require("scripts.views.ConnectingMessage")
 
 local mWidget
 local mTopLayer
@@ -286,21 +287,21 @@ function checkMiniGame()
         local nextImage = getNextMiniGameImage()
         local closeEventHandler = function( sender, eventType )
             if eventType == TOUCH_EVENT_ENDED then
+                sendAnalytics( nextImage, "closed" )
                 -- save in localDB
                 local stage = CCUserDefault:sharedUserDefault():getIntegerForKey( Constants.EVENT_NEXT_MINIGAME_STAGE )
                 setMiniGameNextStage( stage )
                 mWidget:removeChild(minigamePopup)
-                sendAnalytics( nextImage, "closed" )
             end
         end
 
         local playEventHandler = function( sender, eventType )
             if eventType == TOUCH_EVENT_ENDED then
+                sendAnalytics( nextImage, "shared" )
                 -- save in localDB
                 setMiniGameNextStage( Constants.MINIGAME_STAGE_ENDED )
                 mWidget:removeChild(minigamePopup)
                 checkFacebookAndOpenWebview()
-                sendAnalytics( nextImage, "shared" )
             end
         end
 
@@ -406,9 +407,21 @@ function setMiniGameNextStage( stage )
 end
 
 function checkFacebookAndOpenWebview()
-    
+
     local openWebview = function()
-        EventManager:postEvent( Event.Enter_Minigame, { Logic:getFBAccessToken() } )
+        local handler = function( accessToken, success )
+            if success then
+                -- already has permission
+                if accessToken == nil then
+                    accessToken = Logic:getFBAccessToken()
+                end
+                EventManager:postEvent( Event.Enter_Minigame, { accessToken } )
+            else
+                ConnectingMessage.selfRemove()
+            end
+        end
+        ConnectingMessage.loadFrame()
+        FacebookDelegate:sharedDelegate():grantPublishPermission( "publish_actions", handler )
     end
 
     if Logic:getFbId() == false then

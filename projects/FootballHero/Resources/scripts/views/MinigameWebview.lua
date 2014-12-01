@@ -10,7 +10,7 @@ local Constants = require("scripts.Constants")
 local mWidget
 local mURL
 
-function loadFrame( token )
+function loadFrame( url )
 	local widget = GUIReader:shareReader():widgetFromJsonFile("scenes/CompetitionWebview.json")
     mWidget = widget
     mWidget:registerScriptHandler( EnterOrExit )
@@ -22,7 +22,8 @@ function loadFrame( token )
     local title = tolua.cast( widget:getChildByName("title"), "Label" )
     title:setText( Constants.String.football_hero )
 
-    mURL = "http://fhwebsite.cloudapp.net/api/PenaltyKick/fhpenalty/FacebookShare?req=true&access_token="..token
+    --mURL = "http://fhwebsite.cloudapp.net/PenaltyKick/FHFBRedirect?access_token="..token
+    mURL = url
     CCLuaLog( "Minigame url is: "..mURL )
     WebviewDelegate:sharedDelegate():openWebpage( mURL, 0, 40, 320, 528 )
 end
