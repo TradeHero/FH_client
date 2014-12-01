@@ -665,6 +665,10 @@ function shareByFacebook( sender, eventType )
             local handler = function( accessToken, success )
                 ConnectingMessage.selfRemove()
                 if success then
+                    -- already has permission
+                    if accessToken == nil then
+                        accessToken = Logic:getFBAccessToken()
+                    end
                     EventManager:postEvent( Event.Do_Share_Competition, { mCompetitionId, accessToken } )
                 end
             end
