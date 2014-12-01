@@ -47,6 +47,9 @@ function initContent( jsonResponse, leaderboardId, subType )
 	local contentContainer = tolua.cast( mWidget:getChildByName("ScrollView_Content"), "ScrollView" )
     contentContainer:removeAllChildrenWithCleanup( true )
 
+    -- global chats
+    initGlobalChatButton()
+
     -- init header tab
     for i = 1, table.getn( CommunityConfig.CommunityType ) do
         initCommunityTab( CommunityConfig.CommunityType[i], i )
@@ -54,6 +57,10 @@ function initContent( jsonResponse, leaderboardId, subType )
 
     -- init main content
     loadMainContent( contentContainer, jsonResponse, leaderboardId, subType );
+end
+
+function initGlobalChatButton()
+    --TODO
 end
 
 function initCommunityTab( tabInfo, tabId )

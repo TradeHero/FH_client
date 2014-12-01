@@ -380,4 +380,8 @@
     <Project>CountryDropdownContent</Project>
     <GuidesList />
   </GuidesProject>
+  <GuidesProject>
+    <Project>ChatroomSelectScene</Project>
+    <GuidesList />
+  </GuidesProject>
 </ArrayOfGuidesProject>

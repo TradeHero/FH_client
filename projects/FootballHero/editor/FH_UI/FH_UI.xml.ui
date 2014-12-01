@@ -96,6 +96,7 @@
     <string>SpecialDetailedCompetitionDropdownFrame.json</string>
     <string>SpecialDetailedCompetitionDropdownContent.json</string>
     <string>CountryDropdownContent.json</string>
+    <string>ChatroomSelectScene.json</string>
   </JsonList>
   <CanvasSize>
     <Width>640</Width>
@@ -106,10 +107,12 @@
   <ResRelativePath />
   <imageFileList />
   <imagePngList>
-    <string>MatchListScene/Arrow down.png</string>
-    <string>MatchListScene/Arrow Up.png</string>
-    <string>commonRes/England.png</string>
+    <string>MatchListScene/match_bkg.png</string>
+    <string>header/footballhero-logo.png</string>
+    <string>community/img-inactivepage.png</string>
+    <string>community/img-activepage.png</string>
+    <string>chat/icn-leaguechat.png</string>
   </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>MatchListDropDown.json</CurrentUIJson>
+  <CurrentUIJson>ChatroomSelectScene.json</CurrentUIJson>
 </UIProject>
