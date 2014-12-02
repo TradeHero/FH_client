@@ -32,6 +32,7 @@ import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
+import com.myhero.fh.metrics.events.ParamStringEvent;
 
 import com.crashlytics.android.Crashlytics;
 import com.mobileapptracker.MobileAppTracker;
@@ -57,6 +58,9 @@ import android.webkit.WebViewClient;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 
+import com.localytics.android.LocalyticsAmpSession;
+import com.localytics.android.LocalyticsActivityLifecycleCallbacks;
+
 public class MainActivity extends Cocos2dxActivity {
   private static final String TAG = "FacebookTestActivity";
   private static FacebookAuth facebookAuth;
@@ -66,6 +70,8 @@ public class MainActivity extends Cocos2dxActivity {
   private LinearLayout m_webLayout;
   private WebView m_webView;
   private ClipboardManager m_clipboard;
+
+  private LocalyticsAmpSession localyticsSession;
 
   static {
     System.loadLibrary("cocos2dlua");
@@ -115,7 +121,24 @@ public class MainActivity extends Cocos2dxActivity {
     actInstance = this;
     m_webLayout = new LinearLayout(this);
     this.addContentView(m_webLayout, new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
+
+    // Instantiate the object
+    this.localyticsSession = new LocalyticsAmpSession(
+              getApplicationContext() );  // Context used to access device resources
+
+
+    // Register LocalyticsActivityLifecycleCallbacks
+    getApplication().registerActivityLifecycleCallbacks(
+              new LocalyticsActivityLifecycleCallbacks(this.localyticsSession));
+    this.localyticsSession.setLoggingEnabled(true);
   }
+
+    @Override
+    protected void onNewIntent(Intent intent)
+    {
+        super.onNewIntent(intent);
+        setIntent(intent);
+    }
 
     @Override
     public void onResume() {
@@ -124,6 +147,7 @@ public class MainActivity extends Cocos2dxActivity {
         mobileAppTracker.setReferralSources(this);
         // MAT will not function unless the measureSession call is included
         mobileAppTracker.measureSession();
+
     }
 
   @Override
@@ -236,6 +260,11 @@ public class MainActivity extends Cocos2dxActivity {
 	  ClipData clip = ClipData.newPlainText("copied content", content);
 	  m_clipboard.setPrimaryClip(clip);
   }
-    
+
+  public void tagLocalyticsEvent(String eventName, String paramString) {
+      ParamStringEvent event = new ParamStringEvent(eventName, paramString);
+      localyticsSession.tagEvent( eventName, event.getAttributes() );
+  }
+
 }
 

@@ -25,7 +25,7 @@ public class FootballApp extends Application {
     super.onCreate();
 
     // initialize analytics instance
-    Analytics.init(this);
+    //Analytics.init(this);
 
     AirshipConfigOptions options = AirshipConfigOptions.loadDefaultOptions(this);
     UAirship.takeOff(this, options);
