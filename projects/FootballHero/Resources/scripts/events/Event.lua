@@ -88,7 +88,6 @@ EventNameList =
 EventNameDosenotTrackList = 
 { 
     "Enter_Share",
-    "Enter_Tutorial_Ui_With_Type",
     
     "Do_Register",
     "Do_Register_Name",
