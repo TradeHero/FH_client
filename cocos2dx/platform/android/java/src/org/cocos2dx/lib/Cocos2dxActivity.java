@@ -23,7 +23,6 @@
  ****************************************************************************/
 package org.cocos2dx.lib;
 
-import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
@@ -31,6 +30,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.ViewGroup;
@@ -39,7 +39,7 @@ import com.myhero.fh.util.MiscUtil;
 import com.myhero.fh.widget.FHCocos2dxHandler;
 import org.cocos2dx.lib.Cocos2dxHelper.Cocos2dxHelperListener;
 
-public abstract class Cocos2dxActivity extends Activity implements Cocos2dxHelperListener {
+public abstract class Cocos2dxActivity extends FragmentActivity implements Cocos2dxHelperListener {
   // ===========================================================
   // Constants
   // ===========================================================
