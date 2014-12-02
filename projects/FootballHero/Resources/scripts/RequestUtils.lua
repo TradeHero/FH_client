@@ -13,7 +13,7 @@ HTTP_204 = 204
 
 SERVER_IP = "http://fhapi-prod1.cloudapp.net"
 FACEBOOK_GRAPH_IP = "https://graph.facebook.com"
-CDN_SERVER_IP = "http://portalvhdss3c1vgx5mrzv.blob.core.windows.net/fhsettings/"
+CDN_SERVER_IP = "http://fhmainstorage.blob.core.windows.net/fhsettings/"
 
 WEBSITE_IP = "http://fhwebsite.cloudapp.net"
 WEBSITE_DEV_IP = "http://192.168.1.99:44333"
