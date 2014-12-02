@@ -49,5 +49,4 @@ function downloadSMImage( fileUrl, onRequestSuccess, onRequestFailed )
 
     local httpRequest = HttpRequestForLua:create( CCHttpRequest.kHttpGet )
     httpRequest:sendHttpRequest( fileUrl, handler )
-    httpRequest:setPriority( CCHttpRequest.pLow )
 end

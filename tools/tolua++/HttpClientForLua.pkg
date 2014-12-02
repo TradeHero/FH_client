@@ -8,16 +8,6 @@ class CCHttpRequest : CCObject
         kHttpDelete,  
         kHttpUnkown,  
     } HttpRequestType;  
-
-    typedef enum
-    {
-        pVeryLow,
-        pLow,
-        pMedium,
-        pHigh,
-        pVeryHigh,
-
-    } HttpRequestPriority;
       
       
     void setRequestType(HttpRequestType type);  
@@ -52,7 +42,6 @@ class HttpRequestForLua : CCObject
 
     void addHeader(const char* header);
     void setUserpwd(const char* userpwd);
-    void setPriority(int p);
 	void sendHttpRequest(const char* url, LUA_FUNCTION callbackFunc);
 	void onHttpRequestCompleted(cocos2d::CCNode *sender, void *data);
 	void setRequest(CCHttpRequest* request);

@@ -47,24 +47,14 @@ class CCHttpRequest : public CCObject
 {
 public:
     /** Use this enum type as param in setReqeustType(param) */
-	typedef enum
-	{
-		kHttpGet,
-		kHttpPost,
-		kHttpPut,
-		kHttpDelete,
-		kHttpUnkown,
-	} HttpRequestType;
-
-	typedef enum
-	{
-		pVeryLow,
-		pLow,
-		pMedium,
-		pHigh,
-		pVeryHigh,
-
-	} HttpRequestPriority;
+    typedef enum
+    {
+        kHttpGet,
+        kHttpPost,
+        kHttpPut,
+        kHttpDelete,
+        kHttpUnkown,
+    } HttpRequestType;
     
     /** Constructor 
         Because HttpRequest object will be used between UI thead and network thread,
@@ -82,7 +72,6 @@ public:
         _pTarget = NULL;
         _pSelector = NULL;
         _pUserData = NULL;
-		_priority = pMedium;
     };
     
     /** Destructor */
@@ -239,16 +228,6 @@ public:
    		return _headers;
    	}
 
-	inline void setPriority(int p)
-	{
-		_priority = p;
-	}
-
-	inline int getPriority()
-	{
-		return _priority;
-	}
-
 
 protected:
     // properties
@@ -261,7 +240,6 @@ protected:
     void*                       _pUserData;      /// You can add your customed data here 
     std::vector<std::string>    _headers;		      /// custom http headers
 	std::string                 _userpwd;            /// user:password
-	int							_priority;			/// Http request priority, the priority is higher when the number is bigger.
 };
 
 NS_CC_EXT_END

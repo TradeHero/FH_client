@@ -50,11 +50,6 @@ void HttpRequestForLua::setUserpwd(const char* userpwd)
 	getRequest()->setUserpwd(userpwd);
 }
 
-void HttpRequestForLua::setPriority(int p)
-{
-	getRequest()->setPriority(p);
-}
-
 void HttpRequestForLua::sendHttpRequest(const char* url, int callbackFunc)
 {
 	CCLog("Requesting to %s", url);

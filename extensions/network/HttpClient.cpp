@@ -465,26 +465,6 @@ void CCHttpClient::send(CCHttpRequest* request)
         
     pthread_mutex_lock(&s_requestQueueMutex);
     s_requestQueue->addObject(request);
-
-	// Sort the request by priority.
-	int i, j, length = s_requestQueue->data->num;
-	CCHttpRequest ** x = (CCHttpRequest**)s_requestQueue->data->arr;
-	CCHttpRequest *tempItem;
-
-	// insertion sort
-	for (i = 1; i < length; i++)
-	{
-		tempItem = x[i];
-		j = i - 1;
-
-		//continue moving element downwards while priority is smaller
-		while (j >= 0 && (tempItem->getPriority() > x[j]->getPriority()))
-		{
-			x[j + 1] = x[j];
-			j = j - 1;
-		}
-		x[j + 1] = tempItem;
-	}
     pthread_mutex_unlock(&s_requestQueueMutex);
     
     // Notify thread start to work
