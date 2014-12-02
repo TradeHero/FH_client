@@ -67,6 +67,8 @@ M.en = {
     ranking_weekly = "Weekly",
     status_qualified = "- qualified",
     status_unqualified = "- unqualified",
+    shoot_to_win_won = "You have won!",
+    failed_to_score = "failed to score any goals"
   },
   favourite_team = "Your favourite team: ",
   first_name = "First Name",

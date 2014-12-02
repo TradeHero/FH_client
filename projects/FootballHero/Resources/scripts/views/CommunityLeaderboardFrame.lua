@@ -269,7 +269,6 @@ function initLeaderboardContent( i, content, info )
         score:setColor( ccc3( 240, 75, 79 ) )
     end
 
-    string.format( mSubType["description"], info[mSubType["dataColumnId"]], info["NumberOfCoupons"] )
     index:setText( i )
 
     -- stat box

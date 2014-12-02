@@ -11,6 +11,7 @@ local LeaderboardConfig = require("scripts.config.Leaderboard")
 local mTabID
 local mLeaderboardId
 local mSubType = LeaderboardConfig.LeaderboardSubType[1]
+local mJsonResponse
 
 function action( param )
 
@@ -64,15 +65,46 @@ function action( param )
 end
 
 function onRequestSuccess( jsonResponse )
-    loadCommunityScene( jsonResponse )
+    if mTabID == CommunityConfig.COMMUNITY_TAB_ID_COMPETITION then
+        mJsonResponse = jsonResponse
+        -- check for minigame info
+        doMinigameRequest()
+    else
+        loadCommunityScene( jsonResponse )
+    end
 end
 
-function loadCommunityScene( jsonResponse )
+function loadCommunityScene( jsonResponse, minigameResponse )
     local communityScene = require("scripts.views.CommunityBaseScene")
     
     if communityScene.isShown() then
-        communityScene.refreshFrame( jsonResponse, mTabID, mLeaderboardId, mSubType )
+        communityScene.refreshFrame( jsonResponse, mTabID, mLeaderboardId, mSubType, minigameResponse )
     else
-        communityScene.loadFrame( jsonResponse, mTabID, mLeaderboardId, mSubType )
+        communityScene.loadFrame( jsonResponse, mTabID, mLeaderboardId, mSubType, minigameResponse )
     end
+end
+
+function doMinigameRequest()
+    
+    ConnectingMessage.loadFrame()
+    
+    local URL = RequestUtils.SHOOT_TO_WIN_GET_USER_COMPETITION_CALL..Logic:getUserId()
+    local requestContent = {}
+    local requestContentText = Json.encode( requestContent )
+
+    local requestInfo = {}
+    requestInfo.requestData = requestContentText
+    requestInfo.url = URL
+
+    local handler = function( isSucceed, body, header, status, errorBuffer )
+        RequestUtils.messageHandler( requestInfo, isSucceed, body, header, status, errorBuffer, RequestUtils.HTTP_200, onMinigameRequestSuccess )
+    end
+
+    local httpRequest = HttpRequestForLua:create( CCHttpRequest.kHttpGet )
+    httpRequest:addHeader( Logic:getAuthSessionString() )
+    httpRequest:sendHttpRequest( URL, handler )
+end
+
+function onMinigameRequestSuccess( jsonResponse )
+    loadCommunityScene( mJsonResponse, jsonResponse )
 end
