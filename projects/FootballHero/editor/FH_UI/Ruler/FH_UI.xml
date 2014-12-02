@@ -380,4 +380,16 @@
     <Project>MinigamePopup</Project>
     <GuidesList />
   </GuidesProject>
+  <GuidesProject>
+    <Project>MinigameDetailScene</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>MinigameScrollviewContentFrame</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>MinigameWinnersScene</Project>
+    <GuidesList />
+  </GuidesProject>
 </ArrayOfGuidesProject>

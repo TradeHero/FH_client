@@ -96,6 +96,9 @@
     <string>SpecialDetailedCompetitionDropdownFrame.json</string>
     <string>SpecialDetailedCompetitionDropdownContent.json</string>
     <string>MinigamePopup.json</string>
+    <string>MinigameDetailScene.json</string>
+    <string>MinigameScrollviewContentFrame.json</string>
+    <string>MinigameWinnersScene.json</string>
   </JsonList>
   <CanvasSize>
     <Width>640</Width>
@@ -105,7 +108,16 @@
   <ProjectType>UIProject</ProjectType>
   <ResRelativePath />
   <imageFileList />
-  <imagePngList />
+  <imagePngList>
+    <string>MatchListScene/match_bkg.png</string>
+    <string>header/back.png</string>
+    <string>mini-game/btn-ask-friend.png</string>
+    <string>mini-game/prizes_shoottowin.png</string>
+    <string>mini-game/btn-past-winner.png</string>
+    <string>Competition/img-userposition.png</string>
+    <string>LoginNReg/photo.png</string>
+    <string>mini-game/img-goal-counter.png</string>
+  </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>MinigamePopup.json</CurrentUIJson>
+  <CurrentUIJson>MinigameScrollviewContentFrame.json</CurrentUIJson>
 </UIProject>

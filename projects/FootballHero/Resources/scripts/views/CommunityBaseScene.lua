@@ -9,12 +9,13 @@ local Constants = require("scripts.Constants")
 local Competitions = require("scripts.data.Competitions").Competitions
 local CommunityCompetitionFrame = require("scripts.views.CommunityCompetitionFrame")
 local CommunityLeaderboardFrame = require("scripts.views.CommunityLeaderboardFrame")
+local Minigame = require("scripts.data.Minigame").Minigame
 
 local mWidget
 local mTabID
 
 -- DS, see Competitions.lua
-function loadFrame( jsonResponse, tabID, leaderboardId, subType )
+function loadFrame( jsonResponse, tabID, leaderboardId, subType, minigameResponse )
 	local widget = GUIReader:shareReader():widgetFromJsonFile("scenes/CommunityBaseScene.json")
     mWidget = widget
     mWidget:registerScriptHandler( EnterOrExit )
@@ -24,12 +25,12 @@ function loadFrame( jsonResponse, tabID, leaderboardId, subType )
     Navigator.loadFrame( widget )
 
     mTabID = tabID
-    initContent( jsonResponse, leaderboardId, subType )
+    initContent( jsonResponse, leaderboardId, subType, minigameResponse )
 end
 
-function refreshFrame( jsonResponse, tabID, leaderboardId, subType )
+function refreshFrame( jsonResponse, tabID, leaderboardId, subType, minigameResponse )
     mTabID = tabID
-    initContent( jsonResponse, leaderboardId, subType )
+    initContent( jsonResponse, leaderboardId, subType, minigameResponse )
 end
 
 function EnterOrExit( eventType )
@@ -43,7 +44,7 @@ function isShown()
     return mWidget ~= nil
 end
 
-function initContent( jsonResponse, leaderboardId, subType )
+function initContent( jsonResponse, leaderboardId, subType, minigameResponse )
 	local contentContainer = tolua.cast( mWidget:getChildByName("ScrollView_Content"), "ScrollView" )
     contentContainer:removeAllChildrenWithCleanup( true )
 
@@ -53,7 +54,7 @@ function initContent( jsonResponse, leaderboardId, subType )
     end
 
     -- init main content
-    loadMainContent( contentContainer, jsonResponse, leaderboardId, subType );
+    loadMainContent( contentContainer, jsonResponse, leaderboardId, subType, minigameResponse )
 end
 
 function initCommunityTab( tabInfo, tabId )
@@ -80,9 +81,9 @@ function initCommunityTab( tabInfo, tabId )
     end
 end
 
-function loadMainContent( contentContainer, jsonResponse, leaderboardId, subType )
+function loadMainContent( contentContainer, jsonResponse, leaderboardId, subType, minigameResponse )
     if mTabID == CommunityConfig.COMMUNITY_TAB_ID_COMPETITION then
-        loadCompetitionScene( contentContainer, jsonResponse )
+        loadCompetitionScene( contentContainer, jsonResponse, minigameResponse )
     elseif mTabID ==  CommunityConfig.COMMUNITY_TAB_ID_LEADERBOARD then
         loadLeaderboardScene( contentContainer, jsonResponse, leaderboardId, subType )
     end
@@ -92,11 +93,12 @@ function onSelectTab( tabID )
     EventManager:postEvent( Event.Enter_Community, { tabID, 1, 1, Constants.FILTER_MIN_PREDICTION } )
 end
 
-function loadCompetitionScene( contentContainer, jsonResponse )
+function loadCompetitionScene( contentContainer, jsonResponse, minigameResponse )
     CommunityLeaderboardFrame.exitFrame()
 
     local compList = Competitions:new( jsonResponse )
-    CommunityCompetitionFrame.loadFrame( contentContainer, compList )
+    local minigame = Minigame:new( minigameResponse )
+    CommunityCompetitionFrame.loadFrame( contentContainer, compList, minigame )
 end
 
 function loadLeaderboardScene( contentContainer, jsonResponse, leaderboardId, subType )

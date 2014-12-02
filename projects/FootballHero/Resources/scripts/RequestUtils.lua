@@ -15,6 +15,12 @@ SERVER_IP = "http://fhapi-prod1.cloudapp.net"
 FACEBOOK_GRAPH_IP = "https://graph.facebook.com"
 CDN_SERVER_IP = "http://portalvhdss3c1vgx5mrzv.blob.core.windows.net/fhsettings/"
 
+WEBSITE_IP = "http://fhwebsite.cloudapp.net"
+WEBSITE_DEV_IP = "http://192.168.1.99:44333"
+
+SHOOT_TO_WIN_FB_REDIRECT_CALL = WEBSITE_IP.."/api/PenaltyKick/fhpenalty/FHFBRedirect?access_token="
+SHOOT_TO_WIN_GET_USER_COMPETITION_CALL = WEBSITE_IP.."/api/PenaltyKick/fhpenalty/GetUserCompetitionDetails?userId="
+
 EMAIL_REGISTER_REST_CALL = SERVER_IP.."/api/user/SignupWithEmail"
 EMAIL_LOGIN_REST_CALL = SERVER_IP.."/api/loginWithEmail"
 SET_USER_METADATA_REST_CALL = SERVER_IP.."/api/user/setUserMetaData"
@@ -31,6 +37,7 @@ GET_COMPETITION_LIST_REST_CALL = SERVER_IP.."/api/competitions/getCompetitionsFo
 GET_COMPETITION_DETAIL_REST_CALL = SERVER_IP.."/api/leaderboards/getCompetitionInfoAndLeaderboard"
 GET_COMPETITION_LEAGUE_REST_CALL = SERVER_IP.."/api/competitions/getCompetitionLeagueIds"
 GET_CHAT_MESSAGE_REST_CALL = SERVER_IP.."/api/chat/getChatMessages"
+GET_USER_META_DATA = SERVER_IP.."/api/user/getUsersMetaData"
 POST_COUPONS_REST_CALL = SERVER_IP.."/api/coupons/placeCoupons"
 POST_FAV_TEAM_REST_CALL = SERVER_IP.."/api/user/setFavoriteTeam"
 POST_LOGO_REST_CALL = SERVER_IP.."/api/user/uploadProfilePicture"
@@ -78,6 +85,7 @@ function setServerIP( serverIp, cdnServerIp, useDev )
     GET_COMPETITION_DETAIL_REST_CALL = serverIp.."/api/leaderboards/getCompetitionInfoAndLeaderboard"
     GET_COMPETITION_LEAGUE_REST_CALL = serverIp.."/api/competitions/getCompetitionLeagueIds"
     GET_CHAT_MESSAGE_REST_CALL = serverIp.."/api/chat/getChatMessages"
+    GET_USER_META_DATA = serverIp.."/api/user/getUsersMetaData"
     POST_COUPONS_REST_CALL = serverIp.."/api/coupons/placeCoupons"
     POST_FAV_TEAM_REST_CALL= serverIp.."/api/user/setFavoriteTeam"
     POST_LOGO_REST_CALL = serverIp.."/api/user/uploadProfilePicture"
