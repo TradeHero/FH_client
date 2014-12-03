@@ -7,6 +7,7 @@ local Event = require("scripts.events.Event").EventList
 local ConnectingMessage = require("scripts.views.ConnectingMessage")
 local RequestUtils = require("scripts.RequestUtils")
 local Logic = require("scripts.Logic").getInstance()
+local CompetitionConfig = require("scripts.data.Competitions")
 
 local mFacebookShare
 
