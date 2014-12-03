@@ -8,6 +8,7 @@ local ConnectingMessage = require("scripts.views.ConnectingMessage")
 local RequestUtils = require("scripts.RequestUtils")
 local Logic = require("scripts.Logic").getInstance()
 local CompetitionType = require("scripts.data.Competitions").CompetitionType
+local CompetitionConfig = require("scripts.data.Competitions")
 
 function action( param )
 
