@@ -12,7 +12,8 @@ local Logic = require("scripts.Logic").getInstance()
 local EventManager = require("scripts.events.EventManager").getInstance()
 local Event = require("scripts.events.Event").EventList
 local SMIS = require("scripts.SMIS")
-
+local Json = require("json")
+local ConnectingMessage = require("scripts.views.ConnectingMessage")
 
 local mWidget
 local mTopLayer
@@ -258,7 +259,182 @@ function initMatchList( matchList, leagueKey )
         end
     end ) )
 
+    seqArray:addObject( CCCallFunc:create( checkMiniGame ) )
     mWidget:runAction( CCSequence:create( seqArray ) )
+end
+
+function sendAnalytics( nextImageID, shared )
+    local params
+    if nextImageID == Constants.MINIGAME_IMAGE_ONE then
+        params = { ImageOne = shared }
+    else
+        params = { ImageTwo = shared }
+    end
+    
+    CCLuaLog("Send ANALYTICS_EVENT_MINIGAME_ACTION: "..Json.encode( params ) )
+    Analytics:sharedDelegate():postEvent( Constants.ANALYTICS_EVENT_MINIGAME, Json.encode( params ) )
+end
+
+function checkMiniGame()
+    -- check if popup should appear
+    local bAppear = shouldShowMiniGame()
+
+    if bAppear then
+        local minigamePopup = SceneManager.widgetFromJsonFile("scenes/MinigamePopup.json")
+        minigamePopup:setZOrder( Constants.ZORDER_POPUP )
+        mWidget:addChild( minigamePopup )
+
+        local nextImage = getNextMiniGameImage()
+        local closeEventHandler = function( sender, eventType )
+            if eventType == TOUCH_EVENT_ENDED then
+                sendAnalytics( nextImage, "closed" )
+                -- save in localDB
+                local stage = CCUserDefault:sharedUserDefault():getIntegerForKey( Constants.EVENT_NEXT_MINIGAME_STAGE )
+                setMiniGameNextStage( stage )
+                mWidget:removeChild(minigamePopup)
+            end
+        end
+
+        local playEventHandler = function( sender, eventType )
+            if eventType == TOUCH_EVENT_ENDED then
+                sendAnalytics( nextImage, "shared" )
+                -- save in localDB
+                setMiniGameNextStage( Constants.MINIGAME_STAGE_ENDED )
+                mWidget:removeChild(minigamePopup)
+                checkFacebookAndOpenWebview()
+            end
+        end
+
+        local close = minigamePopup:getChildByName( "Button_Close" )
+        close:addTouchEventListener( closeEventHandler )
+        
+        --local later = minigamePopup:getChildByName( "Button_Later" )
+        --later:addTouchEventListener( closeEventHandler )
+
+        --local play = minigamePopup:getChildByName( "Button_Play" )
+        --play:addTouchEventListener( playEventHandler )
+
+        local mask = minigamePopup:getChildByName( "Panel_Mask" )
+        mask:addTouchEventListener( closeEventHandler )
+
+        -- Set Background Image, reposition buttons
+        local BG = tolua.cast( minigamePopup:getChildByName( "Image_BG" ), "ImageView" )
+        BG:loadTexture( Constants.MINIGAME_IMAGE_PATH.."pop-out-"..nextImage..".png" )
+        BG:addTouchEventListener( playEventHandler )
+
+        local bgPos = ccp( BG:getPositionX(), BG:getPositionY() )
+        local bgScale = BG:getScale()
+        local bgSize = BG:getSize()
+        
+        close:setPosition( ccp( bgPos.x + bgSize.width / 2 * bgScale, bgPos.y + bgSize.height / 2 * bgScale ) )
+
+        --later:setPositionY( bgPos.y - bgSize.height / 2 + 75 )
+        --play:setPositionY( bgPos.y - bgSize.height / 2 + 75 )
+    end
+
+end
+
+function getNextMiniGameImage()
+    local nextImage = CCUserDefault:sharedUserDefault():getIntegerForKey( Constants.EVENT_MINIGAME_NEXT_IMAGE )
+    
+    local image_id
+    if nextImage == 0 then
+        -- first image
+        if Logic:getUserId() % 2 == 0 then
+            image_id = Constants.MINIGAME_IMAGE_TWO 
+            CCUserDefault:sharedUserDefault():setIntegerForKey( Constants.EVENT_MINIGAME_NEXT_IMAGE, Constants.MINIGAME_IMAGE_ONE )
+        else
+            image_id = Constants.MINIGAME_IMAGE_ONE 
+            CCUserDefault:sharedUserDefault():setIntegerForKey( Constants.EVENT_MINIGAME_NEXT_IMAGE, Constants.MINIGAME_IMAGE_TWO )
+        end
+    else
+        if nextImage == Constants.MINIGAME_IMAGE_ONE then
+            image_id = Constants.MINIGAME_IMAGE_ONE 
+            CCUserDefault:sharedUserDefault():setIntegerForKey( Constants.EVENT_MINIGAME_NEXT_IMAGE, Constants.MINIGAME_IMAGE_TWO )
+        else
+            image_id = Constants.MINIGAME_IMAGE_TWO 
+            CCUserDefault:sharedUserDefault():setIntegerForKey( Constants.EVENT_MINIGAME_NEXT_IMAGE, Constants.MINIGAME_IMAGE_ONE )
+        end
+    end
+
+    return image_id
+end
+
+function shouldShowMiniGame()
+    local nowTimeStamp = os.time()
+    local minigameStage = CCUserDefault:sharedUserDefault():getIntegerForKey( Constants.EVENT_NEXT_MINIGAME_STAGE )
+    local nextTimeStamp = CCUserDefault:sharedUserDefault():getIntegerForKey( Constants.EVENT_NEXT_MINIGAME_TIME_KEY )
+    local bShouldShow = false
+
+    if minigameStage == Constants.MINIGAME_STAGE_ENDED then
+        -- Already played, do not show
+        print( "Already played, do not show" )
+    elseif minigameStage == 0 then
+        -- Next time does not exist, init
+        print( "Next time does not exist, init" )
+        setMiniGameNextStage( 0 )
+    elseif nextTimeStamp < nowTimeStamp then
+        print( "show popup" )
+        bShouldShow = true
+    else
+        print( "waiting to show popup" )
+    end
+    
+    return bShouldShow
+end
+
+function setMiniGameNextStage( stage )
+    --local stage = CCUserDefault:sharedUserDefault():getIntegerForKey( Constants.EVENT_NEXT_MINIGAME_STAGE )
+
+    if stage == Constants.MINIGAME_STAGE_ENDED then
+        -- No more minigame popup
+        print( "No more minigame popup" )
+        CCUserDefault:sharedUserDefault():setIntegerForKey( Constants.EVENT_NEXT_MINIGAME_STAGE, Constants.MINIGAME_STAGE_ENDED )
+
+    else
+        if stage < table.getn( Constants.MinigameStages ) then
+            -- Set to next stage
+            print( "Set to next stage from stage: ".. stage )
+            stage = stage + 1
+            CCUserDefault:sharedUserDefault():setIntegerForKey( Constants.EVENT_NEXT_MINIGAME_STAGE, stage )
+        end
+
+        local nowTimeStamp = os.time()
+        CCUserDefault:sharedUserDefault():setIntegerForKey( Constants.EVENT_NEXT_MINIGAME_TIME_KEY, nowTimeStamp + Constants.MinigameStages[stage] )
+        print( "Current Timestamp: ".. nowTimeStamp )
+        print( "Set next timestamp to ".. nowTimeStamp + Constants.MinigameStages[stage] )
+    end
+end
+
+function checkFacebookAndOpenWebview()
+
+    local openWebview = function()
+        local handler = function( accessToken, success )
+            if success then
+                -- already has permission
+                if accessToken == nil then
+                    accessToken = Logic:getFBAccessToken()
+                end
+                EventManager:postEvent( Event.Enter_Minigame, { accessToken } )
+            else
+                ConnectingMessage.selfRemove()
+            end
+        end
+        ConnectingMessage.loadFrame()
+        FacebookDelegate:sharedDelegate():grantPublishPermission( "publish_actions", handler )
+    end
+
+    if Logic:getFbId() == false then
+        local successHandler = function()
+            openWebview()
+        end
+        local failedHandler = function()
+            -- Nothing to do.
+        end
+        EventManager:postEvent( Event.Do_FB_Connect_With_User, { successHandler, failedHandler } )
+    else
+        openWebview()
+    end
 end
 
 function updateContentContainer( contentHeight, addContent )

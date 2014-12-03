@@ -376,4 +376,20 @@
     <Project>CommunityLeaderboardDropdownContentFrame_1</Project>
     <GuidesList />
   </GuidesProject>
+  <GuidesProject>
+    <Project>MinigamePopup</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>MinigameDetailScene</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>MinigameScrollviewContentFrame</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>MinigameWinnersScene</Project>
+    <GuidesList />
+  </GuidesProject>
 </ArrayOfGuidesProject>

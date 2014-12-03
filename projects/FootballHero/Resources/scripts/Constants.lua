@@ -26,6 +26,7 @@ MATCH_LIST_CONTENT_IMAGE_PATH = "scenes/MatchListContent/"
 COMPETITION_SCENE_IMAGE_PATH = "scenes/Competition/"
 LOGO_IMAGE_PATH = "myLogo.jpg"
 COMMUNITY_IMAGE_PATH = "scenes/community/"
+MINIGAME_IMAGE_PATH = "scenes/mini-game/"
 
 BannerPrefix = "banner_"
 BannerPreviewPrefix = "banner_prev_"
@@ -66,9 +67,30 @@ ANALYTICS_EVENT_PREDICTION = "Prediction"
 ANALYTICS_EVENT_SOCIAL_ACTION = "Social_Action"
 ANALYTICS_EVENT_POPUP = "Pop-Up"
 ANALYTICS_EVENT_COMPETITION = "Competition"
+ANALYTICS_EVENT_MINIGAME = "Minigame"
 
 NOTIFICATION_KEY_SFX = "soundEffects"
 EVENT_WELCOME_KEY = "event"
+EVENT_NEXT_MINIGAME_TIME_KEY = "next_minigame_time"
+EVENT_NEXT_MINIGAME_STAGE = "next_minigame_stage"
+EVENT_MINIGAME_NEXT_IMAGE = "next_minigame_image"
+
+MinigameStages = {
+	-- development values
+	-- "3",
+	-- "6",
+	-- "12",
+	-- "30",
+	-- -- production values
+	"60",		-- 1 min
+	"86400",	-- 1 day
+	"172800",	-- 2 days
+	"345600",	-- 4 days
+	"604800",	-- 1 week
+}
+MINIGAME_STAGE_ENDED = -1
+MINIGAME_IMAGE_ONE = 1
+MINIGAME_IMAGE_TWO = 2
 
 COMPETITION_PRIZE_WEEKLY = "weekly"
 COMPETITION_PRIZE_MONTHLY = "monthly"

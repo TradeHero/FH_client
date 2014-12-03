@@ -11,17 +11,19 @@ local Competitions = require("scripts.data.Competitions").Competitions
 local CompetitionType = require("scripts.data.Competitions").CompetitionType
 local CompetitionStatus = require("scripts.data.Competitions").CompetitionStatus
 local CompetitionConfig = require("scripts.data.Competitions")
+local ConnectingMessage = require("scripts.views.ConnectingMessage")
+local Logic = require("scripts.Logic").getInstance()
 
 local MAX_CONTAINER_HEIGHT = 560
 
 local mWidget
 
 -- DS, see Competitions.lua
-function loadFrame( parent, compList )
+function loadFrame( parent, compList, miniGame )
     --local competitionFrame = SceneManager.widgetFromJsonFile("scenes/CommunityCompetitionFrame.json")
     --parent:addChild( competitionFrame )
     
-    initCompetitionScene( parent, compList )
+    initCompetitionScene( parent, compList, miniGame )
 end
 
 function EnterOrExit( eventType )
@@ -35,17 +37,23 @@ function isShown()
     return mWidget ~= nil
 end
 
-function initCompetitionScene( competitionFrame, compList )
+function initCompetitionScene( competitionFrame, compList, miniGame )
     
     local newCompFrame = SceneManager.widgetFromJsonFile("scenes/CommunityNewCompetitionFrame.json")
     local joinedCompFrame = SceneManager.widgetFromJsonFile("scenes/CommunityJoinedCompetitionFrame.json")
     
-
     local contentHeight = 0
 
     competitionFrame:addChild( newCompFrame )
     contentHeight = contentHeight + newCompFrame:getSize().height
     
+    -- check for mini game
+    -- TODO: check competition period
+    --if shouldShowMiniGame() and not miniGame["Joined"] then
+    if not miniGame["Joined"] then
+        contentHeight = contentHeight + initMiniGame( competitionFrame, miniGame )
+    end
+
     -- add banner frame if special competition exists
     local specialCompList = compList:getSpecialCompetitions()
     --if next(specialCompList) ~= nil then
@@ -81,7 +89,7 @@ function initCompetitionScene( competitionFrame, compList )
     scrollViewJoined:setLayoutType(LAYOUT_LINEAR_VERTICAL) 
     
     local panelNone = scrollBG:getChildByName("Panel_No_Comp")
-    if compList:getSize() > 0 then
+    if compList:getSize() > 0 or miniGame["Joined"] then
         panelNone:setEnabled( false )
         scrollViewJoined:setEnabled( true )
         scrollViewJoined:removeAllChildrenWithCleanup( true )
@@ -89,6 +97,28 @@ function initCompetitionScene( competitionFrame, compList )
         local height = 0
         local layoutParameter = LinearLayoutParameter:create()
         layoutParameter:setGravity(LINEAR_GRAVITY_CENTER_VERTICAL)
+
+        if miniGame["Joined"] then
+            local eventHandler = function( sender, eventType )
+                if eventType == TOUCH_EVENT_ENDED then
+                    enterMinigame( miniGame )
+                end
+            end
+            
+            local content = SceneManager.widgetFromJsonFile("scenes/CompetitionItemNew.json")
+            content:setLayoutParameter( layoutParameter )
+            scrollViewJoined:addChild( content )
+            height = height + content:getSize().height
+
+            local bt = tolua.cast( content:getChildByName("Panel_Button"), "Layout" )
+            bt:addTouchEventListener( eventHandler )
+            
+            bt:setBackGroundImage( Constants.COMPETITION_IMAGE_PATH..Constants.EntryPrefix.."shoottowin"..".png" )
+
+            local name = tolua.cast( content:getChildByName("Label_Name"), "Label" )
+            name:setEnabled( false )
+        end
+
         for i = 1, compList:getSize() do
             local competition = compList:get(i)
 
@@ -167,6 +197,80 @@ function initCompetitionScene( competitionFrame, compList )
     layout:requestDoLayout()
 end
 
+function initMiniGame( parent, miniGame )
+    local contentHeight = 0
+
+    local bannerFrame = SceneManager.widgetFromJsonFile("scenes/CommunityCompetitionBannerFrame.json")
+    
+    local bannerBG = tolua.cast( bannerFrame:getChildByName( "Image_BannerBG" ), "ImageView" )
+    bannerBG:loadTexture(  Constants.COMPETITION_IMAGE_PATH..Constants.BannerPrefix.."shoottowin"..".png" )
+
+    local joinEventHandler = function( sender, eventType )
+        if eventType == TOUCH_EVENT_ENDED then
+            checkFacebookAndOpenWebview()
+        end
+    end
+    local joinBtn = bannerFrame:getChildByName( "Button_Join" )
+    joinBtn:addTouchEventListener( joinEventHandler )
+    parent:addChild( bannerFrame )
+    contentHeight = contentHeight + bannerFrame:getSize().height
+
+    return contentHeight
+end
+
+function shouldShowMiniGame()
+    
+    local minigameStage = CCUserDefault:sharedUserDefault():getIntegerForKey( Constants.EVENT_NEXT_MINIGAME_STAGE )
+    local bShouldShow = false
+
+    if minigameStage == Constants.MINIGAME_STAGE_ENDED then
+        -- Already played, do not show
+        print( "Already joined minigame" )
+    else
+        bShouldShow = true
+    end
+    
+    return bShouldShow
+end
+
+function setMiniGameEndStage()
+    -- No more minigame popup
+    print( "No more minigame popup" )
+    CCUserDefault:sharedUserDefault():setIntegerForKey( Constants.EVENT_NEXT_MINIGAME_STAGE, Constants.MINIGAME_STAGE_ENDED )
+end
+
+function checkFacebookAndOpenWebview()
+
+    local openWebview = function()
+        local handler = function( accessToken, success )
+            if success then
+                -- already has permission
+                if accessToken == nil then
+                    accessToken = Logic:getFBAccessToken()
+                end
+                setMiniGameEndStage()
+                EventManager:postEvent( Event.Enter_Minigame, { accessToken } )
+            else
+                ConnectingMessage.selfRemove()
+            end
+        end
+        ConnectingMessage.loadFrame()
+        FacebookDelegate:sharedDelegate():grantPublishPermission( "publish_actions", handler )
+    end
+
+    if Logic:getFbId() == false then
+        local successHandler = function()
+            openWebview()
+        end
+        local failedHandler = function()
+            -- Nothing to do.
+        end
+        EventManager:postEvent( Event.Do_FB_Connect_With_User, { successHandler, failedHandler } )
+    else
+        openWebview()
+    end
+end
+
 function initSpecialCompetitions( parent, compList )
     local contentHeight = 0
     -- Add the available ones.
@@ -211,12 +315,16 @@ function initSpecialCompetitions( parent, compList )
     return contentHeight
 end
 
-
 function enterCompetition( competitionId, isSpecialComp )
 
+    local sortType = 3
     if isSpecialComp then
-        EventManager:postEvent( Event.Enter_Competition_Detail, { competitionId, false, 3, CompetitionConfig.COMPETITION_TAB_ID_MONTHLY } )
+        EventManager:postEvent( Event.Enter_Competition_Detail, { competitionId, false, sortType, CompetitionConfig.COMPETITION_TAB_ID_MONTHLY } )
     else
-        EventManager:postEvent( Event.Enter_Competition_Detail, { competitionId } )
+        EventManager:postEvent( Event.Enter_Competition_Detail, { competitionId, false, sortType, CompetitionConfig.COMPETITION_TAB_ID_OVERALL } )
     end
+end
+
+function enterMinigame( miniGame )
+    EventManager:postEvent( Event.Enter_Minigame_Detail, { miniGame } )
 end

@@ -23,6 +23,8 @@ M.en = {
   choice = {
     leave_comp_desc = "Are you sure you want to leave the competition?",
     leave_comp_title = "Leave Competition",
+    leave_comp_yes = "Leave",
+    leave_comp_no = "Stay"
   },
   community = {
     title_competition = "Competitions",
@@ -65,10 +67,13 @@ M.en = {
     ranking_weekly = "Weekly",
     status_qualified = "- qualified",
     status_unqualified = "- unqualified",
+    shoot_to_win_won = "You have won!",
+    failed_to_score = "failed to score any goals"
   },
   favourite_team = "Your favourite team: ",
   first_name = "First Name",
   first_name_optional = "First Name (Optional)",
+  football_hero = "FootballHero",
   friends = "Friends",
   history = {
     lost = "Lost",
@@ -91,15 +96,16 @@ M.en = {
     total_points = "Total Points: %d"
   },
   info = {
-    new_version = "Please download new version and update!",
-    shared_to_fb = "Competition is shared to Facebook.",
-    title = "Info",
-    join_code_copied = "Join code is copied to clipboard.",
-    predictions_entered = "You have completed this match.",
-    star_bet = "You can use 3 star stakes every 12 hours",
     announcement_title = "Announcement",
-    odds_not_ready = "Odds will be updated soon.\nPlease check again later.",
     competition_not_started = "Competition begins 8th Dec 2014.",
+    join_code_copied = "Join code is copied to clipboard.",
+    new_version = "Please download new version and update!",
+    odds_not_ready = "Odds will be updated soon.\nPlease check again later.",
+    predictions_entered = "You have completed this match.",
+    shared_to_fb = "Competition is shared to Facebook.",
+    shared_to_fb_minigame = "You have shared your minigame to Facebook!",
+    star_bet = "You can use 3 star stakes every 12 hours",
+    title = "Info",
   },
   last_name = "Last Name",
   last_name_optional = "Last Name (Optional)",
