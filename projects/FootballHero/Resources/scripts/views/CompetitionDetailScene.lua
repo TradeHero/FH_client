@@ -351,10 +351,11 @@ function initRankingDropdown( startTimeStamp )
 
         local eventHandler = function( sender, eventType )
             if eventType == TOUCH_EVENT_ENDED then
+                local sortType = 3
                  if mTabID == CompetitionsData.COMPETITION_TAB_ID_MONTHLY then
-                    EventManager:postEvent( Event.Enter_Competition_Detail, { mCompetitionId, false, 3, mTabID, mCompetitionDurations[i]["yearNumber"], mCompetitionDurations[i]["monthNumber"] } )
+                    EventManager:postEvent( Event.Enter_Competition_Detail, { mCompetitionId, false, sortType, mTabID, mCompetitionDurations[i]["yearNumber"], mCompetitionDurations[i]["monthNumber"] } )
                 else
-                    EventManager:postEvent( Event.Enter_Competition_Detail, { mCompetitionId, false, 3, mTabID, mCompetitionDurations[i]["yearNumber"], mCompetitionDurations[i]["weekNumber"] } )
+                    EventManager:postEvent( Event.Enter_Competition_Detail, { mCompetitionId, false, sortType, mTabID, mCompetitionDurations[i]["yearNumber"], mCompetitionDurations[i]["weekNumber"] } )
                 end
             end
         end
@@ -484,12 +485,13 @@ function initCompetitionDuration( startTimeStamp )
 end
 
 function onSelectTab( tabID )
+    local sortType = 3
     if tabID == CompetitionsData.COMPETITION_TAB_ID_MONTHLY then
-        EventManager:postEvent( Event.Enter_Competition_Detail, { mCompetitionId, false, 3, tabID, mYearNumber, mMonthNumber } )
+        EventManager:postEvent( Event.Enter_Competition_Detail, { mCompetitionId, false, sortType, tabID, mYearNumber, mMonthNumber } )
     elseif tabID == CompetitionsData.COMPETITION_TAB_ID_WEEKLY then
-        EventManager:postEvent( Event.Enter_Competition_Detail, { mCompetitionId, false, 3, tabID, mYearNumber, mWeekNumber } )
+        EventManager:postEvent( Event.Enter_Competition_Detail, { mCompetitionId, false, sortType, tabID, mYearNumber, mWeekNumber } )
     else
-        EventManager:postEvent( Event.Enter_Competition_Detail, { mCompetitionId, false, 3, tabID } )
+        EventManager:postEvent( Event.Enter_Competition_Detail, { mCompetitionId, false, sortType, tabID } )
     end
 end
 
@@ -900,11 +902,11 @@ function initLeaderboardContent( i, content, info )
     end
 
 
-    if mCompetitionType == CompetitionType["Private"] then
-        score:setText( string.format( mSubType["description"], info[mSubType["dataColumnId"]], info["NumberOfCoupons"] ) )
-    else
+    -- if mCompetitionType == CompetitionType["Private"] then
+    --     score:setText( string.format( mSubType["description"], info[mSubType["dataColumnId"]], info["NumberOfCoupons"] ) )
+    -- else
         score:setText( string.format( score:getStringValue(), info["Profit"] ) )
-    end
+    -- end
     if info[mSubType["dataColumnId"]] < 0 then
         score:setColor( ccc3( 240, 75, 79 ) )
     end

@@ -317,10 +317,11 @@ end
 
 function enterCompetition( competitionId, isSpecialComp )
 
+    local sortType = 3
     if isSpecialComp then
-        EventManager:postEvent( Event.Enter_Competition_Detail, { competitionId, false, 3, CompetitionConfig.COMPETITION_TAB_ID_MONTHLY } )
+        EventManager:postEvent( Event.Enter_Competition_Detail, { competitionId, false, sortType, CompetitionConfig.COMPETITION_TAB_ID_MONTHLY } )
     else
-        EventManager:postEvent( Event.Enter_Competition_Detail, { competitionId } )
+        EventManager:postEvent( Event.Enter_Competition_Detail, { competitionId, false, sortType, CompetitionConfig.COMPETITION_TAB_ID_OVERALL } )
     end
 end
 

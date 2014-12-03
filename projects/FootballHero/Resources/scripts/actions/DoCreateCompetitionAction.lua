@@ -75,5 +75,5 @@ function onRequestSuccess( jsonResponse )
     Analytics:sharedDelegate():postEvent( Constants.ANALYTICS_EVENT_COMPETITION, Json.encode( params ) )
 
     EventManager:popHistoryWithoutExec()    -- Remove the create competition event in history. So that it can back direct to the Community scene.
-    EventManager:postEvent( Event.Enter_Competition_Detail, { competitionId, true } )
+    EventManager:postEvent( Event.Enter_Competition_Detail, { competitionId, true, 3, CompetitionConfig.COMPETITION_TAB_ID_OVERALL } )
 end
