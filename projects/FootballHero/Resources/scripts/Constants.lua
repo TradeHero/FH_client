@@ -77,16 +77,16 @@ EVENT_MINIGAME_NEXT_IMAGE = "next_minigame_image"
 
 MinigameStages = {
 	-- development values
-	"3",
-	"6",
-	"12",
-	"30",
+	-- "3",
+	-- "6",
+	-- "12",
+	-- "30",
 	-- -- production values
-	-- "60",		-- 1 min
-	-- "86400",	-- 1 day
-	-- "172800",	-- 2 days
-	-- "345600",	-- 4 days
-	-- "604800",	-- 1 week
+	"60",		-- 1 min
+	"86400",	-- 1 day
+	"172800",	-- 2 days
+	"345600",	-- 4 days
+	"604800",	-- 1 week
 }
 MINIGAME_STAGE_ENDED = -1
 MINIGAME_IMAGE_ONE = 1
