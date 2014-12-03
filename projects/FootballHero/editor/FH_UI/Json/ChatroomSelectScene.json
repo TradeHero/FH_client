@@ -10,13 +10,7 @@
   "designHeight": 1136,
   "designWidth": 640,
   "textures": [],
-  "texturesPng": [
-    "MatchListScene/match_bkg.png",
-    "header/footballhero-logo.png",
-    "community/img-inactivepage.png",
-    "community/img-activepage.png",
-    "chat/icn-leaguechat.png"
-  ],
+  "texturesPng": [],
   "version": "1.5.0.0",
   "widgetTree": {
     "classname": "Panel",
@@ -115,7 +109,7 @@
           "rotation": 0,
           "scaleX": 1,
           "scaleY": 1,
-          "sizePercentX": 0.3078125,
+          "sizePercentX": 0.4203125,
           "sizePercentY": 0.03697183,
           "sizeType": 0,
           "tag": 1561,

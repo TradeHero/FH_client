@@ -60,7 +60,13 @@ function initContent( jsonResponse, leaderboardId, subType )
 end
 
 function initGlobalChatButton()
-    --TODO
+    local button = mWidget:getChildByName("Button_Chat")
+
+    local eventHandler = function ( sender, eventType )
+        if eventType == TOUCH_EVENT_ENDED then
+            EventManager:postEvent( Event.Enter_League_Chat_List, {} )
+        end
+    end
 end
 
 function initCommunityTab( tabInfo, tabId )
@@ -76,7 +82,6 @@ function initCommunityTab( tabInfo, tabId )
     else
         local eventHandler = function( sender, eventType )
             if eventType == TOUCH_EVENT_ENDED then
-
                 onSelectTab( tabId )
             end
         end

@@ -106,13 +106,7 @@
   <ProjectType>UIProject</ProjectType>
   <ResRelativePath />
   <imageFileList />
-  <imagePngList>
-    <string>MatchListScene/match_bkg.png</string>
-    <string>header/footballhero-logo.png</string>
-    <string>community/img-inactivepage.png</string>
-    <string>community/img-activepage.png</string>
-    <string>chat/icn-leaguechat.png</string>
-  </imagePngList>
+  <imagePngList />
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>ChatroomSelectScene.json</CurrentUIJson>
+  <CurrentUIJson>CommunityBaseScene.json</CurrentUIJson>
 </UIProject>

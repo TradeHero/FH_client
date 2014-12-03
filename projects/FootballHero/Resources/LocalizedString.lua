@@ -20,6 +20,7 @@ local M = {}
 
 M.en = {
   chat_hint = "Tap here to start chatting!",
+  chat_room_title = "Select Chatroom",
   choice = {
     leave_comp_desc = "Are you sure you want to leave the competition?",
     leave_comp_title = "Leave Competition",
@@ -110,6 +111,14 @@ M.en = {
     high_score_title = "High Score",
     win_ratio_desc = "%d%% won (%d predictions)",
     win_ratio_title = "Win Ratio",
+  },
+  league_chat = {
+    english = "English League",
+    spanish = "Spanish League",
+    italian = "Italian League",
+    uefa = "Uefa Champions & Europa League",
+    other = "Other Competitions",
+    feedback = "Questions, Feedback & Comments",
   },
   login_success = "Login success.\nLoading data, please wait...",
   message_hint = "Type your message here",
