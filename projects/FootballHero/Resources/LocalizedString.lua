@@ -99,7 +99,7 @@ M.en = {
   },
   info = {
     announcement_title = "Announcement",
-    competition_not_started = "Competition begins 8th Dec 2014.",
+    competition_not_started = "Competition begins %s.",
     join_code_copied = "Join code is copied to clipboard.",
     new_version = "Please download new version and update!",
     odds_not_ready = "Odds will be updated soon.\nPlease check again later.",
