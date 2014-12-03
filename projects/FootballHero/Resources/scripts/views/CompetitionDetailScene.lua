@@ -326,41 +326,50 @@ function initRankingDropdown( startTimeStamp )
     layoutParameter:setGravity(LINEAR_GRAVITY_CENTER_VERTICAL)
     
     local contentHeight = 0
-    for i = 1, table.getn( mCompetitionDurations ) do
+    
+    local nowTimeStamp = os.time()
 
-        local content = GUIReader:shareReader():widgetFromJsonFile("scenes/SpecialDetailedCompetitionDropdownContent.json")
-        content:setLayoutParameter( layoutParameter )
-        contentContainer:addChild( content )
-        contentHeight = contentHeight + content:getSize().height
+    if nowTimeStamp < startTimeStamp then
+        local startDateString = os.date( "%b %d %Y", startTimeStamp )
 
-        local displayText = mCompetitionDurations[i]["displayDate"]
-        local dateText = tolua.cast( content:getChildByName( "Label_Name" ), "Label" )
-        dateText:setText( displayText )
-        
-        if mCompetitionDurations[i]["monthNumber"] ~= nil then
-            if mCompetitionDurations[i]["monthNumber"] == tonumber( mMonthNumber ) then
-                dateLabel:setText( displayText )
-                break
-            end
-        else
-            if mCompetitionDurations[i]["weekNumber"] == tonumber( mWeekNumber ) then
-                dateLabel:setText( displayText )
-                break
-            end
-        end
+        dateLabel:setText( string.format( Constants.String.info.competition_not_started, startDateString ) )
+    else
+        for i = 1, table.getn( mCompetitionDurations ) do
 
-        local eventHandler = function( sender, eventType )
-            if eventType == TOUCH_EVENT_ENDED then
-                local sortType = 3
-                 if mTabID == CompetitionsData.COMPETITION_TAB_ID_MONTHLY then
-                    EventManager:postEvent( Event.Enter_Competition_Detail, { mCompetitionId, false, sortType, mTabID, mCompetitionDurations[i]["yearNumber"], mCompetitionDurations[i]["monthNumber"] } )
-                else
-                    EventManager:postEvent( Event.Enter_Competition_Detail, { mCompetitionId, false, sortType, mTabID, mCompetitionDurations[i]["yearNumber"], mCompetitionDurations[i]["weekNumber"] } )
+            local content = GUIReader:shareReader():widgetFromJsonFile("scenes/SpecialDetailedCompetitionDropdownContent.json")
+            content:setLayoutParameter( layoutParameter )
+            contentContainer:addChild( content )
+            contentHeight = contentHeight + content:getSize().height
+
+            local displayText = mCompetitionDurations[i]["displayDate"]
+            local dateText = tolua.cast( content:getChildByName( "Label_Name" ), "Label" )
+            dateText:setText( displayText )
+            
+            if mCompetitionDurations[i]["monthNumber"] ~= nil then
+                if mCompetitionDurations[i]["monthNumber"] == tonumber( mMonthNumber ) then
+                    dateLabel:setText( displayText )
+                    break
+                end
+            else
+                if mCompetitionDurations[i]["weekNumber"] == tonumber( mWeekNumber ) then
+                    dateLabel:setText( displayText )
+                    break
                 end
             end
-        end
-        content:addTouchEventListener( eventHandler )
 
+            local eventHandler = function( sender, eventType )
+                if eventType == TOUCH_EVENT_ENDED then
+                    local sortType = 3
+                     if mTabID == CompetitionsData.COMPETITION_TAB_ID_MONTHLY then
+                        EventManager:postEvent( Event.Enter_Competition_Detail, { mCompetitionId, false, sortType, mTabID, mCompetitionDurations[i]["yearNumber"], mCompetitionDurations[i]["monthNumber"] } )
+                    else
+                        EventManager:postEvent( Event.Enter_Competition_Detail, { mCompetitionId, false, sortType, mTabID, mCompetitionDurations[i]["yearNumber"], mCompetitionDurations[i]["weekNumber"] } )
+                    end
+                end
+            end
+            content:addTouchEventListener( eventHandler )
+
+        end
     end
 
     contentContainer:setInnerContainerSize( CCSize:new( 0, contentHeight ) )
@@ -714,7 +723,9 @@ function predictNowEventHandler( sender, eventType )
         local nowTimeStamp = os.time()
 
         if nowTimeStamp < startTimeStamp then
-            EventManager:postEvent( Event.Show_Info, { Constants.String.info.competition_not_started } )
+            local startDateString = os.date( "%b %d %Y", startTimeStamp )
+
+            EventManager:postEvent( Event.Show_Info, { string.format( Constants.String.info.competition_not_started, startDateString ) } )
         else
             EventManager:postEvent( Event.Enter_Match_List, { mLinkedLeagueId } )
         end
