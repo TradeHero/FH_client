@@ -126,7 +126,7 @@ function initCompetitionScene( competitionFrame, compList, miniGame )
 
                 local eventHandler = function( sender, eventType )
                     if eventType == TOUCH_EVENT_ENDED then
-                        enterCompetition( competition["Id"],  competition["CompetitionType"] ~=CompetitionType["Private"] )
+                        enterCompetition( competition["Id"],  competition["CompetitionType"] ==CompetitionType["DetailedRanking"] )
                     end
                 end
                 
@@ -315,10 +315,10 @@ function initSpecialCompetitions( parent, compList )
     return contentHeight
 end
 
-function enterCompetition( competitionId, isSpecialComp )
+function enterCompetition( competitionId, isDetailedComp )
 
     local sortType = 3
-    if isSpecialComp then
+    if isDetailedComp then
         EventManager:postEvent( Event.Enter_Competition_Detail, { competitionId, false, sortType, CompetitionConfig.COMPETITION_TAB_ID_MONTHLY } )
     else
         EventManager:postEvent( Event.Enter_Competition_Detail, { competitionId, false, sortType, CompetitionConfig.COMPETITION_TAB_ID_OVERALL } )
