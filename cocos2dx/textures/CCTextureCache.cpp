@@ -635,7 +635,7 @@ void CCTextureCache::removeUnusedTextures()
         // remove elements
         for (list<CCDictElement*>::iterator iter = elementToRemove.begin(); iter != elementToRemove.end(); ++iter)
         {
-            CCLOG("cocos2d: CCTextureCache: removing unused texture: %s", (*iter)->getStrKey());
+            //CCLOG("cocos2d: CCTextureCache: removing unused texture: %s", (*iter)->getStrKey());
             m_pTextures->removeObjectForElememt(*iter);
         }
     }

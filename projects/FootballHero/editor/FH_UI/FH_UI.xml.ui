@@ -45,10 +45,10 @@
     <string>LeaderboardList.json</string>
     <string>LeaderboardListContent.json</string>
     <string>LeaderboardScene.json</string>
-    <string>LeagueContentInDropDown.json</string>
+    <string>LeagueDropdownContent.json</string>
     <string>LeagueContentWithTransparentBG.json</string>
     <string>LeagueListContent.json</string>
-    <string>LeagueListDropDown.json</string>
+    <string>MatchListDropDown.json</string>
     <string>MarketingMessage.json</string>
     <string>MatchDate.json</string>
     <string>MatchListContent.json</string>
@@ -99,6 +99,9 @@
     <string>MinigameDetailScene.json</string>
     <string>MinigameScrollviewContentFrame.json</string>
     <string>MinigameWinnersScene.json</string>
+    <string>CountryDropdownContent.json</string>
+    <string>ChatroomSelectScene.json</string>
+    <string>ChatroomScene.json</string>
   </JsonList>
   <CanvasSize>
     <Width>640</Width>
@@ -111,13 +114,9 @@
   <imagePngList>
     <string>MatchListScene/match_bkg.png</string>
     <string>header/back.png</string>
-    <string>mini-game/btn-ask-friend.png</string>
-    <string>mini-game/prizes_shoottowin.png</string>
-    <string>mini-game/btn-past-winner.png</string>
-    <string>Competition/img-userposition.png</string>
-    <string>LoginNReg/photo.png</string>
-    <string>mini-game/img-goal-counter.png</string>
+    <string>chat/send_icon.png</string>
+    <string>chat/icn-feedback-logo.png</string>
   </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>MinigameScrollviewContentFrame.json</CurrentUIJson>
+  <CurrentUIJson>ChatroomScene.json</CurrentUIJson>
 </UIProject>

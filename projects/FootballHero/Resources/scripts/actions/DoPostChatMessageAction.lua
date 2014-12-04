@@ -7,20 +7,29 @@ local Event = require("scripts.events.Event").EventList
 local ConnectingMessage = require("scripts.views.ConnectingMessage")
 local RequestUtils = require("scripts.RequestUtils")
 local Logic = require("scripts.Logic").getInstance()
+local LeagueChatConfig = require("scripts.config.LeagueChat").LeagueChatType
 
-
-local mCompetitionId
+local mChannelId
+local mIsLeague
 
 function action( param )
 
-    mCompetitionId = param[1]
+    mChannelId = param[1]
     local message = param[2]
+    mIsLeague = param[3] or false
 
     if string.len( message ) == 0 then
         return
     end
 
-    local requestContent = { CompetitionId = mCompetitionId, 
+    local channel
+    if mIsLeague then
+        channel = LeagueChatConfig[mChannelId]["chatRoomId"]
+    else
+        channel = mChannelId
+    end
+
+    local requestContent = { channel = channel, 
                             MessageText = message, 
                             useDev = RequestUtils.USE_DEV }
     local requestContentText = Json.encode( requestContent )
@@ -47,5 +56,6 @@ end
 
 function onRequestSuccess( jsonResponse )
     local lastChatMesageTimestamp = Logic:getLastChatMessageTimestamp()
-    EventManager:postEvent( Event.Do_Get_Chat_Message, { mCompetitionId, lastChatMesageTimestamp, true } )
+    local isSilent, callback, isLeague = true, nil , mIsLeague
+    EventManager:postEvent( Event.Do_Get_Chat_Message, { mChannelId, lastChatMesageTimestamp, isSilent, callback, isLeague } )
 end

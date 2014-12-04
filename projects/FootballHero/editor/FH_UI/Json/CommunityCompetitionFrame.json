@@ -10,14 +10,7 @@
   "designHeight": 1136,
   "designWidth": 640,
   "textures": [],
-  "texturesPng": [
-    "community/img-compbox.png",
-    "community/btn-newcomp.png",
-    "community/btn-CTA.png",
-    "community/img-inputcode.png",
-    "community/img-header.png",
-    "community/img-leaguebox.png"
-  ],
+  "texturesPng": [],
   "version": "1.5.0.0",
   "widgetTree": {
     "classname": "Panel",

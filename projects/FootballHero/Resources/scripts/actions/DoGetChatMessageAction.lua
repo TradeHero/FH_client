@@ -7,11 +7,12 @@ local Event = require("scripts.events.Event").EventList
 local ConnectingMessage = require("scripts.views.ConnectingMessage")
 local RequestUtils = require("scripts.RequestUtils")
 local Logic = require("scripts.Logic").getInstance()
-
+local LeagueChatConfig = require("scripts.config.LeagueChat").LeagueChatType
 
 local mIsSending = false
-local mCompetitionId
+local mChannelId
 local mCallback
+local mIsLeague
 
 function action( param )
     if mIsSending then
@@ -24,16 +25,24 @@ function action( param )
     end
     mIsSending = true
 
-    mCompetitionId = param[1]
+    mChannelId = param[1]
     local last = param[2]
     local silent = param[3]
     mCallback = param[4]
+    mIsLeague = param[5] or false
 
     local requestContent = {}
     local requestContentText = Json.encode( requestContent )
     
+    local channel
+    if mIsLeague then
+        channel = LeagueChatConfig[mChannelId]["chatRoomId"]
+    else
+        channel = mChannelId
+    end
+
     local url = RequestUtils.GET_CHAT_MESSAGE_REST_CALL
-    url = url.."?competitionId="..mCompetitionId.."&last="..last
+    url = url.."?channel="..channel.."&last="..last
     if RequestUtils.USE_DEV then
         url = url.."&useDev=true"
     end
@@ -56,7 +65,12 @@ function action( param )
 end
 
 function onRequestSuccess( jsonResponse )
-    local ChatScene = require("scripts.views.CompetitionChatScene")
+    local ChatScene
+    if mIsLeague then
+        ChatScene = require("scripts.views.LeagueChatScene")
+    else
+        ChatScene = require("scripts.views.CompetitionChatScene")
+    end
     local ChatMessages = require("scripts.data.ChatMessages").ChatMessages
 
     local chatMessages = ChatMessages:new()
@@ -74,7 +88,7 @@ function onRequestSuccess( jsonResponse )
     if ChatScene.isFrameShown() then
         ChatScene.addMessage( chatMessages )
     else
-        ChatScene.loadFrame( mCompetitionId, chatMessages )
+        ChatScene.loadFrame( mChannelId, chatMessages )
     end
 
     if mCallback ~= nil then

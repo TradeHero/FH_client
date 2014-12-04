@@ -48,6 +48,9 @@ function initContent( jsonResponse, leaderboardId, subType, minigameResponse )
 	local contentContainer = tolua.cast( mWidget:getChildByName("ScrollView_Content"), "ScrollView" )
     contentContainer:removeAllChildrenWithCleanup( true )
 
+    -- global chats
+    initGlobalChatButton()
+
     -- init header tab
     for i = 1, table.getn( CommunityConfig.CommunityType ) do
         initCommunityTab( CommunityConfig.CommunityType[i], i )
@@ -55,6 +58,17 @@ function initContent( jsonResponse, leaderboardId, subType, minigameResponse )
 
     -- init main content
     loadMainContent( contentContainer, jsonResponse, leaderboardId, subType, minigameResponse )
+end
+
+function initGlobalChatButton()
+    local button = mWidget:getChildByName("Button_Chat")
+
+    local eventHandler = function ( sender, eventType )
+        if eventType == TOUCH_EVENT_ENDED then
+            EventManager:postEvent( Event.Enter_League_Chat_List, {} )
+        end
+    end
+    button:addTouchEventListener( eventHandler )
 end
 
 function initCommunityTab( tabInfo, tabId )
@@ -70,7 +84,6 @@ function initCommunityTab( tabInfo, tabId )
     else
         local eventHandler = function( sender, eventType )
             if eventType == TOUCH_EVENT_ENDED then
-
                 onSelectTab( tabId )
             end
         end

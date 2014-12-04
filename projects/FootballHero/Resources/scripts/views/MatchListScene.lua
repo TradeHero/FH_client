@@ -6,8 +6,7 @@ local CountryConfig = require("scripts.config.Country")
 local LeagueConfig = require("scripts.config.League")
 local TeamConfig = require("scripts.config.Team")
 local Navigator = require("scripts.views.Navigator")
-local LeagueListScene = require("scripts.views.LeagueListScene")
-local LeagueListSceneUnexpended = require("scripts.views.LeagueListSceneUnexpended")
+local MatchListDropdownFrame = require("scripts.views.MatchListDropdownFrame")
 local Logic = require("scripts.Logic").getInstance()
 local EventManager = require("scripts.events.EventManager").getInstance()
 local Event = require("scripts.events.Event").EventList
@@ -44,7 +43,7 @@ function loadFrame( matchList, leagueKey )
     initLeagueList( leagueKey )
 
     -- Init the match list according to the data.
-    initMatchList( matchList, leagueKey )
+    initMatchList( matchList, leagueKey, true )
 
     -- Init the league list
     --[[
@@ -98,66 +97,111 @@ end
 function initLeagueList( leagueKey )
     SceneManager.clearKeypadBackListener()
     
-    local content = SceneManager.widgetFromJsonFile("scenes/LeagueListDropDown.json")
+    local content = SceneManager.widgetFromJsonFile("scenes/MatchListDropDown.json")
     mWidget:addChild( content )
 
-    local list = tolua.cast( content:getChildByName("leagueList"), "ScrollView" )
-    local expendedIndicator = content:getChildByName( "expendIndi" )
-    local mask = content:getChildByName("mask")
-    local buttonEventHandler = function( sender, eventType )
+
+    local countryList = tolua.cast( content:getChildByName( "ScrollView_Country"), "ScrollView" )
+    local leagueList = tolua.cast( content:getChildByName( "ScrollView_League"), "ScrollView" )
+    local countryExpand = content:getChildByName( "Button_CountryExpand" )
+    local leagueExpand = content:getChildByName( "Button_LeagueExpand" )
+    local countryButton = content:getChildByName("Button_Country")
+    local leagueButton = content:getChildByName("Button_League")
+    local mask =  content:getChildByName( "Panel_Mask" )
+
+    local countryButtonEventHandler = function( sender, eventType )
         if eventType == TOUCH_EVENT_ENDED then
-            if list:isEnabled() then
-                list:setEnabled( false )
+            if countryList:isEnabled() then
                 mask:setEnabled( false )
-                expendedIndicator:setBrightStyle( BRIGHT_NORMAL )
+                countryList:setEnabled( false )
+                countryExpand:setBrightStyle( BRIGHT_NORMAL )
             else
-                list:setEnabled( true )
                 mask:setEnabled( true )
-                expendedIndicator:setBrightStyle( BRIGHT_HIGHLIGHT )
+                countryList:setEnabled( true )
+                countryExpand:setBrightStyle( BRIGHT_HIGHLIGHT )
+                leagueList:setEnabled( false )
+                leagueExpand:setBrightStyle( BRIGHT_NORMAL )
             end
         end
     end
-    local button = content:getChildByName("button")
-    button:addTouchEventListener( buttonEventHandler )
-    list:setEnabled( false )
+    countryButton:addTouchEventListener( countryButtonEventHandler )
+
+    local leagueButtonEventHandler = function( sender, eventType )
+        if eventType == TOUCH_EVENT_ENDED then
+            if leagueList:isEnabled() then
+                mask:setEnabled( false )
+                leagueList:setEnabled( false )
+                leagueExpand:setBrightStyle( BRIGHT_NORMAL )
+            else
+                mask:setEnabled( true )
+                leagueList:setEnabled( true )
+                leagueExpand:setBrightStyle( BRIGHT_HIGHLIGHT )
+                countryList:setEnabled( false )
+                countryExpand:setBrightStyle( BRIGHT_NORMAL )
+            end
+        end
+    end
+    leagueButton:addTouchEventListener( leagueButtonEventHandler )
+
+    leagueList:setEnabled( false )
+    countryList:setEnabled( false )
     mask:setEnabled( false )
 
-    local initCurrentLeague = function( leagueKey )
-        local logo = tolua.cast( content:getChildByName("countryLogo"), "ImageView" )
-        local leagueName = tolua.cast( content:getChildByName("countryName"), "Label" )
+    local initCurrentCountryLeague = function( leagueKey )
+        local logo = tolua.cast( content:getChildByName( "Image_CountryLogo" ), "ImageView" )
+        local countryName = tolua.cast( content:getChildByName( "Label_CountryName"), "Label" )
+        local leagueName = tolua.cast( content:getChildByName( "Label_LeagueName"), "Label" )
 
         -- Hardcode Popular League texts and logo
-
-        if leagueKey == Constants.MOST_POPULAR_LEAGUE_ID then
-            leagueName:setText( Constants.String.most_popular )
+        if leagueKey == Constants.SpecialLeagueIds.MOST_POPULAR or leagueKey == Constants.SpecialLeagueIds.TODAYS_MATCHES then
+            countryName:setText( Constants.String.match_list.special )
+            if leagueKey == Constants.SpecialLeagueIds.MOST_POPULAR then
+                leagueName:setText( Constants.String.match_list.most_popular )
+            else
+                leagueName:setText( Constants.String.match_list.todays_matches )
+            end
             logo:loadTexture( Constants.COUNTRY_IMAGE_PATH.."favorite.png" )
+            --leagueButton:setTouchEnabled( false )
+            --leagueExpand:setEnabled( false )
         else
             local leagueId = LeagueConfig.getConfigIdByKey( leagueKey )
             local countryId = CountryConfig.getConfigIdByKey( LeagueConfig.getCountryId( leagueId ) )
-            leagueName:setText( CountryConfig.getCountryName( countryId ).." - "..LeagueConfig.getLeagueName( leagueId ) )
+            
+            countryName:setText( CountryConfig.getCountryName( countryId ) )
+            leagueName:setText( LeagueConfig.getLeagueName( leagueId ) )
             logo:loadTexture( CountryConfig.getLogo( countryId ) )
+            --leagueButton:setTouchEnabled( true )
+            --leagueExpand:setEnabled( true )
         end
     end
 
+    
     local leagueSelectedCallback = function( leagueKey )
-        list:setEnabled( false )
         mask:setEnabled( false )
-        expendedIndicator:setBrightStyle( BRIGHT_NORMAL )
+        countryList:setEnabled( false )
+        countryExpand:setBrightStyle( BRIGHT_NORMAL )
+        leagueList:setEnabled( false )
+        leagueExpand:setBrightStyle( BRIGHT_NORMAL )
         
-        initCurrentLeague( leagueKey )
+        initCurrentCountryLeague( leagueKey )
 
         mWidget:stopAllActions()
         EventManager:postEvent( Event.Enter_Match_List, { leagueKey } )
     end
 
-    LeagueListSceneUnexpended.loadFrame( "scenes/LeagueContentInDropDown.json", "", 
-        list, leagueSelectedCallback )
+    MatchListDropdownFrame.loadFrame( leagueKey, "scenes/CountryDropdownContent.json", "scenes/LeagueDropdownContent.json", 
+        countryList, leagueList, leagueSelectedCallback )
 
-    initCurrentLeague( leagueKey )
+    initCurrentCountryLeague( leagueKey )
 end
 
 -- Param matchList is Object of MatchListData
-function initMatchList( matchList, leagueKey )
+function initMatchList( matchList, leagueKey, bInit )
+
+    if not bInit then
+        MatchListDropdownFrame.initLeagueList( leagueKey )
+    end
+
     local predictionScene = SceneManager.getWidgetByName( "TappablePredictionScene" )
     local predictionConfirmScene = SceneManager.getWidgetByName( "PredTotalConfirmScene" )
     if predictionScene ~= nil then
@@ -187,7 +231,7 @@ function initMatchList( matchList, leagueKey )
 
             -- Vincent: for most popular leagues, there are no matches before the "Tap to make a prediction!" hint, thus there is no need for zOrder position shifting
             local zOrder = matchDate["date"]
-            if leagueKey == Constants.MOST_POPULAR_LEAGUE_ID then
+            if leagueKey == Constants.SpecialLeagueIds.MOST_POPULAR then
                 zOrder = 1
             end
 
@@ -460,10 +504,6 @@ function enterMatch( match )
 
     Logic:setSelectedMatch( match )
     EventManager:postEvent( Event.Enter_Match )
-end
-
-function leagueSelectedCallback( leagueId )
-    EventManager:postEvent( Event.Enter_Match_List, { leagueId } )
 end
 
 function helperInitMatchInfo( topContent, matchInfo )

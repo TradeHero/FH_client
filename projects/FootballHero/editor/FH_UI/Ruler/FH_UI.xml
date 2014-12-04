@@ -233,11 +233,11 @@
     <GuidesList />
   </GuidesProject>
   <GuidesProject>
-    <Project>LeagueListDropDown</Project>
+    <Project>MatchListDropDown</Project>
     <GuidesList />
   </GuidesProject>
   <GuidesProject>
-    <Project>LeagueContentInDropDown</Project>
+    <Project>LeagueDropdownContent</Project>
     <GuidesList />
   </GuidesProject>
   <GuidesProject>
@@ -390,6 +390,17 @@
   </GuidesProject>
   <GuidesProject>
     <Project>MinigameWinnersScene</Project>
+    <GuidesList />
+  </GuidesProject>
+    <Project>CountryDropdownContent</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>ChatroomSelectScene</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>ChatroomScene</Project>
     <GuidesList />
   </GuidesProject>
 </ArrayOfGuidesProject>

@@ -27,6 +27,8 @@ COMPETITION_SCENE_IMAGE_PATH = "scenes/Competition/"
 LOGO_IMAGE_PATH = "myLogo.jpg"
 COMMUNITY_IMAGE_PATH = "scenes/community/"
 MINIGAME_IMAGE_PATH = "scenes/mini-game/"
+CHAT_IMAGE_PATH = "scenes/chat/"
+
 
 BannerPrefix = "banner_"
 BannerPreviewPrefix = "banner_prev_"
@@ -57,7 +59,11 @@ TUTORIAL_SHOW_EMAIL_REGISTER_NAME = 6
 
 MAX_USER_NAME_LENGTH = 20
 
-MOST_POPULAR_LEAGUE_ID = -1
+SpecialLeagueIds = {
+	MOST_POPULAR = -1,
+	TODAYS_MATCHES = -2,
+	SPECIAL_COUNT = 2
+}
 
 FILTER_MIN_PREDICTION = 20
 RANKINGS_PER_PAGE = 50
@@ -68,6 +74,8 @@ ANALYTICS_EVENT_SOCIAL_ACTION = "Social_Action"
 ANALYTICS_EVENT_POPUP = "Pop-Up"
 ANALYTICS_EVENT_COMPETITION = "Competition"
 ANALYTICS_EVENT_MINIGAME = "Minigame"
+ANALYTICS_EVENT_LEAGUE = "League"
+
 
 NOTIFICATION_KEY_SFX = "soundEffects"
 EVENT_WELCOME_KEY = "event"
