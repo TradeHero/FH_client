@@ -661,12 +661,6 @@ function updateLatestChatMessage( messageInfo )
     end
 end
 
-function showLeagueEventHandler( sender, eventType )
-    if eventType == TOUCH_EVENT_ENDED then
-        EventManager:postEvent( Event.Enter_Competition_Leagues, { mCompetitionId } )
-    end
-end
-
 function copyCodeEventHandler( sender, eventType )
     if eventType == TOUCH_EVENT_ENDED then
         Misc:sharedDelegate():copyToPasteboard( mCompetitionToken )

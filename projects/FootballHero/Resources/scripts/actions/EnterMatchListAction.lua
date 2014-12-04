@@ -30,9 +30,9 @@ function action( param )
 
     Logic:setPreviousLeagueSelected( leagueId )
 
-    -- Use a different URL for popular leagues (id == MOST_POPULAR_LEAGUE_ID)
+    -- Use a different URL for popular leagues (id == SpecialLeagueIds.MOST_POPULAR)
     local url;
-    if mLeagueId == Constants.MOST_POPULAR_LEAGUE_ID then
+    if mLeagueId == Constants.SpecialLeagueIds.MOST_POPULAR then
         url = RequestUtils.GET_POPULAR_UPCOMING_REST_CALL
     else
         url = RequestUtils.GET_UPCOMING_GAMES_BY_LEAGUE_REST_CALL.."?leagueId="..leagueId
@@ -68,7 +68,7 @@ end
 function onRequestSuccess( matchList )
     local MatchListData = require("scripts.data.MatchListData").MatchListData
 
-    if mLeagueId ~= Constants.MOST_POPULAR_LEAGUE_ID then
+    if mLeagueId ~= Constants.SpecialLeagueIds.MOST_POPULAR then
         -- Sort the match according to its start time.
         local currentTime = os.time()
         local currentDate = os.time{year=os.date("%Y", currentTime), month=os.date("%m", currentTime), day=os.date("%d", currentTime), hour=0}

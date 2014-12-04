@@ -64,7 +64,7 @@ function initCountryList()
 end
 
 function initLeagueList( leagueKey )
-    if leagueKey ~= Constants.MOST_POPULAR_LEAGUE_ID then
+    if leagueKey ~= Constants.SpecialLeagueIds.MOST_POPULAR then
         local contentHeight = 0
         mChildIndex = 1
 
@@ -104,7 +104,7 @@ end
 function addPopular()
     local eventHandler = function( sender, eventType )
         if eventType == TOUCH_EVENT_ENDED then
-            mLeagueSelectCallback( Constants.MOST_POPULAR_LEAGUE_ID, sender )
+            mLeagueSelectCallback( Constants.SpecialLeagueIds.MOST_POPULAR, sender )
         end
     end
 

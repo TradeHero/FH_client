@@ -67,6 +67,7 @@ function initGlobalChatButton()
             EventManager:postEvent( Event.Enter_League_Chat_List, {} )
         end
     end
+    button:addTouchEventListener( eventHandler )
 end
 
 function initCommunityTab( tabInfo, tabId )

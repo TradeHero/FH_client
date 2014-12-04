@@ -384,4 +384,8 @@
     <Project>ChatroomSelectScene</Project>
     <GuidesList />
   </GuidesProject>
+  <GuidesProject>
+    <Project>ChatroomScene</Project>
+    <GuidesList />
+  </GuidesProject>
 </ArrayOfGuidesProject>

@@ -97,6 +97,7 @@
     <string>SpecialDetailedCompetitionDropdownContent.json</string>
     <string>CountryDropdownContent.json</string>
     <string>ChatroomSelectScene.json</string>
+    <string>ChatroomScene.json</string>
   </JsonList>
   <CanvasSize>
     <Width>640</Width>
@@ -106,7 +107,12 @@
   <ProjectType>UIProject</ProjectType>
   <ResRelativePath />
   <imageFileList />
-  <imagePngList />
+  <imagePngList>
+    <string>MatchListScene/match_bkg.png</string>
+    <string>header/back.png</string>
+    <string>chat/send_icon.png</string>
+    <string>chat/icn-feedback-logo.png</string>
+  </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>CommunityBaseScene.json</CurrentUIJson>
+  <CurrentUIJson>ChatroomScene.json</CurrentUIJson>
 </UIProject>

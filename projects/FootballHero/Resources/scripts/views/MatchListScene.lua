@@ -152,7 +152,7 @@ function initLeagueList( leagueKey )
         local leagueName = tolua.cast( content:getChildByName( "Label_LeagueName"), "Label" )
 
         -- Hardcode Popular League texts and logo
-        if leagueKey == Constants.MOST_POPULAR_LEAGUE_ID then
+        if leagueKey == Constants.SpecialLeagueIds.MOST_POPULAR then
             countryName:setText( Constants.String.most_popular )
             leagueName:setText( Constants.String.most_popular_desc )
             logo:loadTexture( Constants.COUNTRY_IMAGE_PATH.."favorite.png" )
@@ -226,7 +226,7 @@ function initMatchList( matchList, leagueKey, bInit )
 
             -- Vincent: for most popular leagues, there are no matches before the "Tap to make a prediction!" hint, thus there is no need for zOrder position shifting
             local zOrder = matchDate["date"]
-            if leagueKey == Constants.MOST_POPULAR_LEAGUE_ID then
+            if leagueKey == Constants.SpecialLeagueIds.MOST_POPULAR then
                 zOrder = 1
             end
 

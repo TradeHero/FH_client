@@ -8,19 +8,20 @@ local ViewUtils = require("scripts.views.ViewUtils")
 local Logic = require("scripts.Logic").getInstance()
 local Constants = require("scripts.Constants")
 local SMIS = require("scripts.SMIS")
+local LeagueChatConfig = require("scripts.config.LeagueChat").LeagueChatType
 
 local mWidget
-local mCompetitionId
+local mLeagueChatId
 local mContainerHeight
 local mHasTodayMessage
-local MESSAGE_CONTAINER_NAME = "messageContainer"
+local MESSAGE_CONTAINER_NAME = "Panel_MessageContainer"
 local RELOAD_DELAY_TIME = 5
 
 -- DS for chatMessages: see ChatMessages
-function loadFrame( competitionId, chatMessages )
-    mCompetitionId = competitionId
+function loadFrame( leaguechatId, chatMessages )
+    mLeagueChatId = leaguechatId
 
-    local widget = GUIReader:shareReader():widgetFromJsonFile("scenes/Chat.json")
+    local widget = GUIReader:shareReader():widgetFromJsonFile("scenes/ChatroomScene.json")
     mWidget = widget
     mWidget:registerScriptHandler( EnterOrExit )
     SceneManager.clearNAddWidget( widget )
@@ -31,25 +32,28 @@ function loadFrame( competitionId, chatMessages )
     mHasTodayMessage = false
     initMessage( chatMessages )
 
-    local backBt = widget:getChildByName("back")
+    local backBt = widget:getChildByName("Button_Back")
     backBt:addTouchEventListener( backEventHandler )
 
-    local sendBt = widget:getChildByName("send")
+    local sendBt = widget:getChildByName("Button_Send")
     sendBt:addTouchEventListener( sendEventHandler )
-
-    local moreBt = widget:getChildByName("more")
-    moreBt:addTouchEventListener( moreEventHandler )
 
     local messageInput = ViewUtils.createTextInput( mWidget:getChildByName( MESSAGE_CONTAINER_NAME ), Constants.String.message_hint, 470, 50 )
 
-    initTitle();
+    initTitle()
     getLatestMessages()
 end
 
 function initTitle()    
-    local title = tolua.cast( mWidget:getChildByName("title"), "Label" )
-    local competitionDetail = Logic:getCompetitionDetail()
-    title:setText( competitionDetail:getName() )
+    local title = tolua.cast( mWidget:getChildByName("Label_Title"), "Label" )
+    title:setText( LeagueChatConfig[mLeagueChatId]["displayName"] )
+
+    local logo = tolua.cast( mWidget:getChildByName("Image_Title"), "ImageView" )
+    logo:loadTexture( LeagueChatConfig[mLeagueChatId]["logo"] ) 
+    logo:setPositionX( title:getPositionX() - title:getSize().width/ 2 - logo:getSize().width )
+
+    local panel = tolua.cast( mWidget:getChildByName("Panel_Title"), "Layout" )
+    panel:setBackGroundColor( LeagueChatConfig[mLeagueChatId]["color"] )
 end
 
 function getLatestMessages()
@@ -60,7 +64,8 @@ local mLastGetLatestMessageTime = 0
 function doGetLatestMessages()
     -- Only send the request when players are still in the chat UI.
     if mWidget ~= nil and os.time() - mLastGetLatestMessageTime >= RELOAD_DELAY_TIME then
-        EventManager:postEvent( Event.Do_Get_Chat_Message, { mCompetitionId, Logic:getLastChatMessageTimestamp(), true, getLatestMessages } )
+        local isSilent, callback, isLeague = true, getLatestMessages , true
+        EventManager:postEvent( Event.Do_Get_Chat_Message, { mLeagueChatId, Logic:getLastChatMessageTimestamp(), isSilent, callback, isLeague } )
         mLastGetLatestMessageTime = os.time()
     end
 end
@@ -86,11 +91,6 @@ function keypadBackEventHandler()
     EventManager:popHistory()
 end
 
-function moreEventHandler( sender, eventType )
-    if eventType == TOUCH_EVENT_ENDED then
-        EventManager:postEvent( Event.Enter_Competition_More, { mCompetitionId } )
-    end
-end
 
 function sendEventHandler( sender,eventType )
     if eventType == TOUCH_EVENT_ENDED then
@@ -98,7 +98,8 @@ function sendEventHandler( sender,eventType )
         local message = messageInput:getText()
         messageInput:setText("")
         if string.len( message ) > 0 then
-            EventManager:postEvent( Event.Do_Send_Chat_Message, { mCompetitionId, message } )
+            local isLeague = true
+            EventManager:postEvent( Event.Do_Send_Chat_Message, { mLeagueChatId, message, isLeague } )
         end
     end
 end

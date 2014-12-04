@@ -26,7 +26,7 @@ MATCH_LIST_CONTENT_IMAGE_PATH = "scenes/MatchListContent/"
 COMPETITION_SCENE_IMAGE_PATH = "scenes/Competition/"
 LOGO_IMAGE_PATH = "myLogo.jpg"
 COMMUNITY_IMAGE_PATH = "scenes/community/"
-CHAT_IMAGE_PATH = "scenes/chat"
+CHAT_IMAGE_PATH = "scenes/chat/"
 
 BannerPrefix = "banner_"
 BannerPreviewPrefix = "banner_prev_"
@@ -57,7 +57,10 @@ TUTORIAL_SHOW_EMAIL_REGISTER_NAME = 6
 
 MAX_USER_NAME_LENGTH = 20
 
-MOST_POPULAR_LEAGUE_ID = -1
+SpecialLeagueIds = {
+	MOST_POPULAR = -1,
+	TODAYS_MATCHES = -2,
+}
 
 FILTER_MIN_PREDICTION = 20
 RANKINGS_PER_PAGE = 50

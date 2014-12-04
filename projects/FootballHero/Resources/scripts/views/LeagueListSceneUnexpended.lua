@@ -103,7 +103,7 @@ function addPopularLeague()
     local eventHandler = function( sender, eventType )
         if eventType == TOUCH_EVENT_ENDED then
             selectOnLeague( sender )
-            mLeagueSelectCallback( Constants.MOST_POPULAR_LEAGUE_ID, sender )
+            mLeagueSelectCallback( Constants.SpecialLeagueIds.MOST_POPULAR, sender )
         end
     end
 
@@ -126,7 +126,7 @@ function addPopularLeague()
     end
 
     if mLeagueInitCallback ~= nil then
-        mLeagueInitCallback( content, Constants.MOST_POPULAR_LEAGUE_ID )
+        mLeagueInitCallback( content, Constants.SpecialLeagueIds.MOST_POPULAR )
     end
 
     mChildIndex = mChildIndex + 1
