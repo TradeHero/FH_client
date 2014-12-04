@@ -122,6 +122,11 @@ M.en = {
     feedback = "Feedback & Comments",
   },
   login_success = "Login success.\nLoading data, please wait...",
+  match_list = {
+    most_popular = "Most Popular",
+    special = "Special",
+    todays_matches = "Today's Matches",
+  },
   message_hint = "Type your message here",
   month = {
     "January",
@@ -137,8 +142,6 @@ M.en = {
     "November",
     "December",
   },
-  most_popular = "Popular",
-  most_popular_desc = "Top 25 Most Popular Matches",
   num_of_points = "%d Points",
   password = "Password",
   password_confirm = "Confirm Password",

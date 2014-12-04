@@ -31,7 +31,8 @@ function initCountryList()
     mChildIndex = 1
 
     -- Add in the "Most Popular" league - top 25 upcoming games
-    contentHeight = contentHeight + addPopular()
+    -- Edit: Add "Special" tab
+    contentHeight = contentHeight + addSpecial()
 
     for i = 1, mCountryNum do
         -- Assume there is at least 1 league and get it
@@ -64,12 +65,35 @@ function initCountryList()
 end
 
 function initLeagueList( leagueKey )
-    if leagueKey ~= Constants.SpecialLeagueIds.MOST_POPULAR then
-        local contentHeight = 0
-        mChildIndex = 1
+    
+    local contentHeight = 0
+    local content
+    mChildIndex = 1
 
-        mLeagueListContainer:removeAllChildrenWithCleanup( true )
+    mLeagueListContainer:removeAllChildrenWithCleanup( true )
 
+    if leagueKey == Constants.SpecialLeagueIds.MOST_POPULAR or leagueKey == Constants.SpecialLeagueIds.TODAYS_MATCHES then
+
+        for i = 1, Constants.SpecialLeagueIds.SPECIAL_COUNT do
+            local eventHandler = function( sender, eventType )
+                if eventType == TOUCH_EVENT_ENDED then
+                    mLeagueSelectCallback( -i, sender )
+                end
+            end
+
+            content = SceneManager.widgetFromJsonFile( mLeagueWidget )
+            mLeagueListContainer:addChild( content, 0, mChildIndex )
+            content:addTouchEventListener( eventHandler )
+
+            local leagueName = tolua.cast( content:getChildByName("Label_LeagueName"), "Label" )
+            
+            if -i == Constants.SpecialLeagueIds.MOST_POPULAR then
+                leagueName:setText( Constants.String.match_list.most_popular )
+            else
+                leagueName:setText( Constants.String.match_list.todays_matches )
+            end
+        end
+    else
         local leagueId = LeagueConfig.getConfigIdByKey( leagueKey )
         local countryId = CountryConfig.getConfigIdByKey( LeagueConfig.getCountryId( leagueId ) )
         
@@ -83,25 +107,25 @@ function initLeagueList( leagueKey )
                 end
             end
 
-            local content = SceneManager.widgetFromJsonFile( mLeagueWidget )
+            content = SceneManager.widgetFromJsonFile( mLeagueWidget )
             mLeagueListContainer:addChild( content, 0, mChildIndex )
             content:addTouchEventListener( eventHandler )
 
             local leagueName = tolua.cast( content:getChildByName("Label_LeagueName"), "Label" )
             leagueName:setText( LeagueConfig.getLeagueName( leagueId ) )
-            
-            contentHeight = contentHeight + content:getSize().height
-            mChildIndex = mChildIndex + 1
         end
-
-        mLeagueListContainer:setInnerContainerSize( CCSize:new( 0, contentHeight ) )
-        local layout = tolua.cast( mLeagueListContainer, "Layout" )
-        layout:requestDoLayout()
-        layout:setLayoutType(LAYOUT_LINEAR_VERTICAL)
     end
+
+    contentHeight = contentHeight + content:getSize().height
+    mChildIndex = mChildIndex + 1
+
+    mLeagueListContainer:setInnerContainerSize( CCSize:new( 0, contentHeight ) )
+    local layout = tolua.cast( mLeagueListContainer, "Layout" )
+    layout:requestDoLayout()
+    layout:setLayoutType(LAYOUT_LINEAR_VERTICAL)
 end
 
-function addPopular()
+function addSpecial()
     local eventHandler = function( sender, eventType )
         if eventType == TOUCH_EVENT_ENDED then
             mLeagueSelectCallback( Constants.SpecialLeagueIds.MOST_POPULAR, sender )
@@ -113,9 +137,9 @@ function addPopular()
     content:addTouchEventListener( eventHandler )
 
     local logo = tolua.cast( content:getChildByName("Image_CountryLogo"), "ImageView" )
-    local leagueName = tolua.cast( content:getChildByName("Label_CountryName"), "Label" )
+    local countryName = tolua.cast( content:getChildByName("Label_CountryName"), "Label" )
     
-    leagueName:setText( Constants.String.most_popular )
+    countryName:setText( Constants.String.match_list.special )
     logo:loadTexture( Constants.COUNTRY_IMAGE_PATH.."favorite.png" )
     
     mChildIndex = mChildIndex + 1

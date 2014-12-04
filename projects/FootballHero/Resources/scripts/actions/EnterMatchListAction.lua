@@ -30,10 +30,12 @@ function action( param )
 
     Logic:setPreviousLeagueSelected( leagueId )
 
-    -- Use a different URL for popular leagues (id == SpecialLeagueIds.MOST_POPULAR)
+    -- Use a different URL for special leagues (id == SpecialLeagueIds.MOST_POPULAR || SpecialLeagueIds.TODAYS_MATCHES)
     local url;
     if mLeagueId == Constants.SpecialLeagueIds.MOST_POPULAR then
         url = RequestUtils.GET_POPULAR_UPCOMING_REST_CALL
+    elseif mLeagueId == Constants.SpecialLeagueIds.TODAYS_MATCHES then
+        url = RequestUtils.GET_UPCOMING_TODAY
     else
         url = RequestUtils.GET_UPCOMING_GAMES_BY_LEAGUE_REST_CALL.."?leagueId="..leagueId
     end
