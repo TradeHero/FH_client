@@ -10,12 +10,7 @@
   "designHeight": 1136,
   "designWidth": 640,
   "textures": [],
-  "texturesPng": [
-    "MatchListScene/match_bkg.png",
-    "MatchListScene/SideMenu_bkg.png",
-    "header/footballhero-logo.png",
-    "MatchListScene/photo.png"
-  ],
+  "texturesPng": [],
   "version": "1.5.0.0",
   "widgetTree": {
     "classname": "Panel",

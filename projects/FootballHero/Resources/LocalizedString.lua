@@ -94,7 +94,8 @@ M.en = {
     no_open_prediction_others = "No open predictions",
     no_closed_prediction = "You have no\n closed predictions yet.",
     no_closed_prediction_others = "No closed predictions",
-    total_points = "Total Points: %d"
+    total_points = "Total Points: %d",
+    show_all = "Show All",
   },
   info = {
     announcement_title = "Announcement",

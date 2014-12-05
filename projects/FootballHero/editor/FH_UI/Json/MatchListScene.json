@@ -11,8 +11,15 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "Competition/img-notJoined-banner.png",
-    "community/btn-CTA.png"
+    "MatchListScene/match_bkg.png",
+    "header/footballhero-logo.png",
+    "header/back.png",
+    "MyHero/img-profbox.png",
+    "MyHero/img-photo.png",
+    "Competition/btn-learnmore.png",
+    "commonRes/England.png",
+    "MatchListScene/Arrow down.png",
+    "MatchListScene/Arrow Up.png"
   ],
   "version": "1.5.0.0",
   "widgetTree": {
@@ -450,7 +457,7 @@
           "customProperty": "",
           "flipX": false,
           "flipY": false,
-          "height": 26,
+          "height": 30,
           "ignoreSize": true,
           "layoutParameter": null,
           "opacity": 255,
@@ -467,7 +474,7 @@
           "touchAble": false,
           "useMergedTexture": false,
           "visible": true,
-          "width": 164,
+          "width": 173,
           "x": -367,
           "y": 944,
           "areaHeight": 0,

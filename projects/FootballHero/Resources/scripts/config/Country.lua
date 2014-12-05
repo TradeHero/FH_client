@@ -63,6 +63,11 @@ end
 	Provide additional getters.
 --]]
 
+function getCountryId( id )
+	local config = getConfig( id )
+	return config["Id"]
+end
+
 function getCountryCode( id )
 	local config = getConfig( id )
 	return config["countryCode"]

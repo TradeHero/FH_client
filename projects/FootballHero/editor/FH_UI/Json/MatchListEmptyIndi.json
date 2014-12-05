@@ -12,8 +12,14 @@
   "textures": [],
   "texturesPng": [
     "MatchListScene/match_bkg.png",
+    "header/footballhero-logo.png",
     "header/back.png",
-    "Tutorial/Default Button.png"
+    "MyHero/img-profbox.png",
+    "MyHero/img-photo.png",
+    "Competition/btn-learnmore.png",
+    "commonRes/England.png",
+    "MatchListScene/Arrow down.png",
+    "MatchListScene/Arrow Up.png"
   ],
   "version": "1.5.0.0",
   "widgetTree": {

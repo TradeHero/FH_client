@@ -7,7 +7,9 @@ local Event = require("scripts.events.Event").EventList
 local TeamConfig = require("scripts.config.Team")
 local Logic = require("scripts.Logic").getInstance()
 local Constants = require("scripts.Constants")
+local CountryConfig = require("scripts.config.Country")
 local SMIS = require("scripts.SMIS")
+local StatsDropDownFilter = require("scripts.views.StatsDropDownFilter")
 local CompetitionType = require("scripts.data.Competitions").CompetitionType
 
 local CONTENT_FADEIN_TIME = 1
@@ -63,6 +65,7 @@ function loadFrame( userId, userName, competitionId, couponHistory, additionalPa
     mWidget:registerScriptHandler( EnterOrExit )
     SceneManager.clearNAddWidget( mWidget )
 
+    initFliter( Constants.STATS_SHOW_ALL )
     initContent( couponHistory )
 
     Navigator.loadFrame( mWidget )
@@ -90,8 +93,8 @@ function refreshFrame( userId, userName, competitionId, couponHistory, additiona
 
     mStep = 1
     mHasMoreToLoad = false
+    initFliter( Constants.STATS_SHOW_ALL )
     initContent( couponHistory )
-
 end
 
 
@@ -112,6 +115,56 @@ function isSelf()
     else
         return false
     end
+end
+
+function initFliter( selectedIndex )
+    local filterPanel = mWidget:getChildByName("Panel_League_Select")
+    local filterExpend = filterPanel:getChildByName( "Button_FilterExpand" )
+    local mask = filterPanel:getChildByName("Panel_Mask")
+    local filterList = tolua.cast( filterPanel:getChildByName("ScrollView_Filter"), "ScrollView" )
+    local logo = tolua.cast( filterPanel:getChildByName("countryLogo"), "ImageView" )
+
+    filterList:setEnabled( false )
+    mask:setEnabled( false )
+    filterExpend:setBrightStyle( BRIGHT_NORMAL )
+
+    local filterHandler = function( sender, eventType )
+        if eventType == TOUCH_EVENT_ENDED then
+            if filterList:isEnabled() then
+                mask:setEnabled( false )
+                filterList:setEnabled( false )
+                filterExpend:setBrightStyle( BRIGHT_NORMAL )
+            else
+                mask:setEnabled( true )
+                filterList:setEnabled( true )
+                filterExpend:setBrightStyle( BRIGHT_HIGHLIGHT )
+            end
+        end
+    end
+    filterPanel:addTouchEventListener( filterHandler )
+
+
+    local refreshFilter = function( index )
+        if index == Constants.STATS_SHOW_ALL then
+            logo:loadTexture( Constants.COUNTRY_IMAGE_PATH.."favorite.png" )
+        else
+            logo:loadTexture( CountryConfig.getLogo( index ) )
+        end
+    end
+    
+    local filterSelectedCallback = function( index )
+        mask:setEnabled( false )
+        filterList:setEnabled( false )
+        filterExpend:setBrightStyle( BRIGHT_NORMAL )
+        
+        refreshFilter( index )
+
+        --EventManager:postEvent( Event.Enter_Match_List, { leagueKey } )
+    end
+
+    StatsDropDownFilter.loadFrame( filterList, filterSelectedCallback )
+
+    refreshFilter( selectedIndex )
 end
 
 function initContent( couponHistory )

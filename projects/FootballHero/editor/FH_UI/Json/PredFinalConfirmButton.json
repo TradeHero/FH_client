@@ -10,11 +10,7 @@
   "designHeight": 1136,
   "designWidth": 640,
   "textures": [],
-  "texturesPng": [
-    "MatchListScene/match_bkg.png",
-    "header/back.png",
-    "Tutorial/Default Button.png"
-  ],
+  "texturesPng": [],
   "version": "1.5.0.0",
   "widgetTree": {
     "classname": "Panel",
@@ -415,7 +411,7 @@
           "customProperty": "",
           "flipX": false,
           "flipY": false,
-          "height": 27,
+          "height": 0,
           "ignoreSize": true,
           "layoutParameter": null,
           "opacity": 255,
@@ -432,7 +428,7 @@
           "touchAble": false,
           "useMergedTexture": false,
           "visible": true,
-          "width": 242,
+          "width": 0,
           "x": 291,
           "y": 129,
           "areaHeight": 0,
