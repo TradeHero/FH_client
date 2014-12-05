@@ -163,13 +163,13 @@ bool UpdateLayer::init()
 	string versionStr = "Version: ";
 	versionStr.append(CCUserDefault::sharedUserDefault()->getStringForKey(KEY_OF_VERSION));
 	CCLabelTTF *versionLabel = CCLabelTTF::create(versionStr.c_str(), "Arial", 20);
-	versionLabel->setPosition(ccp(320, 350));
-	versionLabel->setFontFillColor(ccc3(0, 0, 0));
+	versionLabel->setPosition(ccp(320, 30));
+	versionLabel->setFontFillColor(ccWHITE);
 	addChild(versionLabel);
 
 	pProgressLabel = CCLabelTTF::create("Loading...", "Arial", 30);
 	pProgressLabel->setPosition(ccp(320, 300));
-    pProgressLabel->setFontFillColor(ccc3(0, 0, 0));
+	pProgressLabel->setFontFillColor(ccBLACK);
 	addChild(pProgressLabel);
 
 	return true;
