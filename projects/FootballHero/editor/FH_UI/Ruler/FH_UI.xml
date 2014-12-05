@@ -392,6 +392,7 @@
     <Project>MinigameWinnersScene</Project>
     <GuidesList />
   </GuidesProject>
+  <GuidesProject>
     <Project>CountryDropdownContent</Project>
     <GuidesList />
   </GuidesProject>
