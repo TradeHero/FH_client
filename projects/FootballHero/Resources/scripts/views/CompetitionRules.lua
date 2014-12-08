@@ -5,26 +5,26 @@ local EventManager = require("scripts.events.EventManager").getInstance()
 local Event = require("scripts.events.Event").EventList
 local Navigator = require("scripts.views.Navigator")
 local Constants = require("scripts.Constants")
+local CompetitionsConfig = require("scripts.config.Competitions")
+local Navigator = require("scripts.views.Navigator")
 
 
 local mWidget
-local mURL
 
-function loadFrame( name, token)
-	local widget = GUIReader:shareReader():widgetFromJsonFile("scenes/CompetitionWebview.json")
+function loadFrame( token )
+	local widget = GUIReader:shareReader():widgetFromJsonFile("scenes/CompetitionRules.json")
     mWidget = widget
     mWidget:registerScriptHandler( EnterOrExit )
     SceneManager.clearNAddWidget( widget )
     SceneManager.setKeypadBackListener( keypadBackEventHandler )
 
+    Navigator.loadFrame( widget )
+
     local backBt = widget:getChildByName("back")
     backBt:addTouchEventListener( backEventHandler )
-    local title = tolua.cast( widget:getChildByName("title"), "Label" )
-    title:setText( name )
-
-    mURL = "http://footballheroapp.com/rules/"..token.."/".."rules.html"
-    CCLuaLog( "Rules url is: "..mURL )
-    WebviewDelegate:sharedDelegate():openWebpage( mURL, 0, 40, 320, 528 )
+    local ruleContent = tolua.cast( widget:getChildByName("ruleContent"), "Label" )
+    local competitionId = CompetitionsConfig.getConfigIdByKey( token )
+    ruleContent:setText( CompetitionsConfig.getRules( competitionId ) )
 end
 
 function EnterOrExit( eventType )

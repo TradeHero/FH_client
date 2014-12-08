@@ -73,4 +73,9 @@ function getIsShare( id )
 	return config["isShare"]
 end
 
+function getRules( id )
+	local config = getConfig( id )
+	return config["rules"]
+end
+
 init()

@@ -179,15 +179,23 @@ function initTopContent( minigameDetails )
     local backBt = mWidget:getChildByName("Button_Back")
     backBt:addTouchEventListener( backEventHandler )
 
-    local eventHandler = function( sender, eventType )
+    local winnerEventHandler = function( sender, eventType )
         if eventType == TOUCH_EVENT_ENDED then
             EventManager:postEvent( Event.Enter_Minigame_Winners, { minigameDetails["Winners"] } )
         end
     end
 
+    local rulesEventHandler = function( sender, eventType )
+        if eventType == TOUCH_EVENT_ENDED then
+            EventManager:postEvent( Event.Enter_Competition_Rules, { "minigame" } )
+        end
+    end
+
     local banner = mWidget:getChildByName("Panel_Banner")
     local winners = banner:getChildByName("Button_Winners")
-    winners:addTouchEventListener( eventHandler )
+    local rules = banner:getChildByName("Button_Rules")
+    winners:addTouchEventListener( winnerEventHandler )
+    rules:addTouchEventListener( rulesEventHandler )
 
     local info = mWidget:getChildByName("Panel_Info")
     local button = info:getChildByName("Button_Share")

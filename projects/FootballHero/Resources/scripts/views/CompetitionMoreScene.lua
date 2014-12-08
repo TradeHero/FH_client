@@ -67,9 +67,7 @@ end
 
 function rulesEventHandler( sender, eventType )
     if eventType == TOUCH_EVENT_ENDED then
-        local title = tolua.cast( mWidget:getChildByName("title"), "Label" )
-        local titleText = title:getStringValue()
-        EventManager:postEvent( Event.Enter_Competition_Rules, { titleText, mCompetitionToken } )
+        EventManager:postEvent( Event.Enter_Competition_Rules, { mCompetitionToken } )
     end
 end
 

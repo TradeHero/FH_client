@@ -404,4 +404,8 @@
     <Project>ChatroomScene</Project>
     <GuidesList />
   </GuidesProject>
+  <GuidesProject>
+    <Project>CompetitionRules</Project>
+    <GuidesList />
+  </GuidesProject>
 </ArrayOfGuidesProject>

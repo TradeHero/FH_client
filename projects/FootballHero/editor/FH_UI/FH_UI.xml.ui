@@ -102,6 +102,7 @@
     <string>CountryDropdownContent.json</string>
     <string>ChatroomSelectScene.json</string>
     <string>ChatroomScene.json</string>
+    <string>CompetitionRules.json</string>
   </JsonList>
   <CanvasSize>
     <Width>640</Width>
@@ -113,15 +114,8 @@
   <imageFileList />
   <imagePngList>
     <string>MatchListScene/match_bkg.png</string>
-    <string>header/footballhero-logo.png</string>
     <string>header/back.png</string>
-    <string>MyHero/img-profbox.png</string>
-    <string>MyHero/img-photo.png</string>
-    <string>Competition/btn-learnmore.png</string>
-    <string>commonRes/England.png</string>
-    <string>MatchListScene/Arrow down.png</string>
-    <string>MatchListScene/Arrow Up.png</string>
   </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>MyPicksHome.json</CurrentUIJson>
+  <CurrentUIJson>MinigameDetailScene.json</CurrentUIJson>
 </UIProject>

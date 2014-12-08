@@ -10,7 +10,10 @@
   "designHeight": 1136,
   "designWidth": 640,
   "textures": [],
-  "texturesPng": [],
+  "texturesPng": [
+    "MatchListScene/match_bkg.png",
+    "header/back.png"
+  ],
   "version": "1.5.0.0",
   "widgetTree": {
     "classname": "Panel",
@@ -103,8 +106,8 @@
               "rotation": 0,
               "scaleX": 1,
               "scaleY": 1,
-              "sizePercentX": 0.215625,
-              "sizePercentY": 0.33,
+              "sizePercentX": 1.56249989E-05,
+              "sizePercentY": 0.0001,
               "sizeType": 0,
               "tag": 247,
               "touchAble": false,
@@ -153,8 +156,8 @@
               "rotation": 0,
               "scaleX": 1,
               "scaleY": 1,
-              "sizePercentX": 0.653125,
-              "sizePercentY": 0.32,
+              "sizePercentX": 1.56249989E-05,
+              "sizePercentY": 0.0001,
               "sizeType": 0,
               "tag": 348,
               "touchAble": false,
