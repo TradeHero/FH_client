@@ -20,13 +20,15 @@ local mCompetitionId
 local mUserId
 local mHasMoreToLoad
 local mAdditionalParam
+local mCountryFilter
 
 -- DS for couponHistory see CouponHistoryData
 -- competitionId: The history only contains matches within the leagues in this competition.
 --                  if it is nil, then the history will show everything. 
-function loadFrame( userId, userName, competitionId, couponHistory, additionalParam )
+function loadFrame( userId, userName, competitionId, couponHistory, additionalParam, countryFilter )
     mCompetitionId = competitionId
     mAdditionalParam = additionalParam
+    mCountryFilter = countryFilter
     local showBackButton = false
 
     mWidget = GUIReader:shareReader():widgetFromJsonFile("scenes/MyPicksHome.json")
@@ -65,8 +67,8 @@ function loadFrame( userId, userName, competitionId, couponHistory, additionalPa
     mWidget:registerScriptHandler( EnterOrExit )
     SceneManager.clearNAddWidget( mWidget )
 
-    initFliter( Constants.STATS_SHOW_ALL )
-    initContent( couponHistory )
+    initFliter( mCountryFilter, userName )
+    initContent( couponHistory, userName )
 
     Navigator.loadFrame( mWidget )
 
@@ -74,9 +76,10 @@ function loadFrame( userId, userName, competitionId, couponHistory, additionalPa
     mHasMoreToLoad = false
 end
 
-function refreshFrame( userId, userName, competitionId, couponHistory, additionalParam )
+function refreshFrame( userId, userName, competitionId, couponHistory, additionalParam, countryFilter )
     mCompetitionId = competitionId
     mAdditionalParam = additionalParam
+    mCountryFilter = countryFilter
     local showBackButton = false
 
     local totalPoints = tolua.cast( mWidget:getChildByName("Label_Total_Points"), "Label" )
@@ -93,8 +96,8 @@ function refreshFrame( userId, userName, competitionId, couponHistory, additiona
 
     mStep = 1
     mHasMoreToLoad = false
-    initFliter( Constants.STATS_SHOW_ALL )
-    initContent( couponHistory )
+    initFliter( mCountryFilter, userName )
+    initContent( couponHistory, userName )
 end
 
 
@@ -117,7 +120,7 @@ function isSelf()
     end
 end
 
-function initFliter( selectedIndex )
+function initFliter( countryFilter, userName )
     local filterPanel = mWidget:getChildByName("Panel_League_Select")
     local filterExpend = filterPanel:getChildByName( "Button_FilterExpand" )
     local mask = filterPanel:getChildByName("Panel_Mask")
@@ -159,15 +162,27 @@ function initFliter( selectedIndex )
         
         refreshFilter( index )
 
-        --EventManager:postEvent( Event.Enter_Match_List, { leagueKey } )
+        if index == Constants.STATS_SHOW_ALL then
+            EventManager:postEvent( Event.Enter_History, { mUserId, userName, mCompetitionId, mAdditionalParam } )
+        else
+            local countryId = CountryConfig.getCountryId( index )
+            CCLuaLog("Stats filter by: "..countryId)
+            EventManager:postEvent( Event.Enter_History, { mUserId, userName, mCompetitionId, mAdditionalParam, countryId } )
+        end
     end
 
     StatsDropDownFilter.loadFrame( filterList, filterSelectedCallback )
 
-    refreshFilter( selectedIndex )
+    if countryFilter == Constants.STATS_SHOW_ALL then
+        refreshFilter( countryFilter )
+    else
+        local countryIndex = CountryConfig.getConfigIdByKey( countryFilter )
+        refreshFilter( countryIndex )
+    end
+    
 end
 
-function initContent( couponHistory )
+function initContent( couponHistory, userName )
 	local contentContainer = tolua.cast( mWidget:getChildByName("ScrollView"), "ScrollView" )
     contentContainer:removeAllChildrenWithCleanup( true )
 
@@ -186,7 +201,7 @@ function initContent( couponHistory )
         show:setTitleText( Constants.String.history.show_all )
         local eventHandler = function( sender, eventType )
             if eventType == TOUCH_EVENT_ENDED then
-                EventManager:postEvent( Event.Enter_History, { mUserId, info["DisplayName"] } )
+                EventManager:postEvent( Event.Enter_History, { mUserId, userName } )
             end
         end
         show:addTouchEventListener( eventHandler )
@@ -449,7 +464,7 @@ end
 function scrollViewEventHandler( target, eventType )
     if eventType == SCROLLVIEW_EVENT_BOUNCE_BOTTOM and mHasMoreToLoad then
         mStep = mStep + 1
-        EventManager:postEvent( Event.Load_More_In_History, { mStep, mCompetitionId, mUserId, mAdditionalParam } )
+        EventManager:postEvent( Event.Load_More_In_History, { mStep, mCompetitionId, mUserId, mAdditionalParam, mCountryFilter } )
     end
 end
 
