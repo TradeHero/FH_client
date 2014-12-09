@@ -14,7 +14,7 @@ local CompetitionConfig = require("scripts.data.Competitions")
 local ConnectingMessage = require("scripts.views.ConnectingMessage")
 local Logic = require("scripts.Logic").getInstance()
 
-local MAX_CONTAINER_HEIGHT = 560
+local MAX_CONTAINER_HEIGHT = 480
 
 local mWidget
 
@@ -134,7 +134,6 @@ function initCompetitionScene( competitionFrame, compList, miniGame )
                 content:setLayoutParameter( layoutParameter )
                 scrollViewJoined:addChild( content )
                 height = height + content:getSize().height
-
                 local name = tolua.cast( content:getChildByName("Label_Name"), "Label" )
                 name:setText( competition["Name"] )
 
@@ -157,7 +156,6 @@ function initCompetitionScene( competitionFrame, compList, miniGame )
         local scrollHeight = math.max( height, originalHeight )
         local newContainerHeight = math.min( MAX_CONTAINER_HEIGHT, scrollHeight )
         local deltaY = math.max( newContainerHeight - originalHeight, 0 )
-
         scrollViewJoined:setInnerContainerSize( CCSize:new( 0, scrollHeight ) )
         scrollViewJoined:setSize( CCSize:new( scrollViewJoined:getSize().width, newContainerHeight ) )
         scrollViewJoined:setPositionY( scrollViewJoined:getPositionY() - deltaY )
