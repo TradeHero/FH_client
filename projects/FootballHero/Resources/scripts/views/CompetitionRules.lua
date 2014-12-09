@@ -22,9 +22,19 @@ function loadFrame( token )
 
     local backBt = widget:getChildByName("back")
     backBt:addTouchEventListener( backEventHandler )
-    local ruleContent = tolua.cast( widget:getChildByName("ruleContent"), "Label" )
+    
     local competitionId = CompetitionsConfig.getConfigIdByKey( token )
-    ruleContent:setText( CompetitionsConfig.getRules( competitionId ) )
+    local competitionRulesContent = CompetitionsConfig.getRules( competitionId )
+    local competitionRulesHeight = CompetitionsConfig.getRulesContentHeight( competitionId )
+
+    local ruleContentContainer = tolua.cast( widget:getChildByName("ScrollView_ruleContent"), "ScrollView" )
+    local ruleContent = tolua.cast( ruleContentContainer:getChildByName("ruleContent"), "Label" )
+    ruleContent:setText( competitionRulesContent )
+    ruleContent:setSize( CCSize:new( ruleContent:getSize().width, competitionRulesHeight ) )
+    ruleContent:setTextAreaSize( CCSize:new( ruleContent:getSize().width, competitionRulesHeight ) )
+
+    ruleContentContainer:setInnerContainerSize( CCSize:new( 0, competitionRulesHeight ) )
+    ruleContentContainer:requestDoLayout()
 end
 
 function EnterOrExit( eventType )
@@ -45,6 +55,5 @@ function backEventHandler( sender,eventType )
 end
 
 function keypadBackEventHandler()
-    WebviewDelegate:sharedDelegate():closeWebpage()
     EventManager:popHistory()
 end

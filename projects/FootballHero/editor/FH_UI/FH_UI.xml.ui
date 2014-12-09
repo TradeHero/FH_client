@@ -117,5 +117,5 @@
     <string>header/back.png</string>
   </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>MinigameDetailScene.json</CurrentUIJson>
+  <CurrentUIJson>CompetitionRules.json</CurrentUIJson>
 </UIProject>

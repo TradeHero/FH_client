@@ -78,4 +78,14 @@ function getRules( id )
 	return config["rules"]
 end
 
+function getRulesContentHeight( id )
+	local config = getConfig( id )
+
+	if CCApplication:sharedApplication():getTargetPlatform() == kTargetAndroid then
+		return config["rulesTextHeightAndroid"]
+	else
+		return config["rulesTextHeightIOS"]
+	end
+end
+
 init()
