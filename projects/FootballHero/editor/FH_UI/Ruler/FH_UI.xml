@@ -129,10 +129,6 @@
     <GuidesList />
   </GuidesProject>
   <GuidesProject>
-    <Project>CompetitionTitle</Project>
-    <GuidesList />
-  </GuidesProject>
-  <GuidesProject>
     <Project>HistoryHomeForOthers</Project>
     <GuidesList />
   </GuidesProject>
@@ -254,10 +250,6 @@
   </GuidesProject>
   <GuidesProject>
     <Project>LeagueContentWithTransparentBG</Project>
-    <GuidesList />
-  </GuidesProject>
-  <GuidesProject>
-    <Project>CompetitionInviteContent</Project>
     <GuidesList />
   </GuidesProject>
   <GuidesProject>

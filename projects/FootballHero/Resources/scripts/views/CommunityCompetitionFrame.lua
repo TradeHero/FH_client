@@ -39,6 +39,12 @@ function initCompetitionScene( competitionFrame, compList, miniGame )
     local newCompFrame = SceneManager.widgetFromJsonFile("scenes/CommunityNewCompetitionFrame.json")
     local joinedCompFrame = SceneManager.widgetFromJsonFile("scenes/CommunityJoinedCompetitionFrame.json")
     
+    local newHeader = tolua.cast( newCompFrame:getChildByName( "Label_Join" ), "Label" )
+    newHeader:setText( Constants.String.community.title_join_comp )
+
+    local joinedHeader = tolua.cast( joinedCompFrame:getChildByName( "Label_Joined_Comps" ), "Label" )
+    joinedHeader:setText( Constants.String.community.title_joined_comp )
+
     local contentHeight = 0
 
     competitionFrame:addChild( newCompFrame )
@@ -166,14 +172,15 @@ function initCompetitionScene( competitionFrame, compList, miniGame )
         layout:requestDoLayout()
     else
         scrollViewJoined:setEnabled( false )
-        local btnCreate = panelNone:getChildByName("Button_Create")
+        local btnCreate = tolua.cast( panelNone:getChildByName("Button_Create"), "Button" )
+        btnCreate:setTitleText( Constants.String.button.create )
         btnCreate:addTouchEventListener( createEventHandler )
 
         local lblCTA = tolua.cast( panelNone:getChildByName("Label_CTA"), "Label" )
         lblCTA:setText( Constants.String.community.label_call_to_arm )
     end
 
-    local tokenInput = ViewUtils.createTextInput( newCompFrame:getChildByName( "Panel_Code" ), Constants.String.enter_comp_code, 224 )
+    local tokenInput = ViewUtils.createTextInput( newCompFrame:getChildByName( "Panel_Code" ), Constants.String.community.enter_comp_code, 224 )
     tokenInput:setFontColor( ccc3( 0, 0, 0 ) )
     tokenInput:setPlaceholderFontColor( ccc3( 127, 127, 127 ) )
     tokenInput:setTouchPriority( SceneManager.TOUCH_PRIORITY_MINUS_ONE )

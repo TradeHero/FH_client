@@ -34,7 +34,6 @@ EventNameList =
     "Enter_History",
     "Enter_History_Detail",
     "Enter_Community",
-    "Enter_Leaderboard_List",
     "Enter_League_Chat",
     "Enter_League_Chat_List",
     "Enter_Settings",

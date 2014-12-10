@@ -27,6 +27,12 @@ function loadFrame( token )
     local competitionRulesContent = CompetitionsConfig.getRules( competitionId )
     local competitionRulesHeight = CompetitionsConfig.getRulesContentHeight( competitionId )
 
+    local rules = tolua.cast( widget:getChildByName( "title"), "Label" )
+    rules:setText( Constants.String.community.title_rules )
+
+    local disclaimer = tolua.cast( widget:getChildByName( "disclaimer"), "Label" )
+    disclaimer:setText( Constants.String.community.disclaimer )
+
     local ruleContentContainer = tolua.cast( widget:getChildByName("ScrollView_ruleContent"), "ScrollView" )
     local ruleContent = tolua.cast( ruleContentContainer:getChildByName("ruleContent"), "Label" )
     ruleContent:setText( competitionRulesContent )

@@ -10,10 +10,7 @@
   "designHeight": 1136,
   "designWidth": 640,
   "textures": [],
-  "texturesPng": [
-    "MatchListScene/match_bkg.png",
-    "header/back.png"
-  ],
+  "texturesPng": [],
   "version": "1.5.0.0",
   "widgetTree": {
     "classname": "Panel",
@@ -251,7 +248,7 @@
           "fontName": "fonts/Helvetica Neue Light.ttf",
           "fontSize": 25,
           "hAlignment": 0,
-          "text": "*** Disclaimer - Apple is not a sponsor nor is invloved in any way.",
+          "text": "*** Disclaimer - Apple is not a sponsor nor is involved in any way.",
           "touchScaleEnable": false,
           "vAlignment": 1
         }
@@ -411,8 +408,8 @@
           "ignoreSize": false,
           "layoutParameter": null,
           "opacity": 255,
-          "positionPercentX": 0.000390625,
-          "positionPercentY": 0.0848151743,
+          "positionPercentX": 0,
+          "positionPercentY": 0.08450704,
           "positionType": 0,
           "rotation": 0,
           "scaleX": 1,

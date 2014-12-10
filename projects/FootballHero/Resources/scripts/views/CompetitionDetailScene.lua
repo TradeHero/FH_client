@@ -85,8 +85,19 @@ function loadFrame( subType, competitionId, showRequestPush, tabID, yearNumber, 
     backBt:addTouchEventListener( backEventHandler )
     local moreBt = mWidget:getChildByName("more")
     moreBt:addTouchEventListener( moreEventHandler )
-    
-    if mCompetitionType == CompetitionType["DetailedRanking"] then
+
+    -- label texts
+    if mCompetitionType == CompetitionType["Private"] then
+        local lbTop = tolua.cast( mWidget:getChildByName("Label_TopPerformers"), "Label" )
+        local lbInvite = tolua.cast( mWidget:getChildByName("Label_InvitationCode"), "Label" )
+        local lbCopy = tolua.cast( mWidget:getChildByName("Label_Copy"), "Label" )
+        local lbShare = tolua.cast( mWidget:getChildByName("Label_Share"), "Label" )
+
+        lbTop:setText( Constants.String.community.title_top_performers )
+        lbInvite:setText( Constants.String.community.invite_code )
+        lbCopy:setText( Constants.String.community.copy )
+        lbShare:setText( Constants.String.community.share )
+    elseif mCompetitionType == CompetitionType["DetailedRanking"] then
         setupRankingHeader( true, competitionDetail:getStartTime() )
     end
 

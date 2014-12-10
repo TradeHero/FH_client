@@ -23,13 +23,11 @@
     <string>CommunityLeaderboardFrame.json</string>
     <string>CommunityLeaderboardListContentFrame.json</string>
     <string>CommunityNewCompetitionFrame.json</string>
-    <string>CompetitionInviteContent.json</string>
     <string>CompetitionItemNew.json</string>
     <string>CompetitionLeaderboard.json</string>
     <string>CompetitionMore.json</string>
     <string>CompetitionMoreContent.json</string>
     <string>CompetitionRules.json</string>
-    <string>CompetitionTitle.json</string>
     <string>CompetitionWebview.json</string>
     <string>ConnectingMessage.json</string>
     <string>CountryDropdownContent.json</string>
@@ -113,5 +111,5 @@
   <imageFileList />
   <imagePngList />
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>CommunityBaseScene.json</CurrentUIJson>
+  <CurrentUIJson>CompetitionWebview.json</CurrentUIJson>
 </UIProject>
