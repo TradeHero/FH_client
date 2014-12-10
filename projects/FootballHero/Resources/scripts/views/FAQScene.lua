@@ -3,7 +3,7 @@ module(..., package.seeall)
 local SceneManager = require("scripts.SceneManager")
 local EventManager = require("scripts.events.EventManager").getInstance()
 local Event = require("scripts.events.Event").EventList
-
+local Constants = require("scripts.Constants")
 
 local mWidget
 
@@ -14,8 +14,11 @@ function loadFrame()
     SceneManager.clearNAddWidget( widget )
     SceneManager.setKeypadBackListener( keypadBackEventHandler )
 
-    local backBt = widget:getChildByName("back")
+    local backBt = widget:getChildByName("Button_Back")
     backBt:addTouchEventListener( backEventHandler )
+
+    local title = tolua.cast( widget:getChildByName("Label_Title"), "Label" )
+    title:setText( Constants.String.settings.faq )
 end
 
 function EnterOrExit( eventType )

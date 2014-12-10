@@ -28,6 +28,9 @@ function loadFrame( selectedLeagues )
     local contentContainer = tolua.cast( mWidget:getChildByName("ScrollView"), "ScrollView" )
     contentContainer:removeAllChildrenWithCleanup( true )
 
+    local lbDetails = tolua.cast( mWidget:getChildByName("Label_Details"), "Label" )
+    lbDetails:setText( Constants.String.community.title_details )
+
     mInputWidget = GUIReader:shareReader():widgetFromJsonFile("scenes/CreateCompetitionContent.json")
     contentContainer:addChild( mInputWidget )
 
@@ -39,6 +42,23 @@ function loadFrame( selectedLeagues )
     local facebookCheckBox = tolua.cast( mInputWidget:getChildByName("Facebook"), "CheckBox" )
     facebookCheckBox:addTouchEventListener( facebookEventHandler )
 
+    -- labels
+    local lbFBShare = tolua.cast( mInputWidget:getChildByName( "Label_FBShare"), "Label" )
+    local lbGiveDesc = tolua.cast( mInputWidget:getChildByName( "Label_GiveDesc"), "Label" )
+    local lbGiveTitle = tolua.cast( mInputWidget:getChildByName( "Label_GiveTitle"), "Label" )
+    local lbHowLong = tolua.cast( mInputWidget:getChildByName( "Label_HowLong"), "Label" )
+    local lbMonths = tolua.cast( mInputWidget:getChildByName( "Label_Months"), "Label" )
+    local lbOngoing = tolua.cast( mInputWidget:getChildByName( "Label_Ongoing"), "Label" )
+    local lbSelectLeague = tolua.cast( mInputWidget:getChildByName( "Label_SelectLeague"), "Label" )
+
+    lbFBShare:setText( Constants.String.community.label_fb_share )
+    lbGiveDesc:setText( Constants.String.community.label_give_desc )
+    lbGiveTitle:setText( Constants.String.community.label_give_title )
+    lbHowLong:setText( Constants.String.community.label_how_long )
+    lbMonths:setText( Constants.String.community.label_months )
+    lbOngoing:setText( Constants.String.community.label_ongoing )
+    lbSelectLeague:setText( Constants.String.community.label_select_league )
+
     if selectedLeagues ~= nil then
         Logic:setSelectedLeagues( { selectedLeagues } )
     elseif Logic:getSelectedLeagues() == nil then
@@ -49,8 +69,10 @@ function loadFrame( selectedLeagues )
     print( existingContentHeight )
     SelectedLeaguesScene.loadFrame( contentContainer, Logic:getSelectedLeagues(), true, existingContentHeight )
 
-    local confirmBt = mWidget:getChildByName("Create")
+    local confirmBt = tolua.cast( mWidget:getChildByName("Button_Create"), "Button" )
     confirmBt:addTouchEventListener( confirmEventHandler )
+    confirmBt:setTitleText( Constants.String.button.create )
+
     local backBt = mWidget:getChildByName("Back")
     backBt:addTouchEventListener( backEventHandler )
 
@@ -70,8 +92,8 @@ function EnterOrExit( eventType )
 end
 
 function preSetContent()
-    local description = Constants.String.create_comp_desc
-    local title = Logic:getDisplayName()..Constants.String.create_comp_title
+    local description = Constants.String.community.desc_create_comp
+    local title = Logic:getDisplayName()..Constants.String.community.title_create_comp
 
     mInputWidget:getChildByName( "TitleInput" ):getNodeByTag( 1 ):setText( title )
     tolua.cast( mInputWidget:getChildByName( "DescriptionText" ), "Label" ):setText( description )
