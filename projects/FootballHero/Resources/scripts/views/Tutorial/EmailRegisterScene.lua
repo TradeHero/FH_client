@@ -22,6 +22,9 @@ local LASTNAME_CONTAINER_NAME = "lastnameContainer"
 local mInputFontColor = ccc3( 0, 0, 0 )
 local mInputPlaceholderFontColor = ccc3( 60, 58, 58 )
 
+
+local mLogoSelected
+
 function loadFrame()
     mWidget = GUIReader:shareReader():widgetFromJsonFile("scenes/TutorialEmailRegister.json")
     mWidget:registerScriptHandler( EnterOrExit )
@@ -42,6 +45,7 @@ function loadFrame()
     local userNameInput = ViewUtils.createTextInput( mWidget:getChildByName( USERNAME_CONTAINER_NAME ), Constants.String.user_name )
     local firstNameInput = ViewUtils.createTextInput( mWidget:getChildByName( FIRSTNAME_CONTAINER_NAME ), Constants.String.first_name )
     local lastnameInput = ViewUtils.createTextInput( mWidget:getChildByName( LASTNAME_CONTAINER_NAME ), Constants.String.last_name )
+    local logoInput = mWidget:getChildByName("logo")
 
     mEmailInput:setFontColor( mInputFontColor )
     passwordInput:setFontColor( mInputFontColor )
@@ -66,6 +70,10 @@ function loadFrame()
 
     passwordInput:setInputFlag( kEditBoxInputFlagPassword )
     passwordConfInput:setInputFlag( kEditBoxInputFlagPassword )
+
+    logoInput:addTouchEventListener( logoEventHandler )
+
+    mLogoSelected = false
 end
 
 function isFrameShown()
@@ -103,7 +111,21 @@ function registerEventHandler( sender, eventType )
         local firstName = mWidget:getChildByName( FIRSTNAME_CONTAINER_NAME ):getNodeByTag( 1 ):getText()
         local lastName = mWidget:getChildByName( LASTNAME_CONTAINER_NAME ):getNodeByTag( 1 ):getText()
 
-        EventManager:postEvent( Event.Do_Register, { email, pass, passConf, userName, firstName, lastName } )
+        EventManager:postEvent( Event.Do_Register, { email, pass, passConf, userName, firstName, lastName, mLogoSelected } )
+    end
+end
+
+function logoEventHandler( sender,eventType )
+    if eventType == TOUCH_EVENT_ENDED then
+        local logoSelectResultHandler = function( success )
+            if success then
+                local logoInput = tolua.cast( mWidget:getChildByName("logo"), "ImageView" )
+                logoInput:loadTexture( Constants.LOGO_IMAGE_PATH )
+                mLogoSelected = true
+            end
+        end
+
+        Misc:sharedDelegate():selectImage( Constants.LOGO_IMAGE_PATH, 100, 100, logoSelectResultHandler )
     end
 end
 

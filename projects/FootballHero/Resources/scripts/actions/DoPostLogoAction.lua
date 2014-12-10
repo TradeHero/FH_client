@@ -36,6 +36,8 @@ function action( param )
     httpRequest:addHeader( Logic:getAuthSessionString() )
     Misc:sharedDelegate():setFileToRequestData( httpRequest, beginStr, endStr, path, "rb" )
     httpRequest:sendHttpRequest( url, handler )
+
+    ConnectingMessage.loadFrame()
 end
 
 function onRequestSuccess( jsonResponse )

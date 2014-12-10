@@ -45,11 +45,11 @@ namespace Utils
 #endif
 	}
 
-	void Misc::selectImage(char* path, int handler)
+	void Misc::selectImage(char* path, int width, int height, int handler)
 	{
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
 		mSelectImageHandler = handler;
-		MiscHandler::getInstance()->selectImage(path);
+		MiscHandler::getInstance()->selectImage(path, width, height);
 #endif
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
 

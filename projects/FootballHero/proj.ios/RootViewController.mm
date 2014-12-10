@@ -101,15 +101,20 @@
     
     if (image != nil)
     {
+        CGSize size = CGSizeMake(MiscHandler::getInstance()->getImageWidth(), MiscHandler::getInstance()->getImageHeight());
+        UIGraphicsBeginImageContext(size);
+        [image drawInRect:CGRectMake(0, 0, size.width, size.height)];
+        UIImage* scaledImage = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
         
         NSData *data;
-        if (UIImagePNGRepresentation(image))
+        if (UIImagePNGRepresentation(scaledImage))
         {
-            data = UIImagePNGRepresentation(image);
+            data = UIImagePNGRepresentation(scaledImage);
         }
         else
         {
-            data = UIImageJPEGRepresentation(image, 1.0);
+            data = UIImageJPEGRepresentation(scaledImage, 1.0);
         }
 
         [[NSFileManager defaultManager] createFileAtPath:imageDocPath contents:data attributes:nil];

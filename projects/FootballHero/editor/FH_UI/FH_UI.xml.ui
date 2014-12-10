@@ -112,10 +112,7 @@
   <ProjectType>UIProject</ProjectType>
   <ResRelativePath />
   <imageFileList />
-  <imagePngList>
-    <string>MatchListScene/match_bkg.png</string>
-    <string>header/back.png</string>
-  </imagePngList>
+  <imagePngList />
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>CompetitionRules.json</CurrentUIJson>
+  <CurrentUIJson>TutorialEmailSignin.json</CurrentUIJson>
 </UIProject>

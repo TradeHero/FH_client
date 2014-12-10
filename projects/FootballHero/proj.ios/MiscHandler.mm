@@ -23,9 +23,11 @@ void MiscHandler::copyToPasteboard(const char* content)
 }
 
 
-void MiscHandler::selectImage(char* path)
+void MiscHandler::selectImage(char* path, int width, int height)
 {
     setImagePath(path);
+    setImageWidth(width);
+    setImageHeight(height);
     
     AppController *app = (AppController*) [[UIApplication sharedApplication] delegate];
     [[app getViewController] selectImage];

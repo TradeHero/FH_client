@@ -1,6 +1,6 @@
 /*
 ** Lua binding: Extension
-** Generated automatically by tolua++-1.0.92 on 03/02/15 17:19:33.
+** Generated automatically by tolua++-1.0.92 on 12/10/14 18:10:01.
 */
 
 /****************************************************************************
@@ -1068,8 +1068,10 @@ static int tolua_Extension_Misc_selectImage00(lua_State* tolua_S)
  if (
      !tolua_isusertype(tolua_S,1,"Misc",0,&tolua_err) ||
      !tolua_isstring(tolua_S,2,0,&tolua_err) ||
-     (tolua_isvaluenil(tolua_S,3,&tolua_err) || !toluafix_isfunction(tolua_S,3,"LUA_FUNCTION",0,&tolua_err)) ||
-     !tolua_isnoobj(tolua_S,4,&tolua_err)
+     !tolua_isnumber(tolua_S,3,0,&tolua_err) ||
+     !tolua_isnumber(tolua_S,4,0,&tolua_err) ||
+     (tolua_isvaluenil(tolua_S,5,&tolua_err) || !toluafix_isfunction(tolua_S,5,"LUA_FUNCTION",0,&tolua_err)) ||
+     !tolua_isnoobj(tolua_S,6,&tolua_err)
  )
   goto tolua_lerror;
  else
@@ -1077,12 +1079,14 @@ static int tolua_Extension_Misc_selectImage00(lua_State* tolua_S)
  {
   Misc* self = (Misc*)  tolua_tousertype(tolua_S,1,0);
   char* path = ((char*)  tolua_tostring(tolua_S,2,0));
-  LUA_FUNCTION handler = (  toluafix_ref_function(tolua_S,3,0));
+  int width = ((int)  tolua_tonumber(tolua_S,3,0));
+  int height = ((int)  tolua_tonumber(tolua_S,4,0));
+  LUA_FUNCTION handler = (  toluafix_ref_function(tolua_S,5,0));
 #ifndef TOLUA_RELEASE
   if (!self) tolua_error(tolua_S,"invalid 'self' in function 'selectImage'", NULL);
 #endif
   {
-   self->selectImage(path,handler);
+   self->selectImage(path,width,height,handler);
   }
  }
  return 0;

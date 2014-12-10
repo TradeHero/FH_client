@@ -17,7 +17,7 @@ namespace Utils
 
 		void copyToPasteboard(const char* content);
 
-		void selectImage(char* path, int handler);
+		void selectImage(char* path, int width, int height, int handler);
 
 		void selectImageResult(bool success);
         

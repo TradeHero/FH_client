@@ -16,6 +16,7 @@ local mFirstName = "Yu"
 local mLastName = "Zheng"
 
 local mConfigMd5Info
+local mLogoSelected
 
 function action( param )
 
@@ -53,6 +54,8 @@ function action( param )
     if mLastName == nil then
         mLastName = ""
     end
+
+    mLogoSelected = param[7]
 
     local requestContent = { Email = mEmail, Password = mPassword, 
                             GMTOffset = RequestUtils.getTimezoneOffset(), DeviceToken = Logic:getDeviceToken(),
@@ -129,7 +132,9 @@ end
 function onRegisterNameRequestSuccess( jsonResponse )
     Logic:setDisplayName( mUserName )
     
-    --EventManager:postEvent( Event.Do_Post_Logo )
+    if mLogoSelected then
+        EventManager:postEvent( Event.Do_Post_Logo )
+    end
 
     local finishEvent = Event.Enter_Sel_Fav_Team
     local finishEventParam = {}

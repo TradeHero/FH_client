@@ -8,7 +8,7 @@ public:
     
     void copyToPasteboard(const char* content);
     
-    void selectImage(char* content);
+    void selectImage(char* content, int width, int height);
     
     void selectImageResult(bool success);
     
@@ -34,6 +34,16 @@ public:
     
     void setImagePath(char* path) { imagePath = path; }
     
+    int getImageWidth() { return imageWidth; }
+    
+    void setImageWidth(int width) { imageWidth = width; }
+    
+    int getImageHeight() { return imageHeight; }
+    
+    void setImageHeight(int height) { imageHeight = height; }
+    
 private:
     char* imagePath;
+    int imageWidth;
+    int imageHeight;
 };

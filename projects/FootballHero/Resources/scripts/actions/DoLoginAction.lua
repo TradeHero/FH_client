@@ -93,7 +93,6 @@ function onRequestSuccess( jsonResponse )
         Analytics:sharedDelegate():postEvent( Constants.ANALYTICS_EVENT_LOGIN, Json.encode( params ) )
 
         EventManager:postEvent( Event.Check_File_Version, { configMd5Info, finishEvent, finishEventParam } )
-        --EventManager:postEvent( Event.Do_Post_Logo )
     end
 end
 
