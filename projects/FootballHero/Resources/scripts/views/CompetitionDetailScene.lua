@@ -535,8 +535,12 @@ function initWelcome( competitionDetail )
         local close = popup:getChildByName( "Button_Close" )
         close:addTouchEventListener( eventHandler )
 
-        local start = popup:getChildByName( "Button_Play" )
-        local share = popup:getChildByName( "Button_Share" )
+        local start = tolua.cast( popup:getChildByName( "Button_Play" ), "Button" )
+        local share = tolua.cast( popup:getChildByName( "Button_Share" ), "Button" )
+
+        start:setTitleText( Constants.String.button.play_now )
+        share:setTitleText( Constants.String.button.share )
+
         local isShare = CompetitionsConfig.getIsShare( competitionConfigID )
         if isShare then
             start:setEnabled( false )

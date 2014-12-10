@@ -19,18 +19,23 @@
 local M = {}
 
 M.en = {
+  button = {
+    join = "Join",
+    play_now = "Play Now!",
+    share = "Share",
+  },
   chat_hint = "Tap here to start chatting!",
   chat_room_title = "Select Chatroom",
   choice = {
     leave_comp_desc = "Are you sure you want to leave the competition?",
+    leave_comp_no = "Stay",
     leave_comp_title = "Leave Competition",
     leave_comp_yes = "Leave",
-    leave_comp_no = "Stay"
   },
   community = {
+    label_call_to_arm = "You are not in any \ncompetition yet.\n\nCreate a new competition and\nchallenge your friends now!",
     title_competition = "Competitions",
     title_leaderboard = "Leaderboard",
-    label_call_to_arm = "You are not in any \ncompetition yet.\n\nCreate a new competition and\nchallenge your friends now!",
   },
   create_comp_desc = "Predictions made in the selected league for the competition are automatically included in the competition.",
   create_comp_title = "'s competition",

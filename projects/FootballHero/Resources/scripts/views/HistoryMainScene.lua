@@ -278,7 +278,7 @@ function initContent( couponHistory, userName )
     if table.getn( couponHistory:getOpenData() ) == 0 then
         -- Call to arm
         seqArray:addObject( CCCallFuncN:create( function()
-            local content = SceneManager.widgetFromJsonFile("scenes/MyHeroEmptyFrame.json")
+            local content = SceneManager.widgetFromJsonFile("scenes/MyPicksEmptyFrame.json")
             local closedPredictionContent = content:getChildByName( "Panel_ClosedPrediction" )
             closedPredictionContent:setEnabled( false )
             
@@ -361,7 +361,7 @@ function initContent( couponHistory, userName )
         mHasMoreToLoad = false
         
         seqArray:addObject( CCCallFuncN:create( function()
-            local content = SceneManager.widgetFromJsonFile("scenes/MyHeroEmptyFrame.json")
+            local content = SceneManager.widgetFromJsonFile("scenes/MyPicksEmptyFrame.json")
             local openPredictionContent = content:getChildByName( "Panel_OpenPrediction" )
             openPredictionContent:setEnabled( false )
             local closedPredictionContent = content:getChildByName( "Panel_ClosedPrediction" )

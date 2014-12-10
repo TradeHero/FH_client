@@ -20,9 +20,6 @@ local mWidget
 
 -- DS, see Competitions.lua
 function loadFrame( parent, compList, miniGame )
-    --local competitionFrame = SceneManager.widgetFromJsonFile("scenes/CommunityCompetitionFrame.json")
-    --parent:addChild( competitionFrame )
-    
     initCompetitionScene( parent, compList, miniGame )
 end
 
@@ -208,8 +205,10 @@ function initMiniGame( parent, miniGame )
             checkFacebookAndOpenWebview()
         end
     end
-    local joinBtn = bannerFrame:getChildByName( "Button_Join" )
+    local joinBtn = tolua.cast( bannerFrame:getChildByName( "Button_Join" ), "Button" )
     joinBtn:addTouchEventListener( joinEventHandler )
+    joinBtn:setTitleText( Constants.String.button.join )
+
     parent:addChild( bannerFrame )
     contentHeight = contentHeight + bannerFrame:getSize().height
 
