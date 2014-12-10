@@ -3,12 +3,7 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "des56_decrypt:ldes56.c">
-         <PersistentStrings>
-            <PersistentString
-               value = "KS">
-            </PersistentString>
-         </PersistentStrings>
+         contextName = "cocos2d::CCFileUtils::getFileData(char const*, char const*, unsigned long*):CCFileUtils.cpp">
       </ContextState>
       <ContextState
          contextName = "___ZN17FacebookConnector5loginEv_block_invoke:FacebookConnector.mm">
@@ -25,6 +20,26 @@
                value = "currentDevice">
             </PersistentString>
          </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "cocos2d::CCLabelTTF::setDimensions(cocos2d::CCSize const&amp;):CCLabelTTF.cpp">
+      </ContextState>
+      <ContextState
+         contextName = "cocos2d::CCLabelTTF::updateTexture():CCLabelTTF.cpp">
+      </ContextState>
+      <ContextState
+         contextName = "des56_decrypt:ldes56.c">
+         <PersistentStrings>
+            <PersistentString
+               value = "KS">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "Utils::Misc::setFileToRequestData(cocos2d::extension::HttpRequestForLua*, char const*, char const*, char const*, char const*):Misc.cpp">
+      </ContextState>
+      <ContextState
+         contextName = "cocos2d::gui::Label::setTextAreaSize(cocos2d::CCSize const&amp;):UILabel.cpp">
       </ContextState>
    </ContextStates>
 </VariablesViewState>

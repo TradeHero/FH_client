@@ -1,6 +1,6 @@
 /*
 ** Lua binding: Extension
-** Generated automatically by tolua++-1.0.92 on 11/25/14 16:40:09.
+** Generated automatically by tolua++-1.0.92 on 03/02/15 17:19:33.
 */
 
 /****************************************************************************
@@ -1133,6 +1133,47 @@ static int tolua_Extension_Misc_sendMail00(lua_State* tolua_S)
 }
 #endif //#ifndef TOLUA_DISABLE
 
+/* method: setFileToRequestData of class  Misc */
+#ifndef TOLUA_DISABLE_tolua_Extension_Misc_setFileToRequestData00
+static int tolua_Extension_Misc_setFileToRequestData00(lua_State* tolua_S)
+{
+#ifndef TOLUA_RELEASE
+ tolua_Error tolua_err;
+ if (
+     !tolua_isusertype(tolua_S,1,"Misc",0,&tolua_err) ||
+     !tolua_isusertype(tolua_S,2,"HttpRequestForLua",0,&tolua_err) ||
+     !tolua_isstring(tolua_S,3,0,&tolua_err) ||
+     !tolua_isstring(tolua_S,4,0,&tolua_err) ||
+     !tolua_isstring(tolua_S,5,0,&tolua_err) ||
+     !tolua_isstring(tolua_S,6,0,&tolua_err) ||
+     !tolua_isnoobj(tolua_S,7,&tolua_err)
+ )
+  goto tolua_lerror;
+ else
+#endif
+ {
+  Misc* self = (Misc*)  tolua_tousertype(tolua_S,1,0);
+  HttpRequestForLua* request = ((HttpRequestForLua*)  tolua_tousertype(tolua_S,2,0));
+  const char* begin = ((const char*)  tolua_tostring(tolua_S,3,0));
+  const char* end = ((const char*)  tolua_tostring(tolua_S,4,0));
+  const char* filePath = ((const char*)  tolua_tostring(tolua_S,5,0));
+  const char* pszMode = ((const char*)  tolua_tostring(tolua_S,6,0));
+#ifndef TOLUA_RELEASE
+  if (!self) tolua_error(tolua_S,"invalid 'self' in function 'setFileToRequestData'", NULL);
+#endif
+  {
+   self->setFileToRequestData(request,begin,end,filePath,pszMode);
+  }
+ }
+ return 0;
+#ifndef TOLUA_RELEASE
+ tolua_lerror:
+ tolua_error(tolua_S,"#ferror in function 'setFileToRequestData'.",&tolua_err);
+ return 0;
+#endif
+}
+#endif //#ifndef TOLUA_DISABLE
+
 /* method: sendSMS of class  Misc */
 #ifndef TOLUA_DISABLE_tolua_Extension_Misc_sendSMS00
 static int tolua_Extension_Misc_sendSMS00(lua_State* tolua_S)
@@ -1407,6 +1448,7 @@ TOLUA_API int tolua_Extension_open (lua_State* tolua_S)
    tolua_function(tolua_S,"copyToPasteboard",tolua_Extension_Misc_copyToPasteboard00);
    tolua_function(tolua_S,"selectImage",tolua_Extension_Misc_selectImage00);
    tolua_function(tolua_S,"sendMail",tolua_Extension_Misc_sendMail00);
+   tolua_function(tolua_S,"setFileToRequestData",tolua_Extension_Misc_setFileToRequestData00);
    tolua_function(tolua_S,"sendSMS",tolua_Extension_Misc_sendSMS00);
    tolua_function(tolua_S,"getUADeviceToken",tolua_Extension_Misc_getUADeviceToken00);
    tolua_function(tolua_S,"setUADeviceTokenHandler",tolua_Extension_Misc_setUADeviceTokenHandler00);

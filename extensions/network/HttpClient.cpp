@@ -341,6 +341,7 @@ static int processGetTask(CCHttpRequest *request, write_callback callback, void 
     CURLRaii curl;
     bool ok = curl.init(request, callback, stream, headerCallback, headerStream)
             && curl.setOption(CURLOPT_FOLLOWLOCATION, true)
+			//&& curl.setOption(CURLOPT_PROXY, "127.0.0.1:8888")
             && curl.perform(responseCode);
     return ok ? 0 : 1;
 }
@@ -354,6 +355,7 @@ static int processPostTask(CCHttpRequest *request, write_callback callback, void
 			&& curl.setOption(CURLOPT_USERPWD, request->getUserpwd())
             && curl.setOption(CURLOPT_POSTFIELDS, request->getRequestData())
             && curl.setOption(CURLOPT_POSTFIELDSIZE, request->getRequestDataSize())
+			//&& curl.setOption(CURLOPT_PROXY, "127.0.0.1:8888")
             && curl.perform(responseCode);
     return ok ? 0 : 1;
 }

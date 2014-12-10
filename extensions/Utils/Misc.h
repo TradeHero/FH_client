@@ -2,6 +2,10 @@
 #define _MISC_H_
 
 #include "cocos2d.h"
+#include "cocos-ext.h"
+#include "../network/HttpRequestForLua.h"
+
+USING_NS_CC_EXT;
 
 namespace Utils
 {
@@ -26,6 +30,8 @@ namespace Utils
 		void sendSMSResult(int resultCode);
         
 		char* createFormWithFile(const char* begin, const char* end, const char* filePath, const char* pszMode, unsigned long *pSize);
+
+		void setFileToRequestData(HttpRequestForLua* request, const char* begin, const char* end, const char* filePath, const char* pszMode);
 
 		void getUADeviceToken(int handler);
 

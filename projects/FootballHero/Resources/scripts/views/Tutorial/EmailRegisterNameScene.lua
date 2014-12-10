@@ -59,6 +59,10 @@ function confirmEventHandler( sender,eventType )
 end
 
 function logoEventHandler( sender,eventType )
+    local logoSelectResultHandler = function()
+        
+    end
+
     if eventType == TOUCH_EVENT_ENDED then
         Misc:sharedDelegate():selectImage( Constants.LOGO_IMAGE_PATH, logoSelectResultHandler )
     end

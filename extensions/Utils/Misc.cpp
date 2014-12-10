@@ -147,6 +147,21 @@ namespace Utils
 		return buffer;
 	}
 
+	void Misc::setFileToRequestData(HttpRequestForLua* request, const char* begin, const char* end, const char* filePath, const char* pszMode)
+	{
+		unsigned long pSize;
+		unsigned char* fileContent = CCFileUtils::sharedFileUtils()->getFileData(filePath, pszMode, &pSize);
+
+		char* buffer = new char[strlen(begin) + strlen(end) + pSize];
+
+		memcpy(buffer, begin, strlen(begin));
+		memcpy(buffer + strlen(begin), fileContent, pSize);
+		memcpy(buffer + strlen(begin) + pSize, end, strlen(end));
+
+		pSize += (strlen(begin) + strlen(end));
+		request->getRequest()->setRequestData(buffer, pSize);
+	}
+
 	void Misc::getUADeviceToken(int handler)
 	{
 		mUADeviceTokenHandler = handler;
