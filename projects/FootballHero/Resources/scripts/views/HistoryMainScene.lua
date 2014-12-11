@@ -11,6 +11,7 @@ local CountryConfig = require("scripts.config.Country")
 local SMIS = require("scripts.SMIS")
 local StatsDropDownFilter = require("scripts.views.StatsDropDownFilter")
 local CompetitionType = require("scripts.data.Competitions").CompetitionType
+local RequestUtils = require("scripts.RequestUtils")
 
 local CONTENT_FADEIN_TIME = 1
 
@@ -243,6 +244,7 @@ function initContent( couponHistory, userName )
     end
 
     local logo = tolua.cast( mWidget:getChildByName("Image_Profile_Pic"), "ImageView" )
+    logo:addTouchEventListener( logoEventHandler )
     if info["PictureUrl"] ~= nil then
         local handler = function( filePath )
             if filePath ~= nil and mWidget ~= nil and logo ~= nil then
@@ -424,6 +426,21 @@ end
 
 function predictionClicked( isOpen, matchInfo )
 	EventManager:postEvent( Event.Enter_History_Detail, { isOpen, matchInfo } )
+end
+
+function logoEventHandler( sender,eventType )
+    if eventType == TOUCH_EVENT_ENDED then
+        local logoSelectResultHandler = function( success )
+            if success then
+                local logo = tolua.cast( mWidget:getChildByName("Image_Profile_Pic"), "ImageView" )
+                logo:loadTexture( Constants.LOGO_IMAGE_PATH )
+                EventManager:postEvent( Event.Do_Post_Logo )
+                RequestUtils.invalidResponseCacheContainsUrl( RequestUtils.GET_COUPON_HISTORY_REST_CALL )
+            end
+        end
+
+        Misc:sharedDelegate():selectImage( Constants.LOGO_IMAGE_PATH, 100, 100, logoSelectResultHandler )
+    end
 end
 
 function loadMoreContent( couponHistory )
