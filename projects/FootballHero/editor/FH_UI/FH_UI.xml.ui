@@ -42,11 +42,8 @@
     <string>HistoryDetail.json</string>
     <string>HistoryDetailClosedContent.json</string>
     <string>HistoryDetailOpenContent.json</string>
-    <string>HistoryHomeForOthers.json</string>
     <string>HistoryMainMatchContent.json</string>
     <string>HistoryMainTitle.json</string>
-    <string>LeaderbaordContentInDropDown.json</string>
-    <string>LeaderbaordDropDown.json</string>
     <string>LeaderboardContent.json</string>
     <string>LeaderboardList.json</string>
     <string>LeaderboardListContent.json</string>
@@ -109,7 +106,9 @@
   <ProjectType>UIProject</ProjectType>
   <ResRelativePath />
   <imageFileList />
-  <imagePngList />
+  <imagePngList>
+    <string>community/img-header.png</string>
+  </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>CompetitionWebview.json</CurrentUIJson>
+  <CurrentUIJson>WTWBEGPrediction.json</CurrentUIJson>
 </UIProject>

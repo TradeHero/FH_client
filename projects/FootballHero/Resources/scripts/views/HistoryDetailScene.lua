@@ -101,9 +101,11 @@ function helperInitMatchInfo( content, matchInfo )
 
     local team1Name = tolua.cast( content:getChildByName("team1Name"), "Label" )
     local team2Name = tolua.cast( content:getChildByName("team2Name"), "Label" )
+    local vs = tolua.cast( content:getChildByName("Label_VS"), "Label" )
 
     team1Name:setText( TeamConfig.getTeamName( mHomeTeamId ) )
     team2Name:setText( TeamConfig.getTeamName( mAwayTeamId ) )
+    vs:setText( Constants.String.vs )
 end
 
 function initCouponInfo( content, info )
@@ -154,19 +156,19 @@ function initCouponInfo( content, info )
 
     answer:setText( answerString )
     choice:loadTexture( choiceImage )
-    stake:setText( string.format( stake:getStringValue(), info["Stake"] ) )
+    stake:setText( string.format( Constants.String.history.stake, info["Stake"] ) )
 
     if mIsOpen == false then
         if info["Won"] then
             statusBar:setFocused( true )
             winLoseLabel:setText(Constants.String.history.won_colon)
-            points:setText( string.format( points:getStringValue(), info["Profit"] ) )
+            points:setText( string.format( Constants.String.num_of_points, info["Profit"] ) )
         else
             statusBar:setBright( false )
             winLoseLabel:setText(Constants.String.history.lost_colon)
-            points:setText( string.format( points:getStringValue(), info["Stake"] ) )
+            points:setText( string.format( Constants.String.num_of_points, info["Stake"] ) )
         end
     else
-        points:setText( string.format( points:getStringValue(), info["Profit"] ) )
+        points:setText( string.format( Constants.String.num_of_points, info["Profit"] ) )
     end
 end

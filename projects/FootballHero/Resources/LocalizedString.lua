@@ -125,6 +125,8 @@ M.en = {
     no_closed_prediction_others = "No closed predictions",
     total_points = "Total Points: %d",
     show_all = "Show All",
+    stake = "Stake: %d Points",
+    win_count = "%d of %d",
   },
   info = {
     announcement_title = "Announcement",
@@ -211,7 +213,7 @@ M.en = {
   unknown_team = "Unknown Team",
   updating_files = "Updating %s ...",
   user_name = "Username",
-  
+  vs = "VS",
 
 }
 

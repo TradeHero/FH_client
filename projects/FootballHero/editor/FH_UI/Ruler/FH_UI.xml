@@ -129,10 +129,6 @@
     <GuidesList />
   </GuidesProject>
   <GuidesProject>
-    <Project>HistoryHomeForOthers</Project>
-    <GuidesList />
-  </GuidesProject>
-  <GuidesProject>
     <Project>SettingsHome</Project>
     <GuidesList />
   </GuidesProject>
@@ -258,14 +254,6 @@
   </GuidesProject>
   <GuidesProject>
     <Project>CompetitionMoreContent</Project>
-    <GuidesList />
-  </GuidesProject>
-  <GuidesProject>
-    <Project>LeaderbaordDropDown</Project>
-    <GuidesList />
-  </GuidesProject>
-  <GuidesProject>
-    <Project>LeaderbaordContentInDropDown</Project>
     <GuidesList />
   </GuidesProject>
   <GuidesProject>

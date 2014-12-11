@@ -486,12 +486,14 @@ function helperInitOpenPrediction( content, matchInfo )
     local winCount = tolua.cast( content:getChildByName("Label_WinCount"), "Label" )
     local winType = tolua.cast( content:getChildByName("Label_WinType"), "Label" )
     local score = tolua.cast( content:getChildByName("Label_Score"), "Label" )
+    local vs = tolua.cast( content:getChildByName("Label_VS"), "Label" )
 
     points:setEnabled( false )
     pointsTitle:setEnabled( false )
     winCount:setEnabled( false )
     winType:setEnabled( false )
     score:setEnabled( false )
+    vs:setText( Constants.String.vs )
 end
 
 function helperInitClosedPrediction( content, matchInfo )
@@ -528,10 +530,10 @@ function helperInitClosedPrediction( content, matchInfo )
 
     if wins >= totalMatches / 2 then
         winType:setText( Constants.String.history.won_small )
-        winCount:setText( string.format( winCount:getStringValue(), wins, totalMatches ) )
+        winCount:setText( string.format( Constants.String.history.win_count, wins, totalMatches ) )
     else
         winType:setText( Constants.String.history.lost_small )
-        winCount:setText( string.format( winCount:getStringValue(), totalMatches - wins, totalMatches ) )
+        winCount:setText( string.format( Constants.String.history.win_count, totalMatches - wins, totalMatches ) )
         winCount:setColor( ccc3( 240, 75, 79 ) )
     end
 
