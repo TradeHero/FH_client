@@ -60,8 +60,7 @@
     <string>MyPicksEmptyFrame.json</string>
     <string>MyPicksHome.json</string>
     <string>Navigator.json</string>
-    <string>PNCompetitionMessage.json</string>
-    <string>PNPredictionMessage.json</string>
+    <string>PushNotificationMessage.json</string>
     <string>PredFinalConfirm.json</string>
     <string>PredFinalConfirmButton.json</string>
     <string>PredFinalConfirmContent.json</string>
@@ -101,7 +100,13 @@
   <ProjectType>UIProject</ProjectType>
   <ResRelativePath />
   <imageFileList />
-  <imagePngList />
+  <imagePngList>
+    <string>PredictionConfirm/white_popup.png</string>
+    <string>PredictionConfirm/fb_icon.png</string>
+    <string>PredictionConfirm/off_button.png</string>
+    <string>PredictionConfirm/on_button.png</string>
+    <string>Tutorial/Default Button.png</string>
+  </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>WTWBEGPrediction.json</CurrentUIJson>
+  <CurrentUIJson>PushNotificationMessage.json</CurrentUIJson>
 </UIProject>

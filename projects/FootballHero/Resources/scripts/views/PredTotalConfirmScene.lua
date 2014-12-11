@@ -99,6 +99,10 @@ function facebookEventHandler( sender, eventType )
 end
 
 function initContent()
+
+	local title = tolua.cast( mWidget:getChildByName("Label_Title"), "Label" )
+	title:setText( Constants.String.match_prediction.prediction_summary )
+
 	local contentContainer = tolua.cast( mWidget:getChildByName("resultContainer"), "ScrollView" )
     contentContainer:removeAllChildrenWithCleanup( true )
 
@@ -115,10 +119,14 @@ function initContent()
 		local stake = tolua.cast( content:getChildByName("stake"), "Label" )
 		local answerIcon = tolua.cast( content:getChildByName("answerIcon"), "ImageView" )
 		local bigBet = content:getChildByName("Image_BigBet")
+		local lbStake = tolua.cast( content:getChildByName("Label_Stake"), "Label" )
+		local lbWin = tolua.cast( content:getChildByName("Label_Win"), "Label" )
 
+		lbStake:setText( Constants.String.match_prediction.stake )
+		lbWin:setText( Constants.String.match_prediction.win )
 		question:setText( coupon["Answer"] )
-		reward:setText( string.format( reward:getStringValue(), coupon["Reward"] ) )
-		stake:setText( string.format( stake:getStringValue(), coupon["Stake"] ) )
+		reward:setText( string.format( Constants.String.num_of_points, coupon["Reward"] ) )
+		stake:setText( string.format( Constants.String.num_of_points, coupon["Stake"] ) )
 		answerIcon:loadTexture( coupon["AnswerIcon"] )
 
 		if coupon["Stake"] ~= Constants.STAKE_BIGBET then
@@ -135,12 +143,19 @@ function initContent()
     contentContainer:addChild( buttonsWidget )
     contentHeight = contentHeight + buttonsWidget:getSize().height
 
-    local confirmBt = buttonsWidget:getChildByName("confirm")
+    local confirmBt = tolua.cast( buttonsWidget:getChildByName("confirm"), "Button" )
     confirmBt:addTouchEventListener( confirmEventHandler )
-    local cancelBt = buttonsWidget:getChildByName("cancel")
+    local cancelBt = tolua.cast( buttonsWidget:getChildByName("cancel"), "Button" )
     cancelBt:addTouchEventListener( cancelEventHandler )
     mFacebookBt = tolua.cast( buttonsWidget:getChildByName("facebook"), "CheckBox" )
     mFacebookBt:addTouchEventListener( facebookEventHandler )
+
+    confirmBt:setTitleText( Constants.String.button.confirm )
+    cancelBt:setTitleText( Constants.String.button.cancel )
+    local lbFB = tolua.cast( buttonsWidget:getChildByName("Label_Facebook"), "Label" )
+    local lbShare = tolua.cast( buttonsWidget:getChildByName("Label_Share"), "Label" )
+    lbFB:setText( Constants.String.match_prediction.facebook )
+    lbShare:setText( Constants.String.match_prediction.share )
 
 	-- Update the size of the scroll view so that it locate just above the facebook button.
 	local originSize = contentContainer:getSize()

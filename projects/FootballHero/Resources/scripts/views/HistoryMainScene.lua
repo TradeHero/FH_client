@@ -211,7 +211,7 @@ function initContent( couponHistory, userName )
         label:setText( Constants.String.history.predictions_all )
         show:setEnabled( false )
     end
-
+    
     -- Stats
     local stats = mWidget:getChildByName("Panel_Stats")
     local stat_win = tolua.cast( stats:getChildByName("Label_Win"), "Label" )
@@ -221,12 +221,29 @@ function initContent( couponHistory, userName )
     local stat_last_10_win = tolua.cast( stats:getChildByName("Label_W"), "Label" )
     local stat_last_10_lose = tolua.cast( stats:getChildByName("Label_L"), "Label" )
 
+    --Labels
+    local lb_stat_win = tolua.cast( stats:getChildByName("Label_Title_Win"), "Label" )
+    local lb_stat_lose = tolua.cast( stats:getChildByName("Label_Title_Lose"), "Label" )
+    local lb_stat_win_percent = tolua.cast( stats:getChildByName("Label_Title_Win_Percent"), "Label" )
+    local lb_stat_gain_percent = tolua.cast( stats:getChildByName("Label_Title_Gain_Percent"), "Label" )
+    local lb_stat_last_10 = tolua.cast( stats:getChildByName("Label_Title_Last_10"), "Label" )
+    local lb_stat_last_10_win = tolua.cast( stats:getChildByName("Label_Title_W"), "Label" )
+    local lb_stat_last_10_lose = tolua.cast( stats:getChildByName("Label_Title_L"), "Label" )
+
     stat_win:setText( info["NumberOfCouponsWon"] )
     stat_lose:setText( info["NumberOfCouponsLost"] )
     stat_win_percent:setText( string.format( "%d", info["WinPercentage"] ) )
     stat_gain_percent:setText( info["Roi"] )
     stat_last_10_win:setText( info["WinStreakCouponsWon"] )
     stat_last_10_lose:setText( info["WinStreakCouponsLost"] )
+
+    lb_stat_win:setText( Constants.String.leaderboard.stats.win )
+    lb_stat_lose:setText( Constants.String.leaderboard.stats.lose )
+    lb_stat_win_percent:setText( Constants.String.leaderboard.stats.win_rate )
+    lb_stat_gain_percent:setText( Constants.String.leaderboard.stats.gain_rate )
+    lb_stat_last_10:setText( Constants.String.leaderboard.stats.last_ten )
+    lb_stat_last_10_win:setText( Constants.String.leaderboard.stats.w )
+    lb_stat_last_10_lose:setText( Constants.String.leaderboard.stats.l )
 
     if info["Roi"] < 0 then
         stat_gain_percent:setColor( ccc3( 240, 75, 79 ) )

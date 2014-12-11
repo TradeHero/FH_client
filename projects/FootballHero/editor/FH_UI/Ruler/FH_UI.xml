@@ -245,11 +245,7 @@
     <GuidesList />
   </GuidesProject>
   <GuidesProject>
-    <Project>PNPredictionMessage</Project>
-    <GuidesList />
-  </GuidesProject>
-  <GuidesProject>
-    <Project>PNCompetitionMessage</Project>
+    <Project>PushNotificationMessage</Project>
     <GuidesList />
   </GuidesProject>
   <GuidesProject>
