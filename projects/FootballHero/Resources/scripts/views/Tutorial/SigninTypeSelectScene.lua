@@ -18,11 +18,13 @@ function loadFrame()
     mWidget:setOpacity( 0 )
     SceneManager.addWidget( mWidget )
 
-    local email = mWidget:getChildByName("email")
+    local email = tolua.cast( mWidget:getChildByName("email"), "Button" )
     email:addTouchEventListener( signinTypeEmailEventHandler )
+    email:setTitleText( Constants.String.email_signin )
 
-    local facebook = mWidget:getChildByName("facebook")
+    local facebook = tolua.cast( mWidget:getChildByName("facebook"), "Button" )
     facebook:addTouchEventListener( signinTypeFacebookEventHandler )
+    facebook:setTitleText( Constants.String.facebook_signin )
     
     helperSetTouchEnabled( false )
 end

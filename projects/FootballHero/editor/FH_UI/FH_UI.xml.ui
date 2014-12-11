@@ -36,9 +36,6 @@
     <string>CreateCompetitionContent.json</string>
     <string>ErrorMessage.json</string>
     <string>FAQ.json</string>
-    <string>FavouriteCountryContent.json</string>
-    <string>FavouriteLeagueContent.json</string>
-    <string>FavouriteTeam.json</string>
     <string>HistoryDetail.json</string>
     <string>HistoryDetailClosedContent.json</string>
     <string>HistoryDetailOpenContent.json</string>
@@ -60,8 +57,7 @@
     <string>MyPicksEmptyFrame.json</string>
     <string>MyPicksHome.json</string>
     <string>Navigator.json</string>
-    <string>PNCompetitionMessage.json</string>
-    <string>PNPredictionMessage.json</string>
+    <string>PushNotificationMessage.json</string>
     <string>PredFinalConfirm.json</string>
     <string>PredFinalConfirmButton.json</string>
     <string>PredFinalConfirmContent.json</string>
@@ -83,14 +79,8 @@
     <string>TutorialEmailSignin.json</string>
     <string>TutorialForgotPassword.json</string>
     <string>TutorialHomepage.json</string>
-    <string>TutorialPrediction.json</string>
-    <string>TutorialRegisterName.json</string>
-    <string>TutorialSelectFavourite.json</string>
     <string>TutorialSigninType.json</string>
-    <string>WBTSPrediction.json</string>
-    <string>WTCBMTPrediction.json</string>
     <string>WTGBMTPrediction.json</string>
-    <string>WTSPrediction.json</string>
     <string>WTWBEGPrediction.json</string>
   </JsonList>
   <CanvasSize>
@@ -101,7 +91,14 @@
   <ProjectType>UIProject</ProjectType>
   <ResRelativePath />
   <imageFileList />
-  <imagePngList />
+  <imagePngList>
+    <string>MatchPrediction/prediction-yes.png</string>
+    <string>MatchPrediction/prediction-no.png</string>
+    <string>MatchPrediction/btn-inactivestake.png</string>
+    <string>MatchPrediction/btn-disabledstake.png</string>
+    <string>MatchPrediction/btn-activestake.png</string>
+    <string>MatchPrediction/btn-countdown.png</string>
+  </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
   <CurrentUIJson>WTWBEGPrediction.json</CurrentUIJson>
 </UIProject>

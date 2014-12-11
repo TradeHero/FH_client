@@ -11,9 +11,7 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "MatchListScene/match_bkg.png",
-    "header/back.png",
-    "Tutorial/Default Button.png"
+    "Settings/settings_03.png"
   ],
   "version": "1.5.0.0",
   "widgetTree": {
@@ -154,7 +152,7 @@
         "options": {
           "__type": "LabelSurrogate:#EditorCommon.JsonModel.Component.GUI",
           "classname": "Label",
-          "name": "Label_13",
+          "name": "Label_Title",
           "ZOrder": 0,
           "actiontag": 37108618,
           "anchorPointX": 0.5,

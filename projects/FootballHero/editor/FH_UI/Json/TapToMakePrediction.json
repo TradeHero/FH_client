@@ -23,7 +23,7 @@
         "options": {
           "__type": "LabelSurrogate:#EditorCommon.JsonModel.Component.GUI",
           "classname": "Label",
-          "name": "label001",
+          "name": "Label_Tap",
           "ZOrder": 4,
           "actiontag": 30665697,
           "anchorPointX": 0.5,
@@ -42,7 +42,7 @@
           "positionPercentX": 0.5,
           "positionPercentY": 0.48,
           "positionType": 0,
-          "rotation": -0.186639965,
+          "rotation": 0,
           "scaleX": 1,
           "scaleY": 1,
           "sizePercentX": 0.7578125,

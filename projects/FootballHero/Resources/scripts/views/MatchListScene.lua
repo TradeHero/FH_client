@@ -213,6 +213,10 @@ function initMatchList( matchList, leagueKey, bInit )
 
             if mTheFirstDate == nil then
                 local hintContent = SceneManager.widgetFromJsonFile("scenes/TapToMakePrediction.json")
+
+                local hintText = tolua.cast( hintContent:getChildByName("Label_Tap"), "Label" )
+                hintText:setText( Constants.String.match_prediction.hint_tap )
+
                 hintContent:setLayoutParameter( layoutParameter )
                 hintContent:setZOrder( zOrder )
                 contentContainer:addChild( hintContent )

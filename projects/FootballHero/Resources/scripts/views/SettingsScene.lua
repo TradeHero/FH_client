@@ -5,9 +5,9 @@ local Navigator = require("scripts.views.Navigator")
 local EventManager = require("scripts.events.EventManager").getInstance()
 local Event = require("scripts.events.Event").EventList
 local SettingsConfig = require("scripts.config.Settings")
+local Constants = require("scripts.Constants")
 
 local mWidget
-
 
 function loadFrame()
 	local widget = GUIReader:shareReader():widgetFromJsonFile("scenes/SettingsHome.json")
@@ -33,6 +33,9 @@ function isFrameShown()
 end
 
 function initContent()
+    local title = tolua.cast( mWidget:getChildByName("Label_Title"), "Label" )
+    title:setText( Constants.String.settings.title )
+    
 	local contentContainer = tolua.cast( mWidget:getChildByName("ScrollView"), "ScrollView" )
     contentContainer:removeAllChildrenWithCleanup( true )
 

@@ -65,7 +65,7 @@
             "plistFile": null,
             "resourceType": 0
           },
-          "fontName": "微软雅黑",
+          "fontName": "fonts/Helvetica neue.ttf",
           "fontSize": 34,
           "fontType": 0,
           "normal": null,
@@ -138,7 +138,7 @@
             "plistFile": null,
             "resourceType": 0
           },
-          "fontName": "微软雅黑",
+          "fontName": "fonts/Helvetica neue.ttf",
           "fontSize": 34,
           "fontType": 0,
           "normal": null,
@@ -242,7 +242,7 @@
         "options": {
           "__type": "LabelSurrogate:#EditorCommon.JsonModel.Component.GUI",
           "classname": "Label",
-          "name": "Label_80_0",
+          "name": "Label_Terms",
           "ZOrder": 1,
           "actiontag": 45502768,
           "anchorPointX": 0.5,
@@ -277,7 +277,7 @@
           "areaHeight": 54,
           "areaWidth": 500,
           "fontFile": null,
-          "fontName": "微软雅黑",
+          "fontName": "fonts/Helvetica neue.ttf",
           "fontSize": 20,
           "hAlignment": 0,
           "text": "By Signing in, you are indicating that you have read and agree to FOOTBALL HERO'S",
@@ -292,7 +292,7 @@
         "options": {
           "__type": "ButtonSurrogate:#EditorCommon.JsonModel.Component.GUI",
           "classname": "Button",
-          "name": "Button_81_0",
+          "name": "Button_Terms",
           "ZOrder": 0,
           "actiontag": 9079260,
           "anchorPointX": 0.5,
@@ -334,7 +334,7 @@
             "plistFile": null,
             "resourceType": 0
           },
-          "fontName": "微软雅黑",
+          "fontName": "fonts/Helvetica neue.ttf",
           "fontSize": 14,
           "fontType": 0,
           "normal": null,

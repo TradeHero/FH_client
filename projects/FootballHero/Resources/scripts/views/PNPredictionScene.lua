@@ -15,12 +15,24 @@ function loadFrame( selectYesCallback, selectNoCallback )
     mSelectYesCallback = selectYesCallback
     mSelectNoCallback = selectNoCallback
 
-	local widget = GUIReader:shareReader():widgetFromJsonFile("scenes/PNPredictionMessage.json")
+	local widget = GUIReader:shareReader():widgetFromJsonFile("scenes/PushNotificationMessage.json")
 
-    local okBt = widget:getChildByName("OK")
+    local okBt = tolua.cast( widget:getChildByName("Button_Enable"), "Button" )
     okBt:addTouchEventListener( okEventHandler )
-    local closeBt = widget:getChildByName("close")
+    local closeBt = widget:getChildByName("Button_Close")
     closeBt:addTouchEventListener( closeEventHandler )
+
+    --Labels
+    okBt:setTitleText( Constants.String.button.enable )
+    local lbQuestion = tolua.cast( widget:getChildByName("Label_Question"), "Label" )
+    local lbBody1 = tolua.cast( widget:getChildByName("Label_Body1"), "Label" )
+    local lbBody2 = tolua.cast( widget:getChildByName("Label_Body2"), "Label" )
+    local lbBody3 = tolua.cast( widget:getChildByName("Label_Body3"), "Label" )
+
+    lbQuestion:setText( Constants.String.push_notification.question_prediction )
+    lbBody1:setText( Constants.String.push_notification.receive )
+    lbBody2:setText( Constants.String.push_notification.match_result )
+    lbBody3:setText( Constants.String.push_notification.points_won )
 
     widget:addTouchEventListener( onFrameTouch )
     mWidget = widget

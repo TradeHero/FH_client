@@ -43,11 +43,22 @@ function loadFrame( parent, matchInfo, marketInfo, finishCallback, bigBetStatus,
     local yes = tolua.cast( mWidget:getChildByName("yes"), "ImageView" )
     local no = tolua.cast( mWidget:getChildByName("no"), "ImageView" )
     local yesWinPoint = tolua.cast( yes:getChildByName("yesWinPoint"), "Label" )
+    local yesToWin = tolua.cast( yes:getChildByName("Label_ToWin"), "Label" )
     local noWinPoint = tolua.cast( no:getChildByName("noWinPoint"), "Label" )
+    local noToWin = tolua.cast( no:getChildByName("Label_ToWin"), "Label" )
     local stake = tolua.cast( mWidget:getChildByName("stake"), "Label" )
     local balance = tolua.cast( mWidget:getChildByName("balance"), "Label" )
     local bigBet = tolua.cast( mWidget:getChildByName("CheckBox_BigBet"), "CheckBox" )
     local countdown = mWidget:getChildByName("Button_Countdown")
+    local lbBalance = tolua.cast( mWidget:getChildByName("Label_Balance"), "Label" )
+    local lbStake = tolua.cast( mWidget:getChildByName("Label_Stake"), "Label" )
+    local vs = tolua.cast( mWidget:getChildByName("VS"), "Label" )
+
+    yesToWin:setText( Constants.String.match_prediction.stand_to_win )
+    noToWin:setText( Constants.String.match_prediction.stand_to_win )
+    balance:setText( Constants.String.match_prediction.balance )
+    stake:setText( Constants.String.match_prediction.stake )
+    vs:setText( Constants.String.vs )
 
     mStake = Constants.STAKE
     if bigBetStatus["timeToNextBet"] > 0 then
@@ -89,11 +100,11 @@ function loadFrame( parent, matchInfo, marketInfo, finishCallback, bigBetStatus,
         teamName = TeamConfig.getTeamName( TeamConfig.getConfigIdByKey( mMatch["HomeTeamId"] ) )
         line = line * ( -1 )
     end 
-    question:setText( string.format( question:getStringValue(), teamName, math.ceil( line ) ) )
-    yesWinPoint:setText( string.format( yesWinPoint:getStringValue(), MarketsForGameData.getOddsForType( mMarketInfo, MarketConfig.ODDS_TYPE_ONE_OPTION ) * mStake ) )
-    noWinPoint:setText( string.format( noWinPoint:getStringValue(), MarketsForGameData.getOddsForType( mMarketInfo, MarketConfig.ODDS_TYPE_TWO_OPTION ) * mStake ) )
-    stake:setText( string.format( stake:getStringValue(), mStake ) )
-    balance:setText( string.format( balance:getStringValue(), Logic:getBalance() - Logic:getUncommitedBalance() ) )
+    question:setText( string.format( Constants.String.match_prediction.will_win_by, teamName, math.ceil( line ) ) )
+    yesWinPoint:setText( string.format( Constants.String.num_of_points, MarketsForGameData.getOddsForType( mMarketInfo, MarketConfig.ODDS_TYPE_ONE_OPTION ) * mStake ) )
+    noWinPoint:setText( string.format( Constants.String.num_of_points, MarketsForGameData.getOddsForType( mMarketInfo, MarketConfig.ODDS_TYPE_TWO_OPTION ) * mStake ) )
+    stake:setText( string.format( Constants.String.num_of_points, mStake ) )
+    balance:setText( string.format( Constants.String.num_of_points, Logic:getBalance() - Logic:getUncommitedBalance() ) )
 
     yes:addTouchEventListener( selectYes )
     no:addTouchEventListener( selectNo )

@@ -28,8 +28,9 @@ function loadFrame()
     SceneManager.addWidget( mWidget )
     mWidget:setPosition( ccp( Constants.GAME_WIDTH, 0 ) )
 
-    local register = mWidget:getChildByName("register")
+    local register = tolua.cast( mWidget:getChildByName("register"), "Button" )
     register:addTouchEventListener( registerEventHandler )
+    register:setTitleText( Constants.String.button.register )
 
     local backBt = mWidget:getChildByName("back")
     backBt:addTouchEventListener( backEventHandler )
@@ -66,6 +67,15 @@ function loadFrame()
 
     passwordInput:setInputFlag( kEditBoxInputFlagPassword )
     passwordConfInput:setInputFlag( kEditBoxInputFlagPassword )
+
+    local lbOptionalPic = tolua.cast( mWidget:getChildByName("Label_OptionalPic"), "Label" )
+    local lbOptionalFirstName = tolua.cast( mWidget:getChildByName("Label_OptionalFirstName"), "Label" )
+    local lbOptionalLastName = tolua.cast( mWidget:getChildByName("Label_OptionalLastName"), "Label" )
+
+    lbOptionalPic:setText( Constants.String.optional )
+    lbOptionalFirstName:setText( Constants.String.optional )
+    lbOptionalLastName:setText( Constants.String.optional )
+
 end
 
 function isFrameShown()

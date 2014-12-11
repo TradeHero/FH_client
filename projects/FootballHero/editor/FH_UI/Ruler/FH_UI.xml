@@ -17,14 +17,6 @@
     <GuidesList />
   </GuidesProject>
   <GuidesProject>
-    <Project>FavouriteTeam</Project>
-    <GuidesList />
-  </GuidesProject>
-  <GuidesProject>
-    <Project>FavouriteCountryContent</Project>
-    <GuidesList />
-  </GuidesProject>
-  <GuidesProject>
     <Project>Navigator</Project>
     <GuidesList />
   </GuidesProject>
@@ -49,27 +41,11 @@
     <GuidesList />
   </GuidesProject>
   <GuidesProject>
-    <Project>WBTSPrediction</Project>
-    <GuidesList />
-  </GuidesProject>
-  <GuidesProject>
-    <Project>WTCBMTPrediction</Project>
-    <GuidesList />
-  </GuidesProject>
-  <GuidesProject>
     <Project>WTGBMTPrediction</Project>
     <GuidesList />
   </GuidesProject>
   <GuidesProject>
-    <Project>WTSPrediction</Project>
-    <GuidesList />
-  </GuidesProject>
-  <GuidesProject>
     <Project>WTWBEGPrediction</Project>
-    <GuidesList />
-  </GuidesProject>
-  <GuidesProject>
-    <Project>FavouriteLeagueContent</Project>
     <GuidesList />
   </GuidesProject>
   <GuidesProject>
@@ -149,14 +125,6 @@
     <GuidesList />
   </GuidesProject>
   <GuidesProject>
-    <Project>TutorialSelectFavourite</Project>
-    <GuidesList />
-  </GuidesProject>
-  <GuidesProject>
-    <Project>TutorialPrediction</Project>
-    <GuidesList />
-  </GuidesProject>
-  <GuidesProject>
     <Project>TutorialHomepage</Project>
     <GuidesList />
   </GuidesProject>
@@ -190,10 +158,6 @@
   </GuidesProject>
   <GuidesProject>
     <Project>ForgotPassword_0</Project>
-    <GuidesList />
-  </GuidesProject>
-  <GuidesProject>
-    <Project>TutorialRegisterName</Project>
     <GuidesList />
   </GuidesProject>
   <GuidesProject>
@@ -245,11 +209,7 @@
     <GuidesList />
   </GuidesProject>
   <GuidesProject>
-    <Project>PNPredictionMessage</Project>
-    <GuidesList />
-  </GuidesProject>
-  <GuidesProject>
-    <Project>PNCompetitionMessage</Project>
+    <Project>PushNotificationMessage</Project>
     <GuidesList />
   </GuidesProject>
   <GuidesProject>
