@@ -29,10 +29,6 @@
     <GuidesList />
   </GuidesProject>
   <GuidesProject>
-    <Project>LeagueListContent</Project>
-    <GuidesList />
-  </GuidesProject>
-  <GuidesProject>
     <Project>MatchListContent</Project>
     <GuidesList />
   </GuidesProject>
@@ -98,22 +94,6 @@
   </GuidesProject>
   <GuidesProject>
     <Project>HistoryDetailOpenContent</Project>
-    <GuidesList />
-  </GuidesProject>
-  <GuidesProject>
-    <Project>LeaderboardScene</Project>
-    <GuidesList />
-  </GuidesProject>
-  <GuidesProject>
-    <Project>LeaderboardContent</Project>
-    <GuidesList />
-  </GuidesProject>
-  <GuidesProject>
-    <Project>LeaderboardList</Project>
-    <GuidesList />
-  </GuidesProject>
-  <GuidesProject>
-    <Project>LeaderboardListContent</Project>
     <GuidesList />
   </GuidesProject>
   <GuidesProject>

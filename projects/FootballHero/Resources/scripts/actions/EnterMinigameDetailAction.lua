@@ -42,15 +42,16 @@ function onRequestSuccess( jsonResponse )
     local selfUserId = Logic:getUserId()
     -- add display names and profile pics
     for i = 1, table.getn( jsonResponse ) do
-        for j = 1, table.getn( goalScorers ) do
-            if jsonResponse[i]["UserId"] == goalScorers[j]["playingUserId"] then
-                goalScorers[j]["DisplayName"] = jsonResponse[i]["DisplayName"]
-                goalScorers[j]["PictureUrl"] = jsonResponse[i]["PictureUrl"]
-                break
-            elseif jsonResponse[i]["UserId"] == selfUserId then
-                mMinigame["DisplayName"] = jsonResponse[i]["DisplayName"]
-                mMinigame["PictureUrl"] = jsonResponse[i]["PictureUrl"]
-                break
+        if jsonResponse[i]["UserId"] == selfUserId then
+            mMinigame["DisplayName"] = jsonResponse[i]["DisplayName"]
+            mMinigame["PictureUrl"] = jsonResponse[i]["PictureUrl"]
+        else
+            for j = 1, table.getn( goalScorers ) do
+                if jsonResponse[i]["UserId"] == goalScorers[j]["playingUserId"] then
+                    goalScorers[j]["DisplayName"] = jsonResponse[i]["DisplayName"]
+                    goalScorers[j]["PictureUrl"] = jsonResponse[i]["PictureUrl"]
+                    break
+                end 
             end
         end
     end

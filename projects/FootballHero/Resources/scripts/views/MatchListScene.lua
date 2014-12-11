@@ -45,38 +45,6 @@ function loadFrame( matchList, leagueKey )
     -- Init the match list according to the data.
     initMatchList( matchList, leagueKey, true )
 
-    -- Init the league list
-    --[[
-    LeagueListSceneUnexpended.loadFrame( "scenes/CountryListContent.json", "scenes/LeagueListContent.json", 
-        tolua.cast( mWidget:getChildByName("leagueList"), "ScrollView" ), leagueSelectedCallback )
-    --]]
-
-    -- Option button
-    --[[
-    local optionBt = widget:getChildByName("option")
-    optionBt:addTouchEventListener( optionEventHandler )
-    --]]
-
-    local userName = tolua.cast( widget:getChildByName("userName"), "Label" )
-    userName:setText( Logic:getDisplayName() )
-    
-    if Logic:getPictureUrl() ~= nil then
-        local handler = function( filePath )
-            if filePath ~= nil then
-                local userLogo = tolua.cast( widget:getChildByName("userPhoto"), "ImageView" )
-                userLogo:loadTexture( filePath )
-            end
-        end
-        SMIS.getSMImagePath( Logic:getPictureUrl(), handler )
-    else
-        local fileUtils = CCFileUtils:sharedFileUtils()
-        local path = fileUtils:getWritablePath()..Constants.LOGO_IMAGE_PATH
-        if fileUtils:isFileExist( path ) then
-            local userLogo = tolua.cast( widget:getChildByName("userPhoto"), "ImageView" )
-            userLogo:loadTexture( path )
-        end
-    end
-
     -- Init the toplayer to listen to the swap action.
     --[[
     mTopLayer = CCLayer:create()
@@ -514,14 +482,21 @@ function helperInitMatchInfo( topContent, matchInfo )
     local homePercent = tolua.cast( topContent:getChildByName("home_percent"), "Label" )
     local awayPercent = tolua.cast( topContent:getChildByName("away_percent"), "Label" )
     local drawPercent = tolua.cast( topContent:getChildByName("draw_percent"), "Label" )
-
+    local lbDraw = tolua.cast( topContent:getChildByName("Label_Draw"), "Label" )
     local points = tolua.cast( topContent:getChildByName("Points"), "Label")
     local stamp = tolua.cast( topContent:getChildByName("Stamp"), "ImageView" )
     
     local content = topContent:getChildByName("fade_panel")
     local fhNum = tolua.cast( content:getChildByName("fhNum"), "Label" )
     local played = tolua.cast( content:getChildByName("played"), "Label" )
-    
+    local lbPlayed = tolua.cast( content:getChildByName("Label_Played"), "Label" )
+    local lbTotalFans = tolua.cast( content:getChildByName("Label_TotalFans"), "Label" )
+
+    -- Labels
+    lbDraw:setText( Constants.String.match_list.draw )
+    lbPlayed:setText( Constants.String.match_list.played )
+    lbTotalFans:setText( Constants.String.match_list.total_fans )
+
     -- Load the team logo
     team1:loadTexture( TeamConfig.getLogo( TeamConfig.getConfigIdByKey( matchInfo["HomeTeamId"] ) ) )
     team2:loadTexture( TeamConfig.getLogo( TeamConfig.getConfigIdByKey( matchInfo["AwayTeamId"] ) ) )

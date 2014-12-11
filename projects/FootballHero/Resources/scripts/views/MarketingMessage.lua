@@ -14,11 +14,20 @@ function loadFrame( leagueId )
     mLeagueId = leagueId
 	local widget = GUIReader:shareReader():widgetFromJsonFile("scenes/MarketingMessage.json")
 
-    local okBt = widget:getChildByName("OK")
+    local okBt = tolua.cast( widget:getChildByName("Button_Go"), "Button" )
     okBt:addTouchEventListener( okEventHandler )
-    local closeBt = widget:getChildByName("close")
+    okBt:setTitleText( Constants.String.button.go )
+
+    local closeBt = widget:getChildByName("Button_Close")
     closeBt:addTouchEventListener( closeEventHandler )
 
+    local lbCTA1 = tolua.cast( widget:getChildByName("Label_CTA1"), "Label" )
+    local lbCTA2 = tolua.cast( widget:getChildByName("Label_CTA2"), "Label" )
+    local lbCTA3 = tolua.cast( widget:getChildByName("Label_CTA3"), "Label" )
+    lbCTA1:setText( Constants.String.marketing_message_1 )
+    lbCTA2:setText( Constants.String.marketing_message_2 )
+    lbCTA3:setText( Constants.String.marketing_message_3 )
+    
     widget:addTouchEventListener( onFrameTouch )
     mWidget = widget
     mWidget:registerScriptHandler( EnterOrExit )
