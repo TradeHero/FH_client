@@ -9,8 +9,14 @@ local RequestUtils = require("scripts.RequestUtils")
 local Constants = require("scripts.Constants")
 
 local BOUNDARY = "----WebKitFormBoundary0RE40S3jy2bDPXOM"
+local mCallback
 
 function action( param )
+    mCallback = nil
+    if param ~= nil and param[1] ~= nil then
+        mCallback = param[1]
+    end
+
     local fileUtils = CCFileUtils:sharedFileUtils()
     local path = fileUtils:getWritablePath()..Constants.LOGO_IMAGE_PATH
     if not fileUtils:isFileExist( path ) then
@@ -41,12 +47,16 @@ function action( param )
 end
 
 function onRequestSuccess( jsonResponse )
-    -- Do nothing
     CCLuaLog( "Do Post Logo action success with: "..jsonResponse )
+    if mCallback ~= nil then
+        mCallback()
+    end
 end
 
 function onRequestFailed( jsonResponse )
-    -- Do nothing
     local errorBuffer = jsonResponse["Message"]
     CCLuaLog( "Do Post Logo action failed with: "..errorBuffer )
+    if mCallback ~= nil then
+        mCallback()
+    end
 end

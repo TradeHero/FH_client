@@ -148,6 +148,25 @@ public class MainActivity extends Cocos2dxActivity {
         // MAT will not function unless the measureSession call is included
         mobileAppTracker.measureSession();
 
+        Log.v("###", "onResume");
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Log.v("###", "onDestroy");
+    }
+
+    @Override
+    public void onRestart() {
+        Log.v("###", "onRestart");
+        super.onRestart();
+    }
+
+    @Override
+    public void onPause() {
+        Log.v("###", "onPause");
+        super.onPause();
     }
 
   @Override

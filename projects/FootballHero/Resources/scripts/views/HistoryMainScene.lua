@@ -449,10 +449,15 @@ function logoEventHandler( sender,eventType )
     if eventType == TOUCH_EVENT_ENDED then
         local logoSelectResultHandler = function( success )
             if success then
-                local logo = tolua.cast( mWidget:getChildByName("Image_Profile_Pic"), "ImageView" )
-                logo:loadTexture( Constants.LOGO_IMAGE_PATH )
-                EventManager:postEvent( Event.Do_Post_Logo )
-                RequestUtils.invalidResponseCacheContainsUrl( RequestUtils.GET_COUPON_HISTORY_REST_CALL )
+                local postLogoCallback = function()
+                    local logo = tolua.cast( mWidget:getChildByName("Image_Profile_Pic"), "ImageView" )
+                    logo:loadTexture( Constants.LOGO_IMAGE_PATH )
+
+                    RequestUtils.invalidResponseCacheContainsUrl( RequestUtils.GET_COUPON_HISTORY_REST_CALL )
+                end
+
+                EventManager:postEvent( Event.Do_Post_Logo, { postLogoCallback } )
+                
             end
         end
 

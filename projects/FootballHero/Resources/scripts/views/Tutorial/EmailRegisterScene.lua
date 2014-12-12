@@ -129,9 +129,14 @@ function logoEventHandler( sender,eventType )
     if eventType == TOUCH_EVENT_ENDED then
         local logoSelectResultHandler = function( success )
             if success then
-                local logoInput = tolua.cast( mWidget:getChildByName("logo"), "ImageView" )
-                logoInput:loadTexture( Constants.LOGO_IMAGE_PATH )
-                mLogoSelected = true
+                local refreshImage = function()
+                    local logoInput = tolua.cast( mWidget:getChildByName("logo"), "ImageView" )
+                    logoInput:loadTexture( Constants.LOGO_IMAGE_PATH )
+                    mLogoSelected = true
+                end
+
+                EventManager:scheduledExecutor( refreshImage, 1 )
+                
             end
         end
 

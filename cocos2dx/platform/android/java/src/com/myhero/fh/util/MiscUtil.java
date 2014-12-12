@@ -12,6 +12,7 @@ import org.cocos2dx.lib.Cocos2dxHelper;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 
 public class MiscUtil {
   private static final String TAG = MiscUtil.class.getSimpleName();
@@ -124,23 +125,35 @@ public class MiscUtil {
                 Log.i(TAG, "imagePath = " + imagePath);  // /storage/sdcard0/Nikon_WU/Card/D20130928_001/100NIKON/DSCN2559.JPG
 
                 Bitmap originBitmap = BitmapFactory.decodeFile(imagePath);
-                Bitmap scaledBitmap = Bitmap.createBitmap(mImageWidth, mImageHeight, Bitmap.Config.ARGB_4444);
+                Bitmap scaledBitmap = Bitmap.createBitmap(mImageWidth, mImageHeight, Bitmap.Config.ARGB_8888);
                 Canvas canvas = new Canvas(scaledBitmap);
-                canvas.drawBitmap(originBitmap, null, new Rect(0, 0, mImageWidth, mImageHeight), new Paint(Paint.FILTER_BITMAP_FLAG));
+                canvas.drawBitmap(originBitmap, null, new Rect(0, 0, mImageWidth, mImageHeight), null);
                 File saveFile = new File(mImagePath);
                 if(saveFile.exists()){
                     saveFile.delete();
                 }
+                FileOutputStream out = null;
                 try {
-                    FileOutputStream out = new FileOutputStream(new File(mImagePath));
-                    scaledBitmap.compress(Bitmap.CompressFormat.JPEG, 100, out);
-                    out.close();
+                    File f = new File(mImagePath);
+                    out = new FileOutputStream(f);
+                    scaledBitmap.compress(Bitmap.CompressFormat.JPEG, 80, out);
+                    out.flush();
+                    MediaStore.Images.Media.insertImage(Cocos2dxActivity.getContext().getContentResolver(), f.getAbsolutePath(), f.getName(), f.getName());
+                    selectImageResult(true);
                 }
                 catch(Exception e)
                 {
                     selectImageResult(false);
                 }
-                selectImageResult(true);
+                finally {
+                    try {
+                        if (out != null) {
+                            out.close();
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
             }
             else
             {
