@@ -45,11 +45,13 @@ function loadFrame()
     local team2 = tolua.cast( mWidget:getChildByName("team2"), "ImageView" )
     local team1Name = tolua.cast( mWidget:getChildByName("team1Name"), "Label" )
     local team2Name = tolua.cast( mWidget:getChildByName("team2Name"), "Label" )
+    local vs = tolua.cast( mWidget:getChildByName("Label_VS"), "Label" )
 
     team1:loadTexture( TeamConfig.getLogo( TeamConfig.getConfigIdByKey( mMatch["HomeTeamId"] ) ) )
     team2:loadTexture( TeamConfig.getLogo( TeamConfig.getConfigIdByKey( mMatch["AwayTeamId"] ) ) )
     team1Name:setText( TeamConfig.getTeamName( TeamConfig.getConfigIdByKey( mMatch["HomeTeamId"] ) ) )
     team2Name:setText( TeamConfig.getTeamName( TeamConfig.getConfigIdByKey( mMatch["AwayTeamId"] ) ) )
+    vs:setText( Constants.String.vs )
 
     local backBt = mWidget:getChildByName("Back")
     backBt:addTouchEventListener( backEventHandler )

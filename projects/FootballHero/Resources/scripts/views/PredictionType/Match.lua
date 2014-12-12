@@ -49,6 +49,20 @@ function loadFrame( parent, matchInfo, marketInfo, finishCallback, bigBetStatus,
     local balance = tolua.cast( mWidget:getChildByName("balance"), "Label" )
     local bigBet = tolua.cast( mWidget:getChildByName("CheckBox_BigBet"), "CheckBox" )
     local countdown = mWidget:getChildByName("Button_Countdown")
+    local lbQuestion = tolua.cast( mWidget:getChildByName("question"), "Label" )
+    local lbBalance = tolua.cast( mWidget:getChildByName("Label_Balance"), "Label" )
+    local lbStake = tolua.cast( mWidget:getChildByName("Label_Stake"), "Label" )
+    local lb1ToWin = tolua.cast( team1:getChildByName("Label_StandToWin"), "Label" )
+    local lb2ToWin = tolua.cast( team2:getChildByName("Label_StandToWin"), "Label" )
+    local lbDrawToWin = tolua.cast( draw:getChildByName("Label_StandToWin"), "Label" )
+
+    -- labels
+    lbQuestion:setText( Constants.String.match_prediction.team_to_win )
+    lbBalance:setText( Constants.String.match_prediction.balance )
+    lbStake:setText( Constants.String.match_prediction.stake )
+    lb1ToWin:setText( Constants.String.match_prediction.stand_to_win )
+    lb2ToWin:setText( Constants.String.match_prediction.stand_to_win )
+    lbDrawToWin:setText( Constants.String.match_prediction.stand_to_win )
 
     mStake = Constants.STAKE
     if bigBetStatus["timeToNextBet"] > 0 then

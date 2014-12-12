@@ -19,14 +19,19 @@ function loadFrame()
     SceneManager.addWidget( mWidget )
     mWidget:setPosition( ccp( Constants.GAME_WIDTH, 0 ) )
 
-    local OK = mWidget:getChildByName("OK")
+    local OK = tolua.cast( mWidget:getChildByName("OK"), "Button" )
     OK:addTouchEventListener( okEventHandler )
+    OK:setTitleText( Constants.String.button.ok )
 
-    local cancel = mWidget:getChildByName("cancel")
+    local cancel = tolua.cast( mWidget:getChildByName("cancel"), "Button" )
     cancel:addTouchEventListener( cancelEventHandler )
+    cancel:setTitleText( Constants.String.button.cancel )
 
     local backBt = mWidget:getChildByName("back")
     backBt:addTouchEventListener( backEventHandler )
+
+    local lbEmail = tolua.cast( mWidget:getChildByName("Label_Email"), "Label" )
+    lbEmail:setText( Constants.String.enter_email )
 
     helperSetTouchEnabled( false )
 

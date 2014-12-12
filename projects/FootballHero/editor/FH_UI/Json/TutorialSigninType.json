@@ -120,7 +120,7 @@
             "plistFile": null,
             "resourceType": 0
           },
-          "fontName": "微软雅黑",
+          "fontName": "fonts/Helvetica neue.ttf",
           "fontSize": 34,
           "fontType": 0,
           "normal": null,
@@ -248,7 +248,7 @@
             "plistFile": null,
             "resourceType": 0
           },
-          "fontName": "微软雅黑",
+          "fontName": "fonts/Helvetica neue.ttf",
           "fontSize": 34,
           "fontType": 0,
           "normal": null,

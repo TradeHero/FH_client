@@ -11,9 +11,7 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "MatchListScene/match_bkg.png",
-    "header/back.png",
-    "Tutorial/Default Button.png"
+    "MatchListScene/match_bkg.png"
   ],
   "version": "1.5.0.0",
   "widgetTree": {
@@ -93,7 +91,7 @@
           "customProperty": "",
           "flipX": false,
           "flipY": false,
-          "height": 52,
+          "height": 47,
           "ignoreSize": true,
           "layoutParameter": null,
           "opacity": 255,
@@ -110,13 +108,13 @@
           "touchAble": false,
           "useMergedTexture": false,
           "visible": true,
-          "width": 115,
+          "width": 105,
           "x": 320,
           "y": 62,
           "areaHeight": 0,
           "areaWidth": 0,
           "fontFile": null,
-          "fontName": "微软雅黑",
+          "fontName": "fonts/Helvetica neue.ttf",
           "fontSize": 40,
           "hAlignment": 1,
           "text": "Name",

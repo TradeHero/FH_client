@@ -211,7 +211,7 @@ function initContent( couponHistory, userName )
         label:setText( Constants.String.history.predictions_all )
         show:setEnabled( false )
     end
-
+    
     -- Stats
     local stats = mWidget:getChildByName("Panel_Stats")
     local stat_win = tolua.cast( stats:getChildByName("Label_Win"), "Label" )
@@ -221,12 +221,29 @@ function initContent( couponHistory, userName )
     local stat_last_10_win = tolua.cast( stats:getChildByName("Label_W"), "Label" )
     local stat_last_10_lose = tolua.cast( stats:getChildByName("Label_L"), "Label" )
 
+    --Labels
+    local lb_stat_win = tolua.cast( stats:getChildByName("Label_Title_Win"), "Label" )
+    local lb_stat_lose = tolua.cast( stats:getChildByName("Label_Title_Lose"), "Label" )
+    local lb_stat_win_percent = tolua.cast( stats:getChildByName("Label_Title_Win_Percent"), "Label" )
+    local lb_stat_gain_percent = tolua.cast( stats:getChildByName("Label_Title_Gain_Percent"), "Label" )
+    local lb_stat_last_10 = tolua.cast( stats:getChildByName("Label_Title_Last_10"), "Label" )
+    local lb_stat_last_10_win = tolua.cast( stats:getChildByName("Label_Title_W"), "Label" )
+    local lb_stat_last_10_lose = tolua.cast( stats:getChildByName("Label_Title_L"), "Label" )
+
     stat_win:setText( info["NumberOfCouponsWon"] )
     stat_lose:setText( info["NumberOfCouponsLost"] )
     stat_win_percent:setText( string.format( "%d", info["WinPercentage"] ) )
     stat_gain_percent:setText( info["Roi"] )
     stat_last_10_win:setText( info["WinStreakCouponsWon"] )
     stat_last_10_lose:setText( info["WinStreakCouponsLost"] )
+
+    lb_stat_win:setText( Constants.String.leaderboard.stats.win )
+    lb_stat_lose:setText( Constants.String.leaderboard.stats.lose )
+    lb_stat_win_percent:setText( Constants.String.leaderboard.stats.win_rate )
+    lb_stat_gain_percent:setText( Constants.String.leaderboard.stats.gain_rate )
+    lb_stat_last_10:setText( Constants.String.leaderboard.stats.last_ten )
+    lb_stat_last_10_win:setText( Constants.String.leaderboard.stats.w )
+    lb_stat_last_10_lose:setText( Constants.String.leaderboard.stats.l )
 
     if info["Roi"] < 0 then
         stat_gain_percent:setColor( ccc3( 240, 75, 79 ) )
@@ -280,7 +297,7 @@ function initContent( couponHistory, userName )
     if table.getn( couponHistory:getOpenData() ) == 0 then
         -- Call to arm
         seqArray:addObject( CCCallFuncN:create( function()
-            local content = SceneManager.widgetFromJsonFile("scenes/MyHeroEmptyFrame.json")
+            local content = SceneManager.widgetFromJsonFile("scenes/MyPicksEmptyFrame.json")
             local closedPredictionContent = content:getChildByName( "Panel_ClosedPrediction" )
             closedPredictionContent:setEnabled( false )
             
@@ -363,7 +380,7 @@ function initContent( couponHistory, userName )
         mHasMoreToLoad = false
         
         seqArray:addObject( CCCallFuncN:create( function()
-            local content = SceneManager.widgetFromJsonFile("scenes/MyHeroEmptyFrame.json")
+            local content = SceneManager.widgetFromJsonFile("scenes/MyPicksEmptyFrame.json")
             local openPredictionContent = content:getChildByName( "Panel_OpenPrediction" )
             openPredictionContent:setEnabled( false )
             local closedPredictionContent = content:getChildByName( "Panel_ClosedPrediction" )
@@ -503,12 +520,14 @@ function helperInitOpenPrediction( content, matchInfo )
     local winCount = tolua.cast( content:getChildByName("Label_WinCount"), "Label" )
     local winType = tolua.cast( content:getChildByName("Label_WinType"), "Label" )
     local score = tolua.cast( content:getChildByName("Label_Score"), "Label" )
+    local vs = tolua.cast( content:getChildByName("Label_VS"), "Label" )
 
     points:setEnabled( false )
     pointsTitle:setEnabled( false )
     winCount:setEnabled( false )
     winType:setEnabled( false )
     score:setEnabled( false )
+    vs:setText( Constants.String.vs )
 end
 
 function helperInitClosedPrediction( content, matchInfo )
@@ -545,10 +564,10 @@ function helperInitClosedPrediction( content, matchInfo )
 
     if wins >= totalMatches / 2 then
         winType:setText( Constants.String.history.won_small )
-        winCount:setText( string.format( winCount:getStringValue(), wins, totalMatches ) )
+        winCount:setText( string.format( Constants.String.history.win_count, wins, totalMatches ) )
     else
         winType:setText( Constants.String.history.lost_small )
-        winCount:setText( string.format( winCount:getStringValue(), totalMatches - wins, totalMatches ) )
+        winCount:setText( string.format( Constants.String.history.win_count, totalMatches - wins, totalMatches ) )
         winCount:setColor( ccc3( 240, 75, 79 ) )
     end
 

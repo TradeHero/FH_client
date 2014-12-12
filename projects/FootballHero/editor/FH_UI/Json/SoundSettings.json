@@ -87,7 +87,7 @@
         "options": {
           "__type": "LabelSurrogate:#EditorCommon.JsonModel.Component.GUI",
           "classname": "Label",
-          "name": "Label_2",
+          "name": "Label_Title",
           "ZOrder": 1,
           "actiontag": 2,
           "anchorPointX": 0.5,
@@ -210,7 +210,7 @@
         "options": {
           "__type": "LabelSurrogate:#EditorCommon.JsonModel.Component.GUI",
           "classname": "Label",
-          "name": "Label_3",
+          "name": "Label_SoundFx",
           "ZOrder": 0,
           "actiontag": 10480353,
           "anchorPointX": 0,

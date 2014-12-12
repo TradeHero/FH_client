@@ -44,8 +44,15 @@ function keypadBackEventHandler()
 end
 
 function initContent( winners )
+    initTitle()
+
     -- init main content
     loadMainContent( winners )
+end
+
+function initTitle()
+    local title = tolua.cast( mWidget:getChildByName("Label_Title"), "Label" )
+    title:setText( Constants.String.minigame.winners )
 end
 
 function loadMainContent( winners )
@@ -54,7 +61,7 @@ function loadMainContent( winners )
     backBt:addTouchEventListener( backEventHandler )
 
     local contentContainer = tolua.cast( mWidget:getChildByName("ScrollView_Leaderboard"), "ScrollView" )
-    local CTA = mWidget:getChildByName("Label_CTA")
+    local CTA = tolua.cast( mWidget:getChildByName("Label_CTA"), "Label" )
 
     if table.getn( winners ) > 0 then
         CTA:setEnabled( false )
@@ -76,6 +83,8 @@ function loadMainContent( winners )
         contentContainer:setInnerContainerSize( CCSize:new( 0, contentHeight ) )
         local layout = tolua.cast( contentContainer, "Layout" )
         layout:requestDoLayout()
+    else
+        CTA:setText( Constants.String.minigame.no_one_won )
     end
 end
 
@@ -91,7 +100,7 @@ function initLeaderboardContent( i, content, info )
         name:setText( info["DisplayName"] )
     end
 
-    score:setText( "iPhone 6 Winner" )
+    score:setText( Constants.String.minigame.iPhone6_winner )
 
     local seqArray = CCArray:create()
     seqArray:addObject( CCDelayTime:create( i * 0.2 ) )

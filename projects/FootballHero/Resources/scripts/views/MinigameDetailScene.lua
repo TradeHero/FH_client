@@ -80,6 +80,8 @@ function checkFacebookAndOpenWebview( sender, eventType )
 end
 
 function initContent( minigameDetails )
+    initTitle()
+
     -- top info
     initTopContent( minigameDetails )
 
@@ -88,6 +90,11 @@ function initContent( minigameDetails )
 
     -- init main content
     loadMainContent( minigameDetails )
+end
+
+function initTitle()
+    local lbTitle = tolua.cast( mWidget:getChildByName( "Label_Title" ), "Label" )
+    lbTitle:setText( Constants.String.minigame.title )
 end
 
 function loadMainContent( minigameDetails )
@@ -116,8 +123,12 @@ function loadMainContent( minigameDetails )
         local layout = tolua.cast( contentContainer, "Layout" )
         layout:requestDoLayout()
     else
-        local button = CTA:getChildByName("Button_Share")
+        local button = tolua.cast( CTA:getChildByName("Button_Share"), "Button" )
         button:addTouchEventListener( checkFacebookAndOpenWebview )
+        button:setTitleText( Constants.String.minigame.ask_friends_help )
+
+        local lbCTA = tolua.cast( CTA:getChildByName("Label_CTA"), "Label" )
+        lbCTA:setText( Constants.String.minigame.call_to_action )
 
         contentContainer:setEnabled( false )
     end
@@ -136,9 +147,9 @@ function initLeaderboardContent( i, content, info )
     end
 
     if info["points"] == 0 then
-        score:setText( Constants.String.event.failed_to_score )
+        score:setText( Constants.String.minigame.failed_to_score )
     else
-        score:setText( string.format( score:getStringValue(), info["points"] ) )
+        score:setText( string.format( Constants.String.minigame.helped_to_score, info["points"] ) )
     end
 
     local seqArray = CCArray:create()
@@ -192,16 +203,27 @@ function initTopContent( minigameDetails )
     end
 
     local banner = mWidget:getChildByName("Panel_Banner")
-    local winners = banner:getChildByName("Button_Winners")
-    local rules = banner:getChildByName("Button_Rules")
+    local winners = tolua.cast( banner:getChildByName("Button_Winners"), "Button" )
+    local rules = tolua.cast( banner:getChildByName("Button_Rules"), "Button" )
     winners:addTouchEventListener( winnerEventHandler )
     rules:addTouchEventListener( rulesEventHandler )
 
+    winners:setTitleText( Constants.String.minigame.winners )
+    rules:setTitleText( Constants.String.minigame.rules )
+
     local info = mWidget:getChildByName("Panel_Info")
     local button = info:getChildByName("Button_Share")
+    local button = tolua.cast( info:getChildByName("Button_Share"), "Button" )
+    
     local scoreNum = tolua.cast( info:getChildByName("Label_ScoreNum"), "Label" )
     local scoreDenom = tolua.cast( info:getChildByName("Label_ScoreDenom"), "Label" )
     local helpCount = tolua.cast( info:getChildByName("Label_HelpCount"), "Label" )
+    local lbTitleScore = tolua.cast( info:getChildByName("Label_TitleScore"), "Label" )
+    local lbHelpText = tolua.cast( info:getChildByName("Label_HelpText"), "Label" )
+
+    button:setTitleText( Constants.String.minigame.ask_more_friends )
+    lbTitleScore:setText( Constants.String.minigame.current_score )
+    lbHelpText:setText( Constants.String.minigame.friend_help )
 
     if minigameDetails["GoalsToTarget"] <= 0 then
         button:setEnabled( false )
@@ -230,9 +252,9 @@ function initSelfContent( minigameDetails )
     end
 
     if minigameDetails["GoalsToTarget"] == 0 then
-        score:setText( Constants.String.event.shoot_to_win_won )
+        score:setText( Constants.String.minigame.shoot_to_win_won )
     else
-        score:setText( string.format( score:getStringValue(), minigameDetails["GoalsToTarget"] ) )
+        score:setText( string.format( Constants.String.minigame.goal_to_win, minigameDetails["GoalsToTarget"] ) )
     end
     
     local seqArray = CCArray:create()

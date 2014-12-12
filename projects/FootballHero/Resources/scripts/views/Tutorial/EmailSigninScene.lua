@@ -26,11 +26,13 @@ function loadFrame()
     SceneManager.addWidget( mWidget )
     mWidget:setPosition( ccp( Constants.GAME_WIDTH, 0 ) )
 
-    local signin = mWidget:getChildByName("signin")
+    local signin = tolua.cast( mWidget:getChildByName("signin"), "Button" )
     signin:addTouchEventListener( signinEventHandler )
+    signin:setTitleText( Constants.String.button.sign_in )
 
-    local forgotPassword = mWidget:getChildByName("forgotPassword")
+    local forgotPassword = tolua.cast( mWidget:getChildByName("forgotPassword"), "Button" )
     forgotPassword:addTouchEventListener( forgotPasswordEventHandler )
+    forgotPassword:setTitleText( Constants.String.button.forget_password )
 
     local backBt = mWidget:getChildByName("back")
     backBt:addTouchEventListener( backEventHandler )
@@ -52,6 +54,9 @@ function loadFrame()
 
     mEmailInput:setText( Logic.getInstance():getEmail() )
     mPasswordInput:setText( Logic.getInstance():getPassword() )
+
+    local lbTerms = tolua.cast( mWidget:getChildByName("Label_Terms"), "Label" )
+    lbTerms:setText( Constants.String.terms_agree )
 end
 
 function isFrameShown()

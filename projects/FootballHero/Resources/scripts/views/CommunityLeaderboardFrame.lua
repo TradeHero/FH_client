@@ -70,6 +70,9 @@ end
 function initTitles()
     local title = tolua.cast( mWidget:getChildByName("Label_Leaderboard_Type"), "Label" )
     title:setText( LeaderboardConfig.LeaderboardType[mLeaderboardId]["displayName"] )
+
+    local minTitle = tolua.cast( mWidget:getChildByName( "Label_Min_Prediction" ), "Label" )
+    minTitle:setText( string.format( Constants.String.leaderboard.min_prediction, Constants.FILTER_MIN_PREDICTION ) )
 end
 
 function backEventHandler( sender,eventType )
@@ -272,6 +275,18 @@ function initLeaderboardContent( i, content, info )
     index:setText( i )
 
     -- stat box
+    local title_stat_win = tolua.cast( stats:getChildByName("Label_Title_Win"), "Label" )
+    local title_stat_lose = tolua.cast( stats:getChildByName("Label_Title_Lose"), "Label" )
+    local title_stat_win_percent = tolua.cast( stats:getChildByName("Label_Title_Win_Percent"), "Label" )
+    local title_stat_gain_percent = tolua.cast( stats:getChildByName("Label_Title_Gain_Percent"), "Label" )
+    local title_stat_last_10 = tolua.cast( stats:getChildByName("Label_Title_Last_10"), "Label" )
+    
+    title_stat_win:setText( Constants.String.leaderboard.stats.win )
+    title_stat_lose:setText( Constants.String.leaderboard.stats.lose )
+    title_stat_win_percent:setText( Constants.String.leaderboard.stats.win_rate )
+    title_stat_gain_percent:setText( Constants.String.leaderboard.stats.gain_rate )
+    title_stat_last_10:setText( Constants.String.leaderboard.stats.last_ten )
+    
     local stat_win = tolua.cast( stats:getChildByName("Label_Win"), "Label" )
     local stat_lose = tolua.cast( stats:getChildByName("Label_Lose"), "Label" )
     local stat_win_percent = tolua.cast( stats:getChildByName("Label_Win_Percent"), "Label" )

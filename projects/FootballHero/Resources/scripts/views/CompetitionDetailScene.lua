@@ -85,8 +85,19 @@ function loadFrame( subType, competitionId, showRequestPush, tabID, yearNumber, 
     backBt:addTouchEventListener( backEventHandler )
     local moreBt = mWidget:getChildByName("more")
     moreBt:addTouchEventListener( moreEventHandler )
-    
-    if mCompetitionType == CompetitionType["DetailedRanking"] then
+
+    -- label texts
+    if mCompetitionType == CompetitionType["Private"] then
+        local lbTop = tolua.cast( mWidget:getChildByName("Label_TopPerformers"), "Label" )
+        local lbInvite = tolua.cast( mWidget:getChildByName("Label_InvitationCode"), "Label" )
+        local lbCopy = tolua.cast( mWidget:getChildByName("Label_Copy"), "Label" )
+        local lbShare = tolua.cast( mWidget:getChildByName("Label_Share"), "Label" )
+
+        lbTop:setText( Constants.String.community.title_top_performers )
+        lbInvite:setText( Constants.String.community.invite_code )
+        lbCopy:setText( Constants.String.community.copy )
+        lbShare:setText( Constants.String.community.share )
+    elseif mCompetitionType == CompetitionType["DetailedRanking"] then
         setupRankingHeader( true, competitionDetail:getStartTime() )
     end
 
@@ -535,8 +546,12 @@ function initWelcome( competitionDetail )
         local close = popup:getChildByName( "Button_Close" )
         close:addTouchEventListener( eventHandler )
 
-        local start = popup:getChildByName( "Button_Play" )
-        local share = popup:getChildByName( "Button_Share" )
+        local start = tolua.cast( popup:getChildByName( "Button_Play" ), "Button" )
+        local share = tolua.cast( popup:getChildByName( "Button_Share" ), "Button" )
+
+        start:setTitleText( Constants.String.button.play_now )
+        share:setTitleText( Constants.String.button.share )
+
         local isShare = CompetitionsConfig.getIsShare( competitionConfigID )
         if isShare then
             start:setEnabled( false )
@@ -586,14 +601,21 @@ function initContent( competitionDetail )
         shareBt:addTouchEventListener( shareTypeSelectEventHandler )
     else
         local banner = mWidget:getChildByName("Panel_Banner")
-        local predictBt = banner:getChildByName("Button_Predict")
-        local shareBt = banner:getChildByName("Button_Share")
-        local prizeBt = banner:getChildByName("Button_Learn")
+        local predictBt = tolua.cast( banner:getChildByName("Button_Predict"), "Button" )
+        local shareBt = tolua.cast( banner:getChildByName("Button_Share"), "Button" )
+        local prizeBt = tolua.cast( banner:getChildByName("Button_Learn"), "Button" )
         local playerNum = tolua.cast( banner:getChildByName("Label_PlayerNum"), "Label" )
+        local lbPlayerNum = tolua.cast( banner:getChildByName("Label_HeaderPlayerNum"), "Label" )
+
         predictBt:addTouchEventListener( predictNowEventHandler )
         shareBt:addTouchEventListener( shareTypeSelectEventHandler )
         prizeBt:addTouchEventListener( competitionPrizeEventHandler )
+        
         playerNum:setText( competitionDetail:getPlayerNum() )
+        lbPlayerNum:setText( Constants.String.event.total_players )
+        shareBt:setTitleText( Constants.String.button.share )
+        predictBt:setTitleText( Constants.String.event.predict_now )
+        prizeBt:setTitleText( Constants.String.event.prizes )
 
         local bannerBG = tolua.cast( banner:getChildByName("Image_BannerBG"), "ImageView" )
         bannerBG:loadTexture( Constants.COMPETITION_IMAGE_PATH..Constants.PrizesPrefix..competitionDetail:getJoinToken()..".png" )

@@ -13,6 +13,11 @@ function loadFrame()
     SceneManager.clearNAddWidget( widget )
     SceneManager.setKeypadBackListener( keypadBackEventHandler )
 
+    local title = tolua.cast( widget:getChildByName("Label_Title"), "Label" )
+    title:setText( Constants.String.settings.sound_settings )
+    local soundfx = tolua.cast( widget:getChildByName("Label_SoundFx"), "Label" )
+    soundfx:setText( Constants.String.settings.sound_effects )
+    
     local backBt = widget:getChildByName("back")
     backBt:addTouchEventListener( backEventHandler )
 

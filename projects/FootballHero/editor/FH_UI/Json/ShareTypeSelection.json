@@ -10,7 +10,9 @@
   "designHeight": 1136,
   "designWidth": 640,
   "textures": [],
-  "texturesPng": [],
+  "texturesPng": [
+    "Settings/settings_03.png"
+  ],
   "version": "1.5.0.0",
   "widgetTree": {
     "classname": "Panel",
@@ -150,7 +152,7 @@
         "options": {
           "__type": "LabelSurrogate:#EditorCommon.JsonModel.Component.GUI",
           "classname": "Label",
-          "name": "Label_13",
+          "name": "Label_Title",
           "ZOrder": 0,
           "actiontag": 37108618,
           "anchorPointX": 0.5,

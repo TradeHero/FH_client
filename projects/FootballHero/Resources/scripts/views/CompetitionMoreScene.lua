@@ -113,6 +113,14 @@ function initContent( competitionDetail, selectedLeagues, pushNotificationEnable
     contentContainer:addChild( content )
     mContainerHeight = mContainerHeight + content:getSize().height
 
+    local lbDesc = tolua.cast( content:getChildByName( "Label_TitleDesc"), "Label" )
+    local lbDuration = tolua.cast( content:getChildByName( "Label_TitleDuration"), "Label" )
+    local lbEligible = tolua.cast( content:getChildByName( "Label_TitleEligible"), "Label" )
+
+    lbDesc:setText( Constants.String.community.title_description )
+    lbDuration:setText( Constants.String.community.title_duration )
+    lbEligible:setText( Constants.String.community.title_eligible )
+
     local time = tolua.cast( content:getChildByName("time"), "Label" )
     local description = tolua.cast( content:getChildByName("description"), "Label" )
     if competitionDetail:getEndTime() == 0 then
@@ -123,7 +131,6 @@ function initContent( competitionDetail, selectedLeagues, pushNotificationEnable
                 os.date( "%m/%d/%Y", competitionDetail:getStartTime() ), 
                 os.date( "%m/%d/%Y", competitionDetail:getEndTime() ) ) )
     end
-    
     description:setText( competitionDetail:getDescription() )
 
     initSelectedLeagues( contentContainer, selectedLeagues )
@@ -145,6 +152,12 @@ function initContent( competitionDetail, selectedLeagues, pushNotificationEnable
 
         pushBtn = tolua.cast( normalPanel:getChildByName("CheckBox_Push"), "CheckBox" )
         pushBtn:addTouchEventListener( pushEventHandler )
+
+        local lbPush = tolua.cast( normalPanel:getChildByName("Label_Push"), "Label" )
+        local lbQuit = tolua.cast( normalPanel:getChildByName("Label_Quit"), "Label" )
+
+        lbPush:setText( Constants.String.community.push )
+        lbQuit:setText( Constants.String.community.quit )
     else
         normalPanel:setEnabled( false )
 
@@ -156,6 +169,14 @@ function initContent( competitionDetail, selectedLeagues, pushNotificationEnable
         
         local rulesBtn = specialPanel:getChildByName("Button_Rules")
         rulesBtn:addTouchEventListener( rulesEventHandler )
+
+        local lbPush = tolua.cast( specialPanel:getChildByName("Label_Push"), "Label" )
+        local lbQuit = tolua.cast( specialPanel:getChildByName("Label_Quit"), "Label" )
+        local lbRules = tolua.cast( specialPanel:getChildByName("Label_Rules"), "Label" )
+
+        lbPush:setText( Constants.String.community.push )
+        lbQuit:setText( Constants.String.community.quit )
+        lbRules:setText( Constants.String.community.rules )
     end
     
     if pushNotificationEnabled then
