@@ -73,7 +73,6 @@
     <string>SpecialDetailedCompetitionDropdownFrame.json</string>
     <string>SpecialDetailedCompetitionLeaderboard.json</string>
     <string>TapToMakePrediction.json</string>
-    <string>Team.json</string>
     <string>TutorialEmail.json</string>
     <string>TutorialEmailRegister.json</string>
     <string>TutorialEmailSignin.json</string>
@@ -91,14 +90,7 @@
   <ProjectType>UIProject</ProjectType>
   <ResRelativePath />
   <imageFileList />
-  <imagePngList>
-    <string>MatchPrediction/prediction-yes.png</string>
-    <string>MatchPrediction/prediction-no.png</string>
-    <string>MatchPrediction/btn-inactivestake.png</string>
-    <string>MatchPrediction/btn-disabledstake.png</string>
-    <string>MatchPrediction/btn-activestake.png</string>
-    <string>MatchPrediction/btn-countdown.png</string>
-  </imagePngList>
+  <imagePngList />
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>WTWBEGPrediction.json</CurrentUIJson>
+  <CurrentUIJson />
 </UIProject>

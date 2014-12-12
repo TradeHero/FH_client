@@ -13,10 +13,6 @@
     <GuidesList />
   </GuidesProject>
   <GuidesProject>
-    <Project>Team</Project>
-    <GuidesList />
-  </GuidesProject>
-  <GuidesProject>
     <Project>Navigator</Project>
     <GuidesList />
   </GuidesProject>
