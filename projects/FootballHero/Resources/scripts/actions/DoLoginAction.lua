@@ -81,13 +81,8 @@ function onRequestSuccess( jsonResponse )
 
         PushNotificationManager.initFromServer( pushGenerallyEnabled, pushForPredictionsEnabled )
 
-        local finishEvent = Event.Enter_Sel_Fav_Team
+        local finishEvent = Event.Enter_Match_List
         local finishEventParam = {}
-        if displayName == nil then
-            --finishEvent = Event.Enter_Register_Name
-            finishEvent = Event.Enter_Tutorial_Ui_With_Type
-            finishEventParam = { Constants.TUTORIAL_SHOW_EMAIL_REGISTER_NAME }
-        end
 
         local params = { Platform = "email" }
         Analytics:sharedDelegate():postEvent( Constants.ANALYTICS_EVENT_LOGIN, Json.encode( params ) )

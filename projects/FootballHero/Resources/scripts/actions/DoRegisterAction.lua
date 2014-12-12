@@ -136,7 +136,7 @@ function onRegisterNameRequestSuccess( jsonResponse )
         EventManager:postEvent( Event.Do_Post_Logo )
     end
 
-    local finishEvent = Event.Enter_Sel_Fav_Team
+    local finishEvent = Event.Enter_Match_List
     local finishEventParam = {}
 
     local params = { Platform = "email" }

@@ -86,11 +86,8 @@ function onRequestSuccess( jsonResponse )
 
         PushNotificationManager.initFromServer( pushGenerallyEnabled, pushForPredictionsEnabled )
         
-        local finishEvent = Event.Enter_Sel_Fav_Team
-        if displayName == nil then
-            finishEvent = Event.Enter_Register_Name
-        end
-
+        local finishEvent = Event.Enter_Match_List
+        
         local params = { Platform = "facebook" }
         Analytics:sharedDelegate():postEvent( Constants.ANALYTICS_EVENT_LOGIN, Json.encode( params ) )
 
