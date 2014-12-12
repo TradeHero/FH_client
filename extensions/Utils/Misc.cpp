@@ -47,12 +47,12 @@ namespace Utils
 
 	void Misc::selectImage(char* path, int width, int height, int handler)
 	{
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
 		mSelectImageHandler = handler;
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
 		MiscHandler::getInstance()->selectImage(path, width, height);
 #endif
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
-
+		misc_select_image(path, width, height);
 #endif
 	}
 

@@ -207,6 +207,11 @@ public abstract class Cocos2dxActivity extends FragmentActivity implements Cocos
         activity.startActivity(intent);
     }
 
+    public static void selectImage(Intent intent) throws  ActivityNotFoundException {
+        Cocos2dxActivity activity = (Cocos2dxActivity) sContext;
+        activity.startActivityForResult(intent, MiscUtil.REQUEST_CODE_SELECT_IMAGE);
+    }
+
   @Override protected void onActivityResult(int requestCode, int resultCode, Intent data) {
     super.onActivityResult(requestCode, resultCode, data);
 

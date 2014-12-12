@@ -29,6 +29,12 @@ extern "C"
         const char *dToken = env->GetStringUTFChars(token, NULL);
         Utils::Misc::sharedDelegate()->responseUADeviceToken(dToken);
     }
+
+    JNIEXPORT void JNICALL Java_com_myhero_fh_util_MiscUtil_selectImageResult(JNIEnv *env,
+    	  jobject thiz, jboolean success)
+    {
+        Utils::Misc::sharedDelegate()->selectImageResult(success);
+    }
 }
 
 void openWebPageAndroid(const char* url, int x, int y, int w, int h)
@@ -175,4 +181,18 @@ void misc_get_UA_DeviceToken() {
     jmi.env->CallStaticVoidMethod(jmi.classID, jmi.methodID);
     jmi.env->DeleteLocalRef(jmi.classID);
   }
+}
+
+void misc_select_image(const char* path, int width, int height) {
+    JniMethodInfo jmi;
+    if (JniHelper::getStaticMethodInfo(jmi, "com/myhero/fh/util/MiscUtil",
+                "selectImage", "(Ljava/lang/String;II)V"))
+          {
+                jstring jPath = jmi.env->NewStringUTF(path);
+                jint jWidth = width;
+                jint jHeight = height;
+                jmi.env->CallStaticVoidMethod(jmi.classID, jmi.methodID, jPath, jWidth, jHeight);
+                jmi.env->DeleteLocalRef(jPath);
+                jmi.env->DeleteLocalRef(jmi.classID);
+          }
 }
