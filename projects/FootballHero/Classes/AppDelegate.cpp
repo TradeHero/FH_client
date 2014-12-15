@@ -63,8 +63,11 @@ bool AppDelegate::applicationDidFinishLaunching()
 	{
 		searchPaths.insert(searchPaths.begin(), CCFileUtils::sharedFileUtils()->getDefaultResRootPath() + "zh");
 	}
-    
 	searchPaths.insert(searchPaths.begin(), CCFileUtils::sharedFileUtils()->getWritablePath() + "local");
+	if (CCApplication::sharedApplication()->getCurrentLanguage() == kLanguageChinese)
+	{
+		searchPaths.insert(searchPaths.begin(), CCFileUtils::sharedFileUtils()->getWritablePath() + "local/zh");
+	}
 	searchPaths.insert(searchPaths.begin(), CCFileUtils::sharedFileUtils()->getWritablePath());
 
 	CCFileUtils::sharedFileUtils()->setSearchPaths(searchPaths);
