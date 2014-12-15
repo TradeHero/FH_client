@@ -11,8 +11,12 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "MatchListScene/match_bkg.png",
-    "header/back.png"
+    "commonRes/default.png",
+    "MatchPrediction/btn-inactivestake.png",
+    "MatchPrediction/btn-disabledstake.png",
+    "MatchPrediction/btn-activestake.png",
+    "MatchPrediction/btn-countdown.png",
+    "MatchPrediction/img-draw-blue.png"
   ],
   "version": "1.5.0.0",
   "widgetTree": {
@@ -113,7 +117,7 @@
           "scaleX": 0.9,
           "scaleY": 0.9,
           "sizePercentX": 0.95,
-          "sizePercentY": 0.6690141,
+          "sizePercentY": 0.6672535,
           "sizeType": 0,
           "tag": 1909,
           "touchAble": true,

@@ -320,4 +320,8 @@
     <Project>CompetitionRules</Project>
     <GuidesList />
   </GuidesProject>
+  <GuidesProject>
+    <Project>MyPicksEmptyFrame</Project>
+    <GuidesList />
+  </GuidesProject>
 </ArrayOfGuidesProject>

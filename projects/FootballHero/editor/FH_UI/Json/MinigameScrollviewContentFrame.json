@@ -11,8 +11,9 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "MatchListScene/match_bkg.png",
-    "header/back.png"
+    "mini-game/pop-out-1.png",
+    "Tutorial/Default Button.png",
+    "community/btn-close.png"
   ],
   "version": "1.5.0.0",
   "widgetTree": {
@@ -96,7 +97,7 @@
               "customProperty": "",
               "flipX": false,
               "flipY": false,
-              "height": 0,
+              "height": 33,
               "ignoreSize": true,
               "layoutParameter": null,
               "opacity": 255,
@@ -113,7 +114,7 @@
               "touchAble": false,
               "useMergedTexture": false,
               "visible": true,
-              "width": 0,
+              "width": 138,
               "x": 203,
               "y": 61,
               "areaHeight": 0,
@@ -146,7 +147,7 @@
               "customProperty": "",
               "flipX": false,
               "flipY": false,
-              "height": 0,
+              "height": 32,
               "ignoreSize": true,
               "layoutParameter": null,
               "opacity": 255,
@@ -163,7 +164,7 @@
               "touchAble": false,
               "useMergedTexture": false,
               "visible": true,
-              "width": 0,
+              "width": 418,
               "x": 204,
               "y": 28,
               "areaHeight": 0,

@@ -12,7 +12,9 @@
   "textures": [],
   "texturesPng": [
     "MatchListScene/match_bkg.png",
-    "header/back.png"
+    "header/back.png",
+    "chat/send_icon.png",
+    "chat/icn-feedback-logo.png"
   ],
   "version": "1.5.0.0",
   "widgetTree": {
@@ -38,7 +40,7 @@
           "customProperty": "",
           "flipX": false,
           "flipY": false,
-          "height": 0,
+          "height": 37,
           "ignoreSize": true,
           "layoutParameter": null,
           "opacity": 255,
@@ -55,7 +57,7 @@
           "touchAble": false,
           "useMergedTexture": false,
           "visible": true,
-          "width": 0,
+          "width": 59,
           "x": 320,
           "y": 1094,
           "areaHeight": 0,
