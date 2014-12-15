@@ -58,8 +58,15 @@ bool AppDelegate::applicationDidFinishLaunching()
 #endif
 
 	vector<string> searchPaths = CCFileUtils::sharedFileUtils()->getSearchPaths();
+
+	if (CCApplication::sharedApplication()->getCurrentLanguage() == kLanguageChinese)
+	{
+		searchPaths.insert(searchPaths.begin(), CCFileUtils::sharedFileUtils()->getDefaultResRootPath() + "zh");
+	}
+    
 	searchPaths.insert(searchPaths.begin(), CCFileUtils::sharedFileUtils()->getWritablePath() + "local");
 	searchPaths.insert(searchPaths.begin(), CCFileUtils::sharedFileUtils()->getWritablePath());
+
 	CCFileUtils::sharedFileUtils()->setSearchPaths(searchPaths);
 
 	CCEGLView* eglView = CCEGLView::sharedOpenGLView();

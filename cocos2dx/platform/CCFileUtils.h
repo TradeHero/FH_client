@@ -330,6 +330,8 @@ public:
     virtual void setPopupNotify(bool bNotify);
     virtual bool isPopupNotify();
 
+	inline std::string getDefaultResRootPath() { return m_strDefaultResRootPath; }
+
 protected:
     /**
      *  The default constructor.
