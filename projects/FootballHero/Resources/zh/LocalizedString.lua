@@ -73,7 +73,7 @@ M.en = {
   },
   duration_to = "%s 至 %s",
   duration_forever = "无限期",
-  email = ""邮箱地址",
+  email = "邮箱地址",
   email_signin = "Sign in with Email",
   enter_email = "Please enter your email address.",
   error = {
