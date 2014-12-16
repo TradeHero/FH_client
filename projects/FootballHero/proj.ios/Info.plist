@@ -32,6 +32,16 @@
 				<string>fb788386747851675</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>com.myhero.fh</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>footballhero</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1.23.1</string>

@@ -29,9 +29,12 @@
 @interface AppController : NSObject <UIAccelerometerDelegate, UIAlertViewDelegate, UITextFieldDelegate, UIApplicationDelegate> {
     UIWindow *window;
     RootViewController    *viewController;
+    NSString              *deepLink;
 }
 
 - (RootViewController *)getViewController;
+
+- (NSString *)getDeepLink;
 
 @end
 

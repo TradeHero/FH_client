@@ -215,6 +215,15 @@ static AppDelegate s_sharedApplication;
         return YES;
     }
     
+    if([[url host] isEqualToString:@"openPage"])
+    {
+        deepLink = [url path];
+        NSLog(@"Deep link path:%@", deepLink);
+        
+        MiscHandler::getInstance()->notifyDeepLink([deepLink UTF8String]);
+        return YES;
+    }
+    
     return [FBAppCall handleOpenURL:url
                   sourceApplication:sourceApplication];
 }
@@ -222,6 +231,11 @@ static AppDelegate s_sharedApplication;
 - (RootViewController *)getViewController
 {
     return viewController;
+}
+
+- (NSString *)getDeepLink
+{
+    return deepLink;
 }
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {

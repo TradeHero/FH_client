@@ -364,11 +364,7 @@ end
 
 function contentClick( info )
     local id = info["Id"]
-    local name = Constants.String.unknown_name
-    if info["DisplayName"] ~= nil then
-        name = info["DisplayName"]
-    end
-    EventManager:postEvent( Event.Enter_History, { id, name } )
+    EventManager:postEvent( Event.Enter_History, { id } )
 end
 
 function scrollViewEventHandler( target, eventType )

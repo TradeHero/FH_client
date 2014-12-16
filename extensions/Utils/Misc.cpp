@@ -132,6 +132,56 @@ namespace Utils
 		pStack->clean();
 	}
 
+	void Misc::getDeepLink(int handler)
+	{
+		const char* result = NULL;
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+		result = MiscHandler::getInstance()->getDeepLink();
+#endif
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+		
+#endif
+		CCScriptEngineProtocol* pScriptProtocol = CCScriptEngineManager::sharedManager()->getScriptEngine();
+		cocos2d::CCLuaEngine* pLuaEngine = dynamic_cast<CCLuaEngine*>(pScriptProtocol);
+		if (pLuaEngine == NULL)
+		{
+			assert(false);
+			return;
+		}
+
+		CCLuaStack* pStack = pLuaEngine->getLuaStack();
+		pStack->pushString(result);
+		int ret = pStack->executeFunctionByHandler(handler, 1);
+		pStack->clean();
+
+	}
+
+	void Misc::addEventListenerDeepLink(int handler)
+	{
+		mDeepLinkEventHandler = handler;
+	}
+
+	void Misc::notifyDeepLink(const char * result)
+	{
+		if (mDeepLinkEventHandler == NULL)
+		{
+			return;
+		}
+
+		CCScriptEngineProtocol* pScriptProtocol = CCScriptEngineManager::sharedManager()->getScriptEngine();
+		cocos2d::CCLuaEngine* pLuaEngine = dynamic_cast<CCLuaEngine*>(pScriptProtocol);
+		if (pLuaEngine == NULL)
+		{
+			assert(false);
+			return;
+		}
+
+		CCLuaStack* pStack = pLuaEngine->getLuaStack();
+		pStack->pushString(result);
+		int ret = pStack->executeFunctionByHandler(mDeepLinkEventHandler, 1);
+		pStack->clean();
+	}
+
 	char* Misc::createFormWithFile(const char* begin, const char* end, const char* filePath, const char* pszMode, unsigned long *pSize)
 	{
 		*pSize = 0;

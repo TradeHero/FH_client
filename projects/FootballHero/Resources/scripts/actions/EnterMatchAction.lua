@@ -9,7 +9,7 @@ local RequestUtils = require("scripts.RequestUtils")
 local Constants = require("scripts.Constants")
 
 function action( param )
-    local matchId = Logic:getSelectedMatch()["Id"]
+    local matchId = param[1]
 
     local url = RequestUtils.GET_GAME_MARKETS_REST_CALL.."?gameId="..matchId
 

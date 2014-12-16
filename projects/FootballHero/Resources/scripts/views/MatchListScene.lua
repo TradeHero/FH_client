@@ -475,7 +475,7 @@ function enterMatch( match )
     end
 
     Logic:setSelectedMatch( match )
-    EventManager:postEvent( Event.Enter_Match )
+    EventManager:postEvent( Event.Enter_Match, { match["Id"] } )
 end
 
 function helperInitMatchInfo( topContent, matchInfo )

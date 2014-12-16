@@ -13,11 +13,15 @@ class Misc
 
 	void sendSMS(char* body, LUA_FUNCTION errorHandler);
 
+	void getDeepLink(LUA_FUNCTION handler);
+
+	void addEventListenerDeepLink(LUA_FUNCTION handler);
+
 	void getUADeviceToken( LUA_FUNCTION handler );
 	
 	void setUADeviceTokenHandler(LUA_FUNCTION handler);
 
-	void requestPushNotification();
+	void requestPushNotification();	
 
 	void openUrl(char* url);
 

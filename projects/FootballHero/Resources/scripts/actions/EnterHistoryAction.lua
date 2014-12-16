@@ -10,7 +10,6 @@ local Constants = require("scripts.Constants")
 
 
 local mUserId = Logic:getUserId()
-local mUserName = ""
 local mCompetitionId = nil
 local mAdditionalParam
 local mCountryFilter = Constants.STATS_SHOW_ALL
@@ -33,28 +32,27 @@ function action( param )
 	local step = 1
     
     mUserId = Logic:getUserId()
-    if param ~= nil and param[1] ~= nil and param[2] ~= nil then
+    if param ~= nil and param[1] ~= nil then
         mUserId = param[1]
-        mUserName = param[2]
     end
 
 	local url = RequestUtils.GET_COUPON_HISTORY_REST_CALL.."?userId="..mUserId.."&step="..step
-    if param ~= nil and param[3] ~= nil then
-        mCompetitionId = param[3]
+    if param ~= nil and param[2] ~= nil then
+        mCompetitionId = param[2]
         url = url.."&competitionId="..mCompetitionId
     else
         mCompetitionId = nil
     end
 
     mAdditionalParam = nil
-    if param ~= nil and param[4] ~= nil then
-        mAdditionalParam = param[4]
+    if param ~= nil and param[3] ~= nil then
+        mAdditionalParam = param[3]
         url = url..mAdditionalParam
     end
 
     mCountryFilter = Constants.STATS_SHOW_ALL
-    if param ~= nil and param[5] ~= nil and param[5] ~= Constants.STATS_SHOW_ALL then
-        mCountryFilter = param[5]
+    if param ~= nil and param[4] ~= nil and param[4] ~= Constants.STATS_SHOW_ALL then
+        mCountryFilter = param[4]
         url = url.."&countryId="..mCountryFilter
     end
 
@@ -85,8 +83,8 @@ function onRequestSuccess( response )
     
     local historyMainScene = require("scripts.views.HistoryMainScene")
     if historyMainScene:isFrameShown() then
-        historyMainScene.refreshFrame( mUserId, mUserName, mCompetitionId, couponHistory, mAdditionalParam, mCountryFilter )
+        historyMainScene.refreshFrame( mUserId, mCompetitionId, couponHistory, mAdditionalParam, mCountryFilter )
     else
-        historyMainScene.loadFrame( mUserId, mUserName, mCompetitionId, couponHistory, mAdditionalParam, mCountryFilter )
+        historyMainScene.loadFrame( mUserId, mCompetitionId, couponHistory, mAdditionalParam, mCountryFilter )
     end
 end

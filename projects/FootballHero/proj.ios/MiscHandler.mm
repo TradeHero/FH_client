@@ -90,3 +90,14 @@ void MiscHandler::openUrl(char *url)
 {
     [[UIApplication sharedApplication]openURL:[NSURL URLWithString:[NSString stringWithUTF8String:url]]];
 }
+
+const char* MiscHandler::getDeepLink()
+{
+    AppController *app = (AppController*) [[UIApplication sharedApplication] delegate];
+    return [[app getDeepLink] UTF8String];
+}
+
+void MiscHandler::notifyDeepLink(const char* deepLink)
+{
+    Utils::Misc::sharedDelegate()->notifyDeepLink(deepLink);
+}

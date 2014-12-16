@@ -7,6 +7,8 @@ local RequestUtils = require("scripts.RequestUtils")
 local FileUtils = require("scripts.FileUtils")
 local MD5 = require("MD5")
 local Constants = require("scripts.Constants")
+local SceneManager = require("scripts.SceneManager")
+
 
 local fileList = {
 	"config/countries.txt",
@@ -60,7 +62,19 @@ function checkNext()
 	        local TeamConfig = require("scripts.config.Team")
 
 	        ConnectingMessage.selfRemove()
-	        EventManager:postEvent( mFinishEvent, mFinishEventParam )
+
+	        -- Init the deep link.
+	        local deepLinkHandler = function( deepLink )
+	        	if deepLink == nil then
+	        		EventManager:postEvent( mFinishEvent, mFinishEventParam )
+	        	else
+	        		SceneManager.processDeepLink( deepLink, mFinishEvent, mFinishEventParam )
+	        	end
+
+	        	SceneManager.registerDeepLinkEvent()
+	        end
+
+	        Misc:sharedDelegate():getDeepLink( deepLinkHandler )      
 		end ) )
 
 		CCDirector:sharedDirector():getRunningScene():runAction( CCSequence:create( loadDataTaskSeqArray ) )

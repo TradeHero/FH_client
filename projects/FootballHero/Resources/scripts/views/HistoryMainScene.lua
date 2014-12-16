@@ -26,7 +26,7 @@ local mCountryFilter
 -- DS for couponHistory see CouponHistoryData
 -- competitionId: The history only contains matches within the leagues in this competition.
 --                  if it is nil, then the history will show everything. 
-function loadFrame( userId, userName, competitionId, couponHistory, additionalParam, countryFilter )
+function loadFrame( userId, competitionId, couponHistory, additionalParam, countryFilter )
     mCompetitionId = competitionId
     mAdditionalParam = additionalParam
     mCountryFilter = countryFilter
@@ -68,8 +68,8 @@ function loadFrame( userId, userName, competitionId, couponHistory, additionalPa
     mWidget:registerScriptHandler( EnterOrExit )
     SceneManager.clearNAddWidget( mWidget )
 
-    initFliter( mCountryFilter, userName )
-    initContent( couponHistory, userName )
+    initFliter( mCountryFilter )
+    initContent( couponHistory )
 
     Navigator.loadFrame( mWidget )
 
@@ -77,7 +77,7 @@ function loadFrame( userId, userName, competitionId, couponHistory, additionalPa
     mHasMoreToLoad = false
 end
 
-function refreshFrame( userId, userName, competitionId, couponHistory, additionalParam, countryFilter )
+function refreshFrame( userId, competitionId, couponHistory, additionalParam, countryFilter )
     mCompetitionId = competitionId
     mAdditionalParam = additionalParam
     mCountryFilter = countryFilter
@@ -97,8 +97,8 @@ function refreshFrame( userId, userName, competitionId, couponHistory, additiona
 
     mStep = 1
     mHasMoreToLoad = false
-    initFliter( mCountryFilter, userName )
-    initContent( couponHistory, userName )
+    initFliter( mCountryFilter )
+    initContent( couponHistory )
 end
 
 
@@ -121,7 +121,7 @@ function isSelf()
     end
 end
 
-function initFliter( countryFilter, userName )
+function initFliter( countryFilter )
     local filterPanel = mWidget:getChildByName("Panel_League_Select")
     local filterExpend = filterPanel:getChildByName( "Button_FilterExpand" )
     local mask = filterPanel:getChildByName("Panel_Mask")
@@ -164,11 +164,11 @@ function initFliter( countryFilter, userName )
         refreshFilter( index )
 
         if index == Constants.STATS_SHOW_ALL then
-            EventManager:postEvent( Event.Enter_History, { mUserId, userName, mCompetitionId, mAdditionalParam } )
+            EventManager:postEvent( Event.Enter_History, { mUserId, mCompetitionId, mAdditionalParam } )
         else
             local countryId = CountryConfig.getCountryId( index )
             CCLuaLog("Stats filter by: "..countryId)
-            EventManager:postEvent( Event.Enter_History, { mUserId, userName, mCompetitionId, mAdditionalParam, countryId } )
+            EventManager:postEvent( Event.Enter_History, { mUserId, mCompetitionId, mAdditionalParam, countryId } )
         end
     end
 
@@ -183,7 +183,7 @@ function initFliter( countryFilter, userName )
     
 end
 
-function initContent( couponHistory, userName )
+function initContent( couponHistory )
 	local contentContainer = tolua.cast( mWidget:getChildByName("ScrollView"), "ScrollView" )
     contentContainer:removeAllChildrenWithCleanup( true )
 
@@ -202,7 +202,7 @@ function initContent( couponHistory, userName )
         show:setTitleText( Constants.String.history.show_all )
         local eventHandler = function( sender, eventType )
             if eventType == TOUCH_EVENT_ENDED then
-                EventManager:postEvent( Event.Enter_History, { mUserId, userName } )
+                EventManager:postEvent( Event.Enter_History, { mUserId } )
             end
         end
         show:addTouchEventListener( eventHandler )

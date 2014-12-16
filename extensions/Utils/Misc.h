@@ -28,6 +28,12 @@ namespace Utils
 		void sendSMS(char* body, int handler);
 
 		void sendSMSResult(int resultCode);
+
+		void getDeepLink(int handler);
+
+		void addEventListenerDeepLink(int handler);
+
+		void notifyDeepLink(const char * result);
         
 		char* createFormWithFile(const char* begin, const char* end, const char* filePath, const char* pszMode, unsigned long *pSize);
 
@@ -50,6 +56,7 @@ namespace Utils
 		int mSendMailHandler;
 		int mSendSMSHandler;
 		int mUADeviceTokenHandler;
+		int mDeepLinkEventHandler;
 	};
 };
 

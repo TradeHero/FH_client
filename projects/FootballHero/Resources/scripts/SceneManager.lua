@@ -2,11 +2,20 @@ module(..., package.seeall)
 
 local EventManager = require("scripts.events.EventManager").getInstance()
 local Event = require("scripts.events.Event").EventList
+local RequestUtils = require("scripts.RequestUtils")
+local CommunityConfig = require("scripts.config.Community")
+local LeaderboardConfig = require("scripts.config.Leaderboard")
 
 
 TOUCH_PRIORITY_ZERO = 0
 TOUCH_PRIORITY_MINUS_ONE = -1
 TOUCH_PRIORITY_MINUS_TWO = -2
+
+local DEEPLINK_USER_PROFILE = "user"
+local DEEPLINK_GAME_LIST = "gamelist"
+local DEEPLINK_PREDICT = "prediction"
+local DEEPLINK_COMPETITION = "competition"
+local DEEPLINK_LEADERBOARD = "leaderboard"
 
 local mSceneGameLayer
 local mKeyPadBackEnabled = true
@@ -168,4 +177,69 @@ function widgetFromJsonFile( fileName )
 		mWidgets[fileName] = content
 	end
 	return mWidgets[fileName]:clone()
+end
+
+function registerDeepLinkEvent()
+	local callback = function( deepLink )
+		-- Todo maybe after the current UI finishes loading.
+		processDeepLink( deepLink )
+	end
+
+	Misc:sharedDelegate():addEventListenerDeepLink( callback )
+end
+
+function processDeepLink( deepLink, defaultEvent, defaultEventParam )
+	-- deepLink content for example: /user/me
+	local deepLinklist = RequestUtils.split( deepLink, "/" )
+	local deepLinkPage = deepLinklist[2]
+	local deepLinkParameter = deepLinklist[3]
+	CCLuaLog("Process deep link: "..deepLink)
+
+	if deepLinkPage == DEEPLINK_USER_PROFILE then
+
+		if deepLinkParameter == "me" then
+			EventManager:postEvent( Event.Enter_History )
+		else
+			EventManager:postEvent( Event.Enter_History, { deepLinkParameter } )
+		end
+
+	elseif deepLinkPage == DEEPLINK_GAME_LIST then
+
+		if deepLinkParameter == nil then
+			EventManager:postEvent( Event.Enter_Match_List )
+		else
+			EventManager:postEvent( Event.Enter_Match_List, { tonumber( deepLinkParameter ) } )
+		end
+
+	elseif deepLinkPage == DEEPLINK_PREDICT then
+
+		EventManager:postEvent( Event.Enter_Match, { deepLinkParameter } )
+
+	elseif deepLinkPage == DEEPLINK_COMPETITION then
+
+		if deepLinkParameter == nil then
+			EventManager:postEvent( Event.Enter_Community, { CommunityConfig.COMMUNITY_TAB_ID_COMPETITION } )
+		else
+			-- Since different competition has different default tab id.
+			-- We have to add a parameter for it.
+			EventManager:postEvent( Event.Enter_Competition_Detail, { tonumber( deepLinkParameter ), false, nil, deepLinklist[4] } )
+		end
+
+	elseif deepLinkPage == DEEPLINK_LEADERBOARD then
+
+		if deepLinkParameter == "top-performer" then
+			EventManager:postEvent( Event.Enter_Community, { CommunityConfig.COMMUNITY_TAB_ID_LEADERBOARD, 
+				LeaderboardConfig.LEADERBOARD_TOP, LeaderboardConfig.LEADERBOARD_TYPE_ROI } )
+		elseif deepLinkParameter == "friends" then
+			EventManager:postEvent( Event.Enter_Community, { CommunityConfig.COMMUNITY_TAB_ID_LEADERBOARD, 
+				LeaderboardConfig.LEADERBOARD_FRIENDS, LeaderboardConfig.LEADERBOARD_TYPE_ROI } )
+		end
+
+	else
+		if defaultEvent ~= nil then
+			EventManager:postEvent( defaultEvent, defaultEventParam )
+		else
+			EventManager:postEvent( Event.Enter_Match_List )
+		end
+	end
 end

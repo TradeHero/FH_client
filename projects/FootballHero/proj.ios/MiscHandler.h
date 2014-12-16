@@ -28,6 +28,10 @@ public:
     
     void openUrl(char* url);
     
+    const char* getDeepLink();
+    
+    void notifyDeepLink(const char* deepLink);
+    
     
     // Getter and setter for local varibles.
     char* getImagePath() { return imagePath; }

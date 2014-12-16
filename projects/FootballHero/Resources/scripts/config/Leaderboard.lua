@@ -3,6 +3,13 @@ module(..., package.seeall)
 local Constants = require("scripts.Constants")
 local RequestUtils = require("scripts.RequestUtils")
 
+LEADERBOARD_TOP = 1
+LEADERBOARD_FRIENDS = 2
+
+LEADERBOARD_TYPE_ROI = 1
+LEADERBOARD_TYPE_WP = 2
+LEADERBOARD_TYPE_PROFIT = 3
+
 LeaderboardType = {
 	{ ["displayName"] = Constants.String.top_performers, ["logo"] = Constants.LEADERBOARD_IMAGE_PATH.."top-performers.png", ["request"] = RequestUtils.GET_MAIN_LEADERBOARD_REST_CALL },
 	

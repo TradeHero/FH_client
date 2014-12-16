@@ -1,6 +1,6 @@
 /*
 ** Lua binding: Extension
-** Generated automatically by tolua++-1.0.92 on 12/10/14 18:10:01.
+** Generated automatically by tolua++-1.0.92 on 12/15/14 17:40:22.
 */
 
 /****************************************************************************
@@ -1213,6 +1213,72 @@ static int tolua_Extension_Misc_sendSMS00(lua_State* tolua_S)
 }
 #endif //#ifndef TOLUA_DISABLE
 
+/* method: getDeepLink of class  Misc */
+#ifndef TOLUA_DISABLE_tolua_Extension_Misc_getDeepLink00
+static int tolua_Extension_Misc_getDeepLink00(lua_State* tolua_S)
+{
+#ifndef TOLUA_RELEASE
+ tolua_Error tolua_err;
+ if (
+     !tolua_isusertype(tolua_S,1,"Misc",0,&tolua_err) ||
+     (tolua_isvaluenil(tolua_S,2,&tolua_err) || !toluafix_isfunction(tolua_S,2,"LUA_FUNCTION",0,&tolua_err)) ||
+     !tolua_isnoobj(tolua_S,3,&tolua_err)
+ )
+  goto tolua_lerror;
+ else
+#endif
+ {
+  Misc* self = (Misc*)  tolua_tousertype(tolua_S,1,0);
+  LUA_FUNCTION handler = (  toluafix_ref_function(tolua_S,2,0));
+#ifndef TOLUA_RELEASE
+  if (!self) tolua_error(tolua_S,"invalid 'self' in function 'getDeepLink'", NULL);
+#endif
+  {
+   self->getDeepLink(handler);
+  }
+ }
+ return 0;
+#ifndef TOLUA_RELEASE
+ tolua_lerror:
+ tolua_error(tolua_S,"#ferror in function 'getDeepLink'.",&tolua_err);
+ return 0;
+#endif
+}
+#endif //#ifndef TOLUA_DISABLE
+
+/* method: addEventListenerDeepLink of class  Misc */
+#ifndef TOLUA_DISABLE_tolua_Extension_Misc_addEventListenerDeepLink00
+static int tolua_Extension_Misc_addEventListenerDeepLink00(lua_State* tolua_S)
+{
+#ifndef TOLUA_RELEASE
+ tolua_Error tolua_err;
+ if (
+     !tolua_isusertype(tolua_S,1,"Misc",0,&tolua_err) ||
+     (tolua_isvaluenil(tolua_S,2,&tolua_err) || !toluafix_isfunction(tolua_S,2,"LUA_FUNCTION",0,&tolua_err)) ||
+     !tolua_isnoobj(tolua_S,3,&tolua_err)
+ )
+  goto tolua_lerror;
+ else
+#endif
+ {
+  Misc* self = (Misc*)  tolua_tousertype(tolua_S,1,0);
+  LUA_FUNCTION handler = (  toluafix_ref_function(tolua_S,2,0));
+#ifndef TOLUA_RELEASE
+  if (!self) tolua_error(tolua_S,"invalid 'self' in function 'addEventListenerDeepLink'", NULL);
+#endif
+  {
+   self->addEventListenerDeepLink(handler);
+  }
+ }
+ return 0;
+#ifndef TOLUA_RELEASE
+ tolua_lerror:
+ tolua_error(tolua_S,"#ferror in function 'addEventListenerDeepLink'.",&tolua_err);
+ return 0;
+#endif
+}
+#endif //#ifndef TOLUA_DISABLE
+
 /* method: getUADeviceToken of class  Misc */
 #ifndef TOLUA_DISABLE_tolua_Extension_Misc_getUADeviceToken00
 static int tolua_Extension_Misc_getUADeviceToken00(lua_State* tolua_S)
@@ -1454,6 +1520,8 @@ TOLUA_API int tolua_Extension_open (lua_State* tolua_S)
    tolua_function(tolua_S,"sendMail",tolua_Extension_Misc_sendMail00);
    tolua_function(tolua_S,"setFileToRequestData",tolua_Extension_Misc_setFileToRequestData00);
    tolua_function(tolua_S,"sendSMS",tolua_Extension_Misc_sendSMS00);
+   tolua_function(tolua_S,"getDeepLink",tolua_Extension_Misc_getDeepLink00);
+   tolua_function(tolua_S,"addEventListenerDeepLink",tolua_Extension_Misc_addEventListenerDeepLink00);
    tolua_function(tolua_S,"getUADeviceToken",tolua_Extension_Misc_getUADeviceToken00);
    tolua_function(tolua_S,"setUADeviceTokenHandler",tolua_Extension_Misc_setUADeviceTokenHandler00);
    tolua_function(tolua_S,"requestPushNotification",tolua_Extension_Misc_requestPushNotification00);

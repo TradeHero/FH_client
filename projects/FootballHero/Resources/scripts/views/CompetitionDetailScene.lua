@@ -1029,10 +1029,6 @@ end
 
 function contentClick( info )
     local id = info["Id"]
-    local name = Constants.String.unknown_name
-    if info["DisplayName"] ~= nil then
-        name = info["DisplayName"]
-    end
 
     local additionalParam
     if mTabID == CompetitionsData.COMPETITION_TAB_ID_MONTHLY then
@@ -1042,7 +1038,7 @@ function contentClick( info )
     else
         additionalParam = ""
     end
-    EventManager:postEvent( Event.Enter_History, { id, name, mCompetitionId, additionalParam } )
+    EventManager:postEvent( Event.Enter_History, { id, mCompetitionId, additionalParam } )
 end
 
 function scrollViewEventHandler( target, eventType )
