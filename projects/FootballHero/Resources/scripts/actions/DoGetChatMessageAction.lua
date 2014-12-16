@@ -13,6 +13,7 @@ local mIsSending = false
 local mChannelId
 local mCallback
 local mIsLeague
+local mSilent
 
 function action( param )
     if mIsSending then
@@ -27,7 +28,7 @@ function action( param )
 
     mChannelId = param[1]
     local last = param[2]
-    local silent = param[3]
+    mSilent = param[3]
     mCallback = param[4]
     mIsLeague = param[5] or false
 
@@ -59,7 +60,7 @@ function action( param )
     httpRequest:addHeader( Logic:getAuthSessionString() )
     httpRequest:sendHttpRequest( url, handler )
 
-    if not silent then
+    if not mSilent then
         ConnectingMessage.loadFrame()
     end
 end
@@ -85,10 +86,10 @@ function onRequestSuccess( jsonResponse )
     end
 
     -- Display the messages.
-    if ChatScene.isFrameShown() then
+    if mSilent then
         ChatScene.addMessage( chatMessages )
     else
-        ChatScene.loadFrame( mChannelId, chatMessages )
+        ChatScene.initMessages( chatMessages )
     end
 
     if mCallback ~= nil then

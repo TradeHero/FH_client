@@ -772,8 +772,7 @@ end
 
 function chatRoomEventHandler( sender, eventType )
     if eventType == TOUCH_EVENT_ENDED then
-        EventManager:postEvent( Event.Enter_Competition_Chat )
-        EventManager:postEvent( Event.Do_Get_Chat_Message, { mCompetitionId, 0 } )
+        EventManager:postEvent( Event.Enter_Competition_Chat, { mCompetitionId } )
     end
 end
 
