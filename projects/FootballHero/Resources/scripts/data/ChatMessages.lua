@@ -12,18 +12,21 @@ Data structure:
         "dateDisplay": "25 April",
         "messages": [
            {
+              "UserId": 12345,
               "MessageText": "Test message.",
               "UserName": "Test001",
               "UnixTimeStamp": 1405405019
            },
 
            {
+              "UserId": 12345,
               "MessageText": "Test message 001.",
               "UserName": "Test001",
               "UnixTimeStamp": 1405406475
            },
 
            {
+              "UserId": 12345,
               "MessageText": "Test message 002.",
               "UserName": "Test001",
               "UnixTimeStamp": 1405406651
@@ -36,18 +39,21 @@ Data structure:
         "dateDisplay": "27 April",
         "messages": [
            {
+              "UserId": 12345,
               "MessageText": "Test message.",
               "UserName": "Test001",
               "UnixTimeStamp": 1405405019
            },
 
            {
+              "UserId": 12345,
               "MessageText": "Test message 001.",
               "UserName": "Test001",
               "UnixTimeStamp": 1405406475
            },
 
            {
+              "UserId": 12345,
               "MessageText": "Test message 002.",
               "UserName": "Test001",
               "UnixTimeStamp": 1405406651
