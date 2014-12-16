@@ -324,4 +324,8 @@
     <Project>MyPicksEmptyFrame</Project>
     <GuidesList />
   </GuidesProject>
+  <GuidesProject>
+    <Project>CompetitionDropdownFrame</Project>
+    <GuidesList />
+  </GuidesProject>
 </ArrayOfGuidesProject>

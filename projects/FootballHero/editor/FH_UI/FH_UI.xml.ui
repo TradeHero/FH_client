@@ -23,6 +23,7 @@
     <string>CommunityLeaderboardFrame.json</string>
     <string>CommunityLeaderboardListContentFrame.json</string>
     <string>CommunityNewCompetitionFrame.json</string>
+    <string>CompetitionDropdownFrame.json</string>
     <string>CompetitionItemNew.json</string>
     <string>CompetitionLeaderboard.json</string>
     <string>CompetitionMore.json</string>
@@ -41,12 +42,12 @@
     <string>HistoryDetailOpenContent.json</string>
     <string>HistoryMainMatchContent.json</string>
     <string>HistoryMainTitle.json</string>
-    <string>LeagueDropdownContent.json</string>
     <string>LeagueContentWithTransparentBG.json</string>
-    <string>MatchListDropDown.json</string>
+    <string>LeagueDropdownContent.json</string>
     <string>MarketingMessage.json</string>
     <string>MatchDate.json</string>
     <string>MatchListContent.json</string>
+    <string>MatchListDropDown.json</string>
     <string>MatchListEmptyIndi.json</string>
     <string>MatchListScene.json</string>
     <string>MatchPrediction.json</string>
@@ -57,13 +58,13 @@
     <string>MyPicksEmptyFrame.json</string>
     <string>MyPicksHome.json</string>
     <string>Navigator.json</string>
-    <string>PushNotificationMessage.json</string>
     <string>PredFinalConfirm.json</string>
     <string>PredFinalConfirmButton.json</string>
     <string>PredFinalConfirmContent.json</string>
     <string>PredictionBG.json</string>
     <string>PredictionStatus.json</string>
     <string>PushNotification.json</string>
+    <string>PushNotificationMessage.json</string>
     <string>SettingsHome.json</string>
     <string>SettingsHomeContent.json</string>
     <string>ShareTypeSelection.json</string>
@@ -90,7 +91,13 @@
   <ProjectType>UIProject</ProjectType>
   <ResRelativePath />
   <imageFileList />
-  <imagePngList />
+  <imagePngList>
+    <string>MatchListScene/match_bkg.png</string>
+    <string>header/footballhero-logo.png</string>
+    <string>community/img-inactivepage.png</string>
+    <string>community/img-activepage.png</string>
+    <string>chat/icn-leaguechat.png</string>
+  </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson />
+  <CurrentUIJson>CommunityLeaderboardFrame.json</CurrentUIJson>
 </UIProject>

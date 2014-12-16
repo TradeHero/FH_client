@@ -97,6 +97,8 @@ function loadFrame( subType, competitionId, showRequestPush, tabID, yearNumber, 
         lbInvite:setText( Constants.String.community.invite_code )
         lbCopy:setText( Constants.String.community.copy )
         lbShare:setText( Constants.String.community.share )
+
+        setupRankingHeader( true, competitionDetail:getStartTime() )
     elseif mCompetitionType == CompetitionType["DetailedRanking"] then
         setupRankingHeader( true, competitionDetail:getStartTime() )
     end
@@ -140,7 +142,7 @@ function refreshFrame( tabID, yearNumber, monthNumber, weekNumber )
     mWeekNumber = tonumber( weekNumber )
     competitionDetail = Logic:getCompetitionDetail()
     
-    if mCompetitionType == CompetitionType["DetailedRanking"] then
+    if mCompetitionType == CompetitionType["DetailedRanking"] or mCompetitionType == CompetitionType["Private"] then
         setupRankingHeader( false, competitionDetail:getStartTime() )
     end
 
@@ -288,7 +290,11 @@ function initRankingDropdown( startTimeStamp )
 
     -- add dropdown to scene if not already added
     if mDropdown == nil then
-        mDropdown = GUIReader:shareReader():widgetFromJsonFile("scenes/SpecialDetailedCompetitionDropdownFrame.json")
+        if mCompetitionType == CompetitionType["Private"] then
+            mDropdown = GUIReader:shareReader():widgetFromJsonFile("scenes/CompetitionDropdownFrame.json")
+        else
+            mDropdown = GUIReader:shareReader():widgetFromJsonFile("scenes/SpecialDetailedCompetitionDropdownFrame.json")
+        end
         mWidget:addChild( mDropdown )
     end
 
@@ -619,10 +625,10 @@ function initContent( competitionDetail )
 
         local bannerBG = tolua.cast( banner:getChildByName("Image_BannerBG"), "ImageView" )
         bannerBG:loadTexture( Constants.COMPETITION_IMAGE_PATH..Constants.PrizesPrefix..competitionDetail:getJoinToken()..".png" )
-
-        local selfInfo = competitionDetail:getSelfInfo()
-        initSelfContent( selfInfo )
     end
+
+    local selfInfo = competitionDetail:getSelfInfo()
+    initSelfContent( selfInfo )
 
     -- Add the latest chat message.
     --mChatMessageContainer = mWidget:getChildByName("chatRoom")
@@ -781,42 +787,12 @@ function initSelfContent( info )
     local check = tolua.cast( top:getChildByName("Image_Check"), "ImageView" )
     local qualified = top:getChildByName("Panel_Info")
     
-    local infoCheck = tolua.cast( qualified:getChildByName("Image_Check"), "ImageView" )
-    local infoHint = tolua.cast( qualified:getChildByName("Label_Hint"), "Label" )
-    local infoQualified = tolua.cast( qualified:getChildByName("Label_Qualified"), "Label" )
-
     local eventHandler = function( sender, eventType )
         if eventType == TOUCH_EVENT_ENDED then
             contentClick( info )
         end
     end
-    click:addTouchEventListener( eventHandler )    
-
-    local infoHandler = function( sender, eventType )
-        if eventType == TOUCH_EVENT_ENDED then
-            local deltaX
-            if mSelfInfoOpen then
-                click:setSize( CCSize:new( 560, click:getSize().height ) )
-                mSelfInfoOpen = false
-                deltaX = INFO_MOVE_OFFSET
-            else
-                click:setSize( CCSize:new( 283, click:getSize().height ) )
-                mSelfInfoOpen = true
-                deltaX = INFO_MOVE_OFFSET * (-1)
-            end
-
-            local resultSeqArray = CCArray:create()
-            resultSeqArray:addObject( CCMoveBy:create( INFO_MOVE_TIME, ccp( deltaX, 0 ) ) )
-            qualified:runAction( CCSequence:create( resultSeqArray ) )
-
-        end
-    end
-    qualified:addTouchEventListener( infoHandler )
-    if info["DisplayName"] == nil then
-        name:setText( Constants.String.unknown_name )
-    else
-        name:setText( info["DisplayName"] )
-    end
+    click:addTouchEventListener( eventHandler )
 
     score:setText( string.format( Constants.String.leaderboard.me_score, info["Profit"] ) )
     if info["Profit"] < 0 then
@@ -825,16 +801,50 @@ function initSelfContent( info )
 
     index:setText( info["Position"] )
 
-    if info["NumberOfUserGamesLeftToQualify"] <= 0 then
-        check:loadTexture( Constants.COMPETITION_SCENE_IMAGE_PATH.."icn-qualified.png" )
-        infoCheck:loadTexture( Constants.COMPETITION_SCENE_IMAGE_PATH.."icn-qualified.png" )
-        infoQualified:setText( Constants.String.event.status_qualified )
-        infoHint:setText( Constants.String.event.hint_qualified )
+    if info["DisplayName"] == nil then
+        name:setText( Constants.String.unknown_name )
     else
-        infoQualified:setText( Constants.String.event.status_unqualified )
-        infoHint:setText( string.format( Constants.String.event.hint_unqualified, info["NumberOfUserGamesLeftToQualify"] ) )
+        name:setText( info["DisplayName"] )
     end
+
+    if not qualified == nil then
+        local infoCheck = tolua.cast( qualified:getChildByName("Image_Check"), "ImageView" )
+        local infoHint = tolua.cast( qualified:getChildByName("Label_Hint"), "Label" )
+        local infoQualified = tolua.cast( qualified:getChildByName("Label_Qualified"), "Label" )
     
+        local infoHandler = function( sender, eventType )
+            if eventType == TOUCH_EVENT_ENDED then
+                local deltaX
+                if mSelfInfoOpen then
+                    click:setSize( CCSize:new( 560, click:getSize().height ) )
+                    mSelfInfoOpen = false
+                    deltaX = INFO_MOVE_OFFSET
+                else
+                    click:setSize( CCSize:new( 283, click:getSize().height ) )
+                    mSelfInfoOpen = true
+                    deltaX = INFO_MOVE_OFFSET * (-1)
+                end
+
+                local resultSeqArray = CCArray:create()
+                resultSeqArray:addObject( CCMoveBy:create( INFO_MOVE_TIME, ccp( deltaX, 0 ) ) )
+                qualified:runAction( CCSequence:create( resultSeqArray ) )
+
+            end
+        end
+        qualified:addTouchEventListener( infoHandler )
+        
+
+        if info["NumberOfUserGamesLeftToQualify"] <= 0 then
+            check:loadTexture( Constants.COMPETITION_SCENE_IMAGE_PATH.."icn-qualified.png" )
+            infoCheck:loadTexture( Constants.COMPETITION_SCENE_IMAGE_PATH.."icn-qualified.png" )
+            infoQualified:setText( Constants.String.event.status_qualified )
+            infoHint:setText( Constants.String.event.hint_qualified )
+        else
+            infoQualified:setText( Constants.String.event.status_unqualified )
+            infoHint:setText( string.format( Constants.String.event.hint_unqualified, info["NumberOfUserGamesLeftToQualify"] ) )
+        end
+    end
+
     local seqArray = CCArray:create()
     seqArray:addObject( CCDelayTime:create( 0.2 ) )
     seqArray:addObject( CCCallFuncN:create( function()

@@ -14,7 +14,7 @@ local CompetitionConfig = require("scripts.data.Competitions")
 local ConnectingMessage = require("scripts.views.ConnectingMessage")
 local Logic = require("scripts.Logic").getInstance()
 
-local MAX_CONTAINER_HEIGHT = 480
+local MAX_CONTAINER_HEIGHT = 496
 
 local mWidget
 
