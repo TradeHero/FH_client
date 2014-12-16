@@ -14,11 +14,12 @@ local mWidget
 local mLeagueChatId
 local mContainerHeight
 local mHasTodayMessage
+local mIsFirstCall
 local MESSAGE_CONTAINER_NAME = "Panel_MessageContainer"
 local RELOAD_DELAY_TIME = 5
 
 -- DS for chatMessages: see ChatMessages
-function loadFrame( leaguechatId, chatMessages )
+function loadFrame( leaguechatId )
     mLeagueChatId = leaguechatId
 
     local widget = GUIReader:shareReader():widgetFromJsonFile("scenes/ChatroomScene.json")
@@ -30,7 +31,7 @@ function loadFrame( leaguechatId, chatMessages )
     Navigator.loadFrame( widget )
 
     mHasTodayMessage = false
-    initMessage( chatMessages )
+    mIsFirstCall = true
 
     local backBt = widget:getChildByName("Button_Back")
     backBt:addTouchEventListener( backEventHandler )
@@ -41,7 +42,7 @@ function loadFrame( leaguechatId, chatMessages )
     local messageInput = ViewUtils.createTextInput( mWidget:getChildByName( MESSAGE_CONTAINER_NAME ), Constants.String.message_hint, 470, 50 )
 
     initTitle()
-    getLatestMessages()
+    doGetLatestMessages()
 end
 
 function initTitle()    
@@ -63,9 +64,18 @@ end
 local mLastGetLatestMessageTime = 0
 function doGetLatestMessages()
     -- Only send the request when players are still in the chat UI.
-    if mWidget ~= nil and os.time() - mLastGetLatestMessageTime >= RELOAD_DELAY_TIME then
-        local isSilent, callback, isLeague = true, getLatestMessages , true
-        EventManager:postEvent( Event.Do_Get_Chat_Message, { mLeagueChatId, Logic:getLastChatMessageTimestamp(), isSilent, callback, isLeague } )
+    if mIsFirstCall or ( mWidget ~= nil and os.time() - mLastGetLatestMessageTime >= RELOAD_DELAY_TIME ) then
+        local callback, isLeague = getLatestMessages , true
+        local lastChatTime, isSilent
+        if mIsFirstCall then 
+            lastChatTime = 0
+            isSilent = false
+            mIsFirstCall = false
+        else
+            lastChatTime = Logic:getLastChatMessageTimestamp()
+            isSilent = true
+        end
+        EventManager:postEvent( Event.Do_Get_Chat_Message, { mLeagueChatId, lastChatTime, isSilent, callback, isLeague } )
         mLastGetLatestMessageTime = os.time()
     end
 end
@@ -104,7 +114,7 @@ function sendEventHandler( sender,eventType )
     end
 end
 
-function initMessage( chatMessages )
+function initMessages( chatMessages )
     local contentContainer = tolua.cast( mWidget:getChildByName("ScrollView"), "ScrollView" )
     contentContainer:removeAllChildrenWithCleanup( true )
 
@@ -218,6 +228,7 @@ function relayoutChatMessage( content, message, isMe, i )
     local name = message["UserName"]
     local text = message["MessageText"]
     local time = message["UnixTimeStamp"]
+    local userid = message["UserId"]
 
     local messageBg = tolua.cast( content:getChildByName("bg"), "ImageView" )
     local messageLabel = tolua.cast( content:getChildByName("message"), "Label" )
@@ -253,6 +264,14 @@ function relayoutChatMessage( content, message, isMe, i )
     end
 
     if not isMe then
+        local eventHandler = function( sender, eventType )
+            if eventType == TOUCH_EVENT_ENDED then
+                EventManager:postEvent( Event.Enter_History, { userid, name } )
+            end
+        end
+        logo:addTouchEventListener( eventHandler )
+        messageName:addTouchEventListener( eventHandler )
+
         local seqArray = CCArray:create()
         seqArray:addObject( CCDelayTime:create( i * 0.2 ) )
         seqArray:addObject( CCCallFuncN:create( function()
