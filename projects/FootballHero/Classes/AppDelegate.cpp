@@ -122,6 +122,7 @@ bool AppDelegate::applicationDidFinishLaunching()
 void AppDelegate::applicationDidEnterBackground()
 {
     CCDirector::sharedDirector()->stopAnimation();
+	CCDirector::sharedDirector()->pause();
 
     SimpleAudioEngine::sharedEngine()->pauseBackgroundMusic();
 }
@@ -129,6 +130,8 @@ void AppDelegate::applicationDidEnterBackground()
 // this function will be called when the app is active again
 void AppDelegate::applicationWillEnterForeground()
 {
+	CCDirector::sharedDirector()->stopAnimation();
+	CCDirector::sharedDirector()->resume();
     CCDirector::sharedDirector()->startAnimation();
 
     SimpleAudioEngine::sharedEngine()->resumeBackgroundMusic();

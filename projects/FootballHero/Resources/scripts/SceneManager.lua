@@ -182,7 +182,11 @@ end
 function registerDeepLinkEvent()
 	local callback = function( deepLink )
 		-- Todo maybe after the current UI finishes loading.
-		processDeepLink( deepLink )
+		local delayedTask = function()
+            processDeepLink( deepLink )
+        end
+
+        EventManager:scheduledExecutor( delayedTask, 1 )
 	end
 
 	Misc:sharedDelegate():addEventListenerDeepLink( callback )
