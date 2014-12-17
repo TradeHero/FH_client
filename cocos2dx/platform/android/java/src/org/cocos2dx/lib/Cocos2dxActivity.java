@@ -26,6 +26,7 @@ package org.cocos2dx.lib;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -52,11 +53,14 @@ public abstract class Cocos2dxActivity extends FragmentActivity implements Cocos
 
   private Cocos2dxGLSurfaceView mGLSurfaceView;
   private Handler mHandler;
+  private String m_deepLink = null;
   private static Context sContext = null;
 
   public static Context getContext() {
     return sContext;
   }
+
+  public String getDeepLink() { return m_deepLink; }
 
   // ===========================================================
   // Constructors
@@ -73,6 +77,18 @@ public abstract class Cocos2dxActivity extends FragmentActivity implements Cocos
     this.init();
 
     Cocos2dxHelper.init(this, this);
+
+    Intent intent = getIntent();
+    String action = intent.getAction();
+    Uri data = intent.getData();
+
+    Log.v("###", "Get intent with action: " + action);
+    if (data != null)
+    {
+      Log.v("###", "Get intent with data: " + data.toString());
+      m_deepLink = data.getPath();
+      MiscUtil.notifyDeepLink(m_deepLink);
+    }
   }
 
   @Override public boolean dispatchTouchEvent(MotionEvent event) {

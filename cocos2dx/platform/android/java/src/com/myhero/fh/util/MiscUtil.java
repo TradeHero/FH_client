@@ -79,6 +79,11 @@ public class MiscUtil {
         }
     }
 
+    public static void getDeepLink() {
+        String deepLink = ((Cocos2dxActivity)Cocos2dxActivity.getContext()).getDeepLink();
+        notifyDeepLink(deepLink);
+    }
+
   public static void onActivityResult(int requestCode, int resultCode, Intent data) {
     Log.d(TAG, String.format("requestCode(%d), resultCode(%d), data(%s)", requestCode,
         resultCode, data));
@@ -166,4 +171,5 @@ public class MiscUtil {
     public static native void sendMailResult(int resultCode);
     public static native void sendSmsResult(int resultCode);
     public static native void selectImageResult(boolean success);
+    public static native void notifyDeepLink(String deepLink);
 }

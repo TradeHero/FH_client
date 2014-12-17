@@ -70,10 +70,9 @@ function checkNext()
 	        	else
 	        		SceneManager.processDeepLink( deepLink, mFinishEvent, mFinishEventParam )
 	        	end
-
-	        	SceneManager.registerDeepLinkEvent()
 	        end
 
+	        SceneManager.registerDeepLinkEvent()
 	        Misc:sharedDelegate():getDeepLink( deepLinkHandler )      
 		end ) )
 

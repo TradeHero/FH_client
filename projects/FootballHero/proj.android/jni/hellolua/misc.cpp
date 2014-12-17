@@ -35,6 +35,13 @@ extern "C"
     {
         Utils::Misc::sharedDelegate()->selectImageResult(success);
     }
+
+    JNIEXPORT void JNICALL Java_com_myhero_fh_util_MiscUtil_notifyDeepLink(JNIEnv *env,
+        	  jobject thiz, jstring deepLink)
+    {
+        const char *dDeepLink = env->GetStringUTFChars(deepLink, NULL);
+        Utils::Misc::sharedDelegate()->notifyDeepLink(dDeepLink);
+    }
 }
 
 void openWebPageAndroid(const char* url, int x, int y, int w, int h)
@@ -193,6 +200,16 @@ void misc_select_image(const char* path, int width, int height) {
                 jint jHeight = height;
                 jmi.env->CallStaticVoidMethod(jmi.classID, jmi.methodID, jPath, jWidth, jHeight);
                 jmi.env->DeleteLocalRef(jPath);
+                jmi.env->DeleteLocalRef(jmi.classID);
+          }
+}
+
+void misc_get_deepLink() {
+    JniMethodInfo jmi;
+    if (JniHelper::getStaticMethodInfo(jmi, "com/myhero/fh/util/MiscUtil",
+                "getDeepLink", "()Ljava/lang/String;"))
+          {
+                jmi.env->CallStaticCharMethod(jmi.classID, jmi.methodID);
                 jmi.env->DeleteLocalRef(jmi.classID);
           }
 }
