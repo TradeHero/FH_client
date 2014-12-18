@@ -19,7 +19,7 @@ if [ ! -n "$1" ]; then
 fi
 
 # Process the arguments
-ENV=""
+ENV="prod"
 MANUAL_GIT_DIFF=false
 for arg in "$@"; do
 	if [ $arg == "--dev" ]; then
