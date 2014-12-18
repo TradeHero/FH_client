@@ -807,7 +807,7 @@ function initSelfContent( info )
         name:setText( info["DisplayName"] )
     end
 
-    if not qualified == nil then
+    if qualified ~= nil then
         local infoCheck = tolua.cast( qualified:getChildByName("Image_Check"), "ImageView" )
         local infoHint = tolua.cast( qualified:getChildByName("Label_Hint"), "Label" )
         local infoQualified = tolua.cast( qualified:getChildByName("Label_Qualified"), "Label" )
