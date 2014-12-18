@@ -10,7 +10,7 @@ echo "Working path: $WORKING_PATH"
 echo "Source path: $SOURCE_PATH"
 
 # Make sure the target version is selected
-if [ ! -n "$1" ]; then
+if [[ ! -n "$1" ]]; then
 	echo "Error: No target version defined."
 	echo "Check each version is listed in $VERSION_FILE before run."
 	echo "Usage: ./PatchCreation.sh newVersionCode [--dev] [--manual-git-diff]"
@@ -19,42 +19,42 @@ if [ ! -n "$1" ]; then
 fi
 
 # Process the arguments
-ENV="prod"
+ENV=""
 MANUAL_GIT_DIFF=false
 for arg in "$@"; do
-	if [ $arg == "--dev" ]; then
+	if [[ $arg == "--dev" ]]; then
 		ENV="dev"
-	elif [ $arg == "--manual-git-diff" ]; then
+	elif [[ $arg == "--manual-git-diff" ]]; then
 		MANUAL_GIT_DIFF=true
 	fi
 done
 
-if [ $ENV == "dev" ]; then
+if [[ $ENV == "dev" ]]; then
 	echo "Create patch against dev."
 else
 	echo "Create patch against prod."
 fi
-if [ $MANUAL_GIT_DIFF == true ]; then
+if [[ $MANUAL_GIT_DIFF == true ]]; then
 	echo "Use manual git diff file."
 fi
 
 
 # Clear history
-if [ $MANUAL_GIT_DIFF == false ]; then
+if [[ $MANUAL_GIT_DIFF == false ]]; then
 	rm -rf "$WORKING_PATH"
 	mkdir "$WORKING_PATH"
 fi
 
 function diffVersionWithTags()
 {
-    if [ $1 == $2 ]; then
+    if [[ $1 == $2 ]]; then
         return
     fi
 
 	echo "Create patch from $1 to $2"
 	patchDir=$WORKING_PATH/$1_$2
 	mkdir "$patchDir"
-	if [ $MANUAL_GIT_DIFF == false ]; then
+	if [[ $MANUAL_GIT_DIFF == false ]]; then
 		git diff --name-status $1..$2 > "$patchDir/gitDiff"
 	fi
 
@@ -67,7 +67,7 @@ function diffVersionWithTags()
 	    status="${diffInfoArr[0]}"
 	    filePath="${diffInfoArr[1]}"
 
-	    if [ $status = "A" ] || [ $status = "M" ]; then
+	    if [[ $status = "A" ]] || [[ $status = "M" ]]; then
 			if [[ $filePath == *.cpp ]] || [[ $filePath == *.h ]] || [[ $filePath == *.java ]] || [[ $filePath == *.mm ]] || [[ $filePath == *.m ]]; then
 	    		# Check code updates
 	    		
@@ -90,7 +90,7 @@ function diffVersionWithTags()
 	done < "$patchDir/gitDiff"
 
 	# Create the zip package and update the patchConfig.
-	if [ $codeUpdated == true ]; then
+	if [[ $codeUpdated == true ]]; then
 		echo "Since the code is change, no self update."
 		echo "$1_needUpdate = false" >> $WORKING_PATH/$PATCH_CONFIG_FILE
 	else
@@ -98,7 +98,7 @@ function diffVersionWithTags()
 		cd $WORKING_PATH
 		
 		# Check if the patch folder is empty
-		if [ "`ls -A $1_$2`" == "" ]; then
+		if [[ "`ls -A $1_$2`" == "" ]]; then
 			echo "$1_needUpdate = false" >> $WORKING_PATH/$PATCH_CONFIG_FILE
 		else
 			cd $1_$2
@@ -121,4 +121,4 @@ do
     diffVersionWithTags $v $1
 done < $VERSION_FILE
 
-echo "$1.needUpdate = false" >> $WORKING_PATH/$PATCH_CONFIG_FILE
+echo "$1_needUpdate = false" >> $WORKING_PATH/$PATCH_CONFIG_FILE
