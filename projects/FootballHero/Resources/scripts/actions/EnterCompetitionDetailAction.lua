@@ -36,7 +36,7 @@ function action( param )
     local nowTime = os.time()
     mYearNumber = os.date( "%Y", nowTime )
     mMonthNumber = os.date( "%m", nowTime )
-    mWeekNumber = os.date( "%W", nowTime )
+    mWeekNumber = os.date( "%W", nowTime ) + 1      -- Lua calculate week number worngly. It is one behind.
 
     if mTabID == CompetitionConfig.COMPETITION_TAB_ID_MONTHLY then
         if param[5] ~= nil then
