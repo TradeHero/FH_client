@@ -14,7 +14,7 @@ function init()
 	if mConfigNum > 0 then 
 		return
 	end
-	print("Read Team config.")
+	CCLuaLog("Read Team config.")
 	mConfig, mConfigNum, mIndex = JsonConfigReader.read( FILE_NAME, "Id" )
 end
 

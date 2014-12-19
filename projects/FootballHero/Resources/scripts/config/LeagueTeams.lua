@@ -9,7 +9,7 @@ local FILE_NAME = "config/leagueteams.txt"
 local mConfig = {}
 
 function init()
-	print("Read LeagueTeam config.")
+	CCLuaLog("Read LeagueTeam config.")
 	mConfig = JsonConfigReader.readAndCombine( FILE_NAME, "leagueId" )
 end
 

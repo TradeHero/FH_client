@@ -15,12 +15,12 @@ function init()
 	if mConfigNum > 0 then 
 		return
 	end
-	print("Read Country config.")
+	CCLuaLog("Read Country config.")
 	local filter = function( v )
 		return v["isActive"]
 	end
 	mConfig, mConfigNum, mIndex = JsonConfigReader.read( FILE_NAME, "Id", filter )
-	print( "Read active country number: "..mConfigNum )
+	CCLuaLog( "Read active country number: "..mConfigNum )
 
 	for i = 1, LeagueConfig.getConfigNum() do
 		local countryId = LeagueConfig.getCountryId( i )
@@ -33,7 +33,7 @@ function init()
 		if getLeagueList( i ) == nil then
 			assert( "County "..getCountryName( i ).." has no league." )
 		else
-			print( "County "..getCountryName( i ).." has "..table.getn( getLeagueList( i ) ).." leagues." )
+			CCLuaLog( "County "..getCountryName( i ).." has "..table.getn( getLeagueList( i ) ).." leagues." )
 		end
 	end
 end

@@ -39,7 +39,7 @@ function readStringFromFile( fileName )
 	local path = fileUtils:getWritablePath()..fileName
 	if fileUtils:isFileExist( path ) then
 		print("Read local file from: "..path)
-
+		local startTime = os.clock()
 		local fileHandler, errorCode = io.open( path, "r" )
 		--print( "Read from: "..path )
 		if fileHandler == nil then
@@ -49,6 +49,9 @@ function readStringFromFile( fileName )
 		
 		text = fileHandler:read("*all")
 		fileHandler:close()
+
+		local endTime = os.clock()
+		CCLuaLog("Read file "..fileName.." took "..( endTime - startTime ) )
 	else
 		local fileName = fileUtils:fullPathForFilename( fileName )
 		print("Read file from package: "..fileName)

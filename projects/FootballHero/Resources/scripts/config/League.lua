@@ -13,12 +13,12 @@ function init()
 	if mConfigNum > 0 then 
 		return
 	end
-	print("Read League config.")
+	CCLuaLog("Read League config.")
 	local filter = function( v )
 		return v["isActive"]
 	end
 	mConfig, mConfigNum, mIndex = JsonConfigReader.read( FILE_NAME, "Id", filter )
-	print( "Read active league number: "..mConfigNum )
+	CCLuaLog( "Read active league number: "..mConfigNum )
 end
 
 function getConfig( id )
