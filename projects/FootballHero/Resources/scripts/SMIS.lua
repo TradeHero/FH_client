@@ -8,7 +8,7 @@ local FOLDER = "SMI/"
 -- Return the local file path if the file exist.
 -- Otherwise download it, save it locally and return the file path.
 function getSMImagePath( fileUrl, handler )
-	local fileName = fileUrl
+	local fileName = tostring( fileUrl )
 	
 	local toBeRemove = string.find(fileName, "?")
 	if toBeRemove ~= nil then
@@ -48,6 +48,6 @@ function downloadSMImage( fileUrl, onRequestSuccess, onRequestFailed )
     end
 
     local httpRequest = HttpRequestForLua:create( CCHttpRequest.kHttpGet )
-    httpRequest:sendHttpRequest( fileUrl, handler )
+    httpRequest:sendHttpRequest( tostring( fileUrl ), handler )
     httpRequest:setPriority( CCHttpRequest.pLow )
 end

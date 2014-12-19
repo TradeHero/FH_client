@@ -305,6 +305,9 @@
 		73FC0A22199079630006D0E2 /* iOSa_2.60.0.version in Resources */ = {isa = PBXBuildFile; fileRef = 73FC0A1C199079630006D0E2 /* iOSa_2.60.0.version */; };
 		73FC0A24199079630006D0E2 /* libLocalyticsAMP.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 73FC0A1E199079630006D0E2 /* libLocalyticsAMP.a */; };
 		73FC0A25199079630006D0E2 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 73FC0A1F199079630006D0E2 /* LICENSE */; };
+		73FE009C1A43FE2300B0BC05 /* lua_cjson.c in Sources */ = {isa = PBXBuildFile; fileRef = 73FE009A1A43FE2300B0BC05 /* lua_cjson.c */; };
+		73FE00A11A43FEA100B0BC05 /* fpconv.c in Sources */ = {isa = PBXBuildFile; fileRef = 73FE009D1A43FEA100B0BC05 /* fpconv.c */; };
+		73FE00A21A43FEA100B0BC05 /* strbuf.c in Sources */ = {isa = PBXBuildFile; fileRef = 73FE009F1A43FEA100B0BC05 /* strbuf.c */; };
 		73FE377F1907C8BA0039A45C /* EditBoxDelegateForLua.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 73FE377D1907C8BA0039A45C /* EditBoxDelegateForLua.cpp */; };
 		BFA3732919F8E6AB001FCA85 /* LocalizedString.lua in Resources */ = {isa = PBXBuildFile; fileRef = BFA3732819F8E6AA001FCA85 /* LocalizedString.lua */; };
 		ED35C0C718323498002A0750 /* CCArmatureAnimation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED35C03818323497002A0750 /* CCArmatureAnimation.cpp */; };
@@ -928,6 +931,12 @@
 		73FC0A1F199079630006D0E2 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = LICENSE; path = "AMP-SDK/LICENSE"; sourceTree = "<group>"; };
 		73FC0A20199079630006D0E2 /* LocalyticsAmpSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LocalyticsAmpSession.h; path = "AMP-SDK/LocalyticsAmpSession.h"; sourceTree = "<group>"; };
 		73FC0A21199079630006D0E2 /* LocalyticsSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LocalyticsSession.h; path = "AMP-SDK/LocalyticsSession.h"; sourceTree = "<group>"; };
+		73FE009A1A43FE2300B0BC05 /* lua_cjson.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lua_cjson.c; path = cjson/lua_cjson.c; sourceTree = "<group>"; };
+		73FE009B1A43FE2300B0BC05 /* lua_cjson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = lua_cjson.h; path = cjson/lua_cjson.h; sourceTree = "<group>"; };
+		73FE009D1A43FEA100B0BC05 /* fpconv.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = fpconv.c; path = cjson/fpconv.c; sourceTree = "<group>"; };
+		73FE009E1A43FEA100B0BC05 /* fpconv.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = fpconv.h; path = cjson/fpconv.h; sourceTree = "<group>"; };
+		73FE009F1A43FEA100B0BC05 /* strbuf.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = strbuf.c; path = cjson/strbuf.c; sourceTree = "<group>"; };
+		73FE00A01A43FEA100B0BC05 /* strbuf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = strbuf.h; path = cjson/strbuf.h; sourceTree = "<group>"; };
 		73FE377D1907C8BA0039A45C /* EditBoxDelegateForLua.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EditBoxDelegateForLua.cpp; sourceTree = "<group>"; };
 		73FE377E1907C8BA0039A45C /* EditBoxDelegateForLua.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditBoxDelegateForLua.h; sourceTree = "<group>"; };
 		BFA3732819F8E6AA001FCA85 /* LocalizedString.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LocalizedString.lua; sourceTree = "<group>"; };
@@ -1562,6 +1571,7 @@
 		15C155FF168311CB00D239F2 /* lua */ = {
 			isa = PBXGroup;
 			children = (
+				73FE00991A43FE1800B0BC05 /* cjson */,
 				730F171A1918C8CE000DB5BE /* lfs */,
 				73BFF750191779DE002F173A /* crypt */,
 				46C59AD017641FF300F43DC3 /* script */,
@@ -2062,6 +2072,19 @@
 				73FC0A21199079630006D0E2 /* LocalyticsSession.h */,
 			);
 			name = "AMP-SDK";
+			sourceTree = "<group>";
+		};
+		73FE00991A43FE1800B0BC05 /* cjson */ = {
+			isa = PBXGroup;
+			children = (
+				73FE009D1A43FEA100B0BC05 /* fpconv.c */,
+				73FE009E1A43FEA100B0BC05 /* fpconv.h */,
+				73FE009F1A43FEA100B0BC05 /* strbuf.c */,
+				73FE00A01A43FEA100B0BC05 /* strbuf.h */,
+				73FE009A1A43FE2300B0BC05 /* lua_cjson.c */,
+				73FE009B1A43FE2300B0BC05 /* lua_cjson.h */,
+			);
+			name = cjson;
 			sourceTree = "<group>";
 		};
 		ED35C02A18323496002A0750 /* CocoStudio */ = {
@@ -2626,6 +2649,7 @@
 				15C1540A1683112E00D239F2 /* CCNodeLoaderLibrary.cpp in Sources */,
 				15C1540B1683112E00D239F2 /* CCParticleSystemQuadLoader.cpp in Sources */,
 				15C1540C1683112E00D239F2 /* CCScale9SpriteLoader.cpp in Sources */,
+				73FE00A21A43FEA100B0BC05 /* strbuf.c in Sources */,
 				15C1540D1683112E00D239F2 /* CCScrollViewLoader.cpp in Sources */,
 				15C1540E1683112E00D239F2 /* CCSpriteLoader.cpp in Sources */,
 				73B455CF19A48B2D0097A722 /* lua_zlib.c in Sources */,
@@ -2731,6 +2755,7 @@
 				ED35C0ED18323498002A0750 /* UICheckBox.cpp in Sources */,
 				15C155321683118600D239F2 /* b2ContactManager.cpp in Sources */,
 				15C155331683118600D239F2 /* b2Fixture.cpp in Sources */,
+				73FE00A11A43FEA100B0BC05 /* fpconv.c in Sources */,
 				15C155341683118600D239F2 /* b2Island.cpp in Sources */,
 				15C155351683118600D239F2 /* b2World.cpp in Sources */,
 				7388C04118F4E2FF00CF667C /* HttpRequestForLua.cpp in Sources */,
@@ -2767,6 +2792,7 @@
 				73BFF75A191779FB002F173A /* des56.c in Sources */,
 				15C155481683118600D239F2 /* b2RopeJoint.cpp in Sources */,
 				ED35C0EB18323498002A0750 /* UIScrollView.cpp in Sources */,
+				73FE009C1A43FE2300B0BC05 /* lua_cjson.c in Sources */,
 				ED35C0DB18323498002A0750 /* CCComAudio.cpp in Sources */,
 				7314B48C19B7150F0065D927 /* UAPushSettingsAddTagViewController.m in Sources */,
 				7314B49319B7150F0065D927 /* UAPushSettingsViewController.m in Sources */,

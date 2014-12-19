@@ -28,8 +28,11 @@ LOCAL_SRC_FILES := ../cocos2dx_support/CCLuaBridge.cpp \
           ../crypt/md5.c \
           ../crypt/ldes56.c \
           ../crypt/des56.c \
-		  ../crypt/lua_zlib.c \
+		../crypt/lua_zlib.c \
           ../lfs/lfs.c \
+          ../cjson/lua_cjson.c \
+          ../cjson/strbuf.c \
+          ../cjson/fpconv.c \
           ../cocos2dx_support/tolua_fix.c
           
 LOCAL_EXPORT_C_INCLUDES := $(LOCAL_PATH)/../luajit/include \
@@ -42,6 +45,7 @@ LOCAL_C_INCLUDES := $(LOCAL_PATH)/ \
                     $(LOCAL_PATH)/../tolua \
                     $(LOCAL_PATH)/../crypt \
                     $(LOCAL_PATH)/../lfs \
+                    $(LOCAL_PATH)/../cjson \
                     $(LOCAL_PATH)/../../../cocos2dx \
                     $(LOCAL_PATH)/../../../cocos2dx/include \
                     $(LOCAL_PATH)/../../../cocos2dx/platform \

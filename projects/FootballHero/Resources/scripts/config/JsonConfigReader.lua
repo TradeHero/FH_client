@@ -13,7 +13,7 @@ function read( fileName, primaryKey, filter )
 end
 
 function readWithPrimaryKey( fileName, primaryKey, filter )
-	local startTime = os.time()
+	local startTime = os.clock()
 
 	local config = {}
 	local index = {}
@@ -21,10 +21,13 @@ function readWithPrimaryKey( fileName, primaryKey, filter )
 
 	-- Check if there is a local version
 	local text = FileUtils.readStringFromFile( fileName )
-	print( "Read file "..fileName.." took "..( os.time() - startTime ) )
-	startTime = os.time()
+	CCLuaLog( "Read file "..fileName.." took "..( os.clock() - startTime ) )
+	startTime = os.clock()
 	--print( text )
 	local jsonObject = Json.decode( text )
+	CCLuaLog( "Jsonize file "..fileName.." took "..( os.clock() - startTime ) )
+	startTime = os.clock()
+
 	for i, v in pairs( jsonObject ) do
 		if filter( v ) then
 		    table.insert( config, v )
@@ -35,7 +38,7 @@ function readWithPrimaryKey( fileName, primaryKey, filter )
 		end
 	end
 
-	print( "Parse file "..fileName.." took "..( os.time() - startTime ) )
+	CCLuaLog( "Parse file "..fileName.." took "..( os.clock() - startTime ) )
 	return config, configNum, index
 end
 
@@ -62,10 +65,17 @@ end
 
 function readAndCombine( fileName, primaryKey )
 	local config = {}
+	local startTime = os.clock()
 
 	local text = FileUtils.readStringFromFile( fileName )
+	CCLuaLog( "Read file "..fileName.." took "..( os.clock() - startTime ) )
+	startTime = os.clock()
+
 	--print( text )
 	local jsonObject = Json.decode( text )
+	CCLuaLog( "Jsonize file "..fileName.." took "..( os.clock() - startTime ) )
+	startTime = os.clock()
+
 	for i, v in pairs( jsonObject ) do
 		local id = v[primaryKey]
 		if config[id] == nil then
@@ -75,5 +85,6 @@ function readAndCombine( fileName, primaryKey )
 		table.insert( config[id], v )
 	end
 
+	CCLuaLog( "Parse file "..fileName.." took "..( os.clock() - startTime ) )
 	return config
 end
