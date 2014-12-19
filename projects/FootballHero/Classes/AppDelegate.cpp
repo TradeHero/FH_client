@@ -56,22 +56,6 @@ bool AppDelegate::applicationDidFinishLaunching()
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_BLACKBERRY)
 	CCFileUtils::sharedFileUtils()->addSearchPath("script");
 #endif
-
-	vector<string> searchPaths = CCFileUtils::sharedFileUtils()->getSearchPaths();
-
-	if (CCApplication::sharedApplication()->getCurrentLanguage() == kLanguageChinese)
-	{
-		searchPaths.insert(searchPaths.begin(), CCFileUtils::sharedFileUtils()->getDefaultResRootPath() + "zh");
-	}
-	searchPaths.insert(searchPaths.begin(), CCFileUtils::sharedFileUtils()->getWritablePath() + "local");
-	if (CCApplication::sharedApplication()->getCurrentLanguage() == kLanguageChinese)
-	{
-		searchPaths.insert(searchPaths.begin(), CCFileUtils::sharedFileUtils()->getWritablePath() + "local/zh");
-	}
-	searchPaths.insert(searchPaths.begin(), CCFileUtils::sharedFileUtils()->getWritablePath());
-
-	CCFileUtils::sharedFileUtils()->setSearchPaths(searchPaths);
-
 	CCEGLView* eglView = CCEGLView::sharedOpenGLView();
 	eglView->setDesignResolutionSize(640, 1136, kResolutionShowAll);
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
@@ -107,6 +91,20 @@ bool AppDelegate::applicationDidFinishLaunching()
 			}
 		}
 	}
+
+	vector<string> searchPaths = CCFileUtils::sharedFileUtils()->getSearchPaths();
+
+	if (CCApplication::sharedApplication()->getCurrentLanguage() == kLanguageChinese)
+	{
+		searchPaths.insert(searchPaths.begin(), CCFileUtils::sharedFileUtils()->getDefaultResRootPath() + "zh");
+	}
+	searchPaths.insert(searchPaths.begin(), CCFileUtils::sharedFileUtils()->getWritablePath() + "local");
+	if (CCApplication::sharedApplication()->getCurrentLanguage() == kLanguageChinese)
+	{
+		searchPaths.insert(searchPaths.begin(), CCFileUtils::sharedFileUtils()->getWritablePath() + "local/zh");
+	}
+	searchPaths.insert(searchPaths.begin(), CCFileUtils::sharedFileUtils()->getWritablePath());
+	CCFileUtils::sharedFileUtils()->setSearchPaths(searchPaths);
 
 	CCScene *updateScene = CCScene::create();
 	UpdateLayer *updateLayer = new UpdateLayer();
