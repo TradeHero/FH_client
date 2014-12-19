@@ -276,6 +276,7 @@ end
 
 function shareByFacebook( sender, eventType )
     if eventType == TOUCH_EVENT_ENDED then
+        --[[
         local doShare = function()
             local handler = function( accessToken, success )
                 if success then
@@ -298,6 +299,13 @@ function shareByFacebook( sender, eventType )
         else
             doShare()
         end
+        --]]
+
+        local shareHandler = function()
+
+        end
+
+        ShareSDKDelegate:sharedDelegate():doShare( "Competition Share", "Join me in the competition!", shareHandler )
     end
 end
 
