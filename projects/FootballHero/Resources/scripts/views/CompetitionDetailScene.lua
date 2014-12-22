@@ -809,6 +809,7 @@ function initSelfContent( info )
         infoQualified:setText( Constants.String.event.status_qualified )
         infoHint:setText( Constants.String.event.hint_qualified )
     else
+        check:loadTexture( Constants.COMPETITION_SCENE_IMAGE_PATH.."icn-unqualified.png" )
         infoQualified:setText( Constants.String.event.status_unqualified )
         infoHint:setText( string.format( Constants.String.event.hint_unqualified, info["NumberOfUserGamesLeftToQualify"] ) )
     end
