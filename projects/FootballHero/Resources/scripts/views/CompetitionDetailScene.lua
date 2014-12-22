@@ -360,7 +360,7 @@ function initRankingDropdown( startTimeStamp )
             local eventHandler = function( sender, eventType )
                 if eventType == TOUCH_EVENT_ENDED then
                     local sortType = 3
-                     if mTabID == CompetitionsData.COMPETITION_TAB_ID_MONTHLY then
+                    if mTabID == CompetitionsData.COMPETITION_TAB_ID_MONTHLY then
                         EventManager:postEvent( Event.Enter_Competition_Detail, { mCompetitionId, false, sortType, mTabID, mCompetitionDurations[i]["yearNumber"], mCompetitionDurations[i]["monthNumber"] } )
                     else
                         EventManager:postEvent( Event.Enter_Competition_Detail, { mCompetitionId, false, sortType, mTabID, mCompetitionDurations[i]["yearNumber"], mCompetitionDurations[i]["weekNumber"] } )
@@ -1015,11 +1015,17 @@ end
 
 function scrollViewEventHandler( target, eventType )
     if eventType == SCROLLVIEW_EVENT_BOUNCE_BOTTOM and mHasMoreToLoad then
+        
         mStep = mStep + 1
-        if mCompetitionType ~= CompetitionType["Private"] then
-            EventManager:postEvent( Event.Load_More_In_Competition_Detail, { mCompetitionId, mStep, 3 } )
+        local sortType = 3
+        if mCompetitionType == CompetitionType["DetailedRanking"] then
+            if mTabID == CompetitionsData.COMPETITION_TAB_ID_MONTHLY then
+                EventManager:postEvent( Event.Load_More_In_Competition_Detail, { mCompetitionId, mStep, sortType, mTabID, mYearNumber, mMonthNumber } )
+            else
+                EventManager:postEvent( Event.Load_More_In_Competition_Detail, { mCompetitionId, mStep, sortType, mTabID, mYearNumber, mWeekNumber } )
+            end 
         else
-            EventManager:postEvent( Event.Load_More_In_Competition_Detail, { mCompetitionId, mStep } )
+            EventManager:postEvent( Event.Load_More_In_Competition_Detail, { mCompetitionId, mStep, sortType } )
         end
     end
 end

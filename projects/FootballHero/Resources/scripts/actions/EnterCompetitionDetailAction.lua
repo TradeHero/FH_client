@@ -40,7 +40,6 @@ function action( param )
 
     if mTabID == CompetitionConfig.COMPETITION_TAB_ID_MONTHLY then
         if param[5] ~= nil then
-            print ("monthly param 5 not nil")
             mYearNumber = param[5]
             mMonthNumber = param[6]
         end
@@ -50,7 +49,6 @@ function action( param )
     elseif mTabID == CompetitionConfig.COMPETITION_TAB_ID_WEEKLY then
         
         if param[5] ~= nil then
-            print ("weekly param 5 not nil")
             mYearNumber = param[5]
             mWeekNumber = param[6]
         end
