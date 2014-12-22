@@ -247,6 +247,8 @@ function initContent( couponHistory )
 
     if info["Roi"] < 0 then
         stat_gain_percent:setColor( ccc3( 240, 75, 79 ) )
+    else
+        stat_gain_percent:setColor( ccc3( 79, 199, 93 ) )
     end
 
     local name = tolua.cast( mWidget:getChildByName("Label_Name"), "Label" )
@@ -551,6 +553,7 @@ function helperInitClosedPrediction( content, matchInfo )
     if matchInfo["Profit"] >= 0 then
         statusBG:setFocused( true )
         pointsTitle:setText( Constants.String.history.won )
+        points:setColor( ccc3( 79, 199, 93 ) )
     else
         statusBG:setBright( false )
         pointsTitle:setText( Constants.String.history.lost )
@@ -570,6 +573,7 @@ function helperInitClosedPrediction( content, matchInfo )
     if wins >= totalMatches / 2 then
         winType:setText( Constants.String.history.won_small )
         winCount:setText( string.format( Constants.String.history.win_count, wins, totalMatches ) )
+        winCount:setColor( ccc3( 79, 199, 93 ) )
     else
         winType:setText( Constants.String.history.lost_small )
         winCount:setText( string.format( Constants.String.history.win_count, totalMatches - wins, totalMatches ) )
