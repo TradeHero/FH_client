@@ -13,6 +13,7 @@ local Event = require("scripts.events.Event").EventList
 local SMIS = require("scripts.SMIS")
 local Json = require("json")
 local ConnectingMessage = require("scripts.views.ConnectingMessage")
+local CommunityConfig = require("scripts.config.Community")
 
 local mWidget
 local mTopLayer
@@ -322,14 +323,15 @@ end
 function checkMiniGame()
     -- check if popup should appear
     local bAppear = shouldShowMiniGame()
+    local closeEventHandler, playEventHandler, BG
+
+    local minigamePopup = SceneManager.widgetFromJsonFile("scenes/MinigamePopup.json")
+    minigamePopup:setZOrder( Constants.ZORDER_POPUP )
+    mWidget:addChild( minigamePopup )
 
     if bAppear then
-        local minigamePopup = SceneManager.widgetFromJsonFile("scenes/MinigamePopup.json")
-        minigamePopup:setZOrder( Constants.ZORDER_POPUP )
-        mWidget:addChild( minigamePopup )
-
         local nextImage = getNextMiniGameImage()
-        local closeEventHandler = function( sender, eventType )
+        closeEventHandler = function( sender, eventType )
             if eventType == TOUCH_EVENT_ENDED then
                 sendAnalytics( nextImage, "closed" )
                 -- save in localDB
@@ -339,7 +341,7 @@ function checkMiniGame()
             end
         end
 
-        local playEventHandler = function( sender, eventType )
+        playEventHandler = function( sender, eventType )
             if eventType == TOUCH_EVENT_ENDED then
                 sendAnalytics( nextImage, "shared" )
                 -- save in localDB
@@ -349,32 +351,54 @@ function checkMiniGame()
             end
         end
 
-        local close = minigamePopup:getChildByName( "Button_Close" )
-        close:addTouchEventListener( closeEventHandler )
-        
         --local later = minigamePopup:getChildByName( "Button_Later" )
         --later:addTouchEventListener( closeEventHandler )
 
         --local play = minigamePopup:getChildByName( "Button_Play" )
         --play:addTouchEventListener( playEventHandler )
 
-        local mask = minigamePopup:getChildByName( "Panel_Mask" )
-        mask:addTouchEventListener( closeEventHandler )
-
         -- Set Background Image, reposition buttons
-        local BG = tolua.cast( minigamePopup:getChildByName( "Image_BG" ), "ImageView" )
+        BG = tolua.cast( minigamePopup:getChildByName( "Image_BG" ), "ImageView" )
         BG:loadTexture( Constants.MINIGAME_IMAGE_PATH.."pop-out-"..nextImage..".png" )
         BG:addTouchEventListener( playEventHandler )
 
-        local bgPos = ccp( BG:getPositionX(), BG:getPositionY() )
-        local bgScale = BG:getScale()
-        local bgSize = BG:getSize()
-        
-        close:setPosition( ccp( bgPos.x + bgSize.width / 2 * bgScale, bgPos.y + bgSize.height / 2 * bgScale ) )
-
         --later:setPositionY( bgPos.y - bgSize.height / 2 + 75 )
         --play:setPositionY( bgPos.y - bgSize.height / 2 + 75 )
+
+    else
+        -- TODO: end date?
+        -- FH Championship popup
+        closeEventHandler = function( sender, eventType )
+            if eventType == TOUCH_EVENT_ENDED then
+                mWidget:removeChild(minigamePopup)
+            end
+        end
+
+        playEventHandler = function( sender, eventType )
+            if eventType == TOUCH_EVENT_ENDED then
+                mWidget:removeChild(minigamePopup)
+                EventManager:postEvent( Event.Enter_Community, { CommunityConfig.COMMUNITY_TAB_ID_COMPETITION } )
+            end
+        end
+
+        BG = tolua.cast( minigamePopup:getChildByName( "Image_BG" ), "ImageView" )
+        BG:loadTexture( Constants.COMPETITION_IMAGE_PATH.."popup_fhchamp.png" )
+        BG:addTouchEventListener( playEventHandler )
     end
+
+    local close = minigamePopup:getChildByName( "Button_Close" )
+    close:addTouchEventListener( closeEventHandler )
+
+    local mask = minigamePopup:getChildByName( "Panel_Mask" )
+    mask:addTouchEventListener( closeEventHandler )
+
+    local bgPos = ccp( BG:getPositionX(), BG:getPositionY() )
+    local bgScale = BG:getScale()
+    local bgSize = BG:getSize()
+    
+    close:setPosition( ccp( bgPos.x + bgSize.width / 2 * bgScale, bgPos.y + bgSize.height / 2 * bgScale ) )
+
+
 
 end
 
