@@ -98,6 +98,10 @@ public class FacebookAuth implements Auth {
         if (state == SessionState.OPENING) {
           return;
         }
+        if (state == SessionState.CLOSED_LOGIN_FAILED) {
+            FacebookAuth.this.currentOperationCallback.onSuccess(null);
+            return;
+        }
         if (state.isOpened()) {
           if (FacebookAuth.this.currentOperationCallback == null) {
             return;

@@ -13,8 +13,16 @@ extern "C"
 	JNIEXPORT void JNICALL Java_com_myhero_fh_auth_FacebookAuth_accessTokenUpdate(JNIEnv *env,
 	  jobject thiz, jstring accessToken)
 	{
-		const char *token = env->GetStringUTFChars(accessToken, NULL);
-		Social::FacebookDelegate::sharedDelegate()->accessTokenUpdate(token);
+	    if (accessToken == NULL)
+	    {
+	        Social::FacebookDelegate::sharedDelegate()->accessTokenUpdate(NULL);
+	    }
+	    else
+	    {
+            const char *token = env->GetStringUTFChars(accessToken, NULL);
+            Social::FacebookDelegate::sharedDelegate()->accessTokenUpdate(token);
+	    }
+
 	}
 
   JNIEXPORT void JNICALL Java_com_myhero_fh_auth_FacebookAuth_permissionUpdate(JNIEnv *env,
