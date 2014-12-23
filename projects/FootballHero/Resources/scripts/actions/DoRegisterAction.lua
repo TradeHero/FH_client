@@ -57,14 +57,19 @@ function action( param )
 
     mLogoSelected = param[7]
 
-    local requestContent = { Email = mEmail, Password = mPassword, 
-                            GMTOffset = RequestUtils.getTimezoneOffset(), DeviceToken = Logic:getDeviceToken(),
-                            useDev = RequestUtils.USE_DEV,
-                            Version = Constants.getClientVersion() }
+
+    local loginData = { Email = mEmail, Password = mPassword, 
+                        GMTOffset = RequestUtils.getTimezoneOffset(), DeviceToken = Logic:getDeviceToken(),
+                        useDev = RequestUtils.USE_DEV,
+                        Version = Constants.getClientVersion() }
+
+    local userMetaData = { DisplayName = mUserName, FirstName = mFirstName, LastName = mLastName, DoB = "" }
+
+    local requestContent = { LoginData = loginData, UserMetaData = userMetaData }
     local requestContentText = Json.encode( requestContent )
     print( requestContentText )
     
-    local url = RequestUtils.EMAIL_REGISTER_REST_CALL
+    local url = RequestUtils.FULL_REGISTER_REST_CALL
 
     local requestInfo = {}
     requestInfo.requestData = requestContentText
@@ -105,7 +110,9 @@ function onRegisterRequestSuccess( jsonResponse )
         Logic:setBalance( balance )
         Logic:setFbId( FbId )
 
+        onRegisterNameRequestSuccess()
 
+--[[
         local requestContent = { DisplayName = mUserName, FirstName = mFirstName, LastName = mLastName, DoB = "" }
         local requestContentText = Json.encode( requestContent )
         
@@ -126,6 +133,7 @@ function onRegisterRequestSuccess( jsonResponse )
         httpRequest:sendHttpRequest( url, handler )
 
         ConnectingMessage.loadFrame()
+]]--
     end
 end
 

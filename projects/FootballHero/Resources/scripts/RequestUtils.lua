@@ -22,6 +22,7 @@ SHOOT_TO_WIN_FB_REDIRECT_CALL = WEBSITE_IP.."/api/PenaltyKick/fhpenalty/FHFBRedi
 SHOOT_TO_WIN_GET_USER_COMPETITION_CALL = WEBSITE_IP.."/api/PenaltyKick/fhpenalty/GetUserCompetitionDetails?userId="
 
 EMAIL_REGISTER_REST_CALL = SERVER_IP.."/api/user/SignupWithEmail"
+FULL_REGISTER_REST_CALL = SERVER_IP.."/api/user/fullSignupWithEmail"
 EMAIL_LOGIN_REST_CALL = SERVER_IP.."/api/loginWithEmail"
 SET_USER_METADATA_REST_CALL = SERVER_IP.."/api/user/setUserMetaData"
 FB_LOGIN_REST_CALL = SERVER_IP.."/api/user/SignupWithFacebook"
@@ -72,6 +73,7 @@ local RESPONSE_CACHE_TIME = 600
 
 function setServerIP( serverIp, cdnServerIp, useDev )
     EMAIL_REGISTER_REST_CALL = serverIp.."/api/user/SignupWithEmail"
+    FULL_REGISTER_REST_CALL = serverIp.."/api/user/fullSignupWithEmail"
     EMAIL_LOGIN_REST_CALL = serverIp.."/api/loginWithEmail"
     SET_USER_METADATA_REST_CALL = serverIp.."/api/user/setUserMetaData"
     FB_LOGIN_REST_CALL = serverIp.."/api/user/SignupWithFacebook"
