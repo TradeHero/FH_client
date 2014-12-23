@@ -167,11 +167,11 @@ function initFilter( bRefreshed )
             mWidget:stopAllActions()
 
             if minCheckBox:getSelectedState() == true then                
-                EventManager:postEvent( Event.Enter_Community, { CommunityConfig.COMMUNITY_TAB_ID_LEADERBOARD, mLeaderboardId, typeKey } )
                 mFilter = false
+                EventManager:postEvent( Event.Enter_Community, { CommunityConfig.COMMUNITY_TAB_ID_LEADERBOARD, mLeaderboardId, typeKey } )
             else                
-                EventManager:postEvent( Event.Enter_Community, { CommunityConfig.COMMUNITY_TAB_ID_LEADERBOARD, mLeaderboardId, typeKey, Constants.FILTER_MIN_PREDICTION } )
                 mFilter = true
+                EventManager:postEvent( Event.Enter_Community, { CommunityConfig.COMMUNITY_TAB_ID_LEADERBOARD, mLeaderboardId, typeKey, Constants.FILTER_MIN_PREDICTION } )
             end
         end
     end
