@@ -129,6 +129,10 @@ public class IntentReceiver extends BroadcastReceiver {
 
     public static void getUADeviceToken() {
         String token = PushManager.shared().getAPID();
+        if (token == null) {
+            token = "";
+        }
+
         responseUADeviceToken(token);
     }
 
