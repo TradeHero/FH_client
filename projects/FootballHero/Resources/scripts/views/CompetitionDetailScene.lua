@@ -100,6 +100,11 @@ function loadFrame( subType, competitionId, showRequestPush, tabID, yearNumber, 
 
         setupRankingHeader( true, competitionDetail:getStartTime() )
     elseif mCompetitionType == CompetitionType["DetailedRanking"] then
+        -- FHC Check
+        local stage = CCUserDefault:sharedUserDefault():getIntegerForKey( Constants.EVENT_FHC_STATUS_KEY )
+        if stage ~= Constants.EVENT_FHC_STATUS_JOINED then
+            CCUserDefault:sharedUserDefault():setIntegerForKey( Constants.EVENT_FHC_STATUS_KEY, Constants.EVENT_FHC_STATUS_JOINED )
+        end
         setupRankingHeader( true, competitionDetail:getStartTime() )
     end
 

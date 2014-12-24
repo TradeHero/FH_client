@@ -129,7 +129,7 @@ function initCompetitionScene( competitionFrame, compList, miniGame )
 
                 local eventHandler = function( sender, eventType )
                     if eventType == TOUCH_EVENT_ENDED then
-                        enterCompetition( competition["Id"],  competition["CompetitionType"] ==CompetitionType["DetailedRanking"] )
+                        enterCompetition( competition["Id"],  competition["CompetitionType"] == CompetitionType["DetailedRanking"] )
                     end
                 end
                 

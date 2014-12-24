@@ -71,6 +71,13 @@ function onRequestSuccess( jsonResponse )
     if needUpdate then
         EventManager:postEvent( Event.Show_Please_Update, { Constants.String.info.new_version } )
     else
+
+        -- Popup Footballhero Championship if not already joined
+        local stage = CCUserDefault:sharedUserDefault():getIntegerForKey( Constants.EVENT_FHC_STATUS_KEY )
+        if stage ~= Constants.EVENT_FHC_STATUS_JOINED then
+            CCUserDefault:sharedUserDefault():setIntegerForKey( Constants.EVENT_FHC_STATUS_KEY, Constants.EVENT_FHC_STATUS_TO_OPEN )
+        end
+
         Logic:setUserInfo( mEmail, mPassword, "", sessionToken, userId )
         Logic:setDisplayName( displayName )
         Logic:setPictureUrl( pictureUrl )

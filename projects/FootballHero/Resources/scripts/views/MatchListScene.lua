@@ -294,14 +294,20 @@ end
 
 function checkMiniGame()
     -- check if popup should appear
-    local bAppear = shouldShowMiniGame()
+    local bMiniGameAppear = shouldShowMiniGame()
+    local bFHCAppear = shouldShowFHC()
+
+    if not bMiniGameAppear and not bFHCAppear then
+        return
+    end
+
     local closeEventHandler, playEventHandler, BG
 
     local minigamePopup = SceneManager.widgetFromJsonFile("scenes/MinigamePopup.json")
     minigamePopup:setZOrder( Constants.ZORDER_POPUP )
     mWidget:addChild( minigamePopup )
 
-    if bAppear then
+    if bMiniGameAppear then
         local nextImage = getNextMiniGameImage()
         closeEventHandler = function( sender, eventType )
             if eventType == TOUCH_EVENT_ENDED then
@@ -337,12 +343,13 @@ function checkMiniGame()
         --later:setPositionY( bgPos.y - bgSize.height / 2 + 75 )
         --play:setPositionY( bgPos.y - bgSize.height / 2 + 75 )
 
-    else
+    elseif bFHCAppear then
         -- TODO: end date?
         -- FH Championship popup
         closeEventHandler = function( sender, eventType )
             if eventType == TOUCH_EVENT_ENDED then
                 mWidget:removeChild(minigamePopup)
+                CCUserDefault:sharedUserDefault():setIntegerForKey( Constants.EVENT_FHC_STATUS_KEY, Constants.EVENT_FHC_STATUS_OPENED )
             end
         end
 
@@ -350,6 +357,7 @@ function checkMiniGame()
             if eventType == TOUCH_EVENT_ENDED then
                 mWidget:removeChild(minigamePopup)
                 EventManager:postEvent( Event.Enter_Community, { CommunityConfig.COMMUNITY_TAB_ID_COMPETITION } )
+                CCUserDefault:sharedUserDefault():setIntegerForKey( Constants.EVENT_FHC_STATUS_KEY, Constants.EVENT_FHC_STATUS_OPENED )
             end
         end
 
@@ -369,8 +377,6 @@ function checkMiniGame()
     local bgSize = BG:getSize()
     
     close:setPosition( ccp( bgPos.x + bgSize.width / 2 * bgScale, bgPos.y + bgSize.height / 2 * bgScale ) )
-
-
 
 end
 
@@ -420,6 +426,17 @@ function shouldShowMiniGame()
         print( "waiting to show popup" )
     end
     
+    return bShouldShow
+end
+
+function shouldShowFHC()
+    local bShouldShow = false
+    
+    local stage = CCUserDefault:sharedUserDefault():getIntegerForKey( Constants.EVENT_FHC_STATUS_KEY )
+    if stage ~= Constants.EVENT_FHC_STATUS_JOINED and stage ~= Constants.EVENT_FHC_STATUS_OPENED then
+        bShouldShow = true
+    end
+
     return bShouldShow
 end
 
