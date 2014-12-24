@@ -192,7 +192,7 @@ M.en = {
     special = "Special",
     todays_matches = "Today's Matches",
     total_fans = "Total Fans",
-    upcoming_matches = "Upcoming",
+    upcoming_matches = "Upcoming Matches",
   },
   match_prediction = {
     balance = "Balance",
