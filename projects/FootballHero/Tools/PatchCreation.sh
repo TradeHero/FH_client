@@ -76,7 +76,7 @@ function diffVersionWithTags()
 	    	elif [[ $filePath == projects/FootballHero/Resources/CryptLuascripts/* ]]; then
 	    		# Ignore some files.
 	    		continue
-	    	elif [[ $filePath == projects/FootballHero/Resources/game.bin ]] || [[ $filePath == projects/FootballHero/Resources/server ]]; then
+	    	elif [[ $filePath == projects/FootballHero/Resources/game.bin ]] || [[ $filePath == projects/FootballHero/Resources/server ]] || [[ $filePath == projects/FootballHero/Resources/version ]]; then
 	    		# Ignore some files.
 	    		continue
 	    	elif [[ $filePath == projects/FootballHero/Resources/* ]] || [[ $filePath == projects/FootballHero/Resources/scripts/* ]]; then
