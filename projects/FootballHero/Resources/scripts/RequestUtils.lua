@@ -83,6 +83,7 @@ function setServerIP( serverIp, cdnServerIp, useDev )
     GET_UPCOMING_GAMES_BY_LEAGUE_REST_CALL = serverIp.."/api/games/upcomingByLeague"
     GET_POPULAR_UPCOMING_REST_CALL = serverIp.."/api/games/popularUpcoming"
     GET_UPCOMING_TODAY = serverIp.."/api/games/upcomingToday"
+    GET_UPCOMING_NEXT = serverIp.."/api/games/upcomingNext"
     GET_GAME_MARKETS_REST_CALL = serverIp.."/api/markets/getMarketsForGame"
     GET_COUPON_HISTORY_REST_CALL = serverIp.."/api/couponHistory/getUserCouponHistory"
     GET_MAIN_LEADERBOARD_REST_CALL = serverIp.."/api/leaderboards/getMainLeaderboard"
