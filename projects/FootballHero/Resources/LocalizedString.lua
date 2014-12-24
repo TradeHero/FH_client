@@ -134,6 +134,7 @@ M.en = {
     most_popular = "Most Popular",
     special = "Special",
     todays_matches = "Today's Matches",
+    upcoming_matches = "Upcoming Matches",
   },
   message_hint = "Type your message here",
   month = {

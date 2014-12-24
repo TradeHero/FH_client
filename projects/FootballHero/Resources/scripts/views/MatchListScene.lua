@@ -154,12 +154,12 @@ function initLeagueList( leagueKey )
         local leagueName = tolua.cast( content:getChildByName( "Label_LeagueName"), "Label" )
 
         -- Hardcode Popular League texts and logo
-        if leagueKey == Constants.SpecialLeagueIds.MOST_POPULAR or leagueKey == Constants.SpecialLeagueIds.TODAYS_MATCHES then
+        if leagueKey == Constants.SpecialLeagueIds.MOST_POPULAR or leagueKey == Constants.SpecialLeagueIds.UPCOMING_MATCHES then
             countryName:setText( Constants.String.match_list.special )
             if leagueKey == Constants.SpecialLeagueIds.MOST_POPULAR then
                 leagueName:setText( Constants.String.match_list.most_popular )
             else
-                leagueName:setText( Constants.String.match_list.todays_matches )
+                leagueName:setText( Constants.String.match_list.upcoming_matches )
             end
             logo:loadTexture( Constants.COUNTRY_IMAGE_PATH.."favorite.png" )
             --leagueButton:setTouchEnabled( false )

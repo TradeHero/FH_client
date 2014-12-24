@@ -63,7 +63,7 @@ STATS_SHOW_ALL = -1
 
 SpecialLeagueIds = {
 	MOST_POPULAR = -1,
-	TODAYS_MATCHES = -2,
+	UPCOMING_MATCHES = -2,
 	SPECIAL_COUNT = 2
 }
 
