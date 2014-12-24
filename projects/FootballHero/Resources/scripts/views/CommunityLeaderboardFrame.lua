@@ -217,6 +217,9 @@ function initLeaderboardContent( i, content, info )
     local stats = top:getChildByName("Panel_Stats")
     stats:setEnabled( false )
 
+    local check = tolua.cast( top:getChildByName("Image_Check"), "ImageView" )
+    check:setEnabled( false )
+
     local eventHandler = function( sender, eventType )
         if eventType == TOUCH_EVENT_ENDED then
             contentClick( info )
