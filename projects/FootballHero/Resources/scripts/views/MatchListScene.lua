@@ -541,6 +541,7 @@ function helperInitMatchInfo( topContent, matchInfo )
     end
     team2Name:setText( teamName )
 
+    local isNotGameStart = matchInfo["StartTime"] > os.time()
     local score = tolua.cast( topContent:getChildByName("score"), "Label" )
     if matchInfo["HomeGoals"] >= 0 and matchInfo["AwayGoals"] >= 0 then
         score:setText( string.format( score:getStringValue(), matchInfo["HomeGoals"], matchInfo["AwayGoals"] ) )
@@ -565,8 +566,15 @@ function helperInitMatchInfo( topContent, matchInfo )
         end
     else
         score:setText( "-:-" )
-        stamp:setEnabled( false )
+
         points:setEnabled( false )
+
+        if isNotGameStart then
+            stamp:setEnabled( false )
+        else
+            content:setEnabled( false )
+            stamp:loadTexture( Constants.MATCH_LIST_CONTENT_IMAGE_PATH.."stamp-start.png" )
+        end
     end
 
     local totalWinPredictions = matchInfo["HomePredictions"] + matchInfo["AwayPredictions"] + matchInfo["DrawPredictions"]
@@ -579,8 +587,7 @@ function helperInitMatchInfo( topContent, matchInfo )
     fhNum:setText( matchInfo["TotalUsersPlayed"] )
     played:setText( string.format( played:getStringValue(), matchInfo["PredictionsPlayed"], matchInfo["PredictionsAvailable"] ) )
 
-    local isGameStart = matchInfo["StartTime"] > os.time()
-    if isGameStart then
+    if isNotGameStart then
         topContent:setTouchEnabled( true )
     else
         topContent:setTouchEnabled( false )
