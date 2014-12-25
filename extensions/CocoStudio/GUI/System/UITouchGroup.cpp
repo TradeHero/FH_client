@@ -96,6 +96,10 @@ bool TouchGroup::checkEventWidget(CCTouch* touch, CCEvent *pEvent)
     
 bool TouchGroup::checkTouchEvent(Widget *root, CCTouch* touch, CCEvent* pEvent)
 {
+	if (!root->isEnabled())
+	{
+		return false;
+	}
     ccArray* arrayRootChildren = root->getChildren()->data;
     int length = arrayRootChildren->num;
     for (int i=length-1; i >= 0; i--)
