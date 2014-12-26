@@ -213,3 +213,13 @@ void misc_get_deepLink() {
                 jmi.env->DeleteLocalRef(jmi.classID);
           }
 }
+
+void misc_open_rate() {
+    JniMethodInfo jmi;
+        if (JniHelper::getStaticMethodInfo(jmi, "com/myhero/fh/util/MiscUtil",
+                    "openRate", "()V"))
+              {
+                    jmi.env->CallStaticCharMethod(jmi.classID, jmi.methodID);
+                    jmi.env->DeleteLocalRef(jmi.classID);
+              }
+}

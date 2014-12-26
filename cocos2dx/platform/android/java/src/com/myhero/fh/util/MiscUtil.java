@@ -84,6 +84,16 @@ public class MiscUtil {
         notifyDeepLink(deepLink);
     }
 
+    public static void openRate() {
+        Cocos2dxActivity activity = ((Cocos2dxActivity)Cocos2dxActivity.getContext());
+        try {
+            final String pkgName = activity.getPackageName();
+            activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + pkgName)));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
   public static void onActivityResult(int requestCode, int resultCode, Intent data) {
     Log.d(TAG, String.format("requestCode(%d), resultCode(%d), data(%s)", requestCode,
         resultCode, data));

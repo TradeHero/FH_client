@@ -272,7 +272,7 @@ namespace Utils
 		MiscHandler::getInstance()->openRate();
 #endif
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
-		//misc_open_rate();
+		misc_open_rate();
 #endif
 	}
 

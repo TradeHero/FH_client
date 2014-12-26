@@ -27,10 +27,6 @@ end
 
 function EnterOrExit( eventType )
     if eventType == "enter" then
-        local bg = mWidget:getChildByName("bg")
-
-        bg:setPosition( ccp( bg:getPositionX(), bg:getPositionY() - 960 ) )
-        bg:runAction( CCMoveBy:create( 0.5, ccp( 0, 960 ) ) )
     elseif eventType == "exit" then
         mWidget = nil
     end

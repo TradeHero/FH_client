@@ -132,13 +132,6 @@ public class MainActivity extends Cocos2dxActivity {
     getApplication().registerActivityLifecycleCallbacks(
               new LocalyticsActivityLifecycleCallbacks(this.localyticsSession));
     this.localyticsSession.setLoggingEnabled(true);
-
-      try {
-          final String pkgName = getPackageName();
-          startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + pkgName)));
-      } catch (Exception e) {
-          e.printStackTrace();
-      }
   }
 
     @Override

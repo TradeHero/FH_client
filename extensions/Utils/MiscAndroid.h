@@ -9,4 +9,5 @@ void misc_send_sms(const char* body);
 void misc_open_url(const char* url);
 void misc_select_image(const char* path, int width, int height);
 void misc_get_UA_DeviceToken();
+void misc_open_rate();
 #endif
