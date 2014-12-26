@@ -10,7 +10,14 @@
   "designHeight": 1136,
   "designWidth": 640,
   "textures": [],
-  "texturesPng": [],
+  "texturesPng": [
+    "MatchListContent/stamp-won.png",
+    "commonRes/Arsenal.png",
+    "commonRes/Manchester United.png",
+    "MatchListContent/icn-fans.png",
+    "MatchListContent/icn-played.png",
+    "community/img-leaguebox.png"
+  ],
   "version": "1.5.0.0",
   "widgetTree": {
     "classname": "Panel",
@@ -248,7 +255,7 @@
           "fontName": "fonts/Helvetica Neue Light.ttf",
           "fontSize": 25,
           "hAlignment": 0,
-          "text": "*** Disclaimer - Apple is not a sponsor nor is involved in any way.",
+          "text": "*** Disclaimer - Apple is not a sponsor nor is invloved in any way.",
           "touchScaleEnable": false,
           "vAlignment": 1
         }

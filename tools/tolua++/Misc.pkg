@@ -25,5 +25,7 @@ class Misc
 
 	void openUrl(char* url);
 
+	void openRate();
+
 	void terminate();
 };		

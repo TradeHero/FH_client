@@ -32,6 +32,8 @@ public:
     
     void notifyDeepLink(const char* deepLink);
     
+    void openRate();
+    
     
     // Getter and setter for local varibles.
     char* getImagePath() { return imagePath; }

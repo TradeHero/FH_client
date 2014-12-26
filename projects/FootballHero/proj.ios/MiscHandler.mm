@@ -101,3 +101,8 @@ void MiscHandler::notifyDeepLink(const char* deepLink)
 {
     Utils::Misc::sharedDelegate()->notifyDeepLink(deepLink);
 }
+
+void MiscHandler::openRate()
+{
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=859894802"]];
+}

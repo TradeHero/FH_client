@@ -7,6 +7,7 @@ local Event = require("scripts.events.Event").EventList
 local Logic = require("scripts.Logic").getInstance()
 local RequestUtils = require("scripts.RequestUtils")
 local ConnectingMessage = require("scripts.views.ConnectingMessage")
+local RateManager = require("scripts.RateManager")
 
 
 function action( param )
@@ -75,6 +76,8 @@ function onRequestSuccess( jsonResponse )
 
     RequestUtils.clearResponseCache()
     EventManager:postEvent( Event.Enter_Match_List, { nil, true } )
+
+    RateManager.addPredictionMade()
 end
 
 function onRequestFailed( jsonResponse )

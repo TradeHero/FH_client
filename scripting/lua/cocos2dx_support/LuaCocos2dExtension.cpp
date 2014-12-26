@@ -1,6 +1,6 @@
 /*
 ** Lua binding: Extension
-** Generated automatically by tolua++-1.0.92 on 12/15/14 17:40:22.
+** Generated automatically by tolua++-1.0.92 on 12/25/14 11:54:33.
 */
 
 /****************************************************************************
@@ -1409,6 +1409,37 @@ static int tolua_Extension_Misc_openUrl00(lua_State* tolua_S)
 }
 #endif //#ifndef TOLUA_DISABLE
 
+/* method: openRate of class  Misc */
+#ifndef TOLUA_DISABLE_tolua_Extension_Misc_openRate00
+static int tolua_Extension_Misc_openRate00(lua_State* tolua_S)
+{
+#ifndef TOLUA_RELEASE
+ tolua_Error tolua_err;
+ if (
+     !tolua_isusertype(tolua_S,1,"Misc",0,&tolua_err) ||
+     !tolua_isnoobj(tolua_S,2,&tolua_err)
+ )
+  goto tolua_lerror;
+ else
+#endif
+ {
+  Misc* self = (Misc*)  tolua_tousertype(tolua_S,1,0);
+#ifndef TOLUA_RELEASE
+  if (!self) tolua_error(tolua_S,"invalid 'self' in function 'openRate'", NULL);
+#endif
+  {
+   self->openRate();
+  }
+ }
+ return 0;
+#ifndef TOLUA_RELEASE
+ tolua_lerror:
+ tolua_error(tolua_S,"#ferror in function 'openRate'.",&tolua_err);
+ return 0;
+#endif
+}
+#endif //#ifndef TOLUA_DISABLE
+
 /* method: terminate of class  Misc */
 #ifndef TOLUA_DISABLE_tolua_Extension_Misc_terminate00
 static int tolua_Extension_Misc_terminate00(lua_State* tolua_S)
@@ -1526,6 +1557,7 @@ TOLUA_API int tolua_Extension_open (lua_State* tolua_S)
    tolua_function(tolua_S,"setUADeviceTokenHandler",tolua_Extension_Misc_setUADeviceTokenHandler00);
    tolua_function(tolua_S,"requestPushNotification",tolua_Extension_Misc_requestPushNotification00);
    tolua_function(tolua_S,"openUrl",tolua_Extension_Misc_openUrl00);
+   tolua_function(tolua_S,"openRate",tolua_Extension_Misc_openRate00);
    tolua_function(tolua_S,"terminate",tolua_Extension_Misc_terminate00);
   tolua_endmodule(tolua_S);
  tolua_endmodule(tolua_S);

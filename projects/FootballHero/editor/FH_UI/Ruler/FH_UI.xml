@@ -13,7 +13,23 @@
     <GuidesList />
   </GuidesProject>
   <GuidesProject>
+    <Project>Team</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>FavouriteTeam</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>FavouriteCountryContent</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
     <Project>Navigator</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>LeagueListContent</Project>
     <GuidesList />
   </GuidesProject>
   <GuidesProject>
@@ -37,11 +53,27 @@
     <GuidesList />
   </GuidesProject>
   <GuidesProject>
+    <Project>WBTSPrediction</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>WTCBMTPrediction</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
     <Project>WTGBMTPrediction</Project>
     <GuidesList />
   </GuidesProject>
   <GuidesProject>
+    <Project>WTSPrediction</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
     <Project>WTWBEGPrediction</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>FavouriteLeagueContent</Project>
     <GuidesList />
   </GuidesProject>
   <GuidesProject>
@@ -69,6 +101,22 @@
     <GuidesList />
   </GuidesProject>
   <GuidesProject>
+    <Project>LeaderboardScene</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>LeaderboardContent</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>LeaderboardList</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>LeaderboardListContent</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
     <Project>MatchListEmptyIndi</Project>
     <GuidesList />
   </GuidesProject>
@@ -78,6 +126,14 @@
   </GuidesProject>
   <GuidesProject>
     <Project>PredFinalConfirmContent</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>CompetitionTitle</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>HistoryHomeForOthers</Project>
     <GuidesList />
   </GuidesProject>
   <GuidesProject>
@@ -121,6 +177,14 @@
     <GuidesList />
   </GuidesProject>
   <GuidesProject>
+    <Project>TutorialSelectFavourite</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>TutorialPrediction</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
     <Project>TutorialHomepage</Project>
     <GuidesList />
   </GuidesProject>
@@ -157,6 +221,10 @@
     <GuidesList />
   </GuidesProject>
   <GuidesProject>
+    <Project>TutorialRegisterName</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
     <Project>FH_UI_68</Project>
     <GuidesList />
   </GuidesProject>
@@ -189,11 +257,23 @@
     <GuidesList />
   </GuidesProject>
   <GuidesProject>
+    <Project>CompetitionInviteContent</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
     <Project>CompetitionMore</Project>
     <GuidesList />
   </GuidesProject>
   <GuidesProject>
     <Project>CompetitionMoreContent</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>LeaderbaordDropDown</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>LeaderbaordContentInDropDown</Project>
     <GuidesList />
   </GuidesProject>
   <GuidesProject>
@@ -205,7 +285,11 @@
     <GuidesList />
   </GuidesProject>
   <GuidesProject>
-    <Project>PushNotificationMessage</Project>
+    <Project>PNPredictionMessage</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>PNCompetitionMessage</Project>
     <GuidesList />
   </GuidesProject>
   <GuidesProject>
@@ -222,6 +306,10 @@
   </GuidesProject>
   <GuidesProject>
     <Project>CommunityBaseScene</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>CommunityCompetitionFrame</Project>
     <GuidesList />
   </GuidesProject>
   <GuidesProject>
@@ -321,11 +409,11 @@
     <GuidesList />
   </GuidesProject>
   <GuidesProject>
-    <Project>MyPicksEmptyFrame</Project>
+    <Project>AskForRate</Project>
     <GuidesList />
   </GuidesProject>
   <GuidesProject>
-    <Project>CompetitionDropdownFrame</Project>
+    <Project>AskForComment</Project>
     <GuidesList />
   </GuidesProject>
 </ArrayOfGuidesProject>

@@ -266,6 +266,16 @@ namespace Utils
 #endif
 	}
 
+	void Misc::openRate()
+	{
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+		MiscHandler::getInstance()->openRate();
+#endif
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+		//misc_open_rate();
+#endif
+	}
+
 	void Misc::terminate()
 	{
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)

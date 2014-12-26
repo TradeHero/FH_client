@@ -49,6 +49,8 @@ namespace Utils
 
 		void openUrl(char* url);
 
+		void openRate();
+
 		void terminate();
 	protected:
 		Misc();

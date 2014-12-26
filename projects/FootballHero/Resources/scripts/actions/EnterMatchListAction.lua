@@ -7,6 +7,8 @@ local EventManager = require("scripts.events.EventManager").getInstance()
 local Event = require("scripts.events.Event").EventList
 local Logic = require("scripts.Logic").getInstance()
 local Constants = require("scripts.Constants")
+local RateManager = require("scripts.RateManager")
+
 
 local mLeagueId
 local mCheckShowMarketingMessage
@@ -112,6 +114,10 @@ function onRequestSuccess( matchList )
     
     if mCheckShowMarketingMessage then
         EventManager:postEvent( Event.Show_Marketing_Message, { mLeagueId } )
+    end
+
+    if RateManager.shouldAskToRate() then
+        EventManager:postEvent( Event.Do_Ask_For_Rate )
     end
 end
 

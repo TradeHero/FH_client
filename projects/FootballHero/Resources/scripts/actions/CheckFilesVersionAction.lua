@@ -8,6 +8,7 @@ local FileUtils = require("scripts.FileUtils")
 local MD5 = require("MD5")
 local Constants = require("scripts.Constants")
 local SceneManager = require("scripts.SceneManager")
+local RateManager = require("scripts.RateManager")
 
 
 local fileList = {
@@ -74,7 +75,8 @@ function checkNext()
 	        end
 
 	        SceneManager.registerDeepLinkEvent()
-	        Misc:sharedDelegate():getDeepLink( deepLinkHandler )      
+	        Misc:sharedDelegate():getDeepLink( deepLinkHandler )
+	        RateManager.addLoginSession()
 		end ) )
 
 		CCDirector:sharedDirector():getRunningScene():runAction( CCSequence:create( loadDataTaskSeqArray ) )

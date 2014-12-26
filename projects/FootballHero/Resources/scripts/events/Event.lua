@@ -54,6 +54,8 @@ EventNameList =
     "Enter_Push_Notification",
     "Enter_Sound_Settings",
 
+    "Do_Ask_For_Rate",
+    "Do_Ask_For_Comment",
     "Do_Register",
     "Do_Login",
     "Do_FB_Connect",
@@ -91,6 +93,8 @@ EventNameDosenotTrackList =
 { 
     "Enter_Share",
     
+    "Do_Ask_For_Rate",
+    "Do_Ask_For_Comment",
     "Do_Register",
     "Do_Register_Name",
     "Do_Login",

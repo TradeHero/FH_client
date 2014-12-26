@@ -5,6 +5,7 @@ local Event = require("scripts.events.Event").EventList
 local RequestUtils = require("scripts.RequestUtils")
 local CommunityConfig = require("scripts.config.Community")
 local LeaderboardConfig = require("scripts.config.Leaderboard")
+local RateManager = require("scripts.RateManager")
 
 
 TOUCH_PRIORITY_ZERO = 0
@@ -42,6 +43,8 @@ function init()
 
     mSceneGameLayer:setKeypadEnabled( true )
     mSceneGameLayer:registerScriptKeypadHandler( keypadEventHandler )
+
+    RateManager.init()
 
     initEvents()
 end
@@ -104,6 +107,8 @@ function initEvents()
 	EventManager:registerEventHandler( Event.Do_Get_Chat_Message, "scripts.actions.DoGetChatMessageAction" )
 	EventManager:registerEventHandler( Event.Do_Share_By_SMS, "scripts.actions.DoShareBySMSAction" )
 	EventManager:registerEventHandler( Event.Do_Share_By_Email, "scripts.actions.DoShareByEmailAction" )
+	EventManager:registerEventHandler( Event.Do_Ask_For_Rate, "scripts.actions.DoAskForRateAction" )
+	EventManager:registerEventHandler( Event.Do_Ask_For_Comment, "scripts.actions.DoAskForCommentAction" )
 	EventManager:registerEventHandler( Event.Show_Error_Message, "scripts.actions.ShowErrorMessageAction" )
 	EventManager:registerEventHandler( Event.Show_Choice_Message, "scripts.actions.ShowChoiceMessageAction" )
 	EventManager:registerEventHandler( Event.Show_Info, "scripts.actions.ShowInfoAction" )
