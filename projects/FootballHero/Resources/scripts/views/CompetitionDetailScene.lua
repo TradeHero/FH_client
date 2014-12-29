@@ -456,8 +456,8 @@ function initCompetitionDuration( startTimeStamp )
 
                     currWeek = currWeek + 7 * 24 * 3600
 
-                    local endDay = os.date( "%d", currWeek )
-                    local endMth = os.date( "%b", currWeek )
+                    local endDay = os.date( "%d", currWeek - 1 )
+                    local endMth = os.date( "%b", currWeek - 1 )
 
                     local displayDate = string.format( Constants.String.event.ranking_dropdown_week, displyWeekIndex, startDay, startMth, endDay, endMth )
                     displyWeekIndex = displyWeekIndex + 1
@@ -476,8 +476,8 @@ function initCompetitionDuration( startTimeStamp )
 
                 currWeek = currWeek + 7 * 24 * 3600
 
-                local endDay = os.date( "%d", currWeek )
-                local endMth = os.date( "%b", currWeek )
+                local endDay = os.date( "%d", currWeek - 1 )
+                local endMth = os.date( "%b", currWeek - 1 )
 
                 local displayDate = string.format( Constants.String.event.ranking_dropdown_week, displyWeekIndex, startDay, startMth, endDay, endMth )
                 displyWeekIndex = displyWeekIndex + 1
