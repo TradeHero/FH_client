@@ -13,6 +13,7 @@ local Constants = require("scripts.Constants")
 local CompetitionType = require("scripts.data.Competitions").CompetitionType
 local CompetitionsData = require("scripts.data.Competitions")
 local CompetitionsConfig = require("scripts.config.Competitions")
+local CompetitionStatus = require("scripts.data.Competitions").CompetitionStatus
 local RequestUtils = require("scripts.RequestUtils")
 
 
@@ -370,12 +371,10 @@ function initRankingDropdown( startTimeStamp )
             if mCompetitionDurations[i]["monthNumber"] ~= nil then
                 if mCompetitionDurations[i]["monthNumber"] == tonumber( mMonthNumber ) then
                     dateLabel:setText( displayText )
-                    break
                 end
             else
                 if mCompetitionDurations[i]["weekNumber"] == tonumber( mWeekNumber ) then
                     dateLabel:setText( displayText )
-                    break
                 end
             end
 
@@ -617,9 +616,19 @@ function initContent( competitionDetail )
         local prizeBt = tolua.cast( banner:getChildByName("Button_Learn"), "Button" )
         local playerNum = tolua.cast( banner:getChildByName("Label_PlayerNum"), "Label" )
         local lbPlayerNum = tolua.cast( banner:getChildByName("Label_HeaderPlayerNum"), "Label" )
+        local bgPlayerNum = tolua.cast( banner:getChildByName("Image_PlayerNumBG"), "Label" )
 
-        predictBt:addTouchEventListener( predictNowEventHandler )
-        shareBt:addTouchEventListener( shareTypeSelectEventHandler )
+        if competitionDetail:getCompetitionStatus() == CompetitionStatus["Ended"] then
+            predictBt:setEnabled( false )
+            shareBt:setEnabled( false )
+            prizeBt:setPositionX( 200 )
+            playerNum:setPositionY( playerNum:getPositionY() - 50 )
+            lbPlayerNum:setPositionY( lbPlayerNum:getPositionY() - 50 )
+            bgPlayerNum:setPositionY( bgPlayerNum:getPositionY() - 50 )
+        else
+            predictBt:addTouchEventListener( predictNowEventHandler )
+            shareBt:addTouchEventListener( shareTypeSelectEventHandler )
+        end
         prizeBt:addTouchEventListener( competitionPrizeEventHandler )
         
         playerNum:setText( competitionDetail:getPlayerNum() )
@@ -629,7 +638,14 @@ function initContent( competitionDetail )
         prizeBt:setTitleText( Constants.String.event.prizes )
 
         local bannerBG = tolua.cast( banner:getChildByName("Image_BannerBG"), "ImageView" )
-        bannerBG:loadTexture( Constants.COMPETITION_IMAGE_PATH..Constants.PrizesPrefix..competitionDetail:getJoinToken()..".png" )
+        local filename
+        
+        if competitionDetail:getCompetitionStatus() == CompetitionStatus["Ended"] then
+            filename = Constants.COMPETITION_IMAGE_PATH..Constants.EndPrefix..Constants.PrizesPrefix..competitionDetail:getJoinToken()..".png"
+        else
+            filename = Constants.COMPETITION_IMAGE_PATH..Constants.PrizesPrefix..competitionDetail:getJoinToken()..".png"
+        end
+        bannerBG:loadTexture( filename )
     end
 
     local selfInfo = competitionDetail:getSelfInfo()

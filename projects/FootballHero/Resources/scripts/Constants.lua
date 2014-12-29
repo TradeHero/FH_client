@@ -35,6 +35,7 @@ BannerPreviewPrefix = "banner_prev_"
 WelcomePrefix = "welcome_"
 EntryPrefix = "entry_"
 PrizesPrefix = "prizes_"
+EndPrefix = "end_"
 
 ZORDER_POPUP = 65535
 

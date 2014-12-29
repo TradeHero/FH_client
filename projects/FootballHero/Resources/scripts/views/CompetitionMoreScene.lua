@@ -8,6 +8,7 @@ local ViewUtils = require("scripts.views.ViewUtils")
 local Logic = require("scripts.Logic").getInstance()
 local Constants = require("scripts.Constants")
 local CompetitionType = require("scripts.data.Competitions").CompetitionType
+local CompetitionStatus = require("scripts.data.Competitions").CompetitionStatus
 local CountryConfig = require("scripts.config.Country")
 local LeagueConfig = require("scripts.config.League")
 
@@ -100,7 +101,13 @@ function initContent( competitionDetail, selectedLeagues, pushNotificationEnable
         local joinBtn = banner:getChildByName("Button_Join")
         joinBtn:setEnabled( false )
         local bannerBG = tolua.cast( banner:getChildByName("Image_BannerBG"), "ImageView" )
-        bannerBG:loadTexture( Constants.COMPETITION_IMAGE_PATH..Constants.BannerPrefix..mCompetitionToken..".png" )
+        local filename
+        if competitionDetail:getCompetitionStatus() == CompetitionStatus["Ended"] then
+            filename = Constants.COMPETITION_IMAGE_PATH..Constants.EndPrefix..Constants.BannerPrefix..mCompetitionToken..".png"
+        else
+            filename = Constants.COMPETITION_IMAGE_PATH..Constants.BannerPrefix..mCompetitionToken..".png"
+        end
+        bannerBG:loadTexture( filename )
         
         banner:setLayoutParameter( layoutParameter )
         contentContainer:addChild( banner )

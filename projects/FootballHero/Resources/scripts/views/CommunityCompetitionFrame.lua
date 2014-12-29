@@ -125,7 +125,7 @@ function initCompetitionScene( competitionFrame, compList, miniGame )
         for i = 1, compList:getSize() do
             local competition = compList:get(i)
 
-            if competition["CompetitionStatus"] == CompetitionStatus["Joined"] then
+            if competition["CompetitionStatus"] == CompetitionStatus["Joined"] or competition["CompetitionStatus"] == CompetitionStatus["Ended"] then
 
                 local eventHandler = function( sender, eventType )
                     if eventType == TOUCH_EVENT_ENDED then
@@ -144,7 +144,13 @@ function initCompetitionScene( competitionFrame, compList, miniGame )
                 bt:addTouchEventListener( eventHandler )
                 
                 if competition["CompetitionType"] ~=CompetitionType["Private"] then
-                    bt:setBackGroundImage( Constants.COMPETITION_IMAGE_PATH..Constants.EntryPrefix..competition["JoinToken"]..".png" )
+                    local filename
+                    if competition["CompetitionStatus"] == CompetitionStatus["Ended"] then
+                        filename = Constants.COMPETITION_IMAGE_PATH..Constants.EndPrefix..Constants.EntryPrefix..competition["JoinToken"]..".png"
+                    else
+                        filename = Constants.COMPETITION_IMAGE_PATH..Constants.EntryPrefix..competition["JoinToken"]..".png"
+                    end
+                    bt:setBackGroundImage( filename )
                     name:setEnabled( false )
                 end
 

@@ -79,6 +79,7 @@ function CompetitionDetail:new( detail )
       open = detail.CompetitionInfoDTO.Open,
       owningUserName = detail.CompetitionInfoDTO.OwningUserName,
       competitionType = detail.CompetitionInfoDTO.CompetitionType,
+      competitionStatus = detail.CompetitionInfoDTO.CompetitionStatus,
       linkedLeagueId = detail.CompetitionInfoDTO.LinkedLeagueId,
       latestChatMessage = detail.LatestChatMessage,
       pnSetting = detail.PushNotificationsEnabled,
@@ -128,6 +129,10 @@ end
 
 function CompetitionDetail:getCompetitionType()
    return self.competitionType
+end
+
+function CompetitionDetail:getCompetitionStatus()
+   return self.competitionStatus
 end
 
 function CompetitionDetail:getOwningUserName()
