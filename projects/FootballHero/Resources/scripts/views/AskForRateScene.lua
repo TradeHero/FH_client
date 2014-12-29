@@ -13,8 +13,14 @@ function loadFrame()
 	local widget = GUIReader:shareReader():widgetFromJsonFile("scenes/AskForRate.json")
     local bg = widget:getChildByName("bg")
 
-    local yesBt = bg:getChildByName("yes")
-    local noBt = bg:getChildByName("no")
+    local yesBt = tolua.cast( bg:getChildByName("yes"), "Button" )
+    local noBt = tolua.cast( bg:getChildByName("no"), "Button" )
+    local msgBt = tolua.cast( bg:getChildByName("message"), "Label" )
+
+    yesBt:setTitleText( Constants.String.button.yes )
+    noBt:setTitleText( Constants.String.button.no )
+    msgBt:setText( Constants.String.info.like_fh )
+
     yesBt:addTouchEventListener( yesEventHandler )
     noBt:addTouchEventListener( noEventHandler )
 
