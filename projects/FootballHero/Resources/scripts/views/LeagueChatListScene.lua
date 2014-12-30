@@ -50,6 +50,12 @@ function initContent()
         label:setText( LeagueChatConfig[i]["displayName"] )
         --button:loadTexture( LeagueChatConfig[i]["logo"] )
 
+        local counter = tolua.cast( button:getChildByName( "Button_Counter" ), "Button" )
+        -- if no new messages
+        counter:setEnabled( false )
+        -- else
+        -- counter:setTitleText()
+
         local eventHandler = function ( sender, eventType )
             if eventType == TOUCH_EVENT_ENDED then
                 EventManager:postEvent( Event.Enter_League_Chat, { LeagueChatConfig[i]["chatRoomId"] } )
@@ -58,7 +64,13 @@ function initContent()
             end
         end
         button:addTouchEventListener( eventHandler )
-    end 
+    end
+
+    local facebookBtn = mWidget:getChildByName( "Button_Facebook" )
+    local facebookLbl = tolua.cast( mWidget:getChildByName( "Label_Facebook" ), "Label" )
+    local likeCount = tolua.cast( facebookBtn:getChildByName( "Label_Likes"), "Label" )
+
+    facebookLbl:setText( Constants.String.league_chat.facebook )
 
 end
 

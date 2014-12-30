@@ -1,7 +1,6 @@
 module(..., package.seeall)
 
 local Constants = require("scripts.Constants")
-local RequestUtils = require("scripts.RequestUtils")
 
 LeagueChatType = {
 	{

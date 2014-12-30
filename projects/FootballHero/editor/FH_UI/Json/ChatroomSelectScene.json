@@ -1605,7 +1605,7 @@
             "options": {
               "__type": "LabelSurrogate:#EditorCommon.JsonModel.Component.GUI",
               "classname": "Label",
-              "name": "Label_27",
+              "name": "Label_Likes",
               "ZOrder": 0,
               "actiontag": 62499582,
               "anchorPointX": 0.5,
