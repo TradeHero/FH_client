@@ -36,7 +36,7 @@
                                     delegate:self
                                     cancelButtonTitle:@"Cancel"
                                     destructiveButtonTitle:nil
-                                    otherButtonTitles: @"Select a photo",@"Take a photo",nil];
+                                    otherButtonTitles: @"Select a photo",nil];
     
     [myActionSheet showInView:self.view];
     [myActionSheet release];
@@ -49,9 +49,9 @@
         case 0:
             [self LocalPhoto];
             break;
-        case 1:
+        /*case 1:
             [self takePhoto];
-            break;
+            break;*/
         default:
             break;
     }
