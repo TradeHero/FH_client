@@ -198,57 +198,62 @@ function registerDeepLinkEvent()
 end
 
 function processDeepLink( deepLink, defaultEvent, defaultEventParam )
-	-- deepLink content for example: /user/me
-	local deepLinklist = RequestUtils.split( deepLink, "/" )
-	local deepLinkPage = deepLinklist[2]
-	local deepLinkParameter = deepLinklist[3]
-	CCLuaLog("Process deep link: "..deepLink)
 
-	if deepLinkPage == DEEPLINK_USER_PROFILE then
+	local delayedTask = function()
+        -- deepLink content for example: /user/me
+		local deepLinklist = RequestUtils.split( deepLink, "/" )
+		local deepLinkPage = deepLinklist[2]
+		local deepLinkParameter = deepLinklist[3]
+		CCLuaLog("Process deep link: "..deepLink)
 
-		if deepLinkParameter == "me" then
-			EventManager:postEvent( Event.Enter_History )
+		if deepLinkPage == DEEPLINK_USER_PROFILE then
+
+			if deepLinkParameter == "me" then
+				EventManager:postEvent( Event.Enter_History )
+			else
+				EventManager:postEvent( Event.Enter_History, { deepLinkParameter } )
+			end
+
+		elseif deepLinkPage == DEEPLINK_GAME_LIST then
+
+			if deepLinkParameter == nil then
+				EventManager:postEvent( Event.Enter_Match_List )
+			else
+				EventManager:postEvent( Event.Enter_Match_List, { tonumber( deepLinkParameter ) } )
+			end
+
+		elseif deepLinkPage == DEEPLINK_PREDICT then
+
+			EventManager:postEvent( Event.Enter_Match, { deepLinkParameter } )
+
+		elseif deepLinkPage == DEEPLINK_COMPETITION then
+
+			if deepLinkParameter == nil then
+				EventManager:postEvent( Event.Enter_Community, { CommunityConfig.COMMUNITY_TAB_ID_COMPETITION } )
+			else
+				-- Since different competition has different default tab id.
+				-- We have to add a parameter for it.
+				EventManager:postEvent( Event.Enter_Competition_Detail, { tonumber( deepLinkParameter ), false, nil, deepLinklist[4] } )
+			end
+
+		elseif deepLinkPage == DEEPLINK_LEADERBOARD then
+
+			if deepLinkParameter == "top-performer" then
+				EventManager:postEvent( Event.Enter_Community, { CommunityConfig.COMMUNITY_TAB_ID_LEADERBOARD, 
+					LeaderboardConfig.LEADERBOARD_TOP, LeaderboardConfig.LEADERBOARD_TYPE_ROI } )
+			elseif deepLinkParameter == "friends" then
+				EventManager:postEvent( Event.Enter_Community, { CommunityConfig.COMMUNITY_TAB_ID_LEADERBOARD, 
+					LeaderboardConfig.LEADERBOARD_FRIENDS, LeaderboardConfig.LEADERBOARD_TYPE_ROI } )
+			end
+
 		else
-			EventManager:postEvent( Event.Enter_History, { deepLinkParameter } )
+			if defaultEvent ~= nil then
+				EventManager:postEvent( defaultEvent, defaultEventParam )
+			else
+				EventManager:postEvent( Event.Enter_Match_List )
+			end
 		end
+    end
 
-	elseif deepLinkPage == DEEPLINK_GAME_LIST then
-
-		if deepLinkParameter == nil then
-			EventManager:postEvent( Event.Enter_Match_List )
-		else
-			EventManager:postEvent( Event.Enter_Match_List, { tonumber( deepLinkParameter ) } )
-		end
-
-	elseif deepLinkPage == DEEPLINK_PREDICT then
-
-		EventManager:postEvent( Event.Enter_Match, { deepLinkParameter } )
-
-	elseif deepLinkPage == DEEPLINK_COMPETITION then
-
-		if deepLinkParameter == nil then
-			EventManager:postEvent( Event.Enter_Community, { CommunityConfig.COMMUNITY_TAB_ID_COMPETITION } )
-		else
-			-- Since different competition has different default tab id.
-			-- We have to add a parameter for it.
-			EventManager:postEvent( Event.Enter_Competition_Detail, { tonumber( deepLinkParameter ), false, nil, deepLinklist[4] } )
-		end
-
-	elseif deepLinkPage == DEEPLINK_LEADERBOARD then
-
-		if deepLinkParameter == "top-performer" then
-			EventManager:postEvent( Event.Enter_Community, { CommunityConfig.COMMUNITY_TAB_ID_LEADERBOARD, 
-				LeaderboardConfig.LEADERBOARD_TOP, LeaderboardConfig.LEADERBOARD_TYPE_ROI } )
-		elseif deepLinkParameter == "friends" then
-			EventManager:postEvent( Event.Enter_Community, { CommunityConfig.COMMUNITY_TAB_ID_LEADERBOARD, 
-				LeaderboardConfig.LEADERBOARD_FRIENDS, LeaderboardConfig.LEADERBOARD_TYPE_ROI } )
-		end
-
-	else
-		if defaultEvent ~= nil then
-			EventManager:postEvent( defaultEvent, defaultEventParam )
-		else
-			EventManager:postEvent( Event.Enter_Match_List )
-		end
-	end
+    EventManager:scheduledExecutor( delayedTask, 0.1 )
 end
