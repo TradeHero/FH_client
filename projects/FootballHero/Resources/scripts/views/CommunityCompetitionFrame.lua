@@ -14,9 +14,10 @@ local CompetitionConfig = require("scripts.data.Competitions")
 local ConnectingMessage = require("scripts.views.ConnectingMessage")
 local Logic = require("scripts.Logic").getInstance()
 
-local MAX_CONTAINER_HEIGHT = 496
+local MAX_CONTAINER_HEIGHT = 650
 
 local mWidget
+local m_bannerHeight
 
 -- DS, see Competitions.lua
 function loadFrame( parent, compList, miniGame )
@@ -61,7 +62,10 @@ function initCompetitionScene( competitionFrame, compList, miniGame )
     local specialCompList = compList:getSpecialCompetitions()
     --if next(specialCompList) ~= nil then
     if table.getn( specialCompList ) > 0 then
-        contentHeight = contentHeight + initSpecialCompetitions( competitionFrame, specialCompList )
+        m_bannerHeight = initSpecialCompetitions( competitionFrame, specialCompList )
+        contentHeight = contentHeight + m_bannerHeight
+    else
+        m_bannerHeight = 0
     end
     
     competitionFrame:addChild( joinedCompFrame )
@@ -163,7 +167,7 @@ function initCompetitionScene( competitionFrame, compList, miniGame )
 
         local originalHeight = scrollViewJoined:getInnerContainerSize().height
         local scrollHeight = math.max( height, originalHeight )
-        local newContainerHeight = math.min( MAX_CONTAINER_HEIGHT, scrollHeight )
+        local newContainerHeight = math.min( MAX_CONTAINER_HEIGHT - m_bannerHeight, scrollHeight )
         local deltaY = math.max( newContainerHeight - originalHeight, 0 )
         scrollViewJoined:setInnerContainerSize( CCSize:new( 0, scrollHeight ) )
         scrollViewJoined:setSize( CCSize:new( scrollViewJoined:getSize().width, newContainerHeight ) )
