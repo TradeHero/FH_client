@@ -9,4 +9,5 @@ public:
     void initSession();
     void login();
     void grantPublishPermission(const char* permission);
+    void like();
 };

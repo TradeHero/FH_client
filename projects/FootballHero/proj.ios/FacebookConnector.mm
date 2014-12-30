@@ -9,7 +9,10 @@
 #include "FacebookConnector.h"
 #include "FacebookDelegate.h"
 #import <FacebookSDK/FacebookSDK.h>
+#import <FacebookSDK/FBSettings.h>
 #import "FBSessionSingleton.h"
+#import "AppController.h"
+#import "RootViewController.h"
 
 static FacebookConnector* instance;
 
@@ -65,4 +68,20 @@ void FacebookConnector::grantPublishPermission(const char* permission)
              Social::FacebookDelegate::sharedDelegate()->permissionUpdate(accessToken, [aSession hasGranted:publishPermission]);
          }];
     }
+}
+
+void FacebookConnector::like()
+{
+    
+    [FBSettings enableBetaFeature:FBBetaFeaturesLikeButton];
+    [FBSettings enablePlatformCompatibility:NO];
+    
+    
+    FBLikeControl *like = [[FBLikeControl alloc] init];
+    like.foregroundColor = [UIColor whiteColor];
+    like.objectID = @"http://www.facebook.com/FootballHeroApp";
+    
+    AppController *app = (AppController*) [[UIApplication sharedApplication] delegate];
+    UIView *mainView = [app getViewController].view;
+    [mainView addSubview:like];
 }

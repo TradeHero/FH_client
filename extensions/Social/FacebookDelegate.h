@@ -13,9 +13,11 @@ namespace Social
 
 		void login(int handler);
 		void grantPublishPermission(const char* permission, int handler);
-		
+        void like();
+        
         void accessTokenUpdate(const char* accessToken);
 		void permissionUpdate(const char* accessToken, bool success);
+        
 
 	protected:
 		FacebookDelegate();

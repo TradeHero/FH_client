@@ -6,4 +6,6 @@ function action( param )
 		return
 	end
     SettingsScene.loadFrame()
+
+    FacebookDelegate:sharedDelegate():like()
 end

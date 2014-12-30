@@ -62,6 +62,16 @@ namespace Social
 #endif
 	}
     
+    void FacebookDelegate::like()
+    {
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+        FacebookConnector::getInstance()->like();
+#endif
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+        //android_facebook_requestPublishPermissions(permission);
+#endif
+    }
+    
 	void FacebookDelegate::accessTokenUpdate(const char* accessToken)
 	{
 		if (mAccessTokenUpdateHandler == 0)

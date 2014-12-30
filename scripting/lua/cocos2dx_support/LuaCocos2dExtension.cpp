@@ -1,6 +1,6 @@
 /*
 ** Lua binding: Extension
-** Generated automatically by tolua++-1.0.92 on 12/25/14 11:54:33.
+** Generated automatically by tolua++-1.0.92 on 12/29/14 15:51:10.
 */
 
 /****************************************************************************
@@ -159,6 +159,37 @@ static int tolua_Extension_FacebookDelegate_grantPublishPermission00(lua_State* 
 #ifndef TOLUA_RELEASE
  tolua_lerror:
  tolua_error(tolua_S,"#ferror in function 'grantPublishPermission'.",&tolua_err);
+ return 0;
+#endif
+}
+#endif //#ifndef TOLUA_DISABLE
+
+/* method: like of class  FacebookDelegate */
+#ifndef TOLUA_DISABLE_tolua_Extension_FacebookDelegate_like00
+static int tolua_Extension_FacebookDelegate_like00(lua_State* tolua_S)
+{
+#ifndef TOLUA_RELEASE
+ tolua_Error tolua_err;
+ if (
+     !tolua_isusertype(tolua_S,1,"FacebookDelegate",0,&tolua_err) ||
+     !tolua_isnoobj(tolua_S,2,&tolua_err)
+ )
+  goto tolua_lerror;
+ else
+#endif
+ {
+  FacebookDelegate* self = (FacebookDelegate*)  tolua_tousertype(tolua_S,1,0);
+#ifndef TOLUA_RELEASE
+  if (!self) tolua_error(tolua_S,"invalid 'self' in function 'like'", NULL);
+#endif
+  {
+   self->like();
+  }
+ }
+ return 0;
+#ifndef TOLUA_RELEASE
+ tolua_lerror:
+ tolua_error(tolua_S,"#ferror in function 'like'.",&tolua_err);
  return 0;
 #endif
 }
@@ -1483,6 +1514,7 @@ TOLUA_API int tolua_Extension_open (lua_State* tolua_S)
    tolua_function(tolua_S,"sharedDelegate",tolua_Extension_FacebookDelegate_sharedDelegate00);
    tolua_function(tolua_S,"login",tolua_Extension_FacebookDelegate_login00);
    tolua_function(tolua_S,"grantPublishPermission",tolua_Extension_FacebookDelegate_grantPublishPermission00);
+   tolua_function(tolua_S,"like",tolua_Extension_FacebookDelegate_like00);
   tolua_endmodule(tolua_S);
   tolua_cclass(tolua_S,"CCHttpRequest","CCHttpRequest","CCObject",NULL);
   tolua_beginmodule(tolua_S,"CCHttpRequest");
