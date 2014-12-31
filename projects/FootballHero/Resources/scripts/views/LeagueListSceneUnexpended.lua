@@ -26,9 +26,39 @@ function loadFrame( countryWidget, leagueWidget, leagueListContainer, leagueSele
 	helperInitLeagueList( existingContentHeight or 0 )
 end
 
+function addAllLeagues()
+    local eventHandler = function( sender, eventType )
+        if eventType == TOUCH_EVENT_ENDED then
+            selectOnLeague( sender )
+        mLeagueSelectCallback( Constants.SpecialLeagueIds.ALL_LEAGUES, sender )
+        end
+    end
+
+    local content = SceneManager.widgetFromJsonFile( mCountryWidget )
+    mLeagueListContainer:addChild( content, 0, mChildIndex )
+    content:addTouchEventListener( eventHandler )
+
+    local logo = tolua.cast( content:getChildByName("countryLogo"), "ImageView" )
+    local leagueName = tolua.cast( content:getChildByName("countryName"), "Label" )
+
+    leagueName:setText( Constants.String.community.all_competitions )
+    logo:loadTexture( Constants.COUNTRY_IMAGE_PATH.."favorite.png" )
+
+    if mLeagueInitCallback ~= nil then
+        mLeagueInitCallback( content, Constants.SpecialLeagueIds.ALL_LEAGUES )
+    end
+    
+    mChildIndex = mChildIndex + 1
+
+    return content:getSize().height
+end
+
 function helperInitLeagueList( existingContentHeight )
     local contentHeight = existingContentHeight
     mChildIndex = 1
+
+    -- Add 'All' Leagues
+    contentHeight = contentHeight + addAllLeagues()
 
     for i = 1, mCountryNum do
         local leagueNum = table.getn( CountryConfig.getLeagueList( i ) )
@@ -48,17 +78,9 @@ function helperInitLeagueList( existingContentHeight )
 
             local logo = tolua.cast( content:getChildByName("countryLogo"), "ImageView" )
             local leagueName = tolua.cast( content:getChildByName("countryName"), "Label" )
-            local expendedIndicator = content:getChildByName( "expendIndi" )
-            local selectedIndi = content:getChildByName("selectedIndi")
 
-            if expendedIndicator ~= nil then
-                expendedIndicator:setEnabled( false )
-            end
             leagueName:setText( CountryConfig.getCountryName( i ).." - "..LeagueConfig.getLeagueName( leagueId ) )
             logo:loadTexture( CountryConfig.getLogo( i ) )
-            if selectedIndi ~= nil then
-                selectedIndi:setEnabled( false )
-            end
 
             contentHeight = contentHeight + content:getSize().height
 

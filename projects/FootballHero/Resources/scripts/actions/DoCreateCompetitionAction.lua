@@ -13,7 +13,7 @@ local mFacebookShare
 
 function action( param )
 
-    local name, description, numberOfMonth, selectedLeagues, facebookShare, accessToken = param[1], param[2], param[3], param[4], param[5], param[6]
+    local name, description, numberOfMonth, selectedLeagues, facebookShare, accessToken, allLeaguesQualify = param[1], param[2], param[3], param[4], param[5], param[6], param[7]
     mFacebookShare = facebookShare
 
     if string.len( name ) == 0 then
@@ -32,7 +32,8 @@ function action( param )
 
     local requestContent = { Name = name, 
                             Description = description, 
-                            NumberOfMonth = numberOfMonth, 
+                            NumberOfMonth = numberOfMonth,
+                            AllLeaguesQualify = allLeaguesQualify,
                             AllowedLeaguesIds = selectedLeagues,
                             ShareOnFacebook = facebookShare,
                             FacebookToken = accessToken, }

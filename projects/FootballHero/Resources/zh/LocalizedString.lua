@@ -44,6 +44,7 @@ M.en = {
     leave_comp_yes = "Leave",
   },
   community = {
+    all_competitions = "All Leagues & Cups",
     copy = "COPY",
     desc_create_comp = "在比赛选定的联赛中预测的球赛会自动加入到你的比赛记录中",
     disclaimer = "*** Disclaimer - Apple is not a sponsor nor is involved in any way.",
