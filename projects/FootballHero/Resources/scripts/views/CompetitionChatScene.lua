@@ -265,7 +265,7 @@ function relayoutChatMessage( content, message, isMe, i )
     if not isMe then
         local eventHandler = function( sender, eventType )
             if eventType == TOUCH_EVENT_ENDED then
-                EventManager:postEvent( Event.Enter_History, { userid, name, mCompetitionId } )
+                EventManager:postEvent( Event.Enter_History, { userid, mCompetitionId } )
             end
         end
         logo:addTouchEventListener( eventHandler )
