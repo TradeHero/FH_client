@@ -16,10 +16,9 @@ local mCountryFilter = Constants.STATS_SHOW_ALL
 
 --[[
     param[1] is the user id, default is show myself.
-    param[2] is the user name, default is show myself.
-    param[3] is the competition id, default is nil which means show the life time history.
-    param[4] is the weekly/monthly paramters, default is empty which means show the overall history.
-    param[5] is the country filter, default is show_all.
+    param[2] is the competition id, default is nil which means show the life time history.
+    param[3] is the weekly/monthly paramters, default is empty which means show the overall history.
+    param[4] is the country filter, default is show_all.
 ]]
 
 function action( param )
