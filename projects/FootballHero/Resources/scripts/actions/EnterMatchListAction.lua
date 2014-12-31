@@ -53,7 +53,7 @@ function action( param )
     else
 
         local handler = function( isSucceed, body, header, status, errorBuffer )
-            RequestUtils.messageHandler( requestInfo, isSucceed, body, header, status, errorBuffer, RequestUtils.HTTP_200, onRequestSuccess, onRequestFailed )
+            RequestUtils.messageHandler( requestInfo, isSucceed, body, header, status, errorBuffer, RequestUtils.HTTP_200, true, onRequestSuccess, onRequestFailed )
         end
 
         local httpRequest = HttpRequestForLua:create( CCHttpRequest.kHttpGet )

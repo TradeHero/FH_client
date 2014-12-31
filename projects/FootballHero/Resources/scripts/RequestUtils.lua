@@ -173,7 +173,7 @@ end
 
 
 
-function messageHandler( requestInfo, isSucceed, body, header, status, errorBuffer, successRequestID, successHandler, failedHandler )
+function messageHandler( requestInfo, isSucceed, body, header, status, errorBuffer, successRequestID, removeMask, successHandler, failedHandler )
     CCLuaLog( "Http reponse: "..status.." and errorBuffer: "..errorBuffer )
     local headers = createHeaderObject( header )
     local responseEncoding = headers["Content-Encoding"]
@@ -197,7 +197,11 @@ function messageHandler( requestInfo, isSucceed, body, header, status, errorBuff
     else
         jsonResponse["Message"] = errorBuffer
     end
-    ConnectingMessage.selfRemove()
+    
+    if removeMask then
+        ConnectingMessage.selfRemove()
+    end
+    
     if status == successRequestID then
         -- Check to record the response
         if requestInfo["recordResponse"] then

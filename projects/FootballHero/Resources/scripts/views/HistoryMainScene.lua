@@ -263,7 +263,10 @@ function initContent( couponHistory )
     end
 
     local logo = tolua.cast( mWidget:getChildByName("Image_Profile_Pic"), "ImageView" )
-    logo:addTouchEventListener( logoEventHandler )
+    if isSelf() then
+        logo:addTouchEventListener( logoEventHandler )
+    end
+    
     if info["PictureUrl"] ~= nil then
         local handler = function( filePath )
             if filePath ~= nil and mWidget ~= nil and logo ~= nil then

@@ -55,7 +55,7 @@ function action( param )
         onRequestSuccess( jsonResponseCache )
     else
         local handler = function( isSucceed, body, header, status, errorBuffer )
-            RequestUtils.messageHandler( requestInfo, isSucceed, body, header, status, errorBuffer, RequestUtils.HTTP_200, onRequestSuccess )
+            RequestUtils.messageHandler( requestInfo, isSucceed, body, header, status, errorBuffer, RequestUtils.HTTP_200, true, onRequestSuccess )
         end
 
         local httpRequest = HttpRequestForLua:create( CCHttpRequest.kHttpGet )

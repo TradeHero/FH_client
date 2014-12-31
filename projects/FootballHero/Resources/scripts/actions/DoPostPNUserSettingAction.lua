@@ -29,7 +29,7 @@ function action( param )
     requestInfo.url = url
 
      local handler = function( isSucceed, body, header, status, errorBuffer )
-        RequestUtils.messageHandler( requestInfo, isSucceed, body, header, status, errorBuffer, RequestUtils.HTTP_200, onRequestSuccess )
+        RequestUtils.messageHandler( requestInfo, isSucceed, body, header, status, errorBuffer, RequestUtils.HTTP_200, false, onRequestSuccess )
     end
 
     local httpRequest = HttpRequestForLua:create( CCHttpRequest.kHttpPost )
@@ -38,7 +38,7 @@ function action( param )
     httpRequest:getRequest():setRequestData( requestContentText, string.len( requestContentText ) )
     httpRequest:sendHttpRequest( url, handler )
 
-    ConnectingMessage.loadFrame()
+    --ConnectingMessage.loadFrame()
 end
 
 function onRequestSuccess( jsonResponse )

@@ -76,7 +76,7 @@ function action( param )
     requestInfo.url = url
 
     local handler = function( isSucceed, body, header, status, errorBuffer )
-        RequestUtils.messageHandler( requestInfo, isSucceed, body, header, status, errorBuffer, RequestUtils.HTTP_200, onRegisterRequestSuccess )
+        RequestUtils.messageHandler( requestInfo, isSucceed, body, header, status, errorBuffer, RequestUtils.HTTP_200, true, onRegisterRequestSuccess )
     end
 
     local httpRequest = HttpRequestForLua:create( CCHttpRequest.kHttpPost )
@@ -123,7 +123,7 @@ function onRegisterRequestSuccess( jsonResponse )
         requestInfo.url = url
 
         local handler = function( isSucceed, body, header, status, errorBuffer )
-            RequestUtils.messageHandler( requestInfo, isSucceed, body, header, status, errorBuffer, RequestUtils.HTTP_200, onRegisterNameRequestSuccess )
+            RequestUtils.messageHandler( requestInfo, isSucceed, body, header, status, errorBuffer, RequestUtils.HTTP_200, true, onRegisterNameRequestSuccess )
         end
 
         local httpRequest = HttpRequestForLua:create( CCHttpRequest.kHttpPost )
