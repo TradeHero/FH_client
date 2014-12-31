@@ -15,11 +15,13 @@ function loadFrame()
 
     local yesBt = tolua.cast( bg:getChildByName("yes"), "Button" )
     local noBt = tolua.cast( bg:getChildByName("no"), "Button" )
-    local msgBt = tolua.cast( bg:getChildByName("message"), "Label" )
+    local msg1 = tolua.cast( bg:getChildByName("message"), "Label" )
+    local msg2 = tolua.cast( bg:getChildByName("message1"), "Label" )
 
-    yesBt:setTitleText( Constants.String.button.yes )
-    noBt:setTitleText( Constants.String.button.no )
-    msgBt:setText( Constants.String.info.leave_comment )
+    yesBt:setTitleText( Constants.String.button.ok )
+    noBt:setTitleText( Constants.String.button.no_thanks )
+    msg1:setText( Constants.String.info.leave_comment1 )
+    msg2:setText( Constants.String.info.leave_comment2 )
 
     yesBt:addTouchEventListener( yesEventHandler )
     noBt:addTouchEventListener( noEventHandler )
