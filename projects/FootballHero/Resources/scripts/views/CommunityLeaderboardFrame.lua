@@ -273,6 +273,8 @@ function initLeaderboardContent( i, content, info )
     score:setText( string.format( mSubType["description"], info[mSubType["dataColumnId"]], info["NumberOfCoupons"] ) )
     if info[mSubType["dataColumnId"]] < 0 then
         score:setColor( ccc3( 240, 75, 79 ) )
+    else
+        score:setColor( ccc3( 79, 199, 93 ) )
     end
 
     index:setText( i )
@@ -306,6 +308,8 @@ function initLeaderboardContent( i, content, info )
 
     if info["Roi"] < 0 then
         stat_gain_percent:setColor( ccc3( 240, 75, 79 ) )
+    else
+        stat_gain_percent:setColor( ccc3( 79, 199, 93 ) )
     end
 
     local seqArray = CCArray:create()
