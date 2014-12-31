@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
 <UIProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <ProjectDir>Z:\workspace\FH_client\projects\FootballHero\editor\FH_UI</ProjectDir>
+  <ProjectDir>Z:\FH_client\projects\FootballHero\editor\FH_UI</ProjectDir>
   <Version>1.5.0.0</Version>
-  <Resources>Z:\workspace\FH_client\projects\FootballHero\editor\FH_UI\Resources</Resources>
+  <Resources>Z:\FH_client\projects\FootballHero\editor\FH_UI\Resources</Resources>
   <Name>FH_UI</Name>
   <JsonFileName>FH_UI.json</JsonFileName>
-  <JsonFolder>Z:\workspace\FH_client\projects\FootballHero\editor\FH_UI\Json</JsonFolder>
+  <JsonFolder>Z:\FH_client\projects\FootballHero\editor\FH_UI\Json</JsonFolder>
   <JsonList>
     <string>Chat.json</string>
     <string>ChatMessageContent.json</string>
@@ -13,25 +13,37 @@
     <string>ChatMyMessageContent.json</string>
     <string>ChoiceMessage.json</string>
     <string>CommunityBaseScene.json</string>
+    <string>CommunityCompetitionFrame.json</string>
     <string>CommunityLeaderboardDropdownContentFrame.json</string>
     <string>CommunityLeaderboardDropdownFrame.json</string>
     <string>CommunityLeaderboardFrame.json</string>
     <string>CommunityLeaderboardListContentFrame.json</string>
+    <string>CompetitionInviteContent.json</string>
     <string>CompetitionItemNew.json</string>
     <string>CompetitionLeaderboard.json</string>
     <string>CompetitionMore.json</string>
     <string>CompetitionMoreContent.json</string>
+    <string>CompetitionTitle.json</string>
     <string>ConnectingMessage.json</string>
     <string>CountryListContent.json</string>
     <string>CreateCompetition.json</string>
     <string>CreateCompetitionContent.json</string>
     <string>ErrorMessage.json</string>
     <string>FAQ.json</string>
+    <string>FavouriteCountryContent.json</string>
+    <string>FavouriteLeagueContent.json</string>
+    <string>FavouriteTeam.json</string>
     <string>HistoryDetail.json</string>
     <string>HistoryDetailClosedContent.json</string>
     <string>HistoryDetailOpenContent.json</string>
+    <string>HistoryHomeForOthers.json</string>
     <string>HistoryMainMatchContent.json</string>
     <string>HistoryMainTitle.json</string>
+    <string>LeaderbaordContentInDropDown.json</string>
+    <string>LeaderbaordDropDown.json</string>
+    <string>LeaderboardContent.json</string>
+    <string>LeaderboardList.json</string>
+    <string>LeaderboardListContent.json</string>
     <string>LeaderboardScene.json</string>
     <string>LeagueDropdownContent.json</string>
     <string>LeagueContentWithTransparentBG.json</string>
@@ -43,8 +55,11 @@
     <string>MatchListEmptyIndi.json</string>
     <string>MatchListScene.json</string>
     <string>MatchPrediction.json</string>
+    <string>MyHeroEmptyFrame.json</string>
     <string>MyPicksHome.json</string>
     <string>Navigator.json</string>
+    <string>PNCompetitionMessage.json</string>
+    <string>PNPredictionMessage.json</string>
     <string>PredFinalConfirm.json</string>
     <string>PredFinalConfirmButton.json</string>
     <string>PredFinalConfirmContent.json</string>
@@ -56,13 +71,20 @@
     <string>ShareTypeSelection.json</string>
     <string>SoundSettings.json</string>
     <string>TapToMakePrediction.json</string>
+    <string>Team.json</string>
     <string>TutorialEmail.json</string>
     <string>TutorialEmailRegister.json</string>
     <string>TutorialEmailSignin.json</string>
     <string>TutorialForgotPassword.json</string>
     <string>TutorialHomepage.json</string>
+    <string>TutorialPrediction.json</string>
+    <string>TutorialRegisterName.json</string>
+    <string>TutorialSelectFavourite.json</string>
     <string>TutorialSigninType.json</string>
+    <string>WBTSPrediction.json</string>
+    <string>WTCBMTPrediction.json</string>
     <string>WTGBMTPrediction.json</string>
+    <string>WTSPrediction.json</string>
     <string>WTWBEGPrediction.json</string>
     <string>CommunityCompetitionWelcome.json</string>
     <string>CommunityNewCompetitionFrame.json</string>
@@ -88,11 +110,14 @@
     <Width>640</Width>
     <Height>1136</Height>
   </CanvasSize>
-  <filePath>Z:\workspace\FH_client\projects\FootballHero\editor\FH_UI\FH_UI.xml.ui</filePath>
+  <filePath>Z:\FH_client\projects\FootballHero\editor\FH_UI\FH_UI.xml.ui</filePath>
   <ProjectType>UIProject</ProjectType>
   <ResRelativePath />
   <imageFileList />
-  <imagePngList />
+  <imagePngList>
+    <string>Tutorial/Default Button.png</string>
+    <string>Popup/popup-rate-1.png</string>
+  </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
   <CurrentUIJson>AskForComment.json</CurrentUIJson>
 </UIProject>
