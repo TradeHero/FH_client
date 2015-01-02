@@ -47,10 +47,15 @@ function action( param )
         url = url.."&yearNumber="..mYearNumber.."&monthNumber="..mMonthNumber
 
     elseif mTabID == CompetitionConfig.COMPETITION_TAB_ID_WEEKLY then
-        
         if param[5] ~= nil then
             mYearNumber = param[5]
             mWeekNumber = param[6]
+        end
+
+        -- HACK: week 1 does not exist! at least until 2018
+        if mWeekNumber == 1 then
+            mWeekNumber = 53
+            mYearNumber = mYearNumber - 1
         end
 
         url = url.."&yearNumber="..mYearNumber.."&weekNumber="..mWeekNumber

@@ -85,6 +85,8 @@ function onRequestSuccess( jsonResponse )
         Logic:setLastChatMessageTimestamp( lastMessage["UnixTimeStamp"] )
     end
 
+    mIsSending = false
+
     -- Display the messages.
     if mSilent then
         ChatScene.addMessage( chatMessages )
@@ -95,14 +97,13 @@ function onRequestSuccess( jsonResponse )
     if mCallback ~= nil then
         mCallback()
     end
-
-    mIsSending = false
 end
 
 function onRequestFailed( errorBuffer )
+    
+    mIsSending = false
+
     if mCallback ~= nil then
         mCallback()
     end
-
-    mIsSending = false
 end
