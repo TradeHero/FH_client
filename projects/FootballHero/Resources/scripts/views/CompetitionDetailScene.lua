@@ -352,12 +352,12 @@ function initRankingDropdown( startTimeStamp )
             dateText:setText( displayText )
             
             if mCompetitionDurations[i]["monthNumber"] ~= nil then
-                if mCompetitionDurations[i]["monthNumber"] == tonumber( mMonthNumber ) then
+                if mCompetitionDurations[i]["monthNumber"] == tonumber( mMonthNumber ) and mCompetitionDurations[i]["yearNumber"] == tonumber( mYearNumber ) then
                     dateLabel:setText( displayText )
                     break
                 end
             else
-                if mCompetitionDurations[i]["weekNumber"] == tonumber( mWeekNumber ) then
+                if mCompetitionDurations[i]["weekNumber"] == tonumber( mWeekNumber ) and mCompetitionDurations[i]["yearNumber"] == tonumber( mYearNumber ) then
                     dateLabel:setText( displayText )
                     break
                 end
@@ -428,6 +428,17 @@ function initCompetitionDuration( startTimeStamp )
         local startWeek = os.date( "%W", startTimeStamp ) + 1
         local endWeek = os.date( "%W", nowTimeStamp ) + 1
 
+        -- HACK: week 1 does not exist! at least until 2018
+        if startWeek == 1 then
+            startWeek = 53
+            startYear = startYear - 1
+        end
+
+        if endWeek == 1 then
+            endWeek = 53
+            currYear = currYear - 1
+        end
+
         local currWeek = startTimeStamp - ( tonumber( os.date( "%w", startTimeStamp ) ) - 1 ) * 3600 * 24 
                                             - tonumber( os.date( "%H", startTimeStamp ) ) * 3600
                                             - tonumber( os.date( "%M", startTimeStamp ) ) * 60
@@ -466,7 +477,7 @@ function initCompetitionDuration( startTimeStamp )
                 end
 
                 startYear = startYear + 1
-                startWeek = 1
+                startWeek = 2
             end
         else
             local displyWeekIndex = 1
@@ -501,10 +512,16 @@ end
 
 function onSelectTab( tabID )
     local sortType = 3
+
+    local nowTime = os.time()
+    local yearNumber = os.date( "%Y", nowTime )
+    local monthNumber = os.date( "%m", nowTime )
+    local weekNumber = os.date( "%W", nowTime ) + 1      -- Lua calculate week number worngly. It is one behind.
+
     if tabID == CompetitionsData.COMPETITION_TAB_ID_MONTHLY then
-        EventManager:postEvent( Event.Enter_Competition_Detail, { mCompetitionId, false, sortType, tabID, mYearNumber, mMonthNumber } )
+        EventManager:postEvent( Event.Enter_Competition_Detail, { mCompetitionId, false, sortType, tabID, yearNumber, monthNumber } )
     elseif tabID == CompetitionsData.COMPETITION_TAB_ID_WEEKLY then
-        EventManager:postEvent( Event.Enter_Competition_Detail, { mCompetitionId, false, sortType, tabID, mYearNumber, mWeekNumber } )
+        EventManager:postEvent( Event.Enter_Competition_Detail, { mCompetitionId, false, sortType, tabID, yearNumber, weekNumber } )
     else
         EventManager:postEvent( Event.Enter_Competition_Detail, { mCompetitionId, false, sortType, tabID } )
     end
@@ -776,6 +793,13 @@ function initSelfContent( info )
     end
     click:addTouchEventListener( eventHandler )    
 
+    -- user was not in this competition during this month!
+    if type(info) ~= "table" then
+        score:setText( "-" )
+        index:setText( "-" )
+        return
+    end
+
     local infoHandler = function( sender, eventType )
         if eventType == TOUCH_EVENT_ENDED then
             local deltaX
@@ -805,6 +829,8 @@ function initSelfContent( info )
     score:setText( string.format( Constants.String.leaderboard.me_score, info["Profit"] ) )
     if info["Profit"] < 0 then
         score:setColor( ccc3( 240, 75, 79 ) )
+    else
+        score:setColor( ccc3( 79, 199, 93 ) )
     end
 
     index:setText( info["Position"] )
