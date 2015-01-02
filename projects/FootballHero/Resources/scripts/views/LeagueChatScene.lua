@@ -154,6 +154,12 @@ function initMessages( chatMessages )
 end
 
 function addMessage( chatMessages )
+    
+    if not mWidget then
+        -- protect against user changing scene while fetching new messages
+        return
+    end
+
     local contentContainer = tolua.cast( mWidget:getChildByName("ScrollView"), "ScrollView" )
 
     local layoutParameter = LinearLayoutParameter:create()
