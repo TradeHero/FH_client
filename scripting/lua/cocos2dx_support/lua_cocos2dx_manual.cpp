@@ -4,6 +4,7 @@
 extern "C" {
 #endif
 #include  "tolua_fix.h"
+#include "des56.h"
 #ifdef __cplusplus
 }
 #endif
@@ -337,6 +338,101 @@ static void extendCCTwirl(lua_State* tolua_S)
     lua_pop(tolua_S, 1);
 }
 
+static int tolua_Cocos2d_CCFileUtils_getDecryptedFileData(lua_State* tolua_S)
+{
+#ifndef TOLUA_RELEASE
+    tolua_Error tolua_err;
+    if (
+        !tolua_isusertype(tolua_S, 1, "CCFileUtils", 0, &tolua_err) ||
+        !tolua_isstring(tolua_S, 2, 0, &tolua_err) ||
+        !tolua_isstring(tolua_S, 3, 0, &tolua_err) ||
+        !tolua_isnoobj(tolua_S, 4, &tolua_err)
+        )
+        goto tolua_lerror;
+    else
+#endif
+    {
+        CCFileUtils* self = (CCFileUtils*)tolua_tousertype(tolua_S, 1, 0);
+#ifndef TOLUA_RELEASE
+        if (!self) tolua_error(tolua_S, "invalid 'self' in function 'getDecryptedFileData'", NULL);
+#endif
+        const char* filePath = ((const char*)tolua_tostring(tolua_S, 2, 0));
+        const char* pszMode = ((const char*)tolua_tostring(tolua_S, 3, 0));
+        unsigned long pSize = 0;
+        
+        unsigned char* cypheredText = (unsigned char*)self->getFileData(filePath, pszMode, &pSize);
+        
+        char* decypheredText;
+        keysched KS;
+        int rel_index, abs_index;
+        unsigned long cypherlen = pSize;
+        const char *key = "tuantuan";
+        int padinfo;
+        
+        padinfo = cypheredText[cypherlen - 1];
+        cypherlen--;
+        
+        /* Aloca array */
+        decypheredText =
+        (char *)malloc((cypherlen + 1) * sizeof(char));
+        if (decypheredText == NULL) {
+            lua_pushstring(tolua_S, "Error decrypting file. Not enough memory.");
+            goto tolua_lerror;
+        }
+        
+        /* Inicia decifragem */
+        if (key && strlen(key) >= 8)
+        {
+            char k[8];
+            int i;
+            
+            for (i = 0; i < 8; i++)
+                k[i] = (unsigned char)key[i];
+            fsetkey(k, &KS);
+        }
+        else {
+            lua_pushstring(tolua_S, "Error decrypting file. Invalid key.");
+            goto tolua_lerror;
+        }
+        
+        rel_index = 0;
+        abs_index = 0;
+        
+        while (abs_index < (int)cypherlen)
+        {
+            decypheredText[abs_index] = cypheredText[abs_index];
+            abs_index++;
+            rel_index++;
+            if (rel_index == 8)
+            {
+                rel_index = 0;
+                fencrypt(&(decypheredText[abs_index - 8]), 1, &KS);
+            }
+        }
+        decypheredText[abs_index] = 0;
+        
+        lua_pushlstring(tolua_S, decypheredText, (abs_index - padinfo));
+        free(decypheredText);
+    }
+    return 1;
+#ifndef TOLUA_RELEASE
+    tolua_lerror :
+    tolua_error(tolua_S, "#ferror in function 'getDecryptedFileData'.", &tolua_err);
+    return 0;
+#endif
+}
+
+static void extendFileUtils(lua_State* tolua_S)
+{
+    lua_pushstring(tolua_S, "CCFileUtils");
+    lua_rawget(tolua_S, LUA_REGISTRYINDEX);
+    if (lua_istable(tolua_S, -1))
+    {
+        tolua_function(tolua_S, "getDecryptedFileData", tolua_Cocos2d_CCFileUtils_getDecryptedFileData);
+    }
+    lua_pop(tolua_S, 1);
+}
+
 static int tolua_Cocos2d_CCApplication_isIOS64bit(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
@@ -388,6 +484,7 @@ int register_all_cocos2dx_manual(lua_State* tolua_S)
     extendCCLens3D(tolua_S);
     extendCCRipple3D(tolua_S);
     extendCCTwirl(tolua_S);
+    extendFileUtils(tolua_S);
     extendApplication(tolua_S);
     return 0;
 }

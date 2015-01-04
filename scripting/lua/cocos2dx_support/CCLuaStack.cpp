@@ -30,6 +30,11 @@ extern "C" {
 #include "lualib.h"
 #include "lauxlib.h"
 #include "tolua_fix.h"
+#include "md5.h"
+#include "ldes56.h"
+#include "lfs.h"
+#include "lua_zlib.h"
+#include "lua_cjson.h"
 }
 
 #include "LuaCocos2d.h"
@@ -120,6 +125,11 @@ bool CCLuaStack::init(void)
     };
     luaL_register(m_state, "_G", global_functions);
     tolua_CocoStudio_open(m_state);
+    luaopen_md5_core(m_state);
+    luaopen_des56(m_state);
+    luaopen_lfs(m_state);
+    luaopen_zlib(m_state);
+    luaopen_cjson(m_state);
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS || CC_TARGET_PLATFORM == CC_PLATFORM_MAC)
     CCLuaObjcBridge::luaopen_luaoc(m_state);
 #endif
