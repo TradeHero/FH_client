@@ -349,6 +349,7 @@ static int processGetTask(CCHttpRequest *request, write_callback callback, void 
     CURLRaii curl;
     bool ok = curl.init(request, callback, stream, headerCallback, headerStream)
             && curl.setOption(CURLOPT_FOLLOWLOCATION, true)
+			//&& curl.setOption(CURLOPT_PROXY, "127.0.0.1:8888")
             && curl.perform(responseCode);
     return ok ? 0 : 1;
 }
@@ -359,8 +360,10 @@ static int processPostTask(CCHttpRequest *request, write_callback callback, void
     CURLRaii curl;
     bool ok = curl.init(request, callback, stream, headerCallback, headerStream)
             && curl.setOption(CURLOPT_POST, 1)
+			&& curl.setOption(CURLOPT_USERPWD, request->getUserpwd())
             && curl.setOption(CURLOPT_POSTFIELDS, request->getRequestData())
             && curl.setOption(CURLOPT_POSTFIELDSIZE, request->getRequestDataSize())
+			//&& curl.setOption(CURLOPT_PROXY, "127.0.0.1:8888")
             && curl.perform(responseCode);
     return ok ? 0 : 1;
 }
@@ -472,6 +475,26 @@ void CCHttpClient::send(CCHttpRequest* request)
         
     pthread_mutex_lock(&s_requestQueueMutex);
     s_requestQueue->addObject(request);
+
+	// Sort the request by priority.
+	int i, j, length = s_requestQueue->data->num;
+	CCHttpRequest ** x = (CCHttpRequest**)s_requestQueue->data->arr;
+	CCHttpRequest *tempItem;
+
+	// insertion sort
+	for (i = 1; i < length; i++)
+	{
+		tempItem = x[i];
+		j = i - 1;
+
+		//continue moving element downwards while priority is smaller
+		while (j >= 0 && (tempItem->getPriority() > x[j]->getPriority()))
+		{
+			x[j + 1] = x[j];
+			j = j - 1;
+		}
+		x[j + 1] = tempItem;
+	}
     pthread_mutex_unlock(&s_requestQueueMutex);
     
     // Notify thread start to work

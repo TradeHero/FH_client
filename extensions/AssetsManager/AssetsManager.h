@@ -27,6 +27,7 @@
 #define __AssetsManager__
 
 #include "cocos2d.h"
+#include "cocos-ext.h"
 #include "ExtensionMacros.h"
 
 #if (CC_TARGET_PLATFORM != CC_PLATFORM_WINRT) && (CC_TARGET_PLATFORM != CC_PLATFORM_WP8)

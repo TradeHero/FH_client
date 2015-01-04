@@ -63,7 +63,7 @@ const CCSize& ScrollInnerContainer::getLayoutSize()
     }
 }
 
-static const float AUTOSCROLLMAXSPEED = 1000.0f;
+static const float AUTOSCROLLMAXSPEED = 10000.0f;
 
 const CCPoint SCROLLDIR_UP = CCPoint(0.0f, 1.0f);
 const CCPoint SCROLLDIR_DOWN = CCPoint(0.0f, -1.0f);
@@ -241,7 +241,7 @@ void ScrollView::setInnerContainerSize(const CCSize &size)
     {
          _innerContainer->setPosition(CCPoint(_size.width - ((1.0f - _innerContainer->getAnchorPoint().x) * _innerContainer->getSize().width), _innerContainer->getPosition().y));
     }
-    if (_innerContainer->getPosition().y > 0.0f)
+    if (_innerContainer->getBottomInParent() > 0.0f)
     {
         _innerContainer->setPosition(CCPoint(_innerContainer->getPosition().x, _innerContainer->getAnchorPoint().y * _innerContainer->getSize().height));
     }

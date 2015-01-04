@@ -24,7 +24,9 @@
  ****************************************************************************/
 
 #include "CCEditBoxImplAndroid.h"
-
+#include "CCEditBoxImplAndroidJNI.h"
+#include "../Android/DeviceJNI.h"
+ 
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
 
 #include "CCEditBox.h"
@@ -98,6 +100,29 @@ void CCEditBoxImplAndroid::setFont(const char* pFontName, int fontSize)
 		m_pLabelPlaceHolder->setFontName(pFontName);
 		m_pLabelPlaceHolder->setFontSize(fontSize);
 	}
+}
+
+const char* CCEditBoxImplAndroid::getFontName()
+{
+	if (m_pLabel != NULL) {
+		return m_pLabel->getFontName();
+	}
+
+	if (m_pLabelPlaceHolder != NULL) {
+		return m_pLabelPlaceHolder->getFontName();
+	}
+	return NULL;
+}
+float CCEditBoxImplAndroid::getFontSize()
+{
+	if (m_pLabel != NULL) {
+		return m_pLabel->getFontSize();
+	}
+
+	if (m_pLabelPlaceHolder != NULL) {
+		return m_pLabelPlaceHolder->getFontSize();
+	}
+	return 0;
 }
 
 void CCEditBoxImplAndroid::setFontColor(const ccColor3B& color)
@@ -244,25 +269,37 @@ void CCEditBoxImplAndroid::onEnter(void)
     
 }
 
+void CCEditBoxImplAndroid::onExit(void)
+{    
+    // signal to destroy binded view
+    destroyEditTextJNI((void*) this);
+}
+
 static void editBoxCallbackFunc(const char* pText, void* ctx)
 {
     CCEditBoxImplAndroid* thiz = (CCEditBoxImplAndroid*)ctx;
-    thiz->setText(pText);
-	
-    if (thiz->getDelegate() != NULL)
+    thiz->updateText(pText);
+}
+
+void CCEditBoxImplAndroid::updateText(const char* pText) 
+{
+    setText(pText);
+    m_pLabelPlaceHolder->setVisible(strlen(pText) == 0);
+    m_pLabel->setVisible(true);
+    
+    if (m_pDelegate != NULL)
     {
-        thiz->getDelegate()->editBoxTextChanged(thiz->getCCEditBox(), thiz->getText());
-        thiz->getDelegate()->editBoxEditingDidEnd(thiz->getCCEditBox());
-        thiz->getDelegate()->editBoxReturn(thiz->getCCEditBox());
+        m_pDelegate->editBoxTextChanged(m_pEditBox, pText);
+        m_pDelegate->editBoxEditingDidEnd(m_pEditBox);
+        m_pDelegate->editBoxReturn(m_pEditBox);
     }
     
-    CCEditBox* pEditBox = thiz->getCCEditBox();
-    if (NULL != pEditBox && 0 != pEditBox->getScriptEditBoxHandler())
+    if (NULL != m_pEditBox && 0 != m_pEditBox->getScriptEditBoxHandler())
     {
         cocos2d::CCScriptEngineProtocol* pEngine = cocos2d::CCScriptEngineManager::sharedManager()->getScriptEngine();
-        pEngine->executeEvent(pEditBox->getScriptEditBoxHandler(), "changed",pEditBox);
-        pEngine->executeEvent(pEditBox->getScriptEditBoxHandler(), "ended",pEditBox);
-        pEngine->executeEvent(pEditBox->getScriptEditBoxHandler(), "return",pEditBox);
+        pEngine->executeEvent(m_pEditBox->getScriptEditBoxHandler(), "changed", m_pEditBox);
+        pEngine->executeEvent(m_pEditBox->getScriptEditBoxHandler(), "ended", m_pEditBox);
+        pEngine->executeEvent(m_pEditBox->getScriptEditBoxHandler(), "return", m_pEditBox);
     }
 }
 
@@ -279,12 +316,35 @@ void CCEditBoxImplAndroid::openKeyboard()
         pEngine->executeEvent(pEditBox->getScriptEditBoxHandler(), "began",pEditBox);
     }
 	
-    showEditTextDialogJNI(  m_strPlaceHolder.c_str(),
+	CCSize contentSize = m_pEditBox->getContentSize();
+	CCRect rect = CCRectMake(0, 0, contentSize.width, contentSize.height);
+    rect = CCRectApplyAffineTransform(rect, m_pEditBox->nodeToWorldTransform());
+	
+	CCPoint designCoord = ccp(rect.origin.x, rect.origin.y + rect.size.height);
+    
+    CCEGLViewProtocol* eglView = CCEGLView::sharedOpenGLView();
+    float viewH = getScreenHeightJNI();
+    
+    CCPoint visiblePos = ccp(designCoord.x * eglView->getScaleX(), designCoord.y * eglView->getScaleY());
+    CCPoint screenGLPos = ccpAdd(visiblePos, eglView->getViewPortRect().origin);
+    
+	ccColor3B textColor = m_pEditBox->getFontColor();
+	int textColorValue = (0xff << 24) + (textColor.r << 16) + (textColor.g << 8) + textColor.b;
+	CCLOG("New app installed. %d", textColorValue);
+
+	m_pLabelPlaceHolder->setVisible(false);
+    m_pLabel->setVisible(false);
+    showEditTextDialogJNI(m_strPlaceHolder.c_str(),
 						  m_strText.c_str(),
 						  m_eEditBoxInputMode,
 						  m_eEditBoxInputFlag,
 						  m_eKeyboardReturnType,
 						  m_nMaxLength,
+						  screenGLPos.x, 
+						  viewH - screenGLPos.y,
+                          rect.size.width * eglView->getScaleX(), 
+                          rect.size.height * eglView->getScaleY(),
+						  textColorValue,
 						  editBoxCallbackFunc,
 						  (void*)this  );
 	
@@ -292,7 +352,7 @@ void CCEditBoxImplAndroid::openKeyboard()
 
 void CCEditBoxImplAndroid::closeKeyboard()
 {
-	
+    closeKeyboardJNI((void *) this);
 }
 
 NS_CC_EXT_END

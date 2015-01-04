@@ -139,6 +139,7 @@ protected:
     WidgetReaderProtocol* createWidgetReaderProtocol(const std::string& classname);
     
     std::string m_strFilePath;
+    std::string m_strFileName;
 };
 
 

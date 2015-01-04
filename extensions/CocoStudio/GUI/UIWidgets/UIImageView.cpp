@@ -310,6 +310,11 @@ void ImageView::copySpecialProperties(Widget *widget)
     }
 }
 
+const char* ImageView::getTextureFile()
+{
+	return _textureFile.c_str();
+}
+
 }
 
 NS_CC_END

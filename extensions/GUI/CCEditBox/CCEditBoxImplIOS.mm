@@ -79,6 +79,7 @@ static const int CC_EDIT_BOX_PADDING = 5;
         textField_.delegate = self;
         textField_.hidden = true;
 		textField_.returnKeyType = UIReturnKeyDefault;
+        textField_.adjustsFontSizeToFitWidth = YES;
         [textField_ addTarget:self action:@selector(textChanged) forControlEvents:UIControlEventEditingChanged];
         self.editBox = editBox;
         
@@ -369,6 +370,36 @@ void CCEditBoxImplIOS::setFont(const char* pFontName, int fontSize)
 	m_pLabelPlaceHolder->setFontSize(fontSize);
 }
 
+const char* CCEditBoxImplIOS::getFontName()
+{
+    if (m_pLabel != nil)
+    {
+        return m_pLabel->getFontName();
+    }
+    
+    if (m_pLabelPlaceHolder != nil)
+    {
+        return m_pLabelPlaceHolder->getFontName();
+    }
+    
+    return nil;
+}
+
+float CCEditBoxImplIOS::getFontSize()
+{
+    if (m_pLabel != nil)
+    {
+        return m_pLabel->getFontSize();
+    }
+    
+    if (m_pLabelPlaceHolder != nil)
+    {
+        return m_pLabelPlaceHolder->getFontSize();
+    }
+    
+    return 0;
+}
+
 void CCEditBoxImplIOS::setFontColor(const ccColor3B& color)
 {
     m_systemControl.textField.textColor = [UIColor colorWithRed:color.r / 255.0f green:color.g / 255.0f blue:color.b / 255.0f alpha:1.0f];
@@ -571,6 +602,11 @@ void CCEditBoxImplIOS::onEnter(void)
     }
 }
 
+void CCEditBoxImplIOS::onExit(void)
+{
+    
+}
+
 void CCEditBoxImplIOS::adjustTextFieldPosition()
 {
 	CCSize contentSize = m_pEditBox->getContentSize();
@@ -587,6 +623,7 @@ void CCEditBoxImplIOS::openKeyboard()
 	m_pLabelPlaceHolder->setVisible(false);
 
 	m_systemControl.textField.hidden = NO;
+    adjustTextFieldPosition();
     [m_systemControl openKeyboard];
 }
 
