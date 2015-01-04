@@ -1,0 +1,342 @@
+diff --git a/tools/tolua++/Analytics.pkg b/tools/tolua++/Analytics.pkg
+new file mode 100755
+index 0000000..da039fb
+--- /dev/null
++++ b/tools/tolua++/Analytics.pkg
+@@ -0,0 +1,7 @@
++
++class Analytics
++{
++	static Analytics* sharedDelegate();
++
++	void postEvent(const char* eventName, const char* paramString);
++};
+\ No newline at end of file
+diff --git a/tools/tolua++/CCEditBox.pkg b/tools/tolua++/CCEditBox.pkg
+index 92a6f8d..80c2262 100644
+--- a/tools/tolua++/CCEditBox.pkg
++++ b/tools/tolua++/CCEditBox.pkg
+@@ -94,5 +94,9 @@ class CCEditBox: public CCControlButton
+     virtual void onEnter(void);
+     virtual void onExit(void);
+     
++    void closeKeyboard();
++    
+     void touchDownAction(CCObject *sender, CCControlEvent controlEvent);
++
++    void setDelegate(CCEditBoxDelegate* pDelegate);
+ };
+diff --git a/tools/tolua++/CCFileUtils.pkg b/tools/tolua++/CCFileUtils.pkg
+index aef1f3b..a17e782 100644
+--- a/tools/tolua++/CCFileUtils.pkg
++++ b/tools/tolua++/CCFileUtils.pkg
+@@ -18,4 +18,6 @@ class CCFileUtils
+     bool isPopupNotify();
+ 
+     unsigned char* getFileData(const char* pszFileName, const char* pszMode, unsigned long * pSize);
++
++    virtual bool isFileExist(const std::string& strFilePath);
+ };
+diff --git a/tools/tolua++/CCShaderCache.pkg b/tools/tolua++/CCShaderCache.pkg
+new file mode 100755
+index 0000000..7dda77e
+--- /dev/null
++++ b/tools/tolua++/CCShaderCache.pkg
+@@ -0,0 +1,16 @@
++
++class CCShaderCache : public CCObject
++{
++
++	static CCShaderCache* sharedShaderCache();
++
++	static void purgeSharedShaderCache();
++
++	void loadDefaultShaders();
++
++	void reloadDefaultShaders();
++
++	CCGLProgram * programForKey(const char* key);
++
++	void addProgram(CCGLProgram* program, const char* key);
++};
+diff --git a/tools/tolua++/Cocos2d.pkg b/tools/tolua++/Cocos2d.pkg
+index ecfe480..ef456d5 100644
+--- a/tools/tolua++/Cocos2d.pkg
++++ b/tools/tolua++/Cocos2d.pkg
+@@ -88,3 +88,5 @@ $pfile "CCEditBox.pkg"
+ $pfile "CCInteger.pkg"
+ $pfile "CCScrollView.pkg"
+ $pfile "CCTableView.pkg"
++
++$pfile "CCShaderCache.pkg"
+\ No newline at end of file
+diff --git a/tools/tolua++/EditBoxDelegateForLua.pkg b/tools/tolua++/EditBoxDelegateForLua.pkg
+new file mode 100755
+index 0000000..65440f9
+--- /dev/null
++++ b/tools/tolua++/EditBoxDelegateForLua.pkg
+@@ -0,0 +1,21 @@
++
++enum EditBoxEvent
++{
++	EDIT_BOX_EVENT_DID_BEGIN,
++	EDIT_BOX_EVENT_DID_END,
++	EDIT_BOX_EVENT_TEXT_CHANGED,
++	EDIT_BOX_EVENT_RETURN,
++	EDIT_BOX_EVENT_MAX
++};
++
++class CCEditBoxDelegate 
++{
++};
++
++class EditBoxDelegateForLua : public CCLayer, public CCEditBoxDelegate
++{
++	static EditBoxDelegateForLua* create();
++
++	void registerEventScriptHandler(EditBoxEvent eventType, LUA_FUNCTION nHandler);
++	void unregisterEventScriptHandler(EditBoxEvent eventType);
++};
+\ No newline at end of file
+diff --git a/tools/tolua++/Extension.pkg b/tools/tolua++/Extension.pkg
+index ada4446..4b8990e 100755
+--- a/tools/tolua++/Extension.pkg
++++ b/tools/tolua++/Extension.pkg
+@@ -1,3 +1,8 @@
+ $#include "LuaCocos2dExtension.h"
+ 
+ $pfile "FacebookDelegate.pkg"
++$pfile "HttpClientForLua.pkg"
++$pfile "EditBoxDelegateForLua.pkg"
++$pfile "Analytics.pkg"
++$pfile "WebviewDelegate.pkg"
++$pfile "Misc.pkg"
+\ No newline at end of file
+diff --git a/tools/tolua++/FacebookDelegate.pkg b/tools/tolua++/FacebookDelegate.pkg
+index 941dbf6..0ba8f15 100755
+--- a/tools/tolua++/FacebookDelegate.pkg
++++ b/tools/tolua++/FacebookDelegate.pkg
+@@ -3,5 +3,6 @@ class FacebookDelegate
+ {
+ 	static FacebookDelegate* sharedDelegate();
+ 
+-	void login();
++	void login(LUA_FUNCTION handler);
++	void grantPublishPermission(const char* permission, LUA_FUNCTION handler);
+ };
+\ No newline at end of file
+diff --git a/tools/tolua++/HttpClientForLua.pkg b/tools/tolua++/HttpClientForLua.pkg
+new file mode 100755
+index 0000000..3559501
+--- /dev/null
++++ b/tools/tolua++/HttpClientForLua.pkg
+@@ -0,0 +1,60 @@
++class CCHttpRequest : CCObject  
++{  
++    typedef enum  
++    {  
++        kHttpGet,  
++        kHttpPost,  
++        kHttpPut,  
++        kHttpDelete,  
++        kHttpUnkown,  
++    } HttpRequestType;  
++
++    typedef enum
++    {
++        pVeryLow,
++        pLow,
++        pMedium,
++        pHigh,
++        pVeryHigh,
++
++    } HttpRequestPriority;
++      
++      
++    void setRequestType(HttpRequestType type);  
++  
++  
++    HttpRequestType getRequestType();  
++      
++    void setUrl(const char* url);  
++  
++  
++    const char* getUrl();  
++      
++    void setRequestData(const char* buffer, unsigned int len);  
++  
++  
++    char* getRequestData();  
++  
++  
++    int getRequestDataSize();  
++      
++    void setTag(const char* tag);  
++  
++  
++    const char* getTag();  
++};  
++
++
++
++class HttpRequestForLua : CCObject
++{
++    static HttpRequestForLua * create(CCHttpRequest::HttpRequestType type);
++
++    void addHeader(const char* header);
++    void setUserpwd(const char* userpwd);
++    void setPriority(int p);
++	void sendHttpRequest(const char* url, LUA_FUNCTION callbackFunc);
++	void onHttpRequestCompleted(cocos2d::CCNode *sender, void *data);
++	void setRequest(CCHttpRequest* request);
++	CCHttpRequest* getRequest();
++};
+\ No newline at end of file
+diff --git a/tools/tolua++/Misc.pkg b/tools/tolua++/Misc.pkg
+new file mode 100755
+index 0000000..44581c9
+--- /dev/null
++++ b/tools/tolua++/Misc.pkg
+@@ -0,0 +1,31 @@
++
++class Misc
++{
++	static Misc* sharedDelegate();
++
++	void copyToPasteboard(const char* content);
++
++	void selectImage(char* path, int width, int height, LUA_FUNCTION handler);
++
++	void sendMail(char* receiver, char* subject, char* body, LUA_FUNCTION errorHandler);
++
++	void setFileToRequestData(HttpRequestForLua* request, const char* begin, const char* end, const char* filePath, const char* pszMode);
++
++	void sendSMS(char* body, LUA_FUNCTION errorHandler);
++
++	void getDeepLink(LUA_FUNCTION handler);
++
++	void addEventListenerDeepLink(LUA_FUNCTION handler);
++
++	void getUADeviceToken( LUA_FUNCTION handler );
++	
++	void setUADeviceTokenHandler(LUA_FUNCTION handler);
++
++	void requestPushNotification();	
++
++	void openUrl(char* url);
++
++	void openRate();
++
++	void terminate();
++};		
+\ No newline at end of file
+diff --git a/tools/tolua++/UIButton.pkg b/tools/tolua++/UIButton.pkg
+index 80d09f7..54b1803 100644
+--- a/tools/tolua++/UIButton.pkg
++++ b/tools/tolua++/UIButton.pkg
+@@ -1,3 +1,9 @@
++typedef enum
++{
++    BRIGHT_NONE = -1,
++    BRIGHT_NORMAL,
++    BRIGHT_HIGHLIGHT
++}BrightStyle;
+ 
+ class Button : public Widget
+ {
+@@ -33,4 +39,6 @@ class Button : public Widget
+     void setTitleFontName(const char* fontName);
+     const char* getTitleFontName() const;
+ 
++    void setBrightStyle(BrightStyle style);
++
+ };
+diff --git a/tools/tolua++/UIImageView.pkg b/tools/tolua++/UIImageView.pkg
+index 743a7df..457e48a 100644
+--- a/tools/tolua++/UIImageView.pkg
++++ b/tools/tolua++/UIImageView.pkg
+@@ -17,5 +17,5 @@ class ImageView : public Widget
+     virtual std::string getDescription() const;
+     virtual const CCSize& getContentSize() const;
+     virtual CCNode* getVirtualRenderer();
+-
++    const char* getTextureFile();
+ };
+diff --git a/tools/tolua++/UIScrollView.pkg b/tools/tolua++/UIScrollView.pkg
+index 96e9e11..3f91e74 100644
+--- a/tools/tolua++/UIScrollView.pkg
++++ b/tools/tolua++/UIScrollView.pkg
+@@ -50,6 +50,7 @@ class ScrollView:public Layout,public UIScrollInterface
+     void jumpToPercentVertical(float percent);
+     void jumpToPercentHorizontal(float percent);
+     void jumpToPercentBothDirection(const CCPoint& percent);
++    void jumpToDestination(const CCPoint& des);
+     void setInnerContainerSize(const CCSize &size);
+     const CCSize& getInnerContainerSize() const;
+     virtual void addChild(CCNode * child);
+@@ -71,5 +72,4 @@ class ScrollView:public Layout,public UIScrollInterface
+     virtual void setLayoutType(LayoutType type);
+     virtual LayoutType getLayoutType() const;
+     virtual std::string getDescription() const;
+-
+ };
+diff --git a/tools/tolua++/WebviewDelegate.pkg b/tools/tolua++/WebviewDelegate.pkg
+new file mode 100755
+index 0000000..30ae3ed
+--- /dev/null
++++ b/tools/tolua++/WebviewDelegate.pkg
+@@ -0,0 +1,8 @@
++
++class WebviewDelegate
++{
++	static WebviewDelegate* sharedDelegate();
++
++	void openWebpage(const char* url, int x, int y, int w, int h);
++	void closeWebpage();
++};
+\ No newline at end of file
+diff --git a/tools/tolua++/basic_extension.lua b/tools/tolua++/basic_extension.lua
+index 2c121c2..04dd981 100755
+--- a/tools/tolua++/basic_extension.lua
++++ b/tools/tolua++/basic_extension.lua
+@@ -203,6 +203,7 @@ local CCObjectTypes = {
+     "CCScrollView",
+     "CCTableViewCell",
+     "CCTableView",
++
+ }
+ 
+ -- register CCObject types
+@@ -292,13 +293,27 @@ extern "C" {
+ 
+ #include <map>
+ #include <string>
++#include "cocos2d.h"
++#include "CCLuaEngine.h"
+ #include "FacebookDelegate.h"
++#include "HttpRequestForLua.h"
++#include "EditBoxDelegateForLua.h"
++#include "Analytics.h"
++#include "WebviewDelegate.h"
++#include "Misc.h"
+ 
+-using namespace Social;]])
++using namespace cocos2d;
++using namespace cocos2d::extension;
++using namespace Social;
++using namespace Utils;]])
+ 
+       replace([[/* Exported function */
+ TOLUA_API int  tolua_Extension_open (lua_State* tolua_S);]], [[]])
+ 
++      replace([[*((LUA_FUNCTION*)]], [[(]])
++
++      replace([[tolua_usertype(tolua_S,"LUA_FUNCTION");]], [[]])
++
+       replace('\t', '    ')
+ 
+     WRITE(result)
+diff --git a/tools/tolua++/tolua++.exe b/tools/tolua++/tolua++.exe
+new file mode 100755
+index 0000000..5f49746
+Binary files /dev/null and b/tools/tolua++/tolua++.exe differ

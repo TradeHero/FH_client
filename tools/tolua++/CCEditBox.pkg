@@ -94,5 +94,9 @@ class CCEditBox: public CCControlButton
     virtual void onEnter(void);
     virtual void onExit(void);
     
+    void closeKeyboard();
+    
     void touchDownAction(CCObject *sender, CCControlEvent controlEvent);
+
+    void setDelegate(CCEditBoxDelegate* pDelegate);
 };

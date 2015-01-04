@@ -16,4 +16,6 @@ class CCFileUtils
     
     void setPopupNotify(bool bNotify);
     bool isPopupNotify();
+
+    virtual bool isFileExist(const std::string& strFilePath);
 };

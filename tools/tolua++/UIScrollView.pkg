@@ -50,6 +50,7 @@ class ScrollView:public Layout,public UIScrollInterface
     void jumpToPercentVertical(float percent);
     void jumpToPercentHorizontal(float percent);
     void jumpToPercentBothDirection(const CCPoint& percent);
+    void jumpToDestination(const CCPoint& des);
     void setInnerContainerSize(const CCSize &size);
     const CCSize& getInnerContainerSize() const;
     virtual void addChild(CCNode * child);
@@ -82,5 +83,4 @@ class ScrollView:public Layout,public UIScrollInterface
     virtual void setLayoutType(LayoutType type);
     virtual LayoutType getLayoutType() const;
     virtual std::string getDescription() const;
-
 };

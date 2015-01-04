@@ -1,3 +1,9 @@
+typedef enum
+{
+    BRIGHT_NONE = -1,
+    BRIGHT_NORMAL,
+    BRIGHT_HIGHLIGHT
+}BrightStyle;
 
 class Button : public Widget
 {
@@ -32,4 +38,6 @@ class Button : public Widget
     float getTitleFontSize() const;
     void setTitleFontName(const char* fontName);
     const char* getTitleFontName() const;
+
+    void setBrightStyle(BrightStyle style);
 };

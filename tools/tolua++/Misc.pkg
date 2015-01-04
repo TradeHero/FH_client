@@ -1,0 +1,31 @@
+
+class Misc
+{
+	static Misc* sharedDelegate();
+
+	void copyToPasteboard(const char* content);
+
+	void selectImage(char* path, int width, int height, LUA_FUNCTION handler);
+
+	void sendMail(char* receiver, char* subject, char* body, LUA_FUNCTION errorHandler);
+
+	void setFileToRequestData(HttpRequestForLua* request, const char* begin, const char* end, const char* filePath, const char* pszMode);
+
+	void sendSMS(char* body, LUA_FUNCTION errorHandler);
+
+	void getDeepLink(LUA_FUNCTION handler);
+
+	void addEventListenerDeepLink(LUA_FUNCTION handler);
+
+	void getUADeviceToken( LUA_FUNCTION handler );
+	
+	void setUADeviceTokenHandler(LUA_FUNCTION handler);
+
+	void requestPushNotification();	
+
+	void openUrl(char* url);
+
+	void openRate();
+
+	void terminate();
+};		
