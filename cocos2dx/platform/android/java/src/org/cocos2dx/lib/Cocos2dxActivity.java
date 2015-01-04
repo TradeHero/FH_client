@@ -23,18 +23,25 @@ THE SOFTWARE.
  ****************************************************************************/
 package org.cocos2dx.lib;
 
-import org.cocos2dx.lib.Cocos2dxHelper.Cocos2dxHelperListener;
-
-import android.app.Activity;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.Message;
+import android.view.MotionEvent;
 import android.view.ViewGroup;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.widget.FrameLayout;
 
-public abstract class Cocos2dxActivity extends Activity implements Cocos2dxHelperListener {
+import com.myhero.fh.util.MiscUtil;
+import com.myhero.fh.widget.FHCocos2dxHandler;
+import org.cocos2dx.lib.Cocos2dxHelper.Cocos2dxHelperListener;
+
+public abstract class Cocos2dxActivity extends FragmentActivity implements Cocos2dxHelperListener {
 	// ===========================================================
 	// Constants
 	// ===========================================================
@@ -46,12 +53,17 @@ public abstract class Cocos2dxActivity extends Activity implements Cocos2dxHelpe
 	// ===========================================================
 	
 	private Cocos2dxGLSurfaceView mGLSurfaceView;
-	private Cocos2dxHandler mHandler;
+    private Handler mHandler;
+    private String m_deepLink = null;
 	private static Context sContext = null;
 	
 	public static Context getContext() {
 		return sContext;
 	}
+    
+    public String getDeepLink() {
+        return m_deepLink;
+    }
 	
 	// ===========================================================
 	// Constructors
@@ -61,12 +73,30 @@ public abstract class Cocos2dxActivity extends Activity implements Cocos2dxHelpe
 	protected void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		sContext = this;
-    	this.mHandler = new Cocos2dxHandler(this);
+    	this.mHandler = new FHCocos2dxHandler(this);
 
     	this.init();
 
 		Cocos2dxHelper.init(this, this);
+        
+        Intent intent = getIntent();
+        String action = intent.getAction();
+        Uri data = intent.getData();
+        Log.v("###", "Get intent with action: " + action);
+        if (data != null)
+        {
+            Log.v("###", "Get intent with data: " + data.toString());
+            m_deepLink = data.getPath();
+            MiscUtil.notifyDeepLink(m_deepLink);
+        }
 	}
+    
+    @Override public boolean dispatchTouchEvent(MotionEvent event) {
+        if (event.getAction() == MotionEvent.ACTION_DOWN) {
+            FHCocos2dxHandler.unfocusIfNecessary(getCurrentFocus(), event);
+        }
+        return super.dispatchTouchEvent(event);
+    }
 
 	// ===========================================================
 	// Getter & Setter
@@ -101,10 +131,14 @@ public abstract class Cocos2dxActivity extends Activity implements Cocos2dxHelpe
 	}
 
 	@Override
-	public void showEditTextDialog(final String pTitle, final String pContent, final int pInputMode, final int pInputFlag, final int pReturnType, final int pMaxLength) { 
+    public void showEditTextDialog(final long source, final String pTitle, final String pContent,
+                                final int pInputMode,
+                                final int pInputFlag, final int pReturnType, final int pMaxLength, float x, float y,
+                                float width, float height, int color) {
 		Message msg = new Message();
 		msg.what = Cocos2dxHandler.HANDLER_SHOW_EDITBOX_DIALOG;
-		msg.obj = new Cocos2dxHandler.EditBoxMessage(pTitle, pContent, pInputMode, pInputFlag, pReturnType, pMaxLength);
+        msg.obj = new Cocos2dxHandler.EditBoxMessage(source, pTitle, pContent, pInputMode, pInputFlag,
+                                                    pReturnType, pMaxLength, x, y, width, height, color);
 		this.mHandler.sendMessage(msg);
 	}
 	
@@ -119,15 +153,14 @@ public abstract class Cocos2dxActivity extends Activity implements Cocos2dxHelpe
 	public void init() {
 		
     	// FrameLayout
-        ViewGroup.LayoutParams framelayout_params =
-            new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT,
-                                       ViewGroup.LayoutParams.FILL_PARENT);
+        ViewGroup.LayoutParams framelayout_params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                                                                               ViewGroup.LayoutParams.MATCH_PARENT);
         mFrameLayout = new FrameLayout(this);
         mFrameLayout.setLayoutParams(framelayout_params);
 
         // Cocos2dxEditText layout
         ViewGroup.LayoutParams edittext_layout_params =
-            new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT,
+            new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                                        ViewGroup.LayoutParams.WRAP_CONTENT);
         Cocos2dxEditText edittext = new Cocos2dxEditText(this);
         edittext.setLayoutParams(edittext_layout_params);
@@ -163,11 +196,39 @@ public abstract class Cocos2dxActivity extends Activity implements Cocos2dxHelpe
       Log.d(TAG, "product=" + product);
       boolean isEmulator = false;
       if (product != null) {
-         isEmulator = product.equals("sdk") || product.contains("_sdk") || product.contains("sdk_");
+         isEmulator = product.equals("sdk") || product.contains("_sdk") || product.contains("sdk_") || product.contains("vbox");
       }
       Log.d(TAG, "isEmulator=" + isEmulator);
       return isEmulator;
    }
+    
+    public static void sendMail(Intent intent) throws ActivityNotFoundException {
+        Cocos2dxActivity activity = ((Cocos2dxActivity) sContext);
+        activity.startActivityForResult(intent, MiscUtil.REQUEST_CODE_SEND_EMAIL);
+        activity.setResult(RESULT_OK);
+    }
+    
+    public static void sendSms(Intent intent) throws ActivityNotFoundException {
+        Cocos2dxActivity activity = ((Cocos2dxActivity) sContext);
+        activity.startActivityForResult(intent, MiscUtil.REQUEST_CODE_SEND_SMS);
+        activity.setResult(RESULT_OK);
+    }
+
+    public static void openUrl(Intent intent) throws ActivityNotFoundException {
+        Cocos2dxActivity activity = ((Cocos2dxActivity) sContext);
+        activity.startActivity(intent);
+    }
+
+    public static void selectImage(Intent intent) throws  ActivityNotFoundException {
+        Cocos2dxActivity activity = (Cocos2dxActivity) sContext;
+        activity.startActivityForResult(intent, MiscUtil.REQUEST_CODE_SELECT_IMAGE);
+    }
+
+    @Override protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        
+        MiscUtil.onActivityResult(requestCode, resultCode, data);
+    }
 
 	// ===========================================================
 	// Inner and Anonymous Classes

@@ -156,7 +156,8 @@ public class Cocos2dxEditBoxDialog extends Dialog {
 		final LinearLayout layout = new LinearLayout(this.getContext());
 		layout.setOrientation(LinearLayout.VERTICAL);
 
-		final LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.FILL_PARENT);
+		final LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup
+        .LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
 
 		this.mTextViewTitle = new TextView(this.getContext());
 		final LinearLayout.LayoutParams textviewParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -165,7 +166,7 @@ public class Cocos2dxEditBoxDialog extends Dialog {
 		layout.addView(this.mTextViewTitle, textviewParams);
 
 		this.mInputEditText = new EditText(this.getContext());
-		final LinearLayout.LayoutParams editTextParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+		final LinearLayout.LayoutParams editTextParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 		editTextParams.leftMargin = editTextParams.rightMargin = this.convertDipsToPixels(10);
 
 		layout.addView(this.mInputEditText, editTextParams);
@@ -276,7 +277,8 @@ public class Cocos2dxEditBoxDialog extends Dialog {
 			public boolean onEditorAction(final TextView v, final int actionId, final KeyEvent event) {
 				/* If user didn't set keyboard type, this callback will be invoked twice with 'KeyEvent.ACTION_DOWN' and 'KeyEvent.ACTION_UP'. */
 				if (actionId != EditorInfo.IME_NULL || (actionId == EditorInfo.IME_NULL && event != null && event.getAction() == KeyEvent.ACTION_DOWN)) {
-					Cocos2dxHelper.setEditTextDialogResult(Cocos2dxEditBoxDialog.this.mInputEditText.getText().toString());
+					Cocos2dxHelper.setEditTextDialogResult(0,
+              Cocos2dxEditBoxDialog.this.mInputEditText.getText().toString());
 					Cocos2dxEditBoxDialog.this.closeKeyboard();
 					Cocos2dxEditBoxDialog.this.dismiss();
 					return true;

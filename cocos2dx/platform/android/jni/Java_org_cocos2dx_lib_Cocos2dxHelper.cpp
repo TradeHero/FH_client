@@ -12,9 +12,6 @@
 
 #define  CLASS_NAME "org/cocos2dx/lib/Cocos2dxHelper"
 
-static EditTextCallback s_pfEditTextCallback = NULL;
-static void* s_ctx = NULL;
-
 using namespace cocos2d;
 using namespace std;
 
@@ -24,25 +21,6 @@ extern "C" {
 
     JNIEXPORT void JNICALL Java_org_cocos2dx_lib_Cocos2dxHelper_nativeSetApkPath(JNIEnv*  env, jobject thiz, jstring apkPath) {
         g_apkPath = JniHelper::jstring2string(apkPath);
-    }
-
-    JNIEXPORT void JNICALL Java_org_cocos2dx_lib_Cocos2dxHelper_nativeSetEditTextDialogResult(JNIEnv * env, jobject obj, jbyteArray text) {
-        jsize  size = env->GetArrayLength(text);
-
-        if (size > 0) {
-            jbyte * data = (jbyte*)env->GetByteArrayElements(text, 0);
-            char* pBuf = (char*)malloc(size+1);
-            if (pBuf != NULL) {
-                memcpy(pBuf, data, size);
-                pBuf[size] = '\0';
-                // pass data to edittext's delegate
-                if (s_pfEditTextCallback) s_pfEditTextCallback(pBuf, s_ctx);
-                free(pBuf);
-            }
-            env->ReleaseByteArrayElements(text, data, 0);
-        } else {
-            if (s_pfEditTextCallback) s_pfEditTextCallback("", s_ctx);
-        }
     }
 
 }
@@ -68,34 +46,6 @@ void showDialogJNI(const char * pszMsg, const char * pszTitle) {
 
         jstring stringArg2 = t.env->NewStringUTF(pszMsg);
         t.env->CallStaticVoidMethod(t.classID, t.methodID, stringArg1, stringArg2);
-
-        t.env->DeleteLocalRef(stringArg1);
-        t.env->DeleteLocalRef(stringArg2);
-        t.env->DeleteLocalRef(t.classID);
-    }
-}
-
-void showEditTextDialogJNI(const char* pszTitle, const char* pszMessage, int nInputMode, int nInputFlag, int nReturnType, int nMaxLength, EditTextCallback pfEditTextCallback, void* ctx) {
-    if (pszMessage == NULL) {
-        return;
-    }
-
-    s_pfEditTextCallback = pfEditTextCallback;
-    s_ctx = ctx;
-
-    JniMethodInfo t;
-    if (JniHelper::getStaticMethodInfo(t, CLASS_NAME, "showEditTextDialog", "(Ljava/lang/String;Ljava/lang/String;IIII)V")) {
-        jstring stringArg1;
-
-        if (!pszTitle) {
-            stringArg1 = t.env->NewStringUTF("");
-        } else {
-            stringArg1 = t.env->NewStringUTF(pszTitle);
-        }
-
-        jstring stringArg2 = t.env->NewStringUTF(pszMessage);
-
-        t.env->CallStaticVoidMethod(t.classID, t.methodID, stringArg1, stringArg2, nInputMode, nInputFlag, nReturnType, nMaxLength);
 
         t.env->DeleteLocalRef(stringArg1);
         t.env->DeleteLocalRef(stringArg2);
@@ -336,4 +286,18 @@ void setStringForKeyJNI(const char* pKey, const char* value)
         t.env->DeleteLocalRef(stringArg1);
         t.env->DeleteLocalRef(stringArg2);
     }
+}
+
+int getScreenHeightJNI()
+{
+    JniMethodInfo t;
+    
+    if (JniHelper::getStaticMethodInfo(t, CLASS_NAME, "getScreenHeight", "()I")) {
+        jint ret = t.env->CallStaticIntMethod(t.classID, t.methodID);
+        
+        t.env->DeleteLocalRef(t.classID);
+
+        return ret;
+    }
+    return -1;
 }

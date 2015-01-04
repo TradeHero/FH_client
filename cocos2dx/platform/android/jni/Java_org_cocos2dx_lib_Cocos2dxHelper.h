@@ -26,11 +26,8 @@ THE SOFTWARE.
 
 #include <string>
 
-typedef void (*EditTextCallback)(const char* pText, void* ctx);
-
 extern const char * getApkPath();
 extern void showDialogJNI(const char * pszMsg, const char * pszTitle);
-extern void showEditTextDialogJNI(const char* pszTitle, const char* pszContent, int nInputMode, int nInputFlag, int nReturnType, int nMaxLength, EditTextCallback pfEditTextCallback, void* ctx);
 extern void terminateProcessJNI();
 extern std::string getCurrentLanguageJNI();
 extern std::string getPackageNameJNI();
@@ -49,5 +46,6 @@ extern void setIntegerForKeyJNI(const char* pKey, int value);
 extern void setFloatForKeyJNI(const char* pKey, float value);
 extern void setDoubleForKeyJNI(const char* pKey, double value);
 extern void setStringForKeyJNI(const char* pKey, const char* value);
+extern int getScreenHeightJNI();
 
 #endif /* __Java_org_cocos2dx_lib_Cocos2dxHelper_H__ */
