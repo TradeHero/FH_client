@@ -17,5 +17,5 @@ class ImageView : public Widget
     virtual std::string getDescription() const;
     virtual const CCSize& getContentSize() const;
     virtual CCNode* getVirtualRenderer();
-    const char* getTextureFile();
+
 };

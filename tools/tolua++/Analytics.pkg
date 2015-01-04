@@ -1,7 +1,0 @@
-
-class Analytics
-{
-	static Analytics* sharedDelegate();
-
-	void postEvent(const char* eventName, const char* paramString);
-};

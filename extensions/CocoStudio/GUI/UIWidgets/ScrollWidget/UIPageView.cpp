@@ -26,7 +26,9 @@
 
 NS_CC_BEGIN
 
-namespace gui {
+namespace ui {
+    
+IMPLEMENT_CLASS_GUI_INFO(PageView)
 
 PageView::PageView():
 _curPageIdx(0),
@@ -256,6 +258,11 @@ void PageView::addChild(CCNode *child, int zOrder, int tag)
 {
     Layout::addChild(child, zOrder, tag);
 }
+    
+void PageView::removeChild(CCNode *widget)
+{
+    removeChild(widget, true);
+}
 
 void PageView::removeChild(CCNode *child, bool cleanup)
 {
@@ -318,7 +325,7 @@ void PageView::removeAllChildren()
 {
     removeAllChildrenWithCleanup(true);
 }
-    
+
 void PageView::removeAllChildrenWithCleanup(bool cleanup)
 {
     _pages->removeAllObjects();

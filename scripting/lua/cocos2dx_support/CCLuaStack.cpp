@@ -30,11 +30,6 @@ extern "C" {
 #include "lualib.h"
 #include "lauxlib.h"
 #include "tolua_fix.h"
-#include "md5.h"
-#include "ldes56.h"
-#include "lfs.h"
-#include "lua_zlib.h"
-#include "lua_cjson.h"
 }
 
 #include "LuaCocos2d.h"
@@ -43,7 +38,7 @@ extern "C" {
 #include "lua_cocos2dx_manual.h"
 #include "lua_cocos2dx_extensions_manual.h"
 #include "lua_cocos2dx_cocostudio_manual.h"
-#include "LuaCocos2dExtension.h"
+#include "xxtea.h"
 
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS || CC_TARGET_PLATFORM == CC_PLATFORM_MAC)
 #include "platform/ios/CCLuaObjcBridge.h"
@@ -125,12 +120,6 @@ bool CCLuaStack::init(void)
     };
     luaL_register(m_state, "_G", global_functions);
     tolua_CocoStudio_open(m_state);
-	tolua_Extension_open(m_state);
-	luaopen_md5_core(m_state);
-	luaopen_des56(m_state);
-	luaopen_lfs(m_state);
-	luaopen_zlib(m_state);
-	luaopen_cjson(m_state);
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS || CC_TARGET_PLATFORM == CC_PLATFORM_MAC)
     CCLuaObjcBridge::luaopen_luaoc(m_state);
 #endif
@@ -539,6 +528,90 @@ int CCLuaStack::executeFunctionReturnArray(int nHandler,int nNumArgs,int nNummRe
     lua_settop(m_state, 0);
     
     return 1;
+}
+
+void CCLuaStack::setXXTEAKeyAndSign(const char *key, int keyLen, const char *sign, int signLen)
+{
+    cleanupXXTEAKeyAndSign();
+    
+    if (key && keyLen && sign && signLen)
+    {
+        m_xxteaKey = (char*)malloc(keyLen);
+        memcpy(m_xxteaKey, key, keyLen);
+        m_xxteaKeyLen = keyLen;
+        
+        m_xxteaSign = (char*)malloc(signLen);
+        memcpy(m_xxteaSign, sign, signLen);
+        m_xxteaSignLen = signLen;
+        
+        m_xxteaEnabled = true;
+    }
+    else
+    {
+        m_xxteaEnabled = false;
+    }
+}
+
+void CCLuaStack::cleanupXXTEAKeyAndSign()
+{
+    if (m_xxteaKey)
+    {
+        free(m_xxteaKey);
+        m_xxteaKey = NULL;
+        m_xxteaKeyLen = 0;
+    }
+    if (m_xxteaSign)
+    {
+        free(m_xxteaSign);
+        m_xxteaSign = NULL;
+        m_xxteaSignLen = 0;
+    }
+}
+
+int CCLuaStack::luaLoadBuffer(lua_State* L, const char* chunk, int chunkSize, const char* chunkName)
+{
+    int r = 0;
+    
+    if (m_xxteaEnabled && strncmp(chunk, m_xxteaSign, m_xxteaSignLen) == 0)
+    {
+        // decrypt XXTEA
+        xxtea_long len = 0;
+        unsigned char* result = xxtea_decrypt((unsigned char*)chunk + m_xxteaSignLen,
+                                              (xxtea_long)chunkSize - m_xxteaSignLen,
+                                              (unsigned char*)m_xxteaKey,
+                                              (xxtea_long)m_xxteaKeyLen,
+                                              &len);
+        r = luaL_loadbuffer(L, (char*)result, len, chunkName);
+        free(result);
+    }
+    else
+    {
+        r = luaL_loadbuffer(L, chunk, chunkSize, chunkName);
+    }
+
+#if defined(COCOS2D_DEBUG) && COCOS2D_DEBUG > 0
+    if (r)
+    {
+        switch (r)
+        {
+            case LUA_ERRSYNTAX:
+                CCLOG("[LUA ERROR] load \"%s\", error: syntax error during pre-compilation.", chunkName);
+                break;
+                
+            case LUA_ERRMEM:
+                CCLOG("[LUA ERROR] load \"%s\", error: memory allocation error.", chunkName);
+                break;
+                
+            case LUA_ERRFILE:
+                CCLOG("[LUA ERROR] load \"%s\", error: cannot open/read file.", chunkName);
+                break;
+                
+            default:
+                CCLOG("[LUA ERROR] load \"%s\", error: unknown.", chunkName);
+        }
+    }
+#endif
+    return r;
 }
 
 NS_CC_END

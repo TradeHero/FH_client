@@ -33,7 +33,7 @@
 NS_CC_EXT_BEGIN
 
 
-class CCEditBoxImpl
+class CC_EX_DLL CCEditBoxImpl
 {
 public:
     CCEditBoxImpl(CCEditBox* pEditBox) : m_pDelegate(NULL),m_pEditBox(pEditBox) {}
@@ -41,8 +41,6 @@ public:
     
     virtual bool initWithSize(const CCSize& size) = 0;
     virtual void setFont(const char* pFontName, int fontSize) = 0;
-	virtual const char* getFontName() = 0;
-	virtual float getFontSize() = 0;
     virtual void setFontColor(const ccColor3B& color) = 0;
     virtual void setPlaceholderFont(const char* pFontName, int fontSize) = 0;
     virtual void setPlaceholderFontColor(const ccColor3B& color) = 0;
@@ -73,8 +71,6 @@ public:
      *  @js NA
      */
     virtual void onEnter(void) = 0;
-    
-	virtual void onExit(void) = 0;
     
     
     void setDelegate(CCEditBoxDelegate* pDelegate) { m_pDelegate = pDelegate; };

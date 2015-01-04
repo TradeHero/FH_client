@@ -131,7 +131,7 @@ class CCEditBoxImpl;
  *  @js NA
  *  @lua NA
  */
-class CCEditBoxDelegate 
+class CC_EX_DLL CCEditBoxDelegate 
 {
 public:
     virtual ~CCEditBoxDelegate() {};
@@ -171,7 +171,7 @@ public:
  * 
  */
  
-class CCEditBox
+class CC_EX_DLL CCEditBox
 : public CCControlButton
 , public CCIMEDelegate
 {
@@ -269,32 +269,18 @@ public:
 	 * @param pFontName The font name.
 	 */
 	void setFontName(const char* pFontName);
-
-	/*
-	* Get the font name.
-	*/
-	const char* getFontname();
     
     /**
 	 * Set the font size.
 	 * @param fontSize The font size.
 	 */
 	void setFontSize(int fontSize);
-
-	/*
-	* Get the font size.
-	*/
-	float getFontSize();
     
     /**
      * Set the font color of the widget's text.
      */
     void setFontColor(const ccColor3B& color);
     
-	/**
-	* Get the font color fot he widget's text.
-	*/
-	ccColor3B getFontColor();
 	/**
 	 * Set the placeholder's font.
 	 * @param pFontName The font name.
@@ -407,11 +393,6 @@ public:
      */
     virtual void keyboardDidHide(CCIMEKeyboardNotificationInfo& info);
     
-	/*
-	* Close the keyboard.
-	*/
-	void closeKeyboard();
-
     /** callback funtions 
      *  @js NA
      */

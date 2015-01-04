@@ -203,6 +203,7 @@ local CCObjectTypes = {
     "CCScrollView",
     "CCTableViewCell",
     "CCTableView",
+    "CCComponent",
 }
 
 -- register CCObject types
@@ -303,9 +304,6 @@ using namespace CocosDenshion;]])
 
       replace([[/* Exported function */
 TOLUA_API int  tolua_Cocos2d_open (lua_State* tolua_S);]], [[]])
-
-      replace([[/* Exported function */
-TOLUA_API int  tolua_Extension_open (lua_State* tolua_S);]], [[]])
 
       replace([[*((LUA_FUNCTION*)]], [[(]])
 

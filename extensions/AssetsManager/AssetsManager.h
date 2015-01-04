@@ -27,7 +27,6 @@
 #define __AssetsManager__
 
 #include "cocos2d.h"
-#include "cocos-ext.h"
 #include "ExtensionMacros.h"
 
 #if (CC_TARGET_PLATFORM != CC_PLATFORM_WINRT) && (CC_TARGET_PLATFORM != CC_PLATFORM_WP8)
@@ -46,7 +45,7 @@ class AssetsManagerDelegateProtocol;
  *  @js NA
  *  @lua NA
  */
-class AssetsManager
+class CC_EX_DLL AssetsManager
 {
 public:
     enum ErrorCode
@@ -198,7 +197,7 @@ private:
     AssetsManagerDelegateProtocol *_delegate; // weak reference
 };
 
-class AssetsManagerDelegateProtocol
+class CC_EX_DLL AssetsManagerDelegateProtocol
 {
 public:
     /* @brief Call back function for error

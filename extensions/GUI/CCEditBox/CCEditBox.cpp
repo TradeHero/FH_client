@@ -56,11 +56,6 @@ void CCEditBox::touchDownAction(CCObject *sender, CCControlEvent controlEvent)
     m_pEditBoxImpl->openKeyboard();
 }
 
-void CCEditBox::closeKeyboard()
-{
-	m_pEditBoxImpl->closeKeyboard();
-}
-
 CCEditBox* CCEditBox::create(const CCSize& size, CCScale9Sprite* pNormal9SpriteBg, CCScale9Sprite* pPressed9SpriteBg/* = NULL*/, CCScale9Sprite* pDisabled9SpriteBg/* = NULL*/)
 {
     CCEditBox* pRet = new CCEditBox();
@@ -154,15 +149,6 @@ void CCEditBox::setFont(const char* pFontName, int fontSize)
     }
 }
 
-const char* CCEditBox::getFontname()
-{
-	if (m_pEditBoxImpl != NULL)
-	{
-		m_pEditBoxImpl->getFontName();
-	}
-	return NULL;
-}
-
 void CCEditBox::setFontName(const char* pFontName)
 {
     m_strFontName = pFontName;
@@ -170,15 +156,6 @@ void CCEditBox::setFontName(const char* pFontName)
     {
         m_pEditBoxImpl->setFont(pFontName, m_nFontSize);
     }
-}
-
-float CCEditBox::getFontSize()
-{
-	if (m_pEditBoxImpl != NULL)
-	{
-		m_pEditBoxImpl->getFontSize();
-	}
-	return 0;
 }
 
 void CCEditBox::setFontSize(int fontSize)
@@ -197,11 +174,6 @@ void CCEditBox::setFontColor(const ccColor3B& color)
     {
         m_pEditBoxImpl->setFontColor(color);
     }
-}
-
-ccColor3B CCEditBox::getFontColor()
-{
-	return m_colText;
 }
 
 void CCEditBox::setPlaceholderFont(const char* pFontName, int fontSize)
@@ -237,7 +209,7 @@ void CCEditBox::setPlaceholderFontSize(int fontSize)
 
 void CCEditBox::setPlaceholderFontColor(const ccColor3B& color)
 {
-	m_colPlaceHolder = color;
+    m_colText = color;
     if (m_pEditBoxImpl != NULL)
     {
         m_pEditBoxImpl->setPlaceholderFontColor(color);
@@ -362,7 +334,6 @@ void CCEditBox::onExit(void)
     CCControlButton::onExit();
     if (m_pEditBoxImpl != NULL)
     {
-        m_pEditBoxImpl->onExit();
         // remove system edit control
         m_pEditBoxImpl->closeKeyboard();
     }

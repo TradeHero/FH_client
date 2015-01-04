@@ -13,14 +13,8 @@
     <Filter Include="luajit\include">
       <UniqueIdentifier>{b7025611-420a-4414-b567-f7496eec5f57}</UniqueIdentifier>
     </Filter>
-    <Filter Include="crypt">
-      <UniqueIdentifier>{d9e016ec-f3f6-4bca-b2c1-4fd54ecb04ad}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="lfs">
-      <UniqueIdentifier>{286d8193-09cc-464f-bd6d-266675c56a1c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="cjson">
-      <UniqueIdentifier>{f0f208d3-8b44-477b-8018-e913bcf0df6f}</UniqueIdentifier>
+    <Filter Include="xxtea">
+      <UniqueIdentifier>{7ef5a711-27f8-41a0-989f-538b7b1f4482}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -81,35 +75,8 @@
     <ClCompile Include="..\cocos2dx_support\lua_cocos2dx_manual.cpp">
       <Filter>cocos2dx_support</Filter>
     </ClCompile>
-    <ClCompile Include="..\cocos2dx_support\LuaCocos2dExtension.cpp">
-      <Filter>cocos2dx_support</Filter>
-    </ClCompile>
-    <ClCompile Include="..\crypt\des56.c">
-      <Filter>crypt</Filter>
-    </ClCompile>
-    <ClCompile Include="..\crypt\ldes56.c">
-      <Filter>crypt</Filter>
-    </ClCompile>
-    <ClCompile Include="..\crypt\md5.c">
-      <Filter>crypt</Filter>
-    </ClCompile>
-    <ClCompile Include="..\crypt\md5lib.c">
-      <Filter>crypt</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lfs\lfs.c">
-      <Filter>lfs</Filter>
-    </ClCompile>
-    <ClCompile Include="..\crypt\lua_zlib.c">
-      <Filter>crypt</Filter>
-    </ClCompile>
-    <ClCompile Include="..\cjson\lua_cjson.c">
-      <Filter>cjson</Filter>
-    </ClCompile>
-    <ClCompile Include="..\cjson\strbuf.c">
-      <Filter>cjson</Filter>
-    </ClCompile>
-    <ClCompile Include="..\cjson\fpconv.c">
-      <Filter>cjson</Filter>
+    <ClCompile Include="..\xxtea\xxtea.cpp">
+      <Filter>xxtea</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -173,32 +140,8 @@
     <ClInclude Include="..\cocos2dx_support\lua_cocos2dx_manual.h">
       <Filter>cocos2dx_support</Filter>
     </ClInclude>
-    <ClInclude Include="..\cocos2dx_support\LuaCocos2dExtension.h">
-      <Filter>cocos2dx_support</Filter>
-    </ClInclude>
-    <ClInclude Include="..\crypt\des56.h">
-      <Filter>crypt</Filter>
-    </ClInclude>
-    <ClInclude Include="..\crypt\ldes56.h">
-      <Filter>crypt</Filter>
-    </ClInclude>
-    <ClInclude Include="..\crypt\md5.h">
-      <Filter>crypt</Filter>
-    </ClInclude>
-    <ClInclude Include="..\lfs\lfs.h">
-      <Filter>lfs</Filter>
-    </ClInclude>
-    <ClInclude Include="..\crypt\lua_zlib.h">
-      <Filter>crypt</Filter>
-    </ClInclude>
-    <ClInclude Include="..\cjson\lua_cjson.h">
-      <Filter>cjson</Filter>
-    </ClInclude>
-    <ClInclude Include="..\cjson\strbuf.h">
-      <Filter>cjson</Filter>
-    </ClInclude>
-    <ClInclude Include="..\cjson\fpconv.h">
-      <Filter>cjson</Filter>
+    <ClInclude Include="..\xxtea\xxtea.h">
+      <Filter>xxtea</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

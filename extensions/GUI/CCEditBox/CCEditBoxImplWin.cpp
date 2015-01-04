@@ -93,28 +93,6 @@ void CCEditBoxImplWin::setFont(const char* pFontName, int fontSize)
 	}
 }
 
-const char* CCEditBoxImplWin::getFontName()
-{
-	if (m_pLabel != NULL) {
-		return m_pLabel->getFontName();
-	}
-
-	if (m_pLabelPlaceHolder != NULL) {
-		return m_pLabelPlaceHolder->getFontName();
-	}
-	return NULL;
-}
-float CCEditBoxImplWin::getFontSize()
-{
-	if (m_pLabel != NULL) {
-		return m_pLabel->getFontSize();
-	}
-	if (m_pLabelPlaceHolder != NULL) {
-		return m_pLabelPlaceHolder->getFontSize();
-	}
-	return 0;
-}
-
 void CCEditBoxImplWin::setFontColor(const ccColor3B& color)
 {
     m_colText = color;
@@ -179,7 +157,7 @@ void CCEditBoxImplWin::setText(const char* pText)
 
             if (kEditBoxInputFlagPassword == m_eEditBoxInputFlag)
             {
-                long length = cc_utf8_strlen(m_strText.c_str(), -1);
+                long length = cc_utf8_strlen(m_strText.c_str());
                 for (long i = 0; i < length; i++)
                 {
                     strToShow.append("*");
@@ -308,11 +286,6 @@ void CCEditBoxImplWin::closeKeyboard()
 }
 
 void CCEditBoxImplWin::onEnter(void)
-{
-
-}
-
-void CCEditBoxImplWin::onExit(void)
 {
 
 }

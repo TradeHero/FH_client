@@ -48,14 +48,8 @@ GUI/CCScrollView/CCTableViewCell.cpp \
 GUI/CCScrollView/CCSorting.cpp \
 GUI/CCEditBox/CCEditBox.cpp \
 GUI/CCEditBox/CCEditBoxImplAndroid.cpp \
-GUI/CCEditBox/EditBoxDelegateForLua.cpp \
 network/HttpClient.cpp \
-network/HttpRequestForLua.cpp \
 network/WebSocket.cpp \
-Social/FacebookDelegate.cpp \
-Utils/Analytics.cpp \
-Utils/Misc.cpp \
-Utils/WebviewDelegate.cpp \
 physics_nodes/CCPhysicsDebugNode.cpp \
 physics_nodes/CCPhysicsSprite.cpp \
 LocalStorage/LocalStorageAndroid.cpp \
@@ -97,14 +91,35 @@ CocoStudio/GUI/UIWidgets/UILabelBMFont.cpp \
 CocoStudio/GUI/UIWidgets/UILoadingBar.cpp \
 CocoStudio/GUI/UIWidgets/UISlider.cpp \
 CocoStudio/GUI/UIWidgets/UITextField.cpp \
+CocoStudio/GUI/UIWidgets/UIRichText.cpp \
 CocoStudio/Components/CCComAttribute.cpp \
 CocoStudio/Components/CCComAudio.cpp \
 CocoStudio/Components/CCComController.cpp \
 CocoStudio/Components/CCComRender.cpp \
 CocoStudio/Components/CCInputDelegate.cpp \
 CocoStudio/Json/DictionaryHelper.cpp \
+CocoStudio/Json/CocoLoader.cpp \
+CocoStudio/ActionTimeline/CCActionTimeline.cpp \
+CocoStudio/ActionTimeline/CCActionTimelineCache.cpp \
+CocoStudio/ActionTimeline/CCFrame.cpp \
+CocoStudio/ActionTimeline/CCNodeReader.cpp \
+CocoStudio/ActionTimeline/CCTimeline.cpp \
 CocoStudio/Reader/SceneReader.cpp \
 CocoStudio/Reader/GUIReader.cpp \
+CocoStudio/Reader/WidgetReader/WidgetReader.cpp \
+CocoStudio/Reader/WidgetReader/ButtonReader/ButtonReader.cpp \
+CocoStudio/Reader/WidgetReader/CheckBoxReader/CheckBoxReader.cpp \
+CocoStudio/Reader/WidgetReader/ImageViewReader/ImageViewReader.cpp \
+CocoStudio/Reader/WidgetReader/LabelAtlasReader/LabelAtlasReader.cpp \
+CocoStudio/Reader/WidgetReader/LabelBMFontReader/LabelBMFontReader.cpp \
+CocoStudio/Reader/WidgetReader/LabelReader/LabelReader.cpp \
+CocoStudio/Reader/WidgetReader/LayoutReader/LayoutReader.cpp \
+CocoStudio/Reader/WidgetReader/ListViewReader/ListViewReader.cpp \
+CocoStudio/Reader/WidgetReader/LoadingBarReader/LoadingBarReader.cpp \
+CocoStudio/Reader/WidgetReader/PageViewReader/PageViewReader.cpp \
+CocoStudio/Reader/WidgetReader/ScrollViewReader/ScrollViewReader.cpp \
+CocoStudio/Reader/WidgetReader/SliderReader/SliderReader.cpp \
+CocoStudio/Reader/WidgetReader/TextFieldReader/TextFieldReader.cpp \
 CocoStudio/Action/CCActionManager.cpp \
 CocoStudio/Action/CCActionObject.cpp \
 CocoStudio/Action/CCActionNode.cpp \
@@ -143,7 +158,6 @@ LOCAL_WHOLE_STATIC_LIBRARIES += cocos_curl_static
 LOCAL_WHOLE_STATIC_LIBRARIES += box2d_static
 LOCAL_WHOLE_STATIC_LIBRARIES += chipmunk_static
 LOCAL_WHOLE_STATIC_LIBRARIES += libwebsockets_static
-LOCAL_WHOLE_STATIC_LIBRARIES += cocos_lua_static
 
 LOCAL_CFLAGS += -DCC_ENABLE_CHIPMUNK_INTEGRATION=1
 LOCAL_EXPORT_CFLAGS += -DCC_ENABLE_CHIPMUNK_INTEGRATION=1
@@ -156,7 +170,7 @@ LOCAL_EXPORT_C_INCLUDES := $(LOCAL_PATH) \
                            $(LOCAL_PATH)/GUI/CCScrollView \
                            $(LOCAL_PATH)/network \
                            $(LOCAL_PATH)/LocalStorage \
-						   $(LOCAL_PATH)/CocoStudio/Armature
+						               $(LOCAL_PATH)/CocoStudio/Armature
 
 LOCAL_CFLAGS := -fexceptions
                     
@@ -168,4 +182,3 @@ $(call import-module,cocos2dx/platform/third_party/android/prebuilt/libcurl)
 $(call import-module,external/Box2D)
 $(call import-module,external/chipmunk)
 $(call import-module,external/libwebsockets/android)
-$(call import-module,scripting/lua/luajit)

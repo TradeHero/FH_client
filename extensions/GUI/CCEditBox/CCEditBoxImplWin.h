@@ -40,7 +40,7 @@ class CCEditBox;
  *  @js NA
  *  @lua NA
  */
-class CCEditBoxImplWin : public CCEditBoxImpl
+class CC_EX_DLL CCEditBoxImplWin : public CCEditBoxImpl
 {
 public:
     CCEditBoxImplWin(CCEditBox* pEditText);
@@ -48,8 +48,6 @@ public:
     
     virtual bool initWithSize(const CCSize& size);
 	virtual void setFont(const char* pFontName, int fontSize);
-	virtual const char* getFontName();
-	virtual float getFontSize();
     virtual void setFontColor(const ccColor3B& color);
     virtual void setPlaceholderFont(const char* pFontName, int fontSize);
     virtual void setPlaceholderFontColor(const ccColor3B& color);
@@ -72,7 +70,6 @@ public:
     virtual void openKeyboard();
     virtual void closeKeyboard();
     virtual void onEnter(void);
-	virtual void onExit(void);
 private:
 
     CCLabelTTF* m_pLabel;

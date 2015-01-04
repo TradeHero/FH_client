@@ -1,0 +1,2532 @@
+diff --git a/extensions/Android.mk b/extensions/Android.mk
+index e66d5af..e2cec67 100644
+--- a/extensions/Android.mk
++++ b/extensions/Android.mk
+@@ -48,8 +48,14 @@ GUI/CCScrollView/CCTableViewCell.cpp \
+ GUI/CCScrollView/CCSorting.cpp \
+ GUI/CCEditBox/CCEditBox.cpp \
+ GUI/CCEditBox/CCEditBoxImplAndroid.cpp \
++GUI/CCEditBox/EditBoxDelegateForLua.cpp \
+ network/HttpClient.cpp \
++network/HttpRequestForLua.cpp \
+ network/WebSocket.cpp \
++Social/FacebookDelegate.cpp \
++Utils/Analytics.cpp \
++Utils/Misc.cpp \
++Utils/WebviewDelegate.cpp \
+ physics_nodes/CCPhysicsDebugNode.cpp \
+ physics_nodes/CCPhysicsSprite.cpp \
+ LocalStorage/LocalStorageAndroid.cpp \
+@@ -137,6 +143,7 @@ LOCAL_WHOLE_STATIC_LIBRARIES += cocos_curl_static
+ LOCAL_WHOLE_STATIC_LIBRARIES += box2d_static
+ LOCAL_WHOLE_STATIC_LIBRARIES += chipmunk_static
+ LOCAL_WHOLE_STATIC_LIBRARIES += libwebsockets_static
++LOCAL_WHOLE_STATIC_LIBRARIES += cocos_lua_static
+ 
+ LOCAL_CFLAGS += -DCC_ENABLE_CHIPMUNK_INTEGRATION=1
+ LOCAL_EXPORT_CFLAGS += -DCC_ENABLE_CHIPMUNK_INTEGRATION=1
+@@ -149,7 +156,7 @@ LOCAL_EXPORT_C_INCLUDES := $(LOCAL_PATH) \
+                            $(LOCAL_PATH)/GUI/CCScrollView \
+                            $(LOCAL_PATH)/network \
+                            $(LOCAL_PATH)/LocalStorage \
+-						               $(LOCAL_PATH)/CocoStudio/Armature
++						   $(LOCAL_PATH)/CocoStudio/Armature
+ 
+ LOCAL_CFLAGS := -fexceptions
+                     
+@@ -161,3 +168,4 @@ $(call import-module,cocos2dx/platform/third_party/android/prebuilt/libcurl)
+ $(call import-module,external/Box2D)
+ $(call import-module,external/chipmunk)
+ $(call import-module,external/libwebsockets/android)
++$(call import-module,scripting/lua/luajit)
+diff --git a/extensions/AssetsManager/AssetsManager.cpp b/extensions/AssetsManager/AssetsManager.cpp
+index c8d6cdc..5118ed1 100755
+--- a/extensions/AssetsManager/AssetsManager.cpp
++++ b/extensions/AssetsManager/AssetsManager.cpp
+@@ -24,7 +24,6 @@
+ 
+ #include "AssetsManager.h"
+ #include "cocos2d.h"
+-
+ #if (CC_TARGET_PLATFORM != CC_PLATFORM_WINRT) && (CC_TARGET_PLATFORM != CC_PLATFORM_WP8)
+ #include <curl/curl.h>
+ #include <curl/easy.h>
+@@ -47,7 +46,7 @@ NS_CC_EXT_BEGIN;
+ 
+ #define KEY_OF_VERSION   "current-version-code"
+ #define KEY_OF_DOWNLOADED_VERSION    "downloaded-version-code"
+-#define TEMP_PACKAGE_FILE_NAME    "cocos2dx-update-temp-package.zip"
++#define TEMP_PACKAGE_FILE_NAME    "resources.zip"
+ #define BUFFER_SIZE    8192
+ #define MAX_FILENAME   512
+ 
+@@ -120,38 +119,57 @@ bool AssetsManager::checkUpdate()
+     if (! _curl)
+     {
+         CCLOG("can not init curl");
++		sendErrorMessage(kNetwork);
+         return false;
+     }
+     
+     // Clear _version before assign new value.
+     _version.clear();
+-    
++	std::string response;
++
+     CURLcode res;
+     curl_easy_setopt(_curl, CURLOPT_URL, _versionFileUrl.c_str());
+     curl_easy_setopt(_curl, CURLOPT_SSL_VERIFYPEER, 0L);
+     curl_easy_setopt(_curl, CURLOPT_WRITEFUNCTION, getVersionCode);
+-    curl_easy_setopt(_curl, CURLOPT_WRITEDATA, &_version);
++	curl_easy_setopt(_curl, CURLOPT_WRITEDATA, &response);
+     if (_connectionTimeout) curl_easy_setopt(_curl, CURLOPT_CONNECTTIMEOUT, _connectionTimeout);
+     res = curl_easy_perform(_curl);
+     
+-    if (res != 0)
++	int32_t responseCode = -1;
++	CURLcode code = curl_easy_getinfo(_curl, CURLINFO_RESPONSE_CODE, &responseCode);
++
++	if (res != 0 || responseCode != 200)
+     {
+-        sendErrorMessage(kNetwork);
+         CCLOG("can not get version file content, error code is %d", res);
+-        curl_easy_cleanup(_curl);
+-        return false;
+-    }
+-    
+-    string recordedVersion = CCUserDefault::sharedUserDefault()->getStringForKey(KEY_OF_VERSION);
+-    if (recordedVersion == _version)
+-    {
+-        sendErrorMessage(kNoNewVersion);
+-        CCLOG("there is not new version");
+-        // Set resource search path.
+-        setSearchPath();
++		sendErrorMessage(kNetwork);
++		curl_easy_cleanup(_curl);
+         return false;
+     }
+     
++	// Parse the json response
++	rapidjson::Document jsonDict;
++	jsonDict.Parse<0>(response.c_str());
++	if (jsonDict.HasParseError())
++	{
++		CCLOG("GetParseError %s\n", jsonDict.GetParseError());
++		sendErrorMessage(kNetwork);
++		_version = response;
++		return false;
++	}
++
++	bool needUpdate = DICTOOL->getBooleanValue_json(jsonDict, "NeedUpdate");
++	const char* newVersionChar = DICTOOL->getStringValue_json(jsonDict, "UpdateTo");
++	const char* packageToDownload = DICTOOL->getStringValue_json(jsonDict, "Package");
++
++	if (!needUpdate)
++	{
++		CCLOG("No need to update.");
++		sendErrorMessage(kNoNewVersion);
++		return false;
++	}
++
++	_version.assign(&newVersionChar[0], &newVersionChar[strlen(newVersionChar)]);
++	_packageUrl.assign(&packageToDownload[0], &packageToDownload[strlen(packageToDownload)]);
+     CCLOG("there is a new version: %s", _version.c_str());
+     
+     return true;
+@@ -526,6 +544,10 @@ AssetsManager::Helper::~Helper()
+ void AssetsManager::Helper::sendMessage(Message *msg)
+ {
+     pthread_mutex_lock(&_messageQueueMutex);
++	while (_messageQueue->size() > 0)
++	{
++		_messageQueue->pop_front();
++	}
+     _messageQueue->push_back(msg);
+     pthread_mutex_unlock(&_messageQueueMutex);
+ }
+@@ -595,9 +617,6 @@ void AssetsManager::Helper::handleUpdateSucceed(Message *msg)
+     CCUserDefault::sharedUserDefault()->setStringForKey(KEY_OF_DOWNLOADED_VERSION, "");
+     CCUserDefault::sharedUserDefault()->flush();
+     
+-    // Set resource search path.
+-    manager->setSearchPath();
+-    
+     // Delete unloaded zip file.
+     string zipfileName = manager->_storagePath + TEMP_PACKAGE_FILE_NAME;
+     if (remove(zipfileName.c_str()) != 0)
+diff --git a/extensions/AssetsManager/AssetsManager.h b/extensions/AssetsManager/AssetsManager.h
+old mode 100644
+new mode 100755
+index bad245a..91d8e40
+--- a/extensions/AssetsManager/AssetsManager.h
++++ b/extensions/AssetsManager/AssetsManager.h
+@@ -27,6 +27,7 @@
+ #define __AssetsManager__
+ 
+ #include "cocos2d.h"
++#include "cocos-ext.h"
+ #include "ExtensionMacros.h"
+ 
+ #if (CC_TARGET_PLATFORM != CC_PLATFORM_WINRT) && (CC_TARGET_PLATFORM != CC_PLATFORM_WP8)
+diff --git a/extensions/CocoStudio/GUI/BaseClasses/UIWidget.cpp b/extensions/CocoStudio/GUI/BaseClasses/UIWidget.cpp
+old mode 100644
+new mode 100755
+diff --git a/extensions/CocoStudio/GUI/Layouts/UILayout.cpp b/extensions/CocoStudio/GUI/Layouts/UILayout.cpp
+old mode 100644
+new mode 100755
+diff --git a/extensions/CocoStudio/GUI/Layouts/UILayout.h b/extensions/CocoStudio/GUI/Layouts/UILayout.h
+old mode 100644
+new mode 100755
+diff --git a/extensions/CocoStudio/GUI/Layouts/UILayoutDefine.h b/extensions/CocoStudio/GUI/Layouts/UILayoutDefine.h
+old mode 100644
+new mode 100755
+index 5950716..e5576d0
+--- a/extensions/CocoStudio/GUI/Layouts/UILayoutDefine.h
++++ b/extensions/CocoStudio/GUI/Layouts/UILayoutDefine.h
+@@ -63,7 +63,7 @@ typedef enum
+     LINEAR_GRAVITY_CENTER_VERTICAL,
+     LINEAR_GRAVITY_CENTER_HORIZONTAL
+ }LinearGravity;
+-
++	
+ typedef enum
+ {
+     RELATIVE_ALIGN_NONE,
+diff --git a/extensions/CocoStudio/GUI/System/UITouchGroup.cpp b/extensions/CocoStudio/GUI/System/UITouchGroup.cpp
+index cfd7152..371ddc1 100755
+--- a/extensions/CocoStudio/GUI/System/UITouchGroup.cpp
++++ b/extensions/CocoStudio/GUI/System/UITouchGroup.cpp
+@@ -96,6 +96,10 @@ bool TouchGroup::checkEventWidget(CCTouch* touch, CCEvent *pEvent)
+     
+ bool TouchGroup::checkTouchEvent(Widget *root, CCTouch* touch, CCEvent* pEvent)
+ {
++	if (!root->isEnabled())
++	{
++		return false;
++	}
+     ccArray* arrayRootChildren = root->getChildren()->data;
+     int length = arrayRootChildren->num;
+     for (int i=length-1; i >= 0; i--)
+@@ -176,8 +180,17 @@ void TouchGroup::ccTouchEnded(CCTouch *pTouch, CCEvent *pEvent)
+     for (int i=0; i<length; ++i)
+     {
+         Widget* hitWidget = (Widget*)(selectedWidgetArray->arr[0]);
++        
++		/* 	@@EDIT Vincent: 
++			reverse order of 
++			- m_pSelectedWidgets->removeObject(hitWidget);
++			- hitWidget->onTouchEnded(pTouch, pEvent);
++
++			hitWidget object partially deleted by removeObject statement, result in onTouchEnded storing rubbish data
++			and app crashing on rapid touches
++		*/
++		hitWidget->onTouchEnded(pTouch, pEvent);
+         m_pSelectedWidgets->removeObject(hitWidget);
+-        hitWidget->onTouchEnded(pTouch, pEvent);
+     }
+ }
+ 
+diff --git a/extensions/CocoStudio/GUI/UIWidgets/ScrollWidget/UIScrollView.cpp b/extensions/CocoStudio/GUI/UIWidgets/ScrollWidget/UIScrollView.cpp
+old mode 100644
+new mode 100755
+index f382a41..121eb18
+--- a/extensions/CocoStudio/GUI/UIWidgets/ScrollWidget/UIScrollView.cpp
++++ b/extensions/CocoStudio/GUI/UIWidgets/ScrollWidget/UIScrollView.cpp
+@@ -28,7 +28,7 @@ NS_CC_BEGIN
+ 
+ namespace gui {
+ 
+-static const float AUTOSCROLLMAXSPEED = 1000.0f;
++static const float AUTOSCROLLMAXSPEED = 10000.0f;
+ 
+ const CCPoint SCROLLDIR_UP = CCPoint(0.0f, 1.0f);
+ const CCPoint SCROLLDIR_DOWN = CCPoint(0.0f, -1.0f);
+@@ -204,7 +204,7 @@ void ScrollView::setInnerContainerSize(const CCSize &size)
+     {
+          _innerContainer->setPosition(CCPoint(_size.width - ((1.0f - _innerContainer->getAnchorPoint().x) * _innerContainer->getSize().width), _innerContainer->getPosition().y));
+     }
+-    if (_innerContainer->getPosition().y > 0.0f)
++	if (_innerContainer->getBottomInParent() > 0.0f)
+     {
+         _innerContainer->setPosition(CCPoint(_innerContainer->getPosition().x, _innerContainer->getAnchorPoint().y * _innerContainer->getSize().height));
+     }
+diff --git a/extensions/CocoStudio/GUI/UIWidgets/ScrollWidget/UIScrollView.h b/extensions/CocoStudio/GUI/UIWidgets/ScrollWidget/UIScrollView.h
+old mode 100644
+new mode 100755
+index 4c5dcce..9a50174
+--- a/extensions/CocoStudio/GUI/UIWidgets/ScrollWidget/UIScrollView.h
++++ b/extensions/CocoStudio/GUI/UIWidgets/ScrollWidget/UIScrollView.h
+@@ -212,6 +212,10 @@ public:
+      */
+     void jumpToPercentBothDirection(const CCPoint& percent);
+     
++	/**
++	* Move inner container to both direction position of scrollview.
++	*/
++	void jumpToDestination(const CCPoint& des);
+     /**
+      * Changes inner container size of scrollview.
+      *
+@@ -322,7 +326,6 @@ protected:
+     bool checkNeedBounce();
+     void startAutoScrollChildrenWithOriginalSpeed(const CCPoint& dir, float v, bool attenuated, float acceleration);
+     void startAutoScrollChildrenWithDestination(const CCPoint& des, float time, bool attenuated);
+-    void jumpToDestination(const CCPoint& des);
+     void stopAutoScrollChildren();
+     void startBounceChildren(float v);
+     void stopBounceChildren();
+diff --git a/extensions/CocoStudio/GUI/UIWidgets/UIImageView.cpp b/extensions/CocoStudio/GUI/UIWidgets/UIImageView.cpp
+old mode 100644
+new mode 100755
+index d519eb4..0e471ab
+--- a/extensions/CocoStudio/GUI/UIWidgets/UIImageView.cpp
++++ b/extensions/CocoStudio/GUI/UIWidgets/UIImageView.cpp
+@@ -310,6 +310,11 @@ void ImageView::copySpecialProperties(Widget *widget)
+     }
+ }
+ 
++const char* ImageView::getTextureFile()
++{
++	return _textureFile.c_str();
++}
++
+ }
+ 
+ NS_CC_END
+\ No newline at end of file
+diff --git a/extensions/CocoStudio/GUI/UIWidgets/UIImageView.h b/extensions/CocoStudio/GUI/UIWidgets/UIImageView.h
+old mode 100644
+new mode 100755
+index 94c367f..1d97691
+--- a/extensions/CocoStudio/GUI/UIWidgets/UIImageView.h
++++ b/extensions/CocoStudio/GUI/UIWidgets/UIImageView.h
+@@ -107,6 +107,7 @@ public:
+     
+     virtual const CCSize& getContentSize() const;
+     virtual CCNode* getVirtualRenderer();
++	const char* getTextureFile();
+ protected:
+     virtual void initRenderer();
+     virtual void onSizeChanged();
+diff --git a/extensions/CocoStudio/GUI/UIWidgets/UILabel.cpp b/extensions/CocoStudio/GUI/UIWidgets/UILabel.cpp
+old mode 100644
+new mode 100755
+index b728169..6c8a18e
+--- a/extensions/CocoStudio/GUI/UIWidgets/UILabel.cpp
++++ b/extensions/CocoStudio/GUI/UIWidgets/UILabel.cpp
+@@ -101,8 +101,26 @@ void Label::setFontSize(int size)
+ 
+ void Label::setFontName(const std::string& name)
+ {
+-    _fontName = name;
+-    _labelRenderer->setFontName(name.c_str());
++	std::string newName;
++#if ((CC_TARGET_PLATFORM == CC_PLATFORM_IOS) || (CC_TARGET_PLATFORM == CC_PLATFORM_MAC))
++	int nFindttf = name.find(".ttf");
++	int nFindTTF = name.find(".TTF");
++	if (nFindttf >= 0 || nFindTTF >= 0)
++	{
++		int nFindPos = name.rfind("/");
++		newName = &name[nFindPos + 1];
++		nFindPos = newName.rfind(".");
++		newName = newName.substr(0, nFindPos);
++	}
++	else
++	{
++		newName = name;
++	}
++#else
++	newName = name;
++#endif
++    _fontName = newName;
++    _labelRenderer->setFontName(newName.c_str());
+     labelScaleChangedWithSize();
+ }
+ 
+diff --git a/extensions/CocoStudio/Reader/GUIReader.cpp b/extensions/CocoStudio/Reader/GUIReader.cpp
+index 9ad388e..4e52e06 100755
+--- a/extensions/CocoStudio/Reader/GUIReader.cpp
++++ b/extensions/CocoStudio/Reader/GUIReader.cpp
+@@ -174,6 +174,7 @@ cocos2d::gui::Widget* GUIReader::widgetFromJsonFile(const char *fileName)
+ cocos2d::gui::Widget* WidgetPropertiesReader0250::createWidget(const rapidjson::Value& data, const char* fullPath, const char* fileName)
+ {
+     m_strFilePath = fullPath;
++	m_strFileName = fileName;
+     int texturesCount = DICTOOL->getArrayCount_json(data, "textures");
+     
+     for (int i=0; i<texturesCount; i++)
+@@ -870,6 +871,7 @@ void WidgetPropertiesReader0250::setPropsForLabelBMFontFromJsonDictionary(cocos2
+ cocos2d::gui::Widget* WidgetPropertiesReader0300::createWidget(const rapidjson::Value& data, const char* fullPath, const char* fileName)
+ {
+     m_strFilePath = fullPath;
++	m_strFileName = fileName;
+     
+     int texturesCount = DICTOOL->getArrayCount_json(data, "textures");
+     
+@@ -1154,9 +1156,11 @@ void WidgetPropertiesReader0300::setPropsForButtonFromJsonDictionary(cocos2d::gu
+     int normalType = DICTOOL->getIntValue_json(normalDic, "resourceType");
+     switch (normalType)
+     {
++            
+         case 0:
+         {
+-            std::string tp_n = m_strFilePath;
++            int pos = m_strFileName.find_last_of('/');
++            std::string tp_n = m_strFileName.substr(0, pos + 1);
+             const char* normalFileName = DICTOOL->getStringValue_json(normalDic, "path");
+             const char* normalFileName_tp = (normalFileName && (strcmp(normalFileName, "") != 0))?tp_n.append(normalFileName).c_str():NULL;
+             button->loadTextureNormal(normalFileName_tp);
+@@ -1177,7 +1181,8 @@ void WidgetPropertiesReader0300::setPropsForButtonFromJsonDictionary(cocos2d::gu
+     {
+         case 0:
+         {
+-            std::string tp_p = m_strFilePath;
++            int pos = m_strFileName.find_last_of('/');
++            std::string tp_p = m_strFileName.substr(0, pos + 1);
+             const char* pressedFileName = DICTOOL->getStringValue_json(pressedDic, "path");
+             const char* pressedFileName_tp = (pressedFileName && (strcmp(pressedFileName, "") != 0))?tp_p.append(pressedFileName).c_str():NULL;
+             button->loadTexturePressed(pressedFileName_tp);
+@@ -1198,7 +1203,8 @@ void WidgetPropertiesReader0300::setPropsForButtonFromJsonDictionary(cocos2d::gu
+     {
+         case 0:
+         {
+-            std::string tp_d = m_strFilePath;
++            int pos = m_strFileName.find_last_of('/');
++            std::string tp_d = m_strFileName.substr(0, pos + 1);
+             const char* disabledFileName = DICTOOL->getStringValue_json(disabledDic, "path");
+             const char* disabledFileName_tp = (disabledFileName && (strcmp(disabledFileName, "") != 0))?tp_d.append(disabledFileName).c_str():NULL;
+             button->loadTextureDisabled(disabledFileName_tp);
+@@ -1271,7 +1277,8 @@ void WidgetPropertiesReader0300::setPropsForCheckBoxFromJsonDictionary(cocos2d::
+     {
+         case 0:
+         {
+-            std::string tp_b = m_strFilePath;
++            int pos = m_strFileName.find_last_of('/');
++            std::string tp_b = m_strFileName.substr(0, pos + 1);
+             const char* backGroundFileName = DICTOOL->getStringValue_json(backGroundDic, "path");
+             const char* backGroundFileName_tp = (backGroundFileName && (strcmp(backGroundFileName, "") != 0))?tp_b.append(backGroundFileName).c_str():NULL;
+             checkBox->loadTextureBackGround(backGroundFileName_tp);
+@@ -1293,7 +1300,8 @@ void WidgetPropertiesReader0300::setPropsForCheckBoxFromJsonDictionary(cocos2d::
+     {
+         case 0:
+         {
+-            std::string tp_bs = m_strFilePath;
++            int pos = m_strFileName.find_last_of('/');
++            std::string tp_bs = m_strFileName.substr(0, pos + 1);
+             const char* backGroundSelectedFileName = DICTOOL->getStringValue_json(backGroundSelectedDic, "path");
+             const char* backGroundSelectedFileName_tp = (backGroundSelectedFileName && (strcmp(backGroundSelectedFileName, "") != 0))?tp_bs.append(backGroundSelectedFileName).c_str():NULL;
+             checkBox->loadTextureBackGroundSelected(backGroundSelectedFileName_tp);
+@@ -1315,7 +1323,8 @@ void WidgetPropertiesReader0300::setPropsForCheckBoxFromJsonDictionary(cocos2d::
+     {
+         case 0:
+         {
+-            std::string tp_c = m_strFilePath;
++            int pos = m_strFileName.find_last_of('/');
++            std::string tp_c = m_strFileName.substr(0, pos + 1);
+             const char* frontCrossFileName = DICTOOL->getStringValue_json(frontCrossDic, "path");
+             const char* frontCrossFileName_tp = (frontCrossFileName && (strcmp(frontCrossFileName, "") != 0))?tp_c.append(frontCrossFileName).c_str():NULL;
+             checkBox->loadTextureFrontCross(frontCrossFileName_tp);
+@@ -1337,7 +1346,8 @@ void WidgetPropertiesReader0300::setPropsForCheckBoxFromJsonDictionary(cocos2d::
+     {
+         case 0:
+         {
+-            std::string tp_bd = m_strFilePath;
++            int pos = m_strFileName.find_last_of('/');
++            std::string tp_bd = m_strFileName.substr(0, pos + 1);
+             const char* backGroundDisabledFileName = DICTOOL->getStringValue_json(backGroundDisabledDic, "path");
+             const char* backGroundDisabledFileName_tp = (backGroundDisabledFileName && (strcmp(backGroundDisabledFileName, "") != 0))?tp_bd.append(backGroundDisabledFileName).c_str():NULL;
+             checkBox->loadTextureBackGroundDisabled(backGroundDisabledFileName_tp);
+@@ -1359,7 +1369,8 @@ void WidgetPropertiesReader0300::setPropsForCheckBoxFromJsonDictionary(cocos2d::
+     {
+         case 0:
+         {
+-            std::string tp_cd = m_strFilePath;
++            int pos = m_strFileName.find_last_of('/');
++            std::string tp_cd = m_strFileName.substr(0, pos + 1);
+             const char* frontCrossDisabledFileName = DICTOOL->getStringValue_json(options, "path");
+             const char* frontCrossDisabledFileName_tp = (frontCrossDisabledFileName && (strcmp(frontCrossDisabledFileName, "") != 0))?tp_cd.append(frontCrossDisabledFileName).c_str():NULL;
+             checkBox->loadTextureFrontCrossDisabled(frontCrossDisabledFileName_tp);
+@@ -1390,7 +1401,8 @@ void WidgetPropertiesReader0300::setPropsForImageViewFromJsonDictionary(cocos2d:
+     {
+         case 0:
+         {
+-            std::string tp_i = m_strFilePath;
++			int pos = m_strFileName.find_last_of('/');
++			std::string tp_i = m_strFileName.substr(0, pos + 1);
+             const char* imageFileName = DICTOOL->getStringValue_json(imageFileNameDic, "path");
+             const char* imageFileName_tp = NULL;
+             if (imageFileName && (strcmp(imageFileName, "") != 0))
+@@ -1554,7 +1566,8 @@ void WidgetPropertiesReader0300::setPropsForLayoutFromJsonDictionary(cocos2d::gu
+     {
+         case 0:
+         {
+-            std::string tp_b = m_strFilePath;
++			int pos = m_strFileName.find_last_of('/');
++			std::string tp_b = m_strFileName.substr(0, pos + 1);
+             const char* imageFileName = DICTOOL->getStringValue_json(imageFileNameDic, "path");
+             const char* imageFileName_tp = (imageFileName && (strcmp(imageFileName, "") != 0))?tp_b.append(imageFileName).c_str():NULL;
+             panel->setBackGroundImage(imageFileName_tp);
+@@ -1615,7 +1628,8 @@ void WidgetPropertiesReader0300::setPropsForSliderFromJsonDictionary(cocos2d::gu
+             {
+                 case 0:
+                 {
+-                    std::string tp_b = m_strFilePath;
++					int pos = m_strFileName.find_last_of('/');
++					std::string tp_b = m_strFileName.substr(0, pos + 1);
+                     const char* imageFileName = DICTOOL->getStringValue_json(imageFileNameDic, "path");
+                     const char* imageFileName_tp = (imageFileName && (strcmp(imageFileName, "") != 0))?tp_b.append(imageFileName).c_str():NULL;
+                     slider->loadBarTexture(imageFileName_tp);
+@@ -1641,7 +1655,8 @@ void WidgetPropertiesReader0300::setPropsForSliderFromJsonDictionary(cocos2d::gu
+             {
+                 case 0:
+                 {
+-                    std::string tp_b = m_strFilePath;
++					int pos = m_strFileName.find_last_of('/');
++					std::string tp_b = m_strFileName.substr(0, pos + 1);
+                     const char*imageFileName =  DICTOOL->getStringValue_json(imageFileNameDic, "path");
+                     const char* imageFileName_tp = (imageFileName && (strcmp(imageFileName, "") != 0))?tp_b.append(imageFileName).c_str():NULL;
+                     slider->loadBarTexture(imageFileName_tp);
+@@ -1665,7 +1680,8 @@ void WidgetPropertiesReader0300::setPropsForSliderFromJsonDictionary(cocos2d::gu
+     {
+         case 0:
+         {
+-            std::string tp_n = m_strFilePath;
++            int pos = m_strFileName.find_last_of('/');
++            std::string tp_n = m_strFileName.substr(0, pos + 1);
+             const char* normalFileName = DICTOOL->getStringValue_json(normalDic, "path");
+             const char* normalFileName_tp = (normalFileName && (strcmp(normalFileName, "") != 0))?tp_n.append(normalFileName).c_str():NULL;
+             slider->loadSlidBallTextureNormal(normalFileName_tp);
+@@ -1687,7 +1703,8 @@ void WidgetPropertiesReader0300::setPropsForSliderFromJsonDictionary(cocos2d::gu
+     {
+         case 0:
+         {
+-            std::string tp_p = m_strFilePath;
++            int pos = m_strFileName.find_last_of('/');
++            std::string tp_p = m_strFileName.substr(0, pos + 1);
+             const char* pressedFileName = DICTOOL->getStringValue_json(pressedDic, "path");
+             const char* pressedFileName_tp = (pressedFileName && (strcmp(pressedFileName, "") != 0))?tp_p.append(pressedFileName).c_str():NULL;
+             slider->loadSlidBallTexturePressed(pressedFileName_tp);
+@@ -1709,7 +1726,8 @@ void WidgetPropertiesReader0300::setPropsForSliderFromJsonDictionary(cocos2d::gu
+     {
+         case 0:
+         {
+-            std::string tp_d = m_strFilePath;
++            int pos = m_strFileName.find_last_of('/');
++            std::string tp_d = m_strFileName.substr(0, pos + 1);
+             const char* disabledFileName = DICTOOL->getStringValue_json(disabledDic, "path");
+             const char* disabledFileName_tp = (disabledFileName && (strcmp(disabledFileName, "") != 0))?tp_d.append(disabledFileName).c_str():NULL;
+             slider->loadSlidBallTextureDisabled(disabledFileName_tp);
+@@ -1733,7 +1751,8 @@ void WidgetPropertiesReader0300::setPropsForSliderFromJsonDictionary(cocos2d::gu
+     {
+         case 0:
+         {
+-            std::string tp_b = m_strFilePath;
++			int pos = m_strFileName.find_last_of('/');
++			std::string tp_b = m_strFileName.substr(0, pos + 1);
+             const char* imageFileName = DICTOOL->getStringValue_json(progressBarDic, "path");
+             const char* imageFileName_tp = (imageFileName && (strcmp(imageFileName, "") != 0))?tp_b.append(imageFileName).c_str():NULL;
+             slider->loadProgressBarTexture(imageFileName_tp);
+@@ -1812,7 +1831,8 @@ void WidgetPropertiesReader0300::setPropsForLoadingBarFromJsonDictionary(cocos2d
+     {
+         case 0:
+         {
+-            std::string tp_i = m_strFilePath;
++			int pos = m_strFileName.find_last_of('/');
++			std::string tp_i = m_strFileName.substr(0, pos + 1);
+             const char* imageFileName = DICTOOL->getStringValue_json(imageFileNameDic, "path");
+             const char* imageFileName_tp = NULL;
+             if (imageFileName && (strcmp(imageFileName, "") != 0))
+diff --git a/extensions/CocoStudio/Reader/GUIReader.h b/extensions/CocoStudio/Reader/GUIReader.h
+index d2cbe76..e9a0d57 100755
+--- a/extensions/CocoStudio/Reader/GUIReader.h
++++ b/extensions/CocoStudio/Reader/GUIReader.h
+@@ -72,6 +72,7 @@ public:
+     virtual cocos2d::gui::Widget* widgetFromJsonDictionary(const rapidjson::Value& data) = 0;
+ protected:
+     std::string m_strFilePath;
++	std::string m_strFileName;
+ };
+ 
+ 
+diff --git a/extensions/GUI/Android/DeviceJNI.h b/extensions/GUI/Android/DeviceJNI.h
+new file mode 100755
+index 0000000..a4fdbe0
+--- /dev/null
++++ b/extensions/GUI/Android/DeviceJNI.h
+@@ -0,0 +1,15 @@
++#ifndef __DeviceJNI_H__
++#define __DeviceJNI_H__
++
++#include "cocos2d.h"
++
++#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
++
++#include "ExtensionMacros.h"
++
++void closeKeyboardJNI(void *ctx);
++
++#endif /* #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID) */
++
++#endif /* __DeviceJNI_H__ */
++
+diff --git a/extensions/GUI/CCEditBox/CCEditBox.cpp b/extensions/GUI/CCEditBox/CCEditBox.cpp
+index 51e0214..4943bb9 100755
+--- a/extensions/GUI/CCEditBox/CCEditBox.cpp
++++ b/extensions/GUI/CCEditBox/CCEditBox.cpp
+@@ -56,6 +56,11 @@ void CCEditBox::touchDownAction(CCObject *sender, CCControlEvent controlEvent)
+     m_pEditBoxImpl->openKeyboard();
+ }
+ 
++void CCEditBox::closeKeyboard()
++{
++	m_pEditBoxImpl->closeKeyboard();
++}
++
+ CCEditBox* CCEditBox::create(const CCSize& size, CCScale9Sprite* pNormal9SpriteBg, CCScale9Sprite* pPressed9SpriteBg/* = NULL*/, CCScale9Sprite* pDisabled9SpriteBg/* = NULL*/)
+ {
+     CCEditBox* pRet = new CCEditBox();
+@@ -149,6 +154,15 @@ void CCEditBox::setFont(const char* pFontName, int fontSize)
+     }
+ }
+ 
++const char* CCEditBox::getFontname()
++{
++	if (m_pEditBoxImpl != NULL)
++	{
++		m_pEditBoxImpl->getFontName();
++	}
++	return NULL;
++}
++
+ void CCEditBox::setFontName(const char* pFontName)
+ {
+     m_strFontName = pFontName;
+@@ -158,6 +172,15 @@ void CCEditBox::setFontName(const char* pFontName)
+     }
+ }
+ 
++float CCEditBox::getFontSize()
++{
++	if (m_pEditBoxImpl != NULL)
++	{
++		m_pEditBoxImpl->getFontSize();
++	}
++	return 0;
++}
++
+ void CCEditBox::setFontSize(int fontSize)
+ {
+     m_nFontSize = fontSize;
+@@ -176,6 +199,11 @@ void CCEditBox::setFontColor(const ccColor3B& color)
+     }
+ }
+ 
++ccColor3B CCEditBox::getFontColor()
++{
++	return m_colText;
++}
++
+ void CCEditBox::setPlaceholderFont(const char* pFontName, int fontSize)
+ {
+     m_strPlaceholderFontName = pFontName;
+@@ -209,7 +237,7 @@ void CCEditBox::setPlaceholderFontSize(int fontSize)
+ 
+ void CCEditBox::setPlaceholderFontColor(const ccColor3B& color)
+ {
+-    m_colText = color;
++	m_colPlaceHolder = color;
+     if (m_pEditBoxImpl != NULL)
+     {
+         m_pEditBoxImpl->setPlaceholderFontColor(color);
+@@ -334,6 +362,7 @@ void CCEditBox::onExit(void)
+     CCControlButton::onExit();
+     if (m_pEditBoxImpl != NULL)
+     {
++        m_pEditBoxImpl->onExit();
+         // remove system edit control
+         m_pEditBoxImpl->closeKeyboard();
+     }
+diff --git a/extensions/GUI/CCEditBox/CCEditBox.h b/extensions/GUI/CCEditBox/CCEditBox.h
+index 949799e..b4c9464 100755
+--- a/extensions/GUI/CCEditBox/CCEditBox.h
++++ b/extensions/GUI/CCEditBox/CCEditBox.h
+@@ -269,12 +269,22 @@ public:
+ 	 * @param pFontName The font name.
+ 	 */
+ 	void setFontName(const char* pFontName);
++
++	/*
++	* Get the font name.
++	*/
++	const char* getFontname();
+     
+     /**
+ 	 * Set the font size.
+ 	 * @param fontSize The font size.
+ 	 */
+ 	void setFontSize(int fontSize);
++
++	/*
++	* Get the font size.
++	*/
++	float getFontSize();
+     
+     /**
+      * Set the font color of the widget's text.
+@@ -282,6 +292,10 @@ public:
+     void setFontColor(const ccColor3B& color);
+     
+ 	/**
++	* Get the font color fot he widget's text.
++	*/
++	ccColor3B getFontColor();
++	/**
+ 	 * Set the placeholder's font.
+ 	 * @param pFontName The font name.
+ 	 * @param fontSize The font size.
+@@ -393,6 +407,11 @@ public:
+      */
+     virtual void keyboardDidHide(CCIMEKeyboardNotificationInfo& info);
+     
++	/*
++	* Close the keyboard.
++	*/
++	void closeKeyboard();
++
+     /** callback funtions 
+      *  @js NA
+      */
+diff --git a/extensions/GUI/CCEditBox/CCEditBoxImpl.h b/extensions/GUI/CCEditBox/CCEditBoxImpl.h
+index 046cabb..e37c968 100755
+--- a/extensions/GUI/CCEditBox/CCEditBoxImpl.h
++++ b/extensions/GUI/CCEditBox/CCEditBoxImpl.h
+@@ -41,6 +41,8 @@ public:
+     
+     virtual bool initWithSize(const CCSize& size) = 0;
+     virtual void setFont(const char* pFontName, int fontSize) = 0;
++	virtual const char* getFontName() = 0;
++	virtual float getFontSize() = 0;
+     virtual void setFontColor(const ccColor3B& color) = 0;
+     virtual void setPlaceholderFont(const char* pFontName, int fontSize) = 0;
+     virtual void setPlaceholderFontColor(const ccColor3B& color) = 0;
+@@ -72,6 +74,8 @@ public:
+      */
+     virtual void onEnter(void) = 0;
+     
++	virtual void onExit(void) = 0;
++    
+     
+     void setDelegate(CCEditBoxDelegate* pDelegate) { m_pDelegate = pDelegate; };
+     CCEditBoxDelegate* getDelegate() { return m_pDelegate; };
+diff --git a/extensions/GUI/CCEditBox/CCEditBoxImplAndroid.cpp b/extensions/GUI/CCEditBox/CCEditBoxImplAndroid.cpp
+index 5ddb61a..735525a 100755
+--- a/extensions/GUI/CCEditBox/CCEditBoxImplAndroid.cpp
++++ b/extensions/GUI/CCEditBox/CCEditBoxImplAndroid.cpp
+@@ -24,7 +24,9 @@
+  ****************************************************************************/
+ 
+ #include "CCEditBoxImplAndroid.h"
+-
++#include "CCEditBoxImplAndroidJNI.h"
++#include "../Android/DeviceJNI.h"
++ 
+ #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+ 
+ #include "CCEditBox.h"
+@@ -100,6 +102,29 @@ void CCEditBoxImplAndroid::setFont(const char* pFontName, int fontSize)
+ 	}
+ }
+ 
++const char* CCEditBoxImplAndroid::getFontName()
++{
++	if (m_pLabel != NULL) {
++		return m_pLabel->getFontName();
++	}
++
++	if (m_pLabelPlaceHolder != NULL) {
++		return m_pLabelPlaceHolder->getFontName();
++	}
++	return NULL;
++}
++float CCEditBoxImplAndroid::getFontSize()
++{
++	if (m_pLabel != NULL) {
++		return m_pLabel->getFontSize();
++	}
++
++	if (m_pLabelPlaceHolder != NULL) {
++		return m_pLabelPlaceHolder->getFontSize();
++	}
++	return 0;
++}
++
+ void CCEditBoxImplAndroid::setFontColor(const ccColor3B& color)
+ {
+     m_colText = color;
+@@ -244,25 +269,37 @@ void CCEditBoxImplAndroid::onEnter(void)
+     
+ }
+ 
++void CCEditBoxImplAndroid::onExit(void)
++{    
++    // signal to destroy binded view
++    destroyEditTextJNI((void*) this);
++}
++
+ static void editBoxCallbackFunc(const char* pText, void* ctx)
+ {
+     CCEditBoxImplAndroid* thiz = (CCEditBoxImplAndroid*)ctx;
+-    thiz->setText(pText);
+-	
+-    if (thiz->getDelegate() != NULL)
++    thiz->updateText(pText);
++}
++
++void CCEditBoxImplAndroid::updateText(const char* pText) 
++{
++    setText(pText);
++    m_pLabelPlaceHolder->setVisible(strlen(pText) == 0);
++    m_pLabel->setVisible(true);
++    
++    if (m_pDelegate != NULL)
+     {
+-        thiz->getDelegate()->editBoxTextChanged(thiz->getCCEditBox(), thiz->getText());
+-        thiz->getDelegate()->editBoxEditingDidEnd(thiz->getCCEditBox());
+-        thiz->getDelegate()->editBoxReturn(thiz->getCCEditBox());
++        m_pDelegate->editBoxTextChanged(m_pEditBox, pText);
++        m_pDelegate->editBoxEditingDidEnd(m_pEditBox);
++        m_pDelegate->editBoxReturn(m_pEditBox);
+     }
+     
+-    CCEditBox* pEditBox = thiz->getCCEditBox();
+-    if (NULL != pEditBox && 0 != pEditBox->getScriptEditBoxHandler())
++    if (NULL != m_pEditBox && 0 != m_pEditBox->getScriptEditBoxHandler())
+     {
+         cocos2d::CCScriptEngineProtocol* pEngine = cocos2d::CCScriptEngineManager::sharedManager()->getScriptEngine();
+-        pEngine->executeEvent(pEditBox->getScriptEditBoxHandler(), "changed",pEditBox);
+-        pEngine->executeEvent(pEditBox->getScriptEditBoxHandler(), "ended",pEditBox);
+-        pEngine->executeEvent(pEditBox->getScriptEditBoxHandler(), "return",pEditBox);
++        pEngine->executeEvent(m_pEditBox->getScriptEditBoxHandler(), "changed", m_pEditBox);
++        pEngine->executeEvent(m_pEditBox->getScriptEditBoxHandler(), "ended", m_pEditBox);
++        pEngine->executeEvent(m_pEditBox->getScriptEditBoxHandler(), "return", m_pEditBox);
+     }
+ }
+ 
+@@ -279,12 +316,35 @@ void CCEditBoxImplAndroid::openKeyboard()
+         pEngine->executeEvent(pEditBox->getScriptEditBoxHandler(), "began",pEditBox);
+     }
+ 	
+-    showEditTextDialogJNI(  m_strPlaceHolder.c_str(),
++	CCSize contentSize = m_pEditBox->getContentSize();
++	CCRect rect = CCRectMake(0, 0, contentSize.width, contentSize.height);
++    rect = CCRectApplyAffineTransform(rect, m_pEditBox->nodeToWorldTransform());
++	
++	CCPoint designCoord = ccp(rect.origin.x, rect.origin.y + rect.size.height);
++    
++    CCEGLViewProtocol* eglView = CCEGLView::sharedOpenGLView();
++    float viewH = getScreenHeightJNI();
++    
++    CCPoint visiblePos = ccp(designCoord.x * eglView->getScaleX(), designCoord.y * eglView->getScaleY());
++    CCPoint screenGLPos = ccpAdd(visiblePos, eglView->getViewPortRect().origin);
++    
++	ccColor3B textColor = m_pEditBox->getFontColor();
++	int textColorValue = (0xff << 24) + (textColor.r << 16) + (textColor.g << 8) + textColor.b;
++	CCLOG("New app installed. %d", textColorValue);
++
++	m_pLabelPlaceHolder->setVisible(false);
++    m_pLabel->setVisible(false);
++    showEditTextDialogJNI(m_strPlaceHolder.c_str(),
+ 						  m_strText.c_str(),
+ 						  m_eEditBoxInputMode,
+ 						  m_eEditBoxInputFlag,
+ 						  m_eKeyboardReturnType,
+ 						  m_nMaxLength,
++						  screenGLPos.x, 
++						  viewH - screenGLPos.y,
++                          rect.size.width * eglView->getScaleX(), 
++                          rect.size.height * eglView->getScaleY(),
++						  textColorValue,
+ 						  editBoxCallbackFunc,
+ 						  (void*)this  );
+ 	
+@@ -292,7 +352,7 @@ void CCEditBoxImplAndroid::openKeyboard()
+ 
+ void CCEditBoxImplAndroid::closeKeyboard()
+ {
+-	
++    closeKeyboardJNI((void *) this);
+ }
+ 
+ NS_CC_EXT_END
+diff --git a/extensions/GUI/CCEditBox/CCEditBoxImplAndroid.h b/extensions/GUI/CCEditBox/CCEditBoxImplAndroid.h
+index 6c26ddf..a563eb4 100755
+--- a/extensions/GUI/CCEditBox/CCEditBoxImplAndroid.h
++++ b/extensions/GUI/CCEditBox/CCEditBoxImplAndroid.h
+@@ -45,6 +45,8 @@ public:
+     
+     virtual bool initWithSize(const CCSize& size);
+     virtual void setFont(const char* pFontName, int fontSize);
++	virtual const char* getFontName();
++	virtual float getFontSize();
+     virtual void setFontColor(const ccColor3B& color);
+     virtual void setPlaceholderFont(const char* pFontName, int fontSize);
+     virtual void setPlaceholderFontColor(const ccColor3B& color);
+@@ -67,10 +69,12 @@ public:
+      */
+     virtual void visit(void);
+ 	virtual void onEnter(void);
++	virtual void onExit(void);
+     virtual void doAnimationWhenKeyboardMove(float duration, float distance);
+     virtual void openKeyboard();
+     virtual void closeKeyboard();
+-    
++    void updateText(const char *pText);
++
+ private:
+     CCLabelTTF* m_pLabel;
+     CCLabelTTF* m_pLabelPlaceHolder;
+diff --git a/extensions/GUI/CCEditBox/CCEditBoxImplAndroidJNI.h b/extensions/GUI/CCEditBox/CCEditBoxImplAndroidJNI.h
+new file mode 100755
+index 0000000..7584164
+--- /dev/null
++++ b/extensions/GUI/CCEditBox/CCEditBoxImplAndroidJNI.h
+@@ -0,0 +1,58 @@
++/****************************************************************************
++ Copyright (c) 2010-2012 cocos2d-x.org
++ Copyright (c) 2012 James Chen
++ 
++ http://www.cocos2d-x.org
++ 
++ Permission is hereby granted, free of charge, to any person obtaining a copy
++ of this software and associated documentation files (the "Software"), to deal
++ in the Software without restriction, including without limitation the rights
++ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
++ copies of the Software, and to permit persons to whom the Software is
++ furnished to do so, subject to the following conditions:
++ 
++ The above copyright notice and this permission notice shall be included in
++ all copies or substantial portions of the Software.
++ 
++ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
++ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
++ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
++ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
++ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
++ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
++ THE SOFTWARE.
++ ****************************************************************************/
++
++#ifndef __CCEDITBOXIMPLANDROIDJNI_H__
++#define __CCEDITBOXIMPLANDROIDJNI_H__
++
++#include "cocos2d.h"
++
++#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
++
++#include "ExtensionMacros.h"
++#include "CCEditBoxImpl.h"
++
++typedef void (*EditTextCallback)(const char* pText, void* ctx);
++
++void showEditTextDialogJNI(
++    const char* pszTitle, 
++    const char* pszMessage, 
++    int nInputMode, 
++    int nInputFlag, 
++    int nReturnType, 
++    int nMaxLength, 
++    float x,
++    float y,
++    float width,
++    float height,
++	int color,
++    EditTextCallback pfEditTextCallback, 
++    void* ctx);
++
++void destroyEditTextJNI(void *ctx);
++
++#endif /* #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID) */
++
++#endif /* __CCEDITBOXIMPLANDROIDJNI_H__ */
++
+diff --git a/extensions/GUI/CCEditBox/CCEditBoxImplIOS.h b/extensions/GUI/CCEditBox/CCEditBoxImplIOS.h
+index 2cf7b0d..1048d9e 100755
+--- a/extensions/GUI/CCEditBox/CCEditBoxImplIOS.h
++++ b/extensions/GUI/CCEditBox/CCEditBoxImplIOS.h
+@@ -79,6 +79,8 @@ public:
+     
+     virtual bool initWithSize(const CCSize& size);
+     virtual void setFont(const char* pFontName, int fontSize);
++    virtual const char* getFontName();
++	virtual float getFontSize();
+     virtual void setFontColor(const ccColor3B& color);
+     virtual void setPlaceholderFont(const char* pFontName, int fontSize);
+     virtual void setPlaceholderFontColor(const ccColor3B& color);
+@@ -98,6 +100,7 @@ public:
+ 	virtual void setAnchorPoint(const CCPoint& anchorPoint);
+     virtual void visit(void);
+ 	virtual void onEnter(void);
++    virtual void onExit(void);
+     virtual void doAnimationWhenKeyboardMove(float duration, float distance);
+     virtual void openKeyboard();
+     virtual void closeKeyboard();
+diff --git a/extensions/GUI/CCEditBox/CCEditBoxImplIOS.mm b/extensions/GUI/CCEditBox/CCEditBoxImplIOS.mm
+index aee1d3e..98ceaf7 100755
+--- a/extensions/GUI/CCEditBox/CCEditBoxImplIOS.mm
++++ b/extensions/GUI/CCEditBox/CCEditBoxImplIOS.mm
+@@ -79,6 +79,7 @@ static const int CC_EDIT_BOX_PADDING = 5;
+         textField_.delegate = self;
+         textField_.hidden = true;
+ 		textField_.returnKeyType = UIReturnKeyDefault;
++        textField_.adjustsFontSizeToFitWidth = YES;
+         [textField_ addTarget:self action:@selector(textChanged) forControlEvents:UIControlEventEditingChanged];
+         self.editBox = editBox;
+         
+@@ -372,6 +373,36 @@ void CCEditBoxImplIOS::setFont(const char* pFontName, int fontSize)
+ 	m_pLabelPlaceHolder->setFontSize(fontSize);
+ }
+ 
++const char* CCEditBoxImplIOS::getFontName()
++{
++    if (m_pLabel != nil)
++    {
++        return m_pLabel->getFontName();
++    }
++    
++    if (m_pLabelPlaceHolder != nil)
++    {
++        return m_pLabelPlaceHolder->getFontName();
++    }
++    
++    return nil;
++}
++
++float CCEditBoxImplIOS::getFontSize()
++{
++    if (m_pLabel != nil)
++    {
++        return m_pLabel->getFontSize();
++    }
++    
++    if (m_pLabelPlaceHolder != nil)
++    {
++        return m_pLabelPlaceHolder->getFontSize();
++    }
++    
++    return 0;
++}
++
+ void CCEditBoxImplIOS::setFontColor(const ccColor3B& color)
+ {
+     m_systemControl.textField.textColor = [UIColor colorWithRed:color.r / 255.0f green:color.g / 255.0f blue:color.b / 255.0f alpha:1.0f];
+@@ -575,6 +606,11 @@ void CCEditBoxImplIOS::onEnter(void)
+     }
+ }
+ 
++void CCEditBoxImplIOS::onExit(void)
++{
++    
++}
++
+ void CCEditBoxImplIOS::adjustTextFieldPosition()
+ {
+ 	CCSize contentSize = m_pEditBox->getContentSize();
+@@ -591,6 +627,7 @@ void CCEditBoxImplIOS::openKeyboard()
+ 	m_pLabelPlaceHolder->setVisible(false);
+ 
+ 	m_systemControl.textField.hidden = NO;
++    adjustTextFieldPosition();
+     [m_systemControl openKeyboard];
+ }
+ 
+diff --git a/extensions/GUI/CCEditBox/CCEditBoxImplWin.cpp b/extensions/GUI/CCEditBox/CCEditBoxImplWin.cpp
+index db28663..834c7b1 100755
+--- a/extensions/GUI/CCEditBox/CCEditBoxImplWin.cpp
++++ b/extensions/GUI/CCEditBox/CCEditBoxImplWin.cpp
+@@ -93,6 +93,28 @@ void CCEditBoxImplWin::setFont(const char* pFontName, int fontSize)
+ 	}
+ }
+ 
++const char* CCEditBoxImplWin::getFontName()
++{
++	if (m_pLabel != NULL) {
++		return m_pLabel->getFontName();
++	}
++
++	if (m_pLabelPlaceHolder != NULL) {
++		return m_pLabelPlaceHolder->getFontName();
++	}
++	return NULL;
++}
++float CCEditBoxImplWin::getFontSize()
++{
++	if (m_pLabel != NULL) {
++		return m_pLabel->getFontSize();
++	}
++	if (m_pLabelPlaceHolder != NULL) {
++		return m_pLabelPlaceHolder->getFontSize();
++	}
++	return 0;
++}
++
+ void CCEditBoxImplWin::setFontColor(const ccColor3B& color)
+ {
+     m_colText = color;
+@@ -290,6 +312,11 @@ void CCEditBoxImplWin::onEnter(void)
+ 
+ }
+ 
++void CCEditBoxImplWin::onExit(void)
++{
++
++}
++
+ NS_CC_EXT_END
+ 
+ #endif /* (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32) */
+diff --git a/extensions/GUI/CCEditBox/CCEditBoxImplWin.h b/extensions/GUI/CCEditBox/CCEditBoxImplWin.h
+index 3c0311d..0dca8b2 100755
+--- a/extensions/GUI/CCEditBox/CCEditBoxImplWin.h
++++ b/extensions/GUI/CCEditBox/CCEditBoxImplWin.h
+@@ -48,6 +48,8 @@ public:
+     
+     virtual bool initWithSize(const CCSize& size);
+ 	virtual void setFont(const char* pFontName, int fontSize);
++	virtual const char* getFontName();
++	virtual float getFontSize();
+     virtual void setFontColor(const ccColor3B& color);
+     virtual void setPlaceholderFont(const char* pFontName, int fontSize);
+     virtual void setPlaceholderFontColor(const ccColor3B& color);
+@@ -70,6 +72,7 @@ public:
+     virtual void openKeyboard();
+     virtual void closeKeyboard();
+     virtual void onEnter(void);
++	virtual void onExit(void);
+ private:
+ 
+     CCLabelTTF* m_pLabel;
+diff --git a/extensions/GUI/CCEditBox/EditBoxDelegateForLua.cpp b/extensions/GUI/CCEditBox/EditBoxDelegateForLua.cpp
+new file mode 100755
+index 0000000..87a9ee3
+--- /dev/null
++++ b/extensions/GUI/CCEditBox/EditBoxDelegateForLua.cpp
+@@ -0,0 +1,145 @@
++#include "EditBoxDelegateForLua.h"
++#include "CCLuaEngine.h"
++
++USING_NS_CC;
++USING_NS_CC_EXT;
++
++EditBoxDelegateForLua::EditBoxDelegateForLua()
++{
++}
++
++EditBoxDelegateForLua::~EditBoxDelegateForLua()
++{
++	for (std::map<EditBoxEvent, int>::iterator iter = m_scriptDispatchTable.begin(), end = m_scriptDispatchTable.end();
++		iter != end; ++iter)
++	{
++		int nScriptTapHandler = iter->second;
++		if (nScriptTapHandler == 0)
++		{
++			assert(false);
++			continue;
++		}
++
++		CCScriptEngineManager::sharedManager()->getScriptEngine()->removeScriptHandler(nScriptTapHandler);
++	}
++}
++
++void EditBoxDelegateForLua::editBoxEditingDidBegin(CCEditBox* editBox)
++{
++	int nHandler = dispatchScriptHandlerforEvent(EDIT_BOX_EVENT_DID_BEGIN);
++	if (nHandler == 0)
++	{
++		return;
++	}
++
++	CCScriptEngineProtocol* pScriptProtocol = CCScriptEngineManager::sharedManager()->getScriptEngine();
++	CCLuaEngine* pLuaEngine = dynamic_cast<CCLuaEngine*>(pScriptProtocol);
++	if (pLuaEngine == NULL)
++	{
++		assert(false);
++		return;
++	}
++	
++	CCLuaStack* pStack = pLuaEngine->getLuaStack();
++	pStack->pushCCObject(editBox, "CCEditBox");
++	int ret = pStack->executeFunctionByHandler(nHandler, 1);
++	pStack->clean();
++}
++
++void EditBoxDelegateForLua::editBoxEditingDidEnd(CCEditBox* editBox)
++{
++	int nHandler = dispatchScriptHandlerforEvent(EDIT_BOX_EVENT_DID_END);
++	if (nHandler == 0)
++	{
++		return;
++	}
++
++	CCScriptEngineProtocol* pScriptProtocol = CCScriptEngineManager::sharedManager()->getScriptEngine();
++	CCLuaEngine* pLuaEngine = dynamic_cast<CCLuaEngine*>(pScriptProtocol);
++	if (pLuaEngine == NULL)
++	{
++		assert(false);
++		return;
++	}
++
++	CCLuaStack* pStack = pLuaEngine->getLuaStack();
++	pStack->pushCCObject(editBox, "CCEditBox");
++	int ret = pStack->executeFunctionByHandler(nHandler, 1);
++	pStack->clean();
++}
++
++void EditBoxDelegateForLua::editBoxTextChanged(CCEditBox* editBox, const std::string& text)
++{
++	int nHandler = dispatchScriptHandlerforEvent(EDIT_BOX_EVENT_TEXT_CHANGED);
++	if (nHandler == 0)
++	{
++		return;
++	}
++
++	CCScriptEngineProtocol* pScriptProtocol = CCScriptEngineManager::sharedManager()->getScriptEngine();
++	CCLuaEngine* pLuaEngine = dynamic_cast<CCLuaEngine*>(pScriptProtocol);
++	if (pLuaEngine == NULL)
++	{
++		assert(false);
++		return;
++	}
++
++	CCLuaStack* pStack = pLuaEngine->getLuaStack();
++	pStack->pushCCObject(editBox, "CCEditBox");
++	pStack->pushString(text.c_str());
++	int ret = pStack->executeFunctionByHandler(nHandler, 2);
++	pStack->clean();
++}
++
++void EditBoxDelegateForLua::editBoxReturn(CCEditBox* editBox)
++{
++	int nHandler = dispatchScriptHandlerforEvent(EDIT_BOX_EVENT_RETURN);
++	if (nHandler == 0)
++	{
++		return;
++	}
++
++	CCScriptEngineProtocol* pScriptProtocol = CCScriptEngineManager::sharedManager()->getScriptEngine();
++	CCLuaEngine* pLuaEngine = dynamic_cast<CCLuaEngine*>(pScriptProtocol);
++	if (pLuaEngine == NULL)
++	{
++		assert(false);
++		return;
++	}
++
++	CCLuaStack* pStack = pLuaEngine->getLuaStack();
++	pStack->pushCCObject(editBox, "CCEditBox");
++	int ret = pStack->executeFunctionByHandler(nHandler, 1);
++	pStack->clean();
++}
++
++void EditBoxDelegateForLua::registerEventScriptHandler(EditBoxEvent eventType, int nHandler)
++{
++	unregisterEventScriptHandler(eventType);
++	m_scriptDispatchTable[eventType] = nHandler;
++}
++
++void EditBoxDelegateForLua::unregisterEventScriptHandler(EditBoxEvent eventType)
++{
++	int nScriptTapHandler = dispatchScriptHandlerforEvent(eventType);
++	if (nScriptTapHandler == 0)
++	{
++		return;
++	}
++
++	m_scriptDispatchTable.erase(eventType);
++
++	CCScriptEngineManager::sharedManager()->getScriptEngine()->removeScriptHandler(nScriptTapHandler);
++	LUALOG("[LUA] Remove EditBoxDelegateForLua script handler: %d", nScriptTapHandler);
++}
++
++int EditBoxDelegateForLua::dispatchScriptHandlerforEvent(EditBoxEvent eventType)
++{
++	std::map<EditBoxEvent, int>::iterator eventIter = m_scriptDispatchTable.find(eventType);
++	if (eventIter == m_scriptDispatchTable.end())
++	{
++		return 0;
++	}
++
++	return eventIter->second;
++}
+\ No newline at end of file
+diff --git a/extensions/GUI/CCEditBox/EditBoxDelegateForLua.h b/extensions/GUI/CCEditBox/EditBoxDelegateForLua.h
+new file mode 100755
+index 0000000..fa8732f
+--- /dev/null
++++ b/extensions/GUI/CCEditBox/EditBoxDelegateForLua.h
+@@ -0,0 +1,39 @@
++#ifndef _EDIT_BOX_FOR_LUA_H_
++#define _EDIT_BOX_FOR_LUA_H_
++
++#include "cocos2d.h"
++#include "cocos-ext.h"
++
++enum EditBoxEvent
++{
++	EDIT_BOX_EVENT_DID_BEGIN,
++	EDIT_BOX_EVENT_DID_END,
++	EDIT_BOX_EVENT_TEXT_CHANGED,
++	EDIT_BOX_EVENT_RETURN,
++	EDIT_BOX_EVENT_MAX
++};
++
++class EditBoxDelegateForLua : public cocos2d::CCLayer, public cocos2d::extension::CCEditBoxDelegate
++{
++public:
++	EditBoxDelegateForLua();
++	~EditBoxDelegateForLua();
++
++	CREATE_FUNC(EditBoxDelegateForLua);
++
++	virtual void editBoxEditingDidBegin(cocos2d::extension::CCEditBox* editBox);
++	virtual void editBoxEditingDidEnd(cocos2d::extension::CCEditBox* editBox);
++	virtual void editBoxTextChanged(cocos2d::extension::CCEditBox* editBox, const std::string& text);
++	virtual void editBoxReturn(cocos2d::extension::CCEditBox* editBox);
++
++	void registerEventScriptHandler(EditBoxEvent eventType, int nHandler);
++	void unregisterEventScriptHandler(EditBoxEvent eventType);
++
++private:
++	int dispatchScriptHandlerforEvent(EditBoxEvent eventType);
++
++private:
++	std::map<EditBoxEvent, int>	m_scriptDispatchTable;
++};
++
++#endif
+\ No newline at end of file
+diff --git a/extensions/Social/FacebookAndroid.h b/extensions/Social/FacebookAndroid.h
+new file mode 100644
+index 0000000..dd051ad
+--- /dev/null
++++ b/extensions/Social/FacebookAndroid.h
+@@ -0,0 +1,6 @@
++#include <cocos2d.h>
++
++#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
++void android_facebook_login();
++void android_facebook_requestPublishPermissions(const char* newPermission);
++#endif
+\ No newline at end of file
+diff --git a/extensions/Social/FacebookDelegate.cpp b/extensions/Social/FacebookDelegate.cpp
+index 7dfb65e..73f5f57 100755
+--- a/extensions/Social/FacebookDelegate.cpp
++++ b/extensions/Social/FacebookDelegate.cpp
+@@ -1,8 +1,14 @@
+ #include "cocos2d.h"
+ #include "FacebookDelegate.h"
++#include "CCLuaEngine.h"
+ #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+ #include "FacebookConnector.h"
+ #endif
++#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
++#include "FacebookAndroid.h"
++#endif
++
++USING_NS_CC;
+ 
+ namespace Social
+ {
+@@ -10,7 +16,8 @@ namespace Social
+ 
+ 	FacebookDelegate::FacebookDelegate()
+ 	{
+-
++		mAccessTokenUpdateHandler = 0;
++		mPermissionUpdateHandler = 0;
+ 	}
+ 
+ 	FacebookDelegate::~FacebookDelegate()
+@@ -27,10 +34,78 @@ namespace Social
+ 		return s_sharedUtils;
+ 	}
+ 
+-	void FacebookDelegate::login()
++	void FacebookDelegate::login(int handler)
+ 	{
++		mAccessTokenUpdateHandler = handler;
+ #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+         FacebookConnector::getInstance()->login();
+ #endif
++#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
++		android_facebook_login();
++#endif
++#if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
++		accessTokenUpdate(NULL);
++#endif
++	}
++
++	void FacebookDelegate::grantPublishPermission(const char* permission, int handler)
++	{
++		mPermissionUpdateHandler = handler;
++#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
++		FacebookConnector::getInstance()->grantPublishPermission(permission);
++#endif
++#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
++		android_facebook_requestPublishPermissions(permission);
++#endif
++#if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
++		permissionUpdate(NULL, false);
++#endif
++	}
++    
++	void FacebookDelegate::accessTokenUpdate(const char* accessToken)
++	{
++		if (mAccessTokenUpdateHandler == 0)
++		{
++			return;
++		}
++
++		CCScriptEngineProtocol* pScriptProtocol = CCScriptEngineManager::sharedManager()->getScriptEngine();
++		cocos2d::CCLuaEngine* pLuaEngine = dynamic_cast<CCLuaEngine*>(pScriptProtocol);
++		if (pLuaEngine == NULL)
++		{
++			assert(false);
++			return;
++		}
++
++		CCLuaStack* pStack = pLuaEngine->getLuaStack();
++		pStack->pushString(accessToken);
++		int ret = pStack->executeFunctionByHandler(mAccessTokenUpdateHandler, 1);
++		pStack->clean();
++
++		mAccessTokenUpdateHandler = 0;
++	}
++    
++	void FacebookDelegate::permissionUpdate(const char* accessToken, bool success)
++	{
++		if (mPermissionUpdateHandler == 0)
++		{
++			return;
++		}
++
++		CCScriptEngineProtocol* pScriptProtocol = CCScriptEngineManager::sharedManager()->getScriptEngine();
++		cocos2d::CCLuaEngine* pLuaEngine = dynamic_cast<CCLuaEngine*>(pScriptProtocol);
++		if (pLuaEngine == NULL)
++		{
++			assert(false);
++			return;
++		}
++
++		CCLuaStack* pStack = pLuaEngine->getLuaStack();
++		pStack->pushString(accessToken);
++		pStack->pushBoolean(success);
++		int ret = pStack->executeFunctionByHandler(mPermissionUpdateHandler, 2);
++		pStack->clean();
++
++		mPermissionUpdateHandler = 0;
+ 	}
+ }
+\ No newline at end of file
+diff --git a/extensions/Social/FacebookDelegate.h b/extensions/Social/FacebookDelegate.h
+index 80ed4a0..527a1a5 100755
+--- a/extensions/Social/FacebookDelegate.h
++++ b/extensions/Social/FacebookDelegate.h
+@@ -11,12 +11,18 @@ namespace Social
+ 		~FacebookDelegate();
+ 		static FacebookDelegate* sharedDelegate();
+ 
+-		void login();
++		void login(int handler);
++		void grantPublishPermission(const char* permission, int handler);
++		
++        void accessTokenUpdate(const char* accessToken);
++		void permissionUpdate(const char* accessToken, bool success);
+ 
+ 	protected:
+ 		FacebookDelegate();
++		int mAccessTokenUpdateHandler;
++		int mPermissionUpdateHandler;
+ 	
+ 	};
+ };
+ 
+-#endif
+\ No newline at end of file
++#endif
+diff --git a/extensions/Social/Singleton.h b/extensions/Social/Singleton.h
+deleted file mode 100755
+index 38bb5e0..0000000
+--- a/extensions/Social/Singleton.h
++++ /dev/null
+@@ -1,50 +0,0 @@
+-//
+-// filename	: Singleton.h
+-//
+-
+-#ifndef SINGLETON_H
+-#define SINGLETON_H
+-
+-#include <assert.h>
+-#include <stdlib.h>
+-
+-template <typename TYPE>
+-class Singleton
+-{
+-public:
+-	Singleton ()
+-	{
+-		assert( msSingleton == NULL );
+-		int offset = (int)(TYPE*)1 - (int)(Singleton<TYPE>*)(TYPE*)1;
+-		msSingleton = (TYPE*)((int)this + offset);
+-	}
+-
+-	~Singleton ()
+-	{
+-	}
+-
+-	static void Set (TYPE *object)
+-	{
+-		msSingleton = object;
+-	}
+-
+-	static TYPE &GetSingleton ()
+-	{
+-		assert( msSingleton != NULL );
+-		return (*msSingleton);
+-	}
+-
+-	static TYPE *GetSingletonPtr ()
+-	{
+-		assert( msSingleton != NULL );
+-		return msSingleton;
+-	}
+-
+-private:
+-	static TYPE *msSingleton;
+-};
+-
+-template <typename TYPE>
+-TYPE *Singleton<TYPE>::msSingleton = NULL;
+-
+-#endif
+\ No newline at end of file
+diff --git a/extensions/Utils/Analytics.cpp b/extensions/Utils/Analytics.cpp
+new file mode 100755
+index 0000000..b745e60
+--- /dev/null
++++ b/extensions/Utils/Analytics.cpp
+@@ -0,0 +1,45 @@
++#include "cocos2d.h"
++#include "Analytics.h"
++#include "CCLuaEngine.h"
++#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
++#include "AnalyticsHandler.h"
++#endif
++#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
++#include "AnalyticsAndroid.h"
++#endif
++
++USING_NS_CC;
++
++namespace Utils
++{
++	static Analytics* s_sharedUtils;
++
++	Analytics::Analytics()
++	{
++
++	}
++
++	Analytics::~Analytics()
++	{
++
++	}
++
++	Analytics* Analytics::sharedDelegate()
++	{
++		if (s_sharedUtils == NULL)
++		{
++			s_sharedUtils = new Analytics();
++		}
++		return s_sharedUtils;
++	}
++
++	void Analytics::postEvent(const char* eventName, const char* paramString)
++	{
++#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
++		AnalyticsHandler::getInstance()->postEvent(eventName, paramString);
++#endif
++#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
++		android_analytics_postEvent(eventName, paramString);
++#endif
++	}
++}
+\ No newline at end of file
+diff --git a/extensions/Utils/Analytics.h b/extensions/Utils/Analytics.h
+new file mode 100755
+index 0000000..cae3750
+--- /dev/null
++++ b/extensions/Utils/Analytics.h
+@@ -0,0 +1,22 @@
++#ifndef _ANALYTICS_H_
++#define _ANALYTICS_H_
++
++#include "cocos2d.h"
++
++namespace Utils
++{
++	class Analytics
++	{
++	public:
++		~Analytics();
++		static Analytics* sharedDelegate();
++
++		void postEvent(const char* eventName, const char* paramString);
++
++	protected:
++		Analytics();
++	
++	};
++};
++
++#endif
+diff --git a/extensions/Utils/AnalyticsAndroid.h b/extensions/Utils/AnalyticsAndroid.h
+new file mode 100755
+index 0000000..797dbf6
+--- /dev/null
++++ b/extensions/Utils/AnalyticsAndroid.h
+@@ -0,0 +1,5 @@
++#include <cocos2d.h>
++
++#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
++void android_analytics_postEvent(const char* eventName, const char* paramString);
++#endif
+\ No newline at end of file
+diff --git a/extensions/Utils/Misc.cpp b/extensions/Utils/Misc.cpp
+new file mode 100755
+index 0000000..4848572
+--- /dev/null
++++ b/extensions/Utils/Misc.cpp
+@@ -0,0 +1,290 @@
++#include "cocos2d.h"
++#include "Misc.h"
++#include "CCLuaEngine.h"
++#include <string.h>
++#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
++#include "MiscHandler.h"
++#endif
++#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
++#include "platform/android/jni/JniHelper.h"
++#include "MiscAndroid.h"
++#endif
++
++USING_NS_CC;
++
++namespace Utils
++{
++	static Misc* s_sharedUtils;
++
++	Misc::Misc()
++	{
++
++	}
++
++	Misc::~Misc()
++	{
++
++	}
++
++	Misc* Misc::sharedDelegate()
++	{
++		if (s_sharedUtils == NULL)
++		{
++			s_sharedUtils = new Misc();
++		}
++		return s_sharedUtils;
++	}
++
++	void Misc::copyToPasteboard(const char* content)
++	{
++#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
++		MiscHandler::getInstance()->copyToPasteboard(content);
++#endif
++#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
++		misc_copy_to_paste_board(content);
++#endif
++	}
++
++	void Misc::selectImage(char* path, int width, int height, int handler)
++	{
++		mSelectImageHandler = handler;
++#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
++		MiscHandler::getInstance()->selectImage(path, width, height);
++#endif
++#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
++		misc_select_image(path, width, height);
++#endif
++	}
++
++	void Misc::selectImageResult(bool success)
++	{
++		CCScriptEngineProtocol* pScriptProtocol = CCScriptEngineManager::sharedManager()->getScriptEngine();
++		cocos2d::CCLuaEngine* pLuaEngine = dynamic_cast<CCLuaEngine*>(pScriptProtocol);
++		if (pLuaEngine == NULL)
++		{
++			assert(false);
++			return;
++		}
++
++		CCLuaStack* pStack = pLuaEngine->getLuaStack();
++		pStack->pushBoolean(success);
++		int ret = pStack->executeFunctionByHandler(mSelectImageHandler, 1);
++		pStack->clean();
++	}
++    
++	void Misc::sendMail(char* receiver, char* subject, char* body, int handler)
++    {
++		mSendMailHandler = handler;
++#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
++		MiscHandler::getInstance()->sendMail(receiver, subject, body);
++#endif
++#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
++        misc_send_mail(receiver, subject, body);
++#endif
++#if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
++		sendMailResult(-1);
++#endif
++    }
++
++	void Misc::sendMailResult(int resultCode)
++	{
++		CCScriptEngineProtocol* pScriptProtocol = CCScriptEngineManager::sharedManager()->getScriptEngine();
++		cocos2d::CCLuaEngine* pLuaEngine = dynamic_cast<CCLuaEngine*>(pScriptProtocol);
++		if (pLuaEngine == NULL)
++		{
++			assert(false);
++			return;
++		}
++
++		CCLuaStack* pStack = pLuaEngine->getLuaStack();
++		pStack->pushInt(resultCode);
++		int ret = pStack->executeFunctionByHandler(mSendMailHandler, 1);
++		pStack->clean();
++	}
++
++	void Misc::sendSMS(char* body, int handler)
++	{
++		mSendSMSHandler = handler;
++#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
++		MiscHandler::getInstance()->sendSMS(body);
++#endif
++#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
++		misc_send_sms(body);
++#endif
++#if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
++		sendSMSResult(-1);
++#endif
++	}
++
++	void Misc::sendSMSResult(int resultCode)
++	{
++		CCScriptEngineProtocol* pScriptProtocol = CCScriptEngineManager::sharedManager()->getScriptEngine();
++		cocos2d::CCLuaEngine* pLuaEngine = dynamic_cast<CCLuaEngine*>(pScriptProtocol);
++		if (pLuaEngine == NULL)
++		{
++			assert(false);
++			return;
++		}
++
++		CCLuaStack* pStack = pLuaEngine->getLuaStack();
++		pStack->pushInt(resultCode);
++		int ret = pStack->executeFunctionByHandler(mSendSMSHandler, 1);
++		pStack->clean();
++	}
++
++	void Misc::getDeepLink(int handler)
++	{
++		const char* result = NULL;
++#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
++		result = MiscHandler::getInstance()->getDeepLink();
++#endif
++#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
++		
++#endif
++		CCScriptEngineProtocol* pScriptProtocol = CCScriptEngineManager::sharedManager()->getScriptEngine();
++		cocos2d::CCLuaEngine* pLuaEngine = dynamic_cast<CCLuaEngine*>(pScriptProtocol);
++		if (pLuaEngine == NULL)
++		{
++			assert(false);
++			return;
++		}
++
++		CCLuaStack* pStack = pLuaEngine->getLuaStack();
++		pStack->pushString(result);
++		int ret = pStack->executeFunctionByHandler(handler, 1);
++		pStack->clean();
++
++	}
++
++	void Misc::addEventListenerDeepLink(int handler)
++	{
++		mDeepLinkEventHandler = handler;
++	}
++
++	void Misc::notifyDeepLink(const char * result)
++	{
++		if (mDeepLinkEventHandler == NULL)
++		{
++			return;
++		}
++
++		CCScriptEngineProtocol* pScriptProtocol = CCScriptEngineManager::sharedManager()->getScriptEngine();
++		cocos2d::CCLuaEngine* pLuaEngine = dynamic_cast<CCLuaEngine*>(pScriptProtocol);
++		if (pLuaEngine == NULL)
++		{
++			assert(false);
++			return;
++		}
++
++		CCLuaStack* pStack = pLuaEngine->getLuaStack();
++		pStack->pushString(result);
++		int ret = pStack->executeFunctionByHandler(mDeepLinkEventHandler, 1);
++		pStack->clean();
++	}
++
++	char* Misc::createFormWithFile(const char* begin, const char* end, const char* filePath, const char* pszMode, unsigned long *pSize)
++	{
++		*pSize = 0;
++		unsigned char* fileContent = CCFileUtils::sharedFileUtils()->getFileData(filePath, pszMode, pSize);
++
++		char* buffer = new char[strlen(begin) + strlen(end) + *pSize];
++
++		memcpy(buffer, begin, strlen(begin));
++		memcpy(buffer + strlen(begin), fileContent, *pSize);
++		memcpy(buffer + strlen(begin) + *pSize, end, strlen(end));
++
++		*pSize += strlen(begin) + strlen(end);
++		return buffer;
++	}
++
++	void Misc::setFileToRequestData(HttpRequestForLua* request, const char* begin, const char* end, const char* filePath, const char* pszMode)
++	{
++		unsigned long pSize;
++		unsigned char* fileContent = CCFileUtils::sharedFileUtils()->getFileData(filePath, pszMode, &pSize);
++
++		char* buffer = new char[strlen(begin) + strlen(end) + pSize];
++
++		memcpy(buffer, begin, strlen(begin));
++		memcpy(buffer + strlen(begin), fileContent, pSize);
++		memcpy(buffer + strlen(begin) + pSize, end, strlen(end));
++
++		pSize += (strlen(begin) + strlen(end));
++		request->getRequest()->setRequestData(buffer, pSize);
++	}
++
++	void Misc::getUADeviceToken(int handler)
++	{
++		mUADeviceTokenHandler = handler;
++#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
++		MiscHandler::getInstance()->getUADeviceToken();
++#endif
++#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
++		misc_get_UA_DeviceToken();
++#endif
++#if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
++		responseUADeviceToken("-1");
++#endif
++	}
++
++	void Misc::setUADeviceTokenHandler(int handler)
++	{
++#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
++		mUADeviceTokenHandler = handler;
++#endif
++	}
++
++	void Misc::responseUADeviceToken(const char* token)
++	{
++		CCScriptEngineProtocol* pScriptProtocol = CCScriptEngineManager::sharedManager()->getScriptEngine();
++		cocos2d::CCLuaEngine* pLuaEngine = dynamic_cast<CCLuaEngine*>(pScriptProtocol);
++		if (pLuaEngine == NULL)
++		{
++			assert(false);
++			return;
++		}
++
++		CCLuaStack* pStack = pLuaEngine->getLuaStack();
++		pStack->pushString(token);
++		int ret = pStack->executeFunctionByHandler(mUADeviceTokenHandler, 1);
++		pStack->clean();
++	}
++
++	void Misc::requestPushNotification()
++	{
++#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
++		MiscHandler::getInstance()->requestPushNotification();
++#endif
++	}
++
++	void Misc::openUrl(char* url)
++	{
++#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
++		MiscHandler::getInstance()->openUrl(url);
++#endif
++#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
++		misc_open_url(url);
++#endif
++	}
++
++	void Misc::openRate()
++	{
++#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
++		MiscHandler::getInstance()->openRate();
++#endif
++#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
++		misc_open_rate();
++#endif
++	}
++
++	void Misc::terminate()
++	{
++#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
++		JniMethodInfo jmi;
++		if (JniHelper::getStaticMethodInfo(jmi, "org/cocos2dx/lib/Cocos2dxHelper", "terminateProcess", "()V"))
++		{
++			jmi.env->CallStaticVoidMethod(jmi.classID, jmi.methodID);
++			jmi.env->DeleteLocalRef(jmi.classID);
++		}
++#endif
++	}
++}
+\ No newline at end of file
+diff --git a/extensions/Utils/Misc.h b/extensions/Utils/Misc.h
+new file mode 100755
+index 0000000..92d7234
+--- /dev/null
++++ b/extensions/Utils/Misc.h
+@@ -0,0 +1,65 @@
++#ifndef _MISC_H_
++#define _MISC_H_
++
++#include "cocos2d.h"
++#include "cocos-ext.h"
++#include "../network/HttpRequestForLua.h"
++
++USING_NS_CC_EXT;
++
++namespace Utils
++{
++	class Misc
++	{
++	public:
++		~Misc();
++		static Misc* sharedDelegate();
++
++		void copyToPasteboard(const char* content);
++
++		void selectImage(char* path, int width, int height, int handler);
++
++		void selectImageResult(bool success);
++        
++        void sendMail(char* receiver, char* subject, char* body, int handler);
++
++		void sendMailResult(int resultCode);
++
++		void sendSMS(char* body, int handler);
++
++		void sendSMSResult(int resultCode);
++
++		void getDeepLink(int handler);
++
++		void addEventListenerDeepLink(int handler);
++
++		void notifyDeepLink(const char * result);
++        
++		char* createFormWithFile(const char* begin, const char* end, const char* filePath, const char* pszMode, unsigned long *pSize);
++
++		void setFileToRequestData(HttpRequestForLua* request, const char* begin, const char* end, const char* filePath, const char* pszMode);
++
++		void getUADeviceToken(int handler);
++
++		void setUADeviceTokenHandler(int handler);
++
++		void responseUADeviceToken(const char* token);
++
++		void requestPushNotification();
++
++		void openUrl(char* url);
++
++		void openRate();
++
++		void terminate();
++	protected:
++		Misc();
++		int mSelectImageHandler;
++		int mSendMailHandler;
++		int mSendSMSHandler;
++		int mUADeviceTokenHandler;
++		int mDeepLinkEventHandler;
++	};
++};
++
++#endif
+diff --git a/extensions/Utils/MiscAndroid.h b/extensions/Utils/MiscAndroid.h
+new file mode 100755
+index 0000000..8afd9e7
+--- /dev/null
++++ b/extensions/Utils/MiscAndroid.h
+@@ -0,0 +1,13 @@
++#include <cocos2d.h>
++
++#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
++void openWebPageAndroid(const char* url, int x, int y, int w, int h);
++void closeWebPageAndroid();
++void misc_copy_to_paste_board(const char* content);
++void misc_send_mail(const char* receiver, const char* subject, const char* body);
++void misc_send_sms(const char* body);
++void misc_open_url(const char* url);
++void misc_select_image(const char* path, int width, int height);
++void misc_get_UA_DeviceToken();
++void misc_open_rate();
++#endif
+\ No newline at end of file
+diff --git a/extensions/Utils/WebviewDelegate.cpp b/extensions/Utils/WebviewDelegate.cpp
+new file mode 100755
+index 0000000..b0548d5
+--- /dev/null
++++ b/extensions/Utils/WebviewDelegate.cpp
+@@ -0,0 +1,56 @@
++#include "cocos2d.h"
++#include "WebviewDelegate.h"
++#include "CCLuaEngine.h"
++#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
++#include "WebviewController.h"
++#endif
++#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
++#include "platform/android/jni/JniHelper.h"
++#include "MiscAndroid.h"
++#endif
++
++USING_NS_CC;
++
++namespace Utils
++{
++	static WebviewDelegate* s_sharedUtils;
++
++	WebviewDelegate::WebviewDelegate()
++	{
++
++	}
++
++	WebviewDelegate::~WebviewDelegate()
++	{
++
++	}
++
++	WebviewDelegate* WebviewDelegate::sharedDelegate()
++	{
++		if (s_sharedUtils == NULL)
++		{
++			s_sharedUtils = new WebviewDelegate();
++		}
++		return s_sharedUtils;
++	}
++
++	void WebviewDelegate::openWebpage(const char* url, int x, int y, int w, int h)
++	{
++#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
++		WebviewController::getInstance()->openWebpage(url, x, y, w, h);
++#endif
++#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
++		openWebPageAndroid(url, x, y, w, h);
++#endif
++	}
++
++	void WebviewDelegate::closeWebpage()
++	{
++#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
++		WebviewController::getInstance()->closeWebpage();
++#endif
++#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
++		closeWebPageAndroid();
++#endif
++	}
++}
+\ No newline at end of file
+diff --git a/extensions/Utils/WebviewDelegate.h b/extensions/Utils/WebviewDelegate.h
+new file mode 100755
+index 0000000..4951ea3
+--- /dev/null
++++ b/extensions/Utils/WebviewDelegate.h
+@@ -0,0 +1,23 @@
++#ifndef _WEBVIEW_DELEGATE_H_
++#define _WEBVIEW_DELEGATE_H_
++
++#include "cocos2d.h"
++
++namespace Utils
++{
++	class WebviewDelegate
++	{
++	public:
++		~WebviewDelegate();
++		static WebviewDelegate* sharedDelegate();
++
++		void openWebpage(const char* url, int x, int y, int w, int h);
++		void closeWebpage();
++
++	protected:
++		WebviewDelegate();
++	
++	};
++};
++
++#endif
+diff --git a/extensions/cocos-ext.h b/extensions/cocos-ext.h
+old mode 100644
+new mode 100755
+index 1e7a441..e43b598
+--- a/extensions/cocos-ext.h
++++ b/extensions/cocos-ext.h
+@@ -36,6 +36,7 @@
+ #include "GUI/CCScrollView/CCScrollView.h"
+ #include "GUI/CCScrollView/CCTableView.h"
+ #include "GUI/CCEditBox/CCEditBox.h"
++#include "GUI/CCEditBox/EditBoxDelegateForLua.h"
+ 
+ #include "network/HttpRequest.h"
+ #include "network/HttpResponse.h"
+diff --git a/extensions/network/HttpClient.cpp b/extensions/network/HttpClient.cpp
+old mode 100644
+new mode 100755
+index d1f32c0..4776452
+--- a/extensions/network/HttpClient.cpp
++++ b/extensions/network/HttpClient.cpp
+@@ -341,6 +341,7 @@ static int processGetTask(CCHttpRequest *request, write_callback callback, void
+     CURLRaii curl;
+     bool ok = curl.init(request, callback, stream, headerCallback, headerStream)
+             && curl.setOption(CURLOPT_FOLLOWLOCATION, true)
++			//&& curl.setOption(CURLOPT_PROXY, "127.0.0.1:8888")
+             && curl.perform(responseCode);
+     return ok ? 0 : 1;
+ }
+@@ -351,8 +352,10 @@ static int processPostTask(CCHttpRequest *request, write_callback callback, void
+     CURLRaii curl;
+     bool ok = curl.init(request, callback, stream, headerCallback, headerStream)
+             && curl.setOption(CURLOPT_POST, 1)
++			&& curl.setOption(CURLOPT_USERPWD, request->getUserpwd())
+             && curl.setOption(CURLOPT_POSTFIELDS, request->getRequestData())
+             && curl.setOption(CURLOPT_POSTFIELDSIZE, request->getRequestDataSize())
++			//&& curl.setOption(CURLOPT_PROXY, "127.0.0.1:8888")
+             && curl.perform(responseCode);
+     return ok ? 0 : 1;
+ }
+@@ -464,6 +467,26 @@ void CCHttpClient::send(CCHttpRequest* request)
+         
+     pthread_mutex_lock(&s_requestQueueMutex);
+     s_requestQueue->addObject(request);
++
++	// Sort the request by priority.
++	int i, j, length = s_requestQueue->data->num;
++	CCHttpRequest ** x = (CCHttpRequest**)s_requestQueue->data->arr;
++	CCHttpRequest *tempItem;
++
++	// insertion sort
++	for (i = 1; i < length; i++)
++	{
++		tempItem = x[i];
++		j = i - 1;
++
++		//continue moving element downwards while priority is smaller
++		while (j >= 0 && (tempItem->getPriority() > x[j]->getPriority()))
++		{
++			x[j + 1] = x[j];
++			j = j - 1;
++		}
++		x[j + 1] = tempItem;
++	}
+     pthread_mutex_unlock(&s_requestQueueMutex);
+     
+     // Notify thread start to work
+diff --git a/extensions/network/HttpRequest.h b/extensions/network/HttpRequest.h
+old mode 100644
+new mode 100755
+index 30097d7..3cd49c1
+--- a/extensions/network/HttpRequest.h
++++ b/extensions/network/HttpRequest.h
+@@ -47,14 +47,24 @@ class CCHttpRequest : public CCObject
+ {
+ public:
+     /** Use this enum type as param in setReqeustType(param) */
+-    typedef enum
+-    {
+-        kHttpGet,
+-        kHttpPost,
+-        kHttpPut,
+-        kHttpDelete,
+-        kHttpUnkown,
+-    } HttpRequestType;
++	typedef enum
++	{
++		kHttpGet,
++		kHttpPost,
++		kHttpPut,
++		kHttpDelete,
++		kHttpUnkown,
++	} HttpRequestType;
++
++	typedef enum
++	{
++		pVeryLow,
++		pLow,
++		pMedium,
++		pHigh,
++		pVeryHigh,
++
++	} HttpRequestPriority;
+     
+     /** Constructor 
+         Because HttpRequest object will be used between UI thead and network thread,
+@@ -68,9 +78,11 @@ public:
+         _url.clear();
+         _requestData.clear();
+         _tag.clear();
++		_userpwd.clear();
+         _pTarget = NULL;
+         _pSelector = NULL;
+         _pUserData = NULL;
++		_priority = pMedium;
+     };
+     
+     /** Destructor */
+@@ -116,6 +128,16 @@ public:
+     {
+         return _url.c_str();
+     };
++
++	inline void setUserpwd(const char* userpwd)
++	{
++		_userpwd = userpwd;
++	};
++
++	inline const char* getUserpwd()
++	{
++		return _userpwd.c_str();
++	};
+     
+     /** Option field. You can set your post data here
+      */
+@@ -217,6 +239,16 @@ public:
+    		return _headers;
+    	}
+ 
++	inline void setPriority(int p)
++	{
++		_priority = p;
++	}
++
++	inline int getPriority()
++	{
++		return _priority;
++	}
++
+ 
+ protected:
+     // properties
+@@ -228,6 +260,8 @@ protected:
+     SEL_HttpResponse            _pSelector;      /// callback function, e.g. MyLayer::onHttpResponse(CCHttpClient *sender, CCHttpResponse * response)
+     void*                       _pUserData;      /// You can add your customed data here 
+     std::vector<std::string>    _headers;		      /// custom http headers
++	std::string                 _userpwd;            /// user:password
++	int							_priority;			/// Http request priority, the priority is higher when the number is bigger.
+ };
+ 
+ NS_CC_EXT_END
+diff --git a/extensions/network/HttpRequestForLua.cpp b/extensions/network/HttpRequestForLua.cpp
+new file mode 100755
+index 0000000..12376e3
+--- /dev/null
++++ b/extensions/network/HttpRequestForLua.cpp
+@@ -0,0 +1,119 @@
++#include "HttpRequestForLua.h"
++#include "CCLuaEngine.h"
++
++USING_NS_CC;
++USING_NS_CC_EXT;
++
++HttpRequestForLua::HttpRequestForLua()
++{
++}
++
++
++HttpRequestForLua::~HttpRequestForLua()
++{
++}
++
++HttpRequestForLua * HttpRequestForLua::create(CCHttpRequest::HttpRequestType type)
++{
++	HttpRequestForLua* requestForLua = new HttpRequestForLua();
++
++	if (requestForLua)
++	{
++		requestForLua->autorelease();
++
++		CCHttpRequest* request = new CCHttpRequest();
++		request->setRequestType(type);
++
++		std::vector<std::string> headers;
++		request->setHeaders(headers);
++
++		requestForLua->setRequest(request);
++	}
++	else
++	{
++		CC_SAFE_DELETE(requestForLua);
++	}
++
++	return requestForLua;
++}
++
++void HttpRequestForLua::addHeader(const char* header)
++{
++	std::vector<std::string> headers = getRequest()->getHeaders();
++	
++	headers.push_back(header);
++	getRequest()->setHeaders(headers);
++}
++
++void HttpRequestForLua::setUserpwd(const char* userpwd)
++{
++	getRequest()->setUserpwd(userpwd);
++}
++
++void HttpRequestForLua::setPriority(int p)
++{
++	getRequest()->setPriority(p);
++}
++
++void HttpRequestForLua::sendHttpRequest(const char* url, int callbackFunc)
++{
++	CCLog("Requesting to %s", url);
++	mCallbackFunc = callbackFunc;
++	getRequest()->setUrl(url);
++	getRequest()->setResponseCallback(this, callfuncND_selector(HttpRequestForLua::onHttpRequestCompleted));
++	
++	CCHttpClient::getInstance()->send(getRequest());
++	getRequest()->release();
++}
++
++void HttpRequestForLua::onHttpRequestCompleted(cocos2d::CCNode *sender, void *data)
++{
++	CCHttpResponse *response = (CCHttpResponse*)data;
++
++	if (!response)
++	{
++		return;
++	}
++  
++	if (0 != strlen(response->getHttpRequest()->getTag()))
++	{
++		CCLog("%s completed", response->getHttpRequest()->getTag());
++	}
++	
++	int statusCode = response->getResponseCode();
++	CCLog("response code: %d", statusCode);
++
++	if (!response->isSucceed())
++	{
++		CCLog("response failed");
++		CCLog("error buffer: %s", response->getErrorBuffer());
++	}
++
++	// dump data
++
++	CCScriptEngineProtocol* pScriptProtocol = CCScriptEngineManager::sharedManager()->getScriptEngine();
++	cocos2d::CCLuaEngine* pLuaEngine = dynamic_cast<CCLuaEngine*>(pScriptProtocol);
++	if (pLuaEngine == NULL)
++	{
++		assert(false);
++		return;
++	}
++
++	CCLuaStack* pStack = pLuaEngine->getLuaStack();
++	bool isSucceed = response->isSucceed();
++	int status = response->getResponseCode();
++	const char* errorBuffer = response->getErrorBuffer();
++	std::vector<char>* headerBuffer = response->getResponseHeader();
++	std::vector<char>* bodyBuffer = response->getResponseData();
++	std::string header(headerBuffer->begin(), headerBuffer->end());
++	std::string body(bodyBuffer->begin(), bodyBuffer->end());
++	//pStack->pushCCObject(response->getHttpRequest(), "CCHttpRequest");
++	pStack->pushBoolean(isSucceed);  
++	pStack->pushString(body.c_str(), body.size());
++	pStack->pushString(header.c_str()); 
++	pStack->pushInt(status);
++	pStack->pushString(errorBuffer);
++	pStack->executeFunctionByHandler(mCallbackFunc, 5);
++	pStack->clean();
++
++}
+\ No newline at end of file
+diff --git a/extensions/network/HttpRequestForLua.h b/extensions/network/HttpRequestForLua.h
+new file mode 100755
+index 0000000..db94220
+--- /dev/null
++++ b/extensions/network/HttpRequestForLua.h
+@@ -0,0 +1,34 @@
++#ifndef _HTTPREQUEST_FORLUA_H_
++#define _HTTPREQUEST_FORLUA_H_
++
++#include "cocos2d.h"
++#include "HttpRequest.h"
++#include "HttpClient.h"
++
++
++NS_CC_EXT_BEGIN
++
++class HttpRequestForLua : CCObject
++{
++public:
++	HttpRequestForLua();
++	~HttpRequestForLua();
++
++	static HttpRequestForLua * create(CCHttpRequest::HttpRequestType type);
++
++	void addHeader(const char* header);
++	void setUserpwd(const char* userpwd);
++	void setPriority(int p);
++	void sendHttpRequest(const char* url, int callbackFunc);
++	void onHttpRequestCompleted(cocos2d::CCNode *sender, void *data);
++	void setRequest(CCHttpRequest* request) { mRequest = request; }
++	CCHttpRequest* getRequest() { return mRequest; }
++	
++protected:
++	int mCallbackFunc;
++	CCHttpRequest* mRequest;
++};
++
++NS_CC_EXT_END
++
++#endif
+\ No newline at end of file
+diff --git a/extensions/proj.win32/libExtensions.vcxproj b/extensions/proj.win32/libExtensions.vcxproj
+index be64771..3e0850a 100644
+--- a/extensions/proj.win32/libExtensions.vcxproj
++++ b/extensions/proj.win32/libExtensions.vcxproj
+@@ -67,7 +67,7 @@
+   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+     <ClCompile>
+       <Optimization>Disabled</Optimization>
+-      <AdditionalIncludeDirectories>$(MSBuildProgramFiles32)\Microsoft SDKs\Windows\v7.1A\include;$(ProjectDir)..\..\external\chipmunk\include\chipmunk;$(ProjectDir)..\..\external\sqlite3\include;$(ProjectDir)..\..\external;$(ProjectDir)..\..\external\libwebsockets\win32\include;$(ProjectDir)..\..\cocos2dx;$(ProjectDir)..\..\cocos2dx\include;$(ProjectDir)..\..\cocos2dx\kazmath\include;$(ProjectDir)..\..\cocos2dx\platform\win32;$(ProjectDir)..\..\cocos2dx\platform\third_party\win32;$(ProjectDir)..\..\cocos2dx\platform\third_party\win32\pthread;$(ProjectDir)..\..\cocos2dx\platform\third_party\win32\OGLES;$(ProjectDir)..\..\cocos2dx\platform\third_party\win32\zlib;$(ProjectDir)..\..\CocosDenshion\include;..\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
++      <AdditionalIncludeDirectories>$(MSBuildProgramFiles32)\Microsoft SDKs\Windows\v7.1A\include;$(ProjectDir)..\..\scripting\lua\cocos2dx_support;$(ProjectDir)..\..\scripting\lua\luajit\include;$(ProjectDir)..\..\external\chipmunk\include\chipmunk;$(ProjectDir)..\..\external\sqlite3\include;$(ProjectDir)..\..\external;$(ProjectDir)..\..\external\libwebsockets\win32\include;$(ProjectDir)..\..\cocos2dx;$(ProjectDir)..\..\cocos2dx\include;$(ProjectDir)..\..\cocos2dx\kazmath\include;$(ProjectDir)..\..\cocos2dx\platform\win32;$(ProjectDir)..\..\cocos2dx\platform\third_party\win32;$(ProjectDir)..\..\cocos2dx\platform\third_party\win32\pthread;$(ProjectDir)..\..\cocos2dx\platform\third_party\win32\OGLES;$(ProjectDir)..\..\cocos2dx\platform\third_party\win32\zlib;$(ProjectDir)..\..\CocosDenshion\include;..\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+       <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;_LIB;COCOS2D_DEBUG=1;CC_ENABLE_CHIPMUNK_INTEGRATION=1;_CRT_SECURE_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+       <MinimalRebuild>true</MinimalRebuild>
+       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+@@ -190,12 +190,14 @@
+     <ClCompile Include="..\GUI\CCControlExtension\CCScale9Sprite.cpp" />
+     <ClCompile Include="..\GUI\CCEditBox\CCEditBox.cpp" />
+     <ClCompile Include="..\GUI\CCEditBox\CCEditBoxImplWin.cpp" />
++    <ClCompile Include="..\GUI\CCEditBox\EditBoxDelegateForLua.cpp" />
+     <ClCompile Include="..\GUI\CCScrollView\CCScrollView.cpp" />
+     <ClCompile Include="..\GUI\CCScrollView\CCSorting.cpp" />
+     <ClCompile Include="..\GUI\CCScrollView\CCTableView.cpp" />
+     <ClCompile Include="..\GUI\CCScrollView\CCTableViewCell.cpp" />
+     <ClCompile Include="..\LocalStorage\LocalStorage.cpp" />
+     <ClCompile Include="..\network\HttpClient.cpp" />
++    <ClCompile Include="..\network\HttpRequestForLua.cpp" />
+     <ClCompile Include="..\network\Websocket.cpp" />
+     <ClCompile Include="..\physics_nodes\CCPhysicsDebugNode.cpp" />
+     <ClCompile Include="..\physics_nodes\CCPhysicsSprite.cpp" />
+@@ -221,6 +223,9 @@
+     <ClCompile Include="..\spine\Slot.cpp" />
+     <ClCompile Include="..\spine\SlotData.cpp" />
+     <ClCompile Include="..\spine\spine-cocos2dx.cpp" />
++    <ClCompile Include="..\Utils\Analytics.cpp" />
++    <ClCompile Include="..\Utils\Misc.cpp" />
++    <ClCompile Include="..\Utils\WebviewDelegate.cpp" />
+     <ClCompile Include="Win32InputBox.cpp" />
+   </ItemGroup>
+   <ItemGroup>
+@@ -339,6 +344,7 @@
+     <ClInclude Include="..\GUI\CCEditBox\CCEditBox.h" />
+     <ClInclude Include="..\GUI\CCEditBox\CCEditBoxImpl.h" />
+     <ClInclude Include="..\GUI\CCEditBox\CCEditBoxImplWin.h" />
++    <ClInclude Include="..\GUI\CCEditBox\EditBoxDelegateForLua.h" />
+     <ClInclude Include="..\GUI\CCScrollView\CCScrollView.h" />
+     <ClInclude Include="..\cocos-ext.h" />
+     <ClInclude Include="..\ExtensionMacros.h" />
+@@ -348,6 +354,7 @@
+     <ClInclude Include="..\LocalStorage\LocalStorage.h" />
+     <ClInclude Include="..\network\HttpClient.h" />
+     <ClInclude Include="..\network\HttpRequest.h" />
++    <ClInclude Include="..\network\HttpRequestForLua.h" />
+     <ClInclude Include="..\network\HttpResponse.h" />
+     <ClInclude Include="..\network\Websocket.h" />
+     <ClInclude Include="..\physics_nodes\CCPhysicsDebugNode.h" />
+@@ -375,6 +382,9 @@
+     <ClInclude Include="..\spine\SlotData.h" />
+     <ClInclude Include="..\spine\spine-cocos2dx.h" />
+     <ClInclude Include="..\spine\spine.h" />
++    <ClInclude Include="..\Utils\Analytics.h" />
++    <ClInclude Include="..\Utils\Misc.h" />
++    <ClInclude Include="..\Utils\WebviewDelegate.h" />
+     <ClInclude Include="Win32InputBox.h" />
+   </ItemGroup>
+   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+diff --git a/extensions/proj.win32/libExtensions.vcxproj.filters b/extensions/proj.win32/libExtensions.vcxproj.filters
+index d2523f0..4c1c834 100644
+--- a/extensions/proj.win32/libExtensions.vcxproj.filters
++++ b/extensions/proj.win32/libExtensions.vcxproj.filters
+@@ -100,6 +100,9 @@
+     <Filter Include="Social">
+       <UniqueIdentifier>{1ef6723c-1d80-42ed-b616-e7a966953fb2}</UniqueIdentifier>
+     </Filter>
++    <Filter Include="Utils">
++      <UniqueIdentifier>{8024763a-7143-47c5-9e53-1386853defe8}</UniqueIdentifier>
++    </Filter>
+   </ItemGroup>
+   <ItemGroup>
+     <ClCompile Include="..\GUI\CCScrollView\CCScrollView.cpp">
+@@ -483,6 +486,21 @@
+     <ClCompile Include="..\Social\FacebookDelegate.cpp">
+       <Filter>Social</Filter>
+     </ClCompile>
++    <ClCompile Include="..\network\HttpRequestForLua.cpp">
++      <Filter>network</Filter>
++    </ClCompile>
++    <ClCompile Include="..\GUI\CCEditBox\EditBoxDelegateForLua.cpp">
++      <Filter>GUI\CCEditBox</Filter>
++    </ClCompile>
++    <ClCompile Include="..\Utils\Analytics.cpp">
++      <Filter>Utils</Filter>
++    </ClCompile>
++    <ClCompile Include="..\Utils\WebviewDelegate.cpp">
++      <Filter>Utils</Filter>
++    </ClCompile>
++    <ClCompile Include="..\Utils\Misc.cpp">
++      <Filter>Utils</Filter>
++    </ClCompile>
+   </ItemGroup>
+   <ItemGroup>
+     <ClInclude Include="..\GUI\CCScrollView\CCScrollView.h">
+@@ -868,6 +886,21 @@
+     <ClInclude Include="..\Social\FacebookDelegate.h">
+       <Filter>Social</Filter>
+     </ClInclude>
++    <ClInclude Include="..\network\HttpRequestForLua.h">
++      <Filter>network</Filter>
++    </ClInclude>
++    <ClInclude Include="..\GUI\CCEditBox\EditBoxDelegateForLua.h">
++      <Filter>GUI\CCEditBox</Filter>
++    </ClInclude>
++    <ClInclude Include="..\Utils\Analytics.h">
++      <Filter>Utils</Filter>
++    </ClInclude>
++    <ClInclude Include="..\Utils\WebviewDelegate.h">
++      <Filter>Utils</Filter>
++    </ClInclude>
++    <ClInclude Include="..\Utils\Misc.h">
++      <Filter>Utils</Filter>
++    </ClInclude>
+   </ItemGroup>
+   <ItemGroup>
+     <ClInclude Include="..\spine\Animation.h">

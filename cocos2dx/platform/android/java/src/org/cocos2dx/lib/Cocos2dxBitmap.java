@@ -309,7 +309,9 @@ public class Cocos2dxBitmap {
 			final int pMaxWidth, final int pMaxHeight, final Paint pPaint) {
 		final String[] lines = pString.split("\\n");
 		String[] ret = null;
-		final int maxLines = 0;
+		final FontMetricsInt fm = pPaint.getFontMetricsInt();
+		final int heightPerLine = (int) Math.ceil(fm.bottom - fm.top);
+		final int maxLines = pMaxHeight / heightPerLine;
 
 		if (pMaxWidth != 0) {
 			final LinkedList<String> strList = new LinkedList<String>();

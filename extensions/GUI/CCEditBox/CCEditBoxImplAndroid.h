@@ -45,8 +45,6 @@ public:
     
     virtual bool initWithSize(const CCSize& size);
     virtual void setFont(const char* pFontName, int fontSize);
-	virtual const char* getFontName();
-	virtual float getFontSize();
     virtual void setFontColor(const ccColor3B& color);
     virtual void setPlaceholderFont(const char* pFontName, int fontSize);
     virtual void setPlaceholderFontColor(const ccColor3B& color);
@@ -69,12 +67,10 @@ public:
      */
     virtual void visit(void);
 	virtual void onEnter(void);
-	virtual void onExit(void);
     virtual void doAnimationWhenKeyboardMove(float duration, float distance);
     virtual void openKeyboard();
     virtual void closeKeyboard();
-    void updateText(const char *pText);
-
+    
 private:
     CCLabelTTF* m_pLabel;
     CCLabelTTF* m_pLabelPlaceHolder;

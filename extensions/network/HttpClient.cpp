@@ -26,11 +26,18 @@
 #include "HttpClient.h"
 // #include "platform/CCThread.h"
 
-#if (CC_TARGET_PLATFORM != CC_PLATFORM_WINRT) && (CC_TARGET_PLATFORM != CC_PLATFORM_WP8)
-
-#include <queue>
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_WP8) ||  (CC_TARGET_PLATFORM == CC_PLATFORM_WINRT)
+#include "CCPThreadWinRT.h"
+typedef void THREAD_VOID;
+#define THREAD_RETURN
+#else
 #include <pthread.h>
+typedef void* THREAD_VOID;
+#define THREAD_RETURN 0
+#endif
+
 #include <errno.h>
+#include <queue>
 
 #include "curl/curl.h"
 
@@ -95,7 +102,7 @@ static int processDeleteTask(CCHttpRequest *request, write_callback callback, vo
 
 
 // Worker thread
-static void* networkThread(void *data)
+static THREAD_VOID networkThread(THREAD_VOID)
 {    
     CCHttpRequest *request = NULL;
     
@@ -226,7 +233,8 @@ static void* networkThread(void *data)
 
     pthread_exit(NULL);
     
-    return 0;
+    return THREAD_RETURN;
+
 }
 
 //Configure curl's timeout property
@@ -341,7 +349,6 @@ static int processGetTask(CCHttpRequest *request, write_callback callback, void 
     CURLRaii curl;
     bool ok = curl.init(request, callback, stream, headerCallback, headerStream)
             && curl.setOption(CURLOPT_FOLLOWLOCATION, true)
-			//&& curl.setOption(CURLOPT_PROXY, "127.0.0.1:8888")
             && curl.perform(responseCode);
     return ok ? 0 : 1;
 }
@@ -352,10 +359,8 @@ static int processPostTask(CCHttpRequest *request, write_callback callback, void
     CURLRaii curl;
     bool ok = curl.init(request, callback, stream, headerCallback, headerStream)
             && curl.setOption(CURLOPT_POST, 1)
-			&& curl.setOption(CURLOPT_USERPWD, request->getUserpwd())
             && curl.setOption(CURLOPT_POSTFIELDS, request->getRequestData())
             && curl.setOption(CURLOPT_POSTFIELDSIZE, request->getRequestDataSize())
-			//&& curl.setOption(CURLOPT_PROXY, "127.0.0.1:8888")
             && curl.perform(responseCode);
     return ok ? 0 : 1;
 }
@@ -439,10 +444,10 @@ bool CCHttpClient::lazyInitThreadSemphore()
         pthread_mutex_init(&s_SleepMutex, NULL);
         pthread_cond_init(&s_SleepCondition, NULL);
 
+        need_quit = false;
         pthread_create(&s_networkThread, NULL, networkThread, NULL);
         pthread_detach(s_networkThread);
         
-        need_quit = false;
     }
     
     return true;
@@ -467,26 +472,6 @@ void CCHttpClient::send(CCHttpRequest* request)
         
     pthread_mutex_lock(&s_requestQueueMutex);
     s_requestQueue->addObject(request);
-
-	// Sort the request by priority.
-	int i, j, length = s_requestQueue->data->num;
-	CCHttpRequest ** x = (CCHttpRequest**)s_requestQueue->data->arr;
-	CCHttpRequest *tempItem;
-
-	// insertion sort
-	for (i = 1; i < length; i++)
-	{
-		tempItem = x[i];
-		j = i - 1;
-
-		//continue moving element downwards while priority is smaller
-		while (j >= 0 && (tempItem->getPriority() > x[j]->getPriority()))
-		{
-			x[j + 1] = x[j];
-			j = j - 1;
-		}
-		x[j + 1] = tempItem;
-	}
     pthread_mutex_unlock(&s_requestQueueMutex);
     
     // Notify thread start to work
@@ -533,7 +518,6 @@ void CCHttpClient::dispatchResponseCallbacks(float delta)
 
 NS_CC_EXT_END
 
-#endif // CC_TARGET_PLATFORM != CC_PLATFORM_WINRT) && (CC_TARGET_PLATFORM != CC_PLATFORM_WP8)
 
 
 

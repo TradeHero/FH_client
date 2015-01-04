@@ -13,11 +13,10 @@ extern "C" {
 #include "CCLuaStack.h"
 #include "CCLuaValue.h"
 #include "CCLuaEngine.h"
-#include "Misc.h"
+
 
 USING_NS_CC;
 USING_NS_CC_EXT;
-using namespace Utils;
 
 class LuaScrollViewDelegate:public CCObject, public CCScrollViewDelegate
 {
@@ -110,55 +109,6 @@ static void extendCCScrollView(lua_State* tolua_S)
         tolua_function(tolua_S, "registerScriptHandler", tolua_Cocos2dx_CCScrollView_registerScriptHandler);
     }
     lua_pop(tolua_S, 1);
-}
-
-static int tolua_Cocos2dx_Misc_createFormWithFile(lua_State* tolua_S)
-{
-#ifndef TOLUA_RELEASE
-	tolua_Error tolua_err;
-	if (
-		!tolua_isusertype(tolua_S, 1, "Misc", 0, &tolua_err) ||
-		!tolua_isstring(tolua_S, 2, 0, &tolua_err) ||
-		!tolua_isstring(tolua_S, 3, 0, &tolua_err) ||
-		!tolua_isstring(tolua_S, 4, 0, &tolua_err) ||
-		!tolua_isstring(tolua_S, 5, 0, &tolua_err) ||
-		!tolua_isnoobj(tolua_S, 6, &tolua_err)
-		)
-		goto tolua_lerror;
-	else
-#endif
-	{
-		Misc* self = (Misc*)tolua_tousertype(tolua_S, 1, 0);
-#ifndef TOLUA_RELEASE
-		if (!self) tolua_error(tolua_S, "invalid 'self' in function 'createFormWithFile'", NULL);
-#endif
-		const char* begin = ((const char*)tolua_tostring(tolua_S, 2, 0));
-		const char* end = ((const char*)tolua_tostring(tolua_S, 3, 0));
-		const char* filePath = ((const char*)tolua_tostring(tolua_S, 4, 0));
-		const char* pszMode = ((const char*)tolua_tostring(tolua_S, 5, 0));
-		unsigned long pSize = 0;
-
-		unsigned char* tolua_ret = (unsigned char*)self->createFormWithFile(begin, end, filePath, pszMode, &pSize);
-		tolua_pushstring(tolua_S, (const char*)tolua_ret);
-		tolua_pushnumber(tolua_S, (lua_Number)pSize);
-	}
-	return 2;
-#ifndef TOLUA_RELEASE
-tolua_lerror :
-	tolua_error(tolua_S, "#ferror in function 'createFormWithFile'.", &tolua_err);
-	return 0;
-#endif
-}
-
-static void extendMisc(lua_State* tolua_S)
-{
-	lua_pushstring(tolua_S, "Misc");
-	lua_rawget(tolua_S, LUA_REGISTRYINDEX);
-	if (lua_istable(tolua_S, -1))
-	{
-		tolua_function(tolua_S, "createFormWithFile", tolua_Cocos2dx_Misc_createFormWithFile);
-	}
-	lua_pop(tolua_S, 1);
 }
 
 #define KEY_TABLEVIEW_DATA_SOURCE  "TableViewDataSource"
@@ -579,6 +529,5 @@ int register_all_cocos2dx_extension_manual(lua_State* tolua_S)
     extendCCScrollView(tolua_S);
     extendCCTableView(tolua_S);
     extendCCTableViewCell(tolua_S);
-	extendMisc(tolua_S);
     return 0;
 }

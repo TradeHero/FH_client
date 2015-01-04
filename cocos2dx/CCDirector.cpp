@@ -130,6 +130,7 @@ bool CCDirector::init(void)
     m_uTotalFrames = m_uFrames = 0;
     m_pszFPS = new char[10];
     m_pLastUpdate = new struct cc_timeval();
+    m_fSecondsPerFrame = 0.0f;
 
     // paused ?
     m_bPaused = false;
@@ -457,7 +458,11 @@ void CCDirector::purgeCachedData(void)
     CCLabelBMFont::purgeCachedData();
     if (s_SharedDirector->getOpenGLView())
     {
+        CCSpriteFrameCache::sharedSpriteFrameCache()->purgeSharedSpriteFrameCache();
         CCTextureCache::sharedTextureCache()->removeUnusedTextures();
+#if defined(COCOS2D_DEBUG) && (COCOS2D_DEBUG > 0)
+        CCTextureCache::sharedTextureCache()->dumpCachedTextureInfo();
+#endif
     }
     CCFileUtils::sharedFileUtils()->purgeCachedEntries();
 }
