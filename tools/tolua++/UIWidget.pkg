@@ -38,7 +38,7 @@ typedef enum
     POSITION_PERCENT
 }PositionType;
 
-class Widget : public CCNode
+class Widget : public CCNodeRGBA
 {    
     Widget(void);
     

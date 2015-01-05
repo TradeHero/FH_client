@@ -41,6 +41,7 @@ extern "C" {
 #include "Cocos2dxLuaLoader.h"
 #include "LuaCocoStudio.h"
 #include "lua_cocos2dx_manual.h"
+#include "LuaCocos2dExtension.h"
 #include "lua_cocos2dx_extensions_manual.h"
 #include "lua_cocos2dx_cocostudio_manual.h"
 #include "xxtea.h"
@@ -125,6 +126,7 @@ bool CCLuaStack::init(void)
     };
     luaL_register(m_state, "_G", global_functions);
     tolua_CocoStudio_open(m_state);
+    tolua_Extension_open(m_state);
     luaopen_md5_core(m_state);
     luaopen_des56(m_state);
     luaopen_lfs(m_state);

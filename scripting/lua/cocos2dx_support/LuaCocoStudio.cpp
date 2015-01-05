@@ -1,6 +1,6 @@
 /*
 ** Lua binding: CocoStudio
-** Generated automatically by tolua++-1.0.92 on 01/04/15 17:03:09.
+** Generated automatically by tolua++-1.0.92 on 01/05/15 15:27:20.
 */
 
 /****************************************************************************
@@ -28744,9 +28744,9 @@ TOLUA_API int tolua_CocoStudio_open (lua_State* tolua_S)
   tolua_constant(tolua_S,"POSITION_ABSOLUTE",POSITION_ABSOLUTE);
   tolua_constant(tolua_S,"POSITION_PERCENT",POSITION_PERCENT);
   #ifdef __cplusplus
-  tolua_cclass(tolua_S,"Widget","Widget","CCNode",tolua_collect_Widget);
+  tolua_cclass(tolua_S,"Widget","Widget","CCNodeRGBA",tolua_collect_Widget);
   #else
-  tolua_cclass(tolua_S,"Widget","Widget","CCNode",NULL);
+  tolua_cclass(tolua_S,"Widget","Widget","CCNodeRGBA",NULL);
   #endif
   tolua_beginmodule(tolua_S,"Widget");
    tolua_function(tolua_S,"new",tolua_CocoStudio_Widget_new00);

@@ -54,7 +54,7 @@ function readStringFromFile( fileName )
 		CCLuaLog("Read file "..fileName.." took "..( endTime - startTime ) )
 	else
 		local fileName = fileUtils:fullPathForFilename( fileName )
-		print("Read file from package: "..fileName)
+		CCLuaLog("Read file from package: "..fileName)
 		text, textLength = fileUtils:getFileData( fileName, "r", 0 )
 		if text ~= nil and textLength > 0 then
 			text = string.sub( text, 1, textLength )
