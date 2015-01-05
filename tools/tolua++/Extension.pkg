@@ -1,0 +1,8 @@
+$#include "LuaCocos2dExtension.h"
+
+$pfile "FacebookDelegate.pkg"
+$pfile "HttpClientForLua.pkg"
+$pfile "EditBoxDelegateForLua.pkg"
+$pfile "Analytics.pkg"
+$pfile "WebviewDelegate.pkg"
+$pfile "Misc.pkg"

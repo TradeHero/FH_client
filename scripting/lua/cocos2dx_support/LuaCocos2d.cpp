@@ -1,6 +1,6 @@
 /*
 ** Lua binding: Cocos2d
-** Generated automatically by tolua++-1.0.92 on Mon Dec  8 17:25:38 2014.
+** Generated automatically by tolua++-1.0.92 on 01/04/15 17:02:56.
 */
 
 /****************************************************************************
@@ -464,6 +464,7 @@ static void tolua_reg_types (lua_State* tolua_S)
  tolua_usertype(tolua_S,"CCWaves");
  tolua_usertype(tolua_S,"CCParticleFireworks");
  tolua_usertype(tolua_S,"CCEvent");
+ tolua_usertype(tolua_S,"CCShaderCache");
  tolua_usertype(tolua_S,"CCActionInterval");
  tolua_usertype(tolua_S,"CCRenderTexture");
  tolua_usertype(tolua_S,"CCObject");
@@ -544,6 +545,7 @@ static void tolua_reg_types (lua_State* tolua_S)
  tolua_usertype(tolua_S,"CCComponent");
  tolua_usertype(tolua_S,"CCTableView");
  tolua_usertype(tolua_S,"CCTimer");
+ tolua_usertype(tolua_S,"CCEditBoxDelegate");
  tolua_usertype(tolua_S,"CCControlStepper");
  tolua_usertype(tolua_S,"CCFiniteTimeAction");
  tolua_usertype(tolua_S,"CCTransitionProgressRadialCW");
@@ -9770,6 +9772,41 @@ static int tolua_Cocos2d_CCFileUtils_isPopupNotify00(lua_State* tolua_S)
 #ifndef TOLUA_RELEASE
  tolua_lerror:
  tolua_error(tolua_S,"#ferror in function 'isPopupNotify'.",&tolua_err);
+ return 0;
+#endif
+}
+#endif //#ifndef TOLUA_DISABLE
+
+/* method: isFileExist of class  CCFileUtils */
+#ifndef TOLUA_DISABLE_tolua_Cocos2d_CCFileUtils_isFileExist00
+static int tolua_Cocos2d_CCFileUtils_isFileExist00(lua_State* tolua_S)
+{
+#ifndef TOLUA_RELEASE
+ tolua_Error tolua_err;
+ if (
+     !tolua_isusertype(tolua_S,1,"CCFileUtils",0,&tolua_err) ||
+     !tolua_iscppstring(tolua_S,2,0,&tolua_err) ||
+     !tolua_isnoobj(tolua_S,3,&tolua_err)
+ )
+  goto tolua_lerror;
+ else
+#endif
+ {
+  CCFileUtils* self = (CCFileUtils*)  tolua_tousertype(tolua_S,1,0);
+  const std::string strFilePath = ((const std::string)  tolua_tocppstring(tolua_S,2,0));
+#ifndef TOLUA_RELEASE
+  if (!self) tolua_error(tolua_S,"invalid 'self' in function 'isFileExist'", NULL);
+#endif
+  {
+   bool tolua_ret = (bool)  self->isFileExist(strFilePath);
+   tolua_pushboolean(tolua_S,(bool)tolua_ret);
+   tolua_pushcppstring(tolua_S,(const char*)strFilePath);
+  }
+ }
+ return 2;
+#ifndef TOLUA_RELEASE
+ tolua_lerror:
+ tolua_error(tolua_S,"#ferror in function 'isFileExist'.",&tolua_err);
  return 0;
 #endif
 }
@@ -64002,6 +64039,37 @@ static int tolua_Cocos2d_CCEditBox_onExit00(lua_State* tolua_S)
 }
 #endif //#ifndef TOLUA_DISABLE
 
+/* method: closeKeyboard of class  CCEditBox */
+#ifndef TOLUA_DISABLE_tolua_Cocos2d_CCEditBox_closeKeyboard00
+static int tolua_Cocos2d_CCEditBox_closeKeyboard00(lua_State* tolua_S)
+{
+#ifndef TOLUA_RELEASE
+ tolua_Error tolua_err;
+ if (
+     !tolua_isusertype(tolua_S,1,"CCEditBox",0,&tolua_err) ||
+     !tolua_isnoobj(tolua_S,2,&tolua_err)
+ )
+  goto tolua_lerror;
+ else
+#endif
+ {
+  CCEditBox* self = (CCEditBox*)  tolua_tousertype(tolua_S,1,0);
+#ifndef TOLUA_RELEASE
+  if (!self) tolua_error(tolua_S,"invalid 'self' in function 'closeKeyboard'", NULL);
+#endif
+  {
+   self->closeKeyboard();
+  }
+ }
+ return 0;
+#ifndef TOLUA_RELEASE
+ tolua_lerror:
+ tolua_error(tolua_S,"#ferror in function 'closeKeyboard'.",&tolua_err);
+ return 0;
+#endif
+}
+#endif //#ifndef TOLUA_DISABLE
+
 /* method: touchDownAction of class  CCEditBox */
 #ifndef TOLUA_DISABLE_tolua_Cocos2d_CCEditBox_touchDownAction00
 static int tolua_Cocos2d_CCEditBox_touchDownAction00(lua_State* tolua_S)
@@ -64032,6 +64100,39 @@ static int tolua_Cocos2d_CCEditBox_touchDownAction00(lua_State* tolua_S)
 #ifndef TOLUA_RELEASE
  tolua_lerror:
  tolua_error(tolua_S,"#ferror in function 'touchDownAction'.",&tolua_err);
+ return 0;
+#endif
+}
+#endif //#ifndef TOLUA_DISABLE
+
+/* method: setDelegate of class  CCEditBox */
+#ifndef TOLUA_DISABLE_tolua_Cocos2d_CCEditBox_setDelegate00
+static int tolua_Cocos2d_CCEditBox_setDelegate00(lua_State* tolua_S)
+{
+#ifndef TOLUA_RELEASE
+ tolua_Error tolua_err;
+ if (
+     !tolua_isusertype(tolua_S,1,"CCEditBox",0,&tolua_err) ||
+     !tolua_isusertype(tolua_S,2,"CCEditBoxDelegate",0,&tolua_err) ||
+     !tolua_isnoobj(tolua_S,3,&tolua_err)
+ )
+  goto tolua_lerror;
+ else
+#endif
+ {
+  CCEditBox* self = (CCEditBox*)  tolua_tousertype(tolua_S,1,0);
+  CCEditBoxDelegate* pDelegate = ((CCEditBoxDelegate*)  tolua_tousertype(tolua_S,2,0));
+#ifndef TOLUA_RELEASE
+  if (!self) tolua_error(tolua_S,"invalid 'self' in function 'setDelegate'", NULL);
+#endif
+  {
+   self->setDelegate(pDelegate);
+  }
+ }
+ return 0;
+#ifndef TOLUA_RELEASE
+ tolua_lerror:
+ tolua_error(tolua_S,"#ferror in function 'setDelegate'.",&tolua_err);
  return 0;
 #endif
 }
@@ -66461,6 +66562,192 @@ static int tolua_Cocos2d_CCTableView_unregisterAllScriptHandler00(lua_State* tol
 }
 #endif //#ifndef TOLUA_DISABLE
 
+/* method: sharedShaderCache of class  CCShaderCache */
+#ifndef TOLUA_DISABLE_tolua_Cocos2d_CCShaderCache_sharedShaderCache00
+static int tolua_Cocos2d_CCShaderCache_sharedShaderCache00(lua_State* tolua_S)
+{
+#ifndef TOLUA_RELEASE
+ tolua_Error tolua_err;
+ if (
+     !tolua_isusertable(tolua_S,1,"CCShaderCache",0,&tolua_err) ||
+     !tolua_isnoobj(tolua_S,2,&tolua_err)
+ )
+  goto tolua_lerror;
+ else
+#endif
+ {
+  {
+   CCShaderCache* tolua_ret = (CCShaderCache*)  CCShaderCache::sharedShaderCache();
+    tolua_pushusertype(tolua_S,(void*)tolua_ret,"CCShaderCache");
+  }
+ }
+ return 1;
+#ifndef TOLUA_RELEASE
+ tolua_lerror:
+ tolua_error(tolua_S,"#ferror in function 'sharedShaderCache'.",&tolua_err);
+ return 0;
+#endif
+}
+#endif //#ifndef TOLUA_DISABLE
+
+/* method: purgeSharedShaderCache of class  CCShaderCache */
+#ifndef TOLUA_DISABLE_tolua_Cocos2d_CCShaderCache_purgeSharedShaderCache00
+static int tolua_Cocos2d_CCShaderCache_purgeSharedShaderCache00(lua_State* tolua_S)
+{
+#ifndef TOLUA_RELEASE
+ tolua_Error tolua_err;
+ if (
+     !tolua_isusertable(tolua_S,1,"CCShaderCache",0,&tolua_err) ||
+     !tolua_isnoobj(tolua_S,2,&tolua_err)
+ )
+  goto tolua_lerror;
+ else
+#endif
+ {
+  {
+   CCShaderCache::purgeSharedShaderCache();
+  }
+ }
+ return 0;
+#ifndef TOLUA_RELEASE
+ tolua_lerror:
+ tolua_error(tolua_S,"#ferror in function 'purgeSharedShaderCache'.",&tolua_err);
+ return 0;
+#endif
+}
+#endif //#ifndef TOLUA_DISABLE
+
+/* method: loadDefaultShaders of class  CCShaderCache */
+#ifndef TOLUA_DISABLE_tolua_Cocos2d_CCShaderCache_loadDefaultShaders00
+static int tolua_Cocos2d_CCShaderCache_loadDefaultShaders00(lua_State* tolua_S)
+{
+#ifndef TOLUA_RELEASE
+ tolua_Error tolua_err;
+ if (
+     !tolua_isusertype(tolua_S,1,"CCShaderCache",0,&tolua_err) ||
+     !tolua_isnoobj(tolua_S,2,&tolua_err)
+ )
+  goto tolua_lerror;
+ else
+#endif
+ {
+  CCShaderCache* self = (CCShaderCache*)  tolua_tousertype(tolua_S,1,0);
+#ifndef TOLUA_RELEASE
+  if (!self) tolua_error(tolua_S,"invalid 'self' in function 'loadDefaultShaders'", NULL);
+#endif
+  {
+   self->loadDefaultShaders();
+  }
+ }
+ return 0;
+#ifndef TOLUA_RELEASE
+ tolua_lerror:
+ tolua_error(tolua_S,"#ferror in function 'loadDefaultShaders'.",&tolua_err);
+ return 0;
+#endif
+}
+#endif //#ifndef TOLUA_DISABLE
+
+/* method: reloadDefaultShaders of class  CCShaderCache */
+#ifndef TOLUA_DISABLE_tolua_Cocos2d_CCShaderCache_reloadDefaultShaders00
+static int tolua_Cocos2d_CCShaderCache_reloadDefaultShaders00(lua_State* tolua_S)
+{
+#ifndef TOLUA_RELEASE
+ tolua_Error tolua_err;
+ if (
+     !tolua_isusertype(tolua_S,1,"CCShaderCache",0,&tolua_err) ||
+     !tolua_isnoobj(tolua_S,2,&tolua_err)
+ )
+  goto tolua_lerror;
+ else
+#endif
+ {
+  CCShaderCache* self = (CCShaderCache*)  tolua_tousertype(tolua_S,1,0);
+#ifndef TOLUA_RELEASE
+  if (!self) tolua_error(tolua_S,"invalid 'self' in function 'reloadDefaultShaders'", NULL);
+#endif
+  {
+   self->reloadDefaultShaders();
+  }
+ }
+ return 0;
+#ifndef TOLUA_RELEASE
+ tolua_lerror:
+ tolua_error(tolua_S,"#ferror in function 'reloadDefaultShaders'.",&tolua_err);
+ return 0;
+#endif
+}
+#endif //#ifndef TOLUA_DISABLE
+
+/* method: programForKey of class  CCShaderCache */
+#ifndef TOLUA_DISABLE_tolua_Cocos2d_CCShaderCache_programForKey00
+static int tolua_Cocos2d_CCShaderCache_programForKey00(lua_State* tolua_S)
+{
+#ifndef TOLUA_RELEASE
+ tolua_Error tolua_err;
+ if (
+     !tolua_isusertype(tolua_S,1,"CCShaderCache",0,&tolua_err) ||
+     !tolua_isstring(tolua_S,2,0,&tolua_err) ||
+     !tolua_isnoobj(tolua_S,3,&tolua_err)
+ )
+  goto tolua_lerror;
+ else
+#endif
+ {
+  CCShaderCache* self = (CCShaderCache*)  tolua_tousertype(tolua_S,1,0);
+  const char* key = ((const char*)  tolua_tostring(tolua_S,2,0));
+#ifndef TOLUA_RELEASE
+  if (!self) tolua_error(tolua_S,"invalid 'self' in function 'programForKey'", NULL);
+#endif
+  {
+   CCGLProgram* tolua_ret = (CCGLProgram*)  self->programForKey(key);
+    tolua_pushusertype(tolua_S,(void*)tolua_ret,"CCGLProgram");
+  }
+ }
+ return 1;
+#ifndef TOLUA_RELEASE
+ tolua_lerror:
+ tolua_error(tolua_S,"#ferror in function 'programForKey'.",&tolua_err);
+ return 0;
+#endif
+}
+#endif //#ifndef TOLUA_DISABLE
+
+/* method: addProgram of class  CCShaderCache */
+#ifndef TOLUA_DISABLE_tolua_Cocos2d_CCShaderCache_addProgram00
+static int tolua_Cocos2d_CCShaderCache_addProgram00(lua_State* tolua_S)
+{
+#ifndef TOLUA_RELEASE
+ tolua_Error tolua_err;
+ if (
+     !tolua_isusertype(tolua_S,1,"CCShaderCache",0,&tolua_err) ||
+     !tolua_isusertype(tolua_S,2,"CCGLProgram",0,&tolua_err) ||
+     !tolua_isstring(tolua_S,3,0,&tolua_err) ||
+     !tolua_isnoobj(tolua_S,4,&tolua_err)
+ )
+  goto tolua_lerror;
+ else
+#endif
+ {
+  CCShaderCache* self = (CCShaderCache*)  tolua_tousertype(tolua_S,1,0);
+  CCGLProgram* program = ((CCGLProgram*)  tolua_tousertype(tolua_S,2,0));
+  const char* key = ((const char*)  tolua_tostring(tolua_S,3,0));
+#ifndef TOLUA_RELEASE
+  if (!self) tolua_error(tolua_S,"invalid 'self' in function 'addProgram'", NULL);
+#endif
+  {
+   self->addProgram(program,key);
+  }
+ }
+ return 0;
+#ifndef TOLUA_RELEASE
+ tolua_lerror:
+ tolua_error(tolua_S,"#ferror in function 'addProgram'.",&tolua_err);
+ return 0;
+#endif
+}
+#endif //#ifndef TOLUA_DISABLE
+
 /* method: delete of class  CCComponent */
 #ifndef TOLUA_DISABLE_tolua_Cocos2d_CCComponent_delete00
 static int tolua_Cocos2d_CCComponent_delete00(lua_State* tolua_S)
@@ -67323,6 +67610,7 @@ TOLUA_API int tolua_Cocos2d_open (lua_State* tolua_S)
    tolua_function(tolua_S,"getWritablePath",tolua_Cocos2d_CCFileUtils_getWritablePath00);
    tolua_function(tolua_S,"setPopupNotify",tolua_Cocos2d_CCFileUtils_setPopupNotify00);
    tolua_function(tolua_S,"isPopupNotify",tolua_Cocos2d_CCFileUtils_isPopupNotify00);
+   tolua_function(tolua_S,"isFileExist",tolua_Cocos2d_CCFileUtils_isFileExist00);
   tolua_endmodule(tolua_S);
   tolua_function(tolua_S,"ccDrawPoint",tolua_Cocos2d_ccDrawPoint00);
   tolua_function(tolua_S,"ccDrawPoints",tolua_Cocos2d_ccDrawPoints00);
@@ -70160,7 +70448,9 @@ TOLUA_API int tolua_Cocos2d_open (lua_State* tolua_S)
    tolua_function(tolua_S,"visit",tolua_Cocos2d_CCEditBox_visit00);
    tolua_function(tolua_S,"onEnter",tolua_Cocos2d_CCEditBox_onEnter00);
    tolua_function(tolua_S,"onExit",tolua_Cocos2d_CCEditBox_onExit00);
+   tolua_function(tolua_S,"closeKeyboard",tolua_Cocos2d_CCEditBox_closeKeyboard00);
    tolua_function(tolua_S,"touchDownAction",tolua_Cocos2d_CCEditBox_touchDownAction00);
+   tolua_function(tolua_S,"setDelegate",tolua_Cocos2d_CCEditBox_setDelegate00);
   tolua_endmodule(tolua_S);
   #ifdef __cplusplus
   tolua_cclass(tolua_S,"CCInteger","CCInteger","CCObject",tolua_collect_CCInteger);
@@ -70278,6 +70568,15 @@ TOLUA_API int tolua_Cocos2d_open (lua_State* tolua_S)
    tolua_constant(tolua_S,"kTableCellSizeAtIndex",CCTableView::kTableCellSizeAtIndex);
    tolua_constant(tolua_S,"kNumberOfCellsInTableView",CCTableView::kNumberOfCellsInTableView);
    tolua_function(tolua_S,"unregisterAllScriptHandler",tolua_Cocos2d_CCTableView_unregisterAllScriptHandler00);
+  tolua_endmodule(tolua_S);
+  tolua_cclass(tolua_S,"CCShaderCache","CCShaderCache","CCObject",NULL);
+  tolua_beginmodule(tolua_S,"CCShaderCache");
+   tolua_function(tolua_S,"sharedShaderCache",tolua_Cocos2d_CCShaderCache_sharedShaderCache00);
+   tolua_function(tolua_S,"purgeSharedShaderCache",tolua_Cocos2d_CCShaderCache_purgeSharedShaderCache00);
+   tolua_function(tolua_S,"loadDefaultShaders",tolua_Cocos2d_CCShaderCache_loadDefaultShaders00);
+   tolua_function(tolua_S,"reloadDefaultShaders",tolua_Cocos2d_CCShaderCache_reloadDefaultShaders00);
+   tolua_function(tolua_S,"programForKey",tolua_Cocos2d_CCShaderCache_programForKey00);
+   tolua_function(tolua_S,"addProgram",tolua_Cocos2d_CCShaderCache_addProgram00);
   tolua_endmodule(tolua_S);
   #ifdef __cplusplus
   tolua_cclass(tolua_S,"CCComponent","CCComponent","CCObject",tolua_collect_CCComponent);
