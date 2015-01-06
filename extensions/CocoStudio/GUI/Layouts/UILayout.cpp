@@ -1340,6 +1340,8 @@ void Layout::copySpecialProperties(Widget *widget)
         setLayoutType(layout->_layoutType);
         setClippingEnabled(layout->_clippingEnabled);
         setClippingType(layout->_clippingType);
+        setBackGroundImageColor(layout->_backGroundImageColor);
+        setBackGroundImageOpacity(layout->_backGroundImageOpacity);
     }
 }
 }
