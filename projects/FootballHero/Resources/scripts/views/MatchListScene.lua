@@ -595,9 +595,14 @@ function helperInitMatchInfo( topContent, matchInfo )
     end
 
     local totalWinPredictions = matchInfo["HomePredictions"] + matchInfo["AwayPredictions"] + matchInfo["DrawPredictions"]
-    local homeWinPercent = matchInfo["HomePredictions"] / totalWinPredictions * 100
-    local awayWinPercent = matchInfo["AwayPredictions"] / totalWinPredictions * 100
-    local drawWinPercent = matchInfo["DrawPredictions"] / totalWinPredictions * 100
+    local homeWinPercent = 0
+    local awayWinPercent = 0
+    local drawWinPercent = 0
+    if totalWinPredictions > 0 then
+        homeWinPercent = matchInfo["HomePredictions"] / totalWinPredictions * 100
+        awayWinPercent = matchInfo["AwayPredictions"] / totalWinPredictions * 100
+        drawWinPercent = matchInfo["DrawPredictions"] / totalWinPredictions * 100
+    end
     homePercent:setText( string.format( homePercent:getStringValue(), homeWinPercent ) )
     awayPercent:setText( string.format( awayPercent:getStringValue(), awayWinPercent ) )
     drawPercent:setText( string.format( drawPercent:getStringValue(), drawWinPercent ) )
