@@ -135,7 +135,7 @@ bool AssetsManager::checkUpdate()
     if (_connectionTimeout) curl_easy_setopt(_curl, CURLOPT_CONNECTTIMEOUT, _connectionTimeout);
     res = curl_easy_perform(_curl);
     
-	int32_t responseCode = -1;
+	long responseCode = -1;
 	CURLcode code = curl_easy_getinfo(_curl, CURLINFO_RESPONSE_CODE, &responseCode);
 
 	if (res != 0 || responseCode != 200)

@@ -331,9 +331,11 @@ public:
     /// @param responseCode Null not allowed
     bool perform(int *responseCode)
     {
+        long tempResponseCode = -1;
         if (CURLE_OK != curl_easy_perform(m_curl))
             return false;
-        CURLcode code = curl_easy_getinfo(m_curl, CURLINFO_RESPONSE_CODE, responseCode);
+        CURLcode code = curl_easy_getinfo(m_curl, CURLINFO_RESPONSE_CODE, &tempResponseCode);
+        *responseCode = (int)tempResponseCode;
         if (code != CURLE_OK || *responseCode != 200)
             return false;
         
