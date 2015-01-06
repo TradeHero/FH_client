@@ -1,5 +1,7 @@
 module(..., package.seeall)
 
+require "extern"
+
 local SceneManager = require("scripts.SceneManager")
 local Constants = require("scripts.Constants")
 local EventManager = require("scripts.events.EventManager").getInstance()
