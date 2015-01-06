@@ -113,7 +113,7 @@ function checkFile( fileIndex )
 	    print("Downloading from: "..RequestUtils.CDN_SERVER_IP..CDNFileNameList[fileIndex])
 	    httpRequest:sendHttpRequest( RequestUtils.CDN_SERVER_IP..CDNFileNameList[fileIndex], handler )
 
-	    ConnectingMessage.loadFrame( string.format( Constants.String.updating_files, files ) )
+	    ConnectingMessage.loadFrame( string.format( Constants.String.updating_files, file ) )
 	else
 		checkNext()
 	end
