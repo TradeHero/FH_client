@@ -194,6 +194,14 @@ M.en = {
   marketing_message_1 = "Congratulations on making your first prediction!",
   marketing_message_2 = "Now challenge your friends in your own mini-competition!",
   marketing_message_3 = "Who will rise to the top?",
+  match_center = {
+    make_prediction = "Make a prediction!",
+    played = "Played %d out of %d",
+    prediction_made = "Prediction made",
+    title = "Match Center",
+    title_discussion = "Discussion",
+    title_meetings = "Last Meetings",
+  },
   match_list = {
     draw = "Draw",
     most_popular = "热门比赛",

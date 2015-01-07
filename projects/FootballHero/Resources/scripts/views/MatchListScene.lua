@@ -510,13 +510,8 @@ function updateContentContainer( contentHeight, addContent )
 end
 
 function enterMatch( match )
-    if match["PredictionsAvailable"] > 0 and match["PredictionsPlayed"] == match["PredictionsAvailable"] then
-        EventManager:postEvent( Event.Show_Info, { Constants.String.info.predictions_entered } )
-        return
-    end
-
     Logic:setSelectedMatch( match )
-    EventManager:postEvent( Event.Enter_Match, { match["Id"] } )
+    EventManager:postEvent( Event.Enter_Match_Center, {} )
 end
 
 function helperInitMatchInfo( topContent, matchInfo )
