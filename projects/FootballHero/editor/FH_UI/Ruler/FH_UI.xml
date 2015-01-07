@@ -328,4 +328,8 @@
     <Project>AskForComment</Project>
     <GuidesList />
   </GuidesProject>
+  <GuidesProject>
+    <Project>MatchCenterTopScene</Project>
+    <GuidesList />
+  </GuidesProject>
 </ArrayOfGuidesProject>
