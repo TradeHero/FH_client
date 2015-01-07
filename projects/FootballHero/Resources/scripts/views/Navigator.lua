@@ -5,6 +5,8 @@ local SceneManager = require("scripts.SceneManager")
 local EventManager = require("scripts.events.EventManager").getInstance()
 local Event = require("scripts.events.Event").EventList
 local CommunityConfig = require("scripts.config.Community")
+local FileUtils = require("scripts.FileUtils")
+local Json = require("json")
 
 local mWidget
 local mLastSelectedId = 0
@@ -33,6 +35,13 @@ function loadFrame( parent )
     	mLastSelectedId = 1
     end
     chooseNav( mLastSelectedId )
+
+    local serverContextText = FileUtils.readStringFromFile("server")
+    local serverContext = Json.decode( serverContextText )
+    if not serverContext.useDev then
+    	local devText = mWidget:getChildByName( "Label_DevMode" )
+    	devText:setEnabled( false )
+    end
 end
 
 function EnterOrExit( eventType )
