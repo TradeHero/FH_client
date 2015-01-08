@@ -328,4 +328,8 @@
     <Project>AskForComment</Project>
     <GuidesList />
   </GuidesProject>
+  <GuidesProject>
+    <Project>SpinWheel</Project>
+    <GuidesList />
+  </GuidesProject>
 </ArrayOfGuidesProject>

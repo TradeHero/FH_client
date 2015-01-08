@@ -16,6 +16,7 @@ CONTENT_TYPE_JPG = "Content-Type: image/jpg"
 IMAGE_PATH = "images/"
 TUTORIAL_IMAGE_PATH = IMAGE_PATH.."tutorial/"
 COMPETITION_IMAGE_PATH = IMAGE_PATH.."competitions/"
+SPINWHEEL_IMAGE_PATH = IMAGE_PATH.."spinWheel/"
 
 TEAM_IMAGE_PATH = IMAGE_PATH.."teams/"
 LEAGUE_IMAGE_PATH = IMAGE_PATH.."leagues/"

@@ -53,6 +53,7 @@ EventNameList =
     "Enter_Share",
     "Enter_Push_Notification",
     "Enter_Sound_Settings",
+    "Enter_Spin_the_Wheel",
 
     "Do_Ask_For_Rate",
     "Do_Ask_For_Comment",

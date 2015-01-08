@@ -11,8 +11,13 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "Tutorial/Default Button.png",
-    "Popup/popup-rate-1.png"
+    "spinWheel/bkg-main.png",
+    "spinWheel/img-wheel-nologo.png",
+    "spinWheel/img-xiaomi.png",
+    "spinWheel/img-button.png",
+    "spinWheel/btn-winner.png",
+    "spinWheel/btn-ticket.png",
+    "spinWheel/img-spinner.png"
   ],
   "version": "1.5.0.0",
   "widgetTree": {
@@ -52,8 +57,8 @@
               "rotation": 0,
               "scaleX": 1,
               "scaleY": 1,
-              "sizePercentX": 0.99288255,
-              "sizePercentY": 0.602061868,
+              "sizePercentX": 1.00355875,
+              "sizePercentY": 1.057732,
               "sizeType": 0,
               "tag": 11034,
               "touchAble": false,
@@ -302,7 +307,7 @@
               "rotation": 0,
               "scaleX": 1,
               "scaleY": 1,
-              "sizePercentX": 0.7740213,
+              "sizePercentX": 0.8594306,
               "sizePercentY": 0.0680412352,
               "sizeType": 0,
               "tag": 25257,
