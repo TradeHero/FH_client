@@ -47,6 +47,9 @@ function init()
     RateManager.init()
 
     initEvents()
+
+    math.randomseed(os.time())
+    math.random(100)
 end
 
 function initEvents()

@@ -623,7 +623,8 @@ bool CCRenderTexture::saveToFile(const char *szFilePath)
     CCImage *pImage = newCCImage(true);
     if (pImage)
     {
-        bRet = pImage->saveToFile(szFilePath, kCCImageFormatJPEG);
+        bRet = pImage->saveToFile
+        (szFilePath, kCCImageFormatJPEG);
     }
 
     CC_SAFE_DELETE(pImage);
@@ -640,7 +641,7 @@ bool CCRenderTexture::saveToFile(const char *fileName, tCCImageFormat format)
     {
         std::string fullpath = CCFileUtils::sharedFileUtils()->getWritablePath() + fileName;
         
-        bRet = pImage->saveToFile(fullpath.c_str(), true);
+        bRet = pImage->saveToFile(fullpath.c_str(), false);
     }
 
     CC_SAFE_DELETE(pImage);

@@ -332,4 +332,8 @@
     <Project>SpinWheel</Project>
     <GuidesList />
   </GuidesProject>
+  <GuidesProject>
+    <Project>WheelPanel</Project>
+    <GuidesList />
+  </GuidesProject>
 </ArrayOfGuidesProject>
