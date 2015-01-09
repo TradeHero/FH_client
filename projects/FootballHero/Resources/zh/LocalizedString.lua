@@ -198,9 +198,13 @@ M.en = {
     make_prediction = "Make a prediction!",
     played = "Played %d out of %d",
     prediction_made = "Prediction made",
+    share_body = "", -- TODO
+    share_title = "", -- TODO
     title = "Match Center",
     title_discussion = "Discussion",
     title_meetings = "Last Meetings",
+    write_comment = "Write a comment...",
+    write_discussion = "Write a new discussion...",
   },
   match_list = {
     draw = "Draw",

@@ -54,6 +54,8 @@ EventNameList =
     "Enter_Share",
     "Enter_Push_Notification",
     "Enter_Sound_Settings",
+    "Enter_Make_Discussion_Post",
+    "Enter_Discussion_Details",
 
     "Do_Ask_For_Rate",
     "Do_Ask_For_Comment",
@@ -78,6 +80,9 @@ EventNameList =
     "Do_Get_Chat_Message",
     "Do_Share_By_SMS",
     "Do_Share_By_Email",
+    "Do_Make_Discussion_Post",
+    "Do_Like_Discussion_Post",
+    "Do_Share_Discussion_Post",
 
     "Show_Info",
     "Show_Error_Message",
@@ -117,6 +122,8 @@ EventNameDosenotTrackList =
     "Do_Get_Chat_Message",
     "Do_Share_By_SMS",
     "Do_Share_By_Email",
+    "Do_Make_Discussion_Post",
+    "Do_Like_Discussion_Post",
 
     "Check_Start_Tutorial",
     "Check_File_Version",

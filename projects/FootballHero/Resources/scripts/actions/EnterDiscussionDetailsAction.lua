@@ -9,27 +9,22 @@ local RequestUtils = require("scripts.RequestUtils")
 local Constants = require("scripts.Constants")
 local MatchCenterConfig = require("scripts.config.MatchCenter")
 
-local mTabID
+local mDiscussionInfo
 
 function action( param )
-    mTabID = param[1]
-    local match = Logic:getSelectedMatch()
-    local step = 1
 
-    local url
-    if mTabID == MatchCenterConfig.MATCH_CENTER_TAB_ID_MEETINGS then
-        --url = RequestUtils.GET_COMPETITION_LIST_REST_CALL
-        
-    elseif mTabID == MatchCenterConfig.MATCH_CENTER_TAB_ID_DISCUSSION then
-        url = RequestUtils.GET_DISCUSSION_REST_CALL..
+	mDiscussionInfo = param
+	local postId = mDiscussionInfo["Id"]
+	local step = 1
+
+	local url = RequestUtils.GET_DISCUSSION_REST_CALL..
                 "?discussionObjectId="..MatchCenterConfig.DISCUSSION_POST_TYPE_GAME..
-                "&parentId="..match["Id"]..
+                "&parentId="..postId..
                 "&step="..step..
                 "&perPage="..Constants.DISCUSSIONS_PER_PAGE
                 --"&lastPostTime=<unixTimeStamp>"
-    end
 
-    local requestInfo = {}
+	local requestInfo = {}
     requestInfo.requestData = ""
     requestInfo.url = url
 
@@ -42,22 +37,16 @@ function action( param )
     httpRequest:sendHttpRequest( url, handler )
 
     ConnectingMessage.loadFrame()
-
-    --loadMatchCenterScene( {}, mTabID )
-end
-
-function loadMatchCenterScene( jsonResponse )
-    local MatchCenterScene = require("scripts.views.MatchCenterScene")
-    
-    if MatchCenterScene.isShown() then
-        MatchCenterScene.refreshFrame( jsonResponse, mTabID )
-    else
-        MatchCenterScene.loadFrame( jsonResponse, mTabID )
-    end
 end
 
 function onRequestSuccess( jsonResponse )
-    loadMatchCenterScene( jsonResponse )
+    local DiscussionsDetailsScene = require("scripts.views.MatchCenterDiscussionsDetailScene")
+
+    if DiscussionsDetailsScene.isShown() then
+		DiscussionsDetailsScene.refreshFrame( mDiscussionInfo, jsonResponse )
+    else
+    	DiscussionsDetailsScene.loadFrame( mDiscussionInfo, jsonResponse )
+	end
 end
 
 function onRequestFailed( jsonResponse )

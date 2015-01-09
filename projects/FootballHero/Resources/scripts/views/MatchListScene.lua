@@ -14,6 +14,7 @@ local SMIS = require("scripts.SMIS")
 local Json = require("json")
 local ConnectingMessage = require("scripts.views.ConnectingMessage")
 local CommunityConfig = require("scripts.config.Community")
+local MatchCenterConfig = require("scripts.config.MatchCenter")
 
 local mWidget
 local mTopLayer
@@ -511,7 +512,7 @@ end
 
 function enterMatch( match )
     Logic:setSelectedMatch( match )
-    EventManager:postEvent( Event.Enter_Match_Center, {} )
+    EventManager:postEvent( Event.Enter_Match_Center, { MatchCenterConfig.MATCH_CENTER_TAB_ID_DISCUSSION } )
 end
 
 function helperInitMatchInfo( topContent, matchInfo )

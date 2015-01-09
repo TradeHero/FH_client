@@ -13,21 +13,15 @@ local mTabID
 
 function action( param )
     mTabID = param[1]
-    local match = Logic:getSelectedMatch()
-    local step = 1
-
-    local url
+    if param[1] then print("like? = true") else print("like? = false") end
     if mTabID == MatchCenterConfig.MATCH_CENTER_TAB_ID_MEETINGS then
         --url = RequestUtils.GET_COMPETITION_LIST_REST_CALL
         
     elseif mTabID == MatchCenterConfig.MATCH_CENTER_TAB_ID_DISCUSSION then
-        url = RequestUtils.GET_DISCUSSION_REST_CALL..
-                "?discussionObjectId="..MatchCenterConfig.DISCUSSION_POST_TYPE_GAME..
-                "&parentId="..match["Id"]..
-                "&step="..step..
-                "&perPage="..Constants.DISCUSSIONS_PER_PAGE
-                --"&lastPostTime=<unixTimeStamp>"
+
     end
+--[[
+    local url = RequestUtils.GET_GAME_MARKETS_REST_CALL.."?gameId="..matchId
 
     local requestInfo = {}
     requestInfo.requestData = ""
@@ -42,6 +36,7 @@ function action( param )
     httpRequest:sendHttpRequest( url, handler )
 
     ConnectingMessage.loadFrame()
+--]]
 
     --loadMatchCenterScene( {}, mTabID )
 end

@@ -37,7 +37,7 @@ function loadFrame()
    
 	mWidget = GUIReader:shareReader():widgetFromJsonFile("scenes/PredictionBG.json")
     mWidget:registerScriptHandler( EnterOrExit )
-    SceneManager.addWidget( mWidget )
+    SceneManager.clearNAddWidget( mWidget )
     SceneManager.setKeypadBackListener( keypadBackEventHandler )
     mWidget:setName( "TappablePredictionScene" )
 

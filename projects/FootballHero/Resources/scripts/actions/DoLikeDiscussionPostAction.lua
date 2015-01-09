@@ -9,39 +9,32 @@ local RequestUtils = require("scripts.RequestUtils")
 local Constants = require("scripts.Constants")
 local MatchCenterConfig = require("scripts.config.MatchCenter")
 
-local mTabID
-
 function action( param )
-    mTabID = param[1]
-    local match = Logic:getSelectedMatch()
-    local step = 1
+    local postId = param[1]
+    local bLike = param[2]
+    --TODO param 3 : like post or comments / callback function
 
-    local url
-    if mTabID == MatchCenterConfig.MATCH_CENTER_TAB_ID_MEETINGS then
-        --url = RequestUtils.GET_COMPETITION_LIST_REST_CALL
-        
-    elseif mTabID == MatchCenterConfig.MATCH_CENTER_TAB_ID_DISCUSSION then
-        url = RequestUtils.GET_DISCUSSION_REST_CALL..
-                "?discussionObjectId="..MatchCenterConfig.DISCUSSION_POST_TYPE_GAME..
-                "&parentId="..match["Id"]..
-                "&step="..step..
-                "&perPage="..Constants.DISCUSSIONS_PER_PAGE
-                --"&lastPostTime=<unixTimeStamp>"
-    end
+    local url = RequestUtils.POST_LIKE_DISCUSSION_REST_CALL
+--[[
+    local requestContent = { PostId = postId, Liked = bLike }
+    local requestContentText = Json.encode( requestContent )
 
     local requestInfo = {}
-    requestInfo.requestData = ""
+    requestInfo.requestData = requestContentText
     requestInfo.url = url
 
-    local handler = function( isSucceed, body, header, status, errorBuffer )
-        RequestUtils.messageHandler( requestInfo, isSucceed, body, header, status, errorBuffer, RequestUtils.HTTP_200, true, onRequestSuccess, onRequestFailed )
+     local handler = function( isSucceed, body, header, status, errorBuffer )
+        RequestUtils.messageHandler( requestInfo, isSucceed, body, header, status, errorBuffer, RequestUtils.HTTP_200, true, onRequestSuccess )
     end
 
-    local httpRequest = HttpRequestForLua:create( CCHttpRequest.kHttpGet )
+    local httpRequest = HttpRequestForLua:create( CCHttpRequest.kHttpPost )
+    httpRequest:addHeader( Constants.CONTENT_TYPE_JSON )
     httpRequest:addHeader( Logic:getAuthSessionString() )
+    httpRequest:getRequest():setRequestData( requestContentText, string.len( requestContentText ) )
     httpRequest:sendHttpRequest( url, handler )
 
     ConnectingMessage.loadFrame()
+--]]
 
     --loadMatchCenterScene( {}, mTabID )
 end
@@ -57,6 +50,7 @@ function loadMatchCenterScene( jsonResponse )
 end
 
 function onRequestSuccess( jsonResponse )
+    --TODO handle like
     loadMatchCenterScene( jsonResponse )
 end
 
