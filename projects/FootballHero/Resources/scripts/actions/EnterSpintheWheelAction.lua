@@ -9,24 +9,55 @@ local RequestUtils = require("scripts.RequestUtils")
 local Constants = require("scripts.Constants")
 
 function action( param )
-    local url = RequestUtils.GET_WHEEL_PRIZES
+    local SpinWheelConfig = require("scripts.config.SpinWheel")
+    if SpinWheelConfig.isInit() then
+        local SpinWheelScene = require("scripts.views.SpinWheelScene")
+        SpinWheelScene.loadFrame()
 
-    local requestInfo = {}
-    requestInfo.requestData = ""
-    requestInfo.url = url
+    else
+        local url = RequestUtils.GET_WHEEL_PRIZES
 
-    local handler = function( isSucceed, body, header, status, errorBuffer )
-        RequestUtils.messageHandler( requestInfo, isSucceed, body, header, status, errorBuffer, RequestUtils.HTTP_200, true, onRequestSuccess )
+        local requestInfo = {}
+        requestInfo.requestData = ""
+        requestInfo.url = url
+
+        local handler = function( isSucceed, body, header, status, errorBuffer )
+            RequestUtils.messageHandler( requestInfo, isSucceed, body, header, status, errorBuffer, RequestUtils.HTTP_200, true, onRequestSuccess )
+        end
+
+        local httpRequest = HttpRequestForLua:create( CCHttpRequest.kHttpGet )
+        httpRequest:addHeader( Logic:getAuthSessionString() )
+        httpRequest:sendHttpRequest( url, handler )
+
+        ConnectingMessage.loadFrame()
     end
-
-    local httpRequest = HttpRequestForLua:create( CCHttpRequest.kHttpGet )
-    httpRequest:addHeader( Logic:getAuthSessionString() )
-    httpRequest:sendHttpRequest( url, handler )
-
-    ConnectingMessage.loadFrame()
 end
 
 function onRequestSuccess( response )
+    ConnectingMessage.loadFrame()
+    loadRemoteImage( response, 1 )
+end
+
+function loadRemoteImage( response, id )
+    local prizeConfig = response["Prizes"]
+    if id > table.getn( prizeConfig ) then
+        ConnectingMessage.selfRemove()
+        loadSpinUI( response )
+    else
+        local SMIS = require("scripts.SMIS")
+        local imageUrl = prizeConfig[id]["ImageUrl"]
+        local handler = function( path )
+            prizeConfig[id]["LocalUrl"] = path
+            loadRemoteImage( response, id + 1 )
+        end        
+        SMIS.getSpinPrizeImagePath( imageUrl, handler )
+    end
+end
+
+function loadSpinUI( response )
+    local SpinWheelConfig = require("scripts.config.SpinWheel")
     local SpinWheelScene = require("scripts.views.SpinWheelScene")
+    
+    SpinWheelConfig.init( response["Prizes"], response["Order"] )
     SpinWheelScene.loadFrame()
 end

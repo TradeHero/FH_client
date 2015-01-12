@@ -46,10 +46,14 @@ function loadFrame()
     SceneManager.setKeypadBackListener( keypadBackEventHandler )
 
     mWheelBG = tolua.cast( mWidget:getChildByName("wheelBG"), "ImageView" )
-    local backBt = widget:getChildByName("Button_Back")
+    local backBt = mWidget:getChildByName("Button_Back")
     local stopBt = mWidget:getChildByName("Button_stop")
+    local winnerBt = mWidget:getChildByName("Button_winner")
+    local balanceBt = mWidget:getChildByName("Button_balance") 
     backBt:addTouchEventListener( backEventHandler )
     stopBt:addTouchEventListener( stopEventHandler )
+    winnerBt:addTouchEventListener( winnerEventHandler )
+    balanceBt:addTouchEventListener( balanceEventHandler )
 
     Navigator.loadFrame( widget )
 
@@ -88,17 +92,14 @@ function initContent()
     local wheelPanel = GUIReader:shareReader():widgetFromJsonFile("scenes/WheelPanel.json")
     local wheelPanelBG = wheelPanel:getChildByName("wheelBG")
 
-    for i = 1, table.getn( SpinWheelConfig.Prizes ) do
+    for i = 1, table.getn( SpinWheelConfig.getPrizeOrder() ) do
         local prize = tolua.cast( wheelPanelBG:getChildByName("prize"..i), "ImageView" )
         local text = tolua.cast (wheelPanelBG:getChildByName("text"..i), "Label" )
-        local config = SpinWheelConfig.Prizes[i]
+        local prizeId = SpinWheelConfig.getPrizeOrder()[i]
+        local config = SpinWheelConfig.getPrizeConfigWithID( prizeId )
 
-        prize:loadTexture( config["image"] )
-        text:setText( config["text"] )
-        if config["fontSizeOffset"] then
-            local fontSizeOffset = config["fontSizeOffset"]
-            text:setFontSize( text:getFontSize() + fontSizeOffset )
-        end
+        prize:loadTexture( config["LocalUrl"] )
+        text:setText( config["Name"] )
     end
 
     local FILE_NAME = "wheelPanelImage.png"
@@ -190,5 +191,17 @@ function stopEventHandler( sender,eventType )
             mWheelState = WHEEL_STATE_CHECK_STOP_ANGLE
             mTargetStopAngle = ( 360 - SpinWheelConfig.getStopAngleByPrizeID( 1 ) - STOP_ROTATION_SUM ) % 360
         end
+    end
+end
+
+function winnerEventHandler( sender,eventType )
+    if eventType == TOUCH_EVENT_ENDED then
+        
+    end
+end
+
+function balanceEventHandler( sender,eventType )
+    if eventType == TOUCH_EVENT_ENDED then
+        
     end
 end

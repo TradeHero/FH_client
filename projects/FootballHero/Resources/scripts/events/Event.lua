@@ -54,6 +54,8 @@ EventNameList =
     "Enter_Push_Notification",
     "Enter_Sound_Settings",
     "Enter_Spin_the_Wheel",
+    "Enter_Spin_winner",
+    "Enter_Spin_balance",
 
     "Do_Ask_For_Rate",
     "Do_Ask_For_Comment",

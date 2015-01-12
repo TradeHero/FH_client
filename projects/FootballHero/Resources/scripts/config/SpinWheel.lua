@@ -3,41 +3,60 @@ module(..., package.seeall)
 local Constants = require("scripts.Constants")
 local RequestUtils = require("scripts.RequestUtils")
 
+--[[
+ Data structure
 
-Prizes = {
-	{ ["id"] = 1, ["prizeID"] = 1, ["text"] = "+3000\nPOINTS", ["image"] = Constants.SPINWHEEL_IMAGE_PATH.."img-point.png" },
-	
-	{ ["id"] = 2, ["prizeID"] = 4, ["text"] = "Amazon\nGift Card\nUS$ 1.00", ["image"] = Constants.SPINWHEEL_IMAGE_PATH.."img-cash.png" },
-
-	{ ["id"] = 3, ["prizeID"] = 1, ["text"] = "+3000\nPOINTS", ["image"] = Constants.SPINWHEEL_IMAGE_PATH.."img-point.png" },
-
-	{ ["id"] = 4, ["prizeID"] = 8, ["text"] = "Lucky Draw\nMessi\nSigned Jersey", ["image"] = Constants.SPINWHEEL_IMAGE_PATH.."img-messi.png", ["fontSizeOffset"] = -3 },
-
-	{ ["id"] = 5, ["prizeID"] = 5, ["text"] = "Amazon\nGift Card\nUS$ 2.00", ["image"] = Constants.SPINWHEEL_IMAGE_PATH.."img-cash.png" },
-
-	{ ["id"] = 6, ["prizeID"] = 1, ["text"] = "+3000\nPOINTS", ["image"] = Constants.SPINWHEEL_IMAGE_PATH.."img-point.png" },
-
-	{ ["id"] = 7, ["prizeID"] = 7, ["text"] = "Xiaomi\nPhone", ["image"] = Constants.SPINWHEEL_IMAGE_PATH.."img-xiaomi.png" },
-
-	{ ["id"] = 8, ["prizeID"] = 6, ["text"] = "Amazon\nGift Card\nUS$ 5.00", ["image"] = Constants.SPINWHEEL_IMAGE_PATH.."img-cash.png" },
-
-	{ ["id"] = 9, ["prizeID"] = 1, ["text"] = "+3000\nPOINTS", ["image"] = Constants.SPINWHEEL_IMAGE_PATH.."img-point.png" },
-
-	{ ["id"] = 10, ["prizeID"] = 9, ["text"] = "Ronaldo\nSigned Jersey", ["image"] = Constants.SPINWHEEL_IMAGE_PATH.."img-ronaldo.png" },
-
-	{ ["id"] = 11, ["prizeID"] = 2, ["text"] = "+8000\nPOINTS", ["image"] = Constants.SPINWHEEL_IMAGE_PATH.."img-point.png" },
-
-	{ ["id"] = 12, ["prizeID"] = 1, ["text"] = "+3000\nPOINTS", ["image"] = Constants.SPINWHEEL_IMAGE_PATH.."img-point.png" },
-
-	{ ["id"] = 13, ["prizeID"] = 3, ["text"] = "+12000\nPOINTS", ["image"] = Constants.SPINWHEEL_IMAGE_PATH.."img-point.png" },
+ {
+   "Prices": [
+      {
+         "Id": 1,
+         "Name": "3000 Points",
+         "ImageUrl": "http://fhmainstorage.blob.core.windows.net/wheelres/img-point.png",
+		 "LocalUrl": "......"
+         "DrawTicket": false
+      },
+   ],
+   "Order": [
+           1, 2, 1, 3
+   ]
 }
+--]]
+
+local mInit = false
+local mPrizeConfig = {}
+local mPrizeOrder = {}
+
+function isInit()
+	return mInit
+end
+
+function init( prizeConfig, prizeOrder )
+	mPrizeConfig = prizeConfig
+	mPrizeOrder = prizeOrder
+	mInit = true
+end
+
+function getPrizeOrder()
+	return mPrizeOrder
+end
+
+function getPrizeConfigWithID( id )
+	for i = 1 , table.getn( mPrizeConfig ) do
+		local prizeConfig = mPrizeConfig[i]
+		if prizeConfig["Id"] == id then
+			return prizeConfig
+		end
+	end
+
+	return nil
+end
 
 function getStopAngleByPrizeID( prizeID )
 	local prizesWithThisID = {}
-	for i = 1, table.getn( Prizes ) do
-		local prize = Prizes[i]
-		if prize["prizeID"] == prizeID then
-			table.insert( prizesWithThisID, prize )
+	for i = 1, table.getn( mPrizeOrder ) do
+		local prize = mPrizeOrder[i]
+		if prize == prizeID then
+			table.insert( prizesWithThisID, i )
 		end
 	end
 
@@ -52,5 +71,5 @@ function getStopAngleByPrizeID( prizeID )
 	local range = 360 / 13
 	local borderWidth = 2
 
-	return ( selectedPrize["id"] - 1 ) * range + borderWidth + math.random( range - borderWidth * 2 )
+	return ( selectedPrize - 1 ) * range + borderWidth + math.random( range - borderWidth * 2 )
 end

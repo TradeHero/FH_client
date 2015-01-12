@@ -3,11 +3,20 @@ module(..., package.seeall)
 local RequestUtils = require("scripts.RequestUtils")
 local FileUtils = require("scripts.FileUtils")
 
-local FOLDER = "SMI/"
+local SMI_FOLDER = "SMI/"
+local SPIN_FOLDER = "Spin/"
+
+function getSMImagePath( fileUrl, handler )
+	getRemoteFile( fileUrl, SMI_FOLDER, handler )
+end
+
+function getSpinPrizeImagePath( fileUrl, handler )
+	getRemoteFile( fileUrl, SPIN_FOLDER, handler )
+end
 
 -- Return the local file path if the file exist.
--- Otherwise download it, save it locally and return the file path.
-function getSMImagePath( fileUrl, handler )
+-- Otherwise download it, return the local path.
+function getRemoteFile( fileUrl, localFolder, handler )
 	local fileName = tostring( fileUrl )
 	
 	local toBeRemove = string.find(fileName, "?")
@@ -19,12 +28,12 @@ function getSMImagePath( fileUrl, handler )
 	fileName = list[table.getn( list )]
 
 	local fileUtils = CCFileUtils:sharedFileUtils()
-	local path = fileUtils:getWritablePath()..FOLDER..fileName
+	local path = fileUtils:getWritablePath()..localFolder..fileName
 	if fileUtils:isFileExist( path ) then
 		handler( path )
 	else
 		local successHandler = function( body )
-			FileUtils.writeStringToFile( FOLDER..fileName, body )
+			FileUtils.writeStringToFile( localFolder..fileName, body )
 			handler( path )
 		end
 
@@ -32,11 +41,11 @@ function getSMImagePath( fileUrl, handler )
 			handler( nil )
 		end
 
-		downloadSMImage( fileUrl, successHandler, failedHandler )
+		downloadImage( fileUrl, successHandler, failedHandler )
 	end
 end
 
-function downloadSMImage( fileUrl, onRequestSuccess, onRequestFailed )
+function downloadImage( fileUrl, onRequestSuccess, onRequestFailed )
 	local handler = function( isSucceed, body, header, status, errorBuffer )
         print( "Http reponse: "..status.." and errorBuffer: "..errorBuffer )
 

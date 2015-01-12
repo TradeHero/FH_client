@@ -11,8 +11,14 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
+    "spinWheel/bkg-main.png",
     "spinWheel/img-wheel.png",
-    "spinWheel/img-xiaomi.png"
+    "spinWheel/btn-winner.png",
+    "spinWheel/btn-ticket.png",
+    "spinWheel/img-spinner.png",
+    "header/back.png",
+    "spinWheel/img-button.png",
+    "spinWheel/img-logo.png"
   ],
   "version": "1.5.0.0",
   "widgetTree": {
