@@ -35,6 +35,7 @@ local mWheelBG
 local mWheelCurrentSpeed
 local mTargetStopAngle
 local mSpinnerAnimating
+local mStopPressed
 
 
 function loadFrame()
@@ -64,6 +65,7 @@ function loadFrame()
     playStartAnim()
 
     mSpinnerAnimating = false
+    mStopPressed = false
 end
 
 function EnterOrExit( eventType )
@@ -187,9 +189,14 @@ end
 
 function stopEventHandler( sender,eventType )
     if eventType == TOUCH_EVENT_ENDED then
-        if mWheelState == WHEEL_STATE_START_RUNNING and mWheelCurrentSpeed >= MAX_ROTATE_SPEED then
-            mWheelState = WHEEL_STATE_CHECK_STOP_ANGLE
-            mTargetStopAngle = ( 360 - SpinWheelConfig.getStopAngleByPrizeID( 1 ) - STOP_ROTATION_SUM ) % 360
+        if mWheelState == WHEEL_STATE_START_RUNNING and mWheelCurrentSpeed >= MAX_ROTATE_SPEED and mStopPressed == false then
+            mStopPressed = true
+            local handler = function( prizeId, numberOfLuckyDrawTicketsLeft )
+                mWheelState = WHEEL_STATE_CHECK_STOP_ANGLE
+                mTargetStopAngle = ( 360 - SpinWheelConfig.getStopAngleByPrizeID( prizeId ) - STOP_ROTATION_SUM ) % 360
+            end
+            EventManager:postEvent( Event.Do_Spin, { handler } )
+
         end
     end
 end

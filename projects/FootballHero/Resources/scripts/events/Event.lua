@@ -80,6 +80,7 @@ EventNameList =
     "Do_Get_Chat_Message",
     "Do_Share_By_SMS",
     "Do_Share_By_Email",
+    "Do_Spin",
 
     "Show_Info",
     "Show_Error_Message",
@@ -119,6 +120,7 @@ EventNameDosenotTrackList =
     "Do_Get_Chat_Message",
     "Do_Share_By_SMS",
     "Do_Share_By_Email",
+    "Do_Spin",
 
     "Check_Start_Tutorial",
     "Check_File_Version",
