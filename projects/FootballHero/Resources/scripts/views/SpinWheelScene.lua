@@ -108,6 +108,7 @@ function initContent()
     wheelPanelImage:endToLua()
     wheelPanelImage:saveToFile( FILE_NAME,  kCCImageFormatPNG )
     mWheelBG:loadTexture( FILE_NAME )
+    CCLuaLog( CCFileUtils:sharedFileUtils():fullPathForFilename( FILE_NAME ) )
 end
 
 function tick( dt )
@@ -171,7 +172,7 @@ function beginSpinnerAnim()
         mSpinnerAnimating = true
     end ) )
     seqArray:addObject( CCRotateBy:create( 0.05, -40 ) )
-    seqArray:addObject( CCRotateBy:create( 0.1, 40 ) )
+    seqArray:addObject( CCRotateBy:create( 0.05, 40 ) )
     seqArray:addObject( CCCallFunc:create( function()
         mSpinnerAnimating = false
     end ) )

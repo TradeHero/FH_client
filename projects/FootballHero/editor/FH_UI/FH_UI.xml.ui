@@ -95,9 +95,9 @@
   <ResRelativePath />
   <imageFileList />
   <imagePngList>
-    <string>spinWheel/img-wheel-nologo.png</string>
+    <string>spinWheel/img-wheel.png</string>
     <string>spinWheel/img-xiaomi.png</string>
   </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>WheelPanel.json</CurrentUIJson>
+  <CurrentUIJson>CommunityJoinedCompetitionFrame.json</CurrentUIJson>
 </UIProject>

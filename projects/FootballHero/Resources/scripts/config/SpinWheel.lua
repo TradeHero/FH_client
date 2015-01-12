@@ -11,13 +11,13 @@ Prizes = {
 
 	{ ["id"] = 3, ["prizeID"] = 1, ["text"] = "+3000\nPOINTS", ["image"] = Constants.SPINWHEEL_IMAGE_PATH.."img-point.png" },
 
-	{ ["id"] = 4, ["prizeID"] = 7, ["text"] = "Xiaomi\nPhone", ["image"] = Constants.SPINWHEEL_IMAGE_PATH.."img-xiaomi.png" },
+	{ ["id"] = 4, ["prizeID"] = 8, ["text"] = "Lucky Draw\nMessi\nSigned Jersey", ["image"] = Constants.SPINWHEEL_IMAGE_PATH.."img-messi.png", ["fontSizeOffset"] = -3 },
 
 	{ ["id"] = 5, ["prizeID"] = 5, ["text"] = "Amazon\nGift Card\nUS$ 2.00", ["image"] = Constants.SPINWHEEL_IMAGE_PATH.."img-cash.png" },
 
 	{ ["id"] = 6, ["prizeID"] = 1, ["text"] = "+3000\nPOINTS", ["image"] = Constants.SPINWHEEL_IMAGE_PATH.."img-point.png" },
 
-	{ ["id"] = 7, ["prizeID"] = 8, ["text"] = "Lucky Draw\nMessi\nSigned Jersey", ["image"] = Constants.SPINWHEEL_IMAGE_PATH.."img-messi.png", ["fontSizeOffset"] = -3 },
+	{ ["id"] = 7, ["prizeID"] = 7, ["text"] = "Xiaomi\nPhone", ["image"] = Constants.SPINWHEEL_IMAGE_PATH.."img-xiaomi.png" },
 
 	{ ["id"] = 8, ["prizeID"] = 6, ["text"] = "Amazon\nGift Card\nUS$ 5.00", ["image"] = Constants.SPINWHEEL_IMAGE_PATH.."img-cash.png" },
 

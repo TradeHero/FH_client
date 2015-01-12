@@ -54,6 +54,8 @@ function initCompetitionScene( competitionFrame, compList, miniGame )
     -- check for mini game
     -- TODO: check competition period
     --if shouldShowMiniGame() and not miniGame["Joined"] then
+    contentHeight = contentHeight + initSpinWheel( competitionFrame )
+
     if not miniGame["Joined"] then
         contentHeight = contentHeight + initMiniGame( competitionFrame, miniGame )
     end
@@ -207,6 +209,30 @@ function initCompetitionScene( competitionFrame, compList, miniGame )
     competitionFrame:setInnerContainerSize( CCSize:new( 0, contentHeight ) )
     local layout = tolua.cast( competitionFrame, "Layout" )
     layout:requestDoLayout()
+end
+
+function initSpinWheel( parent )
+    local contentHeight = 0
+
+    local bannerFrame = SceneManager.widgetFromJsonFile("scenes/CommunityCompetitionBannerFrame.json")
+    
+    local bannerBG = tolua.cast( bannerFrame:getChildByName( "Image_BannerBG" ), "ImageView" )
+    bannerBG:loadTexture(  Constants.COMPETITION_IMAGE_PATH..Constants.BannerPrefix.."spinWheel"..".png" )
+
+    local joinEventHandler = function( sender, eventType )
+        if eventType == TOUCH_EVENT_ENDED then
+            EventManager:postEvent( Event.Enter_Spin_the_Wheel )
+        end
+    end
+    bannerFrame:addTouchEventListener( joinEventHandler )
+
+    local joinBtn = tolua.cast( bannerFrame:getChildByName( "Button_Join" ), "Button" )
+    joinBtn:setEnabled( false )
+
+    parent:addChild( bannerFrame )
+    contentHeight = contentHeight + bannerFrame:getSize().height
+
+    return contentHeight
 end
 
 function initMiniGame( parent, miniGame )

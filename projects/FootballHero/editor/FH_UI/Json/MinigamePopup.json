@@ -11,12 +11,8 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "commonRes/default.png",
-    "MatchPrediction/btn-inactivestake.png",
-    "MatchPrediction/btn-disabledstake.png",
-    "MatchPrediction/btn-activestake.png",
-    "MatchPrediction/btn-countdown.png",
-    "MatchPrediction/img-draw-blue.png"
+    "spinWheel/img-wheel.png",
+    "spinWheel/img-xiaomi.png"
   ],
   "version": "1.5.0.0",
   "widgetTree": {

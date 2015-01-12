@@ -12,7 +12,7 @@
   "textures": [],
   "texturesPng": [
     "spinWheel/bkg-main.png",
-    "spinWheel/img-wheel-nologo.png",
+    "spinWheel/img-wheel.png",
     "spinWheel/btn-winner.png",
     "spinWheel/btn-ticket.png",
     "spinWheel/img-spinner.png",
@@ -143,8 +143,8 @@
           "customProperty": "",
           "flipX": false,
           "flipY": false,
-          "height": 585,
-          "ignoreSize": true,
+          "height": 583,
+          "ignoreSize": false,
           "layoutParameter": null,
           "opacity": 255,
           "positionPercentX": 0.5,
@@ -153,14 +153,14 @@
           "rotation": 0,
           "scaleX": 1,
           "scaleY": 1,
-          "sizePercentX": 0.9078125,
-          "sizePercentY": 0.514964759,
+          "sizePercentX": 0.9109375,
+          "sizePercentY": 0.5132042,
           "sizeType": 0,
           "tag": 25846,
           "touchAble": false,
           "useMergedTexture": false,
           "visible": true,
-          "width": 581,
+          "width": 583,
           "x": 320,
           "y": 569,
           "capInsetsHeight": 1,
@@ -169,13 +169,13 @@
           "capInsetsY": 0,
           "fileName": null,
           "fileNameData": {
-            "path": "spinWheel/img-wheel-nologo.png",
+            "path": "spinWheel/img-wheel.png",
             "plistFile": "",
             "resourceType": 0
           },
           "scale9Enable": false,
-          "scale9Height": 585,
-          "scale9Width": 581
+          "scale9Height": 583,
+          "scale9Width": 583
         }
       },
       {
@@ -343,7 +343,7 @@
           "customProperty": "",
           "flipX": false,
           "flipY": false,
-          "height": 110,
+          "height": 104,
           "ignoreSize": true,
           "layoutParameter": null,
           "opacity": 255,
@@ -353,14 +353,14 @@
           "rotation": 0,
           "scaleX": 1,
           "scaleY": 1,
-          "sizePercentX": 0.059375,
-          "sizePercentY": 0.09683099,
+          "sizePercentX": 0.05,
+          "sizePercentY": 0.09154929,
           "sizeType": 0,
           "tag": 25905,
           "touchAble": false,
           "useMergedTexture": false,
           "visible": true,
-          "width": 38,
+          "width": 32,
           "x": 322,
           "y": 912,
           "capInsetsHeight": 1,
@@ -374,8 +374,8 @@
             "resourceType": 0
           },
           "scale9Enable": false,
-          "scale9Height": 110,
-          "scale9Width": 38
+          "scale9Height": 104,
+          "scale9Width": 32
         }
       },
       {

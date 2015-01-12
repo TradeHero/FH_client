@@ -10,7 +10,10 @@
   "designHeight": 1136,
   "designWidth": 640,
   "textures": [],
-  "texturesPng": [],
+  "texturesPng": [
+    "spinWheel/img-wheel.png",
+    "spinWheel/img-xiaomi.png"
+  ],
   "version": "1.5.0.0",
   "widgetTree": {
     "classname": "Panel",
@@ -109,8 +112,8 @@
           "rotation": 0,
           "scaleX": 1,
           "scaleY": 1,
-          "sizePercentX": 1.56249989E-05,
-          "sizePercentY": 8.802816E-06,
+          "sizePercentX": 0.3078125,
+          "sizePercentY": 0.03697183,
           "sizeType": 0,
           "tag": 1561,
           "touchAble": false,

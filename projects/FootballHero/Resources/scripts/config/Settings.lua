@@ -12,5 +12,4 @@ SettingsItem = {
 	--{ ["itemName"] = "Send review", ["event"] = Event.Do_Send_Feedback, },
 	--{ ["itemName"] = "About", ["event"] = Event.Do_Send_Feedback, },
 	{ ["itemName"] = Constants.String.settings.logout, ["event"] = Event.Do_Log_Out, },
-	{ ["itemName"] = "Spin the wheel", ["event"] = Event.Enter_Spin_the_Wheel, },
 }
