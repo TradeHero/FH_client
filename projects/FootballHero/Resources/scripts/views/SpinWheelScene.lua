@@ -7,6 +7,8 @@ local Event = require("scripts.events.Event").EventList
 local SettingsConfig = require("scripts.config.Settings")
 local SpinWheelConfig = require("scripts.config.SpinWheel")
 local Constants = require("scripts.Constants")
+local ViewUtils = require("scripts.views.ViewUtils")
+
 
 -- Below value is per second
 local MAX_ROTATE_SPEED = 180
@@ -28,6 +30,9 @@ local WHEEL_STATE_STOP_RUNNING = 4
 local WHEEL_STATE_STOP_BOUNCE = 5
 local WHEEL_STATE_STOP = 6
 
+local mInputFontColor = ccc3( 255, 255, 255 )
+local mInputPlaceholderFontColor = ccc3( 200, 200, 200 )
+
 local mWidget
 local mWheelTickHandler
 local mWheelState
@@ -36,7 +41,11 @@ local mWheelCurrentSpeed
 local mTargetStopAngle
 local mSpinnerAnimating
 local mStopPressed
-
+local mWinPrizeWidget
+local mWinTicketWidget
+local mWinTicketEmailInput
+local mWinPrizeId
+local mWinNumTicketLeft
 
 function loadFrame()
 	local widget = GUIReader:shareReader():widgetFromJsonFile("scenes/SpinWheel.json")
@@ -59,6 +68,8 @@ function loadFrame()
     Navigator.loadFrame( widget )
 
     initContent()
+    initWinPrizeWidget()
+    initWinTicketWidget()
 
     mWheelState = WHEEL_STATE_START
     mWheelTickHandler = CCDirector:sharedDirector():getScheduler():scheduleScriptFunc( tick, 0.025, false )
@@ -114,6 +125,34 @@ function initContent()
     CCLuaLog( CCFileUtils:sharedFileUtils():fullPathForFilename( FILE_NAME ) )
 end
 
+function initWinPrizeWidget()
+    mWinPrizeWidget = GUIReader:shareReader():widgetFromJsonFile("scenes/SpinWin.json")
+    mWidget:addChild( mWinPrizeWidget )
+    mWinPrizeWidget:setEnabled( false )
+    
+    mWinPrizeWidget:addTouchEventListener( onWinPrizeFrameTouch )
+end
+
+function initWinTicketWidget()
+    mWinTicketWidget = GUIReader:shareReader():widgetFromJsonFile("scenes/SpinWinTicket.json")
+    mWidget:addChild( mWinTicketWidget )
+    mWinTicketWidget:setEnabled( false )
+    
+    mWinTicketWidget:addTouchEventListener( onWinTicketFrameTouch )
+
+    mWinTicketEmailInput = ViewUtils.createTextInput( mWinTicketWidget:getChildByName( "emailContainer" ), Constants.String.email )
+    mWinTicketEmailInput:setFontColor( mInputFontColor )
+    mWinTicketEmailInput:setPlaceholderFontColor( mInputPlaceholderFontColor )
+    mWinTicketEmailInput:setTouchPriority( SceneManager.TOUCH_PRIORITY_MINUS_ONE )
+
+    local submitBt = mWinTicketWidget:getChildByName("Button_submit")
+    local submitEventHandler = function()
+        -- TODO Send server his valid email address.
+        mWinTicketWidget:setEnabled( false )
+    end
+    submitBt:addTouchEventListener( submitEventHandler )
+end
+
 function tick( dt )
     local currentRotation = mWheelBG:getRotation()
     local newRotation = currentRotation
@@ -157,13 +196,33 @@ function tick( dt )
         if currentRotation > MAX_WHEEL_STOP_BOUNCE_ROTATION then
             mWheelState = WHEEL_STATE_STOP
             CCDirector:sharedDirector():getScheduler():unscheduleScriptEntry( mWheelTickHandler )
+
+            local showPrize = function()
+                if not SpinWheelConfig.isLuckDrawPrizeId( mWinPrizeId ) then
+                    mWinTicketWidget:setEnabled( true )
+                    local ticketLeftText = tolua.cast( mWinTicketWidget:getChildByName("Label_ticketLeft"), "Label" )
+                    local descriptionText = tolua.cast( mWinTicketWidget:getChildByName("Label_description"), "Label" )
+                    ticketLeftText:setText( mWinNumTicketLeft )
+                    descriptionText:setText( SpinWheelConfig.getLuckDrawDescription() )
+                else
+                    -- normal prize
+                    mWinPrizeWidget:setEnabled( true )
+                    local prizeText = tolua.cast( mWinPrizeWidget:getChildByName("Label_prize"), "Label" )
+                    local prizeImage = tolua.cast( mWinPrizeWidget:getChildByName("Image_prize"), "ImageView" )
+                    local prizeConfig = SpinWheelConfig.getPrizeConfigWithID( mWinPrizeId )
+                    prizeText:setText( prizeConfig["Name"] )
+                    prizeImage:loadTexture( prizeConfig["LocalUrl"] )    
+                end
+                
+            end
+            EventManager:scheduledExecutor( showPrize, 0.5 )
         else
             newRotation = currentRotation + dt * STOP_BOUNCE_SPEED
             mWheelBG:setRotation( newRotation )
         end
     end
     if mSpinnerAnimating == false and math.floor( newRotation / ANGLE_PER_PIECE ) > math.floor( currentRotation / ANGLE_PER_PIECE )  then
-        beginSpinnerAnim()
+        --beginSpinnerAnim()
     end
 end
 
@@ -194,6 +253,8 @@ function stopEventHandler( sender,eventType )
             local handler = function( prizeId, numberOfLuckyDrawTicketsLeft )
                 mWheelState = WHEEL_STATE_CHECK_STOP_ANGLE
                 mTargetStopAngle = ( 360 - SpinWheelConfig.getStopAngleByPrizeID( prizeId ) - STOP_ROTATION_SUM ) % 360
+                mWinPrizeId = prizeId
+                mWinNumTicketLeft = numberOfLuckyDrawTicketsLeft
             end
             EventManager:postEvent( Event.Do_Spin, { handler } )
 
@@ -211,4 +272,12 @@ function balanceEventHandler( sender,eventType )
     if eventType == TOUCH_EVENT_ENDED then
         
     end
+end
+
+function onWinPrizeFrameTouch( sender, eventType )
+    mWinPrizeWidget:setEnabled( false )
+end
+
+function onWinTicketFrameTouch( sender, eventType )
+    -- Do nothing, just block.
 end

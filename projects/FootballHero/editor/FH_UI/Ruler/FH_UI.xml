@@ -340,4 +340,12 @@
     <Project>SpinBalance</Project>
     <GuidesList />
   </GuidesProject>
+  <GuidesProject>
+    <Project>SpinWin</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>SpinWinTicket</Project>
+    <GuidesList />
+  </GuidesProject>
 </ArrayOfGuidesProject>

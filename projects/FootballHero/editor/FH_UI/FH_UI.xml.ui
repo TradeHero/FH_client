@@ -86,6 +86,8 @@
     <string>SpinWheel.json</string>
     <string>WheelPanel.json</string>
     <string>SpinBalance.json</string>
+    <string>SpinWin.json</string>
+    <string>SpinWinTicket.json</string>
   </JsonList>
   <CanvasSize>
     <Width>640</Width>
@@ -96,15 +98,11 @@
   <ResRelativePath />
   <imageFileList />
   <imagePngList>
-    <string>spinWheel/bkg-main.png</string>
-    <string>spinWheel/img-wheel.png</string>
-    <string>spinWheel/btn-winner.png</string>
-    <string>spinWheel/btn-ticket.png</string>
-    <string>spinWheel/img-spinner.png</string>
-    <string>header/back.png</string>
-    <string>spinWheel/img-button.png</string>
-    <string>spinWheel/img-logo.png</string>
+    <string>spinWheel/img-ticket.png</string>
+    <string>spinWheel/img-shine.png</string>
+    <string>spinWheel/btn-submit.png</string>
+    <string>spinWheel/img-email.png</string>
   </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>SpinBalance.json</CurrentUIJson>
+  <CurrentUIJson>SpinWinTicket.json</CurrentUIJson>
 </UIProject>

@@ -10,7 +10,10 @@
   "designHeight": 1136,
   "designWidth": 640,
   "textures": [],
-  "texturesPng": [],
+  "texturesPng": [
+    "spinWheel/img-xiaomi.png",
+    "spinWheel/img-shine.png"
+  ],
   "version": "1.5.0.0",
   "widgetTree": {
     "classname": "Panel",

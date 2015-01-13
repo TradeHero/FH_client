@@ -25,6 +25,8 @@ local RequestUtils = require("scripts.RequestUtils")
 local mInit = false
 local mPrizeConfig = {}
 local mPrizeOrder = {}
+local mLuckDrawPrizeId
+local mLuckDrawPrizeDescription
 
 function isInit()
 	return mInit
@@ -34,6 +36,13 @@ function init( prizeConfig, prizeOrder )
 	mPrizeConfig = prizeConfig
 	mPrizeOrder = prizeOrder
 	mInit = true
+	for i = 1, table.getn( prizeConfig ) do
+		local config = prizeConfig[i]
+		if config["DrawTicket"] then
+			mLuckDrawPrizeId = i
+			mLuckDrawPrizeDescription = config["DrawInformation"]
+		end
+	end
 end
 
 function getPrizeOrder()
@@ -49,6 +58,14 @@ function getPrizeConfigWithID( id )
 	end
 
 	return nil
+end
+
+function isLuckDrawPrizeId( id )
+	return mLuckDrawPrizeId == id
+end
+
+function getLuckDrawDescription()
+	return mLuckDrawPrizeDescription
 end
 
 function getStopAngleByPrizeID( prizeID )
