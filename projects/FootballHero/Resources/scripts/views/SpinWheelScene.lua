@@ -8,6 +8,7 @@ local SettingsConfig = require("scripts.config.Settings")
 local SpinWheelConfig = require("scripts.config.SpinWheel")
 local Constants = require("scripts.Constants")
 local ViewUtils = require("scripts.views.ViewUtils")
+local Logic = require("scripts.Logic").getInstance()
 
 
 -- Below value is per second
@@ -83,6 +84,9 @@ function EnterOrExit( eventType )
     if eventType == "enter" then
     elseif eventType == "exit" then
         CCDirector:sharedDirector():getScheduler():unscheduleScriptEntry( mWheelTickHandler )
+        if mWinTicketEmailInput then
+            mWinTicketEmailInput:closeKeyboard()
+        end
         mWidget = nil
     end
 end
@@ -140,16 +144,21 @@ function initWinTicketWidget()
     
     mWinTicketWidget:addTouchEventListener( onWinTicketFrameTouch )
 
-    mWinTicketEmailInput = ViewUtils.createTextInput( mWinTicketWidget:getChildByName( "emailContainer" ), Constants.String.email )
+    local placeholderText = Constants.String.email
+    if SpinWheelConfig.getContactEmail() == nil then
+        if Logic:getEmail() ~= nil and string.len( Logic:getEmail() ) > 0 then
+            placeholderText = Logic:getEmail()
+        end
+    else
+        placeholderText = SpinWheelConfig.getContactEmail()
+    end
+
+    mWinTicketEmailInput = ViewUtils.createTextInput( mWinTicketWidget:getChildByName( "emailContainer" ), placeholderText )
     mWinTicketEmailInput:setFontColor( mInputFontColor )
     mWinTicketEmailInput:setPlaceholderFontColor( mInputPlaceholderFontColor )
     mWinTicketEmailInput:setTouchPriority( SceneManager.TOUCH_PRIORITY_MINUS_ONE )
 
     local submitBt = mWinTicketWidget:getChildByName("Button_submit")
-    local submitEventHandler = function()
-        -- TODO Send server his valid email address.
-        mWinTicketWidget:setEnabled( false )
-    end
     submitBt:addTouchEventListener( submitEventHandler )
 end
 
@@ -281,4 +290,15 @@ end
 
 function onWinTicketFrameTouch( sender, eventType )
     -- Do nothing, just block.
+end
+
+function submitEventHandler( sender, eventType )
+    if eventType == TOUCH_EVENT_ENDED then
+        local successCallback = function()
+            mWinTicketWidget:setEnabled( false )
+        end
+        mWinTicketEmailInput:closeKeyboard()
+        local email = mWinTicketWidget:getChildByName( "emailContainer" ):getNodeByTag( 1 ):getText()
+        EventManager:postEvent( Event.Do_Post_Spin_Lucky_Draw, { email, successCallback } )
+    end
 end

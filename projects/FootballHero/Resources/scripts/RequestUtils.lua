@@ -42,8 +42,8 @@ GET_COMPETITION_LEAGUE_REST_CALL = SERVER_IP.."/api/competitions/getCompetitionL
 GET_COMPETITION_DETAILS_REST_CALL = SERVER_IP.."/api/competitions/getCompetitionDetails"
 GET_CHAT_MESSAGE_REST_CALL = SERVER_IP.."/api/chat/getChatMessages"
 GET_USER_META_DATA = SERVER_IP.."/api/user/getUsersMetaData"
-GET_WHEEL_PRIZES = SERVER_IP.."/api/wheel/prizes"
-GET_SPIN_RESULT = SERVER_IP.."/api/wheel/spin"
+GET_WHEEL_PRIZES_REST_CALL = SERVER_IP.."/api/wheel/load"
+GET_SPIN_RESULT_REST_CALL = SERVER_IP.."/api/wheel/spin"
 POST_COUPONS_REST_CALL = SERVER_IP.."/api/coupons/placeCoupons"
 POST_FAV_TEAM_REST_CALL = SERVER_IP.."/api/user/setFavoriteTeam"
 POST_LOGO_REST_CALL = SERVER_IP.."/api/user/uploadProfilePicture"
@@ -56,6 +56,7 @@ POST_CHAT_MESSAGE_REST_CALL = SERVER_IP.."/api/chat/postChatMessage"
 POST_COMPETITION_PUSH_SETTING_REST_CALL = SERVER_IP.."/api/competitions/setPushNotificationSettings"
 POST_USER_PUSH_SETTING_REST_CALL = SERVER_IP.."/api/user/setPushNotificationSettings"
 POST_UPDATE_DEVICD_TOKEN_REST_CALL = SERVER_IP.."/api/user/updateDeviceToken"
+POST_SPIN_LUCKY_DRAW_REST_CALL = SERVER_IP.."/api/wheel/submitEmail"
 
 
 FACEBOOK_FRIENDS_LIST_CALL = "/me/friends?access_token="
@@ -96,8 +97,8 @@ function setServerIP( serverIp, cdnServerIp, useDev )
     GET_COMPETITION_DETAILS_REST_CALL = serverIp.."/api/competitions/getCompetitionDetails"
     GET_CHAT_MESSAGE_REST_CALL = serverIp.."/api/chat/getChatMessages"
     GET_USER_META_DATA = serverIp.."/api/user/getUsersMetaData"
-    GET_WHEEL_PRIZES = serverIp.."/api/wheel/prizes"
-    GET_SPIN_RESULT = serverIp.."/api/wheel/spin"
+    GET_WHEEL_PRIZES_REST_CALL = serverIp.."/api/wheel/load"
+    GET_SPIN_RESULT_REST_CALL = serverIp.."/api/wheel/spin"
     POST_COUPONS_REST_CALL = serverIp.."/api/coupons/placeCoupons"
     POST_FAV_TEAM_REST_CALL= serverIp.."/api/user/setFavoriteTeam"
     POST_LOGO_REST_CALL = serverIp.."/api/user/uploadProfilePicture"
@@ -110,6 +111,7 @@ function setServerIP( serverIp, cdnServerIp, useDev )
     POST_COMPETITION_PUSH_SETTING_REST_CALL = serverIp.."/api/competitions/setPushNotificationSettings"
     POST_USER_PUSH_SETTING_REST_CALL = serverIp.."/api/user/setPushNotificationSettings"
     POST_UPDATE_DEVICD_TOKEN_REST_CALL = serverIp.."/api/user/updateDeviceToken"
+    POST_SPIN_LUCKY_DRAW_REST_CALL = serverIp.."/api/wheel/submitEmail"
 
 	CDN_SERVER_IP = cdnServerIp
     USE_DEV = useDev

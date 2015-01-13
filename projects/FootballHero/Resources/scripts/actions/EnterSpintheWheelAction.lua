@@ -15,7 +15,7 @@ function action( param )
         SpinWheelScene.loadFrame()
 
     else
-        local url = RequestUtils.GET_WHEEL_PRIZES
+        local url = RequestUtils.GET_WHEEL_PRIZES_REST_CALL
 
         local requestInfo = {}
         requestInfo.requestData = ""
@@ -39,7 +39,7 @@ function onRequestSuccess( response )
 end
 
 function loadRemoteImage( response, id )
-    local prizeConfig = response["Prizes"]
+    local prizeConfig = response["PrizeInformation"]["Prizes"]
     if id > table.getn( prizeConfig ) then
         ConnectingMessage.selfRemove()
         loadSpinUI( response )
@@ -58,6 +58,6 @@ function loadSpinUI( response )
     local SpinWheelConfig = require("scripts.config.SpinWheel")
     local SpinWheelScene = require("scripts.views.SpinWheelScene")
     
-    SpinWheelConfig.init( response["Prizes"], response["Order"] )
+    SpinWheelConfig.init( response )
     SpinWheelScene.loadFrame()
 end
