@@ -247,6 +247,10 @@ M.en = {
     title = "Shoot-to-Win Challenge",
     winners = "Past Winners",
   },
+  spinWheel = {
+    winners = "Past Winners",
+    no_one_won = "No one has won any prize yet.",
+  },
   num_of_points = "%d Points",
   optional = "(Optional)",
   password = "Password",

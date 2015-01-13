@@ -20,17 +20,17 @@ function action( param )
     requestInfo.requestData = ""
     requestInfo.url = url
     local handler = function( isSucceed, body, header, status, errorBuffer )
-        RequestUtils.messageHandler( requestInfo, isSucceed, body, header, status, errorBuffer, RequestUtils.HTTP_200, true, onRequestSuccess )
+        RequestUtils.messageHandler( requestInfo, isSucceed, body, header, status, errorBuffer, RequestUtils.HTTP_200, false, onRequestSuccess )
     end
 
     local httpRequest = HttpRequestForLua:create( CCHttpRequest.kHttpGet )
     httpRequest:addHeader( Logic:getAuthSessionString() )
     httpRequest:sendHttpRequest( url, handler )
 
-    ConnectingMessage.loadFrame()
+    --ConnectingMessage.loadFrame()
 end
 
 function onRequestSuccess( jsonResponse )
     local SpinWinnersScene = require("scripts.views.SpinWinnersScene")
-    SpinWinnersScene.loadFrame( jsonResponse["Winners"] )
+    SpinWinnersScene.loadMoreWinners( jsonResponse["Winners"] )
 end

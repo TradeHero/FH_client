@@ -88,6 +88,8 @@
     <string>SpinBalance.json</string>
     <string>SpinWin.json</string>
     <string>SpinWinTicket.json</string>
+    <string>SpinWinnersScene.json</string>
+    <string>SpinWinnerContent.json</string>
   </JsonList>
   <CanvasSize>
     <Width>640</Width>
@@ -98,11 +100,8 @@
   <ResRelativePath />
   <imageFileList />
   <imagePngList>
-    <string>spinWheel/img-ticket.png</string>
-    <string>spinWheel/img-shine.png</string>
-    <string>spinWheel/btn-submit.png</string>
-    <string>spinWheel/img-email.png</string>
+    <string>LoginNReg/photo.png</string>
   </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>SpinBalance.json</CurrentUIJson>
+  <CurrentUIJson>SpinWinnerContent.json</CurrentUIJson>
 </UIProject>

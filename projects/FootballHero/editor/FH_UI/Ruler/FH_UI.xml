@@ -348,4 +348,12 @@
     <Project>SpinWinTicket</Project>
     <GuidesList />
   </GuidesProject>
+  <GuidesProject>
+    <Project>SpinWinnersScene</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>SpinWinnerContent</Project>
+    <GuidesList />
+  </GuidesProject>
 </ArrayOfGuidesProject>

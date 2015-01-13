@@ -274,7 +274,7 @@ end
 
 function winnerEventHandler( sender,eventType )
     if eventType == TOUCH_EVENT_ENDED then
-        
+        EventManager:postEvent( Event.Enter_Spin_winner )
     end
 end
 

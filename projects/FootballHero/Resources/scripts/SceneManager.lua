@@ -125,6 +125,7 @@ function initEvents()
 	EventManager:registerEventHandler( Event.Load_More_In_Leaderboard, "scripts.actions.LoadMoreInLeaderboardAction" )
 	EventManager:registerEventHandler( Event.Load_More_In_History, "scripts.actions.LoadMoreInHistoryAction" )
 	EventManager:registerEventHandler( Event.Load_More_In_Competition_Detail, "scripts.actions.LoadMoreInCompetitionDetailAction" )
+	EventManager:registerEventHandler( Event.Load_More_In_Spin_Winner, "scripts.actions.LoadMoreInSpinWinnerAction" )
 end
 
 function keypadEventHandler( eventType )

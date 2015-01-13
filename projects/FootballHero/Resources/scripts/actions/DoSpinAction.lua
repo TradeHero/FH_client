@@ -17,7 +17,7 @@ function action( param )
     local url = RequestUtils.GET_SPIN_RESULT_REST_CALL
 
     local requestInfo = {}
-    requestInfo.requestData = requestContentText
+    requestInfo.requestData = ""
     requestInfo.url = url
 
      local handler = function( isSucceed, body, header, status, errorBuffer )
