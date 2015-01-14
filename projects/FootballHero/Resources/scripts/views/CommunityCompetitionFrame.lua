@@ -56,8 +56,10 @@ function initCompetitionScene( competitionFrame, compList, miniGame )
     --if shouldShowMiniGame() and not miniGame["Joined"] then
     contentHeight = contentHeight + initSpinWheel( competitionFrame )
 
-    if not miniGame["Joined"] then
-        contentHeight = contentHeight + initMiniGame( competitionFrame, miniGame )
+    if Constants.MINIGAME_PK_ENABLED then
+        if not miniGame["Joined"] then
+            contentHeight = contentHeight + initMiniGame( competitionFrame, miniGame )
+        end
     end
 
     -- add banner frame if special competition exists

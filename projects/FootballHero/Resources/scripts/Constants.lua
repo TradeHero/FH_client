@@ -91,6 +91,8 @@ EVENT_FHC_STATUS_TO_OPEN = 1
 EVENT_FHC_STATUS_OPENED = 2
 EVENT_FHC_STATUS_JOINED = 3
 
+MINIGAME_PK_ENABLED = false
+
 MinigameStages = {
 	-- development values
 	-- "3",

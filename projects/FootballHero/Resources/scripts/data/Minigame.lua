@@ -31,14 +31,26 @@ function Minigame:new( response )
 
   --for key,value in pairs(response) do print(key,value) end
 
-  local obj = {
-    Joined = response["joined"],
-    GoalsScored = response["goals_scored"],
-    Target = response["target"],
-    GoalsToTarget = response["goals_to_target"],
-    GoalScorers = response["users_helping"],
-    Winners = response["previous_winners"]
-  }
+  local obj
+  if response == nil then
+    obj = {
+      Joined = nil,
+      GoalsScored = nil,
+      Target = nil,
+      GoalsToTarget = nil,
+      GoalScorers = nil,
+      Winners = nil
+    }
+  else
+    obj = {
+      Joined = response["joined"],
+      GoalsScored = response["goals_scored"],
+      Target = response["target"],
+      GoalsToTarget = response["goals_to_target"],
+      GoalScorers = response["users_helping"],
+      Winners = response["previous_winners"]
+    }
+  end
 
   setmetatable(obj, self)
   self.__index = self
