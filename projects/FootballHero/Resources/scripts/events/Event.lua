@@ -82,6 +82,7 @@ EventNameList =
     "Do_Share_By_Email",
     "Do_Spin",
     "Do_Post_Spin_Lucky_Draw",
+    "Do_Share_Spin",
 
     "Show_Info",
     "Show_Error_Message",
@@ -124,6 +125,7 @@ EventNameDosenotTrackList =
     "Do_Share_By_Email",
     "Do_Spin",
     "Do_Post_Spin_Lucky_Draw",
+    "Do_Share_Spin",
 
     "Check_Start_Tutorial",
     "Check_File_Version",

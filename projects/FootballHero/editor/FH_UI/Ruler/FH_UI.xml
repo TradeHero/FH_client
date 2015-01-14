@@ -356,4 +356,8 @@
     <Project>SpinWinnerContent</Project>
     <GuidesList />
   </GuidesProject>
+  <GuidesProject>
+    <Project>SpinShare</Project>
+    <GuidesList />
+  </GuidesProject>
 </ArrayOfGuidesProject>

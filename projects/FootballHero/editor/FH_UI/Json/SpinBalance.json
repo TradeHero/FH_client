@@ -11,10 +11,9 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "spinWheel/img-ticket.png",
-    "spinWheel/img-shine.png",
-    "spinWheel/btn-submit.png",
-    "spinWheel/img-email.png"
+    "spinWheel/img-wheel.png",
+    "spinWheel/btn-yes.png",
+    "spinWheel/btn-no.png"
   ],
   "version": "1.5.0.0",
   "widgetTree": {
@@ -870,8 +869,8 @@
           "ignoreSize": false,
           "layoutParameter": null,
           "opacity": 255,
-          "positionPercentX": 0.241145819,
-          "positionPercentY": 0.307511836,
+          "positionPercentX": 0.332291633,
+          "positionPercentY": 0.345657378,
           "positionType": 0,
           "rotation": 0,
           "scaleX": 1,
@@ -884,8 +883,8 @@
           "useMergedTexture": false,
           "visible": true,
           "width": 330,
-          "x": 154,
-          "y": 349,
+          "x": 212,
+          "y": 392,
           "adaptScreen": false,
           "backGroundImage": null,
           "backGroundImageData": null,

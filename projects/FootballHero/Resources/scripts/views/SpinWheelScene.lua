@@ -9,6 +9,7 @@ local SpinWheelConfig = require("scripts.config.SpinWheel")
 local Constants = require("scripts.Constants")
 local ViewUtils = require("scripts.views.ViewUtils")
 local Logic = require("scripts.Logic").getInstance()
+local ConnectingMessage = require("scripts.views.ConnectingMessage")
 
 
 -- Below value is per second
@@ -37,6 +38,7 @@ local mInputPlaceholderFontColor = ccc3( 200, 200, 200 )
 local mWidget
 local mWheelTickHandler
 local mWheelState
+local mIsBonusSpin
 local mWheelBG
 local mWheelCurrentSpeed
 local mTargetStopAngle
@@ -44,6 +46,7 @@ local mSpinnerAnimating
 local mStopPressed
 local mWinPrizeWidget
 local mWinTicketWidget
+local mWinShareWidget
 local mWinTicketEmailInput
 local mWinPrizeId
 local mWinNumTicketLeft
@@ -60,22 +63,27 @@ function loadFrame()
     local backBt = mWidget:getChildByName("Button_Back")
     local stopBt = mWidget:getChildByName("Button_stop")
     local winnerBt = mWidget:getChildByName("Button_winner")
-    local balanceBt = mWidget:getChildByName("Button_balance") 
+    local balanceBt = mWidget:getChildByName("Button_balance")
+    local normalSpinTitle = tolua.cast( mWidget:getChildByName("Label_normalTitle"), "Label" )
+    local bonusSpinTitle = tolua.cast( mWidget:getChildByName("Label_bonusTitle"), "Label" )
     backBt:addTouchEventListener( backEventHandler )
     stopBt:addTouchEventListener( stopEventHandler )
     winnerBt:addTouchEventListener( winnerEventHandler )
     balanceBt:addTouchEventListener( balanceEventHandler )
+    normalSpinTitle:setEnabled( true )
+    bonusSpinTitle:setEnabled( false )
 
     Navigator.loadFrame( widget )
 
     initContent()
     initWinPrizeWidget()
     initWinTicketWidget()
+    initShareWidget()
 
     mWheelState = WHEEL_STATE_START
-    mWheelTickHandler = CCDirector:sharedDirector():getScheduler():scheduleScriptFunc( tick, 0.025, false )
     playStartAnim()
 
+    mIsBonusSpin = false
     mSpinnerAnimating = false
     mStopPressed = false
 end
@@ -144,22 +152,22 @@ function initWinTicketWidget()
     
     mWinTicketWidget:addTouchEventListener( onWinTicketFrameTouch )
 
-    local placeholderText = Constants.String.email
-    if SpinWheelConfig.getContactEmail() == nil then
-        if Logic:getEmail() ~= nil and string.len( Logic:getEmail() ) > 0 then
-            placeholderText = Logic:getEmail()
-        end
-    else
-        placeholderText = SpinWheelConfig.getContactEmail()
-    end
-
-    mWinTicketEmailInput = ViewUtils.createTextInput( mWinTicketWidget:getChildByName( "emailContainer" ), placeholderText )
-    mWinTicketEmailInput:setFontColor( mInputFontColor )
-    mWinTicketEmailInput:setPlaceholderFontColor( mInputPlaceholderFontColor )
-    mWinTicketEmailInput:setTouchPriority( SceneManager.TOUCH_PRIORITY_MINUS_ONE )
-
     local submitBt = mWinTicketWidget:getChildByName("Button_submit")
-    submitBt:addTouchEventListener( submitEventHandler )
+    submitBt:addTouchEventListener( winTicketSubmitEventHandler )
+end
+
+function initShareWidget()
+    mWinShareWidget = GUIReader:shareReader():widgetFromJsonFile("scenes/SpinShare.json")
+    mWidget:addChild( mWinShareWidget )
+    mWinShareWidget:setEnabled( false )
+
+    mWinShareWidget:addTouchEventListener( onShareFrameTouch )
+
+    local shareBt = mWinShareWidget:getChildByName("Button_share")
+    local cancelBt = mWinShareWidget:getChildByName("Button_cancel")
+
+    shareBt:addTouchEventListener( shareDoShareEventHandler )
+    cancelBt:addTouchEventListener( shareCancelEventHandler )
 end
 
 function tick( dt )
@@ -210,6 +218,24 @@ function tick( dt )
                 if SpinWheelConfig.isLuckDrawPrizeId( mWinPrizeId ) then
                     -- luck draw.
                     mWinTicketWidget:setEnabled( true )
+
+                    mWinTicketEmailInput = ViewUtils.createTextInput( mWinTicketWidget:getChildByName( "emailContainer" ), Constants.String.email )
+                    mWinTicketEmailInput:setFontColor( mInputFontColor )
+                    mWinTicketEmailInput:setPlaceholderFontColor( mInputPlaceholderFontColor )
+                    mWinTicketEmailInput:setTouchPriority( SceneManager.TOUCH_PRIORITY_MINUS_ONE )
+
+                    local defaultText = nil
+                    if SpinWheelConfig.getContactEmail() == nil then
+                        if Logic:getEmail() ~= nil and string.len( Logic:getEmail() ) > 0 then
+                            defaultText = Logic:getEmail()
+                        end
+                    else
+                        defaultText = SpinWheelConfig.getContactEmail()
+                    end
+                    if defaultText then
+                        local email = mWinTicketEmailInput:setText( defaultText )
+                    end
+
                     local ticketLeftText = tolua.cast( mWinTicketWidget:getChildByName("Label_ticketLeft"), "Label" )
                     local descriptionText = tolua.cast( mWinTicketWidget:getChildByName("Label_description"), "Label" )
                     ticketLeftText:setText( mWinNumTicketLeft )
@@ -253,6 +279,7 @@ function beginSpinnerAnim()
 end
 
 function playStartAnim()
+    mWheelTickHandler = CCDirector:sharedDirector():getScheduler():scheduleScriptFunc( tick, 0.025, false )
     mWheelState = WHEEL_STATE_START_BOUNCE
 end
 
@@ -286,19 +313,79 @@ end
 
 function onWinPrizeFrameTouch( sender, eventType )
     mWinPrizeWidget:setEnabled( false )
+    if not mIsBonusSpin then
+        mWinShareWidget:setEnabled( true )
+    end
 end
 
 function onWinTicketFrameTouch( sender, eventType )
     -- Do nothing, just block.
 end
 
-function submitEventHandler( sender, eventType )
+function onShareFrameTouch( sender, eventType )
+    -- Do nothing, just block.
+end
+
+function winTicketSubmitEventHandler( sender, eventType )
     if eventType == TOUCH_EVENT_ENDED then
         local successCallback = function()
             mWinTicketWidget:setEnabled( false )
+            if not mIsBonusSpin then
+                mWinShareWidget:setEnabled( true )
+            end
         end
         mWinTicketEmailInput:closeKeyboard()
         local email = mWinTicketWidget:getChildByName( "emailContainer" ):getNodeByTag( 1 ):getText()
         EventManager:postEvent( Event.Do_Post_Spin_Lucky_Draw, { email, successCallback } )
+    end
+end
+
+function shareDoShareEventHandler( sender, eventType )
+    if eventType == TOUCH_EVENT_ENDED then
+        local doShare = function()
+            local handler = function( accessToken, success )
+                ConnectingMessage.selfRemove()
+                if success then
+                    -- already has permission
+                    if accessToken == nil then
+                        accessToken = Logic:getFBAccessToken()
+                    end
+                    EventManager:postEvent( Event.Do_Share_Spin, { accessToken, shareCompleteEventHandler } )
+                end
+            end
+            ConnectingMessage.loadFrame()
+            FacebookDelegate:sharedDelegate():grantPublishPermission( "publish_actions", handler )
+        end
+
+        if Logic:getFbId() == false then
+            local successHandler = function()
+                doShare()
+            end
+            local failedHandler = function()
+                -- Nothing to do.
+            end
+            EventManager:postEvent( Event.Do_FB_Connect_With_User, { successHandler, failedHandler } )
+        else
+            doShare()
+        end
+    end
+end
+
+function shareCancelEventHandler( sender, eventType )
+    mWinShareWidget:setEnabled( false )
+end
+
+function shareCompleteEventHandler( success )
+    mWinShareWidget:setEnabled( false )
+    if success then
+        -- Start bonus spin
+        mIsBonusSpin = true
+        mStopPressed = false
+        local normalSpinTitle = tolua.cast( mWidget:getChildByName("Label_normalTitle"), "Label" )
+        local bonusSpinTitle = tolua.cast( mWidget:getChildByName("Label_bonusTitle"), "Label" )
+        normalSpinTitle:setEnabled( false )
+        bonusSpinTitle:setEnabled( true )
+        mWheelBG:setRotation( 0 )
+        playStartAnim()
     end
 end

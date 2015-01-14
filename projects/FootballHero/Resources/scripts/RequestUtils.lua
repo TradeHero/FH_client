@@ -58,6 +58,7 @@ POST_COMPETITION_PUSH_SETTING_REST_CALL = SERVER_IP.."/api/competitions/setPushN
 POST_USER_PUSH_SETTING_REST_CALL = SERVER_IP.."/api/user/setPushNotificationSettings"
 POST_UPDATE_DEVICD_TOKEN_REST_CALL = SERVER_IP.."/api/user/updateDeviceToken"
 POST_SPIN_LUCKY_DRAW_REST_CALL = SERVER_IP.."/api/wheel/submitEmail"
+POST_SHARE_SPIN_REST_CALL = SERVER_IP.."/api/wheel/shareToFacebook"
 
 
 FACEBOOK_FRIENDS_LIST_CALL = "/me/friends?access_token="
@@ -114,6 +115,7 @@ function setServerIP( serverIp, cdnServerIp, useDev )
     POST_USER_PUSH_SETTING_REST_CALL = serverIp.."/api/user/setPushNotificationSettings"
     POST_UPDATE_DEVICD_TOKEN_REST_CALL = serverIp.."/api/user/updateDeviceToken"
     POST_SPIN_LUCKY_DRAW_REST_CALL = serverIp.."/api/wheel/submitEmail"
+    POST_SHARE_SPIN_REST_CALL = serverIp.."/api/wheel/shareToFacebook"
 
 	CDN_SERVER_IP = cdnServerIp
     USE_DEV = useDev

@@ -11,10 +11,9 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "spinWheel/img-ticket.png",
-    "spinWheel/img-shine.png",
-    "spinWheel/btn-submit.png",
-    "spinWheel/img-email.png"
+    "spinWheel/img-wheel.png",
+    "spinWheel/btn-yes.png",
+    "spinWheel/btn-no.png"
   ],
   "version": "1.5.0.0",
   "widgetTree": {
