@@ -68,7 +68,11 @@ function onRequestSuccess( jsonResponse )
     if mTabID == CommunityConfig.COMMUNITY_TAB_ID_COMPETITION then
         mJsonResponse = jsonResponse
         -- check for minigame info
-        doMinigameRequest()
+        if Constants.MINIGAME_PK_ENABLED then
+            doMinigameRequest()
+        else
+            loadCommunityScene( jsonResponse )
+        end
     else
         loadCommunityScene( jsonResponse )
     end

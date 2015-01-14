@@ -276,7 +276,9 @@ function initMatchList( matchList, leagueKey, bInit )
         end
     end ) )
 
-    seqArray:addObject( CCCallFunc:create( checkMiniGame ) )
+    if Constants.MINIGAME_PK_ENABLED then
+        seqArray:addObject( CCCallFunc:create( checkMiniGame ) )
+    end
     mWidget:runAction( CCSequence:create( seqArray ) )
 end
 
