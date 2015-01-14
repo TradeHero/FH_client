@@ -99,17 +99,9 @@
   <ResRelativePath />
   <imageFileList />
   <imagePngList>
-    <string>MatchListScene/match_bkg.png</string>
-    <string>header/back.png</string>
-    <string>MatchCentre/img-unlike.png</string>
-    <string>MatchCentre/img-like.png</string>
-    <string>MatchCentre/img-comment.png</string>
-    <string>MatchCentre/img-share.png</string>
-    <string>MyHero/img-photo.png</string>
-    <string>community/img-leaguebox.png</string>
+    <string>MatchCentre/img-newdiscussion.png</string>
     <string>MatchCentre/img-write.png</string>
-    <string>MatchCentre/btn-post-comment.png</string>
   </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>MatchCenterDiscussionsContentFrame.json</CurrentUIJson>
+  <CurrentUIJson>MatchCenterDiscussionsFrame.json</CurrentUIJson>
 </UIProject>

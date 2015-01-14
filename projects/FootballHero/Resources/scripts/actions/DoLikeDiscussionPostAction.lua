@@ -9,13 +9,15 @@ local RequestUtils = require("scripts.RequestUtils")
 local Constants = require("scripts.Constants")
 local MatchCenterConfig = require("scripts.config.MatchCenter")
 
+local mCallback
+
 function action( param )
     local postId = param[1]
     local bLike = param[2]
-    --TODO param 3 : like post or comments / callback function
-
+    mCallback = param[3]
+    
     local url = RequestUtils.POST_LIKE_DISCUSSION_REST_CALL
---[[
+
     local requestContent = { PostId = postId, Liked = bLike }
     local requestContentText = Json.encode( requestContent )
 
@@ -34,24 +36,10 @@ function action( param )
     httpRequest:sendHttpRequest( url, handler )
 
     ConnectingMessage.loadFrame()
---]]
-
-    --loadMatchCenterScene( {}, mTabID )
-end
-
-function loadMatchCenterScene( jsonResponse )
-    local MatchCenterScene = require("scripts.views.MatchCenterScene")
-    
-    if MatchCenterScene.isShown() then
-        MatchCenterScene.refreshFrame( jsonResponse, mTabID )
-    else
-        MatchCenterScene.loadFrame( jsonResponse, mTabID )
-    end
 end
 
 function onRequestSuccess( jsonResponse )
-    --TODO handle like
-    loadMatchCenterScene( jsonResponse )
+    mCallback( jsonResponse )
 end
 
 function onRequestFailed( jsonResponse )

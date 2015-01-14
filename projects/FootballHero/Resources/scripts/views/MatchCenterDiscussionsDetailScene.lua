@@ -8,6 +8,7 @@ local EventManager = require("scripts.events.EventManager").getInstance()
 local Event = require("scripts.events.Event").EventList
 local SMIS = require("scripts.SMIS")
 local TeamConfig = require("scripts.config.Team")
+local MatchCenterConfig = require("scripts.config.MatchCenter")
 
 local mWidget
 local mTextInput
@@ -18,7 +19,12 @@ local mHasMoreToLoad
 
 function loadFrame( discussionInfo, comments )
     mStep = 1
-    mHasMoreToLoad = true
+
+    if table.getn( comments ) < Constants.DISCUSSIONS_PER_PAGE then
+        mHasMoreToLoad = false
+    else
+        mHasMoreToLoad = true
+    end
     mPostId = discussionInfo["Id"]    
 
 	mWidget = GUIReader:shareReader():widgetFromJsonFile("scenes/MatchCenterDiscussionsDetailScene.json")
@@ -70,6 +76,41 @@ function keypadBackEventHandler()
     EventManager:popHistory()
 end
 
+function loadMoreContent( comments )
+    
+    if table.getn( comments ) < Constants.DISCUSSIONS_PER_PAGE then
+        mHasMoreToLoad = false
+        if table.getn( comments ) == 0 then
+            return
+        end
+    else
+        mHasMoreToLoad = true
+    end
+
+    local contentContainer = tolua.cast( mWidget:getChildByName("ScrollView_Comments"), "ScrollView" )
+
+    local layoutParameter = LinearLayoutParameter:create()
+    layoutParameter:setGravity(LINEAR_GRAVITY_CENTER_VERTICAL)
+    local contentHeight = contentContainer:getInnerContainerSize().height
+
+    for i = 1, table.getn( comments ) do
+        local content = SceneManager.widgetFromJsonFile("scenes/MatchCenterDiscussionsCommentFrame.json")
+        content:setLayoutParameter( layoutParameter )
+        contentContainer:addChild( content )
+        contentHeight = contentHeight + content:getSize().height
+        initCommentContent( i, content, comments[i] )
+    end
+    mCurrentTotalNum = mCurrentTotalNum + table.getn( comments )
+
+    contentContainer:setInnerContainerSize( CCSize:new( 0, contentHeight ) )
+    local layout = tolua.cast( contentContainer, "Layout" )
+    layout:requestDoLayout()
+
+    if mCurrentTotalNum > Constants.DISCUSSIONS_PER_PAGE then
+        contentContainer:jumpToBottom()
+    end
+end
+
 function initTitle()
     local matchInfo = Logic:getSelectedMatch()
 
@@ -87,7 +128,22 @@ end
 function initContent( comments )
     initCommentsList( comments )
 
-    local eventHandler = function( sender,eventType )
+    local loadCommentEventHandler = function( sender,eventType )
+        if eventType == TOUCH_EVENT_ENDED then
+            sender:setEnabled( false )
+
+            EventManager:postEvent( Event.Load_More_Discussion_Posts, { mPostId, mStep } )
+        end
+    end
+
+    local loadMore = mWidget:getChildByName("Panel_MoreComments")
+    loadMore:setEnabled( false )
+    loadMore:addTouchEventListener( loadCommentEventHandler )
+
+    local loadText = tolua.cast( loadMore:getChildByName("Label_MoreComments"), "Label" )
+    loadText:setText( Constants.String.match_center.load_comments )
+
+    local postCommentEventHandler = function( sender,eventType )
         if eventType == TOUCH_EVENT_ENDED then
             local postPanel = mWidget:getChildByName("Panel_Post")
             postPanel:setEnabled( true )
@@ -95,9 +151,9 @@ function initContent( comments )
     end
 
     local button = tolua.cast( mWidget:getChildByName("Button_Comment"), "Button" )
-    button:addTouchEventListener( eventHandler )
+    button:addTouchEventListener( postCommentEventHandler )
     local text = tolua.cast( button:getChildByName("Label_Comment"), "Label" )
-    text:setText( Constants.String.match_center.write_discussion )
+    text:setText( Constants.String.match_center.write_comment )
 
     initInput()
 end
@@ -112,16 +168,25 @@ function initInput()
     local inputDelegate = EditBoxDelegateForLua:create()
     container:addNode( tolua.cast( inputDelegate, "CCNode" ) )
 
+    
+    inputDelegate:registerEventScriptHandler( EDIT_BOX_EVENT_RETURN, function ( textBox )
+        textBox:setVisible( true )
+    end )
+
     mTextInput = CCEditBox:create( CCSizeMake( 552, 35 ), CCScale9Sprite:create() )
     container:addNode( mTextInput )
     mTextInput:setPosition( 552 / 2, 60 / 2 )
     mTextInput:setVisible( false )
     mTextInput:setDelegate( inputDelegate.__CCEditBoxDelegate__ )
-    --mTextInput:setText( "" )
-
+    
     local postEventHandler = function( sender,eventType )
         if eventType == TOUCH_EVENT_ENDED then
-            EventManager:postEvent( Event.Do_Make_Discussion_Post, { mPostId, mTextInput:getText() } )
+            --mTextInput:setVisible( false )
+            top:setEnabled( false )
+            if mTextInput:getText() ~= "" then
+                EventManager:postEvent( Event.Do_Make_Discussion_Post, { mPostId, mTextInput:getText() } )
+                mTextInput:setText( "" )
+            end
         end
     end
     local button = top:getChildByName("Button_Post")
@@ -150,16 +215,29 @@ function initPost( info )
     local comments = tolua.cast( bottom:getChildByName("Label_Comments"), "Label" )
     local share = tolua.cast( bottom:getChildByName("Button_Share"), "Button" )
     
+    local enableLikeEventHandler = function( bLiked )
+        checkLike:setTouchEnabled( true )
+        local newCount
+        if bLiked then
+            newCount = tonumber( lblLike:getStringValue() ) + 1
+        else
+            newCount = math.max( 0, tonumber( lblLike:getStringValue() ) - 1 )
+        end
+        info["LikeCount"] = newCount
+        info["Liked"] = bLiked
+        lblLike:setText( newCount )
+    end
     local likeEventHandler = function( sender, eventType )
-        local checkbox = tolua.cast( sender, "CheckBox" )
+        local checkbox = tolua.cast( sender, "CheckBox" )    
         if eventType == TOUCH_EVENT_ENDED then
             checkbox:setTouchEnabled( false )
-            EventManager:postEvent( Event.Do_Like_Discussion_Post, { not checkbox:getSelectedState() } )
+            EventManager:postEvent( Event.Do_Like_Discussion_Post, { info["Id"], not checkbox:getSelectedState(), enableLikeEventHandler } )
         end
     end
     checkLike:addTouchEventListener( likeEventHandler )
 
-    share:addTouchEventListener( shareTypeSelectEventHandler )
+    --share:addTouchEventListener( shareTypeSelectEventHandler )
+    share:setEnabled( false )
 
     if type( info["DisplayName"]  ) ~= "string" or info["DisplayName"] == nil then
         name:setText( Constants.String.unknown_name )
@@ -172,9 +250,8 @@ function initPost( info )
     checkLike:setSelectedState( info["Liked"] )
     comments:setText( info["CommentCount"] )
     
-    -- TODO set date
-    -- setDate( info["UnixTimeStamp"] )
-
+    MatchCenterConfig.setTimeDiff( time, info["UnixTimeStamp"] )
+    
     if info["PictureUrl"] ~= nil then
         local handler = function( filePath )
             if filePath ~= nil and mWidget ~= nil and logo ~= nil then
@@ -227,11 +304,23 @@ function initCommentContent( i, content, info )
     local checkLike = tolua.cast( content:getChildByName("CheckBox_Like"), "CheckBox" )
     local lblLike = tolua.cast( content:getChildByName("Label_Like"), "Label" )
 
+    local enableLikeEventHandler = function( bLiked )
+        checkLike:setTouchEnabled( true )
+        local newCount
+        if bLiked then
+            newCount = tonumber( lblLike:getStringValue() ) + 1
+        else
+            newCount = math.max( 0, tonumber( lblLike:getStringValue() ) - 1 )
+        end
+        info["LikeCount"] = newCount
+        info["Liked"] = bLiked
+        lblLike:setText( newCount )
+    end
     local likeEventHandler = function( sender, eventType )
-        local checkbox = tolua.cast( sender, "CheckBox" )
+        local checkbox = tolua.cast( sender, "CheckBox" )    
         if eventType == TOUCH_EVENT_ENDED then
             checkbox:setTouchEnabled( false )
-            EventManager:postEvent( Event.Do_Like_Discussion_Post, { info["Id"], not checkbox:getSelectedState() } )
+            EventManager:postEvent( Event.Do_Like_Discussion_Post, { info["Id"], not checkbox:getSelectedState(), enableLikeEventHandler } )
         end
     end
     checkLike:addTouchEventListener( likeEventHandler )
@@ -313,14 +402,14 @@ function shareByFacebook( sender, eventType )
 end
 
 function scrollViewEventHandler( target, eventType )
-    --[[
-    if eventType == SCROLLVIEW_EVENT_BOUNCE_BOTTOM and mHasMoreToLoad then
+
+    if eventType == SCROLLVIEW_EVENT_SCROLL_TO_BOTTOM and mHasMoreToLoad then
         mStep = mStep + 1
-        if mFilter == true then
-            EventManager:postEvent( Event.Load_More_In_Leaderboard, { mLeaderboardId, mSubType, mStep, Constants.FILTER_MIN_PREDICTION } )
-        else
-            EventManager:postEvent( Event.Load_More_In_Leaderboard, { mLeaderboardId, mSubType, mStep } )
-        end
+        
+        mHasMoreToLoad = false
+        print( "Scrolled to Bottom!")
+
+        local loadMore = mWidget:getChildByName("Panel_MoreComments")
+        loadMore:setEnabled( true )
     end
-    ]]--
 end

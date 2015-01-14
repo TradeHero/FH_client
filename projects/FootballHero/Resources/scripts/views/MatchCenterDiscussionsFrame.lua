@@ -6,19 +6,27 @@ local Event = require("scripts.events.Event").EventList
 local SMIS = require("scripts.SMIS")
 local Constants = require("scripts.Constants")
 local Logic = require("scripts.Logic").getInstance()
+local MatchCenterConfig = require("scripts.config.MatchCenter")
 
 local mWidget
 local mStep
 local mCurrentTotalNum
 local mHasMoreToLoad
+local mMatch
 
 -- DS for subType see LeaderboardConfig
 function loadFrame( parent, discussionInfo )
 	mWidget = GUIReader:shareReader():widgetFromJsonFile("scenes/MatchCenterDiscussionsFrame.json")
     parent:addChild( mWidget )
 
+    mMatch = Logic:getSelectedMatch()
+
     mStep = 1
-    mHasMoreToLoad = true
+    if table.getn( discussionInfo ) < Constants.DISCUSSIONS_PER_PAGE then
+        mHasMoreToLoad = false
+    else
+        mHasMoreToLoad = true
+    end
 
     initContent( discussionInfo )
 end
@@ -95,17 +103,29 @@ function initDiscussionContent( i, content, info )
     top:addTouchEventListener( enterDetailEventHandler )
     btnComments:addTouchEventListener( enterDetailEventHandler )
     
+    local enableLikeEventHandler = function( bLiked )
+        checkLike:setTouchEnabled( true )
+        local newCount
+        if bLiked then
+            newCount = tonumber( lblLike:getStringValue() ) + 1
+        else
+            newCount = math.max( 0, tonumber( lblLike:getStringValue() ) - 1 )
+        end
+        info["LikeCount"] = newCount
+        info["Liked"] = bLiked
+        lblLike:setText( newCount )
+    end
     local likeEventHandler = function( sender, eventType )
-        local checkbox = tolua.cast( sender, "CheckBox" )
+        local checkbox = tolua.cast( sender, "CheckBox" )    
         if eventType == TOUCH_EVENT_ENDED then
             checkbox:setTouchEnabled( false )
-            EventManager:postEvent( Event.Do_Like_Discussion_Post, { info["Id"], not checkbox:getSelectedState() } )
+            EventManager:postEvent( Event.Do_Like_Discussion_Post, { info["Id"], not checkbox:getSelectedState(), enableLikeEventHandler } )
         end
     end
     checkLike:addTouchEventListener( likeEventHandler )
 
-    share:addTouchEventListener( shareTypeSelectEventHandler )
-
+    --share:addTouchEventListener( shareTypeSelectEventHandler )
+    share:setEnabled( false )
 
     if type( info["DisplayName"]  ) ~= "string" or info["DisplayName"] == nil then
         name:setText( Constants.String.unknown_name )
@@ -113,15 +133,13 @@ function initDiscussionContent( i, content, info )
         name:setText( info["DisplayName"] )
     end
 
-
     post:setText( info["Text"] )
     lblLike:setText( info["LikeCount"] )
     checkLike:setSelectedState( info["Liked"] )
     comments:setText( info["CommentCount"] )
-    -- TODO set date
     
-    -- setDate( info["UnixTimeStamp"] )
-
+    MatchCenterConfig.setTimeDiff( time, info["UnixTimeStamp"] )
+    
     local seqArray = CCArray:create()
     seqArray:addObject( CCDelayTime:create( i * 0.2 ) )
     seqArray:addObject( CCCallFuncN:create( function()
@@ -146,10 +164,15 @@ function initDiscussionContent( i, content, info )
     mWidget:runAction( CCSequence:create( seqArray ) )
 end
 
+
 function loadMoreContent( discussionInfo )
-    if table.getn( discussionInfo ) == 0 then
+    if table.getn( discussionInfo ) < Constants.DISCUSSIONS_PER_PAGE then
         mHasMoreToLoad = false
-        return
+        if table.getn( discussionInfo ) == 0 then
+            return
+        end
+    else
+        mHasMoreToLoad = true
     end
 
     local contentContainer = tolua.cast( mWidget:getChildByName("ScrollView_Discussion"), "ScrollView" )
@@ -173,16 +196,12 @@ function loadMoreContent( discussionInfo )
 end
 
 function scrollViewEventHandler( target, eventType )
-    --[[
+    
     if eventType == SCROLLVIEW_EVENT_BOUNCE_BOTTOM and mHasMoreToLoad then
         mStep = mStep + 1
-        if mFilter == true then
-            EventManager:postEvent( Event.Load_More_In_Leaderboard, { mLeaderboardId, mSubType, mStep, Constants.FILTER_MIN_PREDICTION } )
-        else
-            EventManager:postEvent( Event.Load_More_In_Leaderboard, { mLeaderboardId, mSubType, mStep } )
-        end
+        
+        EventManager:postEvent( Event.Load_More_Discussion_Posts, { mMatch["Id"], mStep } )
     end
-    ]]--
 end
 
 function shareTypeSelectEventHandler( sender, eventType )

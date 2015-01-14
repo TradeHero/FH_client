@@ -93,6 +93,7 @@ EventNameList =
     "Load_More_In_Leaderboard",
     "Load_More_In_History",
     "Load_More_In_Competition_Detail",
+    "Load_More_Discussion_Posts",
 }
 
 EventNameDosenotTrackList = 
@@ -132,9 +133,11 @@ EventNameDosenotTrackList =
     "Show_Choice_Message",
     "Show_Marketing_Message",
     "Show_Please_Update",
+    
     "Load_More_In_Leaderboard",
     "Load_More_In_History",
     "Load_More_In_Competition_Detail",
+    "Load_More_Discussion_Posts",
 }
 
 EventList = CreatEnumTable( EventNameList )
