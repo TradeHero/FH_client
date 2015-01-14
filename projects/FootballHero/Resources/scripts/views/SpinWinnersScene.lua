@@ -58,7 +58,7 @@ end
 
 function initTitle()
     local title = tolua.cast( mWidget:getChildByName("Label_Title"), "Label" )
-    title:setText( Constants.String.minigame.winners )
+    title:setText( Constants.String.spinWheel.winners )
 end
 
 function loadMainContent( winners )
@@ -93,7 +93,7 @@ function loadMainContent( winners )
 
         mCurrentTotalNum = table.getn( winners )
     else
-        CTA:setText( Constants.String.minigame.no_one_won )
+        CTA:setText( Constants.String.spinWheel.no_one_won )
     end
 end
 

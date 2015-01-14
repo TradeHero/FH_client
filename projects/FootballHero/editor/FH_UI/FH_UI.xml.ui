@@ -101,17 +101,13 @@
   <ResRelativePath />
   <imageFileList />
   <imagePngList>
-    <string>spinWheel/bkg-main.png</string>
-    <string>spinWheel/img-wheel.png</string>
-    <string>spinWheel/btn-winner.png</string>
-    <string>spinWheel/btn-ticket.png</string>
-    <string>spinWheel/img-spinner.png</string>
+    <string>spinWheel/bkg-balance-page.png</string>
     <string>header/back.png</string>
-    <string>spinWheel/img-bottom-button.png</string>
-    <string>spinWheel/img-top-button-off.png</string>
-    <string>spinWheel/img-top-button-on.png</string>
-    <string>spinWheel/img-logo.png</string>
+    <string>spinWheel/img-ticket.png</string>
+    <string>spinWheel/img-cash.png</string>
+    <string>spinWheel/btn-submit.png</string>
+    <string>spinWheel/img-email.png</string>
   </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>SpinWheel.json</CurrentUIJson>
+  <CurrentUIJson>ErrorMessage.json</CurrentUIJson>
 </UIProject>

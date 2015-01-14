@@ -11,9 +11,16 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
+    "spinWheel/bkg-main.png",
     "spinWheel/img-wheel.png",
-    "spinWheel/btn-yes.png",
-    "spinWheel/btn-no.png"
+    "spinWheel/btn-winner.png",
+    "spinWheel/btn-ticket.png",
+    "spinWheel/img-spinner.png",
+    "header/back.png",
+    "spinWheel/img-bottom-button.png",
+    "spinWheel/img-top-button-off.png",
+    "spinWheel/img-top-button-on.png",
+    "spinWheel/img-logo.png"
   ],
   "version": "1.5.0.0",
   "widgetTree": {
