@@ -96,7 +96,6 @@ function loadMoreContent( comments, bJumpToTop )
     for i = 1, table.getn( comments ) do
         local content = SceneManager.widgetFromJsonFile("scenes/MatchCenterDiscussionsCommentFrame.json")
         content:setLayoutParameter( layoutParameter )
-        content:setName( comments[i]["Id"] )
         
         -- check for duplicates (when loading more after adding new post)
         if contentContainer:getChildByName( comments[i]["Id"] ) == nil then
@@ -140,6 +139,8 @@ end
 function initContent( comments )
     initCommentsList( comments )
 
+    local postPanel = mWidget:getChildByName("Panel_Post")
+
     local loadCommentEventHandler = function( sender,eventType )
         if eventType == TOUCH_EVENT_ENDED then
             sender:setEnabled( false )
@@ -147,6 +148,18 @@ function initContent( comments )
             EventManager:postEvent( Event.Load_More_Discussion_Posts, { mPostId, mStep } )
         end
     end
+
+    local clickMask = mWidget:getChildByName("Panel_InputCancelMask")
+    clickMask:setEnabled( false )
+
+    local clickMaskEventHandler = function( sender, eventType )
+        postPanel:setEnabled( false )
+        clickMask:setEnabled( false )
+        mTextInput:setText( "" )
+        --mTextInput:setVisible( false )
+    end
+    clickMask:addTouchEventListener( clickMaskEventHandler )
+
 
     local loadMore = mWidget:getChildByName("Panel_MoreComments")
     loadMore:setEnabled( false )
@@ -157,8 +170,10 @@ function initContent( comments )
 
     local postCommentEventHandler = function( sender,eventType )
         if eventType == TOUCH_EVENT_ENDED then
-            local postPanel = mWidget:getChildByName("Panel_Post")
+            
             postPanel:setEnabled( true )
+            clickMask:setEnabled( true )
+            --mTextInput:setVisible( true )
 
             -- Make keyboard appear automatically
             local container = postPanel:getChildByName("Panel_Input")
@@ -298,7 +313,7 @@ function initCommentsList( comments )
     for i = 1, table.getn( comments ) do
         local content = SceneManager.widgetFromJsonFile("scenes/MatchCenterDiscussionsCommentFrame.json")
         content:setLayoutParameter( layoutParameter )
-        contentContainer:addChild( content )
+        contentContainer:addChild( content,  -comments[i]["UnixTimeStamp"] )
         contentHeight = contentHeight + content:getSize().height
         initCommentContent( i, content, comments[i] )
     end
@@ -311,6 +326,8 @@ function initCommentsList( comments )
 end
 
 function initCommentContent( i, content, info )
+
+    content:setName( info["Id"] )
 
     local logo = tolua.cast( content:getChildByName("Image_Logo"), "ImageView" )
     local name = tolua.cast( content:getChildByName("Label_Name"), "Label" )
