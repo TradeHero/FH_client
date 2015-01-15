@@ -96,7 +96,8 @@ function loadMoreContent( comments )
     for i = 1, table.getn( comments ) do
         local content = SceneManager.widgetFromJsonFile("scenes/MatchCenterDiscussionsCommentFrame.json")
         content:setLayoutParameter( layoutParameter )
-        contentContainer:addChild( content )
+        -- z-order to reverse add order (ie. Add to top of scrollview)
+        contentContainer:addChild( content,  -comments[i]["UnixTimeStamp"])
         contentHeight = contentHeight + content:getSize().height
         initCommentContent( i, content, comments[i] )
     end
@@ -106,9 +107,9 @@ function loadMoreContent( comments )
     local layout = tolua.cast( contentContainer, "Layout" )
     layout:requestDoLayout()
 
-    if mCurrentTotalNum > Constants.DISCUSSIONS_PER_PAGE then
-        contentContainer:jumpToBottom()
-    end
+    -- if mCurrentTotalNum > Constants.DISCUSSIONS_PER_PAGE then
+    --     contentContainer:jumpToBottom()
+    -- end
 end
 
 function initTitle()
@@ -147,6 +148,10 @@ function initContent( comments )
         if eventType == TOUCH_EVENT_ENDED then
             local postPanel = mWidget:getChildByName("Panel_Post")
             postPanel:setEnabled( true )
+
+            -- Make keyboard appear automatically
+            local container = postPanel:getChildByName("Panel_Input")
+            inputEventHandler( container, TOUCH_EVENT_ENDED )
         end
     end
 
@@ -335,8 +340,7 @@ function initCommentContent( i, content, info )
     lblLike:setText( info["LikeCount"] )
     checkLike:setSelectedState( info["Liked"] )
     
-    -- TODO set date
-    -- setDate( info["UnixTimeStamp"] )
+    MatchCenterConfig.setTimeDiff( time, info["UnixTimeStamp"] )
 
     local seqArray = CCArray:create()
     seqArray:addObject( CCDelayTime:create( i * 0.2 ) )

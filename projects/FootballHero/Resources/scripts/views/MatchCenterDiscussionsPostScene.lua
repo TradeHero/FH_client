@@ -77,6 +77,9 @@ function createTextInput()
     mTextInput:setPosition( 600 / 2, 60 / 2 )
     mTextInput:setVisible( false )
     mTextInput:setDelegate( inputDelegate.__CCEditBoxDelegate__ )
+
+    -- Make keyboard appear automatically
+    inputEventHandler( container, TOUCH_EVENT_ENDED )
 end
 
 function inputEventHandler( sender, eventType )
