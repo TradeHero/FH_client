@@ -56,8 +56,9 @@ function onRequestSuccess( jsonResponse )
     RequestUtils.invalidResponseCacheContainsUrl( RequestUtils.GET_DISCUSSION_REST_CALL )
 
     if m_bIsComment then
+        local bJumpToTop = true
         local MatchCenterDiscussionsDetailScene = require("scripts.views.MatchCenterDiscussionsDetailScene")
-        MatchCenterDiscussionsDetailScene.loadMoreContent( { jsonResponse } )
+        MatchCenterDiscussionsDetailScene.loadMoreContent( { jsonResponse }, bJumpToTop )
     else
         EventManager:postEvent( Event.Enter_Match_Center, { MatchCenterConfig.MATCH_CENTER_TAB_ID_DISCUSSION } )
     end

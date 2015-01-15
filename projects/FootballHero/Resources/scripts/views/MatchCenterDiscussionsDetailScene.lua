@@ -76,9 +76,9 @@ function keypadBackEventHandler()
     EventManager:popHistory()
 end
 
-function loadMoreContent( comments )
+function loadMoreContent( comments, bJumpToTop )
     
-    if table.getn( comments ) < Constants.DISCUSSIONS_PER_PAGE then
+    if not bJumpToTop and table.getn( comments ) < Constants.DISCUSSIONS_PER_PAGE then
         mHasMoreToLoad = false
         if table.getn( comments ) == 0 then
             return
@@ -96,10 +96,15 @@ function loadMoreContent( comments )
     for i = 1, table.getn( comments ) do
         local content = SceneManager.widgetFromJsonFile("scenes/MatchCenterDiscussionsCommentFrame.json")
         content:setLayoutParameter( layoutParameter )
-        -- z-order to reverse add order (ie. Add to top of scrollview)
-        contentContainer:addChild( content,  -comments[i]["UnixTimeStamp"])
-        contentHeight = contentHeight + content:getSize().height
-        initCommentContent( i, content, comments[i] )
+        content:setName( comments[i]["Id"] )
+        
+        -- check for duplicates (when loading more after adding new post)
+        if contentContainer:getChildByName( comments[i]["Id"] ) == nil then
+            -- z-order to reverse add order (ie. Add to top of scrollview)
+            contentContainer:addChild( content,  -comments[i]["UnixTimeStamp"])
+            contentHeight = contentHeight + content:getSize().height
+            initCommentContent( i, content, comments[i] )
+        end
     end
     mCurrentTotalNum = mCurrentTotalNum + table.getn( comments )
 
@@ -107,9 +112,9 @@ function loadMoreContent( comments )
     local layout = tolua.cast( contentContainer, "Layout" )
     layout:requestDoLayout()
 
-    -- if mCurrentTotalNum > Constants.DISCUSSIONS_PER_PAGE then
-    --     contentContainer:jumpToBottom()
-    -- end
+    if bJumpToTop then
+        contentContainer:jumpToTop()
+    end
 end
 
 function initTitle()
