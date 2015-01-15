@@ -11,16 +11,11 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "spinWheel/bkg-main.png",
-    "spinWheel/img-wheel.png",
-    "spinWheel/btn-winner.png",
-    "spinWheel/btn-ticket.png",
-    "spinWheel/img-spinner.png",
+    "spinWheel/bkg-balance-page.png",
     "header/back.png",
-    "spinWheel/img-bottom-button.png",
-    "spinWheel/img-top-button-off.png",
-    "spinWheel/img-top-button-on.png",
-    "spinWheel/img-logo.png"
+    "spinWheel/img-ticket.png",
+    "spinWheel/img-cash.png",
+    "spinWheel/btn-submit.png"
   ],
   "version": "1.5.0.0",
   "widgetTree": {

@@ -226,10 +226,10 @@ function initSpinWheel( parent )
             EventManager:postEvent( Event.Enter_Spin_the_Wheel )
         end
     end
-    bannerFrame:addTouchEventListener( joinEventHandler )
 
     local joinBtn = tolua.cast( bannerFrame:getChildByName( "Button_Join" ), "Button" )
-    joinBtn:setEnabled( false )
+    joinBtn:setTitleText( Constants.String.button.play_now )
+    joinBtn:addTouchEventListener( joinEventHandler )
 
     parent:addChild( bannerFrame )
     contentHeight = contentHeight + bannerFrame:getSize().height

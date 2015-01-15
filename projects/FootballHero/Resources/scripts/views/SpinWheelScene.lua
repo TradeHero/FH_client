@@ -36,6 +36,7 @@ local mInputFontColor = ccc3( 255, 255, 255 )
 local mInputPlaceholderFontColor = ccc3( 200, 200, 200 )
 
 local mWidget
+local mSoundEffectHandle = nil
 local mWheelTickHandler
 local mWheelState
 local mIsBonusSpin
@@ -91,9 +92,14 @@ end
 function EnterOrExit( eventType )
     if eventType == "enter" then
     elseif eventType == "exit" then
+        if mSoundEffectHandle then
+            AudioEngine.stopEffect( mSoundEffectHandle )
+            mSoundEffectHandle = nil
+        end
         CCDirector:sharedDirector():getScheduler():unscheduleScriptEntry( mWheelTickHandler )
         if mWinTicketEmailInput then
             mWinTicketEmailInput:closeKeyboard()
+            mWinTicketEmailInput = nil
         end
         mWidget = nil
     end
@@ -151,9 +157,6 @@ function initWinTicketWidget()
     mWinTicketWidget:setEnabled( false )
     
     mWinTicketWidget:addTouchEventListener( onWinTicketFrameTouch )
-
-    local submitBt = mWinTicketWidget:getChildByName("Button_submit")
-    submitBt:addTouchEventListener( winTicketSubmitEventHandler )
 end
 
 function initShareWidget()
@@ -219,23 +222,6 @@ function tick( dt )
                     -- luck draw.
                     mWinTicketWidget:setEnabled( true )
 
-                    mWinTicketEmailInput = ViewUtils.createTextInput( mWinTicketWidget:getChildByName( "emailContainer" ), Constants.String.email )
-                    mWinTicketEmailInput:setFontColor( mInputFontColor )
-                    mWinTicketEmailInput:setPlaceholderFontColor( mInputPlaceholderFontColor )
-                    mWinTicketEmailInput:setTouchPriority( SceneManager.TOUCH_PRIORITY_MINUS_ONE )
-
-                    local defaultText = nil
-                    if SpinWheelConfig.getContactEmail() == nil then
-                        if Logic:getEmail() ~= nil and string.len( Logic:getEmail() ) > 0 then
-                            defaultText = Logic:getEmail()
-                        end
-                    else
-                        defaultText = SpinWheelConfig.getContactEmail()
-                    end
-                    if defaultText then
-                        local email = mWinTicketEmailInput:setText( defaultText )
-                    end
-
                     local ticketLeftText = tolua.cast( mWinTicketWidget:getChildByName("Label_ticketLeft"), "Label" )
                     local descriptionText = tolua.cast( mWinTicketWidget:getChildByName("Label_description"), "Label" )
                     ticketLeftText:setText( mWinNumTicketLeft )
@@ -252,6 +238,11 @@ function tick( dt )
                 
             end
             EventManager:scheduledExecutor( showPrize, 0.5 )
+
+            if mSoundEffectHandle then
+                AudioEngine.stopEffect( mSoundEffectHandle )
+                mSoundEffectHandle = nil
+            end
         else
             newRotation = currentRotation + dt * STOP_BOUNCE_SPEED
             mWheelBG:setRotation( newRotation )
@@ -281,6 +272,8 @@ end
 function playStartAnim()
     mWheelTickHandler = CCDirector:sharedDirector():getScheduler():scheduleScriptFunc( tick, 0.025, false )
     mWheelState = WHEEL_STATE_START_BOUNCE
+
+    mSoundEffectHandle = AudioEngine.playEffect( AudioEngine.SPIN_WHEEL, true )
 end
 
 function stopEventHandler( sender,eventType )
@@ -311,32 +304,78 @@ function balanceEventHandler( sender,eventType )
     end
 end
 
+function onCollectEmailFrameTouch( sender, eventType )
+    -- Do nothing, just block.
+end
+
 function onWinPrizeFrameTouch( sender, eventType )
-    mWinPrizeWidget:setEnabled( false )
-    if not mIsBonusSpin then
-        mWinShareWidget:setEnabled( true )
+    if eventType == TOUCH_EVENT_ENDED then
+        local touchHandler = function()
+            mWinPrizeWidget:setEnabled( false )
+            if mIsBonusSpin then
+                leaveSpin()
+            else
+                checkNCollectEmail()
+            end
+        end
+
+        if mWinPrizeId == SpinWheelConfig.PRIZE_XIAOMI or mWinPrizeId == SpinWheelConfig.PIRZE_JERSEY then
+            local claimText = string.format( Constants.String.spinWheel.claimVirtualPrize, SpinWheelConfig.getPrizeConfigWithID( mWinPrizeId )["Name"] )
+            EventManager:postEvent( Event.Show_Info, { claimText, touchHandler } ) 
+        else
+            touchHandler()
+        end
     end
 end
 
 function onWinTicketFrameTouch( sender, eventType )
-    -- Do nothing, just block.
+     if eventType == TOUCH_EVENT_ENDED then
+        mWinTicketWidget:setEnabled( false )
+        if mIsBonusSpin then
+            leaveSpin()
+        else
+            checkNCollectEmail()
+        end
+    end
 end
 
 function onShareFrameTouch( sender, eventType )
     -- Do nothing, just block.
 end
 
-function winTicketSubmitEventHandler( sender, eventType )
-    if eventType == TOUCH_EVENT_ENDED then
-        local successCallback = function()
-            mWinTicketWidget:setEnabled( false )
-            if not mIsBonusSpin then
-                mWinShareWidget:setEnabled( true )
+function checkNCollectEmail()
+    if SpinWheelConfig.getContactEmail() then
+        mWinShareWidget:setEnabled( true )
+    else
+        local collectEmailWidget = GUIReader:shareReader():widgetFromJsonFile("scenes/SpinEmailCollect.json")
+        mWidget:addChild( collectEmailWidget )
+        collectEmailWidget:addTouchEventListener( onCollectEmailFrameTouch )
+
+        local emailInput = ViewUtils.createTextInput( collectEmailWidget:getChildByName( "emailContainer" ), Constants.String.email )
+        emailInput:setFontColor( mInputFontColor )
+        emailInput:setPlaceholderFontColor( mInputPlaceholderFontColor )
+        emailInput:setTouchPriority( SceneManager.TOUCH_PRIORITY_MINUS_ONE )
+
+        local emailConfirmInput = ViewUtils.createTextInput( collectEmailWidget:getChildByName( "emailContainerConfirm" ), Constants.String.email_confirm )
+        emailConfirmInput:setFontColor( mInputFontColor )
+        emailConfirmInput:setPlaceholderFontColor( mInputPlaceholderFontColor )
+        emailConfirmInput:setTouchPriority( SceneManager.TOUCH_PRIORITY_MINUS_ONE )
+
+        local submitHandler = function( sender, eventType )
+            if eventType == TOUCH_EVENT_ENDED then
+                local email = emailInput:getText()
+                local emailConfirm = emailConfirmInput:getText()
+
+                local emailCollectSuccessCallback = function()
+                    collectEmailWidget:removeFromParent()
+                    mWinShareWidget:setEnabled( true )
+                end
+
+                EventManager:postEvent( Event.Do_Post_Spin_Collect_Email, { email, emailConfirm, emailCollectSuccessCallback } )
             end
         end
-        mWinTicketEmailInput:closeKeyboard()
-        local email = mWinTicketWidget:getChildByName( "emailContainer" ):getNodeByTag( 1 ):getText()
-        EventManager:postEvent( Event.Do_Post_Spin_Lucky_Draw, { email, successCallback } )
+        local submitBt = collectEmailWidget:getChildByName("Button_submit")
+        submitBt:addTouchEventListener( submitHandler )
     end
 end
 
@@ -373,6 +412,7 @@ end
 
 function shareCancelEventHandler( sender, eventType )
     mWinShareWidget:setEnabled( false )
+    leaveSpin()
 end
 
 function shareCompleteEventHandler( success )
@@ -388,4 +428,11 @@ function shareCompleteEventHandler( success )
         mWheelBG:setRotation( 0 )
         playStartAnim()
     end
+end
+
+function leaveSpin()
+    local leaveHandler = function()
+        EventManager:postEvent( Event.Enter_Community )
+    end
+    EventManager:postEvent( Event.Show_Info, { Constants.String.spinWheel.leave_message, leaveHandler } ) 
 end

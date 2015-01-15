@@ -275,6 +275,8 @@ local Strings = {
     ticket_balance_2 = "%d tickets",
     money_balance = "US$ %s Amazon Gift Card",
     money_payout_success_notification = "Your request has been processed. Please allow 2 - 4 weeks to receive the gift card via your email address.",
+    leave_message = "Come back tomorrow for another spin.",
+    claimVirtualPrize = "Congratulations! You have won a %s. Please contact our support.",
   },
   num_of_points = "%d Points",
   optional = "(Optional)",

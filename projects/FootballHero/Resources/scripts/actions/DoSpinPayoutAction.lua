@@ -14,22 +14,10 @@ local mSuccessCallback
 local mCallback
 
 function action( param )
-    local email = param[1]
-    local emailConfirm = param[2]
-    local amount = param[3]
-    mCallback = param[4]
+    local amount = param[1]
+    mCallback = param[2]
 
-    if email == nil or string.len( email ) == 0 or emailConfirm == nil or string.len( emailConfirm ) == 0 then
-        RequestUtils.onRequestFailed( Constants.String.error.blank_email )
-        return
-    end
-
-    if email ~= emailConfirm then
-        RequestUtils.onRequestFailed( Constants.String.error.email_not_match )
-        return
-    end
-
-    local requestContent = { PaypalEmailAddress = email, Amount = amount }
+    local requestContent = { Amount = amount }
     local requestContentText = Json.encode( requestContent )
     
     local url = RequestUtils.POST_SPIN_PAYOUT_REST_CALL
