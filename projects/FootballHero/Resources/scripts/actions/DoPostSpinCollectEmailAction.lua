@@ -14,12 +14,19 @@ local mSuccessCallback
 
 function action( param )
     local email = param[1]
-    mSuccessCallback = param[2]
+    local emailConfirm = param[2]
+    mSuccessCallback = param[3]
 
-    if email == nil or string.len( email ) == 0 then
+    if email == nil or string.len( email ) == 0 or emailConfirm == nil or string.len( emailConfirm ) == 0 then
         RequestUtils.onRequestFailed( Constants.String.error.blank_email )
         return
     end
+
+    if email ~= emailConfirm then
+        RequestUtils.onRequestFailed( Constants.String.error.email_not_match )
+        return
+    end
+
 
     local requestContent = { Email = email }
     local requestContentText = Json.encode( requestContent )

@@ -11,8 +11,9 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "spinWheel/img-wheel.png",
-    "spinWheel/img-xiaomi.png"
+    "Popup/img-popupbox.png",
+    "Popup/img-toppopup.png",
+    "Tutorial/Default Button.png"
   ],
   "version": "1.5.0.0",
   "widgetTree": {

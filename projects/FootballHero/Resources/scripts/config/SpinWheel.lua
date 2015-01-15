@@ -94,6 +94,10 @@ local RequestUtils = require("scripts.RequestUtils")
 }
 --]]
 
+-- TODO remove the below hard code these two prizes.
+PRIZE_XIAOMI = 8
+PIRZE_JERSEY = 13
+
 local mInit = false
 local mPrizeConfig = {}
 local mPrizeOrder = {}
@@ -175,5 +179,5 @@ function getStopAngleByPrizeID( prizeID )
 	local range = 360 / 13
 	local borderWidth = 2
 
-	return ( selectedPrize - 1 ) * range + borderWidth + math.random( range - borderWidth * 2 )
+	return ( selectedPrize - 1 ) * range + range / 2
 end

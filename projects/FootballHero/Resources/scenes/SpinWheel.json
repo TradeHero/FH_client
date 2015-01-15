@@ -15,12 +15,11 @@
     "spinWheel/img-wheel.png",
     "spinWheel/btn-winner.png",
     "spinWheel/btn-ticket.png",
-    "spinWheel/img-spinner.png",
     "header/back.png",
     "spinWheel/img-bottom-button.png",
     "spinWheel/img-top-button-off.png",
     "spinWheel/img-top-button-on.png",
-    "spinWheel/img-logo.png"
+    "spinWheel/img-spinner-center.png"
   ],
   "version": "1.5.0.0",
   "widgetTree": {
@@ -325,60 +324,6 @@
           "textColorB": 255,
           "textColorG": 255,
           "textColorR": 255
-        }
-      },
-      {
-        "classname": "ImageView",
-        "name": null,
-        "children": [],
-        "options": {
-          "__type": "ImageViewSurrogate:#EditorCommon.JsonModel.Component.GUI",
-          "classname": "ImageView",
-          "name": "Image_spinner",
-          "ZOrder": 0,
-          "actiontag": 64371498,
-          "anchorPointX": 0.6,
-          "anchorPointY": 0.8666667,
-          "classType": "CocoStudio.EngineAdapterWrap.CSImageView",
-          "colorB": 255,
-          "colorG": 255,
-          "colorR": 255,
-          "customProperty": "",
-          "flipX": false,
-          "flipY": false,
-          "height": 104,
-          "ignoreSize": true,
-          "layoutParameter": null,
-          "opacity": 255,
-          "positionPercentX": 0.503125,
-          "positionPercentY": 0.8028169,
-          "positionType": 0,
-          "rotation": 0,
-          "scaleX": 1,
-          "scaleY": 1,
-          "sizePercentX": 0.05,
-          "sizePercentY": 0.09154929,
-          "sizeType": 0,
-          "tag": 25905,
-          "touchAble": false,
-          "useMergedTexture": false,
-          "visible": true,
-          "width": 32,
-          "x": 322,
-          "y": 912,
-          "capInsetsHeight": 1,
-          "capInsetsWidth": 1,
-          "capInsetsX": 0,
-          "capInsetsY": 0,
-          "fileName": null,
-          "fileNameData": {
-            "path": "spinWheel/img-spinner.png",
-            "plistFile": "",
-            "resourceType": 0
-          },
-          "scale9Enable": false,
-          "scale9Height": 104,
-          "scale9Width": 32
         }
       },
       {
@@ -714,7 +659,7 @@
           "customProperty": "",
           "flipX": false,
           "flipY": false,
-          "height": 275,
+          "height": 121,
           "ignoreSize": true,
           "layoutParameter": null,
           "opacity": 255,
@@ -722,8 +667,8 @@
           "positionPercentY": 0.5005134,
           "positionType": 0,
           "rotation": 0,
-          "scaleX": 0.4,
-          "scaleY": 0.4,
+          "scaleX": 1,
+          "scaleY": 1,
           "sizePercentX": 0.125,
           "sizePercentY": 0.07042254,
           "sizeType": 0,
@@ -731,7 +676,7 @@
           "touchAble": false,
           "useMergedTexture": false,
           "visible": true,
-          "width": 271,
+          "width": 93,
           "x": 320,
           "y": 568,
           "capInsetsHeight": 1,
@@ -740,13 +685,13 @@
           "capInsetsY": 0,
           "fileName": null,
           "fileNameData": {
-            "path": "spinWheel/img-logo.png",
+            "path": "spinWheel/img-spinner-center.png",
             "plistFile": "",
             "resourceType": 0
           },
           "scale9Enable": false,
-          "scale9Height": 275,
-          "scale9Width": 271
+          "scale9Height": 121,
+          "scale9Width": 93
         }
       },
       {

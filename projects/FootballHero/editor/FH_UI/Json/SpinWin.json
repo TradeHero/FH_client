@@ -11,9 +11,11 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "spinWheel/img-wheel.png",
-    "spinWheel/btn-yes.png",
-    "spinWheel/btn-no.png"
+    "spinWheel/bkg-balance-page.png",
+    "header/back.png",
+    "spinWheel/img-giftcard.png",
+    "spinWheel/btn-submit.png",
+    "spinWheel/img-email.png"
   ],
   "version": "1.5.0.0",
   "widgetTree": {

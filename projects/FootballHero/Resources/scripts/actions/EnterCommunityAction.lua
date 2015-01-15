@@ -15,7 +15,11 @@ local mJsonResponse
 
 function action( param )
 
-    mTabID = param[1]
+    if param ~= nil and param[1] ~= nil then
+        mTabID = param[1]
+    else
+        mTabID = CommunityConfig.COMMUNITY_TAB_ID_COMPETITION
+    end
 
     local url
     local record = false

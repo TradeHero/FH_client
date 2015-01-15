@@ -67,30 +67,18 @@ function initContent( moneyBalance, ticketBalance )
 
     prizeDescriptionText:setText( SpinWheelConfig.getLuckDrawDescription() )
 
-    local payoutPanel = mWidget:getChildByName("Panel_payout")
+    local submitBt = mWidget:getChildByName("Button_submit")
     if moneyBalance > MIN_MONEY_BALANCE_FOR_PAYOUT then
-        payoutPanel:setEnabled( true )
-        local emailInput = ViewUtils.createTextInput( payoutPanel:getChildByName( "emailContainer" ), Constants.String.email )
-        emailInput:setFontColor( mInputFontColor )
-        emailInput:setPlaceholderFontColor( mInputPlaceholderFontColor )
-        emailInput:setTouchPriority( SceneManager.TOUCH_PRIORITY_MINUS_ONE )
-
-        local emailInputConfirm = ViewUtils.createTextInput( payoutPanel:getChildByName( "emailContainerConfirm" ), Constants.String.email_confirm )
-        emailInputConfirm:setFontColor( mInputFontColor )
-        emailInputConfirm:setPlaceholderFontColor( mInputPlaceholderFontColor )
-        emailInputConfirm:setTouchPriority( SceneManager.TOUCH_PRIORITY_MINUS_ONE )
-
         local submitEventHandler = function( sender, eventType )
             if eventType == TOUCH_EVENT_ENDED then
-                local email = emailInput:getText()
-                local emailConfirm = emailInputConfirm:getText()
-
-                EventManager:postEvent( Event.Do_Spin_Payout, { email, emailConfirm, moneyBalance, refresh } )
+                EventManager:postEvent( Event.Do_Spin_Payout, { moneyBalance, refresh } )
             end
         end
-
-        local submitBt = payoutPanel:getChildByName("Button_submit")
+        
+        submitBt:setEnabled( true )
         submitBt:addTouchEventListener( submitEventHandler )
+    else
+        submitBt:setEnabled( false )
     end
 end
 
