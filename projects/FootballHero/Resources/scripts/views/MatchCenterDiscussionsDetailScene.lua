@@ -439,7 +439,6 @@ function scrollViewEventHandler( target, eventType )
         mStep = mStep + 1
         
         mHasMoreToLoad = false
-        print( "Scrolled to Bottom!")
 
         local loadMore = mWidget:getChildByName("Panel_MoreComments")
         loadMore:setEnabled( true )
