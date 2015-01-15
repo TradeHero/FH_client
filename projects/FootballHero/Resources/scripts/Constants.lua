@@ -4,7 +4,7 @@ local FileUtils = require("scripts.FileUtils")
 require "LocalizedString"
 
 LANGUAGE_DEF = "en"
-String = LocalizedString[LANGUAGE_DEF]
+String = LocalizedString
 
 GAME_WIDTH = 640
 GAME_HEIGHT = 1136

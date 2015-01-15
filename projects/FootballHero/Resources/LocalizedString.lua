@@ -16,9 +16,7 @@
 -----------------------------------------------------------------------------
 -- Module declaration
 -----------------------------------------------------------------------------
-local M = {}
-
-M.en = {
+local Strings = {
   button = {
     cancel = "Cancel",
     confirm = "Confirm!",
@@ -325,16 +323,12 @@ M.en = {
 
 }
 
-M.zh = {
-  
-}
-
 local modename = "LocalizedString"
 local proxy = {}
 local mt    = {
-    __index = M,
+    __index = Strings,
     __newindex =  function (t ,k ,v)
-        print("LocalizedString is read-only!")
+        print("Original Strings are read-only!")
     end
 }
 setmetatable(proxy,mt)
