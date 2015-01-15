@@ -46,6 +46,7 @@ GET_WHEEL_PRIZES_REST_CALL = SERVER_IP.."/api/wheel/load"
 GET_SPIN_RESULT_REST_CALL = SERVER_IP.."/api/wheel/spin"
 GET_SPIN_WINNERS_REST_CALL = SERVER_IP.."/api/wheel/winners"
 GET_SPIN_BALANCE_REST_CALL = SERVER_IP.."/api/wheel/balance"
+GET_DISCUSSION_REST_CALL = SERVER_IP.."/api/discuss/read"
 POST_COUPONS_REST_CALL = SERVER_IP.."/api/coupons/placeCoupons"
 POST_FAV_TEAM_REST_CALL = SERVER_IP.."/api/user/setFavoriteTeam"
 POST_LOGO_REST_CALL = SERVER_IP.."/api/user/uploadProfilePicture"
@@ -61,6 +62,8 @@ POST_UPDATE_DEVICD_TOKEN_REST_CALL = SERVER_IP.."/api/user/updateDeviceToken"
 POST_SPIN_LUCKY_DRAW_REST_CALL = SERVER_IP.."/api/wheel/submitEmail"
 POST_SHARE_SPIN_REST_CALL = SERVER_IP.."/api/wheel/shareToFacebook"
 POST_SPIN_PAYOUT_REST_CALL = SERVER_IP.."/api/wheel/payout"
+POST_NEW_DISCUSSION_REST_CALL = SERVER_IP.."/api/discuss/write"
+POST_LIKE_DISCUSSION_REST_CALL = SERVER_IP.."/api/discuss/like"
 
 
 FACEBOOK_FRIENDS_LIST_CALL = "/me/friends?access_token="
@@ -105,6 +108,7 @@ function setServerIP( serverIp, cdnServerIp, useDev )
     GET_SPIN_RESULT_REST_CALL = serverIp.."/api/wheel/spin"
     GET_SPIN_WINNERS_REST_CALL = serverIp.."/api/wheel/winners"
     GET_SPIN_BALANCE_REST_CALL = serverIp.."/api/wheel/balance"
+    GET_DISCUSSION_REST_CALL = serverIp.."/api/discuss/read"
     POST_COUPONS_REST_CALL = serverIp.."/api/coupons/placeCoupons"
     POST_FAV_TEAM_REST_CALL= serverIp.."/api/user/setFavoriteTeam"
     POST_LOGO_REST_CALL = serverIp.."/api/user/uploadProfilePicture"
@@ -120,6 +124,8 @@ function setServerIP( serverIp, cdnServerIp, useDev )
     POST_SPIN_LUCKY_DRAW_REST_CALL = serverIp.."/api/wheel/submitEmail"
     POST_SHARE_SPIN_REST_CALL = serverIp.."/api/wheel/shareToFacebook"
     POST_SPIN_PAYOUT_REST_CALL = serverIp.."/api/wheel/payout"
+    POST_NEW_DISCUSSION_REST_CALL = serverIp.."/api/discuss/write"
+    POST_LIKE_DISCUSSION_REST_CALL = serverIp.."/api/discuss/like"
 
 	CDN_SERVER_IP = cdnServerIp
     USE_DEV = useDev

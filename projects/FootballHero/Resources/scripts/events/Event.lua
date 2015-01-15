@@ -27,6 +27,7 @@ EventNameList =
     "Enter_Forgot_Password",
     "Enter_Match_List",
     "Enter_Match",
+    "Enter_Match_Center",
     "Enter_Prediction_Confirm",
     "Enter_Pred_Total_Confirm",
     "Enter_Sel_Fav_Team",
@@ -56,6 +57,9 @@ EventNameList =
     "Enter_Spin_the_Wheel",
     "Enter_Spin_winner",
     "Enter_Spin_balance",
+    "Enter_Make_Discussion_Post",
+    "Enter_Discussion_Details",
+
 
     "Do_Ask_For_Rate",
     "Do_Ask_For_Comment",
@@ -84,6 +88,9 @@ EventNameList =
     "Do_Post_Spin_Lucky_Draw",
     "Do_Share_Spin",
     "Do_Spin_Payout",
+    "Do_Make_Discussion_Post",
+    "Do_Like_Discussion_Post",
+    "Do_Share_Discussion_Post",
 
     "Show_Info",
     "Show_Error_Message",
@@ -95,6 +102,7 @@ EventNameList =
     "Load_More_In_History",
     "Load_More_In_Competition_Detail",
     "Load_More_In_Spin_Winner",
+    "Load_More_Discussion_Posts",
 }
 
 EventNameDosenotTrackList = 
@@ -128,6 +136,8 @@ EventNameDosenotTrackList =
     "Do_Post_Spin_Lucky_Draw",
     "Do_Share_Spin",
     "Do_Spin_Payout",
+    "Do_Make_Discussion_Post",
+    "Do_Like_Discussion_Post",
 
     "Check_Start_Tutorial",
     "Check_File_Version",
@@ -136,10 +146,12 @@ EventNameDosenotTrackList =
     "Show_Choice_Message",
     "Show_Marketing_Message",
     "Show_Please_Update",
+    
     "Load_More_In_Leaderboard",
     "Load_More_In_History",
     "Load_More_In_Competition_Detail",
     "Load_More_In_Spin_Winner",
+    "Load_More_Discussion_Posts",
 }
 
 EventList = CreatEnumTable( EventNameList )

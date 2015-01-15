@@ -14,6 +14,7 @@ local SMIS = require("scripts.SMIS")
 local Json = require("json")
 local ConnectingMessage = require("scripts.views.ConnectingMessage")
 local CommunityConfig = require("scripts.config.Community")
+local MatchCenterConfig = require("scripts.config.MatchCenter")
 
 local mWidget
 local mTopLayer
@@ -512,13 +513,8 @@ function updateContentContainer( contentHeight, addContent )
 end
 
 function enterMatch( match )
-    if match["PredictionsAvailable"] > 0 and match["PredictionsPlayed"] == match["PredictionsAvailable"] then
-        EventManager:postEvent( Event.Show_Info, { Constants.String.info.predictions_entered } )
-        return
-    end
-
     Logic:setSelectedMatch( match )
-    EventManager:postEvent( Event.Enter_Match, { match["Id"] } )
+    EventManager:postEvent( Event.Enter_Match_Center, { MatchCenterConfig.MATCH_CENTER_TAB_ID_DISCUSSION } )
 end
 
 function helperInitMatchInfo( topContent, matchInfo )
