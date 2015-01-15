@@ -267,6 +267,10 @@ M.en = {
     winners = "Past Winners",
   },
   spinWheel = {
+    wheel_title = "Spin-the-Wheel",
+    spin_daily = "One spin daily",
+    spin_bonus = "BONUS SPIN",
+    balance_title = "Balance",
     winners = "Past Winners",
     no_one_won = "No one has won any prize yet.",
     ticket_balance_1 = "%d ticket",
