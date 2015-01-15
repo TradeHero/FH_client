@@ -109,5 +109,5 @@
     <string>spinWheel/img-email.png</string>
   </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>SpinEmailCollect.json</CurrentUIJson>
+  <CurrentUIJson>SpinWheel.json</CurrentUIJson>
 </UIProject>

@@ -7,7 +7,7 @@ local RequestUtils = require("scripts.RequestUtils")
  Data structure
 
  {
-   "LastSpinUtc": 1421135692,
+   "NextSpinUtc": 1421135692,
    "Email": null,
    "PrizeInformation": {
       "Prizes": [
@@ -101,7 +101,7 @@ PIRZE_JERSEY = 13
 local mInit = false
 local mPrizeConfig = {}
 local mPrizeOrder = {}
-local mLastSpinTime
+local mNextSpinTime
 local mContactEmail
 local mLuckDrawPrizeId
 local mLuckDrawPrizeDescription
@@ -111,7 +111,7 @@ function isInit()
 end
 
 function init( spinWheelConfig )
-	mLastSpinTime = spinWheelConfig["LastSpinUtc"]
+	mNextSpinTime = spinWheelConfig["NextSpinUtc"]
 	mContactEmail = spinWheelConfig["Email"]
 	if type( mContactEmail ) == "userdata" then
 		mContactEmail = nil
@@ -149,6 +149,10 @@ end
 
 function isLuckDrawPrizeId( id )
 	return mLuckDrawPrizeId == id
+end
+
+function getNextSpinTime()
+	return mNextSpinTime
 end
 
 function getLuckDrawDescription()

@@ -1,5 +1,7 @@
 module(..., package.seeall)
 
+require "extern"
+
 local SceneManager = require("scripts.SceneManager")
 local Navigator = require("scripts.views.Navigator")
 local EventManager = require("scripts.events.EventManager").getInstance()
@@ -51,6 +53,7 @@ local mWinShareWidget
 local mWinTicketEmailInput
 local mWinPrizeId
 local mWinNumTicketLeft
+local mRemainingTime
 
 function loadFrame()
 	local widget = GUIReader:shareReader():widgetFromJsonFile("scenes/SpinWheel.json")
@@ -81,12 +84,42 @@ function loadFrame()
     initWinTicketWidget()
     initShareWidget()
 
-    mWheelState = WHEEL_STATE_START
-    playStartAnim()
+
+    mRemainingTime = SpinWheelConfig.getNextSpinTime() - os.time()
+    local labelTime = tolua.cast( mWidget:getChildByName("Label_Time"), "Label" )
+    local labelTimeTitle = tolua.cast( mWidget:getChildByName("Label_timeTitle"), "Label" )
+
+    if mRemainingTime <= 0 then
+        mWheelState = WHEEL_STATE_START
+        playStartAnim()
+        labelTime:setEnabled( false )
+        labelTimeTitle:setEnabled( false )
+    else
+        labelTime:setEnabled( true )
+        labelTimeTitle:setEnabled( true )
+        labelTime:setText( os.date( "!%X", mRemainingTime ) )
+        performWithDelay( mWidget, updateTimer, 1 )
+    end
+    
 
     mIsBonusSpin = false
     mSpinnerAnimating = false
     mStopPressed = false
+end
+
+function updateTimer()
+    mRemainingTime = mRemainingTime - 1
+    local labelTime = tolua.cast( mWidget:getChildByName("Label_Time"), "Label" )
+    local labelTimeTitle = tolua.cast( mWidget:getChildByName("Label_timeTitle"), "Label" )
+    if mRemainingTime < 0 then    
+        mWheelState = WHEEL_STATE_START
+        playStartAnim()
+        labelTime:setEnabled( false )
+        labelTimeTitle:setEnabled( false )
+    else
+        labelTime:setText( os.date( "!%X", mRemainingTime ) )
+        performWithDelay( mWidget, updateTimer, 1 )
+    end
 end
 
 function EnterOrExit( eventType )
@@ -96,7 +129,10 @@ function EnterOrExit( eventType )
             AudioEngine.stopEffect( mSoundEffectHandle )
             mSoundEffectHandle = nil
         end
-        CCDirector:sharedDirector():getScheduler():unscheduleScriptEntry( mWheelTickHandler )
+        if mWheelTickHandler then
+            CCDirector:sharedDirector():getScheduler():unscheduleScriptEntry( mWheelTickHandler )
+            mWheelTickHandler = nil
+        end
         if mWinTicketEmailInput then
             mWinTicketEmailInput:closeKeyboard()
             mWinTicketEmailInput = nil
