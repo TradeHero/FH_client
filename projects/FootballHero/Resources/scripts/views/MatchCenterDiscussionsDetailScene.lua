@@ -101,7 +101,7 @@ function loadMoreContent( comments, bJumpToTop )
         -- check for duplicates (when loading more after adding new post)
         if contentContainer:getChildByName( comments[i]["Id"] ) == nil then
             -- z-order to reverse add order (ie. Add to top of scrollview)
-            contentContainer:addChild( content,  -comments[i]["UnixTimeStamp"])
+            contentContainer:addChild( content,  -comments[i]["UnixTimeStamp"] )
             contentHeight = contentHeight + content:getSize().height
             initCommentContent( i, content, comments[i] )
         end
@@ -114,6 +114,12 @@ function loadMoreContent( comments, bJumpToTop )
 
     if bJumpToTop then
         contentContainer:jumpToTop()
+
+        -- increment new comments count
+        local content = mWidget:getChildByName("Panel_Discussion")
+        local bottom  = content:getChildByName("Panel_Bottom")
+        local comments = tolua.cast( bottom:getChildByName("Label_Comments"), "Label" )
+        comments:setText( tonumber( comments:getStringValue() ) + 1 )
     end
 end
 
