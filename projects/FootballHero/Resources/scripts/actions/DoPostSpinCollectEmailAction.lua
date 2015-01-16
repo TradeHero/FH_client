@@ -8,8 +8,10 @@ local ConnectingMessage = require("scripts.views.ConnectingMessage")
 local RequestUtils = require("scripts.RequestUtils")
 local Logic = require("scripts.Logic").getInstance()
 local PushNotificationManager = require("scripts.PushNotificationManager")
+local SpinWheelConfig = require("scripts.config.SpinWheel")
 
 
+local mEmail
 local mSuccessCallback
 
 function action( param )
@@ -27,8 +29,9 @@ function action( param )
         return
     end
 
+    mEmail = email
 
-    local requestContent = { Email = email }
+    local requestContent = { Email = mEmail }
     local requestContentText = Json.encode( requestContent )
     
     local url = RequestUtils.POST_SPIN_LUCKY_DRAW_REST_CALL
@@ -51,5 +54,6 @@ function action( param )
 end
 
 function onRequestSuccess( jsonResponse )
+    SpinWheelConfig.setContactEmail( mEmail )
     mSuccessCallback()
 end

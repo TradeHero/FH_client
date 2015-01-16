@@ -102,12 +102,9 @@
   <ResRelativePath />
   <imageFileList />
   <imagePngList>
-    <string>spinWheel/bkg-balance-page.png</string>
+    <string>MatchListScene/match_bkg.png</string>
     <string>header/back.png</string>
-    <string>spinWheel/img-giftcard.png</string>
-    <string>spinWheel/btn-submit.png</string>
-    <string>spinWheel/img-email.png</string>
   </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>SpinWheel.json</CurrentUIJson>
+  <CurrentUIJson>SpinEmailCollect.json</CurrentUIJson>
 </UIProject>

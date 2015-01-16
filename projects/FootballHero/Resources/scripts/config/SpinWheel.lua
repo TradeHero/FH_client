@@ -163,6 +163,10 @@ function getContactEmail()
 	return mContactEmail
 end
 
+function setContactEmail( email )
+	mContactEmail = email
+end
+
 function getStopAngleByPrizeID( prizeID )
 	local prizesWithThisID = {}
 	for i = 1, table.getn( mPrizeOrder ) do

@@ -91,7 +91,7 @@
           "__type": "LabelSurrogate:#EditorCommon.JsonModel.Component.GUI",
           "classname": "Label",
           "name": "Label_Title",
-          "ZOrder": 3,
+          "ZOrder": 1,
           "actiontag": 1996,
           "anchorPointX": 0.5,
           "anchorPointY": 0.5,

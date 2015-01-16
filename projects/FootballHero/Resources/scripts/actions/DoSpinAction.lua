@@ -33,5 +33,8 @@ end
     response data structure: {"PrizeId":4,"PrizeName":"US$ 1.00","NumberOfLuckyDrawTicketsLeft":0}
 --]]
 function onRequestSuccess( jsonResponse )
+    --Invalid the player balance cache.
+    RequestUtils.invalidResponseCacheContainsUrl( RequestUtils.GET_COUPON_HISTORY_REST_CALL )
+
     mCallback( jsonResponse["PrizeId"], jsonResponse["NumberOfLuckyDrawTicketsLeft"] )
 end
