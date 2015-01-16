@@ -10,6 +10,10 @@ DISCUSSION_POST_TYPE_GAME = 1
 DISCUSSION_POST_TYPE_LEAGUE = 2
 DISCUSSION_POST_TYPE_USER = 3
 
+MAX_DISCUSSION_POST_TEXT_WIDTH = 440
+MAX_DISCUSSION_TEXT_WIDTH = 360
+MAX_DISCUSSION_TEXT_HEIGHT = 50
+
 MatchCenterType = {
 	{ ["id"] = "Button_Meetings", ["displayName"] = Constants.String.match_center.title_meetings, ["enabled"] = false },
 	

@@ -234,13 +234,14 @@ end
 function initPost( info )
     local content = mWidget:getChildByName("Panel_Discussion")
 
+    local post = tolua.cast( content:getChildByName("Label_Post"), "Label" )
+
     local top  = content:getChildByName("Panel_Top")
-    local bottom  = content:getChildByName("Panel_Bottom")
     local logo = tolua.cast( top:getChildByName("Image_Logo"), "ImageView" )
     local name = tolua.cast( top:getChildByName("Label_Name"), "Label" )
-    local post = tolua.cast( top:getChildByName("Label_Post"), "Label" )
     local time = tolua.cast( top:getChildByName("Label_Time"), "Label" )
     
+    local bottom  = content:getChildByName("Panel_Bottom")
     local checkLike = tolua.cast( bottom:getChildByName("CheckBox_Like"), "CheckBox" )
     local lblLike = tolua.cast( bottom:getChildByName("Label_Like"), "Label" )
     local comments = tolua.cast( bottom:getChildByName("Label_Comments"), "Label" )
@@ -277,6 +278,8 @@ function initPost( info )
     end
 
     post:setText( info["Text"] )
+    showFullPost( content )
+
     lblLike:setText( info["LikeCount"] )
     checkLike:setSelectedState( info["Liked"] )
     comments:setText( info["CommentCount"] )
@@ -300,6 +303,36 @@ function initPost( info )
         SMIS.getSMImagePath( info["PictureUrl"], handler )
     end
 
+end
+
+function showFullPost( content )
+    
+    local top = content:getChildByName("Panel_Top")
+    local post = tolua.cast( content:getChildByName("Label_Post"), "Label" )
+    local bg = content:getChildByName("Panel_BG")
+
+    local originalSize = post:getSize()
+    if originalSize.width > MatchCenterConfig.MAX_DISCUSSION_TEXT_WIDTH then
+
+        local numOfRows = math.ceil( originalSize.width / MatchCenterConfig.MAX_DISCUSSION_POST_TEXT_WIDTH )
+        local textHeight = numOfRows * 25    
+
+        post:setTextAreaSize( CCSize:new( MatchCenterConfig.MAX_DISCUSSION_POST_TEXT_WIDTH, textHeight ) )
+
+        local addHeight = textHeight - MatchCenterConfig.MAX_DISCUSSION_TEXT_HEIGHT
+        content:setSize( CCSize:new( content:getSize().width, content:getSize().height + addHeight ) )
+        bg:setSize( CCSize:new( bg:getSize().width, bg:getSize().height + addHeight ) )
+        top:setSize( CCSize:new( top:getSize().width, top:getSize().height + addHeight ) )
+
+        top:setPositionY( top:getPositionY() + addHeight )
+        content:setPositionY( content:getPositionY() - addHeight )
+
+
+        local contentContainer = tolua.cast( mWidget:getChildByName("ScrollView_Comments"), "ScrollView" )
+        local moreComments = mWidget:getChildByName("Panel_MoreComments")
+        contentContainer:setSize( CCSize:new( contentContainer:getSize().width, contentContainer:getSize().height - addHeight ) )
+        moreComments:setPositionY( moreComments:getPositionY() - addHeight )
+    end
 end
 
 function initCommentsList( comments )
@@ -329,14 +362,17 @@ function initCommentContent( i, content, info )
 
     content:setName( info["Id"] )
 
-    local logo = tolua.cast( content:getChildByName("Image_Logo"), "ImageView" )
-    local name = tolua.cast( content:getChildByName("Label_Name"), "Label" )
     local post = tolua.cast( content:getChildByName("Label_Comment"), "Label" )
-    local time = tolua.cast( content:getChildByName("Label_Time"), "Label" )
-    
+    local bg = content:getChildByName("Panel_BG")
     local checkLike = tolua.cast( content:getChildByName("CheckBox_Like"), "CheckBox" )
     local lblLike = tolua.cast( content:getChildByName("Label_Like"), "Label" )
 
+    local top = content:getChildByName("Panel_Top")
+    local logo = tolua.cast( top:getChildByName("Image_Logo"), "ImageView" )
+    local name = tolua.cast( top:getChildByName("Label_Name"), "Label" )
+    local time = tolua.cast( top:getChildByName("Label_Time"), "Label" )
+    local more = tolua.cast( post:getChildByName("Label_More"), "Label" )
+    
     local enableLikeEventHandler = function( bLiked )
         checkLike:setTouchEnabled( true )
         local newCount
@@ -370,6 +406,34 @@ function initCommentContent( i, content, info )
     
     MatchCenterConfig.setTimeDiff( time, info["UnixTimeStamp"] )
 
+    local bIsLongComment = isLongComment( post, info, bg, top )
+    if bIsLongComment then
+        local moreEventHandler = function( sender, eventType )
+            local text = more:getStringValue()
+
+            if eventType == TOUCH_EVENT_ENDED then
+                local deltaHeight
+                if text == Constants.String.match_center.more then
+                    more:setText( Constants.String.match_center.less )
+                    deltaHeight = expandComment( info["Text"], info["numOfRows"], content )
+                else
+                    more:setText( Constants.String.match_center.more )
+                    deltaHeight = reduceComment( info["ShortText"], info["numOfRows"], content )
+                end
+
+                local contentContainer = tolua.cast( mWidget:getChildByName("ScrollView_Comments"), "ScrollView" )
+                
+                contentContainer:setInnerContainerSize( CCSize:new( 0, contentContainer:getInnerContainerSize().height + deltaHeight ) )
+                local layout = tolua.cast( contentContainer, "Layout" )
+                layout:requestDoLayout()
+                contentContainer:addEventListenerScrollView( scrollViewEventHandler )
+            end
+        end
+        more:addTouchEventListener( moreEventHandler )
+    else
+        more:setEnabled( false )
+    end
+
     local seqArray = CCArray:create()
     seqArray:addObject( CCDelayTime:create( i * 0.2 ) )
     seqArray:addObject( CCCallFuncN:create( function()
@@ -392,6 +456,64 @@ function initCommentContent( i, content, info )
     end ) )
 
     mWidget:runAction( CCSequence:create( seqArray ) )
+end
+
+function isLongComment( post, info )
+    
+    local bIsLong = false
+    local originalSize = post:getSize()
+    if originalSize.width > MatchCenterConfig.MAX_DISCUSSION_TEXT_WIDTH then
+
+        info["numOfRows"] = math.ceil( originalSize.width / MatchCenterConfig.MAX_DISCUSSION_TEXT_WIDTH )
+        if info["numOfRows"] > 2 then
+            bIsLong = true
+            -- truncate text
+            info["ShortText"] = string.sub( post:getStringValue(), 0, 65 ).."..."
+            post:setText( info["ShortText"] )
+        end
+
+        post:setTextAreaSize( CCSize:new( MatchCenterConfig.MAX_DISCUSSION_TEXT_WIDTH, MatchCenterConfig.MAX_DISCUSSION_TEXT_HEIGHT ) )
+    end
+
+    return bIsLong
+end
+
+function expandComment( newText, numOfRows, content )
+
+    local top = content:getChildByName("Panel_Top")
+    local comment = tolua.cast( content:getChildByName("Label_Comment"), "Label" )
+    local bg = content:getChildByName("Panel_BG")
+
+    local textHeight = numOfRows * 25
+    comment:setTextAreaSize( CCSize:new( MatchCenterConfig.MAX_DISCUSSION_TEXT_WIDTH, textHeight ) )
+    comment:setText( newText )
+
+    local addHeight = textHeight - MatchCenterConfig.MAX_DISCUSSION_TEXT_HEIGHT
+    content:setSize( CCSize:new( content:getSize().width, content:getSize().height + addHeight ) )
+    bg:setSize( CCSize:new( bg:getSize().width, bg:getSize().height + addHeight ) )
+    
+    top:setPositionY( top:getPositionY() + addHeight )
+
+    return addHeight
+end
+
+function reduceComment( newText, numOfRows, content )
+
+    local top = content:getChildByName("Panel_Top")
+    local comment = tolua.cast( content:getChildByName("Label_Comment"), "Label" )
+    local bg = content:getChildByName("Panel_BG")
+
+    local textHeight = numOfRows * 25
+    comment:setTextAreaSize( CCSize:new( MatchCenterConfig.MAX_DISCUSSION_TEXT_WIDTH, MatchCenterConfig.MAX_DISCUSSION_TEXT_HEIGHT ) )
+    comment:setText( newText )
+
+    local addHeight = MatchCenterConfig.MAX_DISCUSSION_TEXT_HEIGHT - textHeight
+    content:setSize( CCSize:new( content:getSize().width, content:getSize().height + addHeight ) )
+    bg:setSize( CCSize:new( bg:getSize().width, bg:getSize().height + addHeight ) )
+    
+    top:setPositionY( top:getPositionY() + addHeight )
+
+    return addHeight
 end
 
 function shareTypeSelectEventHandler( sender, eventType )

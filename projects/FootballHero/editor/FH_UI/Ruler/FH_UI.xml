@@ -361,6 +361,34 @@
     <GuidesList />
   </GuidesProject>
   <GuidesProject>
+    <Project>MatchCenterTopScene</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>CommunityLeaderboardFrame_0</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>MatchCenterDiscussionsFrame</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>MatchCenterDiscussionsContentFrame</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>MatchCenterDiscussionsPostScene</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>MatchCenterDiscussionsDetailScene</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>MatchCenterDiscussionsCommentFrame</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
     <Project>SpinEmailCollect</Project>
     <GuidesList />
   </GuidesProject>

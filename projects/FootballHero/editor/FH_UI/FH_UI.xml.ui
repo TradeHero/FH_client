@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
 <UIProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <ProjectDir>Z:\FH_client\projects\FootballHero\editor\FH_UI</ProjectDir>
-  <Version>1.5.0.0</Version>
-  <Resources>Z:\FH_client\projects\FootballHero\editor\FH_UI\Resources</Resources>
+  <ProjectDir>Z:\workspace\FH_client\projects\FootballHero\editor\FH_UI</ProjectDir>
+  <Version>1.6.0.0</Version>
+  <Resources>Z:\workspace\FH_client\projects\FootballHero\editor\FH_UI\Resources</Resources>
   <Name>FH_UI</Name>
   <JsonFileName>FH_UI.json</JsonFileName>
-  <JsonFolder>Z:\FH_client\projects\FootballHero\editor\FH_UI\Json</JsonFolder>
+  <JsonFolder>Z:\workspace\FH_client\projects\FootballHero\editor\FH_UI\Json</JsonFolder>
   <JsonList>
     <string>Chat.json</string>
     <string>ChatMessageContent.json</string>
@@ -92,19 +92,28 @@
     <string>SpinWinnerContent.json</string>
     <string>SpinShare.json</string>
     <string>SpinEmailCollect.json</string>
+    <string>MatchCenterTopScene.json</string>
+    <string>MatchCenterDiscussionsFrame.json</string>
+    <string>MatchCenterDiscussionsContentFrame.json</string>
+    <string>MatchCenterDiscussionsPostScene.json</string>
+    <string>MatchCenterDiscussionsDetailScene.json</string>
+    <string>MatchCenterDiscussionsCommentFrame.json</string>
   </JsonList>
   <CanvasSize>
     <Width>640</Width>
     <Height>1136</Height>
   </CanvasSize>
-  <filePath>Z:\FH_client\projects\FootballHero\editor\FH_UI\FH_UI.xml.ui</filePath>
+  <filePath>Z:\workspace\FH_client\projects\FootballHero\editor\FH_UI\FH_UI.xml.ui</filePath>
   <ProjectType>UIProject</ProjectType>
   <ResRelativePath />
   <imageFileList />
   <imagePngList>
-    <string>MatchListScene/match_bkg.png</string>
-    <string>header/back.png</string>
+    <string>MyHero/img-photo.png</string>
+    <string>MatchCentre/img-unlike.png</string>
+    <string>MatchCentre/img-like.png</string>
+    <string>MatchCentre/img-comment.png</string>
+    <string>MatchCentre/img-share.png</string>
   </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>SpinEmailCollect.json</CurrentUIJson>
+  <CurrentUIJson>MatchCenterDiscussionsDetailScene.json</CurrentUIJson>
 </UIProject>

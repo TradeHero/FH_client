@@ -68,7 +68,7 @@ function initContent( discussionInfo )
     for i = 1, table.getn( discussionInfo ) do
         local content = SceneManager.widgetFromJsonFile("scenes/MatchCenterDiscussionsContentFrame.json")
         content:setLayoutParameter( layoutParameter )
-        contentContainer:addChild( content )
+        contentContainer:addChild( content,  -discussionInfo[i]["UnixTimeStamp"] )
         contentHeight = contentHeight + content:getSize().height
         initDiscussionContent( i, content, discussionInfo[i] )
     end
@@ -134,6 +134,19 @@ function initDiscussionContent( i, content, info )
     end
 
     post:setText( info["Text"] )
+    local originalSize = post:getSize()
+    if originalSize.width > MatchCenterConfig.MAX_DISCUSSION_POST_TEXT_WIDTH then
+
+        info["numOfRows"] = math.ceil( originalSize.width / MatchCenterConfig.MAX_DISCUSSION_POST_TEXT_WIDTH )
+        if info["numOfRows"] > 2 then
+            -- truncate text
+            info["ShortText"] = string.sub( post:getStringValue(), 0, 90 ).."..."
+            post:setText( info["ShortText"] )
+        end
+
+        post:setTextAreaSize( CCSize:new( MatchCenterConfig.MAX_DISCUSSION_POST_TEXT_WIDTH, MatchCenterConfig.MAX_DISCUSSION_TEXT_HEIGHT ) )
+    end
+
     lblLike:setText( info["LikeCount"] )
     checkLike:setSelectedState( info["Liked"] )
     comments:setText( info["CommentCount"] )
@@ -184,7 +197,7 @@ function loadMoreContent( discussionInfo )
     for i = 1, table.getn( discussionInfo ) do
         local content = SceneManager.widgetFromJsonFile("scenes/MatchCenterDiscussionsContentFrame.json")
         content:setLayoutParameter( layoutParameter )
-        contentContainer:addChild( content )
+        contentContainer:addChild( content,  -discussionInfo[i]["UnixTimeStamp"] )
         contentHeight = contentHeight + content:getSize().height
         initDiscussionContent( mCurrentTotalNum + i, content, discussionInfo[i] )
     end
