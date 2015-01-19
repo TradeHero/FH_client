@@ -62,6 +62,8 @@ import android.widget.LinearLayout.LayoutParams;
 import com.localytics.android.LocalyticsAmpSession;
 import com.localytics.android.LocalyticsActivityLifecycleCallbacks;
 
+import com.appsflyer.AppsFlyerLib;
+
 public class MainActivity extends Cocos2dxActivity {
   private static final String TAG = "FacebookTestActivity";
   private static FacebookAuth facebookAuth;
@@ -132,6 +134,10 @@ public class MainActivity extends Cocos2dxActivity {
     getApplication().registerActivityLifecycleCallbacks(
               new LocalyticsActivityLifecycleCallbacks(this.localyticsSession));
     this.localyticsSession.setLoggingEnabled(true);
+
+    AppsFlyerLib.setAppsFlyerKey("pEuxjZE2GpyRXXwFjHHRRU");
+    AppsFlyerLib.sendTracking(getApplicationContext());
+
   }
 
     @Override

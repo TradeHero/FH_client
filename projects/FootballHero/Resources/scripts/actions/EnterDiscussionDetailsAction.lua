@@ -18,7 +18,7 @@ function action( param )
 	local step = 1
 
 	local url = RequestUtils.GET_DISCUSSION_REST_CALL..
-                "?discussionObjectId="..MatchCenterConfig.DISCUSSION_POST_TYPE_GAME..
+                "?discussionObjectId="..MatchCenterConfig.DISCUSSION_POST_TYPE_POST..
                 "&parentId="..postId..
                 "&step="..step..
                 "&perPage="..Constants.DISCUSSIONS_PER_PAGE

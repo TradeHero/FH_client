@@ -56,7 +56,7 @@ end
 function postEventHandler( sender, eventType )
     if eventType == TOUCH_EVENT_ENDED then
     	local description = tolua.cast( mWidget:getChildByName( "Panel_Text" ), "Label" ):getStringValue()
-        EventManager:postEvent( Event.Do_Make_Discussion_Post, { mMatch["Id"], description } )
+        EventManager:postEvent( Event.Do_Make_Discussion_Post, { mMatch["Id"], description, MatchCenterConfig.DISCUSSION_POST_TYPE_GAME } )
     end
 end
 
