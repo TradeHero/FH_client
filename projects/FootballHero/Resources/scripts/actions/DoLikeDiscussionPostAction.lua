@@ -15,10 +15,11 @@ function action( param )
     local postId = param[1]
     local bLike = param[2]
     mCallback = param[3]
+    local discussionObjectId = param[4]
     
     local url = RequestUtils.POST_LIKE_DISCUSSION_REST_CALL
-
-    local requestContent = { PostId = postId, Liked = bLike }
+    
+    local requestContent = { DiscussionObjectId = discussionObjectId, PostId = postId, Liked = bLike }
     local requestContentText = Json.encode( requestContent )
 
     local requestInfo = {}

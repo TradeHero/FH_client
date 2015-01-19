@@ -15,14 +15,13 @@ function action( param )
 
     -- Parent ID can be a game ID or a post ID
     local parentId = param[1]
-    m_bIsComment =  type( tonumber( parentId ) ) ~= "number"
-
     local text = param[2]
-    local discussionObject = MatchCenterConfig.DISCUSSION_POST_TYPE_GAME
+    local discussionObjectId = param[3]
+    m_bIsComment =  discussionObjectId == MatchCenterConfig.DISCUSSION_POST_TYPE_POST
         
     local url = RequestUtils.POST_NEW_DISCUSSION_REST_CALL
 
-    local requestContent = { ParentId = parentId, Text = text, DiscussionObject = discussionObject }
+    local requestContent = { ParentId = parentId, Text = text, DiscussionObjectId = discussionObjectId }
     local requestContentText = Json.encode( requestContent )
 
     local requestInfo = {}

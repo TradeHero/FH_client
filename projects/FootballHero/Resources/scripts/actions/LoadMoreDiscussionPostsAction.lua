@@ -16,11 +16,11 @@ function action( param )
     -- Parent ID can be a game ID or a post ID
     local parentId = param[1]
     local step = param[2]
+    local discussionObjectId = param[3]
+    m_bIsComment =  discussionObjectId == MatchCenterConfig.DISCUSSION_POST_TYPE_POST
 
-    m_bIsComment =  type( tonumber( parentId ) ) ~= "number"
-    
     local url = RequestUtils.GET_DISCUSSION_REST_CALL..
-                "?discussionObjectId="..MatchCenterConfig.DISCUSSION_POST_TYPE_GAME..
+                "?discussionObjectId="..discussionObjectId..
                 "&parentId="..parentId..
                 "&step="..step..
                 "&perPage="..Constants.DISCUSSIONS_PER_PAGE

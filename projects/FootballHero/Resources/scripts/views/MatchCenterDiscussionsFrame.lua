@@ -119,7 +119,7 @@ function initDiscussionContent( i, content, info )
         local checkbox = tolua.cast( sender, "CheckBox" )    
         if eventType == TOUCH_EVENT_ENDED then
             checkbox:setTouchEnabled( false )
-            EventManager:postEvent( Event.Do_Like_Discussion_Post, { info["Id"], not checkbox:getSelectedState(), enableLikeEventHandler } )
+            EventManager:postEvent( Event.Do_Like_Discussion_Post, { info["Id"], not checkbox:getSelectedState(), enableLikeEventHandler, MatchCenterConfig.DISCUSSION_POST_TYPE_GAME } )
         end
     end
     checkLike:addTouchEventListener( likeEventHandler )
@@ -213,7 +213,7 @@ function scrollViewEventHandler( target, eventType )
     if eventType == SCROLLVIEW_EVENT_BOUNCE_BOTTOM and mHasMoreToLoad then
         mStep = mStep + 1
         
-        EventManager:postEvent( Event.Load_More_Discussion_Posts, { mMatch["Id"], mStep } )
+        EventManager:postEvent( Event.Load_More_Discussion_Posts, { mMatch["Id"], mStep, MatchCenterConfig.DISCUSSION_POST_TYPE_GAME } )
     end
 end
 

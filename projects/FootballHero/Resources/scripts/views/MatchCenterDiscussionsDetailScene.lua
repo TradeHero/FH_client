@@ -145,7 +145,7 @@ function initContent( comments )
         if eventType == TOUCH_EVENT_ENDED then
             sender:setEnabled( false )
 
-            EventManager:postEvent( Event.Load_More_Discussion_Posts, { mPostId, mStep } )
+            EventManager:postEvent( Event.Load_More_Discussion_Posts, { mPostId, mStep, MatchCenterConfig.DISCUSSION_POST_TYPE_POST } )
         end
     end
 
@@ -215,7 +215,7 @@ function initInput()
             --mTextInput:setVisible( false )
             top:setEnabled( false )
             if mTextInput:getText() ~= "" then
-                EventManager:postEvent( Event.Do_Make_Discussion_Post, { mPostId, mTextInput:getText() } )
+                EventManager:postEvent( Event.Do_Make_Discussion_Post, { mPostId, mTextInput:getText(), MatchCenterConfig.DISCUSSION_POST_TYPE_POST } )
                 mTextInput:setText( "" )
             end
         end
@@ -263,7 +263,7 @@ function initPost( info )
         local checkbox = tolua.cast( sender, "CheckBox" )    
         if eventType == TOUCH_EVENT_ENDED then
             checkbox:setTouchEnabled( false )
-            EventManager:postEvent( Event.Do_Like_Discussion_Post, { info["Id"], not checkbox:getSelectedState(), enableLikeEventHandler } )
+            EventManager:postEvent( Event.Do_Like_Discussion_Post, { info["Id"], not checkbox:getSelectedState(), enableLikeEventHandler, MatchCenterConfig.DISCUSSION_POST_TYPE_GAME } )
         end
     end
     checkLike:addTouchEventListener( likeEventHandler )
@@ -389,7 +389,7 @@ function initCommentContent( i, content, info )
         local checkbox = tolua.cast( sender, "CheckBox" )    
         if eventType == TOUCH_EVENT_ENDED then
             checkbox:setTouchEnabled( false )
-            EventManager:postEvent( Event.Do_Like_Discussion_Post, { info["Id"], not checkbox:getSelectedState(), enableLikeEventHandler } )
+            EventManager:postEvent( Event.Do_Like_Discussion_Post, { info["Id"], not checkbox:getSelectedState(), enableLikeEventHandler, MatchCenterConfig.DISCUSSION_POST_TYPE_POST } )
         end
     end
     checkLike:addTouchEventListener( likeEventHandler )
