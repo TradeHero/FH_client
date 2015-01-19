@@ -43,6 +43,8 @@ local function main()
     local eventManager = require("scripts.events.EventManager").getInstance()
     local event = require("scripts.events.Event").EventList
     eventManager:postEvent( event.Check_Start_Tutorial )
+
+    --eventManager:postEvent( event.Export_Unlocalized_String )
 end
 
 function initPackageLoader( decrypt )
@@ -76,14 +78,5 @@ function initPackageLoader( decrypt )
         table.insert( package.loaders, 1, loadFromCompact )
     end
 end
-
---[[
-function initClientVersion( version )
-    local recordedVersion = CCUserDefault:sharedUserDefault():getStringForKey( KEY_OF_VERSION )
-    if recordedVersion == nil or recordedVersion == "" then
-        CCUserDefault:sharedUserDefault():setStringForKey( KEY_OF_VERSION, version )
-    end
-end
---]]
 
 xpcall(main, __G__TRACKBACK__)

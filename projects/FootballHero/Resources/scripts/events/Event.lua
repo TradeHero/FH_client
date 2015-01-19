@@ -103,6 +103,9 @@ EventNameList =
     "Load_More_In_Competition_Detail",
     "Load_More_In_Spin_Winner",
     "Load_More_Discussion_Posts",
+
+    "Export_Unlocalized_String",
+    "Import_Localized_String",
 }
 
 EventNameDosenotTrackList = 
@@ -152,6 +155,9 @@ EventNameDosenotTrackList =
     "Load_More_In_Competition_Detail",
     "Load_More_In_Spin_Winner",
     "Load_More_Discussion_Posts",
+
+    "Export_Unlocalized_String",
+    "Import_Localized_String",
 }
 
 EventList = CreatEnumTable( EventNameList )

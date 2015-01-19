@@ -2,19 +2,12 @@
 --         FILE:  LocalizedString.lua
 --        USAGE:  
 --  DESCRIPTION:  Localization string file for FootballHero
+--                Only allow two tiers table. The third tier will be ignored.
 --       AUTHOR:  Vincent Tee, <vincent@tradehero.mobi>
 --      COMPANY:  MyHero
 --      CREATED:  10/16/2014 11:40:20 AM GMT+8
 --------------------------------------------------------------------------------
 
-
------------------------------------------------------------------------------
--- Imports and dependencies
------------------------------------------------------------------------------
-
------------------------------------------------------------------------------
--- Module declaration
------------------------------------------------------------------------------
 StringDefaultSubTableList = {
   "button",
   "choice",
@@ -35,7 +28,7 @@ StringDefaultSubTableList = {
   "settings",
 }
 
-local StringsDefault = {
+StringsDefault = {
   button = {
     cancel = "Cancel",
     confirm = "Confirm!",

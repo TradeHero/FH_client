@@ -98,11 +98,19 @@ bool AppDelegate::applicationDidFinishLaunching()
 	{
 		searchPaths.insert(searchPaths.begin(), CCFileUtils::sharedFileUtils()->getDefaultResRootPath() + "zh");
 	}
+    else if(CCApplication::sharedApplication()->getCurrentLanguage() == kLanguageBahasa)
+    {
+        searchPaths.insert(searchPaths.begin(), CCFileUtils::sharedFileUtils()->getDefaultResRootPath() + "id");
+    }
 	searchPaths.insert(searchPaths.begin(), CCFileUtils::sharedFileUtils()->getWritablePath() + "local");
 	if (CCApplication::sharedApplication()->getCurrentLanguage() == kLanguageChinese)
 	{
 		searchPaths.insert(searchPaths.begin(), CCFileUtils::sharedFileUtils()->getWritablePath() + "local/zh");
 	}
+    else if (CCApplication::sharedApplication()->getCurrentLanguage() == kLanguageBahasa)
+    {
+        searchPaths.insert(searchPaths.begin(), CCFileUtils::sharedFileUtils()->getWritablePath() + "local/id");
+    }
 	searchPaths.insert(searchPaths.begin(), CCFileUtils::sharedFileUtils()->getWritablePath());
 	CCFileUtils::sharedFileUtils()->setSearchPaths(searchPaths);
 

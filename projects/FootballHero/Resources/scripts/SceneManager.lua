@@ -137,6 +137,9 @@ function initEvents()
 	EventManager:registerEventHandler( Event.Load_More_In_Competition_Detail, "scripts.actions.LoadMoreInCompetitionDetailAction" )
 	EventManager:registerEventHandler( Event.Load_More_In_Spin_Winner, "scripts.actions.LoadMoreInSpinWinnerAction" )
 	EventManager:registerEventHandler( Event.Load_More_Discussion_Posts, "scripts.actions.LoadMoreDiscussionPostsAction" )
+
+	EventManager:registerEventHandler( Event.Export_Unlocalized_String, "scripts.actions.ExportUnlocalizedStringAction" )
+	EventManager:registerEventHandler( Event.Import_Localized_String, "scripts.actions.ImportLocalizedStringAction" )
 end
 
 function keypadEventHandler( eventType )
