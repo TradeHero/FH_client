@@ -93,7 +93,7 @@ bool AppDelegate::applicationDidFinishLaunching()
 	}
 
 	vector<string> searchPaths = CCFileUtils::sharedFileUtils()->getSearchPaths();
-
+    
 	if (CCApplication::sharedApplication()->getCurrentLanguage() == kLanguageChinese)
 	{
 		searchPaths.insert(searchPaths.begin(), CCFileUtils::sharedFileUtils()->getDefaultResRootPath() + "zh");

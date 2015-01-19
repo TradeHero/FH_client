@@ -1,0 +1,7 @@
+league_chat.feedback	Feedback & Comments	反馈
+league_chat.spanish	Spanish League	西班牙联赛
+league_chat.others	Other Competitions	其他联赛
+share_type_title	Share your competition using...	分享
+enter_email	Please enter your email address.	请输入你的Email地址
+match_center.played	Played %d out of %d	玩了%d/%d
+match_center.just_now	Just Now	刚刚

@@ -6,8 +6,7 @@ local mDefaultString = StringsDefault
 
 -- Localized strings
 local TARGET_LANGUAGE = "zh"
-local mLocalizedStrings =
-	require(TARGET_LANGUAGE..".LocalizedString").Strings
+local mLocalizedStrings = require(TARGET_LANGUAGE..".LocalizedString").Strings
 
 -- Output string
 local mSeperate = "\t"

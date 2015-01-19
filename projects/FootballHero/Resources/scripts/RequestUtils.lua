@@ -167,14 +167,18 @@ function getTimezoneOffset()
 end
 
 function split(str, delim, maxNb)   
-    -- Eliminate bad cases...   
+    -- Eliminate bad cases...  
+    if delim == "." then
+        delim = "%."
+    end
+
     if string.find(str, delim) == nil then  
         return { str }  
-    end  
+    end 
     if maxNb == nil or maxNb < 1 then  
         maxNb = 0    -- No limit   
     end  
-    local result = {}  
+    local result = {} 
     local pat = "(.-)" .. delim .. "()"   
     local nb = 0  
     local lastPos   
