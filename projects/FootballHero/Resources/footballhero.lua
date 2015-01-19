@@ -42,9 +42,10 @@ local function main()
 
     local eventManager = require("scripts.events.EventManager").getInstance()
     local event = require("scripts.events.Event").EventList
-    eventManager:postEvent( event.Check_Start_Tutorial )
+    --eventManager:postEvent( event.Check_Start_Tutorial )
 
     --eventManager:postEvent( event.Export_Unlocalized_String )
+    eventManager:postEvent( event.Import_Localized_String )
 end
 
 function initPackageLoader( decrypt )
