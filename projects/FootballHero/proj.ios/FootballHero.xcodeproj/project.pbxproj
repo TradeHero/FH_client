@@ -363,6 +363,7 @@
 		73FE00A11A43FEA100B0BC05 /* fpconv.c in Sources */ = {isa = PBXBuildFile; fileRef = 73FE009D1A43FEA100B0BC05 /* fpconv.c */; };
 		73FE00A21A43FEA100B0BC05 /* strbuf.c in Sources */ = {isa = PBXBuildFile; fileRef = 73FE009F1A43FEA100B0BC05 /* strbuf.c */; };
 		73FE377F1907C8BA0039A45C /* EditBoxDelegateForLua.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 73FE377D1907C8BA0039A45C /* EditBoxDelegateForLua.cpp */; };
+		BF5CC51D1A6CA748004FE15D /* libAppsFlyerLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BF5CC51B1A6CA748004FE15D /* libAppsFlyerLib.a */; };
 		BFA3732919F8E6AB001FCA85 /* LocalizedString.lua in Resources */ = {isa = PBXBuildFile; fileRef = BFA3732819F8E6AA001FCA85 /* LocalizedString.lua */; };
 		ED35C0C718323498002A0750 /* CCArmatureAnimation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED35C03818323497002A0750 /* CCArmatureAnimation.cpp */; };
 		ED35C0C818323498002A0750 /* CCProcessBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED35C03A18323497002A0750 /* CCProcessBase.cpp */; };
@@ -1094,6 +1095,8 @@
 		73FE00A01A43FEA100B0BC05 /* strbuf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = strbuf.h; path = cjson/strbuf.h; sourceTree = "<group>"; };
 		73FE377D1907C8BA0039A45C /* EditBoxDelegateForLua.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EditBoxDelegateForLua.cpp; sourceTree = "<group>"; };
 		73FE377E1907C8BA0039A45C /* EditBoxDelegateForLua.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditBoxDelegateForLua.h; sourceTree = "<group>"; };
+		BF5CC5191A6CA747004FE15D /* AppsFlyerTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppsFlyerTracker.h; sourceTree = "<group>"; };
+		BF5CC51B1A6CA748004FE15D /* libAppsFlyerLib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libAppsFlyerLib.a; sourceTree = "<group>"; };
 		BFA3732819F8E6AA001FCA85 /* LocalizedString.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LocalizedString.lua; sourceTree = "<group>"; };
 		ED35C03818323497002A0750 /* CCArmatureAnimation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCArmatureAnimation.cpp; sourceTree = "<group>"; };
 		ED35C03918323497002A0750 /* CCArmatureAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCArmatureAnimation.h; sourceTree = "<group>"; };
@@ -1223,6 +1226,7 @@
 				73FC0A19199074C10006D0E2 /* SystemConfiguration.framework in Frameworks */,
 				73FC0A17199074B40006D0E2 /* libsqlite3.dylib in Frameworks */,
 				73FC0A15199074A40006D0E2 /* libz.dylib in Frameworks */,
+				BF5CC51D1A6CA748004FE15D /* libAppsFlyerLib.a in Frameworks */,
 				73FC0A13199074810006D0E2 /* AdSupport.framework in Frameworks */,
 				734532A71965056400E5D444 /* MessageUI.framework in Frameworks */,
 				73EDFC8B18ECF85F00322624 /* FacebookSDK.framework in Frameworks */,
@@ -2482,6 +2486,15 @@
 			name = cjson;
 			sourceTree = "<group>";
 		};
+		BF5CC5181A6CA747004FE15D /* AF-iOS-SDK-v2.5.3.11 */ = {
+			isa = PBXGroup;
+			children = (
+				BF5CC5191A6CA747004FE15D /* AppsFlyerTracker.h */,
+				BF5CC51B1A6CA748004FE15D /* libAppsFlyerLib.a */,
+			);
+			path = "AF-iOS-SDK-v2.5.3.11";
+			sourceTree = "<group>";
+		};
 		ED35C02A18323496002A0750 /* CocoStudio */ = {
 			isa = PBXGroup;
 			children = (
@@ -2733,6 +2746,7 @@
 		F293B3BD15EB7BE500256477 = {
 			isa = PBXGroup;
 			children = (
+				BF5CC5181A6CA747004FE15D /* AF-iOS-SDK-v2.5.3.11 */,
 				7305FE411A5A82000071C61E /* AMP-SDK */,
 				7314B46319B714AE0065D927 /* Airship */,
 				15C1533E168310C700D239F2 /* cocos2dx.xcodeproj */,
@@ -3468,6 +3482,7 @@
 					"\"$(PROJECT_DIR)/Airship\"",
 					"\"$(SRCROOT)/../../../scripting/lua/lua/ios\"",
 					"$(PROJECT_DIR)/AMP-SDK",
+					"$(PROJECT_DIR)/AF-iOS-SDK-v2.5.3.11",
 				);
 				OTHER_LDFLAGS = (
 					"-lxml2",
@@ -3535,6 +3550,7 @@
 					"\"$(PROJECT_DIR)/Airship\"",
 					"\"$(SRCROOT)/../../../scripting/lua/lua/ios\"",
 					"$(PROJECT_DIR)/AMP-SDK",
+					"$(PROJECT_DIR)/AF-iOS-SDK-v2.5.3.11",
 				);
 				OTHER_LDFLAGS = (
 					"-lxml2",

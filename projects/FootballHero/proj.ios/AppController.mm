@@ -34,6 +34,7 @@
 #import "UAPush.h"
 #import "UAInbox.h"
 #import "UAInboxUI.h"
+#import "AppsFlyerTracker.h"
 
 #import "RootViewController.h"
 #import "FBSessionSingleton.h"
@@ -113,6 +114,10 @@ static AppDelegate s_sharedApplication;
     [UAInbox shared].pushHandler.delegate = [UAInboxUI shared];
     [UAInboxUI shared].inboxParentController = viewController;
     NSLog(@"UA device token is %@", [UAPush shared].deviceToken);
+
+    // AppsFlyer
+    [AppsFlyerTracker sharedTracker].appsFlyerDevKey = @"pEuxjZE2GpyRXXwFjHHRRU";
+    [AppsFlyerTracker sharedTracker].appleAppID = @"859894802";
 
     NSTimeInterval timeInterval = [startTime timeIntervalSinceNow];
     NSLog(@"Interval:%f",timeInterval);
