@@ -1,10 +1,8 @@
 module(..., package.seeall)
 
 local FileUtils = require("scripts.FileUtils")
-require "LocalizedString"
-
-LANGUAGE_DEF = "en"
-String = LocalizedString
+local LocalizedString = require ("LocalizedString")
+String = LocalizedString.Strings
 
 GAME_WIDTH = 640
 GAME_HEIGHT = 1136
