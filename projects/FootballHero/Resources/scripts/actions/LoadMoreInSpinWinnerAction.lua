@@ -14,7 +14,12 @@ function action( param )
         step = param[1]
     end
 
-    local url = RequestUtils.GET_SPIN_WINNERS_REST_CALL.."?step="..step
+    local onlyShowBigPrize = false
+    if param ~= nil and param[2] ~= nil then
+        onlyShowBigPrize = param[2]
+    end
+
+    local url = RequestUtils.GET_SPIN_WINNERS_REST_CALL.."?step="..step.."&bigOnly="..tostring(onlyShowBigPrize)
    
     local requestInfo = {}
     requestInfo.requestData = ""

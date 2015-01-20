@@ -6,7 +6,6 @@ local mDefaultString = StringsDefault
 
 -- Localized strings
 local TARGET_LANGUAGE = "id"
-local mLocalizedStrings = require(TARGET_LANGUAGE..".LocalizedString").Strings
 
 -- Output string
 local mSeperate = "\t"
@@ -14,6 +13,8 @@ local mResultString = "key"..mSeperate.."en"..mSeperate..TARGET_LANGUAGE
 
 
 function action( param )
+	local mLocalizedStrings = require(TARGET_LANGUAGE..".LocalizedString").Strings
+
 	local mt    = {
 	    __index = function ( t ,k )
 	    	return nil

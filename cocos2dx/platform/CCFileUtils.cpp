@@ -763,6 +763,17 @@ void CCFileUtils::removeAllPaths()
 {
 	m_searchPathArray.clear();
 }
+
+void CCFileUtils::setSearchPathToLocale(const char *locale)
+{
+    removeAllPaths();
+    m_searchPathArray.push_back(getWritablePath() + "local/" + locale);
+    m_searchPathArray.push_back(getWritablePath() + "local");
+    m_searchPathArray.push_back(getDefaultResRootPath() + locale);
+    m_searchPathArray.push_back(getDefaultResRootPath());
+}
+
+
 void CCFileUtils::setFilenameLookupDictionary(CCDictionary* pFilenameLookupDict)
 {
     m_fullPathCache.clear();

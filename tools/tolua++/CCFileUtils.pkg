@@ -11,6 +11,9 @@ class CCFileUtils
     const char* fullPathFromRelativeFile(const char *pszFilename, const char *pszRelativeFile);
     void addSearchResolutionsOrder(const char* order);
     void addSearchPath(const char* path);
+    void removeSearchPath(const char *path);
+    void removeAllPaths();
+    void setSearchPathToLocale(const char* locale);
 
     std::string getWritablePath();
     

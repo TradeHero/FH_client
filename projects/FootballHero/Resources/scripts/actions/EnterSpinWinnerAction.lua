@@ -6,15 +6,15 @@ local ConnectingMessage = require("scripts.views.ConnectingMessage")
 local Logic = require("scripts.Logic").getInstance()
 local Constants = require("scripts.Constants")
 
-local mJsonResponse
+local mOnlyShowBigPrize
 
 function action( param )
-    local step = 1
+    mOnlyShowBigPrize = false
     if param ~= nil and param[1] ~= nil then
-        step = param[1]
+        mOnlyShowBigPrize = param[1]
     end
 
-    local url = RequestUtils.GET_SPIN_WINNERS_REST_CALL.."?step="..step
+    local url = RequestUtils.GET_SPIN_WINNERS_REST_CALL.."?step=1&bigOnly="..tostring(mOnlyShowBigPrize)
    
     local requestInfo = {}
     requestInfo.requestData = ""
@@ -32,5 +32,9 @@ end
 
 function onRequestSuccess( jsonResponse )
     local SpinWinnersScene = require("scripts.views.SpinWinnersScene")
-    SpinWinnersScene.loadFrame( jsonResponse["Winners"] )
+    if SpinWinnersScene.isShown() then
+        SpinWinnersScene.refreshFrame( jsonResponse["Winners"], mOnlyShowBigPrize )
+    else
+        SpinWinnersScene.loadFrame( jsonResponse["Winners"], mOnlyShowBigPrize )
+    end
 end

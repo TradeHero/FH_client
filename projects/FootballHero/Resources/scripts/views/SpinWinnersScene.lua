@@ -12,8 +12,9 @@ local mWidget
 local mCurrentTotalNum
 local mStep
 local mHasMoreToLoad
+local mOnlyShowBigPrize
 
-function loadFrame( winners )
+function loadFrame( winners, onlyShowBigPrize )
 	local widget = GUIReader:shareReader():widgetFromJsonFile("scenes/SpinWinnersScene.json")
 
     mWidget = widget
@@ -24,9 +25,14 @@ function loadFrame( winners )
     
     Navigator.loadFrame( widget )
 
+    refreshFrame( winners, onlyShowBigPrize )
+end
+
+function refreshFrame( winners, onlyShowBigPrize )
     initContent( winners )
     mStep = 1
     mHasMoreToLoad = true
+    mOnlyShowBigPrize = onlyShowBigPrize
 end
 
 function EnterOrExit( eventType )
@@ -52,6 +58,7 @@ end
 
 function initContent( winners )
     initTitle()
+    initFilter()
 
     -- init main content
     loadMainContent( winners )
@@ -60,6 +67,29 @@ end
 function initTitle()
     local title = tolua.cast( mWidget:getChildByName("Label_Title"), "Label" )
     title:setText( Constants.String.spinWheel.winners )
+    local showBigPrizeOnly = tolua.cast( mWidget:getChildByName("Label_bigPrize"), "Label" )
+    showBigPrizeOnly:setText( Constants.String.spinWheel.only_show_big_prize )
+end
+
+function initFilter()
+    local onlyShowBigPrizeEventHandler = function( sender, eventType )
+        if eventType == TOUCH_EVENT_ENDED then
+            local onlyShowBigPrize = tolua.cast( sender, "CheckBox" )
+            
+            mWidget:stopAllActions()
+
+            if onlyShowBigPrize:getSelectedState() == true then                
+                mOnlyShowBigPrize = false
+            else                
+                mOnlyShowBigPrize = true
+            end
+
+            EventManager:postEvent( Event.Enter_Spin_winner, { mOnlyShowBigPrize } )
+        end
+    end
+    local onlyShowBigPrize = tolua.cast( mWidget:getChildByName("CheckBox_bigPrize"), "CheckBox" )
+    onlyShowBigPrize:addTouchEventListener( onlyShowBigPrizeEventHandler )
+    onlyShowBigPrize:setSelectedState( mOnlyShowBigPrize )
 end
 
 function loadMainContent( winners )
@@ -168,6 +198,6 @@ end
 function scrollViewEventHandler( target, eventType )
     if eventType == SCROLLVIEW_EVENT_BOUNCE_BOTTOM and mHasMoreToLoad then
         mStep = mStep + 1
-        EventManager:postEvent( Event.Load_More_In_Spin_Winner, { mStep } )
+        EventManager:postEvent( Event.Load_More_In_Spin_Winner, { mStep, mOnlyShowBigPrize } )
     end
 end

@@ -4,7 +4,6 @@ local RequestUtils = require("scripts.RequestUtils")
 
 -- Localized strings
 local TARGET_LANGUAGE = "zh"
-local mLocalizedStrings = require(TARGET_LANGUAGE..".LocalizedString").Strings
 
 local ID_KEY = 1
 local ID_EN_VALUE = 2
@@ -16,6 +15,7 @@ local mInput
 
 
 function action( param )
+	local mLocalizedStrings = require(TARGET_LANGUAGE..".LocalizedString").Strings
 	-- Load the existing translation text.
 	local mt    = {
 	    __index = function ( t ,k )

@@ -331,6 +331,8 @@ public:
     virtual bool isPopupNotify();
 
 	inline std::string getDefaultResRootPath() { return m_strDefaultResRootPath; }
+    
+    void setSearchPathToLocale(const char* locale);
 
 protected:
     /**

@@ -351,6 +351,7 @@ StringsDefault = {
     share_description = "Share with your friends and get an additiaonal spin.",
     win_ticket_prize = "Luck Draw Ticket",
     win_ticket_left = "left till draw.",
+    only_show_big_prize = "Only show big prize",
   },
   num_of_points = "%d Points",
   optional = "(Optional)",
@@ -423,7 +424,7 @@ function extendsStringDefault()
         if StringsDefault[key] then
           return StringsDefault[key]
         end
-      return "Nil"
+        return nil
     end
   } 
   return mt
@@ -435,7 +436,7 @@ function extendsStringDefaultSubTable( name )
         if StringsDefault[name][key] then
           return StringsDefault[name][key]
         end
-      return "Nil"
+        return nil
     end
   }
   return mt
