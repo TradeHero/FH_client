@@ -94,20 +94,21 @@ bool AppDelegate::applicationDidFinishLaunching()
 
 	vector<string> searchPaths = CCFileUtils::sharedFileUtils()->getSearchPaths();
     
-	if (CCApplication::sharedApplication()->getCurrentLanguage() == kLanguageChinese)
+    ccLanguageType currentLanguage = CCApplication::sharedApplication()->getCurrentLanguage();
+	if (currentLanguage == kLanguageChinese)
 	{
 		searchPaths.insert(searchPaths.begin(), CCFileUtils::sharedFileUtils()->getDefaultResRootPath() + "zh");
 	}
-    else if(CCApplication::sharedApplication()->getCurrentLanguage() == kLanguageBahasa)
+    else if(currentLanguage == kLanguageBahasa)
     {
         searchPaths.insert(searchPaths.begin(), CCFileUtils::sharedFileUtils()->getDefaultResRootPath() + "id");
     }
 	searchPaths.insert(searchPaths.begin(), CCFileUtils::sharedFileUtils()->getWritablePath() + "local");
-	if (CCApplication::sharedApplication()->getCurrentLanguage() == kLanguageChinese)
+	if (currentLanguage == kLanguageChinese)
 	{
 		searchPaths.insert(searchPaths.begin(), CCFileUtils::sharedFileUtils()->getWritablePath() + "local/zh");
 	}
-    else if (CCApplication::sharedApplication()->getCurrentLanguage() == kLanguageBahasa)
+    else if (currentLanguage == kLanguageBahasa)
     {
         searchPaths.insert(searchPaths.begin(), CCFileUtils::sharedFileUtils()->getWritablePath() + "local/id");
     }

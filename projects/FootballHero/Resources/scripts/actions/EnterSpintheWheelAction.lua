@@ -45,7 +45,7 @@ function loadRemoteImage( response, id )
         loadSpinUI( response )
     else
         local SMIS = require("scripts.SMIS")
-        local imageUrl = prizeConfig[id]["ImageUrl"]
+        local imageUrl = prizeConfig[id]["PictureUrl"]
         local handler = function( path )
             prizeConfig[id]["LocalUrl"] = path
             loadRemoteImage( response, id + 1 )

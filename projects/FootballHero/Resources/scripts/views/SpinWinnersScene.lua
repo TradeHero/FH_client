@@ -15,6 +15,7 @@ local mHasMoreToLoad
 
 function loadFrame( winners )
 	local widget = GUIReader:shareReader():widgetFromJsonFile("scenes/SpinWinnersScene.json")
+
     mWidget = widget
     mWidget:registerScriptHandler( EnterOrExit )
     SceneManager.clearNAddWidget( widget )

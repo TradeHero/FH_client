@@ -14,63 +14,63 @@ local RequestUtils = require("scripts.RequestUtils")
          {
             "Id": 1,
             "Name": "+3,000 POINTS",
-            "ImageUrl": "http://fhmainstorage.blob.core.windows.net/wheelres/img-point.png",
+            "PictureUrl": "http://fhmainstorage.blob.core.windows.net/wheelres/img-point.png",
             "DrawTicket": false,
             "DrawInformation": null
          },
          {
             "Id": 2,
             "Name": "+8,000 POINTS",
-            "ImageUrl": "http://fhmainstorage.blob.core.windows.net/wheelres/img-point.png",
+            "PictureUrl": "http://fhmainstorage.blob.core.windows.net/wheelres/img-point.png",
             "DrawTicket": false,
             "DrawInformation": null
          },
          {
             "Id": 3,
             "Name": "+12,000 POINTS",
-            "ImageUrl": "http://fhmainstorage.blob.core.windows.net/wheelres/img-point.png",
+            "PictureUrl": "http://fhmainstorage.blob.core.windows.net/wheelres/img-point.png",
             "DrawTicket": false,
             "DrawInformation": null
          },
          {
             "Id": 4,
             "Name": "US$ 1.00",
-            "ImageUrl": "http://fhmainstorage.blob.core.windows.net/wheelres/img-cash.png",
+            "PictureUrl": "http://fhmainstorage.blob.core.windows.net/wheelres/img-cash.png",
             "DrawTicket": false,
             "DrawInformation": null
          },
          {
             "Id": 5,
             "Name": "US$ 2.00",
-            "ImageUrl": "http://fhmainstorage.blob.core.windows.net/wheelres/img-cash.png",
+            "PictureUrl": "http://fhmainstorage.blob.core.windows.net/wheelres/img-cash.png",
             "DrawTicket": false,
             "DrawInformation": null
          },
          {
             "Id": 6,
             "Name": "US$ 5.00",
-            "ImageUrl": "http://fhmainstorage.blob.core.windows.net/wheelres/img-cash.png",
+            "PictureUrl": "http://fhmainstorage.blob.core.windows.net/wheelres/img-cash.png",
             "DrawTicket": false,
             "DrawInformation": null
          },
          {
             "Id": 8,
             "Name": "Xiaomi Phone",
-            "ImageUrl": "http://fhmainstorage.blob.core.windows.net/wheelres/img-xiaomi.png",
+            "PictureUrl": "http://fhmainstorage.blob.core.windows.net/wheelres/img-xiaomi.png",
             "DrawTicket": false,
             "DrawInformation": null
          },
          {
             "Id": 10,
             "Name": "Lucky Draw Messi Signed Jersey",
-            "ImageUrl": "http://fhmainstorage.blob.core.windows.net/wheelres/img-messi.png",
+            "PictureUrl": "http://fhmainstorage.blob.core.windows.net/wheelres/img-messi.png",
             "DrawTicket": true,
             "DrawInformation": "One Messi Signed Jersey awarded every 3500 tickets"
          },
          {
             "Id": 13,
             "Name": "Ronaldo Signed Jersey",
-            "ImageUrl": "http://fhmainstorage.blob.core.windows.net/wheelres/img-ronaldo.png",
+            "PictureUrl": "http://fhmainstorage.blob.core.windows.net/wheelres/img-ronaldo.png",
             "DrawTicket": false,
             "DrawInformation": null
          }

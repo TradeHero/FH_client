@@ -10,18 +10,8 @@
   "designHeight": 1136,
   "designWidth": 640,
   "textures": [],
-  "texturesPng": [
-    "spinWheel/bkg-main.png",
-    "spinWheel/img-wheel.png",
-    "spinWheel/btn-winner.png",
-    "spinWheel/btn-ticket.png",
-    "header/back.png",
-    "spinWheel/img-bottom-button.png",
-    "spinWheel/img-top-button-off.png",
-    "spinWheel/img-top-button-on.png",
-    "spinWheel/img-spinner-center.png"
-  ],
-  "version": "1.5.0.0",
+  "texturesPng": [],
+  "version": "1.6.0.0",
   "widgetTree": {
     "classname": "Panel",
     "name": null,

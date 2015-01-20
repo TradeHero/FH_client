@@ -53,6 +53,11 @@ function keypadBackEventHandler()
 end
 
 function initContent( moneyBalance, ticketBalance )
+    tolua.cast( mWidget:getChildByName("Label_Title"), "Label" ):setText( Constants.String.spinWheel.balance_title )
+    tolua.cast( mWidget:getChildByName("Label_1"), "Label" ):setText( Constants.String.spinWheel.ticket_you_have )
+    tolua.cast( mWidget:getChildByName("Label_3"), "Label" ):setText( Constants.String.spinWheel.ticket_usage )
+    tolua.cast( mWidget:getChildByName("Label_5"), "Label" ):setText( Constants.String.spinWheel.money_payout_limit )
+    tolua.cast( mWidget:getChildByName("Label_disclaimer"), "Label" ):setText( Constants.String.community.disclaimer )
     local ticketText = tolua.cast( mWidget:getChildByName("Label_ticket"), "Label" )
     local moneyText = tolua.cast( mWidget:getChildByName("Label_balance"), "Label" )
     local prizeDescriptionText = tolua.cast( mWidget:getChildByName("Label_prizeDescription"), "Label" )

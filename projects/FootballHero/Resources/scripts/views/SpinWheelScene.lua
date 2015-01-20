@@ -59,6 +59,13 @@ function loadFrame()
 	local widget = GUIReader:shareReader():widgetFromJsonFile("scenes/SpinWheel.json")
     mWidget = widget
 
+    -- Set the text
+    tolua.cast( mWidget:getChildByName("Label_Title"), "Label" ):setText( Constants.String.spinWheel.wheel_title )
+    tolua.cast( mWidget:getChildByName("Label_6"), "Label" ):setText( Constants.String.spinWheel.wheel_sub_title )
+    tolua.cast( mWidget:getChildByName("Label_bonusTitle"), "Label" ):setText( Constants.String.spinWheel.spin_bonus )
+    tolua.cast( mWidget:getChildByName("Label_normalTitle"), "Label" ):setText( Constants.String.spinWheel.spin_daily )
+    tolua.cast( mWidget:getChildByName("Label_timeTitle"), "Label" ):setText( Constants.String.spinWheel.come_back_in )
+
     widget:registerScriptHandler( EnterOrExit )
     SceneManager.clearNAddWidget( widget )
     SceneManager.setKeypadBackListener( keypadBackEventHandler )
@@ -181,6 +188,10 @@ end
 
 function initWinPrizeWidget()
     mWinPrizeWidget = GUIReader:shareReader():widgetFromJsonFile("scenes/SpinWin.json")
+
+    -- Set the text
+    tolua.cast( mWinPrizeWidget:getChildByName("Label_won"), "Label" ):setText( Constants.String.spinWheel.won )
+
     mWidget:addChild( mWinPrizeWidget )
     mWinPrizeWidget:setEnabled( false )
     
@@ -189,6 +200,12 @@ end
 
 function initWinTicketWidget()
     mWinTicketWidget = GUIReader:shareReader():widgetFromJsonFile("scenes/SpinWinTicket.json")
+
+    -- Set the text
+    tolua.cast( mWinTicketWidget:getChildByName("Label_won"), "Label" ):setText( Constants.String.spinWheel.won )
+    tolua.cast( mWinTicketWidget:getChildByName("Label_prize"), "Label" ):setText( Constants.String.spinWheel.win_ticket_prize )
+    tolua.cast( mWinTicketWidget:getChildByName("Label_left"), "Label" ):setText( Constants.String.spinWheel.win_ticket_left )
+
     mWidget:addChild( mWinTicketWidget )
     mWinTicketWidget:setEnabled( false )
     
@@ -197,6 +214,10 @@ end
 
 function initShareWidget()
     mWinShareWidget = GUIReader:shareReader():widgetFromJsonFile("scenes/SpinShare.json")
+
+    -- Set the text.
+    tolua.cast( mWinShareWidget:getChildByName("Label_prize"), "Label" ):setText( Constants.String.spinWheel.share_description )
+
     mWidget:addChild( mWinShareWidget )
     mWinShareWidget:setEnabled( false )
 
@@ -384,6 +405,15 @@ function checkNCollectEmail()
         mWinShareWidget:setEnabled( true )
     else
         local collectEmailWidget = GUIReader:shareReader():widgetFromJsonFile("scenes/SpinEmailCollect.json")
+
+        -- Set the text.
+        tolua.cast( collectEmailWidget:getChildByName("Label_Title"), "Label" ):setText( Constants.String.spinWheel.collect_email_label_title )
+        tolua.cast( collectEmailWidget:getChildByName("Label_1"), "Label" ):setText( Constants.String.spinWheel.collect_email_you_won )
+        tolua.cast( collectEmailWidget:getChildByName("Label_ticket"), "Label" ):setText( Constants.String.spinWheel.collect_email_prize )
+        tolua.cast( collectEmailWidget:getChildByName("Label_3"), "Label" ):setText( Constants.String.spinWheel.collect_email_towards_wallet )
+        tolua.cast( collectEmailWidget:getChildByName("Label_prizeDescription"), "Label" ):setText( Constants.String.spinWheel.collect_email_description )
+        tolua.cast( collectEmailWidget:getChildByName("Label_disclaimer"), "Label" ):setText( Constants.String.community.disclaimer )
+
         mWidget:addChild( collectEmailWidget )
         collectEmailWidget:addTouchEventListener( onCollectEmailFrameTouch )
 
