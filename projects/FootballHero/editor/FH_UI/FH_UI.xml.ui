@@ -98,6 +98,10 @@
     <string>MatchCenterDiscussionsPostScene.json</string>
     <string>MatchCenterDiscussionsDetailScene.json</string>
     <string>MatchCenterDiscussionsCommentFrame.json</string>
+    <string>SettingsItemContentFrame.json</string>
+    <string>SettingsItemHeaderFrame.json</string>
+    <string>SettingsUserInformationFrame.json</string>
+    <string>SettingsItemDropdownFrame.json</string>
   </JsonList>
   <CanvasSize>
     <Width>640</Width>
@@ -107,13 +111,7 @@
   <ProjectType>UIProject</ProjectType>
   <ResRelativePath />
   <imageFileList />
-  <imagePngList>
-    <string>MyHero/img-photo.png</string>
-    <string>MatchCentre/img-unlike.png</string>
-    <string>MatchCentre/img-like.png</string>
-    <string>MatchCentre/img-comment.png</string>
-    <string>MatchCentre/img-share.png</string>
-  </imagePngList>
+  <imagePngList />
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>MatchCenterDiscussionsDetailScene.json</CurrentUIJson>
+  <CurrentUIJson>SettingsItemHeaderFrame.json</CurrentUIJson>
 </UIProject>
