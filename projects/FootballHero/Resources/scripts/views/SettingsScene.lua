@@ -6,6 +6,8 @@ local EventManager = require("scripts.events.EventManager").getInstance()
 local Event = require("scripts.events.Event").EventList
 local SettingsConfig = require("scripts.config.Settings")
 local Constants = require("scripts.Constants")
+local Logic = require("scripts.Logic").getInstance()
+local SMIS = require("scripts.SMIS")
 
 local mWidget
 local mLogo
@@ -95,6 +97,24 @@ function initSettingsUserInfo( contentContainer, settingsSubItem )
 
     mLogo = tolua.cast( content:getChildByName("Image_Logo"), "ImageView" )
     mLogo:addTouchEventListener( logoEventHandler )
+
+    local pictureUrl = Logic:getPictureUrl()
+    if pictureUrl ~= nil then
+        local handler = function( filePath )
+            if filePath ~= nil and mWidget ~= nil and mLogo ~= nil then
+                local safeLoadTexture = function()
+                    mLogo:loadTexture( filePath )
+                end
+
+                local errorHandler = function( msg )
+                    -- Do nothing
+                end
+
+                xpcall( safeLoadTexture, errorHandler )
+            end
+        end
+        SMIS.getSMImagePath( pictureUrl, handler )
+    end
 
     local email = content:getChildByName("Panel_Email")
     local phone = content:getChildByName("Panel_Phone")
