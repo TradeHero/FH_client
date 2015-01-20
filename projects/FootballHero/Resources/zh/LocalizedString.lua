@@ -2,16 +2,6 @@ module(..., package.seeall)
 
 Strings = {
   chat_hint = "点击开始聊天！",
-  league_chat = {
-    feedback = "反馈",
-    spanish = "西班牙联赛",
-    others = "其他联赛",
-  },
-  enter_email = "请输入你的Email地址",
-  match_center = {
-    just_now = "刚刚",
-    played = "玩了%d/%d",
-  },
   email_signin = "邮箱注册",
   unknown_team = "未知球队",
   leaderboard = {
@@ -45,7 +35,6 @@ Strings = {
     title_create_comp = "的比赛",
   },
   first_name = "名字",
-  share_type_title = "分享",
   match_list = {
     most_popular = "热门比赛",
   },
