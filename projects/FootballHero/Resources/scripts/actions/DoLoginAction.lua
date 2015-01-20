@@ -99,11 +99,6 @@ function onRequestSuccess( jsonResponse )
 end
 
 function onRequestFailed( jsonResponse )
-    local errorBuffer = jsonResponse["Message"]
-    if errorBuffer == nil or errorBuffer == "" then
-        errorBuffer = Constants.String.error.login_failed
-    end
-
     Logic:clearAccountInfoFile()
-    EventManager:postEvent( Event.Show_Error_Message, { errorBuffer } )
+    RequestUtils.onRequestFailedByErrorCode( jsonResponse["Message"] )
 end

@@ -34,7 +34,7 @@ function postPredictionData( param )
     requestInfo.url = url
 
     local handler = function( isSucceed, body, header, status, errorBuffer )
-        RequestUtils.messageHandler( requestInfo, isSucceed, body, header, status, errorBuffer, RequestUtils.HTTP_200, true, onRequestSuccess, onRequestFailed )
+        RequestUtils.messageHandler( requestInfo, isSucceed, body, header, status, errorBuffer, RequestUtils.HTTP_200, true, onRequestSuccess )
     end
 
     local httpRequest = HttpRequestForLua:create( CCHttpRequest.kHttpPost )
@@ -78,9 +78,4 @@ function onRequestSuccess( jsonResponse )
     EventManager:postEvent( Event.Enter_Match_List, { nil, true } )
 
     RateManager.addPredictionMade()
-end
-
-function onRequestFailed( jsonResponse )
-    local errorBuffer = jsonResponse["Message"]
-    EventManager:postEvent( Event.Show_Error_Message, { errorBuffer } )
 end

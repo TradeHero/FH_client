@@ -6,6 +6,8 @@ local Event = require("scripts.events.Event").EventList
 local ConnectingMessage = require("scripts.views.ConnectingMessage")
 local DoLogReport = require("scripts.actions.DoLogReport")
 local FileUtils = require("scripts.FileUtils")
+local Constants = require("scripts.Constants")
+local ServerErrorConfig = require("scripts.config.ServerError")
 
 
 HTTP_200 = 200
@@ -244,17 +246,24 @@ function messageHandler( requestInfo, isSucceed, body, header, status, errorBuff
         if failedHandler ~= nil then
             failedHandler( jsonResponse )
         else
-            onRequestFailed( jsonResponse["Message"] )
+            onRequestFailedByErrorCode( jsonResponse["Message"] )
         end
     end
 end
 
-function reportRequestFailed( requestInfo, errorBuffer )
-    if errorBuffer == "An error has occurred." then
-        local unknowErrorPostText = "Get "..errorBuffer.." with request: "..Json.encode( requestInfo )
-        print( unknowErrorPostText )
+function reportRequestFailed( requestInfo, errorCode )
+    if ServerErrorConfig.isExceptionalErrorByCode( errorCode ) then
+        local unknowErrorPostText = "Get "..errorCode.." with request: "..Json.encode( requestInfo )
         DoLogReport.reportNetworkError( unknowErrorPostText )
     end
+end
+
+function onRequestFailedByErrorCode( errorCode )
+    local errorMessage = Constants.String.serverError[errorCode]
+    if errorMessage == nil then
+        errorMessage = Constants.String.serverError.DEFAULT
+    end
+    onRequestFailed( errorMessage )
 end
 
 function onRequestFailed( errorBuffer )

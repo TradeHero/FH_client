@@ -56,8 +56,5 @@ function onRequestSuccess( jsonResponse )
 end
 
 function onRequestFailed( jsonResponse )
-    local errorBuffer = jsonResponse["Message"]
-    CCLuaLog("Error message is:"..errorBuffer )
-
-    RequestUtils.onRequestFailed( errorBuffer )
+    RequestUtils.onRequestFailedByErrorCode( jsonResponse["Message"] )
 end

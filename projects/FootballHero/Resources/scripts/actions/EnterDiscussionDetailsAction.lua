@@ -29,7 +29,7 @@ function action( param )
     requestInfo.url = url
 
     local handler = function( isSucceed, body, header, status, errorBuffer )
-        RequestUtils.messageHandler( requestInfo, isSucceed, body, header, status, errorBuffer, RequestUtils.HTTP_200, true, onRequestSuccess, onRequestFailed )
+        RequestUtils.messageHandler( requestInfo, isSucceed, body, header, status, errorBuffer, RequestUtils.HTTP_200, true, onRequestSuccess )
     end
 
     local httpRequest = HttpRequestForLua:create( CCHttpRequest.kHttpGet )
@@ -47,11 +47,4 @@ function onRequestSuccess( jsonResponse )
     else
     	DiscussionsDetailsScene.loadFrame( mDiscussionInfo, jsonResponse )
 	end
-end
-
-function onRequestFailed( jsonResponse )
-    local errorBuffer = jsonResponse["Message"]
-    CCLuaLog("Error message is:"..errorBuffer )
-
-    RequestUtils.onRequestFailed( errorBuffer )
 end

@@ -67,7 +67,6 @@ function onRequestSuccess( jsonResponse )
 end
 
 function onRequestFailed( jsonResponse )
-    local errorBuffer = jsonResponse["Message"]
     mFailedHandler()
-    EventManager:postEvent( Event.Show_Error_Message, { errorBuffer } )
+    RequestUtils.onRequestFailedByErrorCode( jsonResponse["Message"] )
 end

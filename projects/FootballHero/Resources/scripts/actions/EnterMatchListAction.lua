@@ -122,7 +122,6 @@ function onRequestSuccess( matchList )
 end
 
 function onRequestFailed( jsonResponse )
-    local errorBuffer = jsonResponse["Message"]
     local MatchListData = require("scripts.data.MatchListData").MatchListData
     local matchList = MatchListData:new()
     local matchListScene = require("scripts.views.MatchListScene")
@@ -132,5 +131,5 @@ function onRequestFailed( jsonResponse )
         matchListScene.loadFrame( matchList, mLeagueId )
     end
     
-    EventManager:postEvent( Event.Show_Error_Message, { errorBuffer } )
+    RequestUtils.onRequestFailedByErrorCode( jsonResponse["Message"] )
 end

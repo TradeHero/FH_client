@@ -65,6 +65,6 @@ function onRequestFailed( jsonResponse )
 
         EventManager:postEvent( Event.Show_Info, { Constants.String.info.odds_not_ready, callback, Constants.String.info.announcement_title } )
     else
-        RequestUtils.onRequestFailed( errorBuffer )
+        RequestUtils.onRequestFailedByErrorCode( jsonResponse["Message"] )
     end
 end
