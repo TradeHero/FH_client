@@ -297,11 +297,12 @@ end
 function checkMiniGame()
     -- check if popup should appear
     local bFHCAppear = shouldShowFHC()
+    
+    local bMiniGameAppear = false 
     if Constants.MINIGAME_PK_ENABLED then
-        bMiniGameAppear = false
-    else
-        local bMiniGameAppear = shouldShowMiniGame()    
+        bMiniGameAppear = shouldShowMiniGame()
     end
+
     if not bMiniGameAppear and not bFHCAppear then
         return
     end
