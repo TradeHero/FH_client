@@ -331,6 +331,7 @@
 		73495B9019C048D300626812 /* UAInboxMessageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73495B8319C048D300626812 /* UAInboxMessageViewController.xib */; };
 		7365C0D218FCE99200C39027 /* FBSessionSingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 7365C0D118FCE99200C39027 /* FBSessionSingleton.m */; };
 		73846DD81A6CBBE0001B4EF1 /* DefaultString.lua in Resources */ = {isa = PBXBuildFile; fileRef = 73846DD71A6CBBE0001B4EF1 /* DefaultString.lua */; };
+		73846DDB1A6E3C8B001B4EF1 /* id in Resources */ = {isa = PBXBuildFile; fileRef = 73846DDA1A6E3C8B001B4EF1 /* id */; };
 		7387400C19FE2A63009AE602 /* scripts in Resources */ = {isa = PBXBuildFile; fileRef = 7387400B19FE2A63009AE602 /* scripts */; };
 		7388C04118F4E2FF00CF667C /* HttpRequestForLua.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7388C03F18F4E2FF00CF667C /* HttpRequestForLua.cpp */; };
 		738BA12A193D7FD2008A74F6 /* DES56.lua in Resources */ = {isa = PBXBuildFile; fileRef = 738BA129193D7FD2008A74F6 /* DES56.lua */; };
@@ -1045,6 +1046,7 @@
 		7365C0D018FCE99200C39027 /* FBSessionSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBSessionSingleton.h; sourceTree = "<group>"; };
 		7365C0D118FCE99200C39027 /* FBSessionSingleton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBSessionSingleton.m; sourceTree = "<group>"; };
 		73846DD71A6CBBE0001B4EF1 /* DefaultString.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = DefaultString.lua; sourceTree = "<group>"; };
+		73846DDA1A6E3C8B001B4EF1 /* id */ = {isa = PBXFileReference; lastKnownFileType = folder; path = id; sourceTree = "<group>"; };
 		7387400B19FE2A63009AE602 /* scripts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = scripts; sourceTree = "<group>"; };
 		7388C03F18F4E2FF00CF667C /* HttpRequestForLua.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HttpRequestForLua.cpp; sourceTree = "<group>"; };
 		7388C04018F4E2FF00CF667C /* HttpRequestForLua.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpRequestForLua.h; sourceTree = "<group>"; };
@@ -2843,6 +2845,7 @@
 		F293BC4615EB859D00256477 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				73846DDA1A6E3C8B001B4EF1 /* id */,
 				73846DD71A6CBBE0001B4EF1 /* DefaultString.lua */,
 				739220351A3EA04200F32FE5 /* zh */,
 				7387400B19FE2A63009AE602 /* scripts */,
@@ -2966,6 +2969,7 @@
 				15C156991683138E00D239F2 /* Default.png in Resources */,
 				730D984D18DC4317000CA5F9 /* scenes in Resources */,
 				15C1569A1683138E00D239F2 /* Default@2x.png in Resources */,
+				73846DDB1A6E3C8B001B4EF1 /* id in Resources */,
 				7314B4B019B715350065D927 /* UAMapPresentationViewController.xib in Resources */,
 				7314B4B419B715350065D927 /* UAPushSettingsAliasView.xib in Resources */,
 				730D984918DC4317000CA5F9 /* fonts in Resources */,

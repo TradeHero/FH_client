@@ -5,7 +5,7 @@ require "DefaultString"
 local mDefaultString = StringsDefault
 
 -- Localized strings
-local TARGET_LANGUAGE = "zh"
+local TARGET_LANGUAGE = "id"
 local mLocalizedStrings = require(TARGET_LANGUAGE..".LocalizedString").Strings
 
 -- Output string
