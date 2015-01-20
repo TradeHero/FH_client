@@ -18,6 +18,7 @@ using namespace CocosDenshion;
 using namespace std;
 
 #define KEY_OF_VERSION   "current-version-code"
+#define KEY_OF_LANGUAGE  "app-language"
 
 AppDelegate::AppDelegate()
 {
@@ -93,8 +94,21 @@ bool AppDelegate::applicationDidFinishLaunching()
 	}
 
 	vector<string> searchPaths = CCFileUtils::sharedFileUtils()->getSearchPaths();
-    
+
     ccLanguageType currentLanguage = CCApplication::sharedApplication()->getCurrentLanguage();
+
+    string szlanguageType = CCUserDefault::sharedUserDefault()->getStringForKey(KEY_OF_LANGUAGE);
+    if (szlanguageType == "") {
+        char * str = new char[32];
+        sprintf(str,"%d",currentLanguage);
+        szlanguageType = string(str);
+
+        CCUserDefault::sharedUserDefault()->setStringForKey(KEY_OF_LANGUAGE, szlanguageType);
+    } else {
+        int nLanguageType = std::atoi( szlanguageType.c_str() );
+        currentLanguage = (ccLanguageType)nLanguageType;
+    }
+
 	if (currentLanguage == kLanguageChinese)
 	{
 		searchPaths.insert(searchPaths.begin(), CCFileUtils::sharedFileUtils()->getDefaultResRootPath() + "zh");

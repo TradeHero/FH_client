@@ -11,6 +11,7 @@ local mWidget
 local mLogo
 local mDropdown
 local mDropdownHeight
+local mCurrLanguage
 
 function loadFrame()
 	local widget = GUIReader:shareReader():widgetFromJsonFile("scenes/SettingsHome.json")
@@ -118,15 +119,15 @@ end
 function initSettingsLanguage( contentContainer, settingsSubItem )
     local contentHeight = 0
 
-    local appLanguage = CCUserDefault:sharedUserDefault():getIntegerForKey( SettingsConfig.SETTING_KEY_LANGUAGE ) or SettingsConfig.LanguageType.kLanguageEnglish
-    local selectedLanguage = settingsSubItem["Items"][appLanguage + 1]
+    local appLanguage = CCUserDefault:sharedUserDefault():getStringForKey( SettingsConfig.KEY_OF_LANGUAGE )
+    local selectedLanguage = settingsSubItem["Items"][tonumber(appLanguage) + 1]
 
     local content = SceneManager.widgetFromJsonFile("scenes/SettingsItemContentFrame.json")
-    local name = tolua.cast( content:getChildByName("Label_Name"), "Label" )
+    mCurrLanguage = tolua.cast( content:getChildByName("Label_Name"), "Label" )
     local button = tolua.cast( content:getChildByName("Panel_Button"), "Layout" )
     local arrow = content:getChildByName("Image_Arrow")
 
-    name:setText( selectedLanguage.itemName )
+    mCurrLanguage:setText( selectedLanguage.itemName )
     button:setBackGroundImage( Constants.COMMUNITY_IMAGE_PATH.."img-leaguebox.png" )
 
     contentContainer:addChild( content )
@@ -152,7 +153,10 @@ function initSettingsLanguage( contentContainer, settingsSubItem )
 
             local eventHandler = function( sender, eventType )
                 if eventType == TOUCH_EVENT_ENDED then
-                    EventManager:postEvent( language.event, i )
+                    local appLanguage = i - 1
+                    CCUserDefault:sharedUserDefault():setStringForKey( SettingsConfig.KEY_OF_LANGUAGE, tostring(appLanguage) )
+
+                    toggleLanguageDropDown( language.itemName )
                 end
             end
             button:addTouchEventListener( eventHandler )
@@ -230,24 +234,33 @@ function logoEventHandler( sender,eventType )
 end
 
 function toggleLanguageEventHandler( sender,eventType )
+    if eventType == TOUCH_EVENT_ENDED then
+        toggleLanguageDropDown()
+    end
+end
+
+function toggleLanguageDropDown( languageText )
     local contentContainer = tolua.cast( mWidget:getChildByName("ScrollView"), "ScrollView" )
     local contentHeight = contentContainer:getSize().height
     
-    if eventType == TOUCH_EVENT_ENDED then
-        if mDropdown:isEnabled() then
-            mDropdown:setSize( CCSize:new( mDropdown:getSize().width, 0 ) )
-            mDropdown:setEnabled( false )
-            contentHeight = contentHeight - mDropdown:getSize().height
-            
-        else
-            mDropdown:setSize( CCSize:new( mDropdown:getSize().width, mDropdownHeight ) )
-            mDropdown:setEnabled( true )
-            contentHeight = contentHeight + mDropdown:getSize().height
-            
-        end
+    if mDropdown:isEnabled() then
+        mDropdown:setSize( CCSize:new( mDropdown:getSize().width, 0 ) )
+        mDropdown:setEnabled( false )
+        contentHeight = contentHeight - mDropdown:getSize().height
+        
+    else
+        mDropdown:setSize( CCSize:new( mDropdown:getSize().width, mDropdownHeight ) )
+        mDropdown:setEnabled( true )
+        contentHeight = contentHeight + mDropdown:getSize().height
+        
     end
 
     contentContainer:setInnerContainerSize( CCSize:new( 0, contentHeight ) )
     local layout = tolua.cast( contentContainer, "Layout" )
     layout:requestDoLayout()
+
+    if languageText then
+        mCurrLanguage:setText( languageText )
+    end
 end
+

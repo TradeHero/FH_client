@@ -277,9 +277,8 @@ function initMatchList( matchList, leagueKey, bInit )
         end
     end ) )
 
-    if Constants.MINIGAME_PK_ENABLED then
-        seqArray:addObject( CCCallFunc:create( checkMiniGame ) )
-    end
+    seqArray:addObject( CCCallFunc:create( checkMiniGame ) )
+    
     mWidget:runAction( CCSequence:create( seqArray ) )
 end
 
@@ -297,9 +296,12 @@ end
 
 function checkMiniGame()
     -- check if popup should appear
-    local bMiniGameAppear = shouldShowMiniGame()
     local bFHCAppear = shouldShowFHC()
-
+    if Constants.MINIGAME_PK_ENABLED then
+        bMiniGameAppear = false
+    else
+        local bMiniGameAppear = shouldShowMiniGame()    
+    end
     if not bMiniGameAppear and not bFHCAppear then
         return
     end
