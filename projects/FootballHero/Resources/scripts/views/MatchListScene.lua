@@ -276,9 +276,8 @@ function initMatchList( matchList, leagueKey, bInit )
         end
     end ) )
 
-    if Constants.MINIGAME_PK_ENABLED then
-        seqArray:addObject( CCCallFunc:create( checkMiniGame ) )
-    end
+    seqArray:addObject( CCCallFunc:create( checkMiniGame ) )
+
     mWidget:runAction( CCSequence:create( seqArray ) )
 end
 
@@ -442,7 +441,6 @@ function shouldShowFHC()
     if stage ~= Constants.EVENT_FHC_STATUS_JOINED and stage ~= Constants.EVENT_FHC_STATUS_OPENED then
         bShouldShow = true
     end
-
     return bShouldShow
 end
 
