@@ -61,7 +61,7 @@ function initContent()
             contentHeight = contentHeight + header:getSize().height
 
             local title = tolua.cast( header:getChildByName("Label_Name"), "Label" )
-            title:setText( SettingsSubItem.Title )
+            title:setText( Constants.String.settings[SettingsSubItem["TitleKey"]] )
 
             contentHeight = contentHeight + initSettingsSubItem( contentContainer, SettingsSubItem )
         end
@@ -177,9 +177,8 @@ function initSettingsLanguage( contentContainer )
                 if eventType == TOUCH_EVENT_ENDED then
                     local appLanguage = language["id"]
                     CCUserDefault:sharedUserDefault():setStringForKey( SettingsConfig.KEY_OF_LANGUAGE, tostring(appLanguage) )
-                    EventManager:postEvent( Event.Do_Select_Language, { appLanguage } )
-
                     toggleLanguageDropDown( language["name"] )
+                    EventManager:postEvent( Event.Do_Select_Language, { appLanguage } )
                 end
             end
             button:addTouchEventListener( eventHandler )
@@ -211,7 +210,7 @@ function initSettingsOthers( contentContainer, settingsSubItem )
         local button = tolua.cast( content:getChildByName("Panel_Button"), "Layout" )
         local arrow = content:getChildByName("Image_Arrow")
 
-        name:setText( setting.itemName )
+        name:setText( Constants.String.settings[setting.itemName] )
 
         local eventHandler = function( sender, eventType )
             if eventType == TOUCH_EVENT_ENDED then
