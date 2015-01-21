@@ -9,7 +9,6 @@ local LanguagesConfig = require("scripts.config.Languages")
 
 function action( param )
 	SceneManager.clear()
-	CCTextureCache:sharedTextureCache():removeAllTextures()
 
 	local appLanguage = param[1]
 	CCLuaLog("appLanguage = "..appLanguage)
@@ -22,6 +21,10 @@ function action( param )
 	-- Reload the settings page.
 	local reloadHandler
 	local reloadFunc = function()
+		CCTextureCache:sharedTextureCache():removeAllTextures()
+		CCFileUtils:sharedFileUtils():purgeCachedEntries()
+		CCFileUtils:sharedFileUtils():setSearchPathToLocale( languageConfig["key"] )
+
 		local SettingsScene = require("scripts.views.SettingsScene")
 		if SettingsScene.isFrameShown() then
 			return

@@ -767,9 +767,10 @@ void CCFileUtils::removeAllPaths()
 void CCFileUtils::setSearchPathToLocale(const char *locale)
 {
     removeAllPaths();
-    m_searchPathArray.push_back(getWritablePath() + "local/" + locale);
-    m_searchPathArray.push_back(getWritablePath() + "local");
-    m_searchPathArray.push_back(getDefaultResRootPath() + locale);
+    m_searchPathArray.push_back(getWritablePath());
+    m_searchPathArray.push_back(getWritablePath() + "local/" + locale + "/");
+    m_searchPathArray.push_back(getWritablePath() + "local/");
+    m_searchPathArray.push_back(getDefaultResRootPath() + locale + "/");
     m_searchPathArray.push_back(getDefaultResRootPath());
 }
 
