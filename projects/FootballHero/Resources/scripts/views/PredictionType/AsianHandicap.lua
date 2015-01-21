@@ -56,6 +56,8 @@ function loadFrame( parent, matchInfo, marketInfo, finishCallback, bigBetStatus,
     local lbStake = tolua.cast( mWidget:getChildByName("Label_Stake"), "Label" )
     local vs = tolua.cast( mWidget:getChildByName("VS"), "Label" )
 
+    lbBalance:setText( Constants.String.match_prediction.balance )
+    lbStake:setText( Constants.String.match_prediction.stake )
     yesToWin:setText( Constants.String.match_prediction.stand_to_win )
     noToWin:setText( Constants.String.match_prediction.stand_to_win )
     balance:setText( Constants.String.match_prediction.balance )

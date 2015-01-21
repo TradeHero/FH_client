@@ -44,6 +44,15 @@ function initContent()
     local title = tolua.cast( mWidget:getChildByName("Label_Title"), "Label" )
     title:setText( Constants.String.settings.title )
     
+    local logout = tolua.cast( mWidget:getChildByName("Button_Logout"), "Button" )
+    logout:setTitleText( Constants.String.settings.logout )
+    local eventHandler = function( sender, eventType )
+        if eventType == TOUCH_EVENT_ENDED then
+            EventManager:postEvent( Event.Do_Log_Out )
+        end
+    end
+    logout:addTouchEventListener( eventHandler )
+
 	local contentContainer = tolua.cast( mWidget:getChildByName("ScrollView"), "ScrollView" )
     contentContainer:removeAllChildrenWithCleanup( true )
 
@@ -140,7 +149,7 @@ end
 function initSettingsLanguage( contentContainer )
     local contentHeight = 0
 
-    local appLanguage = CCUserDefault:sharedUserDefault():getStringForKey( SettingsConfig.KEY_OF_LANGUAGE )
+    local appLanguage = CCUserDefault:sharedUserDefault():getStringForKey( LanguagesConfig.KEY_OF_LANGUAGE )
     local selectedLanguageConfig = LanguagesConfig.getLanguageConfigById( tonumber( appLanguage ) )
 
     local content = SceneManager.widgetFromJsonFile("scenes/SettingsItemContentFrame.json")
@@ -176,7 +185,7 @@ function initSettingsLanguage( contentContainer )
             local eventHandler = function( sender, eventType )
                 if eventType == TOUCH_EVENT_ENDED then
                     local appLanguage = language["id"]
-                    CCUserDefault:sharedUserDefault():setStringForKey( SettingsConfig.KEY_OF_LANGUAGE, tostring(appLanguage) )
+                    CCUserDefault:sharedUserDefault():setStringForKey( LanguagesConfig.KEY_OF_LANGUAGE, tostring(appLanguage) )
                     toggleLanguageDropDown( language["name"] )
                     EventManager:postEvent( Event.Do_Select_Language, { appLanguage } )
                 end

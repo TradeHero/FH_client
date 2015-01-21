@@ -88,8 +88,9 @@ function initCompetitionScene( competitionFrame, compList, miniGame )
 
     local btnNew = newCompFrame:getChildByName("Button_New")
     btnNew:addTouchEventListener( createEventHandler )
-    local btnJoin = newCompFrame:getChildByName("Button_Join")
+    local btnJoin = tolua.cast( newCompFrame:getChildByName("Button_Join"), "Button" )
     btnJoin:addTouchEventListener( joinEventHandler )
+    btnJoin:setTitleText( Constants.String.button.join )
 
     local joinedHeaderBG = joinedCompFrame:getChildByName( "Image_BG_Joined_Comps" )
     contentHeight = contentHeight + joinedHeaderBG:getSize().height
@@ -330,8 +331,10 @@ function initSpecialCompetitions( parent, compList )
                     EventManager:postEvent( Event.Do_Join_Competition, { competition["JoinToken"] } )
                 end
             end
-            local joinBtn = bannerFrame:getChildByName( "Button_Join" )
+            local joinBtn = tolua.cast( bannerFrame:getChildByName( "Button_Join" ), "Button" )
             joinBtn:addTouchEventListener( joinEventHandler )
+            joinBtn:setTitleText( Constants.String.button.join )
+
             parent:addChild( bannerFrame )
             contentHeight = contentHeight + bannerFrame:getSize().height
         end

@@ -29,6 +29,7 @@ local function main()
 
     cclog("Game start.")
 
+    setDateLocale()
     --local st = os.clock()
     --initPackageLoader( false )
     --CCLuaLog( "initPackageLoader took: "..( os.clock() - st ) )
@@ -46,6 +47,15 @@ local function main()
 
     --eventManager:postEvent( event.Export_Unlocalized_String )
     --eventManager:postEvent( event.Import_Localized_String )
+end
+
+function setDateLocale()
+
+    local LanguagesConfig = require("scripts.config.Languages")
+    local appLanguage = tonumber( CCUserDefault:sharedUserDefault():getStringForKey( LanguagesConfig.KEY_OF_LANGUAGE ) )
+    local selectedLanguage = LanguagesConfig.getLanguageConfigById( appLanguage )
+
+    os.setlocale( selectedLanguage["locale"], "time" )
 end
 
 function initPackageLoader( decrypt )

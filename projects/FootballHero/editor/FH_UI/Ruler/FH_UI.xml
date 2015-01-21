@@ -49,6 +49,10 @@
     <GuidesList />
   </GuidesProject>
   <GuidesProject>
+    <Project>MyPicksEmptyFrame</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
     <Project>MyPicksHome</Project>
     <GuidesList />
   </GuidesProject>
@@ -214,6 +218,10 @@
   </GuidesProject>
   <GuidesProject>
     <Project>PushNotification</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>PushNotificationMessage</Project>
     <GuidesList />
   </GuidesProject>
   <GuidesProject>
