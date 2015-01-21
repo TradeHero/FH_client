@@ -11,9 +11,9 @@ LEADERBOARD_TYPE_WP = 2
 LEADERBOARD_TYPE_PROFIT = 3
 
 LeaderboardType = {
-	{ ["displayName"] = Constants.String.top_performers, ["logo"] = Constants.LEADERBOARD_IMAGE_PATH.."top-performers.png", ["request"] = RequestUtils.GET_MAIN_LEADERBOARD_REST_CALL },
+	{ ["displayNameKey"] = "top_performers", ["logo"] = Constants.LEADERBOARD_IMAGE_PATH.."top-performers.png", ["request"] = RequestUtils.GET_MAIN_LEADERBOARD_REST_CALL },
 	
-	{ ["displayName"] = Constants.String.friends, ["logo"] = Constants.LEADERBOARD_IMAGE_PATH.."friends.png", ["request"] = RequestUtils.GET_FRIENDS_LEADERBOARD_REST_CALL },
+	{ ["displayNameKey"] = "friends", ["logo"] = Constants.LEADERBOARD_IMAGE_PATH.."friends.png", ["request"] = RequestUtils.GET_FRIENDS_LEADERBOARD_REST_CALL },
 	
 --[[
 	{ ["displayName"] = "Followers", ["logo"] = Constants.LEADERBOARD_IMAGE_PATH.."followers.png" },
@@ -27,7 +27,7 @@ LeaderboardType = {
 }
 
 LeaderboardSubType = {
-	{ ["sortType"] = 1, ["dataColumnId"] = "Roi", ["title"] = Constants.String.leaderboard.gain_per_prediction_title, ["description"] = Constants.String.leaderboard.gain_per_prediction_desc, },
-	{ ["sortType"] = 2, ["dataColumnId"] = "WinPercentage", ["title"] = Constants.String.leaderboard.win_ratio_title, ["description"] = Constants.String.leaderboard.win_ratio_desc, },
-	{ ["sortType"] = 3, ["dataColumnId"] = "Profit", ["title"] = Constants.String.leaderboard.high_score_title, ["description"] = Constants.String.leaderboard.high_score_desc, },
+	{ ["sortType"] = 1, ["dataColumnId"] = "Roi", ["titleKey"] = "gain_per_prediction_title", ["descriptionKey"] = "gain_per_prediction_desc", },
+	{ ["sortType"] = 2, ["dataColumnId"] = "WinPercentage", ["titleKey"] = "win_ratio_title", ["descriptionKey"] = "win_ratio_desc", },
+	{ ["sortType"] = 3, ["dataColumnId"] = "Profit", ["titleKey"] = "high_score_title", ["descriptionKey"] = "high_score_desc", },
 }

@@ -86,7 +86,7 @@ function initMatchCenterTab()
     for i = 1, table.getn( MatchCenterConfig.MatchCenterType ) do
         
         local tab = tolua.cast( mWidget:getChildByName( MatchCenterConfig.MatchCenterType[i]["id"] ), "Button" )
-        tab:setTitleText( MatchCenterConfig.MatchCenterType[i]["displayName"] )
+        tab:setTitleText( Constants.String.match_center[MatchCenterConfig.MatchCenterType[i]["displayNameKey"]] )
 
         local isActive = mTabID == i
 

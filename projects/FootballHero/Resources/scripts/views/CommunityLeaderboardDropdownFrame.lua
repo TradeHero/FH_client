@@ -2,6 +2,7 @@ module(..., package.seeall)
 
 local SceneManager = require("scripts.SceneManager")
 local LeaderboardConfig = require("scripts.config.Leaderboard")
+local Constants = require("scripts.Constants")
 
 
 local mListWidget
@@ -34,7 +35,7 @@ function helperInitLeagueList()
         content:addTouchEventListener( eventHandler )
 
         local name = tolua.cast( content:getChildByName("Label_Name"), "Label" )
-        name:setText( LeaderboardConfig.LeaderboardSubType[i]["title"] )
+        name:setText( Constants.String.leaderboard[LeaderboardConfig.LeaderboardSubType[i]["titleKey"]] )
 
         contentHeight = contentHeight + content:getSize().height
         mChildIndex = mChildIndex + 1

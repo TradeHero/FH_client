@@ -69,7 +69,7 @@ end
 
 function initTitles()
     local title = tolua.cast( mWidget:getChildByName("Label_Leaderboard_Type"), "Label" )
-    title:setText( LeaderboardConfig.LeaderboardType[mLeaderboardId]["displayName"] )
+    title:setText( Constants.String[LeaderboardConfig.LeaderboardType[mLeaderboardId]["displayNameKey"]] )
 
     local minTitle = tolua.cast( mWidget:getChildByName( "Label_Min_Prediction" ), "Label" )
     minTitle:setText( string.format( Constants.String.leaderboard.min_prediction, Constants.FILTER_MIN_PREDICTION ) )
@@ -134,7 +134,7 @@ function initTypeList()
 
     local initCurrentType = function( typeKey )
         local typeName = tolua.cast( mWidget:getChildByName("Label_Sort_Type"), "Label" )
-        typeName:setText( mSubType["title"] )
+        typeName:setText( Constants.String.leaderboard[mSubType["titleKey"]] )
     end
 
     local typeSelectedCallback = function( typeKey )
@@ -270,7 +270,7 @@ function initLeaderboardContent( i, content, info )
         name:setText( info["DisplayName"] )
     end
 
-    score:setText( string.format( mSubType["description"], info[mSubType["dataColumnId"]], info["NumberOfCoupons"] ) )
+    score:setText( string.format( Constants.String.leaderboard[mSubType["descriptionKey"]], info[mSubType["dataColumnId"]], info["NumberOfCoupons"] ) )
     if info[mSubType["dataColumnId"]] < 0 then
         score:setColor( ccc3( 240, 75, 79 ) )
     else

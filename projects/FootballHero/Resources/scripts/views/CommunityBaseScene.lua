@@ -73,7 +73,7 @@ end
 
 function initCommunityTab( tabInfo, tabId )
     local tab = tolua.cast( mWidget:getChildByName( tabInfo["id"] ), "Button" )
-    tab:setTitleText( tabInfo["displayName"] )
+    tab:setTitleText( Constants.String.community[tabInfo["displayNameKey"]] )
 
     local isActive = mTabID == tabId
 

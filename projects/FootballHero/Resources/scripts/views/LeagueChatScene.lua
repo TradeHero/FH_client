@@ -47,7 +47,7 @@ end
 
 function initTitle()    
     local title = tolua.cast( mWidget:getChildByName("Label_Title"), "Label" )
-    title:setText( LeagueChatConfig[mLeagueChatId]["displayName"] )
+    title:setText( Constants.String.league_chat[LeagueChatConfig[mLeagueChatId]["displayNameKey"]] )
 
     local logo = tolua.cast( mWidget:getChildByName("Image_Title"), "ImageView" )
     logo:loadTexture( LeagueChatConfig[mLeagueChatId]["logo"] ) 

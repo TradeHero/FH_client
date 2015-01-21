@@ -47,7 +47,7 @@ function initContent()
         local button = mWidget:getChildByName( LeagueChatConfig[i]["buttonName"] )
         local label = tolua.cast( mWidget:getChildByName( LeagueChatConfig[i]["labelName"] ), "Label" )
 
-        label:setText( LeagueChatConfig[i]["displayName"] )
+        label:setText( Constants.String.league_chat[LeagueChatConfig[i]["displayNameKey"]] )
         --button:loadTexture( LeagueChatConfig[i]["logo"] )
 
         local counter = tolua.cast( button:getChildByName( "Button_Counter" ), "Button" )
