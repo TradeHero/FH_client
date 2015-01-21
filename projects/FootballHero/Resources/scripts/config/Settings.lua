@@ -8,7 +8,6 @@ SETTING_TYPE_FAVORITE_TEAM = 2
 SETTING_TYPE_LANGUAGE = 3
 SETTING_TYPE_OTHERS = 4
 
-KEY_OF_LANGUAGE = "app-language"
 
 SettingsItem = {
 	{ ["SettingType"] = SETTING_TYPE_INFO, ["TitleKey"] = "user_info", ["Enabled"] = true, ["Items"] = 

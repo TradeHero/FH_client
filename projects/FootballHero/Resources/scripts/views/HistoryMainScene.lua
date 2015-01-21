@@ -68,7 +68,7 @@ function loadFrame( userId, competitionId, couponHistory, additionalParam, count
     mWidget:registerScriptHandler( EnterOrExit )
     SceneManager.clearNAddWidget( mWidget )
 
-    initFliter( mCountryFilter )
+    initFilter( mCountryFilter )
     initContent( couponHistory )
 
     Navigator.loadFrame( mWidget )
@@ -97,7 +97,7 @@ function refreshFrame( userId, competitionId, couponHistory, additionalParam, co
 
     mStep = 1
     mHasMoreToLoad = false
-    initFliter( mCountryFilter )
+    initFilter( mCountryFilter )
     initContent( couponHistory )
 end
 
@@ -121,12 +121,15 @@ function isSelf()
     end
 end
 
-function initFliter( countryFilter )
+function initFilter( countryFilter )
     local filterPanel = mWidget:getChildByName("Panel_League_Select")
     local filterExpend = filterPanel:getChildByName( "Button_FilterExpand" )
     local mask = filterPanel:getChildByName("Panel_Mask")
     local filterList = tolua.cast( filterPanel:getChildByName("ScrollView_Filter"), "ScrollView" )
     local logo = tolua.cast( filterPanel:getChildByName("countryLogo"), "ImageView" )
+    local league = tolua.cast( filterPanel:getChildByName("Label_League"), "Label" )
+
+    league:setText( Constants.String.leaderboard.stats_league )
 
     filterList:setEnabled( false )
     mask:setEnabled( false )
@@ -239,6 +242,7 @@ function initContent( couponHistory )
 
     lb_stat_win:setText( Constants.String.leaderboard.stats_win )
     lb_stat_lose:setText( Constants.String.leaderboard.stats_lose )
+    print( "win rate = "..Constants.String.leaderboard.stats_win_rate)
     lb_stat_win_percent:setText( Constants.String.leaderboard.stats_win_rate )
     lb_stat_gain_percent:setText( Constants.String.leaderboard.stats_gain_rate )
     lb_stat_last_10:setText( Constants.String.leaderboard.stats_last_ten )
@@ -308,7 +312,9 @@ function initContent( couponHistory )
             
             local openPredictionContent = content:getChildByName( "Panel_OpenPrediction" )
             local CTA = tolua.cast( openPredictionContent:getChildByName("Label_CTA"), "Label" )
-            local button = openPredictionContent:getChildByName("Button_Create")
+            local button = tolua.cast( openPredictionContent:getChildByName("Button_Create"), "Button" )
+
+            button:setTitleText( Constants.String.button.predict )
 
             if isSelf() then
                 CTA:setText( Constants.String.history.no_open_prediction )

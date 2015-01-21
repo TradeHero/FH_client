@@ -49,6 +49,10 @@
     <GuidesList />
   </GuidesProject>
   <GuidesProject>
+    <Project>MyPicksEmptyFrame</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
     <Project>MyPicksHome</Project>
     <GuidesList />
   </GuidesProject>
@@ -214,6 +218,10 @@
   </GuidesProject>
   <GuidesProject>
     <Project>PushNotification</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>PushNotificationMessage</Project>
     <GuidesList />
   </GuidesProject>
   <GuidesProject>
@@ -390,6 +398,22 @@
   </GuidesProject>
   <GuidesProject>
     <Project>SpinEmailCollect</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>SettingsItemContentFrame</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>SettingsItemHeaderFrame</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>SettingsUserInformationFrame</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>SettingsItemDropdownFrame</Project>
     <GuidesList />
   </GuidesProject>
 </ArrayOfGuidesProject>
