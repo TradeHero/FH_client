@@ -91,6 +91,7 @@ EventNameList =
     "Do_Make_Discussion_Post",
     "Do_Like_Discussion_Post",
     "Do_Share_Discussion_Post",
+    "Do_Select_Language",
 
     "Show_Info",
     "Show_Error_Message",
@@ -141,6 +142,7 @@ EventNameDosenotTrackList =
     "Do_Spin_Payout",
     "Do_Make_Discussion_Post",
     "Do_Like_Discussion_Post",
+    "Do_Select_Language",
 
     "Check_Start_Tutorial",
     "Check_File_Version",

@@ -22,25 +22,7 @@ SettingsItem = {
 			--{ ["itemName"] = Constants.String.settings.choose_fav_team, ["event"] = Event.Update_Favorite_Team },
 		},
 	},
-	{ ["SettingType"] = SETTING_TYPE_LANGUAGE, ["Title"] = Constants.String.settings.select_language, ["Enabled"] = true, ["Items"] = 
-		{
-			{ ["itemName"] = Constants.String.languages.english, ["event"] = Event.Do_Select_Language },
-			{ ["itemName"] = Constants.String.languages.chinese, ["event"] = Event.Do_Select_Language },
-			nil, -- kLanguageFrench
-			nil, -- kLanguageItalian
-			nil, -- kLanguageGerman
-			nil, -- kLanguageSpanish
-			nil, -- kLanguageDutch
-			nil, -- kLanguageRussian
-			nil, -- kLanguageKorean
-			nil, -- kLanguageJapanese
-			nil, -- kLanguageHungarian
-			nil, -- kLanguagePortuguese
-			nil, -- kLanguageArabic
-			{ ["itemName"] = Constants.String.languages.indonesian, ["event"] = Event.Do_Select_Language },
-
-		},
-	},
+	{ ["SettingType"] = SETTING_TYPE_LANGUAGE, ["Title"] = Constants.String.settings.select_language, ["Enabled"] = true },
 	{ ["SettingType"] = SETTING_TYPE_OTHERS, ["Title"] = Constants.String.settings.others, ["Enabled"] = true, ["Items"] = 
 		{
 			{ ["itemName"] = Constants.String.settings.push_notification, ["event"] = Event.Enter_Push_Notification, },
@@ -54,21 +36,4 @@ SettingsItem = {
 	},
 
 	
-}
-
-LanguageType = {
-	["kLanguageEnglish"] = 0,
-    ["kLanguageChinese"] = 1,
-    ["kLanguageFrench"] = 2,
-    ["kLanguageItalian"] = 3,
-    ["kLanguageGerman"] = 4,
-    ["kLanguageSpanish"] = 5,
-    ["kLanguageDutch"] = 6,
-    ["kLanguageRussian"] = 7,
-    ["kLanguageKorean"] = 8,
-    ["kLanguageJapanese"] = 9,
-    ["kLanguageHungarian"] = 10,
-    ["kLanguagePortuguese"] = 11,
-    ["kLanguageArabic"] = 12,
-    ["kLanguageBahasa"] = 13,
 }

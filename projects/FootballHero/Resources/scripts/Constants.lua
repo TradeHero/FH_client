@@ -121,6 +121,12 @@ STATUS_SELECTED_THIRD = 4
 
 local mClientVersion = ""
 
+function setLanguage( file )
+	CCLuaLog("File = "..file)
+	local LocalizedString = require ( file )
+	String = LocalizedString.Strings
+end
+
 function getClientVersion()
 	if mClientVersion == "" then
 		mClientVersion = FileUtils.readStringFromFile( "version" )

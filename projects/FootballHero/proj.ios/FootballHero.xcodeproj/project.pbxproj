@@ -335,6 +335,7 @@
 		73846DDF1A6E6E5A001B4EF1 /* ar in Resources */ = {isa = PBXBuildFile; fileRef = 73846DDC1A6E6E5A001B4EF1 /* ar */; };
 		73846DE01A6E6E5A001B4EF1 /* th in Resources */ = {isa = PBXBuildFile; fileRef = 73846DDD1A6E6E5A001B4EF1 /* th */; };
 		73846DE11A6E6E5A001B4EF1 /* tr in Resources */ = {isa = PBXBuildFile; fileRef = 73846DDE1A6E6E5A001B4EF1 /* tr */; };
+		73846DE51A6F8269001B4EF1 /* en in Resources */ = {isa = PBXBuildFile; fileRef = 73846DE41A6F8269001B4EF1 /* en */; };
 		7387400C19FE2A63009AE602 /* scripts in Resources */ = {isa = PBXBuildFile; fileRef = 7387400B19FE2A63009AE602 /* scripts */; };
 		7388C04118F4E2FF00CF667C /* HttpRequestForLua.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7388C03F18F4E2FF00CF667C /* HttpRequestForLua.cpp */; };
 		738BA12A193D7FD2008A74F6 /* DES56.lua in Resources */ = {isa = PBXBuildFile; fileRef = 738BA129193D7FD2008A74F6 /* DES56.lua */; };
@@ -1053,6 +1054,7 @@
 		73846DDC1A6E6E5A001B4EF1 /* ar */ = {isa = PBXFileReference; lastKnownFileType = folder; path = ar; sourceTree = "<group>"; };
 		73846DDD1A6E6E5A001B4EF1 /* th */ = {isa = PBXFileReference; lastKnownFileType = folder; path = th; sourceTree = "<group>"; };
 		73846DDE1A6E6E5A001B4EF1 /* tr */ = {isa = PBXFileReference; lastKnownFileType = folder; path = tr; sourceTree = "<group>"; };
+		73846DE41A6F8269001B4EF1 /* en */ = {isa = PBXFileReference; lastKnownFileType = folder; path = en; sourceTree = "<group>"; };
 		7387400B19FE2A63009AE602 /* scripts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = scripts; sourceTree = "<group>"; };
 		7388C03F18F4E2FF00CF667C /* HttpRequestForLua.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HttpRequestForLua.cpp; sourceTree = "<group>"; };
 		7388C04018F4E2FF00CF667C /* HttpRequestForLua.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpRequestForLua.h; sourceTree = "<group>"; };
@@ -2851,6 +2853,7 @@
 		F293BC4615EB859D00256477 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				73846DE41A6F8269001B4EF1 /* en */,
 				73846DDC1A6E6E5A001B4EF1 /* ar */,
 				73846DDD1A6E6E5A001B4EF1 /* th */,
 				73846DDE1A6E6E5A001B4EF1 /* tr */,
@@ -3020,6 +3023,7 @@
 				15C1569D1683138E00D239F2 /* Icon-114.png in Resources */,
 				73846DDF1A6E6E5A001B4EF1 /* ar in Resources */,
 				15C1569E1683138E00D239F2 /* Icon-144.png in Resources */,
+				73846DE51A6F8269001B4EF1 /* en in Resources */,
 				73846DE01A6E6E5A001B4EF1 /* th in Resources */,
 				738BA12A193D7FD2008A74F6 /* DES56.lua in Resources */,
 				730D984618DC4317000CA5F9 /* config in Resources */,

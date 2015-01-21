@@ -1,165 +1,84 @@
-league_chat.feedback	Feedback & Comments	反馈与建议
-league_chat.spanish	Spanish League	西班牙联赛
-league_chat.others	Other Competitions	其他比赛
-league_chat.italian	Italian League	意大利联赛
-league_chat.facebook	Like us on Facebook	在Facebook上给我们点个赞
-league_chat.uefa	Uefa Leagues	欧洲足协赛事
-league_chat.german	German League	德国联赛
-league_chat.english	English League	英格兰联赛
-share_type_SMS	SMS	短信分享
-push_notification.receive	You will receive:	你会收到:
-push_notification.prediction_summary	. Predictions' summary	预测汇总
-push_notification.match_result	. Match results	比赛规则
-push_notification.question_competition	Do you want to receive push notification for this competition?	是否开启本场比赛的信息推送
-push_notification.question_prediction	Do you want to receive push notification for all your predictions?	是否开启所有预测的信息推送
-push_notification.points_won	. Points won or lost	得失分汇总
-push_notification.new_participant	. New participant alert	新加入用户通知
-enter_email	Please enter your email address.	请输入邮箱地址
-match_center.played	Played %d out of %d	已押 %d 共 %d
-match_center.just_now	Just Now	刚刚发布
-match_center.prediction_made	Prediction made	已预测
-match_center.title_meetings	Last Meetings	历史交战记录
+match_center.played	Played %d out of %d	Telah bermain %d dari %d
+match_center.just_now	Just Now	Baru Saja
+match_center.prediction_made	Prediction made	Prediksi telah dibuat
+match_center.title_meetings	Last Meetings	Pertemuan Terakhir
 match_center.share_title		
-match_center.less	less	合并内容
-match_center.make_prediction	Make a prediction!	点击开始预测！
+match_center.less	less	lebih sedikit
+match_center.make_prediction	Make a prediction!	Buat prediksi!
 match_center.share_body		
-match_center.write_discussion	Write a new discussion...	创建新的话题
-match_center.load_comments	Load more comments...	加载更多评论
-match_center.write_comment	Write a comment...	评论一下
-match_center.title	Match Center	比赛中心
-match_center.time_hours	%d hrs	%d 小时
-match_center.title_discussion	Discussion	讨论
-match_center.more	More	更多内容
-match_center.time_days	%d days	%d 天
-match_center.time_minutes	%d mins	%d 分
-button.ok	OK	是
-button.cancel	Cancel	取消
-button.yes	Yes	是
-button.register	Register	注册
-button.enable	Enable	允许
-button.rate_now	Rate now	去给Football评分！
-button.create	Create!	创建！
-button.forget_password	Forgot Password?	忘记密码？
-button.confirm	Confirm!	确认！
-button.sign_in	Sign In	登陆
-button.share	Share	分享
-button.join	Join	加入
-button.play_now	Play Now!	开始游戏！
-button.no	No	否
-button.no_thanks	No, thanks.	否
-button.go	Go!	开始！
-share_type_facebook	Facebook	Facebook
-today	Today	今日
-spinWheel.ticket_usage	for the latest lucky draw.	最新兑换券抽取
-spinWheel.winners	Past Winners	胜者记录
-spinWheel.collect_email_you_won	You have won	你赢得了
-spinWheel.wheel_title	Spin-the-Wheel	超级转转转
-spinWheel.ticket_balance_2	%d tickets	%d 张兑换券
-spinWheel.win_ticket_left	left till draw.	剩余
-spinWheel.spin_daily	One spin daily	每日一次转盘次数
-spinWheel.balance_title	Balance	我的积分
-spinWheel.wheel_sub_title	Spin-the-Wheel!	超级转转转！
-spinWheel.win_ticket_prize	Luck Draw Ticket	幸运兑换券
-spinWheel.share_description	Share with your friends and get an additiaonal spin.	分享给朋友获取更多转盘次数！
-spinWheel.spin_bonus	BONUS SPIN	奖励旋转次数
-spinWheel.collect_email_towards_wallet	towards your account balance	根据账户余额
-spinWheel.money_balance	US$ %s Amazon Gift Card	%s 美元亚马逊礼品卡
-spinWheel.collect_email_prize	1 US Dollar	1 美元
-spinWheel.won	WON	胜
-spinWheel.collect_email_label_title	Claim Prize	奖品发放
-spinWheel.ticket_balance_1	%d ticket	%d 张兑换券
-spinWheel.ticket_you_have	You have	你拥有
-spinWheel.leave_message	Come back tomorrow for another spin.	明天可以拥有更多转盘次数！
-spinWheel.money_payout_limit	Minimum US$25.00 for withdrawal.	提现的最少金额量为25美元
-spinWheel.money_payout_success_notification	Your request has been processed. Please allow 2 - 4 weeks to receive the gift card via your email address.	请求已处理！你会在接下来的2至4周内通过邮件的方式收到礼品卡！
-spinWheel.claimVirtualPrize	Congratulations! You have won a %s. Please contact our support.	恭喜！您赢得了一个 %s. 请联系客户服务邮箱！
-spinWheel.no_one_won	No one has won any prize yet.	暂无玩家获奖
-spinWheel.come_back_in	Come back in:	下一次游戏时间：
-spinWheel.collect_email_description	Please submit a valid email address. Fake email addresses will be disqualified from prizes.	请提交正确的邮箱地址，不合法的邮箱地址会导致您失去获奖机会。
-facebook_signin	Sign in with Facebook	Facebook账号登陆
-marketing_message_3	Who will rise to the top?	谁会成为预测第一人？
-share_type_title	Share your competition using...	通过以下方式分享比赛给你的朋友
-share_type_email	Email	邮件分享
-serverError.COMPETITION_6	No stats data for this year/month/week combination found.	日期数据未找到！
-serverError.COUPON_3	No predictions on coupon. Cannot place empty coupon.	No predictions on coupon. Cannot place empty coupon.
-serverError.FACEBOOK_2	Oops! You are not connected to Facebook.	您还未连接到Facebook！
-serverError.DEFAULT	Oops! Please try again...	抱歉请重试！
-serverError.COUPON_1	Stake not allowed.	押分数量不合法！
-serverError.LEADERBOARD_2	Oops! Please try again.	抱歉请重试！
-serverError.LEADERBOARD_1	Oops! Invalid leaderboard. Please try again.	排行榜不合法，请重试！
-serverError.COUNTRY_1	Oops! Try a different country.	请选择其他的国家！
-serverError.COMPETITION_5	User is not enrolled in this competition.	用户未加入当前比赛！
-serverError.COMPETITION_3	Join token does not exist.	邀请码不存在！
-serverError.COMPETITION_2	The competition does not exist.	比赛不存在！
-serverError.FACEBOOK_4	Oops! This Facebook account is already in use.	该Facebook账号已经在使用！
-serverError.WHEEL_3	Could not find a prize.	未找到奖励！
-serverError.GENERAL_1	Oops! We're sorry. Please try again.	抱歉请重试！
-serverError.SIGNIN_2	Incorrect username or password.	用户名/密码错误！
-serverError.FACEBOOK_3	Oops! This Facebook account is already in use.	该Facebook账号已经在使用！
-serverError.DISCUSSION_3	Oops! Please try again.	抱歉请重试！
-serverError.COMPETITION_7	You cannot join a competition that is in preview mode.	不能加入到预览模式的比赛中！
-serverError.GENERAL_2	Oops! Your User ID is invalid.	用户ID不合法！
-serverError.WHEEL_6	The requested amount is bigger than your balance.	请求数量大于可以用数额！
-serverError.WHEEL_5	Requested amount is lower than minimum payout.	请求数量小于最小数额！
-serverError.COUPON_4	One or more predictions were already played before.	已经参与过一场或一场以上的预测！
-serverError.SIGNIN_1	Oops! Your email is invaild.	您的邮箱地址无效！
-serverError.VERSION_2	New features added! Please update FootballHero in the app store.	请下载新版本的FootballHero获取新特性！
-serverError.COMPETITION_4	You are already enrolled in this competition.	您已加入当前的比赛！
-serverError.WHEEL_4	User has never spinned the wheel.	用户还未使用过转盘次数
-serverError.FACEBOOK_1	Oops! There seems to be an error. Please try again.	软件发生了错误！请重试！
-serverError.WHEEL_1	Your last spin was less than 24 hours ago.	距离上一次使用转盘次数时间小于一天！
-serverError.LEAGUE_1	Oops! Try a different league.	请选择其他的联赛！
-serverError.WHEEL_2	Price probabilities don't add up.	Price probabilities don't add up.
-serverError.DISCUSSION_2	Oops! Please try again.	请重试！
-serverError.DISCUSSION_1	Oops! Please try again.	请重试！
-serverError.SIGNIN_4	Email and/or password cannot be empty.	邮箱/密码不能为空
-serverError.COUPON_2	Too many predictions on coupon.	Too many predictions on coupon.
-serverError.FACEBOOK_5	Oops! We're sorry. Please try again later.	抱歉请重试！
-serverError.COMPETITION_8	Share Bonus already claimed.	分享奖励已发放！
-serverError.COUPON_5	Last big bet was less than 12 hours ago.	距离上一次使用三倍押分时间小于12小时！
-serverError.COMPETITION_1	You already created a competition with that name before.	您已经创建过相同名字的比赛了
-serverError.VERSION_1	Please update latest version in the app store.	请在app store中下载最新版本的软件
-serverError.SIGNIN_3	Email address does not exist.	邮箱不存在
-terms_agree	By Signing in, you are indicating that you have read and agree to FOOTBALL HERO'S	登陆即表示您同意FootballHero的相关服务条款
-marketing_message_1	Congratulations on making your first prediction!	恭喜！你刚刚完成了你的第一场预测！
-football_hero	FootballHero	FootballHero
-month.1	January	一月
-month.2	February	二月
-month.3	March	三月
-month.4	April	四月
-month.5	May	五月
-month.6	June	六月
-month.7	July	七月
-month.8	August	八月
-month.9	September	九月
-month.10	October	十月
-month.11	November	十一月
-month.12	December	十二月
-chat_room_title	Select Chatroom	选择聊天室
-minigame.friend_help	friend(s) have helped you	已经帮助过你的朋友
-minigame.ask_more_friends	Ask more friends!	寻求更多的帮助！
-minigame.goal_to_win	%d goals remaining to win	还需要 %d 个进球
-minigame.winners	Past Winners	胜者记录
-minigame.ask_friends_help	Ask friends to help!	找朋友来帮忙！
-minigame.title	Shoot-to-Win Challenge	进球赢奖品-挑战活动
-minigame.shoot_to_win_won	You have won!	你赢了！
-minigame.rules	Rules	规则说明
-minigame.no_one_won	No one has won an Samsung Note Edge yet.	暂无玩家赢得 Samsung Note Edge
-minigame.call_to_action	No one has scored any goals for you yet.	暂未有人帮你获得过进球
-minigame.helped_to_score	has helped you to score %d goals	已经帮助你获得了 %d 个进球
-minigame.iPhone6_winner	Samsung Note Edge Winner	Samsung Note Edge 获得者
-minigame.failed_to_score	failed to score any goals	未能获得任何进球
-minigame.current_score	Current Score:	当前进球数:
-marketing_message_2	Now challenge your friends in your own mini-competition!	现在邀请朋友加入到你创建的预测游戏中来吧
-email_confirm	E-mail Address Confirm	确认邮箱地址
-match_prediction.share	Share with your friends	分享给好友
-match_prediction.hint_tap	Tap to make a prediction!	点击开始预测
-match_prediction.win	Win	胜
-match_prediction.team_to_win	Which team will win?	哪支球队会获得胜利
-match_prediction.stand_to_win	Stand to Win	押分此项
-match_prediction.will_total_goals	Will total goals be %d or more?	总进球数是否会达到 %d 球或更多?
-match_prediction.balance	Balance	可用分数
-match_prediction.prediction_summary	Prediction Summary	预测汇总
-match_prediction.facebook	Facebook	Facebook
-match_prediction.will_win_by	Will %s win by %d goals or more?	%s 会净胜 %d 球或更多吗?
-match_prediction.stake	Stake	押分
+match_center.write_discussion	Write a new discussion...	Tulis diskusi baru…
+match_center.load_comments	Load more comments...	Lihat komentar yang lain…
+match_center.write_comment	Write a comment...	Tulis komentar…
+match_center.title	Match Center	Pusat Pertandingan
+match_center.time_hours	%d hrs	%d jam
+match_center.title_discussion	Discussion	Diskusi
+match_center.more	More	Lebih banyak
+match_center.time_days	%d days	%d hari
+match_center.time_minutes	%d mins	%d menit
+spinWheel.ticket_usage	for the latest lucky draw.	untuk lucky draw yang terbaru.
+spinWheel.winners	Past Winners	Pemenang yang lalu
+spinWheel.collect_email_you_won	You have won	Anda telah menang
+spinWheel.wheel_title	Spin-the-Wheel	Spin-the-Wheel
+spinWheel.ticket_balance_2	%d tickets	%d tiket
+spinWheel.win_ticket_left	left till draw.	yang tersisa sebelum pengundian.
+spinWheel.spin_daily	One spin daily	Satu putaran per hari
+spinWheel.balance_title	Balance	Saldo
+spinWheel.wheel_sub_title	Spin-the-Wheel!	Spin-the-Wheel!
+spinWheel.win_ticket_prize	Luck Draw Ticket	Tiket Lucky Draw
+spinWheel.share_description	Share with your friends and get an additiaonal spin.	Bagikan ke teman Anda dan dapatkan putaran tambahan.
+spinWheel.spin_bonus	BONUS SPIN	BONUS PUTARAN
+spinWheel.collect_email_towards_wallet	towards your account balance	terhadap saldo rekening Anda
+spinWheel.money_balance	US$ %s Amazon Gift Card	US$ %d Amazon Gift Card
+spinWheel.collect_email_prize	1 US Dollar	1 Dolar US
+spinWheel.won	WON	Menang
+spinWheel.collect_email_label_title	Claim Prize	Klaim Hadiah
+spinWheel.ticket_balance_1	%d ticket	%d tiket
+spinWheel.ticket_you_have	You have	Anda memiliki
+spinWheel.leave_message	Come back tomorrow for another spin.	Kembali lagi besok untuk putaran yang baru.
+spinWheel.money_payout_limit	Minimum US$25.00 for withdrawal.	Minimal US$25.00 untuk penarikan.
+spinWheel.money_payout_success_notification	Your request has been processed. Please allow 2 - 4 weeks to receive the gift card via your email address.	Permintaan Anda sedang diproses. Harap menunggu 2-4 minggu untuk menerima gift card melalui alamat email Anda.
+spinWheel.claimVirtualPrize	Congratulations! You have won a %s. Please contact our support.	Selamat! Anda telah memenangkan %s. Silahkan menghubungi layanan bantuan kami. 
+spinWheel.no_one_won	No one has won any prize yet.	Belum ada yang memenangkan hadiah.
+spinWheel.come_back_in	Come back in:	Kembali lagi dalam:
+spinWheel.collect_email_description	Please submit a valid email address. Fake email addresses will be disqualified from prizes.	Silahkan masukkan alamat email yang benar. Alamat email yang palsu akan di diskualifikasi dari hadiah.
+serverError.COMPETITION_6	No stats data for this year/month/week combination found.	Tidak ada ditemukan kombinasi data statistik untuk tahun/bulan/minggu ini.
+serverError.COUPON_3	No predictions on coupon. Cannot place empty coupon.	Tidak ada prediksi pada kupon. Tidak dapat memasukkan kupon kosong. 
+serverError.FACEBOOK_2	Oops! You are not connected to Facebook.	Oops! Anda tidak terhubung dengan Facebook.
+serverError.DEFAULT	Oops! Please try again...	Oops! Silahkan mencoba kembali…
+serverError.COUPON_1	Stake not allowed.	Taruhan tidak diizinkan. 
+serverError.LEADERBOARD_2	Oops! Please try again.	Oops! Silahkan mencoba kembali.
+serverError.LEADERBOARD_1	Oops! Invalid leaderboard. Please try again.	Oops! Papan pemain terbaik salah. Silahkan mencoba kembali.
+serverError.COUNTRY_1	Oops! Try a different country.	Oops! Silahkan mencoba negara yang berbeda.
+serverError.COMPETITION_5	User is not enrolled in this competition.	Pemain tidak terdaftar dalam kompetisi ini.
+serverError.COMPETITION_3	Join token does not exist.	Kode ikut serta tidak ada.
+serverError.COMPETITION_2	The competition does not exist.	Kompetisi ini tidak ada.
+serverError.FACEBOOK_4	Oops! This Facebook account is already in use.	Oops! Akun Facebook ini telah digunakan.
+serverError.WHEEL_3	Could not find a prize.	Tidak dapat menemukan hadiah.
+serverError.GENERAL_1	Oops! We're sorry. Please try again.	Oops! Kami minta maaf. Silahkan mencoba kembali.
+serverError.SIGNIN_2	Incorrect username or password.	Nama pengguna atau kata sandi salah. 
+serverError.FACEBOOK_3	Oops! This Facebook account is already in use.	Oops! Akun Facebook ini telah digunakan.
+serverError.DISCUSSION_3	Oops! Please try again.	Oops! Silahkan mencoba kembali.
+serverError.COMPETITION_7	You cannot join a competition that is in preview mode.	Anda tidak dapat mengikuti kompetisi dalam mode preview.
+serverError.GENERAL_2	Oops! Your User ID is invalid.	Oops! Nama pengguna Anda tidak benar.
+serverError.WHEEL_6	The requested amount is bigger than your balance.	Jumlah yang diminta lebih besar dari saldo Anda.
+serverError.WHEEL_5	Requested amount is lower than minimum payout.	Jumlah yang diminta lebih kecil dari pembayaran minimal.
+serverError.COUPON_4	One or more predictions were already played before.	Satu atau lebih prediksi telah dimainkan sebelumnya.
+serverError.SIGNIN_1	Oops! Your email is invaild.	Oops! Email Anda tidak benar.
+serverError.VERSION_2	New features added! Please update FootballHero in the app store.	Fitur baru telah ditambahkan! Silahkan perbaharui FootballHero di app store.
+serverError.COMPETITION_4	You are already enrolled in this competition.	Anda telah terdaftar dalam kompetisi ini. 
+serverError.WHEEL_4	User has never spinned the wheel.	Pengguna belum pernah memutar roda. 
+serverError.FACEBOOK_1	Oops! There seems to be an error. Please try again.	Oops! Sepertinya terdapat kesalahan. Silahkan mencoba kembali. 
+serverError.WHEEL_1	Your last spin was less than 24 hours ago.	Putaran terakhir Anda kurang dari 24 jam yang lalu.
+serverError.LEAGUE_1	Oops! Try a different league.	Oops! Coba liga yang lain.
+serverError.WHEEL_2	Price probabilities don't add up.	Kemungkinan harga tidak dapat ditambah.
+serverError.DISCUSSION_2	Oops! Please try again.	Oops! Silahkan mencoba kembali.
+serverError.DISCUSSION_1	Oops! Please try again.	Oops! Silahkan mencoba kembali.
+serverError.SIGNIN_4	Email and/or password cannot be empty.	Email dan/atau kata sandi tidak boleh kosong.
+serverError.COUPON_2	Too many predictions on coupon.	Terlalu banyak prediksi dalam kupon.
+serverError.FACEBOOK_5	Oops! We're sorry. Please try again later.	Oops! Kami minta maaf. Silahkan mencoba kembali.
+serverError.COMPETITION_8	Share Bonus already claimed.	Bonus Share telah diklaim.
+serverError.COUPON_5	Last big bet was less than 12 hours ago.	Taruhan besar terakhir kurang dari 12 jam yang lalu.
+serverError.COMPETITION_1	You already created a competition with that name before.	Anda telah membuat kompetisi dengan nama ini sebelumnya.
+serverError.VERSION_1	Please update latest version in the app store.	Silahkan unduh versi terbaru di app store.
+serverError.SIGNIN_3	Email address does not exist.	Alamat Email tidak ada.
+email_confirm	E-mail Address Confirm	Alamat Email telah dikonfirmasi

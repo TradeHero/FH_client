@@ -126,6 +126,7 @@ function initEvents()
 	EventManager:registerEventHandler( Event.Do_Make_Discussion_Post, "scripts.actions.DoMakeDiscussionPostAction" )
 	EventManager:registerEventHandler( Event.Do_Like_Discussion_Post, "scripts.actions.DoLikeDiscussionPostAction" )
 	EventManager:registerEventHandler( Event.Do_Share_Discussion_Post, "scripts.actions.DoShareDiscussionPostAction" )
+	EventManager:registerEventHandler( Event.Do_Select_Language, "scripts.actions.DoSelectLanguageAction" )
 
 	EventManager:registerEventHandler( Event.Show_Error_Message, "scripts.actions.ShowErrorMessageAction" )
 	EventManager:registerEventHandler( Event.Show_Choice_Message, "scripts.actions.ShowChoiceMessageAction" )

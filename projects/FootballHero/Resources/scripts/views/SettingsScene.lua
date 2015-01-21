@@ -5,6 +5,7 @@ local Navigator = require("scripts.views.Navigator")
 local EventManager = require("scripts.events.EventManager").getInstance()
 local Event = require("scripts.events.Event").EventList
 local SettingsConfig = require("scripts.config.Settings")
+local LanguagesConfig = require("scripts.config.Languages")
 local Constants = require("scripts.Constants")
 local Logic = require("scripts.Logic").getInstance()
 local SMIS = require("scripts.SMIS")
@@ -80,7 +81,7 @@ function initSettingsSubItem( contentContainer, settingsSubItem )
     elseif settingsSubItem.SettingType == SettingsConfig.SETTING_TYPE_FAVORITE_TEAM then
         contentHeight = initSettingsFavoriteTeam( contentContainer, settingsSubItem )
     elseif settingsSubItem.SettingType == SettingsConfig.SETTING_TYPE_LANGUAGE then
-        contentHeight = initSettingsLanguage( contentContainer, settingsSubItem )
+        contentHeight = initSettingsLanguage( contentContainer )
     elseif settingsSubItem.SettingType == SettingsConfig.SETTING_TYPE_OTHERS then
         contentHeight = initSettingsOthers( contentContainer, settingsSubItem )
     end
@@ -136,18 +137,18 @@ function initSettingsFavoriteTeam( contentContainer, settingsSubItem )
     -- contentHeight = contentHeight + content:getSize().height
 end
 
-function initSettingsLanguage( contentContainer, settingsSubItem )
+function initSettingsLanguage( contentContainer )
     local contentHeight = 0
 
     local appLanguage = CCUserDefault:sharedUserDefault():getStringForKey( SettingsConfig.KEY_OF_LANGUAGE )
-    local selectedLanguage = settingsSubItem["Items"][tonumber(appLanguage) + 1]
+    local selectedLanguageConfig = LanguagesConfig.getLanguageConfigById( tonumber( appLanguage ) )
 
     local content = SceneManager.widgetFromJsonFile("scenes/SettingsItemContentFrame.json")
     mCurrLanguage = tolua.cast( content:getChildByName("Label_Name"), "Label" )
     local button = tolua.cast( content:getChildByName("Panel_Button"), "Layout" )
     local arrow = content:getChildByName("Image_Arrow")
 
-    mCurrLanguage:setText( selectedLanguage.itemName )
+    mCurrLanguage:setText( selectedLanguageConfig["name"] )
     button:setBackGroundImage( Constants.COMMUNITY_IMAGE_PATH.."img-leaguebox.png" )
 
     contentContainer:addChild( content )
@@ -158,9 +159,10 @@ function initSettingsLanguage( contentContainer, settingsSubItem )
     local dropdown = mDropdown:getChildByName("Panel_Dropdown")
 
     mDropdownHeight = 0
-    for i = 1, table.getn( settingsSubItem["Items"] ) do
+    local supportedLanguages = LanguagesConfig.getSupportedLanguages()
+    for i = 1, table.getn( supportedLanguages ) do
 
-        local language = settingsSubItem["Items"][i]
+        local language = supportedLanguages[i]
 
         if language then
             local content = SceneManager.widgetFromJsonFile("scenes/SettingsItemContentFrame.json")
@@ -169,14 +171,15 @@ function initSettingsLanguage( contentContainer, settingsSubItem )
             local arrow = tolua.cast( content:getChildByName("Image_Arrow"), "ImageView" )
             
             content:removeChild( arrow )
-            name:setText( language.itemName )
+            name:setText( language["name"] )
 
             local eventHandler = function( sender, eventType )
                 if eventType == TOUCH_EVENT_ENDED then
-                    local appLanguage = i - 1
+                    local appLanguage = language["id"]
                     CCUserDefault:sharedUserDefault():setStringForKey( SettingsConfig.KEY_OF_LANGUAGE, tostring(appLanguage) )
+                    EventManager:postEvent( Event.Do_Select_Language, { appLanguage } )
 
-                    toggleLanguageDropDown( language.itemName )
+                    toggleLanguageDropDown( language["name"] )
                 end
             end
             button:addTouchEventListener( eventHandler )
