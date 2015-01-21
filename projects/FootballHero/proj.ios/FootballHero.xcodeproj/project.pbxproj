@@ -332,6 +332,9 @@
 		7365C0D218FCE99200C39027 /* FBSessionSingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 7365C0D118FCE99200C39027 /* FBSessionSingleton.m */; };
 		73846DD81A6CBBE0001B4EF1 /* DefaultString.lua in Resources */ = {isa = PBXBuildFile; fileRef = 73846DD71A6CBBE0001B4EF1 /* DefaultString.lua */; };
 		73846DDB1A6E3C8B001B4EF1 /* id in Resources */ = {isa = PBXBuildFile; fileRef = 73846DDA1A6E3C8B001B4EF1 /* id */; };
+		73846DDF1A6E6E5A001B4EF1 /* ar in Resources */ = {isa = PBXBuildFile; fileRef = 73846DDC1A6E6E5A001B4EF1 /* ar */; };
+		73846DE01A6E6E5A001B4EF1 /* th in Resources */ = {isa = PBXBuildFile; fileRef = 73846DDD1A6E6E5A001B4EF1 /* th */; };
+		73846DE11A6E6E5A001B4EF1 /* tr in Resources */ = {isa = PBXBuildFile; fileRef = 73846DDE1A6E6E5A001B4EF1 /* tr */; };
 		7387400C19FE2A63009AE602 /* scripts in Resources */ = {isa = PBXBuildFile; fileRef = 7387400B19FE2A63009AE602 /* scripts */; };
 		7388C04118F4E2FF00CF667C /* HttpRequestForLua.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7388C03F18F4E2FF00CF667C /* HttpRequestForLua.cpp */; };
 		738BA12A193D7FD2008A74F6 /* DES56.lua in Resources */ = {isa = PBXBuildFile; fileRef = 738BA129193D7FD2008A74F6 /* DES56.lua */; };
@@ -1047,6 +1050,9 @@
 		7365C0D118FCE99200C39027 /* FBSessionSingleton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBSessionSingleton.m; sourceTree = "<group>"; };
 		73846DD71A6CBBE0001B4EF1 /* DefaultString.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = DefaultString.lua; sourceTree = "<group>"; };
 		73846DDA1A6E3C8B001B4EF1 /* id */ = {isa = PBXFileReference; lastKnownFileType = folder; path = id; sourceTree = "<group>"; };
+		73846DDC1A6E6E5A001B4EF1 /* ar */ = {isa = PBXFileReference; lastKnownFileType = folder; path = ar; sourceTree = "<group>"; };
+		73846DDD1A6E6E5A001B4EF1 /* th */ = {isa = PBXFileReference; lastKnownFileType = folder; path = th; sourceTree = "<group>"; };
+		73846DDE1A6E6E5A001B4EF1 /* tr */ = {isa = PBXFileReference; lastKnownFileType = folder; path = tr; sourceTree = "<group>"; };
 		7387400B19FE2A63009AE602 /* scripts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = scripts; sourceTree = "<group>"; };
 		7388C03F18F4E2FF00CF667C /* HttpRequestForLua.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HttpRequestForLua.cpp; sourceTree = "<group>"; };
 		7388C04018F4E2FF00CF667C /* HttpRequestForLua.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpRequestForLua.h; sourceTree = "<group>"; };
@@ -2845,6 +2851,9 @@
 		F293BC4615EB859D00256477 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				73846DDC1A6E6E5A001B4EF1 /* ar */,
+				73846DDD1A6E6E5A001B4EF1 /* th */,
+				73846DDE1A6E6E5A001B4EF1 /* tr */,
 				73846DDA1A6E3C8B001B4EF1 /* id */,
 				73846DD71A6CBBE0001B4EF1 /* DefaultString.lua */,
 				739220351A3EA04200F32FE5 /* zh */,
@@ -2981,6 +2990,7 @@
 				730D984A18DC4317000CA5F9 /* footballhero.lua in Resources */,
 				733DE935193F26C800361638 /* Default-Portrait@2x~ipad.png in Resources */,
 				733DE931193F262900361638 /* Icon-152.png in Resources */,
+				73846DE11A6E6E5A001B4EF1 /* tr in Resources */,
 				7314B4AA19B715350065D927 /* bottom-detail@2x.png in Resources */,
 				7314B4BA19B715350065D927 /* UAPushSettingsView.xib in Resources */,
 				73A4D4DE19F5180A00433A04 /* Images.xcassets in Resources */,
@@ -3008,7 +3018,9 @@
 				730D984518DC4317000CA5F9 /* CocoStudio.lua in Resources */,
 				73495B8B19C048D300626812 /* list-image-placeholder.png in Resources */,
 				15C1569D1683138E00D239F2 /* Icon-114.png in Resources */,
+				73846DDF1A6E6E5A001B4EF1 /* ar in Resources */,
 				15C1569E1683138E00D239F2 /* Icon-144.png in Resources */,
+				73846DE01A6E6E5A001B4EF1 /* th in Resources */,
 				738BA12A193D7FD2008A74F6 /* DES56.lua in Resources */,
 				730D984618DC4317000CA5F9 /* config in Resources */,
 				46C59AD317641FF300F43DC3 /* AudioEngine.lua in Resources */,

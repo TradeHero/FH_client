@@ -5,7 +5,7 @@ require "DefaultString"
 local mDefaultString = StringsDefault
 
 -- Localized strings
-local TARGET_LANGUAGE = "id"
+local TARGET_LANGUAGE = "ar"
 
 -- Output string
 local mSeperate = "\t"
@@ -28,17 +28,19 @@ function action( param )
     			if ( not mLocalizedStrings[k] ) or 
     				( not mLocalizedStrings[k][innerK] ) then
 					
+					local enValue = string.gsub(mDefaultString[k][innerK], "\n", "\\n")
 					mResultString = mResultString.."\n"..
 									k.."."..innerK..mSeperate..
-									mDefaultString[k][innerK]..mSeperate
+									enValue..mSeperate
 				end	
     		end
     	else
 			if not mLocalizedStrings[k] then
 				
+				local enValue = string.gsub(mDefaultString[k], "\n", "\\n")
 				mResultString = mResultString.."\n"..
 								k..mSeperate..
-								mDefaultString[k]..mSeperate
+								enValue..mSeperate
 			end
     	end
     end
