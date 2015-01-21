@@ -400,4 +400,20 @@
     <Project>SpinEmailCollect</Project>
     <GuidesList />
   </GuidesProject>
+  <GuidesProject>
+    <Project>SettingsItemContentFrame</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>SettingsItemHeaderFrame</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>SettingsUserInformationFrame</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>SettingsItemDropdownFrame</Project>
+    <GuidesList />
+  </GuidesProject>
 </ArrayOfGuidesProject>
