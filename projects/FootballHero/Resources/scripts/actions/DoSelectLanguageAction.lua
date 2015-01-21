@@ -9,12 +9,14 @@ local LanguagesConfig = require("scripts.config.Languages")
 
 function action( param )
 	SceneManager.clear()
+	CCTextureCache:sharedTextureCache():removeAllTextures()
 
 	local appLanguage = param[1]
 	CCLuaLog("appLanguage = "..appLanguage)
 
 	local languageConfig = LanguagesConfig.getLanguageConfigById( appLanguage )
 	Constants.setLanguage( languageConfig["LocalizedStringFile"] )
+
 
 
 	-- Reload the settings page.

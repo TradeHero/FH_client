@@ -74,7 +74,9 @@ public:
     const cocos2d::CCSize getFileDesignSize(const char* fileName) const;
     
     void setFilePath(const std::string& strFilePath) { m_strFilePath = strFilePath; }
+    void setFileName(const std::string& strFileName) { m_strFileName = strFileName; }
     const std::string& getFilePath() const { return m_strFilePath; };
+    const std::string& getFileName() const { return m_strFileName; };
     
     void registerTypeAndCallBack(const std::string& classType,
                                  ObjectFactory::Instance ins,
@@ -82,6 +84,7 @@ public:
                                  SEL_ParseEvent callBack);
 protected:
     std::string m_strFilePath;
+    std::string m_strFileName;
     CCDictionary* _fileDesignSizes;
     
     typedef std::map<std::string, SEL_ParseEvent>  ParseCallBackMap;

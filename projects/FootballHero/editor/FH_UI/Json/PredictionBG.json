@@ -11,13 +11,12 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "MatchPrediction/prediction_bkg.png",
+    "MatchListScene/match_bkg.png",
     "header/back.png",
-    "header/footballhero-logo.png",
-    "commonRes/Arsenal.png",
-    "commonRes/Manchester United.png"
+    "PredictionConfirm/off_button.png",
+    "PredictionConfirm/on_button.png"
   ],
-  "version": "1.5.0.0",
+  "version": "1.6.0.0",
   "widgetTree": {
     "classname": "Panel",
     "name": null,
@@ -242,8 +241,8 @@
           "rotation": 0,
           "scaleX": 0.8,
           "scaleY": 0.8,
-          "sizePercentX": 1.56249989E-05,
-          "sizePercentY": 8.802816E-06,
+          "sizePercentX": 0.0578125,
+          "sizePercentY": 0.0308098588,
           "sizeType": 0,
           "tag": 146,
           "touchAble": false,
@@ -382,7 +381,7 @@
           "customProperty": "",
           "flipX": false,
           "flipY": false,
-          "height": 256,
+          "height": 80,
           "ignoreSize": true,
           "layoutParameter": null,
           "opacity": 255,
@@ -399,7 +398,7 @@
           "touchAble": false,
           "useMergedTexture": false,
           "visible": true,
-          "width": 256,
+          "width": 80,
           "x": 252,
           "y": 985,
           "capInsetsHeight": 1,
@@ -408,13 +407,13 @@
           "capInsetsY": 0,
           "fileName": null,
           "fileNameData": {
-            "path": "commonRes/Arsenal.png",
+            "path": "C:\\Program Files\\Cocos Studio\\EditorDefaultRes\\GUI/image.png",
             "plistFile": "",
-            "resourceType": 0
+            "resourceType": 2
           },
           "scale9Enable": false,
-          "scale9Height": 256,
-          "scale9Width": 256
+          "scale9Height": 80,
+          "scale9Width": 80
         }
       },
       {
@@ -436,7 +435,7 @@
           "customProperty": "",
           "flipX": false,
           "flipY": false,
-          "height": 256,
+          "height": 80,
           "ignoreSize": true,
           "layoutParameter": null,
           "opacity": 255,
@@ -453,7 +452,7 @@
           "touchAble": false,
           "useMergedTexture": false,
           "visible": true,
-          "width": 256,
+          "width": 80,
           "x": 388,
           "y": 985,
           "capInsetsHeight": 1,
@@ -462,13 +461,13 @@
           "capInsetsY": 0,
           "fileName": null,
           "fileNameData": {
-            "path": "commonRes/Manchester United.png",
+            "path": "C:\\Program Files\\Cocos Studio\\EditorDefaultRes\\GUI/image.png",
             "plistFile": "",
-            "resourceType": 0
+            "resourceType": 2
           },
           "scale9Enable": false,
-          "scale9Height": 256,
-          "scale9Width": 256
+          "scale9Height": 80,
+          "scale9Width": 80
         }
       }
     ],

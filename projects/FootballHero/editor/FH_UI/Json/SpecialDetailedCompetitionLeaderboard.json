@@ -11,10 +11,12 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "spinWheel/img-wheel.png",
-    "spinWheel/img-xiaomi.png"
+    "MatchListScene/match_bkg.png",
+    "header/back.png",
+    "PredictionConfirm/off_button.png",
+    "PredictionConfirm/on_button.png"
   ],
-  "version": "1.5.0.0",
+  "version": "1.6.0.0",
   "widgetTree": {
     "classname": "Panel",
     "name": null,

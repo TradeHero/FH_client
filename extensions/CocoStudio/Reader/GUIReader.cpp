@@ -257,6 +257,7 @@ cocos2d::ui::Widget* GUIReader::widgetFromJsonFile(const char *fileName)
     jsonpath = CCFileUtils::sharedFileUtils()->fullPathForFilename(fileName);
     int pos = jsonpath.find_last_of('/');
 	m_strFilePath = jsonpath.substr(0,pos+1);
+    m_strFileName = fileName;
     unsigned long size = 0;
     pBytes = CCFileUtils::sharedFileUtils()->getFileData(jsonpath.c_str(),"r" , &size);
 	if(NULL == pBytes || strcmp((const char*)pBytes, "") == 0)

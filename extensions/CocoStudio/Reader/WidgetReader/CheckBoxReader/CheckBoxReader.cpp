@@ -34,6 +34,7 @@ void CheckBoxReader::setPropsFromJsonDictionary(ui::Widget *widget, const rapidj
     
 
     std::string jsonPath = GUIReader::shareReader()->getFilePath();
+    std::string jsonName = GUIReader::shareReader()->getFileName();
     
     ui::CheckBox* checkBox = (ui::CheckBox*)widget;
     
@@ -43,7 +44,8 @@ void CheckBoxReader::setPropsFromJsonDictionary(ui::Widget *widget, const rapidj
     {
         case 0:
         {
-            std::string tp_b = jsonPath;
+            int pos = jsonName.find_last_of('/');
+            std::string tp_b = jsonName.substr(0, pos + 1);
             const char* backGroundFileName = DICTOOL->getStringValue_json(backGroundDic, "path");
             const char* backGroundFileName_tp = (backGroundFileName && (strcmp(backGroundFileName, "") != 0))?tp_b.append(backGroundFileName).c_str():NULL;
             checkBox->loadTextureBackGround(backGroundFileName_tp);
@@ -65,7 +67,8 @@ void CheckBoxReader::setPropsFromJsonDictionary(ui::Widget *widget, const rapidj
     {
         case 0:
         {
-            std::string tp_bs = jsonPath;
+            int pos = jsonName.find_last_of('/');
+            std::string tp_bs = jsonName.substr(0, pos + 1);
             const char* backGroundSelectedFileName = DICTOOL->getStringValue_json(backGroundSelectedDic, "path");
             const char* backGroundSelectedFileName_tp = (backGroundSelectedFileName && (strcmp(backGroundSelectedFileName, "") != 0))?tp_bs.append(backGroundSelectedFileName).c_str():NULL;
             checkBox->loadTextureBackGroundSelected(backGroundSelectedFileName_tp);
@@ -87,7 +90,8 @@ void CheckBoxReader::setPropsFromJsonDictionary(ui::Widget *widget, const rapidj
     {
         case 0:
         {
-            std::string tp_c = jsonPath;
+            int pos = jsonName.find_last_of('/');
+            std::string tp_c = jsonName.substr(0, pos + 1);
             const char* frontCrossFileName = DICTOOL->getStringValue_json(frontCrossDic, "path");
             const char* frontCrossFileName_tp = (frontCrossFileName && (strcmp(frontCrossFileName, "") != 0))?tp_c.append(frontCrossFileName).c_str():NULL;
             checkBox->loadTextureFrontCross(frontCrossFileName_tp);
@@ -109,7 +113,8 @@ void CheckBoxReader::setPropsFromJsonDictionary(ui::Widget *widget, const rapidj
     {
         case 0:
         {
-            std::string tp_bd = jsonPath;
+            int pos = jsonName.find_last_of('/');
+            std::string tp_bd = jsonName.substr(0, pos + 1);
             const char* backGroundDisabledFileName = DICTOOL->getStringValue_json(backGroundDisabledDic, "path");
             const char* backGroundDisabledFileName_tp = (backGroundDisabledFileName && (strcmp(backGroundDisabledFileName, "") != 0))?tp_bd.append(backGroundDisabledFileName).c_str():NULL;
             checkBox->loadTextureBackGroundDisabled(backGroundDisabledFileName_tp);
@@ -131,7 +136,8 @@ void CheckBoxReader::setPropsFromJsonDictionary(ui::Widget *widget, const rapidj
     {
         case 0:
         {
-            std::string tp_cd = jsonPath;
+            int pos = jsonName.find_last_of('/');
+            std::string tp_cd = jsonName.substr(0, pos + 1);
             const char* frontCrossDisabledFileName = DICTOOL->getStringValue_json(options, "path");
             const char* frontCrossDisabledFileName_tp = (frontCrossDisabledFileName && (strcmp(frontCrossDisabledFileName, "") != 0))?tp_cd.append(frontCrossDisabledFileName).c_str():NULL;
             checkBox->loadTextureFrontCrossDisabled(frontCrossDisabledFileName_tp);

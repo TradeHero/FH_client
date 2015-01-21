@@ -34,6 +34,7 @@ void ImageViewReader::setPropsFromJsonDictionary(ui::Widget *widget, const rapid
     
     
     std::string jsonPath = GUIReader::shareReader()->getFilePath();
+    std::string jsonName = GUIReader::shareReader()->getFileName();
     
     ui::ImageView* imageView = (ui::ImageView*)widget;
     
@@ -43,7 +44,8 @@ void ImageViewReader::setPropsFromJsonDictionary(ui::Widget *widget, const rapid
     {
         case 0:
         {
-            std::string tp_i = jsonPath;
+            int pos = jsonName.find_last_of('/');
+            std::string tp_i = jsonName.substr(0, pos + 1);
             const char* imageFileName = DICTOOL->getStringValue_json(imageFileNameDic, "path");
             const char* imageFileName_tp = NULL;
             if (imageFileName && (strcmp(imageFileName, "") != 0))

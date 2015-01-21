@@ -98,10 +98,6 @@
     <string>MatchCenterDiscussionsPostScene.json</string>
     <string>MatchCenterDiscussionsDetailScene.json</string>
     <string>MatchCenterDiscussionsCommentFrame.json</string>
-    <string>SettingsItemContentFrame.json</string>
-    <string>SettingsItemHeaderFrame.json</string>
-    <string>SettingsUserInformationFrame.json</string>
-    <string>SettingsItemDropdownFrame.json</string>
   </JsonList>
   <CanvasSize>
     <Width>640</Width>
@@ -111,7 +107,12 @@
   <ProjectType>UIProject</ProjectType>
   <ResRelativePath />
   <imageFileList />
-  <imagePngList />
+  <imagePngList>
+    <string>MatchListScene/match_bkg.png</string>
+    <string>header/back.png</string>
+    <string>PredictionConfirm/off_button.png</string>
+    <string>PredictionConfirm/on_button.png</string>
+  </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>SettingsItemHeaderFrame.json</CurrentUIJson>
+  <CurrentUIJson>SpinBalance.json</CurrentUIJson>
 </UIProject>

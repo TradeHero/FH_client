@@ -11,14 +11,12 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "spinWheel/bkg-balance-page.png",
+    "MatchListScene/match_bkg.png",
     "header/back.png",
-    "spinWheel/img-ticket.png",
-    "spinWheel/img-cash.png",
-    "spinWheel/btn-submit.png",
-    "spinWheel/img-email.png"
+    "PredictionConfirm/off_button.png",
+    "PredictionConfirm/on_button.png"
   ],
-  "version": "1.5.0.0",
+  "version": "1.6.0.0",
   "widgetTree": {
     "classname": "Panel",
     "name": null,

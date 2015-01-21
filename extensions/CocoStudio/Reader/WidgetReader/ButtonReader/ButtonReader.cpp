@@ -39,6 +39,7 @@ void ButtonReader::setPropsFromJsonDictionary(ui::Widget *widget, const rapidjso
     
     
     std::string jsonPath = GUIReader::shareReader()->getFilePath();
+    std::string jsonName = GUIReader::shareReader()->getFileName();
     
     ui::Button* button = (ui::Button*)widget;
     bool scale9Enable = DICTOOL->getBooleanValue_json(options, "scale9Enable");
@@ -50,7 +51,8 @@ void ButtonReader::setPropsFromJsonDictionary(ui::Widget *widget, const rapidjso
     {
         case 0:
         {
-            std::string tp_n = jsonPath;
+            int pos = jsonName.find_last_of('/');
+            std::string tp_n = jsonName.substr(0, pos + 1);
             const char* normalFileName = DICTOOL->getStringValue_json(normalDic, "path");
             const char* normalFileName_tp = (normalFileName && (strcmp(normalFileName, "") != 0))?tp_n.append(normalFileName).c_str():NULL;
             button->loadTextureNormal(normalFileName_tp);
@@ -71,7 +73,8 @@ void ButtonReader::setPropsFromJsonDictionary(ui::Widget *widget, const rapidjso
     {
         case 0:
         {
-            std::string tp_p = jsonPath;
+            int pos = jsonName.find_last_of('/');
+            std::string tp_p = jsonName.substr(0, pos + 1);
             const char* pressedFileName = DICTOOL->getStringValue_json(pressedDic, "path");
             const char* pressedFileName_tp = (pressedFileName && (strcmp(pressedFileName, "") != 0))?tp_p.append(pressedFileName).c_str():NULL;
             button->loadTexturePressed(pressedFileName_tp);
@@ -92,7 +95,8 @@ void ButtonReader::setPropsFromJsonDictionary(ui::Widget *widget, const rapidjso
     {
         case 0:
         {
-            std::string tp_d = jsonPath;
+            int pos = jsonName.find_last_of('/');
+            std::string tp_d = jsonName.substr(0, pos + 1);
             const char* disabledFileName = DICTOOL->getStringValue_json(disabledDic, "path");
             const char* disabledFileName_tp = (disabledFileName && (strcmp(disabledFileName, "") != 0))?tp_d.append(disabledFileName).c_str():NULL;
             button->loadTextureDisabled(disabledFileName_tp);

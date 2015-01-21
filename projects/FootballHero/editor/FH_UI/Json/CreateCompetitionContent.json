@@ -11,14 +11,12 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "MatchListContent/stamp-won.png",
-    "commonRes/Arsenal.png",
-    "commonRes/Manchester United.png",
-    "MatchListContent/icn-fans.png",
-    "MatchListContent/icn-played.png",
-    "community/img-leaguebox.png"
+    "MatchListScene/match_bkg.png",
+    "header/back.png",
+    "PredictionConfirm/off_button.png",
+    "PredictionConfirm/on_button.png"
   ],
-  "version": "1.5.0.0",
+  "version": "1.6.0.0",
   "widgetTree": {
     "classname": "Panel",
     "name": null,

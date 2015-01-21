@@ -10,8 +10,13 @@
   "designHeight": 1136,
   "designWidth": 640,
   "textures": [],
-  "texturesPng": [],
-  "version": "1.5.0.0",
+  "texturesPng": [
+    "MatchListScene/match_bkg.png",
+    "header/back.png",
+    "PredictionConfirm/off_button.png",
+    "PredictionConfirm/on_button.png"
+  ],
+  "version": "1.6.0.0",
   "widgetTree": {
     "classname": "Panel",
     "name": null,
@@ -191,7 +196,7 @@
           "capInsetsWidth": 1,
           "capInsetsX": 0,
           "capInsetsY": 0,
-          "clipAble": true,
+          "clipAble": false,
           "colorType": 0,
           "direction": 1,
           "editorClipAble": false,
