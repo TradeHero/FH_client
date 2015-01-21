@@ -165,6 +165,7 @@ StringsDefault = {
     prizes = "Prizes",
     ranking_monthly = "Monthly",
     ranking_overall = "Season",
+    ranking_dropdown_month = "%s %s",
     ranking_dropdown_week = "Week %d: %d %s-%d %s",
     ranking_weekly = "Weekly",
     status_qualified = "- qualified",
@@ -274,6 +275,7 @@ StringsDefault = {
     write_discussion = "Write a new discussion...",
   },
   match_list = {
+    date = "%b %d, %A",
     draw = "Draw",
     most_popular = "Most Popular",
     played = "Played",

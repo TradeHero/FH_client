@@ -424,7 +424,7 @@ function initCompetitionDuration( startTimeStamp )
                     tempEndMth = 12
                 end
                 for i = startMth, tempEndMth do
-                    local displayDate = months[i].." "..startYear
+                    local displayDate = Constants.stringFormatWithVariableOrder( Constants.String.event.ranking_dropdown_month, months[i], startYear )
                     table.insert( mCompetitionDurations, { ["displayDate"] = displayDate, ["monthNumber"] = i, ["yearNumber"] = startYear } )
                 end
 
@@ -433,8 +433,7 @@ function initCompetitionDuration( startTimeStamp )
             end
         else
             for i = startMth, endMth do
-
-                local displayDate = months[i].." "..startYear
+                local displayDate = Constants.stringFormatWithVariableOrder( Constants.String.event.ranking_dropdown_month, months[i], startYear )
                 table.insert( mCompetitionDurations, { ["displayDate"] = displayDate, ["monthNumber"] = i, ["yearNumber"] = startYear } )
             end
         end
@@ -485,7 +484,7 @@ function initCompetitionDuration( startTimeStamp )
                     local endDay = os.date( "%d", currWeek - 1 )
                     local endMth = os.date( "%b", currWeek - 1 )
 
-                    local displayDate = string.format( Constants.String.event.ranking_dropdown_week, displyWeekIndex, startDay, startMth, endDay, endMth )
+                    local displayDate = Constants.stringFormatWithVariableOrder( Constants.String.event.ranking_dropdown_week, displyWeekIndex, startDay, startMth, endDay, endMth )
                     displyWeekIndex = displyWeekIndex + 1
                     --print( "DISPLAY DATE = "..displayDate )
                     table.insert( mCompetitionDurations, { ["displayDate"] = displayDate , ["weekNumber"] = i, ["yearNumber"] = startYear } )
@@ -505,7 +504,7 @@ function initCompetitionDuration( startTimeStamp )
                 local endDay = os.date( "%d", currWeek - 1 )
                 local endMth = os.date( "%b", currWeek - 1 )
 
-                local displayDate = string.format( Constants.String.event.ranking_dropdown_week, displyWeekIndex, startDay, startMth, endDay, endMth )
+                local displayDate = Constants.stringFormatWithVariableOrder( Constants.String.event.ranking_dropdown_week, displyWeekIndex, startDay, startMth, endDay, endMth )
                 displyWeekIndex = displyWeekIndex + 1
                 --print( "DISPLAY DATE = "..displayDate )
                 table.insert( mCompetitionDurations, { ["displayDate"] = displayDate , ["weekNumber"] = i, ["yearNumber"] = startYear } )

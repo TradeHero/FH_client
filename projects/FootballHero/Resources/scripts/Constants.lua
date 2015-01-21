@@ -176,3 +176,14 @@ function to_string( tbl )
 	    return tostring(tbl)
 	end
 end
+
+function stringFormatWithVariableOrder( format, ... )
+    local args, order = {...}, {}
+
+    format = format:gsub('%%(%d+)%$', function(i)
+        table.insert( order, args[tonumber(i)] )
+        return '%'
+    end)
+
+    return string.format( format, unpack(order) )
+end

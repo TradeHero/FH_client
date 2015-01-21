@@ -114,7 +114,8 @@ end
 function MatchListData:addMatch( match )
 	local startTimeNum = match["StartTime"]
     --local startTimeDate = os.date("%y", startTimeNum) * 10000 + os.date("%m", startTimeNum) * 100 + os.date("%d", startTimeNum)
-    local dateDisplay = os.date( "%b %d, %A", startTimeNum )
+    local Constants = require("scripts.Constants")
+    local dateDisplay = os.date( Constants.String.match_list.date, startTimeNum )
     local timeDisplay = os.date( "%H:%M", startTimeNum )
     local matchDate = self:getOrCreateMatchListOnDate( startTimeNum, dateDisplay, timeDisplay )
     table.insert( matchDate["matches"], match )
