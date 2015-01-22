@@ -113,5 +113,5 @@
     <string>Tutorial/Default Button.png</string>
   </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>CreateCompetitionContent.json</CurrentUIJson>
+  <CurrentUIJson>SpinWin.json</CurrentUIJson>
 </UIProject>
