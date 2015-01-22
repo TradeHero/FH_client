@@ -115,9 +115,11 @@ function initMatchPredictionContent()
     local title = tolua.cast( mWidget:getChildByName("Label_Title"), "Label" )
     local date = tolua.cast( mWidget:getChildByName("Label_Date"), "Label" )
     local played = tolua.cast( mWidget:getChildByName("Label_Played"), "Label" )
+    local playedCount = tolua.cast( mWidget:getChildByName("Label_PlayedCount"), "Label" )
     local predict = tolua.cast( mWidget:getChildByName("Button_Prediction"), "Button" )
     local discussion = tolua.cast( mWidget:getChildByName("Button_Discussion"), "Button" )
     local meetings = tolua.cast( mWidget:getChildByName("Button_Meetings"), "Button" )
+    local compName = tolua.cast( mWidget:getChildByName("Label_CompetitionName"), "Label" )
 
     local team1 = tolua.cast( mWidget:getChildByName("Image_Team1"), "ImageView" )
     local team2 = tolua.cast( mWidget:getChildByName("Image_Team2"), "ImageView" )
@@ -125,9 +127,31 @@ function initMatchPredictionContent()
     local team2Name = tolua.cast( mWidget:getChildByName("Label_Team2"), "Label" )
     local vs = tolua.cast( mWidget:getChildByName("Label_VS"), "Label" )
 
+    local homePercent = tolua.cast( mWidget:getChildByName("Label_HomePercent"), "Label" )
+    local awayPercent = tolua.cast( mWidget:getChildByName("Label_AwayPercent"), "Label" )
+    local drawPercent = tolua.cast( mWidget:getChildByName("Label_DrawPercent"), "Label" )
+    local lbDraw = tolua.cast( mWidget:getChildByName("Label_Draw"), "Label" )
+
+    lbDraw:setText( Constants.String.match_list.draw )
+    
+    local totalWinPredictions = mMatch["HomePredictions"] + mMatch["AwayPredictions"] + mMatch["DrawPredictions"]
+    local homeWinPercent = 0
+    local awayWinPercent = 0
+    local drawWinPercent = 0
+    if totalWinPredictions > 0 then
+        homeWinPercent = mMatch["HomePredictions"] / totalWinPredictions * 100
+        awayWinPercent = mMatch["AwayPredictions"] / totalWinPredictions * 100
+        drawWinPercent = mMatch["DrawPredictions"] / totalWinPredictions * 100
+    end
+    homePercent:setText( string.format( homePercent:getStringValue(), homeWinPercent ) )
+    awayPercent:setText( string.format( awayPercent:getStringValue(), awayWinPercent ) )
+    drawPercent:setText( string.format( drawPercent:getStringValue(), drawWinPercent ) )
+
+    compName:setText( mMatch["LeagueName"] )
     title:setText( Constants.String.match_center.title )
     date:setText( os.date( "%b %d, %H:%M", mMatch["StartTime"] ) )
-    played:setText( string.format( Constants.String.match_center.played, mMatch["PredictionsPlayed"], mMatch["PredictionsAvailable"] ) )
+    played:setText( Constants.String.match_center.played )
+    playedCount:setText( string.format( Constants.String.match_center.played_out_of, mMatch["PredictionsPlayed"], mMatch["PredictionsAvailable"] ) )
     discussion:setTitleText( Constants.String.match_center.title_discussion )
     meetings:setTitleText( Constants.String.match_center.title_meetings )
 

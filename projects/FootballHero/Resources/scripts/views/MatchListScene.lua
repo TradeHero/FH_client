@@ -244,7 +244,7 @@ function initMatchList( matchList, leagueKey, bInit )
                 end
 
                 local content = SceneManager.widgetFromJsonFile("scenes/MatchListContent.json")
-                helperInitMatchInfo( content, inV )
+                helperInitMatchInfo( content, inV, leagueKey )
 
                 content:setLayoutParameter( layoutParameter )
                 content:setZOrder( zOrder )
@@ -520,28 +520,42 @@ function enterMatch( match )
     EventManager:postEvent( Event.Enter_Match_Center, { MatchCenterConfig.MATCH_CENTER_TAB_ID_DISCUSSION } )
 end
 
-function helperInitMatchInfo( topContent, matchInfo )
-    local team1 = tolua.cast( topContent:getChildByName("team1"), "ImageView" )
-    local team2 = tolua.cast( topContent:getChildByName("team2"), "ImageView" )
-    local team1Name = tolua.cast( topContent:getChildByName("team1Name"), "Label" )
-    local team2Name = tolua.cast( topContent:getChildByName("team2Name"), "Label" )
-    local homePercent = tolua.cast( topContent:getChildByName("home_percent"), "Label" )
-    local awayPercent = tolua.cast( topContent:getChildByName("away_percent"), "Label" )
-    local drawPercent = tolua.cast( topContent:getChildByName("draw_percent"), "Label" )
-    local lbDraw = tolua.cast( topContent:getChildByName("Label_Draw"), "Label" )
-    local points = tolua.cast( topContent:getChildByName("Points"), "Label")
-    local stamp = tolua.cast( topContent:getChildByName("Stamp"), "ImageView" )
+function helperInitMatchInfo( topContent, matchInfo, leagueKey )
     
-    local content = topContent:getChildByName("fade_panel")
-    local fhNum = tolua.cast( content:getChildByName("fhNum"), "Label" )
-    local played = tolua.cast( content:getChildByName("played"), "Label" )
-    local lbPlayed = tolua.cast( content:getChildByName("Label_Played"), "Label" )
-    local lbTotalFans = tolua.cast( content:getChildByName("Label_TotalFans"), "Label" )
+    local bg = topContent:getChildByName("Panel_MatchBG")
+    local homePercent = tolua.cast( topContent:getChildByName("Label_HomePercent"), "Label" )
+    local awayPercent = tolua.cast( topContent:getChildByName("Label_AwayPercent"), "Label" )
+    local drawPercent = tolua.cast( topContent:getChildByName("Label_DrawPercent"), "Label" )
+    local lbDraw = tolua.cast( topContent:getChildByName("Label_Draw"), "Label" )
+    local lbTotalFans = tolua.cast( topContent:getChildByName("Label_TotalFans"), "Label" )
+    local fanCount = tolua.cast( topContent:getChildByName("Label_FanCount"), "Label" )
+    
+    local fadePanel = topContent:getChildByName("Panel_Fade")
+    local team1 = tolua.cast( fadePanel:getChildByName("Image_Team1"), "ImageView" )
+    local team2 = tolua.cast( fadePanel:getChildByName("Image_Team2"), "ImageView" )
+    local team1Name = tolua.cast( fadePanel:getChildByName("Label_Team1Name"), "Label" )
+    local team2Name = tolua.cast( fadePanel:getChildByName("Label_Team2Name"), "Label" )
+    local compName = tolua.cast( fadePanel:getChildByName("Label_CompetitionName"), "Label" )
 
+    local statusPanel = tolua.cast( topContent:getChildByName("Panel_Status"), "Layout" )
+    local played = tolua.cast( statusPanel:getChildByName("Label_PlayedCount"), "Label" )
+    local lbPlayed = tolua.cast( statusPanel:getChildByName("Label_Played"), "Label" )
+    local status = tolua.cast( statusPanel:getChildByName("Label_Status"), "Label" )
+    local ball = tolua.cast( statusPanel:getChildByName("Image_Ball"), "ImageView" )
+    
     -- Labels
     lbDraw:setText( Constants.String.match_list.draw )
     lbPlayed:setText( Constants.String.match_list.played )
     lbTotalFans:setText( Constants.String.match_list.total_fans )
+    if leagueKey == Constants.SpecialLeagueIds.MOST_POPULAR or leagueKey == Constants.SpecialLeagueIds.UPCOMING_MATCHES then
+        compName:setText( matchInfo["LeagueName"] )
+        compName:setEnabled( true )
+    else
+        bg:setSize( CCSize:new( bg:getSize().width, bg:getSize().height - 30 ) )
+        topContent:setSize( CCSize:new( topContent:getSize().width, topContent:getSize().height - 30 ) )
+        compName:setEnabled( false )
+    end
+    status:setEnabled( false )
 
     -- Load the team logo
     team1:loadTexture( TeamConfig.getLogo( TeamConfig.getConfigIdByKey( matchInfo["HomeTeamId"] ) ) )
@@ -559,39 +573,63 @@ function helperInitMatchInfo( topContent, matchInfo )
     end
     team2Name:setText( teamName )
 
+    local enableMatchStatus = function( szStatus, profit )
+        played:setEnabled( false )
+        lbPlayed:setEnabled( false )
+        ball:setEnabled( false )
+        status:setEnabled( true )
+        
+        statusPanel:setBackGroundColorOpacity( 255 )
+
+        if szStatus == Constants.String.match_list.match_started then
+            statusPanel:setBackGroundColor( ccc3( 40, 119, 209 ) )
+            status:setText( szStatus )
+            status:setColor( ccc3( 248, 231, 28 ) )
+        elseif szStatus == Constants.String.match_list.match_ended then
+            statusPanel:setBackGroundColor( ccc3( 60, 58, 58 ) )
+            status:setText( szStatus )
+            status:setColor( ccc3( 248, 231, 28 ) )
+        elseif szStatus == Constants.String.match_list.match_won then
+            status:setText( string.format( szStatus, profit ) )
+            statusPanel:setBackGroundColor( ccc3( 455, 165, 26 ) )
+        elseif szStatus == Constants.String.match_list.match_lost then
+            statusPanel:setBackGroundColor( ccc3( 208, 2, 27 ) )
+            status:setText( string.format( szStatus, profit ) )
+        end
+    end
+
     local isNotGameStart = matchInfo["StartTime"] > os.time()
-    local score = tolua.cast( topContent:getChildByName("score"), "Label" )
+    local score = tolua.cast( topContent:getChildByName("Label_Score"), "Label" )
     if matchInfo["HomeGoals"] >= 0 and matchInfo["AwayGoals"] >= 0 then
         score:setText( string.format( score:getStringValue(), matchInfo["HomeGoals"], matchInfo["AwayGoals"] ) )
     
+        --local oldOpacity = fadePanel:getOpacity()
+        --if fadePanel:isCascadeOpacityEnabled() then print( "casade enabled!") else print("cascade not enabled!") end
+        fadePanel:setOpacity( 127 )
+        fadePanel:setCascadeOpacityEnabled( true )
+        --if fadePanel:isCascadeOpacityEnabled() then print( "casade enabled!") else print("cascade not enabled!") end
+        --print("reducing opacity from "..oldOpacity.." to "..fadePanel:getOpacity())
+
         if matchInfo["PredictionsPlayed"] == 0 then
-            content:setEnabled( false )
-            stamp:loadTexture( Constants.MATCH_LIST_CONTENT_IMAGE_PATH.."stamp-ended.png" )
-            points:setEnabled( false )
+            -- match ended
+            enableMatchStatus( Constants.String.match_list.match_ended )
+            --statusPanel:setEnabled( false )
         elseif matchInfo["Profit"] == nil then
-            stamp:setEnabled( false )
-            points:setEnabled( false )
+            
         elseif matchInfo["Profit"] >= 0 then
-            content:setEnabled( false )
-            stamp:loadTexture( Constants.MATCH_LIST_CONTENT_IMAGE_PATH.."stamp-won.png" )
-            points:setText( string.format( points:getStringValue(), math.abs( matchInfo["Profit"] ) ) )
-            points:setColor( ccc3( 92, 200, 80 ) )
+            -- won
+            enableMatchStatus( Constants.String.match_list.match_won, math.abs( matchInfo["Profit"] ) )
         else
-            content:setEnabled( false )
-            stamp:loadTexture( Constants.MATCH_LIST_CONTENT_IMAGE_PATH.."stamp-lost.png" )
-            points:setText( string.format( points:getStringValue(), math.abs( matchInfo["Profit"] ) ) )
-            points:setColor( ccc3( 238, 56, 47 ) )
+            -- lost
+            enableMatchStatus( Constants.String.match_list.match_lost, math.abs( matchInfo["Profit"] ) )
         end
     else
         score:setText( "-:-" )
-
-        points:setEnabled( false )
-
-        if isNotGameStart then
-            stamp:setEnabled( false )
-        else
-            content:setEnabled( false )
-            stamp:loadTexture( Constants.MATCH_LIST_CONTENT_IMAGE_PATH.."stamp-start.png" )
+        score:setColor( ccc3( 255, 255, 255 ) )
+        
+        if not isNotGameStart then
+            -- match started
+            enableMatchStatus( Constants.String.match_list.match_started )
         end
     end
 
@@ -607,7 +645,7 @@ function helperInitMatchInfo( topContent, matchInfo )
     homePercent:setText( string.format( homePercent:getStringValue(), homeWinPercent ) )
     awayPercent:setText( string.format( awayPercent:getStringValue(), awayWinPercent ) )
     drawPercent:setText( string.format( drawPercent:getStringValue(), drawWinPercent ) )
-    fhNum:setText( matchInfo["TotalUsersPlayed"] )
+    fanCount:setText( matchInfo["TotalUsersPlayed"] )
     played:setText( string.format( played:getStringValue(), matchInfo["PredictionsPlayed"], matchInfo["PredictionsAvailable"] ) )
 
     if isNotGameStart then

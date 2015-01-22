@@ -17,7 +17,10 @@ MatchListData = {}
                 "HomeGoals": 2,
                 "AwayGoals": 3,
                 "PredictionsPlayed": 0,
-                "PredictionsAvailable": 0
+                "PredictionsAvailable": 0,
+                "Profit": null,
+                "TotalUsersPlayed": 888,
+                "LeagueName": "Premier League"
             },
             {
                 "Id": 4555,
@@ -27,7 +30,10 @@ MatchListData = {}
                 "HomeGoals": 2,
                 "AwayGoals": 3,
                 "PredictionsPlayed": 0,
-                "PredictionsAvailable": 0
+                "PredictionsAvailable": 0,
+                "Profit": null,
+                "TotalUsersPlayed": 888,
+                "LeagueName": "Premier League"
             },
             {
                 "Id": 4083,
@@ -37,7 +43,10 @@ MatchListData = {}
                 "HomeGoals": 2,
                 "AwayGoals": 3,
                 "PredictionsPlayed": 0,
-                "PredictionsAvailable": 0
+                "PredictionsAvailable": 0,
+                "Profit": null,
+                "TotalUsersPlayed": 888,
+                "LeagueName": "Premier League"
             }
         ]
     },
@@ -54,7 +63,10 @@ MatchListData = {}
                 "HomeGoals": 2,
                 "AwayGoals": 3,
                 "PredictionsPlayed": 0,
-                "PredictionsAvailable": 0
+                "PredictionsAvailable": 0,
+                "Profit": null,
+                "TotalUsersPlayed": 888,
+                "LeagueName": "Premier League"
             },
             {
                 "Id": 4555,
@@ -64,7 +76,10 @@ MatchListData = {}
                 "HomeGoals": 2,
                 "AwayGoals": 3,
                 "PredictionsPlayed": 0,
-                "PredictionsAvailable": 0
+                "PredictionsAvailable": 0,
+                "Profit": null,
+                "TotalUsersPlayed": 888,
+                "LeagueName": "Premier League"
             },
             {
                 "Id": 4083,
@@ -74,7 +89,10 @@ MatchListData = {}
                 "HomeGoals": 2,
                 "AwayGoals": 3,
                 "PredictionsPlayed": 0,
-                "PredictionsAvailable": 0
+                "PredictionsAvailable": 0,
+                "Profit": null,
+                "TotalUsersPlayed": 888,
+                "LeagueName": "Premier League"
             }
         ]
     }
