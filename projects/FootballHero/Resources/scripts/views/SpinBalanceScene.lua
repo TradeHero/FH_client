@@ -12,7 +12,7 @@ local ViewUtils = require("scripts.views.ViewUtils")
 
 local mInputFontColor = ccc3( 255, 255, 255 )
 local mInputPlaceholderFontColor = ccc3( 200, 200, 200 )
-local MIN_MONEY_BALANCE_FOR_PAYOUT = 0
+local MIN_MONEY_BALANCE_FOR_PAYOUT = 25
 local mWidget
 
 function loadFrame( moneyBalance, ticketBalance )
