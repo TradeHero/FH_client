@@ -10,10 +10,10 @@ local Constants = require("scripts.Constants")
 
 function action( param )
     local SpinWheelConfig = require("scripts.config.SpinWheel")
-    if SpinWheelConfig.isInit() then
+    -- Prevent request to server again when it is still in spin cool down.
+    if SpinWheelConfig.getNextSpinTime() and SpinWheelConfig.getNextSpinTime() > os.time() then
         local SpinWheelScene = require("scripts.views.SpinWheelScene")
         SpinWheelScene.loadFrame()
-
     else
         local url = RequestUtils.GET_WHEEL_PRIZES_REST_CALL
 

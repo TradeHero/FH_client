@@ -98,17 +98,12 @@ local RequestUtils = require("scripts.RequestUtils")
 PRIZE_XIAOMI = 8
 PIRZE_JERSEY = 13
 
-local mInit = false
 local mPrizeConfig = {}
 local mPrizeOrder = {}
 local mNextSpinTime
 local mContactEmail
 local mLuckDrawPrizeId
 local mLuckDrawPrizeDescription
-
-function isInit()
-	return mInit
-end
 
 function init( spinWheelConfig )
 	mNextSpinTime = spinWheelConfig["NextSpinUtc"]
@@ -121,7 +116,6 @@ function init( spinWheelConfig )
 
 	mPrizeConfig = prizeInfo["Prizes"]
 	mPrizeOrder = prizeInfo["Order"]
-	mInit = true
 	for i = 1, table.getn( mPrizeConfig ) do
 		local config = mPrizeConfig[i]
 		if config["DrawTicket"] then
