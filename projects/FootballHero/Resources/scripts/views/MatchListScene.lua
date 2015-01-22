@@ -603,12 +603,14 @@ function helperInitMatchInfo( topContent, matchInfo, leagueKey )
     if matchInfo["HomeGoals"] >= 0 and matchInfo["AwayGoals"] >= 0 then
         score:setText( string.format( score:getStringValue(), matchInfo["HomeGoals"], matchInfo["AwayGoals"] ) )
     
-        --local oldOpacity = fadePanel:getOpacity()
-        --if fadePanel:isCascadeOpacityEnabled() then print( "casade enabled!") else print("cascade not enabled!") end
-        fadePanel:setOpacity( 127 )
-        fadePanel:setCascadeOpacityEnabled( true )
-        --if fadePanel:isCascadeOpacityEnabled() then print( "casade enabled!") else print("cascade not enabled!") end
-        --print("reducing opacity from "..oldOpacity.." to "..fadePanel:getOpacity())
+        -- not working
+        --fadePanel:setOpacity( 127 )
+        --fadePanel:setCascadeOpacityEnabled( true )
+        local children = fadePanel:getChildren()
+        for i = 1, children:count() do
+            local child = children:objectAtIndex(i - 1)
+            child:setOpacity( 127 )
+        end
 
         if matchInfo["PredictionsPlayed"] == 0 then
             -- match ended
