@@ -11,10 +11,8 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "MatchListScene/match_bkg.png",
-    "header/back.png",
-    "PredictionConfirm/off_button.png",
-    "PredictionConfirm/on_button.png"
+    "spinWheel/img-xiaomi.png",
+    "spinWheel/img-shine.png"
   ],
   "version": "1.6.0.0",
   "widgetTree": {
@@ -342,7 +340,7 @@
         "options": {
           "__type": "LabelSurrogate:#EditorCommon.JsonModel.Component.GUI",
           "classname": "Label",
-          "name": "Label_18",
+          "name": "Label_GiveTitle",
           "ZOrder": 0,
           "actiontag": 25095833,
           "anchorPointX": 0.5,
@@ -392,7 +390,7 @@
         "options": {
           "__type": "LabelSurrogate:#EditorCommon.JsonModel.Component.GUI",
           "classname": "Label",
-          "name": "Label_19",
+          "name": "Label_GiveDesc",
           "ZOrder": 0,
           "actiontag": 9727376,
           "anchorPointX": 0.5,
@@ -442,7 +440,7 @@
         "options": {
           "__type": "LabelSurrogate:#EditorCommon.JsonModel.Component.GUI",
           "classname": "Label",
-          "name": "Label_20",
+          "name": "Label_HowLong",
           "ZOrder": 0,
           "actiontag": 2469965,
           "anchorPointX": 0.5,
@@ -492,7 +490,7 @@
         "options": {
           "__type": "LabelSurrogate:#EditorCommon.JsonModel.Component.GUI",
           "classname": "Label",
-          "name": "Label_21",
+          "name": "Label_Ongoing",
           "ZOrder": 0,
           "actiontag": 2530897,
           "anchorPointX": 0.5,
@@ -542,7 +540,7 @@
         "options": {
           "__type": "LabelSurrogate:#EditorCommon.JsonModel.Component.GUI",
           "classname": "Label",
-          "name": "Label_22",
+          "name": "Label_FBShare",
           "ZOrder": 0,
           "actiontag": 52630013,
           "anchorPointX": 0.5,
@@ -826,7 +824,7 @@
         "options": {
           "__type": "LabelSurrogate:#EditorCommon.JsonModel.Component.GUI",
           "classname": "Label",
-          "name": "Label_35",
+          "name": "Label_SelectLeague",
           "ZOrder": 0,
           "actiontag": 43263293,
           "anchorPointX": 0.5,
@@ -876,7 +874,7 @@
         "options": {
           "__type": "LabelSurrogate:#EditorCommon.JsonModel.Component.GUI",
           "classname": "Label",
-          "name": "Label_21_0",
+          "name": "Label_Months",
           "ZOrder": 0,
           "actiontag": 34103421,
           "anchorPointX": 0.5,
