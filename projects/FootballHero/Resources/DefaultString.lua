@@ -356,6 +356,8 @@ StringsDefault = {
     win_ticket_prize = "Luck Draw Ticket",
     win_ticket_left = "left till draw.",
     only_show_big_prize = "Only show big prize",
+    please_contact = "Please contact",
+    to_claim_prize = "to claim prize.",
   },
   num_of_points = "%d Points",
   optional = "(Optional)",

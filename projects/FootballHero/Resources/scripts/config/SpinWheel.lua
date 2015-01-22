@@ -16,6 +16,7 @@ local RequestUtils = require("scripts.RequestUtils")
             "Name": "+3,000 POINTS",
             "PictureUrl": "http://fhmainstorage.blob.core.windows.net/wheelres/img-point.png",
             "DrawTicket": false,
+			"ShowContactInfo": false,
             "DrawInformation": null
          },
          {
@@ -23,6 +24,7 @@ local RequestUtils = require("scripts.RequestUtils")
             "Name": "+8,000 POINTS",
             "PictureUrl": "http://fhmainstorage.blob.core.windows.net/wheelres/img-point.png",
             "DrawTicket": false,
+			"ShowContactInfo": false,
             "DrawInformation": null
          },
          {
@@ -30,6 +32,7 @@ local RequestUtils = require("scripts.RequestUtils")
             "Name": "+12,000 POINTS",
             "PictureUrl": "http://fhmainstorage.blob.core.windows.net/wheelres/img-point.png",
             "DrawTicket": false,
+			"ShowContactInfo": false,
             "DrawInformation": null
          },
          {
@@ -37,6 +40,7 @@ local RequestUtils = require("scripts.RequestUtils")
             "Name": "US$ 1.00",
             "PictureUrl": "http://fhmainstorage.blob.core.windows.net/wheelres/img-cash.png",
             "DrawTicket": false,
+			"ShowContactInfo": false,
             "DrawInformation": null
          },
          {
@@ -44,6 +48,7 @@ local RequestUtils = require("scripts.RequestUtils")
             "Name": "US$ 2.00",
             "PictureUrl": "http://fhmainstorage.blob.core.windows.net/wheelres/img-cash.png",
             "DrawTicket": false,
+			"ShowContactInfo": false,
             "DrawInformation": null
          },
          {
@@ -51,6 +56,7 @@ local RequestUtils = require("scripts.RequestUtils")
             "Name": "US$ 5.00",
             "PictureUrl": "http://fhmainstorage.blob.core.windows.net/wheelres/img-cash.png",
             "DrawTicket": false,
+			"ShowContactInfo": false,
             "DrawInformation": null
          },
          {
@@ -58,6 +64,7 @@ local RequestUtils = require("scripts.RequestUtils")
             "Name": "Xiaomi Phone",
             "PictureUrl": "http://fhmainstorage.blob.core.windows.net/wheelres/img-xiaomi.png",
             "DrawTicket": false,
+			"ShowContactInfo": true,
             "DrawInformation": null
          },
          {
@@ -65,6 +72,7 @@ local RequestUtils = require("scripts.RequestUtils")
             "Name": "Lucky Draw Messi Signed Jersey",
             "PictureUrl": "http://fhmainstorage.blob.core.windows.net/wheelres/img-messi.png",
             "DrawTicket": true,
+			"ShowContactInfo": false,
             "DrawInformation": "One Messi Signed Jersey awarded every 3500 tickets"
          },
          {
@@ -72,6 +80,7 @@ local RequestUtils = require("scripts.RequestUtils")
             "Name": "Ronaldo Signed Jersey",
             "PictureUrl": "http://fhmainstorage.blob.core.windows.net/wheelres/img-ronaldo.png",
             "DrawTicket": false,
+			"ShowContactInfo": true,
             "DrawInformation": null
          }
       ],
@@ -93,10 +102,6 @@ local RequestUtils = require("scripts.RequestUtils")
    }
 }
 --]]
-
--- TODO remove the below hard code these two prizes.
-PRIZE_XIAOMI = 8
-PIRZE_JERSEY = 13
 
 local mPrizeConfig = {}
 local mPrizeOrder = {}
@@ -159,6 +164,17 @@ end
 
 function setContactEmail( email )
 	mContactEmail = email
+end
+
+function isShowContactInfo( id )
+	for i = 1, table.getn( mPrizeConfig ) do
+		local config = mPrizeConfig[i]
+		if config["id"] == id then
+			return config["ShowContactInfo"]
+		end
+	end
+
+	return false
 end
 
 function getStopAngleByPrizeID( prizeID )

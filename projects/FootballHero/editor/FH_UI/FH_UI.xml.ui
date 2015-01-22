@@ -108,9 +108,8 @@
   <ResRelativePath />
   <imageFileList />
   <imagePngList>
-    <string>PredictionConfirm/off_button.png</string>
-    <string>PredictionConfirm/on_button.png</string>
-    <string>Tutorial/Default Button.png</string>
+    <string>spinWheel/img-shine.png</string>
+    <string>spinWheel/img-xiaomi.png</string>
   </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
   <CurrentUIJson>SpinWin.json</CurrentUIJson>

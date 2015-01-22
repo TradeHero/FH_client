@@ -191,6 +191,9 @@ function initWinPrizeWidget()
 
     -- Set the text
     tolua.cast( mWinPrizeWidget:getChildByName("Label_won"), "Label" ):setText( Constants.String.spinWheel.won )
+    local claimPanel = mWinPrizeWidget:getChildByName("Panel_claimPrize")
+    tolua.cast( claimPanel:getChildByName("Label_please"), "Label" ):setText( Constants.String.spinWheel.please_contact )
+    tolua.cast( claimPanel:getChildByName("Label_claim"), "Label" ):setText( Constants.String.spinWheel.to_claim_prize )
 
     mWidget:addChild( mWinPrizeWidget )
     mWinPrizeWidget:setEnabled( false )
@@ -286,6 +289,12 @@ function tick( dt )
                 else
                     -- normal prize.
                     mWinPrizeWidget:setEnabled( true )
+                    local claimPanel = mWinPrizeWidget:getChildByName("Panel_claimPrize")
+                    if SpinWheelConfig.isShowContactInfo(mWinPrizeId) then
+                        claimPanel:setEnabled( true )
+                    else
+                        claimPanel:setEnabled( false )
+                    end
                     local prizeText = tolua.cast( mWinPrizeWidget:getChildByName("Label_prize"), "Label" )
                     local prizeImage = tolua.cast( mWinPrizeWidget:getChildByName("Image_prize"), "ImageView" )
                     local prizeConfig = SpinWheelConfig.getPrizeConfigWithID( mWinPrizeId )
@@ -336,6 +345,7 @@ end
 function stopEventHandler( sender,eventType )
     if eventType == TOUCH_EVENT_ENDED then
         if mWheelState == WHEEL_STATE_START_RUNNING and mWheelCurrentSpeed >= MAX_ROTATE_SPEED and mStopPressed == false then
+            AudioEngine.playEffect( AudioEngine.SETTINGS_ON_OFF )
             mStopPressed = true
             local handler = function( prizeId, numberOfLuckyDrawTicketsLeft )
                 mWheelState = WHEEL_STATE_CHECK_STOP_ANGLE
@@ -344,7 +354,6 @@ function stopEventHandler( sender,eventType )
                 mWinNumTicketLeft = numberOfLuckyDrawTicketsLeft
             end
             EventManager:postEvent( Event.Do_Spin, { handler } )
-
         end
     end
 end
@@ -367,20 +376,19 @@ end
 
 function onWinPrizeFrameTouch( sender, eventType )
     if eventType == TOUCH_EVENT_ENDED then
-        local touchHandler = function()
-            mWinPrizeWidget:setEnabled( false )
-            if mIsBonusSpin then
-                leaveSpin()
-            else
-                checkNCollectEmail()
+        mWinPrizeWidget:setEnabled( false )
+
+        if SpinWheelConfig.isShowContactInfo( mWinPrizeId ) then
+            function handler( resultCode )
+                -- Do nothing
             end
+            Misc:sharedDelegate():sendMail( Constants.String.support_email, Constants.String.support_title, "", handler )
         end
 
-        if mWinPrizeId == SpinWheelConfig.PRIZE_XIAOMI or mWinPrizeId == SpinWheelConfig.PIRZE_JERSEY then
-            local claimText = string.format( Constants.String.spinWheel.claimVirtualPrize, SpinWheelConfig.getPrizeConfigWithID( mWinPrizeId )["Name"] )
-            EventManager:postEvent( Event.Show_Info, { claimText, touchHandler } ) 
+        if mIsBonusSpin then
+            leaveSpin()
         else
-            touchHandler()
+            checkNCollectEmail()
         end
     end
 end

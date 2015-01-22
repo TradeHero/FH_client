@@ -148,6 +148,8 @@ Strings = {
 		collect_email_towards_wallet = "ke dalam saldo rekening Anda",
 		collect_email_prize = "1 Dolar US",
 		collect_email_description = "Silahkan masukkan email yang benar. Email yang palsu akan di diskualifikasi dari hadiah.",
+		please_contact = "Silahkan menghubungi",
+    	to_claim_prize = "untuk mengklaim hadiah.",
 	},
 	login_success = "Berhasil masuk.\nMemuat data, silahkan tunggu...",
 	event = {
