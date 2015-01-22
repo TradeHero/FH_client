@@ -424,7 +424,7 @@ function initCompetitionDuration( startTimeStamp )
                     tempEndMth = 12
                 end
                 for i = startMth, tempEndMth do
-                    local displayDate = Constants.stringFormatWithVariableOrder( Constants.String.event.ranking_dropdown_month, months[i], startYear )
+                    local displayDate = Constants.stringFormatWithVariableOrder( Constants.String.event.ranking_dropdown_month, months[tostring(i)], startYear )
                     table.insert( mCompetitionDurations, { ["displayDate"] = displayDate, ["monthNumber"] = i, ["yearNumber"] = startYear } )
                 end
 
@@ -433,7 +433,7 @@ function initCompetitionDuration( startTimeStamp )
             end
         else
             for i = startMth, endMth do
-                local displayDate = Constants.stringFormatWithVariableOrder( Constants.String.event.ranking_dropdown_month, months[i], startYear )
+                local displayDate = Constants.stringFormatWithVariableOrder( Constants.String.event.ranking_dropdown_month, months[tostring(i)], startYear )
                 table.insert( mCompetitionDurations, { ["displayDate"] = displayDate, ["monthNumber"] = i, ["yearNumber"] = startYear } )
             end
         end
