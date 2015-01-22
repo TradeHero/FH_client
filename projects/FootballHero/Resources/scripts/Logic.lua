@@ -50,6 +50,7 @@ function Logic:new()
 		mCoupons = Coupons:new(),  -- DS: Coupons
 		mPreviousLeagueSelected = 0,
 		mSelectedLeagues = nil,
+		mAllLeaguesQualify = false,
 		mLastChatMessageTimestamp = 0,
 		sessionToken = 0,
 		email = "",
@@ -124,6 +125,14 @@ end
 
 function Logic:setSelectedLeagues( selectedLeagues )
 	self.mSelectedLeagues = selectedLeagues
+end
+
+function Logic:getAllLeaguesQualify()
+	return self.mAllLeaguesQualify
+end
+
+function Logic:setAllLeaguesQualify( bQualify )
+	self.mAllLeaguesQualify = bQualify
 end
 
 function Logic:getLastChatMessageTimestamp()

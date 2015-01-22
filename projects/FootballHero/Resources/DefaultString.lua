@@ -58,6 +58,7 @@ StringsDefault = {
     leave_comp_yes = "Leave",
   },
   community = {
+    all_competitions = "All Leagues & Cups",
     copy = "COPY",
     desc_create_comp = "Predictions made in the selected league for the competition are automatically included in the competition.",
     disclaimer = "*** Disclaimer - Apple is not a sponsor nor is involved in any way.",

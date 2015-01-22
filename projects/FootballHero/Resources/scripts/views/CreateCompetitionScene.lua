@@ -194,8 +194,9 @@ function sendCreateCompetition()
     local name = mInputWidget:getChildByName( "TitleInput" ):getNodeByTag( 1 ):getText()
     local description = tolua.cast( mInputWidget:getChildByName( "DescriptionText" ), "Label" ):getStringValue()
     local selectedLeagues = Logic:getSelectedLeagues() or {}
+    local allLeaguesQualify = Logic:getAllLeaguesQualify() or false
 
-    EventManager:postEvent( Event.Do_Create_Competition, { name, description, numberOfMonth, selectedLeagues, facebookCheckBox:getSelectedState(), mAccessToken } )
+    EventManager:postEvent( Event.Do_Create_Competition, { name, description, numberOfMonth, selectedLeagues, facebookCheckBox:getSelectedState(), mAccessToken, allLeaguesQualify } )
 end
 
 function backEventHandler( sender, eventType )

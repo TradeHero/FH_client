@@ -27,15 +27,25 @@ function leagueSelected( leagueId, sender )
         local tick = sender:getChildByName("ticked")
         if tick:isEnabled() then
             tick:setEnabled( false )
-            for i = 1, table.getn( mSelectedLeagues ) do
-                if mSelectedLeagues[i] == leagueId then
-                    table.remove( mSelectedLeagues, i )
-                    break
+            if leagueId == Constants.SpecialLeagueIds.ALL_LEAGUES then
+                --print( "set false")
+                Logic:setAllLeaguesQualify( false )
+            else
+                for i = 1, table.getn( mSelectedLeagues ) do
+                    if mSelectedLeagues[i] == leagueId then
+                        table.remove( mSelectedLeagues, i )
+                        break
+                    end
                 end
             end
         else
             tick:setEnabled( true )
-            table.insert( mSelectedLeagues, leagueId )
+            if leagueId == Constants.SpecialLeagueIds.ALL_LEAGUES then
+                --print( "set true")
+                Logic:setAllLeaguesQualify( true )
+            else
+                table.insert( mSelectedLeagues, leagueId )
+            end
         end
 
         Logic:setSelectedLeagues( mSelectedLeagues )

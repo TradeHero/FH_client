@@ -179,6 +179,7 @@ Strings = {
 	terms_agree = "Dengan masuk ke aplikasi, Anda menyatakan bahwa Anda telah membaca ketentuan dan setuju dengan ketentuan FootballHero",
 	last_name_optional = "Nama Belakang (Opsional)",
 	community = {
+		all_competitions = "Semua Liga",
 		share = "BAGI",
 		rules = "PERATURAN",
 		label_call_to_arm = "Anda belum berada di \nkompetisi manapun.\n\n Buat kompetisi yang baru dan\n tantang teman-teman Anda sekarang!",
