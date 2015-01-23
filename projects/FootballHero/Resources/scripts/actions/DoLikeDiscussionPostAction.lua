@@ -40,6 +40,8 @@ function action( param )
 end
 
 function onRequestSuccess( jsonResponse )
+    RequestUtils.invalidResponseCacheContainsUrl( RequestUtils.GET_DISCUSSION_REST_CALL )
+    
     mCallback( jsonResponse )
 end
 
