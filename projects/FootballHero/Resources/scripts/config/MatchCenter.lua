@@ -35,7 +35,7 @@ function setTimeDiff( content, prevTime )
     elseif timeDiff < 3600 * 24 then
     	displayTime = string.format( Constants.String.match_center.time_hours, math.floor( timeDiff / 3600 ) )
     else
-    	displayTime = string.format( Constants.String.match_center.time_days, match.floor( timeDiff / (3600 * 24) ) )
+    	displayTime = string.format( Constants.String.match_center.time_days, math.floor( timeDiff / (3600 * 24) ) )
     end
 
     content:setText( displayTime )
