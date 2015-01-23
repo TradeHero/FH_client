@@ -11,10 +11,15 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "MatchListContent/icn-fans.png",
-    "MatchListContent/icn-played.png",
-    "community/img-leaguebox.png",
-    "commonRes/default.png"
+    "MatchListScene/match_bkg.png",
+    "header/back.png",
+    "MatchCentre/img-matchcentrebkg.png",
+    "commonRes/default.png",
+    "MatchCentre/btn-prediction.png",
+    "MatchCentre/btn-predictionmade.png",
+    "MatchCentre/img-inactivepage.png",
+    "MatchCentre/img-activepage.png",
+    "MatchListContent/icn-fans.png"
   ],
   "version": "1.6.0.0",
   "widgetTree": {
@@ -415,7 +420,7 @@
           "touchAble": false,
           "useMergedTexture": false,
           "visible": true,
-          "width": 102,
+          "width": 48,
           "x": 376,
           "y": 48,
           "areaHeight": 0,
@@ -424,7 +429,7 @@
           "fontName": "fonts/Helvetica neue.ttf",
           "fontSize": 22,
           "hAlignment": 0,
-          "text": "Total Fans",
+          "text": "Fans",
           "touchScaleEnable": false,
           "vAlignment": 0
         }
@@ -506,7 +511,7 @@
               "ignoreSize": true,
               "layoutParameter": null,
               "opacity": 255,
-              "positionPercentX": 0.65,
+              "positionPercentX": 0.725,
               "positionPercentY": 0.5,
               "positionType": 0,
               "rotation": 0,
@@ -520,7 +525,7 @@
               "useMergedTexture": false,
               "visible": true,
               "width": 77,
-              "x": 104,
+              "x": 116,
               "y": 20,
               "areaHeight": 0,
               "areaWidth": 0,
