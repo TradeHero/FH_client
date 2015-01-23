@@ -59,6 +59,8 @@ function onRequestSuccess( jsonResponse )
         local MatchCenterDiscussionsDetailScene = require("scripts.views.MatchCenterDiscussionsDetailScene")
         MatchCenterDiscussionsDetailScene.loadMoreContent( { jsonResponse }, bJumpToTop )
     else
+        EventManager:popHistoryWithoutExec() -- remove Enter_Make_Discussion_Post
+        EventManager:popHistoryWithoutExec() -- remove Enter_Match_Center
         EventManager:postEvent( Event.Enter_Match_Center, { MatchCenterConfig.MATCH_CENTER_TAB_ID_DISCUSSION } )
     end
 end
