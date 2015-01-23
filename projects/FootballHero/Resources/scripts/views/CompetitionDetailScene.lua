@@ -243,7 +243,7 @@ end
 
 function initRankingTab( tabInfo, tabId, bInit )
     local tab = tolua.cast( mWidget:getChildByName( tabInfo["id"] ), "Button" )
-    tab:setTitleText( tabInfo["displayName"] )
+    tab:setTitleText( Constants.String.event[tabInfo["displayNameKey"]] )
 
     local isActive = mTabID == tabId
 

@@ -144,6 +144,7 @@ Strings = {
 		money_payout_success_notification = "Permintaan Anda sedang diproses. Harap menunggu 2-4 minggu untuk menerima gift card melalui alamat email Anda.",
 		ticket_balance_1 = "%d tiket",
 		ticket_you_have = "Anda memiliki",
+		only_show_big_prize = "Hanya perlihatkan hadiah besar",
 		leave_message = "Kembali lagi besok untuk putaran yang baru.",
 		money_payout_limit = "Minimal US$25.00 untuk penarikan.",
 		collect_email_label_title = "Klaim Hadiah",
