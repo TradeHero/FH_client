@@ -97,6 +97,8 @@ Strings = {
 		no = "Tidak",
 		no_thanks = "Tidak, terima kasih.",
 		go = "Pergi!",
+		existing_user = "Pengguna Lama",
+		new_user = "Pengguna Baru",
 	},
 	share_type_facebook = "Facebook",
 	marketing_message_1 = "Selamat! Anda telah membuat prediksi pertama",

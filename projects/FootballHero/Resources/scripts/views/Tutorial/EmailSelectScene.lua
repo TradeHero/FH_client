@@ -18,11 +18,13 @@ function loadFrame()
     SceneManager.addWidget( mWidget )
     mWidget:setPosition( ccp( Constants.GAME_WIDTH, 0 ) )
 
-    local newUser = mWidget:getChildByName("newUser")
+    local newUser = tolua.cast( mWidget:getChildByName("newUser"), "Button" )
     newUser:addTouchEventListener( newUserEventHandler )
+    newUser:setTitleText( Constants.String.button.new_user )
 
-    local existingUser = mWidget:getChildByName("existingUser")
+    local existingUser = tolua.cast( mWidget:getChildByName("existingUser"), "Button" )
     existingUser:addTouchEventListener( existingUserEventHandler )
+    existingUser:setTitleText( Constants.String.button.existing_user )
 
     local backBt = mWidget:getChildByName("Back")
     backBt:addTouchEventListener( backEventHandler )
