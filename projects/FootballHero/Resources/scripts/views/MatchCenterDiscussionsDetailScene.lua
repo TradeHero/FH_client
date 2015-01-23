@@ -430,6 +430,7 @@ function initCommentContent( i, content, info )
             end
         end
         more:addTouchEventListener( moreEventHandler )
+        more:setText( Constants.String.match_center.more )
     else
         more:setEnabled( false )
     end
