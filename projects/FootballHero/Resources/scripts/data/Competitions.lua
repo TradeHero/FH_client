@@ -7,9 +7,9 @@ COMPETITION_TAB_ID_MONTHLY = 2
 COMPETITION_TAB_ID_WEEKLY = 3
 
 CompetitionTabs = {
-  { ["id"] = "Button_Overall", ["displayName"] = Constants.String.event.ranking_overall },
-  { ["id"] = "Button_Monthly", ["displayName"] = Constants.String.event.ranking_monthly },
-  { ["id"] = "Button_Weekly", ["displayName"] = Constants.String.event.ranking_weekly },
+  { ["id"] = "Button_Overall", ["displayNameKey"] = "ranking_overall" },
+  { ["id"] = "Button_Monthly", ["displayNameKey"] = "ranking_monthly" },
+  { ["id"] = "Button_Weekly", ["displayNameKey"] = "ranking_weekly" },
 }
 
 CompetitionType = {

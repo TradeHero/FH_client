@@ -100,10 +100,10 @@ function loadMainContent( winners )
     local contentContainer = tolua.cast( mWidget:getChildByName("ScrollView_Leaderboard"), "ScrollView" )
     local CTA = tolua.cast( mWidget:getChildByName("Label_CTA"), "Label" )
 
+    contentContainer:removeAllChildrenWithCleanup( true )
+
     if table.getn( winners ) > 0 then
         CTA:setEnabled( false )
-        
-        contentContainer:removeAllChildrenWithCleanup( true )
 
         local layoutParameter = LinearLayoutParameter:create()
         layoutParameter:setGravity(LINEAR_GRAVITY_CENTER_VERTICAL)
@@ -124,6 +124,7 @@ function loadMainContent( winners )
 
         mCurrentTotalNum = table.getn( winners )
     else
+        CTA:setEnabled( true )
         CTA:setText( Constants.String.spinWheel.no_one_won )
     end
 end
@@ -162,7 +163,7 @@ function initLeaderboardContent( i, content, info )
     local score = tolua.cast( top:getChildByName("Label_Score"), "Label" )
     local logo = tolua.cast( top:getChildByName("Image_Logo"), "ImageView" )
 
-    if info["DisplayName"] == nil then
+    if info["DisplayName"] == nil or type( info["DisplayName"] ) ~= "string"  then
         name:setText( Constants.String.unknown_name )
     else
         name:setText( info["DisplayName"] )
