@@ -60,4 +60,8 @@ function loadSpinUI( response )
     
     SpinWheelConfig.init( response )
     SpinWheelScene.loadFrame()
+
+    local params = { Action = "start" }
+    CCLuaLog("Send ANALYTICS_EVENT_SPINWHEEL: "..Json.encode( params ) )
+    Analytics:sharedDelegate():postEvent( Constants.ANALYTICS_EVENT_SPINWHEEL, Json.encode( params ) )
 end

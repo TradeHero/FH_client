@@ -37,12 +37,9 @@ function action( param )
 end
 
 function onRequestSuccess( jsonResponse )
-    local params = { Platform = "facebook", 
-                    Content = "Spin", 
-                    Action = "wall share", 
-                    Location = "Spin result" }
-    CCLuaLog("Send ANALYTICS_EVENT_SOCIAL_ACTION: "..Json.encode( params ) )
-    Analytics:sharedDelegate():postEvent( Constants.ANALYTICS_EVENT_SOCIAL_ACTION, Json.encode( params ) )
+    local params = { Action = "share" }
+    CCLuaLog("Send ANALYTICS_EVENT_SPINWHEEL: "..Json.encode( params ) )
+    Analytics:sharedDelegate():postEvent( Constants.ANALYTICS_EVENT_SPINWHEEL, Json.encode( params ) )
 
     mCallback( jsonResponse["GotExtraSpin"] )
 end

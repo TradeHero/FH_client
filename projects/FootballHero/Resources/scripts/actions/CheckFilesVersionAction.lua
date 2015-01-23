@@ -42,7 +42,14 @@ function action( param )
 	mFinishEvent = param[2]
 	mFinishEventParam = param[3]
 
-	mCurrentFileIndex = 0
+	if type( mConfigMd5Info ) == "table" then
+		mCurrentFileIndex = 0
+	else
+		-- If server reponse untable parameter for Configinfo,
+		-- We need to skip the check process and launch the app directly.
+		mCurrentFileIndex = table.getn( fileList ) + 1
+	end
+	
 	checkNext()
 end
 
@@ -88,7 +95,7 @@ function checkFile( fileIndex )
 	local MD5ConfigId = MD5ConfigIDList[fileIndex]
 	local serverMD5 = mConfigMd5Info[MD5ConfigId]
 	if serverMD5 == nil then
-		print( "Checking "..file..", but server MD5 is nil." )
+		CCLuaLog( "Checking "..file..", but server MD5 is nil." )
 		checkNext()
 		return
 	end
@@ -97,10 +104,10 @@ function checkFile( fileIndex )
 	-- Re-download the file if not match
 	local fileContent = FileUtils.readStringFromFile( file )
 	local localMD5 = MD5.sumhexa( fileContent )
-	print( "Checking "..file..": "..serverMD5.." | "..localMD5 )
+	CCLuaLog( "Checking "..file..": "..serverMD5.." | "..localMD5 )
 	if serverMD5 ~= localMD5 then
 		local handler = function( isSucceed, body, header, status, errorBuffer )
-	        print( "Http reponse: "..status.." and errorBuffer: "..errorBuffer )
+	        CCLuaLog( "Http reponse: "..status.." and errorBuffer: "..errorBuffer )
 	        ConnectingMessage.selfRemove()
 	        if status == RequestUtils.HTTP_200 then
 	            onRequestSuccess( file, body )
@@ -110,7 +117,7 @@ function checkFile( fileIndex )
 	    end
 
 	    local httpRequest = HttpRequestForLua:create( CCHttpRequest.kHttpGet )
-	    print("Downloading from: "..RequestUtils.CDN_SERVER_IP..CDNFileNameList[fileIndex])
+	    CCLuaLog("Downloading from: "..RequestUtils.CDN_SERVER_IP..CDNFileNameList[fileIndex])
 	    httpRequest:sendHttpRequest( RequestUtils.CDN_SERVER_IP..CDNFileNameList[fileIndex], handler )
 
 	    ConnectingMessage.loadFrame( string.format( Constants.String.updating_files, file ) )
@@ -127,7 +134,7 @@ function onRequestSuccess( fileName, fileContent )
 	if serverMD5 ~= nil and serverMD5 ~= localMD5 then
 		onRequestFailed("")
 	else
-		print("Update complete for file: "..fileName)
+		CCLuaLog("Update complete for file: "..fileName)
 		FileUtils.writeStringToFile( fileName, fileContent )
 		checkNext()
 	end

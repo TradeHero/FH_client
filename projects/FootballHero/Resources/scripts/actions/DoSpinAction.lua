@@ -33,6 +33,10 @@ end
     response data structure: {"PrizeId":4,"PrizeName":"US$ 1.00","NumberOfLuckyDrawTicketsLeft":0}
 --]]
 function onRequestSuccess( jsonResponse )
+    local params = { Action = "stop" }
+    CCLuaLog("Send ANALYTICS_EVENT_SPINWHEEL: "..Json.encode( params ) )
+    Analytics:sharedDelegate():postEvent( Constants.ANALYTICS_EVENT_SPINWHEEL, Json.encode( params ) )
+
     --Invalid the player balance cache.
     RequestUtils.invalidResponseCacheContainsUrl( RequestUtils.GET_COUPON_HISTORY_REST_CALL )
 
