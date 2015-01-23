@@ -205,6 +205,7 @@ StringsDefault = {
   },
   info = {
     announcement_title = "Announcement",
+    coming_soon = "Coming Soon!",
     competition_not_started = "Competition begins %s.",
     join_code_copied = "Join code is copied to clipboard.",
     leave_comment1 = "Let us know how we could improve!",

@@ -95,15 +95,17 @@ function initMatchCenterTab()
             tab:setTouchEnabled( false )
             tab:setTitleColor( ccc3( 255, 255, 255 ) )
         else
-
-            if MatchCenterConfig.MatchCenterType[i]["enabled"] then
-                local eventHandler = function( sender, eventType )
-                    if eventType == TOUCH_EVENT_ENDED then
+            local eventHandler = function( sender, eventType )
+                if eventType == TOUCH_EVENT_ENDED then
+                    if MatchCenterConfig.MatchCenterType[i]["enabled"] then
                         onSelectTab( i )
+                    else
+                        EventManager:postEvent( Event.Show_Info, { Constants.String.info.coming_soon } )
                     end
                 end
-                tab:addTouchEventListener( eventHandler )
             end
+            tab:addTouchEventListener( eventHandler )
+        
             tab:setBright( true )
             tab:setTouchEnabled( true )
             tab:setTitleColor( ccc3( 127, 127, 127 ) )

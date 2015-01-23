@@ -216,6 +216,7 @@ Strings = {
 	football_hero = "FootballHero",
 	message_hint = "Masukkan pesan",
 	info = {
+		coming_soon = "Segera Hadir!",
 		competition_not_started = "Kompetisi mulai %s.",
 		like_fh1 = "Apakah Anda suka FootballHero sejauh ini?",
 		predictions_entered = "Anda telah menyelesaikan pertandingan ini.",
