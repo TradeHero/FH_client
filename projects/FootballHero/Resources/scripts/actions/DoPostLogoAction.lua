@@ -48,6 +48,7 @@ end
 
 function onRequestSuccess( jsonResponse )
     CCLuaLog( "Do Post Logo action success with: "..jsonResponse )
+    Logic:setPictureUrl( jsonResponse )
     if mCallback ~= nil then
         mCallback()
     end
