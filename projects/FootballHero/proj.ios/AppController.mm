@@ -159,6 +159,8 @@ static AppDelegate s_sharedApplication;
     [[LocalyticsSession shared] upload];
     
     [MobileAppTracker measureSession];
+
+    [[AppsFlyerTracker sharedTracker] trackAppLaunch];
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
