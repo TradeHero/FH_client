@@ -9,6 +9,8 @@ local LanguagesConfig = require("scripts.config.Languages")
 local Constants = require("scripts.Constants")
 local Logic = require("scripts.Logic").getInstance()
 local SMIS = require("scripts.SMIS")
+local RequestUtils = require("scripts.RequestUtils")
+
 
 local mWidget
 local mLogo
