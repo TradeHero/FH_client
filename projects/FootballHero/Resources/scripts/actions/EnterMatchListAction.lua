@@ -71,7 +71,7 @@ end
 
 function onRequestSuccess( matchList )
     local MatchListData = require("scripts.data.MatchListData").MatchListData
-
+    local sortedMatchList
     if mLeagueId ~= Constants.SpecialLeagueIds.MOST_POPULAR then
         -- Sort the match according to its start time.
         local currentTime = os.time()
@@ -97,12 +97,15 @@ function onRequestSuccess( matchList )
                 return false
             end
         end )
-    end
 
-    -- Group and sort.
-    local sortedMatchList = MatchListData:new()
-    for k,v in pairs( matchList ) do
-        sortedMatchList:addMatch( v )
+        -- Group and sort.
+        sortedMatchList = MatchListData:new()
+        for k,v in pairs( matchList ) do
+            sortedMatchList:addMatch( v )
+        end
+
+    else
+        sortedMatchList = matchList
     end
 
 	local matchListScene = require("scripts.views.MatchListScene")

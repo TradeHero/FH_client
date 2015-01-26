@@ -195,65 +195,26 @@ function initMatchList( matchList, leagueKey, bInit )
         layoutParameter:setGravity(LINEAR_GRAVITY_CENTER_VERTICAL)
         local contentHeight = 0
         
-        mTheFirstDate = nil
-        for k,v in pairs( matchList:getMatchDateList() ) do
-            local matchDate = v
-
-            -- Vincent: for most popular leagues, there are no matches before the "Tap to make a prediction!" hint, thus there is no need for zOrder position shifting
-            local zOrder = matchDate["date"]
-            if leagueKey == Constants.SpecialLeagueIds.MOST_POPULAR then
-                zOrder = 1
-            end
-
-            local content = SceneManager.widgetFromJsonFile("scenes/MatchDate.json")
-            local dateDisplay = tolua.cast( content:getChildByName("Label_Date"), "Label" )
-            local timeDisplay = tolua.cast( content:getChildByName("Label_Time"), "Label" )
-            dateDisplay:setText( matchDate["dateDisplay"] )
-            timeDisplay:setText( matchDate["timeDisplay"] )
-            content:setLayoutParameter( layoutParameter )
-            content:setZOrder( zOrder )
-
-            if mTheFirstDate == nil then
-                local hintContent = SceneManager.widgetFromJsonFile("scenes/TapToMakePrediction.json")
-
-                local hintText = tolua.cast( hintContent:getChildByName("Label_Tap"), "Label" )
-                hintText:setText( Constants.String.match_prediction.hint_tap )
-
-                hintContent:setLayoutParameter( layoutParameter )
-                hintContent:setZOrder( zOrder )
-                contentContainer:addChild( hintContent )
-                contentHeight = contentHeight + hintContent:getSize().height
-
-                mTheFirstDate = content
-            end
-
-            -- Add the date
-            contentContainer:addChild( content )
-            contentHeight = contentHeight + content:getSize().height
-
-            content:setOpacity( 0 )
-            content:setCascadeOpacityEnabled( true )
-            mWidget:runAction( CCTargetedAction:create( content, CCFadeIn:create( CONTENT_FADEIN_TIME ) ) )
-
-            local i = 1
-            for inK, inV in pairs( matchDate["matches"] ) do
+        if leagueKey == Constants.SpecialLeagueIds.MOST_POPULAR then
+            
+            for i = 1, table.getn( matchList ) do
+                local match = matchList[i]
                 local eventHandler = function( sender, eventType )
                     if eventType == TOUCH_EVENT_ENDED then
-                        enterMatch( inV )
+                        enterMatch( match )
                     end
                 end
 
                 local content = SceneManager.widgetFromJsonFile("scenes/MatchListContent.json")
-                helperInitMatchInfo( content, inV, leagueKey )
+                helperInitMatchInfo( content, match, leagueKey )
 
                 content:setLayoutParameter( layoutParameter )
-                content:setZOrder( zOrder )
                 contentContainer:addChild( content )
                 contentHeight = contentHeight + content:getSize().height
 
                 content:addTouchEventListener( eventHandler )
 
-                if i == table.getn( matchDate["matches"] ) then
+                if i == table.getn( matchList ) then
                     local separator = content:getChildByName("Panel_Separator")
                     separator:setEnabled( false )
                 end
@@ -262,9 +223,78 @@ function initMatchList( matchList, leagueKey, bInit )
                 content:setCascadeOpacityEnabled( true )
                 mWidget:runAction( CCTargetedAction:create( content, CCFadeIn:create( CONTENT_FADEIN_TIME ) ) )
                 
-                updateContentContainer( contentHeight, content )
+                updateContentContainer( contentHeight, content, true )
+            end
 
-                i = i + 1
+        else
+            mTheFirstDate = nil
+            for k,v in pairs( matchList:getMatchDateList() ) do
+                local matchDate = v
+
+                -- Vincent: for most popular leagues, there are no matches before the "Tap to make a prediction!" hint, thus there is no need for zOrder position shifting
+                local zOrder = matchDate["date"]
+            
+                local content = SceneManager.widgetFromJsonFile("scenes/MatchDate.json")
+                local dateDisplay = tolua.cast( content:getChildByName("Label_Date"), "Label" )
+                local timeDisplay = tolua.cast( content:getChildByName("Label_Time"), "Label" )
+                dateDisplay:setText( matchDate["dateDisplay"] )
+                timeDisplay:setText( matchDate["timeDisplay"] )
+                content:setLayoutParameter( layoutParameter )
+                content:setZOrder( zOrder )
+
+                if mTheFirstDate == nil then
+                    local hintContent = SceneManager.widgetFromJsonFile("scenes/TapToMakePrediction.json")
+
+                    local hintText = tolua.cast( hintContent:getChildByName("Label_Tap"), "Label" )
+                    hintText:setText( Constants.String.match_prediction.hint_tap )
+
+                    hintContent:setLayoutParameter( layoutParameter )
+                    hintContent:setZOrder( zOrder )
+                    contentContainer:addChild( hintContent )
+                    contentHeight = contentHeight + hintContent:getSize().height
+
+                    mTheFirstDate = content
+                end
+
+                -- Add the date
+                contentContainer:addChild( content )
+                contentHeight = contentHeight + content:getSize().height
+
+                content:setOpacity( 0 )
+                content:setCascadeOpacityEnabled( true )
+                mWidget:runAction( CCTargetedAction:create( content, CCFadeIn:create( CONTENT_FADEIN_TIME ) ) )
+
+                local i = 1
+                for inK, inV in pairs( matchDate["matches"] ) do
+                    local eventHandler = function( sender, eventType )
+                        if eventType == TOUCH_EVENT_ENDED then
+                            enterMatch( inV )
+                        end
+                    end
+
+                    local content = SceneManager.widgetFromJsonFile("scenes/MatchListContent.json")
+                    helperInitMatchInfo( content, inV, leagueKey )
+
+                    content:setLayoutParameter( layoutParameter )
+                    content:setZOrder( zOrder )
+                    contentContainer:addChild( content )
+                    contentHeight = contentHeight + content:getSize().height
+
+                    content:addTouchEventListener( eventHandler )
+
+                    if i == table.getn( matchDate["matches"] ) then
+                        local separator = content:getChildByName("Panel_Separator")
+                        separator:setEnabled( false )
+                    end
+
+                    content:setOpacity( 0 )
+                    content:setCascadeOpacityEnabled( true )
+                    mWidget:runAction( CCTargetedAction:create( content, CCFadeIn:create( CONTENT_FADEIN_TIME ) ) )
+                    
+                    updateContentContainer( contentHeight, content )
+
+                    i = i + 1
+                end
             end
         end
 
@@ -500,14 +530,15 @@ function checkFacebookAndOpenWebview()
     end
 end
 
-function updateContentContainer( contentHeight, addContent )
+function updateContentContainer( contentHeight, addContent, bPopular )
     local contentContainer = tolua.cast( mWidget:getChildByName("ScrollView"), "ScrollView" )
 
     contentContainer:setInnerContainerSize( CCSize:new( 0, contentHeight ) )
     local layout = tolua.cast( contentContainer, "Layout" )
     layout:requestDoLayout()
 
-    if mTheFirstDate ~= nil then
+
+    if bPopular == nil and mTheFirstDate ~= nil then
         if addContent:getZOrder() < mTheFirstDate:getZOrder() then
             local y = contentContainer:getInnerContainer():getPositionY() + addContent:getSize().height
             contentContainer:jumpToDestination( ccp( 0, y ) )
