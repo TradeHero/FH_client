@@ -170,5 +170,6 @@ function initCouponInfo( content, info )
         end
     else
         points:setText( string.format( Constants.String.num_of_points, info["Profit"] ) )
+        winLoseLabel:setText(Constants.String.history.won_colon)
     end
 end
