@@ -22,12 +22,10 @@ function loadFrame( parent, jsonResponse )
     local discussionInfo
     if jsonResponse["GameInformation"] == nil then
         discussionInfo = jsonResponse
-        mMatch = Logic:getSelectedMatch()
     else
         discussionInfo = jsonResponse["DiscussionInformation"]
-        mMatch = jsonResponse["GameInformation"]
-        Logic:setSelectedMatch( mMatch )
     end
+    mMatch = Logic:getSelectedMatch()
     
     mStep = 1
     if table.getn( discussionInfo ) < Constants.DISCUSSIONS_PER_PAGE then

@@ -21,7 +21,13 @@ local mBigBetStatus = {}
 
 function loadFrame( jsonResponse, tabID )
     
-    mMatch = Logic:getSelectedMatch()
+    if jsonResponse["GameInformation"] == nil then
+        mMatch = Logic:getSelectedMatch()
+    else
+        mMatch = jsonResponse["GameInformation"]
+        Logic:setSelectedMatch( mMatch )
+    end
+    
     mTabID = tabID
     
 	mWidget = GUIReader:shareReader():widgetFromJsonFile("scenes/MatchCenterTopScene.json")
