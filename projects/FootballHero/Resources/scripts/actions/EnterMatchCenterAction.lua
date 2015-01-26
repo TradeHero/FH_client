@@ -13,7 +13,8 @@ local mTabID
 
 function action( param )
     mTabID = param[1]
-    local match = Logic:getSelectedMatch()
+    local matchID = param[2]
+
     local step = 1
 
     local url
@@ -21,12 +22,17 @@ function action( param )
         --url = RequestUtils.GET_COMPETITION_LIST_REST_CALL
         
     elseif mTabID == MatchCenterConfig.MATCH_CENTER_TAB_ID_DISCUSSION then
-        url = RequestUtils.GET_DISCUSSION_REST_CALL..
-                "?discussionObjectId="..MatchCenterConfig.DISCUSSION_POST_TYPE_GAME..
-                "&parentId="..match["Id"]..
-                "&step="..step..
-                "&perPage="..Constants.DISCUSSIONS_PER_PAGE
-                --"&lastPostTime=<unixTimeStamp>"
+        if matchID == nil then
+            local match = Logic:getSelectedMatch()
+            url = RequestUtils.GET_DISCUSSION_REST_CALL..
+                    "?discussionObjectId="..MatchCenterConfig.DISCUSSION_POST_TYPE_GAME..
+                    "&parentId="..match["Id"]..
+                    "&step="..step..
+                    "&perPage="..Constants.DISCUSSIONS_PER_PAGE
+                    --"&lastPostTime=<unixTimeStamp>"
+        else
+            url = RequestUtils.GET_MATCH_CENTER.."?gameId="..matchID
+        end
     end
 
     local requestInfo = {}

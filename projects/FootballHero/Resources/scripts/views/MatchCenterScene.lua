@@ -189,7 +189,7 @@ function loadDiscussionsScene( contentContainer, jsonResponse )
 end
 
 function onSelectTab( tabID )
-    EventManager:postEvent( Event.Enter_Match_Center, { tabID, 1, 1 } )
+    EventManager:postEvent( Event.Enter_Match_Center, { tabID } )
 end
 
 function enterMatch()

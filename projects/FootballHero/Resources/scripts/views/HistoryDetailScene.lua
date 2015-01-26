@@ -7,6 +7,7 @@ local Event = require("scripts.events.Event").EventList
 local MarketConfig = require("scripts.config.Market")
 local TeamConfig = require("scripts.config.Team")
 local Constants = require("scripts.Constants")
+local MatchCenterConfig = require("scripts.config.MatchCenter")
 
 local CONTENT_FADEIN_TIME = 1
 
@@ -34,7 +35,7 @@ function loadFrame( isOpen, matchInfo )
     backBt:addTouchEventListener( backEventHandler )
 
     helperInitMatchInfo( mWidget, matchInfo )
-    initContent()
+    initContent( matchInfo["GameId"] )
 end
 
 function EnterOrExit( eventType )
@@ -54,7 +55,17 @@ function keypadBackEventHandler()
     EventManager:popHistory()
 end
 
-function initContent()
+function initContent( matchId )
+
+    local matchCenterEvent = function( sender,eventType  )
+        if eventType == TOUCH_EVENT_ENDED then
+            EventManager:postEvent( Event.Enter_Match_Center, { MatchCenterConfig.MATCH_CENTER_TAB_ID_DISCUSSION, matchId } )
+        end
+    end
+    local matchCenter = tolua.cast( mWidget:getChildByName("Button_MatchCenter"), "Button" )
+    matchCenter:setTitleText( Constants.String.match_center.title )
+    matchCenter:addTouchEventListener( matchCenterEvent )
+
     local contentWidgetFile = "scenes/HistoryDetailClosedContent.json"
     if mIsOpen then
         contentWidgetFile = "scenes/HistoryDetailOpenContent.json"
@@ -170,5 +181,6 @@ function initCouponInfo( content, info )
         end
     else
         points:setText( string.format( Constants.String.num_of_points, info["Profit"] ) )
+        winLoseLabel:setText(Constants.String.history.won_colon)
     end
 end

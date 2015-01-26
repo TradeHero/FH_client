@@ -15,12 +15,20 @@ local mHasMoreToLoad
 local mMatch
 
 -- DS for subType see LeaderboardConfig
-function loadFrame( parent, discussionInfo )
+function loadFrame( parent, jsonResponse )
 	mWidget = GUIReader:shareReader():widgetFromJsonFile("scenes/MatchCenterDiscussionsFrame.json")
     parent:addChild( mWidget )
 
-    mMatch = Logic:getSelectedMatch()
-
+    local discussionInfo
+    if jsonResponse["GameInformation"] == nil then
+        discussionInfo = jsonResponse
+        mMatch = Logic:getSelectedMatch()
+    else
+        discussionInfo = jsonResponse["DiscussionInformation"]
+        mMatch = jsonResponse["GameInformation"]
+        Logic:setSelectedMatch( mMatch )
+    end
+    
     mStep = 1
     if table.getn( discussionInfo ) < Constants.DISCUSSIONS_PER_PAGE then
         mHasMoreToLoad = false

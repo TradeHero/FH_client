@@ -242,7 +242,7 @@ function initContent( couponHistory )
 
     lb_stat_win:setText( Constants.String.leaderboard.stats_win )
     lb_stat_lose:setText( Constants.String.leaderboard.stats_lose )
-    print( "win rate = "..Constants.String.leaderboard.stats_win_rate)
+
     lb_stat_win_percent:setText( Constants.String.leaderboard.stats_win_rate )
     lb_stat_gain_percent:setText( Constants.String.leaderboard.stats_gain_rate )
     lb_stat_last_10:setText( Constants.String.leaderboard.stats_last_ten )
