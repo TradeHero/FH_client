@@ -10,12 +10,7 @@
   "designHeight": 1136,
   "designWidth": 640,
   "textures": [],
-  "texturesPng": [
-    "MatchListContent/icn-fans.png",
-    "MatchListContent/icn-played.png",
-    "community/img-leaguebox.png",
-    "commonRes/default.png"
-  ],
+  "texturesPng": [],
   "version": "1.6.0.0",
   "widgetTree": {
     "classname": "Panel",
@@ -506,7 +501,7 @@
               "ignoreSize": true,
               "layoutParameter": null,
               "opacity": 255,
-              "positionPercentX": 0.65,
+              "positionPercentX": 0.725,
               "positionPercentY": 0.5,
               "positionType": 0,
               "rotation": 0,
@@ -520,7 +515,7 @@
               "useMergedTexture": false,
               "visible": true,
               "width": 77,
-              "x": 104,
+              "x": 116,
               "y": 20,
               "areaHeight": 0,
               "areaWidth": 0,
