@@ -166,6 +166,7 @@ function initSettingsLanguage( contentContainer )
     contentHeight = contentHeight + content:getSize().height
 
     button:addTouchEventListener( toggleLanguageEventHandler )
+    arrow:addTouchEventListener( toggleLanguageEventHandler )
     mDropdown = SceneManager.widgetFromJsonFile("scenes/SettingsItemDropdownFrame.json")
     local dropdown = mDropdown:getChildByName("Panel_Dropdown")
 
@@ -268,6 +269,16 @@ end
 
 function toggleLanguageEventHandler( sender,eventType )
     if eventType == TOUCH_EVENT_ENDED then
+        
+        local parent = sender:getParent()
+        local arrow = tolua.cast( parent:getChildByName("Image_Arrow"), "ImageView" )
+        
+        if mDropdown:isEnabled() then
+            arrow:setRotation( 270 )
+        else
+            arrow:setRotation( 0 )
+        end
+
         toggleLanguageDropDown()
     end
 end
