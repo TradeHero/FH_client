@@ -10,7 +10,12 @@
   "designHeight": 1136,
   "designWidth": 640,
   "textures": [],
-  "texturesPng": [],
+  "texturesPng": [
+    "MatchListContent/icn-fans.png",
+    "MatchListContent/icn-played.png",
+    "community/img-leaguebox.png",
+    "commonRes/default.png"
+  ],
   "version": "1.6.0.0",
   "widgetTree": {
     "classname": "Panel",
@@ -410,7 +415,7 @@
           "touchAble": false,
           "useMergedTexture": false,
           "visible": true,
-          "width": 102,
+          "width": 48,
           "x": 376,
           "y": 48,
           "areaHeight": 0,
@@ -419,7 +424,7 @@
           "fontName": "fonts/Helvetica neue.ttf",
           "fontSize": 22,
           "hAlignment": 0,
-          "text": "Total Fans",
+          "text": "Fans",
           "touchScaleEnable": false,
           "vAlignment": 0
         }

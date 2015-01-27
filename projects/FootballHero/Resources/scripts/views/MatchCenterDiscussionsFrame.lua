@@ -14,10 +14,20 @@ local mCurrentTotalNum
 local mHasMoreToLoad
 local mMatch
 
+local mScrollPositionY
+--local mCurrScrollDirection
+local mScrollCallback
+
+local CONTENT_HEIGHT_LARGE = 880
+local CONTENT_HEIGHT_SMALL = 520
+local CONTENT_HEIGHT_SPEED = 30
+
 -- DS for subType see LeaderboardConfig
-function loadFrame( parent, jsonResponse )
+function loadFrame( parent, jsonResponse, callback )
 	mWidget = GUIReader:shareReader():widgetFromJsonFile("scenes/MatchCenterDiscussionsFrame.json")
     parent:addChild( mWidget )
+
+    mScrollCallback = callback
 
     local discussionInfo
     if jsonResponse["GameInformation"] == nil then
@@ -84,6 +94,7 @@ function initContent( discussionInfo )
     local layout = tolua.cast( contentContainer, "Layout" )
     layout:requestDoLayout()
     contentContainer:addEventListenerScrollView( scrollViewEventHandler )
+    contentContainer:addTouchEventListener( scrollTouchEventListener )
 end
 
 function initDiscussionContent( i, content, info )
@@ -214,13 +225,56 @@ function loadMoreContent( discussionInfo )
     layout:requestDoLayout()
 end
 
+
+
+function scrollTouchEventListener( sender, eventType )
+    if eventType == TOUCH_EVENT_ENDED then
+        mScrollPositionY = nil
+    end
+end
+
 function scrollViewEventHandler( target, eventType )
     
+    if eventType == SCROLLVIEW_EVENT_SCROLLING then
+        local scrollview = tolua.cast( target, "ScrollView" )
+        local container = scrollview:getInnerContainer()
+        
+        local currentHeight = scrollview:getSize().height
+        local newHeight = currentHeight
+
+        if mScrollPositionY ~= nil then
+            if mScrollPositionY < container:getPositionY() then
+                --print("scrolling down..")
+                showMatchInfo( false )
+
+                newHeight = math.min( currentHeight + CONTENT_HEIGHT_SPEED, CONTENT_HEIGHT_LARGE )
+                
+            elseif mScrollPositionY > container:getPositionY() then
+                --print("scrolling up..")
+                showMatchInfo( true )
+
+                newHeight = math.max( currentHeight - CONTENT_HEIGHT_SPEED, CONTENT_HEIGHT_SMALL )
+            end
+
+            scrollview:setSize( CCSize:new( scrollview:getSize().width, newHeight ) )
+            scrollview:setPositionY( scrollview:getPositionY() + currentHeight -  newHeight )
+            --scrollview:setInnerContainerSize( CCSize:new( 0, newHeight ) )
+
+            local layout = tolua.cast( scrollview, "Layout" )
+            layout:requestDoLayout()
+        end
+        mScrollPositionY = container:getPositionY()
+    end
+
     if eventType == SCROLLVIEW_EVENT_BOUNCE_BOTTOM and mHasMoreToLoad then
         mStep = mStep + 1
         
         EventManager:postEvent( Event.Load_More_Discussion_Posts, { mMatch["Id"], mStep, MatchCenterConfig.DISCUSSION_POST_TYPE_GAME } )
     end
+end
+
+function showMatchInfo( bShow )
+    mScrollCallback( bShow )
 end
 
 function shareTypeSelectEventHandler( sender, eventType )

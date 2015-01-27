@@ -426,7 +426,6 @@ function initCommentContent( i, content, info )
                 contentContainer:setInnerContainerSize( CCSize:new( 0, contentContainer:getInnerContainerSize().height + deltaHeight ) )
                 local layout = tolua.cast( contentContainer, "Layout" )
                 layout:requestDoLayout()
-                contentContainer:addEventListenerScrollView( scrollViewEventHandler )
             end
         end
         more:addTouchEventListener( moreEventHandler )

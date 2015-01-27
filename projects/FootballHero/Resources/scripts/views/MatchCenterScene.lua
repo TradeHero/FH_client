@@ -17,6 +17,10 @@ local mMarketsInfo
 local MIN_MOVE_DISTANCE = 100
 local SWITCH_MOVE_TIME = 0.4
 
+local CONTENT_HEIGHT_LARGE = 960
+local CONTENT_HEIGHT_SMALL = 600
+local CONTENT_HEIGHT_SPEED = 30
+
 local mBigBetStatus = {}
 
 function loadFrame( jsonResponse, tabID )
@@ -89,9 +93,10 @@ function loadMainContent( jsonResponse )
 end
 
 function initMatchCenterTab()
+    local fade = mWidget:getChildByName("Panel_Fade")
     for i = 1, table.getn( MatchCenterConfig.MatchCenterType ) do
         
-        local tab = tolua.cast( mWidget:getChildByName( MatchCenterConfig.MatchCenterType[i]["id"] ), "Button" )
+        local tab = tolua.cast( fade:getChildByName( MatchCenterConfig.MatchCenterType[i]["id"] ), "Button" )
         tab:setTitleText( Constants.String.match_center[MatchCenterConfig.MatchCenterType[i]["displayNameKey"]] )
 
         local isActive = mTabID == i
@@ -121,24 +126,26 @@ end
 
 function initMatchPredictionContent()
     local title = tolua.cast( mWidget:getChildByName("Label_Title"), "Label" )
-    local date = tolua.cast( mWidget:getChildByName("Label_Date"), "Label" )
-    local played = tolua.cast( mWidget:getChildByName("Label_Played"), "Label" )
-    local playedCount = tolua.cast( mWidget:getChildByName("Label_PlayedCount"), "Label" )
-    local predict = tolua.cast( mWidget:getChildByName("Button_Prediction"), "Button" )
-    local discussion = tolua.cast( mWidget:getChildByName("Button_Discussion"), "Button" )
-    local meetings = tolua.cast( mWidget:getChildByName("Button_Meetings"), "Button" )
-    local compName = tolua.cast( mWidget:getChildByName("Label_CompetitionName"), "Label" )
+    local fade = mWidget:getChildByName("Panel_Fade")
+    
+    local date = tolua.cast( fade:getChildByName("Label_Date"), "Label" )
+    local played = tolua.cast( fade:getChildByName("Label_Played"), "Label" )
+    local playedCount = tolua.cast( fade:getChildByName("Label_PlayedCount"), "Label" )
+    local predict = tolua.cast( fade:getChildByName("Button_Prediction"), "Button" )
+    local discussion = tolua.cast( fade:getChildByName("Button_Discussion"), "Button" )
+    local meetings = tolua.cast( fade:getChildByName("Button_Meetings"), "Button" )
+    local compName = tolua.cast( fade:getChildByName("Label_CompetitionName"), "Label" )
 
-    local team1 = tolua.cast( mWidget:getChildByName("Image_Team1"), "ImageView" )
-    local team2 = tolua.cast( mWidget:getChildByName("Image_Team2"), "ImageView" )
-    local team1Name = tolua.cast( mWidget:getChildByName("Label_Team1"), "Label" )
-    local team2Name = tolua.cast( mWidget:getChildByName("Label_Team2"), "Label" )
-    local vs = tolua.cast( mWidget:getChildByName("Label_VS"), "Label" )
+    local team1 = tolua.cast( fade:getChildByName("Image_Team1"), "ImageView" )
+    local team2 = tolua.cast( fade:getChildByName("Image_Team2"), "ImageView" )
+    local team1Name = tolua.cast( fade:getChildByName("Label_Team1"), "Label" )
+    local team2Name = tolua.cast( fade:getChildByName("Label_Team2"), "Label" )
+    local vs = tolua.cast( fade:getChildByName("Label_VS"), "Label" )
 
-    local homePercent = tolua.cast( mWidget:getChildByName("Label_HomePercent"), "Label" )
-    local awayPercent = tolua.cast( mWidget:getChildByName("Label_AwayPercent"), "Label" )
-    local drawPercent = tolua.cast( mWidget:getChildByName("Label_DrawPercent"), "Label" )
-    local lbDraw = tolua.cast( mWidget:getChildByName("Label_Draw"), "Label" )
+    local homePercent = tolua.cast( fade:getChildByName("Label_HomePercent"), "Label" )
+    local awayPercent = tolua.cast( fade:getChildByName("Label_AwayPercent"), "Label" )
+    local drawPercent = tolua.cast( fade:getChildByName("Label_DrawPercent"), "Label" )
+    local lbDraw = tolua.cast( fade:getChildByName("Label_Draw"), "Label" )
 
     lbDraw:setText( Constants.String.match_list.draw )
     
@@ -191,7 +198,7 @@ end
 
 function loadDiscussionsScene( contentContainer, jsonResponse )
     local MatchCenterDiscussionsFrame = require("scripts.views.MatchCenterDiscussionsFrame")
-    MatchCenterDiscussionsFrame.loadFrame( contentContainer, jsonResponse )
+    MatchCenterDiscussionsFrame.loadFrame( contentContainer, jsonResponse, showMatchInfo )
 end
 
 function onSelectTab( tabID )
@@ -200,4 +207,29 @@ end
 
 function enterMatch()
     EventManager:postEvent( Event.Enter_Match, { mMatch["Id"] } )
+end
+
+function showMatchInfo( bShow )
+    local contentContainer = mWidget:getChildByName("Panel_Content")
+    local currentHeight = contentContainer:getSize().height
+    local newHeight =currentHeight
+
+    if bShow then
+        newHeight = currentHeight - CONTENT_HEIGHT_SPEED
+
+        if newHeight <= CONTENT_HEIGHT_SMALL then
+            newHeight = CONTENT_HEIGHT_SMALL
+        end
+        
+    else
+        newHeight = currentHeight + CONTENT_HEIGHT_SPEED
+
+        if newHeight >= CONTENT_HEIGHT_LARGE then
+            newHeight = CONTENT_HEIGHT_LARGE
+        end
+    end
+
+    contentContainer:setSize( CCSize:new( contentContainer:getSize().width, newHeight ) )
+    local layout = tolua.cast( contentContainer, "Layout" )
+    layout:requestDoLayout()
 end
