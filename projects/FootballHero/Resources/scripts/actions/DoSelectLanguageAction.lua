@@ -15,8 +15,7 @@ function action( param )
 
 	local languageConfig = LanguagesConfig.getLanguageConfigById( appLanguage )
 	Constants.setLanguage( languageConfig["LocalizedStringFile"] )
-
-
+    os.setlocale( languageConfig["locale"], "time" )
 
 	-- Reload the settings page.
 	local reloadHandler
