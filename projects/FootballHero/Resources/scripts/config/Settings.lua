@@ -16,7 +16,7 @@ SettingsItem = {
 			--{ ["itemName"] = Constants.String.settings.phone_num, ["event"] = Event.Update_Phone_Number, },
 		},
 	},
-	{ ["SettingType"] = SETTING_TYPE_FAVORITE_TEAM, ["TitleKey"] = "favorite_team", ["Enabled"] = false, ["Items"] = 
+	{ ["SettingType"] = SETTING_TYPE_FAVORITE_TEAM, ["TitleKey"] = "favorite_team", ["Enabled"] = true, ["Items"] = 
 		{
 			--{ ["itemName"] = Constants.String.settings.choose_fav_team, ["event"] = Event.Update_Favorite_Team },
 		},

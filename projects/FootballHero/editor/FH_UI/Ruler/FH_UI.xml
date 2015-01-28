@@ -17,19 +17,11 @@
     <GuidesList />
   </GuidesProject>
   <GuidesProject>
-    <Project>LeagueListContent</Project>
-    <GuidesList />
-  </GuidesProject>
-  <GuidesProject>
     <Project>MatchListContent</Project>
     <GuidesList />
   </GuidesProject>
   <GuidesProject>
     <Project>MatchDate</Project>
-    <GuidesList />
-  </GuidesProject>
-  <GuidesProject>
-    <Project>CountryListContent</Project>
     <GuidesList />
   </GuidesProject>
   <GuidesProject>
@@ -94,10 +86,6 @@
   </GuidesProject>
   <GuidesProject>
     <Project>SettingsHome</Project>
-    <GuidesList />
-  </GuidesProject>
-  <GuidesProject>
-    <Project>SettingsHomeContent</Project>
     <GuidesList />
   </GuidesProject>
   <GuidesProject>
@@ -414,6 +402,14 @@
   </GuidesProject>
   <GuidesProject>
     <Project>SettingsItemDropdownFrame</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>SettingsLeagueListContentFrame</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>SettingsTeamListContentFrame</Project>
     <GuidesList />
   </GuidesProject>
 </ArrayOfGuidesProject>

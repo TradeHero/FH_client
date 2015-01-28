@@ -30,7 +30,6 @@ EventNameList =
     "Enter_Match_Center",
     "Enter_Prediction_Confirm",
     "Enter_Pred_Total_Confirm",
-    "Enter_Sel_Fav_Team",
     "Enter_Next_Prediction",
     "Enter_History",
     "Enter_History_Detail",
@@ -59,7 +58,8 @@ EventNameList =
     "Enter_Spin_balance",
     "Enter_Make_Discussion_Post",
     "Enter_Discussion_Details",
-
+    "Enter_Settings_Select_League",
+    "Enter_Settings_Select_Team",
 
     "Do_Ask_For_Rate",
     "Do_Ask_For_Comment",

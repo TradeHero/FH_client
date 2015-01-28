@@ -66,7 +66,6 @@ function loadFrame( selectedLeagues )
     end
 
     local existingContentHeight = mInputWidget:getSize().height + BLANK_AREA_HEIGHT
-    print( existingContentHeight )
     SelectedLeaguesScene.loadFrame( contentContainer, Logic:getSelectedLeagues(), true, existingContentHeight )
 
     local confirmBt = tolua.cast( mWidget:getChildByName("Button_Create"), "Button" )

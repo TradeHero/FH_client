@@ -27,6 +27,9 @@ function loadFrame()
 
     Navigator.loadFrame( widget )
 
+    local backBt = mWidget:getChildByName("Button_Back")
+    backBt:setEnabled( false )
+
     initContent()
 end
 
@@ -67,13 +70,7 @@ function initContent()
         local SettingsSubItem = SettingsConfig.SettingsItem[i]
 
         if SettingsSubItem.Enabled then
-            local header = SceneManager.widgetFromJsonFile("scenes/SettingsItemHeaderFrame.json")
-            contentContainer:addChild( header )
-            contentHeight = contentHeight + header:getSize().height
-
-            local title = tolua.cast( header:getChildByName("Label_Name"), "Label" )
-            title:setText( Constants.String.settings[SettingsSubItem["TitleKey"]] )
-
+            contentHeight = contentHeight + initSettingsHeader( contentContainer, SettingsSubItem )
             contentHeight = contentHeight + initSettingsSubItem( contentContainer, SettingsSubItem )
         end
 
@@ -82,6 +79,29 @@ function initContent()
     contentContainer:setInnerContainerSize( CCSize:new( 0, contentHeight ) )
     local layout = tolua.cast( contentContainer, "Layout" )
     layout:requestDoLayout()
+end
+
+function initSettingsHeader( contentContainer, settingsSubItem )
+    local header = SceneManager.widgetFromJsonFile("scenes/SettingsItemHeaderFrame.json")
+    contentContainer:addChild( header )
+    
+    local title = tolua.cast( header:getChildByName("Label_Name"), "Label" )
+    title:setText( Constants.String.settings[settingsSubItem["TitleKey"]] )
+
+    local edit = tolua.cast( header:getChildByName("Button_Edit"), "Button" )
+
+    if settingsSubItem.SettingType == SettingsConfig.SETTING_TYPE_FAVORITE_TEAM then
+        local editEventHandler = function( sender, eventType )
+            if eventType == TOUCH_EVENT_ENDED then
+                EventManager:postEvent( Event.Enter_Settings_Select_League )
+            end
+        end
+        edit:addTouchEventListener( editEventHandler )
+    else
+        edit:setEnabled( false )
+    end
+
+    return header:getSize().height
 end
 
 function initSettingsSubItem( contentContainer, settingsSubItem )
@@ -141,11 +161,24 @@ function initSettingsUserInfo( contentContainer, settingsSubItem )
 end
 
 function initSettingsFavoriteTeam( contentContainer, settingsSubItem )
-    -- TODO next version
-    -- local content = SceneManager.widgetFromJsonFile("scenes/SettingsUserInformationFrame.json")
     
-    -- contentContainer:addChild( content )
-    -- contentHeight = contentHeight + content:getSize().height
+    local contentHeight = 0
+
+    -- foreach fav teams
+        local content = SceneManager.widgetFromJsonFile("scenes/SettingsItemContentFrame.json")
+        local teamName = tolua.cast( content:getChildByName("Label_Name"), "Label" )
+        local button = tolua.cast( content:getChildByName("Panel_Button"), "Layout" )
+        local arrow = content:getChildByName("Image_Arrow")
+
+        teamName:setText( Constants.String.settings.favorite_team_none )
+        button:setBackGroundImage( Constants.COMMUNITY_IMAGE_PATH.."img-leaguebox.png" )
+        arrow:setEnabled( false )
+
+    
+    contentContainer:addChild( content )
+    contentHeight = contentHeight + content:getSize().height
+
+    return contentHeight
 end
 
 function initSettingsLanguage( contentContainer )

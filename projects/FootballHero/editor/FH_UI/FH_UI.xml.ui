@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
 <UIProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <ProjectDir>Z:\FH_client\projects\FootballHero\editor\FH_UI</ProjectDir>
+  <ProjectDir>Z:\workspace\FH_client\projects\FootballHero\editor\FH_UI</ProjectDir>
   <Version>1.6.0.0</Version>
-  <Resources>Z:\FH_client\projects\FootballHero\editor\FH_UI\Resources</Resources>
+  <Resources>Z:\workspace\FH_client\projects\FootballHero\editor\FH_UI\Resources</Resources>
   <Name>FH_UI</Name>
   <JsonFileName>FH_UI.json</JsonFileName>
-  <JsonFolder>Z:\FH_client\projects\FootballHero\editor\FH_UI\Json</JsonFolder>
+  <JsonFolder>Z:\workspace\FH_client\projects\FootballHero\editor\FH_UI\Json</JsonFolder>
   <JsonList>
     <string>Chat.json</string>
     <string>ChatMessageContent.json</string>
@@ -22,7 +22,6 @@
     <string>CompetitionMore.json</string>
     <string>CompetitionMoreContent.json</string>
     <string>ConnectingMessage.json</string>
-    <string>CountryListContent.json</string>
     <string>CreateCompetition.json</string>
     <string>CreateCompetitionContent.json</string>
     <string>ErrorMessage.json</string>
@@ -35,7 +34,6 @@
     <string>LeaderboardScene.json</string>
     <string>LeagueDropdownContent.json</string>
     <string>LeagueContentWithTransparentBG.json</string>
-    <string>LeagueListContent.json</string>
     <string>MatchListDropDown.json</string>
     <string>MarketingMessage.json</string>
     <string>MatchDate.json</string>
@@ -54,7 +52,6 @@
     <string>PushNotification.json</string>
     <string>PushNotificationMessage.json</string>
     <string>SettingsHome.json</string>
-    <string>SettingsHomeContent.json</string>
     <string>ShareTypeSelection.json</string>
     <string>SoundSettings.json</string>
     <string>TapToMakePrediction.json</string>
@@ -104,16 +101,24 @@
     <string>SettingsItemHeaderFrame.json</string>
     <string>SettingsUserInformationFrame.json</string>
     <string>SettingsItemDropdownFrame.json</string>
+    <string>SettingsLeagueListContentFrame.json</string>
+    <string>SettingsTeamListContentFrame.json</string>
   </JsonList>
   <CanvasSize>
     <Width>640</Width>
     <Height>1136</Height>
   </CanvasSize>
-  <filePath>Z:\FH_client\projects\FootballHero\editor\FH_UI\FH_UI.xml.ui</filePath>
+  <filePath>Z:\workspace\FH_client\projects\FootballHero\editor\FH_UI\FH_UI.xml.ui</filePath>
   <ProjectType>UIProject</ProjectType>
   <ResRelativePath />
   <imageFileList />
-  <imagePngList />
+  <imagePngList>
+    <string>community/img-leaguebox.png</string>
+    <string>community/img-separator.png</string>
+    <string>commonRes/England.png</string>
+    <string>Settings/img-add.png</string>
+    <string>Settings/img-added.png</string>
+  </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>SpinWinnersScene.json</CurrentUIJson>
+  <CurrentUIJson>SettingsTeamListContentFrame.json</CurrentUIJson>
 </UIProject>
