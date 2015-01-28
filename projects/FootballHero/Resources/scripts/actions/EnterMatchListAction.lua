@@ -11,7 +11,7 @@ local RateManager = require("scripts.RateManager")
 
 
 local mLeagueId
-local mCheckShowMarketingMessage
+--local mCheckShowMarketingMessage
 
 function action( param )
     local leagueId = Logic:getStartLeagueId()
@@ -22,11 +22,11 @@ function action( param )
     if param ~= nil and param[1] ~= nil then
         leagueId = param[1]
     end
-    if param ~= nil then
-        mCheckShowMarketingMessage = param[2]
-    else
-        mCheckShowMarketingMessage = false
-    end
+    -- if param ~= nil then
+    --     mCheckShowMarketingMessage = param[2]
+    -- else
+    --     mCheckShowMarketingMessage = false
+    -- end
 
     mLeagueId = leagueId
 
@@ -112,9 +112,10 @@ function onRequestSuccess( matchList )
         matchListScene.loadFrame( sortedMatchList, mLeagueId )
     end
     
-    if mCheckShowMarketingMessage then
-        EventManager:postEvent( Event.Show_Marketing_Message, { mLeagueId } )
-    end
+    -- disabled
+    -- if mCheckShowMarketingMessage then
+    --     EventManager:postEvent( Event.Show_Marketing_Message, { mLeagueId } )
+    -- end
 
     if RateManager.shouldAskToRate() then
         EventManager:postEvent( Event.Do_Ask_For_Rate )
