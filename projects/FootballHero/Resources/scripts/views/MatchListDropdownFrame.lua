@@ -34,6 +34,9 @@ function initCountryList()
     -- Edit: Add "Special" tab
     contentHeight = contentHeight + addSpecial()
 
+    -- TODO sort by default/non-default leagues
+    contentHeight = contentHeight + addMoreRegion()
+
     for i = 1, mCountryNum do
         -- Assume there is at least 1 league and get it
         local leagueId = CountryConfig.getLeagueList( i )[1]
@@ -146,3 +149,42 @@ function addSpecial()
 
     return content:getSize().height
 end
+
+function addMoreRegion()
+
+    local content = SceneManager.widgetFromJsonFile( mCountryWidget );
+    mCountryListContainer:addChild( content, 0, mChildIndex );
+    content:addTouchEventListener( toggleRegions )
+
+    local logo = tolua.cast( content:getChildByName("Image_CountryLogo"), "ImageView" )
+    local label = tolua.cast( content:getChildByName("Label_CountryName"), "Label" )
+    
+    label:setText( Constants.String.match_list.more_regions )
+    logo:loadTexture( Constants.COUNTRY_IMAGE_PATH.."more-region.png" )
+    
+    mChildIndex = mChildIndex + 1
+
+    return content:getSize().height
+end
+
+function toggleRegions( sender, eventType )
+    if eventType == TOUCH_EVENT_ENDED then
+        local label = tolua.cast( sender:getChildByName("Label_CountryName"), "Label" )
+        local logo = tolua.cast( sender:getChildByName("Image_CountryLogo"), "ImageView" )
+
+        if label:getStringValue() == Constants.String.match_list.more_regions then
+            label:setText( Constants.String.match_list.less_regions )
+            logo:loadTexture( Constants.COUNTRY_IMAGE_PATH.."less-region.png" )
+
+            -- TODO
+            -- hide non-default regions
+        else
+            label:setText( Constants.String.match_list.more_regions )
+            logo:loadTexture( Constants.COUNTRY_IMAGE_PATH.."more-region.png" )
+
+            -- TODO
+            -- show default regions
+        end
+    end
+end
+
