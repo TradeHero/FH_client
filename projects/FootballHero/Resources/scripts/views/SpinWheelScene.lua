@@ -419,6 +419,7 @@ function checkNCollectEmail()
         tolua.cast( collectEmailWidget:getChildByName("Label_1"), "Label" ):setText( Constants.String.spinWheel.collect_email_you_won )
         tolua.cast( collectEmailWidget:getChildByName("Label_ticket"), "Label" ):setText( SpinWheelConfig.getPrizeConfigWithID( mWinPrizeId )["Name"] )
         tolua.cast( collectEmailWidget:getChildByName("Label_3"), "Label" ):setText( Constants.String.spinWheel.collect_email_towards_wallet )
+        tolua.cast( collectEmailWidget:getChildByName("Label_min"), "Label" ):setText( Constants.String.spinWheel.collect_email_min )
         tolua.cast( collectEmailWidget:getChildByName("Label_prizeDescription"), "Label" ):setText( Constants.String.spinWheel.collect_email_description )
         tolua.cast( collectEmailWidget:getChildByName("Label_disclaimer"), "Label" ):setText( Constants.String.community.disclaimer )
 
