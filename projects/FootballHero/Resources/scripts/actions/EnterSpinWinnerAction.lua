@@ -33,8 +33,8 @@ end
 function onRequestSuccess( jsonResponse )
     local SpinWinnersScene = require("scripts.views.SpinWinnersScene")
     if SpinWinnersScene.isShown() then
-        SpinWinnersScene.refreshFrame( jsonResponse["Winners"], mOnlyShowBigPrize )
+        SpinWinnersScene.refreshFrame( jsonResponse["Winners"], mOnlyShowBigPrize, jsonResponse["TotalWinners"] )
     else
-        SpinWinnersScene.loadFrame( jsonResponse["Winners"], mOnlyShowBigPrize )
+        SpinWinnersScene.loadFrame( jsonResponse["Winners"], mOnlyShowBigPrize, jsonResponse["TotalWinners"] )
     end
 end

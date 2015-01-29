@@ -13,8 +13,9 @@ local mCurrentTotalNum
 local mStep
 local mHasMoreToLoad
 local mOnlyShowBigPrize
+local mTotalNumCountdown
 
-function loadFrame( winners, onlyShowBigPrize )
+function loadFrame( winners, onlyShowBigPrize, totalNum )
 	local widget = GUIReader:shareReader():widgetFromJsonFile("scenes/SpinWinnersScene.json")
 
     mWidget = widget
@@ -25,14 +26,15 @@ function loadFrame( winners, onlyShowBigPrize )
     
     Navigator.loadFrame( widget )
 
-    refreshFrame( winners, onlyShowBigPrize )
+    refreshFrame( winners, onlyShowBigPrize, totalNum )
 end
 
-function refreshFrame( winners, onlyShowBigPrize )
+function refreshFrame( winners, onlyShowBigPrize, totalNum )
+    mTotalNumCountdown = totalNum
+    mOnlyShowBigPrize = onlyShowBigPrize
     initContent( winners )
     mStep = 1
     mHasMoreToLoad = true
-    mOnlyShowBigPrize = onlyShowBigPrize
 end
 
 function EnterOrExit( eventType )
@@ -169,8 +171,10 @@ function initLeaderboardContent( i, content, info )
         name:setText( info["DisplayName"] )
     end
 
-    index:setText( i )
+    index:setText( mTotalNumCountdown )
     score:setText( info["PrizeName"] )
+
+    mTotalNumCountdown = math.max( 1, mTotalNumCountdown - 1 )
 
     local seqArray = CCArray:create()
     seqArray:addObject( CCDelayTime:create( i * 0.2 ) )
