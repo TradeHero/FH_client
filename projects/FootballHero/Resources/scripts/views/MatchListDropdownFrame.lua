@@ -15,6 +15,8 @@ local mLeagueSelectCallback
 
 local mChildIndex
 
+local mbIsHidden = true
+
 function loadFrame( leagueKey, countryWidget, leagueWidget, countryListContainer, leagueListContainer, leagueSelectCallback )
 	mCountryWidget = countryWidget
 	mLeagueWidget = leagueWidget
@@ -27,44 +29,58 @@ function loadFrame( leagueKey, countryWidget, leagueWidget, countryListContainer
 end
 
 function initCountryList()
+
     local contentHeight = 0
     mChildIndex = 1
 
-    -- Add in the "Most Popular" league - top 25 upcoming games
-    -- Edit: Add "Special" tab
+    mCountryListContainer:removeAllChildrenWithCleanup( true )
+    
+    -- Add "Special" tab
     contentHeight = contentHeight + addSpecial()
 
-    -- TODO sort by default/non-default leagues
+    -- Add the "Shown by Default" countries
+    local shownCountries = CountryConfig.getShownCountries()
+    for index, country in pairs ( shownCountries ) do
+        contentHeight = contentHeight + addCountry( index, country )
+    end
+    
     contentHeight = contentHeight + addMoreRegion()
 
-    for i = 1, mCountryNum do
-        -- Assume there is at least 1 league and get it
-        local leagueId = CountryConfig.getLeagueList( i )[1]
-
-        local eventHandler = function( sender, eventType )
-            if eventType == TOUCH_EVENT_ENDED then
-                mLeagueSelectCallback( LeagueConfig.getConfigId( leagueId ), sender )
-            end
+    if not mbIsHidden then
+        mHiddenCountries = CountryConfig.getHiddenCountries()
+        for index, country in pairs ( mHiddenCountries ) do
+            contentHeight = contentHeight + addCountry( index, country )
         end
-
-        local content = SceneManager.widgetFromJsonFile( mCountryWidget )
-        mCountryListContainer:addChild( content, 0, mChildIndex )
-        content:addTouchEventListener( eventHandler )
-
-        local logo = tolua.cast( content:getChildByName("Image_CountryLogo"), "ImageView" )
-        local countryName = tolua.cast( content:getChildByName("Label_CountryName"), "Label" )
-
-        countryName:setText( CountryConfig.getCountryName( i ) )
-        logo:loadTexture( CountryConfig.getLogo( i ) )
-
-        contentHeight = contentHeight + content:getSize().height
-        mChildIndex = mChildIndex + 1
     end
 
     mCountryListContainer:setInnerContainerSize( CCSize:new( 0, contentHeight ) )
     local layout = tolua.cast( mCountryListContainer, "Layout" )
     layout:requestDoLayout()
     layout:setLayoutType(LAYOUT_LINEAR_VERTICAL)
+end
+
+function addCountry( i, country )
+    local leagueId = CountryConfig.getLeagueList( i )[1]
+
+    local eventHandler = function( sender, eventType )
+        if eventType == TOUCH_EVENT_ENDED then
+            mLeagueSelectCallback( LeagueConfig.getConfigId( leagueId ), sender )
+        end
+    end
+
+    local content = SceneManager.widgetFromJsonFile( mCountryWidget )
+    mCountryListContainer:addChild( content, 0, mChildIndex )
+    content:addTouchEventListener( eventHandler )
+
+    local logo = tolua.cast( content:getChildByName("Image_CountryLogo"), "ImageView" )
+    local countryName = tolua.cast( content:getChildByName("Label_CountryName"), "Label" )
+
+    countryName:setText( CountryConfig.getCountryName( i ) )
+    logo:loadTexture( CountryConfig.getLogo( i ) )
+
+    mChildIndex = mChildIndex + 1
+
+    return content:getSize().height
 end
 
 function initLeagueList( leagueKey )
@@ -151,7 +167,6 @@ function addSpecial()
 end
 
 function addMoreRegion()
-
     local content = SceneManager.widgetFromJsonFile( mCountryWidget );
     mCountryListContainer:addChild( content, 0, mChildIndex );
     content:addTouchEventListener( toggleRegions )
@@ -159,8 +174,13 @@ function addMoreRegion()
     local logo = tolua.cast( content:getChildByName("Image_CountryLogo"), "ImageView" )
     local label = tolua.cast( content:getChildByName("Label_CountryName"), "Label" )
     
-    label:setText( Constants.String.match_list.more_regions )
-    logo:loadTexture( Constants.COUNTRY_IMAGE_PATH.."more-region.png" )
+    if mbIsHidden then
+        label:setText( Constants.String.match_list.more_regions )
+        logo:loadTexture( Constants.COUNTRY_IMAGE_PATH.."more-region.png" )
+    else
+        label:setText( Constants.String.match_list.less_regions )
+        logo:loadTexture( Constants.COUNTRY_IMAGE_PATH.."less-region.png" )
+    end
     
     mChildIndex = mChildIndex + 1
 
@@ -175,16 +195,14 @@ function toggleRegions( sender, eventType )
         if label:getStringValue() == Constants.String.match_list.more_regions then
             label:setText( Constants.String.match_list.less_regions )
             logo:loadTexture( Constants.COUNTRY_IMAGE_PATH.."less-region.png" )
-
-            -- TODO
-            -- hide non-default regions
+            -- show default regions
+            mbIsHidden = false
         else
             label:setText( Constants.String.match_list.more_regions )
             logo:loadTexture( Constants.COUNTRY_IMAGE_PATH.."more-region.png" )
-
-            -- TODO
-            -- show default regions
+            -- hide non-default regions
+            mbIsHidden = true
         end
+        initCountryList()
     end
 end
-
