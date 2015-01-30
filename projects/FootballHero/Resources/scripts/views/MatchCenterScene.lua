@@ -135,6 +135,8 @@ function initMatchPredictionContent()
     local discussion = tolua.cast( fade:getChildByName("Button_Discussion"), "Button" )
     local meetings = tolua.cast( fade:getChildByName("Button_Meetings"), "Button" )
     local compName = tolua.cast( fade:getChildByName("Label_CompetitionName"), "Label" )
+    local lbTotalFans = tolua.cast( fade:getChildByName("Label_Fans"), "Label" )
+    local fansCount = tolua.cast( fade:getChildByName("Label_FansCount"), "Label" )
 
     local team1 = tolua.cast( fade:getChildByName("Image_Team1"), "ImageView" )
     local team2 = tolua.cast( fade:getChildByName("Image_Team2"), "ImageView" )
@@ -148,6 +150,8 @@ function initMatchPredictionContent()
     local lbDraw = tolua.cast( fade:getChildByName("Label_Draw"), "Label" )
 
     lbDraw:setText( Constants.String.match_list.draw )
+    lbTotalFans:setText( Constants.String.match_list.total_fans )
+    fansCount:setText( mMatch["TotalUsersPlayed"] )
     
     local totalWinPredictions = mMatch["HomePredictions"] + mMatch["AwayPredictions"] + mMatch["DrawPredictions"]
     local homeWinPercent = 0
