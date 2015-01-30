@@ -100,15 +100,18 @@ function initTeamsList( contentContainer, leagueId )
         local eventHandler = function( sender, eventType )
             if eventType == TOUCH_EVENT_ENDED then
                 local favorite = tolua.cast( sender, "CheckBox" )
-                
-                if favorite:getSelectedState() then
-                    print( "unliked "..teamName )
-                else
-                    print( "favorited "..teamName )
+
+                local failedEventHandler = function( jsonResponse )
+                    favorite:setSelectedState( not favorite:getSelectedState() )
+                    RequestUtils.onRequestFailedByErrorCode( jsonResponse["Message"] )
                 end
+                EventManager:postEvent( Event.Do_Post_Fav_Team, { teamKey, not favorite:getSelectedState(), failedEventHandler } )
             end
         end
         check:addTouchEventListener( eventHandler )
+        
+        local isFavorite, i = Logic:isFavoriteTeam( teamKey )
+        check:setSelectedState( isFavorite )
     end
 
     contentContainer:setInnerContainerSize( CCSize:new( 0, contentHeight ) )

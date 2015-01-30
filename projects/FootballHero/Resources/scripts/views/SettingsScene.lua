@@ -11,6 +11,7 @@ local Logic = require("scripts.Logic").getInstance()
 local SMIS = require("scripts.SMIS")
 local RequestUtils = require("scripts.RequestUtils")
 
+local TeamConfig = require("scripts.config.Team")
 
 local mWidget
 local mLogo
@@ -18,7 +19,9 @@ local mDropdown
 local mDropdownHeight
 local mCurrLanguage
 
-function loadFrame()
+local mFavoriteTeams
+
+function loadFrame( jsonResponse )
 	local widget = GUIReader:shareReader():widgetFromJsonFile("scenes/SettingsHome.json")
     mWidget = widget
     mWidget:registerScriptHandler( EnterOrExit )
@@ -29,6 +32,9 @@ function loadFrame()
 
     local backBt = mWidget:getChildByName("Button_Back")
     backBt:setEnabled( false )
+
+    mFavoriteTeams = jsonResponse["FavoriteTeams"]
+    Logic:setFavoriteTeams( mFavoriteTeams )
 
     initContent()
 end
@@ -164,21 +170,38 @@ function initSettingsFavoriteTeam( contentContainer, settingsSubItem )
     
     local contentHeight = 0
 
-    -- foreach fav teams
-        local content = SceneManager.widgetFromJsonFile("scenes/SettingsItemContentFrame.json")
-        local teamName = tolua.cast( content:getChildByName("Label_Name"), "Label" )
-        local button = tolua.cast( content:getChildByName("Panel_Button"), "Layout" )
-        local arrow = content:getChildByName("Image_Arrow")
+    if table.getn( mFavoriteTeams ) == 0 then
+        local teamName = Constants.String.settings.favorite_team_none
+        local teamLogo = Constants.COMMUNITY_IMAGE_PATH.."img-leaguebox.png"
 
-        teamName:setText( Constants.String.settings.favorite_team_none )
-        button:setBackGroundImage( Constants.COMMUNITY_IMAGE_PATH.."img-leaguebox.png" )
-        arrow:setEnabled( false )
+        contentHeight = contentHeight + addFavoriteTeam( contentContainer, teamName, teamLogo )
+    else
+        for i = 1, table.getn( mFavoriteTeams ) do
+            local teamKey = mFavoriteTeams[i]
+            local teamId = TeamConfig.getConfigIdByKey( teamKey )
+            local teamName = TeamConfig.getTeamName( teamId )
+            local teamLogo = TeamConfig.getLogo( teamId )
 
+            contentHeight = contentHeight + addFavoriteTeam( contentContainer, teamName, teamLogo )
+        end
+    end
     
-    contentContainer:addChild( content )
-    contentHeight = contentHeight + content:getSize().height
-
     return contentHeight
+end
+
+function addFavoriteTeam( contentContainer, teamName, teamLogo )
+    local content = SceneManager.widgetFromJsonFile("scenes/SettingsTeamListContentFrame.json")
+    local lblTeamName = tolua.cast( content:getChildByName("Label_Name"), "Label" )
+    local logo = tolua.cast( content:getChildByName("Image_Jersey"), "ImageView" )
+    local check = tolua.cast( content:getChildByName("CheckBox_Favorite"), "CheckBox" )
+
+    lblTeamName:setText( teamName )
+    logo:loadTexture( teamLogo )
+    check:setEnabled( false )
+
+    contentContainer:addChild( content )
+    
+    return content:getSize().height
 end
 
 function initSettingsLanguage( contentContainer )

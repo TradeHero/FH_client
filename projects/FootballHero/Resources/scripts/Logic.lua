@@ -64,6 +64,7 @@ function Logic:new()
 		ActiveInCompetition = false,
 		FbId = nil,
 		deviceToken = "",
+		favoriteTeams = {},
 
 		competitionDetail = nil,
 	}
@@ -294,4 +295,32 @@ end
 
 function Logic:getCompetitionDetail()
 	return self.competitionDetail
+end
+
+function Logic:setFavoriteTeams( favoriteTeam )
+	if  "table" == type( favoriteTeam ) then
+		self.favoriteTeams = favoriteTeam
+	else
+		local isFavorite, index = instance:isFavoriteTeam( favoriteTeam )
+		if isFavorite then
+			table.remove( self.favoriteTeams, index )
+		else
+			table.insert( self.favoriteTeams, favoriteTeam )
+		end
+		
+	end
+end
+
+function Logic:getFavoriteTeams()
+	return self.favoriteTeams
+end
+
+function Logic:isFavoriteTeam( teamId )
+	for i = 1, table.getn( self.favoriteTeams ) do
+		if self.favoriteTeams[i] == teamId then
+			return true, i
+		end
+	end
+
+	return false
 end
