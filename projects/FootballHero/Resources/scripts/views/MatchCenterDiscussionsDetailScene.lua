@@ -313,13 +313,12 @@ function showFullPost( content )
 
     local originalSize = post:getSize()
     if originalSize.width > MatchCenterConfig.MAX_DISCUSSION_TEXT_WIDTH then
-
         local numOfRows = math.ceil( originalSize.width / MatchCenterConfig.MAX_DISCUSSION_POST_TEXT_WIDTH )
         local textHeight = numOfRows * 25    
 
         post:setTextAreaSize( CCSize:new( MatchCenterConfig.MAX_DISCUSSION_POST_TEXT_WIDTH, textHeight ) )
 
-        local addHeight = textHeight - MatchCenterConfig.MAX_DISCUSSION_TEXT_HEIGHT
+        local addHeight = math.max( 0, textHeight - MatchCenterConfig.MAX_DISCUSSION_TEXT_HEIGHT )
         content:setSize( CCSize:new( content:getSize().width, content:getSize().height + addHeight ) )
         bg:setSize( CCSize:new( bg:getSize().width, bg:getSize().height + addHeight ) )
         top:setSize( CCSize:new( top:getSize().width, top:getSize().height + addHeight ) )
