@@ -106,7 +106,7 @@ function getLogo( id )
 	if config ~= nil then
 		local fileUtils = CCFileUtils:sharedFileUtils()
 		local filePath = fileUtils:fullPathForFilename( Constants.COUNTRY_IMAGE_PATH..config["Id"]..".png" )
-		print( "Countries "..filePath )
+		
 		if fileUtils:isFileExist( filePath ) then
 			return Constants.COUNTRY_IMAGE_PATH..config["Id"]..".png"
 		else
@@ -128,6 +128,32 @@ function getAllLeagues()
     end
 
     return leagues
+end
+
+function getShownCountries()
+	local countries = {}
+
+	for i = 1, getConfigNum() do
+		if mConfig[i]["isShown"] then
+			countries[i] = mConfig[i]
+			--table.insert( countries, mConfig[i] )
+		end
+	end
+
+	return countries
+end
+
+function getHiddenCountries()
+	local countries = {}
+
+	for i = 1, getConfigNum() do
+		if not mConfig[i]["isShown"] then
+			countries[i] = mConfig[i]
+			--table.insert( countries, mConfig[i] )
+		end
+	end
+
+	return countries
 end
 
 init()
