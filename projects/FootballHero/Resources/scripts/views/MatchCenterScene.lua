@@ -236,7 +236,9 @@ function showMatchInfo( bShow )
         end
     end
 
-    contentContainer:setSize( CCSize:new( contentContainer:getSize().width, newHeight ) )
-    local layout = tolua.cast( contentContainer, "Layout" )
-    layout:requestDoLayout()
+    if newHeight ~= currentHeight then
+        contentContainer:setSize( CCSize:new( contentContainer:getSize().width, newHeight ) )
+        local layout = tolua.cast( contentContainer, "Layout" )
+        layout:requestDoLayout()
+    end
 end

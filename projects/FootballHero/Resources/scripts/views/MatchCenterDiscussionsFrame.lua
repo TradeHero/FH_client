@@ -263,12 +263,14 @@ function scrollViewEventHandler( target, eventType )
                 newHeight = math.max( currentHeight - CONTENT_HEIGHT_SPEED, CONTENT_HEIGHT_SMALL )
             end
 
-            scrollview:setSize( CCSize:new( scrollview:getSize().width, newHeight ) )
-            scrollview:setPositionY( scrollview:getPositionY() + currentHeight -  newHeight )
-            --scrollview:setInnerContainerSize( CCSize:new( 0, newHeight ) )
+            if newHeight ~= currentHeight then
+                scrollview:setSize( CCSize:new( scrollview:getSize().width, newHeight ) )
+                scrollview:setPositionY( scrollview:getPositionY() + currentHeight -  newHeight )
+                --scrollview:setInnerContainerSize( CCSize:new( 0, newHeight ) )
 
-            local layout = tolua.cast( scrollview, "Layout" )
-            layout:requestDoLayout()
+                local layout = tolua.cast( scrollview, "Layout" )
+                layout:requestDoLayout()
+            end
         end
         mScrollPositionY = container:getPositionY()
     end
