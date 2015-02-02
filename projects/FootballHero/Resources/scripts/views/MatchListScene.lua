@@ -681,11 +681,11 @@ function helperInitMatchInfo( topContent, matchInfo, leagueKey )
     fanCount:setText( matchInfo["TotalUsersPlayed"] )
     played:setText( string.format( played:getStringValue(), matchInfo["PredictionsPlayed"], matchInfo["PredictionsAvailable"] ) )
 
-    if isNotGameStart then
-        topContent:setTouchEnabled( true )
-    else
-        topContent:setTouchEnabled( false )
-    end
+    -- if isNotGameStart then
+    --     topContent:setTouchEnabled( true )
+    -- else
+    --     topContent:setTouchEnabled( false )
+    -- end
 end
 
 function optionEventHandler( sender, eventType )

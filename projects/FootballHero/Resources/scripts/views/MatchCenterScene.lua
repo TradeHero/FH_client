@@ -178,6 +178,9 @@ function initMatchPredictionContent()
         predict:setTitleText( Constants.String.match_center.prediction_made )
         predict:setBright( false )
         predict:setTitleColor( ccc3( 127, 127, 127 ) )
+    elseif mMatch["StartTime"] <= os.time() then
+        predict:setBright( false )
+        predict:setTitleColor( ccc3( 127, 127, 127 ) )
     else
         predict:setTitleText( Constants.String.match_center.make_prediction )
 
