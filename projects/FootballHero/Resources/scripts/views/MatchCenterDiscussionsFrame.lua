@@ -94,7 +94,6 @@ function initContent( discussionInfo )
     local layout = tolua.cast( contentContainer, "Layout" )
     layout:requestDoLayout()
     contentContainer:addEventListenerScrollView( scrollViewEventHandler )
-    contentContainer:addTouchEventListener( scrollTouchEventListener )
 end
 
 function initDiscussionContent( i, content, info )
@@ -230,14 +229,6 @@ function loadMoreContent( discussionInfo )
     contentContainer:setInnerContainerSize( CCSize:new( 0, contentHeight ) )
     local layout = tolua.cast( contentContainer, "Layout" )
     layout:requestDoLayout()
-end
-
-
-
-function scrollTouchEventListener( sender, eventType )
-    if eventType == TOUCH_EVENT_ENDED then
-        mScrollPositionY = nil
-    end
 end
 
 function scrollViewEventHandler( target, eventType )

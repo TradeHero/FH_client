@@ -45,10 +45,16 @@ function onRequestSuccess( jsonResponse )
     local competitionId = jsonResponse["CompetitionId"]
     local joinToken = jsonResponse["JoinToken"]
     local competitionType = jsonResponse["CompetitionType"]
-    
-    local params = { Action = "join"}
+
+    local params = { Action = "join" }
     CCLuaLog("Send ANALYTICS_EVENT_COMPETITION: "..Json.encode( params ) )
     Analytics:sharedDelegate():postEvent( Constants.ANALYTICS_EVENT_COMPETITION, Json.encode( params ) )
+
+    if competitionType ~=CompetitionType["Private"] then
+        local params = { Action = "join", Competition = joinToken }
+        CCLuaLog("Send ANALYTICS_EVENT_SPECIAL_COMPETITION: "..Json.encode( params ) )
+        Analytics:sharedDelegate():postEvent( Constants.ANALYTICS_EVENT_SPECIAL_COMPETITION, Json.encode( params ) )
+    end
 
     local sortType = 3
     EventManager:postEvent( Event.Enter_Competition_Detail, { competitionId, true, sortType, CompetitionConfig.COMPETITION_TAB_ID_OVERALL } )
