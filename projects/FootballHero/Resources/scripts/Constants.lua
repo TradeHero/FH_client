@@ -27,6 +27,7 @@ LOGO_IMAGE_PATH = "myLogo.jpg"
 COMMUNITY_IMAGE_PATH = "scenes/community/"
 MINIGAME_IMAGE_PATH = "scenes/mini-game/"
 CHAT_IMAGE_PATH = "scenes/chat/"
+SETTINGS_IMAGE_PATH = "scenes/Settings/"
 
 
 BannerPrefix = "banner_"

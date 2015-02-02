@@ -11,6 +11,7 @@ local Logic = require("scripts.Logic").getInstance()
 local SMIS = require("scripts.SMIS")
 local RequestUtils = require("scripts.RequestUtils")
 
+local TeamConfig = require("scripts.config.Team")
 
 local mWidget
 local mLogo
@@ -18,7 +19,9 @@ local mDropdown
 local mDropdownHeight
 local mCurrLanguage
 
-function loadFrame()
+local mFavoriteTeams
+
+function loadFrame( jsonResponse )
 	local widget = GUIReader:shareReader():widgetFromJsonFile("scenes/SettingsHome.json")
     mWidget = widget
     mWidget:registerScriptHandler( EnterOrExit )
@@ -26,6 +29,12 @@ function loadFrame()
     SceneManager.clearKeypadBackListener()
 
     Navigator.loadFrame( widget )
+
+    local backBt = mWidget:getChildByName("Button_Back")
+    backBt:setEnabled( false )
+
+    mFavoriteTeams = jsonResponse["FavoriteTeams"]
+    Logic:setFavoriteTeams( mFavoriteTeams )
 
     initContent()
 end
@@ -67,13 +76,7 @@ function initContent()
         local SettingsSubItem = SettingsConfig.SettingsItem[i]
 
         if SettingsSubItem.Enabled then
-            local header = SceneManager.widgetFromJsonFile("scenes/SettingsItemHeaderFrame.json")
-            contentContainer:addChild( header )
-            contentHeight = contentHeight + header:getSize().height
-
-            local title = tolua.cast( header:getChildByName("Label_Name"), "Label" )
-            title:setText( Constants.String.settings[SettingsSubItem["TitleKey"]] )
-
+            contentHeight = contentHeight + initSettingsHeader( contentContainer, SettingsSubItem )
             contentHeight = contentHeight + initSettingsSubItem( contentContainer, SettingsSubItem )
         end
 
@@ -82,6 +85,29 @@ function initContent()
     contentContainer:setInnerContainerSize( CCSize:new( 0, contentHeight ) )
     local layout = tolua.cast( contentContainer, "Layout" )
     layout:requestDoLayout()
+end
+
+function initSettingsHeader( contentContainer, settingsSubItem )
+    local header = SceneManager.widgetFromJsonFile("scenes/SettingsItemHeaderFrame.json")
+    contentContainer:addChild( header )
+    
+    local title = tolua.cast( header:getChildByName("Label_Name"), "Label" )
+    title:setText( Constants.String.settings[settingsSubItem["TitleKey"]] )
+
+    local edit = tolua.cast( header:getChildByName("Button_Edit"), "Button" )
+
+    if settingsSubItem.SettingType == SettingsConfig.SETTING_TYPE_FAVORITE_TEAM then
+        local editEventHandler = function( sender, eventType )
+            if eventType == TOUCH_EVENT_ENDED then
+                EventManager:postEvent( Event.Enter_Settings_Select_League )
+            end
+        end
+        edit:addTouchEventListener( editEventHandler )
+    else
+        edit:setEnabled( false )
+    end
+
+    return header:getSize().height
 end
 
 function initSettingsSubItem( contentContainer, settingsSubItem )
@@ -141,11 +167,41 @@ function initSettingsUserInfo( contentContainer, settingsSubItem )
 end
 
 function initSettingsFavoriteTeam( contentContainer, settingsSubItem )
-    -- TODO next version
-    -- local content = SceneManager.widgetFromJsonFile("scenes/SettingsUserInformationFrame.json")
     
-    -- contentContainer:addChild( content )
-    -- contentHeight = contentHeight + content:getSize().height
+    local contentHeight = 0
+
+    if table.getn( mFavoriteTeams ) == 0 then
+        local teamName = Constants.String.settings.favorite_team_none
+        local teamLogo = Constants.COMMUNITY_IMAGE_PATH.."img-leaguebox.png"
+
+        contentHeight = contentHeight + addFavoriteTeam( contentContainer, teamName, teamLogo )
+    else
+        for i = 1, table.getn( mFavoriteTeams ) do
+            local teamKey = mFavoriteTeams[i]
+            local teamId = TeamConfig.getConfigIdByKey( teamKey )
+            local teamName = TeamConfig.getTeamName( teamId )
+            local teamLogo = TeamConfig.getLogo( teamId )
+
+            contentHeight = contentHeight + addFavoriteTeam( contentContainer, teamName, teamLogo )
+        end
+    end
+    
+    return contentHeight
+end
+
+function addFavoriteTeam( contentContainer, teamName, teamLogo )
+    local content = SceneManager.widgetFromJsonFile("scenes/SettingsTeamListContentFrame.json")
+    local lblTeamName = tolua.cast( content:getChildByName("Label_Name"), "Label" )
+    local logo = tolua.cast( content:getChildByName("Image_Jersey"), "ImageView" )
+    local check = tolua.cast( content:getChildByName("CheckBox_Favorite"), "CheckBox" )
+
+    lblTeamName:setText( teamName )
+    logo:loadTexture( teamLogo )
+    check:setEnabled( false )
+
+    contentContainer:addChild( content )
+    
+    return content:getSize().height
 end
 
 function initSettingsLanguage( contentContainer )

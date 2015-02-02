@@ -8,16 +8,16 @@ local Json = require("json")
 local RequestUtils = require("scripts.RequestUtils")
 local Constants = require("scripts.Constants")
 
-
-local mStartLeague
+local mFailedCallback
+local mFavTeamID
 
 function action( param )
 	
+    mFavTeamID = param[1]
+    local bLiked = param[2]
+    mFailedCallback = param[3]
 
-    local favTeamID = param[1]
-    mStartLeague = param[2]
-
-    local requestContent = { TeamId = favTeamID, LeagueId = mStartLeague }
+    local requestContent = { TeamId = mFavTeamID, Liked = bLiked }
     local requestContentText = Json.encode( requestContent )
     
     local url = RequestUtils.POST_FAV_TEAM_REST_CALL
@@ -27,7 +27,7 @@ function action( param )
     requestInfo.url = url
 
     local handler = function( isSucceed, body, header, status, errorBuffer )
-        RequestUtils.messageHandler( requestInfo, isSucceed, body, header, status, errorBuffer, RequestUtils.HTTP_200, true, onRequestSuccess )
+        RequestUtils.messageHandler( requestInfo, isSucceed, body, header, status, errorBuffer, RequestUtils.HTTP_200, true, onRequestSuccess, onRequestFailed )
     end
 
     local httpRequest = HttpRequestForLua:create( CCHttpRequest.kHttpPost )
@@ -40,6 +40,10 @@ function action( param )
 end
 
 function onRequestSuccess( jsonResponse )
-    Logic:setStartLeagueId( mStartLeague )
-    EventManager:postEvent( Event.Enter_Match_List )
+    Logic:setFavoriteTeams( mFavTeamID )
+    RequestUtils.invalidResponseCacheContainsUrl( RequestUtils.GET_SETTINGS )
+end
+
+function onRequestFailed( jsonResponse )
+    mFailedCallback( jsonResponse )
 end
