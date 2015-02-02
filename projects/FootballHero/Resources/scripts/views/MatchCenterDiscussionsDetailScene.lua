@@ -268,6 +268,14 @@ function initPost( info )
     end
     checkLike:addTouchEventListener( likeEventHandler )
 
+    local enterHistoryEventHandler = function( sender, eventType )
+        if eventType == TOUCH_EVENT_ENDED then
+            EventManager:postEvent( Event.Enter_History, { info["UserId"] } )
+        end
+    end
+    logo:setTouchEnabled( true )
+    logo:addTouchEventListener( enterHistoryEventHandler )
+
     --share:addTouchEventListener( shareTypeSelectEventHandler )
     share:setEnabled( false )
 
@@ -392,6 +400,14 @@ function initCommentContent( i, content, info )
         end
     end
     checkLike:addTouchEventListener( likeEventHandler )
+
+    local enterHistoryEventHandler = function( sender, eventType )
+        if eventType == TOUCH_EVENT_ENDED then
+            EventManager:postEvent( Event.Enter_History, { info["UserId"] } )
+        end
+    end
+    logo:setTouchEnabled( true )
+    logo:addTouchEventListener( enterHistoryEventHandler )
 
     if type( info["DisplayName"]  ) ~= "string" or info["DisplayName"] == nil then
         name:setText( Constants.String.unknown_name )

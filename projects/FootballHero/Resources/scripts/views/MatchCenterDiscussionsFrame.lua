@@ -120,6 +120,14 @@ function initDiscussionContent( i, content, info )
     top:addTouchEventListener( enterDetailEventHandler )
     btnComments:addTouchEventListener( enterDetailEventHandler )
     
+    local enterHistoryEventHandler = function( sender, eventType )
+        if eventType == TOUCH_EVENT_ENDED then
+            EventManager:postEvent( Event.Enter_History, { info["UserId"] } )
+        end
+    end
+    logo:setTouchEnabled( true )
+    logo:addTouchEventListener( enterHistoryEventHandler )
+
     local enableLikeEventHandler = function( bLiked )
         checkLike:setTouchEnabled( true )
         local newCount
@@ -193,7 +201,6 @@ function initDiscussionContent( i, content, info )
 
     mWidget:runAction( CCSequence:create( seqArray ) )
 end
-
 
 function loadMoreContent( discussionInfo )
     if table.getn( discussionInfo ) < Constants.DISCUSSIONS_PER_PAGE then
