@@ -134,7 +134,7 @@ function getShownCountries()
 	local countries = {}
 
 	for i = 1, getConfigNum() do
-		if mConfig[i]["isShown"] then
+		if mConfig[i]["isOnTop"] and not mConfig[i]["isHidden"] then
 			countries[i] = mConfig[i]
 			--table.insert( countries, mConfig[i] )
 		end
@@ -147,7 +147,7 @@ function getHiddenCountries()
 	local countries = {}
 
 	for i = 1, getConfigNum() do
-		if not mConfig[i]["isShown"] then
+		if not mConfig[i]["isOnTop"] and not mConfig[i]["isHidden"] then
 			countries[i] = mConfig[i]
 			--table.insert( countries, mConfig[i] )
 		end

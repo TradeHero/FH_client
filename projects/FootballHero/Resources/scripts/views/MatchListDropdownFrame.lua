@@ -117,22 +117,25 @@ function initLeagueList( leagueKey )
         local leagueId = LeagueConfig.getConfigIdByKey( leagueKey )
         local countryId = CountryConfig.getConfigIdByKey( LeagueConfig.getCountryId( leagueId ) )
         
-        local leagueNum = table.getn( CountryConfig.getLeagueList( countryId ) )
+        local leagueList = CountryConfig.getLeagueList( countryId )
+        local leagueNum = table.getn( leagueList )
         for j = 1, leagueNum do
-            local leagueId = CountryConfig.getLeagueList( countryId )[j]
+            local leagueId = leagueList[j]
+            if not LeagueConfig.isHidden( leagueId ) then
 
-            local eventHandler = function( sender, eventType )
-                if eventType == TOUCH_EVENT_ENDED then
-                    mLeagueSelectCallback( LeagueConfig.getConfigId( leagueId ), sender )
+                local eventHandler = function( sender, eventType )
+                    if eventType == TOUCH_EVENT_ENDED then
+                        mLeagueSelectCallback( LeagueConfig.getConfigId( leagueId ), sender )
+                    end
                 end
+                
+                content = SceneManager.widgetFromJsonFile( mLeagueWidget )
+                mLeagueListContainer:addChild( content, 0, mChildIndex )
+                content:addTouchEventListener( eventHandler )
+
+                local leagueName = tolua.cast( content:getChildByName("Label_LeagueName"), "Label" )
+                leagueName:setText( LeagueConfig.getLeagueName( leagueId ) )
             end
-
-            content = SceneManager.widgetFromJsonFile( mLeagueWidget )
-            mLeagueListContainer:addChild( content, 0, mChildIndex )
-            content:addTouchEventListener( eventHandler )
-
-            local leagueName = tolua.cast( content:getChildByName("Label_LeagueName"), "Label" )
-            leagueName:setText( LeagueConfig.getLeagueName( leagueId ) )
         end
     end
 

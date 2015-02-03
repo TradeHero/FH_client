@@ -76,4 +76,9 @@ function isActive( id )
 	return config["isActive"]
 end
 
+function isHidden( id )
+	local config = getConfig( id )
+	return config["isHidden"]
+end
+
 init()
