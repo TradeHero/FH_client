@@ -31,7 +31,7 @@ function action( param )
                     "&perPage="..Constants.DISCUSSIONS_PER_PAGE
                     --"&lastPostTime=<unixTimeStamp>"
         else
-            url = RequestUtils.GET_MATCH_CENTER.."?gameId="..matchID
+            url = RequestUtils.GET_MATCH_CENTER_REST_CALL.."?gameId="..matchID
         end
     end
 

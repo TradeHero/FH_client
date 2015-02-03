@@ -37,7 +37,9 @@ function action( param )
     if mLeagueId == Constants.SpecialLeagueIds.MOST_POPULAR then
         url = RequestUtils.GET_POPULAR_UPCOMING_REST_CALL
     elseif mLeagueId == Constants.SpecialLeagueIds.UPCOMING_MATCHES then
-        url = RequestUtils.GET_UPCOMING_NEXT
+        url = RequestUtils.GET_UPCOMING_NEXT_REST_CALL
+    elseif mLeagueId == Constants.SpecialLeagueIds.MOST_DISCUSSED then
+        url = RequestUtils.GET_MOST_DISCUSSED_REST_CALL
     else
         url = RequestUtils.GET_UPCOMING_GAMES_BY_LEAGUE_REST_CALL.."?leagueId="..leagueId
     end

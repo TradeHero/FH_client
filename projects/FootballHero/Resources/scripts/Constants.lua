@@ -64,9 +64,22 @@ STATS_SHOW_ALL = -1
 SpecialLeagueIds = {
 	MOST_POPULAR = -1,
 	UPCOMING_MATCHES = -2,
-	SPECIAL_COUNT = 2,
+	MOST_DISCUSSED = -3,
+	SPECIAL_COUNT = 3,
 	ALL_LEAGUES = -99,
 }
+function IsSpecialLeague( id )
+	local bSpecial = false
+
+	if id == SpecialLeagueIds.MOST_POPULAR or 
+		id == SpecialLeagueIds.UPCOMING_MATCHES or
+		id == SpecialLeagueIds.MOST_DISCUSSED then
+
+		bSpecial = true
+	end
+
+	return bSpecial
+end
 
 FILTER_MIN_PREDICTION = 20
 RANKINGS_PER_PAGE = 50

@@ -9,7 +9,7 @@ local RequestUtils = require("scripts.RequestUtils")
 
 function action( param )
 	
-    local url = RequestUtils.GET_SETTINGS
+    local url = RequestUtils.GET_SETTINGS_REST_CALL
 
     local requestInfo = {}
     requestInfo.requestData = ""

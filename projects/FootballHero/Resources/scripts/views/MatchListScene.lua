@@ -123,13 +123,16 @@ function initLeagueList( leagueKey )
         local leagueName = tolua.cast( content:getChildByName( "Label_LeagueName"), "Label" )
 
         -- Hardcode Popular League texts and logo
-        if leagueKey == Constants.SpecialLeagueIds.MOST_POPULAR or leagueKey == Constants.SpecialLeagueIds.UPCOMING_MATCHES then
+        if Constants.IsSpecialLeague( leagueKey ) then
             countryName:setText( Constants.String.match_list.special )
             if leagueKey == Constants.SpecialLeagueIds.MOST_POPULAR then
                 leagueName:setText( Constants.String.match_list.most_popular )
-            else
+            elseif leagueKey == Constants.SpecialLeagueIds.UPCOMING_MATCHES then
                 leagueName:setText( Constants.String.match_list.upcoming_matches )
+            elseif leagueKey == Constants.SpecialLeagueIds.MOST_DISCUSSED then
+                leagueName:setText( Constants.String.match_list.most_discussed )
             end
+
             logo:loadTexture( Constants.COUNTRY_IMAGE_PATH.."favorite.png" )
             --leagueButton:setTouchEnabled( false )
             --leagueExpand:setEnabled( false )
@@ -195,8 +198,17 @@ function initMatchList( matchList, leagueKey, bInit )
         layoutParameter:setGravity(LINEAR_GRAVITY_CENTER_VERTICAL)
         local contentHeight = 0
         
-        if leagueKey == Constants.SpecialLeagueIds.MOST_POPULAR then
+        if leagueKey == Constants.SpecialLeagueIds.MOST_POPULAR or leagueKey == Constants.SpecialLeagueIds.MOST_DISCUSSED then
             
+            local hintContent = SceneManager.widgetFromJsonFile("scenes/TapToMakePrediction.json")
+
+            local hintText = tolua.cast( hintContent:getChildByName("Label_Tap"), "Label" )
+            hintText:setText( Constants.String.match_prediction.hint_tap )
+
+            hintContent:setLayoutParameter( layoutParameter )
+            contentContainer:addChild( hintContent )
+            contentHeight = contentHeight + hintContent:getSize().height
+
             for i = 1, table.getn( matchList ) do
                 local match = matchList[i]
                 local eventHandler = function( sender, eventType )

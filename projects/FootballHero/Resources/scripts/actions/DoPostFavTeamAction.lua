@@ -41,7 +41,7 @@ end
 
 function onRequestSuccess( jsonResponse )
     Logic:setFavoriteTeams( mFavTeamID )
-    RequestUtils.invalidResponseCacheContainsUrl( RequestUtils.GET_SETTINGS )
+    RequestUtils.invalidResponseCacheContainsUrl( RequestUtils.GET_SETTINGS_REST_CALL )
 end
 
 function onRequestFailed( jsonResponse )

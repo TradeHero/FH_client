@@ -91,8 +91,7 @@ function initLeagueList( leagueKey )
 
     mLeagueListContainer:removeAllChildrenWithCleanup( true )
 
-    if leagueKey == Constants.SpecialLeagueIds.MOST_POPULAR or leagueKey == Constants.SpecialLeagueIds.UPCOMING_MATCHES then
-
+    if Constants.IsSpecialLeague( leagueKey ) then
         for i = 1, Constants.SpecialLeagueIds.SPECIAL_COUNT do
             local eventHandler = function( sender, eventType )
                 if eventType == TOUCH_EVENT_ENDED then
@@ -108,8 +107,10 @@ function initLeagueList( leagueKey )
             
             if -i == Constants.SpecialLeagueIds.MOST_POPULAR then
                 leagueName:setText( Constants.String.match_list.most_popular )
-            else
+            elseif -i == Constants.SpecialLeagueIds.UPCOMING_MATCHES then
                 leagueName:setText( Constants.String.match_list.upcoming_matches )
+            elseif -i == Constants.SpecialLeagueIds.MOST_DISCUSSED then
+                leagueName:setText( Constants.String.match_list.most_discussed )
             end
         end
     else

@@ -288,6 +288,7 @@ StringsDefault = {
     match_started = "Match Started",
     match_won = "WON: %d Pts",
     more_regions = "More Regions",
+    most_discussed = "Most Discussed",
     most_popular = "Most Popular",
     played = "Played",
     special = "Special",
