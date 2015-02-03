@@ -291,7 +291,7 @@ Strings = {
     balance = "可用分数",
     prediction_summary = "预测汇总",
     facebook = "Facebook",
-    stake = "押分\n_webauthserver:*:221:221:Web Auth Se",
+    stake = "押分",
     will_win_by = "%s 会净胜 %d 球或更多吗?",
   },
   quit_desc = "再次点击返回退出",

@@ -33,7 +33,9 @@ function loadFrame( jsonResponse )
     local backBt = mWidget:getChildByName("Button_Back")
     backBt:setEnabled( false )
 
-    mFavoriteTeams = jsonResponse["FavoriteTeams"]
+    if jsonResponse then
+        mFavoriteTeams = jsonResponse["FavoriteTeams"]
+    end
     Logic:setFavoriteTeams( mFavoriteTeams )
 
     initContent()

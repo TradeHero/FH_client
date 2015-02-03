@@ -5,7 +5,7 @@ require "DefaultString"
 local mDefaultString = StringsDefault
 
 -- Localized strings
-local TARGET_LANGUAGE = "ar"
+local TARGET_LANGUAGE = "id"
 
 -- Output string
 local mSeperate = "\t"
@@ -19,19 +19,28 @@ function action( param )
 	    __index = function ( t ,k )
 	    	return nil
 	    end
-	} 
+	}
+
 	setmetatable( mLocalizedStrings, mt )
+	for i = 1 , table.getn( StringDefaultSubTableList ) do
+	    local subTableTitle = StringDefaultSubTableList[i]
+	    if mLocalizedStrings[subTableTitle] then
+	        setmetatable( mLocalizedStrings[subTableTitle], mt )  
+	    end
+	end
 
 	for k, v in pairs( mDefaultString ) do
     	if type( v ) == "table" then
     		for innerK, innerV in pairs( mDefaultString[k] ) do
     			if ( not mLocalizedStrings[k] ) or 
     				( not mLocalizedStrings[k][innerK] ) then
-					
+
 					local enValue = string.gsub(mDefaultString[k][innerK], "\n", "\\n")
 					mResultString = mResultString.."\n"..
 									k.."."..innerK..mSeperate..
 									enValue..mSeperate
+				else
+					--CCLuaLog( mLocalizedStrings[k][innerK] )
 				end	
     		end
     	else
@@ -41,6 +50,8 @@ function action( param )
 				mResultString = mResultString.."\n"..
 								k..mSeperate..
 								enValue..mSeperate
+			else
+				--CCLuaLog( mLocalizedStrings[k] )
 			end
     	end
     end
