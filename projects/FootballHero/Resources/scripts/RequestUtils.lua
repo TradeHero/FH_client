@@ -99,6 +99,7 @@ function setServerIP( serverIp, cdnServerIp, useDev )
     GET_POPULAR_UPCOMING_REST_CALL = serverIp.."/api/games/popularUpcoming"
     GET_UPCOMING_TODAY_REST_CALL = serverIp.."/api/games/upcomingToday"
     GET_UPCOMING_NEXT_REST_CALL = serverIp.."/api/games/upcomingNext"
+    GET_MOST_DISCUSSED_REST_CALL = serverIp.."/api/games/mostDiscussed"
     GET_GAME_MARKETS_REST_CALL = serverIp.."/api/markets/getMarketsForGame"
     GET_COUPON_HISTORY_REST_CALL = serverIp.."/api/couponHistory/getUserCouponHistory"
     GET_MAIN_LEADERBOARD_REST_CALL = serverIp.."/api/leaderboards/getMainLeaderboard"
