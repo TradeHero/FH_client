@@ -74,7 +74,7 @@ end
 function onRequestSuccess( matchList )
     local MatchListData = require("scripts.data.MatchListData").MatchListData
     local sortedMatchList
-    if mLeagueId ~= Constants.SpecialLeagueIds.MOST_POPULAR then
+    if mLeagueId ~= Constants.SpecialLeagueIds.MOST_POPULAR and mLeagueId ~= Constants.SpecialLeagueIds.MOST_DISCUSSED then
         -- Sort the match according to its start time.
         local currentTime = os.time()
         local currentDate = os.time{year=os.date("%Y", currentTime), month=os.date("%m", currentTime), day=os.date("%d", currentTime), hour=0}
