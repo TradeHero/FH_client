@@ -1,11 +1,6 @@
 module(..., package.seeall)
 
 Strings = {
-    languages = {
-        english = "English",
-        indonesian = "Bahasa Indonesia",
-        chinese = "中文",
-    },
     chat_hint = "点击开始聊天！",
     league_chat = {
         feedback = "反馈与建议",
@@ -32,6 +27,7 @@ Strings = {
         match_won = "赢得: %d 分",
         todays_matches = "今日赛事",
         upcoming_matches = "即将开赛",
+        most_discussed = "热门话题",
     },
     message_hint = "在此输入消息",
     button = {
@@ -300,18 +296,18 @@ Strings = {
         sound_settings = "声音设置",
     },
     month = {
-        ["1"] = "一月",
-        ["3"] = "三月",
-        ["2"] = "二月",
-        ["5"] = "五月",
-        ["4"] = "四月",
-        ["7"] = "七月",
-        ["6"] = "六月",
-        ["9"] = "九月",
-        ["8"] = "八月",
-        ["12"] = "十二月",
-        ["11"] = "十一月",
-        ["10"] = "十月",
+        ["m1"] = "一月",
+        ["m3"] = "三月",
+        ["m2"] = "二月",
+        ["m5"] = "五月",
+        ["m4"] = "四月",
+        ["m7"] = "七月",
+        ["m6"] = "六月",
+        ["m9"] = "九月",
+        ["m8"] = "八月",
+        ["m12"] = "十二月",
+        ["m11"] = "十一月",
+        ["m10"] = "十月",
     },
     chat_room_title = "选择聊天室",
     num_of_points = "%d 分",

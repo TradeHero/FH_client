@@ -5,7 +5,7 @@ require "DefaultString"
 local mDefaultString = StringsDefault
 
 -- Localized strings
-local TARGET_LANGUAGE = "id"
+local TARGET_LANGUAGE = "zh"
 
 -- Output string
 local mSeperate = "\t"
@@ -31,17 +31,21 @@ function action( param )
 
 	for k, v in pairs( mDefaultString ) do
     	if type( v ) == "table" then
-    		for innerK, innerV in pairs( mDefaultString[k] ) do
-    			if ( not mLocalizedStrings[k] ) or 
-    				( not mLocalizedStrings[k][innerK] ) then
+    		if k == "languages" then
+    			-- skip the languages
+    		else
+    			for innerK, innerV in pairs( mDefaultString[k] ) do
+	    			if ( not mLocalizedStrings[k] ) or 
+	    				( not mLocalizedStrings[k][innerK] ) then
 
-					local enValue = string.gsub(mDefaultString[k][innerK], "\n", "\\n")
-					mResultString = mResultString.."\n"..
-									k.."."..innerK..mSeperate..
-									enValue..mSeperate
-				else
-					--CCLuaLog( mLocalizedStrings[k][innerK] )
-				end	
+						local enValue = string.gsub(mDefaultString[k][innerK], "\n", "\\n")
+						mResultString = mResultString.."\n"..
+										k.."."..innerK..mSeperate..
+										enValue..mSeperate
+					else
+						--CCLuaLog( mLocalizedStrings[k][innerK] )
+					end	
+	    		end
     		end
     	else
 			if not mLocalizedStrings[k] then
