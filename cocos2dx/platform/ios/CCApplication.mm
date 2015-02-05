@@ -125,6 +125,9 @@ ccLanguageType CCApplication::getCurrentLanguage()
     else if ([languageCode isEqualToString:@"id"]){
         ret = kLanguageBahasa;
     }
+    else if ([languageCode isEqualToString:@"th"]){
+        ret = kLanguageThailand;
+    }
 
     return ret;
 }

@@ -1,93 +1,350 @@
 languages.chinese	中文	中文
-languages.indonesian	Bahasa Indonesia	印尼语
-languages.english	English	英语
-match_center.played_out_of	%d out of %d	%d 共 %d
-button.existing_user	Existing User	已注册用户
-button.new_user	New User	新用户
-button.predict	Predict!	开始预测！
-match_list.match_ended	Match Ended	比赛结束
-match_list.played	Played	已预测
-match_list.special	Special	精选
-match_list.more_regions	More Regions	更多地区
-match_list.match_started	Match Started	已开始比赛
-match_list.less_regions	Less Regions	折叠显示
-match_list.match_lost	LOST: %d Pts	亏损: %d 分
-match_list.total_fans	Fans	关注者
-match_list.upcoming_matches	Upcoming Matches	即将开赛
-match_list.todays_matches	Today's Matches	今日赛事
-match_list.match_won	WON: %d Pts	赢得: %d 分
-match_list.draw	Draw	平局
-leaderboard.stats_win_rate	Win %	胜 %
-leaderboard.stats_last_ten	Last 10	最近10场
-leaderboard.me_score	%d won	%d 胜
-leaderboard.stats_l	L	L
-leaderboard.stats_league	League	联赛
-leaderboard.stats_w	W	W
-leaderboard.stats_win	Win	胜
-leaderboard.min_prediction	At least %d predictions	至少 %d 场预测
-leaderboard.stats_gain_rate	Gain %	收益率 %
-leaderboard.stats_lose	Lose	负
-spinWheel.only_show_big_prize	Only show big prize	仅显示大奖
-spinWheel.to_claim_prize	to claim prize.	获奖者通道
-spinWheel.please_contact	Please contact	联系我们
-spinWheel.collect_email_min	Minimum withdrawal is US$25	最小提现金额为 US￥25
-event.total_players	Total Players	总玩家数
-event.prizes	Prizes	奖品
-event.predict_now	Predict Now	开始预测
-event.ranking_weekly	Weekly	周榜
-event.ranking_overall	Season	季度榜
-event.ranking_monthly	Monthly	月榜
-community.share	SHARE	分享
-community.rules	RULES	规则
-community.all_competitions	All Leagues & Cups	全部联赛 & 杯赛
-community.title_joined_comp	Joined Competitions	已加入的比赛
-community.disclaimer	*** Disclaimer - Apple is not a sponsor nor is involved in any way.	** 免责声明 - 苹果非此内容赞助者且不以任何形式参与其中
-community.copy	COPY	复制
-community.title_top_performers	Top Performers	最佳预测
-community.title_rules	Rules	比赛规则
-community.title_join_comp	Join a Competition	加入比赛
-community.label_ongoing	Ongoing	正在进行
-community.label_months	months	月份
-community.title_eligible	Eligible Leagues/Cups	可加入联赛/杯赛
-community.invite_code	Invitation Code:	邀请码：
-community.title_duration	Duration	比赛时间
-community.quit	QUIT	退出
-community.title_description	Description	比赛描述
-community.label_select_league	Select a League	选择联赛
-community.label_give_title	Give a title to your competition	添加比赛名称
-community.title_details	Details	详细信息
-community.push	PUSH NOTIFICATION	推送消息
-community.label_how_long	How long will it last?	设定比赛时间
-community.label_give_desc	Give a description	添加描述信息
-community.label_fb_share	Facebook Share	分享到 Facebook
-info.competition_not_started	Competition begins %s.	比赛开始于 %s
-info.like_fh1	Do you like FootballHero so far?	喜欢FootballHero吗？
-info.shared_to_fb_minigame	You have shared your minigame to Facebook!	minigame已经分享至Facebook！
-info.leave_comment2	Email us your feedback	通过Email反馈给我们
-info.coming_soon	Coming Soon!	即将到来！
-info.like_fh2	Please take a moment to rate the app.	给我们一个好评吧~
-info.leave_comment1	Let us know how we could improve!	提出建议与意见！
-info.announcement_title	Announcement	申明
-info.odds_not_ready	Odds will be updated soon.\nPlease check again later.	暂无更新，请稍后重试！
-settings.general	General News	系统通知
-settings.tap_to_edit	Tap to Edit	编辑头像
-settings.select_league	Select League	选择联赛
-settings.select_language	Select Language	选择语言
-settings.user_info	User Information	用户信息
-settings.phone	Phone number	手机号码
-settings.favorite_team_none	No Favorite Teams	无最爱球队
-settings.email	E-mail Address	邮箱地址
-settings.sound_effects	Sound Effects	音效
-settings.sound_settings	Sound Settings	声音设置
-settings.title	Settings	设置
-settings.set_favorite_tams	Set My Favorite Teams	选择最爱球队
-settings.prediction	Prediction	预测消息
-settings.others	Others	更多设置
-settings.favorite_team	Favorite Teams	最爱球队
-choice.leave_comp_no	Stay	继续
-choice.leave_comp_yes	Leave	退出
-history.total_points	Total Points: %d	总分数: %d
-history.win_count	%d of %d	%d 中 %d
-history.stake	Stake: %d Points	押分: %d 分
-error.title_default	Oops! You've got an error	加载失败请重试！
-error.email_not_match	Email do not match.	邮箱地址不匹配
+languages.indonesian	Bahasa Indonesia	Bahasa Indonesia
+languages.english	English	English
+chat_hint	Tap here to start chatting!	اضغط هنا لبدء الدردشة!
+league_chat.feedback	Feedback & Comments	الملاحظات والتعليقات
+league_chat.spanish	Spanish League	الدوري الاسباني
+league_chat.others	Other Competitions	المسابقات الأخرى
+league_chat.italian	Italian League	الدوري الإيطالي
+league_chat.facebook	Like us on Facebook	سجل إعجابك بنا على Facebook
+league_chat.uefa	Uefa Leagues	الدوريات الأوروبية
+league_chat.german	German League	الدوري الألماني
+league_chat.english	English League	الدوري الإنجليزي
+user_name	Username	اسم المستخدم
+share_type_email	Email	البريد الإلكتروني
+today	Today	اليوم
+unknown_name	Unknown Name	اسم غير معروف
+top_performers	Top Performers	أفضل اللاعبين
+enter_email	Please enter your email address.	يُرجى إدخال عنوان البريد الإلكتروني.
+match_center.played	Played	تم اللعب
+match_center.just_now	Just Now	الآن
+match_center.prediction_made	Prediction made	تم تسجيل التوقع
+match_center.title_meetings	Last Meetings	أحدث الاجتماعات
+match_center.played_out_of	%d out of %d	%d من %d
+match_center.share_title		
+match_center.less	less	أقل
+match_center.make_prediction	Make a prediction!	سجل توقعك!
+match_center.share_body		
+match_center.write_discussion	Write a new discussion...	قم بكتابة مناقشة جديدة...
+match_center.load_comments	Load more comments...	حمل مزيد من التعليقات...
+match_center.write_comment	Write a comment...	اكتب تعليق...
+match_center.title	Match Center	مركز المباراة
+match_center.time_hours	%d hrs	%d ساعة
+match_center.title_discussion	Discussion	مناقشة
+match_center.more	More	المزيد
+match_center.time_days	%d days	%d يوم
+match_center.time_minutes	%d mins	%d دقيقة
+button.share	Share	مشاركة
+button.cancel	Cancel	إلغاء
+button.yes	Yes	نعم
+button.existing_user	Existing User	مستخدم موجود
+button.enable	Enable	تمكين
+button.rate_now	Rate now	تصنيف الآن
+button.new_user	New User	مستخدم جديد
+button.no_thanks	No, thanks.	لا، شكرًا.
+button.ok	OK	موافق
+button.sign_in	Sign In	تسجيل الدخول
+button.no	No	لا
+button.create	Create!	إنشاء!
+button.forget_password	Forgot Password?	هل نسيت كلمة المرور؟
+button.confirm	Confirm!	تأكيد!
+button.predict	Predict!	توقع!
+button.join	Join	انضمام
+button.register	Register	تسجيل
+button.play_now	Play Now!	العب الآن!
+button.go	Go!	اذهب!
+share_type_facebook	Facebook	Facebook
+match_list.match_ended	Match Ended	المباراة انتهت
+match_list.played	Played	تم اللعب
+match_list.most_popular	Most Popular	الأكثر شيوعًا
+match_list.date	%b %d, %A	%b %, d و%A
+match_list.special	Special	خاص
+match_list.match_started	Match Started	المباراة بدأت
+match_list.match_won	WON: %d Pts	فوز: %d نقطة
+match_list.match_lost	LOST: %d Pts	خسارة: %d نقطة
+match_list.total_fans	Fans	الجماهير
+match_list.upcoming_matches	Upcoming Matches	المباريات القادمة
+match_list.todays_matches	Today's Matches	مباريات اليوم
+match_list.draw	Draw	تعادل
+unknown_team	Unknown Team	فريق غير معروف
+leaderboard.win_ratio_title	Win Ratio	نسبة الفوز
+leaderboard.stats_win_rate	Win %	فوز%
+leaderboard.gain_per_prediction_title	Gain per Prediction	المكسب لكل توقع
+leaderboard.stats_last_ten	Last 10	آخر 10 مباريات
+leaderboard.me_score	%d won	%d فوز
+leaderboard.stats_l	L	خسارة
+leaderboard.win_ratio_desc	%d%% won (%d predictions)	%d%%فوز (%d توقعات)
+leaderboard.stats_league	League	الدوري
+leaderboard.high_score_title	High Score	أعلى رصيد
+leaderboard.stats_w	W	فوز
+leaderboard.high_score_desc	%d won (%d predictions)	%d فوز (%d توقعات)
+leaderboard.gain_per_prediction_desc	%d%% gain (%d predictions)	%d%%مكسب (%d توقعات)
+leaderboard.stats_win	Win	فوز
+leaderboard.min_prediction	At least %d predictions	توقعات بنسبة %d على أقل تقدير
+leaderboard.stats_gain_rate	Gain %	مكسب%
+leaderboard.stats_lose	Lose	خسارة
+last_name	Last Name	الاسم الأخير
+message_hint	Type your message here	اكتب رسالتك هنا
+password_confirm	Confirm Password	قم بتأكيد كلمة المرور
+spinWheel.ticket_usage	for the latest lucky draw.	للسحب الأخير.
+spinWheel.only_show_big_prize	Only show big prize	أظهر الجوائز الكبيرة فقط
+spinWheel.winners	Past Winners	الفائزون السابقون
+spinWheel.collect_email_you_won	You have won	لقد فزت
+spinWheel.wheel_title	Spin-the-Wheel	قم بتدوير العجلة
+spinWheel.ticket_balance_2	%d tickets	%d تذكرة
+spinWheel.win_ticket_left	left till draw.	يسار حتى السحب.
+spinWheel.spin_daily	One spin daily	قم بتدويرها مرة واحدة يوميًا
+spinWheel.to_claim_prize	to claim prize.	للحصول على جائزة
+spinWheel.balance_title	Balance	الرصيد
+spinWheel.wheel_sub_title	Spin-the-Wheel!	قم بتدوير العجلة!
+spinWheel.win_ticket_prize	Luck Draw Ticket	تذكرة سحب
+spinWheel.please_contact	Please contact	يرجى الاتصال
+spinWheel.share_description	Share with your friends and get an additional spin.	شارك اللعبة مع أصدقاءك وأحصل على دورة إضافية.
+spinWheel.spin_bonus	BONUS SPIN	مكافأة دوارة
+spinWheel.collect_email_towards_wallet	towards your account balance	تجاه رصيد الحساب الخاص بك
+spinWheel.money_balance	US$ %s Amazon Gift Card	دولار أمريكي %s بطاقة Amazon Gift Card
+spinWheel.collect_email_prize	1 US Dollar	1 دولار أمريكي
+spinWheel.won	WON	فوز
+spinWheel.collect_email_label_title	Claim Prize	الحصول على جائزة
+spinWheel.ticket_balance_1	%d ticket	%d تذكرة
+spinWheel.ticket_you_have	You have	يمكنك
+spinWheel.leave_message	Come back tomorrow for another spin.	الرجوع غدًا للحصول على محاولة أخرى.
+spinWheel.money_payout_limit	Minimum US$25.00 for withdrawal.	25 دولار أمريكي للانسحاب على أقل تقدير.
+spinWheel.money_payout_success_notification	Your request has been processed. Please allow 2 - 4 weeks to receive the gift card via your email address.	تم إرسال طلبك, يرجى الانتظار من أسبوعين إلى أربعة أسابيع لاستلام بطاقة الهدايا عبر البريد الإلكتروني الخاص بك.
+spinWheel.claimVirtualPrize	Congratulations! You have won a %s. Please contact our support.	تهنئتنا! لقد فزت ب %s, يرجى الاتصال بفريق الدعم التابع لنا.
+spinWheel.no_one_won	No one has won any prize yet.	لم يفُز أحد بأي جائزة حتى الآن.
+spinWheel.come_back_in	Come back in:	أعد الزيارة مرة أخرى في:
+spinWheel.collect_email_description	Please submit a valid email address. Fake email addresses will be disqualified from winning prizes.	يُرجَى إدخال عنوان بريد إلكتروني صالح. إذ أن عناوين البريد الإلكتروني الزائفة سوف تُحرم من الفوز بالجوائز.
+login_success	Login success.\nLoading data, please wait...	تم تسجيل الدخول بنجاح \nجاري تحميل البيانات, يرجى الانتظار...
+event.hint_unqualified	You must predict on %d more matches in this competition to qualify for prizes.	يجب أن تتوقع ما يزيد عن %d مباراة في هذه المسابقة حتى تصبح مؤهلاً للحصول على الجوائز.
+event.ranking_dropdown_week	Week %1$d: %2$d %3$s-%4$d %5$s	أسبوع %1$d: %2$d %3$s-%4$d %5$s
+event.total_players	Total Players	العدد الكلي لللاعبين
+event.status_unqualified	-unqualified	-unqualified
+event.prizes	Prizes	الجوائز
+event.predict_now	Predict Now	سجل توقعاتك الآن
+event.status_qualified	-qualified	-qualified
+event.ranking_weekly	Weekly	أسبوعيًا
+event.ranking_overall	Season	كل موسم
+event.ranking_dropdown_month	%1$s %2$s	%2$s %1$s
+event.ranking_monthly	Monthly	شهريًا
+event.hint_qualified	Qualified for prizes	لقد تأهلت لتحصل على الجوائز
+marketing_message_2	Now challenge your friends in your own mini-competition!	تحدى أصدقاءك في المسابقات الصغيرة الخاصة بك الآن!
+facebook_signin	Sign in with Facebook	سجل الدخول باستخدام Facebook
+share_type_title	Share your competition using...	شارك المسابقة الخاصة بك باستخدام...
+duration_forever	%s until forever	%s إلى ما لا نهاية
+marketing_message_3	Who will rise to the top?	من الذي سوف يحتل الصدارة؟
+share_type_SMS	SMS	رسالة نصية قصيرة
+updating_files	Updating %s ...	جاري تحديث %s...
+password	Password	كلمة المرور
+serverError.COMPETITION_6	No stats data for this year/month/week combination found.	لم يتم العثور على بيانات إحصائية مجمعة لهذا العام/الشهر/ الأسبوع.
+serverError.COUPON_3	No predictions on coupon. Cannot place empty coupon.	لا يوجد توقعات على الكوبون, يتعذر وضع كوبون فارغ.
+serverError.FACEBOOK_2	Oops! You are not connected to Facebook.	عفوًا! أنت غير مُتصل بحساب Facebook.
+serverError.DEFAULT	Oops! Please try again...	عفوًا! يرجى إعادة المحاولة...
+serverError.COUPON_1	Stake not allowed.	جائزة غير مسموح بها.
+serverError.LEADERBOARD_2	Oops! Please try again.	عفوًا! يرجى إعادة المحاولة.
+serverError.LEADERBOARD_1	Oops! Invalid leaderboard. Please try again.	عفوًا! لوحة نتائج غير صحيحة, يرجى إعادة المحاولة.
+serverError.COUNTRY_1	Oops! Try a different country.	عفوًا! حاول استخدام دولة أخرى.
+serverError.COMPETITION_5	User is not enrolled in this competition.	لم يتم تسجيل المستخدم في هذه المسابقة.
+serverError.COMPETITION_3	Join token does not exist.	رمز الانضمام غير موجود.
+serverError.COMPETITION_2	The competition does not exist.	المسابقة غير موجودة.
+serverError.FACEBOOK_4	Oops! This Facebook account is already in use.	عفوًا! حساب Facebook مستخدم بالفعل.
+serverError.WHEEL_3	Could not find a prize.	يتعذر العثور على جائزة.
+serverError.GENERAL_1	Oops! We're sorry. Please try again.	عفوًا! نرجو المعذرة. يرجى إعادة المحاولة.
+serverError.SIGNIN_2	Incorrect username or password.	اسم مستخدم أو كلمة مرور غير صحيحة
+serverError.FACEBOOK_3	Oops! This Facebook account is already in use.	عفوًا! حساب Facebook مستخدم بالفعل.
+serverError.DISCUSSION_3	Oops! Please try again.	عفوًا! يرجى إعادة المحاولة.
+serverError.COMPETITION_7	You cannot join a competition that is in preview mode.	يتعذر الاشتراك في مسابقة وهي في وضع المعاينة.
+serverError.GENERAL_2	Oops! Your User ID is invalid.	عفوًا! معرِّف المستخدم الخاص بك غير صحيح.
+serverError.WHEEL_6	The requested amount is bigger than your balance.	الكمية المطلوبة تتعدى الرصيد الخاص بك.
+serverError.WHEEL_5	Requested amount is lower than minimum payout.	الكمية المطلوبة أقل من الحد الأدنى للعوائد.
+serverError.COUPON_4	One or more predictions were already played before.	تم اللعب بأحد التوقعات أو أكثر مُسبقًا.
+serverError.SIGNIN_1	Oops! Your email is invaild.	عفوًا! البريد الإلكتروني غير صالح.
+serverError.VERSION_2	New features added! Please update FootballHero in the app store.	تم إضافة عدد من الخصائص الجديدة! يرجي تحديث لعبة FootballHero من متجر التطبيقات.
+serverError.COMPETITION_4	You are already enrolled in this competition.	أنت مُسجل بالفعل في هذه المسابقة.
+serverError.WHEEL_4	User has never spinned the wheel.	المستخدم لم يقم بتدوير العجلة مطلقًا.
+serverError.FACEBOOK_1	Oops! There seems to be an error. Please try again.	عفوًا! يبدوا أن هناك خطأ ما. يرجى إعادة المحاولة.
+serverError.WHEEL_1	Your last spin was less than 24 hours ago.	لم يمر 24 ساعة على آخر مرة قمت بتدوير العجلة.
+serverError.LEAGUE_1	Oops! Try a different league.	عفوًا! حاول استخدام دوري آخر.
+serverError.WHEEL_2	Price probabilities don't add up.	يتعذر جمع احتمالات السعر.
+serverError.DISCUSSION_2	Oops! Please try again.	عفوًا! يرجى إعادة المحاولة.
+serverError.DISCUSSION_1	Oops! Please try again.	عفوًا! يرجى إعادة المحاولة.
+serverError.SIGNIN_4	Email and/or password cannot be empty.	لا يمكن ترك خانة البريد الإلكتروني و/أو كلمة المرور فارغة.
+serverError.COUPON_2	Too many predictions on coupon.	يوجد عدد كبير من التوقعات على الكوبون.
+serverError.FACEBOOK_5	Oops! We're sorry. Please try again later.	عفوًا! نرجو المعذرة. يرجى المحاولة مرة أخرى لاحقًا.
+serverError.COMPETITION_8	Share Bonus already claimed.	تم الحصول على مشاركة الحوافز
+serverError.COUPON_5	Last big bet was less than 12 hours ago.	أحدث الرهانات الكبيرة كان قبل 12 ساعة.
+serverError.COMPETITION_1	You already created a competition with that name before.	لقد قمت بإنشاء واحدة من المسابقات بهذا الاسم من قبل.
+serverError.VERSION_1	Please update latest version in the app store.	يرجي تحديث الإصدار الأخير في متجر التطبيقات.
+serverError.SIGNIN_3	Email address does not exist.	عنوان البريد الإلكتروني غير موجود.
+duration_to	%s to %s	%s إلى %s
+terms_agree	By Signing in, you are indicating that you have read and agree to FOOTBALL HERO'S	فور تسجيل الدخول، تقر بأنك قد قرأت ووافقت على شروط FOOTBALL HERO'S
+last_name_optional	Last Name (Optional)	الاسم الأخير (اختياري)
+community.share	SHARE	مشاركة
+community.rules	RULES	قواعد
+community.label_call_to_arm	You are not in any \ncompetition yet.\n\nCreate a new competition and\nchallenge your friends now!	أنت غير مسجّل في أي \nمسابقة حتى الآن.\n\nأنشيء مسابقة جديدة وابدأ تحدي أصدقائك الآن!
+community.enter_comp_code	Enter Code	أدخل الرمز
+community.all_competitions	All Leagues & Cups	جميع الدوريات والكؤوس
+community.title_joined_comp	Joined Competitions	الانضمام للمسابقات
+community.disclaimer	*** Disclaimer - Apple is not a sponsor nor is involved in any way.	*** بيان إخلاء المسؤولية - لا يمثل Apple راعيًا أو مشاركًا بأي حال من الأحوال.
+community.copy	COPY	نسخ
+community.title_top_performers	Top Performers	أفضل اللاعبين
+community.title_rules	Rules	قواعد اللعب
+community.title_join_comp	Join a Competition	الانضمام إلى المسابقة
+community.title_leaderboard	Leaderboard	لوحة النتائج
+community.label_ongoing	Ongoing	جارية
+community.label_months	months	شهور
+community.title_eligible	Eligible Leagues/Cups	الدوريات المؤهلة/الكؤوس
+community.invite_code	Invitation Code:	رمز الدعوة:
+community.title_duration	Duration	المدة
+community.quit	QUIT	إنهاء
+community.title_description	Description	الوصف
+community.title_competition	Competitions	المسابقات
+community.title_create_comp	s competition	المسابقات الصغيرة
+community.label_select_league	Select a League	حدد الدوري
+community.label_give_title	Give a title to your competition	ضع عنوان للمسابقة
+community.title_details	Details	التفاصيل
+community.push	PUSH NOTIFICATION	الإخطارات اللحظية
+community.label_how_long	How long will it last?	الى متى سوف تستمر؟
+community.label_give_desc	Give a description	اختر وصفًا
+community.desc_create_comp	Predictions made in the selected league for the competition are automatically included in the competition.	وترد التوقعات المحرزة في المسابقات المختارة تلقائيًا إلى المسابقة.
+community.label_fb_share	Facebook Share	مشاركة عبر Facebook
+first_name	First Name	الاسم الأول
+push_notification.receive	You will receive:	سوف تتلقى:
+push_notification.prediction_summary	. Predictions' summary	ملخص التوقعات
+push_notification.match_result	. Match results	نتائج المباريات
+push_notification.question_competition	Do you want to receive push notification for this competition?	هل ترغب في استلام الإخطارات اللحظية عن هذه المسابقة؟
+push_notification.question_prediction	Do you want to receive push notification for all your predictions?	هل ترغب في استلام الإخطارات اللحظية عن كافة التوقعات؟
+push_notification.points_won	. Points won or lost	نقاط الفوز أو الخسارة
+push_notification.new_participant	. New participant alert	تنبيه مشارك جديد
+football_hero	FootballHero	FootballHero
+quit_cancel	Stay	استمرار
+info.competition_not_started	Competition begins %s.	تبدأ المسابقة %s.
+info.like_fh1	Do you like FootballHero so far?	هل تعجبك FootballHero حتى الآن؟
+info.predictions_entered	You have completed this match.	لقد أتممت هذه المباراة.
+info.title	Info	معلومات
+info.star_bet	You can use 3 star stakes every 12 hours	يمكن استخدام 3 ملصقات على شكل نجوم كل 12 ساعة
+info.shared_to_fb_minigame	You have shared your minigame to Facebook!	لقد قمت بمشاركة لعبتك الصغيرة عبر Facebook!
+info.leave_comment2	Email us your feedback	ارسل لنا ملاحظاتك
+info.coming_soon	Coming Soon!	قريبًا!
+info.like_fh2	Please take a moment to rate the app.	يرجى قضاء دقيقة في تصنيف التطبيقات.
+info.join_code_copied	Join code is copied to clipboard.	يتم نسخ كود الانضمام إلى الحافظة.
+info.leave_comment1	Let us know how we could improve!	يرجى إعلامنا عن كيفية التطور!
+info.shared_to_fb	Competition is shared to Facebook.	تمت مشاركة المسابقة عبر Facebook.
+info.announcement_title	Announcement	إعلان
+info.odds_not_ready	Odds will be updated soon.\nPlease check again later.	سيتم تحديث الاحتمالات قريبًا.\nيرجى التحقق مرة أخرى في وقت لاحق.
+info.new_version	Please download new version and update!	يرجى تنزيل الإصدار الجديد وتحديثه!
+quit_title	Are you sure you want to quit?	هل تريد الإنهاء بالتأكيد؟
+settings.faq	FAQ	الأسئلة الشائعة
+settings.general	General News	الأخبار العامة
+settings.tap_to_edit	Tap to Edit	انقر للتحرير
+settings.sounds	Sounds	الأصوات
+settings.send_feedback	Send Feedback	إرسال تعليق
+settings.select_language	Select Language	تحديد اللغة
+settings.phone	Phone number	رقم الهاتف
+settings.logout	Logout	تسجيل الخروج
+settings.email	E-mail Address	عنوان البريد الإلكتروني
+settings.user_info	User Information	معلومات المستخدم
+settings.sound_settings	Sound Settings	إعدادات الصوت
+settings.title	Settings	الإعدادات
+settings.sound_effects	Sound Effects	المؤثرات الصوتية
+settings.push_notification	Push Notification	الإخطارات اللحظية
+settings.prediction	Prediction	توقعات
+settings.others	Others	أخرى
+settings.favorite_team	Favorite Teams	الفرق المفضّلة
+month.1	January	يناير
+month.3	March	مارس
+month.2	February	فبراير
+month.5	May	مايو
+month.4	April	أبريل
+month.7	July	يوليو
+month.6	June	يونيو
+month.9	September	سبتمبر
+month.8	August	أغسطس
+month.12	December	ديسمبر
+month.11	November	نوفمبر
+month.10	October	أكتوبر
+chat_room_title	Select Chatroom	حدد غرفة الدردشة
+num_of_points	%d Points	نقاط %d
+share_title	Join %s's competition on FootballHero	انضم إلى الذين لديهم %s من مسابقة FootballHero
+minigame.friend_help	friend(s) have helped you	الأصدقاء الذين قاموا بمعاونتك
+minigame.ask_more_friends	Ask more friends!	اسأل مزيد من الأصدقاء!
+minigame.goal_to_win	%d goals remaining to win	%d من الإهداف المتبقية للفوز
+minigame.winners	Past Winners	الفائزون السابقون
+minigame.ask_friends_help	Ask friends to help!	اسأل الأصدقاء للمساعدة!
+minigame.title	Shoot-to-Win Challenge	صوّب لتربح التحدي
+minigame.shoot_to_win_won	You have won!	لقد فزت!
+minigame.rules	Rules	قواعد اللعب
+minigame.no_one_won	No one has won an Samsung Note Edge yet.	لم يفز شخص بأحد Samsung Note Edge حتى الآن.
+minigame.call_to_action	No one has scored any goals for you yet.	لم يحرز أي شخص أية أهداف لصالحك حتى الآن.
+minigame.helped_to_score	has helped you to score %d goals	لقد ساعدك على إحراز %d من الأهداف
+minigame.iPhone6_winner	Samsung Note Edge Winner	Samsung Note Edge Winner
+minigame.failed_to_score	failed to score any goals	فشلت في إحراز أية أهداف
+minigame.current_score	Current Score:	النقاط الحالية:
+optional	(Optional)	(اختياري)
+choice.leave_comp_no	Stay	استمرار
+choice.leave_comp_title	Leave Competition	خروج من المسابقة
+choice.leave_comp_yes	Leave	مغادرة
+choice.leave_comp_desc	Are you sure you want to leave the competition?	هل تريد بالتأكيد الخروج من المسابقة؟
+support_title	FootballHero - Support	FootballHero - دعم
+vs	VS	ضد
+share_body	Can you beat me? Join my competition on FootballHero. Code: %s  www.footballheroapp.com/download	هل بإمكانك هزيمتي؟ انضم لمسابقتي في FootballHero. الرمز: %s  www.footballheroapp.com/download
+support_email	support@footballheroapp.com	support@footballheroapp.com
+marketing_message_1	Congratulations on making your first prediction!	تهنئتنا على صدق توقعك الأوّل!
+email	E-mail Address	عنوان البريد الإلكتروني
+friends	Friends	الأصدقاء
+history.show_all	Show All	إظهار الكل
+history.won_small	won	فوز
+history.predictions_closed	Closed Predictions	توقعات مغلقة
+history.lost	Lost	خسارة
+history.won_colon	Won:	فوز:
+history.total_points	Total Points: %d	إجمالي النقاط: %d
+history.predictions_open	Open Predictions	توقعات مفتوحة
+history.win_by	Will %s win by %d goals or more?	هل سيفوز %s برصيد %d من الأهداف أو أكثر؟
+history.total_goals	Will total goals be %d or more?	هل سيكون إجمالي رصيد الأهداف %d أو أكثر؟
+history.won	Won	فوز
+history.predictions_all	All Predictions	كافة التوقعات
+history.no_open_prediction	You have no\n open predictions yet.	لا يوجد لديك \nتوقعات مفتوحة حتى الآن.
+history.win_count	%d of %d	%d من %d
+history.stake	Stake: %d Points	جائزة: نقاط %d
+history.no_open_prediction_others	No open predictions	لا توجد توقعات مفتوحة
+history.lost_small	lost	خسارة
+history.lost_colon	Lost:	خسارة:
+history.no_closed_prediction_others	No closed predictions	لا يوجد توقعات مغلقة
+history.no_closed_prediction	You have no\n closed predictions yet.	لا يوجد لديك \nتوقعات مغلقة حتى الآن.
+history.which_team	Which team will win?	من الفريق الذي سيفوز؟
+first_name_optional	First Name (Optional)	الاسم الأول (اختياري)
+email_confirm	E-mail Address Confirm	تأكيد عنوان البريد الإلكتروني
+match_prediction.share	Share with your friends	شارك اللعبة مع أصدقائك
+match_prediction.hint_tap	Tap to make a prediction!	انقر لتسجيل توقع!
+match_prediction.win	Win	فوز
+match_prediction.team_to_win	Which team will win?	من الفريق الذي سيفوز؟
+match_prediction.stand_to_win	Stand to Win	قادر على الفوز
+match_prediction.will_total_goals	Will total goals be %d or more?	هل سيكون إجمالي رصيد الأهداف %d أو أكثر؟
+match_prediction.balance	Balance	الرصيد
+match_prediction.prediction_summary	Prediction Summary	ملخص التوقعات
+match_prediction.facebook	Facebook	Facebook
+match_prediction.will_win_by	Will %s win by %d goals or more?	هل سيفوز %s برصيد %d من الأهداف أو أكثر؟
+match_prediction.stake	Stake	جائزة
+quit_desc	Tap back again to quit.	انقر على رجوع مرة أخرى للخروج.
+error.bad_email_format	Bad email format.	تنسيق رسالة بريد إلكتروني سيئ.
+error.title_default	Oops! You've got an error	عفوًا! يوجد لديك خطأ
+error.blank_password	Password is blank.	خانة كلمة المرور فارغة.
+error.no_sms	You have no SMS set up.	لا يوجد لديك إعداد للرسائل النصية القصيرة.
+error.blank_league	Selected League cannot be blank.	لا يمكن ترك خانة الدوري المرغوب فارغة.
+error.email_not_match	Email do not match.	البريد الإلكتروني غير مطابق.
+error.invalid_month	Number of months is not a number.	عدد الأشهر ليس رقمًا.
+error.blank_token	Competition code cannot be blank.	لا يمكن ترك خانة رمز المسابقة فارغة.
+error.blank_email	Email is blank.	خانة البريد الإلكتروني فارغة.
+error.blank_title	Title cannot be blank.	لا يمكن ترك خانة العنوان فارغة.
+error.updating_failed	Update configurations failed. Please retry.	فشل تحديث التهيئة. يرجى إعادة المحاولة.
+error.blank_comp_id	CompetitionId cannot be blank.	لا يمكن ترك خانة المسابقة فارغة.
+error.blank_desc	Description cannot be blank.	لا يمكن ترك خانة الوصف فارغة.
+error.password_short	Password too short.	كلمة المرور أقصر مما ينبغي.
+error.password_not_match	Passwords do not match.	كلمة المرور غير مطابقة.
+error.password_long	Password too long.	كلمة المرور أطول مما ينبغي.
+error.blank_user_name	User name is blank.	خانة اسم المستخدم فارغة.
+error.no_email	You have no email account set up.	لا يوجد لديك إعداد لحساب البريد الإلكتروني.
+error.go_to_store	Go to Store.	يرجى الذهاب إلى المتجر.
+error.login_failed	Login failed. Please retry.	فشل تسجيل الدخول. يرجى إعادة المحاولة.
+error.match_completed	You have completed this match.	لقد أتممت هذه المباراة.
+email_signin	Sign in with Email	قم بتسجيل الدخول باستخدام البريد الإلكتروني

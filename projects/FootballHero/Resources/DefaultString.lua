@@ -27,6 +27,7 @@ StringDefaultSubTableList = {
   "spinWheel",
   "push_notification",
   "settings",
+  "languages",
 }
 
 StringsDefault = {
@@ -224,6 +225,8 @@ StringsDefault = {
     english = "English",
     indonesian = "Bahasa Indonesia",
     chinese = "中文",
+    arabic = "العربية",
+    thailand = "ไทย",
   },
   last_name = "Last Name",
   last_name_optional = "Last Name (Optional)",
