@@ -17,6 +17,7 @@ local DEEPLINK_GAME_LIST = "gamelist"
 local DEEPLINK_PREDICT = "prediction"
 local DEEPLINK_COMPETITION = "competition"
 local DEEPLINK_LEADERBOARD = "leaderboard"
+local DEEPLINK_SPINTHEWHEEL = "spinthewheel"
 
 local mSceneGameLayer
 local mKeyPadBackEnabled = true
@@ -270,8 +271,9 @@ function processDeepLink( deepLink, defaultEvent, defaultEventParam )
 				EventManager:postEvent( Event.Enter_Community, { CommunityConfig.COMMUNITY_TAB_ID_LEADERBOARD, 
 					LeaderboardConfig.LEADERBOARD_FRIENDS, LeaderboardConfig.LEADERBOARD_TYPE_ROI } )
 			end
-
-		else
+        elseif deepLinkPage == DEEPLINK_SPINTHEWHEEL then
+            EventManager:postEvent( Event.Enter_Spin_the_Wheel )
+        else
 			if defaultEvent ~= nil then
 				EventManager:postEvent( defaultEvent, defaultEventParam )
 			else
