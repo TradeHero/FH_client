@@ -122,6 +122,22 @@ public abstract class Cocos2dxActivity extends FragmentActivity implements Cocos
 		this.mGLSurfaceView.onPause();
 	}
 
+    @Override
+    protected void onNewIntent(Intent intent)
+    {
+        super.onNewIntent(intent);
+
+        String action = intent.getAction();
+        Uri data = intent.getData();
+        Log.v("###", "Get intent with action: " + action);
+        if (data != null)
+        {
+            Log.v("###", "Get intent with data: " + data.toString());
+            m_deepLink = data.getPath();
+            MiscUtil.notifyDeepLink(m_deepLink);
+        }
+    }
+
 	@Override
 	public void showDialog(final String pTitle, final String pMessage) {
 		Message msg = new Message();
