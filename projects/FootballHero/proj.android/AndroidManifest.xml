@@ -56,8 +56,8 @@
             <category android:name="android.intent.category.BROWSABLE"/>
         </intent-filter>
         <intent-filter>
-            <!-- Accepts URIs that begin with "http://footballhero.com" -->
-            <data android:scheme="http" android:host="footballhero.com"/>
+            <!-- Accepts URIs that begin with "http://footballheroapp.com" -->
+            <data android:scheme="http" android:host="footballheroapp.com/"/>
             <action android:name="android.intent.action.VIEW"/>
             <category android:name="android.intent.category.DEFAULT"/>
             <category android:name="android.intent.category.BROWSABLE"/>
