@@ -59,9 +59,10 @@ function initContent( leagueId )
     title:setText( Constants.String.settings.set_favorite_tams )
 
     local done = tolua.cast( mWidget:getChildByName("Button_Logout"), "Button" )
-    done:loadTextureNormal( Constants.SETTINGS_IMAGE_PATH.."btn-done.png" )
-    done:setOpacity( 255 )
-    done:setTitleText( "" )
+    done:setEnabled( false )
+    --done:loadTextureNormal( Constants.SETTINGS_IMAGE_PATH.."btn-done.png" )
+    --done:setOpacity( 255 )
+    --done:setTitleText( "" )
     
     local contentContainer = tolua.cast( mWidget:getChildByName("ScrollView"), "ScrollView" )
     contentContainer:removeAllChildrenWithCleanup( true )
