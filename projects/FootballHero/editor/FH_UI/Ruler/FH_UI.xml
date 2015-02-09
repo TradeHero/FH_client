@@ -69,10 +69,6 @@
     <GuidesList />
   </GuidesProject>
   <GuidesProject>
-    <Project>LeaderboardScene</Project>
-    <GuidesList />
-  </GuidesProject>
-  <GuidesProject>
     <Project>MatchListEmptyIndi</Project>
     <GuidesList />
   </GuidesProject>
