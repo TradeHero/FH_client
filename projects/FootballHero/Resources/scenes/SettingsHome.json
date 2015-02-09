@@ -194,7 +194,7 @@
           "areaHeight": 0,
           "areaWidth": 0,
           "fontFile": null,
-          "fontName": "fonts/Helvetica neue.ttf",
+          "fontName": "fonts/HelveticaNeue.ttf",
           "fontSize": 30,
           "hAlignment": 0,
           "text": "Settings",
@@ -251,7 +251,7 @@
             "plistFile": null,
             "resourceType": 0
           },
-          "fontName": "fonts/Helvetica neue.ttf",
+          "fontName": "fonts/HelveticaNeue.ttf",
           "fontSize": 24,
           "fontType": 0,
           "normal": null,
@@ -324,7 +324,7 @@
             "plistFile": null,
             "resourceType": 0
           },
-          "fontName": "fonts/Helvetica neue.ttf",
+          "fontName": "fonts/HelveticaNeue.ttf",
           "fontSize": 14,
           "fontType": 0,
           "normal": null,

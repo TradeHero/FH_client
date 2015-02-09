@@ -58,7 +58,7 @@
           "areaHeight": 0,
           "areaWidth": 0,
           "fontFile": null,
-          "fontName": "fonts/Helvetica Neue Bold.ttf",
+          "fontName": "fonts/HelveticaNeue-Bold.ttf",
           "fontSize": 40,
           "hAlignment": 1,
           "text": "Tap to make a prediction!",

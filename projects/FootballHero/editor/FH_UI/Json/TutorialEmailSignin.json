@@ -68,7 +68,7 @@
             "plistFile": null,
             "resourceType": 0
           },
-          "fontName": "fonts/Helvetica neue.ttf",
+          "fontName": "fonts/HelveticaNeue.ttf",
           "fontSize": 34,
           "fontType": 0,
           "normal": null,
@@ -141,7 +141,7 @@
             "plistFile": null,
             "resourceType": 0
           },
-          "fontName": "fonts/Helvetica neue.ttf",
+          "fontName": "fonts/HelveticaNeue.ttf",
           "fontSize": 34,
           "fontType": 0,
           "normal": null,
@@ -280,7 +280,7 @@
           "areaHeight": 54,
           "areaWidth": 500,
           "fontFile": null,
-          "fontName": "fonts/Helvetica neue.ttf",
+          "fontName": "fonts/HelveticaNeue.ttf",
           "fontSize": 20,
           "hAlignment": 0,
           "text": "By Signing in, you are indicating that you have read and agree to FOOTBALL HERO'S",
@@ -337,7 +337,7 @@
             "plistFile": null,
             "resourceType": 0
           },
-          "fontName": "fonts/Helvetica neue.ttf",
+          "fontName": "fonts/HelveticaNeue.ttf",
           "fontSize": 14,
           "fontType": 0,
           "normal": null,

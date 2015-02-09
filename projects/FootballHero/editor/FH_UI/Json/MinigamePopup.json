@@ -186,7 +186,7 @@
             "plistFile": null,
             "resourceType": 0
           },
-          "fontName": "fonts/Helvetica Neue Light.ttf",
+          "fontName": "fonts/HelveticaNeue-Light.ttf",
           "fontSize": 34,
           "fontType": 0,
           "normal": null,
@@ -259,7 +259,7 @@
             "plistFile": null,
             "resourceType": 0
           },
-          "fontName": "fonts/Helvetica Neue Bold.ttf",
+          "fontName": "fonts/HelveticaNeue-Bold.ttf",
           "fontSize": 34,
           "fontType": 0,
           "normal": null,
@@ -332,7 +332,7 @@
             "plistFile": null,
             "resourceType": 0
           },
-          "fontName": "fonts/Helvetica neue.ttf",
+          "fontName": "fonts/HelveticaNeue.ttf",
           "fontSize": 14,
           "fontType": 0,
           "normal": null,

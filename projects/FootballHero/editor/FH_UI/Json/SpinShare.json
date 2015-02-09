@@ -63,7 +63,7 @@
           "areaHeight": 180,
           "areaWidth": 600,
           "fontFile": null,
-          "fontName": "fonts/Helvetica Neue Bold.ttf",
+          "fontName": "fonts/HelveticaNeue-Bold.ttf",
           "fontSize": 40,
           "hAlignment": 1,
           "text": "Share with your friends and get an additiaonal spin.",
@@ -174,7 +174,7 @@
             "plistFile": null,
             "resourceType": 0
           },
-          "fontName": "fonts/Helvetica Neue Bold.ttf",
+          "fontName": "fonts/HelveticaNeue-Bold.ttf",
           "fontSize": 30,
           "fontType": 0,
           "normal": null,
@@ -247,7 +247,7 @@
             "plistFile": null,
             "resourceType": 0
           },
-          "fontName": "fonts/Helvetica neue.ttf",
+          "fontName": "fonts/HelveticaNeue.ttf",
           "fontSize": 25,
           "fontType": 0,
           "normal": null,

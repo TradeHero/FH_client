@@ -192,7 +192,7 @@
           "areaHeight": 0,
           "areaWidth": 0,
           "fontFile": null,
-          "fontName": "fonts/Helvetica neue.ttf",
+          "fontName": "fonts/HelveticaNeue.ttf",
           "fontSize": 30,
           "hAlignment": 0,
           "text": "Share your competition using...",
@@ -496,7 +496,7 @@
             "plistFile": null,
             "resourceType": 0
           },
-          "fontName": "fonts/Helvetica neue.ttf",
+          "fontName": "fonts/HelveticaNeue.ttf",
           "fontSize": 36,
           "fontType": 0,
           "normal": null,
@@ -624,7 +624,7 @@
             "plistFile": null,
             "resourceType": 0
           },
-          "fontName": "fonts/Helvetica neue.ttf",
+          "fontName": "fonts/HelveticaNeue.ttf",
           "fontSize": 36,
           "fontType": 0,
           "normal": null,
@@ -752,7 +752,7 @@
             "plistFile": null,
             "resourceType": 0
           },
-          "fontName": "fonts/Helvetica neue.ttf",
+          "fontName": "fonts/HelveticaNeue.ttf",
           "fontSize": 36,
           "fontType": 0,
           "normal": null,

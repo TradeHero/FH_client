@@ -111,14 +111,14 @@ void Label::setFontName(const std::string& name)
     int nFindTTF = name.find(".TTF");
     if (nFindttf >= 0 || nFindTTF >= 0)
     {
-            int nFindPos = name.rfind("/");
-            newName = &name[nFindPos + 1];
-            nFindPos = newName.rfind(".");
-            newName = newName.substr(0, nFindPos);
+        int nFindPos = name.rfind("/");
+        newName = &name[nFindPos + 1];
+        nFindPos = newName.rfind(".");
+        newName = newName.substr(0, nFindPos);
     }
     else
     {
-            newName = name;
+        newName = name;
     }
 #else
     newName = name;

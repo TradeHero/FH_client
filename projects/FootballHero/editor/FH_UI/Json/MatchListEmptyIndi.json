@@ -10,12 +10,7 @@
   "designHeight": 1136,
   "designWidth": 640,
   "textures": [],
-  "texturesPng": [
-    "MatchListScene/match_bkg.png",
-    "header/back.png",
-    "PredictionConfirm/off_button.png",
-    "PredictionConfirm/on_button.png"
-  ],
+  "texturesPng": [],
   "version": "1.6.0.0",
   "widgetTree": {
     "classname": "Panel",
@@ -63,7 +58,7 @@
           "areaHeight": 60,
           "areaWidth": 640,
           "fontFile": null,
-          "fontName": "fonts/Helvetica Neue Bold.ttf",
+          "fontName": "fonts/HelveticaNeue-Bold.ttf",
           "fontSize": 30,
           "hAlignment": 1,
           "text": "No matches available.",
@@ -113,7 +108,7 @@
           "areaHeight": 80,
           "areaWidth": 640,
           "fontFile": null,
-          "fontName": "fonts/Helvetica neue.ttf",
+          "fontName": "fonts/HelveticaNeue.ttf",
           "fontSize": 25,
           "hAlignment": 1,
           "text": "Select a new competition to see more matches!",

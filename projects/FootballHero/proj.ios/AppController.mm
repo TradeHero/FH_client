@@ -122,6 +122,18 @@ static AppDelegate s_sharedApplication;
     NSTimeInterval timeInterval = [startTime timeIntervalSinceNow];
     NSLog(@"Interval:%f",timeInterval);
     
+
+    for (NSString* family in [UIFont familyNames])
+    {
+        NSLog(@"%@", family);
+        
+        for (NSString* name in [UIFont fontNamesForFamilyName: family])
+        {
+            NSLog(@"  %@", name);
+        }
+    }
+
+    
     return YES;
 }
 
