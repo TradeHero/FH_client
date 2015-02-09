@@ -29,7 +29,8 @@ function loadFrame()
     local backBt = mWidget:getChildByName("Button_Back")
     backBt:addTouchEventListener( backEventHandler )
 
-    local postBt = mWidget:getChildByName("Button_Post")
+    local postBt = tolua.cast( mWidget:getChildByName("Label_Post"), "Label" )
+    postBt:setText( Constants.String.match_center.post )
     postBt:addTouchEventListener( postEventHandler )
 
     createTextInput()

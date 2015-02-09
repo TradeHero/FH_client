@@ -220,9 +220,9 @@ function initInput()
             end
         end
     end
-    local button = top:getChildByName("Button_Post")
+    local button = tolua.cast( top:getChildByName("Label_Post"), "Label" )
+    button:setText( Constants.String.match_center.post )
     button:addTouchEventListener( postEventHandler )
-
 end
 
 function inputEventHandler( sender, eventType )

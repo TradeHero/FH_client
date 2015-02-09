@@ -271,6 +271,7 @@ StringsDefault = {
     more = "More",
     played = "Played",
     played_out_of = "%d out of %d",
+    post = "Post",
     prediction_made = "Prediction made",
     share_body = "", -- TODO
     share_title = "", -- TODO
