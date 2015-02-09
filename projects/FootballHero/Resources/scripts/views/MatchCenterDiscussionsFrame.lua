@@ -233,38 +233,39 @@ end
 
 function scrollViewEventHandler( target, eventType )
     
-    if eventType == SCROLLVIEW_EVENT_SCROLLING then
-        local scrollview = tolua.cast( target, "ScrollView" )
-        local container = scrollview:getInnerContainer()
+    -- DELETE not working well
+    -- if eventType == SCROLLVIEW_EVENT_SCROLLING then
+    --     local scrollview = tolua.cast( target, "ScrollView" )
+    --     local container = scrollview:getInnerContainer()
         
-        local currentHeight = scrollview:getSize().height
-        local newHeight = currentHeight
+    --     local currentHeight = scrollview:getSize().height
+    --     local newHeight = currentHeight
 
-        if mScrollPositionY ~= nil then
-            if mScrollPositionY < container:getPositionY() then
-                --print("scrolling down..")
-                showMatchInfo( false )
+    --     if mScrollPositionY ~= nil then
+    --         if mScrollPositionY < container:getPositionY() then
+    --             --print("scrolling down..")
+    --             showMatchInfo( false )
 
-                newHeight = math.min( currentHeight + CONTENT_HEIGHT_SPEED, CONTENT_HEIGHT_LARGE )
+    --             newHeight = math.min( currentHeight + CONTENT_HEIGHT_SPEED, CONTENT_HEIGHT_LARGE )
                 
-            elseif mScrollPositionY > container:getPositionY() then
-                --print("scrolling up..")
-                showMatchInfo( true )
+    --         elseif mScrollPositionY > container:getPositionY() then
+    --             --print("scrolling up..")
+    --             showMatchInfo( true )
 
-                newHeight = math.max( currentHeight - CONTENT_HEIGHT_SPEED, CONTENT_HEIGHT_SMALL )
-            end
+    --             newHeight = math.max( currentHeight - CONTENT_HEIGHT_SPEED, CONTENT_HEIGHT_SMALL )
+    --         end
 
-            if newHeight ~= currentHeight then
-                scrollview:setSize( CCSize:new( scrollview:getSize().width, newHeight ) )
-                scrollview:setPositionY( scrollview:getPositionY() + currentHeight -  newHeight )
-                --scrollview:setInnerContainerSize( CCSize:new( 0, newHeight ) )
+    --         if newHeight ~= currentHeight then
+    --             scrollview:setSize( CCSize:new( scrollview:getSize().width, newHeight ) )
+    --             scrollview:setPositionY( scrollview:getPositionY() + currentHeight -  newHeight )
+    --             --scrollview:setInnerContainerSize( CCSize:new( 0, newHeight ) )
 
-                local layout = tolua.cast( scrollview, "Layout" )
-                layout:requestDoLayout()
-            end
-        end
-        mScrollPositionY = container:getPositionY()
-    end
+    --             local layout = tolua.cast( scrollview, "Layout" )
+    --             layout:requestDoLayout()
+    --         end
+    --     end
+    --     mScrollPositionY = container:getPositionY()
+    -- end
 
     if eventType == SCROLLVIEW_EVENT_BOUNCE_BOTTOM and mHasMoreToLoad then
         mStep = mStep + 1

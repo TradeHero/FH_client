@@ -29,6 +29,9 @@ function loadFrame( parent )
     for i = 1, NAV_BT_NUM do
     	local navBt = widget:getChildByName("nav"..i)
     	navBt:addTouchEventListener( navEventHandler )
+
+    	local navTxt = tolua.cast( navBt:getChildByName("Label_nav"..i), "Label" )
+    	navTxt:setText( Constants.String.navigator["n"..tostring(i)] )
     end
 
     if mLastSelectedId == 0 then
