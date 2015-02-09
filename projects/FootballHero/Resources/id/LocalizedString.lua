@@ -324,6 +324,7 @@ Strings = {
 		winners = "Pemenang yang lalu",
 	},
 	settings = {
+		edit = "Edit",
 		faq = "Pertanyaan Umum",
 		general = "Berita Umum",
 		tap_to_edit = "Tekan untuk edit",

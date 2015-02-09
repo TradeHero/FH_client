@@ -238,7 +238,6 @@
 		730D984518DC4317000CA5F9 /* CocoStudio.lua in Resources */ = {isa = PBXBuildFile; fileRef = 730D983618DC4316000CA5F9 /* CocoStudio.lua */; };
 		730D984618DC4317000CA5F9 /* config in Resources */ = {isa = PBXBuildFile; fileRef = 730D983718DC4316000CA5F9 /* config */; };
 		730D984818DC4317000CA5F9 /* extern.lua in Resources */ = {isa = PBXBuildFile; fileRef = 730D983918DC4316000CA5F9 /* extern.lua */; };
-		730D984918DC4317000CA5F9 /* fonts in Resources */ = {isa = PBXBuildFile; fileRef = 730D983A18DC4316000CA5F9 /* fonts */; };
 		730D984A18DC4317000CA5F9 /* footballhero.lua in Resources */ = {isa = PBXBuildFile; fileRef = 730D983B18DC4316000CA5F9 /* footballhero.lua */; };
 		730D984B18DC4317000CA5F9 /* images in Resources */ = {isa = PBXBuildFile; fileRef = 730D983C18DC4316000CA5F9 /* images */; };
 		730D984C18DC4317000CA5F9 /* json.lua in Resources */ = {isa = PBXBuildFile; fileRef = 730D983D18DC4317000CA5F9 /* json.lua */; };
@@ -802,7 +801,6 @@
 		1AB87028175E0A40005D39BF /* CCSkeletonAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSkeletonAnimation.h; sourceTree = "<group>"; };
 		1AB8702E175E0A5B005D39BF /* libwebsockets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = libwebsockets.h; sourceTree = "<group>"; };
 		1AB87030175E0A5B005D39BF /* libwebsockets.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libwebsockets.a; sourceTree = "<group>"; };
-		1AC3622916D47C5C000847F2 /* fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; name = fonts; path = ../Resources/fonts; sourceTree = "<group>"; };
 		373B91261878902900198F86 /* CCComBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCComBase.h; sourceTree = "<group>"; };
 		373F99331869F07A0080E035 /* CCActionFrame.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCActionFrame.cpp; sourceTree = "<group>"; };
 		373F99341869F07A0080E035 /* CCActionFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCActionFrame.h; sourceTree = "<group>"; };
@@ -907,7 +905,6 @@
 		730D983618DC4316000CA5F9 /* CocoStudio.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CocoStudio.lua; sourceTree = "<group>"; };
 		730D983718DC4316000CA5F9 /* config */ = {isa = PBXFileReference; lastKnownFileType = folder; path = config; sourceTree = "<group>"; };
 		730D983918DC4316000CA5F9 /* extern.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = extern.lua; sourceTree = "<group>"; };
-		730D983A18DC4316000CA5F9 /* fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = fonts; sourceTree = "<group>"; };
 		730D983B18DC4316000CA5F9 /* footballhero.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = footballhero.lua; sourceTree = "<group>"; };
 		730D983C18DC4316000CA5F9 /* images */ = {isa = PBXFileReference; lastKnownFileType = folder; path = images; sourceTree = "<group>"; };
 		730D983D18DC4317000CA5F9 /* json.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = json.lua; sourceTree = "<group>"; };
@@ -2879,13 +2876,11 @@
 				730D983618DC4316000CA5F9 /* CocoStudio.lua */,
 				730D983718DC4316000CA5F9 /* config */,
 				730D983918DC4316000CA5F9 /* extern.lua */,
-				730D983A18DC4316000CA5F9 /* fonts */,
 				730D983B18DC4316000CA5F9 /* footballhero.lua */,
 				730D983C18DC4316000CA5F9 /* images */,
 				730D983D18DC4317000CA5F9 /* json.lua */,
 				730D983E18DC4317000CA5F9 /* scenes */,
 				730D984018DC4317000CA5F9 /* sounds */,
-				1AC3622916D47C5C000847F2 /* fonts */,
 				15C156911683138E00D239F2 /* Default-568h@2x.png */,
 				15C156921683138E00D239F2 /* Default.png */,
 				15C156931683138E00D239F2 /* Default@2x.png */,
@@ -2984,7 +2979,6 @@
 				73846DDB1A6E3C8B001B4EF1 /* id in Resources */,
 				7314B4B019B715350065D927 /* UAMapPresentationViewController.xib in Resources */,
 				7314B4B419B715350065D927 /* UAPushSettingsAliasView.xib in Resources */,
-				730D984918DC4317000CA5F9 /* fonts in Resources */,
 				7314B4AC19B715350065D927 /* middle-detail@2x.png in Resources */,
 				BFA3732919F8E6AB001FCA85 /* LocalizedString.lua in Resources */,
 				7314B4B219B715350065D927 /* UAPushMoreSettingsView.xib in Resources */,

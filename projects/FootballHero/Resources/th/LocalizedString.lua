@@ -259,6 +259,7 @@ Strings = {
     optional = "(ตัวเลือก)",
     top_performers = "ผู้เล่นอันดับสูงสุด",
     settings = {
+        edit = "ก้ไข",
         prediction = "การทำนาย",
         sound_effects = "เอฟเฟกต์เสียง",
         tap_to_edit = "แตะเพื่อแก้ไข",

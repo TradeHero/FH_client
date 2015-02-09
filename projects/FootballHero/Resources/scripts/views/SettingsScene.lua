@@ -96,7 +96,9 @@ function initSettingsHeader( contentContainer, settingsSubItem )
     local title = tolua.cast( header:getChildByName("Label_Name"), "Label" )
     title:setText( Constants.String.settings[settingsSubItem["TitleKey"]] )
 
-    local edit = tolua.cast( header:getChildByName("Button_Edit"), "Button" )
+    local edit = header:getChildByName("Panel_Edit")
+    local editTxt = tolua.cast( edit:getChildByName("Label_Edit"), "Label" )
+    editTxt:setText( Constants.String.settings.edit )
 
     if settingsSubItem.SettingType == SettingsConfig.SETTING_TYPE_FAVORITE_TEAM then
         local editEventHandler = function( sender, eventType )

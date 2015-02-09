@@ -24,7 +24,6 @@ StringDefaultSubTableList = {
   "match_prediction",
   "month",
   "minigame",
-  "navigator",
   "spinWheel",
   "push_notification",
   "settings",
@@ -377,12 +376,6 @@ StringsDefault = {
     please_contact = "Please contact",
     to_claim_prize = "to claim prize.",
   },
-  navigator = {
-    n1 = "Matches",
-    n2 = "Community",
-    n3 = "My Picks",
-    n4 = "Settings",
-  },
   num_of_points = "%d Points",
   optional = "(Optional)",
   password = "Password",
@@ -400,6 +393,7 @@ StringsDefault = {
   quit_desc = "Tap back again to quit.",
   quit_cancel = "Stay",
   settings = {
+    edit = "Edit",
     email = "E-mail Address",
     faq = "FAQ",
     favorite_team = "Favorite Teams",

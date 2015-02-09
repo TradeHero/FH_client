@@ -274,6 +274,7 @@ Strings = {
     top_performers = "最佳预测帝",
     quit_cancel = "取消",
     settings = {
+        edit = "编辑",
         faq = "常见问题",
         sound_effects = "音效",
         tap_to_edit = "编辑头像",
