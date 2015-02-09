@@ -16,6 +16,7 @@ module(..., package.seeall)
 	    ["kLanguagePortuguese"] = 11,
 	    ["kLanguageArabic"] = 12,
 	    ["kLanguageBahasa"] = 13,
+	    ["kLanguageThailand"] = 14,
 	}
 
 --]]
@@ -28,7 +29,9 @@ local Constants = require("scripts.Constants")
 local mLanguageConfig = {
 	{ ["id"] = 0, ["name"] = Constants.String.languages.english, ["key"] = "en", ["LocalizedStringFile"] = "en.LocalizedString", ["locale"] = "en_US" },
 	{ ["id"] = 1, ["name"] = Constants.String.languages.chinese, ["key"] = "zh", ["LocalizedStringFile"] = "zh.LocalizedString", ["locale"] = "zh_CN" },
+    { ["id"] = 12, ["name"] = Constants.String.languages.arabic, ["key"] = "ar", ["LocalizedStringFile"] = "ar.LocalizedString", ["locale"] = "ar_AE" },
 	{ ["id"] = 13, ["name"] = Constants.String.languages.indonesian, ["key"] = "id", ["LocalizedStringFile"] = "id.LocalizedString", ["locale"] = "id_ID" },
+	{ ["id"] = 14, ["name"] = Constants.String.languages.thailand, ["key"] = "th", ["LocalizedStringFile"] = "th.LocalizedString", ["locale"] = "th_TH" },
 }
 
 function getSupportedLanguages()

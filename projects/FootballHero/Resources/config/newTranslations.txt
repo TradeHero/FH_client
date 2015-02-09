@@ -1,84 +1,9 @@
-match_center.played	Played %d out of %d	Telah bermain %d dari %d
-match_center.just_now	Just Now	Baru Saja
-match_center.prediction_made	Prediction made	Prediksi telah dibuat
-match_center.title_meetings	Last Meetings	Pertemuan Terakhir
-match_center.share_title		
-match_center.less	less	lebih sedikit
-match_center.make_prediction	Make a prediction!	Buat prediksi!
-match_center.share_body		
-match_center.write_discussion	Write a new discussion...	Tulis diskusi baru…
-match_center.load_comments	Load more comments...	Lihat komentar yang lain…
-match_center.write_comment	Write a comment...	Tulis komentar…
-match_center.title	Match Center	Pusat Pertandingan
-match_center.time_hours	%d hrs	%d jam
-match_center.title_discussion	Discussion	Diskusi
-match_center.more	More	Lebih banyak
-match_center.time_days	%d days	%d hari
-match_center.time_minutes	%d mins	%d menit
-spinWheel.ticket_usage	for the latest lucky draw.	untuk lucky draw yang terbaru.
-spinWheel.winners	Past Winners	Pemenang yang lalu
-spinWheel.collect_email_you_won	You have won	Anda telah menang
-spinWheel.wheel_title	Spin-the-Wheel	Spin-the-Wheel
-spinWheel.ticket_balance_2	%d tickets	%d tiket
-spinWheel.win_ticket_left	left till draw.	yang tersisa sebelum pengundian.
-spinWheel.spin_daily	One spin daily	Satu putaran per hari
-spinWheel.balance_title	Balance	Saldo
-spinWheel.wheel_sub_title	Spin-the-Wheel!	Spin-the-Wheel!
-spinWheel.win_ticket_prize	Luck Draw Ticket	Tiket Lucky Draw
-spinWheel.share_description	Share with your friends and get an additiaonal spin.	Bagikan ke teman Anda dan dapatkan putaran tambahan.
-spinWheel.spin_bonus	BONUS SPIN	BONUS PUTARAN
-spinWheel.collect_email_towards_wallet	towards your account balance	terhadap saldo rekening Anda
-spinWheel.money_balance	US$ %s Amazon Gift Card	US$ %d Amazon Gift Card
-spinWheel.collect_email_prize	1 US Dollar	1 Dolar US
-spinWheel.won	WON	Menang
-spinWheel.collect_email_label_title	Claim Prize	Klaim Hadiah
-spinWheel.ticket_balance_1	%d ticket	%d tiket
-spinWheel.ticket_you_have	You have	Anda memiliki
-spinWheel.leave_message	Come back tomorrow for another spin.	Kembali lagi besok untuk putaran yang baru.
-spinWheel.money_payout_limit	Minimum US$25.00 for withdrawal.	Minimal US$25.00 untuk penarikan.
-spinWheel.money_payout_success_notification	Your request has been processed. Please allow 2 - 4 weeks to receive the gift card via your email address.	Permintaan Anda sedang diproses. Harap menunggu 2-4 minggu untuk menerima gift card melalui alamat email Anda.
-spinWheel.claimVirtualPrize	Congratulations! You have won a %s. Please contact our support.	Selamat! Anda telah memenangkan %s. Silahkan menghubungi layanan bantuan kami. 
-spinWheel.no_one_won	No one has won any prize yet.	Belum ada yang memenangkan hadiah.
-spinWheel.come_back_in	Come back in:	Kembali lagi dalam:
-spinWheel.collect_email_description	Please submit a valid email address. Fake email addresses will be disqualified from prizes.	Silahkan masukkan alamat email yang benar. Alamat email yang palsu akan di diskualifikasi dari hadiah.
-serverError.COMPETITION_6	No stats data for this year/month/week combination found.	Tidak ada ditemukan kombinasi data statistik untuk tahun/bulan/minggu ini.
-serverError.COUPON_3	No predictions on coupon. Cannot place empty coupon.	Tidak ada prediksi pada kupon. Tidak dapat memasukkan kupon kosong. 
-serverError.FACEBOOK_2	Oops! You are not connected to Facebook.	Oops! Anda tidak terhubung dengan Facebook.
-serverError.DEFAULT	Oops! Please try again...	Oops! Silahkan mencoba kembali…
-serverError.COUPON_1	Stake not allowed.	Taruhan tidak diizinkan. 
-serverError.LEADERBOARD_2	Oops! Please try again.	Oops! Silahkan mencoba kembali.
-serverError.LEADERBOARD_1	Oops! Invalid leaderboard. Please try again.	Oops! Papan pemain terbaik salah. Silahkan mencoba kembali.
-serverError.COUNTRY_1	Oops! Try a different country.	Oops! Silahkan mencoba negara yang berbeda.
-serverError.COMPETITION_5	User is not enrolled in this competition.	Pemain tidak terdaftar dalam kompetisi ini.
-serverError.COMPETITION_3	Join token does not exist.	Kode ikut serta tidak ada.
-serverError.COMPETITION_2	The competition does not exist.	Kompetisi ini tidak ada.
-serverError.FACEBOOK_4	Oops! This Facebook account is already in use.	Oops! Akun Facebook ini telah digunakan.
-serverError.WHEEL_3	Could not find a prize.	Tidak dapat menemukan hadiah.
-serverError.GENERAL_1	Oops! We're sorry. Please try again.	Oops! Kami minta maaf. Silahkan mencoba kembali.
-serverError.SIGNIN_2	Incorrect username or password.	Nama pengguna atau kata sandi salah. 
-serverError.FACEBOOK_3	Oops! This Facebook account is already in use.	Oops! Akun Facebook ini telah digunakan.
-serverError.DISCUSSION_3	Oops! Please try again.	Oops! Silahkan mencoba kembali.
-serverError.COMPETITION_7	You cannot join a competition that is in preview mode.	Anda tidak dapat mengikuti kompetisi dalam mode preview.
-serverError.GENERAL_2	Oops! Your User ID is invalid.	Oops! Nama pengguna Anda tidak benar.
-serverError.WHEEL_6	The requested amount is bigger than your balance.	Jumlah yang diminta lebih besar dari saldo Anda.
-serverError.WHEEL_5	Requested amount is lower than minimum payout.	Jumlah yang diminta lebih kecil dari pembayaran minimal.
-serverError.COUPON_4	One or more predictions were already played before.	Satu atau lebih prediksi telah dimainkan sebelumnya.
-serverError.SIGNIN_1	Oops! Your email is invaild.	Oops! Email Anda tidak benar.
-serverError.VERSION_2	New features added! Please update FootballHero in the app store.	Fitur baru telah ditambahkan! Silahkan perbaharui FootballHero di app store.
-serverError.COMPETITION_4	You are already enrolled in this competition.	Anda telah terdaftar dalam kompetisi ini. 
-serverError.WHEEL_4	User has never spinned the wheel.	Pengguna belum pernah memutar roda. 
-serverError.FACEBOOK_1	Oops! There seems to be an error. Please try again.	Oops! Sepertinya terdapat kesalahan. Silahkan mencoba kembali. 
-serverError.WHEEL_1	Your last spin was less than 24 hours ago.	Putaran terakhir Anda kurang dari 24 jam yang lalu.
-serverError.LEAGUE_1	Oops! Try a different league.	Oops! Coba liga yang lain.
-serverError.WHEEL_2	Price probabilities don't add up.	Kemungkinan harga tidak dapat ditambah.
-serverError.DISCUSSION_2	Oops! Please try again.	Oops! Silahkan mencoba kembali.
-serverError.DISCUSSION_1	Oops! Please try again.	Oops! Silahkan mencoba kembali.
-serverError.SIGNIN_4	Email and/or password cannot be empty.	Email dan/atau kata sandi tidak boleh kosong.
-serverError.COUPON_2	Too many predictions on coupon.	Terlalu banyak prediksi dalam kupon.
-serverError.FACEBOOK_5	Oops! We're sorry. Please try again later.	Oops! Kami minta maaf. Silahkan mencoba kembali.
-serverError.COMPETITION_8	Share Bonus already claimed.	Bonus Share telah diklaim.
-serverError.COUPON_5	Last big bet was less than 12 hours ago.	Taruhan besar terakhir kurang dari 12 jam yang lalu.
-serverError.COMPETITION_1	You already created a competition with that name before.	Anda telah membuat kompetisi dengan nama ini sebelumnya.
-serverError.VERSION_1	Please update latest version in the app store.	Silahkan unduh versi terbaru di app store.
-serverError.SIGNIN_3	Email address does not exist.	Alamat Email tidak ada.
-email_confirm	E-mail Address Confirm	Alamat Email telah dikonfirmasi
+match_list.date	%b %d, %A	
+match_list.more_regions	More Regions	Daerah Lainnya
+match_list.less_regions	Less Regions	Tutup
+match_list.most_discussed	Most Discussed	Paling Dibahas
+event.ranking_dropdown_month	%1$s %2$s	
+settings.select_league	Select League	Pilih Liga
+settings.favorite_team_none	No Favorite Teams	Tidak ada Tim Favorit
+settings.set_favorite_tams	Set My Favorite Teams	Tentukan Tim Favorit Saya
+error.email_not_match	Email do not match.	Email tidak cocok

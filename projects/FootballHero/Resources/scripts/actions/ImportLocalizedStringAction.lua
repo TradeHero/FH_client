@@ -34,16 +34,18 @@ function action( param )
 	for i = 1, table.getn( newTranslations ) do
 
 		local translation = newTranslations[i]
-		CCLuaLog(translation)
+		--CCLuaLog(translation)
 		local keyValues = RequestUtils.split( translation, "\t" )
-
+		if keyValues[ID_TARGET_VALUE] == nil or keyValues[ID_TARGET_VALUE] == "" then
+			keyValues[ID_TARGET_VALUE] = keyValues[ID_EN_VALUE]
+		end
 		local keys = RequestUtils.split( keyValues[ID_KEY], "." )
 		
 		if table.getn( keys ) == 1 then
-			CCLuaLog(keyValues[ID_KEY].."|"..keys[1])
+			--CCLuaLog(keyValues[ID_KEY].."|"..keys[1])
 			mLocalizedStrings[keys[ID_TABLE]] = keyValues[ID_TARGET_VALUE]
 		elseif table.getn( keys ) == 2 then
-			CCLuaLog(keyValues[ID_KEY].."|"..keys[1]..".."..keys[2])
+			--CCLuaLog(keyValues[ID_KEY].."|"..keys[1]..".."..keys[2])
 
 			if not mLocalizedStrings[keys[ID_TABLE]] then
 				mLocalizedStrings[keys[ID_TABLE]] = {}

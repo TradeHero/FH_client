@@ -224,14 +224,28 @@ function messageHandler( requestInfo, isSucceed, body, header, status, errorBuff
     CCLuaLog( "Http reponse body: "..body )
     
     local jsonResponse = {}
+    local responseError = false
     if string.len( body ) > 0 then
-        jsonResponse = Json.decode( body )
+        local safeLoadJson = function()
+            jsonResponse = Json.decode( body )
+        end
+
+        local errorHandler = function( msg )
+            responseError = true
+        end
+
+        xpcall( safeLoadJson, errorHandler )
     else
         jsonResponse["Message"] = errorBuffer
     end
     
     if removeMask then
         ConnectingMessage.selfRemove()
+    end
+
+    if responseError then
+        onRequestFailedByErrorCode( "default" )
+        return
     end
     
     if status == successRequestID then

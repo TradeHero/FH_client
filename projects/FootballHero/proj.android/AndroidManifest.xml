@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.myhero.fh"
-    android:versionCode="43"
+    android:versionCode="45"
     android:versionName="1.40">
 
   <uses-sdk android:minSdkVersion="15" android:targetSdkVersion="19"/>
@@ -56,8 +56,8 @@
             <category android:name="android.intent.category.BROWSABLE"/>
         </intent-filter>
         <intent-filter>
-            <!-- Accepts URIs that begin with "http://footballhero.com" -->
-            <data android:scheme="http" android:host="footballhero.com"/>
+            <!-- Accepts URIs that begin with "http://footballheroapp.com" -->
+            <data android:scheme="http" android:host="footballheroapp.com/"/>
             <action android:name="android.intent.action.VIEW"/>
             <category android:name="android.intent.category.DEFAULT"/>
             <category android:name="android.intent.category.BROWSABLE"/>

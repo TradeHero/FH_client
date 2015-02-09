@@ -109,23 +109,28 @@ bool AppDelegate::applicationDidFinishLaunching()
         currentLanguage = (ccLanguageType)nLanguageType;
     }
 
+    string resLanguageKey = "";
+    
 	if (currentLanguage == kLanguageChinese)
 	{
-		searchPaths.insert(searchPaths.begin(), CCFileUtils::sharedFileUtils()->getDefaultResRootPath() + "zh");
+		resLanguageKey = "zh";
 	}
     else if(currentLanguage == kLanguageBahasa)
     {
-        searchPaths.insert(searchPaths.begin(), CCFileUtils::sharedFileUtils()->getDefaultResRootPath() + "id");
+        resLanguageKey = "id";
     }
-	searchPaths.insert(searchPaths.begin(), CCFileUtils::sharedFileUtils()->getWritablePath() + "local");
-	if (currentLanguage == kLanguageChinese)
-	{
-		searchPaths.insert(searchPaths.begin(), CCFileUtils::sharedFileUtils()->getWritablePath() + "local/zh");
-	}
-    else if (currentLanguage == kLanguageBahasa)
+    else if (currentLanguage == kLanguageThailand)
     {
-        searchPaths.insert(searchPaths.begin(), CCFileUtils::sharedFileUtils()->getWritablePath() + "local/id");
+        resLanguageKey = "th";
     }
+    else if (currentLanguage == kLanguageArabic)
+    {
+        resLanguageKey = "ar";
+    }
+    
+    searchPaths.insert(searchPaths.begin(), CCFileUtils::sharedFileUtils()->getDefaultResRootPath() + resLanguageKey);
+    searchPaths.insert(searchPaths.begin(), CCFileUtils::sharedFileUtils()->getWritablePath() + "local");
+    searchPaths.insert(searchPaths.begin(), CCFileUtils::sharedFileUtils()->getWritablePath() + "local/" + resLanguageKey);
 	searchPaths.insert(searchPaths.begin(), CCFileUtils::sharedFileUtils()->getWritablePath());
 	CCFileUtils::sharedFileUtils()->setSearchPaths(searchPaths);
 

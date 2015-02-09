@@ -14,7 +14,7 @@
 		"token":"fhchamp", 
 		"title1":"FootballHero Championship", 
 		"title2":"2014/15", 
-		"body":"Share this competition on Facebook and receive instant $10,000 profit to the Season competition!\n\n\n\nThats 10% head start against your peers!", 
+		"body":"分享比赛给Facebook好友即可获得季度赛10000美元的收益奖励! \n\n\n\n 领先对手10%的起步!", 
 		"isShare":true, 
 		"rules":"1. 可预测比赛将在正式比赛开始前1分钟前关闭，已预测项目不可取消。\n\n2. 用户的初始收益均为0。\n\n3. 每一场比赛的基础押分为1000分。\n\n4. 比赛延期或取消，相关的预测项将被清空。\n\n5. 排行榜每天更新一次。\n\n6. 违反当地相关法律法规的用户将被取消获奖资格。\n\n7. 排名基于用户的比赛周收益，月收益以及季度收益(分数)。\n\n8. 用户每周至少需要参加10场比赛预测，每月至少需要参加40场比赛预测才能获取获奖资格。\n\n9. 比赛将于2015年4月30日结束。\n\n10. 获奖者需要在比赛结束后60日内将联系方式及相关信息发送至support@footballheroapp.com，否则获奖资格将被取消。\n\n11. 获奖者将在发出确认邮件后的6至8周内收到奖品。\n\n12. 禁止用户注册多个账号参与比赛，严重违反者将被取消比赛资格。\n\n13. 一切解释权归FootballHero所有。",
 		"rulesTextHeightIOS":835,
