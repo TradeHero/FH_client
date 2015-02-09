@@ -1,9 +1,7 @@
-match_list.date	%b %d, %A	
-match_list.more_regions	More Regions	Daerah Lainnya
-match_list.less_regions	Less Regions	Tutup
-match_list.most_discussed	Most Discussed	Paling Dibahas
-event.ranking_dropdown_month	%1$s %2$s	
-settings.select_league	Select League	Pilih Liga
-settings.favorite_team_none	No Favorite Teams	Tidak ada Tim Favorit
-settings.set_favorite_tams	Set My Favorite Teams	Tentukan Tim Favorit Saya
-error.email_not_match	Email do not match.	Email tidak cocok
+match_list.more_regions	More Regions	أكثر المناطق
+match_list.less_regions	Less Regions	أقل المناطق
+match_list.most_discussed	Most Discussed	الأكثر إثارة للمناقشات
+spinWheel.collect_email_min	Minimum withdrawal is US$25	الحد الأدنى للسحب 25 دولارًا أمريكيًا
+settings.select_league	Select League	تحديد الدوري
+settings.favorite_team_none	No Favorite Teams	لا توجد فرق مفضلة
+settings.set_favorite_tams	Set My Favorite Teams	تحديد الفرق المفضلة
