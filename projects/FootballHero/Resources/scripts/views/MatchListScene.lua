@@ -586,6 +586,9 @@ function helperInitMatchInfo( topContent, matchInfo, leagueKey )
     local status = tolua.cast( statusPanel:getChildByName("Label_Status"), "Label" )
     local ball = tolua.cast( statusPanel:getChildByName("Image_Ball"), "ImageView" )
     
+    local postCount = tolua.cast( topContent:getChildByName("Label_DiscussionCount"), "Label" )
+    postCount:setText( matchInfo["CommentCount"] )
+
     -- Labels
     lbDraw:setText( Constants.String.match_list.draw )
     lbPlayed:setText( Constants.String.match_list.played )
