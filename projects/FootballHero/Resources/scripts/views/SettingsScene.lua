@@ -401,12 +401,12 @@ end
 
 function toggleLanguageDropDown( languageText )
     local contentContainer = tolua.cast( mWidget:getChildByName("ScrollView"), "ScrollView" )
-    local contentHeight = contentContainer:getSize().height
+    local contentHeight = contentContainer:getInnerContainerSize().height
     
     if mDropdown:isEnabled() then
+        contentHeight = contentHeight - mDropdown:getSize().height
         mDropdown:setSize( CCSize:new( mDropdown:getSize().width, 0 ) )
         mDropdown:setEnabled( false )
-        contentHeight = contentHeight - mDropdown:getSize().height
         
     else
         mDropdown:setSize( CCSize:new( mDropdown:getSize().width, mDropdownHeight ) )
