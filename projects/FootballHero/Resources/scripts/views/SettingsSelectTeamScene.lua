@@ -59,10 +59,16 @@ function initContent( leagueId )
     title:setText( Constants.String.settings.set_favorite_tams )
 
     local done = tolua.cast( mWidget:getChildByName("Button_Logout"), "Button" )
-    done:setEnabled( false )
-    --done:loadTextureNormal( Constants.SETTINGS_IMAGE_PATH.."btn-done.png" )
-    --done:setOpacity( 255 )
-    --done:setTitleText( "" )
+    --done:setEnabled( false )
+    done:loadTextureNormal( Constants.SETTINGS_IMAGE_PATH.."btn-done.png" )
+    done:setOpacity( 255 )
+    done:setTitleText( "" )
+    local eventHandler = function( sender, eventType )
+        if eventType == TOUCH_EVENT_ENDED then
+            EventManager:postEvent( Event.Enter_Settings )
+        end
+    end
+    done:addTouchEventListener( eventHandler )
     
     local contentContainer = tolua.cast( mWidget:getChildByName("ScrollView"), "ScrollView" )
     contentContainer:removeAllChildrenWithCleanup( true )

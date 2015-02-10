@@ -8,6 +8,7 @@ local Json = require("json")
 local RequestUtils = require("scripts.RequestUtils")
 local Constants = require("scripts.Constants")
 
+local mSuccessCallback
 local mFailedCallback
 local mFavTeamID
 
@@ -16,6 +17,7 @@ function action( param )
     mFavTeamID = param[1]
     local bLiked = param[2]
     mFailedCallback = param[3]
+    mSuccessCallback = param[4]
 
     local requestContent = { TeamId = mFavTeamID, Liked = bLiked }
     local requestContentText = Json.encode( requestContent )
@@ -42,6 +44,10 @@ end
 function onRequestSuccess( jsonResponse )
     Logic:setFavoriteTeams( mFavTeamID )
     RequestUtils.invalidResponseCacheContainsUrl( RequestUtils.GET_SETTINGS_REST_CALL )
+
+    if mSuccessCallback then
+        mSuccessCallback( jsonResponse )
+    end
 end
 
 function onRequestFailed( jsonResponse )

@@ -186,14 +186,14 @@ function initSettingsFavoriteTeam( contentContainer, settingsSubItem )
             local teamName = TeamConfig.getTeamName( teamId )
             local teamLogo = TeamConfig.getLogo( teamId )
 
-            contentHeight = contentHeight + addFavoriteTeam( contentContainer, teamName, teamLogo )
+            contentHeight = contentHeight + addFavoriteTeam( contentContainer, teamName, teamLogo, teamKey )
         end
     end
     
     return contentHeight
 end
 
-function addFavoriteTeam( contentContainer, teamName, teamLogo )
+function addFavoriteTeam( contentContainer, teamName, teamLogo, teamKey )
     local content = SceneManager.widgetFromJsonFile("scenes/SettingsTeamListContentFrame.json")
     local lblTeamName = tolua.cast( content:getChildByName("Label_Name"), "Label" )
     local logo = tolua.cast( content:getChildByName("Image_Jersey"), "ImageView" )
@@ -201,11 +201,38 @@ function addFavoriteTeam( contentContainer, teamName, teamLogo )
 
     lblTeamName:setText( teamName )
     logo:loadTexture( teamLogo )
-    check:setEnabled( false )
+    check:loadTextureBackGround( Constants.COUNTRY_IMAGE_PATH.."less-region.png" )
+    check:loadTextureBackGroundSelected( Constants.COUNTRY_IMAGE_PATH.."less-region.png" )
+    
+    local eventHandler = function( sender, eventType )
+        if eventType == TOUCH_EVENT_ENDED then
+            local favorite = tolua.cast( sender, "CheckBox" )
+
+            local failedEventHandler = function( jsonResponse )
+                RequestUtils.onRequestFailedByErrorCode( jsonResponse["Message"] )
+            end
+            local successEventHandler = function( jsonResponse )
+                removeFavoriteTeam( content )
+            end
+            EventManager:postEvent( Event.Do_Post_Fav_Team, { teamKey, false, failedEventHandler, successEventHandler } )
+        end
+    end
+    check:addTouchEventListener( eventHandler )
 
     contentContainer:addChild( content )
     
     return content:getSize().height
+end
+
+function removeFavoriteTeam( content )
+    local contentContainer = tolua.cast( mWidget:getChildByName("ScrollView"), "ScrollView" )
+    local innnerContainerHeight = contentContainer:getInnerContainerSize().height
+    local contentHeight = content:getSize().height
+    contentContainer:removeChild( content, true )
+
+    contentContainer:setInnerContainerSize( CCSize:new( 0, innnerContainerHeight - contentHeight ) )
+    local layout = tolua.cast( contentContainer, "Layout" )
+    layout:requestDoLayout()
 end
 
 function initSettingsLanguage( contentContainer )
