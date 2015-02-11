@@ -92,7 +92,7 @@ public abstract class Cocos2dxActivity extends FragmentActivity implements Cocos
 	}
     
     @Override public boolean dispatchTouchEvent(MotionEvent event) {
-        if (event.getAction() == MotionEvent.ACTION_DOWN) {
+        if (event.getAction() == MotionEvent.ACTION_UP) {
             FHCocos2dxHandler.unfocusIfNecessary(getCurrentFocus(), event);
         }
         return super.dispatchTouchEvent(event);
