@@ -12,7 +12,7 @@ local Constants = require("scripts.Constants")
 local ViewUtils = require("scripts.views.ViewUtils")
 local Logic = require("scripts.Logic").getInstance()
 local ConnectingMessage = require("scripts.views.ConnectingMessage")
-
+local Header = require("scripts.views.HeaderFrame")
 
 -- Below value is per second
 local MAX_ROTATE_SPEED = 180
@@ -60,7 +60,6 @@ function loadFrame()
     mWidget = widget
 
     -- Set the text
-    tolua.cast( mWidget:getChildByName("Label_Title"), "Label" ):setText( Constants.String.spinWheel.wheel_title )
     tolua.cast( mWidget:getChildByName("Label_6"), "Label" ):setText( Constants.String.spinWheel.wheel_sub_title )
     tolua.cast( mWidget:getChildByName("Label_bonusTitle"), "Label" ):setText( Constants.String.spinWheel.spin_bonus )
     tolua.cast( mWidget:getChildByName("Label_normalTitle"), "Label" ):setText( Constants.String.spinWheel.spin_daily )
@@ -68,16 +67,17 @@ function loadFrame()
 
     widget:registerScriptHandler( EnterOrExit )
     SceneManager.clearNAddWidget( widget )
-    SceneManager.setKeypadBackListener( keypadBackEventHandler )
+    
+    Header.loadFrame( mWidget, Constants.String.spinWheel.wheel_title, false )
 
     mWheelBG = tolua.cast( mWidget:getChildByName("wheelBG"), "ImageView" )
-    local backBt = mWidget:getChildByName("Button_Back")
+    
     local stopBt = mWidget:getChildByName("Button_stop")
     local winnerBt = mWidget:getChildByName("Button_winner")
     local balanceBt = mWidget:getChildByName("Button_balance")
     local normalSpinTitle = tolua.cast( mWidget:getChildByName("Label_normalTitle"), "Label" )
     local bonusSpinTitle = tolua.cast( mWidget:getChildByName("Label_bonusTitle"), "Label" )
-    backBt:addTouchEventListener( backEventHandler )
+    
     stopBt:addTouchEventListener( stopEventHandler )
     winnerBt:addTouchEventListener( winnerEventHandler )
     balanceBt:addTouchEventListener( balanceEventHandler )
@@ -90,7 +90,6 @@ function loadFrame()
     initWinPrizeWidget()
     initWinTicketWidget()
     initShareWidget()
-
 
     mRemainingTime = SpinWheelConfig.getNextSpinTime() - os.time()
     local labelTime = tolua.cast( mWidget:getChildByName("Label_Time"), "Label" )
@@ -150,16 +149,6 @@ end
 
 function isFrameShown()
     return mWidget ~= nil
-end
-
-function backEventHandler( sender,eventType )
-    if eventType == TOUCH_EVENT_ENDED then
-        keypadBackEventHandler()
-    end
-end
-
-function keypadBackEventHandler()
-    EventManager:popHistory()
 end
 
 function initContent()
@@ -413,9 +402,9 @@ function checkNCollectEmail()
         mWinShareWidget:setEnabled( true )
     else
         local collectEmailWidget = GUIReader:shareReader():widgetFromJsonFile("scenes/SpinEmailCollect.json")
-
+        Header.loadFrame( collectEmailWidget, Constants.String.spinWheel.collect_email_label_title, true )
         -- Set the text.
-        tolua.cast( collectEmailWidget:getChildByName("Label_Title"), "Label" ):setText( Constants.String.spinWheel.collect_email_label_title )
+        --tolua.cast( collectEmailWidget:getChildByName("Label_Title"), "Label" ):setText( Constants.String.spinWheel.collect_email_label_title )
         tolua.cast( collectEmailWidget:getChildByName("Label_1"), "Label" ):setText( Constants.String.spinWheel.collect_email_you_won )
         tolua.cast( collectEmailWidget:getChildByName("Label_ticket"), "Label" ):setText( SpinWheelConfig.getPrizeConfigWithID( mWinPrizeId )["Name"] )
         tolua.cast( collectEmailWidget:getChildByName("Label_3"), "Label" ):setText( Constants.String.spinWheel.collect_email_towards_wallet )

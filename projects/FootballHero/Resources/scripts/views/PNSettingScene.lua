@@ -5,6 +5,7 @@ local EventManager = require("scripts.events.EventManager").getInstance()
 local Event = require("scripts.events.Event").EventList
 local PushNotificationManager = require("scripts.PushNotificationManager")
 local Constants = require("scripts.Constants")
+local Header = require("scripts.views.HeaderFrame")
 
 local mWidget
 
@@ -13,18 +14,14 @@ function loadFrame()
     mWidget = widget
     mWidget:registerScriptHandler( EnterOrExit )
     SceneManager.clearNAddWidget( widget )
-    SceneManager.setKeypadBackListener( keypadBackEventHandler )
 
-    local title = tolua.cast( widget:getChildByName("Label_Title"), "Label" )
+    Header.loadFrame( mWidget, Constants.String.settings.push_notification, true )
+
     local general = tolua.cast( widget:getChildByName("Label_General"), "Label" )
     local prediction = tolua.cast( widget:getChildByName("Label_Prediction"), "Label" )
 
-    title:setText( Constants.String.settings.push_notification )
     general:setText( Constants.String.settings.general )
     prediction:setText( Constants.String.settings.prediction )
-
-    local backBt = widget:getChildByName("back")
-    backBt:addTouchEventListener( backEventHandler )
 
     local generalCheck = tolua.cast( mWidget:getChildByName("generalCheck"), "CheckBox" )
     generalCheck:addTouchEventListener( generalCheckHandler )
@@ -48,16 +45,6 @@ end
 
 function isFrameShown()
     return mWidget ~= nil
-end
-
-function backEventHandler( sender,eventType )
-    if eventType == TOUCH_EVENT_ENDED then
-        keypadBackEventHandler()
-    end
-end
-
-function keypadBackEventHandler()
-    EventManager:popHistory()
 end
 
 function generalCheckHandler( sender,eventType )

@@ -3,6 +3,7 @@ module(..., package.seeall)
 local SceneManager = require("scripts.SceneManager")
 local EventManager = require("scripts.events.EventManager").getInstance()
 local Constants = require("scripts.Constants")
+local Header = require("scripts.views.HeaderFrame")
 
 local mWidget
 
@@ -11,16 +12,12 @@ function loadFrame()
     mWidget = widget
     mWidget:registerScriptHandler( EnterOrExit )
     SceneManager.clearNAddWidget( widget )
-    SceneManager.setKeypadBackListener( keypadBackEventHandler )
 
-    local title = tolua.cast( widget:getChildByName("Label_Title"), "Label" )
-    title:setText( Constants.String.settings.sound_settings )
+    Header.loadFrame( mWidget, Constants.String.settings.sound_settings, true )
+
     local soundfx = tolua.cast( widget:getChildByName("Label_SoundFx"), "Label" )
     soundfx:setText( Constants.String.settings.sound_effects )
     
-    local backBt = widget:getChildByName("back")
-    backBt:addTouchEventListener( backEventHandler )
-
     local sfxCheck = tolua.cast( mWidget:getChildByName("sfxCheck"), "CheckBox" )
     sfxCheck:addTouchEventListener( sfxCheckHandler )
 
@@ -38,16 +35,6 @@ end
 
 function isFrameShown()
     return mWidget ~= nil
-end
-
-function backEventHandler( sender,eventType )
-    if eventType == TOUCH_EVENT_ENDED then
-        keypadBackEventHandler()
-    end
-end
-
-function keypadBackEventHandler()
-    EventManager:popHistory()
 end
 
 function sfxCheckHandler( sender,eventType )

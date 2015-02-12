@@ -10,11 +10,14 @@ local Constants = require("scripts.Constants")
 local MatchCenterConfig = require("scripts.config.MatchCenter")
 
 local m_bIsComment
+local mGameId
 
 function action( param )
 
     -- Parent ID can be a game ID or a post ID
     local parentId = param[1]
+    mGameId = parentId
+
     local text = param[2]
     local discussionObjectId = param[3]
     m_bIsComment =  discussionObjectId == MatchCenterConfig.DISCUSSION_POST_TYPE_POST
@@ -59,6 +62,9 @@ function onRequestSuccess( jsonResponse )
         local MatchCenterDiscussionsDetailScene = require("scripts.views.MatchCenterDiscussionsDetailScene")
         MatchCenterDiscussionsDetailScene.loadMoreContent( { jsonResponse }, bJumpToTop )
     else
+        -- Restrict user to single post per match
+        CCUserDefault:sharedUserDefault():setBoolForKey( string.format( Constants.EVENT_MATCH_DISCUSSION_KEY, mGameId ), true )
+
         EventManager:popHistory()
         --EventManager:popHistoryWithoutExec() -- remove Enter_Match_Center
         --EventManager:postEvent( Event.Enter_Match_Center, { MatchCenterConfig.MATCH_CENTER_TAB_ID_DISCUSSION } )

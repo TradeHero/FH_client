@@ -7,29 +7,34 @@ local EventManager = require("scripts.events.EventManager").getInstance()
 local Event = require("scripts.events.Event").EventList
 local RequestUtils = require("scripts.RequestUtils")
 local Constants = require("scripts.Constants")
+local SpinWheelScene = require("scripts.views.SpinWheelScene")
 
 function action( param )
-    local SpinWheelConfig = require("scripts.config.SpinWheel")
-    -- Prevent request to server again when it is still in spin cool down.
-    if SpinWheelConfig.getNextSpinTime() and SpinWheelConfig.getNextSpinTime() > os.time() then
-        local SpinWheelScene = require("scripts.views.SpinWheelScene")
-        SpinWheelScene.loadFrame()
+
+    if SpinWheelScene.isFrameShown() then
     else
-        local url = RequestUtils.GET_WHEEL_PRIZES_REST_CALL
+        local SpinWheelConfig = require("scripts.config.SpinWheel")
+        -- Prevent request to server again when it is still in spin cool down.
+        if SpinWheelConfig.getNextSpinTime() and SpinWheelConfig.getNextSpinTime() > os.time() then
+            local SpinWheelScene = require("scripts.views.SpinWheelScene")
+            SpinWheelScene.loadFrame()
+        else
+            local url = RequestUtils.GET_WHEEL_PRIZES_REST_CALL
 
-        local requestInfo = {}
-        requestInfo.requestData = ""
-        requestInfo.url = url
+            local requestInfo = {}
+            requestInfo.requestData = ""
+            requestInfo.url = url
 
-        local handler = function( isSucceed, body, header, status, errorBuffer )
-            RequestUtils.messageHandler( requestInfo, isSucceed, body, header, status, errorBuffer, RequestUtils.HTTP_200, true, onRequestSuccess )
+            local handler = function( isSucceed, body, header, status, errorBuffer )
+                RequestUtils.messageHandler( requestInfo, isSucceed, body, header, status, errorBuffer, RequestUtils.HTTP_200, true, onRequestSuccess )
+            end
+
+            local httpRequest = HttpRequestForLua:create( CCHttpRequest.kHttpGet )
+            httpRequest:addHeader( Logic:getAuthSessionString() )
+            httpRequest:sendHttpRequest( url, handler )
+
+            ConnectingMessage.loadFrame()
         end
-
-        local httpRequest = HttpRequestForLua:create( CCHttpRequest.kHttpGet )
-        httpRequest:addHeader( Logic:getAuthSessionString() )
-        httpRequest:sendHttpRequest( url, handler )
-
-        ConnectingMessage.loadFrame()
     end
 end
 
@@ -56,7 +61,6 @@ end
 
 function loadSpinUI( response )
     local SpinWheelConfig = require("scripts.config.SpinWheel")
-    local SpinWheelScene = require("scripts.views.SpinWheelScene")
     
     SpinWheelConfig.init( response )
     SpinWheelScene.loadFrame()

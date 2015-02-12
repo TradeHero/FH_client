@@ -8,6 +8,7 @@ local MatchCenterConfig = require("scripts.config.MatchCenter")
 local Logic = require("scripts.Logic").getInstance()
 local EventManager = require("scripts.events.EventManager").getInstance()
 local Event = require("scripts.events.Event").EventList
+local Header = require("scripts.views.HeaderFrame")
 
 local mWidget
 
@@ -37,8 +38,8 @@ function loadFrame( jsonResponse, tabID )
 	mWidget = GUIReader:shareReader():widgetFromJsonFile("scenes/MatchCenterTopScene.json")
     mWidget:registerScriptHandler( EnterOrExit )
     SceneManager.clearNAddWidget( mWidget )
-    SceneManager.setKeypadBackListener( keypadBackEventHandler )
     
+    Header.loadFrame( mWidget, Constants.String.match_center.title, true )
     Navigator.loadFrame( mWidget )
 
     -- init Last Meetings, Discussion header tab
@@ -47,9 +48,6 @@ function loadFrame( jsonResponse, tabID )
     initMatchPredictionContent()
     
     loadMainContent( jsonResponse, tabID )
-
-    local backBt = mWidget:getChildByName("Button_Back")
-    backBt:addTouchEventListener( backEventHandler )
 end
 
 function refreshFrame( jsonResponse, tabID )
@@ -68,16 +66,6 @@ function EnterOrExit( eventType )
     elseif eventType == "exit" then
         mWidget = nil
     end
-end
-
-function backEventHandler( sender, eventType )
-    if eventType == TOUCH_EVENT_ENDED then
-        keypadBackEventHandler()
-    end
-end
-
-function keypadBackEventHandler()
-    EventManager:popHistory()
 end
 
 function loadMainContent( jsonResponse )
@@ -125,7 +113,7 @@ function initMatchCenterTab()
 end
 
 function initMatchPredictionContent()
-    local title = tolua.cast( mWidget:getChildByName("Label_Title"), "Label" )
+    
     local fade = mWidget:getChildByName("Panel_Fade")
     
     local date = tolua.cast( fade:getChildByName("Label_Date"), "Label" )
@@ -167,7 +155,7 @@ function initMatchPredictionContent()
     drawPercent:setText( string.format( drawPercent:getStringValue(), drawWinPercent ) )
 
     compName:setText( mMatch["LeagueName"] )
-    title:setText( Constants.String.match_center.title )
+    
     date:setText( os.date( "%b %d, %H:%M", mMatch["StartTime"] ) )
     played:setText( Constants.String.match_center.played )
     playedCount:setText( string.format( Constants.String.match_center.played_out_of, mMatch["PredictionsPlayed"], mMatch["PredictionsAvailable"] ) )

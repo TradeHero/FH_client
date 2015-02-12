@@ -101,6 +101,7 @@ EVENT_NEXT_MINIGAME_TIME_KEY = "next_minigame_time"
 EVENT_NEXT_MINIGAME_STAGE = "next_minigame_stage"
 EVENT_MINIGAME_NEXT_IMAGE = "next_minigame_image"
 EVENT_FHC_STATUS_KEY = "footballhero_championship_status"
+EVENT_MATCH_DISCUSSION_KEY = "match_discussion_%d"
 
 EVENT_FHC_STATUS_TO_OPEN = 1
 EVENT_FHC_STATUS_OPENED = 2

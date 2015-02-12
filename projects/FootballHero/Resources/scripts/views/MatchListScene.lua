@@ -15,6 +15,7 @@ local Json = require("json")
 local ConnectingMessage = require("scripts.views.ConnectingMessage")
 local CommunityConfig = require("scripts.config.Community")
 local MatchCenterConfig = require("scripts.config.MatchCenter")
+local Header = require("scripts.views.HeaderFrame")
 
 local mWidget
 local mTopLayer
@@ -37,7 +38,8 @@ function loadFrame( matchList, leagueKey )
     mWidget = widget
     mWidget:registerScriptHandler( EnterOrExit )
     SceneManager.clearNAddWidget( widget )
-    SceneManager.clearKeypadBackListener()
+    
+    Header.loadFrame( widget, nil, false )
 
     Navigator.loadFrame( widget )
     Navigator.chooseNav( 1 )

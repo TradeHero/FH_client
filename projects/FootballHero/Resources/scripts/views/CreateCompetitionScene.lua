@@ -9,7 +9,7 @@ local Event = require("scripts.events.Event").EventList
 local ViewUtils = require("scripts.views.ViewUtils")
 local CountryConfig = require("scripts.config.Country")
 local ConnectingMessage = require("scripts.views.ConnectingMessage")
-
+local Header = require("scripts.views.HeaderFrame")
 
 local BLANK_AREA_HEIGHT = 120
 
@@ -23,7 +23,8 @@ function loadFrame( selectedLeagues )
     mWidget = widget
     mWidget:registerScriptHandler( EnterOrExit )
     SceneManager.clearNAddWidget(mWidget)
-    SceneManager.setKeypadBackListener( keypadBackEventHandler )
+    
+    Header.loadFrame( widget, Constants.String.community.title_create_competition, true )
 
     local contentContainer = tolua.cast( mWidget:getChildByName("ScrollView"), "ScrollView" )
     contentContainer:removeAllChildrenWithCleanup( true )
@@ -71,9 +72,6 @@ function loadFrame( selectedLeagues )
     local confirmBt = tolua.cast( mWidget:getChildByName("Button_Create"), "Button" )
     confirmBt:addTouchEventListener( confirmEventHandler )
     confirmBt:setTitleText( Constants.String.button.create )
-
-    local backBt = mWidget:getChildByName("Back")
-    backBt:addTouchEventListener( backEventHandler )
 
     local desTextDisplay = mInputWidget:getChildByName("DescriptionText")
     desTextDisplay:addTouchEventListener( desInputEventHandler )
@@ -196,16 +194,6 @@ function sendCreateCompetition()
     local allLeaguesQualify = Logic:getAllLeaguesQualify() or false
 
     EventManager:postEvent( Event.Do_Create_Competition, { name, description, numberOfMonth, selectedLeagues, facebookCheckBox:getSelectedState(), mAccessToken, allLeaguesQualify } )
-end
-
-function backEventHandler( sender, eventType )
-    if eventType == TOUCH_EVENT_ENDED then
-        keypadBackEventHandler()
-    end
-end
-
-function keypadBackEventHandler()
-    EventManager:popHistory()
 end
 
 function cancelEventHandler( sender, eventType )

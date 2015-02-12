@@ -8,6 +8,7 @@ local ViewUtils = require("scripts.views.ViewUtils")
 local Logic = require("scripts.Logic").getInstance()
 local Constants = require("scripts.Constants")
 local LeagueChatConfig = require("scripts.config.LeagueChat").LeagueChatType
+local Header = require("scripts.views.HeaderFrame")
 
 local mWidget
 local mContainerHeight
@@ -17,28 +18,20 @@ local RELOAD_DELAY_TIME = 5
 
 -- DS for chatMessages: see ChatMessages
 function loadFrame()
-    mCompetitionId = competitionId
-
     local widget = GUIReader:shareReader():widgetFromJsonFile("scenes/ChatroomSelectScene.json")
     mWidget = widget
     mWidget:registerScriptHandler( EnterOrExit )
     SceneManager.clearNAddWidget( widget )
-    SceneManager.setKeypadBackListener( keypadBackEventHandler )
+    
+    Header.loadFrame( mWidget, Constants.String.chat_room_title, false )
 
     Navigator.loadFrame( widget )
-
-    
-    local backBt = widget:getChildByName("Button_Back")
-    backBt:addTouchEventListener( backEventHandler )
-
-    initTitle()
     
     initContent()
 end
 
-function initTitle()    
-    local title = tolua.cast( mWidget:getChildByName("Label_Title"), "Label" )
-    title:setText( Constants.String.chat_room_title )
+function reloadFrame()
+    initContent()
 end
 
 function initContent()
@@ -81,14 +74,4 @@ end
 
 function isFrameShown()
     return mWidget ~= nil
-end
-
-function backEventHandler( sender,eventType )
-    if eventType == TOUCH_EVENT_ENDED then
-        keypadBackEventHandler()
-    end
-end
-
-function keypadBackEventHandler()
-    EventManager:popHistory()
 end

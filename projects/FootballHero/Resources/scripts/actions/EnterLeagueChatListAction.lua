@@ -7,5 +7,10 @@ local mSentOnce = false
 
 function action( param )
 	local LeagueChatListScene = require("scripts.views.LeagueChatListScene")
-    LeagueChatListScene.loadFrame()
+
+	if LeagueChatListScene.isFrameShown() then
+		LeagueChatListScene.reloadFrame()
+	else
+    	LeagueChatListScene.loadFrame()
+    end
 end

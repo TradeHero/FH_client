@@ -85,7 +85,7 @@
     <GuidesList />
   </GuidesProject>
   <GuidesProject>
-    <Project>FAQ</Project>
+    <Project>EmptyTemplate</Project>
     <GuidesList />
   </GuidesProject>
   <GuidesProject>
@@ -257,10 +257,6 @@
     <GuidesList />
   </GuidesProject>
   <GuidesProject>
-    <Project>CompetitionWebview</Project>
-    <GuidesList />
-  </GuidesProject>
-  <GuidesProject>
     <Project>SpecialCompetitionLeaderboard</Project>
     <GuidesList />
   </GuidesProject>
@@ -406,6 +402,10 @@
   </GuidesProject>
   <GuidesProject>
     <Project>SettingsTeamListContentFrame</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>HeaderFrame</Project>
     <GuidesList />
   </GuidesProject>
 </ArrayOfGuidesProject>

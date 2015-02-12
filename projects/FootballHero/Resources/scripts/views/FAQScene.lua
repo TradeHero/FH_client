@@ -4,21 +4,17 @@ local SceneManager = require("scripts.SceneManager")
 local EventManager = require("scripts.events.EventManager").getInstance()
 local Event = require("scripts.events.Event").EventList
 local Constants = require("scripts.Constants")
+local Header = require("scripts.views.HeaderFrame")
 
 local mWidget
 
 function loadFrame()
-	local widget = GUIReader:shareReader():widgetFromJsonFile("scenes/FAQ.json")
+	local widget = GUIReader:shareReader():widgetFromJsonFile("scenes/EmptyTemplate.json")
     mWidget = widget
     mWidget:registerScriptHandler( EnterOrExit )
     SceneManager.clearNAddWidget( widget )
-    SceneManager.setKeypadBackListener( keypadBackEventHandler )
-
-    local backBt = widget:getChildByName("Button_Back")
-    backBt:addTouchEventListener( backEventHandler )
-
-    local title = tolua.cast( widget:getChildByName("Label_Title"), "Label" )
-    title:setText( Constants.String.settings.faq )
+    
+    Header.loadFrame( widget, Constants.String.settings.faq, true )
 end
 
 function EnterOrExit( eventType )
@@ -31,15 +27,4 @@ end
 
 function isFrameShown()
     return mWidget ~= nil
-end
-
-function backEventHandler( sender,eventType )
-    if eventType == TOUCH_EVENT_ENDED then
-        keypadBackEventHandler()
-    end
-end
-
-function keypadBackEventHandler()
-    WebviewDelegate:sharedDelegate():closeWebpage()
-    EventManager:popHistory()
 end

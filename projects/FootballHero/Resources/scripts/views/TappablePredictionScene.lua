@@ -11,7 +11,7 @@ local MarketsForGameData = require("scripts.data.MarketsForGameData")
 local MatchPrediction = require("scripts.views.PredictionType.Match")
 local TotalGoalPrediction = require("scripts.views.PredictionType.TotalGoal")
 local AsianHandicapPrediction = require("scripts.views.PredictionType.AsianHandicap")
-
+local Header = require("scripts.views.HeaderFrame")
 
 -- Children list:
 -- 1 to 3: prediction status buttons
@@ -37,9 +37,11 @@ function loadFrame()
    
 	mWidget = GUIReader:shareReader():widgetFromJsonFile("scenes/PredictionBG.json")
     mWidget:registerScriptHandler( EnterOrExit )
-    SceneManager.clearNAddWidget( mWidget )
-    SceneManager.setKeypadBackListener( keypadBackEventHandler )
     mWidget:setName( "TappablePredictionScene" )
+
+    SceneManager.clearNAddWidget( mWidget )
+    
+    Header.loadFrame( mWidget, nil, true )
 
     local team1 = tolua.cast( mWidget:getChildByName("team1"), "ImageView" )
     local team2 = tolua.cast( mWidget:getChildByName("team2"), "ImageView" )
@@ -52,10 +54,7 @@ function loadFrame()
     team1Name:setText( TeamConfig.getTeamName( TeamConfig.getConfigIdByKey( mMatch["HomeTeamId"] ) ) )
     team2Name:setText( TeamConfig.getTeamName( TeamConfig.getConfigIdByKey( mMatch["AwayTeamId"] ) ) )
     vs:setText( Constants.String.vs )
-
-    local backBt = mWidget:getChildByName("Back")
-    backBt:addTouchEventListener( backEventHandler )
-
+    
     mMovableContainer = Layout:create()
     mMovableContainer:setSize( CCSize:new( Constants.GAME_WIDTH, Constants.GAME_HEIGHT ) )
     mMovableContainer:setTouchEnabled( true )
@@ -73,16 +72,6 @@ function EnterOrExit( eventType )
     elseif eventType == "exit" then
         mWidget = nil
     end
-end
-
-function backEventHandler( sender, eventType )
-    if eventType == TOUCH_EVENT_ENDED then
-        keypadBackEventHandler()
-    end
-end
-
-function keypadBackEventHandler()
-    EventManager:popHistory()
 end
 
 function initPredictionStatus()

@@ -8,6 +8,7 @@ local MarketConfig = require("scripts.config.Market")
 local TeamConfig = require("scripts.config.Team")
 local Constants = require("scripts.Constants")
 local MatchCenterConfig = require("scripts.config.MatchCenter")
+local Header = require("scripts.views.HeaderFrame")
 
 local CONTENT_FADEIN_TIME = 1
 
@@ -27,12 +28,10 @@ function loadFrame( isOpen, matchInfo )
     mWidget = widget
     mWidget:registerScriptHandler( EnterOrExit )
     SceneManager.clearNAddWidget( widget )
-    SceneManager.setKeypadBackListener( keypadBackEventHandler )
+    
+    Header.loadFrame( widget, nil, true )
 
     Navigator.loadFrame( widget )
-
-    local backBt = mWidget:getChildByName("back")
-    backBt:addTouchEventListener( backEventHandler )
 
     helperInitMatchInfo( mWidget, matchInfo )
     initContent( matchInfo["GameId"] )
@@ -43,16 +42,6 @@ function EnterOrExit( eventType )
     elseif eventType == "exit" then
         mWidget = nil
     end
-end
-
-function backEventHandler( sender,eventType )
-    if eventType == TOUCH_EVENT_ENDED then
-        keypadBackEventHandler()
-    end
-end
-
-function keypadBackEventHandler()
-    EventManager:popHistory()
 end
 
 function initContent( matchId )

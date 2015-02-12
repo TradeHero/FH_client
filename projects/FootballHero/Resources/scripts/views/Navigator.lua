@@ -10,13 +10,14 @@ local Json = require("json")
 
 local mWidget
 local mLastSelectedId = 0
-local NAV_BT_NUM = 4
+local NAV_BT_NUM = 5
 
 local TAB_EVENT_LIST = {
 	{ Event.Enter_Match_List, nil },
 	{ Event.Enter_Community, { CommunityConfig.COMMUNITY_TAB_ID_COMPETITION } },
 	{ Event.Enter_History, nil },
-	{ Event.Enter_Settings, nil },
+	{ Event.Enter_Spin_the_Wheel, nil },
+	{ Event.Enter_League_Chat_List, nil },
 }
 
 

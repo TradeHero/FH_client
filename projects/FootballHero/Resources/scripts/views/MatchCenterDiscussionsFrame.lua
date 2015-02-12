@@ -65,7 +65,11 @@ function initContent( discussionInfo )
 
     local eventHandler = function( sender,eventType )
         if eventType == TOUCH_EVENT_ENDED then
-            EventManager:postEvent( Event.Enter_Make_Discussion_Post, {} )
+            if CCUserDefault:sharedUserDefault():getBoolForKey( string.format( Constants.EVENT_MATCH_DISCUSSION_KEY, mMatch["Id"] ) ) ~= true then
+                EventManager:postEvent( Event.Enter_Make_Discussion_Post, {} )
+            else
+                EventManager:postEvent( Event.Show_Info, { Constants.String.info.single_discussion } )
+            end
         end
     end
 

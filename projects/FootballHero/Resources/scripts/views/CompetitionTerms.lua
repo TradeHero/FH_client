@@ -5,22 +5,18 @@ local EventManager = require("scripts.events.EventManager").getInstance()
 local Event = require("scripts.events.Event").EventList
 local Navigator = require("scripts.views.Navigator")
 local Constants = require("scripts.Constants")
-
+local Header = require("scripts.views.HeaderFrame")
 
 local mWidget
 local mURL
 
 function loadFrame( name, token )
-	local widget = GUIReader:shareReader():widgetFromJsonFile("scenes/CompetitionWebview.json")
+	local widget = GUIReader:shareReader():widgetFromJsonFile("scenes/EmptyTemplate.json")
     mWidget = widget
     mWidget:registerScriptHandler( EnterOrExit )
     SceneManager.clearNAddWidget( widget )
-    SceneManager.setKeypadBackListener( keypadBackEventHandler )
-
-    local backBt = widget:getChildByName("back")
-    backBt:addTouchEventListener( backEventHandler )
-    local title = tolua.cast( widget:getChildByName("title"), "Label" )
-    title:setText( name )
+    
+    Header.loadFrame( mWidget, name, true, true )
 
     mURL = "http://footballheroapp.com/terms/"..token.."/".."terms.html"
     CCLuaLog( "T&C url is: "..mURL )
@@ -36,15 +32,4 @@ end
 
 function isFrameShown()
     return mWidget ~= nil
-end
-
-function backEventHandler( sender,eventType )
-    if eventType == TOUCH_EVENT_ENDED then
-        keypadBackEventHandler()
-    end
-end
-
-function keypadBackEventHandler()
-    WebviewDelegate:sharedDelegate():closeWebpage()
-    EventManager:popHistory()
 end

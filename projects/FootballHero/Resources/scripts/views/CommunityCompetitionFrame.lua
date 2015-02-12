@@ -1,7 +1,7 @@
 module(..., package.seeall)
 
 local SceneManager = require("scripts.SceneManager")
-local Navigator = require("scripts.views.Navigator")
+
 local EventManager = require("scripts.events.EventManager").getInstance()
 local Event = require("scripts.events.Event").EventList
 local CommunityConfig = require("scripts.config.Community")

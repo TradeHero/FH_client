@@ -183,7 +183,7 @@ void ScrollView::setInnerContainerSize(const CCSize &size)
     CCSize originalInnerSize = _innerContainer->getSize();
     if (size.width < _size.width)
     {
-        CCLOG("Inner width <= scrollview width, it will be force sized!");
+        //CCLOG("Inner width <= scrollview width, it will be force sized!");
     }
     else
     {
@@ -191,7 +191,7 @@ void ScrollView::setInnerContainerSize(const CCSize &size)
     }
     if (size.height < _size.height)
     {
-        CCLOG("Inner height <= scrollview height, it will be force sized!");
+        //CCLOG("Inner height <= scrollview height, it will be force sized!");
     }
     else
     {
@@ -919,6 +919,7 @@ bool ScrollView::scrollChildren(float touchOffsetX, float touchOffsetY)
         case SCROLLVIEW_DIR_VERTICAL: // vertical
         {
             float realOffset = touchOffsetY;
+            //CCLog("touch offset = %f", realOffset);
             if (_bounceEnabled)
             {
                 float icBottomPos = _innerContainer->getBottomInParent();

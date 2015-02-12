@@ -6,7 +6,7 @@ local EventManager = require("scripts.events.EventManager").getInstance()
 local Event = require("scripts.events.Event").EventList
 local Constants = require("scripts.Constants")
 local SMIS = require("scripts.SMIS")
-
+local Header = require("scripts.views.HeaderFrame")
 
 local mWidget
 local mCurrentTotalNum
@@ -21,9 +21,9 @@ function loadFrame( winners, onlyShowBigPrize, totalNum )
     mWidget = widget
     mWidget:registerScriptHandler( EnterOrExit )
     SceneManager.clearNAddWidget( widget )
-    SceneManager.clearKeypadBackListener()
-    SceneManager.setKeypadBackListener( keypadBackEventHandler )
     
+    Header.loadFrame( mWidget, Constants.String.spinWheel.winners, true )
+
     Navigator.loadFrame( widget )
 
     refreshFrame( winners, onlyShowBigPrize, totalNum )
@@ -48,16 +48,6 @@ function isShown()
     return mWidget ~= nil
 end
 
-function backEventHandler( sender, eventType )
-    if eventType == TOUCH_EVENT_ENDED then
-        keypadBackEventHandler()
-    end
-end
-
-function keypadBackEventHandler()
-    EventManager:popHistory()
-end
-
 function initContent( winners )
     initTitle()
     initFilter()
@@ -67,8 +57,6 @@ function initContent( winners )
 end
 
 function initTitle()
-    local title = tolua.cast( mWidget:getChildByName("Label_Title"), "Label" )
-    title:setText( Constants.String.spinWheel.winners )
     local showBigPrizeOnly = tolua.cast( mWidget:getChildByName("Label_bigPrize"), "Label" )
     showBigPrizeOnly:setText( Constants.String.spinWheel.only_show_big_prize )
 end
@@ -96,9 +84,6 @@ end
 
 function loadMainContent( winners )
     
-    local backBt = mWidget:getChildByName("Button_Back")
-    backBt:addTouchEventListener( backEventHandler )
-
     local contentContainer = tolua.cast( mWidget:getChildByName("ScrollView_Leaderboard"), "ScrollView" )
     local CTA = tolua.cast( mWidget:getChildByName("Label_CTA"), "Label" )
 

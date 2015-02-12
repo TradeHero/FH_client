@@ -7,7 +7,7 @@ local Navigator = require("scripts.views.Navigator")
 local Constants = require("scripts.Constants")
 local CompetitionsConfig = require("scripts.config.Competitions")
 local Navigator = require("scripts.views.Navigator")
-
+local Header = require("scripts.views.HeaderFrame")
 
 local mWidget
 
@@ -16,19 +16,14 @@ function loadFrame( token )
     mWidget = widget
     mWidget:registerScriptHandler( EnterOrExit )
     SceneManager.clearNAddWidget( widget )
-    SceneManager.setKeypadBackListener( keypadBackEventHandler )
+    
+    Header.loadFrame( widget, Constants.String.community.title_rules, true )
 
     Navigator.loadFrame( widget )
-
-    local backBt = widget:getChildByName("back")
-    backBt:addTouchEventListener( backEventHandler )
     
     local competitionId = CompetitionsConfig.getConfigIdByKey( token )
     local competitionRulesContent = CompetitionsConfig.getRules( competitionId )
     local competitionRulesHeight = CompetitionsConfig.getRulesContentHeight( competitionId )
-
-    local rules = tolua.cast( widget:getChildByName( "title"), "Label" )
-    rules:setText( Constants.String.community.title_rules )
 
     local disclaimer = tolua.cast( widget:getChildByName( "disclaimer"), "Label" )
     disclaimer:setText( Constants.String.community.disclaimer )
@@ -52,14 +47,4 @@ end
 
 function isFrameShown()
     return mWidget ~= nil
-end
-
-function backEventHandler( sender,eventType )
-    if eventType == TOUCH_EVENT_ENDED then
-        keypadBackEventHandler()
-    end
-end
-
-function keypadBackEventHandler()
-    EventManager:popHistory()
 end

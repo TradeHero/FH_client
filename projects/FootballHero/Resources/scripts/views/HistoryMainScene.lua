@@ -12,6 +12,7 @@ local SMIS = require("scripts.SMIS")
 local StatsDropDownFilter = require("scripts.views.StatsDropDownFilter")
 local CompetitionType = require("scripts.data.Competitions").CompetitionType
 local RequestUtils = require("scripts.RequestUtils")
+local Header = require("scripts.views.HeaderFrame")
 
 local CONTENT_FADEIN_TIME = 1
 
@@ -46,23 +47,10 @@ function loadFrame( userId, competitionId, couponHistory, additionalParam, count
         showBackButton = true
     end
 
-    local backBt = mWidget:getChildByName("Button_Back")
     if showBackButton then
-        local keypadBackEventHandler = function()
-            EventManager:popHistory()
-        end
-
-        local backEventHandler = function( sender, eventType )
-            if eventType == TOUCH_EVENT_ENDED then
-                keypadBackEventHandler()
-            end
-        end
-        
-        backBt:addTouchEventListener( backEventHandler )
-        SceneManager.setKeypadBackListener( keypadBackEventHandler )
+        Header.loadFrame( mWidget, nil, true )
     else
-        backBt:setEnabled( false )
-        SceneManager.clearKeypadBackListener()
+        Header.loadFrame( mWidget, nil, false )
     end
 
     mWidget:registerScriptHandler( EnterOrExit )
@@ -81,19 +69,9 @@ function refreshFrame( userId, competitionId, couponHistory, additionalParam, co
     mCompetitionId = competitionId
     mAdditionalParam = additionalParam
     mCountryFilter = countryFilter
-    local showBackButton = false
 
     local totalPoints = tolua.cast( mWidget:getChildByName("Label_Total_Points"), "Label" )
     totalPoints:setText( string.format( Constants.String.history.total_points, couponHistory:getBalance() ) )
-
-    mUserId = userId
-    if mUserId == Logic:getUserId() then
-        if mCompetitionId ~= nil then
-            showBackButton = true
-        end
-    else
-        showBackButton = true
-    end
 
     mStep = 1
     mHasMoreToLoad = false

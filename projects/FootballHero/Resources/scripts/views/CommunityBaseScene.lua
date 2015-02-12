@@ -10,6 +10,7 @@ local Competitions = require("scripts.data.Competitions").Competitions
 local CommunityCompetitionFrame = require("scripts.views.CommunityCompetitionFrame")
 local CommunityLeaderboardFrame = require("scripts.views.CommunityLeaderboardFrame")
 local Minigame = require("scripts.data.Minigame").Minigame
+local Header = require("scripts.views.HeaderFrame")
 
 local mWidget
 local mTabID
@@ -20,7 +21,8 @@ function loadFrame( jsonResponse, tabID, leaderboardId, subType, minigameRespons
     mWidget = widget
     mWidget:registerScriptHandler( EnterOrExit )
     SceneManager.clearNAddWidget( widget )
-    SceneManager.clearKeypadBackListener()
+    
+    Header.loadFrame( mWidget, nil, false )
 
     Navigator.loadFrame( widget )
 
@@ -48,9 +50,6 @@ function initContent( jsonResponse, leaderboardId, subType, minigameResponse )
 	local contentContainer = tolua.cast( mWidget:getChildByName("ScrollView_Content"), "ScrollView" )
     contentContainer:removeAllChildrenWithCleanup( true )
 
-    -- global chats
-    initGlobalChatButton()
-
     -- init header tab
     for i = 1, table.getn( CommunityConfig.CommunityType ) do
         initCommunityTab( CommunityConfig.CommunityType[i], i )
@@ -58,17 +57,6 @@ function initContent( jsonResponse, leaderboardId, subType, minigameResponse )
 
     -- init main content
     loadMainContent( contentContainer, jsonResponse, leaderboardId, subType, minigameResponse )
-end
-
-function initGlobalChatButton()
-    local button = mWidget:getChildByName("Button_Chat")
-
-    local eventHandler = function ( sender, eventType )
-        if eventType == TOUCH_EVENT_ENDED then
-            EventManager:postEvent( Event.Enter_League_Chat_List, {} )
-        end
-    end
-    button:addTouchEventListener( eventHandler )
 end
 
 function initCommunityTab( tabInfo, tabId )
