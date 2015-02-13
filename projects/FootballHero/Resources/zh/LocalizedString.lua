@@ -151,6 +151,7 @@ Strings = {
         no_one_won = "暂无玩家获奖",
         come_back_in = "下一次游戏时间：",
         collect_email_description = "请提交正确的邮箱地址，不合法的邮箱地址会导致您失去获奖机会。",
+        win_prizes = "奖品包括梅西签名球衣，大量现金奖励！",
     },
     login_success = "登陆成功.\n数据加载中...",
     event = {

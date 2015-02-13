@@ -155,6 +155,7 @@ Strings = {
 		balance_title = "Saldo",
 		collect_email_prize = "1 Dolar US",
 		to_claim_prize = "untuk mengklaim hadiah.",
+		win_prizes = "Menangkan hadiah menarik: Kaus bertanda tangan Messi dan Uang Tunai!",
 	},
 	login_success = "Berhasil masuk.\nMemuat data, silahkan tunggu...",
 	event = {
