@@ -54,7 +54,7 @@ function initCompetitionScene( competitionFrame, compList, miniGame )
     -- check for mini game
     -- TODO: check competition period
     --if shouldShowMiniGame() and not miniGame["Joined"] then
-    contentHeight = contentHeight + initSpinWheel( competitionFrame )
+    --contentHeight = contentHeight + initSpinWheel( competitionFrame )
 
     if Constants.MINIGAME_PK_ENABLED then
         if not miniGame["Joined"] then
