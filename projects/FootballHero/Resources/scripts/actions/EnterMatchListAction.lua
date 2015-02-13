@@ -11,6 +11,7 @@ local RateManager = require("scripts.RateManager")
 
 
 local mLeagueId
+local mStep
 --local mCheckShowMarketingMessage
 
 function action( param )
@@ -19,9 +20,17 @@ function action( param )
         leagueId = Logic:getPreviousLeagueSelected()
     end
 
-    if param ~= nil and param[1] ~= nil then
-        leagueId = param[1]
+    mStep = 1
+    if param ~= nil  then
+        if param[1] ~= nil then
+            leagueId = param[1]
+        end
+
+        if param[2] ~= nil then
+            mStep = param[2]
+        end
     end
+
     -- if param ~= nil then
     --     mCheckShowMarketingMessage = param[2]
     -- else
@@ -37,7 +46,7 @@ function action( param )
     if mLeagueId == Constants.SpecialLeagueIds.MOST_POPULAR then
         url = RequestUtils.GET_POPULAR_UPCOMING_REST_CALL
     elseif mLeagueId == Constants.SpecialLeagueIds.UPCOMING_MATCHES then
-        url = RequestUtils.GET_UPCOMING_NEXT_REST_CALL
+        url = RequestUtils.GET_UPCOMING_NEXT_REST_CALL.."?step="..mStep--.."&number=1"
     elseif mLeagueId == Constants.SpecialLeagueIds.MOST_DISCUSSED then
         url = RequestUtils.GET_MOST_DISCUSSED_REST_CALL
     else
@@ -112,7 +121,11 @@ function onRequestSuccess( matchList )
 
 	local matchListScene = require("scripts.views.MatchListScene")
     if matchListScene.isShown() then
-        matchListScene.initMatchList( sortedMatchList, mLeagueId )
+        if mStep > 1 then
+            matchListScene.extendMatchList( sortedMatchList )
+        else
+            matchListScene.initMatchList( sortedMatchList, mLeagueId )
+        end
     else
         matchListScene.loadFrame( sortedMatchList, mLeagueId )
     end
@@ -132,7 +145,7 @@ function onRequestFailed( jsonResponse )
     local matchList = MatchListData:new()
     local matchListScene = require("scripts.views.MatchListScene")
     if matchListScene.isShown() then
-        matchListScene.initMatchList( matchList )
+            matchListScene.initMatchList( matchList )
     else
         matchListScene.loadFrame( matchList, mLeagueId )
     end

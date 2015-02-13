@@ -21,6 +21,8 @@ local mWidget
 local mTopLayer
 local mOptionPanelShown
 local mTheFirstDate = nil
+local mStep
+local mHasMoreToLoad
 
 local MIN_MOVE_DISTANCE = 100
 local OPTION_MOVE_TIME = 0.5
@@ -43,6 +45,9 @@ function loadFrame( matchList, leagueKey )
 
     Navigator.loadFrame( widget )
     Navigator.chooseNav( 1 )
+
+    mStep = 1
+    mHasMoreToLoad = true
 
     initLeagueList( leagueKey )
 
@@ -193,6 +198,10 @@ function initMatchList( matchList, leagueKey, bInit )
     local contentContainer = tolua.cast( mWidget:getChildByName("ScrollView"), "ScrollView" )
     contentContainer:removeAllChildrenWithCleanup( true )
 
+    if leagueKey == Constants.SpecialLeagueIds.UPCOMING_MATCHES then
+        contentContainer:addEventListenerScrollView( scrollViewEventHandler )
+    end
+
     local seqArray = CCArray:create()
     seqArray:addObject( CCDelayTime:create( 0.3 ) )
     seqArray:addObject( CCCallFunc:create( function()
@@ -322,6 +331,82 @@ function initMatchList( matchList, leagueKey, bInit )
     end ) )
 
     seqArray:addObject( CCCallFunc:create( checkMiniGame ) )
+    
+    mWidget:runAction( CCSequence:create( seqArray ) )
+end
+
+function extendMatchList( matchList )
+    
+    if table.getn( matchList ) == 0 then
+        mHasMoreToLoad = false
+        return
+    end
+    
+    local contentContainer = tolua.cast( mWidget:getChildByName("ScrollView"), "ScrollView" )
+    
+    local seqArray = CCArray:create()
+    seqArray:addObject( CCDelayTime:create( 0.3 ) )
+    seqArray:addObject( CCCallFunc:create( function()
+        local layoutParameter = LinearLayoutParameter:create()
+        layoutParameter:setGravity(LINEAR_GRAVITY_CENTER_VERTICAL)
+        -- There will be a slight bug if container height < default container height of 900... 
+        -- 1 match = about 303 height, 3 matches = 906
+        local contentHeight = contentContainer:getInnerContainerSize().height
+        
+        for k,v in pairs( matchList:getMatchDateList() ) do
+            local matchDate = v
+
+            local zOrder = matchDate["date"]
+        
+            local content = SceneManager.widgetFromJsonFile("scenes/MatchDate.json")
+            local dateDisplay = tolua.cast( content:getChildByName("Label_Date"), "Label" )
+            local timeDisplay = tolua.cast( content:getChildByName("Label_Time"), "Label" )
+            dateDisplay:setText( matchDate["dateDisplay"] )
+            timeDisplay:setText( matchDate["timeDisplay"] )
+            content:setLayoutParameter( layoutParameter )
+            content:setZOrder( zOrder )
+
+            -- Add the date
+            contentContainer:addChild( content )
+            contentHeight = contentHeight + content:getSize().height
+
+            content:setOpacity( 0 )
+            content:setCascadeOpacityEnabled( true )
+            mWidget:runAction( CCTargetedAction:create( content, CCFadeIn:create( CONTENT_FADEIN_TIME ) ) )
+
+            local i = 1
+            for inK, inV in pairs( matchDate["matches"] ) do
+                local eventHandler = function( sender, eventType )
+                    if eventType == TOUCH_EVENT_ENDED then
+                        enterMatch( inV )
+                    end
+                end
+
+                local content = SceneManager.widgetFromJsonFile("scenes/MatchListContent.json")
+                helperInitMatchInfo( content, inV, leagueKey )
+
+                content:setLayoutParameter( layoutParameter )
+                content:setZOrder( zOrder )
+                contentContainer:addChild( content )
+                contentHeight = contentHeight + content:getSize().height
+
+                content:addTouchEventListener( eventHandler )
+
+                if i == table.getn( matchDate["matches"] ) then
+                    local separator = content:getChildByName("Panel_Separator")
+                    separator:setEnabled( false )
+                end
+
+                content:setOpacity( 0 )
+                content:setCascadeOpacityEnabled( true )
+                mWidget:runAction( CCTargetedAction:create( content, CCFadeIn:create( CONTENT_FADEIN_TIME ) ) )
+                
+                updateContentContainer( contentHeight, content )
+
+                i = i + 1
+            end
+        end
+    end ) )
     
     mWidget:runAction( CCSequence:create( seqArray ) )
 end
@@ -767,4 +852,12 @@ function hideOptionAnim( callbackFunc )
         end
     end ) )
     mWidget:runAction( CCSequence:create( seqArray ) )
+end
+
+function scrollViewEventHandler( target, eventType )
+    if eventType == SCROLLVIEW_EVENT_BOUNCE_BOTTOM and mHasMoreToLoad then
+        mStep = mStep + 1
+        
+        EventManager:postEvent( Event.Enter_Match_List, { Constants.SpecialLeagueIds.UPCOMING_MATCHES, mStep } )
+    end
 end

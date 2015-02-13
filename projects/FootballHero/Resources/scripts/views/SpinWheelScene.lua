@@ -77,6 +77,26 @@ function loadFrame()
     local balanceBt = mWidget:getChildByName("Button_balance")
     local normalSpinTitle = tolua.cast( mWidget:getChildByName("Label_normalTitle"), "Label" )
     local bonusSpinTitle = tolua.cast( mWidget:getChildByName("Label_bonusTitle"), "Label" )
+
+    local btnPopup = tolua.cast( mWidget:getChildByName("CheckBox_Info"), "CheckBox" )
+
+    local popupInfo = tolua.cast( mWidget:getChildByName("Image_Info"), "ImageView" )
+    local headerPopup = tolua.cast( popupInfo:getChildByName("Image_Header"), "ImageView" )
+    local titlePopup = tolua.cast( headerPopup:getChildByName("Label_Header"), "Label" )
+    local popupText = tolua.cast( popupInfo:getChildByName("Label_Info"), "Label" )
+    titlePopup:setText( Constants.String.spinWheel.wheel_title )
+    popupText:setText( Constants.String.spinWheel.win_prizes )
+    popupInfo:setEnabled( false )
+    -- not working
+    --popupInfo:setCascadeOpacityEnabled( true )
+    
+    local popupEventHandler = function( sender, eventType )
+        if eventType == TOUCH_EVENT_ENDED then
+            togglePopup( btnPopup:getSelectedState(), popupInfo )
+        end
+    end
+    btnPopup:addTouchEventListener( popupEventHandler )
+
     
     stopBt:addTouchEventListener( stopEventHandler )
     winnerBt:addTouchEventListener( winnerEventHandler )
@@ -112,6 +132,18 @@ function loadFrame()
     mSpinnerAnimating = false
     mStopPressed = false
 end
+
+function togglePopup( isSelected, popup )
+    if isSelected then
+        -- remove popup
+       popup:setEnabled( false )
+    else
+        -- show popup
+       popup:setEnabled( true )
+       --mWidget:runAction( CCTargetedAction:create( popupHandicap, CCFadeIn:create( 5.0 ) ) )
+   end
+end
+
 
 function updateTimer()
     mRemainingTime = mRemainingTime - 1
