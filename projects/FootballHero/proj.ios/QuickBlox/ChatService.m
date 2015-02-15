@@ -11,16 +11,18 @@
 typedef void(^CompletionBlock)();
 typedef void(^JoinRoomCompletionBlock)(QBChatRoom *);
 typedef void(^CompletionBlockWithResult)(NSArray *);
+typedef void(^LeaveRoomCompletionBlock)(NSString *);
 
 @interface ChatService () <QBChatDelegate>
 
 @property (copy) QBUUser *currentUser;
-@property (retain) QBChatRoom *currentChatRoom;
+@property (assign) QBChatRoom *currentChatRoom;
 @property (retain) NSTimer *presenceTimer;
 
 @property (copy) CompletionBlock loginCompletionBlock;
 @property (copy) JoinRoomCompletionBlock joinRoomCompletionBlock;
 @property (copy) CompletionBlockWithResult requestRoomsCompletionBlock;
+@property (copy) LeaveRoomCompletionBlock leaveRoomCompletionBlock;
 
 @end
 
@@ -64,6 +66,10 @@ typedef void(^CompletionBlockWithResult)(NSArray *);
 
 - (void)sendMessageToCurrentRoom:(QBChatMessage *)message{
     if (self.currentChatRoom != nil){
+        if (!self.currentChatRoom.isJoined){
+            [self.currentChatRoom joinRoom];
+        }
+        
         BOOL result = [[QBChat instance] sendChatMessage:message toRoom:self.currentChatRoom];
     }
 }
@@ -84,9 +90,21 @@ typedef void(^CompletionBlockWithResult)(NSArray *);
     [room joinRoomWithHistoryAttribute:@{@"maxstanzas": @"0"}];
 }
 
+- (void)leaveRoomwithCompletionBlock:(void (^)(NSString *))completionBlock {
+    self.leaveRoomCompletionBlock = completionBlock;
+    if (self.currentChatRoom != nil){
+        [self.currentChatRoom leaveRoom];
+        [self.currentChatRoom release];
+        self.currentChatRoom = nil;
+    }else {
+        [self chatRoomDidLeave:@""];
+    }
+    
+}
+
 - (void)leaveRoom:(QBChatRoom *)room{
     [[QBChat instance] leaveRoom:room];
-    self.currentChatRoom = nil;
+    
 }
 
 - (void)requestRoomsWithCompletionBlock:(void(^)(NSArray *))completionBlock{
@@ -118,10 +136,12 @@ typedef void(^CompletionBlockWithResult)(NSArray *);
 }
 
 - (void)chatRoomDidEnter:(QBChatRoom *)room{
-    self.joinRoomCompletionBlock(room);
-    self.joinRoomCompletionBlock = nil;
-    
-    self.currentChatRoom = room;
+    if (self.joinRoomCompletionBlock != nil) {
+        self.joinRoomCompletionBlock(room);
+        self.joinRoomCompletionBlock = nil;
+        
+        self.currentChatRoom = room;
+    }
 }
 
 - (void)chatDidReceiveListOfRooms:(NSArray *)rooms{
@@ -144,6 +164,13 @@ typedef void(^CompletionBlockWithResult)(NSArray *);
     
     [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationDidReceiveNewMessageFromRoom
                                                         object:nil userInfo:@{kMessage: message, kRoomJID: roomJID}];
+}
+
+- (void) chatRoomDidLeave:(NSString *)roomName {
+    if (self.leaveRoomCompletionBlock != nil){
+        self.leaveRoomCompletionBlock(roomName);
+        self.leaveRoomCompletionBlock = nil;
+    }
 }
 
 

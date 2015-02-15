@@ -74,6 +74,7 @@ function action( param )
 end
 
 function onRequestSuccess( jsonResponse )
+    CCLuaLog("Quickblox history.")
     local messages = jsonResponse["items"]
     mChatMessages = messages
     local unCachedUsers = ""

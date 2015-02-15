@@ -22,6 +22,7 @@ function loadFrame()
     mWidget = widget
     mWidget:registerScriptHandler( EnterOrExit )
     SceneManager.clearNAddWidget( widget )
+    SceneManager.clearKeypadBackListener()
     
     Header.loadFrame( mWidget, Constants.String.chat_room_title, false )
 

@@ -18,6 +18,9 @@ namespace Utils
         void joinChatRoom(const char* jid, int handler);
         void joinChatRoomResult(bool success);
         
+        void leaveChatRoom(int handler);
+        void leaveChatRoomResult(bool success);
+        
         void sendMessage(const char* message);
         void setNewMessageHandler(int handler);
         void newMessageHandler(const char* sender, const char* message, int timestamp);
@@ -26,6 +29,7 @@ namespace Utils
 		QuickBloxChat();
         int mLoginHandler;
         int mJoinRoomHandler;
+        int mLeaveRoomHandler;
         int mNewMessageHandler;
 	
 	};

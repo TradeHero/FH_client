@@ -41,9 +41,15 @@
 #import <FacebookSDK/FacebookSDK.h>
 #import <MobileAppTracker/MobileAppTracker.h>
 #import <AdSupport/AdSupport.h>
+#import <Quickblox/Quickblox.h>
+#import "LocalStorageService.h"
+#import "ChatService.h"
+#import "QuickBloxChatHandler.h"
 #include "MiscHandler.h"
 
 @implementation AppController
+
+#define QUICK_BLOX_PASSWORD @"11111111"
 
 #pragma mark -
 #pragma mark Application lifecycle
@@ -122,19 +128,120 @@ static AppDelegate s_sharedApplication;
     NSTimeInterval timeInterval = [startTime timeIntervalSinceNow];
     NSLog(@"Interval:%f",timeInterval);
     
-
-//    for (NSString* family in [UIFont familyNames])
-//    {
-//        NSLog(@"%@", family);
-//        
-//        for (NSString* name in [UIFont fontNamesForFamilyName: family])
-//        {
-//            NSLog(@"  %@", name);
-//        }
-//    }
-
+    [QBApplication sharedApplication].applicationId = 18975;
+    [QBConnection registerServiceKey:@"zencjPNL6BUKjTn"];
+    [QBConnection registerServiceSecret:@"kMjSLXRcHxqftVT"];
+    [QBSettings setAccountKey:@"dqtBD2ZHNJphn2q6YuHy"];
+    
+/**
+    for (NSString* family in [UIFont familyNames])
+    {
+        NSLog(@"%@", family);
+        
+        for (NSString* name in [UIFont fontNamesForFamilyName: family])
+        {
+            NSLog(@"  %@", name);
+        }
+    }
+**/
     
     return YES;
+}
+
+- (void) signin:(NSString *)userName withProfileImg:(NSString *)profileImg andUserId:(int)userId {
+    // QuickBlox session creation
+    QBSessionParameters *extendedAuthRequest = [[QBSessionParameters alloc] init];
+    extendedAuthRequest.userLogin = userName;
+    extendedAuthRequest.userPassword = QUICK_BLOX_PASSWORD;
+    //
+    [QBRequest createSessionWithExtendedParameters:extendedAuthRequest successBlock:^(QBResponse *response, QBASession *session) {
+        
+        
+        // Save current user
+        //
+        QBUUser *currentUser = [QBUUser user];
+        currentUser.ID = session.userID;
+        currentUser.login = userName;
+        currentUser.password = QUICK_BLOX_PASSWORD;
+        //
+        [[LocalStorageService shared] setCurrentUser:currentUser];
+        
+        [self loginWithUser:currentUser];
+        
+        [self registerForRemoteNotifications];
+        
+        QuickBloxChatHandler::getInstance()->loginResult([session.token UTF8String]);
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(chatDidReceiveMessageNotification:)
+                                                      name:kNotificationDidReceiveNewMessage object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(chatRoomDidReceiveMessageNotification:)
+                                                     name:kNotificationDidReceiveNewMessageFromRoom object:nil];
+        
+    } errorBlock:^(QBResponse *response) {
+        // User does not exist, do sign up.
+        [self signup:userName withProfileImg:profileImg andUserId:userId];
+    }];
+}
+
+- (void) signup:(NSString *)userName withProfileImg:(NSString *)profileImg andUserId:(int)userId {
+    [QBRequest createSessionWithSuccessBlock:^(QBResponse *response, QBASession *session) {
+        QBUUser* user = [QBUUser user];
+        user.login = userName;
+        user.password = QUICK_BLOX_PASSWORD;
+        user.website = profileImg;
+        user.externalUserID = userId;
+        
+        [QBRequest signUp:user successBlock:^(QBResponse *response, QBUUser *user) {
+            [self signin:userName withProfileImg:profileImg andUserId:userId];
+        } errorBlock:^(QBResponse *response) {
+            [self showError:response];
+        }];
+    } errorBlock:^(QBResponse *response) {
+        [self showError:response];
+    }];
+}
+
+- (void) loginWithUser:(QBUUser*)currentUser {
+    // Login to QuickBlox Chat
+    //
+    [[ChatService instance] loginWithUser:currentUser completionBlock:^{
+        
+    }];
+}
+
+- (void) registerForRemoteNotifications{
+    
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 80000
+    if ([[UIApplication sharedApplication] respondsToSelector:@selector(registerUserNotificationSettings:)]) {
+        
+        [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge) categories:nil]];
+        [[UIApplication sharedApplication] registerForRemoteNotifications];
+    }
+    else{
+        [[UIApplication sharedApplication] registerForRemoteNotificationTypes:UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound];
+    }
+#else
+    [[UIApplication sharedApplication] registerForRemoteNotificationTypes:UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound];
+#endif
+}
+
+- (void) showError:(QBResponse*)response {
+    NSString *errorMessage = [[response.error description] stringByReplacingOccurrencesOfString:@"(" withString:@""];
+    errorMessage = [errorMessage stringByReplacingOccurrencesOfString:@")" withString:@""];
+    
+    NSLog(@"%@", errorMessage);
+}
+
+- (void)chatDidReceiveMessageNotification:(NSNotification *)notification{
+    
+    QBChatMessage *message = notification.userInfo[kMessage];
+    QuickBloxChatHandler::getInstance()->newMessageHandler([message.senderNick UTF8String], [message.text UTF8String], message.datetime.timeIntervalSince1970);
+}
+
+- (void)chatRoomDidReceiveMessageNotification:(NSNotification *)notification{
+    QBChatMessage *message = notification.userInfo[kMessage];
+    
+    QuickBloxChatHandler::getInstance()->newMessageHandler([message.senderNick UTF8String], [message.text UTF8String], message.datetime.timeIntervalSince1970);
 }
 
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {

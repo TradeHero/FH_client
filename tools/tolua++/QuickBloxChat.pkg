@@ -8,6 +8,8 @@ class QuickBloxChat
     void logout();
 
     void joinChatRoom(const char* jid, LUA_FUNCTION handler);
+
+    void leaveChatRoom(LUA_FUNCTION handler);
     
     void sendMessage(const char* message);
 

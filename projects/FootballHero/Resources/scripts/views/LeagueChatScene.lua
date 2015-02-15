@@ -26,7 +26,7 @@ function loadFrame( leaguechatId )
 
     local widget = GUIReader:shareReader():widgetFromJsonFile("scenes/ChatroomScene.json")
     mWidget = widget
-    mWidget:registerScriptHandler( EnterOrExit )
+    widget:registerScriptHandler( EnterOrExit )
     SceneManager.clearNAddWidget( widget )
     SceneManager.setKeypadBackListener( keypadBackEventHandler )
 
@@ -41,7 +41,7 @@ function loadFrame( leaguechatId )
     local sendBt = widget:getChildByName("Button_Send")
     sendBt:addTouchEventListener( sendEventHandler )
 
-    local messageInput = ViewUtils.createTextInput( mWidget:getChildByName( MESSAGE_CONTAINER_NAME ), Constants.String.message_hint, 470, 50 )
+    local messageInput = ViewUtils.createTextInput( widget:getChildByName( MESSAGE_CONTAINER_NAME ), Constants.String.message_hint, 470, 50 )
 
     initTitle()
     doGetLatestMessages()
@@ -112,7 +112,9 @@ function backEventHandler( sender,eventType )
 end
 
 function keypadBackEventHandler()
-    EventManager:popHistory()
+    QuickBloxChat:sharedDelegate():leaveChatRoom( function()
+        EventManager:popHistory()
+    end )
 end
 
 

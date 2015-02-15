@@ -38,6 +38,8 @@ function action( param )
 end
 
 function onRequestSuccess( jsonResponse )
+
+    CCLuaLog("Quickblox users.")
     for k,v in pairs( jsonResponse["items"] ) do
         local user = v["user"]
         QuickBloxUsers.addUser( user["id"], user )

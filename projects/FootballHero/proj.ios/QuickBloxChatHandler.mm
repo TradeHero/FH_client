@@ -39,8 +39,14 @@ void QuickBloxChatHandler::joinChatRoom(const char* jid)
     QBChatRoom* room = [[QBChatRoom alloc] init];
     [room initWithRoomJID:[NSString stringWithUTF8String:jid]];
     [[ChatService instance] joinRoom:room completionBlock:^(QBChatRoom *joinedChatRoom) {
-        NSLog(@"%@", joinedChatRoom);
         Utils::QuickBloxChat::sharedDelegate()->joinChatRoomResult(true);
+    }];
+}
+
+void QuickBloxChatHandler::leaveChatRoom()
+{
+    [[ChatService instance] leaveRoomwithCompletionBlock:^(NSString *) {
+        Utils::QuickBloxChat::sharedDelegate()->leaveChatRoomResult(true);
     }];
 }
 

@@ -1,6 +1,6 @@
 /*
 ** Lua binding: Extension
-** Generated automatically by tolua++-1.0.92 on 02/15/15 15:37:19.
+** Generated automatically by tolua++-1.0.92 on 02/15/15 17:06:23.
 */
 
 /****************************************************************************
@@ -1606,6 +1606,39 @@ static int tolua_Extension_QuickBloxChat_joinChatRoom00(lua_State* tolua_S)
 }
 #endif //#ifndef TOLUA_DISABLE
 
+/* method: leaveChatRoom of class  QuickBloxChat */
+#ifndef TOLUA_DISABLE_tolua_Extension_QuickBloxChat_leaveChatRoom00
+static int tolua_Extension_QuickBloxChat_leaveChatRoom00(lua_State* tolua_S)
+{
+#ifndef TOLUA_RELEASE
+ tolua_Error tolua_err;
+ if (
+     !tolua_isusertype(tolua_S,1,"QuickBloxChat",0,&tolua_err) ||
+     (tolua_isvaluenil(tolua_S,2,&tolua_err) || !toluafix_isfunction(tolua_S,2,"LUA_FUNCTION",0,&tolua_err)) ||
+     !tolua_isnoobj(tolua_S,3,&tolua_err)
+ )
+  goto tolua_lerror;
+ else
+#endif
+ {
+  QuickBloxChat* self = (QuickBloxChat*)  tolua_tousertype(tolua_S,1,0);
+  LUA_FUNCTION handler = (  toluafix_ref_function(tolua_S,2,0));
+#ifndef TOLUA_RELEASE
+  if (!self) tolua_error(tolua_S,"invalid 'self' in function 'leaveChatRoom'", NULL);
+#endif
+  {
+   self->leaveChatRoom(handler);
+  }
+ }
+ return 0;
+#ifndef TOLUA_RELEASE
+ tolua_lerror:
+ tolua_error(tolua_S,"#ferror in function 'leaveChatRoom'.",&tolua_err);
+ return 0;
+#endif
+}
+#endif //#ifndef TOLUA_DISABLE
+
 /* method: sendMessage of class  QuickBloxChat */
 #ifndef TOLUA_DISABLE_tolua_Extension_QuickBloxChat_sendMessage00
 static int tolua_Extension_QuickBloxChat_sendMessage00(lua_State* tolua_S)
@@ -1767,6 +1800,7 @@ TOLUA_API int tolua_Extension_open (lua_State* tolua_S)
    tolua_function(tolua_S,"login",tolua_Extension_QuickBloxChat_login00);
    tolua_function(tolua_S,"logout",tolua_Extension_QuickBloxChat_logout00);
    tolua_function(tolua_S,"joinChatRoom",tolua_Extension_QuickBloxChat_joinChatRoom00);
+   tolua_function(tolua_S,"leaveChatRoom",tolua_Extension_QuickBloxChat_leaveChatRoom00);
    tolua_function(tolua_S,"sendMessage",tolua_Extension_QuickBloxChat_sendMessage00);
    tolua_function(tolua_S,"setNewMessageHandler",tolua_Extension_QuickBloxChat_setNewMessageHandler00);
   tolua_endmodule(tolua_S);

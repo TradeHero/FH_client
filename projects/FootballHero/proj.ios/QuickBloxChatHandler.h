@@ -11,6 +11,7 @@ public:
     void loginResult(const char* token);
     
     void joinChatRoom(const char* jid);
+    void leaveChatRoom();
     void sendMessage(const char* message);
     
     void newMessageHandler(const char* sender, const char* message, int timestamp);

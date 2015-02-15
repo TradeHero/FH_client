@@ -98,6 +98,33 @@ namespace Utils
         pStack->clean();
     }
     
+    void QuickBloxChat::leaveChatRoom(int handler)
+    {
+        mLeaveRoomHandler = handler;
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+        QuickBloxChatHandler::getInstance()->leaveChatRoom();
+#endif
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+        
+#endif
+    }
+    
+    void QuickBloxChat::leaveChatRoomResult(bool success)
+    {
+        CCScriptEngineProtocol* pScriptProtocol = CCScriptEngineManager::sharedManager()->getScriptEngine();
+        cocos2d::CCLuaEngine* pLuaEngine = dynamic_cast<CCLuaEngine*>(pScriptProtocol);
+        if (pLuaEngine == NULL)
+        {
+            assert(false);
+            return;
+        }
+        
+        CCLuaStack* pStack = pLuaEngine->getLuaStack();
+        pStack->pushBoolean(success);
+        int ret = pStack->executeFunctionByHandler(mLeaveRoomHandler, 1);
+        pStack->clean();
+    }
+    
     void QuickBloxChat::sendMessage(const char* message)
     {
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
