@@ -98,6 +98,9 @@ function EnterOrExit( eventType )
     if eventType == "enter" then
     elseif eventType == "exit" then
         mWidget = nil
+        QuickBloxChat:sharedDelegate():leaveChatRoom( function()
+            -- nothing.
+        end )
     end
 end
 
