@@ -73,6 +73,10 @@ function onRequestSuccess( jsonResponse )
     local pushGenerallyEnabled = jsonResponse["PushGenerallyEnabled"]
     local needUpdate = jsonResponse["Update"]
 
+    if type( pictureUrl ) == "userdata" then
+        pictureUrl = ""
+    end
+
     if needUpdate then
         EventManager:postEvent( Event.Show_Please_Update, { Constants.String.info.new_version } )
     else
@@ -90,6 +94,10 @@ function onRequestSuccess( jsonResponse )
         
         local params = { Platform = "facebook" }
         Analytics:sharedDelegate():postEvent( Constants.ANALYTICS_EVENT_LOGIN, Json.encode( params ) )
+
+        QuickBloxChat:sharedDelegate():login( displayName, pictureUrl, userId, function( token )
+            Logic:setQuickBloxToken( token )
+        end )
 
         EventManager:postEvent( Event.Check_File_Version, { configMd5Info, finishEvent } )
     end

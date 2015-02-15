@@ -306,6 +306,15 @@
 		7320C61B1A594635009E47CC /* SliderReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7320C6191A594635009E47CC /* SliderReader.cpp */; };
 		7320C61F1A594646009E47CC /* TextFieldReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7320C61D1A594646009E47CC /* TextFieldReader.cpp */; };
 		7320C6231A594674009E47CC /* WidgetReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7320C6201A594674009E47CC /* WidgetReader.cpp */; };
+		732CCE6F1A8B56D0001533F0 /* Quickblox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 732CCE6E1A8B56D0001533F0 /* Quickblox.framework */; };
+		732CCE711A8B5800001533F0 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 732CCE701A8B5800001533F0 /* CoreMedia.framework */; };
+		732CCE731A8B58E9001533F0 /* libresolv.9.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 732CCE721A8B58E9001533F0 /* libresolv.9.dylib */; };
+		732CCE761A8B5C63001533F0 /* libxml2.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 732CCE751A8B5C63001533F0 /* libxml2.2.dylib */; };
+		732CCE901A8B5FB8001533F0 /* LocalStorageService.m in Sources */ = {isa = PBXBuildFile; fileRef = 732CCE8B1A8B5FB8001533F0 /* LocalStorageService.m */; };
+		732CCE911A8B5FB8001533F0 /* ChatService.m in Sources */ = {isa = PBXBuildFile; fileRef = 732CCE8C1A8B5FB8001533F0 /* ChatService.m */; };
+		732CCE921A8B5FB8001533F0 /* CharactersEscapeService.m in Sources */ = {isa = PBXBuildFile; fileRef = 732CCE8E1A8B5FB8001533F0 /* CharactersEscapeService.m */; };
+		732CCE951A8DABE8001533F0 /* QuickBloxChat.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 732CCE931A8DABE7001533F0 /* QuickBloxChat.cpp */; };
+		732CCE981A8DAD95001533F0 /* QuickBloxChatHandler.mm in Sources */ = {isa = PBXBuildFile; fileRef = 732CCE971A8DAD95001533F0 /* QuickBloxChatHandler.mm */; };
 		732E3ACA19625F0E0009E474 /* MiscHandler.mm in Sources */ = {isa = PBXBuildFile; fileRef = 732E3AC919625F0E0009E474 /* MiscHandler.mm */; };
 		732E3ACD196263A10009E474 /* Misc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 732E3ACB196263A10009E474 /* Misc.cpp */; };
 		733DE92B193DCB1D00361638 /* AssetsManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 733DE929193DCB1D00361638 /* AssetsManager.cpp */; };
@@ -1012,6 +1021,20 @@
 		7320C6201A594674009E47CC /* WidgetReader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = WidgetReader.cpp; path = WidgetReader/WidgetReader.cpp; sourceTree = "<group>"; };
 		7320C6211A594674009E47CC /* WidgetReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WidgetReader.h; path = WidgetReader/WidgetReader.h; sourceTree = "<group>"; };
 		7320C6221A594674009E47CC /* WidgetReaderProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WidgetReaderProtocol.h; path = WidgetReader/WidgetReaderProtocol.h; sourceTree = "<group>"; };
+		732CCE6E1A8B56D0001533F0 /* Quickblox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Quickblox.framework; sourceTree = "<group>"; };
+		732CCE701A8B5800001533F0 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		732CCE721A8B58E9001533F0 /* libresolv.9.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libresolv.9.dylib; path = usr/lib/libresolv.9.dylib; sourceTree = SDKROOT; };
+		732CCE751A8B5C63001533F0 /* libxml2.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.2.dylib; path = usr/lib/libxml2.2.dylib; sourceTree = SDKROOT; };
+		732CCE8A1A8B5FB8001533F0 /* ChatService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChatService.h; path = QuickBlox/ChatService.h; sourceTree = "<group>"; };
+		732CCE8B1A8B5FB8001533F0 /* LocalStorageService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LocalStorageService.m; path = QuickBlox/LocalStorageService.m; sourceTree = "<group>"; };
+		732CCE8C1A8B5FB8001533F0 /* ChatService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ChatService.m; path = QuickBlox/ChatService.m; sourceTree = "<group>"; };
+		732CCE8D1A8B5FB8001533F0 /* LocalStorageService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LocalStorageService.h; path = QuickBlox/LocalStorageService.h; sourceTree = "<group>"; };
+		732CCE8E1A8B5FB8001533F0 /* CharactersEscapeService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CharactersEscapeService.m; path = QuickBlox/CharactersEscapeService.m; sourceTree = "<group>"; };
+		732CCE8F1A8B5FB8001533F0 /* CharactersEscapeService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CharactersEscapeService.h; path = QuickBlox/CharactersEscapeService.h; sourceTree = "<group>"; };
+		732CCE931A8DABE7001533F0 /* QuickBloxChat.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = QuickBloxChat.cpp; path = Utils/QuickBloxChat.cpp; sourceTree = "<group>"; };
+		732CCE941A8DABE7001533F0 /* QuickBloxChat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = QuickBloxChat.h; path = Utils/QuickBloxChat.h; sourceTree = "<group>"; };
+		732CCE961A8DAD95001533F0 /* QuickBloxChatHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuickBloxChatHandler.h; sourceTree = "<group>"; };
+		732CCE971A8DAD95001533F0 /* QuickBloxChatHandler.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = QuickBloxChatHandler.mm; sourceTree = "<group>"; };
 		732E3AC619625EBB0009E474 /* MiscHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MiscHandler.h; sourceTree = "<group>"; };
 		732E3AC919625F0E0009E474 /* MiscHandler.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MiscHandler.mm; sourceTree = "<group>"; };
 		732E3ACB196263A10009E474 /* Misc.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Misc.cpp; path = Utils/Misc.cpp; sourceTree = "<group>"; };
@@ -1223,6 +1246,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				732CCE761A8B5C63001533F0 /* libxml2.2.dylib in Frameworks */,
+				732CCE731A8B58E9001533F0 /* libresolv.9.dylib in Frameworks */,
+				732CCE711A8B5800001533F0 /* CoreMedia.framework in Frameworks */,
+				732CCE6F1A8B56D0001533F0 /* Quickblox.framework in Frameworks */,
 				7305FE4C1A5A8D630071C61E /* libLocalyticsAMP_x64.a in Frameworks */,
 				73B0326B19BED7B20034452A /* iAd.framework in Frameworks */,
 				7314B4C719B717A00065D927 /* MapKit.framework in Frameworks */,
@@ -2375,6 +2402,19 @@
 			name = TextFieldReader;
 			sourceTree = "<group>";
 		};
+		732CCE771A8B5DFE001533F0 /* QuickBlox */ = {
+			isa = PBXGroup;
+			children = (
+				732CCE8A1A8B5FB8001533F0 /* ChatService.h */,
+				732CCE8B1A8B5FB8001533F0 /* LocalStorageService.m */,
+				732CCE8C1A8B5FB8001533F0 /* ChatService.m */,
+				732CCE8D1A8B5FB8001533F0 /* LocalStorageService.h */,
+				732CCE8E1A8B5FB8001533F0 /* CharactersEscapeService.m */,
+				732CCE8F1A8B5FB8001533F0 /* CharactersEscapeService.h */,
+			);
+			name = QuickBlox;
+			sourceTree = "<group>";
+		};
 		733DE928193DCB0A00361638 /* AssetsManager */ = {
 			isa = PBXGroup;
 			children = (
@@ -2463,6 +2503,8 @@
 		73DCA130192C4EDA008AC05D /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				732CCE931A8DABE7001533F0 /* QuickBloxChat.cpp */,
+				732CCE941A8DABE7001533F0 /* QuickBloxChat.h */,
 				732E3ACB196263A10009E474 /* Misc.cpp */,
 				732E3ACC196263A10009E474 /* Misc.h */,
 				73D51F26192F44A4000A65AF /* WebviewDelegate.cpp */,
@@ -2755,6 +2797,7 @@
 		F293B3BD15EB7BE500256477 = {
 			isa = PBXGroup;
 			children = (
+				732CCE771A8B5DFE001533F0 /* QuickBlox */,
 				BF5CC5181A6CA747004FE15D /* AF-iOS-SDK-v2.5.3.11 */,
 				7305FE411A5A82000071C61E /* AMP-SDK */,
 				7314B46319B714AE0065D927 /* Airship */,
@@ -2784,6 +2827,10 @@
 		F293B3CB15EB7BE500256477 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				732CCE751A8B5C63001533F0 /* libxml2.2.dylib */,
+				732CCE721A8B58E9001533F0 /* libresolv.9.dylib */,
+				732CCE701A8B5800001533F0 /* CoreMedia.framework */,
+				732CCE6E1A8B56D0001533F0 /* Quickblox.framework */,
 				73B0326A19BED7B20034452A /* iAd.framework */,
 				73B0326819BED7620034452A /* MobileAppTracker.framework */,
 				7314B4C619B717A00065D927 /* MapKit.framework */,
@@ -2817,6 +2864,8 @@
 		F293B6E815EB807E00256477 /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
+				732CCE961A8DAD95001533F0 /* QuickBloxChatHandler.h */,
+				732CCE971A8DAD95001533F0 /* QuickBloxChatHandler.mm */,
 				7314B4CA19B718240065D927 /* AirshipConfig.plist */,
 				73D51F23192F3082000A65AF /* WebviewController.h */,
 				73D51F24192F3082000A65AF /* WebviewController.mm */,
@@ -3092,6 +3141,7 @@
 				15C1540D1683112E00D239F2 /* CCScrollViewLoader.cpp in Sources */,
 				15C1540E1683112E00D239F2 /* CCSpriteLoader.cpp in Sources */,
 				73B455CF19A48B2D0097A722 /* lua_zlib.c in Sources */,
+				732CCE951A8DABE8001533F0 /* QuickBloxChat.cpp in Sources */,
 				ED35C0D918323498002A0750 /* CCUtilMath.cpp in Sources */,
 				7314B49019B7150F0065D927 /* UAPushSettingsTagsViewController.m in Sources */,
 				15C1540F1683112E00D239F2 /* CCControl.cpp in Sources */,
@@ -3175,6 +3225,7 @@
 				15C154A41683116B00D239F2 /* cpSpatialIndex.c in Sources */,
 				7314B48D19B7150F0065D927 /* UAPushSettingsAliasViewController.m in Sources */,
 				15C154A51683116B00D239F2 /* cpSweep1D.c in Sources */,
+				732CCE911A8B5FB8001533F0 /* ChatService.m in Sources */,
 				7305FE241A5A803A0071C61E /* ldebug.c in Sources */,
 				15C154A61683116B00D239F2 /* cpVect.c in Sources */,
 				ED35C0E018323498002A0750 /* UIWidget.cpp in Sources */,
@@ -3217,6 +3268,7 @@
 				15C155331683118600D239F2 /* b2Fixture.cpp in Sources */,
 				73FE00A11A43FEA100B0BC05 /* fpconv.c in Sources */,
 				15C155341683118600D239F2 /* b2Island.cpp in Sources */,
+				732CCE901A8B5FB8001533F0 /* LocalStorageService.m in Sources */,
 				15C155351683118600D239F2 /* b2World.cpp in Sources */,
 				7305FE391A5A803A0071C61E /* lua.c in Sources */,
 				7388C04118F4E2FF00CF667C /* HttpRequestForLua.cpp in Sources */,
@@ -3306,6 +3358,7 @@
 				ED35C0F318323498002A0750 /* UISlider.cpp in Sources */,
 				46C1009116BF786A00F74D54 /* LuaCocos2d.cpp in Sources */,
 				73495B8919C048D300626812 /* UAInboxNavUI.m in Sources */,
+				732CCE981A8DAD95001533F0 /* QuickBloxChatHandler.mm in Sources */,
 				46C1009216BF786A00F74D54 /* CCLuaObjcBridge.mm in Sources */,
 				7305FE2A1A5A803A0071C61E /* liolib.c in Sources */,
 				46C1009316BF786A00F74D54 /* tolua_fix.c in Sources */,
@@ -3320,6 +3373,7 @@
 				ED35C0CA18323498002A0750 /* CCArmature.cpp in Sources */,
 				1A40E7E21727C47E006D4861 /* Atlas.cpp in Sources */,
 				1A40E7E31727C47E006D4861 /* AtlasAttachmentLoader.cpp in Sources */,
+				732CCE921A8B5FB8001533F0 /* CharactersEscapeService.m in Sources */,
 				ED35C0D318323498002A0750 /* CCArmatureDataManager.cpp in Sources */,
 				1A40E7E41727C47E006D4861 /* Attachment.cpp in Sources */,
 				733DE92B193DCB1D00361638 /* AssetsManager.cpp in Sources */,
@@ -3488,6 +3542,7 @@
 					"\"$(SRCROOT)/../../../cocos2dx/platform/ios/Simulation\"",
 					"\"$(SRCROOT)/../../../extensions\"",
 					"$(PROJECT_DIR)/Airship/**",
+					"${SDKROOT}/usr/include/libxml2",
 				);
 				INFOPLIST_FILE = Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
@@ -3524,7 +3579,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_OBJC_ARC = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3556,6 +3611,7 @@
 					"\"$(SRCROOT)/../../../cocos2dx/platform/ios/Simulation\"",
 					"\"$(SRCROOT)/../../../extensions\"",
 					"$(PROJECT_DIR)/Airship/**",
+					"${SDKROOT}/usr/include/libxml2",
 				);
 				INFOPLIST_FILE = Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;

@@ -51,7 +51,11 @@ function initContent()
 
         local eventHandler = function ( sender, eventType )
             if eventType == TOUCH_EVENT_ENDED then
-                EventManager:postEvent( Event.Enter_League_Chat, { LeagueChatConfig[i]["chatRoomId"], i } )
+                if LeagueChatConfig[i]["useQuickBlox"] then
+                    EventManager:postEvent( Event.Enter_Quickblox_Chatroom, { LeagueChatConfig[i]["quickBloxJID"], i } )
+                else
+                    EventManager:postEvent( Event.Enter_League_Chat, { LeagueChatConfig[i]["chatRoomId"], i } )
+                end
             end
         end
         button:addTouchEventListener( eventHandler )

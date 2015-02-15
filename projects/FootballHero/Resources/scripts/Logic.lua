@@ -65,6 +65,7 @@ function Logic:new()
 		FbId = nil,
 		deviceToken = "",
 		favoriteTeams = {},
+		quickBloxToken = "",
 
 		competitionDetail = nil,
 	}
@@ -176,6 +177,10 @@ end
 
 function Logic:getAuthSessionString()
 	return "Authorization: FH-Token "..self.sessionToken
+end
+
+function Logic:getQuickbloxSessionString()
+	return "QB-Token: "..self.quickBloxToken
 end
 
 function Logic:getUserId()
@@ -323,4 +328,12 @@ function Logic:isFavoriteTeam( teamId )
 	end
 
 	return false
+end
+
+function Logic:getQuickBloxToken()
+	return self.quickBloxToken
+end
+
+function Logic:setQuickBloxToken( token )
+	self.quickBloxToken = token
 end

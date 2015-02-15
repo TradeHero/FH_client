@@ -8,5 +8,6 @@ local Logic = require("scripts.Logic").getInstance()
 function action( param )
 	Logic:clearAccountInfoFile()
 	RequestUtils.clearResponseCache()
+	QuickBloxChat:sharedDelegate():logout()
 	EventManager:postEvent( Event.Check_Start_Tutorial )
 end

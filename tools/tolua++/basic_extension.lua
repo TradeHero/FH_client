@@ -301,6 +301,7 @@ extern "C" {
 #include "Analytics.h"
 #include "WebviewDelegate.h"
 #include "Misc.h"
+#include "QuickBloxChat.h"
 
 using namespace cocos2d;
 using namespace cocos2d::extension;

@@ -97,6 +97,7 @@ function initEvents()
 	EventManager:registerEventHandler( Event.Enter_Discussion_Details, "scripts.actions.EnterDiscussionDetailsAction" )
 	EventManager:registerEventHandler( Event.Enter_Settings_Select_League, "scripts.actions.EnterSettingsSelectLeagueAction" )
 	EventManager:registerEventHandler( Event.Enter_Settings_Select_Team, "scripts.actions.EnterSettingsSelectTeamAction" )
+	EventManager:registerEventHandler( Event.Enter_Quickblox_Chatroom, "scripts.actions.EnterQuickbloxChatroomAction" )
 
 	EventManager:registerEventHandler( Event.Do_Register, "scripts.actions.DoRegisterAction" )
 	EventManager:registerEventHandler( Event.Do_Login, "scripts.actions.DoLoginAction" )
@@ -129,6 +130,10 @@ function initEvents()
 	EventManager:registerEventHandler( Event.Do_Like_Discussion_Post, "scripts.actions.DoLikeDiscussionPostAction" )
 	EventManager:registerEventHandler( Event.Do_Share_Discussion_Post, "scripts.actions.DoShareDiscussionPostAction" )
 	EventManager:registerEventHandler( Event.Do_Select_Language, "scripts.actions.DoSelectLanguageAction" )
+	EventManager:registerEventHandler( Event.Do_Get_Quickblox_Chatroom_History, "scripts.actions.DoGetQuickbloxChatroomHistoryAction" )
+	EventManager:registerEventHandler( Event.Do_Send_Quickblox_Chat, "scripts.actions.DoSendQuickbloxChatAction" )
+	EventManager:registerEventHandler( Event.Do_Get_Quickblox_Users, "scripts.actions.DoGetQuickbloxUsersAction" )
+	
 
 	EventManager:registerEventHandler( Event.Show_Error_Message, "scripts.actions.ShowErrorMessageAction" )
 	EventManager:registerEventHandler( Event.Show_Choice_Message, "scripts.actions.ShowChoiceMessageAction" )

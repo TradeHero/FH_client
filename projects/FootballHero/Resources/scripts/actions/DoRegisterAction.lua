@@ -98,6 +98,10 @@ function onRegisterRequestSuccess( jsonResponse )
     local FbId = jsonResponse["FbId"]
     local needUpdate = jsonResponse["Update"]
 
+    if type( pictureUrl ) == "userdata" then
+        pictureUrl = ""
+    end
+
     if needUpdate then
         EventManager:postEvent( Event.Show_Please_Update, { Constants.String.info.new_version } )
     else
@@ -109,6 +113,10 @@ function onRegisterRequestSuccess( jsonResponse )
         Logic:setStartLeagueId( startLeagueId )
         Logic:setBalance( balance )
         Logic:setFbId( FbId )
+
+        QuickBloxChat:sharedDelegate():login( displayName, pictureUrl, userId, function( token )
+            Logic:setQuickBloxToken( token )
+        end )
 
         onRegisterNameRequestSuccess()
 

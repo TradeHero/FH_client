@@ -34,6 +34,8 @@
 
 - (RootViewController *)getViewController;
 
+- (void) signin:(NSString*)userName withProfileImg:(NSString*)profileImg andUserId:(int)userId;
+
 - (NSString *)getDeepLink;
 
 @end

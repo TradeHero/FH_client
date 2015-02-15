@@ -8,7 +8,9 @@ local ViewUtils = require("scripts.views.ViewUtils")
 local Logic = require("scripts.Logic").getInstance()
 local Constants = require("scripts.Constants")
 local SMIS = require("scripts.SMIS")
-local LeagueChatConfig = require("scripts.config.LeagueChat").LeagueChatType
+local LeagueChat = require("scripts.config.LeagueChat")
+local LeagueChatConfig = LeagueChat.LeagueChatType
+
 
 local mWidget
 local mLeagueChatId
@@ -63,20 +65,32 @@ end
 
 local mLastGetLatestMessageTime = 0
 function doGetLatestMessages()
-    -- Only send the request when players are still in the chat UI.
-    if mIsFirstCall or ( mWidget ~= nil and os.time() - mLastGetLatestMessageTime >= RELOAD_DELAY_TIME ) then
-        local callback, isLeague = getLatestMessages , true
-        local lastChatTime, isSilent
-        if mIsFirstCall then 
-            lastChatTime = 0
-            isSilent = false
-            mIsFirstCall = false
-        else
-            lastChatTime = Logic:getLastChatMessageTimestamp()
-            isSilent = true
+    if LeagueChatConfig[mLeagueChatId]["useQuickBlox"] then
+        local quickBloxNewMessageHandler = function( sender, text, timeStamp )
+            EventManager:postEvent( Event.Do_Get_Quickblox_Users, { tostring( sender ), function()
+                local chatMessages = LeagueChat.createChatMessagesWithData( sender, text, timeStamp )
+                addMessage( chatMessages )
+            end } )
         end
-        EventManager:postEvent( Event.Do_Get_Chat_Message, { mLeagueChatId, lastChatTime, isSilent, callback, isLeague } )
-        mLastGetLatestMessageTime = os.time()
+
+        EventManager:postEvent( Event.Do_Get_Quickblox_Chatroom_History, { LeagueChatConfig[mLeagueChatId]["quickBloxID"] } )
+        QuickBloxChat:sharedDelegate():setNewMessageHandler( quickBloxNewMessageHandler )
+    else
+        -- Only send the request when players are still in the chat UI.
+        if mIsFirstCall or ( mWidget ~= nil and os.time() - mLastGetLatestMessageTime >= RELOAD_DELAY_TIME ) then
+            local callback, isLeague = getLatestMessages , true
+            local lastChatTime, isSilent
+            if mIsFirstCall then 
+                lastChatTime = 0
+                isSilent = false
+                mIsFirstCall = false
+            else
+                lastChatTime = Logic:getLastChatMessageTimestamp()
+                isSilent = true
+            end
+            EventManager:postEvent( Event.Do_Get_Chat_Message, { mLeagueChatId, lastChatTime, isSilent, callback, isLeague } )
+            mLastGetLatestMessageTime = os.time()
+        end
     end
 end
 
@@ -108,8 +122,12 @@ function sendEventHandler( sender,eventType )
         local message = messageInput:getText()
         messageInput:setText("")
         if string.len( message ) > 0 then
-            local isLeague = true
-            EventManager:postEvent( Event.Do_Send_Chat_Message, { mLeagueChatId, message, isLeague } )
+            if LeagueChatConfig[mLeagueChatId]["useQuickBlox"] then
+                EventManager:postEvent( Event.Do_Send_Quickblox_Chat, { message } )
+            else
+                local isLeague = true
+                EventManager:postEvent( Event.Do_Send_Chat_Message, { mLeagueChatId, message, isLeague } )
+            end
         end
     end
 end

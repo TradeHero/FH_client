@@ -60,6 +60,7 @@ EventNameList =
     "Enter_Discussion_Details",
     "Enter_Settings_Select_League",
     "Enter_Settings_Select_Team",
+    "Enter_Quickblox_Chatroom",
 
     "Do_Ask_For_Rate",
     "Do_Ask_For_Comment",
@@ -92,6 +93,9 @@ EventNameList =
     "Do_Like_Discussion_Post",
     "Do_Share_Discussion_Post",
     "Do_Select_Language",
+    "Do_Get_Quickblox_Chatroom_History",
+    "Do_Send_Quickblox_Chat",
+    "Do_Get_Quickblox_Users",
 
     "Show_Info",
     "Show_Error_Message",
@@ -143,6 +147,9 @@ EventNameDosenotTrackList =
     "Do_Make_Discussion_Post",
     "Do_Like_Discussion_Post",
     "Do_Select_Language",
+    "Do_Get_Quickblox_Chatroom_History",
+    "Do_Send_Quickblox_Chat",
+    "Do_Get_Quickblox_Users",
 
     "Check_Start_Tutorial",
     "Check_File_Version",

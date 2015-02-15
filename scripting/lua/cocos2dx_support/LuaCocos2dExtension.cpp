@@ -1,6 +1,6 @@
 /*
 ** Lua binding: Extension
-** Generated automatically by tolua++-1.0.92 on 01/05/15 15:27:16.
+** Generated automatically by tolua++-1.0.92 on 02/15/15 15:37:19.
 */
 
 /****************************************************************************
@@ -41,6 +41,7 @@ extern "C" {
 #include "Analytics.h"
 #include "WebviewDelegate.h"
 #include "Misc.h"
+#include "QuickBloxChat.h"
 
 using namespace cocos2d;
 using namespace cocos2d::extension;
@@ -60,8 +61,9 @@ static void tolua_reg_types (lua_State* tolua_S)
  tolua_usertype(tolua_S,"HttpRequestForLua");
  tolua_usertype(tolua_S,"WebviewDelegate");
  tolua_usertype(tolua_S,"Analytics");
- tolua_usertype(tolua_S,"FacebookDelegate");
  tolua_usertype(tolua_S,"CCHttpRequest");
+ tolua_usertype(tolua_S,"FacebookDelegate");
+ tolua_usertype(tolua_S,"QuickBloxChat");
  
  tolua_usertype(tolua_S,"CCObject");
  tolua_usertype(tolua_S,"CCEditBoxDelegate");
@@ -1471,6 +1473,205 @@ static int tolua_Extension_Misc_terminate00(lua_State* tolua_S)
 }
 #endif //#ifndef TOLUA_DISABLE
 
+/* method: sharedDelegate of class  QuickBloxChat */
+#ifndef TOLUA_DISABLE_tolua_Extension_QuickBloxChat_sharedDelegate00
+static int tolua_Extension_QuickBloxChat_sharedDelegate00(lua_State* tolua_S)
+{
+#ifndef TOLUA_RELEASE
+ tolua_Error tolua_err;
+ if (
+     !tolua_isusertable(tolua_S,1,"QuickBloxChat",0,&tolua_err) ||
+     !tolua_isnoobj(tolua_S,2,&tolua_err)
+ )
+  goto tolua_lerror;
+ else
+#endif
+ {
+  {
+   QuickBloxChat* tolua_ret = (QuickBloxChat*)  QuickBloxChat::sharedDelegate();
+    tolua_pushusertype(tolua_S,(void*)tolua_ret,"QuickBloxChat");
+  }
+ }
+ return 1;
+#ifndef TOLUA_RELEASE
+ tolua_lerror:
+ tolua_error(tolua_S,"#ferror in function 'sharedDelegate'.",&tolua_err);
+ return 0;
+#endif
+}
+#endif //#ifndef TOLUA_DISABLE
+
+/* method: login of class  QuickBloxChat */
+#ifndef TOLUA_DISABLE_tolua_Extension_QuickBloxChat_login00
+static int tolua_Extension_QuickBloxChat_login00(lua_State* tolua_S)
+{
+#ifndef TOLUA_RELEASE
+ tolua_Error tolua_err;
+ if (
+     !tolua_isusertype(tolua_S,1,"QuickBloxChat",0,&tolua_err) ||
+     !tolua_isstring(tolua_S,2,0,&tolua_err) ||
+     !tolua_isstring(tolua_S,3,0,&tolua_err) ||
+     !tolua_isnumber(tolua_S,4,0,&tolua_err) ||
+     (tolua_isvaluenil(tolua_S,5,&tolua_err) || !toluafix_isfunction(tolua_S,5,"LUA_FUNCTION",0,&tolua_err)) ||
+     !tolua_isnoobj(tolua_S,6,&tolua_err)
+ )
+  goto tolua_lerror;
+ else
+#endif
+ {
+  QuickBloxChat* self = (QuickBloxChat*)  tolua_tousertype(tolua_S,1,0);
+  const char* username = ((const char*)  tolua_tostring(tolua_S,2,0));
+  const char* profileImg = ((const char*)  tolua_tostring(tolua_S,3,0));
+  int userId = ((int)  tolua_tonumber(tolua_S,4,0));
+  LUA_FUNCTION handler = (  toluafix_ref_function(tolua_S,5,0));
+#ifndef TOLUA_RELEASE
+  if (!self) tolua_error(tolua_S,"invalid 'self' in function 'login'", NULL);
+#endif
+  {
+   self->login(username,profileImg,userId,handler);
+  }
+ }
+ return 0;
+#ifndef TOLUA_RELEASE
+ tolua_lerror:
+ tolua_error(tolua_S,"#ferror in function 'login'.",&tolua_err);
+ return 0;
+#endif
+}
+#endif //#ifndef TOLUA_DISABLE
+
+/* method: logout of class  QuickBloxChat */
+#ifndef TOLUA_DISABLE_tolua_Extension_QuickBloxChat_logout00
+static int tolua_Extension_QuickBloxChat_logout00(lua_State* tolua_S)
+{
+#ifndef TOLUA_RELEASE
+ tolua_Error tolua_err;
+ if (
+     !tolua_isusertype(tolua_S,1,"QuickBloxChat",0,&tolua_err) ||
+     !tolua_isnoobj(tolua_S,2,&tolua_err)
+ )
+  goto tolua_lerror;
+ else
+#endif
+ {
+  QuickBloxChat* self = (QuickBloxChat*)  tolua_tousertype(tolua_S,1,0);
+#ifndef TOLUA_RELEASE
+  if (!self) tolua_error(tolua_S,"invalid 'self' in function 'logout'", NULL);
+#endif
+  {
+   self->logout();
+  }
+ }
+ return 0;
+#ifndef TOLUA_RELEASE
+ tolua_lerror:
+ tolua_error(tolua_S,"#ferror in function 'logout'.",&tolua_err);
+ return 0;
+#endif
+}
+#endif //#ifndef TOLUA_DISABLE
+
+/* method: joinChatRoom of class  QuickBloxChat */
+#ifndef TOLUA_DISABLE_tolua_Extension_QuickBloxChat_joinChatRoom00
+static int tolua_Extension_QuickBloxChat_joinChatRoom00(lua_State* tolua_S)
+{
+#ifndef TOLUA_RELEASE
+ tolua_Error tolua_err;
+ if (
+     !tolua_isusertype(tolua_S,1,"QuickBloxChat",0,&tolua_err) ||
+     !tolua_isstring(tolua_S,2,0,&tolua_err) ||
+     (tolua_isvaluenil(tolua_S,3,&tolua_err) || !toluafix_isfunction(tolua_S,3,"LUA_FUNCTION",0,&tolua_err)) ||
+     !tolua_isnoobj(tolua_S,4,&tolua_err)
+ )
+  goto tolua_lerror;
+ else
+#endif
+ {
+  QuickBloxChat* self = (QuickBloxChat*)  tolua_tousertype(tolua_S,1,0);
+  const char* jid = ((const char*)  tolua_tostring(tolua_S,2,0));
+  LUA_FUNCTION handler = (  toluafix_ref_function(tolua_S,3,0));
+#ifndef TOLUA_RELEASE
+  if (!self) tolua_error(tolua_S,"invalid 'self' in function 'joinChatRoom'", NULL);
+#endif
+  {
+   self->joinChatRoom(jid,handler);
+  }
+ }
+ return 0;
+#ifndef TOLUA_RELEASE
+ tolua_lerror:
+ tolua_error(tolua_S,"#ferror in function 'joinChatRoom'.",&tolua_err);
+ return 0;
+#endif
+}
+#endif //#ifndef TOLUA_DISABLE
+
+/* method: sendMessage of class  QuickBloxChat */
+#ifndef TOLUA_DISABLE_tolua_Extension_QuickBloxChat_sendMessage00
+static int tolua_Extension_QuickBloxChat_sendMessage00(lua_State* tolua_S)
+{
+#ifndef TOLUA_RELEASE
+ tolua_Error tolua_err;
+ if (
+     !tolua_isusertype(tolua_S,1,"QuickBloxChat",0,&tolua_err) ||
+     !tolua_isstring(tolua_S,2,0,&tolua_err) ||
+     !tolua_isnoobj(tolua_S,3,&tolua_err)
+ )
+  goto tolua_lerror;
+ else
+#endif
+ {
+  QuickBloxChat* self = (QuickBloxChat*)  tolua_tousertype(tolua_S,1,0);
+  const char* message = ((const char*)  tolua_tostring(tolua_S,2,0));
+#ifndef TOLUA_RELEASE
+  if (!self) tolua_error(tolua_S,"invalid 'self' in function 'sendMessage'", NULL);
+#endif
+  {
+   self->sendMessage(message);
+  }
+ }
+ return 0;
+#ifndef TOLUA_RELEASE
+ tolua_lerror:
+ tolua_error(tolua_S,"#ferror in function 'sendMessage'.",&tolua_err);
+ return 0;
+#endif
+}
+#endif //#ifndef TOLUA_DISABLE
+
+/* method: setNewMessageHandler of class  QuickBloxChat */
+#ifndef TOLUA_DISABLE_tolua_Extension_QuickBloxChat_setNewMessageHandler00
+static int tolua_Extension_QuickBloxChat_setNewMessageHandler00(lua_State* tolua_S)
+{
+#ifndef TOLUA_RELEASE
+ tolua_Error tolua_err;
+ if (
+     !tolua_isusertype(tolua_S,1,"QuickBloxChat",0,&tolua_err) ||
+     (tolua_isvaluenil(tolua_S,2,&tolua_err) || !toluafix_isfunction(tolua_S,2,"LUA_FUNCTION",0,&tolua_err)) ||
+     !tolua_isnoobj(tolua_S,3,&tolua_err)
+ )
+  goto tolua_lerror;
+ else
+#endif
+ {
+  QuickBloxChat* self = (QuickBloxChat*)  tolua_tousertype(tolua_S,1,0);
+  LUA_FUNCTION handler = (  toluafix_ref_function(tolua_S,2,0));
+#ifndef TOLUA_RELEASE
+  if (!self) tolua_error(tolua_S,"invalid 'self' in function 'setNewMessageHandler'", NULL);
+#endif
+  {
+   self->setNewMessageHandler(handler);
+  }
+ }
+ return 0;
+#ifndef TOLUA_RELEASE
+ tolua_lerror:
+ tolua_error(tolua_S,"#ferror in function 'setNewMessageHandler'.",&tolua_err);
+ return 0;
+#endif
+}
+#endif //#ifndef TOLUA_DISABLE
+
 /* Open function */
 TOLUA_API int tolua_Extension_open (lua_State* tolua_S)
 {
@@ -1559,6 +1760,15 @@ TOLUA_API int tolua_Extension_open (lua_State* tolua_S)
    tolua_function(tolua_S,"openUrl",tolua_Extension_Misc_openUrl00);
    tolua_function(tolua_S,"openRate",tolua_Extension_Misc_openRate00);
    tolua_function(tolua_S,"terminate",tolua_Extension_Misc_terminate00);
+  tolua_endmodule(tolua_S);
+  tolua_cclass(tolua_S,"QuickBloxChat","QuickBloxChat","",NULL);
+  tolua_beginmodule(tolua_S,"QuickBloxChat");
+   tolua_function(tolua_S,"sharedDelegate",tolua_Extension_QuickBloxChat_sharedDelegate00);
+   tolua_function(tolua_S,"login",tolua_Extension_QuickBloxChat_login00);
+   tolua_function(tolua_S,"logout",tolua_Extension_QuickBloxChat_logout00);
+   tolua_function(tolua_S,"joinChatRoom",tolua_Extension_QuickBloxChat_joinChatRoom00);
+   tolua_function(tolua_S,"sendMessage",tolua_Extension_QuickBloxChat_sendMessage00);
+   tolua_function(tolua_S,"setNewMessageHandler",tolua_Extension_QuickBloxChat_setNewMessageHandler00);
   tolua_endmodule(tolua_S);
  tolua_endmodule(tolua_S);
  return 1;
