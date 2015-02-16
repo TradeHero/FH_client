@@ -5,7 +5,6 @@
 #include "WebviewController.h"
 #endif
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
-#include "platform/android/jni/JniHelper.h"
 #include "MiscAndroid.h"
 #endif
 

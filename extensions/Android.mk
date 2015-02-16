@@ -56,6 +56,7 @@ Social/FacebookDelegate.cpp \
 Utils/Analytics.cpp \
 Utils/Misc.cpp \
 Utils/WebviewDelegate.cpp \
+Utils/QuickBloxChat.cpp \
 physics_nodes/CCPhysicsDebugNode.cpp \
 physics_nodes/CCPhysicsSprite.cpp \
 LocalStorage/LocalStorageAndroid.cpp \

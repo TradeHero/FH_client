@@ -48,5 +48,9 @@ void android_analytics_postEvent(const char* eventName, const char* paramString)
     jstring paramStringArg = minfo.env->NewStringUTF(paramString);
     minfo.env->CallVoidMethod(activityObj, minfo.methodID,
         eventNameArg, paramStringArg);
+    minfo.env->DeleteLocalRef(eventNameArg);
+    minfo.env->DeleteLocalRef(paramStringArg);
+    minfo.env->DeleteLocalRef(minfo.classID);
+    minfo.env->DeleteLocalRef(activityObj);
   }
 }

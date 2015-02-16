@@ -5,7 +5,7 @@
 #include "QuickBloxChatHandler.h"
 #endif
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
-#include "AnalyticsAndroid.h"
+#include "QuickBloxChatAndroid.h"
 #endif
 
 USING_NS_CC;
@@ -41,7 +41,7 @@ namespace Utils
         QuickBloxChatHandler::getInstance()->login(username, profileImg, userId);
 #endif
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
-		
+        quickblox_login(username, profileImg, userId);
 #endif
 	}
     
@@ -67,7 +67,7 @@ namespace Utils
         QuickBloxChatHandler::getInstance()->logout();
 #endif
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
-        
+        quickblox_logout();
 #endif
     }
     
@@ -78,7 +78,7 @@ namespace Utils
         QuickBloxChatHandler::getInstance()->joinChatRoom(jid);
 #endif
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
-        
+        quickblox_joinChatRoom(jid);
 #endif
     }
     
@@ -105,7 +105,7 @@ namespace Utils
         QuickBloxChatHandler::getInstance()->leaveChatRoom();
 #endif
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
-        
+        quickblox_leaveChatRoom();
 #endif
     }
     
@@ -131,7 +131,7 @@ namespace Utils
         QuickBloxChatHandler::getInstance()->sendMessage(message);
 #endif
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
-        
+        quickblox_sendMessage(message);
 #endif
     }
     
