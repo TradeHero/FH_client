@@ -113,6 +113,7 @@ static AppDelegate s_sharedApplication;
     [UAirship takeOff:[UAConfig defaultConfig]];
     [UAPush setDefaultPushEnabledValue:NO];
     [[UAPush shared] resetBadge];
+    [[UAPush shared] setPushEnabled:YES];
     [UAPush shared].notificationTypes = (UIRemoteNotificationTypeBadge |
                                          UIRemoteNotificationTypeSound |
                                          UIRemoteNotificationTypeAlert);
