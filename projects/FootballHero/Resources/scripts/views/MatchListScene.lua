@@ -336,8 +336,7 @@ function initMatchList( matchList, leagueKey, bInit )
 end
 
 function extendMatchList( matchList )
-    
-    if table.getn( matchList ) == 0 then
+    if table.getn( matchList:getMatchDateList() ) == 0 then
         mHasMoreToLoad = false
         return
     end
