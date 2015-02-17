@@ -8,6 +8,7 @@ local ConnectingMessage = require("scripts.views.ConnectingMessage")
 local RequestUtils = require("scripts.RequestUtils")
 local Logic = require("scripts.Logic").getInstance()
 local PushNotificationManager = require("scripts.PushNotificationManager")
+local QuickBloxService = require("scripts.QuickBloxService")
 
 
 local mEmail = "test126@abc.com"
@@ -99,7 +100,7 @@ function onRequestSuccess( jsonResponse )
         local params = { Platform = "email" }
         Analytics:sharedDelegate():postEvent( Constants.ANALYTICS_EVENT_LOGIN, Json.encode( params ) )
 
-        QuickBloxChat:sharedDelegate():login( displayName, pictureUrl, userId, function( token )
+        QuickBloxService.login( displayName, pictureUrl, userId, function( token )
             Logic:setQuickBloxToken( token )
         end )
 

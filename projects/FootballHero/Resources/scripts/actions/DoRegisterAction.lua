@@ -7,6 +7,8 @@ local ConnectingMessage = require("scripts.views.ConnectingMessage")
 local Json = require("json")
 local Logic = require("scripts.Logic").getInstance()
 local RequestUtils = require("scripts.RequestUtils")
+local QuickBloxService = require("scripts.QuickBloxService")
+
 
 local mEmail = "test126@abc.com"
 local mPassword = "test126"
@@ -114,7 +116,7 @@ function onRegisterRequestSuccess( jsonResponse )
         Logic:setBalance( balance )
         Logic:setFbId( FbId )
 
-        QuickBloxChat:sharedDelegate():login( displayName, pictureUrl, userId, function( token )
+        QuickBloxService.login( displayName, pictureUrl, userId, function( token )
             Logic:setQuickBloxToken( token )
         end )
 

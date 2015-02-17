@@ -7,9 +7,9 @@ local Event = require("scripts.events.Event").EventList
 local ConnectingMessage = require("scripts.views.ConnectingMessage")
 local RequestUtils = require("scripts.RequestUtils")
 local Logic = require("scripts.Logic").getInstance()
-local LeagueChat = require("scripts.config.LeagueChat")
-local LeagueChatConfig = LeagueChat.LeagueChatType
+local LeagueChatConfig = require("scripts.config.LeagueChat").LeagueChatType
 local QuickBloxUsers = require("scripts.data.QuickBloxUsers")
+local QuickBloxService = require("scripts.QuickBloxService")
 
 --[[
 
@@ -97,6 +97,6 @@ function showChatMessages()
     local ChatScene = require("scripts.views.LeagueChatScene")
 
     -- Display the messages.
-    local chatMessages = LeagueChat.createChatMessages( mChatMessages )
+    local chatMessages = QuickBloxService.createChatMessages( mChatMessages )
     ChatScene.initMessages( chatMessages )
 end

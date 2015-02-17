@@ -8,8 +8,8 @@ local ViewUtils = require("scripts.views.ViewUtils")
 local Logic = require("scripts.Logic").getInstance()
 local Constants = require("scripts.Constants")
 local SMIS = require("scripts.SMIS")
-local LeagueChat = require("scripts.config.LeagueChat")
-local LeagueChatConfig = LeagueChat.LeagueChatType
+local LeagueChatConfig = require("scripts.config.LeagueChat").LeagueChatType
+local QuickBloxService = require("scripts.QuickBloxService")
 
 
 local mWidget
@@ -68,13 +68,13 @@ function doGetLatestMessages()
     if LeagueChatConfig[mLeagueChatId]["useQuickBlox"] then
         local quickBloxNewMessageHandler = function( sender, text, timeStamp )
             EventManager:postEvent( Event.Do_Get_Quickblox_Users, { tostring( sender ), function()
-                local chatMessages = LeagueChat.createChatMessagesWithData( sender, text, timeStamp )
+                local chatMessages = QuickBloxService.createChatMessagesWithData( sender, text, timeStamp )
                 addMessage( chatMessages )
             end } )
         end
 
         EventManager:postEvent( Event.Do_Get_Quickblox_Chatroom_History, { LeagueChatConfig[mLeagueChatId]["quickBloxID"] } )
-        QuickBloxChat:sharedDelegate():setNewMessageHandler( quickBloxNewMessageHandler )
+        QuickBloxService.setNewMessageHandler( quickBloxNewMessageHandler )
     else
         -- Only send the request when players are still in the chat UI.
         if mIsFirstCall or ( mWidget ~= nil and os.time() - mLastGetLatestMessageTime >= RELOAD_DELAY_TIME ) then
@@ -98,7 +98,7 @@ function EnterOrExit( eventType )
     if eventType == "enter" then
     elseif eventType == "exit" then
         mWidget = nil
-        QuickBloxChat:sharedDelegate():leaveChatRoom( function()
+        QuickBloxService.leaveChatRoom( function()
             -- nothing.
         end )
     end
@@ -115,7 +115,7 @@ function backEventHandler( sender,eventType )
 end
 
 function keypadBackEventHandler()
-    QuickBloxChat:sharedDelegate():leaveChatRoom( function()
+    QuickBloxService.leaveChatRoom( function()
         EventManager:popHistory()
     end )
 end

@@ -7,8 +7,6 @@ local Event = require("scripts.events.Event").EventList
 local ConnectingMessage = require("scripts.views.ConnectingMessage")
 local RequestUtils = require("scripts.RequestUtils")
 local Logic = require("scripts.Logic").getInstance()
-local LeagueChat = require("scripts.config.LeagueChat")
-local LeagueChatConfig = LeagueChat.LeagueChatType
 local QuickBloxUsers = require("scripts.data.QuickBloxUsers")
 
 

@@ -1,8 +1,6 @@
 module(..., package.seeall)
 
 local Constants = require("scripts.Constants")
-local QuickBloxUsers = require("scripts.data.QuickBloxUsers")
-local ChatMessages = require("scripts.data.ChatMessages").ChatMessages
 
 LeagueChatType = {
 	{
@@ -12,7 +10,7 @@ LeagueChatType = {
 		["logo"] = Constants.CHAT_IMAGE_PATH.."icn-england-logo.png", 
 		["chatRoomId"] = "global-english",
 		["color"] = ccc3( 29, 49, 141 ),
-		["useQuickBlox"] = false,
+		["useQuickBlox"] = true,
 		["quickBloxJID"] = "18975_54c88072535c12629c025a37@muc.chat.quickblox.com",
 		["quickBloxID"] = "54c88072535c12629c025a37",
 	},
@@ -72,48 +70,3 @@ LeagueChatType = {
 	},
 }
 
-function createChatMessagesWithData( sender, text, timeStamp )
-	local oneMessage = {}
-	oneMessage["sender_id"] = tonumber( sender )
-	oneMessage["message"] = text
-	oneMessage["date_sent"] = timeStamp
-
-	return createChatMessages( { oneMessage } )
-end
-
-function createChatMessages( messages )
-    table.sort( messages, function ( n1, n2 )
-        if n1["date_sent"] < n2["date_sent"] then
-            return true
-        else
-            return false
-        end
-    end )
-
-    local chatMessages = ChatMessages:new()
-    for k,v in pairs( messages ) do
-        chatMessages:addMessage( helperMappingtoChatMessage( v ) )
-    end
-
-    return chatMessages
-end
-
-function helperMappingtoChatMessage( quickbloxMessage )
-    local message = {}
-
-    local quickBloxUser = QuickBloxUsers.getUserById( quickbloxMessage["sender_id"] )
-    if quickBloxUser then
-    	message["UserId"] = quickBloxUser["external_user_id"]
-    	message["UserName"] =  quickBloxUser["login"]
-    	message["PictureUrl"] = quickBloxUser["website"]
-    else
-    	message["UserId"] = quickbloxMessage["sender_id"]
-    	message["UserName"] =  quickbloxMessage["sender_id"]
-    	message["PictureUrl"] = nil
-    end
-    
-    message["MessageText"] = quickbloxMessage["message"]
-    message["UnixTimeStamp"] = quickbloxMessage["date_sent"]
-
-    return message
-end

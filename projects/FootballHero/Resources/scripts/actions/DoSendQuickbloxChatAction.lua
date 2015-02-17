@@ -8,6 +8,8 @@ local ConnectingMessage = require("scripts.views.ConnectingMessage")
 local RequestUtils = require("scripts.RequestUtils")
 local Logic = require("scripts.Logic").getInstance()
 local LeagueChatConfig = require("scripts.config.LeagueChat").LeagueChatType
+local QuickBloxService = require("scripts.QuickBloxService")
+
 
 function action( param )
     local message = param[1]
@@ -16,5 +18,5 @@ function action( param )
         return
     end
 
-    QuickBloxChat:sharedDelegate():sendMessage( message )
+    QuickBloxService.sendMessage( message )
 end
