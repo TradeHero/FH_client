@@ -33,6 +33,8 @@ end
 function leaveChatRoom( callback )
 	if isQuickBloxEnabled() then
 		QuickBloxChat:sharedDelegate():leaveChatRoom( callback )
+	else
+		callback()
 	end
 end
 
