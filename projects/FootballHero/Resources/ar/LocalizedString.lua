@@ -254,6 +254,7 @@ Strings = {
 		label_give_desc = "اختر وصفًا",
 		desc_create_comp = "وترد التوقعات المحرزة في المسابقات المختارة تلقائيًا إلى المسابقة.",
 		label_fb_share = "مشاركة عبر Facebook",
+		label_new = "جديد",
 	},
 	first_name = "الاسم الأول",
 	share_type_email = "البريد الإلكتروني",

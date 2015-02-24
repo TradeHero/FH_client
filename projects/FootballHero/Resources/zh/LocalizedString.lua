@@ -251,6 +251,7 @@ Strings = {
         label_give_desc = "添加描述信息",
         desc_create_comp = "在比赛选定的联赛中预测的球赛会自动加入到你的比赛记录中",
         title_competition = "比赛",
+        label_new = "新",
     },
     first_name = "名字",
     share_body = "嘿！你能比我预测得更准吗？加入我在FootballHero创建的比分预测大赛吧！邀请码: %s  www.footballheroapp.com/download",

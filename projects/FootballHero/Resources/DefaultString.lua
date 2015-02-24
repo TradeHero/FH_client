@@ -73,6 +73,7 @@ StringsDefault = {
     label_give_title = "Give a title to your competition",
     label_how_long = "How long will it last?",
     label_months  = "months",
+    label_new = "New",
     label_ongoing = "Ongoing",
     label_select_league = "Select a League",
     push = "PUSH NOTIFICATION",

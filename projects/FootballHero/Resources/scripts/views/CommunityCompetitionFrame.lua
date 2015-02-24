@@ -43,6 +43,9 @@ function initCompetitionScene( competitionFrame, compList, miniGame )
     local newHeader = tolua.cast( newCompFrame:getChildByName( "Label_Join" ), "Label" )
     newHeader:setText( Constants.String.community.title_join_comp )
 
+    local newLabel = tolua.cast( newCompFrame:getChildByName( "Label_New" ), "Label" )
+    newLabel:setText( Constants.String.community.label_new )
+
     local joinedHeader = tolua.cast( joinedCompFrame:getChildByName( "Label_Joined_Comps" ), "Label" )
     joinedHeader:setText( Constants.String.community.title_joined_comp )
 

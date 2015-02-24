@@ -231,6 +231,7 @@ Strings = {
 		label_give_desc = "Berikan deskripsi",
 		desc_create_comp = "Predikisi yang telah dibuat dalam liga yang terpilih untuk kompetisi akan dimasukkan ke dalam kompetisi secara otomatis.",
 		label_fb_share = "Bagi melalui Facebook",
+		label_new = "Baru",
 	},
 	first_name = "Nama Depan",
 	share_type_email = "Email",
