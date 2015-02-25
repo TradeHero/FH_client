@@ -7,21 +7,32 @@
   <JsonFileName>FH_UI.json</JsonFileName>
   <JsonFolder>Z:\workspace\FH_client\projects\FootballHero\editor\FH_UI\Json</JsonFolder>
   <JsonList>
+    <string>AskForComment.json</string>
+    <string>AskForRate.json</string>
     <string>Chat.json</string>
     <string>ChatMessageContent.json</string>
     <string>ChatMessageDate.json</string>
     <string>ChatMyMessageContent.json</string>
+    <string>ChatroomScene.json</string>
+    <string>ChatroomSelectScene.json</string>
     <string>ChoiceMessage.json</string>
     <string>CommunityBaseScene.json</string>
+    <string>CommunityCompetitionBannerFrame.json</string>
+    <string>CommunityCompetitionWelcome.json</string>
+    <string>CommunityJoinedCompetitionFrame.json</string>
     <string>CommunityLeaderboardDropdownContentFrame.json</string>
     <string>CommunityLeaderboardDropdownFrame.json</string>
     <string>CommunityLeaderboardFrame.json</string>
     <string>CommunityLeaderboardListContentFrame.json</string>
+    <string>CommunityNewCompetitionFrame.json</string>
     <string>CompetitionItemNew.json</string>
     <string>CompetitionLeaderboard.json</string>
     <string>CompetitionMore.json</string>
     <string>CompetitionMoreContent.json</string>
+    <string>CompetitionRules.json</string>
+    <string>CompetitionWebview.json</string>
     <string>ConnectingMessage.json</string>
+    <string>CountryDropdownContent.json</string>
     <string>CreateCompetition.json</string>
     <string>CreateCompetitionContent.json</string>
     <string>ErrorMessage.json</string>
@@ -33,13 +44,24 @@
     <string>HistoryMainTitle.json</string>
     <string>LeagueDropdownContent.json</string>
     <string>LeagueContentWithTransparentBG.json</string>
-    <string>MatchListDropDown.json</string>
+    <string>LeagueDropdownContent.json</string>
     <string>MarketingMessage.json</string>
+    <string>MatchCenterDiscussionsCommentFrame.json</string>
+    <string>MatchCenterDiscussionsContentFrame.json</string>
+    <string>MatchCenterDiscussionsDetailScene.json</string>
+    <string>MatchCenterDiscussionsFrame.json</string>
+    <string>MatchCenterDiscussionsPostScene.json</string>
+    <string>MatchCenterTopScene.json</string>
     <string>MatchDate.json</string>
     <string>MatchListContent.json</string>
+    <string>MatchListDropDown.json</string>
     <string>MatchListEmptyIndi.json</string>
     <string>MatchListScene.json</string>
     <string>MatchPrediction.json</string>
+    <string>MinigameDetailScene.json</string>
+    <string>MinigamePopup.json</string>
+    <string>MinigameScrollviewContentFrame.json</string>
+    <string>MinigameWinnersScene.json</string>
     <string>MyPicksEmptyFrame.json</string>
     <string>MyPicksHome.json</string>
     <string>Navigator.json</string>
@@ -51,8 +73,26 @@
     <string>PushNotification.json</string>
     <string>PushNotificationMessage.json</string>
     <string>SettingsHome.json</string>
+    <string>SettingsItemContentFrame.json</string>
+    <string>SettingsItemDropdownFrame.json</string>
+    <string>SettingsItemHeaderFrame.json</string>
+    <string>SettingsLeagueListContentFrame.json</string>
+    <string>SettingsTeamListContentFrame.json</string>
+    <string>SettingsUserInformationFrame.json</string>
     <string>ShareTypeSelection.json</string>
     <string>SoundSettings.json</string>
+    <string>SpecialCompetitionLeaderboard.json</string>
+    <string>SpecialDetailedCompetitionDropdownContent.json</string>
+    <string>SpecialDetailedCompetitionDropdownFrame.json</string>
+    <string>SpecialDetailedCompetitionLeaderboard.json</string>
+    <string>SpinBalance.json</string>
+    <string>SpinEmailCollect.json</string>
+    <string>SpinShare.json</string>
+    <string>SpinWheel.json</string>
+    <string>SpinWin.json</string>
+    <string>SpinWinnerContent.json</string>
+    <string>SpinWinnersScene.json</string>
+    <string>SpinWinTicket.json</string>
     <string>TapToMakePrediction.json</string>
     <string>TutorialEmail.json</string>
     <string>TutorialEmailRegister.json</string>
@@ -60,6 +100,7 @@
     <string>TutorialForgotPassword.json</string>
     <string>TutorialHomepage.json</string>
     <string>TutorialSigninType.json</string>
+    <string>WheelPanel.json</string>
     <string>WTGBMTPrediction.json</string>
     <string>WTWBEGPrediction.json</string>
     <string>CommunityCompetitionWelcome.json</string>

@@ -55,6 +55,10 @@ function loadFrame( parent, matchInfo, marketInfo, finishCallback, bigBetStatus,
     local lbBalance = tolua.cast( mWidget:getChildByName("Label_Balance"), "Label" )
     local lbStake = tolua.cast( mWidget:getChildByName("Label_Stake"), "Label" )
     local vs = tolua.cast( mWidget:getChildByName("VS"), "Label" )
+    local titleHandicap = tolua.cast( question:getChildByName("Label_Header"), "Label" )
+    local btnHandicap = tolua.cast( mWidget:getChildByName("CheckBox_Handicap"), "CheckBox" )
+
+    local popupHandicap = tolua.cast( mWidget:getChildByName("Image_HandicapPopup"), "ImageView" )
 
     lbBalance:setText( Constants.String.match_prediction.balance )
     lbStake:setText( Constants.String.match_prediction.stake )
@@ -63,6 +67,18 @@ function loadFrame( parent, matchInfo, marketInfo, finishCallback, bigBetStatus,
     balance:setText( Constants.String.match_prediction.balance )
     stake:setText( Constants.String.match_prediction.stake )
     vs:setText( Constants.String.vs )
+    titleHandicap:setText( Constants.String.handicap.name )
+    popupHandicap:setEnabled( false )
+    -- not working
+    --popupHandicap:setCascadeOpacityEnabled( true )
+    
+
+    local popupEventHandler = function( sender, eventType )
+        if eventType == TOUCH_EVENT_ENDED then
+            toggleHandicapPopup( btnHandicap:getSelectedState(), popupHandicap )
+        end
+    end
+    btnHandicap:addTouchEventListener( popupEventHandler )
 
     mStake = Constants.STAKE
     if bigBetStatus["timeToNextBet"] > 0 then
@@ -99,16 +115,43 @@ function loadFrame( parent, matchInfo, marketInfo, finishCallback, bigBetStatus,
     end
 
     local line = MarketsForGameData.getMarketLine( mMarketInfo )
+    local absLine = line
     local teamName = TeamConfig.getTeamName( TeamConfig.getConfigIdByKey( mMatch["AwayTeamId"] ) )
     if line < 0 then
         teamName = TeamConfig.getTeamName( TeamConfig.getConfigIdByKey( mMatch["HomeTeamId"] ) )
-        line = line * ( -1 )
+        absLine = line * ( -1 )
     end 
-    question:setText( string.format( Constants.String.match_prediction.will_win_by, teamName, math.ceil( line ) ) )
+    question:setText( string.format( Constants.String.match_prediction.will_win_by, teamName, tostring(absLine) ) )
     yesWinPoint:setText( string.format( Constants.String.num_of_points, MarketsForGameData.getOddsForType( mMarketInfo, MarketConfig.ODDS_TYPE_ONE_OPTION ) * mStake ) )
     noWinPoint:setText( string.format( Constants.String.num_of_points, MarketsForGameData.getOddsForType( mMarketInfo, MarketConfig.ODDS_TYPE_TWO_OPTION ) * mStake ) )
     stake:setText( string.format( Constants.String.num_of_points, mStake ) )
     balance:setText( string.format( Constants.String.num_of_points, Logic:getBalance() - Logic:getUncommitedBalance() ) )
+
+    local labelHome = tolua.cast( popupHandicap:getChildByName( "Label_TitleHome"), "Label" )
+    local labelAway = tolua.cast( popupHandicap:getChildByName( "Label_TitleAway"), "Label" )
+    local txtHome = tolua.cast( popupHandicap:getChildByName( "Label_GuideHome"), "Label" )
+    local txtAway = tolua.cast( popupHandicap:getChildByName( "Label_GuideAway"), "Label" )
+
+    local homeTeam = TeamConfig.getTeamName( TeamConfig.getConfigIdByKey( mMatch["HomeTeamId"] ) )
+    local awayTeam = TeamConfig.getTeamName( TeamConfig.getConfigIdByKey( mMatch["AwayTeamId"] ) )
+    labelHome:setText( string.format( Constants.String.handicap.predict_on, homeTeam ) )
+    labelAway:setText( string.format( Constants.String.handicap.predict_on, awayTeam ) )
+
+    local bHomeFav = line < 0
+    absLine = string.gsub(absLine, "%.", "_")
+    local keyHandicap
+    if bHomeFav then
+        keyHandicap = "h"..absLine.."_home"
+        print( keyHandicap )
+        txtHome:setText( string.format( Constants.String.handicap[keyHandicap], homeTeam, homeTeam ) )
+        keyHandicap = "h"..absLine.."_away"
+        txtAway:setText( string.format( Constants.String.handicap[keyHandicap], awayTeam, awayTeam ) )
+    else
+        keyHandicap = "h"..absLine.."_away"
+        txtHome:setText( string.format( Constants.String.handicap[keyHandicap], homeTeam, homeTeam ) )
+        keyHandicap = "h"..absLine.."_home"
+        txtAway:setText( string.format( Constants.String.handicap[keyHandicap], awayTeam, awayTeam ) )
+    end
 
     yes:addTouchEventListener( selectYes )
     no:addTouchEventListener( selectNo )
@@ -122,6 +165,17 @@ function releaseFrame()
     if mWidget ~= nil then
         mWidget:removeFromParent()
     end
+end
+
+function toggleHandicapPopup( isSelected, popupHandicap )
+    if isSelected then
+        -- remove popup
+       popupHandicap:setEnabled( false )
+    else
+        -- show popup
+       popupHandicap:setEnabled( true )
+       --mWidget:runAction( CCTargetedAction:create( popupHandicap, CCFadeIn:create( 5.0 ) ) )
+   end
 end
 
 function choose( selectedIndex )
