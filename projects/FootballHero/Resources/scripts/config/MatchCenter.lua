@@ -16,7 +16,7 @@ MAX_DISCUSSION_TEXT_WIDTH = 360
 MAX_DISCUSSION_TEXT_HEIGHT = 50
 
 MatchCenterType = {
-	{ ["id"] = "Button_Meetings", ["displayNameKey"] = "title_meetings", ["enabled"] = false },
+	{ ["id"] = "Button_Meetings", ["displayNameKey"] = "title_meetings", ["enabled"] = true },
 	
 	{ ["id"] = "Button_Discussion", ["displayNameKey"] = "title_discussion", ["enabled"] = true }
 }

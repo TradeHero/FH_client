@@ -55,6 +55,8 @@ function refreshFrame( jsonResponse, tabID )
 
     -- init Last Meetings, Discussion header tab
     initMatchCenterTab()
+    
+    loadMainContent( jsonResponse, tabID )
 end
 
 function isShown()
@@ -188,7 +190,8 @@ function initMatchPredictionContent()
 end
 
 function loadLastMeetingsScene( contentContainer, jsonResponse )
-    --TODO
+    local MatchCenterStatisticsFrame = require("scripts.views.MatchCenterStatsFrame")
+    MatchCenterStatisticsFrame.loadFrame( contentContainer, jsonResponse )
 end
 
 function loadDiscussionsScene( contentContainer, jsonResponse )

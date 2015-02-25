@@ -102,6 +102,8 @@
     <string>SettingsLeagueListContentFrame.json</string>
     <string>SettingsTeamListContentFrame.json</string>
     <string>HeaderFrame.json</string>
+    <string>MatchCenterStatsFrame.json</string>
+    <string>MatchCenterStatsWDWFrame.json</string>
   </JsonList>
   <CanvasSize>
     <Width>640</Width>
@@ -112,12 +114,9 @@
   <ResRelativePath />
   <imageFileList />
   <imagePngList>
-    <string>MatchListContent/icn-fans.png</string>
-    <string>MatchListContent/icn-played.png</string>
-    <string>community/img-leaguebox.png</string>
-    <string>commonRes/default.png</string>
-    <string>MatchListContent/img-discussion.png</string>
+    <string>MatchCentre/img-more.png</string>
+    <string>MatchCentre/img-draw-amount.png</string>
   </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>MinigameScrollviewContentFrame.json</CurrentUIJson>
+  <CurrentUIJson>MatchCenterStatsWDWFrame.json</CurrentUIJson>
 </UIProject>

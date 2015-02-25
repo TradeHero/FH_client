@@ -277,6 +277,7 @@ StringsDefault = {
     prediction_made = "Prediction made",
     share_body = "", -- TODO
     share_title = "", -- TODO
+    team_wins = "%s \nwins",
     time_days = "%d days",
     time_hours = "%d hrs",
     time_minutes = "%d mins",

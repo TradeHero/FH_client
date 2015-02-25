@@ -19,8 +19,10 @@ function action( param )
 
     local url
     if mTabID == MatchCenterConfig.MATCH_CENTER_TAB_ID_MEETINGS then
+        -- TODO use correct url
         --url = RequestUtils.GET_COMPETITION_LIST_REST_CALL
-        
+        loadMatchCenterScene( nil )
+        return
     elseif mTabID == MatchCenterConfig.MATCH_CENTER_TAB_ID_DISCUSSION then
         if matchID == nil then
             local match = Logic:getSelectedMatch()
