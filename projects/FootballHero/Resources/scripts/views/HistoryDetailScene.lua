@@ -125,7 +125,7 @@ function initCouponInfo( content, info )
     local points = tolua.cast( content:getChildByName("points"), "Label" )
     local stake = tolua.cast( content:getChildByName("stake"), "Label" )
     local choice = tolua.cast( content:getChildByName("choice"), "ImageView" )
-    local statusBar = tolua.cast( content:getChildByName("statusBar"), "Button" )
+    local statusBar = tolua.cast( content:getChildByName("Label_BG_Status"), "Button" )
 
     -- Init the answer string.
     local marketType = info["MarketTypeId"]
@@ -157,7 +157,7 @@ function initCouponInfo( content, info )
             line = line * ( -1 )
         end 
         
-        answerString = string.format( Constants.String.history.win_by, teamName, math.ceil( line ) )
+        answerString = string.format( Constants.String.history.win_by, teamName, line )
         if answerId then
             choiceImage = Constants.PREDICTION_CHOICE_IMAGE_PATH.."prediction-yes.png"
         else
@@ -170,14 +170,21 @@ function initCouponInfo( content, info )
     stake:setText( string.format( Constants.String.history.stake, info["Stake"] ) )
 
     if mIsOpen == false then
+        local refund = tolua.cast( content:getChildByName("Label_Refund"), "Label" )
         if info["Won"] then
             statusBar:setFocused( true )
             winLoseLabel:setText(Constants.String.history.won_colon)
             points:setText( string.format( Constants.String.num_of_points, info["Profit"] ) )
+            refund:setEnabled( false )
+        elseif info["Profit"] == 0 then
+            winLoseLabel:setText(Constants.String.history.push_colon)
+            points:setText( string.format( Constants.String.num_of_points, info["Stake"] ) )
+            refund:setText( Constants.String.history.refund )
         else
             statusBar:setBright( false )
             winLoseLabel:setText(Constants.String.history.lost_colon)
-            points:setText( string.format( Constants.String.num_of_points, info["Stake"] ) )
+            points:setText( string.format( Constants.String.num_of_points, -info["Profit"] ) )
+            refund:setEnabled( false )
         end
     else
         points:setText( string.format( Constants.String.num_of_points, info["Profit"] ) )
