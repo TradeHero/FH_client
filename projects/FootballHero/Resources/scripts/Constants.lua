@@ -28,7 +28,7 @@ COMMUNITY_IMAGE_PATH = "scenes/community/"
 MINIGAME_IMAGE_PATH = "scenes/mini-game/"
 CHAT_IMAGE_PATH = "scenes/chat/"
 SETTINGS_IMAGE_PATH = "scenes/Settings/"
-
+MATCH_CENTER_IMAGE_PATH = "scenes/MatchCentre/"
 
 BannerPrefix = "banner_"
 BannerPreviewPrefix = "banner_prev_"

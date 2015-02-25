@@ -417,7 +417,15 @@
     <GuidesList />
   </GuidesProject>
   <GuidesProject>
-    <Project>MatchCenterStatsLastSixHeaderFrame</Project>
+    <Project>MatchCenterStatsLastSixFrame</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>MatchCenterStatsHomeAwayHeaderFrame</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>MatchCenterStatsHomeAwayContentFrame</Project>
     <GuidesList />
   </GuidesProject>
 </ArrayOfGuidesProject>
