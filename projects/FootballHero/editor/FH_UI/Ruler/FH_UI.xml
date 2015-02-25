@@ -416,4 +416,8 @@
     <Project>MatchCenterStatsWDWFrame</Project>
     <GuidesList />
   </GuidesProject>
+  <GuidesProject>
+    <Project>MatchCenterStatsLastSixHeaderFrame</Project>
+    <GuidesList />
+  </GuidesProject>
 </ArrayOfGuidesProject>

@@ -57,7 +57,8 @@ function initContent( statsInfo )
 end
 
 function initLastSixResults( contentContainer, statsInfo )
-
+    local last6HeaderFrame = SceneManager.widgetFromJsonFile("scenes/MatchCenterStatsLastSixHeaderFrame.json")
+    contentContainer:addChild( last6HeaderFrame )
 end
 
 function initWDW( contentContainer, statsInfo )
@@ -80,7 +81,6 @@ function initWDW( contentContainer, statsInfo )
     -- TODO set correct image based on win % (img-more.png / img-less.png)
     -- home:loadText()
     -- away:loadText()
-    
     homeSide:setText( string.format( Constants.String.match_center.team_wins, TeamConfig.getTeamName( TeamConfig.getConfigIdByKey( mMatch["HomeTeamId"] ) ) ) )
     awaySide:setText( string.format( Constants.String.match_center.team_wins, TeamConfig.getTeamName( TeamConfig.getConfigIdByKey( mMatch["AwayTeamId"] ) ) ) )
     drawSide:setText( Constants.String.match_list.draw )

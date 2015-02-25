@@ -104,6 +104,7 @@
     <string>HeaderFrame.json</string>
     <string>MatchCenterStatsFrame.json</string>
     <string>MatchCenterStatsWDWFrame.json</string>
+    <string>MatchCenterStatsLastSixHeaderFrame.json</string>
   </JsonList>
   <CanvasSize>
     <Width>640</Width>
@@ -114,9 +115,8 @@
   <ResRelativePath />
   <imageFileList />
   <imagePngList>
-    <string>MatchCentre/img-more.png</string>
-    <string>MatchCentre/img-draw-amount.png</string>
+    <string>community/img-header.png</string>
   </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>MatchCenterStatsWDWFrame.json</CurrentUIJson>
+  <CurrentUIJson>MatchCenterStatsLastSixHeaderFrame.json</CurrentUIJson>
 </UIProject>
