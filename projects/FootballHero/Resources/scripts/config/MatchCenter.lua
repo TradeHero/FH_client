@@ -21,6 +21,11 @@ MatchCenterType = {
 	{ ["id"] = "Button_Discussion", ["displayNameKey"] = "title_discussion", ["enabled"] = true }
 }
 
+MatchCenterStatsFormType = {
+    { ["displayNameKey"] = "label_total" },
+    { ["displayNameKey"] = "label_home" },
+    { ["displayNameKey"] = "label_away" }
+}
 
 function setTimeDiff( content, prevTime )
 

@@ -7,6 +7,7 @@ local Constants = require("scripts.Constants")
 local Logic = require("scripts.Logic").getInstance()
 
 local TeamConfig = require("scripts.config.Team")
+local MatchCenterConfig = require("scripts.config.MatchCenter")
 
 local mMatch
 
@@ -51,6 +52,8 @@ function initContent( statsInfo )
     contentHeight = contentHeight + initOverUnder( contentContainer, statsInfo )
     contentHeight = contentHeight + initLeagueTable( contentContainer, statsInfo )
 
+    contentHeight = contentHeight + 10
+
     contentContainer:setInnerContainerSize( CCSize:new( 0, contentHeight ) )
     local layout = tolua.cast( contentContainer, "Layout" )
     layout:requestDoLayout()
@@ -64,11 +67,13 @@ function initLastSixResults( contentContainer, statsInfo )
     contentContainer:addChild( last6HeaderFrame )
     contentHeight = contentHeight + last6HeaderFrame:getSize().height
 
+    local bg2 = last6HeaderFrame:getChildByName("Panel_BG")
     local date = tolua.cast( last6HeaderFrame:getChildByName("Label_Date"), "Label" )
     local home = tolua.cast( last6HeaderFrame:getChildByName("Label_Home"), "Label" )
     local vs = tolua.cast( last6HeaderFrame:getChildByName("Label_VS"), "Label" )
     local away = tolua.cast( last6HeaderFrame:getChildByName("Label_Away"), "Label" )
 
+    bg2:setEnabled( false )
     date:setText( Constants.String.match_center.label_date )
     home:setText( Constants.String.match_center.label_home)
     vs:setText( Constants.String.vs )
@@ -194,11 +199,149 @@ function initHomeAway( contentContainer, statsInfo, isHome )
 end
 
 function initFormTable( contentContainer, statsInfo )
-    return 0
+    local contentHeight = 0
+
+    local formFrame = SceneManager.widgetFromJsonFile("scenes/MatchCenterStatsFormOverUnderHeaderFrame.json")
+    contentContainer:addChild( formFrame )
+    contentHeight = contentHeight + formFrame:getSize().height
+
+    local home = tolua.cast( formFrame:getChildByName("Label_Home"), "Label" )
+    local title = tolua.cast( formFrame:getChildByName("Label_Title"), "Label" )
+    local away = tolua.cast( formFrame:getChildByName("Label_Away"), "Label" )
+
+    home:setText( TeamConfig.getTeamName( TeamConfig.getConfigIdByKey( mMatch["HomeTeamId"] ) ) )
+    title:setText( Constants.String.match_center.form_table )
+    away:setText( TeamConfig.getTeamName( TeamConfig.getConfigIdByKey( mMatch["AwayTeamId"] ) ) )
+
+    local header = SceneManager.widgetFromJsonFile("scenes/MatchCenterStatsFormContentFrame.json")
+    contentContainer:addChild( header )
+    contentHeight = contentHeight + header:getSize().height
+
+    local bg = tolua.cast( header:getChildByName("Panel_BG"), "Layout" )
+    local lbltitle = tolua.cast( header:getChildByName("Label_Title"), "Label" )
+    local lblHomeEvent = tolua.cast( header:getChildByName("Label_Home_Event"), "Label" )
+    local lblHomeWin = tolua.cast( header:getChildByName("Label_Home_Win"), "Label" )
+    local lblHomeDraw = tolua.cast( header:getChildByName("Label_Home_Draw"), "Label" )
+    local lblHomeLose = tolua.cast( header:getChildByName("Label_Home_Lose"), "Label" )
+    local lblAwayEvent = tolua.cast( header:getChildByName("Label_Away_Event"), "Label" )
+    local lblAwayWin = tolua.cast( header:getChildByName("Label_Away_Win"), "Label" )
+    local lblAwayDraw = tolua.cast( header:getChildByName("Label_Away_Draw"), "Label" )
+    local lblAwayLose = tolua.cast( header:getChildByName("Label_Away_Lose"), "Label" )
+
+    bg:setBackGroundColorOpacity( 38 )
+    lbltitle:setEnabled( false )
+    lblHomeEvent:setText( Constants.String.match_center.E )
+    lblHomeWin:setText( Constants.String.match_center.W )
+    lblHomeDraw:setText( Constants.String.match_center.D )
+    lblHomeLose:setText( Constants.String.match_center.L )
+    lblAwayEvent:setText( Constants.String.match_center.E )
+    lblAwayWin:setText( Constants.String.match_center.W )
+    lblAwayDraw:setText( Constants.String.match_center.D )
+    lblAwayLose:setText( Constants.String.match_center.L )
+
+    -- TODO - read 'statsInfo' data
+    for i = 1,3 do
+        local content = SceneManager.widgetFromJsonFile("scenes/MatchCenterStatsFormContentFrame.json")
+        contentContainer:addChild( content )
+        contentHeight = contentHeight + content:getSize().height
+
+        local lbltitle = tolua.cast( content:getChildByName("Label_Title"), "Label" )
+        local lblHomeEvent = tolua.cast( content:getChildByName("Label_Home_Event"), "Label" )
+        local lblHomeWin = tolua.cast( content:getChildByName("Label_Home_Win"), "Label" )
+        local lblHomeDraw = tolua.cast( content:getChildByName("Label_Home_Draw"), "Label" )
+        local lblHomeLose = tolua.cast( content:getChildByName("Label_Home_Lose"), "Label" )
+        local lblAwayEvent = tolua.cast( content:getChildByName("Label_Away_Event"), "Label" )
+        local lblAwayWin = tolua.cast( content:getChildByName("Label_Away_Win"), "Label" )
+        local lblAwayDraw = tolua.cast( content:getChildByName("Label_Away_Draw"), "Label" )
+        local lblAwayLose = tolua.cast( content:getChildByName("Label_Away_Lose"), "Label" )
+        
+        lbltitle:setText( Constants.String.match_center[MatchCenterConfig.MatchCenterStatsFormType[i]["displayNameKey"]] )
+
+        -- TODO - read 'statsInfo' data
+        lblHomeEvent:setText( Constants.String.match_center.E )
+        lblHomeWin:setText( Constants.String.match_center.W )
+        lblHomeDraw:setText( Constants.String.match_center.D )
+        lblHomeLose:setText( Constants.String.match_center.L )
+        lblAwayEvent:setText( Constants.String.match_center.E )
+        lblAwayWin:setText( Constants.String.match_center.W )
+        lblAwayDraw:setText( Constants.String.match_center.D )
+        lblAwayLose:setText( Constants.String.match_center.L )
+    end
+
+    return contentHeight
 end
 
 function initOverUnder( contentContainer, statsInfo )
-    return 0
+    local contentHeight = 0
+
+    local formFrame = SceneManager.widgetFromJsonFile("scenes/MatchCenterStatsFormOverUnderHeaderFrame.json")
+    contentContainer:addChild( formFrame )
+    contentHeight = contentHeight + formFrame:getSize().height
+
+    local home = tolua.cast( formFrame:getChildByName("Label_Home"), "Label" )
+    local title = tolua.cast( formFrame:getChildByName("Label_Title"), "Label" )
+    local away = tolua.cast( formFrame:getChildByName("Label_Away"), "Label" )
+
+    home:setText( TeamConfig.getTeamName( TeamConfig.getConfigIdByKey( mMatch["HomeTeamId"] ) ) )
+    title:setText( Constants.String.match_center.over_under )
+    away:setText( TeamConfig.getTeamName( TeamConfig.getConfigIdByKey( mMatch["AwayTeamId"] ) ) )
+
+    local header = SceneManager.widgetFromJsonFile("scenes/MatchCenterStatsFormContentFrame.json")
+    contentContainer:addChild( header )
+    contentHeight = contentHeight + header:getSize().height
+
+    local bg = tolua.cast( header:getChildByName("Panel_BG"), "Layout" )
+    local lbltitle = tolua.cast( header:getChildByName("Label_Title"), "Label" )
+    local lblHomeEvent = tolua.cast( header:getChildByName("Label_Home_Event"), "Label" )
+    local lblHomeWin = tolua.cast( header:getChildByName("Label_Home_Win"), "Label" )
+    local lblHomeDraw = tolua.cast( header:getChildByName("Label_Home_Draw"), "Label" )
+    local lblHomeLose = tolua.cast( header:getChildByName("Label_Home_Lose"), "Label" )
+    local lblAwayEvent = tolua.cast( header:getChildByName("Label_Away_Event"), "Label" )
+    local lblAwayWin = tolua.cast( header:getChildByName("Label_Away_Win"), "Label" )
+    local lblAwayDraw = tolua.cast( header:getChildByName("Label_Away_Draw"), "Label" )
+    local lblAwayLose = tolua.cast( header:getChildByName("Label_Away_Lose"), "Label" )
+
+    bg:setBackGroundColorOpacity( 38 )
+    lbltitle:setEnabled( false )
+    lblHomeEvent:setText( Constants.String.match_center.E )
+    lblHomeWin:setText( Constants.String.match_center.W )
+    lblHomeDraw:setText( Constants.String.match_center.D )
+    lblHomeLose:setText( Constants.String.match_center.L )
+    lblAwayEvent:setText( Constants.String.match_center.E )
+    lblAwayWin:setText( Constants.String.match_center.W )
+    lblAwayDraw:setText( Constants.String.match_center.D )
+    lblAwayLose:setText( Constants.String.match_center.L )
+
+    -- TODO - read 'statsInfo' data
+    for i = 1,3 do
+        local content = SceneManager.widgetFromJsonFile("scenes/MatchCenterStatsFormContentFrame.json")
+        contentContainer:addChild( content )
+        contentHeight = contentHeight + content:getSize().height
+
+        local lbltitle = tolua.cast( content:getChildByName("Label_Title"), "Label" )
+        local lblHomeEvent = tolua.cast( content:getChildByName("Label_Home_Event"), "Label" )
+        local lblHomeWin = tolua.cast( content:getChildByName("Label_Home_Win"), "Label" )
+        local lblHomeDraw = tolua.cast( content:getChildByName("Label_Home_Draw"), "Label" )
+        local lblHomeLose = tolua.cast( content:getChildByName("Label_Home_Lose"), "Label" )
+        local lblAwayEvent = tolua.cast( content:getChildByName("Label_Away_Event"), "Label" )
+        local lblAwayWin = tolua.cast( content:getChildByName("Label_Away_Win"), "Label" )
+        local lblAwayDraw = tolua.cast( content:getChildByName("Label_Away_Draw"), "Label" )
+        local lblAwayLose = tolua.cast( content:getChildByName("Label_Away_Lose"), "Label" )
+        
+        lbltitle:setText( Constants.String.match_center[MatchCenterConfig.MatchCenterStatsFormType[i]["displayNameKey"]] )
+
+        -- TODO - read 'statsInfo' data
+        lblHomeEvent:setText( Constants.String.match_center.E )
+        lblHomeWin:setText( Constants.String.match_center.W )
+        lblHomeDraw:setText( Constants.String.match_center.D )
+        lblHomeLose:setText( Constants.String.match_center.L )
+        lblAwayEvent:setText( Constants.String.match_center.E )
+        lblAwayWin:setText( Constants.String.match_center.W )
+        lblAwayDraw:setText( Constants.String.match_center.D )
+        lblAwayLose:setText( Constants.String.match_center.L )
+    end
+
+    return contentHeight
 end
     
 function initLeagueTable( contentContainer, statsInfo )

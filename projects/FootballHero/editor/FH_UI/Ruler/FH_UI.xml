@@ -428,4 +428,12 @@
     <Project>MatchCenterStatsHomeAwayContentFrame</Project>
     <GuidesList />
   </GuidesProject>
+  <GuidesProject>
+    <Project>MatchCenterStatsFormOverUnderHeaderFrame</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>MatchCenterStatsFormContentFrame</Project>
+    <GuidesList />
+  </GuidesProject>
 </ArrayOfGuidesProject>

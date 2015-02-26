@@ -107,6 +107,8 @@
     <string>MatchCenterStatsLastSixFrame.json</string>
     <string>MatchCenterStatsHomeAwayHeaderFrame.json</string>
     <string>MatchCenterStatsHomeAwayContentFrame.json</string>
+    <string>MatchCenterStatsFormOverUnderHeaderFrame.json</string>
+    <string>MatchCenterStatsFormContentFrame.json</string>
   </JsonList>
   <CanvasSize>
     <Width>640</Width>
@@ -121,5 +123,5 @@
     <string>commonRes/default.png</string>
   </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>MatchCenterStatsHomeAwayHeaderFrame.json</CurrentUIJson>
+  <CurrentUIJson>MatchCenterStatsFormContentFrame.json</CurrentUIJson>
 </UIProject>
