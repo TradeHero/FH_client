@@ -10,7 +10,7 @@ LeagueChatType = {
 		["logo"] = Constants.CHAT_IMAGE_PATH.."icn-england-logo.png", 
 		["chatRoomId"] = "global-english",
 		["color"] = ccc3( 29, 49, 141 ),
-		["useQuickBlox"] = false,
+		["useQuickBlox"] = true,
 		["quickBloxJID"] = "18975_54c88072535c12629c025a37@muc.chat.quickblox.com",
 		["quickBloxID"] = "54c88072535c12629c025a37",
 	},

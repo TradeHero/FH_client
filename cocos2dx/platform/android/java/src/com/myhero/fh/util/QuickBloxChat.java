@@ -10,15 +10,19 @@ import android.util.Log;
 import com.quickblox.auth.QBAuth;
 import com.quickblox.auth.model.QBSession;
 import com.quickblox.chat.QBChatService;
+import com.quickblox.chat.QBGroupChat;
+import com.quickblox.chat.listeners.QBMessageListenerImpl;
 import com.quickblox.core.QBEntityCallbackImpl;
 import com.quickblox.core.QBSettings;
 import com.quickblox.users.QBUsers;
 import com.quickblox.users.model.QBUser;
 import org.jivesoftware.smack.SmackException;
+import org.jivesoftware.smackx.muc.DiscussionHistory;
 
+import java.util.Arrays;
 import java.util.List;
 
-public class QuickBloxChat {
+public class QuickBloxChat extends QBMessageListenerImpl<QBGroupChat> {
     private static final String APP_ID = "18975";
     private static final String AUTH_KEY = "zencjPNL6BUKjTn";
     private static final String AUTH_SECRET = "kMjSLXRcHxqftVT";
@@ -40,7 +44,7 @@ public class QuickBloxChat {
         chatService = QBChatService.getInstance();
     }
 
-    public static void quickbloxSignin(String userName, String profileImg, int userId) {
+    public static void signin(String userName, String profileImg, int userId) {
         // create QB user
         //
         currentUserName = userName;
@@ -50,7 +54,39 @@ public class QuickBloxChat {
         QuickbloxSigninHandler.sendMessage(new Message());
     }
 
-    private static void quickbloxSignup() {
+    public static void signout() {
+        chatService.logout(new QBEntityCallbackImpl() {
+            @Override
+            public void onSuccess() {
+                super.onSuccess();
+                Log.i(this.getClass().getName(), "Chat user log out.");
+            }
+        });
+    }
+
+    public static void joinChatRoom(String jid) {
+        final QBGroupChat groupChat = QBChatService.getInstance().getGroupChatManager().createGroupChat(jid);
+
+        DiscussionHistory history = new DiscussionHistory();
+        history.setMaxStanzas(0);
+
+        groupChat.join(history, new QBEntityCallbackImpl() {
+            @Override
+            public void onSuccess() {
+                groupChat.addMessageListener(this);
+                quickbloxJoinChatRoomResult(true);
+                Log.w("Chat", "Join successful");
+            }
+
+            @Override
+            public void onError(final List list) {
+                quickbloxJoinChatRoomResult(false);
+                Log.w("Could not join chat, errors:", Arrays.toString(list.toArray()));
+            }
+        });
+    }
+
+    private static void signup() {
         QBAuth.createSession(new QBEntityCallbackImpl<QBSession>() {
             @Override
             public void onSuccess(QBSession session, Bundle params) {
@@ -63,7 +99,7 @@ public class QuickBloxChat {
                     @Override
                     public void onSuccess(QBUser user, Bundle args) {
                         // success
-                        quickbloxSignin(currentUserName, currentUserProfileImg, currentUserId);
+                        signin(currentUserName, currentUserProfileImg, currentUserId);
                     }
 
                     @Override
@@ -105,6 +141,7 @@ public class QuickBloxChat {
 
 
     public static native void quickbloxLoginResult(String token);
+    public static native void quickbloxJoinChatRoomResult(boolean success);
 
     private static Handler QuickbloxSigninHandler = new Handler()
     {
@@ -134,7 +171,7 @@ public class QuickBloxChat {
 
                 @Override
                 public void onError(List<String> errors) {
-                    quickbloxSignup();
+                    signup();
                 }
             });
         }
