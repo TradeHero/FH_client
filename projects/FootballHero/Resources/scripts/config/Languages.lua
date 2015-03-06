@@ -45,5 +45,5 @@ function getLanguageConfigById( id )
 		end
 	end
 
-	return nil
+	return mLanguageConfig[1]		-- Make english the default one.
 end
