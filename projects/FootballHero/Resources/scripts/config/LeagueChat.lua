@@ -21,7 +21,10 @@ LeagueChatType = {
 		["logo"] = Constants.CHAT_IMAGE_PATH.."icn-spanish-logo.png", 
 		["chatRoomId"] = "global-spanish",
 		["color"] = ccc3( 35, 91, 28 ),
-		["useQuickBlox"] = false,
+		["useQuickBlox"] = true,
+		["quickBloxJID"] = "18975_54c89dbf535c1223b2026b25@muc.chat.quickblox.com",
+		["quickBloxID"] = "54c89dbf535c1223b2026b25",
+		
 	},
 	{
 		["labelName"] = "Label_Italian", 

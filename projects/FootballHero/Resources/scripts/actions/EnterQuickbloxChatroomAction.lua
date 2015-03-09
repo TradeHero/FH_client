@@ -20,6 +20,6 @@ function action( param )
 		    ChatScene.loadFrame( channelId )
         end
 
-        EventManager:scheduledExecutor( delayedTask, 1 )
+        EventManager:scheduledExecutor( delayedTask, 0.2 )
 	end )
 end
