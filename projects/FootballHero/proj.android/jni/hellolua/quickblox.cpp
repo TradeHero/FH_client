@@ -19,9 +19,23 @@ extern "C"
 
 	JNIEXPORT void JNICALL Java_com_myhero_fh_util_QuickBloxChat_quickbloxJoinChatRoomResult(JNIEnv *env,
       jobject thiz, jboolean success)
-     {
-         Utils::QuickBloxChat::sharedDelegate()->joinChatRoomResult(success);
-     }
+    {
+        Utils::QuickBloxChat::sharedDelegate()->joinChatRoomResult(success);
+    }
+
+    JNIEXPORT void JNICALL Java_com_myhero_fh_util_QuickBloxChat_quickbloxNewMessageHandler(JNIEnv *env,
+      jobject thiz, jstring sender, jstring message, jint timestamp)
+    {
+        const char *dSender = env->GetStringUTFChars(sender, NULL);
+        const char *dMessage = env->GetStringUTFChars(message, NULL);
+        Utils::QuickBloxChat::sharedDelegate()->newMessageHandler(dSender, dMessage, timestamp);
+    }
+
+    JNIEXPORT void JNICALL Java_com_myhero_fh_util_QuickBloxChat_quickbloxLeaveChatRoomResult(JNIEnv *env,
+      jobject thiz, jboolean success)
+    {
+        Utils::QuickBloxChat::sharedDelegate()->leaveChatRoomResult(success);
+    }
 }
 
 void quickblox_login(const char* userName, const char* profileImg, int userId)
@@ -66,10 +80,24 @@ void quickblox_joinChatRoom(const char* jid)
 
 void quickblox_leaveChatRoom()
 {
-
+    JniMethodInfo jmi;
+    if (JniHelper::getStaticMethodInfo(jmi, "com/myhero/fh/util/QuickBloxChat",
+                "leaveChatRoom", "()V"))
+    {
+        jmi.env->CallStaticVoidMethod(jmi.classID, jmi.methodID);
+        jmi.env->DeleteLocalRef(jmi.classID);
+    }
 }
 
 void quickblox_sendMessage(const char* message)
 {
-
+    JniMethodInfo jmi;
+    if (JniHelper::getStaticMethodInfo(jmi, "com/myhero/fh/util/QuickBloxChat",
+                "sendMessage", "(Ljava/lang/String;)V"))
+    {
+        jstring jmessage = jmi.env->NewStringUTF(message);
+        jmi.env->CallStaticVoidMethod(jmi.classID, jmi.methodID, jmessage);
+        jmi.env->DeleteLocalRef(jmessage);
+        jmi.env->DeleteLocalRef(jmi.classID);
+    }
 }

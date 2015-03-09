@@ -4,7 +4,6 @@ package com.myhero.fh.util;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
 import com.quickblox.auth.QBAuth;
@@ -12,17 +11,20 @@ import com.quickblox.auth.model.QBSession;
 import com.quickblox.chat.QBChatService;
 import com.quickblox.chat.QBGroupChat;
 import com.quickblox.chat.listeners.QBMessageListenerImpl;
+import com.quickblox.chat.model.QBChatMessage;
 import com.quickblox.core.QBEntityCallbackImpl;
 import com.quickblox.core.QBSettings;
 import com.quickblox.users.QBUsers;
 import com.quickblox.users.model.QBUser;
 import org.jivesoftware.smack.SmackException;
+import org.jivesoftware.smack.XMPPException;
 import org.jivesoftware.smackx.muc.DiscussionHistory;
 
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
-public class QuickBloxChat extends QBMessageListenerImpl<QBGroupChat> {
+public class QuickBloxChat {
     private static final String APP_ID = "18975";
     private static final String AUTH_KEY = "zencjPNL6BUKjTn";
     private static final String AUTH_SECRET = "kMjSLXRcHxqftVT";
@@ -30,6 +32,14 @@ public class QuickBloxChat extends QBMessageListenerImpl<QBGroupChat> {
     private static final int AUTO_PRESENCE_INTERVAL_IN_SECONDS = 30;
     private static QBChatService chatService;
     private static QBUser currentUser;
+    private static QBGroupChat groupChat;
+    private static QBMessageListenerImpl<QBGroupChat> groupChatMessageListener = new QBMessageListenerImpl<QBGroupChat>() {
+        @Override
+        public void processMessage(QBGroupChat sender, QBChatMessage message) {
+            int time = (int)(System.currentTimeMillis() / 1000L);
+            quickbloxNewMessageHandler(message.getSenderId().toString(), message.getBody(), time);
+        }
+    };;
 
     private static String currentUserName;
     private static String currentUserProfileImg;
@@ -65,7 +75,11 @@ public class QuickBloxChat extends QBMessageListenerImpl<QBGroupChat> {
     }
 
     public static void joinChatRoom(String jid) {
-        final QBGroupChat groupChat = QBChatService.getInstance().getGroupChatManager().createGroupChat(jid);
+        if (groupChat != null) {
+            groupChat.removeMessageListener(groupChatMessageListener);
+        }
+        groupChat = QBChatService.getInstance().getGroupChatManager().createGroupChat(jid);
+        groupChat.addMessageListener(groupChatMessageListener);
 
         DiscussionHistory history = new DiscussionHistory();
         history.setMaxStanzas(0);
@@ -73,7 +87,6 @@ public class QuickBloxChat extends QBMessageListenerImpl<QBGroupChat> {
         groupChat.join(history, new QBEntityCallbackImpl() {
             @Override
             public void onSuccess() {
-                groupChat.addMessageListener(this);
                 quickbloxJoinChatRoomResult(true);
                 Log.w("Chat", "Join successful");
             }
@@ -84,6 +97,38 @@ public class QuickBloxChat extends QBMessageListenerImpl<QBGroupChat> {
                 Log.w("Could not join chat, errors:", Arrays.toString(list.toArray()));
             }
         });
+    }
+
+    public static void leaveChatRoom() {
+        if (groupChat != null) {
+            try {
+                groupChat.leave();
+                groupChat.removeMessageListener(groupChatMessageListener);
+                groupChat = null;
+            } catch (SmackException.NotConnectedException nce){
+                nce.printStackTrace();
+            } catch (XMPPException e) {
+                e.printStackTrace();
+            }
+
+            quickbloxLeaveChatRoomResult(true);
+        }
+    }
+
+    public static void sendMessage(String message) {
+        if (groupChat != null) {
+            try {
+                QBChatMessage qbMessage = new QBChatMessage();
+                qbMessage.setBody(message);
+                qbMessage.setProperty("save_to_history", "1");
+                qbMessage.setDateSent(new Date().getTime()/1000);
+                groupChat.sendMessage(qbMessage);
+            } catch (XMPPException e) {
+                e.printStackTrace();
+            } catch (SmackException.NotConnectedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     private static void signup() {
@@ -139,9 +184,10 @@ public class QuickBloxChat extends QBMessageListenerImpl<QBGroupChat> {
         });
     }
 
-
     public static native void quickbloxLoginResult(String token);
     public static native void quickbloxJoinChatRoomResult(boolean success);
+    public static native void quickbloxNewMessageHandler(String sender, String message, int timeStamp);
+    public static native void quickbloxLeaveChatRoomResult(boolean success);
 
     private static Handler QuickbloxSigninHandler = new Handler()
     {
