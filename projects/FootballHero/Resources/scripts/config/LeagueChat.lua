@@ -11,8 +11,10 @@ LeagueChatType = {
 		["chatRoomId"] = "global-english",
 		["color"] = ccc3( 29, 49, 141 ),
 		["useQuickBlox"] = true,
-		["quickBloxJID"] = "18975_54c88072535c12629c025a37@muc.chat.quickblox.com",
-		["quickBloxID"] = "54c88072535c12629c025a37",
+		--["quickBloxJID"] = "18975_54c88072535c12629c025a37@muc.chat.quickblox.com",
+		--["quickBloxID"] = "54c88072535c12629c025a37",
+		["quickBloxJID"] = "20587_54feb614535c12834e08647b@muc.chat.quickblox.com",
+		["quickBloxID"] = "54feb614535c12834e08647b",
 	},
 	{
 		["labelName"] = "Label_Spanish", 
@@ -22,9 +24,10 @@ LeagueChatType = {
 		["chatRoomId"] = "global-spanish",
 		["color"] = ccc3( 35, 91, 28 ),
 		["useQuickBlox"] = true,
-		["quickBloxJID"] = "18975_54c89dbf535c1223b2026b25@muc.chat.quickblox.com",
-		["quickBloxID"] = "54c89dbf535c1223b2026b25",
-		
+		--["quickBloxJID"] = "18975_54c89dbf535c1223b2026b25@muc.chat.quickblox.com",
+		--["quickBloxID"] = "54c89dbf535c1223b2026b25",
+		["quickBloxJID"] = "20587_54feb61c535c120b70010dee@muc.chat.quickblox.com",
+		["quickBloxID"] = "54feb61c535c120b70010dee",
 	},
 	{
 		["labelName"] = "Label_Italian", 
@@ -72,4 +75,3 @@ LeagueChatType = {
 		["useQuickBlox"] = false,
 	},
 }
-

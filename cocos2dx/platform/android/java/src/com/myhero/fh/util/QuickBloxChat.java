@@ -25,9 +25,18 @@ import java.util.Date;
 import java.util.List;
 
 public class QuickBloxChat {
+    /**
+    // Quickblox production config.
     private static final String APP_ID = "18975";
     private static final String AUTH_KEY = "zencjPNL6BUKjTn";
     private static final String AUTH_SECRET = "kMjSLXRcHxqftVT";
+    **/
+
+    // Quickblox dev config.
+    private static final String APP_ID = "20587";
+    private static final String AUTH_KEY = "G7EMdXQg9h94nyc";
+    private static final String AUTH_SECRET = "2Abhdccg2cJk26t";
+
     private static final String QUICK_BLOX_PASSWORD = "11111111";
     private static final int AUTO_PRESENCE_INTERVAL_IN_SECONDS = 30;
     private static QBChatService chatService;

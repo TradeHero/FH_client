@@ -129,10 +129,24 @@ static AppDelegate s_sharedApplication;
     NSTimeInterval timeInterval = [startTime timeIntervalSinceNow];
     NSLog(@"Interval:%f",timeInterval);
     
+    /** 
+    // QuickBlox production config
     [QBApplication sharedApplication].applicationId = 18975;
     [QBConnection registerServiceKey:@"zencjPNL6BUKjTn"];
     [QBConnection registerServiceSecret:@"kMjSLXRcHxqftVT"];
     [QBSettings setAccountKey:@"dqtBD2ZHNJphn2q6YuHy"];
+     **/
+    
+    // QuickBlox dev config
+    [QBApplication sharedApplication].applicationId = 20587;
+    [QBConnection registerServiceKey:@"G7EMdXQg9h94nyc"];
+    [QBConnection registerServiceSecret:@"2Abhdccg2cJk26t"];
+    [QBSettings setAccountKey:@"dqtBD2ZHNJphn2q6YuHy"];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(chatDidReceiveMessageNotification:)
+                                                 name:kNotificationDidReceiveNewMessage object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(chatRoomDidReceiveMessageNotification:)
+                                                 name:kNotificationDidReceiveNewMessageFromRoom object:nil];
     
 /**
     for (NSString* family in [UIFont familyNames])
@@ -172,11 +186,6 @@ static AppDelegate s_sharedApplication;
         [self registerForRemoteNotifications];
         
         QuickBloxChatHandler::getInstance()->loginResult([session.token UTF8String]);
-        
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(chatDidReceiveMessageNotification:)
-                                                      name:kNotificationDidReceiveNewMessage object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(chatRoomDidReceiveMessageNotification:)
-                                                     name:kNotificationDidReceiveNewMessageFromRoom object:nil];
         
     } errorBlock:^(QBResponse *response) {
         // User does not exist, do sign up.
