@@ -117,11 +117,16 @@ function loadFrame( parent, matchInfo, marketInfo, finishCallback, bigBetStatus,
     local line = MarketsForGameData.getMarketLine( mMarketInfo )
     local absLine = line
     local teamName = TeamConfig.getTeamName( TeamConfig.getConfigIdByKey( mMatch["AwayTeamId"] ) )
-    if line < 0 then
+    if line <= 0 then
         teamName = TeamConfig.getTeamName( TeamConfig.getConfigIdByKey( mMatch["HomeTeamId"] ) )
         absLine = line * ( -1 )
     end 
-    question:setText( string.format( Constants.String.match_prediction.will_win_by, teamName, tostring(absLine) ) )
+    if line == 0 then
+        question:setText( string.format( Constants.String.match_prediction.will_win_by_line0, teamName ) )
+    else
+        question:setText( string.format( Constants.String.match_prediction.will_win_by, teamName, tostring(absLine) ) )
+    end
+    
     yesWinPoint:setText( string.format( Constants.String.num_of_points, MarketsForGameData.getOddsForType( mMarketInfo, MarketConfig.ODDS_TYPE_ONE_OPTION ) * mStake ) )
     noWinPoint:setText( string.format( Constants.String.num_of_points, MarketsForGameData.getOddsForType( mMarketInfo, MarketConfig.ODDS_TYPE_TWO_OPTION ) * mStake ) )
     stake:setText( string.format( Constants.String.num_of_points, mStake ) )
@@ -134,24 +139,12 @@ function loadFrame( parent, matchInfo, marketInfo, finishCallback, bigBetStatus,
 
     local homeTeam = TeamConfig.getTeamName( TeamConfig.getConfigIdByKey( mMatch["HomeTeamId"] ) )
     local awayTeam = TeamConfig.getTeamName( TeamConfig.getConfigIdByKey( mMatch["AwayTeamId"] ) )
-    labelHome:setText( string.format( Constants.String.handicap.predict_on, homeTeam ) )
-    labelAway:setText( string.format( Constants.String.handicap.predict_on, awayTeam ) )
+    labelHome:setText( string.format( Constants.String.handicap.predict_on, Constants.String.button.yes ) )
+    labelAway:setText( string.format( Constants.String.handicap.predict_on, Constants.String.button.no ) )
 
-    local bHomeFav = line < 0
-    absLine = string.gsub(absLine, "%.", "_")
-    local keyHandicap
-    if bHomeFav then
-        keyHandicap = "h"..absLine.."_home"
-        print( keyHandicap )
-        txtHome:setText( string.format( Constants.String.handicap[keyHandicap], homeTeam, homeTeam ) )
-        keyHandicap = "h"..absLine.."_away"
-        txtAway:setText( string.format( Constants.String.handicap[keyHandicap], awayTeam, awayTeam ) )
-    else
-        keyHandicap = "h"..absLine.."_away"
-        txtHome:setText( string.format( Constants.String.handicap[keyHandicap], homeTeam, homeTeam ) )
-        keyHandicap = "h"..absLine.."_home"
-        txtAway:setText( string.format( Constants.String.handicap[keyHandicap], awayTeam, awayTeam ) )
-    end
+    local yesText, noText = ViewUtils.getYesNoText( line, homeTeam, awayTeam )
+    txtHome:setText( yesText )
+    txtAway:setText( noText )
 
     yes:addTouchEventListener( selectYes )
     no:addTouchEventListener( selectNo )

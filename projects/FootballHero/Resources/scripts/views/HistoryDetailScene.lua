@@ -9,6 +9,8 @@ local TeamConfig = require("scripts.config.Team")
 local Constants = require("scripts.Constants")
 local MatchCenterConfig = require("scripts.config.MatchCenter")
 local Header = require("scripts.views.HeaderFrame")
+local ViewUtils = require("scripts.views.ViewUtils")
+
 
 local CONTENT_FADEIN_TIME = 1
 
@@ -115,6 +117,8 @@ function initCouponInfo( content, info )
     local stake = tolua.cast( content:getChildByName("stake"), "Label" )
     local choice = tolua.cast( content:getChildByName("choice"), "ImageView" )
     local statusBar = tolua.cast( content:getChildByName("Label_BG_Status"), "Button" )
+    local infoCheckBox = tolua.cast( content:getChildByName("CheckBox_Handicap"), "CheckBox" )
+    local infoPanel = tolua.cast( content:getChildByName("Image_HandicapPopup"), "ImageView" )
 
     -- Init the answer string.
     local marketType = info["MarketTypeId"]
@@ -123,6 +127,7 @@ function initCouponInfo( content, info )
 
     local answerString
     local choiceImage
+    local infoCheckBoxVisible
     if marketType == MarketConfig.MARKET_TYPE_MATCH then
         answerString = Constants.String.history.which_team
         if info["OutcomeSide"] == MarketConfig.ODDS_TYPE_ONE_OPTION then
@@ -132,6 +137,7 @@ function initCouponInfo( content, info )
         elseif info["OutcomeSide"] == MarketConfig.ODDS_TYPE_THREE_OPTION then
             choiceImage = Constants.PREDICTION_CHOICE_IMAGE_PATH.."img-draw-blue.png"
         end
+        infoCheckBoxVisible = false
     elseif marketType == MarketConfig.MARKET_TYPE_TOTAL_GOAL then
         answerString = string.format( Constants.String.history.total_goals, math.ceil( line ) )
         if answerId then
@@ -139,24 +145,63 @@ function initCouponInfo( content, info )
         else
             choiceImage = Constants.PREDICTION_CHOICE_IMAGE_PATH.."prediction-no.png"
         end
+        infoCheckBoxVisible = false
     elseif marketType == MarketConfig.MARKET_TYPE_ASIAN_HANDICAP then
         local teamName = TeamConfig.getTeamName( mAwayTeamId )
-        if line < 0 then
+        local absLine = math.abs( line )
+        if line <= 0 then
             teamName = TeamConfig.getTeamName( mHomeTeamId )
-            line = line * ( -1 )
         end 
         
-        answerString = string.format( Constants.String.history.win_by, teamName, line )
+        if absLine == 0 then
+            answerString = string.format( Constants.String.history.win_by_line0, teamName )
+        else
+            answerString = string.format( Constants.String.history.win_by, teamName, absLine )
+        end
+        
         if answerId then
             choiceImage = Constants.PREDICTION_CHOICE_IMAGE_PATH.."prediction-yes.png"
         else
             choiceImage = Constants.PREDICTION_CHOICE_IMAGE_PATH.."prediction-no.png"
         end
+        infoCheckBoxVisible = true
     end
 
     answer:setText( answerString )
     choice:loadTexture( choiceImage )
     stake:setText( string.format( Constants.String.history.stake, info["Stake"] ) )
+    infoCheckBox:setEnabled( infoCheckBoxVisible )
+    infoPanel:setEnabled( false )
+
+    if infoCheckBoxVisible then
+        local popupEventHandler = function( sender, eventType )
+            if eventType == TOUCH_EVENT_ENDED then
+                if infoCheckBox:getSelectedState() then
+                    -- remove popup
+                   infoPanel:setEnabled( false )
+                else
+                    -- show popup
+                   infoPanel:setEnabled( true )
+               end
+            end
+        end
+        infoCheckBox:addTouchEventListener( popupEventHandler )
+
+        local labelHome = tolua.cast( infoPanel:getChildByName( "Label_TitleHome"), "Label" )
+        local labelAway = tolua.cast( infoPanel:getChildByName( "Label_TitleAway"), "Label" )
+        local txtHome = tolua.cast( infoPanel:getChildByName( "Label_GuideHome"), "Label" )
+        local txtAway = tolua.cast( infoPanel:getChildByName( "Label_GuideAway"), "Label" )
+
+        local homeTeam = TeamConfig.getTeamName( mHomeTeamId )
+        local awayTeam = TeamConfig.getTeamName( mAwayTeamId )
+        labelHome:setText( string.format( Constants.String.handicap.predict_on, Constants.String.button.yes ) )
+        labelAway:setText( string.format( Constants.String.handicap.predict_on, Constants.String.button.no ) )
+
+        local yesText, noText = ViewUtils.getYesNoText( line, homeTeam, awayTeam )
+        txtHome:setText( yesText )
+        txtAway:setText( noText )
+    end
+    
 
     if mIsOpen == false then
         local refund = tolua.cast( content:getChildByName("Label_Refund"), "Label" )
