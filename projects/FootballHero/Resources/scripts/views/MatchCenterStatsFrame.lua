@@ -52,7 +52,7 @@ function initContent( statsInfo )
     contentHeight = contentHeight + initOverUnder( contentContainer, statsInfo )
     contentHeight = contentHeight + initLeagueTable( contentContainer, statsInfo )
 
-    contentHeight = contentHeight + 10
+    contentHeight = contentHeight + 20
 
     contentContainer:setInnerContainerSize( CCSize:new( 0, contentHeight ) )
     local layout = tolua.cast( contentContainer, "Layout" )
@@ -201,7 +201,7 @@ end
 function initFormTable( contentContainer, statsInfo )
     local contentHeight = 0
 
-    local formFrame = SceneManager.widgetFromJsonFile("scenes/MatchCenterStatsFormOverUnderHeaderFrame.json")
+    local formFrame = SceneManager.widgetFromJsonFile("scenes/MatchCenterStatsTableHeaderFrame.json")
     contentContainer:addChild( formFrame )
     contentHeight = contentHeight + formFrame:getSize().height
 
@@ -213,7 +213,7 @@ function initFormTable( contentContainer, statsInfo )
     title:setText( Constants.String.match_center.form_table )
     away:setText( TeamConfig.getTeamName( TeamConfig.getConfigIdByKey( mMatch["AwayTeamId"] ) ) )
 
-    local header = SceneManager.widgetFromJsonFile("scenes/MatchCenterStatsFormContentFrame.json")
+    local header = SceneManager.widgetFromJsonFile("scenes/MatchCenterStatsTableContentFrame.json")
     contentContainer:addChild( header )
     contentHeight = contentHeight + header:getSize().height
 
@@ -241,7 +241,7 @@ function initFormTable( contentContainer, statsInfo )
 
     -- TODO - read 'statsInfo' data
     for i = 1,3 do
-        local content = SceneManager.widgetFromJsonFile("scenes/MatchCenterStatsFormContentFrame.json")
+        local content = SceneManager.widgetFromJsonFile("scenes/MatchCenterStatsTableContentFrame.json")
         contentContainer:addChild( content )
         contentHeight = contentHeight + content:getSize().height
 
@@ -274,19 +274,84 @@ end
 function initOverUnder( contentContainer, statsInfo )
     local contentHeight = 0
 
-    local formFrame = SceneManager.widgetFromJsonFile("scenes/MatchCenterStatsFormOverUnderHeaderFrame.json")
-    contentContainer:addChild( formFrame )
-    contentHeight = contentHeight + formFrame:getSize().height
+    local overUnderFrame = SceneManager.widgetFromJsonFile("scenes/MatchCenterStatsTableHeaderFrame.json")
+    contentContainer:addChild( overUnderFrame )
+    contentHeight = contentHeight + overUnderFrame:getSize().height
 
-    local home = tolua.cast( formFrame:getChildByName("Label_Home"), "Label" )
-    local title = tolua.cast( formFrame:getChildByName("Label_Title"), "Label" )
-    local away = tolua.cast( formFrame:getChildByName("Label_Away"), "Label" )
+    local home = tolua.cast( overUnderFrame:getChildByName("Label_Home"), "Label" )
+    local title = tolua.cast( overUnderFrame:getChildByName("Label_Title"), "Label" )
+    local away = tolua.cast( overUnderFrame:getChildByName("Label_Away"), "Label" )
 
     home:setText( TeamConfig.getTeamName( TeamConfig.getConfigIdByKey( mMatch["HomeTeamId"] ) ) )
     title:setText( Constants.String.match_center.over_under )
     away:setText( TeamConfig.getTeamName( TeamConfig.getConfigIdByKey( mMatch["AwayTeamId"] ) ) )
 
-    local header = SceneManager.widgetFromJsonFile("scenes/MatchCenterStatsFormContentFrame.json")
+    local header = SceneManager.widgetFromJsonFile("scenes/MatchCenterStatsOverUnderContentFrame.json")
+    contentContainer:addChild( header )
+    contentHeight = contentHeight + header:getSize().height
+
+    local bg = tolua.cast( header:getChildByName("Panel_BG"), "Layout" )
+    local lbltitle = tolua.cast( header:getChildByName("Label_Title"), "Label" )
+    local lblHomeEvent = tolua.cast( header:getChildByName("Label_Home_Event"), "Label" )
+    local lblHomeOver = tolua.cast( header:getChildByName("Label_Home_Over"), "Label" )
+    local lblHomeUnder = tolua.cast( header:getChildByName("Label_Home_Under"), "Label" )    
+    local lblAwayEvent = tolua.cast( header:getChildByName("Label_Away_Event"), "Label" )
+    local lblAwayOver = tolua.cast( header:getChildByName("Label_Away_Over"), "Label" )
+    local lblAwayUnder = tolua.cast( header:getChildByName("Label_Away_Under"), "Label" )
+
+    bg:setBackGroundColorOpacity( 38 )
+    lbltitle:setEnabled( false )
+    lblHomeEvent:setText( Constants.String.match_center.label_event )
+    lblHomeOver:setText( Constants.String.match_center.label_over )
+    lblHomeUnder:setText( Constants.String.match_center.label_under )    
+    lblAwayEvent:setText( Constants.String.match_center.label_event )
+    lblAwayOver:setText( Constants.String.match_center.label_over )
+    lblAwayUnder:setText( Constants.String.match_center.label_under )
+
+    -- TODO - read 'statsInfo' data
+    for i = 1,3 do
+        local content = SceneManager.widgetFromJsonFile("scenes/MatchCenterStatsOverUnderContentFrame.json")
+        contentContainer:addChild( content )
+        contentHeight = contentHeight + content:getSize().height
+
+        local lbltitle = tolua.cast( content:getChildByName("Label_Title"), "Label" )
+        local lblHomeEvent = tolua.cast( content:getChildByName("Label_Home_Event"), "Label" )
+        local lblHomeOver = tolua.cast( content:getChildByName("Label_Home_Over"), "Label" )
+        local lblHomeUnder = tolua.cast( content:getChildByName("Label_Home_Under"), "Label" )    
+        local lblAwayEvent = tolua.cast( content:getChildByName("Label_Away_Event"), "Label" )
+        local lblAwayOver = tolua.cast( content:getChildByName("Label_Away_Over"), "Label" )
+        local lblAwayUnder = tolua.cast( content:getChildByName("Label_Away_Under"), "Label" )
+        
+        lbltitle:setText( Constants.String.match_center[MatchCenterConfig.MatchCenterStatsFormType[i]["displayNameKey"]] )
+
+        -- TODO - read 'statsInfo' data
+        lblHomeEvent:setText( 0 )
+        lblHomeOver:setText( 0 )
+        lblHomeUnder:setText( 0 )    
+        lblAwayEvent:setText( 0 )
+        lblAwayOver:setText( 0 )
+        lblAwayUnder:setText( 0 )
+    end
+
+    return contentHeight
+end
+    
+function initLeagueTable( contentContainer, statsInfo )
+    local contentHeight = 0
+
+    local leagueTableFrame = SceneManager.widgetFromJsonFile("scenes/MatchCenterStatsTableHeaderFrame.json")
+    contentContainer:addChild( leagueTableFrame )
+    contentHeight = contentHeight + leagueTableFrame:getSize().height
+
+    local home = tolua.cast( leagueTableFrame:getChildByName("Label_Home"), "Label" )
+    local title = tolua.cast( leagueTableFrame:getChildByName("Label_Title"), "Label" )
+    local away = tolua.cast( leagueTableFrame:getChildByName("Label_Away"), "Label" )
+
+    home:setText( TeamConfig.getTeamName( TeamConfig.getConfigIdByKey( mMatch["HomeTeamId"] ) ) )
+    title:setText( Constants.String.match_center.league_table )
+    away:setText( TeamConfig.getTeamName( TeamConfig.getConfigIdByKey( mMatch["AwayTeamId"] ) ) )
+
+    local header = SceneManager.widgetFromJsonFile("scenes/MatchCenterStatsTableContentFrame.json")
     contentContainer:addChild( header )
     contentHeight = contentHeight + header:getSize().height
 
@@ -314,7 +379,7 @@ function initOverUnder( contentContainer, statsInfo )
 
     -- TODO - read 'statsInfo' data
     for i = 1,3 do
-        local content = SceneManager.widgetFromJsonFile("scenes/MatchCenterStatsFormContentFrame.json")
+        local content = SceneManager.widgetFromJsonFile("scenes/MatchCenterStatsTableContentFrame.json")
         contentContainer:addChild( content )
         contentHeight = contentHeight + content:getSize().height
 
@@ -331,21 +396,17 @@ function initOverUnder( contentContainer, statsInfo )
         lbltitle:setText( Constants.String.match_center[MatchCenterConfig.MatchCenterStatsFormType[i]["displayNameKey"]] )
 
         -- TODO - read 'statsInfo' data
-        lblHomeEvent:setText( Constants.String.match_center.E )
-        lblHomeWin:setText( Constants.String.match_center.W )
-        lblHomeDraw:setText( Constants.String.match_center.D )
-        lblHomeLose:setText( Constants.String.match_center.L )
-        lblAwayEvent:setText( Constants.String.match_center.E )
-        lblAwayWin:setText( Constants.String.match_center.W )
-        lblAwayDraw:setText( Constants.String.match_center.D )
-        lblAwayLose:setText( Constants.String.match_center.L )
+        lblHomeEvent:setText( 6 )
+        lblHomeWin:setText( 6 - i )
+        lblHomeDraw:setText( 0 )
+        lblHomeLose:setText( i )
+        lblAwayEvent:setText( 6 )
+        lblAwayWin:setText( i )
+        lblAwayDraw:setText( 6 - i )
+        lblAwayLose:setText( 0 )
     end
 
     return contentHeight
-end
-    
-function initLeagueTable( contentContainer, statsInfo )
-    return 0
 end
 
 

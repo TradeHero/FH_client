@@ -429,11 +429,15 @@
     <GuidesList />
   </GuidesProject>
   <GuidesProject>
-    <Project>MatchCenterStatsFormOverUnderHeaderFrame</Project>
+    <Project>MatchCenterStatsTableHeaderFrame</Project>
     <GuidesList />
   </GuidesProject>
   <GuidesProject>
-    <Project>MatchCenterStatsFormContentFrame</Project>
+    <Project>MatchCenterStatsTableContentFrame</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>MatchCenterStatsOverUnderContentFrame</Project>
     <GuidesList />
   </GuidesProject>
 </ArrayOfGuidesProject>

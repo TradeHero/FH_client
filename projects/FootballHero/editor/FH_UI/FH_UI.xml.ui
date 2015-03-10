@@ -107,8 +107,9 @@
     <string>MatchCenterStatsLastSixFrame.json</string>
     <string>MatchCenterStatsHomeAwayHeaderFrame.json</string>
     <string>MatchCenterStatsHomeAwayContentFrame.json</string>
-    <string>MatchCenterStatsFormOverUnderHeaderFrame.json</string>
-    <string>MatchCenterStatsFormContentFrame.json</string>
+    <string>MatchCenterStatsTableHeaderFrame.json</string>
+    <string>MatchCenterStatsTableContentFrame.json</string>
+    <string>MatchCenterStatsOverUnderContentFrame.json</string>
   </JsonList>
   <CanvasSize>
     <Width>640</Width>
@@ -118,10 +119,7 @@
   <ProjectType>UIProject</ProjectType>
   <ResRelativePath />
   <imageFileList />
-  <imagePngList>
-    <string>MatchCentre/img-awaybox.png</string>
-    <string>commonRes/default.png</string>
-  </imagePngList>
+  <imagePngList />
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>MatchCenterStatsFormContentFrame.json</CurrentUIJson>
+  <CurrentUIJson>MatchCenterStatsOverUnderContentFrame.json</CurrentUIJson>
 </UIProject>
