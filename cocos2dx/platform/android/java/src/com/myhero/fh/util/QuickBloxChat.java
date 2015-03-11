@@ -50,9 +50,9 @@ public class QuickBloxChat {
         }
     };;
 
-    private static String currentUserName;
+    private static String currentUserLogin;
     private static String currentUserProfileImg;
-    private static int currentUserId;
+    private static String currentUserFullName;
 
     public static void init(Context context) {
         QBChatService.setDebugEnabled(true);
@@ -66,9 +66,9 @@ public class QuickBloxChat {
     public static void signin(String userName, String profileImg, int userId) {
         // create QB user
         //
-        currentUserName = userName;
+        currentUserLogin = String.valueOf(userId);
         currentUserProfileImg = profileImg;
-        currentUserId = userId;
+        currentUserFullName = userName;
 
         QuickbloxSigninHandler.sendMessage(new Message());
     }
@@ -84,6 +84,10 @@ public class QuickBloxChat {
     }
 
     public static void joinChatRoom(String jid) {
+        if (QBChatService.getInstance().getGroupChatManager() == null) {
+            quickbloxJoinChatRoomResult(false);
+            return;
+        }
         if (groupChat != null) {
             groupChat.removeMessageListener(groupChatMessageListener);
         }
@@ -145,15 +149,15 @@ public class QuickBloxChat {
             @Override
             public void onSuccess(QBSession session, Bundle params) {
                 // success
-                final QBUser user = new QBUser(currentUserName, QUICK_BLOX_PASSWORD);
+                final QBUser user = new QBUser(currentUserLogin, QUICK_BLOX_PASSWORD);
                 user.setWebsite(currentUserProfileImg);
-                user.setExternalId(String.valueOf(currentUserProfileImg));
+                user.setFullName(currentUserFullName);
 
                 QBUsers.signUp(user, new QBEntityCallbackImpl<QBUser>() {
                     @Override
                     public void onSuccess(QBUser user, Bundle args) {
                         // success
-                        signin(currentUserName, currentUserProfileImg, currentUserId);
+                        QuickbloxSigninHandler.sendMessage(new Message());
                     }
 
                     @Override
@@ -205,7 +209,7 @@ public class QuickBloxChat {
         {
             super.handleMessage(msg);
             final QBUser user = new QBUser();
-            user.setLogin(currentUserName);
+            user.setLogin(currentUserLogin);
             user.setPassword(QUICK_BLOX_PASSWORD);
 
             QBAuth.createSession(user, new QBEntityCallbackImpl<QBSession>() {

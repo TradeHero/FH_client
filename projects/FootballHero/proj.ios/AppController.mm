@@ -166,7 +166,7 @@ static AppDelegate s_sharedApplication;
 - (void) signin:(NSString *)userName withProfileImg:(NSString *)profileImg andUserId:(int)userId {
     // QuickBlox session creation
     QBSessionParameters *extendedAuthRequest = [[QBSessionParameters alloc] init];
-    extendedAuthRequest.userLogin = userName;
+    extendedAuthRequest.userLogin = [NSString stringWithFormat:@"%d",userId];
     extendedAuthRequest.userPassword = QUICK_BLOX_PASSWORD;
     //
     [QBRequest createSessionWithExtendedParameters:extendedAuthRequest successBlock:^(QBResponse *response, QBASession *session) {
@@ -176,7 +176,7 @@ static AppDelegate s_sharedApplication;
         //
         QBUUser *currentUser = [QBUUser user];
         currentUser.ID = session.userID;
-        currentUser.login = userName;
+        currentUser.login = [NSString stringWithFormat:@"%d",userId];
         currentUser.password = QUICK_BLOX_PASSWORD;
         //
         [[LocalStorageService shared] setCurrentUser:currentUser];
@@ -196,10 +196,10 @@ static AppDelegate s_sharedApplication;
 - (void) signup:(NSString *)userName withProfileImg:(NSString *)profileImg andUserId:(int)userId {
     [QBRequest createSessionWithSuccessBlock:^(QBResponse *response, QBASession *session) {
         QBUUser* user = [QBUUser user];
-        user.login = userName;
+        user.login = [NSString stringWithFormat:@"%d",userId];
         user.password = QUICK_BLOX_PASSWORD;
         user.website = profileImg;
-        user.externalUserID = userId;
+        user.fullName = userName;
         
         [QBRequest signUp:user successBlock:^(QBResponse *response, QBUUser *user) {
             [self signin:userName withProfileImg:profileImg andUserId:userId];

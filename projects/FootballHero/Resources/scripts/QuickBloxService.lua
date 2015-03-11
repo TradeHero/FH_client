@@ -96,8 +96,8 @@ function helperMappingtoChatMessage( quickbloxMessage )
 
     local quickBloxUser = QuickBloxUsers.getUserById( quickbloxMessage["sender_id"] )
     if quickBloxUser then
-    	message["UserId"] = quickBloxUser["external_user_id"]
-    	message["UserName"] =  quickBloxUser["login"]
+    	message["UserId"] = quickBloxUser["login"]
+    	message["UserName"] =  quickBloxUser["full_name"]
     	message["PictureUrl"] = quickBloxUser["website"]
     else
     	message["UserId"] = quickbloxMessage["sender_id"]
