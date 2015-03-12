@@ -46,7 +46,6 @@ function loadFrame( matchList, leagueKey )
     Navigator.loadFrame( widget )
     Navigator.chooseNav( 1 )
 
-    mStep = 1
     mHasMoreToLoad = true
 
     initLeagueList( leagueKey )
@@ -182,6 +181,8 @@ function initMatchList( matchList, leagueKey, bInit )
         MatchListDropdownFrame.initLeagueList( leagueKey )
     end
 
+    mStep = 1
+
     local predictionScene = SceneManager.getWidgetByName( "TappablePredictionScene" )
     local predictionConfirmScene = SceneManager.getWidgetByName( "PredTotalConfirmScene" )
     if predictionScene ~= nil then
@@ -200,6 +201,8 @@ function initMatchList( matchList, leagueKey, bInit )
 
     if leagueKey == Constants.SpecialLeagueIds.UPCOMING_MATCHES then
         contentContainer:addEventListenerScrollView( scrollViewEventHandler )
+    else
+        contentContainer:addEventListenerScrollView( scrollViewDoNothingEventHandler )
     end
 
     local seqArray = CCArray:create()
@@ -859,4 +862,7 @@ function scrollViewEventHandler( target, eventType )
         
         EventManager:postEvent( Event.Enter_Match_List, { Constants.SpecialLeagueIds.UPCOMING_MATCHES, mStep } )
     end
+end
+
+function scrollViewDoNothingEventHandler( target, eventType )
 end
