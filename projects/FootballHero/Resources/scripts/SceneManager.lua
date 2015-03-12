@@ -133,6 +133,7 @@ function initEvents()
 	EventManager:registerEventHandler( Event.Do_Get_Quickblox_Chatroom_History, "scripts.actions.DoGetQuickbloxChatroomHistoryAction" )
 	EventManager:registerEventHandler( Event.Do_Send_Quickblox_Chat, "scripts.actions.DoSendQuickbloxChatAction" )
 	EventManager:registerEventHandler( Event.Do_Get_Quickblox_Users, "scripts.actions.DoGetQuickbloxUsersAction" )
+	EventManager:registerEventHandler( Event.Do_Quickblox_Last_Message, "scripts.actions.DoQuickbloxLastMessageAction" )
 	
 
 	EventManager:registerEventHandler( Event.Show_Error_Message, "scripts.actions.ShowErrorMessageAction" )

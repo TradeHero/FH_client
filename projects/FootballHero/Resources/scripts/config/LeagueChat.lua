@@ -15,6 +15,7 @@ LeagueChatType = {
 		--["quickBloxID"] = "54c88072535c12629c025a37",
 		["quickBloxJID"] = "20587_54feb614535c12834e08647b@muc.chat.quickblox.com",
 		["quickBloxID"] = "54feb614535c12834e08647b",
+		["lastMessageTime"] = 0,
 	},
 	{
 		["labelName"] = "Label_Spanish", 
@@ -28,6 +29,7 @@ LeagueChatType = {
 		--["quickBloxID"] = "54c89dbf535c1223b2026b25",
 		["quickBloxJID"] = "20587_54feb61c535c120b70010dee@muc.chat.quickblox.com",
 		["quickBloxID"] = "54feb61c535c120b70010dee",
+		["lastMessageTime"] = 0,
 	},
 	{
 		["labelName"] = "Label_Italian", 
@@ -75,3 +77,14 @@ LeagueChatType = {
 		["useQuickBlox"] = false,
 	},
 }
+
+function getChatConfigByQuickbloxId( id )
+	for i = 1, table.getn( LeagueChatType ) do
+		local chatConfig = LeagueChatType[i]
+		if chatConfig["useQuickBlox"] and chatConfig["quickBloxID"] == id then
+			return chatConfig
+		end
+	end
+
+	return nil
+end

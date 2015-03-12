@@ -70,6 +70,8 @@ function doGetLatestMessages()
             EventManager:postEvent( Event.Do_Get_Quickblox_Users, { tostring( sender ), function()
                 local chatMessages = QuickBloxService.createChatMessagesWithData( sender, text, timeStamp )
                 addMessage( chatMessages )
+                
+                EventManager:postEvent( Event.Do_Quickblox_Last_Message, { "Save", LeagueChatConfig[mLeagueChatId]["quickBloxID"], timeStamp } )
             end } )
         end
 

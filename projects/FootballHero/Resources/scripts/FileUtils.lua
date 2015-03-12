@@ -17,6 +17,7 @@ function writeStringToFile( fileName, str )
 
 	fileHandle:write( str )
 	fileHandle:close()
+	CCLuaLog("Write file: "..writePath)
 end
 
 function createFolderRecur( existFolder, toCreateFolder )

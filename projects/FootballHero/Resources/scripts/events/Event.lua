@@ -96,6 +96,7 @@ EventNameList =
     "Do_Get_Quickblox_Chatroom_History",
     "Do_Send_Quickblox_Chat",
     "Do_Get_Quickblox_Users",
+    "Do_Quickblox_Last_Message",
 
     "Show_Info",
     "Show_Error_Message",
@@ -150,6 +151,7 @@ EventNameDosenotTrackList =
     "Do_Get_Quickblox_Chatroom_History",
     "Do_Send_Quickblox_Chat",
     "Do_Get_Quickblox_Users",
+    "Do_Quickblox_Last_Message",
 
     "Check_Start_Tutorial",
     "Check_File_Version",

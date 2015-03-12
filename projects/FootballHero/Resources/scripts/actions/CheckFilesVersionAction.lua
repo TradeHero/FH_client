@@ -69,6 +69,9 @@ function checkNext()
 	        local LeagueConfig = require("scripts.config.League")
 	        local TeamConfig = require("scripts.config.Team")
 
+	        -- Load the saved data for quickblox chat room.
+	        EventManager:postEvent( Event.Do_Quickblox_Last_Message, { "Load" } )
+
 	        ConnectingMessage.selfRemove()
 
 	        -- Init the deep link.

@@ -7,7 +7,8 @@ local Event = require("scripts.events.Event").EventList
 local ConnectingMessage = require("scripts.views.ConnectingMessage")
 local RequestUtils = require("scripts.RequestUtils")
 local Logic = require("scripts.Logic").getInstance()
-local LeagueChatConfig = require("scripts.config.LeagueChat").LeagueChatType
+local LeagueChat = require("scripts.config.LeagueChat")
+local LeagueChatConfig = LeagueChat.LeagueChatType
 local QuickBloxUsers = require("scripts.data.QuickBloxUsers")
 local QuickBloxService = require("scripts.QuickBloxService")
 
@@ -47,16 +48,17 @@ Data structure of the Quickblox messages.
 
 --]]
 
+local mRoomId
 local mChatMessages
 
 function action( param )
-    local roomId = param[1]
+    mRoomId = param[1]
 
     local requestContent = {}
     local requestContentText = Json.encode( requestContent )
     
     local url = "https://api.quickblox.com/chat/Message.json"
-    url = url.."?chat_dialog_id="..roomId.."&limit=20&sort_desc=date_sent"
+    url = url.."?chat_dialog_id="..mRoomId.."&limit=20&sort_desc=date_sent"
 
     local requestInfo = {}
     requestInfo.requestData = requestContentText
@@ -96,7 +98,12 @@ end
 function showChatMessages()
     local ChatScene = require("scripts.views.LeagueChatScene")
 
-    -- Display the messages.
+    -- Display the messages. This function will sort the mChatMessages by time
     local chatMessages = QuickBloxService.createChatMessages( mChatMessages )
+
+    -- Update the last received message's timestamp for this room.
+    local lastChatMessage = mChatMessages[ table.getn( mChatMessages ) ]
+    EventManager:postEvent( Event.Do_Quickblox_Last_Message, { "Save", mRoomId, lastChatMessage["date_sent"] } )
+
     ChatScene.initMessages( chatMessages )
 end
