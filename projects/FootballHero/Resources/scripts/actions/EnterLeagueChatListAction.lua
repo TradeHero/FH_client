@@ -7,6 +7,8 @@ local Logic = require("scripts.Logic").getInstance()
 local RequestUtils = require("scripts.RequestUtils")
 local LeagueChat = require("scripts.config.LeagueChat")
 local LeagueChatConfig = LeagueChat.LeagueChatType
+local EventManager = require("scripts.events.EventManager").getInstance()
+local Event = require("scripts.events.Event").EventList
 
 
 --[[
@@ -78,6 +80,11 @@ function getUnreadMessageCount( index )
 		    requestInfo.requestData = requestContentText
 		    requestInfo.url = url
 
+		    function onRequestFailed()
+		    	ConnectingMessage.selfRemove()
+		    	compelte()
+		    end
+
 		    function onRequestSuccess( jsonResponse )
 				local config = jsonResponse["items"]
 				mUnreadMessageCountInfo[chatConfig["quickBloxID"]] = config["count"]
@@ -87,7 +94,7 @@ function getUnreadMessageCount( index )
 			end
 
 		    local handler = function( isSucceed, body, header, status, errorBuffer )
-		        RequestUtils.messageHandler( requestInfo, isSucceed, body, header, status, errorBuffer, RequestUtils.HTTP_200, false, onRequestSuccess )
+		        RequestUtils.messageHandler( requestInfo, isSucceed, body, header, status, errorBuffer, RequestUtils.HTTP_200, false, onRequestSuccess, onRequestFailed )
 		    end
 
 		    local httpRequest = HttpRequestForLua:create( CCHttpRequest.kHttpGet )
@@ -102,7 +109,7 @@ end
 
 function compelte()
 	local LeagueChatListScene = require("scripts.views.LeagueChatListScene")
-	
+
 	if LeagueChatListScene.isFrameShown() then
 		LeagueChatListScene.reloadFrame( mUnreadMessageCountInfo )
 	else
