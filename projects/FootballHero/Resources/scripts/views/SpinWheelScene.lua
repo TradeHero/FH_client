@@ -299,14 +299,15 @@ function tick( dt )
             CCDirector:sharedDirector():getScheduler():unscheduleScriptEntry( mWheelTickHandler )
 
             local showPrize = function()
-                if SpinWheelConfig.isLuckDrawPrizeId( mWinPrizeId ) then
+                local prizeConfig = SpinWheelConfig.getPrizeConfigWithID( mWinPrizeId )
+                if prizeConfig["DrawTicket"] then
                     -- luck draw.
                     mWinTicketWidget:setEnabled( true )
 
                     local ticketLeftText = tolua.cast( mWinTicketWidget:getChildByName("Label_ticketLeft"), "Label" )
                     local descriptionText = tolua.cast( mWinTicketWidget:getChildByName("Label_description"), "Label" )
                     ticketLeftText:setText( mWinNumTicketLeft )
-                    descriptionText:setText( SpinWheelConfig.getLuckDrawDescription() )
+                    descriptionText:setText( prizeConfig["DrawInformation"] )
                 else
                     -- normal prize.
                     mWinPrizeWidget:setEnabled( true )

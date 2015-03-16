@@ -145,7 +145,7 @@ function onRequestFailed( jsonResponse )
     local matchList = MatchListData:new()
     local matchListScene = require("scripts.views.MatchListScene")
     if matchListScene.isShown() then
-        matchListScene.initMatchList( matchList )
+        matchListScene.initMatchList( matchList, mLeagueId )
     else
         matchListScene.loadFrame( matchList, mLeagueId )
     end
