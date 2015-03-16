@@ -153,14 +153,13 @@
   <ResRelativePath />
   <imageFileList />
   <imagePngList>
-    <string>MatchPrediction/prediction-yes.png</string>
-    <string>MyHero/img-openbox.png</string>
-    <string>MyHero/img-winbox.png</string>
-    <string>MyHero/img-losebox.png</string>
-    <string>MatchPrediction/img-infobox.png</string>
-    <string>MatchPrediction/img-title.png</string>
-    <string>MatchPrediction/icn-info.png</string>
+    <string>spinWheel/bkg-balance-page.png</string>
+    <string>header/back.png</string>
+    <string>spinWheel/img-ticket.png</string>
+    <string>spinWheel/img-cash.png</string>
+    <string>spinWheel/btn-submit.png</string>
+    <string>spinWheel/img-ticket-2.png</string>
   </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>HistoryDetailOpenContent.json</CurrentUIJson>
+  <CurrentUIJson>SpinWinnersScene.json</CurrentUIJson>
 </UIProject>

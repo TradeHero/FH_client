@@ -81,6 +81,10 @@ function initContent( moneyBalance, ticketBalance )
         -- Description label
         local prizeDescriptionText = tolua.cast( mWidget:getChildByName("Label_prizeDescription"..i), "Label" )
         prizeDescriptionText:setText( prizeConfig["DrawInformation"] )
+
+        -- Progress label
+        local progressText = tolua.cast( mWidget:getChildByName("Label_progress"..i), "Label" )
+        progressText:setText( info["NumberOfLuckDrawTicketsLeft"].." "..Constants.String.spinWheel.win_ticket_left )
     end
     
     local moneyText = tolua.cast( mWidget:getChildByName("Label_balance"), "Label" )
