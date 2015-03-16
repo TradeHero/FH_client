@@ -55,22 +55,36 @@ end
 function initContent( moneyBalance, ticketBalance )
     tolua.cast( mWidget:getChildByName("Label_Title"), "Label" ):setText( Constants.String.spinWheel.balance_title )
     tolua.cast( mWidget:getChildByName("Label_1"), "Label" ):setText( Constants.String.spinWheel.ticket_you_have )
-    tolua.cast( mWidget:getChildByName("Label_3"), "Label" ):setText( Constants.String.spinWheel.ticket_usage )
     tolua.cast( mWidget:getChildByName("Label_5"), "Label" ):setText( Constants.String.spinWheel.money_payout_limit )
     tolua.cast( mWidget:getChildByName("Label_disclaimer"), "Label" ):setText( Constants.String.community.disclaimer )
-    local ticketText = tolua.cast( mWidget:getChildByName("Label_ticket"), "Label" )
-    local moneyText = tolua.cast( mWidget:getChildByName("Label_balance"), "Label" )
-    local prizeDescriptionText = tolua.cast( mWidget:getChildByName("Label_prizeDescription"), "Label" )
 
-    if ticketBalance > 1 then
-        ticketText:setText( string.format( Constants.String.spinWheel.ticket_balance_2, ticketBalance ) )
-    else
-        ticketText:setText( string.format( Constants.String.spinWheel.ticket_balance_1, ticketBalance ) )
+    for i = 1, 2 do
+        local info = ticketBalance[i]
+        local ticketNum = info["NumberOfLuckyDrawTickets"]
+        local prizeConfig = SpinWheelConfig.getPrizeConfigWithID( info["PrizeId"] )
+
+        -- Usage label
+        tolua.cast( mWidget:getChildByName("Label_usage"..i), "Label" ):setText( Constants.String.spinWheel.ticket_usage )
+        
+        -- Prize Image
+        local image = tolua.cast( mWidget:getChildByName("Image_prize"..i), "ImageView" )
+        image:loadTexture( prizeConfig["LocalUrl"] )
+
+        -- Ticket Label
+        local ticketText = tolua.cast( mWidget:getChildByName("Label_ticket"..i), "Label" )
+        if ticketNum > 1 then
+            ticketText:setText( string.format( Constants.String.spinWheel.ticket_balance_2, ticketNum ) )
+        else
+            ticketText:setText( string.format( Constants.String.spinWheel.ticket_balance_1, ticketNum ) )
+        end
+
+        -- Description label
+        local prizeDescriptionText = tolua.cast( mWidget:getChildByName("Label_prizeDescription"..i), "Label" )
+        prizeDescriptionText:setText( prizeConfig["DrawInformation"] )
     end
     
+    local moneyText = tolua.cast( mWidget:getChildByName("Label_balance"), "Label" )
     moneyText:setText( string.format( Constants.String.spinWheel.money_balance, moneyBalance ) )
-
-    prizeDescriptionText:setText( SpinWheelConfig.getLuckDrawDescription() )
 
     local submitBt = mWidget:getChildByName("Button_submit")
     if moneyBalance > MIN_MONEY_BALANCE_FOR_PAYOUT then

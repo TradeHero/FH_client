@@ -27,12 +27,44 @@ end
 
 --[[
     response data structure
-    {"RealMoneyBalance":17.0,"NumberOfLuckyDrawTickets":1,"NumberOfLuckDrawTicketsLeft":3487,"NumberOfLuckyDrawTicketsEachRound":3500,"LuckyDrawEmail":null}
+    {
+
+   "RealMoneyBalance": 8,
+
+   "LuckyDrawEmail": null,
+
+   "DrawTicketBalances": [
+
+      {
+
+         "PrizeId": 8,
+
+         "NumberOfLuckyDrawTickets": 3,
+
+         "NumberOfLuckDrawTicketsLeft": 3492,
+
+         "NumberOfLuckyDrawTicketsEachRound": 3500
+
+      },
+
+      {
+
+         "PrizeId": 12,
+
+         "NumberOfLuckyDrawTickets": 3,
+
+         "NumberOfLuckDrawTicketsLeft": 3496,
+
+         "NumberOfLuckyDrawTicketsEachRound": 3500
+
+      }
+   ]
+}
 --]]
 
 function onRequestSuccess( jsonResponse )
     local moneyBalance = jsonResponse["RealMoneyBalance"]
-    local ticketBalance = jsonResponse["NumberOfLuckyDrawTickets"]
+    local ticketBalance = jsonResponse["DrawTicketBalances"]
 
     local SpinBalanceScene = require("scripts.views.SpinBalanceScene")
     SpinBalanceScene.loadFrame( moneyBalance, ticketBalance )
