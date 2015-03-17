@@ -152,14 +152,7 @@
   <ProjectType>UIProject</ProjectType>
   <ResRelativePath />
   <imageFileList />
-  <imagePngList>
-    <string>spinWheel/bkg-balance-page.png</string>
-    <string>header/back.png</string>
-    <string>spinWheel/img-ticket.png</string>
-    <string>spinWheel/img-cash.png</string>
-    <string>spinWheel/btn-submit.png</string>
-    <string>spinWheel/img-ticket-2.png</string>
-  </imagePngList>
+  <imagePngList />
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>SpinWinnersScene.json</CurrentUIJson>
+  <CurrentUIJson>SpinWinnerContent.json</CurrentUIJson>
 </UIProject>
