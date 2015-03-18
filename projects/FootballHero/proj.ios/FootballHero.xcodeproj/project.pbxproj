@@ -197,6 +197,19 @@
 		46C1009316BF786A00F74D54 /* tolua_fix.c in Sources */ = {isa = PBXBuildFile; fileRef = 46C1008A16BF786A00F74D54 /* tolua_fix.c */; };
 		46C59AD317641FF300F43DC3 /* AudioEngine.lua in Resources */ = {isa = PBXBuildFile; fileRef = 46C59AD117641FF300F43DC3 /* AudioEngine.lua */; };
 		46C59AD417641FF300F43DC3 /* CCBReaderLoad.lua in Resources */ = {isa = PBXBuildFile; fileRef = 46C59AD217641FF300F43DC3 /* CCBReaderLoad.lua */; };
+		730332F11AB9232A00657F74 /* FacebookConnection.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 730332DE1AB9232A00657F74 /* FacebookConnection.framework */; };
+		730332F21AB9232A00657F74 /* WeChatConnection.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 730332DF1AB9232A00657F74 /* WeChatConnection.framework */; };
+		730332F31AB9232A00657F74 /* AGCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 730332E11AB9232A00657F74 /* AGCommon.framework */; };
+		730332F41AB9232A00657F74 /* ShareSDKLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 730332E21AB9232A00657F74 /* ShareSDKLocalizable.strings */; };
+		730332F51AB9232A00657F74 /* Resource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 730332E41AB9232A00657F74 /* Resource.bundle */; };
+		730332F61AB9232A00657F74 /* ShareSDKCoreService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 730332E51AB9232A00657F74 /* ShareSDKCoreService.framework */; };
+		730332F71AB9232A00657F74 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 730332E91AB9232A00657F74 /* libWeChatSDK.a */; };
+		730332F81AB9232A00657F74 /* ShareSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 730332EC1AB9232A00657F74 /* ShareSDK.framework */; };
+		730332F91AB9232A00657F74 /* ShareSDKFlatShareViewUI.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 730332EE1AB9232A00657F74 /* ShareSDKFlatShareViewUI.bundle */; };
+		730332FA1AB9232A00657F74 /* ShareSDKFlatShareViewUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 730332EF1AB9232A00657F74 /* ShareSDKFlatShareViewUI.framework */; };
+		730332FB1AB9232A00657F74 /* ShareSDKShareActionSheet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 730332F01AB9232A00657F74 /* ShareSDKShareActionSheet.framework */; };
+		730332FD1AB9250E00657F74 /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 730332FC1AB9250E00657F74 /* libicucore.dylib */; };
+		730332FF1AB9252400657F74 /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 730332FE1AB9252400657F74 /* libz.1.2.5.dylib */; };
 		7305FE1F1A5A803A0071C61E /* lapi.c in Sources */ = {isa = PBXBuildFile; fileRef = 7305FDE91A5A803A0071C61E /* lapi.c */; };
 		7305FE201A5A803A0071C61E /* lauxlib.c in Sources */ = {isa = PBXBuildFile; fileRef = 7305FDEB1A5A803A0071C61E /* lauxlib.c */; };
 		7305FE211A5A803A0071C61E /* lbaselib.c in Sources */ = {isa = PBXBuildFile; fileRef = 7305FDED1A5A803A0071C61E /* lbaselib.c */; };
@@ -847,6 +860,22 @@
 		46C1008B16BF786A00F74D54 /* tolua_fix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tolua_fix.h; sourceTree = "<group>"; };
 		46C59AD117641FF300F43DC3 /* AudioEngine.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AudioEngine.lua; sourceTree = "<group>"; };
 		46C59AD217641FF300F43DC3 /* CCBReaderLoad.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CCBReaderLoad.lua; sourceTree = "<group>"; };
+		730332DE1AB9232A00657F74 /* FacebookConnection.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookConnection.framework; sourceTree = "<group>"; };
+		730332DF1AB9232A00657F74 /* WeChatConnection.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = WeChatConnection.framework; sourceTree = "<group>"; };
+		730332E11AB9232A00657F74 /* AGCommon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AGCommon.framework; sourceTree = "<group>"; };
+		730332E31AB9232A00657F74 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/ShareSDKLocalizable.strings; sourceTree = "<group>"; };
+		730332E41AB9232A00657F74 /* Resource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Resource.bundle; sourceTree = "<group>"; };
+		730332E51AB9232A00657F74 /* ShareSDKCoreService.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ShareSDKCoreService.framework; sourceTree = "<group>"; };
+		730332E61AB9232A00657F74 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/ShareSDKLocalizable.strings"; sourceTree = "<group>"; };
+		730332E91AB9232A00657F74 /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
+		730332EA1AB9232A00657F74 /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
+		730332EB1AB9232A00657F74 /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
+		730332EC1AB9232A00657F74 /* ShareSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ShareSDK.framework; sourceTree = "<group>"; };
+		730332EE1AB9232A00657F74 /* ShareSDKFlatShareViewUI.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ShareSDKFlatShareViewUI.bundle; sourceTree = "<group>"; };
+		730332EF1AB9232A00657F74 /* ShareSDKFlatShareViewUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ShareSDKFlatShareViewUI.framework; sourceTree = "<group>"; };
+		730332F01AB9232A00657F74 /* ShareSDKShareActionSheet.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ShareSDKShareActionSheet.framework; sourceTree = "<group>"; };
+		730332FC1AB9250E00657F74 /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
+		730332FE1AB9252400657F74 /* libz.1.2.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.5.dylib; path = usr/lib/libz.1.2.5.dylib; sourceTree = SDKROOT; };
 		7305FDE91A5A803A0071C61E /* lapi.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lapi.c; path = lua/lapi.c; sourceTree = "<group>"; };
 		7305FDEA1A5A803A0071C61E /* lapi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = lapi.h; path = lua/lapi.h; sourceTree = "<group>"; };
 		7305FDEB1A5A803A0071C61E /* lauxlib.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lauxlib.c; path = lua/lauxlib.c; sourceTree = "<group>"; };
@@ -1246,6 +1275,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7314B4C119B717580065D927 /* Security.framework in Frameworks */,
+				730332FF1AB9252400657F74 /* libz.1.2.5.dylib in Frameworks */,
+				730332FD1AB9250E00657F74 /* libicucore.dylib in Frameworks */,
 				732CCE761A8B5C63001533F0 /* libxml2.2.dylib in Frameworks */,
 				732CCE731A8B58E9001533F0 /* libresolv.9.dylib in Frameworks */,
 				732CCE711A8B5800001533F0 /* CoreMedia.framework in Frameworks */,
@@ -1256,21 +1288,27 @@
 				7314B4C519B717870065D927 /* CoreLocation.framework in Frameworks */,
 				7305FE401A5A80720071C61E /* liblua.a in Frameworks */,
 				7314B4C319B7177D0065D927 /* CoreTelephony.framework in Frameworks */,
-				7314B4C119B717580065D927 /* Security.framework in Frameworks */,
 				7314B4BF19B7174A0065D927 /* MobileCoreServices.framework in Frameworks */,
 				7314B4BD19B717300065D927 /* CFNetwork.framework in Frameworks */,
 				73FC0A19199074C10006D0E2 /* SystemConfiguration.framework in Frameworks */,
 				73FC0A17199074B40006D0E2 /* libsqlite3.dylib in Frameworks */,
+				730332F31AB9232A00657F74 /* AGCommon.framework in Frameworks */,
+				730332F61AB9232A00657F74 /* ShareSDKCoreService.framework in Frameworks */,
+				730332F71AB9232A00657F74 /* libWeChatSDK.a in Frameworks */,
 				73FC0A15199074A40006D0E2 /* libz.dylib in Frameworks */,
+				730332F81AB9232A00657F74 /* ShareSDK.framework in Frameworks */,
 				BF5CC51D1A6CA748004FE15D /* libAppsFlyerLib.a in Frameworks */,
 				73FC0A13199074810006D0E2 /* AdSupport.framework in Frameworks */,
 				734532A71965056400E5D444 /* MessageUI.framework in Frameworks */,
+				730332F11AB9232A00657F74 /* FacebookConnection.framework in Frameworks */,
 				73EDFC8B18ECF85F00322624 /* FacebookSDK.framework in Frameworks */,
 				15C1568E1683131500D239F2 /* libcurl.a in Frameworks */,
 				15C1568C168311EC00D239F2 /* libcocos2dx.a in Frameworks */,
 				73FC0A1A1990781F0006D0E2 /* QuartzCore.framework in Frameworks */,
+				730332FA1AB9232A00657F74 /* ShareSDKFlatShareViewUI.framework in Frameworks */,
 				F293B3CF15EB7BE500256477 /* OpenGLES.framework in Frameworks */,
 				F293B3D115EB7BE500256477 /* OpenAL.framework in Frameworks */,
+				730332F21AB9232A00657F74 /* WeChatConnection.framework in Frameworks */,
 				F293B3D315EB7BE500256477 /* AudioToolbox.framework in Frameworks */,
 				F293B3D515EB7BE500256477 /* AVFoundation.framework in Frameworks */,
 				F293B3D715EB7BE500256477 /* UIKit.framework in Frameworks */,
@@ -1278,6 +1316,7 @@
 				F293B3DB15EB7BE500256477 /* CoreGraphics.framework in Frameworks */,
 				1A9D7E63171E38B2000B3B9A /* libluajit.a in Frameworks */,
 				73B0326919BED7620034452A /* MobileAppTracker.framework in Frameworks */,
+				730332FB1AB9232A00657F74 /* ShareSDKShareActionSheet.framework in Frameworks */,
 				7314B46519B714BC0065D927 /* libUAirship-4.0.3.a in Frameworks */,
 				1AB87031175E0A5B005D39BF /* libwebsockets.a in Frameworks */,
 			);
@@ -2030,6 +2069,66 @@
 				46C59AD217641FF300F43DC3 /* CCBReaderLoad.lua */,
 			);
 			path = script;
+			sourceTree = "<group>";
+		};
+		730332DC1AB9232A00657F74 /* ShareSDK */ = {
+			isa = PBXGroup;
+			children = (
+				730332DD1AB9232A00657F74 /* Connection */,
+				730332E01AB9232A00657F74 /* Core */,
+				730332E71AB9232A00657F74 /* Extend */,
+				730332EC1AB9232A00657F74 /* ShareSDK.framework */,
+				730332ED1AB9232A00657F74 /* UI */,
+			);
+			path = ShareSDK;
+			sourceTree = "<group>";
+		};
+		730332DD1AB9232A00657F74 /* Connection */ = {
+			isa = PBXGroup;
+			children = (
+				730332DE1AB9232A00657F74 /* FacebookConnection.framework */,
+				730332DF1AB9232A00657F74 /* WeChatConnection.framework */,
+			);
+			path = Connection;
+			sourceTree = "<group>";
+		};
+		730332E01AB9232A00657F74 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				730332E11AB9232A00657F74 /* AGCommon.framework */,
+				730332E21AB9232A00657F74 /* ShareSDKLocalizable.strings */,
+				730332E41AB9232A00657F74 /* Resource.bundle */,
+				730332E51AB9232A00657F74 /* ShareSDKCoreService.framework */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		730332E71AB9232A00657F74 /* Extend */ = {
+			isa = PBXGroup;
+			children = (
+				730332E81AB9232A00657F74 /* WeChatSDK */,
+			);
+			path = Extend;
+			sourceTree = "<group>";
+		};
+		730332E81AB9232A00657F74 /* WeChatSDK */ = {
+			isa = PBXGroup;
+			children = (
+				730332E91AB9232A00657F74 /* libWeChatSDK.a */,
+				730332EA1AB9232A00657F74 /* WXApi.h */,
+				730332EB1AB9232A00657F74 /* WXApiObject.h */,
+			);
+			path = WeChatSDK;
+			sourceTree = "<group>";
+		};
+		730332ED1AB9232A00657F74 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				730332EE1AB9232A00657F74 /* ShareSDKFlatShareViewUI.bundle */,
+				730332EF1AB9232A00657F74 /* ShareSDKFlatShareViewUI.framework */,
+				730332F01AB9232A00657F74 /* ShareSDKShareActionSheet.framework */,
+			);
+			path = UI;
 			sourceTree = "<group>";
 		};
 		7305FDE81A5A800E0071C61E /* lua */ = {
@@ -2797,6 +2896,8 @@
 		F293B3BD15EB7BE500256477 = {
 			isa = PBXGroup;
 			children = (
+				F293BB7C15EB830F00256477 /* Classes */,
+				730332DC1AB9232A00657F74 /* ShareSDK */,
 				732CCE771A8B5DFE001533F0 /* QuickBlox */,
 				BF5CC5181A6CA747004FE15D /* AF-iOS-SDK-v2.5.3.11 */,
 				7305FE411A5A82000071C61E /* AMP-SDK */,
@@ -2804,7 +2905,6 @@
 				15C1533E168310C700D239F2 /* cocos2dx.xcodeproj */,
 				15C154A71683118600D239F2 /* Box2D */,
 				15C1542E1683116B00D239F2 /* chipmunk */,
-				F293BB7C15EB830F00256477 /* Classes */,
 				15C1555A168311AA00D239F2 /* CocosDenshion */,
 				15C153791683112E00D239F2 /* extensions */,
 				F293B3CB15EB7BE500256477 /* Frameworks */,
@@ -2827,6 +2927,8 @@
 		F293B3CB15EB7BE500256477 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				730332FE1AB9252400657F74 /* libz.1.2.5.dylib */,
+				730332FC1AB9250E00657F74 /* libicucore.dylib */,
 				732CCE751A8B5C63001533F0 /* libxml2.2.dylib */,
 				732CCE721A8B58E9001533F0 /* libresolv.9.dylib */,
 				732CCE701A8B5800001533F0 /* CoreMedia.framework */,
@@ -2890,8 +2992,8 @@
 		F293BB7C15EB830F00256477 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				F293BB7E15EB831F00256477 /* AppDelegate.cpp */,
 				F293BB7F15EB831F00256477 /* AppDelegate.h */,
+				F293BB7E15EB831F00256477 /* AppDelegate.cpp */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -2982,6 +3084,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				"zh-Hans",
 			);
 			mainGroup = F293B3BD15EB7BE500256477;
 			productRefGroup = F293B3C915EB7BE500256477 /* Products */;
@@ -3047,7 +3150,9 @@
 				730D984318DC4317000CA5F9 /* CCBReaderLoad.lua in Resources */,
 				7314B4B619B715350065D927 /* UAPushSettingsSoundsViewController.xib in Resources */,
 				73495B9019C048D300626812 /* UAInboxMessageViewController.xib in Resources */,
+				730332F51AB9232A00657F74 /* Resource.bundle in Resources */,
 				7314B4AF19B715350065D927 /* UALocationSettingsViewController.xib in Resources */,
+				730332F41AB9232A00657F74 /* ShareSDKLocalizable.strings in Resources */,
 				730D984C18DC4317000CA5F9 /* json.lua in Resources */,
 				730D984418DC4317000CA5F9 /* Cocos2d.lua in Resources */,
 				7305FE481A5A820F0071C61E /* iOSa_2.60.0.version in Resources */,
@@ -3070,6 +3175,7 @@
 				73846DE01A6E6E5A001B4EF1 /* th in Resources */,
 				738BA12A193D7FD2008A74F6 /* DES56.lua in Resources */,
 				730D984618DC4317000CA5F9 /* config in Resources */,
+				730332F91AB9232A00657F74 /* ShareSDKFlatShareViewUI.bundle in Resources */,
 				46C59AD317641FF300F43DC3 /* AudioEngine.lua in Resources */,
 				73BFF75F19177A46002F173A /* MD5.lua in Resources */,
 				7314B4B719B715350065D927 /* UAPushSettingsTagsViewController.xib in Resources */,
@@ -3431,6 +3537,18 @@
 		};
 /* End PBXTargetDependency section */
 
+/* Begin PBXVariantGroup section */
+		730332E21AB9232A00657F74 /* ShareSDKLocalizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				730332E31AB9232A00657F74 /* en */,
+				730332E61AB9232A00657F74 /* zh-Hans */,
+			);
+			name = ShareSDKLocalizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
 /* Begin XCBuildConfiguration section */
 		F293B6C215EB7BEA00256477 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -3512,7 +3630,11 @@
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)",
+					"\"$(PROJECT_DIR)\"",
+					"\"$(PROJECT_DIR)/ShareSDK/Connection\"",
+					"\"$(PROJECT_DIR)/ShareSDK/Core\"",
+					"\"$(PROJECT_DIR)/ShareSDK\"",
+					"\"$(PROJECT_DIR)/ShareSDK/UI\"",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -3547,7 +3669,7 @@
 				INFOPLIST_FILE = Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				LIBRARY_SEARCH_PATHS = (
-					"$(SRCROOT)/../../../cocos2dx/platform/third_party/ios/libraries",
+					"\"$(SRCROOT)/../../../cocos2dx/platform/third_party/ios/libraries\"",
 					"$(inherited)",
 					"\"$(SRCROOT)/../../../scripting/lua/luajit/ios\"",
 					"\"$(SRCROOT)/../../../external/libwebsockets/ios/lib\"",
@@ -3556,6 +3678,7 @@
 					"\"$(SRCROOT)/../../../scripting/lua/lua/ios\"",
 					"$(PROJECT_DIR)/AMP-SDK",
 					"$(PROJECT_DIR)/AF-iOS-SDK-v2.5.3.11",
+					"$(PROJECT_DIR)/ShareSDK/Extend/WeChatSDK",
 				);
 				OTHER_LDFLAGS = (
 					"-lxml2",
@@ -3583,7 +3706,11 @@
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)",
+					"\"$(PROJECT_DIR)\"",
+					"\"$(PROJECT_DIR)/ShareSDK/Connection\"",
+					"\"$(PROJECT_DIR)/ShareSDK/Core\"",
+					"\"$(PROJECT_DIR)/ShareSDK\"",
+					"\"$(PROJECT_DIR)/ShareSDK/UI\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Prefix.pch;
@@ -3616,7 +3743,7 @@
 				INFOPLIST_FILE = Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				LIBRARY_SEARCH_PATHS = (
-					"$(SRCROOT)/../../../cocos2dx/platform/third_party/ios/libraries",
+					"\"$(SRCROOT)/../../../cocos2dx/platform/third_party/ios/libraries\"",
 					"$(inherited)",
 					"\"$(SRCROOT)/../../../scripting/lua/luajit/ios\"",
 					"\"$(SRCROOT)/../../../external/libwebsockets/ios/lib\"",
@@ -3625,6 +3752,7 @@
 					"\"$(SRCROOT)/../../../scripting/lua/lua/ios\"",
 					"$(PROJECT_DIR)/AMP-SDK",
 					"$(PROJECT_DIR)/AF-iOS-SDK-v2.5.3.11",
+					"$(PROJECT_DIR)/ShareSDK/Extend/WeChatSDK",
 				);
 				OTHER_LDFLAGS = (
 					"-lxml2",
