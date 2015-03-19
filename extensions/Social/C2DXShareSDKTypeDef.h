@@ -110,7 +110,7 @@ namespace cn
         /**
          *	@brief	授权返回回调事件
          */
-        typedef void(*C2DXAuthResultEvent) (C2DXResponseState state, C2DXPlatType platType, CCDictionary *error);
+        typedef void(*C2DXAuthResultEvent) (C2DXResponseState state, C2DXPlatType platType, CCDictionary *error, const char* accessToken);
         
         /**
          *	@brief	获取用户信息返回回调事件

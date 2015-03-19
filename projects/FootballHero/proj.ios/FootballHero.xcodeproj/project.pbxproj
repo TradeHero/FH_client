@@ -350,6 +350,8 @@
 		73495B8E19C048D300626812 /* UAInboxMessageListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73495B8119C048D300626812 /* UAInboxMessageListCell.xib */; };
 		73495B8F19C048D300626812 /* UAInboxMessageListController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73495B8219C048D300626812 /* UAInboxMessageListController.xib */; };
 		73495B9019C048D300626812 /* UAInboxMessageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73495B8319C048D300626812 /* UAInboxMessageViewController.xib */; };
+		734F0B731AB9837300AD3C93 /* C2DXShareSDK.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 734F0B711AB9837300AD3C93 /* C2DXShareSDK.cpp */; };
+		734F0B761AB983A000AD3C93 /* C2DXiOSShareSDK.mm in Sources */ = {isa = PBXBuildFile; fileRef = 734F0B751AB983A000AD3C93 /* C2DXiOSShareSDK.mm */; };
 		7365C0D218FCE99200C39027 /* FBSessionSingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 7365C0D118FCE99200C39027 /* FBSessionSingleton.m */; };
 		73846DD81A6CBBE0001B4EF1 /* DefaultString.lua in Resources */ = {isa = PBXBuildFile; fileRef = 73846DD71A6CBBE0001B4EF1 /* DefaultString.lua */; };
 		73846DDB1A6E3C8B001B4EF1 /* id in Resources */ = {isa = PBXBuildFile; fileRef = 73846DDA1A6E3C8B001B4EF1 /* id */; };
@@ -1096,6 +1098,12 @@
 		73495B8119C048D300626812 /* UAInboxMessageListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UAInboxMessageListCell.xib; sourceTree = "<group>"; };
 		73495B8219C048D300626812 /* UAInboxMessageListController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UAInboxMessageListController.xib; sourceTree = "<group>"; };
 		73495B8319C048D300626812 /* UAInboxMessageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UAInboxMessageViewController.xib; sourceTree = "<group>"; };
+		734F0B701AB9837300AD3C93 /* C2DXShareSDKTypeDef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = C2DXShareSDKTypeDef.h; path = Social/C2DXShareSDKTypeDef.h; sourceTree = "<group>"; };
+		734F0B711AB9837300AD3C93 /* C2DXShareSDK.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = C2DXShareSDK.cpp; path = Social/C2DXShareSDK.cpp; sourceTree = "<group>"; };
+		734F0B721AB9837300AD3C93 /* C2DXShareSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = C2DXShareSDK.h; path = Social/C2DXShareSDK.h; sourceTree = "<group>"; };
+		734F0B741AB983A000AD3C93 /* C2DXiOSShareSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C2DXiOSShareSDK.h; sourceTree = "<group>"; };
+		734F0B751AB983A000AD3C93 /* C2DXiOSShareSDK.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = C2DXiOSShareSDK.mm; sourceTree = "<group>"; };
+		734F0B771ABA741D00AD3C93 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		7365C0D018FCE99200C39027 /* FBSessionSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBSessionSingleton.h; sourceTree = "<group>"; };
 		7365C0D118FCE99200C39027 /* FBSessionSingleton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBSessionSingleton.m; sourceTree = "<group>"; };
 		73846DD71A6CBBE0001B4EF1 /* DefaultString.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = DefaultString.lua; sourceTree = "<group>"; };
@@ -2617,6 +2625,9 @@
 		73EDFC8118EBE6A600322624 /* Social */ = {
 			isa = PBXGroup;
 			children = (
+				734F0B701AB9837300AD3C93 /* C2DXShareSDKTypeDef.h */,
+				734F0B711AB9837300AD3C93 /* C2DXShareSDK.cpp */,
+				734F0B721AB9837300AD3C93 /* C2DXShareSDK.h */,
 				73EDFC7E18EBE69E00322624 /* FacebookDelegate.h */,
 				73EDFC7D18EBE69E00322624 /* FacebookDelegate.cpp */,
 			);
@@ -2927,6 +2938,7 @@
 		F293B3CB15EB7BE500256477 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				734F0B771ABA741D00AD3C93 /* libc++.dylib */,
 				730332FE1AB9252400657F74 /* libz.1.2.5.dylib */,
 				730332FC1AB9250E00657F74 /* libicucore.dylib */,
 				732CCE751A8B5C63001533F0 /* libxml2.2.dylib */,
@@ -2966,6 +2978,8 @@
 		F293B6E815EB807E00256477 /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
+				734F0B741AB983A000AD3C93 /* C2DXiOSShareSDK.h */,
+				734F0B751AB983A000AD3C93 /* C2DXiOSShareSDK.mm */,
 				732CCE961A8DAD95001533F0 /* QuickBloxChatHandler.h */,
 				732CCE971A8DAD95001533F0 /* QuickBloxChatHandler.mm */,
 				7314B4CA19B718240065D927 /* AirshipConfig.plist */,
@@ -3276,6 +3290,7 @@
 				373F99411869F07A0080E035 /* CCActionNode.cpp in Sources */,
 				15C1541D1683112E00D239F2 /* CCEditBoxImplIOS.mm in Sources */,
 				15C1541F1683112E00D239F2 /* CCScrollView.cpp in Sources */,
+				734F0B731AB9837300AD3C93 /* C2DXShareSDK.cpp in Sources */,
 				15C154201683112E00D239F2 /* CCSorting.cpp in Sources */,
 				15C154211683112E00D239F2 /* CCTableView.cpp in Sources */,
 				15C154221683112E00D239F2 /* CCTableViewCell.cpp in Sources */,
@@ -3347,6 +3362,7 @@
 				ED35C0DE18323498002A0750 /* CCInputDelegate.cpp in Sources */,
 				7320C6171A59461E009E47CC /* ScrollViewReader.cpp in Sources */,
 				15C155241683118600D239F2 /* b2Distance.cpp in Sources */,
+				734F0B761AB983A000AD3C93 /* C2DXiOSShareSDK.mm in Sources */,
 				15C155251683118600D239F2 /* b2DynamicTree.cpp in Sources */,
 				15C155261683118600D239F2 /* b2TimeOfImpact.cpp in Sources */,
 				15C155271683118600D239F2 /* b2ChainShape.cpp in Sources */,

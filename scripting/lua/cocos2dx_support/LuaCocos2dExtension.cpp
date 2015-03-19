@@ -1,6 +1,6 @@
 /*
 ** Lua binding: Extension
-** Generated automatically by tolua++-1.0.92 on 02/15/15 17:06:23.
+** Generated automatically by tolua++-1.0.92 on 03/19/15 12:19:12.
 */
 
 /****************************************************************************
@@ -42,11 +42,13 @@ extern "C" {
 #include "WebviewDelegate.h"
 #include "Misc.h"
 #include "QuickBloxChat.h"
+#include "C2DXShareSDK.h"
 
 using namespace cocos2d;
 using namespace cocos2d::extension;
 using namespace Social;
 using namespace Utils;
+using namespace cn::sharesdk;
 
 
 
@@ -55,10 +57,13 @@ using namespace Utils;
 /* function to register type */
 static void tolua_reg_types (lua_State* tolua_S)
 {
+ tolua_usertype(tolua_S,"CCEditBoxDelegate");
  tolua_usertype(tolua_S,"Misc");
  tolua_usertype(tolua_S,"CCLayer");
+ tolua_usertype(tolua_S,"CCArray");
  tolua_usertype(tolua_S,"cocos2d::CCNode");
  tolua_usertype(tolua_S,"HttpRequestForLua");
+ tolua_usertype(tolua_S,"C2DXShareSDK");
  tolua_usertype(tolua_S,"WebviewDelegate");
  tolua_usertype(tolua_S,"Analytics");
  tolua_usertype(tolua_S,"CCHttpRequest");
@@ -66,7 +71,7 @@ static void tolua_reg_types (lua_State* tolua_S)
  tolua_usertype(tolua_S,"QuickBloxChat");
  
  tolua_usertype(tolua_S,"CCObject");
- tolua_usertype(tolua_S,"CCEditBoxDelegate");
+ tolua_usertype(tolua_S,"CCDictionary");
  tolua_usertype(tolua_S,"EditBoxDelegateForLua");
 }
 
@@ -1705,6 +1710,102 @@ static int tolua_Extension_QuickBloxChat_setNewMessageHandler00(lua_State* tolua
 }
 #endif //#ifndef TOLUA_DISABLE
 
+/* method: authorize of class  C2DXShareSDK */
+#ifndef TOLUA_DISABLE_tolua_Extension_C2DXShareSDK_authorize00
+static int tolua_Extension_C2DXShareSDK_authorize00(lua_State* tolua_S)
+{
+#ifndef TOLUA_RELEASE
+ tolua_Error tolua_err;
+ if (
+     !tolua_isusertable(tolua_S,1,"C2DXShareSDK",0,&tolua_err) ||
+     !tolua_isnumber(tolua_S,2,0,&tolua_err) ||
+     (tolua_isvaluenil(tolua_S,3,&tolua_err) || !toluafix_isfunction(tolua_S,3,"LUA_FUNCTION",0,&tolua_err)) ||
+     !tolua_isnoobj(tolua_S,4,&tolua_err)
+ )
+  goto tolua_lerror;
+ else
+#endif
+ {
+  C2DXPlatType platType = ((C2DXPlatType) (int)  tolua_tonumber(tolua_S,2,0));
+  LUA_FUNCTION handler = (  toluafix_ref_function(tolua_S,3,0));
+  {
+   C2DXShareSDK::authorize(platType,handler);
+  }
+ }
+ return 0;
+#ifndef TOLUA_RELEASE
+ tolua_lerror:
+ tolua_error(tolua_S,"#ferror in function 'authorize'.",&tolua_err);
+ return 0;
+#endif
+}
+#endif //#ifndef TOLUA_DISABLE
+
+/* method: hasAutorized of class  C2DXShareSDK */
+#ifndef TOLUA_DISABLE_tolua_Extension_C2DXShareSDK_hasAutorized00
+static int tolua_Extension_C2DXShareSDK_hasAutorized00(lua_State* tolua_S)
+{
+#ifndef TOLUA_RELEASE
+ tolua_Error tolua_err;
+ if (
+     !tolua_isusertable(tolua_S,1,"C2DXShareSDK",0,&tolua_err) ||
+     !tolua_isnumber(tolua_S,2,0,&tolua_err) ||
+     (tolua_isvaluenil(tolua_S,3,&tolua_err) || !toluafix_isfunction(tolua_S,3,"LUA_FUNCTION",0,&tolua_err)) ||
+     !tolua_isnoobj(tolua_S,4,&tolua_err)
+ )
+  goto tolua_lerror;
+ else
+#endif
+ {
+  C2DXPlatType platType = ((C2DXPlatType) (int)  tolua_tonumber(tolua_S,2,0));
+  LUA_FUNCTION handler = (  toluafix_ref_function(tolua_S,3,0));
+  {
+   bool tolua_ret = (bool)  C2DXShareSDK::hasAutorized(platType,handler);
+   tolua_pushboolean(tolua_S,(bool)tolua_ret);
+  }
+ }
+ return 1;
+#ifndef TOLUA_RELEASE
+ tolua_lerror:
+ tolua_error(tolua_S,"#ferror in function 'hasAutorized'.",&tolua_err);
+ return 0;
+#endif
+}
+#endif //#ifndef TOLUA_DISABLE
+
+/* method: showShareMenu of class  C2DXShareSDK */
+#ifndef TOLUA_DISABLE_tolua_Extension_C2DXShareSDK_showShareMenu00
+static int tolua_Extension_C2DXShareSDK_showShareMenu00(lua_State* tolua_S)
+{
+#ifndef TOLUA_RELEASE
+ tolua_Error tolua_err;
+ if (
+     !tolua_isusertable(tolua_S,1,"C2DXShareSDK",0,&tolua_err) ||
+     !tolua_isusertype(tolua_S,2,"CCArray",0,&tolua_err) ||
+     !tolua_isusertype(tolua_S,3,"CCDictionary",0,&tolua_err) ||
+     (tolua_isvaluenil(tolua_S,4,&tolua_err) || !toluafix_isfunction(tolua_S,4,"LUA_FUNCTION",0,&tolua_err)) ||
+     !tolua_isnoobj(tolua_S,5,&tolua_err)
+ )
+  goto tolua_lerror;
+ else
+#endif
+ {
+  CCArray* platTypes = ((CCArray*)  tolua_tousertype(tolua_S,2,0));
+  CCDictionary* content = ((CCDictionary*)  tolua_tousertype(tolua_S,3,0));
+  LUA_FUNCTION handler = (  toluafix_ref_function(tolua_S,4,0));
+  {
+   C2DXShareSDK::showShareMenu(platTypes,content,handler);
+  }
+ }
+ return 0;
+#ifndef TOLUA_RELEASE
+ tolua_lerror:
+ tolua_error(tolua_S,"#ferror in function 'showShareMenu'.",&tolua_err);
+ return 0;
+#endif
+}
+#endif //#ifndef TOLUA_DISABLE
+
 /* Open function */
 TOLUA_API int tolua_Extension_open (lua_State* tolua_S)
 {
@@ -1803,6 +1904,62 @@ TOLUA_API int tolua_Extension_open (lua_State* tolua_S)
    tolua_function(tolua_S,"leaveChatRoom",tolua_Extension_QuickBloxChat_leaveChatRoom00);
    tolua_function(tolua_S,"sendMessage",tolua_Extension_QuickBloxChat_sendMessage00);
    tolua_function(tolua_S,"setNewMessageHandler",tolua_Extension_QuickBloxChat_setNewMessageHandler00);
+  tolua_endmodule(tolua_S);
+  tolua_constant(tolua_S,"C2DXPlatTypeSinaWeibo",C2DXPlatTypeSinaWeibo);
+  tolua_constant(tolua_S,"C2DXPlatTypeTencentWeibo",C2DXPlatTypeTencentWeibo);
+  tolua_constant(tolua_S,"C2DXPlatTypeSohuWeibo",C2DXPlatTypeSohuWeibo);
+  tolua_constant(tolua_S,"C2DXPlatTypeDouBan",C2DXPlatTypeDouBan);
+  tolua_constant(tolua_S,"C2DXPlatTypeQZone",C2DXPlatTypeQZone);
+  tolua_constant(tolua_S,"C2DXPlatTypeRenren",C2DXPlatTypeRenren);
+  tolua_constant(tolua_S,"C2DXPlatTypeKaixin",C2DXPlatTypeKaixin);
+  tolua_constant(tolua_S,"C2DXPlatTypePengyou",C2DXPlatTypePengyou);
+  tolua_constant(tolua_S,"C2DXPlatTypeFacebook",C2DXPlatTypeFacebook);
+  tolua_constant(tolua_S,"C2DXPlatTypeTwitter",C2DXPlatTypeTwitter);
+  tolua_constant(tolua_S,"C2DXPlatTypeEvernote",C2DXPlatTypeEvernote);
+  tolua_constant(tolua_S,"C2DXPlatTypeFoursquare",C2DXPlatTypeFoursquare);
+  tolua_constant(tolua_S,"C2DXPlatTypeGooglePlus",C2DXPlatTypeGooglePlus);
+  tolua_constant(tolua_S,"C2DXPlatTypeInstagram",C2DXPlatTypeInstagram);
+  tolua_constant(tolua_S,"C2DXPlatTypeLinkedIn",C2DXPlatTypeLinkedIn);
+  tolua_constant(tolua_S,"C2DXPlatTypeTumblr",C2DXPlatTypeTumblr);
+  tolua_constant(tolua_S,"C2DXPlatTypeMail",C2DXPlatTypeMail);
+  tolua_constant(tolua_S,"C2DXPlatTypeSMS",C2DXPlatTypeSMS);
+  tolua_constant(tolua_S,"C2DXPlatTypeAirPrint",C2DXPlatTypeAirPrint);
+  tolua_constant(tolua_S,"C2DXPlatTypeCopy",C2DXPlatTypeCopy);
+  tolua_constant(tolua_S,"C2DXPlatTypeWeixiSession",C2DXPlatTypeWeixiSession);
+  tolua_constant(tolua_S,"C2DXPlatTypeWeixiTimeline",C2DXPlatTypeWeixiTimeline);
+  tolua_constant(tolua_S,"C2DXPlatTypeQQ",C2DXPlatTypeQQ);
+  tolua_constant(tolua_S,"C2DXPlatTypeInstapaper",C2DXPlatTypeInstapaper);
+  tolua_constant(tolua_S,"C2DXPlatTypePocket",C2DXPlatTypePocket);
+  tolua_constant(tolua_S,"C2DXPlatTypeYouDaoNote",C2DXPlatTypeYouDaoNote);
+  tolua_constant(tolua_S,"C2DXPlatTypeSohuKan",C2DXPlatTypeSohuKan);
+  tolua_constant(tolua_S,"C2DXPlatTypePinterest",C2DXPlatTypePinterest);
+  tolua_constant(tolua_S,"C2DXPlatTypeFlickr",C2DXPlatTypeFlickr);
+  tolua_constant(tolua_S,"C2DXPlatTypeDropbox",C2DXPlatTypeDropbox);
+  tolua_constant(tolua_S,"C2DXPlatTypeVKontakte",C2DXPlatTypeVKontakte);
+  tolua_constant(tolua_S,"C2DXPlatTypeWeixiFav",C2DXPlatTypeWeixiFav);
+  tolua_constant(tolua_S,"C2DXPlatTypeYiXinSession",C2DXPlatTypeYiXinSession);
+  tolua_constant(tolua_S,"C2DXPlatTypeYiXinTimeline",C2DXPlatTypeYiXinTimeline);
+  tolua_constant(tolua_S,"C2DXPlatTypeYiXinFav",C2DXPlatTypeYiXinFav);
+  tolua_constant(tolua_S,"C2DXPlatTypeMingDao",C2DXPlatTypeMingDao);
+  tolua_constant(tolua_S,"C2DXPlatTypeLine",C2DXPlatTypeLine);
+  tolua_constant(tolua_S,"C2DXPlatTypeWhatsApp",C2DXPlatTypeWhatsApp);
+  tolua_constant(tolua_S,"C2DXPlatTypeKaKaoTalk",C2DXPlatTypeKaKaoTalk);
+  tolua_constant(tolua_S,"C2DXPlatTypeKaKaoStory",C2DXPlatTypeKaKaoStory);
+  tolua_constant(tolua_S,"C2DXPlatTypeAny",C2DXPlatTypeAny);
+  tolua_constant(tolua_S,"C2DXContentTypeText",C2DXContentTypeText);
+  tolua_constant(tolua_S,"C2DXContentTypeImage",C2DXContentTypeImage);
+  tolua_constant(tolua_S,"C2DXContentTypeNews",C2DXContentTypeNews);
+  tolua_constant(tolua_S,"C2DXContentTypeMusic",C2DXContentTypeMusic);
+  tolua_constant(tolua_S,"C2DXContentTypeVideo",C2DXContentTypeVideo);
+  tolua_constant(tolua_S,"C2DXContentTypeApp",C2DXContentTypeApp);
+  tolua_constant(tolua_S,"C2DXContentTypeNonGif",C2DXContentTypeNonGif);
+  tolua_constant(tolua_S,"C2DXContentTypeGif",C2DXContentTypeGif);
+  tolua_constant(tolua_S,"C2DXContentTypeFile",C2DXContentTypeFile);
+  tolua_cclass(tolua_S,"C2DXShareSDK","C2DXShareSDK","",NULL);
+  tolua_beginmodule(tolua_S,"C2DXShareSDK");
+   tolua_function(tolua_S,"authorize",tolua_Extension_C2DXShareSDK_authorize00);
+   tolua_function(tolua_S,"hasAutorized",tolua_Extension_C2DXShareSDK_hasAutorized00);
+   tolua_function(tolua_S,"showShareMenu",tolua_Extension_C2DXShareSDK_showShareMenu00);
   tolua_endmodule(tolua_S);
  tolua_endmodule(tolua_S);
  return 1;

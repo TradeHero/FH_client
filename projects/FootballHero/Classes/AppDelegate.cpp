@@ -338,7 +338,8 @@ void authResultHandler(C2DXResponseState state, C2DXPlatType platType, CCDiction
             content -> setObject(CCString::create("extInfo"), "extInfo");
             
             
-            C2DXShareSDK::shareContent(C2DXPlatTypeFacebook, content, NULL);
+            //C2DXShareSDK::shareContent(C2DXPlatTypeFacebook, content, 0);
+            C2DXShareSDK::showShareView(C2DXPlatTypeFacebook, content, NULL);
 
             break;
         }
@@ -374,9 +375,10 @@ void AppDelegate::initPlatformConfig()
     C2DXShareSDK::setPlatformConfig(C2DXPlatTypeWeixiSession, wcConfigDict);
     C2DXShareSDK::setPlatformConfig(C2DXPlatTypeWeixiTimeline, wcConfigDict);
     
+    /**
     C2DXShareSDK::authorize(C2DXPlatTypeFacebook, authResultHandler);
     
-    /** Share example w/o shareMenu
+    // Share example w/o shareMenu
     CCDictionary *content = CCDictionary::create();
     content -> setObject(CCString::create("I have won a prize in FootballHero Spin-The-Wheel game! Download now for a chance to win Messi & Ronaldo Signed Jerseys!"), "content");
     content -> setObject(CCString::create("https://fbexternal-a.akamaihd.net/safe_image.php?d=AQDUZiW0WQBqnF67&w=487&h=255&url=http%3A%2F%2Ffhmainstorage.blob.core.windows.net%2Ffhres%2Fspin-the-wheel-1200x650.png&cfs=1&upscale=1"), "image");

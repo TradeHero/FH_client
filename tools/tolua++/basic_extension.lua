@@ -302,11 +302,13 @@ extern "C" {
 #include "WebviewDelegate.h"
 #include "Misc.h"
 #include "QuickBloxChat.h"
+#include "C2DXShareSDK.h"
 
 using namespace cocos2d;
 using namespace cocos2d::extension;
 using namespace Social;
-using namespace Utils;]])
+using namespace Utils;
+using namespace cn::sharesdk;]])
 
       replace([[/* Exported function */
 TOLUA_API int  tolua_Extension_open (lua_State* tolua_S);]], [[]])

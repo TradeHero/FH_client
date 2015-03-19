@@ -1,13 +1,13 @@
 //
-//  C2DXShareSDK.h
+//  C2DXiOSShareSDK.h
 //  C2DXShareSDKSample
 //
 //  Created by 冯 鸿杰 on 13-12-17.
 //
 //
 
-#ifndef __C2DXShareSDKSample__C2DXShareSDK__
-#define __C2DXShareSDKSample__C2DXShareSDK__
+#ifndef __C2DXShareSDKSample__C2DXiOSShareSDK__
+#define __C2DXShareSDKSample__C2DXiOSShareSDK__
 
 #include <iostream>
 #include "cocos2d.h"
@@ -20,9 +20,9 @@ namespace cn
     namespace sharesdk
     {
         /**
-         *	@brief	ShareSDK
+         *	@brief	ShareSDK (iOS)
          */
-        class C2DXShareSDK
+        class C2DXiOSShareSDK
         {
         public:
             
@@ -111,11 +111,12 @@ namespace cn
              *
              *	@param 	platTypes 	平台类型列表
              *	@param 	content 	分享内容
-             *	@param 	pt          弹出分享菜单的位置，仅用于设置iPad分享菜单弹出
+             *	@param 	pt          弹出分享菜单参位置，仅用于设置iPad分享菜单弹出
              *  @param  direction   弹出分享菜单指向，仅用于设置iPad分享菜单弹出
              *	@param 	callback 	回调方法
              */
             static void showShareMenu(CCArray *platTypes, CCDictionary *content, CCPoint pt, C2DXMenuArrowDirection direction, C2DXShareResultEvent callback);
+            
             
             /**
              *	@brief	显示分享视图
@@ -125,12 +126,8 @@ namespace cn
              *	@param 	callback 	回调方法
              */
             static void showShareView(C2DXPlatType platType, CCDictionary *content, C2DXShareResultEvent callback);
-            
-            
         };
     }
 }
 
-
-
-#endif /* defined(__C2DXShareSDKSample__C2DXShareSDK__) */
+#endif /* defined(__C2DXShareSDKSample__C2DXiOSShareSDK__) */

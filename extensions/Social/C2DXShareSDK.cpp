@@ -5,7 +5,7 @@
 //  Created by 冯 鸿杰 on 13-12-17.
 //
 //
-
+#include "CCLuaEngine.h"
 #include "C2DXShareSDK.h"
 
 #if CC_TARGET_PLATFORM == CC_PLATFORM_IOS
@@ -19,7 +19,11 @@
 #endif
 
 
+USING_NS_CC;
 using namespace cn::sharesdk;
+
+static int mAuthorizeHandler;
+static int mShareHandler;
 
 void C2DXShareSDK::open(CCString *appKey, bool useAppTrusteeship)
 {
@@ -68,8 +72,50 @@ void C2DXShareSDK::setPlatformConfig(C2DXPlatType platType, CCDictionary *config
 #endif
 }
 
-void C2DXShareSDK::authorize(C2DXPlatType platType, C2DXAuthResultEvent callback)
+void C2DXShareSDK::authorizeHandler(C2DXResponseState state, C2DXPlatType platType, CCDictionary *error, const char* accessToken)
 {
+    bool success = false;
+    switch (state) {
+        case C2DXResponseStateSuccess:
+        {
+            success = true;
+            break;
+        }
+        case C2DXResponseStateFail:
+        {
+            success = false;
+            break;
+        }
+        default:
+            break;
+    }
+    
+    if (mAuthorizeHandler == 0)
+    {
+        return;
+    }
+    
+    CCScriptEngineProtocol* pScriptProtocol = CCScriptEngineManager::sharedManager()->getScriptEngine();
+    cocos2d::CCLuaEngine* pLuaEngine = dynamic_cast<CCLuaEngine*>(pScriptProtocol);
+    if (pLuaEngine == NULL)
+    {
+        assert(false);
+        return;
+    }
+    
+    CCLuaStack* pStack = pLuaEngine->getLuaStack();
+    pStack->pushBoolean(success);
+    pStack->pushString(accessToken);
+    int ret = pStack->executeFunctionByHandler(mAuthorizeHandler, 2);
+    pStack->clean();
+    
+    mAuthorizeHandler = 0;
+}
+
+void C2DXShareSDK::authorize(C2DXPlatType platType, int handler)
+{
+    mAuthorizeHandler = handler;
+    
 #if CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
     
     //TODO: Andorid
@@ -78,10 +124,12 @@ void C2DXShareSDK::authorize(C2DXPlatType platType, C2DXAuthResultEvent callback
 #elif CC_TARGET_PLATFORM == CC_PLATFORM_IOS
     
     //TODO: iOS
-    C2DXiOSShareSDK::authorize(platType, callback);
+    C2DXiOSShareSDK::authorize(platType, authorizeHandler);
     
 #endif
 }
+
+
 
 void C2DXShareSDK::cancelAuthorize(C2DXPlatType platType)
 {
@@ -98,21 +146,35 @@ void C2DXShareSDK::cancelAuthorize(C2DXPlatType platType)
 #endif
 }
 
-bool C2DXShareSDK::hasAutorized(C2DXPlatType platType)
+bool C2DXShareSDK::hasAutorized(C2DXPlatType platType, int handler)
 {
+    bool result = false;
 #if CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
     
     //TODO: Andorid
-    return isValid((int)platType);
+    result = isValid((int)platType);
     
 #elif CC_TARGET_PLATFORM == CC_PLATFORM_IOS
     
     //TODO: iOS
-    return C2DXiOSShareSDK::hasAutorized(platType);
+    result = C2DXiOSShareSDK::hasAutorized(platType);
     
 #endif
     
-    return false;
+    CCScriptEngineProtocol* pScriptProtocol = CCScriptEngineManager::sharedManager()->getScriptEngine();
+    cocos2d::CCLuaEngine* pLuaEngine = dynamic_cast<CCLuaEngine*>(pScriptProtocol);
+    if (pLuaEngine == NULL)
+    {
+        assert(false);
+        return false;
+    }
+    
+    CCLuaStack* pStack = pLuaEngine->getLuaStack();
+    pStack->pushBoolean(result);
+    int ret = pStack->executeFunctionByHandler(handler, 1);
+    pStack->clean();
+    
+    return result;
 }
 
 void C2DXShareSDK::getUserInfo(C2DXPlatType platType, C2DXGetUserInfoResultEvent callback)
@@ -159,7 +221,46 @@ void C2DXShareSDK::oneKeyShareContent(CCArray *platTypes, CCDictionary *content,
 #endif
 }
 
-void C2DXShareSDK::showShareMenu(CCArray *platTypes, CCDictionary *content, C2DXShareResultEvent callback)
+void C2DXShareSDK::shareResultHandler(C2DXResponseState state, C2DXPlatType platType, CCDictionary *shareInfo, CCDictionary *error)
+{
+    bool success = false;
+    switch (state) {
+        case C2DXResponseStateSuccess:
+        {
+            success = true;
+            break;
+        }
+        case C2DXResponseStateFail:
+        {
+            success = false;
+            break;
+        }
+        default:
+            break;
+    }
+    
+    if (mShareHandler == 0)
+    {
+        return;
+    }
+    
+    CCScriptEngineProtocol* pScriptProtocol = CCScriptEngineManager::sharedManager()->getScriptEngine();
+    cocos2d::CCLuaEngine* pLuaEngine = dynamic_cast<CCLuaEngine*>(pScriptProtocol);
+    if (pLuaEngine == NULL)
+    {
+        assert(false);
+        return;
+    }
+    
+    CCLuaStack* pStack = pLuaEngine->getLuaStack();
+    pStack->pushBoolean(success);
+    int ret = pStack->executeFunctionByHandler(mShareHandler, 1);
+    pStack->clean();
+    
+    mShareHandler = 0;
+}
+
+void C2DXShareSDK::showShareMenu(CCArray *platTypes, CCDictionary *content, int handler)
 {
 #if CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
     
@@ -169,7 +270,7 @@ void C2DXShareSDK::showShareMenu(CCArray *platTypes, CCDictionary *content, C2DX
 #elif CC_TARGET_PLATFORM == CC_PLATFORM_IOS
     
     //TODO: iOS
-    C2DXiOSShareSDK::showShareMenu(platTypes, content, callback);
+    C2DXiOSShareSDK::showShareMenu(platTypes, content, shareResultHandler);
     
 #endif
 }

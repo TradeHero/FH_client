@@ -16,8 +16,8 @@ local mAccessToken
 function action( param )
 	local RequestUtils = require("scripts.RequestUtils")
 
-    local handler = function( accessToken )
-        if accessToken == nil then
+    local handler = function( success, accessToken )
+        if not success then
             -- To handle user reject to the oAuth.
             onFBConnectFailed()
         else
@@ -27,7 +27,8 @@ function action( param )
     end
 
     ConnectingMessage.loadFrame()
-    FacebookDelegate:sharedDelegate():login( handler )
+    --FacebookDelegate:sharedDelegate():login( handler )
+    C2DXShareSDK:authorize( C2DXPlatTypeFacebook, handler )
 end
 
 function onFBConnectFailed()

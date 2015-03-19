@@ -53,7 +53,7 @@ namespace cn
              *	@param 	platType 	平台类型
              *	@param 	callback 	回调方法
              */
-            static void authorize(C2DXPlatType platType, C2DXAuthResultEvent callback);
+            static void authorize(C2DXPlatType platType, int handler);
             
             /**
              *	@brief	取消用户授权
@@ -69,7 +69,7 @@ namespace cn
              *
              *	@return	true 已授权， false 尚未授权
              */
-            static bool hasAutorized(C2DXPlatType platType);
+            static bool hasAutorized(C2DXPlatType platType, int handler);
             
             /**
              *	@brief	获取用户信息
@@ -104,7 +104,7 @@ namespace cn
              *	@param 	content 	分享内容
              *	@param 	callback 	回调方法
              */
-            static void showShareMenu(CCArray *platTypes, CCDictionary *content, C2DXShareResultEvent callback);
+            static void showShareMenu(CCArray *platTypes, CCDictionary *content, int handler);
             
             /**
              *	@brief	显示分享菜单
@@ -126,6 +126,10 @@ namespace cn
              */
             static void showShareView(C2DXPlatType platType, CCDictionary *content, C2DXShareResultEvent callback);
             
+        protected:
+            
+            static void authorizeHandler (C2DXResponseState state, C2DXPlatType platType, CCDictionary *error, const char* accessToken);
+            static void shareResultHandler(C2DXResponseState state, C2DXPlatType platType, CCDictionary *shareInfo, CCDictionary *error);
             
         };
     }
