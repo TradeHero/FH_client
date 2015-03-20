@@ -29,6 +29,7 @@ StringDefaultSubTableList = {
   "push_notification",
   "settings",
   "languages",
+  "share",
 }
 
 StringsDefault = {
@@ -469,6 +470,11 @@ StringsDefault = {
   updating_files = "Updating %s ...",
   user_name = "Username",
   vs = "VS",
+  share = {
+    spinTheWheel_content = "I have won a prize in FootballHero Spin-The-Wheel game! Download now for a chance to win Messi & Ronaldo Signed Jerseys!",
+    competition_content = "I have joined a FootballHero Prediction competition. CLICK HERE to join me and win Messi & Ronaldo Signed Jerseys!",
+    prediction_content = "%s If you disagree, CLICK HERE! Predict now and win Messi & Ronaldo Signed Jerseys!",
+  },
 }
 
 local modename = "DefaultString"

@@ -22,6 +22,10 @@ function loadFrame()
     SceneManager.setKeyPadBackEnabled( false )
 end
 
+function isShown()
+    return mWidget ~= nil
+end
+
 function EnterOrExit( eventType )
     if eventType == "enter" then
     elseif eventType == "exit" then

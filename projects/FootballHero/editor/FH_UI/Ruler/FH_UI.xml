@@ -408,4 +408,8 @@
     <Project>HeaderFrame</Project>
     <GuidesList />
   </GuidesProject>
+  <GuidesProject>
+    <Project>CompetitionWebview</Project>
+    <GuidesList />
+  </GuidesProject>
 </ArrayOfGuidesProject>

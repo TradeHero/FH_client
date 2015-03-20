@@ -13,6 +13,8 @@ local ViewUtils = require("scripts.views.ViewUtils")
 local Logic = require("scripts.Logic").getInstance()
 local ConnectingMessage = require("scripts.views.ConnectingMessage")
 local Header = require("scripts.views.HeaderFrame")
+local ShareConfig = require("scripts.config.Share")
+
 
 -- Below value is per second
 local MAX_ROTATE_SPEED = 180
@@ -484,7 +486,7 @@ function shareDoShareEventHandler( sender, eventType )
             end
         end
 
-        EventManager:postEvent( Event.Enter_Share, { callback } )
+        EventManager:postEvent( Event.Enter_Share, { ShareConfig.SHARE_SPINTHEWHEEL, callback } )
     end
 end
 

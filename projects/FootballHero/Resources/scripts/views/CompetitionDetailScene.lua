@@ -15,6 +15,7 @@ local CompetitionsData = require("scripts.data.Competitions")
 local CompetitionsConfig = require("scripts.config.Competitions")
 local CompetitionStatus = require("scripts.data.Competitions").CompetitionStatus
 local RequestUtils = require("scripts.RequestUtils")
+local ShareConfig = require("scripts.config.Share")
 
 
 local INFO_MOVE_OFFSET = 287
@@ -592,7 +593,7 @@ function initWelcome( competitionDetail )
                         end
                     end
 
-                    EventManager:postEvent( Event.Enter_Share, { callback } )
+                    EventManager:postEvent( Event.Enter_Share, { ShareConfig.SHARE_COMPETITION, callback } )
                 end
             end
             share:addTouchEventListener( shareNClose )
@@ -775,7 +776,7 @@ function shareTypeSelectEventHandler( sender, eventType )
             end
         end
 
-        EventManager:postEvent( Event.Enter_Share, { callback } )
+        EventManager:postEvent( Event.Enter_Share, { ShareConfig.SHARE_COMPETITION, callback } )
     end
 end
 

@@ -3,7 +3,8 @@ module(..., package.seeall)
 local EventManager = require("scripts.events.EventManager").getInstance()
 local Event = require("scripts.events.Event").EventList
 local Logic = require("scripts.Logic").getInstance()
-
+local ShareConfig = require("scripts.config.Share")
+local ConnectingMessage = require("scripts.views.ConnectingMessage")
 
 --[[
 	Share logic:
@@ -16,20 +17,11 @@ local Logic = require("scripts.Logic").getInstance()
 local mCallback
 
 function action( param )
-    mCallback = param[1]
-
-    local content = CCDictionary:create()
-    content:setObject( CCString:create("I have won a prize in FootballHero Spin-The-Wheel game! Download now for a chance to win Messi & Ronaldo Signed Jerseys!"), "content")
-    content:setObject( CCString:create("https://fbexternal-a.akamaihd.net/safe_image.php?d=AQDUZiW0WQBqnF67&w=487&h=255&url=http%3A%2F%2Ffhmainstorage.blob.core.windows.net%2Ffhres%2Fspin-the-wheel-1200x650.png&cfs=1&upscale=1"), "image")
-    content:setObject( CCString:create("Football Hero"), "title")
-    content:setObject( CCString:create("Football Hero"), "description")
-    content:setObject( CCString:create("http://www.footballheroapp.com/download"), "url")
-    content:setObject( CCString:create( C2DXContentTypeNews ), "type")
-    content:setObject( CCString:create("http://www.footballheroapp.com"), "siteUrl")
-    content:setObject( CCString:create("FootballHero"), "site")
-    content:setObject( CCString:create("extInfo"), "extInfo")
+	local shareId = param[1]
+    mCallback = param[2]
     
-    C2DXShareSDK:showShareMenu( nil, content, shareHandler )
+    ConnectingMessage.loadFrame()
+    C2DXShareSDK:showShareMenu( nil, ShareConfig.getContentDictionaryById( shareId ), shareHandler )
 end
 
 function shareHandler( success, platType )
@@ -41,12 +33,17 @@ function shareHandler( success, platType )
 			local handler = function()
 	            -- Nothing to do.
 	        end
-            local accessToken = C2DXShareSDK:getCredentialWithType( C2DXPlatTypeFacebook )
-			EventManager:postEvent( Event.Do_FB_Connect_With_User, { accessToken, handler, handler } )
+            C2DXShareSDK:getCredentialWithType( C2DXPlatTypeFacebook, function( accessToken )
+            	if accessToken then
+            		EventManager:postEvent( Event.Do_FB_Connect_With_User, { accessToken, handler, handler } )
+            	end
+            end )
+			
 		end
 	else
 		CCLuaLog("Share failed.")
 	end  
 
+	ConnectingMessage.selfRemove()
     mCallback( success, platType )
 end
