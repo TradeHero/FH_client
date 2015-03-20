@@ -1,6 +1,6 @@
 /*
 ** Lua binding: Extension
-** Generated automatically by tolua++-1.0.92 on 03/19/15 12:19:12.
+** Generated automatically by tolua++-1.0.92 on 03/19/15 16:30:17.
 */
 
 /****************************************************************************
@@ -1806,6 +1806,37 @@ static int tolua_Extension_C2DXShareSDK_showShareMenu00(lua_State* tolua_S)
 }
 #endif //#ifndef TOLUA_DISABLE
 
+/* method: getCredentialWithType of class  C2DXShareSDK */
+#ifndef TOLUA_DISABLE_tolua_Extension_C2DXShareSDK_getCredentialWithType00
+static int tolua_Extension_C2DXShareSDK_getCredentialWithType00(lua_State* tolua_S)
+{
+#ifndef TOLUA_RELEASE
+ tolua_Error tolua_err;
+ if (
+     !tolua_isusertable(tolua_S,1,"C2DXShareSDK",0,&tolua_err) ||
+     !tolua_isnumber(tolua_S,2,0,&tolua_err) ||
+     (tolua_isvaluenil(tolua_S,3,&tolua_err) || !toluafix_isfunction(tolua_S,3,"LUA_FUNCTION",0,&tolua_err)) ||
+     !tolua_isnoobj(tolua_S,4,&tolua_err)
+ )
+  goto tolua_lerror;
+ else
+#endif
+ {
+  C2DXPlatType platType = ((C2DXPlatType) (int)  tolua_tonumber(tolua_S,2,0));
+  LUA_FUNCTION handler = (  toluafix_ref_function(tolua_S,3,0));
+  {
+   C2DXShareSDK::getCredentialWithType(platType,handler);
+  }
+ }
+ return 0;
+#ifndef TOLUA_RELEASE
+ tolua_lerror:
+ tolua_error(tolua_S,"#ferror in function 'getCredentialWithType'.",&tolua_err);
+ return 0;
+#endif
+}
+#endif //#ifndef TOLUA_DISABLE
+
 /* Open function */
 TOLUA_API int tolua_Extension_open (lua_State* tolua_S)
 {
@@ -1960,6 +1991,7 @@ TOLUA_API int tolua_Extension_open (lua_State* tolua_S)
    tolua_function(tolua_S,"authorize",tolua_Extension_C2DXShareSDK_authorize00);
    tolua_function(tolua_S,"hasAutorized",tolua_Extension_C2DXShareSDK_hasAutorized00);
    tolua_function(tolua_S,"showShareMenu",tolua_Extension_C2DXShareSDK_showShareMenu00);
+   tolua_function(tolua_S,"getCredentialWithType",tolua_Extension_C2DXShareSDK_getCredentialWithType00);
   tolua_endmodule(tolua_S);
  tolua_endmodule(tolua_S);
  return 1;

@@ -126,6 +126,13 @@ namespace cn
              */
             static void showShareView(C2DXPlatType platType, CCDictionary *content, C2DXShareResultEvent callback);
             
+            
+            /**
+             *  Get the credential with a certain platform.
+             *  @return nil if not exist.
+             */
+            static void getCredentialWithType(C2DXPlatType platType, int handler);
+            
         protected:
             
             static void authorizeHandler (C2DXResponseState state, C2DXPlatType platType, CCDictionary *error, const char* accessToken);

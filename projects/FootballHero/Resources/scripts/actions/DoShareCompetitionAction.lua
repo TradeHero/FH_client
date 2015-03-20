@@ -23,7 +23,7 @@ function action( param )
     requestInfo.url = url
 
     local handler = function( isSucceed, body, header, status, errorBuffer )
-        RequestUtils.messageHandler( requestInfo, isSucceed, body, header, status, errorBuffer, RequestUtils.HTTP_200, true, onRequestSuccess )
+        RequestUtils.messageHandler( requestInfo, isSucceed, body, header, status, errorBuffer, RequestUtils.HTTP_200, false, onRequestSuccess )
     end
 
     local httpRequest = HttpRequestForLua:create( CCHttpRequest.kHttpPost )
@@ -31,31 +31,17 @@ function action( param )
     httpRequest:addHeader( Logic:getAuthSessionString() )
     httpRequest:getRequest():setRequestData( requestContentText, string.len( requestContentText ) )
     httpRequest:sendHttpRequest( url, handler )
-
-    ConnectingMessage.loadFrame()
 end
 
 function onRequestSuccess( jsonResponse )
-    local params = { Platform = "facebook", 
-                    Content = "competition code", 
-                    Action = "wall share", 
-                    Location = "competition share button" }
-    CCLuaLog("Send ANALYTICS_EVENT_SOCIAL_ACTION: "..Json.encode( params ) )
-    Analytics:sharedDelegate():postEvent( Constants.ANALYTICS_EVENT_SOCIAL_ACTION, Json.encode( params ) )
-
-    local callback = nil
     local refreshLeaderboard = false
     if type( jsonResponse ) == "table" and jsonResponse["RefreshLeaderboard"] then
         refreshLeaderboard = true
     end
     if refreshLeaderboard then
-        callback = function()
-            -- Invalid the cache.
-            RequestUtils.invalidResponseCacheContainsUrl( RequestUtils.GET_COMPETITION_DETAIL_REST_CALL )
-            -- Reload the current page.
-            EventManager:reloadCurrent()
-        end
+        -- Invalid the cache.
+        RequestUtils.invalidResponseCacheContainsUrl( RequestUtils.GET_COMPETITION_DETAIL_REST_CALL )
+        -- Reload the current page.
+        EventManager:reloadCurrent()
     end
-
-    EventManager:postEvent( Event.Show_Info, { Constants.String.info.shared_to_fb, callback } )
 end

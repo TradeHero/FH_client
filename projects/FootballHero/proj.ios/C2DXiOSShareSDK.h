@@ -126,6 +126,8 @@ namespace cn
              *	@param 	callback 	回调方法
              */
             static void showShareView(C2DXPlatType platType, CCDictionary *content, C2DXShareResultEvent callback);
+            
+            static const char* getCredentialWithType(C2DXPlatType platType);
         };
     }
 }

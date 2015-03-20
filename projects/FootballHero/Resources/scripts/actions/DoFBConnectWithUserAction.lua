@@ -8,38 +8,42 @@ local Json = require("json")
 local RequestUtils = require("scripts.RequestUtils")
 local Logic = require("scripts.Logic").getInstance()
 
-
+local mAccessToken
 local mSuccessHandler
 local mFailedHandler
 
 function action( param )
-    mSuccessHandler = param[1]
-    mFailedHandler = param[2]
+    mAccessToken = param[1]
+    mSuccessHandler = param[2]
+    mFailedHandler = param[3]
 
-	local RequestUtils = require("scripts.RequestUtils")
-
-    local handler = function( accessToken )
-        if accessToken == nil then
-            -- To handle user reject to the oAuth.
-            onFBConnectFailed()
-        else
-            print("Get token "..accessToken)
-            onFBConnectSuccess( accessToken )
+    if mAccessToken then
+        onFBConnectSuccess()
+    else
+        local handler = function( success, platType, accessToken )
+            if not success then
+                -- To handle user reject to the oAuth.
+                CCLuaLog("FB connect with existing user failed.")
+                onFBConnectFailed()
+            else
+                CCLuaLog("Get login result "..accessToken)
+                mAccessToken = accessToken
+                onFBConnectSuccess()
+            end
+            ConnectingMessage.selfRemove()
         end
-        ConnectingMessage.selfRemove()
+
+        ConnectingMessage.loadFrame()
+        C2DXShareSDK:authorize( C2DXPlatTypeFacebook, handler )
     end
-
-    ConnectingMessage.loadFrame()
-    FacebookDelegate:sharedDelegate():login( handler )
-
 end
 
 function onFBConnectFailed()
     mFailedHandler( true )
 end
 
-function onFBConnectSuccess( accessToken )
-    local requestContent = { SocialNetworkType = 0, AuthToken = accessToken, useDev = RequestUtils.USE_DEV }
+function onFBConnectSuccess()
+    local requestContent = { SocialNetworkType = 0, AuthToken = mAccessToken, useDev = RequestUtils.USE_DEV }
     local requestContentText = Json.encode( requestContent )
     
     local url = RequestUtils.FB_CONNECT_REST_CALL
@@ -62,7 +66,8 @@ function onFBConnectSuccess( accessToken )
 end
 
 function onRequestSuccess( jsonResponse )
-    Logic:setFbId( "" )
+    -- Bind the FB account with the current email account.
+    Logic:setFbId( mAccessToken )
     mSuccessHandler()
 end
 

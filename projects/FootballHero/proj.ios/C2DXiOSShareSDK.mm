@@ -421,7 +421,7 @@ void C2DXiOSShareSDK::authorize(C2DXPlatType platType, C2DXAuthResultEvent callb
                                            viewDelegate:nil
                                 authManagerViewDelegate:nil];
         [authOptions setScopes:[NSDictionary dictionaryWithObjectsAndKeys:
-                                @[@"public_profile", @"user_friends", @"email", @"user_birthday", @"publish_actions"],
+                                @[@"public_profile", @"user_friends", @"email", @"user_birthday"],
                                 [NSNumber numberWithInt:ShareTypeFacebook],
                                 nil]
          ];
@@ -703,3 +703,14 @@ void C2DXiOSShareSDK::showShareView(C2DXPlatType platType, CCDictionary *content
                                  
                              }];
 }
+
+const char* C2DXiOSShareSDK::getCredentialWithType(C2DXPlatType platType)
+{
+    id<ISSPlatformCredential> credential = [ShareSDK getCredentialWithType:(ShareType)platType];
+    if (credential)
+    {
+        return [[credential token] UTF8String];
+    }
+    return NULL;
+}
+

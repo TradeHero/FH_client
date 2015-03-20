@@ -152,7 +152,6 @@ function initDiscussionContent( i, content, info )
     end
     checkLike:addTouchEventListener( likeEventHandler )
 
-    --share:addTouchEventListener( shareTypeSelectEventHandler )
     share:setEnabled( false )
 
     if type( info["DisplayName"]  ) ~= "string" or info["DisplayName"] == nil then
@@ -280,43 +279,4 @@ end
 
 function showMatchInfo( bShow )
     mScrollCallback( bShow )
-end
-
-function shareTypeSelectEventHandler( sender, eventType )
-    if eventType == TOUCH_EVENT_ENDED then
-        EventManager:postEvent( Event.Enter_Share, { Constants.String.match_center.share_title,
-                                                    Constants.String.match_center.share_body, mCompetitionToken,
-                                                    shareByFacebook } )
-    end
-end
-
-function shareByFacebook( sender, eventType )
-    if eventType == TOUCH_EVENT_ENDED then
-        local doShare = function()
-            local handler = function( accessToken, success )
-                ConnectingMessage.selfRemove()
-                if success then
-                    -- already has permission
-                    if accessToken == nil then
-                        accessToken = Logic:getFBAccessToken()
-                    end
-                    EventManager:postEvent( Event.Do_Share_Discussion_Post, { mCompetitionId, accessToken } )
-                end
-            end
-            ConnectingMessage.loadFrame()
-            FacebookDelegate:sharedDelegate():grantPublishPermission( "publish_actions", handler )
-        end
-
-        if Logic:getFbId() == false then
-            local successHandler = function()
-                doShare()
-            end
-            local failedHandler = function()
-                -- Nothing to do.
-            end
-            EventManager:postEvent( Event.Do_FB_Connect_With_User, { successHandler, failedHandler } )
-        else
-            doShare()
-        end
-    end
 end

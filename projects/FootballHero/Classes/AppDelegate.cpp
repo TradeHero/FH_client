@@ -320,51 +320,6 @@ void UpdateLayer::loadGame()
 	CCScriptEngineManager::sharedManager()->getScriptEngine()->executeScriptFile(path.c_str());
 }
 
-void authResultHandler(C2DXResponseState state, C2DXPlatType platType, CCDictionary *error)
-{
-    switch (state) {
-        case C2DXResponseStateSuccess:
-        {
-            CCLog("授权成功");
-            CCDictionary *content = CCDictionary::create();
-            content -> setObject(CCString::create("I have won a prize in FootballHero Spin-The-Wheel game! Download now for a chance to win Messi & Ronaldo Signed Jerseys!"), "content");
-            content -> setObject(CCString::create("https://fbexternal-a.akamaihd.net/safe_image.php?d=AQDUZiW0WQBqnF67&w=487&h=255&url=http%3A%2F%2Ffhmainstorage.blob.core.windows.net%2Ffhres%2Fspin-the-wheel-1200x650.png&cfs=1&upscale=1"), "image");
-            content -> setObject(CCString::create("Football Hero"), "title");
-            content -> setObject(CCString::create("Football Hero"), "description");
-            content -> setObject(CCString::create("http://www.footballheroapp.com/download"), "url");
-            content -> setObject(CCString::createWithFormat("%d", C2DXContentTypeNews), "type");
-            content -> setObject(CCString::create("http://www.footballheroapp.com"), "siteUrl");
-            content -> setObject(CCString::create("FootballHero"), "site");
-            content -> setObject(CCString::create("extInfo"), "extInfo");
-            
-            
-            //C2DXShareSDK::shareContent(C2DXPlatTypeFacebook, content, 0);
-            C2DXShareSDK::showShareView(C2DXPlatTypeFacebook, content, NULL);
-
-            break;
-        }
-        case C2DXResponseStateFail:
-            CCLog("授权失败");
-            break;
-        default:
-            break;
-    }
-}
-
-void shareResultHandler(C2DXResponseState state, C2DXPlatType platType, CCDictionary *shareInfo, CCDictionary *error)
-{
-    switch (state) {
-        case C2DXResponseStateSuccess:
-            CCLog("分享成功");
-            break;
-        case C2DXResponseStateFail:
-            CCLog("分享失败");
-            break;
-        default:
-            break;
-    }
-}
-
 void AppDelegate::initPlatformConfig()
 {
     C2DXShareSDK::open(CCString::create("358192cd0c0a"), false);
@@ -374,26 +329,6 @@ void AppDelegate::initPlatformConfig()
     wcConfigDict -> setObject(CCString::create("wxf75bd5c7f852b490"), "app_id");
     C2DXShareSDK::setPlatformConfig(C2DXPlatTypeWeixiSession, wcConfigDict);
     C2DXShareSDK::setPlatformConfig(C2DXPlatTypeWeixiTimeline, wcConfigDict);
-    
-    /**
-    C2DXShareSDK::authorize(C2DXPlatTypeFacebook, authResultHandler);
-    
-    // Share example w/o shareMenu
-    CCDictionary *content = CCDictionary::create();
-    content -> setObject(CCString::create("I have won a prize in FootballHero Spin-The-Wheel game! Download now for a chance to win Messi & Ronaldo Signed Jerseys!"), "content");
-    content -> setObject(CCString::create("https://fbexternal-a.akamaihd.net/safe_image.php?d=AQDUZiW0WQBqnF67&w=487&h=255&url=http%3A%2F%2Ffhmainstorage.blob.core.windows.net%2Ffhres%2Fspin-the-wheel-1200x650.png&cfs=1&upscale=1"), "image");
-    content -> setObject(CCString::create("Football Hero"), "title");
-    content -> setObject(CCString::create("Football Hero"), "description");
-    content -> setObject(CCString::create("http://www.footballheroapp.com/download"), "url");
-    content -> setObject(CCString::createWithFormat("%d", C2DXContentTypeNews), "type");
-    content -> setObject(CCString::create("http://www.footballheroapp.com"), "siteUrl");
-    content -> setObject(CCString::create("FootballHero"), "site");
-    content -> setObject(CCString::create("extInfo"), "extInfo");
-    
-    //C2DXShareSDK::showShareMenu(NULL, content, CCPointMake(100, 100), C2DXMenuArrowDirectionLeft, shareResultHandler);
-    //C2DXShareSDK::shareContent(C2DXPlatTypeFacebook, content, shareResultHandler);
-    **/
-    
     
     /**
     //新浪微博

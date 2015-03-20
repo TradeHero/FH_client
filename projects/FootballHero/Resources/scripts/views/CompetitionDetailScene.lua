@@ -585,7 +585,7 @@ function initWelcome( competitionDetail )
             local shareNClose = function( sender, eventType )
                 if eventType == TOUCH_EVENT_ENDED then
                     mWidget:removeChild(popup)
-                    shareByFacebook( sender, eventType )
+                    EventManager:postEvent( Event.Enter_Share )
                 end
             end
             share:addTouchEventListener( shareNClose )
@@ -744,37 +744,6 @@ function copyCodeEventHandler( sender, eventType )
     end
 end
 
-function shareByFacebook( sender, eventType )
-    if eventType == TOUCH_EVENT_ENDED then
-        local doShare = function()
-            local handler = function( accessToken, success )
-                ConnectingMessage.selfRemove()
-                if success then
-                    -- already has permission
-                    if accessToken == nil then
-                        accessToken = Logic:getFBAccessToken()
-                    end
-                    EventManager:postEvent( Event.Do_Share_Competition, { mCompetitionId, accessToken } )
-                end
-            end
-            ConnectingMessage.loadFrame()
-            FacebookDelegate:sharedDelegate():grantPublishPermission( "publish_actions", handler )
-        end
-
-        if Logic:getFbId() == false then
-            local successHandler = function()
-                doShare()
-            end
-            local failedHandler = function()
-                -- Nothing to do.
-            end
-            EventManager:postEvent( Event.Do_FB_Connect_With_User, { successHandler, failedHandler } )
-        else
-            doShare()
-        end
-    end
-end
-
 function predictNowEventHandler( sender, eventType )
     if eventType == TOUCH_EVENT_ENDED then
         local competitionDetail = Logic:getCompetitionDetail()
@@ -793,9 +762,13 @@ end
 
 function shareTypeSelectEventHandler( sender, eventType )
     if eventType == TOUCH_EVENT_ENDED then
-        EventManager:postEvent( Event.Enter_Share, { string.format( SHARE_TITLE, Logic:getDisplayName() ),
-                                                    string.format( SHARE_BODY, mCompetitionToken ),
-                                                    shareByFacebook } )
+        local callback = function( success, platType )
+            if success then
+                EventManager:postEvent( Event.Do_Share_Competition, { mCompetitionId, "" } )
+            end
+        end
+
+        EventManager:postEvent( Event.Enter_Share, { callback } )
     end
 end
 

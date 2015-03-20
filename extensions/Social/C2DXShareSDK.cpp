@@ -86,6 +86,15 @@ void C2DXShareSDK::authorizeHandler(C2DXResponseState state, C2DXPlatType platTy
             success = false;
             break;
         }
+        case C2DXResponseStateBegin:
+        {
+            return;
+        }
+        case C2DXResponseStateCancel:
+        {
+            success = false;
+            break;
+        }
         default:
             break;
     }
@@ -105,8 +114,9 @@ void C2DXShareSDK::authorizeHandler(C2DXResponseState state, C2DXPlatType platTy
     
     CCLuaStack* pStack = pLuaEngine->getLuaStack();
     pStack->pushBoolean(success);
+    pStack->pushInt(platType);
     pStack->pushString(accessToken);
-    int ret = pStack->executeFunctionByHandler(mAuthorizeHandler, 2);
+    int ret = pStack->executeFunctionByHandler(mAuthorizeHandler, 3);
     pStack->clean();
     
     mAuthorizeHandler = 0;
@@ -171,7 +181,8 @@ bool C2DXShareSDK::hasAutorized(C2DXPlatType platType, int handler)
     
     CCLuaStack* pStack = pLuaEngine->getLuaStack();
     pStack->pushBoolean(result);
-    int ret = pStack->executeFunctionByHandler(handler, 1);
+    pStack->pushInt(platType);
+    int ret = pStack->executeFunctionByHandler(handler, 2);
     pStack->clean();
     
     return result;
@@ -235,6 +246,15 @@ void C2DXShareSDK::shareResultHandler(C2DXResponseState state, C2DXPlatType plat
             success = false;
             break;
         }
+        case C2DXResponseStateBegin:
+        {
+            return;
+        }
+        case C2DXResponseStateCancel:
+        {
+            success = false;
+            break;
+        }
         default:
             break;
     }
@@ -254,7 +274,8 @@ void C2DXShareSDK::shareResultHandler(C2DXResponseState state, C2DXPlatType plat
     
     CCLuaStack* pStack = pLuaEngine->getLuaStack();
     pStack->pushBoolean(success);
-    int ret = pStack->executeFunctionByHandler(mShareHandler, 1);
+    pStack->pushInt(platType);
+    int ret = pStack->executeFunctionByHandler(mShareHandler, 2);
     pStack->clean();
     
     mShareHandler = 0;
@@ -262,6 +283,7 @@ void C2DXShareSDK::shareResultHandler(C2DXResponseState state, C2DXPlatType plat
 
 void C2DXShareSDK::showShareMenu(CCArray *platTypes, CCDictionary *content, int handler)
 {
+    mShareHandler = handler;
 #if CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
     
     //TODO: Andorid
@@ -303,4 +325,39 @@ void C2DXShareSDK::showShareView(C2DXPlatType platType, CCDictionary *content, C
     C2DXiOSShareSDK::showShareView(platType, content, callback);
     
 #endif
+}
+
+void C2DXShareSDK::getCredentialWithType(C2DXPlatType platType, int handler)
+{
+    const char* result = NULL;
+#if CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
+    
+    //TODO: Android
+    
+#elif CC_TARGET_PLATFORM == CC_PLATFORM_IOS
+    
+    //TODO: iOS
+    result = C2DXiOSShareSDK::getCredentialWithType(platType);
+    
+#endif
+    
+    CCScriptEngineProtocol* pScriptProtocol = CCScriptEngineManager::sharedManager()->getScriptEngine();
+    cocos2d::CCLuaEngine* pLuaEngine = dynamic_cast<CCLuaEngine*>(pScriptProtocol);
+    if (pLuaEngine == NULL)
+    {
+        assert(false);
+        return;
+    }
+    
+    CCLuaStack* pStack = pLuaEngine->getLuaStack();
+    if (result)
+    {
+        pStack->pushInt(platType);
+    }
+    else
+    {
+        pStack->pushNil();
+    }
+    int ret = pStack->executeFunctionByHandler(handler, 1);
+    pStack->clean();
 }

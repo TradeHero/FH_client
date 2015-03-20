@@ -16,9 +16,10 @@ local mAccessToken
 function action( param )
 	local RequestUtils = require("scripts.RequestUtils")
 
-    local handler = function( success, accessToken )
+    local handler = function( success, platType, accessToken )
         if not success then
             -- To handle user reject to the oAuth.
+            CCLuaLog("FB Login failed.")
             onFBConnectFailed()
         else
             CCLuaLog("Get login result "..accessToken)
@@ -27,7 +28,6 @@ function action( param )
     end
 
     ConnectingMessage.loadFrame()
-    --FacebookDelegate:sharedDelegate():login( handler )
     C2DXShareSDK:authorize( C2DXPlatTypeFacebook, handler )
 end
 
