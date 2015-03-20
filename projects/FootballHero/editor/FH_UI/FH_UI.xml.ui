@@ -153,9 +153,9 @@
   <ResRelativePath />
   <imageFileList />
   <imagePngList>
-    <string>spinWheel/img-wheel.png</string>
-    <string>spinWheel/btn-yes.png</string>
-    <string>spinWheel/btn-no.png</string>
+    <string>PredictionConfirm/white_popup.png</string>
+    <string>Tutorial/Default Button.png</string>
+    <string>MatchPrediction/btn-newshare.png</string>
   </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
   <CurrentUIJson>PredFinalConfirm.json</CurrentUIJson>

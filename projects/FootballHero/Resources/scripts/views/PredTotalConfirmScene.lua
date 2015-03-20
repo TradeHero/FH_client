@@ -7,10 +7,10 @@ local EventManager = require("scripts.events.EventManager").getInstance()
 local Event = require("scripts.events.Event").EventList
 local ConnectingMessage = require("scripts.views.ConnectingMessage")
 local PushNotificationManager = require("scripts.PushNotificationManager")
+local ShareConfig = require("scripts.config.Share")
 
 
 local mWidget
-local mFacebookBt
 local mAccessToken
 
 function loadFrame()
@@ -31,7 +31,6 @@ function EnterOrExit( eventType )
     if eventType == "enter" then
     elseif eventType == "exit" then
         mWidget = nil
-        mFacebookBt = nil
     end
 end
 
@@ -42,7 +41,7 @@ end
 function confirmEventHandler( sender, eventType )
 	if eventType == TOUCH_EVENT_ENDED then
 		local callback = function()
-			Logic:setPredictionMetadata( "", mFacebookBt:getSelectedState() )
+			Logic:setPredictionMetadata( "", false )
 	    	EventManager:postEvent( Event.Do_Post_Predictions, { mAccessToken } )
 		end
 
@@ -59,42 +58,13 @@ function cancelEventHandler( sender, eventType )
 	end
 end
 
-function facebookEventHandler( sender, eventType )
+function shareEventHandler( sender, eventType )
 	if eventType == TOUCH_EVENT_ENDED then
-		if mFacebookBt:getSelectedState() == false then
-			local doShare = function()
-				print("Do Share")
-	            local handler = function( accessToken, success )
-	            	if success then
-	            		-- already has permission
-		                if accessToken == nil then
-		                    mAccessToken = Logic:getFBAccessToken()
-		                else
-	            			mAccessToken = accessToken
-	            		end
-	            	else
-	            		mFacebookBt:setSelectedState( false )
-	            	end
-	                
-	                ConnectingMessage.selfRemove()
-	            end
-	            ConnectingMessage.loadFrame()
-	            FacebookDelegate:sharedDelegate():grantPublishPermission( "publish_actions", handler )
-	        end
+		local callback = function( success, platType )
+            -- Do nothing
+        end
 
-	        if Logic:getFbId() == false then
-	            local successHandler = function()
-	                doShare()
-	            end
-	            local failedHandler = function()
-	            	print("FB connect failed.")
-	                mFacebookBt:setSelectedState( false )
-	            end
-	            EventManager:postEvent( Event.Do_FB_Connect_With_User, { successHandler, failedHandler } )
-	        else
-	            doShare()
-	        end
-		end
+        EventManager:postEvent( Event.Enter_Share, { ShareConfig.SHARE_PREDICTION, callback } )
 	end
 end
 
@@ -147,15 +117,11 @@ function initContent()
     confirmBt:addTouchEventListener( confirmEventHandler )
     local cancelBt = tolua.cast( buttonsWidget:getChildByName("cancel"), "Button" )
     cancelBt:addTouchEventListener( cancelEventHandler )
-    mFacebookBt = tolua.cast( buttonsWidget:getChildByName("facebook"), "CheckBox" )
-    mFacebookBt:addTouchEventListener( facebookEventHandler )
+    local shareBt = tolua.cast( buttonsWidget:getChildByName("share"), "CheckBox" )
+    shareBt:addTouchEventListener( shareEventHandler )
 
     confirmBt:setTitleText( Constants.String.button.confirm )
     cancelBt:setTitleText( Constants.String.button.cancel )
-    local lbFB = tolua.cast( buttonsWidget:getChildByName("Label_Facebook"), "Label" )
-    local lbShare = tolua.cast( buttonsWidget:getChildByName("Label_Share"), "Label" )
-    lbFB:setText( Constants.String.match_prediction.facebook )
-    lbShare:setText( Constants.String.match_prediction.share )
 
 	-- Update the size of the scroll view so that it locate just above the facebook button.
 	local originSize = contentContainer:getSize()

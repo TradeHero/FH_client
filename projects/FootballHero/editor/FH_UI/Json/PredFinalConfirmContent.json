@@ -11,9 +11,9 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "spinWheel/img-wheel.png",
-    "spinWheel/btn-yes.png",
-    "spinWheel/btn-no.png"
+    "PredictionConfirm/white_popup.png",
+    "Tutorial/Default Button.png",
+    "MatchPrediction/btn-newshare.png"
   ],
   "version": "1.6.0.0",
   "widgetTree": {
