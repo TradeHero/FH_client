@@ -251,7 +251,7 @@ function initMiniGame( parent, miniGame )
 
     local joinEventHandler = function( sender, eventType )
         if eventType == TOUCH_EVENT_ENDED then
-            checkFacebookAndOpenWebview()
+            --checkFacebookAndOpenWebview()
         end
     end
     local joinBtn = tolua.cast( bannerFrame:getChildByName( "Button_Join" ), "Button" )
@@ -283,38 +283,6 @@ function setMiniGameEndStage()
     -- No more minigame popup
     print( "No more minigame popup" )
     CCUserDefault:sharedUserDefault():setIntegerForKey( Constants.EVENT_NEXT_MINIGAME_STAGE, Constants.MINIGAME_STAGE_ENDED )
-end
-
-function checkFacebookAndOpenWebview()
-
-    local openWebview = function()
-        local handler = function( accessToken, success )
-            if success then
-                -- already has permission
-                if accessToken == nil then
-                    accessToken = Logic:getFBAccessToken()
-                end
-                setMiniGameEndStage()
-                EventManager:postEvent( Event.Enter_Minigame, { accessToken } )
-            else
-                ConnectingMessage.selfRemove()
-            end
-        end
-        ConnectingMessage.loadFrame()
-        FacebookDelegate:sharedDelegate():grantPublishPermission( "publish_actions", handler )
-    end
-
-    if Logic:getFbId() == false then
-        local successHandler = function()
-            openWebview()
-        end
-        local failedHandler = function()
-            -- Nothing to do.
-        end
-        EventManager:postEvent( Event.Do_FB_Connect_With_User, { successHandler, failedHandler } )
-    else
-        openWebview()
-    end
 end
 
 function initSpecialCompetitions( parent, compList )

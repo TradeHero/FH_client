@@ -478,32 +478,13 @@ end
 
 function shareDoShareEventHandler( sender, eventType )
     if eventType == TOUCH_EVENT_ENDED then
-        local doShare = function()
-            local handler = function( accessToken, success )
-                ConnectingMessage.selfRemove()
-                if success then
-                    -- already has permission
-                    if accessToken == nil then
-                        accessToken = Logic:getFBAccessToken()
-                    end
-                    EventManager:postEvent( Event.Do_Share_Spin, { accessToken, shareCompleteEventHandler } )
-                end
+        local callback = function( success, platType )
+            if success then
+                EventManager:postEvent( Event.Do_Share_Spin, { "", shareCompleteEventHandler } )
             end
-            ConnectingMessage.loadFrame()
-            FacebookDelegate:sharedDelegate():grantPublishPermission( "publish_actions", handler )
         end
 
-        if Logic:getFbId() == false then
-            local successHandler = function()
-                doShare()
-            end
-            local failedHandler = function()
-                -- Nothing to do.
-            end
-            EventManager:postEvent( Event.Do_FB_Connect_With_User, { successHandler, failedHandler } )
-        else
-            doShare()
-        end
+        EventManager:postEvent( Event.Enter_Share, { callback } )
     end
 end
 

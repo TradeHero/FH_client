@@ -585,7 +585,14 @@ function initWelcome( competitionDetail )
             local shareNClose = function( sender, eventType )
                 if eventType == TOUCH_EVENT_ENDED then
                     mWidget:removeChild(popup)
-                    EventManager:postEvent( Event.Enter_Share )
+                    
+                    local callback = function( success, platType )
+                        if success then
+                            EventManager:postEvent( Event.Do_Share_Competition, { mCompetitionId, "" } )
+                        end
+                    end
+
+                    EventManager:postEvent( Event.Enter_Share, { callback } )
                 end
             end
             share:addTouchEventListener( shareNClose )

@@ -47,35 +47,8 @@ function keypadBackEventHandler()
 end
 
 function checkFacebookAndOpenWebview( sender, eventType )
-
     if eventType == TOUCH_EVENT_ENDED then
-        local openWebview = function()
-            local handler = function( accessToken, success )
-                if success then
-                    -- already has permission
-                    if accessToken == nil then
-                        accessToken = Logic:getFBAccessToken()
-                    end
-                    EventManager:postEvent( Event.Enter_Minigame, { accessToken, true } )
-                else
-                    ConnectingMessage.selfRemove()
-                end
-            end
-            ConnectingMessage.loadFrame()
-            FacebookDelegate:sharedDelegate():grantPublishPermission( "publish_actions", handler )
-        end
-
-        if Logic:getFbId() == false then
-            local successHandler = function()
-                openWebview()
-            end
-            local failedHandler = function()
-                -- Nothing to do.
-            end
-            EventManager:postEvent( Event.Do_FB_Connect_With_User, { successHandler, failedHandler } )
-        else
-            openWebview()
-        end
+        
     end
 end
 

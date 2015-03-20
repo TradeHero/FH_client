@@ -462,7 +462,7 @@ function checkMiniGame()
                 -- save in localDB
                 setMiniGameNextStage( Constants.MINIGAME_STAGE_ENDED )
                 mWidget:removeChild(minigamePopup)
-                checkFacebookAndOpenWebview()
+                --checkFacebookAndOpenWebview()
             end
         end
 
@@ -597,37 +597,6 @@ function setMiniGameNextStage( stage )
         CCUserDefault:sharedUserDefault():setIntegerForKey( Constants.EVENT_NEXT_MINIGAME_TIME_KEY, nowTimeStamp + Constants.MinigameStages[stage] )
         print( "Current Timestamp: ".. nowTimeStamp )
         print( "Set next timestamp to ".. nowTimeStamp + Constants.MinigameStages[stage] )
-    end
-end
-
-function checkFacebookAndOpenWebview()
-
-    local openWebview = function()
-        local handler = function( accessToken, success )
-            if success then
-                -- already has permission
-                if accessToken == nil then
-                    accessToken = Logic:getFBAccessToken()
-                end
-                EventManager:postEvent( Event.Enter_Minigame, { accessToken } )
-            else
-                ConnectingMessage.selfRemove()
-            end
-        end
-        ConnectingMessage.loadFrame()
-        FacebookDelegate:sharedDelegate():grantPublishPermission( "publish_actions", handler )
-    end
-
-    if Logic:getFbId() == false then
-        local successHandler = function()
-            openWebview()
-        end
-        local failedHandler = function()
-            -- Nothing to do.
-        end
-        EventManager:postEvent( Event.Do_FB_Connect_With_User, { successHandler, failedHandler } )
-    else
-        openWebview()
     end
 end
 

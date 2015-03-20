@@ -40,11 +40,7 @@ function loadFrame( selectedLeagues )
     local ongoingCheckBox = tolua.cast( mInputWidget:getChildByName("Ongoing"), "CheckBox" )
     ongoingCheckBox:addTouchEventListener( ongoingEventHandler )
 
-    local facebookCheckBox = tolua.cast( mInputWidget:getChildByName("Facebook"), "CheckBox" )
-    facebookCheckBox:addTouchEventListener( facebookEventHandler )
-
     -- labels
-    local lbFBShare = tolua.cast( mInputWidget:getChildByName( "Label_FBShare"), "Label" )
     local lbGiveDesc = tolua.cast( mInputWidget:getChildByName( "Label_GiveDesc"), "Label" )
     local lbGiveTitle = tolua.cast( mInputWidget:getChildByName( "Label_GiveTitle"), "Label" )
     local lbHowLong = tolua.cast( mInputWidget:getChildByName( "Label_HowLong"), "Label" )
@@ -52,7 +48,6 @@ function loadFrame( selectedLeagues )
     local lbOngoing = tolua.cast( mInputWidget:getChildByName( "Label_Ongoing"), "Label" )
     local lbSelectLeague = tolua.cast( mInputWidget:getChildByName( "Label_SelectLeague"), "Label" )
 
-    lbFBShare:setText( Constants.String.community.label_fb_share )
     lbGiveDesc:setText( Constants.String.community.label_give_desc )
     lbGiveTitle:setText( Constants.String.community.label_give_title )
     lbHowLong:setText( Constants.String.community.label_how_long )
@@ -112,46 +107,6 @@ function ongoingEventHandler( sender, eventType )
     end
 end
 
-function facebookEventHandler( sender, eventType )
-    if eventType == TOUCH_EVENT_ENDED then
-        local facebookCheckBox = tolua.cast( sender, "CheckBox" )
-        if facebookCheckBox:getSelectedState() == false then
-            local doShare = function()
-                print("Do Share")
-                local handler = function( accessToken, success )
-                    if success then
-                        -- already has permission
-                        if accessToken == nil then
-                            mAccessToken = Logic:getFBAccessToken()
-                        else
-                            mAccessToken = accessToken
-                        end
-                    else
-                        facebookCheckBox:setSelectedState( false )
-                    end
-                    
-                    ConnectingMessage.selfRemove()
-                end
-                ConnectingMessage.loadFrame()
-                FacebookDelegate:sharedDelegate():grantPublishPermission( "publish_actions", handler )
-            end
-
-            if Logic:getFbId() == false then
-                local successHandler = function()
-                    doShare()
-                end
-                local failedHandler = function()
-                    print("FB connect failed.")
-                    facebookCheckBox:setSelectedState( false )
-                end
-                EventManager:postEvent( Event.Do_FB_Connect_With_User, { successHandler, failedHandler } )
-            else
-                doShare()
-            end
-        end
-    end
-end
-
 function confirmEventHandler( sender, eventType )
     if eventType == TOUCH_EVENT_ENDED then
         -- Check the date
@@ -183,7 +138,6 @@ end
 function sendCreateCompetition()
     local numberOfMonth = mInputWidget:getChildByName( "MonthInput" ):getNodeByTag( 1 ):getText()
     local ongoingCheckBox = tolua.cast( mInputWidget:getChildByName("Ongoing"), "CheckBox" )
-    local facebookCheckBox = tolua.cast( mInputWidget:getChildByName("Facebook"), "CheckBox" )
     if ongoingCheckBox:getSelectedState() then
         numberOfMonth = -1
     end
@@ -193,7 +147,7 @@ function sendCreateCompetition()
     local selectedLeagues = Logic:getSelectedLeagues() or {}
     local allLeaguesQualify = Logic:getAllLeaguesQualify() or false
 
-    EventManager:postEvent( Event.Do_Create_Competition, { name, description, numberOfMonth, selectedLeagues, facebookCheckBox:getSelectedState(), mAccessToken, allLeaguesQualify } )
+    EventManager:postEvent( Event.Do_Create_Competition, { name, description, numberOfMonth, selectedLeagues, false, mAccessToken, allLeaguesQualify } )
 end
 
 function cancelEventHandler( sender, eventType )
