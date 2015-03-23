@@ -326,7 +326,7 @@ void AppDelegate::initPlatformConfig()
     
     //微信
     CCDictionary *wcConfigDict = CCDictionary::create();
-    wcConfigDict -> setObject(CCString::create("wxf75bd5c7f852b490"), "app_id");
+    wcConfigDict -> setObject(CCString::create("wx42f998d065038926"), "app_id");
     C2DXShareSDK::setPlatformConfig(C2DXPlatTypeWeixiSession, wcConfigDict);
     C2DXShareSDK::setPlatformConfig(C2DXPlatTypeWeixiTimeline, wcConfigDict);
     

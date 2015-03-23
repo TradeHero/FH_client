@@ -30,7 +30,7 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>fb788386747851675</string>
-				<string>wxf75bd5c7f852b490</string>
+				<string>wx42f998d065038926</string>
 			</array>
 		</dict>
 		<dict>
@@ -45,7 +45,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1.41.3</string>
+	<string>1.41.4</string>
 	<key>FacebookAppID</key>
 	<string>788386747851675</string>
 	<key>FacebookDisplayName</key>
