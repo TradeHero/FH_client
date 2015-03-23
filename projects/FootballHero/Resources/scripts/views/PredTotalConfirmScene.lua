@@ -8,6 +8,7 @@ local Event = require("scripts.events.Event").EventList
 local ConnectingMessage = require("scripts.views.ConnectingMessage")
 local PushNotificationManager = require("scripts.PushNotificationManager")
 local ShareConfig = require("scripts.config.Share")
+local TeamConfig = require("scripts.config.Team")
 
 
 local mWidget
@@ -64,7 +65,14 @@ function shareEventHandler( sender, eventType )
             -- Do nothing
         end
 
-        EventManager:postEvent( Event.Enter_Share, { ShareConfig.SHARE_PREDICTION, callback } )
+        local match = Logic:getSelectedMatch()
+        local firstPrediction = Logic:getPredictions():get( 1 )
+        local homeTeamName = TeamConfig.getTeamName( TeamConfig.getConfigIdByKey( match["HomeTeamId"] ) )
+        local awayTeamName = TeamConfig.getTeamName( TeamConfig.getConfigIdByKey( match["AwayTeamId"] ) )
+       	local shareContent = homeTeamName.." vs "..awayTeamName.."\n"
+       	shareContent = shareContent..firstPrediction["Answer"]
+
+        EventManager:postEvent( Event.Enter_Share, { ShareConfig.SHARE_PREDICTION, callback, shareContent } )
 	end
 end
 
@@ -94,7 +102,7 @@ function initContent()
 
 		lbStake:setText( Constants.String.match_prediction.stake )
 		lbWin:setText( Constants.String.match_prediction.win )
-		question:setText( coupon["Answer"] )
+		question:setText( coupon["Question"] )
 		reward:setText( string.format( Constants.String.num_of_points, coupon["Reward"] ) )
 		stake:setText( string.format( Constants.String.num_of_points, coupon["Stake"] ) )
 		answerIcon:loadTexture( coupon["AnswerIcon"] )

@@ -46,6 +46,8 @@
 #import "ChatService.h"
 #import "QuickBloxChatHandler.h"
 #include "MiscHandler.h"
+#import <ShareSDK/ShareSDK.h>
+#import "WXApi.h"                   //微信
 
 @implementation AppController
 
@@ -148,6 +150,7 @@ static AppDelegate s_sharedApplication;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(chatRoomDidReceiveMessageNotification:)
                                                  name:kNotificationDidReceiveNewMessageFromRoom object:nil];
     
+    [ShareSDK importWeChatClass:[WXApi class]];
 /**
     for (NSString* family in [UIFont familyNames])
     {
@@ -259,7 +262,7 @@ static AppDelegate s_sharedApplication;
     // Normally your app would handle url navigation here and go to the correct
     // app location.  In this example we just print the url in an alert.
     
-   return NO;
+   return [ShareSDK handleOpenURL:url sourceApplication:nil annotation:nil wxDelegate:nil];
 }
 
 
@@ -359,6 +362,8 @@ static AppDelegate s_sharedApplication;
         MiscHandler::getInstance()->notifyDeepLink([deepLink UTF8String]);
         return YES;
     }
+    
+    [ShareSDK handleOpenURL:url sourceApplication:sourceApplication annotation:annotation wxDelegate:nil];
     
     return [FBAppCall handleOpenURL:url
                   sourceApplication:sourceApplication];

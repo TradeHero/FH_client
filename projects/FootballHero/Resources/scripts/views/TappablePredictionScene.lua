@@ -145,7 +145,7 @@ function goToConfirm()
     for i = 1, mMarketsInfo:getNum() do
         if mPredictionAnswers[i] ~= nil then
             local p = mPredictionAnswers[i]
-            Logic:addPrediction( p["OddId"], p["Answer"], p["Rewards"], p["AnswerImagePath"], p["PredictionType"],
+            Logic:addPrediction( p["OddId"], p["Question"], p["Answer"], p["Rewards"], p["AnswerImagePath"], p["PredictionType"],
                                 Logic:getPreviousLeagueSelected(), mMatch["HomeTeamId"], mMatch["AwayTeamId"], p["Stake"] )
         end
     end

@@ -163,6 +163,7 @@ function selectTeam1Win( sender, eventType )
             MarketsForGameData.getOddsForType( mMarketInfo, MarketConfig.ODDS_TYPE_ONE_OPTION ) * mStake,
             MarketsForGameData.getOddIdForType( mMarketInfo, MarketConfig.ODDS_TYPE_ONE_OPTION ),
             question:getStringValue(),
+            string.format( Constants.String.match_prediction.answer_match_win, TeamConfig.getTeamName( TeamConfig.getConfigIdByKey( mMatch["HomeTeamId"] ) ) ),
             Constants.STATUS_SELECTED_LEFT )
     end
 end
@@ -174,6 +175,7 @@ function selectTeam2Win( sender, eventType )
             MarketsForGameData.getOddsForType( mMarketInfo, MarketConfig.ODDS_TYPE_TWO_OPTION ) * mStake,
             MarketsForGameData.getOddIdForType( mMarketInfo, MarketConfig.ODDS_TYPE_TWO_OPTION ),
             question:getStringValue(),
+            string.format( Constants.String.match_prediction.answer_match_win, TeamConfig.getTeamName( TeamConfig.getConfigIdByKey( mMatch["AwayTeamId"] ) ) ),
             Constants.STATUS_SELECTED_RIGHT )
     end
 end
@@ -185,6 +187,7 @@ function selectDraw( sender, eventType )
             MarketsForGameData.getOddsForType( mMarketInfo, MarketConfig.ODDS_TYPE_THREE_OPTION ) * mStake,
             MarketsForGameData.getOddIdForType( mMarketInfo, MarketConfig.ODDS_TYPE_THREE_OPTION ),
             question:getStringValue(),
+            Constants.String.match_prediction.answer_match_draw,
             Constants.STATUS_SELECTED_THIRD )
     end
 end
@@ -217,7 +220,7 @@ function selectBigBet( sender, eventType )
     end
 end
 
-function makePrediction( rewards, oddId, answer, selectedIndex )
+function makePrediction( rewards, oddId, question, answer, selectedIndex )
     local selected
     local notSelected
     local notSelected2
@@ -249,7 +252,7 @@ function makePrediction( rewards, oddId, answer, selectedIndex )
 
     resultSeqArray:addObject( CCDelayTime:create( FINISH_DELAY_TIME ) )
     resultSeqArray:addObject( CCCallFuncN:create( function()
-        local prediction = Prediction:new( oddId, answer, rewards, selected:getTextureFile(), TYPE_STRING, mStake )
+        local prediction = Prediction:new( oddId, question, answer, rewards, selected:getTextureFile(), TYPE_STRING, mStake )
         mFinishCallback( selectedIndex, prediction )
     end ) )
 

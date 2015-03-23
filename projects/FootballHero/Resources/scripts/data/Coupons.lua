@@ -59,13 +59,14 @@ function Coupons:new()
     return obj 
 end
 
-function Coupons:addCoupon( id, answer, reward, answerIcon, predictionType, leagueId, teamid1, teamid2, stake )
+function Coupons:addCoupon( id, question, answer, reward, answerIcon, predictionType, leagueId, teamid1, teamid2, stake )
     local idList = {}
     table.insert( idList, id )
 
     local coupon = {
         OutcomeIds = idList,
         Stake = stake,
+        Question = question, 
         Answer = answer,
         Reward = reward,
         AnswerIcon = answerIcon,

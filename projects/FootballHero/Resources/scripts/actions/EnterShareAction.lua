@@ -19,9 +19,14 @@ local mCallback
 function action( param )
 	local shareId = param[1]
     mCallback = param[2]
+    local shareStringParam = param[3]
     
     ConnectingMessage.loadFrame()
-    C2DXShareSDK:showShareMenu( nil, ShareConfig.getContentDictionaryById( shareId ), shareHandler )
+    local shareContent = ShareConfig.getContentDictionaryById( shareId )
+    local shareStringFormat = shareContent:valueForKey("content"):getCString()
+    local shareString = string.format( shareStringFormat, shareStringParam )
+    shareContent:setObject( CCString:create( shareString ), "content" )
+    C2DXShareSDK:showShareMenu( nil, shareContent, shareHandler )
 end
 
 function shareHandler( success, platType )

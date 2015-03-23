@@ -17,6 +17,7 @@ local ViewUtils = require("scripts.views.ViewUtils")
 local mWidget
 
 local mMatch
+local mLine
 local mMarketInfo
 local mFinishCallback
 local mBigBetCallback
@@ -92,8 +93,8 @@ function loadFrame( parent, matchInfo, marketInfo, finishCallback, bigBetStatus,
         end
     end
 
-    local line = MarketsForGameData.getMarketLine( mMarketInfo )
-    question:setText( string.format( Constants.String.match_prediction.will_total_goals, math.ceil( line ) ) )
+    mLine = MarketsForGameData.getMarketLine( mMarketInfo )
+    question:setText( string.format( Constants.String.match_prediction.will_total_goals, math.ceil( mLine ) ) )
     yesWinPoint:setText( string.format( Constants.String.num_of_points, MarketsForGameData.getOddsForType( mMarketInfo, MarketConfig.ODDS_TYPE_ONE_OPTION ) * mStake ) )
     noWinPoint:setText( string.format( Constants.String.num_of_points, MarketsForGameData.getOddsForType( mMarketInfo, MarketConfig.ODDS_TYPE_TWO_OPTION ) * mStake ) )
     stake:setText( string.format( Constants.String.num_of_points, mStake ) )
@@ -145,6 +146,7 @@ function selectYes( sender, eventType )
             MarketsForGameData.getOddsForType( mMarketInfo, MarketConfig.ODDS_TYPE_ONE_OPTION ) * mStake,
             MarketsForGameData.getOddIdForType( mMarketInfo, MarketConfig.ODDS_TYPE_ONE_OPTION ),
             question:getStringValue(),
+            string.format( Constants.String.match_prediction.answer_total_goal_yes, math.ceil( mLine ) ),
             Constants.STATUS_SELECTED_LEFT )
     end
 end
@@ -157,6 +159,7 @@ function selectNo( sender, eventType )
             MarketsForGameData.getOddsForType( mMarketInfo, MarketConfig.ODDS_TYPE_TWO_OPTION ) * mStake,
             MarketsForGameData.getOddIdForType( mMarketInfo, MarketConfig.ODDS_TYPE_TWO_OPTION ),
             question:getStringValue(),
+            string.format( Constants.String.match_prediction.answer_total_goal_no, math.ceil( mLine ) - 1 ),
             Constants.STATUS_SELECTED_RIGHT )
     end
 end
@@ -186,7 +189,7 @@ function selectBigBet( sender, eventType )
     end
 end
 
-function makePrediction( rewards, oddId, answer, selectedIndex )
+function makePrediction( rewards, oddId, question, answer, selectedIndex )
     local selected
     local notSelected
     if selectedIndex == Constants.STATUS_SELECTED_LEFT then
@@ -209,7 +212,7 @@ function makePrediction( rewards, oddId, answer, selectedIndex )
 
     resultSeqArray:addObject( CCDelayTime:create( FINISH_DELAY_TIME ) )
     resultSeqArray:addObject( CCCallFuncN:create( function()
-        local prediction = Prediction:new( oddId, answer, rewards, selected:getTextureFile(), TYPE_STRING, mStake )
+        local prediction = Prediction:new( oddId, question, answer, rewards, selected:getTextureFile(), TYPE_STRING, mStake )
         mFinishCallback( selectedIndex, prediction )
     end ) )
 

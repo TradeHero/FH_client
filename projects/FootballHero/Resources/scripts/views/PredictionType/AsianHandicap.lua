@@ -208,6 +208,7 @@ function selectYes( sender, eventType )
             MarketsForGameData.getOddsForType( mMarketInfo, MarketConfig.ODDS_TYPE_ONE_OPTION ) * mStake,
             MarketsForGameData.getOddIdForType( mMarketInfo, MarketConfig.ODDS_TYPE_ONE_OPTION ),
             question:getStringValue(),
+            string.format( Constants.String.match_prediction.answer_asian_handicap_yes, teamName, math.ceil( line ) ),
             Constants.STATUS_SELECTED_LEFT )
     end
 end
@@ -225,6 +226,7 @@ function selectNo( sender, eventType )
             MarketsForGameData.getOddsForType( mMarketInfo, MarketConfig.ODDS_TYPE_TWO_OPTION ) * mStake,
             MarketsForGameData.getOddIdForType( mMarketInfo, MarketConfig.ODDS_TYPE_TWO_OPTION ),
             question:getStringValue(),
+            string.format( Constants.String.match_prediction.answer_asian_handicap_no, teamName, math.ceil( line ) - 1 ),
             Constants.STATUS_SELECTED_RIGHT )
     end
 end
@@ -254,7 +256,7 @@ function selectBigBet( sender, eventType )
     end
 end
 
-function makePrediction( rewards, oddId, answer, selectedIndex )
+function makePrediction( rewards, oddId, question, answer, selectedIndex )
     local selected
     local notSelected
     if selectedIndex == Constants.STATUS_SELECTED_LEFT then
@@ -277,7 +279,7 @@ function makePrediction( rewards, oddId, answer, selectedIndex )
 
     resultSeqArray:addObject( CCDelayTime:create( FINISH_DELAY_TIME ) )
     resultSeqArray:addObject( CCCallFuncN:create( function()
-        local prediction = Prediction:new( oddId, answer, rewards, selected:getTextureFile(), TYPE_STRING, mStake )
+        local prediction = Prediction:new( oddId, question, answer, rewards, selected:getTextureFile(), TYPE_STRING, mStake )
         mFinishCallback( selectedIndex, prediction )
     end ) )
 

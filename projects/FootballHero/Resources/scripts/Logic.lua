@@ -187,10 +187,10 @@ function Logic:getUserId()
 	return self.userId
 end
 
-function Logic:addPrediction( prediction, answer, reward, answerIcon, predictionType, leagueId, teamid1, teamid2, stake )
+function Logic:addPrediction( prediction, question, answer, reward, answerIcon, predictionType, leagueId, teamid1, teamid2, stake )
 	print( string.format( "Make Prediction: %d with answer[%s], reward[%d] and answerIcon[%s]", 
 							prediction, answer, reward, answerIcon ) )
-	self.mCoupons:addCoupon( prediction, answer, reward, answerIcon, predictionType, leagueId, teamid1, teamid2, stake )
+	self.mCoupons:addCoupon( prediction, question, answer, reward, answerIcon, predictionType, leagueId, teamid1, teamid2, stake )
 end
 
 function Logic:setPredictionMetadata( message, shareOnFacebook )

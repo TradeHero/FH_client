@@ -15,9 +15,10 @@ oddId, answer, rewards, selected:getTextureFile()
 
 --]]
 
-function Prediction:new( oddId, answer, rewards, answerImagePath, type, stake )
+function Prediction:new( oddId, question, answer, rewards, answerImagePath, type, stake )
 	local obj = {
 		OddId = oddId,
+        Question = question,
         Answer = answer,
         Rewards = rewards,
         AnswerImagePath = answerImagePath,

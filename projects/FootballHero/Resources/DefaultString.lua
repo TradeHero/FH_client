@@ -350,6 +350,12 @@ StringsDefault = {
     will_win_by = "Will %s win by %s goals or more?",
     will_win_by_line0 = "Will %s win on level handicap?",
     win = "Win",
+    answer_match_win = "I have predicted %s to win.",
+    answer_match_draw = "I have predicted a draw.",
+    answer_total_goal_yes = "I have predicted the game to have %s goals or more.",
+    answer_total_goal_no = "I have predicted the game to have %s goals or less.",
+    answer_asian_handicap_yes = "I have predicted %s wins by %s goals or more.",
+    answer_asian_handicap_no = "I have predicted %s wins by %s goals or less.",
   },
   message_hint = "Type your message here",
   month = {
@@ -471,9 +477,9 @@ StringsDefault = {
   user_name = "Username",
   vs = "VS",
   share = {
-    spinTheWheel_content = "I have won a prize in FootballHero Spin-The-Wheel game! Download now for a chance to win Messi & Ronaldo Signed Jerseys!",
-    competition_content = "I have joined a FootballHero Prediction competition. CLICK HERE to join me and win Messi & Ronaldo Signed Jerseys!",
-    prediction_content = "%s If you disagree, CLICK HERE! Predict now and win Messi & Ronaldo Signed Jerseys!",
+    spinTheWheel_content = "I have won a prize in FootballHero Spin-The-Wheel game! Download now for a chance to win Messi & Ronaldo Signed Jerseys! www.footballheroapp.com/download",
+    competition_content = "I have joined a FootballHero Prediction competition. Download now to join me and win Messi & Ronaldo Signed Jerseys! www.footballheroapp.com/download",
+    prediction_content = "%s If you disagree, Download now and win Messi & Ronaldo Signed Jerseys! www.footballheroapp.com/download",
   },
 }
 
