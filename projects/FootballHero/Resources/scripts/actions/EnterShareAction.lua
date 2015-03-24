@@ -51,5 +51,5 @@ function shareHandler( state, platType, errorMsg )
 	end  
 
 	ConnectingMessage.selfRemove()
-    mCallback( success, platType )
+    mCallback( state == C2DXResponseStateSuccess, platType )
 end
