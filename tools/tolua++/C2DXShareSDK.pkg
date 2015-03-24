@@ -58,9 +58,19 @@ typedef enum
     C2DXContentTypeFile = 8 /**< 文件消息,仅供微信使用 */
 } C2DXContentType;
 
+typedef enum
+{
+    C2DXResponseStateBegin = 0, /**< 开始 */
+    C2DXResponseStateSuccess = 1, /**< 成功 */
+    C2DXResponseStateFail = 2, /**< 失败 */
+    C2DXResponseStateCancel = 3 /**< 取消 */
+}C2DXResponseState;
+
 class C2DXShareSDK
 {
 	static void authorize(C2DXPlatType platType, LUA_FUNCTION handler);
+
+    static void cancelAuthorize(C2DXPlatType platType);
 
 	static bool hasAutorized(C2DXPlatType platType, LUA_FUNCTION handler);
 

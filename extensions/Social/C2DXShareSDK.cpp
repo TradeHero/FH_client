@@ -74,29 +74,9 @@ void C2DXShareSDK::setPlatformConfig(C2DXPlatType platType, CCDictionary *config
 
 void C2DXShareSDK::authorizeHandler(C2DXResponseState state, C2DXPlatType platType, CCDictionary *error, const char* accessToken)
 {
-    bool success = false;
-    switch (state) {
-        case C2DXResponseStateSuccess:
-        {
-            success = true;
-            break;
-        }
-        case C2DXResponseStateFail:
-        {
-            success = false;
-            break;
-        }
-        case C2DXResponseStateBegin:
-        {
-            return;
-        }
-        case C2DXResponseStateCancel:
-        {
-            success = false;
-            break;
-        }
-        default:
-            break;
+    if (state == C2DXResponseStateBegin)
+    {
+        return ;
     }
     
     if (mAuthorizeHandler == 0)
@@ -113,7 +93,7 @@ void C2DXShareSDK::authorizeHandler(C2DXResponseState state, C2DXPlatType platTy
     }
     
     CCLuaStack* pStack = pLuaEngine->getLuaStack();
-    pStack->pushBoolean(success);
+    pStack->pushInt(state);
     pStack->pushInt(platType);
     pStack->pushString(accessToken);
     int ret = pStack->executeFunctionByHandler(mAuthorizeHandler, 3);
@@ -234,34 +214,23 @@ void C2DXShareSDK::oneKeyShareContent(CCArray *platTypes, CCDictionary *content,
 
 void C2DXShareSDK::shareResultHandler(C2DXResponseState state, C2DXPlatType platType, CCDictionary *shareInfo, CCDictionary *error)
 {
-    bool success = false;
-    switch (state) {
-        case C2DXResponseStateSuccess:
-        {
-            success = true;
-            break;
-        }
-        case C2DXResponseStateFail:
-        {
-            success = false;
-            break;
-        }
-        case C2DXResponseStateBegin:
-        {
-            return;
-        }
-        case C2DXResponseStateCancel:
-        {
-            success = false;
-            break;
-        }
-        default:
-            break;
+    if (state == C2DXResponseStateBegin)
+    {
+        return;
     }
     
     if (mShareHandler == 0)
     {
         return;
+    }
+    
+    const char* errorMsg = "";
+    if (error)
+    {
+        CCObject* errorMsgObj = error->objectForKey("error_msg");
+        if (errorMsgObj) {
+            errorMsg = ((CCString*) errorMsgObj)->getCString();
+        }
     }
     
     CCScriptEngineProtocol* pScriptProtocol = CCScriptEngineManager::sharedManager()->getScriptEngine();
@@ -273,9 +242,10 @@ void C2DXShareSDK::shareResultHandler(C2DXResponseState state, C2DXPlatType plat
     }
     
     CCLuaStack* pStack = pLuaEngine->getLuaStack();
-    pStack->pushBoolean(success);
+    pStack->pushInt(state);
     pStack->pushInt(platType);
-    int ret = pStack->executeFunctionByHandler(mShareHandler, 2);
+    pStack->pushString(errorMsg);
+    int ret = pStack->executeFunctionByHandler(mShareHandler, 3);
     pStack->clean();
     
     mShareHandler = 0;
@@ -352,7 +322,7 @@ void C2DXShareSDK::getCredentialWithType(C2DXPlatType platType, int handler)
     CCLuaStack* pStack = pLuaEngine->getLuaStack();
     if (result)
     {
-        pStack->pushInt(platType);
+        pStack->pushString(result);
     }
     else
     {

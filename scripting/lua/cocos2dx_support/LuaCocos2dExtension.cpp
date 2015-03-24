@@ -1,6 +1,6 @@
 /*
 ** Lua binding: Extension
-** Generated automatically by tolua++-1.0.92 on 03/19/15 16:30:17.
+** Generated automatically by tolua++-1.0.92 on 03/24/15 12:09:08.
 */
 
 /****************************************************************************
@@ -1741,6 +1741,35 @@ static int tolua_Extension_C2DXShareSDK_authorize00(lua_State* tolua_S)
 }
 #endif //#ifndef TOLUA_DISABLE
 
+/* method: cancelAuthorize of class  C2DXShareSDK */
+#ifndef TOLUA_DISABLE_tolua_Extension_C2DXShareSDK_cancelAuthorize00
+static int tolua_Extension_C2DXShareSDK_cancelAuthorize00(lua_State* tolua_S)
+{
+#ifndef TOLUA_RELEASE
+ tolua_Error tolua_err;
+ if (
+     !tolua_isusertable(tolua_S,1,"C2DXShareSDK",0,&tolua_err) ||
+     !tolua_isnumber(tolua_S,2,0,&tolua_err) ||
+     !tolua_isnoobj(tolua_S,3,&tolua_err)
+ )
+  goto tolua_lerror;
+ else
+#endif
+ {
+  C2DXPlatType platType = ((C2DXPlatType) (int)  tolua_tonumber(tolua_S,2,0));
+  {
+   C2DXShareSDK::cancelAuthorize(platType);
+  }
+ }
+ return 0;
+#ifndef TOLUA_RELEASE
+ tolua_lerror:
+ tolua_error(tolua_S,"#ferror in function 'cancelAuthorize'.",&tolua_err);
+ return 0;
+#endif
+}
+#endif //#ifndef TOLUA_DISABLE
+
 /* method: hasAutorized of class  C2DXShareSDK */
 #ifndef TOLUA_DISABLE_tolua_Extension_C2DXShareSDK_hasAutorized00
 static int tolua_Extension_C2DXShareSDK_hasAutorized00(lua_State* tolua_S)
@@ -1986,9 +2015,14 @@ TOLUA_API int tolua_Extension_open (lua_State* tolua_S)
   tolua_constant(tolua_S,"C2DXContentTypeNonGif",C2DXContentTypeNonGif);
   tolua_constant(tolua_S,"C2DXContentTypeGif",C2DXContentTypeGif);
   tolua_constant(tolua_S,"C2DXContentTypeFile",C2DXContentTypeFile);
+  tolua_constant(tolua_S,"C2DXResponseStateBegin",C2DXResponseStateBegin);
+  tolua_constant(tolua_S,"C2DXResponseStateSuccess",C2DXResponseStateSuccess);
+  tolua_constant(tolua_S,"C2DXResponseStateFail",C2DXResponseStateFail);
+  tolua_constant(tolua_S,"C2DXResponseStateCancel",C2DXResponseStateCancel);
   tolua_cclass(tolua_S,"C2DXShareSDK","C2DXShareSDK","",NULL);
   tolua_beginmodule(tolua_S,"C2DXShareSDK");
    tolua_function(tolua_S,"authorize",tolua_Extension_C2DXShareSDK_authorize00);
+   tolua_function(tolua_S,"cancelAuthorize",tolua_Extension_C2DXShareSDK_cancelAuthorize00);
    tolua_function(tolua_S,"hasAutorized",tolua_Extension_C2DXShareSDK_hasAutorized00);
    tolua_function(tolua_S,"showShareMenu",tolua_Extension_C2DXShareSDK_showShareMenu00);
    tolua_function(tolua_S,"getCredentialWithType",tolua_Extension_C2DXShareSDK_getCredentialWithType00);

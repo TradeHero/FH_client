@@ -2,7 +2,7 @@
 #define __APP_DELEGATE_H__
 
 #include "cocos2d.h"
-#include "C2DXShareSDK.h"
+#include "Social/C2DXShareSDK.h"
 #include "AssetsManager/AssetsManager.h"
 
 using namespace cn::sharesdk;

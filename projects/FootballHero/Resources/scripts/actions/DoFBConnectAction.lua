@@ -16,12 +16,12 @@ local mAccessToken
 function action( param )
 	local RequestUtils = require("scripts.RequestUtils")
 
-    local handler = function( success, platType, accessToken )
-        if not success then
+    local handler = function( state, platType, accessToken )
+        if state == C2DXResponseStateCancel or state == C2DXResponseStateFail then
             -- To handle user reject to the oAuth.
             CCLuaLog("FB Login failed.")
             onFBConnectFailed()
-        else
+        elseif state == C2DXResponseStateSuccess then
             CCLuaLog("Get login result "..accessToken)
             onFBConnectSuccess( accessToken )
         end

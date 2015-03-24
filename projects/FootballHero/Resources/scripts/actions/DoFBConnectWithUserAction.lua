@@ -20,12 +20,12 @@ function action( param )
     if mAccessToken then
         onFBConnectSuccess()
     else
-        local handler = function( success, platType, accessToken )
-            if not success then
+        local handler = function( state, platType, accessToken )
+            if state == C2DXResponseStateCancel or state == C2DXResponseStateFail then
                 -- To handle user reject to the oAuth.
                 CCLuaLog("FB connect with existing user failed.")
                 onFBConnectFailed()
-            else
+            elseif state == C2DXResponseStateSuccess then
                 CCLuaLog("Get login result "..accessToken)
                 mAccessToken = accessToken
                 onFBConnectSuccess()
@@ -45,6 +45,7 @@ end
 function onFBConnectSuccess()
     local requestContent = { SocialNetworkType = 0, AuthToken = mAccessToken, useDev = RequestUtils.USE_DEV }
     local requestContentText = Json.encode( requestContent )
+    CCLuaLog("Request content text: "..requestContentText)
     
     local url = RequestUtils.FB_CONNECT_REST_CALL
     

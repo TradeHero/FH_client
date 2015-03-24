@@ -11,5 +11,6 @@ function action( param )
 	Logic:clearAccountInfoFile()
 	RequestUtils.clearResponseCache()
 	QuickBloxService.logout()
+	C2DXShareSDK:cancelAuthorize( C2DXPlatTypeFacebook )
 	EventManager:postEvent( Event.Check_Start_Tutorial )
 end

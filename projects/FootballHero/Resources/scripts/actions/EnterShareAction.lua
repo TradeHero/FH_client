@@ -29,8 +29,8 @@ function action( param )
     C2DXShareSDK:showShareMenu( nil, shareContent, shareHandler )
 end
 
-function shareHandler( success, platType )
-	if success then
+function shareHandler( state, platType, errorMsg )
+	if state == C2DXResponseStateSuccess then
 		CCLuaLog("Share Success with: "..platType)
 
         -- Check and try bind the FB account with the current email account.
@@ -45,8 +45,9 @@ function shareHandler( success, platType )
             end )
 			
 		end
-	else
+	elseif state == C2DXResponseStateFail then
 		CCLuaLog("Share failed.")
+		EventManager:postEvent( Event.Show_Error_Message, { errorMsg } )
 	end  
 
 	ConnectingMessage.selfRemove()
