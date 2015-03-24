@@ -26,6 +26,7 @@ function action( param )
     local shareStringFormat = shareContent:valueForKey("content"):getCString()
     local shareString = string.format( shareStringFormat, shareStringParam )
     shareContent:setObject( CCString:create( shareString ), "content" )
+    shareContent:setObject( CCString:create( shareString ), "title" )
     C2DXShareSDK:showShareMenu( nil, shareContent, shareHandler )
 end
 
