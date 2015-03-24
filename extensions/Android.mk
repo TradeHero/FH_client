@@ -53,6 +53,7 @@ network/HttpClient.cpp \
 network/HttpRequestForLua.cpp \
 network/WebSocket.cpp \
 Social/FacebookDelegate.cpp \
+Social/C2DXShareSDK.cpp \
 Utils/Analytics.cpp \
 Utils/Misc.cpp \
 Utils/WebviewDelegate.cpp \
