@@ -5,6 +5,7 @@ local Event = require("scripts.events.Event").EventList
 local Logic = require("scripts.Logic").getInstance()
 local ShareConfig = require("scripts.config.Share")
 local ConnectingMessage = require("scripts.views.ConnectingMessage")
+local Constants = require("scripts.Constants")
 
 --[[
 	Share logic:
@@ -23,10 +24,17 @@ function action( param )
     
     ConnectingMessage.loadFrame()
     local shareContent = ShareConfig.getContentDictionaryById( shareId )
-    local shareStringFormat = shareContent:valueForKey("content"):getCString()
-    local shareString = string.format( shareStringFormat, shareStringParam )
-    shareContent:setObject( CCString:create( shareString ), "content" )
-    shareContent:setObject( CCString:create( shareString ), "title" )
+    
+    -- Update the content
+    local shareContentFormat = shareContent:valueForKey("content"):getCString()
+    local shareContentString = string.format( shareContentFormat, shareStringParam )
+    shareContent:setObject( CCString:create( shareContentString ), "content" )
+
+    -- Update the title
+    local shareTitleFomat = shareContent:valueForKey("title"):getCString()
+    local shareTitleString = string.format( shareTitleFomat, shareStringParam )
+    shareContent:setObject( CCString:create( shareTitleString ), "title" )
+    
     C2DXShareSDK:showShareMenu( nil, shareContent, shareHandler )
 end
 

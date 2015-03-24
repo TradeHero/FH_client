@@ -477,9 +477,12 @@ StringsDefault = {
   user_name = "Username",
   vs = "VS",
   share = {
-    spinTheWheel_content = "I have won a prize in FootballHero Spin-The-Wheel game! Download now for a chance to win Messi & Ronaldo Signed Jerseys! www.footballheroapp.com/download",
-    competition_content = "I have joined a FootballHero Prediction competition. Download now to join me and win Messi & Ronaldo Signed Jerseys! www.footballheroapp.com/download",
-    prediction_content = "%s If you disagree, Download now and win Messi & Ronaldo Signed Jerseys! www.footballheroapp.com/download",
+    spinTheWheel_content = "I won a prize in Spin-The-Wheel game! Win $$$, Messi & Ronaldo Signed Jerseys! www.footballheroapp.com/download",
+    competition_content = "I joined a FootballHero Prediction competition. Win $$$, Messi & Ronaldo Signed Jerseys! www.footballheroapp.com/download",
+    prediction_content = "%s Win $$$, Messi & Ronaldo Signed Jerseys! www.footballheroapp.com/download",
+    spinTheWheel_title = "FootballHero - I won a prize in Spin-The-Wheel game!",
+    competition_title = "FootballHero - I joined a soccer prediction competition.",
+    prediction_title = "FootballHero - %s",
   },
 }
 
