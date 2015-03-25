@@ -109,7 +109,7 @@ void C2DXShareSDK::authorize(C2DXPlatType platType, int handler)
 #if CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
     
     //TODO: Andorid
-    doAuthorize((int)platType, callback);
+    doAuthorize((int)platType, authorizeHandler);
     
 #elif CC_TARGET_PLATFORM == CC_PLATFORM_IOS
     
@@ -257,7 +257,7 @@ void C2DXShareSDK::showShareMenu(CCArray *platTypes, CCDictionary *content, int 
 #if CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
     
     //TODO: Andorid
-    onekeyShare(0, content, callback);
+    onekeyShare(0, content, shareResultHandler);
     
 #elif CC_TARGET_PLATFORM == CC_PLATFORM_IOS
     
@@ -272,7 +272,7 @@ void C2DXShareSDK::showShareMenu(CCArray *platTypes, CCDictionary *content, CCPo
 #if CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
     
     //TODO: Android
-    showShareMenu(0, content, callback);
+    onekeyShare(0, content, callback);
     
 #elif CC_TARGET_PLATFORM == CC_PLATFORM_IOS
     

@@ -54,6 +54,9 @@ network/HttpRequestForLua.cpp \
 network/WebSocket.cpp \
 Social/FacebookDelegate.cpp \
 Social/C2DXShareSDK.cpp \
+Social/Android/ShareSDKUtils.cpp \
+Social/Android/JSON/CCJSONConverter.cpp \
+Social/Android/JSON/cJSON/cJSON.c \
 Utils/Analytics.cpp \
 Utils/Misc.cpp \
 Utils/WebviewDelegate.cpp \
@@ -159,6 +162,11 @@ spine/extension.cpp \
 spine/CCSkeletonAnimation.cpp \
 spine/CCSkeleton.cpp \
 spine/spine-cocos2dx.cpp \
+
+LOCAL_C_INCLUDES := $(LOCAL_PATH)/Social \
+                    $(LOCAL_PATH)/Social/Android \
+					$(LOCAL_PATH)/Social/Android/JSON \
+					$(LOCAL_PATH)/Social/Android/JSON/cJSON
 
 LOCAL_WHOLE_STATIC_LIBRARIES := cocos2dx_static
 LOCAL_WHOLE_STATIC_LIBRARIES += cocosdenshion_static
