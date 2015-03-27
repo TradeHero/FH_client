@@ -36,6 +36,7 @@ public class EditPageFakeActivity extends FakeActivity {
 	protected View backgroundView;
 	protected ArrayList<String> toFriendList;
 	private ArrayList<ImageInfo> shareImageList;
+    protected OnButtonClickListener mButtonClickLister;
 
 	protected static class ImageInfo {
 		public String paramName;
@@ -46,6 +47,10 @@ public class EditPageFakeActivity extends FakeActivity {
 	protected static interface ImageListResultsCallback {
 		void onFinish(ArrayList<ImageInfo> results);
 	}
+
+    public static interface OnButtonClickListener {
+        void onBackClick();
+    }
 
 	public void setShareData(HashMap<String, Object> data) {
 		shareParamMap = data;
@@ -66,6 +71,8 @@ public class EditPageFakeActivity extends FakeActivity {
 	public void setPlatforms(List<Platform> supportEditPagePlatforms) {
 		this.platforms = supportEditPagePlatforms;
 	}
+
+    public void setButtonClickLister(OnButtonClickListener listener) {this.mButtonClickLister = listener;}
 
 	public String getLogoName(String platform) {
 		if (platform == null) {

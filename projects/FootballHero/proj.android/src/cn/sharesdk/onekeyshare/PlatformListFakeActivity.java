@@ -55,6 +55,9 @@ public class PlatformListFakeActivity extends FakeActivity {
 		// 取消分享菜单的统计
 		if (canceled) {
 			ShareSDK.logDemoEvent(2, null);
+            if (onShareButtonClickListener != null) {
+                onShareButtonClickListener.onClick(null, null);
+            }
 		}
 
 		return super.onFinish();
@@ -194,6 +197,14 @@ public class PlatformListFakeActivity extends FakeActivity {
 		editPageFakeActivity.setBackgroundView(backgroundView);
 		editPageFakeActivity.setShareData(shareParamsMap);
 		editPageFakeActivity.setPlatforms(platforms);
+        editPageFakeActivity.setButtonClickLister(new EditPageFakeActivity.OnButtonClickListener() {
+            @Override
+            public void onBackClick() {
+                if (onShareButtonClickListener != null) {
+                    onShareButtonClickListener.onClick(null, null);
+                }
+            }
+        });
 		if (dialogMode) {
 			editPageFakeActivity.setDialogMode();
 		}

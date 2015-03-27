@@ -527,6 +527,9 @@ public class EditPage extends EditPageFakeActivity implements OnClickListener, T
 			if (plat != null) {
 				ShareSDK.logDemoEvent(5, plat);
 			}
+            if (mButtonClickLister != null) {
+                mButtonClickLister.onBackClick();
+            }
 			finish();
 			return;
 		}

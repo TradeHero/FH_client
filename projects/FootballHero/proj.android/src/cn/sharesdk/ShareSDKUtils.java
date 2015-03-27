@@ -83,8 +83,12 @@ public class ShareSDKUtils {
 					t.printStackTrace();
 				}
 				HashMap<String, Object> map = new HashMap<String, Object>();
-				map.put("platform",
-						ShareSDK.platformNameToId(platform.getName()));
+                if (platform == null) {
+                    map.put("platform", 99);
+                } else {
+                    map.put("platform", ShareSDK.platformNameToId(platform.getName()));
+                }
+
 				map.put("action", action);
 				map.put("status", 2); // Success = 1, Fail = 2, Cancel = 3
 				map.put("res", throwableToMap(t));
@@ -99,8 +103,12 @@ public class ShareSDKUtils {
 					System.out.println("onCancel");
 				}
 				HashMap<String, Object> map = new HashMap<String, Object>();
-				map.put("platform",
-						ShareSDK.platformNameToId(platform.getName()));
+                if (platform == null) {
+                    map.put("platform", 99);
+                } else {
+                    map.put("platform", ShareSDK.platformNameToId(platform.getName()));
+                }
+
 				map.put("action", action);
 				map.put("status", 3); // Success = 1, Fail = 2, Cancel = 3
                 map.put("accessToken", "FBCancel");

@@ -14,6 +14,7 @@ import static cn.sharesdk.framework.utils.R.getStringRes;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map.Entry;
 
 import cn.sharesdk.framework.CustomPlatform;
@@ -60,6 +61,15 @@ public class OnekeyShare implements PlatformActionListener, Callback {
 		customers = new ArrayList<CustomerLogo>();
 		callback = this;
 		hiddenPlatforms = new HashMap<String, String>();
+        onShareButtonClickListener = new PlatformListFakeActivity.OnShareButtonClickListener() {
+            @Override
+            public void onClick(View v, List<Object> checkPlatforms) {
+                if (v == null && checkPlatforms == null) {
+                    // This means cancel share.
+                    callback.onCancel(null, 9); // Hard code 9 is ACTION_SHARE
+                }
+            }
+        };
 	}
 
 	public void show(Context context) {
@@ -93,6 +103,7 @@ public class OnekeyShare implements PlatformActionListener, Callback {
 		}
 
 		PlatformListFakeActivity platformListFakeActivity;
+        //theme = OnekeyShareTheme.SKYBLUE;
 		try {
 			if(OnekeyShareTheme.SKYBLUE == theme){
 				platformListFakeActivity = (PlatformListFakeActivity) Class.forName("cn.sharesdk.onekeyshare.theme.skyblue.PlatformListPage").newInstance();

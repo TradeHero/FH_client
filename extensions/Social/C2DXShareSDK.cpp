@@ -303,6 +303,9 @@ void C2DXShareSDK::getCredentialWithType(C2DXPlatType platType, int handler)
 #if CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
     
     //TODO: Android
+    CCDictionary* authInfo = getAuthInfo((int)platType);
+    CCString* tokenStr = (CCString*)authInfo->objectForKey("token");
+    result = tokenStr->getCString();
     
 #elif CC_TARGET_PLATFORM == CC_PLATFORM_IOS
     
