@@ -32,6 +32,7 @@ import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
+import cn.sharesdk.ShareSDKUtils;
 import com.myhero.fh.metrics.events.ParamStringEvent;
 
 import com.crashlytics.android.Crashlytics;
@@ -139,7 +140,9 @@ public class MainActivity extends Cocos2dxActivity {
     AppsFlyerLib.setAppsFlyerKey("pEuxjZE2GpyRXXwFjHHRRU");
     AppsFlyerLib.sendTracking(getApplicationContext());
 
-      QuickBloxChat.init(this);
+    QuickBloxChat.init(this);
+
+    ShareSDKUtils.prepare();
   }
 
     @Override

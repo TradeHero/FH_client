@@ -40,7 +40,8 @@ JNIEXPORT void JNICALL Java_cn_sharesdk_ShareSDKUtils_onJavaCallback
 
 void callBackComplete(int action, int platformId, CCDictionary* res){
 	if (action == 1 && NULL != authCb) { // 1 = ACTION_AUTHORIZING
-		authCb(C2DXResponseStateSuccess, (C2DXPlatType) platformId, NULL, "");
+        CCString* accessToken = (CCString*)res->objectForKey("accessToken");
+		authCb(C2DXResponseStateSuccess, (C2DXPlatType) platformId, NULL, accessToken->getCString());
 	} else if (action == 8 && NULL != infoCb) { // 8 = ACTION_USER_INFOR
 		infoCb(C2DXResponseStateSuccess, (C2DXPlatType) platformId, res, NULL);
 	} else if (action == 9 && NULL != shareCb) { // 9 = ACTION_SHARE

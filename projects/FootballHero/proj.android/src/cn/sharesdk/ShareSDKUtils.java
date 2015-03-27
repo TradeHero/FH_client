@@ -63,6 +63,14 @@ public class ShareSDKUtils {
 					//action = 2, 8, 获取用户列表与用户信息才放入   
 					map.put("res", res);
 				}
+                if (platform != null && platform.getDb() != null)
+                {
+                    map.put("accessToken", platform.getDb().getToken());
+                }
+                else
+                {
+                    map.put("accessToken", "");
+                }
 				map.put("platformDb", getPlatformDB(platform));
 				Message msg = new Message();
 				msg.obj = hashon.fromHashMap(map);
@@ -80,6 +88,7 @@ public class ShareSDKUtils {
 				map.put("action", action);
 				map.put("status", 2); // Success = 1, Fail = 2, Cancel = 3
 				map.put("res", throwableToMap(t));
+                map.put("accessToken", "FBError");
 				Message msg = new Message();
 				msg.obj = hashon.fromHashMap(map);
 				UIHandler.sendMessage(msg, cb);
@@ -94,6 +103,7 @@ public class ShareSDKUtils {
 						ShareSDK.platformNameToId(platform.getName()));
 				map.put("action", action);
 				map.put("status", 3); // Success = 1, Fail = 2, Cancel = 3
+                map.put("accessToken", "FBCancel");
 				Message msg = new Message();
 				msg.obj = hashon.fromHashMap(map);
 				UIHandler.sendMessage(msg, cb);

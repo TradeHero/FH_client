@@ -8,11 +8,18 @@
 
 package cn.sharesdk.onekeyshare;
 
+import static cn.sharesdk.framework.utils.BitmapHelper.captureView;
+import static cn.sharesdk.framework.utils.R.getStringRes;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
+import cn.sharesdk.framework.CustomPlatform;
+import cn.sharesdk.framework.Platform;
+import cn.sharesdk.framework.PlatformActionListener;
+import cn.sharesdk.framework.ShareSDK;
 import m.framework.utils.UIHandler;
 import android.app.NotificationManager;
 import android.content.Context;
