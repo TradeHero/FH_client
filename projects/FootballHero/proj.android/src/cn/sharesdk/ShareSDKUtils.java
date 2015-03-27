@@ -92,7 +92,7 @@ public class ShareSDKUtils {
 				map.put("action", action);
 				map.put("status", 2); // Success = 1, Fail = 2, Cancel = 3
 				map.put("res", throwableToMap(t));
-                map.put("accessToken", "FBError");
+                map.put("accessToken", "");
 				Message msg = new Message();
 				msg.obj = hashon.fromHashMap(map);
 				UIHandler.sendMessage(msg, cb);
@@ -111,7 +111,7 @@ public class ShareSDKUtils {
 
 				map.put("action", action);
 				map.put("status", 3); // Success = 1, Fail = 2, Cancel = 3
-                map.put("accessToken", "FBCancel");
+                map.put("accessToken", "");
 				Message msg = new Message();
 				msg.obj = hashon.fromHashMap(map);
 				UIHandler.sendMessage(msg, cb);

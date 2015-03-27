@@ -131,7 +131,7 @@
         SortId="8"
         ConsumerKey="788386747851675"
         ConsumerSecret="698e7f99acc954691bb0250b4dd9d6d2"
-        RedirectUrl="http://mob.com"
+        RedirectUrl="http://fhwebsite.cloudapp.net/"
         Enable="true" />
 
     <Twitter

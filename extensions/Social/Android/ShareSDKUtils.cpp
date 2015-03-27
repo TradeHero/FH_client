@@ -25,10 +25,11 @@ JNIEXPORT void JNICALL Java_cn_sharesdk_ShareSDKUtils_onJavaCallback
 	CCNumber* status = (CCNumber*) dic->objectForKey("status"); // Success = 1, Fail = 2, Cancel = 3 
 	CCNumber* action = (CCNumber*) dic->objectForKey("action"); //  1 = ACTION_AUTHORIZING,  8 = ACTION_USER_INFOR,9 = ACTION_SHARE
 	CCNumber* platform = (CCNumber*) dic->objectForKey("platform");
+    CCString* accessToken = (CCString*)dic->objectForKey("accessToken");
 	CCDictionary* res = (CCDictionary*) dic->objectForKey("res");
 	// TODO add codes here
 	if(1 == status->getIntValue()){
-		callBackComplete(action->getIntValue(), platform->getIntValue(), res);
+		callBackComplete(action->getIntValue(), platform->getIntValue(), accessToken, res);
 	}else if(2 == status->getIntValue()){
 		callBackError(action->getIntValue(), platform->getIntValue(), res);
 	}else{
@@ -38,9 +39,8 @@ JNIEXPORT void JNICALL Java_cn_sharesdk_ShareSDKUtils_onJavaCallback
 	dic->release();
 }
 
-void callBackComplete(int action, int platformId, CCDictionary* res){
+void callBackComplete(int action, int platformId, CCString* accessToken, CCDictionary* res){
 	if (action == 1 && NULL != authCb) { // 1 = ACTION_AUTHORIZING
-        CCString* accessToken = (CCString*)res->objectForKey("accessToken");
 		authCb(C2DXResponseStateSuccess, (C2DXPlatType) platformId, NULL, accessToken->getCString());
 	} else if (action == 8 && NULL != infoCb) { // 8 = ACTION_USER_INFOR
 		infoCb(C2DXResponseStateSuccess, (C2DXPlatType) platformId, res, NULL);
