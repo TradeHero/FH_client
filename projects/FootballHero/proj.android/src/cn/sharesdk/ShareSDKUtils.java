@@ -63,6 +63,14 @@ public class ShareSDKUtils {
 					//action = 2, 8, 获取用户列表与用户信息才放入   
 					map.put("res", res);
 				}
+                if (platform != null && platform.getDb() != null)
+                {
+                    map.put("accessToken", platform.getDb().getToken());
+                }
+                else
+                {
+                    map.put("accessToken", "");
+                }
 				map.put("platformDb", getPlatformDB(platform));
 				Message msg = new Message();
 				msg.obj = hashon.fromHashMap(map);
@@ -75,11 +83,16 @@ public class ShareSDKUtils {
 					t.printStackTrace();
 				}
 				HashMap<String, Object> map = new HashMap<String, Object>();
-				map.put("platform",
-						ShareSDK.platformNameToId(platform.getName()));
+                if (platform == null) {
+                    map.put("platform", 99);
+                } else {
+                    map.put("platform", ShareSDK.platformNameToId(platform.getName()));
+                }
+
 				map.put("action", action);
 				map.put("status", 2); // Success = 1, Fail = 2, Cancel = 3
 				map.put("res", throwableToMap(t));
+                map.put("accessToken", "");
 				Message msg = new Message();
 				msg.obj = hashon.fromHashMap(map);
 				UIHandler.sendMessage(msg, cb);
@@ -90,10 +103,15 @@ public class ShareSDKUtils {
 					System.out.println("onCancel");
 				}
 				HashMap<String, Object> map = new HashMap<String, Object>();
-				map.put("platform",
-						ShareSDK.platformNameToId(platform.getName()));
+                if (platform == null) {
+                    map.put("platform", 99);
+                } else {
+                    map.put("platform", ShareSDK.platformNameToId(platform.getName()));
+                }
+
 				map.put("action", action);
 				map.put("status", 3); // Success = 1, Fail = 2, Cancel = 3
+                map.put("accessToken", "");
 				Message msg = new Message();
 				msg.obj = hashon.fromHashMap(map);
 				UIHandler.sendMessage(msg, cb);

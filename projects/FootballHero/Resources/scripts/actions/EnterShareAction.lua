@@ -57,7 +57,7 @@ function shareHandler( state, platType, errorMsg )
 	elseif state == C2DXResponseStateFail then
 		CCLuaLog("Share failed.")
 		EventManager:postEvent( Event.Show_Error_Message, { errorMsg } )
-	end  
+	end
 
 	ConnectingMessage.selfRemove()
     mCallback( state == C2DXResponseStateSuccess, platType )

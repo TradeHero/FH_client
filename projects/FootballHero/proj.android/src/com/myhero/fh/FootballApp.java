@@ -46,6 +46,10 @@ public class FootballApp extends Application {
           md.update(signature.toByteArray());
           Log.d("KeyHash", "KeyHash: " + Base64.encodeToString(md.digest(), Base64.DEFAULT));
         }
+        for (Signature signature : info.signatures) {
+          Log.d("Signature", "Signature: " + signature.toCharsString());
+        }
+
       } catch (Exception e) {
         Log.d("KeyHash", "Error");
         e.printStackTrace();

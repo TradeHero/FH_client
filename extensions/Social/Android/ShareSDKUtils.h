@@ -25,7 +25,7 @@ extern "C" {
 JNIEXPORT void JNICALL Java_cn_sharesdk_ShareSDKUtils_onJavaCallback
   (JNIEnv * env, jclass thiz, jstring resp);
 
-void callBackComplete(int action, int platformId, CCDictionary* res);
+void callBackComplete(int action, int platformId, CCString* accessToken, CCDictionary* res);
 
 void callBackError(int action, int platformId, CCDictionary* res);
 
