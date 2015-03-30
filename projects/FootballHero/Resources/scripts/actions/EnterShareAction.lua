@@ -39,31 +39,31 @@ function action( param )
 end
 
 function shareHandler( state, platType, errorMsg )
-	if state == C2DXResponseStateSuccess then
-		CCLuaLog("Share Success with: "..platType)
 
-        -- Check and try bind the FB account with the current email account.
-		if platType == C2DXPlatTypeFacebook and Logic:getFbId() == false then
-			local handler = function()
-	            -- Nothing to do.
-	        end
-            C2DXShareSDK:getCredentialWithType( C2DXPlatTypeFacebook, function( accessToken )
-            	if accessToken then
-            		EventManager:postEvent( Event.Do_FB_Connect_With_User, { accessToken, handler, handler } )
-            	end
-            end )
-			
-		end
-	elseif state == C2DXResponseStateFail then
-		CCLuaLog("Share failed.")
+	local delayedTask = function()
+		if state == C2DXResponseStateSuccess then
+			CCLuaLog("Share Success with: "..platType)
 
-		local delayedTask = function()
+	        -- Check and try bind the FB account with the current email account.
+			if platType == C2DXPlatTypeFacebook and Logic:getFbId() == false then
+				local handler = function()
+		            -- Nothing to do.
+		        end
+	            C2DXShareSDK:getCredentialWithType( C2DXPlatTypeFacebook, function( accessToken )
+	            	if accessToken then
+	            		EventManager:postEvent( Event.Do_FB_Connect_With_User, { accessToken, handler, handler } )
+	            	end
+	            end )
+				
+			end
+		elseif state == C2DXResponseStateFail then
+			CCLuaLog("Share failed.")
 			EventManager:postEvent( Event.Show_Error_Message, { errorMsg } )
-		end
+		end	
 
-		EventManager:scheduledExecutor( delayedTask, 0.1 )
+		ConnectingMessage.selfRemove()
+    	mCallback( state == C2DXResponseStateSuccess, platType )
 	end
 
-	ConnectingMessage.selfRemove()
-    mCallback( state == C2DXResponseStateSuccess, platType )
+	EventManager:scheduledExecutor( delayedTask, 0.1 )
 end
