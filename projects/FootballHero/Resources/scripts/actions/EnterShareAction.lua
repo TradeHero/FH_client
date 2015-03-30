@@ -56,7 +56,12 @@ function shareHandler( state, platType, errorMsg )
 		end
 	elseif state == C2DXResponseStateFail then
 		CCLuaLog("Share failed.")
-		EventManager:postEvent( Event.Show_Error_Message, { errorMsg } )
+
+		local delayedTask = function()
+			EventManager:postEvent( Event.Show_Error_Message, { errorMsg } )
+		end
+
+		EventManager:scheduledExecutor( delayedTask, 0.1 )
 	end
 
 	ConnectingMessage.selfRemove()

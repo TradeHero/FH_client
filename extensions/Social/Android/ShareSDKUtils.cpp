@@ -50,12 +50,14 @@ void callBackComplete(int action, int platformId, CCString* accessToken, CCDicti
 }
 
 void callBackError(int action, int platformId, CCDictionary* res){
+    CCDictionary* errorDic = CCDictionary::create();
+    errorDic->setObject(res->objectForKey("error_msg"), "error_msg");
 	if (action == 1 && NULL != authCb) { // 1 = ACTION_AUTHORIZING
-		authCb(C2DXResponseStateFail, (C2DXPlatType) platformId, NULL, "");
+		authCb(C2DXResponseStateFail, (C2DXPlatType) platformId, errorDic, "");
 	} else if (action == 8 && NULL != infoCb) { // 8 = ACTION_USER_INFOR
-		infoCb(C2DXResponseStateFail, (C2DXPlatType) platformId, res, NULL);
+		infoCb(C2DXResponseStateFail, (C2DXPlatType) platformId, res, errorDic);
 	} else if (action == 9 && NULL != shareCb) { // 9 = ACTION_SHARE
-		shareCb(C2DXResponseStateFail, (C2DXPlatType) platformId, res, NULL);
+		shareCb(C2DXResponseStateFail, (C2DXPlatType) platformId, res, errorDic);
 	}
 }
 

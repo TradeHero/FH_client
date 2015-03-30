@@ -3,6 +3,7 @@ package cn.sharesdk;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import cn.sharesdk.wechat.utils.WechatClientNotExistException;
 import m.framework.utils.Hashon;
 import m.framework.utils.UIHandler;
 
@@ -91,6 +92,7 @@ public class ShareSDKUtils {
 
 				map.put("action", action);
 				map.put("status", 2); // Success = 1, Fail = 2, Cancel = 3
+
 				map.put("res", throwableToMap(t));
                 map.put("accessToken", "");
 				Message msg = new Message();
@@ -123,21 +125,14 @@ public class ShareSDKUtils {
 
 	private static HashMap<String, Object> throwableToMap(Throwable t) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("msg", t.getMessage());
-		ArrayList<HashMap<String, Object>> traces = new ArrayList<HashMap<String, Object>>();
-		for (StackTraceElement trace : t.getStackTrace()) {
-			HashMap<String, Object> element = new HashMap<String, Object>();
-			element.put("cls", trace.getClassName());
-			element.put("method", trace.getMethodName());
-			element.put("file", trace.getFileName());
-			element.put("line", trace.getLineNumber());
-			traces.add(element);
-		}
-		map.put("stack", traces);
-		Throwable cause = t.getCause();
-		if (cause != null) {
-			map.put("cause", throwableToMap(cause));
-		}
+		map.put("exceptionClass", t.getClass().getCanonicalName());
+
+        // Map the exception to error code. And the code should be the same with IOS's error code.
+        if (t instanceof WechatClientNotExistException)
+        {
+            map.put("error_msg", "WeChat is not installed");
+        }
+
 		return map;
 	}
 
