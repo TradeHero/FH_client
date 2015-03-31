@@ -173,6 +173,8 @@ public class MainActivity extends Cocos2dxActivity {
     public void onRestart() {
         Log.v("###", "onRestart");
         super.onRestart();
+
+        ShareSDKUtils.appResume();
     }
 
     @Override

@@ -3,6 +3,7 @@ package cn.sharesdk;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import cn.sharesdk.onekeyshare.ShareContentCustomizeCallback;
 import cn.sharesdk.wechat.utils.WechatClientNotExistException;
 import m.framework.utils.Hashon;
 import m.framework.utils.UIHandler;
@@ -28,6 +29,8 @@ public class ShareSDKUtils {
 	private static Context context;
 	private static PlatformActionListener paListaner;
 	private static Hashon hashon;
+    private static Platform currentPlatform;
+    private static int currentAction;
 
 	private ShareSDKUtils() {
 
@@ -135,6 +138,12 @@ public class ShareSDKUtils {
 
 		return map;
 	}
+
+    public static void appResume() {
+        if (paListaner != null && currentPlatform != null) {
+            paListaner.onCancel(currentPlatform, currentAction);
+        }
+    }
 
 	public static void initSDK(final String appKey,
 			final boolean enableStatistics) {
@@ -380,6 +389,13 @@ public class ShareSDKUtils {
 		if (platformId > 0) {
 			oks.setPlatform(ShareSDK.platformIdToName(platformId));
 		}
+        oks.setShareContentCustomizeCallback(new ShareContentCustomizeCallback() {
+            @Override
+            public void onShare(Platform platform, ShareParams paramsToShare) {
+                currentPlatform = platform;
+                currentAction = 9;
+            }
+        });
 		oks.show(context);
 	}
 

@@ -132,14 +132,14 @@ static AppDelegate s_sharedApplication;
     NSLog(@"Interval:%f",timeInterval);
     
     /** 
-    // QuickBlox production config
+    // QuickBlox dev config
     [QBApplication sharedApplication].applicationId = 18975;
     [QBConnection registerServiceKey:@"zencjPNL6BUKjTn"];
     [QBConnection registerServiceSecret:@"kMjSLXRcHxqftVT"];
     [QBSettings setAccountKey:@"dqtBD2ZHNJphn2q6YuHy"];
      **/
     
-    // QuickBlox dev config
+    // QuickBlox prod config
     [QBApplication sharedApplication].applicationId = 20587;
     [QBConnection registerServiceKey:@"G7EMdXQg9h94nyc"];
     [QBConnection registerServiceSecret:@"2Abhdccg2cJk26t"];
