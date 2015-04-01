@@ -1,6 +1,6 @@
 /*
 ** Lua binding: Extension
-** Generated automatically by tolua++-1.0.92 on 03/24/15 12:09:08.
+** Generated automatically by tolua++-1.0.92 on 03/31/15 17:02:06.
 */
 
 /****************************************************************************
@@ -1352,6 +1352,72 @@ static int tolua_Extension_Misc_setUADeviceTokenHandler00(lua_State* tolua_S)
 }
 #endif //#ifndef TOLUA_DISABLE
 
+/* method: addUATags of class  Misc */
+#ifndef TOLUA_DISABLE_tolua_Extension_Misc_addUATags00
+static int tolua_Extension_Misc_addUATags00(lua_State* tolua_S)
+{
+#ifndef TOLUA_RELEASE
+ tolua_Error tolua_err;
+ if (
+     !tolua_isusertype(tolua_S,1,"Misc",0,&tolua_err) ||
+     !tolua_isstring(tolua_S,2,0,&tolua_err) ||
+     !tolua_isnoobj(tolua_S,3,&tolua_err)
+ )
+  goto tolua_lerror;
+ else
+#endif
+ {
+  Misc* self = (Misc*)  tolua_tousertype(tolua_S,1,0);
+  const char* tagsString = ((const char*)  tolua_tostring(tolua_S,2,0));
+#ifndef TOLUA_RELEASE
+  if (!self) tolua_error(tolua_S,"invalid 'self' in function 'addUATags'", NULL);
+#endif
+  {
+   self->addUATags(tagsString);
+  }
+ }
+ return 0;
+#ifndef TOLUA_RELEASE
+ tolua_lerror:
+ tolua_error(tolua_S,"#ferror in function 'addUATags'.",&tolua_err);
+ return 0;
+#endif
+}
+#endif //#ifndef TOLUA_DISABLE
+
+/* method: removeUATags of class  Misc */
+#ifndef TOLUA_DISABLE_tolua_Extension_Misc_removeUATags00
+static int tolua_Extension_Misc_removeUATags00(lua_State* tolua_S)
+{
+#ifndef TOLUA_RELEASE
+ tolua_Error tolua_err;
+ if (
+     !tolua_isusertype(tolua_S,1,"Misc",0,&tolua_err) ||
+     !tolua_isstring(tolua_S,2,0,&tolua_err) ||
+     !tolua_isnoobj(tolua_S,3,&tolua_err)
+ )
+  goto tolua_lerror;
+ else
+#endif
+ {
+  Misc* self = (Misc*)  tolua_tousertype(tolua_S,1,0);
+  const char* tagsString = ((const char*)  tolua_tostring(tolua_S,2,0));
+#ifndef TOLUA_RELEASE
+  if (!self) tolua_error(tolua_S,"invalid 'self' in function 'removeUATags'", NULL);
+#endif
+  {
+   self->removeUATags(tagsString);
+  }
+ }
+ return 0;
+#ifndef TOLUA_RELEASE
+ tolua_lerror:
+ tolua_error(tolua_S,"#ferror in function 'removeUATags'.",&tolua_err);
+ return 0;
+#endif
+}
+#endif //#ifndef TOLUA_DISABLE
+
 /* method: requestPushNotification of class  Misc */
 #ifndef TOLUA_DISABLE_tolua_Extension_Misc_requestPushNotification00
 static int tolua_Extension_Misc_requestPushNotification00(lua_State* tolua_S)
@@ -1950,6 +2016,8 @@ TOLUA_API int tolua_Extension_open (lua_State* tolua_S)
    tolua_function(tolua_S,"addEventListenerDeepLink",tolua_Extension_Misc_addEventListenerDeepLink00);
    tolua_function(tolua_S,"getUADeviceToken",tolua_Extension_Misc_getUADeviceToken00);
    tolua_function(tolua_S,"setUADeviceTokenHandler",tolua_Extension_Misc_setUADeviceTokenHandler00);
+   tolua_function(tolua_S,"addUATags",tolua_Extension_Misc_addUATags00);
+   tolua_function(tolua_S,"removeUATags",tolua_Extension_Misc_removeUATags00);
    tolua_function(tolua_S,"requestPushNotification",tolua_Extension_Misc_requestPushNotification00);
    tolua_function(tolua_S,"openUrl",tolua_Extension_Misc_openUrl00);
    tolua_function(tolua_S,"openRate",tolua_Extension_Misc_openRate00);

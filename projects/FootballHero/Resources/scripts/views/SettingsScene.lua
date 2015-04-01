@@ -306,6 +306,7 @@ function initSettingsLanguage( contentContainer )
                     local appLanguage = language["id"]
                     CCUserDefault:sharedUserDefault():setStringForKey( LanguagesConfig.KEY_OF_LANGUAGE, tostring(appLanguage) )
                     toggleLanguageDropDown( language["name"] )
+                    LanguagesConfig.updateUALanguageTag()
                     EventManager:postEvent( Event.Do_Select_Language, { appLanguage } )
                 end
             end

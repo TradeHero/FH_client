@@ -16,6 +16,7 @@ end
 
 EventNameList = 
 { 
+    "Do_Startup",
     "Check_Start_Tutorial",
     "Check_File_Version",
 
@@ -153,6 +154,7 @@ EventNameDosenotTrackList =
     "Do_Get_Quickblox_Users",
     "Do_Quickblox_Last_Message",
 
+    "Do_Startup",
     "Check_Start_Tutorial",
     "Check_File_Version",
     "Show_Info",

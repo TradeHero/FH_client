@@ -21,6 +21,10 @@ class Misc
 	
 	void setUADeviceTokenHandler(LUA_FUNCTION handler);
 
+	void addUATags(const char* tagsString);
+        
+    void removeUATags(const char* tagsString);
+
 	void requestPushNotification();	
 
 	void openUrl(char* url);

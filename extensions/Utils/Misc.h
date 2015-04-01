@@ -44,6 +44,10 @@ namespace Utils
 		void setUADeviceTokenHandler(int handler);
 
 		void responseUADeviceToken(const char* token);
+        
+        void addUATags(const char* tagsString);
+        
+        void removeUATags(const char* tagsString);
 
 		void requestPushNotification();
 

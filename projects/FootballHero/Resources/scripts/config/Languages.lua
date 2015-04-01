@@ -1,27 +1,25 @@
 module(..., package.seeall)
 
---[[
-	LanguageType = {
-		["kLanguageEnglish"] = 0,
-	    ["kLanguageChinese"] = 1,
-	    ["kLanguageFrench"] = 2,
-	    ["kLanguageItalian"] = 3,
-	    ["kLanguageGerman"] = 4,
-	    ["kLanguageSpanish"] = 5,
-	    ["kLanguageDutch"] = 6,
-	    ["kLanguageRussian"] = 7,
-	    ["kLanguageKorean"] = 8,
-	    ["kLanguageJapanese"] = 9,
-	    ["kLanguageHungarian"] = 10,
-	    ["kLanguagePortuguese"] = 11,
-	    ["kLanguageArabic"] = 12,
-	    ["kLanguageBahasa"] = 13,
-	    ["kLanguageThailand"] = 14,
-	}
-
---]]
+local Json = require("json")
 
 KEY_OF_LANGUAGE = "app-language"
+local LANGUAGE_NAME = {}
+table.insert( LANGUAGE_NAME, "English" )			-- 0
+table.insert( LANGUAGE_NAME, "Chinese" )			-- 1
+table.insert( LANGUAGE_NAME, "French" )				-- 2
+table.insert( LANGUAGE_NAME, "Italian" )			-- 3
+table.insert( LANGUAGE_NAME, "German" )				-- 4
+table.insert( LANGUAGE_NAME, "Spanish" )			-- 5
+table.insert( LANGUAGE_NAME, "Dutch" )				-- 6
+table.insert( LANGUAGE_NAME, "Russian" )			-- 7
+table.insert( LANGUAGE_NAME, "Korean" )				-- 8
+table.insert( LANGUAGE_NAME, "Japanese" )			-- 9
+table.insert( LANGUAGE_NAME, "Hungarian" )			-- 10
+table.insert( LANGUAGE_NAME, "Portuguese" )			-- 11
+table.insert( LANGUAGE_NAME, "Arabic" )				-- 12
+table.insert( LANGUAGE_NAME, "Bahasa Indonesia" )	-- 13
+table.insert( LANGUAGE_NAME, "Thailand" )			-- 14
+table.insert( LANGUAGE_NAME, "Cambodian" )			-- 15
 
 local Constants = require("scripts.Constants")
 
@@ -46,4 +44,24 @@ function getLanguageConfigById( id )
 	end
 
 	return mLanguageConfig[1]		-- Make english the default one.
+end
+
+function getLanguageName( id )
+	if id > 0 and id < table.getn( LANGUAGE_NAME ) then
+		return LANGUAGE_NAME[id + 1]
+	end
+
+	return LANGUAGE_NAME[1]
+end
+
+function updateUALanguageTag()
+	-- Remove all language Tags
+	Misc:sharedDelegate():removeUATags( Json.encode( LANGUAGE_NAME ) )
+
+	-- Add the current language tag.
+	local currentLanguage = CCApplication:sharedApplication():getCurrentLanguage()
+	local languageTag = getLanguageName( currentLanguage )
+	local tagsToAdd = {}
+	table.insert( tagsToAdd, languageTag )
+	Misc:sharedDelegate():addUATags( Json.encode( tagsToAdd ) )
 end

@@ -119,9 +119,17 @@ ccLanguageType CCApplication::getCurrentLanguage()
     {
         ret = kLanguageArabic;
     }
-    else if (0 == strcmp("in", pLanguageName))
+    else if (0 == strcmp("id", pLanguageName))
     {
         ret = kLanguageBahasa;
+    }
+    else if (0 == strcmp("th", pLanguageName))
+    {
+        ret = kLanguageThailand;
+    }
+    else if (0 == strcmp("kh", pLanguageName))
+    {
+        ret = kLanguageCambodian;
     }
     
     return ret;

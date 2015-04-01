@@ -22,6 +22,10 @@ public:
     
     void getUADeviceToken();
     
+    void addUATags(const char* tagsString);
+    
+    void removeUATags(const char* tagsString);
+    
     void responseUADeviceToken(const char* token);
     
     void requestPushNotification();

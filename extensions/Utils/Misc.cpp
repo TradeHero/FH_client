@@ -248,6 +248,26 @@ namespace Utils
 		int ret = pStack->executeFunctionByHandler(mUADeviceTokenHandler, 1);
 		pStack->clean();
 	}
+    
+    void Misc::addUATags(const char *tagsString)
+    {
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+        MiscHandler::getInstance()->addUATags(tagsString);
+#endif
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+        
+#endif
+    }
+    
+    void Misc::removeUATags(const char *tagsString)
+    {
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+        MiscHandler::getInstance()->removeUATags(tagsString);
+#endif
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+        
+#endif
+    }
 
 	void Misc::requestPushNotification()
 	{

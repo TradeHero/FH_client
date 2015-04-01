@@ -6,12 +6,16 @@ typedef enum LanguageType
     kLanguageItalian,
     kLanguageGerman,
     kLanguageSpanish,
+    kLanguageDutch,
     kLanguageRussian,
     kLanguageKorean,
     kLanguageJapanese,
     kLanguageHungarian,
     kLanguagePortuguese,
-    kLanguageArabic
+    kLanguageArabic,
+    kLanguageBahasa,
+    kLanguageThailand,
+    kLanguageCambodian
 } ccLanguageType;
 
 enum TargetPlatform

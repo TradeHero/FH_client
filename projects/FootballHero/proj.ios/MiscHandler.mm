@@ -76,6 +76,39 @@ void MiscHandler::getUADeviceToken()
     Utils::Misc::sharedDelegate()->responseUADeviceToken([token UTF8String]);
 }
 
+void MiscHandler::addUATags(const char *tagsString)
+{
+    NSError *error = nil;
+    NSData *jsonData = [[NSString stringWithUTF8String:tagsString] dataUsingEncoding:NSUTF8StringEncoding];
+    
+    NSArray *tags = [NSJSONSerialization JSONObjectWithData:jsonData
+                                                    options:NSJSONReadingAllowFragments
+                                                      error:&error];
+    
+    if (error == NULL)
+    {
+        [[UAPush shared] addTagsToCurrentDevice:tags];
+        
+        NSArray* t = [[UAPush shared] tags];
+        NSLog(@"UA tags: %@", t);
+    }
+}
+
+void MiscHandler::removeUATags(const char *tagsString)
+{
+    NSError *error = nil;
+    NSData *jsonData = [[NSString stringWithUTF8String:tagsString] dataUsingEncoding:NSUTF8StringEncoding];
+    
+    NSArray *tags = [NSJSONSerialization JSONObjectWithData:jsonData
+                                                    options:NSJSONReadingAllowFragments
+                                                      error:&error];
+    
+    if (error == NULL)
+    {
+        [[UAPush shared] removeTagsFromCurrentDevice:tags];
+    }
+}
+
 void MiscHandler::responseUADeviceToken(const char* token)
 {
     Utils::Misc::sharedDelegate()->responseUADeviceToken(token);
