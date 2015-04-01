@@ -255,7 +255,7 @@ namespace Utils
         MiscHandler::getInstance()->addUATags(tagsString);
 #endif
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
-        
+        misc_add_UA_Tags(tagsString);
 #endif
     }
     
@@ -265,7 +265,7 @@ namespace Utils
         MiscHandler::getInstance()->removeUATags(tagsString);
 #endif
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
-        
+        misc_remove_UA_Tags(tagsString);
 #endif
     }
 

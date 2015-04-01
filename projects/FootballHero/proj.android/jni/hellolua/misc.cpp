@@ -190,6 +190,31 @@ void misc_get_UA_DeviceToken() {
   }
 }
 
+void misc_add_UA_Tags(const char* tagsString)
+{
+    JniMethodInfo jmi;
+    if (JniHelper::getStaticMethodInfo(jmi, "com/myhero/fh/IntentReceiver",
+        "addUATags", "(Ljava/lang/String;)V"))
+    {
+        jstring jTagsString = jmi.env->NewStringUTF(tagsString);
+        jmi.env->CallStaticVoidMethod(jmi.classID, jmi.methodID, jTagsString);
+        jmi.env->DeleteLocalRef(jTagsString);
+        jmi.env->DeleteLocalRef(jmi.classID);
+    }
+}
+void misc_remove_UA_Tags(const char* tagsString)
+{
+    JniMethodInfo jmi;
+    if (JniHelper::getStaticMethodInfo(jmi, "com/myhero/fh/IntentReceiver",
+        "removeUATags", "(Ljava/lang/String;)V"))
+    {
+        jstring jTagsString = jmi.env->NewStringUTF(tagsString);
+        jmi.env->CallStaticVoidMethod(jmi.classID, jmi.methodID, jTagsString);
+        jmi.env->DeleteLocalRef(jTagsString);
+        jmi.env->DeleteLocalRef(jmi.classID);
+    }
+}
+
 void misc_select_image(const char* path, int width, int height) {
     JniMethodInfo jmi;
     if (JniHelper::getStaticMethodInfo(jmi, "com/myhero/fh/util/MiscUtil",

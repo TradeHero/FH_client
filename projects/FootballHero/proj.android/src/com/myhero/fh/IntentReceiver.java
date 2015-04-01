@@ -38,10 +38,11 @@ import com.urbanairship.actions.LandingPageAction;
 import com.urbanairship.actions.OpenExternalUrlAction;
 import com.urbanairship.push.GCMMessageHandler;
 import com.urbanairship.push.PushManager;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class IntentReceiver extends BroadcastReceiver {
 
@@ -134,6 +135,52 @@ public class IntentReceiver extends BroadcastReceiver {
         }
 
         responseUADeviceToken(token);
+    }
+
+    public static void addUATags(String tagsString) {
+        Set<String> currentTags = PushManager.shared().getTags();
+
+        try
+        {
+            JSONArray paramObject = new JSONArray(tagsString);
+            for (int i = 0; i < paramObject.length(); i ++)
+            {
+                String value = (String)paramObject.get(i);
+                if (!currentTags.contains(value))
+                {
+                    currentTags.add(value);
+                }
+            }
+            PushManager.shared().setTags(currentTags);
+
+        }
+        catch (JSONException exception)
+        {
+            exception.printStackTrace();
+        }
+    }
+
+    public static void removeUATags(String tagsString) {
+        Set<String> currentTags = PushManager.shared().getTags();
+
+        try
+        {
+            JSONArray paramObject = new JSONArray(tagsString);
+            for (int i = 0; i < paramObject.length(); i ++)
+            {
+                String value = (String)paramObject.get(i);
+                if (currentTags.contains(value))
+                {
+                    currentTags.remove(value);
+                }
+            }
+            PushManager.shared().setTags(currentTags);
+
+        }
+        catch (JSONException exception)
+        {
+            exception.printStackTrace();
+        }
     }
 
     public static native void responseUADeviceToken(String token);
