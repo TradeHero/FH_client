@@ -18,6 +18,7 @@ local DEEPLINK_PREDICT = "prediction"
 local DEEPLINK_COMPETITION = "competition"
 local DEEPLINK_LEADERBOARD = "leaderboard"
 local DEEPLINK_SPINTHEWHEEL = "spinthewheel"
+local DEEPLINK_FBFH = "FBFH"
 
 local mSceneGameLayer
 local mKeyPadBackEnabled = true
@@ -280,6 +281,9 @@ function processDeepLink( deepLink, defaultEvent, defaultEventParam )
 			end
         elseif deepLinkPage == DEEPLINK_SPINTHEWHEEL then
             EventManager:postEvent( Event.Enter_Spin_the_Wheel )
+
+        elseif deepLinkPage == DEEPLINK_FBFH then
+        	Misc:sharedDelegate():openUrl("http://www.facebook.com/FootballHeroApp")
         else
 			if defaultEvent ~= nil then
 				EventManager:postEvent( defaultEvent, defaultEventParam )

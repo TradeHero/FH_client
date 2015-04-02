@@ -232,7 +232,7 @@ void misc_select_image(const char* path, int width, int height) {
 void misc_get_deepLink() {
     JniMethodInfo jmi;
     if (JniHelper::getStaticMethodInfo(jmi, "com/myhero/fh/util/MiscUtil",
-                "getDeepLink", "()Ljava/lang/String;"))
+                "getDeepLink", "()V"))
           {
                 jmi.env->CallStaticCharMethod(jmi.classID, jmi.methodID);
                 jmi.env->DeleteLocalRef(jmi.classID);

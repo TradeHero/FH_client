@@ -162,7 +162,6 @@ static AppDelegate s_sharedApplication;
         }
     }
 **/
-    
     return YES;
 }
 
@@ -356,7 +355,8 @@ static AppDelegate s_sharedApplication;
     
     if([[url host] isEqualToString:@"openPage"])
     {
-        deepLink = [url path];
+        deepLink = [NSString stringWithString:[url path]];
+        [deepLink retain];
         NSLog(@"Deep link path:%@", deepLink);
         
         MiscHandler::getInstance()->notifyDeepLink([deepLink UTF8String]);

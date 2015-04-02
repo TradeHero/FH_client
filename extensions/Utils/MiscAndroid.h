@@ -9,6 +9,7 @@ void misc_send_sms(const char* body);
 void misc_open_url(const char* url);
 void misc_select_image(const char* path, int width, int height);
 void misc_get_UA_DeviceToken();
+void misc_get_deepLink();
 void misc_add_UA_Tags(const char* tagsString);
 void misc_remove_UA_Tags(const char* tagsString);
 void misc_open_rate();

@@ -139,7 +139,7 @@ namespace Utils
 		result = MiscHandler::getInstance()->getDeepLink();
 #endif
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
-		
+        misc_get_deepLink();
 #endif
 		CCScriptEngineProtocol* pScriptProtocol = CCScriptEngineManager::sharedManager()->getScriptEngine();
 		cocos2d::CCLuaEngine* pLuaEngine = dynamic_cast<CCLuaEngine*>(pScriptProtocol);
