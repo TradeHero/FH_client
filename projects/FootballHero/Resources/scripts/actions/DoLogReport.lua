@@ -2,6 +2,7 @@ module(..., package.seeall)
 
 local Constants = require("scripts.Constants")
 local RequestUtils = require("scripts.RequestUtils")
+local Logic = require("scripts.Logic").getInstance()
 local Json = require("json")
 
 
@@ -54,7 +55,9 @@ function report( log, sourceType )
     requestObject["ErrorType"] = sourceType
     requestObject["ClientVersion"] = CCUserDefault:sharedUserDefault():getStringForKey( KEY_OF_VERSION )
     requestObject["Device"] = getDeviceName()
+    requestObject["UserDisplayName"] = Logic:getDisplayName() or "Unknown"
     requestObject["StackTrace"] = log
+
     local requestContent = Json.encode( requestObject )
 
     local handler = function( isSucceed, body, header, status, errorBuffer )
