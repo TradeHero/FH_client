@@ -459,6 +459,9 @@ function loadMoreContent( couponHistory )
         mHasMoreToLoad = false
         return
     end
+    if not mWidget then
+        return
+    end
 
     local contentContainer = tolua.cast( mWidget:getChildByName("ScrollView"), "ScrollView" )
 
