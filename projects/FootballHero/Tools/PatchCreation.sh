@@ -72,7 +72,6 @@ function diffVersionWithTags()
 	    		# Check code updates
 	    		
 	    		codeUpdated=true
-	    		break
 	    	elif [[ $filePath == projects/FootballHero/Resources/CryptLuascripts/* ]]; then
 	    		# Ignore some files.
 	    		continue
@@ -91,26 +90,24 @@ function diffVersionWithTags()
 
 	# Create the zip package and update the patchConfig.
 	if [[ $codeUpdated == true ]]; then
-		echo "Since the code is change, no self update."
+		echo "Note the code is change which are not self-updatable!!"
+	fi
+	rm -f $patchDir/gitDiff
+	cd $WORKING_PATH
+	
+	# Check if the patch folder is empty
+	if [[ "`ls -A $1_$2`" == "" ]]; then
 		echo "$1_needUpdate = false" >> $WORKING_PATH/$PATCH_CONFIG_FILE
 	else
-		rm -f $patchDir/gitDiff
-		cd $WORKING_PATH
-		
-		# Check if the patch folder is empty
-		if [[ "`ls -A $1_$2`" == "" ]]; then
-			echo "$1_needUpdate = false" >> $WORKING_PATH/$PATCH_CONFIG_FILE
-		else
-			cd $1_$2
-			zip -r -q ../$1_$2.zip *
-			cd ..
-			fileSizeInfo=$(du -sh $1_$2.zip)
-			fileSize=(${fileSizeInfo//	/ })
-			echo "$1_needUpdate = true" >> $WORKING_PATH/$PATCH_CONFIG_FILE
-			echo "$1_updateTo = $2" >> $WORKING_PATH/$PATCH_CONFIG_FILE
-			echo "$1_package = http://fhmainstorage.blob.core.windows.net/autoupdates$ENV/$1_$2.zip" >> $WORKING_PATH/$PATCH_CONFIG_FILE
-			echo "$1_size = $fileSize" >> $WORKING_PATH/$PATCH_CONFIG_FILE
-		fi
+		cd $1_$2
+		zip -r -q ../$1_$2.zip *
+		cd ..
+		fileSizeInfo=$(du -sh $1_$2.zip)
+		fileSize=(${fileSizeInfo//	/ })
+		echo "$1_needUpdate = true" >> $WORKING_PATH/$PATCH_CONFIG_FILE
+		echo "$1_updateTo = $2" >> $WORKING_PATH/$PATCH_CONFIG_FILE
+		echo "$1_package = http://fhmainstorage.blob.core.windows.net/autoupdates$ENV/$1_$2.zip" >> $WORKING_PATH/$PATCH_CONFIG_FILE
+		echo "$1_size = $fileSize" >> $WORKING_PATH/$PATCH_CONFIG_FILE
 	fi
 
 	echo "" >> $WORKING_PATH/$PATCH_CONFIG_FILE
