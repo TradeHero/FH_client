@@ -264,7 +264,7 @@ function initLeaderboardContent( i, content, info )
     drop:addTouchEventListener( dropHandler )
     btn:addTouchEventListener( dropHandler )
 
-    if info["DisplayName"] == nil then
+    if info["DisplayName"] == nil or type( info["DisplayName"] ) ~= "string" then
         name:setText( Constants.String.unknown_name )
     else
         name:setText( info["DisplayName"] )

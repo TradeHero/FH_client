@@ -113,7 +113,7 @@ function initLeaderboardContent( i, content, info )
     local score = tolua.cast( top:getChildByName("Label_Score"), "Label" )
     local logo = tolua.cast( top:getChildByName("Image_Logo"), "ImageView" )
 
-    if info["DisplayName"] == nil then
+    if info["DisplayName"] == nil or type(info["DisplayName"]) ~= "string" then
         name:setText( Constants.String.unknown_name )
     else
         name:setText( info["DisplayName"] )
@@ -218,7 +218,7 @@ function initSelfContent( minigameDetails )
     local logo = tolua.cast( self:getChildByName("Image_Logo"), "ImageView" )
     
     -- TODO
-    if minigameDetails["DisplayName"] == nil then
+    if minigameDetails["DisplayName"] == nil or type(minigameDetails["DisplayName"]) ~= "string" then
         name:setText( Constants.String.unknown_name )
     else
         name:setText( minigameDetails["DisplayName"] )

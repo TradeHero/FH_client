@@ -234,7 +234,7 @@ function initContent( couponHistory )
     end
 
     local name = tolua.cast( mWidget:getChildByName("Label_Name"), "Label" )
-    if info["DisplayName"] == nil then
+    if info["DisplayName"] == nil or type(info["DisplayName"]) ~= "string" then
         name:setText( Constants.String.unknown_name )
     else
         -- TODO: name width check
