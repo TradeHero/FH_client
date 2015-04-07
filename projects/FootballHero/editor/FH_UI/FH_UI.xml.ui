@@ -154,5 +154,5 @@
   <imageFileList />
   <imagePngList />
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>MatchCenterTopScene.json</CurrentUIJson>
+  <CurrentUIJson>ChatroomSelectScene.json</CurrentUIJson>
 </UIProject>

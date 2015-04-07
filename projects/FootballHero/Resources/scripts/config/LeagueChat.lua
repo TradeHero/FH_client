@@ -19,7 +19,7 @@ LeagueChatType = {
 	},
 	{
 		["labelName"] = "Label_Spanish", 
-		["buttonName"] = "Button_Spanish", 
+		["buttonName"] = "Button_Bahasa", 
 		["displayNameKey"] = "spanish", 
 		["logo"] = Constants.CHAT_IMAGE_PATH.."icn-spanish-logo.png", 
 		["chatRoomId"] = "global-spanish",
@@ -33,7 +33,7 @@ LeagueChatType = {
 	},
 	{
 		["labelName"] = "Label_Italian", 
-		["buttonName"] = "Button_Italian", 
+		["buttonName"] = "Button_Thai", 
 		["displayNameKey"] = "italian", 
 		["logo"] = Constants.CHAT_IMAGE_PATH.."icn-italian-logo.png", 
 		["chatRoomId"] = "global-italian",
@@ -42,7 +42,7 @@ LeagueChatType = {
 	},
 	{
 		["labelName"] = "Label_German", 
-		["buttonName"] = "Button_German", 
+		["buttonName"] = "Button_Chinese", 
 		["displayNameKey"] = "german", 
 		["logo"] = Constants.CHAT_IMAGE_PATH.."icn-german-logo.png", 
 		["chatRoomId"] = "global-german",
@@ -51,7 +51,7 @@ LeagueChatType = {
 	},
 	{
 		["labelName"] = "Label_Uefa", 
-		["buttonName"] = "Button_Uefa", 
+		["buttonName"] = "Button_Arabic", 
 		["displayNameKey"] = "uefa", 
 		["logo"] = Constants.CHAT_IMAGE_PATH.."icn-uefa-logo.png", 
 		["chatRoomId"] = "global-uefa",
@@ -60,20 +60,11 @@ LeagueChatType = {
 	},
 	{
 		["labelName"] = "Label_Others", 
-		["buttonName"] = "Button_Others", 
+		["buttonName"] = "Button_Feedback", 
 		["displayNameKey"] = "others", 
 		["logo"] = Constants.CHAT_IMAGE_PATH.."icn-misc-logo.png", 
 		["chatRoomId"] = "global-others",
 		["color"] = ccc3( 137, 10, 108 ),
-		["useQuickBlox"] = false,
-	},
-	{
-		["labelName"] = "Label_Feedback", 
-		["buttonName"] = "Button_Feedback", 
-		["displayNameKey"] = "feedback", 
-		["logo"] = Constants.CHAT_IMAGE_PATH.."icn-feedback-logo.png", 
-		["chatRoomId"] = "global-feedback",
-		["color"] = ccc3( 153, 160, 171 ),
 		["useQuickBlox"] = false,
 	},
 }
