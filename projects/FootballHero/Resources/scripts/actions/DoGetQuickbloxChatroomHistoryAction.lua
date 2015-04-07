@@ -103,7 +103,11 @@ function showChatMessages()
 
     -- Update the last received message's timestamp for this room.
     local lastChatMessage = mChatMessages[ table.getn( mChatMessages ) ]
-    EventManager:postEvent( Event.Do_Quickblox_Last_Message, { "Save", mRoomId, lastChatMessage["date_sent"] } )
+    if lastChatMessage then
+        EventManager:postEvent( Event.Do_Quickblox_Last_Message, { "Save", mRoomId, lastChatMessage["date_sent"] } )
+    else
+        EventManager:postEvent( Event.Do_Quickblox_Last_Message, { "Save", mRoomId, 0 } )
+    end
 
     ChatScene.initMessages( chatMessages )
 end

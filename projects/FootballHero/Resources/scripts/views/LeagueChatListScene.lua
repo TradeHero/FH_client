@@ -40,7 +40,7 @@ function initContent( roomInfos )
     for i = 1, table.getn( LeagueChatConfig ) do
         local chatConfig = LeagueChatConfig[i]
         local button = mWidget:getChildByName( chatConfig["buttonName"] )
-        local label = tolua.cast( mWidget:getChildByName( chatConfig["labelName"] ), "Label" )
+        local label = tolua.cast( button:getChildByName("Label_title"), "Label" )
         local counter = tolua.cast( button:getChildByName( "Button_Counter" ), "Button" )
 
         label:setText( Constants.String.league_chat[chatConfig["displayNameKey"]] )
@@ -71,12 +71,12 @@ function initContent( roomInfos )
         button:addTouchEventListener( eventHandler )
     end
 
-    local facebookBtn = mWidget:getChildByName( "Button_Facebook" )
-    local facebookLbl = tolua.cast( mWidget:getChildByName( "Label_Facebook" ), "Label" )
-    local likeCount = tolua.cast( facebookBtn:getChildByName( "Label_Likes"), "Label" )
+    local facebookBtn = mWidget:getChildByName( "Button_FBLike" )
+    local facebookLbl = tolua.cast( facebookBtn:getChildByName( "Label_title" ), "Label" )
+    local likeCount = tolua.cast( facebookBtn:getChildByName( "Button_Counter"), "Label" )
 
     facebookLbl:setText( Constants.String.league_chat.facebook )
-
+    likeCount:setEnabled( false )
 end
 
 function EnterOrExit( eventType )

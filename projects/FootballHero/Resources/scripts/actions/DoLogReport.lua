@@ -16,20 +16,26 @@ local KEY_OF_VERSION = "current-version-code"
 
 function reportConfigError( log )
     if not RequestUtils.USE_DEV then
-        --report( log, "configError" )
+        report( log, "configError" )
     end
 end
 
 function reportNetworkError( log )
-    report( log, "networkError" )
+    if not RequestUtils.USE_DEV then
+        report( log, "networkError" )
+    end
 end
 
 function reportLog( log )
-	report( log, "clientLog" )
+    if not RequestUtils.USE_DEV then
+	   report( log, "clientLog" )
+    end
 end
 
 function reportError( log )
-	report( log, "clientError" )
+    if not RequestUtils.USE_DEV then
+	   report( log, "clientError" )
+    end
 end
 
 function report( log, sourceType )
