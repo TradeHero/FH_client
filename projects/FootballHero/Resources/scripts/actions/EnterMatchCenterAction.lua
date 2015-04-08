@@ -19,7 +19,7 @@ function action( param )
 
     local url
     if mTabID == MatchCenterConfig.MATCH_CENTER_TAB_ID_MEETINGS then
-        --url = RequestUtils.GET_COMPETITION_LIST_REST_CALL
+        url = RequestUtils.GET_MATCH_CENTER_REST_CALL.."?gameId="..matchID.."&includeStatistics=true"
         
     elseif mTabID == MatchCenterConfig.MATCH_CENTER_TAB_ID_DISCUSSION then
         if matchID == nil then

@@ -618,7 +618,7 @@ end
 
 function enterMatch( match )
     Logic:setSelectedMatch( match )
-    EventManager:postEvent( Event.Enter_Match_Center, { MatchCenterConfig.MATCH_CENTER_TAB_ID_DISCUSSION } )
+    EventManager:postEvent( Event.Enter_Match_Center, { MatchCenterConfig.MATCH_CENTER_TAB_ID_MEETINGS, match["Id"] } )
 end
 
 function helperInitMatchInfo( topContent, matchInfo, leagueKey )

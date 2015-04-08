@@ -412,4 +412,48 @@
     <Project>CompetitionWebview</Project>
     <GuidesList />
   </GuidesProject>
+  <GuidesProject>
+    <Project>MatchCenterStatsVSTitle</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>MatchCenterStatsVSContent</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>MatchCenterStatsVSDiagram</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>MatchCenterStatsFrame</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>MatchCenterStatsNoContent</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>MatchCenterStatsL6HomeTitle</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>MatchCenterStatsL6AwayTitle</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>MatchCenterStatsL6Content</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>MatchCenterStatsBlankGap</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>MatchCenterStatsBlankGap_0</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>MatchCenterStatsFormTable</Project>
+    <GuidesList />
+  </GuidesProject>
 </ArrayOfGuidesProject>

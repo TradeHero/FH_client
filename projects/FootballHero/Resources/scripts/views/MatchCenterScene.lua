@@ -47,7 +47,7 @@ function loadFrame( jsonResponse, tabID )
     
     initMatchPredictionContent()
     
-    loadMainContent( jsonResponse, tabID )
+    loadMainContent( jsonResponse )
 end
 
 function refreshFrame( jsonResponse, tabID )
@@ -55,6 +55,7 @@ function refreshFrame( jsonResponse, tabID )
 
     -- init Last Meetings, Discussion header tab
     initMatchCenterTab()
+    loadMainContent( jsonResponse )
 end
 
 function isShown()
@@ -188,7 +189,8 @@ function initMatchPredictionContent()
 end
 
 function loadLastMeetingsScene( contentContainer, jsonResponse )
-    --TODO
+    local MatchCenterStatsScene = require("scripts.views.MatchCenterStatsScene")
+    MatchCenterStatsScene.loadFrame( contentContainer, jsonResponse )
 end
 
 function loadDiscussionsScene( contentContainer, jsonResponse )
@@ -197,7 +199,7 @@ function loadDiscussionsScene( contentContainer, jsonResponse )
 end
 
 function onSelectTab( tabID )
-    EventManager:postEvent( Event.Enter_Match_Center, { tabID } )
+    EventManager:postEvent( Event.Enter_Match_Center, { tabID, mMatch["Id"] } )
 end
 
 function enterMatch()

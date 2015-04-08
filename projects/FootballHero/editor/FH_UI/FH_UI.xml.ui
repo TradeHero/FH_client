@@ -143,6 +143,16 @@
     <string>SettingsLeagueListContentFrame.json</string>
     <string>SettingsTeamListContentFrame.json</string>
     <string>HeaderFrame.json</string>
+    <string>MatchCenterStatsVSTitle.json</string>
+    <string>MatchCenterStatsVSContent.json</string>
+    <string>MatchCenterStatsVSDiagram.json</string>
+    <string>MatchCenterStatsFrame.json</string>
+    <string>MatchCenterStatsNoContent.json</string>
+    <string>MatchCenterStatsL6HomeTitle.json</string>
+    <string>MatchCenterStatsL6AwayTitle.json</string>
+    <string>MatchCenterStatsL6Content.json</string>
+    <string>MatchCenterStatsBlankGap.json</string>
+    <string>MatchCenterStatsFormTable.json</string>
   </JsonList>
   <CanvasSize>
     <Width>640</Width>
@@ -152,7 +162,9 @@
   <ProjectType>UIProject</ProjectType>
   <ResRelativePath />
   <imageFileList />
-  <imagePngList />
+  <imagePngList>
+    <string>MatchCentre/img-blackbox.png</string>
+  </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>ChatroomSelectScene.json</CurrentUIJson>
+  <CurrentUIJson>MatchCenterStatsFormTable.json</CurrentUIJson>
 </UIProject>
