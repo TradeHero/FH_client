@@ -8,6 +8,8 @@ local Logic = require("scripts.Logic").getInstance()
 
 local mWidget
 local mTotalHeight
+local mHomeTeamId
+local mAwayTeamId
 local mHomeTeamName
 local mAwayTeamName
 
@@ -17,8 +19,10 @@ function loadFrame( parent, jsonResponse )
     parent:addChild( mWidget )
 
     local match = Logic:getSelectedMatch()
-    mHomeTeamName = TeamConfig.getTeamName( TeamConfig.getConfigIdByKey( match["HomeTeamId"] ) )
-    mAwayTeamName = TeamConfig.getTeamName( TeamConfig.getConfigIdByKey( match["AwayTeamId"] ) )
+    mHomeTeamId = match["HomeTeamId"]
+    mAwayTeamId = match["AwayTeamId"]
+    mHomeTeamName = TeamConfig.getTeamName( TeamConfig.getConfigIdByKey( mHomeTeamId ) )
+    mAwayTeamName = TeamConfig.getTeamName( TeamConfig.getConfigIdByKey( mAwayTeamId ) )
 
     local contentContainer = tolua.cast( mWidget:getChildByName("ScrollView_Stats"), "ScrollView" )
     contentContainer:removeAllChildrenWithCleanup( true )
@@ -148,6 +152,33 @@ function addFormTableInfo( jsonResponse, contentContainer )
    tolua.cast( formTable:getChildByName("Label_home"), "Label" ):setText( Constants.String.match_center.home )
    tolua.cast( formTable:getChildByName("Label_away"), "Label" ):setText( Constants.String.match_center.away )
 
+   local formTableData = jsonResponse["TeamForm"]
+   if formTableData ~= nil and type( formTableData ) == "table" and table.getn( formTableData ) > 0 then
+      for i = 1, table.getn( formTableData ) do
+         local teamFormTableData = formTableData[i]
+         local suffix
+         if teamFormTableData["TeamId"] == mHomeTeamId then
+            suffix = "1"
+         else
+            suffix = "2"
+         end
+
+         tolua.cast( formTable:getChildByName("Label_P_total"..suffix), "Label" ):setText( teamFormTableData["NumberOfGames"] )
+         tolua.cast( formTable:getChildByName("Label_W_total"..suffix), "Label" ):setText( teamFormTableData["NumberOfGamesWon"] )
+         tolua.cast( formTable:getChildByName("Label_D_total"..suffix), "Label" ):setText( teamFormTableData["NumberOfGamesDrawn"] )
+         tolua.cast( formTable:getChildByName("Label_L_total"..suffix), "Label" ):setText( teamFormTableData["NumberOfGamesLost"] )
+
+         tolua.cast( formTable:getChildByName("Label_P_home"..suffix), "Label" ):setText( teamFormTableData["NumberOfHomeGames"] )
+         tolua.cast( formTable:getChildByName("Label_W_home"..suffix), "Label" ):setText( teamFormTableData["NumberOfHomeGamesWon"] )
+         tolua.cast( formTable:getChildByName("Label_D_home"..suffix), "Label" ):setText( teamFormTableData["NumberOfHomeGamesDrawn"] )
+         tolua.cast( formTable:getChildByName("Label_L_home"..suffix), "Label" ):setText( teamFormTableData["NumberOfHomeGamesLost"] )
+
+         tolua.cast( formTable:getChildByName("Label_P_away"..suffix), "Label" ):setText( teamFormTableData["NumberOfAwayGames"] )
+         tolua.cast( formTable:getChildByName("Label_W_away"..suffix), "Label" ):setText( teamFormTableData["NumberOfAwayGamesWon"] )
+         tolua.cast( formTable:getChildByName("Label_D_away"..suffix), "Label" ):setText( teamFormTableData["NumberOfAwayGamesDrawn"] )
+         tolua.cast( formTable:getChildByName("Label_L_away"..suffix), "Label" ):setText( teamFormTableData["NumberOfAwayGamesLost"] )
+      end
+   end
 end
 
 --[[
@@ -157,37 +188,37 @@ end
 
          {
 
-            "TeamId": 32586,
+            "TeamId": 32588,
 
-            "Position": 3,
+            "Position": 17,
 
-            "Points": 62,
+            "Points": 26,
 
             "NumberOfGames": 29,
 
-            "NumberOfGamesWon": 19,
+            "NumberOfGamesWon": 6,
 
-            "NumberOfGamesDrawn": 5,
+            "NumberOfGamesDrawn": 8,
 
-            "NumberOfGamesLost": 5
+            "NumberOfGamesLost": 15
 
          },
 
          {
 
-            "TeamId": 32584,
+            "TeamId": 32583,
 
-            "Position": 10,
+            "Position": 20,
 
-            "Points": 37,
+            "Points": 18,
 
             "NumberOfGames": 29,
 
-            "NumberOfGamesWon": 9,
+            "NumberOfGamesWon": 3,
 
-            "NumberOfGamesDrawn": 10,
+            "NumberOfGamesDrawn": 9,
 
-            "NumberOfGamesLost": 10
+            "NumberOfGamesLost": 17
 
          }
 
@@ -197,85 +228,85 @@ end
 
          {
 
-            "TeamId": 32586,
+            "TeamId": 32588,
 
-            "OverTotal_15": 23,
+            "OverTotal_15": 18,
 
-            "OverTotal_25": 15,
+            "OverTotal_25": 13,
 
-            "OverTotal_35": 11,
+            "OverTotal_35": 6,
 
-            "UnderTotal_15": 23,
+            "UnderTotal_15": 18,
 
-            "UnderTotal_25": 15,
+            "UnderTotal_25": 13,
 
-            "UnderTotal_35": 11,
+            "UnderTotal_35": 6,
 
-            "OverHome_15": 23,
+            "OverHome_15": 18,
 
-            "OverHome_25": 15,
+            "OverHome_25": 13,
 
-            "OverHome_35": 11,
+            "OverHome_35": 6,
 
-            "UnderHome_15": 23,
+            "UnderHome_15": 18,
 
-            "UnderHome_25": 15,
+            "UnderHome_25": 13,
 
-            "UnderHome_35": 11,
+            "UnderHome_35": 6,
 
-            "OverAway_15": 23,
+            "OverAway_15": 18,
 
-            "OverAway_25": 15,
+            "OverAway_25": 13,
 
-            "OverAway_35": 11,
+            "OverAway_35": 6,
 
-            "UnderAway_15": 23,
+            "UnderAway_15": 18,
 
-            "UnderAway_25": 15,
+            "UnderAway_25": 13,
 
-            "UnderAway_35": 11
+            "UnderAway_35": 6
 
          },
 
          {
 
-            "TeamId": 32584,
+            "TeamId": 32583,
 
-            "OverTotal_15": 20,
+            "OverTotal_15": 22,
 
-            "OverTotal_25": 11,
+            "OverTotal_25": 12,
 
-            "OverTotal_35": 7,
+            "OverTotal_35": 5,
 
-            "UnderTotal_15": 20,
+            "UnderTotal_15": 22,
 
-            "UnderTotal_25": 11,
+            "UnderTotal_25": 12,
 
-            "UnderTotal_35": 7,
+            "UnderTotal_35": 5,
 
-            "OverHome_15": 20,
+            "OverHome_15": 22,
 
-            "OverHome_25": 11,
+            "OverHome_25": 12,
 
-            "OverHome_35": 7,
+            "OverHome_35": 5,
 
-            "UnderHome_15": 20,
+            "UnderHome_15": 22,
 
-            "UnderHome_25": 11,
+            "UnderHome_25": 12,
 
-            "UnderHome_35": 7,
+            "UnderHome_35": 5,
 
-            "OverAway_15": 20,
+            "OverAway_15": 22,
 
-            "OverAway_25": 11,
+            "OverAway_25": 12,
 
-            "OverAway_35": 7,
+            "OverAway_35": 5,
 
-            "UnderAway_15": 20,
+            "UnderAway_15": 22,
 
-            "UnderAway_25": 11,
+            "UnderAway_25": 12,
 
-            "UnderAway_35": 7
+            "UnderAway_35": 5
 
          }
 
@@ -285,21 +316,7 @@ end
 
          {
 
-            "TeamId": 32586,
-
-            "NumberOfGames": 6,
-
-            "NumberOfGamesWon": 4,
-
-            "NumberOfGamesDrawn": 1,
-
-            "NumberOfGamesLost": 1
-
-         },
-
-         {
-
-            "TeamId": 32584,
+            "TeamId": 32588,
 
             "NumberOfGames": 6,
 
@@ -307,7 +324,53 @@ end
 
             "NumberOfGamesDrawn": 2,
 
-            "NumberOfGamesLost": 2
+            "NumberOfGamesLost": 2,
+
+            "NumberOfHomeGames": 3,
+
+            "NumberOfHomeGamesWon": 1,
+
+            "NumberOfHomeGamesDrawn": 1,
+
+            "NumberOfHomeGamesLost": 1,
+
+            "NumberOfAwayGames": 3,
+
+            "NumberOfAwayGamesWon": 1,
+
+            "NumberOfAwayGamesDrawn": 1,
+
+            "NumberOfAwayGamesLost": 1
+
+         },
+
+         {
+
+            "TeamId": 32583,
+
+            "NumberOfGames": 6,
+
+            "NumberOfGamesWon": 0,
+
+            "NumberOfGamesDrawn": 0,
+
+            "NumberOfGamesLost": 6,
+
+            "NumberOfHomeGames": 3,
+
+            "NumberOfHomeGamesWon": 0,
+
+            "NumberOfHomeGamesDrawn": 0,
+
+            "NumberOfHomeGamesLost": 3,
+
+            "NumberOfAwayGames": 3,
+
+            "NumberOfAwayGamesWon": 0,
+
+            "NumberOfAwayGamesDrawn": 0,
+
+            "NumberOfAwayGamesLost": 3
 
          }
 
@@ -317,9 +380,45 @@ end
 
          {
 
-            "StartTime": 1426953600,
+            "StartTime": 1427025600,
 
-            "OpponentTeamId": 32581,
+            "OpponentTeamId": 32579,
+
+            "HomeGoals": 0,
+
+            "AwayGoals": 0
+
+         },
+
+         {
+
+            "StartTime": 1425744000,
+
+            "OpponentTeamId": 32577,
+
+            "HomeGoals": 3,
+
+            "AwayGoals": 4
+
+         },
+
+         {
+
+            "StartTime": 1424556000,
+
+            "OpponentTeamId": 32582,
+
+            "HomeGoals": 0,
+
+            "AwayGoals": 2
+
+         },
+
+         {
+
+            "StartTime": 1423255500,
+
+            "OpponentTeamId": 32585,
 
             "HomeGoals": 2,
 
@@ -329,49 +428,13 @@ end
 
          {
 
-            "StartTime": 1425848400,
+            "StartTime": 1422187200,
 
-            "OpponentTeamId": 32578,
+            "OpponentTeamId": 32589,
 
-            "HomeGoals": 1,
+            "HomeGoals": 2,
 
-            "AwayGoals": 1
-
-         },
-
-         {
-
-            "StartTime": 1424548800,
-
-            "OpponentTeamId": 32580,
-
-            "HomeGoals": 3,
-
-            "AwayGoals": 0
-
-         },
-
-         {
-
-            "StartTime": 1423324800,
-
-            "OpponentTeamId": 32576,
-
-            "HomeGoals": 4,
-
-            "AwayGoals": 0
-
-         },
-
-         {
-
-            "StartTime": 1422129600,
-
-            "OpponentTeamId": 32587,
-
-            "HomeGoals": 3,
-
-            "AwayGoals": 1
+            "AwayGoals": 2
 
          }
 
@@ -381,33 +444,21 @@ end
 
          {
 
-            "StartTime": 1428184800,
+            "StartTime": 1427050800,
+
+            "OpponentTeamId": 32584,
+
+            "HomeGoals": 3,
+
+            "AwayGoals": 1
+
+         },
+
+         {
+
+            "StartTime": 1426438800,
 
             "OpponentTeamId": 32595,
-
-            "HomeGoals": 1,
-
-            "AwayGoals": 1
-
-         },
-
-         {
-
-            "StartTime": 1426538700,
-
-            "OpponentTeamId": 32581,
-
-            "HomeGoals": 0,
-
-            "AwayGoals": 1
-
-         },
-
-         {
-
-            "StartTime": 1425211200,
-
-            "OpponentTeamId": 32578,
 
             "HomeGoals": 2,
 
@@ -417,29 +468,43 @@ end
 
          {
 
-            "StartTime": 1423860300,
+            "StartTime": 1425069900,
 
-            "OpponentTeamId": 32580,
+            "OpponentTeamId": 32579,
 
-            "HomeGoals": 2,
+            "HomeGoals": 1,
 
-            "AwayGoals": 2
+            "AwayGoals": 0
 
          },
 
          {
 
-            "StartTime": 1422720000,
+            "StartTime": 1423929600,
 
-            "OpponentTeamId": 32576,
+            "OpponentTeamId": 32577,
 
-            "HomeGoals": 4,
+            "HomeGoals": 3,
 
-            "AwayGoals": 1
+            "AwayGoals": 0
+
+         },
+
+         {
+
+            "StartTime": 1422741600,
+
+            "OpponentTeamId": 32582,
+
+            "HomeGoals": 1,
+
+            "AwayGoals": 0
 
          }
 
       ],
 
       "LastGamesAgainst": []
+
+   }
 --]]

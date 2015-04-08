@@ -11,14 +11,7 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "MatchListScene/match_bkg.png",
-    "MatchCentre/img-matchcentrebkg.png",
-    "MatchCentre/btn-predict-now.png",
-    "MatchCentre/btn-predictionmade.png",
-    "commonRes/default.png",
-    "MatchCentre/img-inactivepage.png",
-    "MatchCentre/img-activepage.png",
-    "MatchListContent/icn-fans.png"
+    "MatchListScene/match_bkg.png"
   ],
   "version": "1.6.0.0",
   "widgetTree": {
@@ -1273,7 +1266,7 @@
           "__type": "PanelSurrogate:#EditorCommon.JsonModel.Component.GUI",
           "classname": "Panel",
           "name": "Panel_Fade",
-          "ZOrder": 0,
+          "ZOrder": 1,
           "actiontag": 56769960,
           "anchorPointX": 0,
           "anchorPointY": 0,
@@ -1337,7 +1330,7 @@
           "__type": "PanelSurrogate:#EditorCommon.JsonModel.Component.GUI",
           "classname": "Panel",
           "name": "Panel_Content",
-          "ZOrder": 3,
+          "ZOrder": 0,
           "actiontag": 44610765,
           "anchorPointX": 0,
           "anchorPointY": 0,

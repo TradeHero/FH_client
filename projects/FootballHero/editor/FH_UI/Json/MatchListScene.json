@@ -11,9 +11,7 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "MatchCentre/img-more.png",
-    "MatchCentre/img-less.png",
-    "MatchCentre/img-draw-amount.png"
+    "MatchCentre/img-blackbox.png"
   ],
   "version": "1.6.0.0",
   "widgetTree": {
