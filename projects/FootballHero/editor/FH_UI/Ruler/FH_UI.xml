@@ -456,4 +456,8 @@
     <Project>MatchCenterStatsFormTable</Project>
     <GuidesList />
   </GuidesProject>
+  <GuidesProject>
+    <Project>MatchCenterOverUnderTable</Project>
+    <GuidesList />
+  </GuidesProject>
 </ArrayOfGuidesProject>

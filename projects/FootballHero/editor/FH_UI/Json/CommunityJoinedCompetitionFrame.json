@@ -11,10 +11,9 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "spinWheel/img-wheel.png",
-    "spinWheel/img-xiaomi.png"
+    "MatchCentre/img-blackbox.png"
   ],
-  "version": "1.5.0.0",
+  "version": "1.6.0.0",
   "widgetTree": {
     "classname": "Panel",
     "name": null,
@@ -102,8 +101,8 @@
           "rotation": 0,
           "scaleX": 1,
           "scaleY": 1,
-          "sizePercentX": 0.4453125,
-          "sizePercentY": 0.07826087,
+          "sizePercentX": 0.4921875,
+          "sizePercentY": 0.08913043,
           "sizeType": 0,
           "tag": 14161,
           "touchAble": false,
@@ -437,7 +436,7 @@
           "capInsetsWidth": 1,
           "capInsetsX": 5,
           "capInsetsY": 5,
-          "clipAble": true,
+          "clipAble": false,
           "colorType": 0,
           "direction": 1,
           "editorClipAble": false,

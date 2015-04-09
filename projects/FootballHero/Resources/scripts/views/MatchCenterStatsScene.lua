@@ -28,9 +28,10 @@ function loadFrame( parent, jsonResponse )
     contentContainer:removeAllChildrenWithCleanup( true )
 
     mTotalHeight = 0
-    addAgainstInfo( jsonResponse["Statistics"], contentContainer )
+    --addAgainstInfo( jsonResponse["Statistics"], contentContainer )
     addLast6Info( jsonResponse["Statistics"], contentContainer )
     addFormTableInfo( jsonResponse["Statistics"], contentContainer )
+    addOverUnderTable( jsonResponse["Statistics"], contentContainer )
 
     contentContainer:setInnerContainerSize( CCSize:new( 0, mTotalHeight ) )
     local layout = tolua.cast( contentContainer, "Layout" )
@@ -179,6 +180,91 @@ function addFormTableInfo( jsonResponse, contentContainer )
          tolua.cast( formTable:getChildByName("Label_L_away"..suffix), "Label" ):setText( teamFormTableData["NumberOfAwayGamesLost"] )
       end
    end
+end
+
+function addOverUnderTable( jsonResponse, contentContainer )
+   -- Add the titla bar
+   local overunderTable = GUIReader:shareReader():widgetFromJsonFile("scenes/MatchCenterOverUnderTable.json")
+   contentContainer:addChild( overunderTable )
+   mTotalHeight = mTotalHeight + overunderTable:getSize().height
+   tolua.cast( overunderTable:getChildByName("Label_homeTeam"), "Label" ):setText( mHomeTeamName )
+   tolua.cast( overunderTable:getChildByName("Label_awayTeam"), "Label" ):setText( mAwayTeamName )
+   tolua.cast( overunderTable:getChildByName("Label_overunder"), "Label" ):setText( Constants.String.match_center.overunder_title )
+   tolua.cast( overunderTable:getChildByName("Label_played1"), "Label" ):setText( Constants.String.match_center.overunder_played )
+   tolua.cast( overunderTable:getChildByName("Label_over1"), "Label" ):setText( Constants.String.match_center.overunder_over )
+   tolua.cast( overunderTable:getChildByName("Label_under1"), "Label" ):setText( Constants.String.match_center.overunder_under )
+   tolua.cast( overunderTable:getChildByName("Label_played2"), "Label" ):setText( Constants.String.match_center.overunder_played )
+   tolua.cast( overunderTable:getChildByName("Label_over2"), "Label" ):setText( Constants.String.match_center.overunder_over )
+   tolua.cast( overunderTable:getChildByName("Label_under2"), "Label" ):setText( Constants.String.match_center.overunder_under )
+   tolua.cast( overunderTable:getChildByName("Label_total"), "Label" ):setText( Constants.String.match_center.total )
+   tolua.cast( overunderTable:getChildByName("Label_home"), "Label" ):setText( Constants.String.match_center.home )
+   tolua.cast( overunderTable:getChildByName("Label_away"), "Label" ):setText( Constants.String.match_center.away )
+
+   local updateTable = function( lineStr )
+      local lineNum = tonumber( lineStr )
+      tolua.cast( overunderTable:getChildByName("Label_line"), "Label" ):setText( lineNum / 10 )
+
+      local formTableData = jsonResponse["GoalStats"]
+      if formTableData ~= nil and type( formTableData ) == "table" and table.getn( formTableData ) > 0 then
+         for i = 1, table.getn( formTableData ) do
+            local teamFormTableData = formTableData[i]
+            local suffix
+            if teamFormTableData["TeamId"] == mHomeTeamId then
+               suffix = "1"
+            else
+               suffix = "2"
+            end
+
+            tolua.cast( overunderTable:getChildByName("Label_P_total"..suffix), "Label" ):setText( teamFormTableData["OverTotal_"..lineStr] + teamFormTableData["UnderTotal_"..lineStr] )
+            tolua.cast( overunderTable:getChildByName("Label_O_total"..suffix), "Label" ):setText( teamFormTableData["OverTotal_"..lineStr] )
+            tolua.cast( overunderTable:getChildByName("Label_U_total"..suffix), "Label" ):setText( teamFormTableData["UnderTotal_"..lineStr] )
+
+            tolua.cast( overunderTable:getChildByName("Label_P_home"..suffix), "Label" ):setText( teamFormTableData["OverHome_"..lineStr] + teamFormTableData["UnderHome_"..lineStr] )
+            tolua.cast( overunderTable:getChildByName("Label_O_home"..suffix), "Label" ):setText( teamFormTableData["OverHome_"..lineStr] )
+            tolua.cast( overunderTable:getChildByName("Label_U_home"..suffix), "Label" ):setText( teamFormTableData["UnderHome_"..lineStr] )
+
+            tolua.cast( overunderTable:getChildByName("Label_P_away"..suffix), "Label" ):setText( teamFormTableData["OverAway_"..lineStr] + teamFormTableData["UnderAway_"..lineStr] )
+            tolua.cast( overunderTable:getChildByName("Label_O_away"..suffix), "Label" ):setText( teamFormTableData["OverAway_"..lineStr] )
+            tolua.cast( overunderTable:getChildByName("Label_U_away"..suffix), "Label" ):setText( teamFormTableData["UnderAway_"..lineStr] )
+         end
+      end
+   end
+
+   local lines = { "15", "25", "35" }
+   local currentLineIndex = 1
+   updateTable( lines[currentLineIndex] )
+   
+   -- Add the button handler.
+   local leftHandler = function( sender, eventType )
+      if eventType == TOUCH_EVENT_ENDED then
+         currentLineIndex = currentLineIndex - 1
+         if currentLineIndex < 1 then
+            currentLineIndex = table.getn( lines )
+         end
+
+         updateTable( lines[currentLineIndex] )
+      end
+   end
+
+   local rightHandler = function( sender, eventType )
+      if eventType == TOUCH_EVENT_ENDED then
+         currentLineIndex = currentLineIndex + 1
+         if currentLineIndex > table.getn( lines ) then
+            currentLineIndex = 1
+         end
+
+         updateTable( lines[currentLineIndex] )
+      end
+   end
+
+   local leftPanel = overunderTable:getChildByName( "Panel_Arrow_Left")
+   local leftButton = leftPanel:getChildByName( "Button_Left")
+   local rightPanel = overunderTable:getChildByName( "Panel_Arrow_Right")
+   local rightButton = rightPanel:getChildByName( "Button_Right")
+   leftPanel:addTouchEventListener( leftHandler )
+   leftButton:addTouchEventListener( leftHandler )
+   rightPanel:addTouchEventListener( rightHandler )
+   rightButton:addTouchEventListener( rightHandler )
 end
 
 --[[

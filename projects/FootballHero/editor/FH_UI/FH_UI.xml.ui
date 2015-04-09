@@ -153,6 +153,7 @@
     <string>MatchCenterStatsL6Content.json</string>
     <string>MatchCenterStatsBlankGap.json</string>
     <string>MatchCenterStatsFormTable.json</string>
+    <string>MatchCenterOverUnderTable.json</string>
   </JsonList>
   <CanvasSize>
     <Width>640</Width>
@@ -163,8 +164,10 @@
   <ResRelativePath />
   <imageFileList />
   <imagePngList>
-    <string>MatchListScene/match_bkg.png</string>
+    <string>MatchCentre/img-blackbox.png</string>
+    <string>community/btn-goarrow.png</string>
+    <string>community/btn-goarrow-down.png</string>
   </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>MatchCenterTopScene.json</CurrentUIJson>
+  <CurrentUIJson>MatchCenterOverUnderTable.json</CurrentUIJson>
 </UIProject>

@@ -340,6 +340,10 @@ StringsDefault = {
     formTable_won = "W",
     formTable_draw = "D",
     formTable_lost = "L",
+    overunder_title = "Over/Under",
+    overunder_played = "Played",
+    overunder_over = "Over",
+    overunder_under = "Under",
   },
   match_list = {
     date = "%b %d, %A",
