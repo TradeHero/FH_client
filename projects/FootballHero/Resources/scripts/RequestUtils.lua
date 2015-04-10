@@ -273,7 +273,7 @@ end
 
 function reportRequestFailed( requestInfo, errorCode )
     if ServerErrorConfig.isExceptionalErrorByCode( errorCode ) then
-        local unknowErrorPostText = "Get "..errorCode.." with request: "..Json.encode( requestInfo )
+        local unknowErrorPostText = "Get error code: "..errorCode.." with request body: "..Json.encode( requestInfo )
         DoLogReport.reportNetworkError( unknowErrorPostText )
     end
 end

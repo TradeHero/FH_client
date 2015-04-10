@@ -460,4 +460,8 @@
     <Project>MatchCenterOverUnderTable</Project>
     <GuidesList />
   </GuidesProject>
+  <GuidesProject>
+    <Project>MatchCenterLeagueTable</Project>
+    <GuidesList />
+  </GuidesProject>
 </ArrayOfGuidesProject>

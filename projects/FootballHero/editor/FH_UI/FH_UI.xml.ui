@@ -154,6 +154,7 @@
     <string>MatchCenterStatsBlankGap.json</string>
     <string>MatchCenterStatsFormTable.json</string>
     <string>MatchCenterOverUnderTable.json</string>
+    <string>MatchCenterLeagueTable.json</string>
   </JsonList>
   <CanvasSize>
     <Width>640</Width>
@@ -165,9 +166,7 @@
   <imageFileList />
   <imagePngList>
     <string>MatchCentre/img-blackbox.png</string>
-    <string>community/btn-goarrow.png</string>
-    <string>community/btn-goarrow-down.png</string>
   </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>MatchCenterOverUnderTable.json</CurrentUIJson>
+  <CurrentUIJson>MatchCenterLeagueTable.json</CurrentUIJson>
 </UIProject>
