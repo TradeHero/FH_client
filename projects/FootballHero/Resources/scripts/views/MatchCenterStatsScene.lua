@@ -92,7 +92,7 @@ function addLast6Info( jsonResponse, contentContainer )
 				local teamNameLabel = tolua.cast( content:getChildByName("Label_teamName"), "Label" )
 				local scoreLabel = tolua.cast( content:getChildByName("Label_score"), "Label" )
 
-				dateLabel:setText( os.date( "%x", info["StartTime"] ))
+				dateLabel:setText( os.date( "%d/%m/%Y", info["StartTime"] ))
 				teamNameLabel:setText( TeamConfig.getTeamName( TeamConfig.getConfigIdByKey( info["OpponentTeamId"] ) ) )
 				scoreLabel:setText( info["HomeGoals"]..":"..info["AwayGoals"] )
 				local absGoals = info["HomeGoals"] - info["AwayGoals"]
