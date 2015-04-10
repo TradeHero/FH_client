@@ -179,9 +179,11 @@ function initCouponInfo( content, info )
                 if infoCheckBox:getSelectedState() then
                     -- remove popup
                    infoPanel:setEnabled( false )
+                   infoPanel:getParent():setZOrder( 0 )
                 else
                     -- show popup
                    infoPanel:setEnabled( true )
+                   infoPanel:getParent():setZOrder( 1 )
                end
             end
         end
