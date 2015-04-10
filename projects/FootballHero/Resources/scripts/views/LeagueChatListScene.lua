@@ -77,6 +77,14 @@ function initContent( roomInfos )
 
     facebookLbl:setText( Constants.String.league_chat.facebook )
     likeCount:setEnabled( false )
+
+    local fbLikeHandler = function( sender, eventType )
+        if eventType == TOUCH_EVENT_ENDED then
+            Misc:sharedDelegate():openUrl("http://www.facebook.com/FootballHeroApp")
+        end
+    end
+
+    facebookBtn:addTouchEventListener( fbLikeHandler )
 end
 
 function EnterOrExit( eventType )
