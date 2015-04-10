@@ -91,3 +91,10 @@ end
 function EventManager:popHistoryWithoutExec()
 	table.remove( self.mEventHistory )
 end
+
+function EventManager:clearHistory()
+	local historyNum = table.getn( self.mEventHistory )
+	for i = 1, historyNum do
+		table.remove( self.mEventHistory )
+	end
+end

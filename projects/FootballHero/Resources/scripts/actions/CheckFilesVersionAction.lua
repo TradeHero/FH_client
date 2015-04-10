@@ -77,6 +77,9 @@ function checkNext()
 	        -- Init the deep link.
 	        local deepLinkHandler = function( deepLink )
 	        	--CCLuaLog("Deep link check after checking files version: "..( deepLink or "null" ) )
+
+	        	EventManager:clearHistory()
+	        	
 	        	if deepLink == nil then
 	        		EventManager:postEvent( mFinishEvent, mFinishEventParam )
 	        	else
