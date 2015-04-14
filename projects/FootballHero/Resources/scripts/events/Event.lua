@@ -119,6 +119,9 @@ EventNameList =
 
 EventNameDosenotTrackList = 
 { 
+    "Enter_TestDemo",
+    "Enter_TestDemo2",
+
     "Enter_Share",
     
     "Do_Ask_For_Rate",

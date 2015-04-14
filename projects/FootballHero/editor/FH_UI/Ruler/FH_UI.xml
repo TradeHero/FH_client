@@ -465,11 +465,15 @@
     <GuidesList />
   </GuidesProject>
   <GuidesProject>
-    <Project>MatchListContent_0</Project>
+    <Project>TestDemoCell</Project>
     <GuidesList />
   </GuidesProject>
   <GuidesProject>
     <Project>TestDemo</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>TestDemo2</Project>
     <GuidesList />
   </GuidesProject>
 </ArrayOfGuidesProject>

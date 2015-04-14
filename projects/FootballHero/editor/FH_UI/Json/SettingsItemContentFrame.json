@@ -10,7 +10,9 @@
   "designHeight": 1136,
   "designWidth": 640,
   "textures": [],
-  "texturesPng": [],
+  "texturesPng": [
+    "GUI/button.png"
+  ],
   "version": "1.6.0.0",
   "widgetTree": {
     "classname": "Panel",
@@ -99,7 +101,7 @@
           "customProperty": "",
           "flipX": false,
           "flipY": false,
-          "height": 37,
+          "height": 31,
           "ignoreSize": true,
           "layoutParameter": null,
           "opacity": 255,
@@ -116,7 +118,7 @@
           "touchAble": false,
           "useMergedTexture": false,
           "visible": true,
-          "width": 282,
+          "width": 288,
           "x": 33,
           "y": 47,
           "areaHeight": 0,

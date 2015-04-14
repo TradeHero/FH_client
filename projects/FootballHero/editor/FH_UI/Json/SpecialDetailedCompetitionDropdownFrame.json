@@ -11,8 +11,7 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "MatchListScene/Arrow down.png",
-    "MatchListScene/Arrow Up.png"
+    "GUI/button.png"
   ],
   "version": "1.6.0.0",
   "widgetTree": {
@@ -307,7 +306,7 @@
           "customProperty": "",
           "flipX": false,
           "flipY": false,
-          "height": 36,
+          "height": 33,
           "ignoreSize": true,
           "layoutParameter": null,
           "opacity": 255,
@@ -317,14 +316,14 @@
           "rotation": 0,
           "scaleX": 1,
           "scaleY": 1,
-          "sizePercentX": 0.75,
-          "sizePercentY": 0.03257042,
+          "sizePercentX": 0.7328125,
+          "sizePercentY": 0.03169014,
           "sizeType": 0,
           "tag": 7823,
           "touchAble": false,
           "useMergedTexture": false,
           "visible": true,
-          "width": 469,
+          "width": 496,
           "x": 320,
           "y": 776,
           "areaHeight": 0,

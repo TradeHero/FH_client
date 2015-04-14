@@ -35,14 +35,14 @@
     <string>CountryDropdownContent.json</string>
     <string>CreateCompetition.json</string>
     <string>CreateCompetitionContent.json</string>
-    <string>ErrorMessage.json</string>
     <string>EmptyTemplate.json</string>
+    <string>ErrorMessage.json</string>
+    <string>HeaderFrame.json</string>
     <string>HistoryDetail.json</string>
     <string>HistoryDetailClosedContent.json</string>
     <string>HistoryDetailOpenContent.json</string>
     <string>HistoryMainMatchContent.json</string>
     <string>HistoryMainTitle.json</string>
-    <string>LeagueDropdownContent.json</string>
     <string>LeagueContentWithTransparentBG.json</string>
     <string>LeagueDropdownContent.json</string>
     <string>MarketingMessage.json</string>
@@ -51,6 +51,18 @@
     <string>MatchCenterDiscussionsDetailScene.json</string>
     <string>MatchCenterDiscussionsFrame.json</string>
     <string>MatchCenterDiscussionsPostScene.json</string>
+    <string>MatchCenterLeagueTable.json</string>
+    <string>MatchCenterOverUnderTable.json</string>
+    <string>MatchCenterStatsBlankGap.json</string>
+    <string>MatchCenterStatsFormTable.json</string>
+    <string>MatchCenterStatsFrame.json</string>
+    <string>MatchCenterStatsL6AwayTitle.json</string>
+    <string>MatchCenterStatsL6Content.json</string>
+    <string>MatchCenterStatsL6HomeTitle.json</string>
+    <string>MatchCenterStatsNoContent.json</string>
+    <string>MatchCenterStatsVSContent.json</string>
+    <string>MatchCenterStatsVSDiagram.json</string>
+    <string>MatchCenterStatsVSTitle.json</string>
     <string>MatchCenterTopScene.json</string>
     <string>MatchDate.json</string>
     <string>MatchListContent.json</string>
@@ -94,6 +106,8 @@
     <string>SpinWinnersScene.json</string>
     <string>SpinWinTicket.json</string>
     <string>TapToMakePrediction.json</string>
+    <string>TestDemo.json</string>
+    <string>TestDemoCell.json</string>
     <string>TutorialEmail.json</string>
     <string>TutorialEmailRegister.json</string>
     <string>TutorialEmailSignin.json</string>
@@ -103,59 +117,7 @@
     <string>WheelPanel.json</string>
     <string>WTGBMTPrediction.json</string>
     <string>WTWBEGPrediction.json</string>
-    <string>CommunityCompetitionWelcome.json</string>
-    <string>CommunityNewCompetitionFrame.json</string>
-    <string>CommunityJoinedCompetitionFrame.json</string>
-    <string>CommunityCompetitionBannerFrame.json</string>
-    <string>SpecialCompetitionLeaderboard.json</string>
-    <string>SpecialDetailedCompetitionLeaderboard.json</string>
-    <string>SpecialDetailedCompetitionDropdownFrame.json</string>
-    <string>SpecialDetailedCompetitionDropdownContent.json</string>
-    <string>MinigamePopup.json</string>
-    <string>MinigameDetailScene.json</string>
-    <string>MinigameScrollviewContentFrame.json</string>
-    <string>MinigameWinnersScene.json</string>
-    <string>CountryDropdownContent.json</string>
-    <string>ChatroomSelectScene.json</string>
-    <string>ChatroomScene.json</string>
-    <string>CompetitionRules.json</string>
-    <string>AskForRate.json</string>
-    <string>AskForComment.json</string>
-    <string>SpinWheel.json</string>
-    <string>WheelPanel.json</string>
-    <string>SpinBalance.json</string>
-    <string>SpinWin.json</string>
-    <string>SpinWinTicket.json</string>
-    <string>SpinWinnersScene.json</string>
-    <string>SpinWinnerContent.json</string>
-    <string>SpinShare.json</string>
-    <string>SpinEmailCollect.json</string>
-    <string>MatchCenterTopScene.json</string>
-    <string>MatchCenterDiscussionsFrame.json</string>
-    <string>MatchCenterDiscussionsContentFrame.json</string>
-    <string>MatchCenterDiscussionsPostScene.json</string>
-    <string>MatchCenterDiscussionsDetailScene.json</string>
-    <string>MatchCenterDiscussionsCommentFrame.json</string>
-    <string>SettingsItemContentFrame.json</string>
-    <string>SettingsItemHeaderFrame.json</string>
-    <string>SettingsUserInformationFrame.json</string>
-    <string>SettingsItemDropdownFrame.json</string>
-    <string>SettingsLeagueListContentFrame.json</string>
-    <string>SettingsTeamListContentFrame.json</string>
-    <string>HeaderFrame.json</string>
-    <string>MatchCenterStatsVSTitle.json</string>
-    <string>MatchCenterStatsVSContent.json</string>
-    <string>MatchCenterStatsVSDiagram.json</string>
-    <string>MatchCenterStatsFrame.json</string>
-    <string>MatchCenterStatsNoContent.json</string>
-    <string>MatchCenterStatsL6HomeTitle.json</string>
-    <string>MatchCenterStatsL6AwayTitle.json</string>
-    <string>MatchCenterStatsL6Content.json</string>
-    <string>MatchCenterStatsBlankGap.json</string>
-    <string>MatchCenterStatsFormTable.json</string>
-    <string>MatchCenterOverUnderTable.json</string>
-    <string>MatchCenterLeagueTable.json</string>
-    <string>TestDemo.json</string>
+    <string>TestDemo2.json</string>
   </JsonList>
   <CanvasSize>
     <Width>640</Width>
@@ -165,10 +127,7 @@
   <ProjectType>UIProject</ProjectType>
   <ResRelativePath />
   <imageFileList />
-  <imagePngList>
-    <string>community/btn-CTA.png</string>
-    <string>GUI/button.png</string>
-  </imagePngList>
+  <imagePngList />
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>TestDemo.json</CurrentUIJson>
+  <CurrentUIJson>TestDemo2.json</CurrentUIJson>
 </UIProject>

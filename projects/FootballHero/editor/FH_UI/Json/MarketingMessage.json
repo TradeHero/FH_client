@@ -11,12 +11,9 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "Popup/popout_image.png",
-    "Popup/popout_white.png",
-    "Tutorial/Default Button.png",
-    "Popup/close_icon.png"
+    "GUI/button.png"
   ],
-  "version": "1.5.0.0",
+  "version": "1.6.0.0",
   "widgetTree": {
     "classname": "Panel",
     "name": null,
@@ -299,7 +296,7 @@
           "layoutParameter": null,
           "opacity": 255,
           "positionPercentX": 0.5,
-          "positionPercentY": 0.492454737,
+          "positionPercentY": 0.49207747,
           "positionType": 0,
           "rotation": 0,
           "scaleX": 1,
@@ -399,7 +396,7 @@
           "layoutParameter": null,
           "opacity": 255,
           "positionPercentX": 0.5,
-          "positionPercentY": 0.340668976,
+          "positionPercentY": 0.339788735,
           "positionType": 0,
           "rotation": 0,
           "scaleX": 1,

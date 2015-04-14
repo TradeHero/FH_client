@@ -11,7 +11,7 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "MatchListScene/match_bkg.png"
+    "GUI/button.png"
   ],
   "version": "1.6.0.0",
   "widgetTree": {

@@ -11,10 +11,7 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "MatchListScene/match_bkg.png",
-    "header/back.png",
-    "PredictionConfirm/off_button.png",
-    "PredictionConfirm/on_button.png"
+    "GUI/button.png"
   ],
   "version": "1.6.0.0",
   "widgetTree": {
@@ -271,7 +268,7 @@
           "customProperty": "",
           "flipX": false,
           "flipY": false,
-          "height": 31,
+          "height": 26,
           "ignoreSize": true,
           "layoutParameter": null,
           "opacity": 255,
@@ -288,7 +285,7 @@
           "touchAble": false,
           "useMergedTexture": false,
           "visible": true,
-          "width": 297,
+          "width": 325,
           "x": 61,
           "y": 759,
           "areaHeight": 0,

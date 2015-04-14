@@ -11,12 +11,9 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "spinWheel/img-ticket.png",
-    "spinWheel/img-shine.png",
-    "spinWheel/btn-submit.png",
-    "spinWheel/img-email.png"
+    "GUI/button.png"
   ],
-  "version": "1.5.0.0",
+  "version": "1.6.0.0",
   "widgetTree": {
     "classname": "Panel",
     "name": null,
@@ -104,7 +101,7 @@
           "customProperty": "",
           "flipX": false,
           "flipY": false,
-          "height": 35,
+          "height": 30,
           "ignoreSize": true,
           "layoutParameter": null,
           "opacity": 255,
@@ -121,7 +118,7 @@
           "touchAble": false,
           "useMergedTexture": false,
           "visible": true,
-          "width": 177,
+          "width": 180,
           "x": 319,
           "y": 1096,
           "areaHeight": 0,
