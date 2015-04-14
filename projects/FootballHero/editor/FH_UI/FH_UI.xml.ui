@@ -155,6 +155,7 @@
     <string>MatchCenterStatsFormTable.json</string>
     <string>MatchCenterOverUnderTable.json</string>
     <string>MatchCenterLeagueTable.json</string>
+    <string>TestDemo.json</string>
   </JsonList>
   <CanvasSize>
     <Width>640</Width>
@@ -165,8 +166,9 @@
   <ResRelativePath />
   <imageFileList />
   <imagePngList>
-    <string>MatchCentre/img-blackbox.png</string>
+    <string>community/btn-CTA.png</string>
+    <string>GUI/button.png</string>
   </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>MatchCenterLeagueTable.json</CurrentUIJson>
+  <CurrentUIJson>TestDemo.json</CurrentUIJson>
 </UIProject>

@@ -16,6 +16,8 @@ end
 
 EventNameList = 
 { 
+    "Enter_TestDemo",
+
     "Do_Startup",
     "Check_Start_Tutorial",
     "Check_File_Version",

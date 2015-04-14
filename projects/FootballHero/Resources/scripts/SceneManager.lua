@@ -55,6 +55,9 @@ function init()
 end
 
 function initEvents()
+
+	EventManager:registerEventHandler( Event.Enter_TestDemo, "scripts.actions.EnterTestDemoAction")
+
 	EventManager:registerEventHandler( Event.Do_Startup, "scripts.actions.DoStartupAction" )
 	EventManager:registerEventHandler( Event.Check_File_Version, "scripts.actions.CheckFilesVersionAction" )
 	EventManager:registerEventHandler( Event.Check_Start_Tutorial, "scripts.actions.CheckStartTutorialAction" )
