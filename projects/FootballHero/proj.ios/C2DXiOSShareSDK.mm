@@ -421,7 +421,7 @@ void C2DXiOSShareSDK::authorize(C2DXPlatType platType, C2DXAuthResultEvent callb
                                            viewDelegate:nil
                                 authManagerViewDelegate:nil];
         [authOptions setScopes:[NSDictionary dictionaryWithObjectsAndKeys:
-                                @[@"public_profile", @"user_friends", @"email", @"user_birthday"],
+                                @[@"public_profile", @"user_friends", @"email"],
                                 [NSNumber numberWithInt:ShareTypeFacebook],
                                 nil]
          ];
