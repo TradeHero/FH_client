@@ -34,7 +34,7 @@ function eventAddCell( sender, eventType )
         local eventHandler = function ( sender, eventType )
             if eventType == TOUCH_EVENT_ENDED then
                 print( "chenjiang......." )
-                EventManager.postEvent( Event.Enter_TestDemo2, nil )
+                EventManager:postEvent( Event.Enter_TestDemo2, nil )
             end
         end
         local contentContainer = tolua.cast( mWidget:getChildByName("ScrollView_Main"), "ScrollView" )
