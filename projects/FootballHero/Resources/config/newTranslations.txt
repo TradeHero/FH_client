@@ -1,71 +1,78 @@
-share.prediction_content	%s Win $$$, Messi & Ronaldo Signed Jerseys! www.footballheroapp.com/download	%s Menangkan $$$, Baju bertanda tangan Messi & Ronaldo! www.footballheroapp.com/download
-share.competition_content	I joined a FootballHero Prediction competition. Win $$$, Messi & Ronaldo Signed Jerseys! www.footballheroapp.com/download	Saya ikut kejuaraan prediksi FootballHero. Menangkan $$$, Baju bertanda tangan Messi & Ronaldo! www.footballheroapp.com/download
-share.spinTheWheel_content	I won a prize in Spin-The-Wheel game! Win $$$, Messi & Ronaldo Signed Jerseys! www.footballheroapp.com/download	Saya menang hadiah di game Spin-the-Wheel! Menangkan $$$, Baju bertanda tangan Messi & Ronaldo! www.footballheroapp.com/download
-share.spinTheWheel_title	FootballHero - I won a prize in Spin-The-Wheel game!	FootballHero - Saya menang hadiah di game Spin-the-Wheel!
-share.competition_title	FootballHero - I joined a soccer prediction competition.	FootballHero - Saya ikut kejuaraan prediksi sepakbola. 
+share.prediction_content	%s Win $$$, Messi & Ronaldo Signed Jerseys! www.footballheroapp.com/download	"%s 赢得了 $$$, 梅西&罗纳尔多亲笔签名球衣！www.footballheroapp.com/download
+"
+share.competition_content	I joined a FootballHero Prediction competition. Win $$$, Messi & Ronaldo Signed Jerseys! www.footballheroapp.com/download	我参加了FootballHero球赛竞猜，赢得了 $$$, 梅西&罗纳尔多亲笔签名球衣！www.footballheroapp.com/download
+share.spinTheWheel_content	I won a prize in Spin-The-Wheel game! Win $$$, Messi & Ronaldo Signed Jerseys! www.footballheroapp.com/download	我在'超级转转转'中赢得了 $$$, 梅西&罗纳尔多亲笔签名球衣！www.footballheroapp.com/download
+share.spinTheWheel_title	FootballHero - I won a prize in Spin-The-Wheel game!	FootballHero - 我在'超级转转转'中赢得了奖金！
+share.competition_title	FootballHero - I joined a soccer prediction competition.	FootballHero - 我在FootbellHero中参加了足球竞彩大赛！
 share.prediction_title	FootballHero - %s	FootballHero - %s
 league_chat.bahasa_chat	Bahasa Indonesia	Bahasa Indonesia
 league_chat.arabic_chat	Arabic	Arabic
-league_chat.chinese_chat	Chinese	Chinese
+league_chat.chinese_chat	Chinese	中文
 league_chat.thai_chat	Thai	Thai
-league_chat.group_chat	Group Chat	Grup Chat
-match_center.last6_away_title	Last 6 Away Results	6 Laga Tandang Terakhir
-match_center.against_diagram_wins	%s wins	%s kemenangan
-match_center.home_short	H	K
-match_center.overunder_over	Over	Atas
-match_center.formTable_lost	L	K
-match_center.home	Home	Kandang
+league_chat.group_chat	Group Chat	群组讨论
+match_center.last6_away_title	Last 6 Away Results	最近6场客场比赛结果
+match_center.against_diagram_wins	%s wins	%s 胜
+match_center.home_short	H	主
+match_center.overunder_over	Over	大盘
+match_center.formTable_lost	L	负
+match_center.home	Home	主场
 match_center.VS	VS	VS
-match_center.total	Total	Total
-match_center.overunder_title	Over/Under	Atas/Bawah
-match_center.overunder_under	Under	Bawah
-match_center.away_short	A	T
-match_center.formTable_draw	D	S
-match_center.pos	Pos	Pos
-match_center.against_content_nodata	No data available.	Data tidak tersedia.
-match_center.formTable_title	Form Table	Tabel Formulir
-match_center.total_short	T	T
-match_center.overunder_played	Played	Dimainkan
-match_center.leagueTable_title	League Table	Tabel Liga
-match_center.formTable_won	W	M
-match_center.pts	Pts	Poin
-match_center.away	Away	Tandang
-match_center.last6_home_title	Last 6 Home Results	6 Laga Kandang Terakhir
-match_center.against_diagram_draw	Draw	Seri
-match_center.against_title_date	Date	Tanggal
-match_center.formTable_played	P	P
-handicap.h1_yes	You win if %s wins by 2 goals or more.\nYour bet is refunded if %s wins by 1 goal.	Anda menang jika %s menang dengan selisih 2 gol atau lebih. \nTaruhan anda akan dikembalikan jika %s menang dengan selisih 1 gol.
-handicap.h0_yes	You win if %s wins.\nYour bet is refunded on a draw.	Anda menang jika %s menang. \nTaruhan anda akan dikembalikan jika seri.
-handicap.hX_no	You win if %TeamName% wins, draws or loses by %LineMinusOne% goals or less.\nYour bet is refunded if %TeamName% loses by %Line% goals.	Anda menang jika %TeamName% menang, seri atau kalah dengan selisih %LineMinusOne% gol atau kurang. \nTaruhan anda akan dikembalikan jika %TeamName% kalah dengan selisih %Line% gol.
-handicap.hX_25_yes	You win if %TeamName% wins by %LinePulsOne% goals or more.\nYou lose half your bet if %TeamName% wins by %Line% goals.	Anda menang jika %TeamName% menang dengan selisih %LinePulsOne% gol atau lebih. \nAnda kalah setengah taruhan jika %TeamName% menang dengan selisih %Line% gol.
-handicap.hX_75_yes	You win if %TeamName% wins by %LinePulsTwo% goals or more.\nYou win half your bet if %TeamName% win by %LinePulsOne% goals.	Anda menang jika %TeamName% menang dengan %LiePulsTwo% gol atau lebih. \nAnda menang setengah taruhan jika %TeamName% menang dengan selisih %LinePulsOne% gol.
-handicap.hX_yes	You win if %TeamName% wins by %LinePulsOne% goals or more.\nYour bet is refunded if %TeamName% wins by %Line% goals.	Anda menang jika %TeamName% menang dengan selisih %LinePulsOne% gol atau lebih. \nTaruhan anda akan dikembalikan jika %TeamName% menang dengan selisih %Line% gol.
-handicap.h0_75_yes	You win if %s wins by 2 goals or more.\nYou win half your bet if %s wins by 1 goal.	Anda menang jika %s menang dengan selisih 2 gol atau lebih. \nAnda menang setengah taruhan jika %s menang dengan selisih 1 gol.
-handicap.h0_5_yes	You win if %s wins.	Anda menang jika %s menang.
-handicap.h1_5_no	You win if %s wins, draw or loses by 1 goal.	Anda menang jika %s menang, seri atau kalah dengan selisih 1 gol.
-handicap.h1_75_no	You win if %s wins or draw.\nYou lose half your bet if %s loses by 2 goals.	Anda menang jika %s menang atau seri. \nAnda kalah setengah taruhan jika %s kalah dengan selisih 2 gol.
-handicap.h1_75_yes	You win if %s wins by 3 goals or more.\nYou win half your bet if %s wins by 2 goal.	Anda menang jika %s menang dengan selisih 3 gol atau lebih. \nAnda menang setengah taruhan jika %s menang dengan selisih 2 gol.
-handicap.hX_25_no	You win if %TeamName% wins, draws or loses by %LineMinusOne% goals or less.\nYou win half your bet if %TeamName% loses by %Line% goals.	Anda menang jika %TeamName% menang, seri atau kalah dengan selisih %LineMinusOne% gol atau kurang. \nAnda menang setengah taruhan jika %TeamName% kalah dengan selisih %Line% gol.
-handicap.h1_25_no	You win if %s draws or wins.\nYou win half your bet if %s loses by 1 goal.	Anda menang jika %s seri atau menang. \nAnda menang setengah taruhan jika %s kalah dengan selisih 1 gol.
-handicap.h0_25_no	You win if %s wins.\nYou win half your bet if %s draws.	Anda menang jika %s menang. \nAnda menang setengah taruhan jika %s seri.
-handicap.h0_5_no	you win if %s wins or draws.	Anda menang jika %s menang atau seri.
-handicap.h0_no	You win if %s wins.\nYour bet is refunded on a draw.	Anda menang jika %s menang. \nTaruhan anda akan dikembalikan jika seri.
-handicap.h0_25_yes	You win if %s wins.\nYou lose half your bet if %s draws.	Anda menang jika %s menang. \nAnda kalah setengah taruhan jika %s seri.
-handicap.h1_25_yes	You win if %s wins by 2 goals or more.\nYou lose half your bet if %s wins by 1 goal.	Anda menang jika %s menang dengan selisih 2 gol atau lebih. \nAnda kalah setengah taruhan jika %s menang dengan selisih 1 gol.
-handicap.hX_5_yes	You win if %TeamName% wins by %LinePulsOne% goals or more.	Anda menang jika %TeamName% menang dengan selisih %LinePulsOne% gol atau lebih.
-handicap.hX_75_no	You win if %TeamName% wins, draws or loses by %Line% goals or less.\nYou lose half your bet if %TeamName% loses by %LinePulsOne% goals.	Anda menang jika %TeamName% menang, seri atau kalah dengan selisih %Line% gol atau kurang. \nAnda kalah setengah taruhan jika %TeamName% kalah dengan selisih %LinePulsOne% gol.
-handicap.hX_5_no	You win if %TeamName% wins, draws or loses by %Line% goals or less.	Anda menang jika %TeamName% menang, seri atau kalah dengan selisih %Line% gol atau kurang.
-handicap.h1_5_yes	You win if %s wins by 2 goals or more.	Anda menang jika %s menang dengan selisih 2 gol atau lebih.
-handicap.h1_no	You win if %s wins or draw.\nYour bet is refunded if %s loses by 1 goal.	Anda menang jika %s menang atau seri. \nTaruhan anda akan dikembalikan jika %s kalah dengan selisih 1 gol.
-handicap.h0_75_no	You win if %s wins or draws.\nYou lose half your bet if %s loses by 1 goal.	Anda menang jika %s menang atau seri. \nAnda kalah setengah taruhan jika %s kalah dengan selisih 1 gol.
-history.push_colon	Push:	Tekan:
-history.draw	Draw	Seri
-history.refund	refunded	Dikembalikan
-history.win_by_line0	Will %s win on level handicap?	Akankah %s menang dalam level handicap?
-match_prediction.answer_match_draw	I have predicted a draw.	Saya prediksi seri.
-match_prediction.answer_asian_handicap_no	I have predicted %s wins by %s goals or less.	Saya prediksi %s menang dengan selisih %s gol atau kurang.
-match_prediction.answer_match_win	I have predicted %s to win.	Saya prediksi %s menang.
-match_prediction.answer_total_goal_no	I have predicted the game to have %s goals or less.	Saya prediksi permainan akan tercetak %s gol atau kurang. 
-match_prediction.answer_asian_handicap_yes	I have predicted %s wins by %s goals or more.	Saya prediksi %s menang dengan selisih %s gol atau lebih.
-match_prediction.will_win_by_line0	Will %s win on level handicap?	Akankah %s menang dalam level handicap?
-match_prediction.answer_total_goal_yes	I have predicted the game to have %s goals or more.	Saya prediksi permainan akan tercetak %s gol atau lebih.
+match_center.post	Post	提交
+match_center.total	Total	所有
+match_center.overunder_title	Over/Under	大小盘
+match_center.overunder_under	Under	小盘
+match_center.away_short	A	客
+match_center.formTable_draw	D	平
+match_center.pos	Pos	名
+match_center.against_content_nodata	No data available.	暂无数据
+match_center.formTable_title	Form Table	数据表
+match_center.total_short	T	总
+match_center.overunder_played	Played	次数
+match_center.leagueTable_title	League Table	联赛表
+match_center.formTable_won	W	胜
+match_center.pts	Pts	分
+match_center.away	Away	客场
+match_center.last6_home_title	Last 6 Home Results	最近6场主场比赛结果
+match_center.against_diagram_draw	Draw	平
+match_center.against_title_date	Date	日期
+match_center.formTable_played	P	场次
+community.title_create_competition	Create Competition	创建比赛
+info.single_discussion	You can only write 1 discussion per match.	每场比赛只能创建一个话题
+handicap.h1_yes	You win if %s wins by 2 goals or more.\nYour bet is refunded if %s wins by 1 goal.	得分条件是%s的胜球数大于2球 \n 若胜球数为1球则退还积分
+handicap.h0_yes	You win if %s wins.\nYour bet is refunded on a draw.	得分条件是%s获胜 \n 若平局则退还积分
+handicap.hX_no	You win if %TeamName% wins, draws or loses by %LineMinusOne% goals or less.\nYour bet is refunded if %TeamName% loses by %Line% goals.	得分条件是%TeamName%获胜,平分,或输球数小于%LineMinusOne% \n 若输球数达到%Line%则退还积分
+handicap.hX_25_yes	You win if %TeamName% wins by %LinePulsOne% goals or more.\nYou lose half your bet if %TeamName% wins by %Line% goals.	得分条件是%TeamName%的胜球数达到%LinePulsOne% \n 若胜球数为%Line%则积分减半
+handicap.hX_75_yes	You win if %TeamName% wins by %LinePulsTwo% goals or more.\nYou win half your bet if %TeamName% win by %LinePulsOne% goals.	得分条件是%TeamName%的胜球数达到%LinePulsTwo% \n 若胜球数为%LinePulsOne%则积分减半
+handicap.hX_yes	You win if %TeamName% wins by %LinePulsOne% goals or more.\nYour bet is refunded if %TeamName% wins by %Line% goals.	得分条件是%TeamName%的胜球数达到%LinePulsOne% \n 若胜球数为%Line%则退还积分
+handicap.h0_75_yes	You win if %s wins by 2 goals or more.\nYou win half your bet if %s wins by 1 goal.	得分条件是%s的胜球数达到%LinePulsOne% \n 若胜球数为%Line%则退还积分
+handicap.h0_5_yes	You win if %s wins.	得分条件是%s获胜
+handicap.h1_5_no	You win if %s wins, draw or loses by 1 goal.	得分条件是%s获胜, 负球数少于一球
+handicap.h1_75_no	You win if %s wins or draw.\nYou lose half your bet if %s loses by 2 goals.	得分条件是%s获胜或打平, 负球数到达2球则损失一般分数
+handicap.h1_75_yes	You win if %s wins by 3 goals or more.\nYou win half your bet if %s wins by 2 goal.	得分条件是%s胜球数到达3个\n 胜球数为两个时积分减半
+handicap.predict_on	Predict on %s	预测 %s
+handicap.hX_25_no	You win if %TeamName% wins, draws or loses by %LineMinusOne% goals or less.\nYou win half your bet if %TeamName% loses by %Line% goals.	得分条件是%TeamName%的负球数少于%LineMinusOne% \n 若负球数达到%Line%则积分减半
+handicap.h1_25_no	You win if %s draws or wins.\nYou win half your bet if %s loses by 1 goal.	得分条件是%s平局或获胜 \m 输球数为1个时积分减半
+handicap.h0_25_no	You win if %s wins.\nYou win half your bet if %s draws.	得分条件是%s获胜 \n 若平局则积分减半
+handicap.h0_5_no	you win if %s wins or draws.	得分条件是%s平局或获胜
+handicap.h0_no	You win if %s wins.\nYour bet is refunded on a draw.	得分条件是%s获胜 \n 平均则退回积分
+handicap.h0_25_yes	You win if %s wins.\nYou lose half your bet if %s draws.	得分条件是%s获胜 \n 平局则积分减半
+handicap.h1_25_yes	You win if %s wins by 2 goals or more.\nYou lose half your bet if %s wins by 1 goal.	得分条件是%s的胜球数达到2个
+handicap.title	Payment Outcome Summary	积分概览
+handicap.hX_5_yes	You win if %TeamName% wins by %LinePulsOne% goals or more.	得分条件是%TeamName%的胜球数达到%LinePulsOne%
+handicap.name	Asian Handicap	亚洲让分盘
+handicap.hX_75_no	You win if %TeamName% wins, draws or loses by %Line% goals or less.\nYou lose half your bet if %TeamName% loses by %LinePulsOne% goals.	得分条件是%TeamName%的负球数少于%Line% \n %TeamName%的负球数达到%LinePulsOne%则积分减半
+handicap.hX_5_no	You win if %TeamName% wins, draws or loses by %Line% goals or less.	得分条件是%TeamName%的负球数少于%Line%
+handicap.h1_5_yes	You win if %s wins by 2 goals or more.	得分条件是%s的胜球数达到2个
+handicap.h1_no	You win if %s wins or draw.\nYour bet is refunded if %s loses by 1 goal.	得分条件是%s获胜或平局 \n 弱若负球数为1个则退还积分
+handicap.h0_75_no	You win if %s wins or draws.\nYou lose half your bet if %s loses by 1 goal.	得分条件是%s获胜或平局 \n 若负球数为1个则积分减半
+history.push_colon	Push:	
+history.draw	Draw	平局
+history.refund	refunded	
+history.win_by_line0	Will %s win on level handicap?	
+match_prediction.answer_match_draw	I have predicted a draw.	我预测是平局
+match_prediction.answer_asian_handicap_no	I have predicted %s wins by %s goals or less.	我预测%s的胜球数会少于等于%s个
+match_prediction.answer_match_win	I have predicted %s to win.	我预测%s会获胜
+match_prediction.answer_total_goal_no	I have predicted the game to have %s goals or less.	我预测比赛总进球数会少于等于%s个
+match_prediction.answer_asian_handicap_yes	I have predicted %s wins by %s goals or more.	我预测%s的胜球数会达到%s个
+match_prediction.will_win_by_line0	Will %s win on level handicap?	
+match_prediction.answer_total_goal_yes	I have predicted the game to have %s goals or more.	我预测比赛总进球数会多于等于%s个
