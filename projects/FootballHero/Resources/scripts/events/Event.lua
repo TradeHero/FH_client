@@ -62,6 +62,8 @@ EventNameList =
     "Enter_Settings_Select_League",
     "Enter_Settings_Select_Team",
     "Enter_Quickblox_Chatroom",
+    "Enter_GameCenter",
+    "Enter_Lucky8",
 
     "Do_Ask_For_Rate",
     "Do_Ask_For_Comment",

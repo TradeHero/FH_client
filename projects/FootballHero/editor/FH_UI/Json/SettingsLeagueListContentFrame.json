@@ -11,9 +11,11 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "MatchListScene/match_bkg.png",
-    "community/img-inactivepage.png",
-    "header/back.png"
+    "MatchListContent/icn-fans.png",
+    "MatchListContent/icn-played.png",
+    "community/img-leaguebox.png",
+    "commonRes/default.png",
+    "MatchListContent/img-discussion.png"
   ],
   "version": "1.6.0.0",
   "widgetTree": {
@@ -107,7 +109,7 @@
           "customProperty": "",
           "flipX": false,
           "flipY": false,
-          "height": 33,
+          "height": 28,
           "ignoreSize": true,
           "layoutParameter": null,
           "opacity": 255,
@@ -124,7 +126,7 @@
           "touchAble": false,
           "useMergedTexture": false,
           "visible": true,
-          "width": 255,
+          "width": 252,
           "x": 110,
           "y": 47,
           "areaHeight": 0,

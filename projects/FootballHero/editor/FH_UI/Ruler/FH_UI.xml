@@ -464,4 +464,12 @@
     <Project>MatchCenterLeagueTable</Project>
     <GuidesList />
   </GuidesProject>
+  <GuidesProject>
+    <Project>GameCenterScene</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>GameCenterCell</Project>
+    <GuidesList />
+  </GuidesProject>
 </ArrayOfGuidesProject>

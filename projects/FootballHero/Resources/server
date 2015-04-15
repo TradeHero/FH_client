@@ -1,1 +1,1 @@
-{"serverURL":"http://fhapi-dev1.cloudapp.net", "CDNserverURL":"http://fhmainstorage.blob.core.windows.net/fhdevsettings/", "useDev":true, "selfUpdateURL":"http://fhapi-dev1.cloudapp.net/api/misc/checkForAutoUpdate"}
+{"serverURL":"http://fhapi-prod1.cloudapp.net", "CDNserverURL":"http://fhmainstorage.blob.core.windows.net/fhprodsettings/", "useDev":true, "selfUpdateURL":"http://fhapi-prod1.cloudapp.net/api/misc/checkForAutoUpdate"}

@@ -155,6 +155,8 @@
     <string>MatchCenterStatsFormTable.json</string>
     <string>MatchCenterOverUnderTable.json</string>
     <string>MatchCenterLeagueTable.json</string>
+    <string>GameCenterScene.json</string>
+    <string>GameCenterCell.json</string>
   </JsonList>
   <CanvasSize>
     <Width>640</Width>
@@ -165,8 +167,12 @@
   <ResRelativePath />
   <imageFileList />
   <imagePngList>
-    <string>MatchCentre/img-blackbox.png</string>
+    <string>MatchListContent/icn-fans.png</string>
+    <string>MatchListContent/icn-played.png</string>
+    <string>community/img-leaguebox.png</string>
+    <string>commonRes/default.png</string>
+    <string>MatchListContent/img-discussion.png</string>
   </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>MatchCenterLeagueTable.json</CurrentUIJson>
+  <CurrentUIJson>GameCenterCell.json</CurrentUIJson>
 </UIProject>
