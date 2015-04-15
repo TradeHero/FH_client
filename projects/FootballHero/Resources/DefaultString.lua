@@ -419,8 +419,15 @@ StringsDefault = {
     title = "Shoot-to-Win Challenge",
     winners = "Past Winners",
   },
+  lucky8 = {
+    lucky8_title = "Lucky 8",
+    lucky8_sub_des = "Predict random 8 games daily and win $500 if you guess all 8 matches correctly!",
+    btn_picks_title = "Your Picks",
+    btn_rules_title = "Rules",
+  },
   spinWheel = {
     wheel_title = "Spin-the-Wheel",
+    wheel_sub_des = "Get your daily spin to win prize including Messi Signed Jersey and Real Cash!",
     wheel_sub_title = "Spin-the-Wheel!",
     spin_daily = "One spin daily",
     spin_bonus = "BONUS SPIN",

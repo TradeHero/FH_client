@@ -157,6 +157,8 @@
     <string>MatchCenterLeagueTable.json</string>
     <string>GameCenterScene.json</string>
     <string>GameCenterCell.json</string>
+    <string>lucky8MainScene.json</string>
+    <string>Lucky8MatchListCell.json</string>
   </JsonList>
   <CanvasSize>
     <Width>640</Width>
@@ -167,11 +169,8 @@
   <ResRelativePath />
   <imageFileList />
   <imagePngList>
-    <string>MatchListContent/icn-fans.png</string>
-    <string>MatchListContent/icn-played.png</string>
     <string>community/img-leaguebox.png</string>
-    <string>commonRes/default.png</string>
-    <string>MatchListContent/img-discussion.png</string>
+    <string>spinWheel/img-stw.png</string>
   </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
   <CurrentUIJson>GameCenterCell.json</CurrentUIJson>

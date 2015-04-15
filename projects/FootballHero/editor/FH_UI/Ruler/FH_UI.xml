@@ -472,4 +472,12 @@
     <Project>GameCenterCell</Project>
     <GuidesList />
   </GuidesProject>
+  <GuidesProject>
+    <Project>lucky8MainScene</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>Lucky8MatchListCell</Project>
+    <GuidesList />
+  </GuidesProject>
 </ArrayOfGuidesProject>

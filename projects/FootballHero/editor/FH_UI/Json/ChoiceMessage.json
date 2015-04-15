@@ -11,10 +11,11 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "MatchListScene/match_bkg.png",
-    "header/back.png",
-    "PredictionConfirm/off_button.png",
-    "PredictionConfirm/on_button.png"
+    "MatchListContent/icn-fans.png",
+    "MatchListContent/icn-played.png",
+    "community/img-leaguebox.png",
+    "commonRes/default.png",
+    "MatchListContent/img-discussion.png"
   ],
   "version": "1.6.0.0",
   "widgetTree": {
@@ -271,7 +272,7 @@
           "customProperty": "",
           "flipX": false,
           "flipY": false,
-          "height": 31,
+          "height": 26,
           "ignoreSize": true,
           "layoutParameter": null,
           "opacity": 255,
@@ -288,7 +289,7 @@
           "touchAble": false,
           "useMergedTexture": false,
           "visible": true,
-          "width": 218,
+          "width": 221,
           "x": 61,
           "y": 762,
           "areaHeight": 0,

@@ -9,9 +9,9 @@ local RequestUtils = require("scripts.RequestUtils")
 local Constants = require("scripts.Constants")
 
 function action( param )
-    local gameCenterScene = require( "scripts.views.GameCenterScene" )
-    if gameCenterScene.isFrameShown() ~= true then
-        gameCenterScene.loadFrame()
+    local lucky8Scene = require( "scripts.views.Lucky8Scene" )
+    if lucky8Scene.isFrameShown() ~= true then
+        lucky8Scene.loadFrame()
     end
 end
 

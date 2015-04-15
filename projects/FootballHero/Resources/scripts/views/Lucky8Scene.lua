@@ -7,51 +7,33 @@ local Constants = require("scripts.Constants")
 local Navigator = require("scripts.views.Navigator")
 local Header = require("scripts.views.HeaderFrame")
 
-local mWidget
-local mContentHeight
-
-local ENTER_GAME_EVENT_LIST = 
-{
-    { Event.Enter_Spin_the_Wheel, nil },
-    { Event.Enter_Lucky8, nil },
-}
+local mWidget 
 
 function loadFrame()
-    local widget = GUIReader:shareReader():widgetFromJsonFile("scenes/GameCenterScene.json")
+    local widget = GUIReader:shareReader():widgetFromJsonFile( "scenes/lucky8MainScene.json" )
     mWidget = widget
     widget:registerScriptHandler( EnterOrExit )
     SceneManager.clearNAddWidget( widget )
-    Header.loadFrame( widget, nil, false )
+    Header.loadFrame( widget, Constants.String.lucky8.lucky8_title, true )
     Navigator.loadFrame( widget )
-    initCells( table.getn( ENTER_GAME_EVENT_LIST ) )
+
+    initButtonInfo()
 end
 
-function initCells( cellNum )
-    mContentHeight = 0
-    local contentContainer = tolua.cast( mWidget:getChildByName("ScrollView"), "ScrollView" )
-    for i = 1, cellNum do
-        local eventHandler = function ( sender, eventType )
-            if eventType == TOUCH_EVENT_ENDED then
-                enterGame( i )
-            end
-        end
-        local content = SceneManager.widgetFromJsonFile( "scenes/GameCenterCell.json")
-        contentContainer:addChild( content )
-        mContentHeight = mContentHeight + content:getSize().height
-        content:addTouchEventListener( eventHandler )
-        updateContentContainer( mContentHeight, content )
-    end
+function getCurrentTime(  )
+    local currentTime = os.time()
+    local currentDate = os.date( "%B %")
 end
 
-function updateContentContainer( contentHeight, content )
-    local contentContainer = tolua.cast( mWidget:getChildByName("ScrollView"), "ScrollView" )
-    contentContainer:setInnerContainerSize( CCSize:new(0, contentHeight) )
-    local layout = tolua.cast( contentContainer, "Layout" )
-    layout:requestDoLayout()
-end
+function initButtonInfo(  )
+    local btnPicks = tolua.cast( mWidget:getChildByName( "Button_Picks" ), "Button" )  
+    btnPicks:setTitleText( Constants.String.lucky8.btn_picks_title )
 
-function enterGame( index )
-    EventManager:postEvent( ENTER_GAME_EVENT_LIST[index][1], ENTER_GAME_EVENT_LIST[index][2] )
+    local btnMatchLists = tolua.cast( mWidget:getChildByName( "Button_MatchLists" ), "Button" )
+    getCurrentTime()
+
+    local btnRules = tolua.cast( mWidget:getChildByName( "Button_Rules" ), "Button" )
+    btnRules:setTitleText( Constants.String.lucky8.btn_rules_title )
 end
 
 function EnterOrExit( eventType )
