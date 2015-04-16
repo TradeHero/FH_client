@@ -480,4 +480,12 @@
     <Project>Lucky8MatchListCell</Project>
     <GuidesList />
   </GuidesProject>
+  <GuidesProject>
+    <Project>YourPicksCell</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>Lucky8Header</Project>
+    <GuidesList />
+  </GuidesProject>
 </ArrayOfGuidesProject>

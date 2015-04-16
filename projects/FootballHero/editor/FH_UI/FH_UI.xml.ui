@@ -159,6 +159,8 @@
     <string>GameCenterCell.json</string>
     <string>lucky8MainScene.json</string>
     <string>Lucky8MatchListCell.json</string>
+    <string>YourPicksCell.json</string>
+    <string>Lucky8Header.json</string>
   </JsonList>
   <CanvasSize>
     <Width>640</Width>
@@ -169,9 +171,10 @@
   <ResRelativePath />
   <imageFileList />
   <imagePngList>
-    <string>community/img-leaguebox.png</string>
-    <string>spinWheel/img-stw.png</string>
+    <string>header/back.png</string>
+    <string>spinWheel/btn-winner.png</string>
+    <string>header/footballhero-logo.png</string>
   </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>GameCenterCell.json</CurrentUIJson>
+  <CurrentUIJson>Lucky8Header.json</CurrentUIJson>
 </UIProject>

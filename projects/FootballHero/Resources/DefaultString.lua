@@ -424,6 +424,7 @@ StringsDefault = {
     lucky8_sub_des = "Predict random 8 games daily and win $500 if you guess all 8 matches correctly!",
     btn_picks_title = "Your Picks",
     btn_rules_title = "Rules",
+    btn_submit_title = "Submit!",
   },
   spinWheel = {
     wheel_title = "Spin-the-Wheel",

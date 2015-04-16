@@ -11,7 +11,8 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "spinWheel/img-stw.png"
+    "community/img-leaguebox.png",
+    "GUI/image.png"
   ],
   "version": "1.6.0.0",
   "widgetTree": {
