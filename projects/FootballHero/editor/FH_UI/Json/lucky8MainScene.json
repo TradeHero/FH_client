@@ -10,11 +10,7 @@
   "designHeight": 1136,
   "designWidth": 640,
   "textures": [],
-  "texturesPng": [
-    "header/back.png",
-    "spinWheel/btn-winner.png",
-    "header/footballhero-logo.png"
-  ],
+  "texturesPng": [],
   "version": "1.6.0.0",
   "widgetTree": {
     "classname": "Panel",
@@ -305,60 +301,6 @@
           "textColorB": 255,
           "textColorG": 255,
           "textColorR": 255
-        }
-      },
-      {
-        "classname": "ImageView",
-        "name": null,
-        "children": [],
-        "options": {
-          "__type": "ImageViewSurrogate:#EditorCommon.JsonModel.Component.GUI",
-          "classname": "ImageView",
-          "name": "Image_6",
-          "ZOrder": 0,
-          "actiontag": 14412003,
-          "anchorPointX": 0.5,
-          "anchorPointY": 0.5,
-          "classType": "CocoStudio.EngineAdapterWrap.CSImageView",
-          "colorB": 255,
-          "colorG": 255,
-          "colorR": 255,
-          "customProperty": "",
-          "flipX": false,
-          "flipY": false,
-          "height": 1136,
-          "ignoreSize": true,
-          "layoutParameter": null,
-          "opacity": 21,
-          "positionPercentX": 0.5,
-          "positionPercentY": 0.5021567,
-          "positionType": 0,
-          "rotation": 0,
-          "scaleX": 1,
-          "scaleY": 1,
-          "sizePercentX": 0.125,
-          "sizePercentY": 0.07042254,
-          "sizeType": 0,
-          "tag": 37877,
-          "touchAble": false,
-          "useMergedTexture": false,
-          "visible": true,
-          "width": 640,
-          "x": 320,
-          "y": 570,
-          "capInsetsHeight": 1,
-          "capInsetsWidth": 1,
-          "capInsetsX": 0,
-          "capInsetsY": 0,
-          "fileName": null,
-          "fileNameData": {
-            "path": "lucky8/01-today-cont.png",
-            "plistFile": "",
-            "resourceType": 0
-          },
-          "scale9Enable": false,
-          "scale9Height": 1136,
-          "scale9Width": 640
         }
       },
       {

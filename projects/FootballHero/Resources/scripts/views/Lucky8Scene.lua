@@ -16,7 +16,7 @@ local CELL_RES_STRING =
 {
     "scenes/YourPicksCell.json",
     "scenes/Lucky8MatchListCell.json",
-    "scenes/Lucky8MatchListCell.json",
+    "scenes/Lucky8RuleCell.json",
 }
 
 function loadFrame()
@@ -76,13 +76,15 @@ function changeScrollView( index, cellNum )
     end
     for i = 1, cellNum do
         local cell = SceneManager.widgetFromJsonFile( CELL_RES_STRING[index] )
-        CCLuaLog( CELL_RES_STRING[i] )
+        if index == 1 then
+            cell:addTouchEventListener( enterHistory )
+        elseif index == 3 then
+            local text = tolua.cast( cell:getChildByName("TextField_Rule"), "TextField" )
+            text:setText( Constants.String.lucky8.lucky8_rule )
+        end
         contentContainer:addChild( cell )
         mScrollViewHeight = mScrollViewHeight + cell:getSize().height
         updateScrollView( mScrollViewHeight, cell )
-        if index == 1 then
-            cell:addTouchEventListener( enterHistory )
-        end
     end
 end
 
@@ -92,18 +94,22 @@ function enterHistory( sender, eventType )
     end
 end
 
-function changeTab( index )
-    changeScrollView( index, 8 )
+function changeTab( index, cellNum )
+    changeScrollView( index, cellNum )
 end
 
 function onSelectTab( index )
+    local cellNum = 8
+    if index == 3 then
+        cellNum = 1
+    end
     for i = 1, table.getn( mTabButtons ) do
         local btnTab = mTabButtons[ i ]
         if i == index then
             btnTab:setBright( false )
             btnTab:setTouchEnabled( false )
             btnTab:setTitleColor( ccc3( 255, 255, 255 ) )
-            changeTab( index )
+            changeTab( index, cellNum )
         else
             btnTab:setBright( true )
             btnTab:setTouchEnabled( true )

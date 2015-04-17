@@ -496,4 +496,8 @@
     <Project>Lucky8HistoryCell</Project>
     <GuidesList />
   </GuidesProject>
+  <GuidesProject>
+    <Project>Lucky8RuleCell</Project>
+    <GuidesList />
+  </GuidesProject>
 </ArrayOfGuidesProject>

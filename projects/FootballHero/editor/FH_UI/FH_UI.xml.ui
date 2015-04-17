@@ -163,6 +163,7 @@
     <string>Lucky8Header.json</string>
     <string>Lucky8HistoryScene.json</string>
     <string>Lucky8HistoryCell.json</string>
+    <string>Lucky8RuleCell.json</string>
   </JsonList>
   <CanvasSize>
     <Width>640</Width>
@@ -172,14 +173,7 @@
   <ProjectType>UIProject</ProjectType>
   <ResRelativePath />
   <imageFileList />
-  <imagePngList>
-    <string>community/img-leaguebox.png</string>
-    <string>commonRes/default.png</string>
-    <string>lucky8/img-notpick.png</string>
-    <string>lucky8/img-newresult.png</string>
-    <string>lucky8/img-pick.png</string>
-    <string>lucky8/img-lost.png</string>
-  </imagePngList>
+  <imagePngList />
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>Lucky8HistoryCell.json</CurrentUIJson>
+  <CurrentUIJson>Lucky8RuleCell.json</CurrentUIJson>
 </UIProject>
