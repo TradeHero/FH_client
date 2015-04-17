@@ -158,27 +158,29 @@ function addFormTableInfo( jsonResponse, contentContainer )
    if formTableData ~= nil and type( formTableData ) == "table" and table.getn( formTableData ) > 0 then
       for i = 1, table.getn( formTableData ) do
          local teamFormTableData = formTableData[i]
-         local suffix
-         if teamFormTableData["TeamId"] == mHomeTeamId then
-            suffix = "1"
-         else
-            suffix = "2"
+         if teamFormTableData ~= nil and type( teamFormTableData ) == "table" then
+            local suffix
+            if teamFormTableData["TeamId"] == mHomeTeamId then
+              suffix = "1"
+            else
+              suffix = "2"
+            end
+
+            tolua.cast( formTable:getChildByName("Label_P_total"..suffix), "Label" ):setText( teamFormTableData["NumberOfGames"] )
+            tolua.cast( formTable:getChildByName("Label_W_total"..suffix), "Label" ):setText( teamFormTableData["NumberOfGamesWon"] )
+            tolua.cast( formTable:getChildByName("Label_D_total"..suffix), "Label" ):setText( teamFormTableData["NumberOfGamesDrawn"] )
+            tolua.cast( formTable:getChildByName("Label_L_total"..suffix), "Label" ):setText( teamFormTableData["NumberOfGamesLost"] )
+
+            tolua.cast( formTable:getChildByName("Label_P_home"..suffix), "Label" ):setText( teamFormTableData["NumberOfHomeGames"] )
+            tolua.cast( formTable:getChildByName("Label_W_home"..suffix), "Label" ):setText( teamFormTableData["NumberOfHomeGamesWon"] )
+            tolua.cast( formTable:getChildByName("Label_D_home"..suffix), "Label" ):setText( teamFormTableData["NumberOfHomeGamesDrawn"] )
+            tolua.cast( formTable:getChildByName("Label_L_home"..suffix), "Label" ):setText( teamFormTableData["NumberOfHomeGamesLost"] )
+
+            tolua.cast( formTable:getChildByName("Label_P_away"..suffix), "Label" ):setText( teamFormTableData["NumberOfAwayGames"] )
+            tolua.cast( formTable:getChildByName("Label_W_away"..suffix), "Label" ):setText( teamFormTableData["NumberOfAwayGamesWon"] )
+            tolua.cast( formTable:getChildByName("Label_D_away"..suffix), "Label" ):setText( teamFormTableData["NumberOfAwayGamesDrawn"] )
+            tolua.cast( formTable:getChildByName("Label_L_away"..suffix), "Label" ):setText( teamFormTableData["NumberOfAwayGamesLost"] )
          end
-
-         tolua.cast( formTable:getChildByName("Label_P_total"..suffix), "Label" ):setText( teamFormTableData["NumberOfGames"] )
-         tolua.cast( formTable:getChildByName("Label_W_total"..suffix), "Label" ):setText( teamFormTableData["NumberOfGamesWon"] )
-         tolua.cast( formTable:getChildByName("Label_D_total"..suffix), "Label" ):setText( teamFormTableData["NumberOfGamesDrawn"] )
-         tolua.cast( formTable:getChildByName("Label_L_total"..suffix), "Label" ):setText( teamFormTableData["NumberOfGamesLost"] )
-
-         tolua.cast( formTable:getChildByName("Label_P_home"..suffix), "Label" ):setText( teamFormTableData["NumberOfHomeGames"] )
-         tolua.cast( formTable:getChildByName("Label_W_home"..suffix), "Label" ):setText( teamFormTableData["NumberOfHomeGamesWon"] )
-         tolua.cast( formTable:getChildByName("Label_D_home"..suffix), "Label" ):setText( teamFormTableData["NumberOfHomeGamesDrawn"] )
-         tolua.cast( formTable:getChildByName("Label_L_home"..suffix), "Label" ):setText( teamFormTableData["NumberOfHomeGamesLost"] )
-
-         tolua.cast( formTable:getChildByName("Label_P_away"..suffix), "Label" ):setText( teamFormTableData["NumberOfAwayGames"] )
-         tolua.cast( formTable:getChildByName("Label_W_away"..suffix), "Label" ):setText( teamFormTableData["NumberOfAwayGamesWon"] )
-         tolua.cast( formTable:getChildByName("Label_D_away"..suffix), "Label" ):setText( teamFormTableData["NumberOfAwayGamesDrawn"] )
-         tolua.cast( formTable:getChildByName("Label_L_away"..suffix), "Label" ):setText( teamFormTableData["NumberOfAwayGamesLost"] )
       end
    end
 end
@@ -209,24 +211,26 @@ function addOverUnderTable( jsonResponse, contentContainer )
       if formTableData ~= nil and type( formTableData ) == "table" and table.getn( formTableData ) > 0 then
          for i = 1, table.getn( formTableData ) do
             local teamFormTableData = formTableData[i]
-            local suffix
-            if teamFormTableData["TeamId"] == mHomeTeamId then
-               suffix = "1"
-            else
-               suffix = "2"
+            if teamFormTableData ~= nil and type( teamFormTableData ) == "table" then
+              local suffix
+              if teamFormTableData["TeamId"] == mHomeTeamId then
+                 suffix = "1"
+              else
+                 suffix = "2"
+              end
+
+              tolua.cast( overunderTable:getChildByName("Label_P_total"..suffix), "Label" ):setText( teamFormTableData["OverTotal_"..lineStr] + teamFormTableData["UnderTotal_"..lineStr] )
+              tolua.cast( overunderTable:getChildByName("Label_O_total"..suffix), "Label" ):setText( teamFormTableData["OverTotal_"..lineStr] )
+              tolua.cast( overunderTable:getChildByName("Label_U_total"..suffix), "Label" ):setText( teamFormTableData["UnderTotal_"..lineStr] )
+
+              tolua.cast( overunderTable:getChildByName("Label_P_home"..suffix), "Label" ):setText( teamFormTableData["OverHome_"..lineStr] + teamFormTableData["UnderHome_"..lineStr] )
+              tolua.cast( overunderTable:getChildByName("Label_O_home"..suffix), "Label" ):setText( teamFormTableData["OverHome_"..lineStr] )
+              tolua.cast( overunderTable:getChildByName("Label_U_home"..suffix), "Label" ):setText( teamFormTableData["UnderHome_"..lineStr] )
+
+              tolua.cast( overunderTable:getChildByName("Label_P_away"..suffix), "Label" ):setText( teamFormTableData["OverAway_"..lineStr] + teamFormTableData["UnderAway_"..lineStr] )
+              tolua.cast( overunderTable:getChildByName("Label_O_away"..suffix), "Label" ):setText( teamFormTableData["OverAway_"..lineStr] )
+              tolua.cast( overunderTable:getChildByName("Label_U_away"..suffix), "Label" ):setText( teamFormTableData["UnderAway_"..lineStr] )
             end
-
-            tolua.cast( overunderTable:getChildByName("Label_P_total"..suffix), "Label" ):setText( teamFormTableData["OverTotal_"..lineStr] + teamFormTableData["UnderTotal_"..lineStr] )
-            tolua.cast( overunderTable:getChildByName("Label_O_total"..suffix), "Label" ):setText( teamFormTableData["OverTotal_"..lineStr] )
-            tolua.cast( overunderTable:getChildByName("Label_U_total"..suffix), "Label" ):setText( teamFormTableData["UnderTotal_"..lineStr] )
-
-            tolua.cast( overunderTable:getChildByName("Label_P_home"..suffix), "Label" ):setText( teamFormTableData["OverHome_"..lineStr] + teamFormTableData["UnderHome_"..lineStr] )
-            tolua.cast( overunderTable:getChildByName("Label_O_home"..suffix), "Label" ):setText( teamFormTableData["OverHome_"..lineStr] )
-            tolua.cast( overunderTable:getChildByName("Label_U_home"..suffix), "Label" ):setText( teamFormTableData["UnderHome_"..lineStr] )
-
-            tolua.cast( overunderTable:getChildByName("Label_P_away"..suffix), "Label" ):setText( teamFormTableData["OverAway_"..lineStr] + teamFormTableData["UnderAway_"..lineStr] )
-            tolua.cast( overunderTable:getChildByName("Label_O_away"..suffix), "Label" ):setText( teamFormTableData["OverAway_"..lineStr] )
-            tolua.cast( overunderTable:getChildByName("Label_U_away"..suffix), "Label" ):setText( teamFormTableData["UnderAway_"..lineStr] )
          end
       end
    end
@@ -297,54 +301,55 @@ function addLeagueTable( jsonResponse, contentContainer )
    if leagueTableData ~= nil and type( leagueTableData ) == "table" and table.getn( leagueTableData ) > 0 then
       for i = 1, table.getn( leagueTableData ) do
          local teamLeagueTableData = leagueTableData[i]
-         local suffix
-         if teamLeagueTableData["TeamId"] == mHomeTeamId then
+         if teamLeagueTableData ~= nil and type( teamLeagueTableData ) == "table" then
+          local suffix
+          if teamLeagueTableData["TeamId"] == mHomeTeamId then
             suffix = "1"
-         else
+          else
             suffix = "2"
-         end
+          end
 
-         local posTotal = tolua.cast( leagueTable:getChildByName("Label_Pos_total"..suffix), "Label" )
-         local posHome = tolua.cast( leagueTable:getChildByName("Label_Pos_home"..suffix), "Label" )
-         local posAway = tolua.cast( leagueTable:getChildByName("Label_Pos_away"..suffix), "Label" )
-         if teamLeagueTableData["PositionTotal"] > 0 then
+          local posTotal = tolua.cast( leagueTable:getChildByName("Label_Pos_total"..suffix), "Label" )
+          local posHome = tolua.cast( leagueTable:getChildByName("Label_Pos_home"..suffix), "Label" )
+          local posAway = tolua.cast( leagueTable:getChildByName("Label_Pos_away"..suffix), "Label" )
+          if teamLeagueTableData["PositionTotal"] > 0 then
             posTotal:setText( teamLeagueTableData["PositionTotal"] )
-         else
+          else
             posTotal:setText( "--" )
-         end
+          end
 
-         if teamLeagueTableData["PositionHome"] > 0 then
+          if teamLeagueTableData["PositionHome"] > 0 then
             posHome:setText( teamLeagueTableData["PositionHome"] )
-         else
+          else
             posHome:setText( "--" )
-         end
+          end
 
-         if teamLeagueTableData["PositionAway"] > 0 then
+          if teamLeagueTableData["PositionAway"] > 0 then
             posAway:setText( teamLeagueTableData["PositionAway"] )
-         else
+          else
             posAway:setText( "--" )
-         end
+          end
 
-         tolua.cast( leagueTable:getChildByName("Label_P_total"..suffix), "Label" ):setText( teamLeagueTableData["NumberOfGamesTotal"] )
-         tolua.cast( leagueTable:getChildByName("Label_W_total"..suffix), "Label" ):setText( teamLeagueTableData["NumberOfGamesWonTotal"] )
-         tolua.cast( leagueTable:getChildByName("Label_D_total"..suffix), "Label" ):setText( teamLeagueTableData["NumberOfGamesDrawnTotal"] )
-         tolua.cast( leagueTable:getChildByName("Label_L_total"..suffix), "Label" ):setText( teamLeagueTableData["NumberOfGamesLostTotal"] )
-         tolua.cast( leagueTable:getChildByName("Label_Pts_total"..suffix), "Label" ):setText( teamLeagueTableData["PointsTotal"] )
+          tolua.cast( leagueTable:getChildByName("Label_P_total"..suffix), "Label" ):setText( teamLeagueTableData["NumberOfGamesTotal"] )
+          tolua.cast( leagueTable:getChildByName("Label_W_total"..suffix), "Label" ):setText( teamLeagueTableData["NumberOfGamesWonTotal"] )
+          tolua.cast( leagueTable:getChildByName("Label_D_total"..suffix), "Label" ):setText( teamLeagueTableData["NumberOfGamesDrawnTotal"] )
+          tolua.cast( leagueTable:getChildByName("Label_L_total"..suffix), "Label" ):setText( teamLeagueTableData["NumberOfGamesLostTotal"] )
+          tolua.cast( leagueTable:getChildByName("Label_Pts_total"..suffix), "Label" ):setText( teamLeagueTableData["PointsTotal"] )
 
-         tolua.cast( leagueTable:getChildByName("Label_P_home"..suffix), "Label" ):setText( teamLeagueTableData["NumberOfGamesHome"] )
-         tolua.cast( leagueTable:getChildByName("Label_W_home"..suffix), "Label" ):setText( teamLeagueTableData["NumberOfGamesWonHome"] )
-         tolua.cast( leagueTable:getChildByName("Label_D_home"..suffix), "Label" ):setText( teamLeagueTableData["NumberOfGamesDrawnHome"] )
-         tolua.cast( leagueTable:getChildByName("Label_L_home"..suffix), "Label" ):setText( teamLeagueTableData["NumberOfGamesLostHome"] )
-         tolua.cast( leagueTable:getChildByName("Label_Pts_home"..suffix), "Label" ):setText( teamLeagueTableData["PointsHome"] )
+          tolua.cast( leagueTable:getChildByName("Label_P_home"..suffix), "Label" ):setText( teamLeagueTableData["NumberOfGamesHome"] )
+          tolua.cast( leagueTable:getChildByName("Label_W_home"..suffix), "Label" ):setText( teamLeagueTableData["NumberOfGamesWonHome"] )
+          tolua.cast( leagueTable:getChildByName("Label_D_home"..suffix), "Label" ):setText( teamLeagueTableData["NumberOfGamesDrawnHome"] )
+          tolua.cast( leagueTable:getChildByName("Label_L_home"..suffix), "Label" ):setText( teamLeagueTableData["NumberOfGamesLostHome"] )
+          tolua.cast( leagueTable:getChildByName("Label_Pts_home"..suffix), "Label" ):setText( teamLeagueTableData["PointsHome"] )
 
-         tolua.cast( leagueTable:getChildByName("Label_P_away"..suffix), "Label" ):setText( teamLeagueTableData["NumberOfGamesAway"] )
-         tolua.cast( leagueTable:getChildByName("Label_W_away"..suffix), "Label" ):setText( teamLeagueTableData["NumberOfGamesWonAway"] )
-         tolua.cast( leagueTable:getChildByName("Label_D_away"..suffix), "Label" ):setText( teamLeagueTableData["NumberOfGamesDrawnAway"] )
-         tolua.cast( leagueTable:getChildByName("Label_L_away"..suffix), "Label" ):setText( teamLeagueTableData["NumberOfGamesLostAway"] )
-         tolua.cast( leagueTable:getChildByName("Label_Pts_away"..suffix), "Label" ):setText( teamLeagueTableData["PointsAway"] )
+          tolua.cast( leagueTable:getChildByName("Label_P_away"..suffix), "Label" ):setText( teamLeagueTableData["NumberOfGamesAway"] )
+          tolua.cast( leagueTable:getChildByName("Label_W_away"..suffix), "Label" ):setText( teamLeagueTableData["NumberOfGamesWonAway"] )
+          tolua.cast( leagueTable:getChildByName("Label_D_away"..suffix), "Label" ):setText( teamLeagueTableData["NumberOfGamesDrawnAway"] )
+          tolua.cast( leagueTable:getChildByName("Label_L_away"..suffix), "Label" ):setText( teamLeagueTableData["NumberOfGamesLostAway"] )
+          tolua.cast( leagueTable:getChildByName("Label_Pts_away"..suffix), "Label" ):setText( teamLeagueTableData["PointsAway"] )
+         end 
       end
    end
-
 end
 
 --[[
