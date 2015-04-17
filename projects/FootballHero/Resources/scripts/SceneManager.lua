@@ -102,6 +102,7 @@ function initEvents()
 	EventManager:registerEventHandler( Event.Enter_Quickblox_Chatroom, "scripts.actions.EnterQuickbloxChatroomAction" )
     EventManager:registerEventHandler( Event.Enter_GameCenter, "scripts.actions.EnterGameCenterAction" )
     EventManager:registerEventHandler( Event.Enter_Lucky8, "scripts.actions.EnterLucky8Action" )
+    EventManager:registerEventHandler( Event.Enter_Lucky8History, "scripts.actions.EnterLucky8History" )
 
 	EventManager:registerEventHandler( Event.Do_Register, "scripts.actions.DoRegisterAction" )
 	EventManager:registerEventHandler( Event.Do_Login, "scripts.actions.DoLoginAction" )

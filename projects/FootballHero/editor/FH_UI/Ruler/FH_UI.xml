@@ -488,4 +488,8 @@
     <Project>Lucky8Header</Project>
     <GuidesList />
   </GuidesProject>
+  <GuidesProject>
+    <Project>Lucky8HistoryScene</Project>
+    <GuidesList />
+  </GuidesProject>
 </ArrayOfGuidesProject>

@@ -64,6 +64,7 @@ EventNameList =
     "Enter_Quickblox_Chatroom",
     "Enter_GameCenter",
     "Enter_Lucky8",
+    "Enter_Lucky8History",
 
     "Do_Ask_For_Rate",
     "Do_Ask_For_Comment",

@@ -11,11 +11,9 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "MatchListScene/match_bkg.png",
-    "community/img-inactivepage.png",
-    "community/img-activepage.png",
-    "lucky8/01-today-cont.png",
-    "spinWheel/btn-submit.png"
+    "header/back.png",
+    "spinWheel/btn-winner.png",
+    "header/footballhero-logo.png"
   ],
   "version": "1.6.0.0",
   "widgetTree": {

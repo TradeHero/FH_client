@@ -7,36 +7,26 @@ local Constants = require("scripts.Constants")
 local Navigator = require("scripts.views.Navigator")
 local Header = require("scripts.views.Lucky8Header")
 
-local mWidget 
-local mScrollViewHeight
-local mTabButtons
-local mBtnSubmits
-
-local CELL_RES_STRING = 
-{
-    "scenes/YourPicksCell.json",
-    "scenes/Lucky8MatchListCell.json",
-    "scenes/Lucky8MatchListCell.json",
-}
+local mWidget
 
 function loadFrame()
-    local widget = GUIReader:shareReader():widgetFromJsonFile( "scenes/lucky8MainScene.json" )
+    local widget = GUIReader:shareReader():widgetFromJsonFile( "scenes/Lucky8HistoryScene.json" )
     mWidget = widget
     widget:registerScriptHandler( EnterOrExit )
     SceneManager.clearNAddWidget( widget )
     Header.loadFrame( widget, Constants.String.lucky8.lucky8_title, true )
     Navigator.loadFrame( widget )
 
-    local btnSubmit = tolua.cast( mWidget:getChildByName("Button_Submit"), "Button" )
-    mBtnSubmits = btnSubmit
-    btnSubmit:addTouchEventListener( eventSubmit )
-    local submitTitle = tolua.cast( btnSubmit:getChildByName("TextField_Submit"), "TextField" )
-    submitTitle:setText( Constants.String.lucky8.btn_submit_title )
+    -- local btnSubmit = tolua.cast( mWidget:getChildByName("Button_Submit"), "Button" )
+    -- mBtnSubmits = btnSubmit
+    -- btnSubmit:addTouchEventListener( eventSubmit )
+    -- local submitTitle = tolua.cast( btnSubmit:getChildByName("TextField_Submit"), "TextField" )
+    -- submitTitle:setText( Constants.String.lucky8.btn_submit_title )
 
-    initButtonInfo()
+    -- initButtonInfo()
 
-    mScrollViewHeight = 0;
-    initScrollView( 8 ) 
+    -- mScrollViewHeight = 0;
+    -- initScrollView( 8 ) 
 end
 
 function eventSubmit( sender, eventType )
@@ -69,6 +59,11 @@ function changeScrollView( index, cellNum )
     local contentContainer = tolua.cast( mWidget:getChildByName("ScrollView_Content"), "ScrollView" )
     contentContainer:removeAllChildrenWithCleanup( true )
     mScrollViewHeight = 0
+    if mBtnSubmits == nil then
+        CCLuaLog( "chenjiang,dfdjfkjdskfjsdkfjdskfdsfasdfdsf" )
+    else
+        CCLuaLog("nnnnnnnnnnnnnnnn")
+    end
     if index == 1 or index == 3 then
         mBtnSubmits:setVisible( false )
     else
@@ -80,15 +75,6 @@ function changeScrollView( index, cellNum )
         contentContainer:addChild( cell )
         mScrollViewHeight = mScrollViewHeight + cell:getSize().height
         updateScrollView( mScrollViewHeight, cell )
-        if index == 1 then
-            cell:addTouchEventListener( enterHistory )
-        end
-    end
-end
-
-function enterHistory( sender, eventType )
-    if eventType == TOUCH_EVENT_ENDED then
-        EventManager:postEvent( Event.Enter_Lucky8History )
     end
 end
 

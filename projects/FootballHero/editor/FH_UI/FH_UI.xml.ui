@@ -161,6 +161,7 @@
     <string>Lucky8MatchListCell.json</string>
     <string>YourPicksCell.json</string>
     <string>Lucky8Header.json</string>
+    <string>Lucky8HistoryScene.json</string>
   </JsonList>
   <CanvasSize>
     <Width>640</Width>
@@ -176,5 +177,5 @@
     <string>header/footballhero-logo.png</string>
   </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>Lucky8Header.json</CurrentUIJson>
+  <CurrentUIJson>Lucky8HistoryScene.json</CurrentUIJson>
 </UIProject>
