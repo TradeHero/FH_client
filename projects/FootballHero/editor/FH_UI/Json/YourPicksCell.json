@@ -11,9 +11,8 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "header/back.png",
-    "spinWheel/btn-winner.png",
-    "header/footballhero-logo.png"
+    "community/img-leaguebox.png",
+    "lucky8/img-newresult.png"
   ],
   "version": "1.6.0.0",
   "widgetTree": {
@@ -57,7 +56,7 @@
               "sizePercentY": 0.007936508,
               "sizeType": 0,
               "tag": 37913,
-              "touchAble": true,
+              "touchAble": false,
               "useMergedTexture": false,
               "visible": true,
               "width": 640,
@@ -125,7 +124,7 @@
                   "sizePercentY": 0.3375,
                   "sizeType": 0,
                   "tag": 37914,
-                  "touchAble": true,
+                  "touchAble": false,
                   "useMergedTexture": false,
                   "visible": true,
                   "width": 54,
@@ -228,7 +227,7 @@
               "sizePercentY": 0.214285716,
               "sizeType": 0,
               "tag": 37910,
-              "touchAble": true,
+              "touchAble": false,
               "useMergedTexture": false,
               "visible": true,
               "width": 195,
@@ -280,7 +279,7 @@
               "sizePercentY": 0.214285716,
               "sizeType": 0,
               "tag": 37911,
-              "touchAble": true,
+              "touchAble": false,
               "useMergedTexture": false,
               "visible": true,
               "width": 350,

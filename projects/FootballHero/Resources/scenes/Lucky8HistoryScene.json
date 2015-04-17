@@ -149,7 +149,7 @@
           "ZOrder": 0,
           "actiontag": 6463651,
           "anchorPointX": 0.5,
-          "anchorPointY": 0.5,
+          "anchorPointY": 0,
           "classType": "CocoStudio.EngineAdapterWrap.CSTextField",
           "colorB": 255,
           "colorG": 255,

@@ -11,9 +11,7 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "header/back.png",
-    "spinWheel/btn-winner.png",
-    "header/footballhero-logo.png"
+    "MatchListScene/match_bkg.png"
   ],
   "version": "1.6.0.0",
   "widgetTree": {
@@ -151,7 +149,7 @@
           "ZOrder": 0,
           "actiontag": 6463651,
           "anchorPointX": 0.5,
-          "anchorPointY": 0.5,
+          "anchorPointY": 0,
           "classType": "CocoStudio.EngineAdapterWrap.CSTextField",
           "colorB": 255,
           "colorG": 255,
