@@ -465,15 +465,43 @@
     <GuidesList />
   </GuidesProject>
   <GuidesProject>
-    <Project>TestDemoCell</Project>
+    <Project>GameCenterScene</Project>
     <GuidesList />
   </GuidesProject>
   <GuidesProject>
-    <Project>TestDemo</Project>
+    <Project>GameCenterCell</Project>
     <GuidesList />
   </GuidesProject>
   <GuidesProject>
-    <Project>TestDemo2</Project>
+    <Project>lucky8MainScene</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>Lucky8MatchListCell</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>YourPicksCell</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>Lucky8Header</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>Lucky8HistoryScene</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>Lucky8HistoryCell</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>Lucky8RuleCell</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>Lucky8WonPrice</Project>
     <GuidesList />
   </GuidesProject>
 </ArrayOfGuidesProject>
