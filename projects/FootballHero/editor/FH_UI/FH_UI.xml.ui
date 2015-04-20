@@ -180,5 +180,5 @@
     <string>spinWheel/btn-yes.png</string>
   </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>Lucky8WonPrice.json</CurrentUIJson>
+  <CurrentUIJson>Lucky8MatchListCell.json</CurrentUIJson>
 </UIProject>

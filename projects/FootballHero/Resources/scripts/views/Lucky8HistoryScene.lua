@@ -8,6 +8,7 @@ local Navigator = require("scripts.views.Navigator")
 local Header = require("scripts.views.Lucky8Header")
 
 local mWidget
+local mWonPrize
 
 function loadFrame()
     local widget = GUIReader:shareReader():widgetFromJsonFile( "scenes/Lucky8HistoryScene.json" )
@@ -27,15 +28,24 @@ function showPrizeScene( isShow )
     end
 
     local wonPrice = SceneManager.widgetFromJsonFile( "scenes/Lucky8WonPrice.json" )
+    mWonPrize = wonPrice
     mWidget:addChild( wonPrice )
+
     local btnClaim = tolua.cast( wonPrice:getChildByName("Button_Claim"), "Button" )
     btnClaim:addTouchEventListener( eventClaim )
 
     local claimText = tolua.cast( btnClaim:getChildByName("TextField_Claim"), "TextField" )
+    claimText:setText( Constants.String.lucky8.won_prize_btn_claim )
+
+    local wonText = tolua.cast( wonPrice:getChildByName("TextField_Won"), "TextField" )
+    wonText:setText( Constants.String.lucky8.won_prize_won_txt )
 end
 
 function eventClaim( sender, eventType )
-    CCLuaLog( "Lucky8HistoryScene eventClaim" )
+    if eventType == TOUCH_EVENT_ENDED then
+        CCLuaLog( "Lucky8HistoryScene eventClaim" )
+        mWonPrize:removeFromParentAndCleanup( true )
+    end
 end
 
 function initScrollView( cellNum )
