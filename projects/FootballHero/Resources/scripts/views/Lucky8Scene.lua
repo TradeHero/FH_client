@@ -41,6 +41,7 @@ end
 
 function eventSubmit( sender, eventType )
     CCLuaLog( "eventSubmit" )
+    CCLuaLog( "eventSubmit" )
 end
 
 function initScrollView( cellNum )

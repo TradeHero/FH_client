@@ -10,7 +10,12 @@
   "designHeight": 1136,
   "designWidth": 640,
   "textures": [],
-  "texturesPng": [],
+  "texturesPng": [
+    "lucky8/04-Won.png",
+    "spinWheel/img-shine.png",
+    "spinWheel/img-giftcard.png",
+    "spinWheel/btn-yes.png"
+  ],
   "version": "1.6.0.0",
   "widgetTree": {
     "classname": "Panel",

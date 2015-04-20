@@ -500,4 +500,8 @@
     <Project>Lucky8RuleCell</Project>
     <GuidesList />
   </GuidesProject>
+  <GuidesProject>
+    <Project>Lucky8WonPrice</Project>
+    <GuidesList />
+  </GuidesProject>
 </ArrayOfGuidesProject>

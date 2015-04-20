@@ -17,6 +17,25 @@ function loadFrame()
     Header.loadFrame( widget, Constants.String.lucky8.lucky8_title, true )
 
     initScrollView( 8 )
+
+    showPrizeScene( true )
+end
+
+function showPrizeScene( isShow )
+    if isShow == false then 
+        return 
+    end
+
+    local wonPrice = SceneManager.widgetFromJsonFile( "scenes/Lucky8WonPrice.json" )
+    mWidget:addChild( wonPrice )
+    local btnClaim = tolua.cast( wonPrice:getChildByName("Button_Claim"), "Button" )
+    btnClaim:addTouchEventListener( eventClaim )
+
+    local claimText = tolua.cast( btnClaim:getChildByName("TextField_Claim"), "TextField" )
+end
+
+function eventClaim( sender, eventType )
+    CCLuaLog( "Lucky8HistoryScene eventClaim" )
 end
 
 function initScrollView( cellNum )

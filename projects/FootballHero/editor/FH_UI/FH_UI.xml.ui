@@ -164,6 +164,7 @@
     <string>Lucky8HistoryScene.json</string>
     <string>Lucky8HistoryCell.json</string>
     <string>Lucky8RuleCell.json</string>
+    <string>Lucky8WonPrice.json</string>
   </JsonList>
   <CanvasSize>
     <Width>640</Width>
@@ -173,7 +174,11 @@
   <ProjectType>UIProject</ProjectType>
   <ResRelativePath />
   <imageFileList />
-  <imagePngList />
+  <imagePngList>
+    <string>spinWheel/img-shine.png</string>
+    <string>spinWheel/img-giftcard.png</string>
+    <string>spinWheel/btn-yes.png</string>
+  </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson />
+  <CurrentUIJson>Lucky8WonPrice.json</CurrentUIJson>
 </UIProject>
