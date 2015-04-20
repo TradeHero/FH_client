@@ -175,5 +175,5 @@
   <imageFileList />
   <imagePngList />
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>lucky8MainScene.json</CurrentUIJson>
+  <CurrentUIJson />
 </UIProject>
