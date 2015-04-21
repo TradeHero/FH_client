@@ -10,7 +10,10 @@
   "designHeight": 1136,
   "designWidth": 640,
   "textures": [],
-  "texturesPng": [],
+  "texturesPng": [
+    "spinWheel/btn-ticket.png",
+    "header/footballhero-logo.png"
+  ],
   "version": "1.6.0.0",
   "widgetTree": {
     "classname": "Panel",
@@ -647,13 +650,13 @@
               "layoutParameter": null,
               "opacity": 255,
               "positionPercentX": 0.478125,
-              "positionPercentY": 0.672249556,
+              "positionPercentY": 0.67,
               "positionType": 0,
               "rotation": 0,
               "scaleX": 1,
               "scaleY": 1,
-              "sizePercentX": 0.125,
-              "sizePercentY": 0.4,
+              "sizePercentX": 0.2,
+              "sizePercentY": 0.31,
               "sizeType": 0,
               "tag": 37942,
               "touchAble": false,

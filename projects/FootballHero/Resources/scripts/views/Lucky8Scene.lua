@@ -21,6 +21,11 @@ local CELL_RES_STRING =
     "scenes/Lucky8RuleCell.json",
 }
 
+local MATHLISTCELL_PICK_RES = {
+    pick = Constants.LUCKY8_IMAGE_PATH .. "img-pick.png",
+    notpick = Constants.LUCKY8_IMAGE_PATH .. "img-notpick.png",
+}
+
 function loadFrame()
     local widget = GUIReader:shareReader():widgetFromJsonFile( "scenes/lucky8MainScene.json" )
     mWidget = widget
@@ -70,7 +75,9 @@ end
 
 function eventSelectWhoWin( sender, eventType )
     if eventType == TOUCH_EVENT_ENDED then
-        
+        CCLuaLog( "eventSelectWhoWin" )
+        -- sender:loadTextureNormal( MATHLISTCELL_PICK_RES[1] )
+        sender:setBright( false )
     end
 end
 
@@ -88,15 +95,16 @@ function changeScrollView( index, cellNum )
         if index == 1 then
             cell:addTouchEventListener( enterHistory )
         elseif index == 2 then
-            -- local panelFade = tolua.cast( cell:getChildByName("Panel_Fade"), "Panel" )
-            -- local btn1 = tolua.cast( panelFade:getChildByName("Button_1"), "Button" )
-            -- btn1:addTouchEventListener( eventSelectWhoWin )
+            local panelFade = cell:getChildByName("Panel_Fade")
 
-            -- local btn2 = tolua.cast( panelFade:getChildByName("Button_2"), "Button" )
-            -- btn2:addTouchEventListener( eventSelectWhoWin )
+            local btn1 = tolua.cast( panelFade:getChildByName("Button_1"), "Button" )
+            btn1:addTouchEventListener( eventSelectWhoWin )
 
-            -- local btnDraw = tolua.cast( panelFade:getChildByName("Button_Draw"), "Button" )
-            -- btn2:addTouchEventListener( eventSelectWhoWin )
+            local btn2 = tolua.cast( panelFade:getChildByName("Button_2"), "Button" )
+            btn2:addTouchEventListener( eventSelectWhoWin )
+
+            local btnDraw = tolua.cast( panelFade:getChildByName("Button_Draw"), "Button" )
+            btnDraw:addTouchEventListener( eventSelectWhoWin )
         else
             local text = tolua.cast( cell:getChildByName("TextField_Rule"), "TextField" )
             text:setText( Constants.String.lucky8.lucky8_rule )

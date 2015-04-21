@@ -177,7 +177,8 @@
   <imageFileList />
   <imagePngList>
     <string>spinWheel/btn-ticket.png</string>
+    <string>header/footballhero-logo.png</string>
   </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>GameCenterHeader.json</CurrentUIJson>
+  <CurrentUIJson>lucky8MainScene.json</CurrentUIJson>
 </UIProject>
