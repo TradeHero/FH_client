@@ -12,6 +12,8 @@ local mScrollViewHeight
 local mTabButtons
 local mBtnSubmits
 
+local mMatchlistCells
+
 local CELL_RES_STRING = 
 {
     "scenes/YourPicksCell.json",
@@ -66,6 +68,12 @@ function getCurrentTime(  )
     -- local currentDate = os.date( "%B %")
 end
 
+function eventSelectWhoWin( sender, eventType )
+    if eventType == TOUCH_EVENT_ENDED then
+        
+    end
+end
+
 function changeScrollView( index, cellNum )
     local contentContainer = tolua.cast( mWidget:getChildByName("ScrollView_Content"), "ScrollView" )
     contentContainer:removeAllChildrenWithCleanup( true )
@@ -79,7 +87,17 @@ function changeScrollView( index, cellNum )
         local cell = SceneManager.widgetFromJsonFile( CELL_RES_STRING[index] )
         if index == 1 then
             cell:addTouchEventListener( enterHistory )
-        elseif index == 3 then
+        elseif index == 2 then
+            -- local panelFade = tolua.cast( cell:getChildByName("Panel_Fade"), "Panel" )
+            -- local btn1 = tolua.cast( panelFade:getChildByName("Button_1"), "Button" )
+            -- btn1:addTouchEventListener( eventSelectWhoWin )
+
+            -- local btn2 = tolua.cast( panelFade:getChildByName("Button_2"), "Button" )
+            -- btn2:addTouchEventListener( eventSelectWhoWin )
+
+            -- local btnDraw = tolua.cast( panelFade:getChildByName("Button_Draw"), "Button" )
+            -- btn2:addTouchEventListener( eventSelectWhoWin )
+        else
             local text = tolua.cast( cell:getChildByName("TextField_Rule"), "TextField" )
             text:setText( Constants.String.lucky8.lucky8_rule )
         end

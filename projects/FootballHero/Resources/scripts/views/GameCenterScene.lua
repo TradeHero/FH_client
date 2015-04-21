@@ -5,7 +5,7 @@ local EventManager = require("scripts.events.EventManager").getInstance()
 local Event = require("scripts.events.Event").EventList
 local Constants = require("scripts.Constants")
 local Navigator = require("scripts.views.Navigator")
-local Header = require("scripts.views.HeaderFrame")
+local Header = require("scripts.views.GameCenterHeader")
 
 local mWidget
 local mContentHeight
@@ -30,7 +30,7 @@ function loadFrame()
     mWidget = widget
     widget:registerScriptHandler( EnterOrExit )
     SceneManager.clearNAddWidget( widget )
-    Header.loadFrame( widget, nil, false )
+    Header.loadFrame( widget, Constants.String.lucky8.game_center_title, false )
     Navigator.loadFrame( widget )
     initCells( table.getn( ENTER_GAME_EVENT_LIST ) )
 end

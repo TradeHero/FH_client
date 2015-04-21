@@ -165,6 +165,7 @@
     <string>Lucky8HistoryCell.json</string>
     <string>Lucky8RuleCell.json</string>
     <string>Lucky8WonPrice.json</string>
+    <string>GameCenterHeader.json</string>
   </JsonList>
   <CanvasSize>
     <Width>640</Width>
@@ -175,10 +176,8 @@
   <ResRelativePath />
   <imageFileList />
   <imagePngList>
-    <string>spinWheel/img-shine.png</string>
-    <string>spinWheel/img-giftcard.png</string>
-    <string>spinWheel/btn-yes.png</string>
+    <string>spinWheel/btn-ticket.png</string>
   </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>Lucky8MatchListCell.json</CurrentUIJson>
+  <CurrentUIJson>GameCenterHeader.json</CurrentUIJson>
 </UIProject>

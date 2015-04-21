@@ -11,10 +11,8 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "community/img-leaguebox.png",
-    "commonRes/default.png",
-    "lucky8/img-notpick.png",
-    "lucky8/img-pick.png"
+    "spinWheel/btn-ticket.png",
+    "header/footballhero-logo.png"
   ],
   "version": "1.6.0.0",
   "widgetTree": {
@@ -142,80 +140,7 @@
         "options": {
           "__type": "ButtonSurrogate:#EditorCommon.JsonModel.Component.GUI",
           "classname": "Button",
-          "name": "Button_Back",
-          "ZOrder": 2,
-          "actiontag": 38790075,
-          "anchorPointX": 0.5,
-          "anchorPointY": 0.5,
-          "classType": "CocoStudio.EngineAdapterWrap.CSButton",
-          "colorB": 255,
-          "colorG": 255,
-          "colorR": 255,
-          "customProperty": "",
-          "flipX": false,
-          "flipY": false,
-          "height": 79,
-          "ignoreSize": true,
-          "layoutParameter": null,
-          "opacity": 255,
-          "positionPercentX": 0.0546875,
-          "positionPercentY": 0.5,
-          "positionType": 0,
-          "rotation": 0,
-          "scaleX": 1,
-          "scaleY": 1,
-          "sizePercentX": 0.0984375,
-          "sizePercentY": 0.9875,
-          "sizeType": 0,
-          "tag": 30806,
-          "touchAble": true,
-          "useMergedTexture": false,
-          "visible": true,
-          "width": 63,
-          "x": 35,
-          "y": 40,
-          "capInsetsHeight": 0,
-          "capInsetsWidth": 0,
-          "capInsetsX": 0,
-          "capInsetsY": 0,
-          "disabled": null,
-          "disabledData": {
-            "path": null,
-            "plistFile": null,
-            "resourceType": 0
-          },
-          "fontName": "fonts/HelveticaNeue.ttf",
-          "fontSize": 14,
-          "fontType": 0,
-          "normal": null,
-          "normalData": {
-            "path": "header/back.png",
-            "plistFile": "",
-            "resourceType": 0
-          },
-          "pressed": null,
-          "pressedData": {
-            "path": null,
-            "plistFile": null,
-            "resourceType": 0
-          },
-          "scale9Enable": false,
-          "scale9Height": 79,
-          "scale9Width": 63,
-          "text": "",
-          "textColorB": 255,
-          "textColorG": 255,
-          "textColorR": 255
-        }
-      },
-      {
-        "classname": "Button",
-        "name": null,
-        "children": [],
-        "options": {
-          "__type": "ButtonSurrogate:#EditorCommon.JsonModel.Component.GUI",
-          "classname": "Button",
-          "name": "Button_PastWinners",
+          "name": "Button_Balance",
           "ZOrder": 2,
           "actiontag": 13566355,
           "anchorPointX": 0.5,
@@ -262,7 +187,7 @@
           "fontType": 0,
           "normal": null,
           "normalData": {
-            "path": "spinWheel/btn-winner.png",
+            "path": "spinWheel/btn-ticket.png",
             "plistFile": "",
             "resourceType": 0
           },

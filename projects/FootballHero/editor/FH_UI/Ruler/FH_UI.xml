@@ -504,4 +504,8 @@
     <Project>Lucky8WonPrice</Project>
     <GuidesList />
   </GuidesProject>
+  <GuidesProject>
+    <Project>GameCenterHeader</Project>
+    <GuidesList />
+  </GuidesProject>
 </ArrayOfGuidesProject>

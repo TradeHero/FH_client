@@ -11,9 +11,10 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "spinWheel/img-shine.png",
-    "spinWheel/img-giftcard.png",
-    "spinWheel/btn-yes.png"
+    "community/img-leaguebox.png",
+    "commonRes/default.png",
+    "lucky8/img-notpick.png",
+    "lucky8/img-pick.png"
   ],
   "version": "1.6.0.0",
   "widgetTree": {
