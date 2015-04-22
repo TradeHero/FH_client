@@ -16,8 +16,7 @@ local mHasTodayMessage
 local MESSAGE_CONTAINER_NAME = "messageContainer"
 local RELOAD_DELAY_TIME = 5
 
--- DS for roomInfos: { quickbloxRoomId: unreadMessageCount }
-function loadFrame( roomInfos )
+function loadFrame()
     local widget = GUIReader:shareReader():widgetFromJsonFile("scenes/ChatroomSelectScene.json")
     mWidget = widget
     mWidget:registerScriptHandler( EnterOrExit )
@@ -28,15 +27,14 @@ function loadFrame( roomInfos )
 
     Navigator.loadFrame( widget )
     
-    initContent( roomInfos )
+    initContent()
 end
 
-function reloadFrame( roomInfos )
-    initContent( roomInfos )
+function reloadFrame()
+    initContent()
 end
 
-function initContent( roomInfos )
-
+function initContent()
     for i = 1, table.getn( LeagueChatConfig ) do
         local chatConfig = LeagueChatConfig[i]
         local button = mWidget:getChildByName( chatConfig["buttonName"] )
@@ -45,19 +43,8 @@ function initContent( roomInfos )
 
         label:setText( Constants.String.league_chat[chatConfig["displayNameKey"]] )
 
-        -- Update the unread message counter.
+        -- Hide the unread message counter.
         counter:setEnabled( false )
-        if chatConfig["useQuickBlox"] then
-            local unreadMessageCount = roomInfos[chatConfig["quickBloxID"]]
-            if unreadMessageCount and unreadMessageCount > 0 then
-                counter:setEnabled( true )
-                if unreadMessageCount < 100 then
-                    counter:setTitleText( unreadMessageCount )
-                else
-                    counter:setTitleText( "99+" )
-                end
-            end
-        end
 
         local eventHandler = function ( sender, eventType )
             if eventType == TOUCH_EVENT_ENDED then
@@ -85,6 +72,34 @@ function initContent( roomInfos )
     end
 
     facebookBtn:addTouchEventListener( fbLikeHandler )
+end
+
+function updateUnreadMessageCounter( quickBloxID, unreadMessageCount )
+    if isFrameShown() then
+        for i = 1, table.getn( LeagueChatConfig ) do
+            local chatConfig = LeagueChatConfig[i]
+            if chatConfig["useQuickBlox"] and chatConfig["quickBloxID"] == quickBloxID then
+                local button = mWidget:getChildByName( chatConfig["buttonName"] )
+                if not button then
+                    return
+                end
+                local counter = tolua.cast( button:getChildByName( "Button_Counter" ), "Button" )
+                if not counter then
+                    return
+                end
+                if unreadMessageCount and unreadMessageCount > 0 then
+                    counter:setEnabled( true )
+                    if unreadMessageCount < 100 then
+                        counter:setTitleText( unreadMessageCount )
+                    else
+                        counter:setTitleText( "99+" )
+                    end
+                end
+
+                return
+            end
+        end
+    end
 end
 
 function EnterOrExit( eventType )

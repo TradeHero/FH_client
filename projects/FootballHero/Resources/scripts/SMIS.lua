@@ -57,6 +57,6 @@ function downloadImage( fileUrl, onRequestSuccess, onRequestFailed )
     end
 
     local httpRequest = HttpRequestForLua:create( CCHttpRequest.kHttpGet )
+    httpRequest:setPriority( CCHttpRequest.pVeryLow )
     httpRequest:sendHttpRequest( tostring( fileUrl ), handler )
-    httpRequest:setPriority( CCHttpRequest.pLow )
 end
