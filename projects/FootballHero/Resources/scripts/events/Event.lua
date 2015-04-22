@@ -65,6 +65,7 @@ EventNameList =
     "Enter_GameCenter",
     "Enter_Lucky8",
     "Enter_Lucky8History",
+    "Enter_LiveScoreScene",
 
     "Do_Ask_For_Rate",
     "Do_Ask_For_Comment",

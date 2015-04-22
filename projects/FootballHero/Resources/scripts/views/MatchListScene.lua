@@ -42,6 +42,7 @@ function loadFrame( matchList, leagueKey )
     SceneManager.clearNAddWidget( widget )
     
     Header.loadFrame( widget, nil, false )
+    Header.showLiveButton( true )
 
     Navigator.loadFrame( widget )
     Navigator.chooseNav( 1 )

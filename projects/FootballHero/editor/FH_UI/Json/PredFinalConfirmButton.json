@@ -11,9 +11,8 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "PredictionConfirm/white_popup.png",
-    "Tutorial/Default Button.png",
-    "MatchPrediction/btn-newshare.png"
+    "spinWheel/btn-ticket.png",
+    "header/footballhero-logo.png"
   ],
   "version": "1.6.0.0",
   "widgetTree": {
@@ -243,14 +242,14 @@
           "ignoreSize": true,
           "layoutParameter": null,
           "opacity": 255,
-          "positionPercentX": 0.489862382,
-          "positionPercentY": 0.708060145,
+          "positionPercentX": 0.4890625,
+          "positionPercentY": 0.706161141,
           "positionType": 0,
           "rotation": 0,
           "scaleX": 1,
           "scaleY": 1,
-          "sizePercentX": 0.1609375,
-          "sizePercentY": 0.189573467,
+          "sizePercentX": 0.8125,
+          "sizePercentY": 0.521327,
           "sizeType": 0,
           "tag": 34995,
           "touchAble": true,

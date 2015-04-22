@@ -508,4 +508,12 @@
     <Project>GameCenterHeader</Project>
     <GuidesList />
   </GuidesProject>
+  <GuidesProject>
+    <Project>LiveScoreScene</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>LiveScoreDateCell</Project>
+    <GuidesList />
+  </GuidesProject>
 </ArrayOfGuidesProject>

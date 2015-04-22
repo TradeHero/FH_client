@@ -11,7 +11,8 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "MatchCentre/img-blackbox.png"
+    "spinWheel/btn-ticket.png",
+    "header/footballhero-logo.png"
   ],
   "version": "1.6.0.0",
   "widgetTree": {
@@ -445,8 +446,8 @@
           "rotation": 0,
           "scaleX": 1,
           "scaleY": 1,
-          "sizePercentX": 0.3140625,
-          "sizePercentY": 0.03683036,
+          "sizePercentX": 0.334375,
+          "sizePercentY": 0.0424107127,
           "sizeType": 0,
           "tag": 14214,
           "touchAble": false,
@@ -495,8 +496,8 @@
           "rotation": 0,
           "scaleX": 1,
           "scaleY": 1,
-          "sizePercentX": 0.1859375,
-          "sizePercentY": 0.03013393,
+          "sizePercentX": 0.196875,
+          "sizePercentY": 0.0345982127,
           "sizeType": 0,
           "tag": 14215,
           "touchAble": false,
@@ -754,8 +755,8 @@
           "rotation": 0,
           "scaleX": 1,
           "scaleY": 1,
-          "sizePercentX": 0.5265625,
-          "sizePercentY": 0.04464286,
+          "sizePercentX": 0.646875,
+          "sizePercentY": 0.0390625,
           "sizeType": 0,
           "tag": 14213,
           "touchAble": false,

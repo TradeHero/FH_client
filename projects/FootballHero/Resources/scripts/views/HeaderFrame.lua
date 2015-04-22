@@ -38,6 +38,26 @@ function loadFrame( parent, titleText, bHasBackBtn, bHasWebView )
 	local settingsBt = widget:getChildByName("Button_Settings")
     settingsBt:addTouchEventListener( settingsEventHandler )
 
+    local btnLive = tolua.cast( mWidget:getChildByName("Button_Live"), "Button" )
+    btnLive:addTouchEventListener( eventLiveClicked )
+
+    showLiveButton( false )
+end
+
+function eventLiveClicked( sender, eventType )
+    if eventType == TOUCH_EVENT_ENDED then
+        CCLuaLog("eventLiveClicked")
+        EventManager:postEvent( Event.Enter_LiveScoreScene )
+    end
+end
+
+function showLiveButton( isShow )
+    local btnLive = tolua.cast( mWidget:getChildByName("Button_Live"), "Button" )
+    if isShow == true then
+        btnLive:setVisible( true )
+    else
+        btnLive:setVisible( false )
+    end
 end
 
 function EnterOrExit( eventType )

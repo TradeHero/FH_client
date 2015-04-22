@@ -11,9 +11,8 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "MatchListScene/match_bkg.png",
-    "PredictionConfirm/off_button.png",
-    "PredictionConfirm/on_button.png"
+    "spinWheel/btn-ticket.png",
+    "header/footballhero-logo.png"
   ],
   "version": "1.6.0.0",
   "widgetTree": {
@@ -229,7 +228,7 @@
           "customProperty": "",
           "flipX": false,
           "flipY": false,
-          "height": 40,
+          "height": 35,
           "ignoreSize": true,
           "layoutParameter": null,
           "opacity": 255,
@@ -246,7 +245,7 @@
           "touchAble": false,
           "useMergedTexture": false,
           "visible": true,
-          "width": 316,
+          "width": 360,
           "x": 23,
           "y": 1045,
           "areaHeight": 0,

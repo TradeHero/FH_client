@@ -11,8 +11,8 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "MatchPrediction/prediction_bkg.png",
-    "GUI/image.png"
+    "spinWheel/btn-ticket.png",
+    "header/footballhero-logo.png"
   ],
   "version": "1.6.0.0",
   "widgetTree": {
@@ -38,7 +38,7 @@
           "customProperty": "",
           "flipX": false,
           "flipY": false,
-          "height": 35,
+          "height": 30,
           "ignoreSize": true,
           "layoutParameter": null,
           "opacity": 255,
@@ -48,14 +48,14 @@
           "rotation": 0,
           "scaleX": 0.8,
           "scaleY": 0.8,
-          "sizePercentX": 0.0578125,
+          "sizePercentX": 0.0609375,
           "sizePercentY": 0.0308098588,
           "sizeType": 0,
           "tag": 146,
           "touchAble": false,
           "useMergedTexture": false,
           "visible": true,
-          "width": 39,
+          "width": 30,
           "x": 320,
           "y": 988,
           "areaHeight": 0,
@@ -214,7 +214,7 @@
           "capInsetsY": 0,
           "fileName": null,
           "fileNameData": {
-            "path": "C:\\Program Files (x86)\\Cocos Studio\\EditorDefaultRes\\GUI/image.png",
+            "path": "C:\\Program Files\\Cocos Studio\\EditorDefaultRes\\GUI/image.png",
             "plistFile": "",
             "resourceType": 2
           },
@@ -268,7 +268,7 @@
           "capInsetsY": 0,
           "fileName": null,
           "fileNameData": {
-            "path": "C:\\Program Files (x86)\\Cocos Studio\\EditorDefaultRes\\GUI/image.png",
+            "path": "C:\\Program Files\\Cocos Studio\\EditorDefaultRes\\GUI/image.png",
             "plistFile": "",
             "resourceType": 2
           },
