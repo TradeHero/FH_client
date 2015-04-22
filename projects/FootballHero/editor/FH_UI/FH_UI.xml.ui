@@ -168,5 +168,5 @@
     <string>MatchCentre/img-blackbox.png</string>
   </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>MatchCenterLeagueTable.json</CurrentUIJson>
+  <CurrentUIJson>MatchCenterStatsVSTitle.json</CurrentUIJson>
 </UIProject>
