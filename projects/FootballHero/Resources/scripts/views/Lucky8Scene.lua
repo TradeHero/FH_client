@@ -26,6 +26,17 @@ local MATHLISTCELL_PICK_RES = {
     notpick = Constants.LUCKY8_IMAGE_PATH .. "img-notpick.png",
 }
 
+-- cell info
+local SingleCell = {
+    isTeam1Selected,
+    isDrawSelected,
+    isTeam2Selected,
+}
+
+local mMatchlistCellInfo = {
+    
+}
+
 function loadFrame()
     local widget = GUIReader:shareReader():widgetFromJsonFile( "scenes/lucky8MainScene.json" )
     mWidget = widget
