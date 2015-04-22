@@ -52,20 +52,20 @@ local Event = require("scripts.events.Event").EventList
 
 --]]
 
-local mUnreadMessageCountInfo = {}		-- { quickbloxRoomId: unreadMessageCount }
-
 function action( param )
+	local LeagueChatListScene = require("scripts.views.LeagueChatListScene")
 
-	getUnreadMessageCount( 1 )
+	if LeagueChatListScene.isFrameShown() then
+		LeagueChatListScene.reloadFrame()
+	else
+    	LeagueChatListScene.loadFrame()
+    end
 
-    ConnectingMessage.loadFrame()
+    getUnreadMessageCount( 1 )
 end
 
 function getUnreadMessageCount( index )
-	if index > table.getn( LeagueChatConfig ) then
-		ConnectingMessage.selfRemove()
-		compelte()
-	else
+	if index <= table.getn( LeagueChatConfig ) then
 		local chatConfig = LeagueChatConfig[index]
 		if chatConfig["useQuickBlox"] then
 			local requestContent = {}
@@ -81,15 +81,19 @@ function getUnreadMessageCount( index )
 		    requestInfo.url = url
 
 		    function onRequestFailed()
-		    	ConnectingMessage.selfRemove()
-		    	compelte()
+		    	-- Ignore silently.
+
+		    	index =  index + 1
+				getUnreadMessageCount( index )
 		    end
 
 		    function onRequestSuccess( jsonResponse )
 				local config = jsonResponse["items"]
-				mUnreadMessageCountInfo[chatConfig["quickBloxID"]] = config["count"]
+				
+				local LeagueChatListScene = require("scripts.views.LeagueChatListScene")
+				LeagueChatListScene.updateUnreadMessageCounter( chatConfig["quickBloxID"], config["count"] )
 
-			    index =  index + 1
+				index =  index + 1
 				getUnreadMessageCount( index )
 			end
 
@@ -99,20 +103,11 @@ function getUnreadMessageCount( index )
 
 		    local httpRequest = HttpRequestForLua:create( CCHttpRequest.kHttpGet )
 		    httpRequest:addHeader( Logic:getQuickbloxSessionString() )
+		    httpRequest:setPriority( CCHttpRequest.pLow )
 		    httpRequest:sendHttpRequest( url, handler )
 		else
 			index =  index + 1
 			getUnreadMessageCount( index )
 		end
 	end
-end
-
-function compelte()
-	local LeagueChatListScene = require("scripts.views.LeagueChatListScene")
-
-	if LeagueChatListScene.isFrameShown() then
-		LeagueChatListScene.reloadFrame( mUnreadMessageCountInfo )
-	else
-    	LeagueChatListScene.loadFrame( mUnreadMessageCountInfo )
-    end
 end
