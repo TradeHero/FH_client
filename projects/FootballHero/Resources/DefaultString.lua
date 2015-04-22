@@ -335,6 +335,7 @@ StringsDefault = {
     write_comment = "Write a comment...",
     write_discussion = "Write a new discussion...",
     against_title_date = "Date",
+    against_title = "Last Meetings",
     against_content_nodata = "No data available.",
     against_diagram_wins = "%s wins",
     against_diagram_draw = "Draw",

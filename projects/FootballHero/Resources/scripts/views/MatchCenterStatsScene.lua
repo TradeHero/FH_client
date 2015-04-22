@@ -28,7 +28,7 @@ function loadFrame( parent, jsonResponse )
     contentContainer:removeAllChildrenWithCleanup( true )
 
     mTotalHeight = 0
-    --addAgainstInfo( jsonResponse["Statistics"], contentContainer )
+    addAgainstInfo( jsonResponse["Statistics"], contentContainer )
     addLast6Info( jsonResponse["Statistics"], contentContainer )
     addFormTableInfo( jsonResponse["Statistics"], contentContainer )
     addOverUnderTable( jsonResponse["Statistics"], contentContainer )
@@ -45,14 +45,28 @@ function addAgainstInfo( jsonResponse, contentContainer )
 	contentContainer:addChild( titleBar )
 	mTotalHeight = mTotalHeight + titleBar:getSize().height
 	tolua.cast( titleBar:getChildByName("Label_date"), "Label" ):setText( Constants.String.match_center.against_title_date )
-	tolua.cast( titleBar:getChildByName("Label_home"), "Label" ):setText( Constants.String.match_center.home )
-	tolua.cast( titleBar:getChildByName("Label_VS"), "Label" ):setText( Constants.String.match_center.VS )
-	tolua.cast( titleBar:getChildByName("Label_away"), "Label" ):setText( Constants.String.match_center.away )
+	tolua.cast( titleBar:getChildByName("Label_VS"), "Label" ):setText( Constants.String.match_center.against_title )
 
 	-- Add the against info
 	local againstInfo = jsonResponse["LastGamesAgainst"]
 	if againstInfo ~= nil and type( againstInfo ) == "table" and table.getn( againstInfo ) > 0 then
 		-- Add the against info.
+    for i = 1, table.getn( againstInfo ) do
+        local info = againstInfo[i]
+        local content = SceneManager.widgetFromJsonFile("scenes/MatchCenterStatsVSContent.json")
+        contentContainer:addChild( content )
+        mTotalHeight = mTotalHeight + content:getSize().height
+        
+        local dateLabel = tolua.cast( content:getChildByName("Label_date"), "Label" )
+        local dateHome = tolua.cast( content:getChildByName("Label_home"), "Label" )
+        local dateAway = tolua.cast( content:getChildByName("Label_away"), "Label" )
+        local dateScore = tolua.cast( content:getChildByName("Label_score"), "Label" )
+
+        dateLabel:setText( os.date( "%d/%m/%Y", info["StartTime"] ) )
+        dateHome:setText( TeamConfig.getTeamName( TeamConfig.getConfigIdByKey( info["HomeTeamId"] ) ) )
+        dateAway:setText( TeamConfig.getTeamName( TeamConfig.getConfigIdByKey( info["AwayTeamId"] ) ) )
+        dateScore:setText( info["ScoreString"])
+    end
 	else
 		-- No data available.
 		local nodata = GUIReader:shareReader():widgetFromJsonFile("scenes/MatchCenterStatsNoContent.json")
@@ -61,6 +75,7 @@ function addAgainstInfo( jsonResponse, contentContainer )
 		tolua.cast( nodata:getChildByName("Label_nodata"), "Label" ):setText( Constants.String.match_center.against_content_nodata )
 	end
 
+--[[
 	-- Add the diagram
 	local diagram = GUIReader:shareReader():widgetFromJsonFile("scenes/MatchCenterStatsVSDiagram.json")
 	contentContainer:addChild( diagram )
@@ -68,6 +83,12 @@ function addAgainstInfo( jsonResponse, contentContainer )
 	tolua.cast( diagram:getChildByName("Label_home_wins"), "Label" ):setText( string.format( Constants.String.match_center.against_diagram_wins, mHomeTeamName ) )
 	tolua.cast( diagram:getChildByName("Label_away_wins"), "Label" ):setText( string.format( Constants.String.match_center.against_diagram_wins, mAwayTeamName ) )
 	tolua.cast( diagram:getChildByName("Label_draw"), "Label" ):setText( Constants.String.match_center.against_diagram_draw )
+--]]
+
+  -- Add the gap
+  local gap = GUIReader:shareReader():widgetFromJsonFile("scenes/MatchCenterStatsBlankGap.json")
+  contentContainer:addChild( gap )
+  mTotalHeight = mTotalHeight + gap:getSize().height
 end
 
 function addLast6Info( jsonResponse, contentContainer )
@@ -83,7 +104,7 @@ function addLast6Info( jsonResponse, contentContainer )
 		if info ~= nil and type( info ) == "table" and table.getn( info ) > 0 then
 			for i = 1, table.getn( info ) do
 				local info = info[i]
-				local content = GUIReader:shareReader():widgetFromJsonFile("scenes/MatchCenterStatsL6Content.json")
+				local content = SceneManager.widgetFromJsonFile("scenes/MatchCenterStatsL6Content.json")
 				contentContainer:addChild( content )
 				mTotalHeight = mTotalHeight + content:getSize().height
 				
@@ -92,7 +113,7 @@ function addLast6Info( jsonResponse, contentContainer )
 				local teamNameLabel = tolua.cast( content:getChildByName("Label_teamName"), "Label" )
 				local scoreLabel = tolua.cast( content:getChildByName("Label_score"), "Label" )
 
-				dateLabel:setText( os.date( "%d/%m/%Y", info["StartTime"] ))
+				dateLabel:setText( os.date( "%d/%m/%Y", info["StartTime"] ) )
 				teamNameLabel:setText( TeamConfig.getTeamName( TeamConfig.getConfigIdByKey( info["OpponentTeamId"] ) ) )
 				scoreLabel:setText( info["HomeGoals"]..":"..info["AwayGoals"] )
 				local absGoals = info["HomeGoals"] - info["AwayGoals"]
