@@ -10,10 +10,7 @@
   "designHeight": 1136,
   "designWidth": 640,
   "textures": [],
-  "texturesPng": [
-    "chat/img-bahasa.png",
-    "community/img-header.png"
-  ],
+  "texturesPng": [],
   "version": "1.6.0.0",
   "widgetTree": {
     "classname": "Panel",
@@ -102,7 +99,7 @@
           "rotation": 0,
           "scaleX": 1,
           "scaleY": 1,
-          "sizePercentX": 0.140625,
+          "sizePercentX": 0.7046875,
           "sizePercentY": 0.5192308,
           "sizeType": 0,
           "tag": 39991,
