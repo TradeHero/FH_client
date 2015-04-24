@@ -89,6 +89,16 @@ function initContent( matchId )
     end
 
     seqArray:addObject( CCCallFuncN:create( function()
+        if not mIsOpen then
+            local content = GUIReader:shareReader():widgetFromJsonFile( "scenes/HistoryDetailShare.json" )
+            content:setLayoutParameter( layoutParameter )
+            contentContainer:addChild( content )
+            contentHeight = contentHeight + content:getSize().height
+
+            local shareButton = tolua.cast( content:getChildByName("Button_Share"), "Button" )
+            shareButton:addTouchEventListener( shareEventHandler )
+        end
+
         contentContainer:setInnerContainerSize( CCSize:new( 0, contentHeight ) )
         local layout = tolua.cast( contentContainer, "Layout" )
         layout:requestDoLayout()
@@ -225,5 +235,11 @@ function initCouponInfo( content, info )
     else
         points:setText( string.format( Constants.String.num_of_points, info["Profit"] ) )
         winLoseLabel:setText(Constants.String.history.won_colon)
+    end
+end
+
+function shareEventHandler( sender, eventType )
+    if eventType == TOUCH_EVENT_ENDED then
+        SceneManager.takeScreenShot()
     end
 end

@@ -464,4 +464,8 @@
     <Project>MatchCenterLeagueTable</Project>
     <GuidesList />
   </GuidesProject>
+  <GuidesProject>
+    <Project>HistoryDetailShare</Project>
+    <GuidesList />
+  </GuidesProject>
 </ArrayOfGuidesProject>

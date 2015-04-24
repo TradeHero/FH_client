@@ -295,3 +295,15 @@ function processDeepLink( deepLink, defaultEvent, defaultEventParam )
 
     EventManager:scheduledExecutor( delayedTask, 0.1 )
 end
+
+function takeScreenShot()
+	local scene = CCDirector:sharedDirector():getRunningScene()
+    local shareImage = CCRenderTexture:create( 640, 1136, kCCTexture2DPixelFormat_RGBA8888 )
+    shareImage:begin()
+    scene:visit()
+    shareImage:endToLua()
+    
+    local FILE_NAME = "ScreenShot.png"
+    shareImage:saveToFile( FILE_NAME,  kCCImageFormatPNG )
+    CCLuaLog( CCFileUtils:sharedFileUtils():fullPathForFilename( FILE_NAME ) )
+end
