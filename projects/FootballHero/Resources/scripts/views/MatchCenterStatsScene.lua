@@ -65,7 +65,10 @@ function addAgainstInfo( jsonResponse, contentContainer )
         dateLabel:setText( os.date( "%d/%m/%Y", info["StartTime"] ) )
         dateHome:setText( TeamConfig.getTeamName( TeamConfig.getConfigIdByKey( info["HomeTeamId"] ) ) )
         dateAway:setText( TeamConfig.getTeamName( TeamConfig.getConfigIdByKey( info["AwayTeamId"] ) ) )
-        dateScore:setText( info["ScoreString"])
+
+        local scoreText = string.gsub( info["ScoreString"], "-", " : " )
+        dateScore:setText( scoreText )
+
     end
 	else
 		-- No data available.
@@ -115,7 +118,7 @@ function addLast6Info( jsonResponse, contentContainer )
 
 				dateLabel:setText( os.date( "%d/%m/%Y", info["StartTime"] ) )
 				teamNameLabel:setText( TeamConfig.getTeamName( TeamConfig.getConfigIdByKey( info["OpponentTeamId"] ) ) )
-				scoreLabel:setText( info["HomeGoals"]..":"..info["AwayGoals"] )
+				scoreLabel:setText( info["HomeGoals"].." : "..info["AwayGoals"] )
 				local absGoals = info["HomeGoals"] - info["AwayGoals"]
 				if not isHome then
 					absGoals = absGoals * ( -1 )
