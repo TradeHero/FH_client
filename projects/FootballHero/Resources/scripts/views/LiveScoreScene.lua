@@ -30,18 +30,8 @@ end
 
 function eventSelectDate( sender, eventType )
     if eventType == TOUCH_EVENT_ENDED then
-        -- for i = 1, mDate:count() do
-            -- local cell = mDate:objectAtIndex( i )
-            -- if cell == sender then
-                CCLuaLog( "cell == sender" )
-                sender:setBright( false )
-                sender:setTouchEnabled( false )
-            -- else
-            --     CCLuaLog( "cell ~= sender" )
-            --     sender:setBright( true )
-            --     sender:setTouchEnabled( true )
-            -- end
-        -- end
+        sender:setBright( false )
+        sender:setTouchEnabled( false )
     end
 end
 
@@ -96,6 +86,13 @@ function initMatchList( num )
         matchListContent:addChild( cell )
         height = height + cell:getSize().height
         updateContentContainerHeight( height, matchListContent )
+
+        for j = 1, 4 do
+            local subCell = SceneManager.widgetFromJsonFile( "scenes/LiveScoreMatchCell.json" )
+            matchListContent:addChild( subCell )
+            height = height + subCell:getSize().height
+            updateContentContainerHeight( height, matchListContent )
+        end
     end
 end
 
