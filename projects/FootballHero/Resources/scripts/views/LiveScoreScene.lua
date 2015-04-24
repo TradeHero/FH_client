@@ -17,7 +17,7 @@ function loadFrame()
     widget:registerScriptHandler( EnterOrExit )
     SceneManager.clearNAddWidget( widget )
     Header.loadFrame( widget, nil, false )
-    Header.showLiveButton( true )
+    Header.showLiveButton( false )
     Navigator.loadFrame( widget )
 
     initDates( 14 )
