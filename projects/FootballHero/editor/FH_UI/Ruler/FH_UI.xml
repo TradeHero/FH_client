@@ -516,4 +516,12 @@
     <Project>LiveScoreDateCell</Project>
     <GuidesList />
   </GuidesProject>
+  <GuidesProject>
+    <Project>LiveScoreCell</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>LiveScoreMatchCell</Project>
+    <GuidesList />
+  </GuidesProject>
 </ArrayOfGuidesProject>

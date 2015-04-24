@@ -128,6 +128,8 @@
     <string>YourPicksCell.json</string>
     <string>LiveScoreScene.json</string>
     <string>LiveScoreDateCell.json</string>
+    <string>LiveScoreCell.json</string>
+    <string>LiveScoreMatchCell.json</string>
   </JsonList>
   <CanvasSize>
     <Width>640</Width>
@@ -137,9 +139,7 @@
   <ProjectType>UIProject</ProjectType>
   <ResRelativePath />
   <imageFileList />
-  <imagePngList>
-    <string>MatchListScene/match_bkg.png</string>
-  </imagePngList>
+  <imagePngList />
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>LiveScoreDateCell.json</CurrentUIJson>
+  <CurrentUIJson>LiveScoreMatchCell.json</CurrentUIJson>
 </UIProject>
