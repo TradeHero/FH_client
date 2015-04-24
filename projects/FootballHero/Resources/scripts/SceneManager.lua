@@ -6,6 +6,7 @@ local RequestUtils = require("scripts.RequestUtils")
 local CommunityConfig = require("scripts.config.Community")
 local LeaderboardConfig = require("scripts.config.Leaderboard")
 local RateManager = require("scripts.RateManager")
+local Constants = require("scripts.Constants")
 
 
 TOUCH_PRIORITY_ZERO = 0
@@ -303,7 +304,7 @@ function takeScreenShot()
     scene:visit()
     shareImage:endToLua()
     
-    local FILE_NAME = "ScreenShot.png"
+    local FILE_NAME = Constants.SCREEN_SHOT_IMAGE_NAME
     shareImage:saveToFile( FILE_NAME,  kCCImageFormatPNG )
     CCLuaLog( CCFileUtils:sharedFileUtils():fullPathForFilename( FILE_NAME ) )
 end

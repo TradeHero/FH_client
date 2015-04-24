@@ -10,6 +10,7 @@ local Constants = require("scripts.Constants")
 local MatchCenterConfig = require("scripts.config.MatchCenter")
 local Header = require("scripts.views.HeaderFrame")
 local ViewUtils = require("scripts.views.ViewUtils")
+local ShareConfig = require("scripts.config.Share")
 
 
 local CONTENT_FADEIN_TIME = 1
@@ -241,5 +242,11 @@ end
 function shareEventHandler( sender, eventType )
     if eventType == TOUCH_EVENT_ENDED then
         SceneManager.takeScreenShot()
+        
+        local callback = function( success, platType )
+            -- Do nothing.
+        end
+
+        EventManager:postEvent( Event.Enter_Share, { ShareConfig.SHARE_PREDRESULT, callback, TeamConfig.getTeamName( mHomeTeamId ).." VS "..TeamConfig.getTeamName( mAwayTeamId ) } )
     end
 end

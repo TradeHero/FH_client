@@ -34,6 +34,18 @@ function action( param )
     local shareTitleFomat = shareContent:valueForKey("title"):getCString()
     local shareTitleString = string.format( shareTitleFomat, shareStringParam )
     shareContent:setObject( CCString:create( shareTitleString ), "title" )
+
+    -- Update the image
+    local shareImage = shareContent:valueForKey("image"):getCString()
+    if shareImage == ShareConfig.SCREEN_SHOT then
+    	local fileUtils = CCFileUtils:sharedFileUtils()
+    	local shareImageLocalPath = fileUtils:getWritablePath()..Constants.SCREEN_SHOT_IMAGE_NAME
+    	if fileUtils:isFileExist( shareImageLocalPath ) then
+    		shareContent:setObject( CCString:create( fileUtils:fullPathForFilename( shareImageLocalPath ) ), "image" )
+    	else
+    		shareContent:setObject( CCString:create( "" ), "image" )
+    	end
+    end
     
     C2DXShareSDK:showShareMenu( nil, shareContent, shareHandler )
 end

@@ -5,7 +5,9 @@ local Constants = require("scripts.Constants")
 SHARE_COMPETITION = "competition"
 SHARE_SPINTHEWHEEL = "spinTheWheel"
 SHARE_PREDICTION = "prediction"
+SHARE_PREDRESULT = "predResult"
 
+SCREEN_SHOT = "ScreenShot"
 
 ShareContent = {
 	{	["id"] = SHARE_COMPETITION, 
@@ -36,6 +38,18 @@ ShareContent = {
 		["content"] = Constants.String.share.prediction_content,
 		["image"] = "http://fhmainstorage.blob.core.windows.net/fhres/facebook-share-1.png",
 		["title"] = Constants.String.share.prediction_title,
+		["description"] = Constants.String.football_hero,
+		["url"] = "http://www.footballheroapp.com",
+		["type"] = C2DXContentTypeNews,
+		["siteUrl"] = "http://www.footballheroapp.com",
+		["site"] = Constants.String.football_hero,
+		["extInfo"] = "extInfo",
+	},
+
+	{	["id"] = SHARE_PREDRESULT, 
+		["content"] = Constants.String.share.predResult_content,
+		["image"] = SCREEN_SHOT,
+		["title"] = Constants.String.share.predResult_title,
 		["description"] = Constants.String.football_hero,
 		["url"] = "http://www.footballheroapp.com",
 		["type"] = C2DXContentTypeNews,

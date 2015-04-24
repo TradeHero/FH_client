@@ -512,9 +512,11 @@ StringsDefault = {
     spinTheWheel_content = "I won a prize in Spin-The-Wheel game! Win $$$, Messi & Ronaldo Signed Jerseys! www.footballheroapp.com/download",
     competition_content = "I joined a FootballHero Prediction competition. Win $$$, Messi & Ronaldo Signed Jerseys! www.footballheroapp.com/download",
     prediction_content = "%s Win $$$, Messi & Ronaldo Signed Jerseys! www.footballheroapp.com/download",
+    predResult_content = "FootballHero: %s\nCLICK HERE TO PLAY! www.footballheroapp.com/download",
     spinTheWheel_title = "FootballHero - I won a prize in Spin-The-Wheel game!",
     competition_title = "FootballHero - I joined a soccer prediction competition.",
     prediction_title = "FootballHero - %s",
+    predResult_title = "FootballHero",
   },
 }
 
