@@ -7,6 +7,9 @@ local Constants = require("scripts.Constants")
 local Navigator = require("scripts.views.Navigator")
 local Header = require("scripts.views.Lucky8Header")
 local TeamConfig = require("scripts.config.Team")
+local RequestUtils = require("scripts.RequestUtils")
+local Logic = require("scripts.Logic").getInstance()
+local ConnectingMessage = require("scripts.views.ConnectingMessage")
 
 local mWidget 
 local mScrollViewHeight
@@ -34,9 +37,32 @@ local SingleCell = {
     isTeam2Selected,
 }
 
-local mMatchlistCellInfo = {
-    
-}
+local mMatchlistCellInfo
+
+function requestLucky8MatchList(  )
+    local url = RequestUtils.GET_LUCKY8_GAMES
+    local requestInfo = {}
+    requestInfo.requestData = ""
+    requestInfo.url = url
+    local handler = function ( isSucceed, body, header, status, errorBuffer )
+        RequestUtils.messageHandler( requestInfo, isSucceed, body, header, status, errorBuffer, RequestUtils.HTTP_200, true, onRequestLucky8MatchListSuccess, onRequestLucky8MatchListFailed )
+    end
+
+    local httpRequest = HttpRequestForLua:create( CCHttpRequest.kHttpGet )
+    httpRequest:addHeader( Logic:getAuthSessionString() )
+    httpRequest:sendHttpRequest( url, handler )
+
+    ConnectingMessage.loadFrame()
+end
+
+function onRequestLucky8MatchListSuccess( json )
+    mScrollViewHeight = 0;
+    initScrollView( json ) 
+end
+
+function onRequestLucky8MatchListFailed( json )
+    -- body
+end
 
 function loadFrame( params )
     local widget = GUIReader:shareReader():widgetFromJsonFile( "scenes/lucky8MainScene.json" )
@@ -54,8 +80,7 @@ function loadFrame( params )
 
     initButtonInfo()
 
-    mScrollViewHeight = 0;
-    initScrollView( params ) 
+    requestLucky8MatchList()
 end
 
 function eventSubmit( sender, eventType )
@@ -86,6 +111,15 @@ function helpInitMatchListcell( cell, cellInfo )
 
     local labelScore = tolua.cast( cell:getChildByName("Label_Score_0"), "Label" )
     labelScore:setText( "-:-" )
+
+    local btn1 = tolua.cast( panelFade:getChildByName("Button_1"), "Button" )
+    btn1:addTouchEventListener( eventSelectWhoWin )
+
+    local btn2 = tolua.cast( panelFade:getChildByName("Button_2"), "Button" )
+    btn2:addTouchEventListener( eventSelectWhoWin )
+
+    local btnDraw = tolua.cast( panelFade:getChildByName("Button_Draw"), "Button" )
+    btnDraw:addTouchEventListener( eventSelectWhoWin )
 end
 
 function initScrollView( data )
@@ -135,16 +169,7 @@ function changeScrollView( index, cellNum )
         if index == 1 then
             cell:addTouchEventListener( enterHistory )
         elseif index == 2 then
-            local panelFade = cell:getChildByName("Panel_Fade")
-
-            local btn1 = tolua.cast( panelFade:getChildByName("Button_1"), "Button" )
-            btn1:addTouchEventListener( eventSelectWhoWin )
-
-            local btn2 = tolua.cast( panelFade:getChildByName("Button_2"), "Button" )
-            btn2:addTouchEventListener( eventSelectWhoWin )
-
-            local btnDraw = tolua.cast( panelFade:getChildByName("Button_Draw"), "Button" )
-            btnDraw:addTouchEventListener( eventSelectWhoWin )
+            requestLucky8MatchList()
         else
             local text = tolua.cast( cell:getChildByName("TextField_Rule"), "TextField" )
             text:setText( Constants.String.lucky8.lucky8_rule )
