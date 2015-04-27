@@ -141,5 +141,5 @@
   <imageFileList />
   <imagePngList />
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>Lucky8MatchListCell.json</CurrentUIJson>
+  <CurrentUIJson>MatchListContent.json</CurrentUIJson>
 </UIProject>

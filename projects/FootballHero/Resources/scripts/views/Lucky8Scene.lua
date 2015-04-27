@@ -79,6 +79,13 @@ function helpInitMatchListcell( cell, cellInfo )
     team1:loadTexture( TeamConfig.getLogo( TeamConfig.getConfigIdByKey(homeTeamId)) )
     local team2 = tolua.cast( panelFade:getChildByName("Image_Team2"), "ImageView" )
     team2:loadTexture( TeamConfig.getLogo( TeamConfig.getConfigIdByKey(awayTeamId)) )  
+
+    local timeDisplay = os.date( "%H:%M", cellInfo["StartTime"] )
+    local textFieldTime = tolua.cast( panelFade:getChildByName("TextField_Time"), "TextField" )
+    textFieldTime:setText( timeDisplay )
+
+    local labelScore = tolua.cast( cell:getChildByName("Label_Score_0"), "Label" )
+    labelScore:setText( "-:-" )
 end
 
 function initScrollView( data )
