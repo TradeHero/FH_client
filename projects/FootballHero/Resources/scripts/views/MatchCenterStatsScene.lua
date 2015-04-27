@@ -260,7 +260,7 @@ function addOverUnderTable( jsonResponse, contentContainer )
    end
 
    local lines = { "15", "25", "35" }
-   local currentLineIndex = 1
+   local currentLineIndex = 2
    updateTable( lines[currentLineIndex] )
    
    -- Add the button handler.
