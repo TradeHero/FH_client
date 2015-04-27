@@ -11,11 +11,13 @@ local MatchCenterConfig = require("scripts.config.MatchCenter")
 local Header = require("scripts.views.HeaderFrame")
 local ViewUtils = require("scripts.views.ViewUtils")
 local ShareConfig = require("scripts.config.Share")
+local Logic = require("scripts.Logic").getInstance()
 
 
 local CONTENT_FADEIN_TIME = 1
 
 local mWidget
+local mUserId
 local mIsOpen
 local mGameCouponsDTOs
 
@@ -23,7 +25,8 @@ local mHomeTeamId
 local mAwayTeamId
 
 -- DS for matchInof, see CouponHistoryData
-function loadFrame( isOpen, matchInfo )
+function loadFrame( userId, isOpen, matchInfo )
+    mUserId = userId
 	mIsOpen = isOpen
     mGameCouponsDTOs = matchInfo["GameCouponsDTOs"]
 
@@ -90,7 +93,7 @@ function initContent( matchId )
     end
 
     seqArray:addObject( CCCallFuncN:create( function()
-        if not mIsOpen then
+        if mUserId == Logic:getUserId() and not mIsOpen then
             local content = GUIReader:shareReader():widgetFromJsonFile( "scenes/HistoryDetailShare.json" )
             content:setLayoutParameter( layoutParameter )
             contentContainer:addChild( content )

@@ -431,7 +431,7 @@ function initContent( couponHistory )
 end
 
 function predictionClicked( isOpen, matchInfo )
-	EventManager:postEvent( Event.Enter_History_Detail, { isOpen, matchInfo } )
+	EventManager:postEvent( Event.Enter_History_Detail, { mUserId, isOpen, matchInfo } )
 end
 
 function logoEventHandler( sender,eventType )
