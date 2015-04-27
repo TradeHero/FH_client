@@ -91,7 +91,7 @@ function initContent( moneyBalance, ticketBalance )
     moneyText:setText( string.format( Constants.String.spinWheel.money_balance, moneyBalance ) )
 
     local submitBt = mWidget:getChildByName("Button_submit")
-    if moneyBalance > MIN_MONEY_BALANCE_FOR_PAYOUT then
+    if moneyBalance >= MIN_MONEY_BALANCE_FOR_PAYOUT then
         local submitEventHandler = function( sender, eventType )
             if eventType == TOUCH_EVENT_ENDED then
                 EventManager:postEvent( Event.Do_Spin_Payout, { moneyBalance, refresh } )
