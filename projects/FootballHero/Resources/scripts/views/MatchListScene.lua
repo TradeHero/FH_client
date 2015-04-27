@@ -177,7 +177,8 @@ end
 
 -- Param matchList is Object of MatchListData
 function initMatchList( matchList, leagueKey, bInit )
-
+local DebugTools = require( "scripts.DebugTools" )
+DebugTools.print_lua_table( matchList, 2 )
     if not bInit then
         MatchListDropdownFrame.initLeagueList( leagueKey )
     end

@@ -9,10 +9,7 @@ local RequestUtils = require("scripts.RequestUtils")
 local Constants = require("scripts.Constants")
 
 function action( param )
-    local lucky8Scene = require( "scripts.views.Lucky8Scene" )
-    if lucky8Scene.isFrameShown() ~= true then
-        lucky8Scene.loadFrame()
-    end
+    
 
     local url = RequestUtils.GET_LUCKY8_GAMES
     local requestInfo = {}
@@ -30,7 +27,10 @@ function action( param )
 end
 
 function onRequestSuccess( data )
-	
+	local lucky8Scene = require( "scripts.views.Lucky8Scene" )
+    if lucky8Scene.isFrameShown() ~= true then
+        lucky8Scene.loadFrame( data )
+    end
 end
 
 function onRequestFailed( jsonResponse )

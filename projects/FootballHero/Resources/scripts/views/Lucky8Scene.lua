@@ -6,6 +6,7 @@ local Event = require("scripts.events.Event").EventList
 local Constants = require("scripts.Constants")
 local Navigator = require("scripts.views.Navigator")
 local Header = require("scripts.views.Lucky8Header")
+local TeamConfig = require("scripts.config.Team")
 
 local mWidget 
 local mScrollViewHeight
@@ -37,7 +38,7 @@ local mMatchlistCellInfo = {
     
 }
 
-function loadFrame()
+function loadFrame( params )
     local widget = GUIReader:shareReader():widgetFromJsonFile( "scenes/lucky8MainScene.json" )
     mWidget = widget
     widget:registerScriptHandler( EnterOrExit )
@@ -54,7 +55,7 @@ function loadFrame()
     initButtonInfo()
 
     mScrollViewHeight = 0;
-    initScrollView( 8 ) 
+    initScrollView( params ) 
 end
 
 function eventSubmit( sender, eventType )
@@ -62,10 +63,31 @@ function eventSubmit( sender, eventType )
     CCLuaLog( "eventSubmit" )
 end
 
-function initScrollView( cellNum )
+function helpInitMatchListcell( cell, cellInfo )
+    local panelFade = cell:getChildByName("Panel_Fade")
+    local textTeamHome = tolua.cast( panelFade:getChildByName("TextField_TeamName1"), "TextField" )
+    local homeTeamId = cellInfo["Home"]["TeamId"]
+    textTeamHome:setText( TeamConfig.getTeamName( TeamConfig.getConfigIdByKey( homeTeamId ) ) ) 
+    local textTeamAway = tolua.cast( panelFade:getChildByName("TextField_TeamName2"), "TextField" )
+    local awayTeamId = cellInfo["Away"]["TeamId"]
+    textTeamAway:setText( TeamConfig.getTeamName(TeamConfig.getConfigIdByKey( awayTeamId )) )
+
+    local LeagueName = tolua.cast( panelFade:getChildByName("TextField_Legaue"), "TextField" )
+    LeagueName:setText( cellInfo["LeagueName"] )
+
+    local team1 = tolua.cast( panelFade:getChildByName("Image_Team1"), "ImageView" )
+    team1:loadTexture( TeamConfig.getLogo( TeamConfig.getConfigIdByKey(homeTeamId)) )
+    local team2 = tolua.cast( panelFade:getChildByName("Image_Team2"), "ImageView" )
+    team2:loadTexture( TeamConfig.getLogo( TeamConfig.getConfigIdByKey(awayTeamId)) )  
+end
+
+function initScrollView( data )
+    local games = data["Games"]
     local contentContainer = tolua.cast( mWidget:getChildByName("ScrollView_Content"), "ScrollView" )
-    for  i = 1, cellNum do
+    contentContainer:removeAllChildrenWithCleanup( true )
+    for k,v in pairs( games ) do
         local matchContent = SceneManager.widgetFromJsonFile( "scenes/Lucky8MatchListCell.json" )
+        helpInitMatchListcell( matchContent, v )
         contentContainer:addChild( matchContent )
         mScrollViewHeight = mScrollViewHeight + matchContent:getSize().height
         updateScrollView( mScrollViewHeight, content )

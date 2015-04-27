@@ -139,10 +139,7 @@
   <ProjectType>UIProject</ProjectType>
   <ResRelativePath />
   <imageFileList />
-  <imagePngList>
-    <string>liveScore/livescore_btn_add.png</string>
-    <string>liveScore/livescore_btn_added.png</string>
-  </imagePngList>
+  <imagePngList />
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>YourPicksCell.json</CurrentUIJson>
+  <CurrentUIJson>Lucky8MatchListCell.json</CurrentUIJson>
 </UIProject>
