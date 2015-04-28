@@ -14,7 +14,8 @@
     "community/img-leaguebox.png",
     "commonRes/default.png",
     "lucky8/img-notpick.png",
-    "lucky8/img-pick.png"
+    "lucky8/img-pick.png",
+    "lucky8/luck8_img_lock.png"
   ],
   "version": "1.6.0.0",
   "widgetTree": {
@@ -730,6 +731,60 @@
               "passwordStyleText": "*",
               "placeHolder": "input words here",
               "text": "VS"
+            }
+          },
+          {
+            "classname": "ImageView",
+            "name": null,
+            "children": [],
+            "options": {
+              "__type": "ImageViewSurrogate:#EditorCommon.JsonModel.Component.GUI",
+              "classname": "ImageView",
+              "name": "Image_Lock",
+              "ZOrder": 0,
+              "actiontag": 5832602,
+              "anchorPointX": 0.5,
+              "anchorPointY": 0.5,
+              "classType": "CocoStudio.EngineAdapterWrap.CSImageView",
+              "colorB": 255,
+              "colorG": 255,
+              "colorR": 255,
+              "customProperty": "",
+              "flipX": false,
+              "flipY": false,
+              "height": 191,
+              "ignoreSize": true,
+              "layoutParameter": null,
+              "opacity": 255,
+              "positionPercentX": 0.4921875,
+              "positionPercentY": 0.48,
+              "positionType": 0,
+              "rotation": 0,
+              "scaleX": 1,
+              "scaleY": 1,
+              "sizePercentX": 0.125,
+              "sizePercentY": 0.4,
+              "sizeType": 0,
+              "tag": 40002,
+              "touchAble": false,
+              "useMergedTexture": false,
+              "visible": false,
+              "width": 171,
+              "x": 315,
+              "y": 96,
+              "capInsetsHeight": 1,
+              "capInsetsWidth": 1,
+              "capInsetsX": 0,
+              "capInsetsY": 0,
+              "fileName": null,
+              "fileNameData": {
+                "path": "lucky8/luck8_img_lock.png",
+                "plistFile": "",
+                "resourceType": 0
+              },
+              "scale9Enable": false,
+              "scale9Height": 191,
+              "scale9Width": 171
             }
           }
         ],
