@@ -43,8 +43,41 @@ local mArrMatchData;
 
 local mMatchlistCellInfo
 
+function requestLucky8Rounds(  )
+    local url = RequestUtils.GET_LUCKY8_ROUNDS
+    local requestInfo = {}
+    requestInfo.requestData = ""
+    requestInfo.url = url
+    local handler = function ( isSucceed, body, header, status, errorBuffer )
+        RequestUtils.messageHandler( requestInfo, isSucceed, body, header, status, errorBuffer, RequestUtils.HTTP_200, true, onRequestLucky8RoundsSucess, onRequestLucky8RoundsFailed )
+    end
+
+    local httpRequest = HttpRequestForLua:create( CCHttpRequest.kHttpGet )
+    httpRequest:addHeader( Logic:getAuthSessionString() )
+    httpRequest:sendHttpRequest( url, handler )
+
+    ConnectingMessage.loadFrame()
+end
+
+function onRequestLucky8RoundsSucess( jsonResponse )
+    local contentContainer = tolua.cast( mWidget:getChildByName("ScrollView_Content"), "ScrollView" )
+    contentContainer:removeAllChildrenWithCleanup( true )
+    mScrollViewHeight = 0
+    
+    local Rounds = jsonResponse["Rounds"]
+    for k,v in pairs( Rounds ) do
+        local cell = SceneManager.widgetFromJsonFile( CELL_RES_STRING[1] )
+        contentContainer:addChild( cell )
+        mScrollViewHeight = mScrollViewHeight + cell:getSize().height
+        updateScrollView( mScrollViewHeight, contentContainer )
+    end
+end
+
+function onRequestLucky8RoundsFailed( jsonResponse )
+    
+end
+
 function requestLucky8MatchList(  )
-    print( "requestLucky8MatchList........................................" )
     local url = RequestUtils.GET_LUCKY8_GAMES
     local requestInfo = {}
     requestInfo.requestData = ""
@@ -137,6 +170,13 @@ function helpInitMatchListcell( cell, cellInfo, Played )
     local imageLock = panelFade:getChildByName("Image_Lock")
     imageLock:setVisible( Played )
 
+    local btnHome = tolua.cast( panelFade:getChildByName( "Button_Home" ), "Button" )
+    btnHome:addTouchEventListener( eventSelectWhoWin )
+    local btnAway = tolua.cast( panelFade:getChildByName( "Button_Away" ), "Button" )
+    btnAway:addTouchEventListener( eventSelectWhoWin )
+    local btnDrawBig = tolua.cast( panelFade:getChildByName("Button_Draw_Big"), "Button" )
+    btnDrawBig:addTouchEventListener( eventSelectWhoWin )
+
     local textTeamHome = tolua.cast( panelFade:getChildByName("TextField_TeamName1"), "TextField" )
     local homeTeamId = cellInfo["Home"]["TeamId"]
     textTeamHome:setText( TeamConfig.getTeamName( TeamConfig.getConfigIdByKey( homeTeamId ) ) ) 
@@ -160,19 +200,22 @@ function helpInitMatchListcell( cell, cellInfo, Played )
     labelScore:setText( "-:-" )
 
     local btn1 = tolua.cast( panelFade:getChildByName("Button_1"), "Button" )
-    btn1:addTouchEventListener( eventSelectWhoWin )
+    -- btn1:addTouchEventListener( eventSelectWhoWin )
 
     local btn2 = tolua.cast( panelFade:getChildByName("Button_2"), "Button" )
-    btn2:addTouchEventListener( eventSelectWhoWin )
+    -- btn2:addTouchEventListener( eventSelectWhoWin )
 
     local btnDraw = tolua.cast( panelFade:getChildByName("Button_Draw"), "Button" )
-    btnDraw:addTouchEventListener( eventSelectWhoWin )
+    -- btnDraw:addTouchEventListener( eventSelectWhoWin )
 
     local cellData = {
-        btn_one = btn1,
-        btn_two = btn2,
-        btn_draw = btnDraw,
-        data = cellInfo,
+        btn_home     = btnHome,
+        btn_away     = btnAway,
+        btn_draw_big = btnDrawBig,
+        btn_one      = btn1,
+        btn_two      = btn2,
+        btn_draw     = btnDraw,
+        data         = cellInfo,
         selectedIndex = 0,
     } 
     table.insert( mMatchlistCellInfo, cellData )
@@ -182,7 +225,8 @@ function eventSelectWhoWin( sender, eventType )
     if eventType == TOUCH_EVENT_ENDED then
         for k,v in pairs( mMatchlistCellInfo ) do
             local btn1 = v["btn_one"]
-            if btn1 == sender then
+            local btnHome = v["btn_home"]
+            if btnHome == sender then
                 btn1:setBright( false )
                 v["selectedIndex"] = v["data"]["Home"]["FHOddId"]
                 v["btn_two"]:setBright( true )
@@ -190,7 +234,8 @@ function eventSelectWhoWin( sender, eventType )
             end
 
             local btn2 = v["btn_two"]
-            if btn2 == sender then
+            local btnAway = v["btn_away"]
+            if btnAway == sender then
                 btn2:setBright( false )
                 v["selectedIndex"] = v["data"]["Away"]["FHOddId"]
                 v["btn_one"]:setBright( true )
@@ -198,7 +243,8 @@ function eventSelectWhoWin( sender, eventType )
             end
 
             local btnDraw = v["btn_draw"]
-            if btnDraw == sender then
+            local btnDrawBig = v["btn_draw_big"]
+            if btnDrawBig == sender then
                 btnDraw:setBright( false )
                 v["selectedIndex"] = v["data"]["Draw"]["FHOddId"]
                 v["btn_one"]:setBright( true )
@@ -236,30 +282,30 @@ function getCurrentTime(  )
     -- local currentDate = os.date( "%B %")
 end
 
-function changeScrollView( index, cellNum )
-    local contentContainer = tolua.cast( mWidget:getChildByName("ScrollView_Content"), "ScrollView" )
-    contentContainer:removeAllChildrenWithCleanup( true )
-    mScrollViewHeight = 0
-    if index == 1 or index == 3 then
-        mBtnSubmits:setVisible( false )
-    else
-        mBtnSubmits:setVisible( true )
-    end
-    for i = 1, cellNum do
-        local cell = SceneManager.widgetFromJsonFile( CELL_RES_STRING[index] )
-        if index == 1 then
-            cell:addTouchEventListener( enterHistory )
-        elseif index == 2 then
-            -- requestLucky8MatchList()
-        else
-            local text = tolua.cast( cell:getChildByName("TextField_Rule"), "TextField" )
-            text:setText( Constants.String.lucky8.lucky8_rule )
-        end
-        contentContainer:addChild( cell )
-        mScrollViewHeight = mScrollViewHeight + cell:getSize().height
-        updateScrollView( mScrollViewHeight, cell )
-    end
-end
+-- function changeScrollView( index, cellNum )
+--     local contentContainer = tolua.cast( mWidget:getChildByName("ScrollView_Content"), "ScrollView" )
+--     contentContainer:removeAllChildrenWithCleanup( true )
+--     mScrollViewHeight = 0
+--     if index == 1 or index == 3 then
+--         mBtnSubmits:setVisible( false )
+--     else
+--         mBtnSubmits:setVisible( true )
+--     end
+--     for i = 1, cellNum do
+--         local cell = SceneManager.widgetFromJsonFile( CELL_RES_STRING[index] )
+--         if index == 1 then
+--             cell:addTouchEventListener( enterHistory )
+--         elseif index == 2 then
+--             -- requestLucky8MatchList()
+--         else
+--             local text = tolua.cast( cell:getChildByName("TextField_Rule"), "TextField" )
+--             text:setText( Constants.String.lucky8.lucky8_rule )
+--         end
+--         contentContainer:addChild( cell )
+--         mScrollViewHeight = mScrollViewHeight + cell:getSize().height
+--         updateScrollView( mScrollViewHeight, cell )
+--     end
+-- end
 
 function enterHistory( sender, eventType )
     if eventType == TOUCH_EVENT_ENDED then
@@ -267,22 +313,39 @@ function enterHistory( sender, eventType )
     end
 end
 
-function changeTab( index, cellNum )
-    changeScrollView( index, cellNum )
+function changeTab( index )
+    -- changeScrollView( index )
+    if index == 1 or index == 3 then
+        mBtnSubmits:setVisible( false )
+    else
+        mBtnSubmits:setVisible( true )
+    end
+
+    if index == 1 then
+        requestLucky8Rounds()
+    elseif index == 2 then
+        requestLucky8MatchList()
+    else
+        local contentContainer = tolua.cast( mWidget:getChildByName("ScrollView_Content"), "ScrollView" )
+        contentContainer:removeAllChildrenWithCleanup( true )
+        mScrollViewHeight = 0
+        local cell = SceneManager.widgetFromJsonFile( CELL_RES_STRING[index] )
+        local text = tolua.cast( cell:getChildByName("TextField_Rule"), "TextField" )
+        text:setText( Constants.String.lucky8.lucky8_rule )
+        contentContainer:addChild( cell )
+        mScrollViewHeight = mScrollViewHeight + cell:getSize().height
+        updateScrollView( mScrollViewHeight, cell )
+    end
 end
 
 function onSelectTab( index )
-    local cellNum = 8
-    if index == 3 then
-        cellNum = 1
-    end
     for i = 1, table.getn( mTabButtons ) do
         local btnTab = mTabButtons[ i ]
         if i == index then
             btnTab:setBright( false )
             btnTab:setTouchEnabled( false )
             btnTab:setTitleColor( ccc3( 255, 255, 255 ) )
-            changeTab( index, cellNum )
+            changeTab( index )
         else
             btnTab:setBright( true )
             btnTab:setTouchEnabled( true )

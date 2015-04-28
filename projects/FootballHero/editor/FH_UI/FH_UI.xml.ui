@@ -145,7 +145,8 @@
     <string>lucky8/img-notpick.png</string>
     <string>lucky8/img-pick.png</string>
     <string>lucky8/luck8_img_lock.png</string>
+    <string>GUI/button.png</string>
   </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>Lucky8Header.json</CurrentUIJson>
+  <CurrentUIJson>Lucky8MatchListCell.json</CurrentUIJson>
 </UIProject>
