@@ -73,16 +73,16 @@ function helperInitPickscell( cell, cellInfo )
     local txtDateMiddle = tolua.cast( panelBg:getChildByName( "TextField_Date_Middle" ), "TextField" )
     txtDateMiddle:setText( os.date("%b %d, %A", StartTime) )
 
+    local imageChecked = panelBg:getChildByName("Image_Check")
     if Settled == false then
-        print( "Settled == false " )
         imagePick:loadTexture( "images/lucky8/lucky8_img_newresult.png" )
         txtNumber:setText( " " )
         local txtResult = tolua.cast( panelBg:getChildByName("TextField_Result"), "TextField" )
         txtResult:setVisible( false )
         txtDate:setVisible( false )
         txtDateMiddle:setVisible( true )
+        imageChecked:setVisible( false )
     else
-        print( "Settled == true " )
         imagePick:loadTexture( "images/lucky8/lucky8_img_newresult.png" )
         local txt = string.format("%d", PredictionsCorrect) .. "/" .. string.format("%d", PredictionsMade)
         txtNumber:setText( txt )
@@ -91,6 +91,13 @@ function helperInitPickscell( cell, cellInfo )
         txtResult:setText( "You've got " .. string.format("%d", PredictionsCorrect) .. " out of " .. string.format("%d", PredictionsMade) .. " games correct.")
         txtDate:setVisible( true )
         txtDateMiddle:setVisible( false )
+
+        local Checked = cellInfo["Checked"]
+        if Checked == false then
+            imageChecked:setVisible( true )
+        else
+            imageChecked:setVisible( false )
+        end
     end
 end
 
