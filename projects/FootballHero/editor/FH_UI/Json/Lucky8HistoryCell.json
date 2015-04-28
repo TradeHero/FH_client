@@ -11,8 +11,8 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "spinWheel/btn-ticket.png",
-    "header/footballhero-logo.png"
+    "community/img-leaguebox.png",
+    "lucky8/img-newresult.png"
   ],
   "version": "1.6.0.0",
   "widgetTree": {

@@ -11,11 +11,12 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "header/back.png",
-    "liveScore/livescore_btn_live_on.png",
-    "liveScore/livescore_btn_live_off.png",
-    "Navigator/btn-setting.png",
-    "header/footballhero-logo.png"
+    "community/img-leaguebox.png",
+    "commonRes/default.png",
+    "lucky8/img-notpick.png",
+    "lucky8/img-pick.png",
+    "lucky8/luck8_img_lock.png",
+    "GUI/button.png"
   ],
   "version": "1.6.0.0",
   "widgetTree": {
@@ -238,7 +239,7 @@
           "rotation": 0,
           "scaleX": 1,
           "scaleY": 1,
-          "sizePercentX": 0.1609375,
+          "sizePercentX": 0.15625,
           "sizePercentY": 0.5,
           "sizeType": 0,
           "tag": 38917,

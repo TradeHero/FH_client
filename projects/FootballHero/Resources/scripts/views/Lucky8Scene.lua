@@ -59,6 +59,41 @@ function requestLucky8Rounds(  )
     ConnectingMessage.loadFrame()
 end
 
+function helperInitPickscell( cell, cellInfo )
+    local PredictionsCorrect = cellInfo["PredictionsCorrect"]
+    local PredictionsMade = cellInfo["PredictionsMade"]
+    local StartTime = cellInfo["StartTime"]
+    local Settled = cellInfo["Settled"]
+    local curTime = os.time()
+    local panelBg = cell:getChildByName( "Panel_Bg" )
+    local imagePick = tolua.cast( panelBg:getChildByName("Image_Pick"), "ImageView" )
+    local txtNumber = tolua.cast( imagePick:getChildByName("TextField_Number"), "TextField" )
+    local txtDate = tolua.cast( panelBg:getChildByName( "TextField_Date" ), "TextField" )
+    txtDate:setText( os.date("%b %d, %A", StartTime) )
+    local txtDateMiddle = tolua.cast( panelBg:getChildByName( "TextField_Date_Middle" ), "TextField" )
+    txtDateMiddle:setText( os.date("%b %d, %A", StartTime) )
+
+    if Settled == false then
+        print( "Settled == false " )
+        imagePick:loadTexture( "images/lucky8/lucky8_img_newresult.png" )
+        txtNumber:setText( " " )
+        local txtResult = tolua.cast( panelBg:getChildByName("TextField_Result"), "TextField" )
+        txtResult:setVisible( false )
+        txtDate:setVisible( false )
+        txtDateMiddle:setVisible( true )
+    else
+        print( "Settled == true " )
+        imagePick:loadTexture( "images/lucky8/lucky8_img_newresult.png" )
+        local txt = string.format("%d", PredictionsCorrect) .. "/" .. string.format("%d", PredictionsMade)
+        txtNumber:setText( txt )
+        local txtResult = tolua.cast( panelBg:getChildByName("TextField_Result"), "TextField" )
+        txtResult:setVisible( true )
+        txtResult:setText( "You've got " .. string.format("%d", PredictionsCorrect) .. " out of " .. string.format("%d", PredictionsMade) .. " games correct.")
+        txtDate:setVisible( true )
+        txtDateMiddle:setVisible( false )
+    end
+end
+
 function onRequestLucky8RoundsSucess( jsonResponse )
     local contentContainer = tolua.cast( mWidget:getChildByName("ScrollView_Content"), "ScrollView" )
     contentContainer:removeAllChildrenWithCleanup( true )
@@ -68,6 +103,7 @@ function onRequestLucky8RoundsSucess( jsonResponse )
     for k,v in pairs( Rounds ) do
         local cell = SceneManager.widgetFromJsonFile( CELL_RES_STRING[1] )
         contentContainer:addChild( cell )
+        helperInitPickscell( cell, v )
         mScrollViewHeight = mScrollViewHeight + cell:getSize().height
         updateScrollView( mScrollViewHeight, contentContainer )
     end
@@ -196,7 +232,7 @@ function helpInitMatchListcell( cell, cellInfo, Played )
     local textFieldTime = tolua.cast( panelFade:getChildByName("TextField_Time"), "TextField" )
     textFieldTime:setText( timeDisplay )
 
-    local labelScore = tolua.cast( cell:getChildByName("Label_Score_0" ), "Label" )
+    local labelScore = tolua.cast( panelFade:getChildByName("Label_Score_0" ), "Label" )
     labelScore:setText( "-:-" )
 
     local btn1 = tolua.cast( panelFade:getChildByName("Button_1"), "Button" )
