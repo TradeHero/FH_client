@@ -83,7 +83,23 @@ function helperInitCells( cell, data )
         -- txtScore:setText( data["ScoreString"] )
     end
     
-
+    local btnHome = tolua.cast( panelFade:getChildByName("Button_1"), "Button" )
+    local btnAway = tolua.cast( panelFade:getChildByName("Button_2"), "Button" )
+    local btnDraw = tolua.cast( panelFade:getChildByName("Button_Draw"), "Button" )
+    local PickId = data["PickId"]
+    if PickId == data["Home"]["FHOddId"] then
+        btnHome:setBright( false )
+        btnDraw:setBright( true )
+        btnAway:setBright( true )
+    elseif PickId == data["Away"]["FHOddId"] then
+        btnHome:setBright( true )
+        btnDraw:setBright( false )
+        btnAway:setBright( true )
+    else
+        btnHome:setBright( true )
+        btnDraw:setBright( true )
+        btnAway:setBright( false )
+    end
 end
 
 function initScrollView( param )

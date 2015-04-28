@@ -224,13 +224,6 @@ function helpInitMatchListcell( cell, cellInfo, Played )
     local imageLock = panelFade:getChildByName("Image_Lock")
     imageLock:setVisible( Played )
 
-    local btnHome = tolua.cast( panelFade:getChildByName( "Button_Home" ), "Button" )
-    btnHome:addTouchEventListener( eventSelectWhoWin )
-    local btnAway = tolua.cast( panelFade:getChildByName( "Button_Away" ), "Button" )
-    btnAway:addTouchEventListener( eventSelectWhoWin )
-    local btnDrawBig = tolua.cast( panelFade:getChildByName("Button_Draw_Big"), "Button" )
-    btnDrawBig:addTouchEventListener( eventSelectWhoWin )
-
     local textTeamHome = tolua.cast( panelFade:getChildByName("TextField_TeamName1"), "TextField" )
     local homeTeamId = cellInfo["Home"]["TeamId"]
     textTeamHome:setText( TeamConfig.getTeamName( TeamConfig.getConfigIdByKey( homeTeamId ) ) ) 
@@ -253,14 +246,41 @@ function helpInitMatchListcell( cell, cellInfo, Played )
     local labelScore = tolua.cast( panelFade:getChildByName("Label_Score_0" ), "Label" )
     labelScore:setText( "-:-" )
 
+    local btnHome = tolua.cast( panelFade:getChildByName( "Button_Home" ), "Button" )
+    btnHome:addTouchEventListener( eventSelectWhoWin )
+    local btnAway = tolua.cast( panelFade:getChildByName( "Button_Away" ), "Button" )
+    btnAway:addTouchEventListener( eventSelectWhoWin )
+    local btnDrawBig = tolua.cast( panelFade:getChildByName("Button_Draw_Big"), "Button" )
+    btnDrawBig:addTouchEventListener( eventSelectWhoWin )
+
     local btn1 = tolua.cast( panelFade:getChildByName("Button_1"), "Button" )
-    -- btn1:addTouchEventListener( eventSelectWhoWin )
-
     local btn2 = tolua.cast( panelFade:getChildByName("Button_2"), "Button" )
-    -- btn2:addTouchEventListener( eventSelectWhoWin )
-
     local btnDraw = tolua.cast( panelFade:getChildByName("Button_Draw"), "Button" )
-    -- btnDraw:addTouchEventListener( eventSelectWhoWin )
+
+    if Played == true then
+        btnHome:setTouchEnabled( false )
+        btnDrawBig:setTouchEnabled( false )
+        btnAway:setTouchEnabled( false )
+
+        local PickId = cellInfo["PickId"]
+        if PickId == cellInfo["Home"]["FHOddId"] then
+            btn1:setBright( false )
+            btn2:setBright( true )
+            btnDraw:setBright( true )
+        elseif PickId == cellInfo["Away"]["FHOddId"] then
+            btn1:setBright( true )
+            btn2:setBright( false )
+            btnDraw:setBright( true )
+        else
+            btn1:setBright( true )
+            btn2:setBright( true )
+            btnDraw:setBright( false )
+        end
+    else
+        btnHome:setTouchEnabled( true )
+        btnDrawBig:setTouchEnabled( true )
+        btnAway:setTouchEnabled( true )
+    end
 
     local cellData = {
         btn_home     = btnHome,
@@ -329,11 +349,6 @@ function updateScrollView( scrollViewHeight, content )
     contentContainer:setInnerContainerSize( CCSize:new(0, scrollViewHeight) )
     local layout = tolua.cast( contentContainer, "Layout" )
     layout:requestDoLayout()
-end
-
-function getCurrentTime(  )
-    local currentTime = os.time()
-    -- local currentDate = os.date( "%B %")
 end
 
 -- function changeScrollView( index, cellNum )
@@ -433,7 +448,12 @@ function initButtonInfo(  )
     local btnMatchLists = tolua.cast( mWidget:getChildByName( "Button_MatchLists" ), "Button" )
     table.insert( mTabButtons, btnMatchLists )
     bindEventHandler( btnMatchLists, 2 )
-    getCurrentTime()
+    local txtDate = tolua.cast( btnMatchLists:getChildByName( "TextField_Date" ), "TextField" )
+    local txtWeekDay = tolua.cast( btnMatchLists:getChildByName("TextField_WeekDay"), "TextField" )
+    local displayDate = os.date( "%b %d", os.time() )
+    local displayWeekDay = os.date( "%A", os.time() )
+    txtDate:setText( displayDate )
+    txtWeekDay:setText( displayWeekDay )
 
     local btnRules = tolua.cast( mWidget:getChildByName( "Button_Rules" ), "Button" )
     table.insert( mTabButtons, btnRules )

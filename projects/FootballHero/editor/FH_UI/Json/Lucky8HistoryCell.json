@@ -14,7 +14,6 @@
     "community/img-leaguebox.png",
     "commonRes/default.png",
     "lucky8/img-notpick.png",
-    "lucky8/img-newresult.png",
     "lucky8/img-pick.png",
     "lucky8/img-lost.png"
   ],
@@ -234,7 +233,7 @@
               "sizePercentY": 0.135,
               "sizeType": 0,
               "tag": 37880,
-              "touchAble": true,
+              "touchAble": false,
               "useMergedTexture": false,
               "visible": true,
               "width": 27,
@@ -261,7 +260,7 @@
               },
               "pressed": null,
               "pressedData": {
-                "path": "lucky8/img-newresult.png",
+                "path": "lucky8/img-pick.png",
                 "plistFile": "",
                 "resourceType": 0
               },
@@ -413,7 +412,7 @@
               "sizePercentY": 0.135,
               "sizeType": 0,
               "tag": 37885,
-              "touchAble": true,
+              "touchAble": false,
               "useMergedTexture": false,
               "visible": true,
               "width": 27,
@@ -440,7 +439,7 @@
               },
               "pressed": null,
               "pressedData": {
-                "path": "lucky8/img-newresult.png",
+                "path": "lucky8/img-pick.png",
                 "plistFile": "",
                 "resourceType": 0
               },
@@ -538,7 +537,7 @@
               "sizePercentY": 0.135,
               "sizeType": 0,
               "tag": 37889,
-              "touchAble": true,
+              "touchAble": false,
               "useMergedTexture": false,
               "visible": true,
               "width": 27,
@@ -565,7 +564,7 @@
               },
               "pressed": null,
               "pressedData": {
-                "path": "lucky8/img-newresult.png",
+                "path": "lucky8/img-pick.png",
                 "plistFile": "",
                 "resourceType": 0
               },
