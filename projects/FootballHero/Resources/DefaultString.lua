@@ -420,6 +420,7 @@ StringsDefault = {
     winners = "Past Winners",
   },
   lucky8 = {
+    draw = "Draw",
     game_center_title = "Game Center",
     lucky8_title     = "Lucky 8",
     lucky8_sub_des   = "Predict random 8 games daily and win $500 if you guess all 8 matches correctly!",

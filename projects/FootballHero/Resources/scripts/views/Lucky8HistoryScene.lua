@@ -6,20 +6,21 @@ local Event = require("scripts.events.Event").EventList
 local Constants = require("scripts.Constants")
 local Navigator = require("scripts.views.Navigator")
 local Header = require("scripts.views.Lucky8Header")
+local TeamConfig = require("scripts.config.Team")
 
 local mWidget
 local mWonPrize
 
-function loadFrame()
+function loadFrame( param )
     local widget = GUIReader:shareReader():widgetFromJsonFile( "scenes/Lucky8HistoryScene.json" )
     mWidget = widget
     widget:registerScriptHandler( EnterOrExit )
     SceneManager.clearNAddWidget( widget )
     Header.loadFrame( widget, Constants.String.lucky8.lucky8_title, true )
 
-    initScrollView( 8 )
+    initScrollView( param )
 
-    showPrizeScene( true )
+    -- showPrizeScene( true )
 end
 
 function showPrizeScene( isShow )
@@ -48,12 +49,51 @@ function eventClaim( sender, eventType )
     end
 end
 
-function initScrollView( cellNum )
+function helperInitCells( cell, data )
+    local panelFade = cell:getChildByName( "Panel_Fade" )
+    local imageHome = tolua.cast( panelFade:getChildByName("Image_Team1"), "ImageView" )
+    local imageAway = tolua.cast( panelFade:getChildByName("Image_Team2"), "ImageView" )
+    local teamId1 = data["Home"]["TeamId"]
+    local teamId2 = data["Away"]["TeamId"]
+    imageHome:loadTexture( TeamConfig.getLogo( TeamConfig.getConfigIdByKey(teamId1) ) )
+    imageAway:loadTexture( TeamConfig.getLogo( TeamConfig.getConfigIdByKey(teamId1) ) )
+
+    local textLeague = tolua.cast( panelFade:getChildByName("TextField_Legaue"), "TextField" )
+    textLeague:setText( data["LeagueName"] )
+
+    local teamName1 = tolua.cast( panelFade:getChildByName("TextField_TeamName1"), "TextField" )
+    local teamName2 = tolua.cast( panelFade:getChildByName("TextField_TeamName2"), "TextField" )
+    local txtDraw = tolua.cast( panelFade:getChildByName("TextField_Draw"), "TextField" )
+    txtDraw:setText( Constants.String.lucky8.draw )
+    teamName1:setText( TeamConfig.getTeamName( TeamConfig.getConfigIdByKey( teamId1 ) ) )
+    teamName2:setText( TeamConfig.getTeamName( TeamConfig.getConfigIdByKey( teamId1 ) ) )
+
+    local imageResult = tolua.cast( panelFade:getChildByName("Image_Result"), "ImageView" )
+    local isWon = data["Won"]
+    if isWon == true then
+        imageResult:loadTexture( Constants.LUCKY8_IMAGE_PATH .. "lucky8_img_won.png" )
+    else
+        imageResult:loadTexture( Constants.LUCKY8_IMAGE_PATH .. "lucky8_img_lost.png" )
+    end
+
+    local txtScore = tolua.cast( panelFade:getChildByName("Label_Score_0" ), "Label" )
+    if data["ScoreString"] == nil then
+        txtScore:setText( " " )
+    else
+        -- txtScore:setText( data["ScoreString"] )
+    end
+    
+
+end
+
+function initScrollView( param )
     local contentContainer = tolua.cast( mWidget:getChildByName("ScrollView"), "ScrollView" )
     local scrollViewHeight = 0 
-    for  i = 1, cellNum do
+    local games = param["Games"]
+    for k,v in pairs(games) do
         local matchContent = SceneManager.widgetFromJsonFile( "scenes/Lucky8HistoryCell.json" )
         contentContainer:addChild( matchContent )
+        helperInitCells( matchContent, v )
         scrollViewHeight = scrollViewHeight + matchContent:getSize().height
         updateScrollView( scrollViewHeight, content )
     end

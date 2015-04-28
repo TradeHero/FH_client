@@ -20,6 +20,8 @@ local mBtnSubmits
 local mMatchlistCells
 local mCurrentRoundId
 
+local mYourPicksData;
+
 local CELL_RES_STRING = 
 {
     "scenes/YourPicksCell.json",
@@ -102,6 +104,7 @@ function helperInitPickscell( cell, cellInfo )
 end
 
 function onRequestLucky8RoundsSucess( jsonResponse )
+    mYourPicksData = {}
     local contentContainer = tolua.cast( mWidget:getChildByName("ScrollView_Content"), "ScrollView" )
     contentContainer:removeAllChildrenWithCleanup( true )
     mScrollViewHeight = 0
@@ -109,10 +112,18 @@ function onRequestLucky8RoundsSucess( jsonResponse )
     local Rounds = jsonResponse["Rounds"]
     for k,v in pairs( Rounds ) do
         local cell = SceneManager.widgetFromJsonFile( CELL_RES_STRING[1] )
+        cell:addTouchEventListener( enterHistory )
         contentContainer:addChild( cell )
         helperInitPickscell( cell, v )
         mScrollViewHeight = mScrollViewHeight + cell:getSize().height
         updateScrollView( mScrollViewHeight, contentContainer )
+
+        local cellData = {
+            kCell = cell,
+            cellInfo = v,
+        }
+
+        table.insert( mYourPicksData, cellData )
     end
 end
 
@@ -138,7 +149,7 @@ end
 
 function onRequestLucky8MatchListSuccess( json )
     mScrollViewHeight = 0;
-    initScrollView( json ) 
+    initScrollView( json )
 end
 
 function onRequestLucky8MatchListFailed( json )
@@ -352,7 +363,13 @@ end
 
 function enterHistory( sender, eventType )
     if eventType == TOUCH_EVENT_ENDED then
-        EventManager:postEvent( Event.Enter_Lucky8History )
+        for k,v in pairs(mYourPicksData) do
+            local cell = v["kCell"]
+            if cell == sender then
+                local cellInfo = v["cellInfo"]
+                EventManager:postEvent( Event.Enter_Lucky8History, cellInfo )
+            end
+        end
     end
 end
 
