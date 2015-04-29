@@ -21,8 +21,6 @@ function loadFrame( param, cellInfo )
     initScrollView( param )
 
     initResultText( cellInfo )
-
-    -- showPrizeScene( true )
 end
 
 function initResultText( cellInfo )
@@ -31,6 +29,11 @@ function initResultText( cellInfo )
     local PredictionsMade = cellInfo["PredictionsMade"]
     local text = string.format( "You've got %d out of %d games correct", PredictionsCorrect, PredictionsMade )
     textResult:setText( text )
+
+    local UsdWon = cellInfo["UsdWon"]
+    if UsdWon == 500 then
+        showPrizeScene( true )
+    end
 end
 
 function showPrizeScene( isShow )
