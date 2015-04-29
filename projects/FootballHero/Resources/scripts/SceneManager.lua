@@ -20,6 +20,7 @@ local DEEPLINK_COMPETITION = "competition"
 local DEEPLINK_LEADERBOARD = "leaderboard"
 local DEEPLINK_SPINTHEWHEEL = "spinthewheel"
 local DEEPLINK_FBFH = "FBFH"
+local DEEPLINK_VIDEO = "FBVideo"
 
 local mSceneGameLayer
 local mKeyPadBackEnabled = true
@@ -101,6 +102,7 @@ function initEvents()
 	EventManager:registerEventHandler( Event.Enter_Settings_Select_League, "scripts.actions.EnterSettingsSelectLeagueAction" )
 	EventManager:registerEventHandler( Event.Enter_Settings_Select_Team, "scripts.actions.EnterSettingsSelectTeamAction" )
 	EventManager:registerEventHandler( Event.Enter_Quickblox_Chatroom, "scripts.actions.EnterQuickbloxChatroomAction" )
+	EventManager:registerEventHandler( Event.Enter_DailyMotion_Video, "scripts.actions.EnterDailyMotionVideoAction" )
 
 	EventManager:registerEventHandler( Event.Do_Register, "scripts.actions.DoRegisterAction" )
 	EventManager:registerEventHandler( Event.Do_Login, "scripts.actions.DoLoginAction" )
@@ -137,6 +139,7 @@ function initEvents()
 	EventManager:registerEventHandler( Event.Do_Send_Quickblox_Chat, "scripts.actions.DoSendQuickbloxChatAction" )
 	EventManager:registerEventHandler( Event.Do_Get_Quickblox_Users, "scripts.actions.DoGetQuickbloxUsersAction" )
 	EventManager:registerEventHandler( Event.Do_Quickblox_Last_Message, "scripts.actions.DoQuickbloxLastMessageAction" )
+	EventManager:registerEventHandler( Event.Do_Get_DailyMotion_Video_Info, "scripts.actions.DoGetDailyMotionVideoInfoAction" )
 	
 
 	EventManager:registerEventHandler( Event.Show_Error_Message, "scripts.actions.ShowErrorMessageAction" )
@@ -285,6 +288,8 @@ function processDeepLink( deepLink, defaultEvent, defaultEventParam )
 
         elseif deepLinkPage == DEEPLINK_FBFH then
         	Misc:sharedDelegate():openUrl("http://www.facebook.com/FootballHeroApp")
+        elseif deepLinkPage == DEEPLINK_VIDEO then
+			EventManager:postEvent( Event.Enter_Community, { CommunityConfig.COMMUNITY_TAB_ID_HIGHLIGHT } )        	
         else
 			if defaultEvent ~= nil then
 				EventManager:postEvent( defaultEvent, defaultEventParam )

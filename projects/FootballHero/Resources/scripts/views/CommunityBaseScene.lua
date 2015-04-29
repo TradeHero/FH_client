@@ -9,6 +9,7 @@ local Constants = require("scripts.Constants")
 local Competitions = require("scripts.data.Competitions").Competitions
 local CommunityCompetitionFrame = require("scripts.views.CommunityCompetitionFrame")
 local CommunityLeaderboardFrame = require("scripts.views.CommunityLeaderboardFrame")
+local CommunityHighLightFrame = require("scripts.views.CommunityHighLightFrame")
 local Minigame = require("scripts.data.Minigame").Minigame
 local Header = require("scripts.views.HeaderFrame")
 
@@ -85,6 +86,8 @@ end
 function loadMainContent( contentContainer, jsonResponse, leaderboardId, subType, minigameResponse )
     if mTabID == CommunityConfig.COMMUNITY_TAB_ID_COMPETITION then
         loadCompetitionScene( contentContainer, jsonResponse, minigameResponse )
+    elseif mTabID == CommunityConfig.COMMUNITY_TAB_ID_HIGHLIGHT then
+        loadHighLightScene( contentContainer, jsonResponse )
     elseif mTabID ==  CommunityConfig.COMMUNITY_TAB_ID_LEADERBOARD then
         loadLeaderboardScene( contentContainer, jsonResponse, leaderboardId, subType )
     end
@@ -100,6 +103,13 @@ function loadCompetitionScene( contentContainer, jsonResponse, minigameResponse 
     local compList = Competitions:new( jsonResponse )
     local minigame = Minigame:new( minigameResponse )
     CommunityCompetitionFrame.loadFrame( contentContainer, compList, minigame )
+end
+
+function loadHighLightScene( contentContainer, jsonResponse )
+    CommunityLeaderboardFrame.exitFrame()
+    if not CommunityHighLightFrame.isShown() then
+        CommunityHighLightFrame.loadFrame( contentContainer, jsonResponse )
+    end
 end
 
 function loadLeaderboardScene( contentContainer, jsonResponse, leaderboardId, subType )

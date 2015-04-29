@@ -353,7 +353,7 @@
     <GuidesList />
   </GuidesProject>
   <GuidesProject>
-    <Project>CommunityLeaderboardFrame_0</Project>
+    <Project>CommunityHighLightFrame</Project>
     <GuidesList />
   </GuidesProject>
   <GuidesProject>
@@ -462,6 +462,14 @@
   </GuidesProject>
   <GuidesProject>
     <Project>MatchCenterLeagueTable</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>CommunityHighLightContent</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>CommunityPlayVideoFrame</Project>
     <GuidesList />
   </GuidesProject>
   <GuidesProject>

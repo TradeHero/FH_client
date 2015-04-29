@@ -5,6 +5,7 @@ local FileUtils = require("scripts.FileUtils")
 
 local SMI_FOLDER = "SMI/"
 local SPIN_FOLDER = "Spin/"
+local VIDEO_FOLDER = "Video/"
 
 function getSMImagePath( fileUrl, handler )
 	getRemoteFile( fileUrl, SMI_FOLDER, handler )
@@ -12,6 +13,10 @@ end
 
 function getSpinPrizeImagePath( fileUrl, handler )
 	getRemoteFile( fileUrl, SPIN_FOLDER, handler )
+end
+
+function getVideoImagePath( fileUrl, handler )
+	getRemoteFile( fileUrl, VIDEO_FOLDER, handler )
 end
 
 -- Return the local file path if the file exist.

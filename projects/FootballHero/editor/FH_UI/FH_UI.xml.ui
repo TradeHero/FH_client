@@ -42,6 +42,7 @@
     <string>HistoryDetailOpenContent.json</string>
     <string>HistoryMainMatchContent.json</string>
     <string>HistoryMainTitle.json</string>
+    <string>HistoryDetailShare.json</string>
     <string>LeagueDropdownContent.json</string>
     <string>LeagueContentWithTransparentBG.json</string>
     <string>LeagueDropdownContent.json</string>
@@ -155,7 +156,9 @@
     <string>MatchCenterStatsFormTable.json</string>
     <string>MatchCenterOverUnderTable.json</string>
     <string>MatchCenterLeagueTable.json</string>
-    <string>HistoryDetailShare.json</string>
+    <string>CommunityHighLightFrame.json</string>
+    <string>CommunityHighLightContent.json</string>
+    <string>CommunityPlayVideoFrame.json</string>
   </JsonList>
   <CanvasSize>
     <Width>640</Width>
@@ -166,8 +169,12 @@
   <ResRelativePath />
   <imageFileList />
   <imagePngList>
+    <string>MatchListScene/match_bkg.png</string>
+    <string>header/back.png</string>
+    <string>header/footballhero-logo.png</string>
     <string>Tutorial/Default Button.png</string>
+    <string>community/img-playbtn.png</string>
   </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>HistoryDetail.json</CurrentUIJson>
+  <CurrentUIJson>ChatroomSelectScene.json</CurrentUIJson>
 </UIProject>

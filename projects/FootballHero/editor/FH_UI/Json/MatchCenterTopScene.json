@@ -11,7 +11,9 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "MatchCentre/img-blackbox.png"
+    "header/footballhero-logo.png",
+    "commonRes/default.png",
+    "community/img-playbtn.png"
   ],
   "version": "1.6.0.0",
   "widgetTree": {
