@@ -476,4 +476,12 @@
     <Project>HistoryDetailShare</Project>
     <GuidesList />
   </GuidesProject>
+  <GuidesProject>
+    <Project>CommunityVideoFrame</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>CommunityVideoContent</Project>
+    <GuidesList />
+  </GuidesProject>
 </ArrayOfGuidesProject>

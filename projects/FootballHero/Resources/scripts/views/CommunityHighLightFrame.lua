@@ -73,6 +73,7 @@ function loadFrame( parent, highLightInfo )
         local teamImage1 = tolua.cast( content:getChildByName("Image_Team1"), "ImageView" )
         local teamImage2 = tolua.cast( content:getChildByName("Image_Team2"), "ImageView" )
         local score = tolua.cast( content:getChildByName("Label_score"), "Label" )
+        local time = tolua.cast( content:getChildByName("Label_time"), "Label" )
         local playBt = tolua.cast( content:getChildByName("Button_play"), "Button" )
         local thumbnail = tolua.cast( content:getChildByName("Panel_thumbnail"):getChildByName("Image_thumbnail"), "ImageView" )
 
@@ -80,6 +81,7 @@ function loadFrame( parent, highLightInfo )
         teamName2:setText( TeamConfig.getTeamName( TeamConfig.getConfigIdByKey( info["AwayID"] ) ) )
         teamImage1:loadTexture( TeamConfig.getLogo( TeamConfig.getConfigIdByKey( info["HomeID"] ) ) )
         teamImage2:loadTexture( TeamConfig.getLogo( TeamConfig.getConfigIdByKey( info["AwayID"] ) ) )
+        time:setText( info["Time"] )
         score:setText( info["HomeGoal"].." - "..info["AwayGoal"] )
         thumbnail:setEnabled( false )
 
@@ -117,7 +119,7 @@ end
 function loadThumbnailImage( info, i, thumbnail )
     local seqArray = CCArray:create()
 
-    seqArray:addObject( CCDelayTime:create( 0.3 * ( i - 1 ) ) )
+    seqArray:addObject( CCDelayTime:create( 0.1 * ( i - 1 ) ) )
     seqArray:addObject( CCCallFuncN:create( function()
         local callback = function( success, videoInfo )
             if success and videoInfo and type( videoInfo ) == "table" then

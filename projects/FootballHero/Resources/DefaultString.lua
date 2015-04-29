@@ -94,9 +94,10 @@ StringsDefault = {
     title_join_comp = "Join a Competition",
     title_rules = "Rules",
     title_top_performers = "Top Performers",
-    title_highlight = "Videos",
+    title_highlight = "Highlights",
     highlight_subtitle = "YOU ARE NOW LEAVING FOOTBALLHERO",
-    highlight_disclaimer = "FootballHero is not the owner of the content that you are about to watch.\n\nThe third party site and content you are about to visit is not hosted or created by FootballHero.\nFootballHero is not responsible for and cannot be held liable or accountable for any of the content hosted on the third party site."
+    highlight_disclaimer = "FootballHero is not the owner of the content that you are about to watch.\n\nThe third party site and content you are about to visit is not hosted or created by FootballHero.\nFootballHero is not responsible for and cannot be held liable or accountable for any of the content hosted on the third party site.",
+    title_video = "Videos",
   },
   duration_to = "%s to %s",
   duration_forever = "%s until forever",

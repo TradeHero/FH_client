@@ -159,6 +159,8 @@
     <string>CommunityHighLightFrame.json</string>
     <string>CommunityHighLightContent.json</string>
     <string>CommunityPlayVideoFrame.json</string>
+    <string>CommunityVideoFrame.json</string>
+    <string>CommunityVideoContent.json</string>
   </JsonList>
   <CanvasSize>
     <Width>640</Width>
@@ -168,13 +170,7 @@
   <ProjectType>UIProject</ProjectType>
   <ResRelativePath />
   <imageFileList />
-  <imagePngList>
-    <string>MatchListScene/match_bkg.png</string>
-    <string>header/back.png</string>
-    <string>header/footballhero-logo.png</string>
-    <string>Tutorial/Default Button.png</string>
-    <string>community/img-playbtn.png</string>
-  </imagePngList>
+  <imagePngList />
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>ChatroomSelectScene.json</CurrentUIJson>
+  <CurrentUIJson>CommunityVideoContent.json</CurrentUIJson>
 </UIProject>
