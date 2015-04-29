@@ -193,7 +193,9 @@ function eventSubmit( sender, eventType )
     local odds = {}
     for k,v in pairs( mMatchlistCellInfo ) do
         local selectedIndex = v["selectedIndex"]
-        table.insert( odds, selectedIndex )
+        if selectedIndex ~= 0 then
+            table.insert( odds, selectedIndex )
+        end
     end
     print( mCurrentRoundId[1]["roundid"] )
     local debugTools = require("scripts.DebugTools")
@@ -250,7 +252,7 @@ function helpInitMatchListcell( cell, cellInfo, Played )
     local team1 = tolua.cast( panelFade:getChildByName("Image_Team1"), "ImageView" )
     team1:loadTexture( TeamConfig.getLogo( TeamConfig.getConfigIdByKey(homeTeamId)) )
     local team2 = tolua.cast( panelFade:getChildByName("Image_Team2"), "ImageView" )
-    team2:loadTexture( TeamConfig.getLogo( TeamConfig.getConfigIdByKey(awayTeamId)) )  
+    team2:loadTexture( TeamConfig.getLogo( TeamConfig.getConfigIdByKey(awayTeamId)) ) 
 
     local timeDisplay = os.date( "%H:%M", cellInfo["StartTime"] )
     local textFieldTime = tolua.cast( panelFade:getChildByName("TextField_Time"), "TextField" )
@@ -284,15 +286,30 @@ function helpInitMatchListcell( cell, cellInfo, Played )
             btn1:setBright( true )
             btn2:setBright( false )
             btnDraw:setBright( true )
-        else
+        elseif PickId == cellInfo["Draw"]["FHOddId"] then
             btn1:setBright( true )
             btn2:setBright( true )
             btnDraw:setBright( false )
+        else 
+            btn1:setBright( true )
+            btn2:setBright( true )
+            btnDraw:setBright( true )
         end
     else
-        btnHome:setTouchEnabled( true )
-        btnDrawBig:setTouchEnabled( true )
-        btnAway:setTouchEnabled( true )
+        local imageStart = tolua.cast( panelFade:getChildByName("Image_Started"), "ImageView" )
+        if os.time() > cellInfo["StartTime"] then
+            imageStart:setVisible( true )
+            textFieldTime:setVisible( false )
+            btnHome:setTouchEnabled( false )
+            btnDrawBig:setTouchEnabled( false )
+            btnAway:setTouchEnabled( false )
+        else
+            imageStart:setVisible( false )
+            textFieldTime:setVisible( true )
+            btnHome:setTouchEnabled( true )
+            btnDrawBig:setTouchEnabled( true )
+            btnAway:setTouchEnabled( true )
+        end
     end
 
     local cellData = {
