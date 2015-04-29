@@ -82,11 +82,16 @@ function helperInitCells( cell, data )
     teamName2:setText( TeamConfig.getTeamName( TeamConfig.getConfigIdByKey( teamId1 ) ) )
 
     local imageResult = tolua.cast( panelFade:getChildByName("Image_Result"), "ImageView" )
-    local isWon = data["Won"]
-    if isWon == true then
-        imageResult:loadTexture( Constants.LUCKY8_IMAGE_PATH .. "lucky8_img_won.png" )
+    if os.time() > data["StartTime"] then
+        imageResult:setVisible( true )
+        local isWon = data["Won"]
+        if isWon == true then
+            imageResult:loadTexture( Constants.LUCKY8_IMAGE_PATH .. "lucky8_img_won.png" )
+        else
+            imageResult:loadTexture( Constants.LUCKY8_IMAGE_PATH .. "lucky8_img_lost.png" )
+        end
     else
-        imageResult:loadTexture( Constants.LUCKY8_IMAGE_PATH .. "lucky8_img_lost.png" )
+        imageResult:setVisible( false )
     end
 
     local txtScore = tolua.cast( panelFade:getChildByName("Label_Score_0" ), "Label" )
