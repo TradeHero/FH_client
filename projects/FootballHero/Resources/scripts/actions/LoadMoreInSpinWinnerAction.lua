@@ -20,6 +20,16 @@ function action( param )
     end
 
     local url = RequestUtils.GET_SPIN_WINNERS_REST_CALL.."?step="..step.."&bigOnly="..tostring(onlyShowBigPrize)
+
+    if param ~= nil and param[3] ~= nil then
+        if param[3] == Constants.GAME_WINNERS_LUCKY8 then
+            url = RequestUtils.GET_LUCKY8_WINNERS_REST_CALL.."?step="..step.."&bigOnly="..tostring(onlyShowBigPrize)
+        else
+            url = RequestUtils.GET_SPIN_WINNERS_REST_CALL.."?step="..step.."&bigOnly="..tostring(onlyShowBigPrize)
+        end
+    else
+        url = RequestUtils.GET_SPIN_WINNERS_REST_CALL.."?step="..step.."&bigOnly="..tostring(onlyShowBigPrize)
+    end
    
     local requestInfo = {}
     requestInfo.requestData = ""

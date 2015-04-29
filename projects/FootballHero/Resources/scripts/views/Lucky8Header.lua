@@ -45,7 +45,7 @@ end
 
 function pastWinnersEventHandler( sender, eventType )
 	if eventType == TOUCH_EVENT_ENDED then
-		EventManager:postEvent( Event.Enter_Spin_winner )
+        EventManager:postEvent( Event.Enter_Spin_winner, { false,  Constants.GAME_WINNERS_LUCKY8 } )
 	end
 end
 

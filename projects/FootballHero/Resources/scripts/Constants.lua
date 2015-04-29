@@ -4,6 +4,10 @@ local FileUtils = require("scripts.FileUtils")
 local LocalizedString = require ("LocalizedString")
 String = LocalizedString.Strings
 
+GAME_WINNERS_NONE = 0
+GAME_WINNERS_LUCKY8 = 1
+GAME_WINNERS_SPINWHEEL = 2
+
 GAME_WIDTH = 640
 GAME_HEIGHT = 1136
 

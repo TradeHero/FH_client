@@ -334,6 +334,15 @@ function initScrollView( data )
     local contentContainer = tolua.cast( mWidget:getChildByName("ScrollView_Content"), "ScrollView" )
     contentContainer:removeAllChildrenWithCleanup( true )
     local Played = data["Played"]
+    local btnSubmit = tolua.cast( mWidget:getChildByName("Button_Submit"), "Button" )
+    if Played == true then
+        btnSubmit:setBright( false )
+        btnSubmit:setTouchEnabled( false )
+    else
+        btnSubmit:setBright( true )
+        btnSubmit:setTouchEnabled( true )
+    end
+
     mMatchlistCellInfo = {}
     for k,v in pairs( games ) do
         local matchContent = SceneManager.widgetFromJsonFile( "scenes/Lucky8MatchListCell.json" )

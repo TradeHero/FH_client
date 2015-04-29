@@ -80,7 +80,7 @@ function helperInitCells( cell, data )
     if data["ScoreString"] == nil then
         txtScore:setText( " " )
     else
-        -- txtScore:setText( data["ScoreString"] )
+        txtScore:setText( tostring(data["ScoreString"]) )
     end
     
     local btnHome = tolua.cast( panelFade:getChildByName("Button_1"), "Button" )

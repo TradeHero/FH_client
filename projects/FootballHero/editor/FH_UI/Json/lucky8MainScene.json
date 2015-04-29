@@ -14,7 +14,8 @@
     "MatchListScene/match_bkg.png",
     "community/img-inactivepage.png",
     "community/img-activepage.png",
-    "spinWheel/btn-submit.png"
+    "spinWheel/btn-submit.png",
+    "lucky8/lucky8_img_graybutton.png"
   ],
   "version": "1.6.0.0",
   "widgetTree": {
@@ -268,8 +269,8 @@
               "rotation": 0,
               "scaleX": 1,
               "scaleY": 1,
-              "sizePercentX": 0.4225352,
-              "sizePercentY": 0.3375,
+              "sizePercentX": 0.6103286,
+              "sizePercentY": 0.3125,
               "sizeType": 0,
               "tag": 40951,
               "touchAble": false,
@@ -315,13 +316,13 @@
               "layoutParameter": null,
               "opacity": 255,
               "positionPercentX": 0.4976526,
-              "positionPercentY": -0.700498939,
+              "positionPercentY": -0.7,
               "positionType": 0,
               "rotation": 0,
               "scaleX": 1,
               "scaleY": 1,
-              "sizePercentX": 0.4225352,
-              "sizePercentY": 0.3375,
+              "sizePercentX": 0.6103286,
+              "sizePercentY": 0.3125,
               "sizeType": 0,
               "tag": 40952,
               "touchAble": false,
@@ -511,8 +512,8 @@
           "capInsetsY": 0,
           "disabled": null,
           "disabledData": {
-            "path": null,
-            "plistFile": null,
+            "path": "lucky8/lucky8_img_graybutton.png",
+            "plistFile": "",
             "resourceType": 0
           },
           "fontName": "微软雅黑",
@@ -526,8 +527,8 @@
           },
           "pressed": null,
           "pressedData": {
-            "path": null,
-            "plistFile": null,
+            "path": "lucky8/lucky8_img_graybutton.png",
+            "plistFile": "",
             "resourceType": 0
           },
           "scale9Enable": false,

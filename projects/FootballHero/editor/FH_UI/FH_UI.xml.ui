@@ -144,6 +144,7 @@
     <string>community/img-inactivepage.png</string>
     <string>community/img-activepage.png</string>
     <string>spinWheel/btn-submit.png</string>
+    <string>lucky8/lucky8_img_graybutton.png</string>
   </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
   <CurrentUIJson>lucky8MainScene.json</CurrentUIJson>
