@@ -190,38 +190,38 @@ function loadFrame( params )
 end
 
 function eventSubmit( sender, eventType )
-    local odds = {}
-    for k,v in pairs( mMatchlistCellInfo ) do
-        local selectedIndex = v["selectedIndex"]
-        if selectedIndex ~= 0 then
-            table.insert( odds, selectedIndex )
+    if eventType == TOUCH_EVENT_ENDED then
+        local odds = {}
+        for k,v in pairs( mMatchlistCellInfo ) do
+            local selectedIndex = v["selectedIndex"]
+            if selectedIndex ~= 0 then
+                table.insert( odds, selectedIndex )
+            end
         end
+
+        local requestContent = {
+            RoundId = mCurrentRoundId[1]["roundid"],
+            FHOddIds = odds,
+        }
+
+        local requestContentText = Json.encode( requestContent )
+        local url = RequestUtils.POST_LUCKY8_PREDICT
+        local requestInfo = {}
+        requestInfo.requestData = requestContentText
+        requestInfo.url = url
+
+        local handler = function ( isSucceed, body, header, status, errorBuffer )
+            RequestUtils.messageHandler( requestInfo, isSucceed, body, header, status, errorBuffer, RequestUtils.HTTP_200, true, onPostLucky8PredictSucess, onPostLucky8PredictFailed )
+        end
+
+        local httpRequest = HttpRequestForLua:create( CCHttpRequest.kHttpPost )
+        httpRequest:addHeader( Constants.CONTENT_TYPE_JSON )
+        httpRequest:addHeader( Logic:getAuthSessionString() )
+        httpRequest:getRequest():setRequestData( requestContentText, string.len( requestContentText ) )
+        httpRequest:sendHttpRequest( url, handler )
+
+        ConnectingMessage.loadFrame()
     end
-    print( mCurrentRoundId[1]["roundid"] )
-    local debugTools = require("scripts.DebugTools")
-    debugTools.print_lua_table( mCurrentRoundId )
-    local requestContent = {
-        RoundId = mCurrentRoundId[1]["roundid"],
-        FHOddIds = odds,
-    }
-    local requestContentText = Json.encode( requestContent )
-    print( "Post message: "..requestContentText )
-    local url = RequestUtils.POST_LUCKY8_PREDICT
-    local requestInfo = {}
-    requestInfo.requestData = requestContentText
-    requestInfo.url = url
-
-    local handler = function ( isSucceed, body, header, status, errorBuffer )
-        RequestUtils.messageHandler( requestInfo, isSucceed, body, header, status, errorBuffer, RequestUtils.HTTP_200, true, onPostLucky8PredictSucess, onPostLucky8PredictFailed )
-    end
-
-    local httpRequest = HttpRequestForLua:create( CCHttpRequest.kHttpPost )
-    httpRequest:addHeader( Constants.CONTENT_TYPE_JSON )
-    httpRequest:addHeader( Logic:getAuthSessionString() )
-    httpRequest:getRequest():setRequestData( requestContentText, string.len( requestContentText ) )
-    httpRequest:sendHttpRequest( url, handler )
-
-    ConnectingMessage.loadFrame()
 end
 
 -- {"Information":"successful"}

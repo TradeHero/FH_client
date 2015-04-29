@@ -90,11 +90,9 @@ function helperInitCells( cell, data )
     end
 
     local txtScore = tolua.cast( panelFade:getChildByName("Label_Score_0" ), "Label" )
-    if data["ScoreString"] == nil then
-        print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
+    if type( data["ScoreString"] ) == "userdata" then
         txtScore:setText( " " )
     else
-        print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" .. data["ScoreString"])
         txtScore:setText( tostring(data["ScoreString"]) )
     end
     
