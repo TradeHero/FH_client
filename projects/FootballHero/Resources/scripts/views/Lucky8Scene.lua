@@ -103,6 +103,19 @@ function helperInitPickscell( cell, cellInfo )
     end
 end
 
+-- {
+--     "Rounds": [
+--         {
+--             "RoundId": 3,
+--             "Checked": false,
+--             "Settled": false,
+--             "StartTime": 1430222400,
+--             "PredictionsMade": 8,
+--             "PredictionsCorrect": 0,
+--             "UsdWon": 500
+--         }
+--     ]
+-- }
 function onRequestLucky8RoundsSucess( jsonResponse )
     mYourPicksData = {}
     local contentContainer = tolua.cast( mWidget:getChildByName("ScrollView_Content"), "ScrollView" )
@@ -398,7 +411,6 @@ function enterHistory( sender, eventType )
 end
 
 function changeTab( index )
-    -- changeScrollView( index )
     if index == 1 or index == 3 then
         mBtnSubmits:setVisible( false )
     else

@@ -147,5 +147,5 @@
     <string>lucky8/lucky8_img_graybutton.png</string>
   </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>lucky8MainScene.json</CurrentUIJson>
+  <CurrentUIJson>Lucky8HistoryCell.json</CurrentUIJson>
 </UIProject>

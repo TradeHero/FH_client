@@ -11,7 +11,7 @@ local TeamConfig = require("scripts.config.Team")
 local mWidget
 local mWonPrize
 
-function loadFrame( param )
+function loadFrame( param, cellInfo )
     local widget = GUIReader:shareReader():widgetFromJsonFile( "scenes/Lucky8HistoryScene.json" )
     mWidget = widget
     widget:registerScriptHandler( EnterOrExit )
@@ -20,7 +20,17 @@ function loadFrame( param )
 
     initScrollView( param )
 
+    initResultText( cellInfo )
+
     -- showPrizeScene( true )
+end
+
+function initResultText( cellInfo )
+    local textResult = tolua.cast( mWidget:getChildByName("TextField_4"), "TextField" )
+    local PredictionsCorrect = cellInfo["PredictionsCorrect"]
+    local PredictionsMade = cellInfo["PredictionsMade"]
+    local text = string.format( "You've got %d out of %d games correct", PredictionsCorrect, PredictionsMade )
+    textResult:setText( text )
 end
 
 function showPrizeScene( isShow )

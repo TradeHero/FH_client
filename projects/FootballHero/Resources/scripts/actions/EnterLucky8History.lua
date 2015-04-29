@@ -6,8 +6,10 @@ local RequestUtils = require("scripts.RequestUtils")
 local Logic = require("scripts.Logic").getInstance()
 local ConnectingMessage = require("scripts.views.ConnectingMessage")
 local Json = require("json")
+local mCellInfo
 
 function requestLucky8History( cellInfo )
+    mCellInfo = cellInfo
 	local roundId = cellInfo["RoundId"]
 	local url = RequestUtils.GET_LUCKY8_GAMES .. "?roundId=" .. string.format("%d", roundId)
     local requestInfo = {}
@@ -26,7 +28,7 @@ end
 
 function onRequestLucky8MatchListSuccess( jsonResponse )
 	local lucky8HistoryScene = require( "scripts.views.Lucky8HistoryScene" )
-	lucky8HistoryScene.loadFrame( jsonResponse )
+	lucky8HistoryScene.loadFrame( jsonResponse, mCellInfo )
 end
 
 function onRequestLucky8MatchListFailed( jsonResponse )

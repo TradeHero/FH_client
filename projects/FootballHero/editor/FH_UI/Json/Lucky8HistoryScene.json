@@ -11,8 +11,11 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "community/img-leaguebox.png",
-    "lucky8/img-newresult.png"
+    "MatchListScene/match_bkg.png",
+    "community/img-inactivepage.png",
+    "community/img-activepage.png",
+    "spinWheel/btn-submit.png",
+    "lucky8/lucky8_img_graybutton.png"
   ],
   "version": "1.6.0.0",
   "widgetTree": {

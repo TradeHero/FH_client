@@ -11,11 +11,11 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "community/img-leaguebox.png",
-    "commonRes/default.png",
-    "lucky8/img-notpick.png",
-    "lucky8/img-pick.png",
-    "lucky8/img-lost.png"
+    "MatchListScene/match_bkg.png",
+    "community/img-inactivepage.png",
+    "community/img-activepage.png",
+    "spinWheel/btn-submit.png",
+    "lucky8/lucky8_img_graybutton.png"
   ],
   "version": "1.6.0.0",
   "widgetTree": {
@@ -600,7 +600,7 @@
               "ignoreSize": true,
               "layoutParameter": null,
               "opacity": 255,
-              "positionPercentX": 0.479687452,
+              "positionPercentX": 0.478125,
               "positionPercentY": 0.435,
               "positionType": 0,
               "rotation": 0,
