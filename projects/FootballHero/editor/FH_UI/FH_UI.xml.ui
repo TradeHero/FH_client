@@ -139,7 +139,11 @@
   <ProjectType>UIProject</ProjectType>
   <ResRelativePath />
   <imageFileList />
-  <imagePngList />
+  <imagePngList>
+    <string>community/img-leaguebox.png</string>
+    <string>lucky8/img-newresult.png</string>
+    <string>lucky8/img-result.png</string>
+  </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
   <CurrentUIJson>YourPicksCell.json</CurrentUIJson>
 </UIProject>
