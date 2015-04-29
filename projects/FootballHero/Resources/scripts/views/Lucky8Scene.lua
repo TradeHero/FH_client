@@ -299,6 +299,13 @@ function helpInitMatchListcell( cell, cellInfo, Played )
             btn2:setBright( true )
             btnDraw:setBright( true )
         end
+        if os.time() > cellInfo["StartTime"] then
+            cell:setOpacity( 125 )
+            cell:setCascadeOpacityEnabled( true )
+        else
+            cell:setOpacity( 255 )
+            cell:setCascadeOpacityEnabled( true )
+        end
     else
         local imageStart = tolua.cast( panelFade:getChildByName("Image_Started"), "ImageView" )
         if os.time() > cellInfo["StartTime"] then

@@ -82,16 +82,24 @@ function helperInitCells( cell, data )
     teamName2:setText( TeamConfig.getTeamName( TeamConfig.getConfigIdByKey( teamId1 ) ) )
 
     local imageResult = tolua.cast( panelFade:getChildByName("Image_Result"), "ImageView" )
-    if os.time() > data["StartTime"] then
-        imageResult:setVisible( true )
-        local isWon = data["Won"]
-        if isWon == true then
-            imageResult:loadTexture( Constants.LUCKY8_IMAGE_PATH .. "lucky8_img_won.png" )
-        else
-            imageResult:loadTexture( Constants.LUCKY8_IMAGE_PATH .. "lucky8_img_lost.png" )
-        end
-    else
+    local txtStartTime = tolua.cast( panelFade:getChildByName("TextField_StartTime"), "TextField" )
+    if os.time() < data["StartTime"] then
         imageResult:setVisible( false )
+        txtStartTime:setText( os.date( "%H:%M", data["StartTime"] ) )
+        txtStartTime:setVisible( true )
+    else
+        txtStartTime:setVisible( false )
+        imageResult:setVisible( true )
+        if data["PickId"] == 0 then
+            imageResult:loadTexture( Constants.LUCKY8_IMAGE_PATH .. "luck8_img_missed.png" )
+        else
+            local isWon = data["Won"]
+            if isWon == true then
+                imageResult:loadTexture( Constants.LUCKY8_IMAGE_PATH .. "lucky8_img_won.png" )
+            else
+                imageResult:loadTexture( Constants.LUCKY8_IMAGE_PATH .. "lucky8_img_lost.png" )
+            end
+        end
     end
 
     local txtScore = tolua.cast( panelFade:getChildByName("Label_Score_0" ), "Label" )
@@ -116,7 +124,7 @@ function helperInitCells( cell, data )
     else
         btnHome:setBright( true )
         btnDraw:setBright( true )
-        btnAway:setBright( false )
+        btnAway:setBright( true )
     end
 end
 
