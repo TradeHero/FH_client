@@ -226,12 +226,16 @@ end
 
 -- {"Information":"successful"}
 function onPostLucky8PredictSucess( json )
-    
+    refreshPage()
 end
 
 -- {"Message":"Round already played!"}
 function onPostLucky8PredictFailed( jsonResponse )
     RequestUtils.onRequestFailedByErrorCode( jsonResponse["Message"] )
+end
+
+function refreshPage( ... )
+    requestLucky8MatchList()
 end
 
 function helpInitMatchListcell( cell, cellInfo, Played )

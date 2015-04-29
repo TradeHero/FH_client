@@ -96,7 +96,7 @@ function helperInitCells( cell, data )
 
     local txtScore = tolua.cast( panelFade:getChildByName("Label_Score_0" ), "Label" )
     if type( data["ScoreString"] ) == "userdata" then
-        txtScore:setText( " " )
+        txtScore:setText( "-:-" )
     else
         txtScore:setText( tostring(data["ScoreString"]) )
     end
