@@ -45,22 +45,6 @@ local mArrMatchData;
 
 local mMatchlistCellInfo
 
-function requestLucky8Rounds(  )
-    local url = RequestUtils.GET_LUCKY8_ROUNDS
-    local requestInfo = {}
-    requestInfo.requestData = ""
-    requestInfo.url = url
-    local handler = function ( isSucceed, body, header, status, errorBuffer )
-        RequestUtils.messageHandler( requestInfo, isSucceed, body, header, status, errorBuffer, RequestUtils.HTTP_200, true, onRequestLucky8RoundsSucess, onRequestLucky8RoundsFailed )
-    end
-
-    local httpRequest = HttpRequestForLua:create( CCHttpRequest.kHttpGet )
-    httpRequest:addHeader( Logic:getAuthSessionString() )
-    httpRequest:sendHttpRequest( url, handler )
-
-    ConnectingMessage.loadFrame()
-end
-
 function helperInitPickscell( cell, cellInfo )
     local PredictionsCorrect = cellInfo["PredictionsCorrect"]
     local PredictionsMade = cellInfo["PredictionsMade"]
@@ -103,20 +87,7 @@ function helperInitPickscell( cell, cellInfo )
     end
 end
 
--- {
---     "Rounds": [
---         {
---             "RoundId": 3,
---             "Checked": false,
---             "Settled": false,
---             "StartTime": 1430222400,
---             "PredictionsMade": 8,
---             "PredictionsCorrect": 0,
---             "UsdWon": 500
---         }
---     ]
--- }
-function onRequestLucky8RoundsSucess( jsonResponse )
+function updateYourPicks( jsonResponse )
     mYourPicksData = {}
     local contentContainer = tolua.cast( mWidget:getChildByName("ScrollView_Content"), "ScrollView" )
     contentContainer:removeAllChildrenWithCleanup( true )
@@ -140,35 +111,6 @@ function onRequestLucky8RoundsSucess( jsonResponse )
     end
 end
 
-function onRequestLucky8RoundsFailed( jsonResponse )
-    
-end
-
-function requestLucky8MatchList(  )
-    local url = RequestUtils.GET_LUCKY8_GAMES
-    local requestInfo = {}
-    requestInfo.requestData = ""
-    requestInfo.url = url
-    local handler = function ( isSucceed, body, header, status, errorBuffer )
-        RequestUtils.messageHandler( requestInfo, isSucceed, body, header, status, errorBuffer, RequestUtils.HTTP_200, true, onRequestLucky8MatchListSuccess, onRequestLucky8MatchListFailed )
-    end
-
-    local httpRequest = HttpRequestForLua:create( CCHttpRequest.kHttpGet )
-    httpRequest:addHeader( Logic:getAuthSessionString() )
-    httpRequest:sendHttpRequest( url, handler )
-
-    ConnectingMessage.loadFrame()
-end
-
-function onRequestLucky8MatchListSuccess( json )
-    mScrollViewHeight = 0;
-    initScrollView( json )
-end
-
-function onRequestLucky8MatchListFailed( json )
-    -- body
-end
-
 function loadFrame( params )
     mCurrentRoundId = {}
     local widget = GUIReader:shareReader():widgetFromJsonFile( "scenes/lucky8MainScene.json" )
@@ -184,9 +126,8 @@ function loadFrame( params )
     local submitTitle = tolua.cast( btnSubmit:getChildByName("TextField_Submit"), "TextField" )
     submitTitle:setText( Constants.String.lucky8.btn_submit_title )
 
-    initButtonInfo()
-
-    requestLucky8MatchList()
+    initButtonInfo( )
+    initScrollView( params )
 end
 
 function eventSubmit( sender, eventType )
@@ -205,37 +146,12 @@ function eventSubmit( sender, eventType )
         }
 
         local requestContentText = Json.encode( requestContent )
-        local url = RequestUtils.POST_LUCKY8_PREDICT
-        local requestInfo = {}
-        requestInfo.requestData = requestContentText
-        requestInfo.url = url
-
-        local handler = function ( isSucceed, body, header, status, errorBuffer )
-            RequestUtils.messageHandler( requestInfo, isSucceed, body, header, status, errorBuffer, RequestUtils.HTTP_200, true, onPostLucky8PredictSucess, onPostLucky8PredictFailed )
-        end
-
-        local httpRequest = HttpRequestForLua:create( CCHttpRequest.kHttpPost )
-        httpRequest:addHeader( Constants.CONTENT_TYPE_JSON )
-        httpRequest:addHeader( Logic:getAuthSessionString() )
-        httpRequest:getRequest():setRequestData( requestContentText, string.len( requestContentText ) )
-        httpRequest:sendHttpRequest( url, handler )
-
-        ConnectingMessage.loadFrame()
+        EventManager:postEvent( Event.Do_Lucky8_Submit, requestContentText )
     end
 end
 
--- {"Information":"successful"}
-function onPostLucky8PredictSucess( json )
-    refreshPage()
-end
-
--- {"Message":"Round already played!"}
-function onPostLucky8PredictFailed( jsonResponse )
-    RequestUtils.onRequestFailedByErrorCode( jsonResponse["Message"] )
-end
-
-function refreshPage( ... )
-    requestLucky8MatchList()
+function refreshPage( data )
+    initScrollView( data )
 end
 
 function helpInitMatchListcell( cell, cellInfo, Played )
@@ -385,6 +301,7 @@ function initScrollView( data )
     end
 
     mMatchlistCellInfo = {}
+    mScrollViewHeight = 0
     for k,v in pairs( games ) do
         local matchContent = SceneManager.widgetFromJsonFile( "scenes/Lucky8MatchListCell.json" )
         helpInitMatchListcell( matchContent, v, Played )
@@ -400,31 +317,6 @@ function updateScrollView( scrollViewHeight, content )
     local layout = tolua.cast( contentContainer, "Layout" )
     layout:requestDoLayout()
 end
-
--- function changeScrollView( index, cellNum )
---     local contentContainer = tolua.cast( mWidget:getChildByName("ScrollView_Content"), "ScrollView" )
---     contentContainer:removeAllChildrenWithCleanup( true )
---     mScrollViewHeight = 0
---     if index == 1 or index == 3 then
---         mBtnSubmits:setVisible( false )
---     else
---         mBtnSubmits:setVisible( true )
---     end
---     for i = 1, cellNum do
---         local cell = SceneManager.widgetFromJsonFile( CELL_RES_STRING[index] )
---         if index == 1 then
---             cell:addTouchEventListener( enterHistory )
---         elseif index == 2 then
---             -- requestLucky8MatchList()
---         else
---             local text = tolua.cast( cell:getChildByName("TextField_Rule"), "TextField" )
---             text:setText( Constants.String.lucky8.lucky8_rule )
---         end
---         contentContainer:addChild( cell )
---         mScrollViewHeight = mScrollViewHeight + cell:getSize().height
---         updateScrollView( mScrollViewHeight, cell )
---     end
--- end
 
 function enterHistory( sender, eventType )
     if eventType == TOUCH_EVENT_ENDED then
@@ -446,9 +338,10 @@ function changeTab( index )
     end
 
     if index == 1 then
-        requestLucky8Rounds()
+        -- requestLucky8Rounds()
+        EventManager:postEvent( Event.Do_Lucky8_Rounds, {updateYourPicks} )
     elseif index == 2 then
-        requestLucky8MatchList()
+        EventManager:postEvent( Event.Enter_Lucky8 )
     else
         local contentContainer = tolua.cast( mWidget:getChildByName("ScrollView_Content"), "ScrollView" )
         contentContainer:removeAllChildrenWithCleanup( true )

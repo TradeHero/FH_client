@@ -15,9 +15,7 @@
     "commonRes/default.png",
     "lucky8/img-notpick.png",
     "lucky8/img-pick.png",
-    "lucky8/img-startmatch.png",
-    "lucky8/luck8_img_lock.png",
-    "GUI/button.png"
+    "lucky8/img-lost.png"
   ],
   "version": "1.6.0.0",
   "widgetTree": {

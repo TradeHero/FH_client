@@ -67,6 +67,8 @@ EventNameList =
     "Enter_Lucky8History",
     "Enter_LiveScoreScene",
 
+    "Do_Lucky8_Rounds",
+    "Do_Lucky8_Submit",
     "Do_Ask_For_Rate",
     "Do_Ask_For_Comment",
     "Do_Register",

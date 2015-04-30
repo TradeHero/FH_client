@@ -8,13 +8,16 @@ local Event = require("scripts.events.Event").EventList
 local RequestUtils = require("scripts.RequestUtils")
 local Constants = require("scripts.Constants")
 
-function requestLucky8MatchList(  )
-    local url = RequestUtils.GET_LUCKY8_GAMES
+local mCallBack 
+
+function requestLucky8Rounds( param )
+    mCallBack = param[1]
+    local url = RequestUtils.GET_LUCKY8_ROUNDS
     local requestInfo = {}
     requestInfo.requestData = ""
     requestInfo.url = url
     local handler = function ( isSucceed, body, header, status, errorBuffer )
-        RequestUtils.messageHandler( requestInfo, isSucceed, body, header, status, errorBuffer, RequestUtils.HTTP_200, true, onRequestLucky8MatchListSuccess, onRequestLucky8MatchListFailed )
+        RequestUtils.messageHandler( requestInfo, isSucceed, body, header, status, errorBuffer, RequestUtils.HTTP_200, true, onRequestRoundsSuccess, onRequestRoundsFailed )
     end
 
     local httpRequest = HttpRequestForLua:create( CCHttpRequest.kHttpGet )
@@ -24,23 +27,27 @@ function requestLucky8MatchList(  )
     ConnectingMessage.loadFrame()
 end
 
-function onRequestLucky8MatchListSuccess( json )
-	local lucky8Scene = require( "scripts.views.Lucky8Scene" )
-	if lucky8Scene.isFrameShown() then
-		lucky8Scene.refreshPage( json )
-	else
-		lucky8Scene.loadFrame( json )
-	end
+-- {
+--     "Rounds": [
+--         {
+--             "RoundId": 3,
+--             "Checked": false,
+--             "Settled": false,
+--             "StartTime": 1430222400,
+--             "PredictionsMade": 8,
+--             "PredictionsCorrect": 0,
+--             "UsdWon": 500
+--         }
+--     ]
+-- }
+function onRequestRoundsSuccess( json )
+	mCallBack( json )
 end
 
-function onRequestLucky8MatchListFailed( json )
-    -- body
+function onRequestRoundsFailed( json )
+    RequestUtils.onRequestFailedByErrorCode( json["Message"] )
 end
 
 function action( param )
-	requestLucky8MatchList( )
-    -- local lucky8Scene = require( "scripts.views.Lucky8Scene" )
-    -- if lucky8Scene.isFrameShown() ~= true then
-    --     lucky8Scene.loadFrame( data )
-    -- end
+	requestLucky8Rounds( param )
 end
