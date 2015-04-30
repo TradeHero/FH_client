@@ -85,7 +85,7 @@ function helperInitCells( cell, data )
     local txtStartTime = tolua.cast( panelFade:getChildByName("TextField_StartTime"), "TextField" )
     if os.time() < data["StartTime"] then
         imageResult:setVisible( false )
-        txtStartTime:setText( os.date( "%H:%M", data["StartTime"] ) )
+        txtStartTime:setText( os.date( "%b %d %H:%M", data["StartTime"] ) )
         txtStartTime:setVisible( true )
     else
         txtStartTime:setVisible( false )

@@ -175,7 +175,7 @@ function helpInitMatchListcell( cell, cellInfo, Played )
     local team2 = tolua.cast( panelFade:getChildByName("Image_Team2"), "ImageView" )
     team2:loadTexture( TeamConfig.getLogo( TeamConfig.getConfigIdByKey(awayTeamId)) ) 
 
-    local timeDisplay = os.date( "%H:%M", cellInfo["StartTime"] )
+    local timeDisplay = os.date( "%b %d %H:%M", cellInfo["StartTime"] )
     local textFieldTime = tolua.cast( panelFade:getChildByName("TextField_Time"), "TextField" )
     textFieldTime:setText( timeDisplay )
 
