@@ -57,7 +57,6 @@ end
 
 function eventClaim( sender, eventType )
     if eventType == TOUCH_EVENT_ENDED then
-        CCLuaLog( "Lucky8HistoryScene eventClaim" )
         mWonPrize:removeFromParentAndCleanup( true )
     end
 end

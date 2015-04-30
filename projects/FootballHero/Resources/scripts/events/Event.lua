@@ -124,7 +124,10 @@ EventNameList =
 EventNameDosenotTrackList = 
 { 
     "Enter_Share",
+    "Enter_Lucky8History",
     
+    "Do_Lucky8_Submit",
+    "Do_Lucky8_Rounds",
     "Do_Ask_For_Rate",
     "Do_Ask_For_Comment",
     "Do_Register",
