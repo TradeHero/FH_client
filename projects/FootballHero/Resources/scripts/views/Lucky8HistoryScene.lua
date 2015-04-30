@@ -119,11 +119,11 @@ function helperInitCells( cell, data )
         btnAway:setBright( true )
     elseif PickId == data["Away"]["FHOddId"] then
         btnHome:setBright( true )
-        btnDraw:setBright( false )
-        btnAway:setBright( true )
+        btnDraw:setBright( true )
+        btnAway:setBright( false )
     else
         btnHome:setBright( true )
-        btnDraw:setBright( true )
+        btnDraw:setBright( false )
         btnAway:setBright( true )
     end
 end

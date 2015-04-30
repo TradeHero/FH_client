@@ -39,8 +39,4 @@ end
 
 function action( param )
 	requestLucky8MatchList( )
-    -- local lucky8Scene = require( "scripts.views.Lucky8Scene" )
-    -- if lucky8Scene.isFrameShown() ~= true then
-    --     lucky8Scene.loadFrame( data )
-    -- end
 end

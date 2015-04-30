@@ -140,12 +140,12 @@
   <ResRelativePath />
   <imageFileList />
   <imagePngList>
-    <string>community/img-leaguebox.png</string>
-    <string>commonRes/default.png</string>
-    <string>lucky8/img-notpick.png</string>
-    <string>lucky8/img-pick.png</string>
-    <string>lucky8/img-lost.png</string>
+    <string>MatchListScene/match_bkg.png</string>
+    <string>community/img-inactivepage.png</string>
+    <string>community/img-activepage.png</string>
+    <string>spinWheel/btn-submit.png</string>
+    <string>lucky8/lucky8_img_graybutton.png</string>
   </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>Lucky8HistoryCell.json</CurrentUIJson>
+  <CurrentUIJson>lucky8MainScene.json</CurrentUIJson>
 </UIProject>

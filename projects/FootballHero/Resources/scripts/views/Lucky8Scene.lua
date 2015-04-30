@@ -135,8 +135,14 @@ function eventSubmit( sender, eventType )
         local odds = {}
         for k,v in pairs( mMatchlistCellInfo ) do
             local selectedIndex = v["selectedIndex"]
-            if selectedIndex ~= 0 then
-                table.insert( odds, selectedIndex )
+            local StartTime = v["data"]["StartTime"]
+            if os.time() < StartTime then
+                if selectedIndex ~= 0 then
+                    table.insert( odds, selectedIndex )
+                else
+                    EventManager:postEvent( Event.Show_Error_Message, { Constants.String.lucky8.select_all_matches } )
+                    return 
+                end
             end
         end
 
