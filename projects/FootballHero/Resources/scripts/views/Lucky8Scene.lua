@@ -332,7 +332,7 @@ function enterHistory( sender, eventType )
 end
 
 function changeTab( index )
-    if index == LUCKY8_YOUR_PICKS_INDEX or index == LUCKY8_TODAY_MATCHLIST_INDEX then
+    if index == LUCKY8_YOUR_PICKS_INDEX or index == LUCKY8_RULES_INDEX then
         mBtnSubmits:setVisible( false )
     else
         mBtnSubmits:setVisible( true )
