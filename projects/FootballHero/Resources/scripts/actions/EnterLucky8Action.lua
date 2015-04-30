@@ -31,6 +31,11 @@ function onRequestLucky8MatchListSuccess( json )
 	else
 		lucky8Scene.loadFrame( json )
 	end
+
+    local params = {
+        Action = "Enter lucky8",
+    }
+    Analytics:sharedDelegate():postEvent( Constants.ANALYTICS_EVENT_ENTER_LUCKY8, Json.encode( params ) )
 end
 
 function onRequestLucky8MatchListFailed( json )
