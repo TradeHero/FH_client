@@ -36,6 +36,10 @@ local MATHLISTCELL_PICK_RES = {
 
 local mMatchlistCellInfo
 
+local LUCKY8_YOUR_PICKS_INDEX = 1
+local LUCKY8_TODAY_MATCHLIST_INDEX = 2
+local LUCKY8_RULES_INDEX = 3
+
 function helperInitPickscell( cell, cellInfo )
     local PredictionsCorrect = cellInfo["PredictionsCorrect"]
     local PredictionsMade = cellInfo["PredictionsMade"]
@@ -328,16 +332,15 @@ function enterHistory( sender, eventType )
 end
 
 function changeTab( index )
-    if index == 1 or index == 3 then
+    if index == LUCKY8_YOUR_PICKS_INDEX or index == LUCKY8_TODAY_MATCHLIST_INDEX then
         mBtnSubmits:setVisible( false )
     else
         mBtnSubmits:setVisible( true )
     end
 
-    if index == 1 then
-        -- requestLucky8Rounds()
+    if index == LUCKY8_YOUR_PICKS_INDEX then
         EventManager:postEvent( Event.Do_Lucky8_Rounds, {updateYourPicks} )
-    elseif index == 2 then
+    elseif index == LUCKY8_TODAY_MATCHLIST_INDEX then
         EventManager:postEvent( Event.Enter_Lucky8 )
     else
         local contentContainer = tolua.cast( mWidget:getChildByName("ScrollView_Content"), "ScrollView" )
@@ -382,11 +385,11 @@ function initButtonInfo(  )
     local btnPicks = tolua.cast( mWidget:getChildByName( "Button_Picks" ), "Button" )  
     btnPicks:setTitleText( Constants.String.lucky8.btn_picks_title )
     table.insert( mTabButtons, btnPicks )
-    bindEventHandler( btnPicks, 1 )
+    bindEventHandler( btnPicks, LUCKY8_YOUR_PICKS_INDEX )
 
     local btnMatchLists = tolua.cast( mWidget:getChildByName( "Button_MatchLists" ), "Button" )
     table.insert( mTabButtons, btnMatchLists )
-    bindEventHandler( btnMatchLists, 2 )
+    bindEventHandler( btnMatchLists, LUCKY8_TODAY_MATCHLIST_INDEX )
     local txtDate = tolua.cast( btnMatchLists:getChildByName( "TextField_Date" ), "TextField" )
     local txtWeekDay = tolua.cast( btnMatchLists:getChildByName("TextField_WeekDay"), "TextField" )
     local displayDate = os.date( "%b %d", os.time() )
@@ -397,9 +400,9 @@ function initButtonInfo(  )
     local btnRules = tolua.cast( mWidget:getChildByName( "Button_Rules" ), "Button" )
     table.insert( mTabButtons, btnRules )
     btnRules:setTitleText( Constants.String.lucky8.btn_rules_title )
-    bindEventHandler( btnRules, 3 )
+    bindEventHandler( btnRules, LUCKY8_RULES_INDEX )
 
-    onSelectTab( 2 )
+    onSelectTab( LUCKY8_TODAY_MATCHLIST_INDEX )
 end
 
 function EnterOrExit( eventType )
