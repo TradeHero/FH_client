@@ -31,7 +31,8 @@ function initResultText( cellInfo )
     textResult:setText( text )
 
     local UsdWon = cellInfo["UsdWon"]
-    if UsdWon == 500 then
+    local Checked = cellInfo["Checked"]
+    if Checked == false and UsdWon == 500 then
         showPrizeScene( true )
     end
 end
