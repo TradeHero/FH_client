@@ -14,7 +14,7 @@ function requestLucky8MatchList(  )
     requestInfo.requestData = ""
     requestInfo.url = url
     local handler = function ( isSucceed, body, header, status, errorBuffer )
-        RequestUtils.messageHandler( requestInfo, isSucceed, body, header, status, errorBuffer, RequestUtils.HTTP_200, true, onRequestLucky8MatchListSuccess, onRequestLucky8MatchListFailed )
+        RequestUtils.messageHandler( requestInfo, isSucceed, body, header, status, errorBuffer, RequestUtils.HTTP_200, true, onRequestLucky8MatchListSuccess, nil )
     end
 
     local httpRequest = HttpRequestForLua:create( CCHttpRequest.kHttpGet )
@@ -36,10 +36,6 @@ function onRequestLucky8MatchListSuccess( json )
         Action = "Enter lucky8",
     }
     Analytics:sharedDelegate():postEvent( Constants.ANALYTICS_EVENT_ENTER_LUCKY8, Json.encode( params ) )
-end
-
-function onRequestLucky8MatchListFailed( json )
-    -- body
 end
 
 function action( param )
