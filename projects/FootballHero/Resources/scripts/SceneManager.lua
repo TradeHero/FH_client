@@ -20,6 +20,7 @@ local DEEPLINK_COMPETITION = "competition"
 local DEEPLINK_LEADERBOARD = "leaderboard"
 local DEEPLINK_SPINTHEWHEEL = "spinthewheel"
 local DEEPLINK_FBFH = "FBFH"
+local DEEPLINK_HIGHLIGHT = "FBHighlight"
 local DEEPLINK_VIDEO = "FBVideo"
 
 local mSceneGameLayer
@@ -288,8 +289,13 @@ function processDeepLink( deepLink, defaultEvent, defaultEventParam )
 
         elseif deepLinkPage == DEEPLINK_FBFH then
         	Misc:sharedDelegate():openUrl("http://www.facebook.com/FootballHeroApp")
-        elseif deepLinkPage == DEEPLINK_VIDEO then
-			EventManager:postEvent( Event.Enter_Community, { CommunityConfig.COMMUNITY_TAB_ID_HIGHLIGHT } )        	
+
+        elseif deepLinkPage == DEEPLINK_HIGHLIGHT then
+			EventManager:postEvent( Event.Enter_Community, { CommunityConfig.COMMUNITY_TAB_ID_HIGHLIGHT } )
+
+		elseif deepLinkPage == DEEPLINK_VIDEO then
+			EventManager:postEvent( Event.Enter_Community, { CommunityConfig.COMMUNITY_TAB_ID_VIDEO } )
+
         else
 			if defaultEvent ~= nil then
 				EventManager:postEvent( defaultEvent, defaultEventParam )
