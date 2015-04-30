@@ -34,15 +34,6 @@ local MATHLISTCELL_PICK_RES = {
     notpick = Constants.LUCKY8_IMAGE_PATH .. "img-notpick.png",
 }
 
--- cell info
-local SingleCell = {
-    isTeam1Selected,
-    isDrawSelected,
-    isTeam2Selected,
-}
-
-local mArrMatchData;
-
 local mMatchlistCellInfo
 
 function helperInitPickscell( cell, cellInfo )
