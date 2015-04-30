@@ -87,7 +87,7 @@ function loadFrame( parent, highLightInfo )
 
         local playHandler = function( sender, eventType )
             if eventType == TOUCH_EVENT_ENDED then
-                EventManager:postEvent( Event.Enter_DailyMotion_Video, { info["videoURL"] } )
+                EventManager:postEvent( Event.Enter_Video_Info, { info["videoURL"] } )
             end
         end
         playBt:addTouchEventListener( playHandler )

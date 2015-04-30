@@ -62,7 +62,7 @@ EventNameList =
     "Enter_Settings_Select_League",
     "Enter_Settings_Select_Team",
     "Enter_Quickblox_Chatroom",
-    "Enter_DailyMotion_Video",
+    "Enter_Video_Info",
 
     "Do_Ask_For_Rate",
     "Do_Ask_For_Comment",

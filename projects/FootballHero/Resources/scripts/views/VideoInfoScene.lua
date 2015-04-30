@@ -10,7 +10,7 @@ local SMIS = require("scripts.SMIS")
 local mVideoURL
 local mWidget
 
-function loadFrame( videoURL )
+function loadFrame( videoURL, youtubeKey )
     mVideoURL = videoURL
 
 	local widget = GUIReader:shareReader():widgetFromJsonFile("scenes/CommunityPlayVideoFrame.json")
@@ -32,25 +32,36 @@ function loadFrame( videoURL )
     gotoVideoButton:addTouchEventListener( playVideoHandler )
     subtitle:setText( Constants.String.community.highlight_subtitle )
     disclaimer:setText( Constants.String.community.highlight_disclaimer )
+    
     thumbnail:setEnabled( false )
-
-    local callback = function( success, videoInfo )
-        if success and videoInfo and type( videoInfo ) == "table" then
-            local imageUrl = videoInfo["thumbnail_url"]
-
-            if imageUrl then
-                local handler = function( path )
-                    if mWidget and thumbnail and path then
-                        thumbnail:loadTexture( path )
-                        thumbnail:setEnabled( true )
-                    end
-                end
-                
-                SMIS.getVideoImagePath( imageUrl, handler )
+    if youtubeKey then
+        local handler = function( path )
+            if mWidget and thumbnail and path then
+                thumbnail:loadTexture( path )
+                thumbnail:setEnabled( true )
             end
         end
-    end
-    EventManager:postEvent( Event.Do_Get_DailyMotion_Video_Info, { mVideoURL, callback } )
+        
+        SMIS.getVideoImagePath( Constants.getYoutubeThumbnailURLByKey( youtubeKey ), handler, youtubeKey..".jpg" )
+    else
+        local callback = function( success, videoInfo )
+            if success and videoInfo and type( videoInfo ) == "table" then
+                local imageUrl = videoInfo["thumbnail_url"]
+
+                if imageUrl then
+                    local handler = function( path )
+                        if mWidget and thumbnail and path then
+                            thumbnail:loadTexture( path )
+                            thumbnail:setEnabled( true )
+                        end
+                    end
+                    
+                    SMIS.getVideoImagePath( imageUrl, handler )
+                end
+            end
+        end
+        EventManager:postEvent( Event.Do_Get_DailyMotion_Video_Info, { mVideoURL, callback } )
+    end 
 end
 
 function EnterOrExit( eventType )

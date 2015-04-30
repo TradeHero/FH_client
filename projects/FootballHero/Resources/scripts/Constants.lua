@@ -206,3 +206,11 @@ function stringFormatWithVariableOrder( format, ... )
 
     return string.format( format, unpack(order) )
 end
+
+function getYoutubeVideoURLByKey( key )
+    return "https://www.youtube.com/watch?v="..key
+end
+
+function getYoutubeThumbnailURLByKey( key )
+    return "https://i.ytimg.com/vi/"..key.."/mqdefault.jpg"    
+end

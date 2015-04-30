@@ -10,7 +10,8 @@ local Logic = require("scripts.Logic").getInstance()
 
 function action( param )
     local videoURL = param[1]
+    local youtubeKey = param[2]
 
-    local DailyMotionVideoScene = require("scripts.views.DailyMotionVideoScene")
-    DailyMotionVideoScene.loadFrame( videoURL )
+    local VideoInfoScene = require("scripts.views.VideoInfoScene")
+    VideoInfoScene.loadFrame( videoURL, youtubeKey )
 end

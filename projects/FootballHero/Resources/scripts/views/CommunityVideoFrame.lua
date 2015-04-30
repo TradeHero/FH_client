@@ -76,7 +76,8 @@ function loadFrame( parent, highLightInfo )
 
         local playHandler = function( sender, eventType )
             if eventType == TOUCH_EVENT_ENDED then
-                EventManager:postEvent( Event.Enter_DailyMotion_Video, { info["videoURL"] } )
+                local videoURL = Constants.getYoutubeVideoURLByKey( info["videoKey"] )
+                EventManager:postEvent( Event.Enter_Video_Info, { videoURL, info["videoKey"] } )
             end
         end
         playBt:addTouchEventListener( playHandler )
@@ -110,7 +111,7 @@ function loadThumbnailImage( imageUrlKey, i, thumbnail )
 
     seqArray:addObject( CCDelayTime:create( 0.1 * ( i - 1 ) ) )
     seqArray:addObject( CCCallFuncN:create( function()
-        imageUrl = "https://i.ytimg.com/vi/"..imageUrlKey.."/mqdefault.jpg"
+        imageUrl = Constants.getYoutubeThumbnailURLByKey( imageUrlKey )
 
         local handler = function( path )
             if mWidget and thumbnail and path then

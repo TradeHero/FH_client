@@ -102,7 +102,7 @@ function initEvents()
 	EventManager:registerEventHandler( Event.Enter_Settings_Select_League, "scripts.actions.EnterSettingsSelectLeagueAction" )
 	EventManager:registerEventHandler( Event.Enter_Settings_Select_Team, "scripts.actions.EnterSettingsSelectTeamAction" )
 	EventManager:registerEventHandler( Event.Enter_Quickblox_Chatroom, "scripts.actions.EnterQuickbloxChatroomAction" )
-	EventManager:registerEventHandler( Event.Enter_DailyMotion_Video, "scripts.actions.EnterDailyMotionVideoAction" )
+	EventManager:registerEventHandler( Event.Enter_Video_Info, "scripts.actions.EnterVideoInfoAction" )
 
 	EventManager:registerEventHandler( Event.Do_Register, "scripts.actions.DoRegisterAction" )
 	EventManager:registerEventHandler( Event.Do_Login, "scripts.actions.DoLoginAction" )
