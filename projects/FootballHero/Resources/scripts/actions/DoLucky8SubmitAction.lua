@@ -15,7 +15,7 @@ function requestSubmit( requestContentText )
     requestInfo.url = url
 
     local handler = function ( isSucceed, body, header, status, errorBuffer )
-        RequestUtils.messageHandler( requestInfo, isSucceed, body, header, status, errorBuffer, RequestUtils.HTTP_200, true, onRequestSubmitSuccess, onRequestSubmitFailed )
+        RequestUtils.messageHandler( requestInfo, isSucceed, body, header, status, errorBuffer, RequestUtils.HTTP_200, true, onRequestSubmitSuccess, nil )
     end
 
     local httpRequest = HttpRequestForLua:create( CCHttpRequest.kHttpPost )
@@ -34,10 +34,6 @@ function onRequestSubmitSuccess( json )
     }
     Analytics:sharedDelegate():postEvent( Constants.ANALYTICS_EVENT_SUBMIT_PREDITION_LUCK8, Json.encode( params ) )
 	EventManager:postEvent( Event.Enter_Lucky8 )
-end
-
-function onRequestSubmitFailed( json )
-    RequestUtils.onRequestFailedByErrorCode( json["Message"] )
 end
 
 function action( param )

@@ -17,7 +17,7 @@ function requestLucky8Rounds( param )
     requestInfo.requestData = ""
     requestInfo.url = url
     local handler = function ( isSucceed, body, header, status, errorBuffer )
-        RequestUtils.messageHandler( requestInfo, isSucceed, body, header, status, errorBuffer, RequestUtils.HTTP_200, true, onRequestRoundsSuccess, onRequestRoundsFailed )
+        RequestUtils.messageHandler( requestInfo, isSucceed, body, header, status, errorBuffer, RequestUtils.HTTP_200, true, onRequestRoundsSuccess, nil )
     end
 
     local httpRequest = HttpRequestForLua:create( CCHttpRequest.kHttpGet )
@@ -42,10 +42,6 @@ end
 -- }
 function onRequestRoundsSuccess( json )
 	mCallBack( json )
-end
-
-function onRequestRoundsFailed( json )
-    RequestUtils.onRequestFailedByErrorCode( json["Message"] )
 end
 
 function action( param )

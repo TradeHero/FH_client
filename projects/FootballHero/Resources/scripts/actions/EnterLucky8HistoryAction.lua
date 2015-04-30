@@ -16,7 +16,7 @@ function requestLucky8History( cellInfo )
     requestInfo.requestData = ""
     requestInfo.url = url
     local handler = function ( isSucceed, body, header, status, errorBuffer )
-        RequestUtils.messageHandler( requestInfo, isSucceed, body, header, status, errorBuffer, RequestUtils.HTTP_200, true, onRequestLucky8MatchListSuccess, onRequestLucky8MatchListFailed )
+        RequestUtils.messageHandler( requestInfo, isSucceed, body, header, status, errorBuffer, RequestUtils.HTTP_200, true, onRequestLucky8MatchListSuccess, nil )
     end
 
     local httpRequest = HttpRequestForLua:create( CCHttpRequest.kHttpGet )
@@ -29,10 +29,6 @@ end
 function onRequestLucky8MatchListSuccess( jsonResponse )
 	local lucky8HistoryScene = require( "scripts.views.Lucky8HistoryScene" )
 	lucky8HistoryScene.loadFrame( jsonResponse, mCellInfo )
-end
-
-function onRequestLucky8MatchListFailed( jsonResponse )
-	RequestUtils.onRequestFailedByErrorCode( jsonResponse["Message"] )
 end
 
 function action( param )
