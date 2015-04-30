@@ -11,9 +11,8 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "MatchListScene/match_bkg.png",
-    "community/img-inactivepage.png",
-    "header/back.png"
+    "spinWheel/btn-ticket.png",
+    "header/footballhero-logo.png"
   ],
   "version": "1.6.0.0",
   "widgetTree": {
@@ -107,7 +106,7 @@
           "customProperty": "",
           "flipX": false,
           "flipY": false,
-          "height": 33,
+          "height": 28,
           "ignoreSize": true,
           "layoutParameter": null,
           "opacity": 255,
@@ -117,14 +116,14 @@
           "rotation": 0,
           "scaleX": 1,
           "scaleY": 1,
-          "sizePercentX": 0.3984375,
-          "sizePercentY": 0.375,
+          "sizePercentX": 0.39375,
+          "sizePercentY": 0.3181818,
           "sizeType": 0,
           "tag": 247,
           "touchAble": false,
           "useMergedTexture": false,
           "visible": true,
-          "width": 255,
+          "width": 252,
           "x": 110,
           "y": 47,
           "areaHeight": 0,

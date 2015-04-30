@@ -42,6 +42,7 @@ function loadFrame( matchList, leagueKey )
     SceneManager.clearNAddWidget( widget )
     
     Header.loadFrame( widget, nil, false )
+    Header.showLiveButton( true )
 
     Navigator.loadFrame( widget )
     Navigator.chooseNav( 1 )
@@ -176,7 +177,6 @@ end
 
 -- Param matchList is Object of MatchListData
 function initMatchList( matchList, leagueKey, bInit )
-
     if not bInit then
         MatchListDropdownFrame.initLeagueList( leagueKey )
     end

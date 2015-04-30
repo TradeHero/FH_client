@@ -70,7 +70,7 @@ function loadFrame()
     widget:registerScriptHandler( EnterOrExit )
     SceneManager.clearNAddWidget( widget )
     
-    Header.loadFrame( mWidget, Constants.String.spinWheel.wheel_title, false )
+    Header.loadFrame( mWidget, Constants.String.spinWheel.wheel_title, true )
 
     mWheelBG = tolua.cast( mWidget:getChildByName("wheelBG"), "ImageView" )
     

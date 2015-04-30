@@ -484,4 +484,64 @@
     <Project>CommunityVideoContent</Project>
     <GuidesList />
   </GuidesProject>
+<GuidesProject>
+    <Project>GameCenterScene</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>GameCenterCell</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>lucky8MainScene</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>Lucky8MatchListCell</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>YourPicksCell</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>Lucky8Header</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>Lucky8HistoryScene</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>Lucky8HistoryCell</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>Lucky8RuleCell</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>Lucky8WonPrice</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>GameCenterHeader</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>LiveScoreScene</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>LiveScoreDateCell</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>LiveScoreCell</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>LiveScoreMatchCell</Project>
+    <GuidesList />
+  </GuidesProject>
 </ArrayOfGuidesProject>

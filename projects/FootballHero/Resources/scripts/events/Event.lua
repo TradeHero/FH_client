@@ -63,7 +63,13 @@ EventNameList =
     "Enter_Settings_Select_Team",
     "Enter_Quickblox_Chatroom",
     "Enter_Video_Info",
+	"Enter_GameCenter",
+    "Enter_Lucky8",
+    "Enter_Lucky8History",
+    "Enter_LiveScoreScene",
 
+    "Do_Lucky8_Rounds",
+    "Do_Lucky8_Submit",
     "Do_Ask_For_Rate",
     "Do_Ask_For_Comment",
     "Do_Register",
@@ -120,7 +126,10 @@ EventNameList =
 EventNameDosenotTrackList = 
 { 
     "Enter_Share",
+    "Enter_Lucky8History",
     
+    "Do_Lucky8_Submit",
+    "Do_Lucky8_Rounds",
     "Do_Ask_For_Rate",
     "Do_Ask_For_Comment",
     "Do_Register",
