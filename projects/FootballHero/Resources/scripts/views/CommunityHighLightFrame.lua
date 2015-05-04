@@ -6,7 +6,7 @@ local Event = require("scripts.events.Event").EventList
 local SMIS = require("scripts.SMIS")
 local Constants = require("scripts.Constants")
 local TeamConfig = require("scripts.config.Team")
-
+local ShareConfig = require("scripts.config.Share")
 
 local mWidget
 local mLeaderboardId
@@ -75,6 +75,7 @@ function loadFrame( parent, highLightInfo )
         local score = tolua.cast( content:getChildByName("Label_score"), "Label" )
         local time = tolua.cast( content:getChildByName("Label_time"), "Label" )
         local playBt = tolua.cast( content:getChildByName("Button_play"), "Button" )
+        local shareBt = tolua.cast( content:getChildByName("Button_share"), "Button" )
         local thumbnail = tolua.cast( content:getChildByName("Panel_thumbnail"):getChildByName("Image_thumbnail"), "ImageView" )
 
         teamName1:setText( TeamConfig.getTeamName( TeamConfig.getConfigIdByKey( info["HomeID"] ) ) )
@@ -91,6 +92,33 @@ function loadFrame( parent, highLightInfo )
             end
         end
         playBt:addTouchEventListener( playHandler )
+
+        local shareHandler = function ( sender, eventType )
+            if eventType == TOUCH_EVENT_ENDED then
+                local callback = function( success, videoInfo )
+                    local imageUrl = ""
+                    if success and videoInfo and type( videoInfo ) == "table" then
+                        imageUrl = videoInfo["thumbnail_url"]
+                    end
+
+                    local callback = function( success, platType )
+                        if success then
+                            -- Do nothing.
+                        end
+                    end
+
+                    local shareText = string.format( Constants.String.community.highlight_share_text, 
+                                        TeamConfig.getTeamName( TeamConfig.getConfigIdByKey( info["HomeID"] ) ),
+                                        info["HomeGoal"], 
+                                        info["AwayGoal"],
+                                        TeamConfig.getTeamName( TeamConfig.getConfigIdByKey( info["AwayID"] ) ) )
+
+                    EventManager:postEvent( Event.Enter_Share, { ShareConfig.SHARE_VIDEO, callback, shareText, imageUrl } )
+                end
+                EventManager:postEvent( Event.Do_Get_DailyMotion_Video_Info, { info["videoURL"], callback } )
+            end
+        end
+        shareBt:addTouchEventListener( shareHandler )
 
         -- Load thumbnail
         loadThumbnailImage( info, i, thumbnail )

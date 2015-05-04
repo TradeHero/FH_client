@@ -6,6 +6,7 @@ local Event = require("scripts.events.Event").EventList
 local SMIS = require("scripts.SMIS")
 local Constants = require("scripts.Constants")
 local TeamConfig = require("scripts.config.Team")
+local ShareConfig = require("scripts.config.Share")
 
 
 local mWidget
@@ -68,6 +69,7 @@ function loadFrame( parent, highLightInfo )
         local title = tolua.cast( content:getChildByName("Label_title"), "Label" )
         local time = tolua.cast( content:getChildByName("Label_time"), "Label" )
         local playBt = tolua.cast( content:getChildByName("Button_play"), "Button" )
+        local shareBt = tolua.cast( content:getChildByName("Button_share"), "Button" )
         local thumbnail = tolua.cast( content:getChildByName("Panel_thumbnail"):getChildByName("Image_thumbnail"), "ImageView" )
 
         time:setText( info["Time"] )
@@ -81,6 +83,21 @@ function loadFrame( parent, highLightInfo )
             end
         end
         playBt:addTouchEventListener( playHandler )
+
+        local shareHandler = function ( sender, eventType )
+            if eventType == TOUCH_EVENT_ENDED then
+                local callback = function( success, platType )
+                    if success then
+                        -- Do nothing.
+                    end
+                end
+
+                local shareText = string.format( Constants.String.community.video_share_text, info["Title"] )
+                local imageUrl = Constants.getYoutubeThumbnailURLByKey( info["videoKey"] )
+                EventManager:postEvent( Event.Enter_Share, { ShareConfig.SHARE_VIDEO, callback, shareText, imageUrl } )
+            end
+        end
+        shareBt:addTouchEventListener( shareHandler )
 
         -- Load thumbnail
         loadThumbnailImage( info["videoKey"], i, thumbnail )

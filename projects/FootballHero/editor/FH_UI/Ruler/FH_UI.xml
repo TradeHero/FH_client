@@ -484,7 +484,7 @@
     <Project>CommunityVideoContent</Project>
     <GuidesList />
   </GuidesProject>
-<GuidesProject>
+  <GuidesProject>
     <Project>GameCenterScene</Project>
     <GuidesList />
   </GuidesProject>

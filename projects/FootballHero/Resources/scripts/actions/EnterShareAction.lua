@@ -20,7 +20,8 @@ local mCallback
 function action( param )
 	local shareId = param[1]
     mCallback = param[2]
-    local shareStringParam = param[3]
+    local shareStringParam = param[3] or ""
+    local shareImageURL = param[4]
     
     ConnectingMessage.loadFrame()
     local shareContent = ShareConfig.getContentDictionaryById( shareId )
@@ -45,6 +46,8 @@ function action( param )
     	else
     		shareContent:setObject( CCString:create( "" ), "image" )
     	end
+    elseif shareImage == ShareConfig.PARAM_VALUE then
+    	shareContent:setObject( CCString:create( shareImageURL ), "image" )
     end
     
     C2DXShareSDK:showShareMenu( nil, shareContent, shareHandler )

@@ -98,6 +98,8 @@ StringsDefault = {
     highlight_subtitle = "YOU ARE NOW LEAVING FOOTBALLHERO",
     highlight_disclaimer = "FootballHero is not the owner of the content that you are about to watch.\n\nThe third party site and content you are about to visit is not hosted or created by FootballHero.\nFootballHero is not responsible for and cannot be held liable or accountable for any of the content hosted on the third party site.",
     title_video = "Videos",
+    highlight_share_text = "Watch the highlights: %s %d - %d %s",
+    video_share_text = "Watch: %s",
   },
   duration_to = "%s to %s",
   duration_forever = "%s until forever",
@@ -531,10 +533,12 @@ StringsDefault = {
     competition_content = "I joined a FootballHero Prediction competition. Win $$$, Messi & Ronaldo Signed Jerseys! www.footballheroapp.com/download",
     prediction_content = "%s Win $$$, Messi & Ronaldo Signed Jerseys! www.footballheroapp.com/download",
     predResult_content = "FootballHero: %s\nCLICK HERE TO PLAY! www.footballheroapp.com/download",
+    video_content = "%s.\nCLICK HERE TO WATCH! www.footballheroapp.com/download",
     spinTheWheel_title = "FootballHero - I won a prize in Spin-The-Wheel game!",
     competition_title = "FootballHero - I joined a soccer prediction competition.",
     prediction_title = "FootballHero - %s",
     predResult_title = "FootballHero",
+    video_title = "FootballHero",
   },
 }
 

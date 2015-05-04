@@ -6,8 +6,10 @@ SHARE_COMPETITION = "competition"
 SHARE_SPINTHEWHEEL = "spinTheWheel"
 SHARE_PREDICTION = "prediction"
 SHARE_PREDRESULT = "predResult"
+SHARE_VIDEO = "video"
 
 SCREEN_SHOT = "ScreenShot"
+PARAM_VALUE = "ParamValue"
 
 ShareContent = {
 	{	["id"] = SHARE_COMPETITION, 
@@ -50,6 +52,18 @@ ShareContent = {
 		["content"] = Constants.String.share.predResult_content,
 		["image"] = SCREEN_SHOT,
 		["title"] = Constants.String.share.predResult_title,
+		["description"] = Constants.String.football_hero,
+		["url"] = "http://www.footballheroapp.com",
+		["type"] = C2DXContentTypeNews,
+		["siteUrl"] = "http://www.footballheroapp.com",
+		["site"] = Constants.String.football_hero,
+		["extInfo"] = "extInfo",
+	},
+
+	{	["id"] = SHARE_VIDEO, 
+		["content"] = Constants.String.share.video_content,
+		["image"] = PARAM_VALUE,
+		["title"] = Constants.String.share.video_title,
 		["description"] = Constants.String.football_hero,
 		["url"] = "http://www.footballheroapp.com",
 		["type"] = C2DXContentTypeNews,

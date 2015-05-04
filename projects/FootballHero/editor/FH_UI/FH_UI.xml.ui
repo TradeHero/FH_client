@@ -198,7 +198,12 @@
   <ProjectType>UIProject</ProjectType>
   <ResRelativePath />
   <imageFileList />
-  <imagePngList />
+  <imagePngList>
+    <string>header/footballhero-logo.png</string>
+    <string>commonRes/default.png</string>
+    <string>community/img-playbtn.png</string>
+    <string>Competition/share_icon.png</string>
+  </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>Lucky8RuleCell.json</CurrentUIJson>
+  <CurrentUIJson>CommunityVideoContent.json</CurrentUIJson>
 </UIProject>
