@@ -255,10 +255,13 @@ function messageHandler( requestInfo, isSucceed, body, header, status, errorBuff
 
     if responseError then
         if requestInfo["ignoreJsonDecodeError"] then
-            -- Do nothing.
+            if failedHandler ~= nil then
+                failedHandler( jsonResponse )
+            end
         else
             onRequestFailedByErrorCode( "default" )
         end
+        
         return
     end
     

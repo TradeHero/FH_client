@@ -537,8 +537,8 @@ StringsDefault = {
     spinTheWheel_title = "FootballHero - I won a prize in Spin-The-Wheel game!",
     competition_title = "FootballHero - I joined a soccer prediction competition.",
     prediction_title = "FootballHero - %s",
-    predResult_title = "FootballHero",
-    video_title = "FootballHero",
+    predResult_title = "FootballHero - %s",
+    video_title = "FootballHero - %s",
   },
 }
 
