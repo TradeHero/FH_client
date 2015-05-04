@@ -10,7 +10,12 @@
   "designHeight": 1136,
   "designWidth": 640,
   "textures": [],
-  "texturesPng": [],
+  "texturesPng": [
+    "header/footballhero-logo.png",
+    "commonRes/default.png",
+    "community/img-playbtn.png",
+    "Competition/share_icon.png"
+  ],
   "version": "1.6.0.0",
   "widgetTree": {
     "classname": "Panel",
@@ -226,8 +231,8 @@
               "customProperty": "",
               "flipX": false,
               "flipY": false,
-              "height": 260,
-              "ignoreSize": false,
+              "height": 54,
+              "ignoreSize": true,
               "layoutParameter": null,
               "opacity": 255,
               "positionPercentX": 0.5,
@@ -243,7 +248,7 @@
               "touchAble": false,
               "useMergedTexture": false,
               "visible": true,
-              "width": 400,
+              "width": 304,
               "x": 200,
               "y": 130,
               "capInsetsHeight": 1,
@@ -257,8 +262,8 @@
                 "resourceType": 0
               },
               "scale9Enable": false,
-              "scale9Height": 260,
-              "scale9Width": 400
+              "scale9Height": 54,
+              "scale9Width": 304
             }
           }
         ],

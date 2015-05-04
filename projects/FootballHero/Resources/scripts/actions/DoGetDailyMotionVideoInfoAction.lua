@@ -17,6 +17,7 @@ function action( param )
     local requestInfo = {}
     requestInfo.requestData = ""
     requestInfo.recordResponse = true
+    requestInfo.ignoreJsonDecodeError = true
     requestInfo.url = url
 
     local onRequestSuccess = function ( jsonResponse )

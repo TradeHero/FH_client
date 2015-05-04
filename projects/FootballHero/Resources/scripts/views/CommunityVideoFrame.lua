@@ -74,7 +74,6 @@ function loadFrame( parent, highLightInfo )
 
         time:setText( info["Time"] )
         title:setText( info["Title"] )
-        thumbnail:setEnabled( false )
 
         local playHandler = function( sender, eventType )
             if eventType == TOUCH_EVENT_ENDED then
@@ -134,6 +133,8 @@ function loadThumbnailImage( imageUrlKey, i, thumbnail )
             if mWidget and thumbnail and path then
                 thumbnail:loadTexture( path )
                 thumbnail:setEnabled( true )
+                thumbnail:ignoreContentAdaptWithSize( false )
+                thumbnail:setSize( CCSize:new( 620, 280 ) )
             end
         end
         

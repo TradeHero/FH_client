@@ -33,12 +33,13 @@ function loadFrame( videoURL, youtubeKey )
     subtitle:setText( Constants.String.community.highlight_subtitle )
     disclaimer:setText( Constants.String.community.highlight_disclaimer )
     
-    thumbnail:setEnabled( false )
     if youtubeKey then
         local handler = function( path )
             if mWidget and thumbnail and path then
                 thumbnail:loadTexture( path )
                 thumbnail:setEnabled( true )
+                thumbnail:ignoreContentAdaptWithSize( false )
+                thumbnail:setSize( CCSize:new( 400, 260 ) )
             end
         end
         

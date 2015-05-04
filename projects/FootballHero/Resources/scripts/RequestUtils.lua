@@ -254,7 +254,11 @@ function messageHandler( requestInfo, isSucceed, body, header, status, errorBuff
     end
 
     if responseError then
-        onRequestFailedByErrorCode( "default" )
+        if requestInfo["ignoreJsonDecodeError"] then
+            -- Do nothing.
+        else
+            onRequestFailedByErrorCode( "default" )
+        end
         return
     end
     

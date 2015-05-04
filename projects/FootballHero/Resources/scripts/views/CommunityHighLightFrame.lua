@@ -84,7 +84,6 @@ function loadFrame( parent, highLightInfo )
         teamImage2:loadTexture( TeamConfig.getLogo( TeamConfig.getConfigIdByKey( info["AwayID"] ) ) )
         time:setText( info["Time"] )
         score:setText( info["HomeGoal"].." - "..info["AwayGoal"] )
-        thumbnail:setEnabled( false )
 
         local playHandler = function( sender, eventType )
             if eventType == TOUCH_EVENT_ENDED then
@@ -158,6 +157,8 @@ function loadThumbnailImage( info, i, thumbnail )
                         if mWidget and thumbnail and path then
                             thumbnail:loadTexture( path )
                             thumbnail:setEnabled( true )
+                            thumbnail:ignoreContentAdaptWithSize( false )
+                            thumbnail:setSize( CCSize:new( 620, 280 ) )
                         end
                     end
                     

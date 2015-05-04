@@ -205,5 +205,5 @@
     <string>Competition/share_icon.png</string>
   </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>CommunityVideoContent.json</CurrentUIJson>
+  <CurrentUIJson>CommunityPlayVideoFrame.json</CurrentUIJson>
 </UIProject>

@@ -10,7 +10,12 @@
   "designHeight": 1136,
   "designWidth": 640,
   "textures": [],
-  "texturesPng": [],
+  "texturesPng": [
+    "header/footballhero-logo.png",
+    "commonRes/default.png",
+    "community/img-playbtn.png",
+    "Competition/share_icon.png"
+  ],
   "version": "1.6.0.0",
   "widgetTree": {
     "classname": "Panel",
