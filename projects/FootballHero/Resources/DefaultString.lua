@@ -441,7 +441,7 @@ StringsDefault = {
   },
   spinWheel = {
     wheel_title = "Spin-the-Wheel",
-    wheel_sub_des = "Get your daily spin to win prize including Messi Signed Jersey and Real Cash!",
+    wheel_sub_des = "Get your daily spin to win prizes including Messi Signed Jersey and Real Cash!",
     wheel_sub_title = "Spin-the-Wheel!",
     spin_daily = "One spin daily",
     spin_bonus = "BONUS SPIN",

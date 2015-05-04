@@ -160,10 +160,10 @@ function helpInitMatchListcell( cell, cellInfo, Played )
     local imageLock = panelFade:getChildByName("Image_Lock")
     imageLock:setVisible( Played )
 
-    local textTeamHome = tolua.cast( panelFade:getChildByName("TextField_TeamName1"), "TextField" )
+    local textTeamHome = tolua.cast( panelFade:getChildByName("Label_TeamName1"), "Label" )
     local homeTeamId = cellInfo["Home"]["TeamId"]
     textTeamHome:setText( TeamConfig.getTeamName( TeamConfig.getConfigIdByKey( homeTeamId ) ) ) 
-    local textTeamAway = tolua.cast( panelFade:getChildByName("TextField_TeamName2"), "TextField" )
+    local textTeamAway = tolua.cast( panelFade:getChildByName("Label_TeamName2"), "Label" )
     local awayTeamId = cellInfo["Away"]["TeamId"]
     textTeamAway:setText( TeamConfig.getTeamName(TeamConfig.getConfigIdByKey( awayTeamId )) )
 

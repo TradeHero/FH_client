@@ -11,10 +11,11 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
+    "MatchListScene/match_bkg.png",
+    "header/back.png",
     "header/footballhero-logo.png",
-    "commonRes/default.png",
-    "community/img-playbtn.png",
-    "Competition/share_icon.png"
+    "Tutorial/Default Button.png",
+    "community/img-playbtn.png"
   ],
   "version": "1.6.0.0",
   "widgetTree": {

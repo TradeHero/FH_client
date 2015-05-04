@@ -199,11 +199,14 @@
   <ResRelativePath />
   <imageFileList />
   <imagePngList>
-    <string>header/footballhero-logo.png</string>
+    <string>community/img-leaguebox.png</string>
     <string>commonRes/default.png</string>
-    <string>community/img-playbtn.png</string>
-    <string>Competition/share_icon.png</string>
+    <string>lucky8/img-notpick.png</string>
+    <string>lucky8/img-pick.png</string>
+    <string>lucky8/img-startmatch.png</string>
+    <string>lucky8/luck8_img_lock.png</string>
+    <string>GUI/button.png</string>
   </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>CommunityPlayVideoFrame.json</CurrentUIJson>
+  <CurrentUIJson>Lucky8MatchListCell.json</CurrentUIJson>
 </UIProject>
