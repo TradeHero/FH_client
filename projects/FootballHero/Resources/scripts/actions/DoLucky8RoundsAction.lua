@@ -43,7 +43,7 @@ end
 function onRequestRoundsSuccess( json )
     local lucky8Scene = require( "scripts.views.Lucky8Scene" )
     if lucky8Scene.isFrameShown() then
-        lucky8Scene.updateYourPicks( json )
+        lucky8Scene.refreshPageOfPicks( json )
     else
         lucky8Scene.loadFrameWithPicks( json )
     end
