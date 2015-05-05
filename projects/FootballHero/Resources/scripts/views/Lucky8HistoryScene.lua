@@ -90,7 +90,7 @@ function helperInitCells( cell, data )
     else
         txtStartTime:setVisible( false )
         imageResult:setVisible( true )
-        if data["PickId"] == 0 then
+        if data["Picked"] == 0 then
             imageResult:loadTexture( Constants.LUCKY8_IMAGE_PATH .. "luck8_img_missed.png" )
         else
             local isWon = data["Won"]
@@ -112,18 +112,22 @@ function helperInitCells( cell, data )
     local btnHome = tolua.cast( panelFade:getChildByName("Button_1"), "Button" )
     local btnAway = tolua.cast( panelFade:getChildByName("Button_2"), "Button" )
     local btnDraw = tolua.cast( panelFade:getChildByName("Button_Draw"), "Button" )
-    local PickId = data["PickId"]
-    if PickId == data["Home"]["FHOddId"] then
+    local PickId = data["Picked"] --1 = home, 2 = draw, 3 = away
+    if PickId == 1 then
         btnHome:setBright( false )
         btnDraw:setBright( true )
         btnAway:setBright( true )
-    elseif PickId == data["Away"]["FHOddId"] then
+    elseif PickId == 3 then
         btnHome:setBright( true )
         btnDraw:setBright( true )
         btnAway:setBright( false )
-    else
+    elseif PickId == 2 then
         btnHome:setBright( true )
         btnDraw:setBright( false )
+        btnAway:setBright( true )
+    else
+        btnHome:setBright( true )
+        btnDraw:setBright( true )
         btnAway:setBright( true )
     end
 end

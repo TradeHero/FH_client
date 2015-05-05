@@ -250,16 +250,16 @@ function helpInitMatchListcell( cell, cellInfo, Played )
         btnDrawBig:setTouchEnabled( false )
         btnAway:setTouchEnabled( false )
 
-        local PickId = cellInfo["PickId"]
-        if PickId == cellInfo["Home"]["FHOddId"] then
+        local PickId = cellInfo["Picked"] --1 = home, 2 = draw, 3 = away
+        if PickId == 1 then
             btn1:setBright( false )
             btn2:setBright( true )
             btnDraw:setBright( true )
-        elseif PickId == cellInfo["Away"]["FHOddId"] then
+        elseif PickId == 3 then
             btn1:setBright( true )
             btn2:setBright( false )
             btnDraw:setBright( true )
-        elseif PickId == cellInfo["Draw"]["FHOddId"] then
+        elseif PickId == 2 then
             btn1:setBright( true )
             btn2:setBright( true )
             btnDraw:setBright( false )
