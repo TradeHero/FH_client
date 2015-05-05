@@ -69,7 +69,7 @@ function helperInitCells( cell, data )
     local teamId1 = data["Home"]["TeamId"]
     local teamId2 = data["Away"]["TeamId"]
     imageHome:loadTexture( TeamConfig.getLogo( TeamConfig.getConfigIdByKey(teamId1) ) )
-    imageAway:loadTexture( TeamConfig.getLogo( TeamConfig.getConfigIdByKey(teamId1) ) )
+    imageAway:loadTexture( TeamConfig.getLogo( TeamConfig.getConfigIdByKey(teamId2) ) )
 
     local textLeague = tolua.cast( panelFade:getChildByName("Label_League"), "Label" )
     textLeague:setText( data["LeagueName"] )
@@ -79,7 +79,7 @@ function helperInitCells( cell, data )
     local txtDraw = tolua.cast( panelFade:getChildByName("Label_Draw"), "Label" )
     txtDraw:setText( Constants.String.lucky8.draw )
     teamName1:setText( TeamConfig.getTeamName( TeamConfig.getConfigIdByKey( teamId1 ) ) )
-    teamName2:setText( TeamConfig.getTeamName( TeamConfig.getConfigIdByKey( teamId1 ) ) )
+    teamName2:setText( TeamConfig.getTeamName( TeamConfig.getConfigIdByKey( teamId2 ) ) )
 
     local imageResult = tolua.cast( panelFade:getChildByName("Image_Result"), "ImageView" )
     local txtStartTime = tolua.cast( panelFade:getChildByName("Label_StartTime"), "Label" )

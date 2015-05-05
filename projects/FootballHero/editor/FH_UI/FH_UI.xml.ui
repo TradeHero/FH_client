@@ -206,5 +206,5 @@
     <string>lucky8/img-lost.png</string>
   </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>Lucky8HistoryCell.json</CurrentUIJson>
+  <CurrentUIJson>lucky8MainScene.json</CurrentUIJson>
 </UIProject>
