@@ -106,6 +106,39 @@ function updateYourPicks( jsonResponse )
     end
 end
 
+function loadFrameWithPicks( params )
+    mCurrentRoundId = {}
+    local widget = GUIReader:shareReader():widgetFromJsonFile( "scenes/lucky8MainScene.json" )
+    mWidget = widget
+    widget:registerScriptHandler( EnterOrExit )
+    SceneManager.clearNAddWidget( widget )
+    Header.loadFrame( widget, Constants.String.lucky8.lucky8_title, true )
+    Navigator.loadFrame( widget )
+
+    local btnSubmit = tolua.cast( mWidget:getChildByName("Button_Submit"), "Button" )
+    mBtnSubmits = btnSubmit
+    btnSubmit:addTouchEventListener( eventSubmit )
+    local submitTitle = tolua.cast( btnSubmit:getChildByName("Label_Submit"), "Label" )
+    submitTitle:setText( Constants.String.lucky8.btn_submit_title )
+    btnSubmit:setVisible( false )
+
+    initButtonInfo( )
+    updateYourPicks( params )
+
+    for i = 1, table.getn( mTabButtons ) do
+        local btnTab = mTabButtons[ i ]
+        if i == LUCKY8_YOUR_PICKS_INDEX then
+            btnTab:setBright( false )
+            btnTab:setTouchEnabled( false )
+            btnTab:setTitleColor( ccc3( 255, 255, 255 ) )
+        else
+            btnTab:setBright( true )
+            btnTab:setTouchEnabled( true )
+            btnTab:setTitleColor( ccc3( 127, 127, 127 ) )
+        end
+    end
+end
+
 function loadFrame( params )
     mCurrentRoundId = {}
     local widget = GUIReader:shareReader():widgetFromJsonFile( "scenes/lucky8MainScene.json" )
@@ -153,6 +186,19 @@ end
 
 function refreshPage( data )
     initScrollView( data )
+    for i = 1, table.getn( mTabButtons ) do
+        local btnTab = mTabButtons[ i ]
+        if i == LUCKY8_TODAY_MATCHLIST_INDEX then
+            btnTab:setBright( false )
+            btnTab:setTouchEnabled( false )
+            btnTab:setTitleColor( ccc3( 255, 255, 255 ) )
+        else
+            btnTab:setBright( true )
+            btnTab:setTouchEnabled( true )
+            btnTab:setTitleColor( ccc3( 127, 127, 127 ) )
+        end
+    end
+    mBtnSubmits:setVisible( true )
 end
 
 function helpInitMatchListcell( cell, cellInfo, Played )
@@ -402,7 +448,18 @@ function initButtonInfo(  )
     btnRules:setTitleText( Constants.String.lucky8.btn_rules_title )
     bindEventHandler( btnRules, LUCKY8_RULES_INDEX )
 
-    onSelectTab( LUCKY8_TODAY_MATCHLIST_INDEX )
+    for i = 1, table.getn( mTabButtons ) do
+        local btnTab = mTabButtons[ i ]
+        if i == LUCKY8_TODAY_MATCHLIST_INDEX then
+            btnTab:setBright( false )
+            btnTab:setTouchEnabled( false )
+            btnTab:setTitleColor( ccc3( 255, 255, 255 ) )
+        else
+            btnTab:setBright( true )
+            btnTab:setTouchEnabled( true )
+            btnTab:setTitleColor( ccc3( 127, 127, 127 ) )
+        end
+    end
 end
 
 function EnterOrExit( eventType )
