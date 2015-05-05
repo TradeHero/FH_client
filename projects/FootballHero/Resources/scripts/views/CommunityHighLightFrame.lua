@@ -98,6 +98,9 @@ function loadFrame( parent, highLightInfo )
                     local imageUrl = ""
                     if success and videoInfo and type( videoInfo ) == "table" then
                         imageUrl = videoInfo["thumbnail_url"]
+                    else
+                        EventManager:postEvent( Event.Show_Info, { Constants.String.error.video_not_available } )
+                        return
                     end
 
                     local callback = function( success, platType )

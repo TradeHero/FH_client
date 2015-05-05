@@ -129,6 +129,7 @@ StringsDefault = {
     password_short = "Password too short.",
     title_default = "Oops! You've got an error",
     updating_failed = "Update configurations failed. Please retry.",
+    video_not_available = "This video is no longer available.",
   },
   serverError = {
     DEFAULT = "Oops! Please try again...",
