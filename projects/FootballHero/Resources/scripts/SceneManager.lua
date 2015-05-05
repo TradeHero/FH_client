@@ -22,6 +22,7 @@ local DEEPLINK_SPINTHEWHEEL = "spinthewheel"
 local DEEPLINK_FBFH = "FBFH"
 local DEEPLINK_HIGHLIGHT = "FBHighlight"
 local DEEPLINK_VIDEO = "FBVideo"
+local DEEPLINK_GAMECENTER = "gamecenter"
 
 local mSceneGameLayer
 local mKeyPadBackEnabled = true
@@ -301,6 +302,9 @@ function processDeepLink( deepLink, defaultEvent, defaultEventParam )
 
 		elseif deepLinkPage == DEEPLINK_VIDEO then
 			EventManager:postEvent( Event.Enter_Community, { CommunityConfig.COMMUNITY_TAB_ID_VIDEO } )
+
+		elseif deepLinkPage == DEEPLINK_GAMECENTER then
+			EventManager:postEvent( Event.Enter_GameCenter )
 
         else
 			if defaultEvent ~= nil then
