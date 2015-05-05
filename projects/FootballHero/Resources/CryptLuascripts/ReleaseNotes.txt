@@ -2,8 +2,7 @@ Checklist for release
 1. Check version 
 2. Check server 
 3. Check UrbanAirship config 
-4. Make sure game.bin is up-to-date
-
+4. Check the chat room config is point to production.
 
 Server config for connecting to dev:
 {"serverURL":"http://fhapi-dev1.cloudapp.net", "CDNserverURL":"http://fhmainstorage.blob.core.windows.net/fhdevsettings/", "useDev":true, "selfUpdateURL":"http://fhapi-dev1.cloudapp.net/api/misc/checkForAutoUpdate"}

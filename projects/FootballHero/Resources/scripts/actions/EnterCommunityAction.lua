@@ -22,10 +22,19 @@ function action( param )
     end
 
     local url
+    local needRequestHeader = true
     local record = false
     if mTabID == CommunityConfig.COMMUNITY_TAB_ID_COMPETITION then
         url = RequestUtils.GET_COMPETITION_LIST_REST_CALL
         url = url.."?showSpecial=true"
+
+    elseif mTabID == CommunityConfig.COMMUNITY_TAB_ID_HIGHLIGHT then
+        url = RequestUtils.CDN_SERVER_IP.."highlights.txt"
+        needRequestHeader = false
+    elseif 
+        mTabID == CommunityConfig.COMMUNITY_TAB_ID_VIDEO then
+        url = RequestUtils.CDN_SERVER_IP.."videos.txt"
+        needRequestHeader = false
     elseif mTabID == CommunityConfig.COMMUNITY_TAB_ID_LEADERBOARD then
 
         mLeaderboardId = param[2]
@@ -61,7 +70,9 @@ function action( param )
         end
 
         local httpRequest = HttpRequestForLua:create( CCHttpRequest.kHttpGet )
-        httpRequest:addHeader( Logic:getAuthSessionString() )
+        if needRequestHeader then
+            httpRequest:addHeader( Logic:getAuthSessionString() )
+        end
         httpRequest:sendHttpRequest( url, handler )
 
         ConnectingMessage.loadFrame()

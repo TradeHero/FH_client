@@ -195,7 +195,6 @@
 		46C1009116BF786A00F74D54 /* LuaCocos2d.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 46C1008416BF786A00F74D54 /* LuaCocos2d.cpp */; };
 		46C1009216BF786A00F74D54 /* CCLuaObjcBridge.mm in Sources */ = {isa = PBXBuildFile; fileRef = 46C1008916BF786A00F74D54 /* CCLuaObjcBridge.mm */; };
 		46C1009316BF786A00F74D54 /* tolua_fix.c in Sources */ = {isa = PBXBuildFile; fileRef = 46C1008A16BF786A00F74D54 /* tolua_fix.c */; };
-		46C59AD317641FF300F43DC3 /* AudioEngine.lua in Resources */ = {isa = PBXBuildFile; fileRef = 46C59AD117641FF300F43DC3 /* AudioEngine.lua */; };
 		46C59AD417641FF300F43DC3 /* CCBReaderLoad.lua in Resources */ = {isa = PBXBuildFile; fileRef = 46C59AD217641FF300F43DC3 /* CCBReaderLoad.lua */; };
 		730332F11AB9232A00657F74 /* FacebookConnection.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 730332DE1AB9232A00657F74 /* FacebookConnection.framework */; };
 		730332F21AB9232A00657F74 /* WeChatConnection.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 730332DF1AB9232A00657F74 /* WeChatConnection.framework */; };
@@ -860,7 +859,6 @@
 		46C1008916BF786A00F74D54 /* CCLuaObjcBridge.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CCLuaObjcBridge.mm; sourceTree = "<group>"; };
 		46C1008A16BF786A00F74D54 /* tolua_fix.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = tolua_fix.c; sourceTree = "<group>"; };
 		46C1008B16BF786A00F74D54 /* tolua_fix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tolua_fix.h; sourceTree = "<group>"; };
-		46C59AD117641FF300F43DC3 /* AudioEngine.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AudioEngine.lua; sourceTree = "<group>"; };
 		46C59AD217641FF300F43DC3 /* CCBReaderLoad.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CCBReaderLoad.lua; sourceTree = "<group>"; };
 		730332DE1AB9232A00657F74 /* FacebookConnection.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookConnection.framework; sourceTree = "<group>"; };
 		730332DF1AB9232A00657F74 /* WeChatConnection.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = WeChatConnection.framework; sourceTree = "<group>"; };
@@ -2073,7 +2071,6 @@
 		46C59AD017641FF300F43DC3 /* script */ = {
 			isa = PBXGroup;
 			children = (
-				46C59AD117641FF300F43DC3 /* AudioEngine.lua */,
 				46C59AD217641FF300F43DC3 /* CCBReaderLoad.lua */,
 			);
 			path = script;
@@ -3190,7 +3187,6 @@
 				738BA12A193D7FD2008A74F6 /* DES56.lua in Resources */,
 				730D984618DC4317000CA5F9 /* config in Resources */,
 				730332F91AB9232A00657F74 /* ShareSDKFlatShareViewUI.bundle in Resources */,
-				46C59AD317641FF300F43DC3 /* AudioEngine.lua in Resources */,
 				73BFF75F19177A46002F173A /* MD5.lua in Resources */,
 				7314B4B719B715350065D927 /* UAPushSettingsTagsViewController.xib in Resources */,
 				7314B4AD19B715350065D927 /* top-detail.png in Resources */,

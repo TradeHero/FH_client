@@ -62,7 +62,14 @@ EventNameList =
     "Enter_Settings_Select_League",
     "Enter_Settings_Select_Team",
     "Enter_Quickblox_Chatroom",
+    "Enter_Video_Info",
+	"Enter_GameCenter",
+    "Enter_Lucky8",
+    "Enter_Lucky8History",
+    "Enter_LiveScoreScene",
 
+    "Do_Lucky8_Rounds",
+    "Do_Lucky8_Submit",
     "Do_Ask_For_Rate",
     "Do_Ask_For_Comment",
     "Do_Register",
@@ -98,6 +105,7 @@ EventNameList =
     "Do_Send_Quickblox_Chat",
     "Do_Get_Quickblox_Users",
     "Do_Quickblox_Last_Message",
+    "Do_Get_DailyMotion_Video_Info",
 
     "Show_Info",
     "Show_Error_Message",
@@ -119,6 +127,7 @@ EventNameDosenotTrackList =
 { 
     "Enter_Share",
     
+    "Do_Lucky8_Submit",
     "Do_Ask_For_Rate",
     "Do_Ask_For_Comment",
     "Do_Register",
@@ -153,6 +162,7 @@ EventNameDosenotTrackList =
     "Do_Send_Quickblox_Chat",
     "Do_Get_Quickblox_Users",
     "Do_Quickblox_Last_Message",
+    "Do_Get_DailyMotion_Video_Info",
 
     "Do_Startup",
     "Check_Start_Tutorial",

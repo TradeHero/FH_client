@@ -14,6 +14,11 @@ local mStep
 local mHasMoreToLoad
 local mOnlyShowBigPrize
 local mTotalNumCountdown
+local mWhichGame
+
+function updateWhichGame( whichGame )
+    mWhichGame = whichGame
+end
 
 function loadFrame( winners, onlyShowBigPrize, totalNum )
 	local widget = GUIReader:shareReader():widgetFromJsonFile("scenes/SpinWinnersScene.json")
@@ -74,7 +79,7 @@ function initFilter()
                 mOnlyShowBigPrize = true
             end
 
-            EventManager:postEvent( Event.Enter_Spin_winner, { mOnlyShowBigPrize } )
+            EventManager:postEvent( Event.Enter_Spin_winner, { mOnlyShowBigPrize, mWhichGame } )
         end
     end
     local onlyShowBigPrize = tolua.cast( mWidget:getChildByName("CheckBox_bigPrize"), "CheckBox" )
@@ -188,6 +193,6 @@ end
 function scrollViewEventHandler( target, eventType )
     if eventType == SCROLLVIEW_EVENT_BOUNCE_BOTTOM and mHasMoreToLoad then
         mStep = mStep + 1
-        EventManager:postEvent( Event.Load_More_In_Spin_Winner, { mStep, mOnlyShowBigPrize } )
+        EventManager:postEvent( Event.Load_More_In_Spin_Winner, { mStep, mOnlyShowBigPrize, mWhichGame } )
     end
 end

@@ -82,7 +82,7 @@ function onRequestSuccess( response )
     
     local historyMainScene = require("scripts.views.HistoryMainScene")
     if historyMainScene:isFrameShown() then
-        historyMainScene.refreshFrame( mUserId, mCompetitionId, couponHistory, mAdditionalParam, mCountryFilter )
+        --historyMainScene.refreshFrame( mUserId, mCompetitionId, couponHistory, mAdditionalParam, mCountryFilter )
     else
         historyMainScene.loadFrame( mUserId, mCompetitionId, couponHistory, mAdditionalParam, mCountryFilter )
     end

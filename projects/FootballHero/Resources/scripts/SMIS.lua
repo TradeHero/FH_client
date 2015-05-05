@@ -5,27 +5,36 @@ local FileUtils = require("scripts.FileUtils")
 
 local SMI_FOLDER = "SMI/"
 local SPIN_FOLDER = "Spin/"
+local VIDEO_FOLDER = "Video/"
 
-function getSMImagePath( fileUrl, handler )
-	getRemoteFile( fileUrl, SMI_FOLDER, handler )
+function getSMImagePath( fileUrl, handler, preferedFileName )
+	getRemoteFile( fileUrl, SMI_FOLDER, handler, preferedFileName )
 end
 
-function getSpinPrizeImagePath( fileUrl, handler )
-	getRemoteFile( fileUrl, SPIN_FOLDER, handler )
+function getSpinPrizeImagePath( fileUrl, handler, preferedFileName )
+	getRemoteFile( fileUrl, SPIN_FOLDER, handler, preferedFileName )
+end
+
+function getVideoImagePath( fileUrl, handler, preferedFileName )
+	getRemoteFile( fileUrl, VIDEO_FOLDER, handler, preferedFileName )
 end
 
 -- Return the local file path if the file exist.
 -- Otherwise download it, return the local path.
-function getRemoteFile( fileUrl, localFolder, handler )
+function getRemoteFile( fileUrl, localFolder, handler, preferedFileName )
 	local fileName = tostring( fileUrl )
 	
-	local toBeRemove = string.find(fileName, "?")
-	if toBeRemove ~= nil then
-			fileName = string.sub(fileName, 1, toBeRemove - 1)
-	end
+	if preferedFileName then
+		fileName = preferedFileName
+	else
+		local toBeRemove = string.find(fileName, "?")
+		if toBeRemove ~= nil then
+				fileName = string.sub(fileName, 1, toBeRemove - 1)
+		end
 
-	local list = RequestUtils.split( fileName, "/" )
-	fileName = list[table.getn( list )]
+		local list = RequestUtils.split( fileName, "/" )
+		fileName = list[table.getn( list )]	
+	end
 
 	local fileUtils = CCFileUtils:sharedFileUtils()
 	local path = fileUtils:getWritablePath()..localFolder..fileName

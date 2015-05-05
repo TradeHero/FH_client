@@ -24,16 +24,22 @@ function action( param )
             local requestInfo = {}
             requestInfo.requestData = ""
             requestInfo.url = url
+            requestInfo.recordResponse = true
 
-            local handler = function( isSucceed, body, header, status, errorBuffer )
-                RequestUtils.messageHandler( requestInfo, isSucceed, body, header, status, errorBuffer, RequestUtils.HTTP_200, true, onRequestSuccess )
+            local jsonResponseCache = RequestUtils.getResponseCache( url )
+            if jsonResponseCache ~= nil then
+                onRequestSuccess( jsonResponseCache )
+            else
+                local handler = function( isSucceed, body, header, status, errorBuffer )
+                    RequestUtils.messageHandler( requestInfo, isSucceed, body, header, status, errorBuffer, RequestUtils.HTTP_200, true, onRequestSuccess )
+                end
+
+                local httpRequest = HttpRequestForLua:create( CCHttpRequest.kHttpGet )
+                httpRequest:addHeader( Logic:getAuthSessionString() )
+                httpRequest:sendHttpRequest( url, handler )
+
+                ConnectingMessage.loadFrame()
             end
-
-            local httpRequest = HttpRequestForLua:create( CCHttpRequest.kHttpGet )
-            httpRequest:addHeader( Logic:getAuthSessionString() )
-            httpRequest:sendHttpRequest( url, handler )
-
-            ConnectingMessage.loadFrame()
         end
     end
 end

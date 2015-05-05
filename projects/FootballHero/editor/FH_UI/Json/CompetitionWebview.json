@@ -10,7 +10,10 @@
   "designHeight": 1136,
   "designWidth": 640,
   "textures": [],
-  "texturesPng": [],
+  "texturesPng": [
+    "spinWheel/btn-ticket.png",
+    "header/footballhero-logo.png"
+  ],
   "version": "1.6.0.0",
   "widgetTree": {
     "classname": "Panel",
@@ -21,7 +24,7 @@
       "classname": "Panel",
       "name": "Panel_6",
       "ZOrder": 0,
-      "actiontag": 41666396,
+      "actiontag": -1,
       "anchorPointX": 0,
       "anchorPointY": 0,
       "classType": "CocoStudio.EngineAdapterWrap.CSPanel",

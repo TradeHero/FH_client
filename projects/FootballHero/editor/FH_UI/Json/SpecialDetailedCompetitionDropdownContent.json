@@ -11,10 +11,11 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "spinWheel/img-wheel.png",
-    "spinWheel/img-xiaomi.png"
+    "header/footballhero-logo.png",
+    "commonRes/default.png",
+    "community/img-playbtn.png"
   ],
-  "version": "1.5.0.0",
+  "version": "1.6.0.0",
   "widgetTree": {
     "classname": "Panel",
     "name": null,

@@ -330,6 +330,12 @@ void AppDelegate::initPlatformConfig()
     C2DXShareSDK::setPlatformConfig(C2DXPlatTypeWeixiSession, wcConfigDict);
     C2DXShareSDK::setPlatformConfig(C2DXPlatTypeWeixiTimeline, wcConfigDict);
     
+    //Facebook
+    CCDictionary *fbConfigDict = CCDictionary::create();
+    fbConfigDict -> setObject(CCString::create("788386747851675"), "api_key");
+    fbConfigDict -> setObject(CCString::create("698e7f99acc954691bb0250b4dd9d6d2"), "app_secret");
+    C2DXShareSDK::setPlatformConfig(C2DXPlatTypeFacebook, fbConfigDict);
+    
     /**
     //新浪微博
     CCDictionary *sinaConfigDict = CCDictionary::create();
@@ -360,12 +366,7 @@ void AppDelegate::initPlatformConfig()
     CCDictionary *qqConfigDict = CCDictionary::create();
     qqConfigDict -> setObject(CCString::create("100371282"), "app_id");
     C2DXShareSDK::setPlatformConfig(C2DXPlatTypeQQ, qqConfigDict);
-    
-    //Facebook
-    CCDictionary *fbConfigDict = CCDictionary::create();
-    fbConfigDict -> setObject(CCString::create("107704292745179"), "api_key");
-    fbConfigDict -> setObject(CCString::create("38053202e1a5fe26c80c753071f0b573"), "app_secret");
-    C2DXShareSDK::setPlatformConfig(C2DXPlatTypeFacebook, fbConfigDict);
+
     
     //Twitter
     CCDictionary *twConfigDict = CCDictionary::create();

@@ -35,22 +35,46 @@
     <string>CountryDropdownContent.json</string>
     <string>CreateCompetition.json</string>
     <string>CreateCompetitionContent.json</string>
-    <string>ErrorMessage.json</string>
     <string>EmptyTemplate.json</string>
+    <string>ErrorMessage.json</string>
+    <string>GameCenterCell.json</string>
+    <string>GameCenterHeader.json</string>
+    <string>GameCenterScene.json</string>
+    <string>HeaderFrame.json</string>
     <string>HistoryDetail.json</string>
     <string>HistoryDetailClosedContent.json</string>
     <string>HistoryDetailOpenContent.json</string>
     <string>HistoryMainMatchContent.json</string>
     <string>HistoryMainTitle.json</string>
+    <string>HistoryDetailShare.json</string>
     <string>LeagueDropdownContent.json</string>
     <string>LeagueContentWithTransparentBG.json</string>
     <string>LeagueDropdownContent.json</string>
+    <string>Lucky8Header.json</string>
+    <string>Lucky8HistoryCell.json</string>
+    <string>Lucky8HistoryScene.json</string>
+    <string>lucky8MainScene.json</string>
+    <string>Lucky8MatchListCell.json</string>
+    <string>Lucky8RuleCell.json</string>
+    <string>Lucky8WonPrice.json</string>
     <string>MarketingMessage.json</string>
     <string>MatchCenterDiscussionsCommentFrame.json</string>
     <string>MatchCenterDiscussionsContentFrame.json</string>
     <string>MatchCenterDiscussionsDetailScene.json</string>
     <string>MatchCenterDiscussionsFrame.json</string>
     <string>MatchCenterDiscussionsPostScene.json</string>
+    <string>MatchCenterLeagueTable.json</string>
+    <string>MatchCenterOverUnderTable.json</string>
+    <string>MatchCenterStatsBlankGap.json</string>
+    <string>MatchCenterStatsFormTable.json</string>
+    <string>MatchCenterStatsFrame.json</string>
+    <string>MatchCenterStatsL6AwayTitle.json</string>
+    <string>MatchCenterStatsL6Content.json</string>
+    <string>MatchCenterStatsL6HomeTitle.json</string>
+    <string>MatchCenterStatsNoContent.json</string>
+    <string>MatchCenterStatsVSContent.json</string>
+    <string>MatchCenterStatsVSDiagram.json</string>
+    <string>MatchCenterStatsVSTitle.json</string>
     <string>MatchCenterTopScene.json</string>
     <string>MatchDate.json</string>
     <string>MatchListContent.json</string>
@@ -155,6 +179,16 @@
     <string>MatchCenterStatsFormTable.json</string>
     <string>MatchCenterOverUnderTable.json</string>
     <string>MatchCenterLeagueTable.json</string>
+    <string>CommunityHighLightFrame.json</string>
+    <string>CommunityHighLightContent.json</string>
+    <string>CommunityPlayVideoFrame.json</string>
+    <string>CommunityVideoFrame.json</string>
+    <string>CommunityVideoContent.json</string>
+    <string>YourPicksCell.json</string>
+    <string>LiveScoreScene.json</string>
+    <string>LiveScoreDateCell.json</string>
+    <string>LiveScoreCell.json</string>
+    <string>LiveScoreMatchCell.json</string>
   </JsonList>
   <CanvasSize>
     <Width>640</Width>
@@ -165,8 +199,12 @@
   <ResRelativePath />
   <imageFileList />
   <imagePngList>
-    <string>MatchCentre/img-blackbox.png</string>
+    <string>community/img-leaguebox.png</string>
+    <string>commonRes/default.png</string>
+    <string>lucky8/img-notpick.png</string>
+    <string>lucky8/img-pick.png</string>
+    <string>lucky8/img-lost.png</string>
   </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>MatchCenterStatsVSTitle.json</CurrentUIJson>
+  <CurrentUIJson>lucky8MainScene.json</CurrentUIJson>
 </UIProject>

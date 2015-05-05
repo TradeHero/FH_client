@@ -20,7 +20,8 @@ local mCallback
 function action( param )
 	local shareId = param[1]
     mCallback = param[2]
-    local shareStringParam = param[3]
+    local shareStringParam = param[3] or ""
+    local shareImageURL = param[4]
     
     ConnectingMessage.loadFrame()
     local shareContent = ShareConfig.getContentDictionaryById( shareId )
@@ -34,6 +35,20 @@ function action( param )
     local shareTitleFomat = shareContent:valueForKey("title"):getCString()
     local shareTitleString = string.format( shareTitleFomat, shareStringParam )
     shareContent:setObject( CCString:create( shareTitleString ), "title" )
+
+    -- Update the image
+    local shareImage = shareContent:valueForKey("image"):getCString()
+    if shareImage == ShareConfig.SCREEN_SHOT then
+    	local fileUtils = CCFileUtils:sharedFileUtils()
+    	local shareImageLocalPath = fileUtils:getWritablePath()..Constants.SCREEN_SHOT_IMAGE_NAME
+    	if fileUtils:isFileExist( shareImageLocalPath ) then
+    		shareContent:setObject( CCString:create( fileUtils:fullPathForFilename( shareImageLocalPath ) ), "image" )
+    	else
+    		shareContent:setObject( CCString:create( "" ), "image" )
+    	end
+    elseif shareImage == ShareConfig.PARAM_VALUE then
+    	shareContent:setObject( CCString:create( shareImageURL ), "image" )
+    end
     
     C2DXShareSDK:showShareMenu( nil, shareContent, shareHandler )
 end

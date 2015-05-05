@@ -10,11 +10,14 @@ local Constants = require("scripts.Constants")
 local MatchCenterConfig = require("scripts.config.MatchCenter")
 local Header = require("scripts.views.HeaderFrame")
 local ViewUtils = require("scripts.views.ViewUtils")
+local ShareConfig = require("scripts.config.Share")
+local Logic = require("scripts.Logic").getInstance()
 
 
 local CONTENT_FADEIN_TIME = 1
 
 local mWidget
+local mUserId
 local mIsOpen
 local mGameCouponsDTOs
 
@@ -22,7 +25,8 @@ local mHomeTeamId
 local mAwayTeamId
 
 -- DS for matchInof, see CouponHistoryData
-function loadFrame( isOpen, matchInfo )
+function loadFrame( userId, isOpen, matchInfo )
+    mUserId = userId
 	mIsOpen = isOpen
     mGameCouponsDTOs = matchInfo["GameCouponsDTOs"]
 
@@ -89,6 +93,16 @@ function initContent( matchId )
     end
 
     seqArray:addObject( CCCallFuncN:create( function()
+        if mUserId == Logic:getUserId() and not mIsOpen then
+            local content = GUIReader:shareReader():widgetFromJsonFile( "scenes/HistoryDetailShare.json" )
+            content:setLayoutParameter( layoutParameter )
+            contentContainer:addChild( content )
+            contentHeight = contentHeight + content:getSize().height
+
+            local shareButton = tolua.cast( content:getChildByName("Button_Share"), "Button" )
+            shareButton:addTouchEventListener( shareEventHandler )
+        end
+
         contentContainer:setInnerContainerSize( CCSize:new( 0, contentHeight ) )
         local layout = tolua.cast( contentContainer, "Layout" )
         layout:requestDoLayout()
@@ -225,5 +239,17 @@ function initCouponInfo( content, info )
     else
         points:setText( string.format( Constants.String.num_of_points, info["Profit"] ) )
         winLoseLabel:setText(Constants.String.history.won_colon)
+    end
+end
+
+function shareEventHandler( sender, eventType )
+    if eventType == TOUCH_EVENT_ENDED then
+        SceneManager.takeScreenShot()
+        
+        local callback = function( success, platType )
+            -- Do nothing.
+        end
+
+        EventManager:postEvent( Event.Enter_Share, { ShareConfig.SHARE_PREDRESULT, callback, TeamConfig.getTeamName( mHomeTeamId ).." VS "..TeamConfig.getTeamName( mAwayTeamId ) } )
     end
 end

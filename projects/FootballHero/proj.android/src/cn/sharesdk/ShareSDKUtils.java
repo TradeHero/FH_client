@@ -208,7 +208,11 @@ public class ShareSDKUtils {
 		String name = ShareSDK.platformIdToName(platformId);
 		Platform plat = ShareSDK.getPlatform(context, name);
 		plat.setPlatformActionListener(paListaner);
-		plat.authorize();
+        if (name.equalsIgnoreCase("Facebook")) {
+            plat.authorize(new String[] {"public_profile", "user_friends", "email"});
+        } else {
+            plat.authorize();
+        }
 	}
 
 	public static void removeAccount(int platformId) {
