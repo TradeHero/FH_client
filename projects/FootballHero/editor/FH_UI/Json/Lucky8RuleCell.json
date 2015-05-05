@@ -10,25 +10,31 @@
   "designHeight": 1136,
   "designWidth": 640,
   "textures": [],
-  "texturesPng": [],
+  "texturesPng": [
+    "community/img-leaguebox.png",
+    "commonRes/default.png",
+    "lucky8/img-notpick.png",
+    "lucky8/img-pick.png",
+    "lucky8/img-lost.png"
+  ],
   "version": "1.6.0.0",
   "widgetTree": {
     "classname": "Panel",
     "name": null,
     "children": [
       {
-        "classname": "TextField",
+        "classname": "Label",
         "name": null,
         "children": [],
         "options": {
-          "__type": "TextFieldSurrogate:#EditorCommon.JsonModel.Component.GUI",
-          "classname": "TextField",
-          "name": "TextField_Rule",
+          "__type": "LabelSurrogate:#EditorCommon.JsonModel.Component.GUI",
+          "classname": "Label",
+          "name": "Label_Rule",
           "ZOrder": 0,
-          "actiontag": 25367518,
+          "actiontag": 23237741,
           "anchorPointX": 0.5,
           "anchorPointY": 0.5,
-          "classType": "CocoStudio.EngineAdapterWrap.CSTextField",
+          "classType": "CocoStudio.EngineAdapterWrap.CSLabel",
           "colorB": 255,
           "colorG": 255,
           "colorR": 255,
@@ -48,8 +54,8 @@
           "sizePercentX": 0.921875,
           "sizePercentY": 0.986754954,
           "sizeType": 0,
-          "tag": 37957,
-          "touchAble": true,
+          "tag": 45316,
+          "touchAble": false,
           "useMergedTexture": false,
           "visible": true,
           "width": 590,
@@ -60,12 +66,10 @@
           "fontFile": null,
           "fontName": "fonts/HelveticaNeue.ttf",
           "fontSize": 25,
-          "maxLength": 10,
-          "maxLengthEnable": false,
-          "passwordEnable": false,
-          "passwordStyleText": "*",
-          "placeHolder": "input words here",
-          "text": "Text Field"
+          "hAlignment": 0,
+          "text": "",
+          "touchScaleEnable": false,
+          "vAlignment": 0
         }
       }
     ],

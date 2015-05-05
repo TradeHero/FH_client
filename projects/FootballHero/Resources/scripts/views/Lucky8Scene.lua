@@ -118,7 +118,7 @@ function loadFrame( params )
     local btnSubmit = tolua.cast( mWidget:getChildByName("Button_Submit"), "Button" )
     mBtnSubmits = btnSubmit
     btnSubmit:addTouchEventListener( eventSubmit )
-    local submitTitle = tolua.cast( btnSubmit:getChildByName("TextField_Submit"), "TextField" )
+    local submitTitle = tolua.cast( btnSubmit:getChildByName("Label_Submit"), "Label" )
     submitTitle:setText( Constants.String.lucky8.btn_submit_title )
 
     initButtonInfo( )
@@ -167,7 +167,7 @@ function helpInitMatchListcell( cell, cellInfo, Played )
     local awayTeamId = cellInfo["Away"]["TeamId"]
     textTeamAway:setText( TeamConfig.getTeamName(TeamConfig.getConfigIdByKey( awayTeamId )) )
 
-    local LeagueName = tolua.cast( panelFade:getChildByName("TextField_Legaue"), "TextField" )
+    local LeagueName = tolua.cast( panelFade:getChildByName("Label_League"), "Label" )
     LeagueName:setText( cellInfo["LeagueName"] )
 
     local team1 = tolua.cast( panelFade:getChildByName("Image_Team1"), "ImageView" )
@@ -176,7 +176,7 @@ function helpInitMatchListcell( cell, cellInfo, Played )
     team2:loadTexture( TeamConfig.getLogo( TeamConfig.getConfigIdByKey(awayTeamId)) ) 
 
     local timeDisplay = os.date( "%b %d %H:%M", cellInfo["StartTime"] )
-    local textFieldTime = tolua.cast( panelFade:getChildByName("TextField_Time"), "TextField" )
+    local textFieldTime = tolua.cast( panelFade:getChildByName("Label_Time"), "Label" )
     textFieldTime:setText( timeDisplay )
 
     local labelScore = tolua.cast( panelFade:getChildByName("Label_Score_0" ), "Label" )
@@ -347,7 +347,7 @@ function changeTab( index )
         contentContainer:removeAllChildrenWithCleanup( true )
         mScrollViewHeight = 0
         local cell = SceneManager.widgetFromJsonFile( CELL_RES_STRING[index] )
-        local text = tolua.cast( cell:getChildByName("TextField_Rule"), "TextField" )
+        local text = tolua.cast( cell:getChildByName("Label_Rule"), "Label" )
         text:setText( Constants.String.lucky8.lucky8_rule )
         contentContainer:addChild( cell )
         mScrollViewHeight = mScrollViewHeight + cell:getSize().height
@@ -390,8 +390,8 @@ function initButtonInfo(  )
     local btnMatchLists = tolua.cast( mWidget:getChildByName( "Button_MatchLists" ), "Button" )
     table.insert( mTabButtons, btnMatchLists )
     bindEventHandler( btnMatchLists, LUCKY8_TODAY_MATCHLIST_INDEX )
-    local txtDate = tolua.cast( btnMatchLists:getChildByName( "TextField_Date" ), "TextField" )
-    local txtWeekDay = tolua.cast( btnMatchLists:getChildByName("TextField_WeekDay"), "TextField" )
+    local txtDate = tolua.cast( btnMatchLists:getChildByName( "Label_Date" ), "Label" )
+    local txtWeekDay = tolua.cast( btnMatchLists:getChildByName("Label_WeekDay"), "Label" )
     local displayDate = os.date( "%b %d", os.time() )
     local displayWeekDay = os.date( "%A", os.time() )
     txtDate:setText( displayDate )

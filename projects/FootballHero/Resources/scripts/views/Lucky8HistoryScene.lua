@@ -24,7 +24,7 @@ function loadFrame( param, cellInfo )
 end
 
 function initResultText( cellInfo )
-    local textResult = tolua.cast( mWidget:getChildByName("TextField_4"), "TextField" )
+    local textResult = tolua.cast( mWidget:getChildByName("Label_4"), "Label" )
     local PredictionsCorrect = cellInfo["PredictionsCorrect"]
     local PredictionsMade = cellInfo["PredictionsMade"]
     local text = string.format( "You've got %d out of %d games correct", PredictionsCorrect, PredictionsMade )
@@ -49,10 +49,10 @@ function showPrizeScene( isShow )
     local btnClaim = tolua.cast( wonPrice:getChildByName("Button_Claim"), "Button" )
     btnClaim:addTouchEventListener( eventClaim )
 
-    local claimText = tolua.cast( btnClaim:getChildByName("TextField_Claim"), "TextField" )
+    local claimText = tolua.cast( btnClaim:getChildByName("Label_Claim"), "Label" )
     claimText:setText( Constants.String.lucky8.won_prize_btn_claim )
 
-    local wonText = tolua.cast( wonPrice:getChildByName("TextField_Won"), "TextField" )
+    local wonText = tolua.cast( wonPrice:getChildByName("Label_Won"), "Label" )
     wonText:setText( Constants.String.lucky8.won_prize_won_txt )
 end
 
@@ -71,18 +71,18 @@ function helperInitCells( cell, data )
     imageHome:loadTexture( TeamConfig.getLogo( TeamConfig.getConfigIdByKey(teamId1) ) )
     imageAway:loadTexture( TeamConfig.getLogo( TeamConfig.getConfigIdByKey(teamId1) ) )
 
-    local textLeague = tolua.cast( panelFade:getChildByName("TextField_Legaue"), "TextField" )
+    local textLeague = tolua.cast( panelFade:getChildByName("Label_League"), "Label" )
     textLeague:setText( data["LeagueName"] )
 
-    local teamName1 = tolua.cast( panelFade:getChildByName("TextField_TeamName1"), "TextField" )
-    local teamName2 = tolua.cast( panelFade:getChildByName("TextField_TeamName2"), "TextField" )
-    local txtDraw = tolua.cast( panelFade:getChildByName("TextField_Draw"), "TextField" )
+    local teamName1 = tolua.cast( panelFade:getChildByName("Label_TeamName1"), "Label" )
+    local teamName2 = tolua.cast( panelFade:getChildByName("Label_TeamName2"), "Label" )
+    local txtDraw = tolua.cast( panelFade:getChildByName("Label_Draw"), "Label" )
     txtDraw:setText( Constants.String.lucky8.draw )
     teamName1:setText( TeamConfig.getTeamName( TeamConfig.getConfigIdByKey( teamId1 ) ) )
     teamName2:setText( TeamConfig.getTeamName( TeamConfig.getConfigIdByKey( teamId1 ) ) )
 
     local imageResult = tolua.cast( panelFade:getChildByName("Image_Result"), "ImageView" )
-    local txtStartTime = tolua.cast( panelFade:getChildByName("TextField_StartTime"), "TextField" )
+    local txtStartTime = tolua.cast( panelFade:getChildByName("Label_StartTime"), "Label" )
     if os.time() < data["StartTime"] then
         imageResult:setVisible( false )
         txtStartTime:setText( os.date( "%b %d %H:%M", data["StartTime"] ) )
