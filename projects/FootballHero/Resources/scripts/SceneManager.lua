@@ -52,6 +52,9 @@ function init()
 
     RateManager.init()
 
+    package.path = package.path .. ";"..CCFileUtils:sharedFileUtils():getWritablePath().."local/?.lua"
+    CCLuaLog( "Package path is "..package.path )
+
     initEvents()
 
     math.randomseed(os.time())
