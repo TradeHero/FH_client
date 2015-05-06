@@ -67,7 +67,7 @@ function onRequestSuccess( jsonResponse )
     local configMd5Info = jsonResponse["ConfigMd5Info"]
     local displayName = jsonResponse["DisplayName"]
     local pictureUrl = jsonResponse["PictureUrl"]
-    local startLeagueId = Constants.SpecialLeagueIds.UPCOMING_MATCHES --jsonResponse["StartLeagueId"]
+    local startLeagueId = Constants.SpecialLeagueIds.MOST_POPULAR --jsonResponse["StartLeagueId"]
     local balance = jsonResponse["Balance"]
     local active = jsonResponse["ActiveInCompetition"]
     local FbId = jsonResponse["FbId"]
