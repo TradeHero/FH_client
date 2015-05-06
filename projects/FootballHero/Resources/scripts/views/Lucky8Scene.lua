@@ -278,8 +278,14 @@ function helpInitMatchListcell( cell, cellInfo, Played )
     else
         local imageStart = tolua.cast( panelFade:getChildByName("Image_Started"), "ImageView" )
         if os.time() > cellInfo["StartTime"] then
-            imageStart:setVisible( true )
-            textFieldTime:setVisible( false )
+            if type( cellInfo["ScoreString"] ) == "userdata" then
+                imageStart:setVisible( true )
+                textFieldTime:setVisible( false )
+            else
+                labelScore:setText( cellInfo["ScoreString"] )
+                imageStart:setVisible( false )
+                textFieldTime:setVisible( true )
+            end
             btnHome:setTouchEnabled( false )
             btnDrawBig:setTouchEnabled( false )
             btnAway:setTouchEnabled( false )

@@ -94,9 +94,7 @@ function helperInitCells( cell, data )
             imageResult:loadTexture( Constants.LUCKY8_IMAGE_PATH .. "luck8_img_missed.png" )
         else
             if type( data["ScoreString"] ) == "userdata" then
-                txtStartTime:setVisible( true )
-                txtStartTime:setText( Constants.String.lucky8.game_started )
-                imageResult:setVisible( false )
+                imageResult:loadTexture( Constants.LUCKY8_IMAGE_PATH .. "img-startmatch.png" )
             else
                 local isWon = data["Won"]
                 if isWon == true then
