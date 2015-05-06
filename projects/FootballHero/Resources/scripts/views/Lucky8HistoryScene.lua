@@ -93,11 +93,17 @@ function helperInitCells( cell, data )
         if data["Picked"] == 0 then
             imageResult:loadTexture( Constants.LUCKY8_IMAGE_PATH .. "luck8_img_missed.png" )
         else
-            local isWon = data["Won"]
-            if isWon == true then
-                imageResult:loadTexture( Constants.LUCKY8_IMAGE_PATH .. "lucky8_img_won.png" )
+            if type( data["ScoreString"] ) == "userdata" then
+                txtStartTime:setVisible( true )
+                txtStartTime:setText( Constants.String.lucky8.game_started )
+                imageResult:setVisible( false )
             else
-                imageResult:loadTexture( Constants.LUCKY8_IMAGE_PATH .. "lucky8_img_lost.png" )
+                local isWon = data["Won"]
+                if isWon == true then
+                    imageResult:loadTexture( Constants.LUCKY8_IMAGE_PATH .. "lucky8_img_won.png" )
+                else
+                    imageResult:loadTexture( Constants.LUCKY8_IMAGE_PATH .. "lucky8_img_lost.png" )
+                end
             end
         end
     end
