@@ -70,7 +70,7 @@ function getTeamName( id )
 	end
 end
 
-function getLogo( id )
+function getLogo( id, isHome )
 	local config = getConfig( id )
 
 	if config ~= nil then
@@ -79,10 +79,18 @@ function getLogo( id )
 		if fileUtils:isFileExist( filePath ) then
 			return Constants.TEAM_IMAGE_PATH..config["Id"]..".png"
 		else
-			return Constants.TEAM_IMAGE_PATH.."default.png"
+			if isHome then
+				return Constants.TEAM_IMAGE_PATH.."default-home.png"
+			else
+				return Constants.TEAM_IMAGE_PATH.."default-away.png"
+			end
 		end
 	else
-		return Constants.TEAM_IMAGE_PATH.."default.png"
+		if isHome then
+			return Constants.TEAM_IMAGE_PATH.."default-home.png"
+		else
+			return Constants.TEAM_IMAGE_PATH.."default-away.png"
+		end
 	end
 end
 

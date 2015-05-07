@@ -223,9 +223,9 @@ function helpInitMatchListcell( cell, cellInfo, Played )
     LeagueName:setText( cellInfo["LeagueName"] )
 
     local team1 = tolua.cast( panelFade:getChildByName("Image_Team1"), "ImageView" )
-    team1:loadTexture( TeamConfig.getLogo( TeamConfig.getConfigIdByKey(homeTeamId)) )
+    team1:loadTexture( TeamConfig.getLogo( TeamConfig.getConfigIdByKey( homeTeamId ), true ) )
     local team2 = tolua.cast( panelFade:getChildByName("Image_Team2"), "ImageView" )
-    team2:loadTexture( TeamConfig.getLogo( TeamConfig.getConfigIdByKey(awayTeamId)) ) 
+    team2:loadTexture( TeamConfig.getLogo( TeamConfig.getConfigIdByKey( awayTeamId ), false ) ) 
 
     local timeDisplay = os.date( "%b %d %H:%M", cellInfo["StartTime"] )
     local textFieldTime = tolua.cast( panelFade:getChildByName("Label_Time"), "Label" )

@@ -89,7 +89,7 @@ function initTeamsList( contentContainer, leagueId )
         local teamKey = leagueTeams[i]["teamId"]
         local teamId = TeamConfig.getConfigIdByKey( teamKey )
         local teamName = TeamConfig.getTeamName( teamId )
-        local teamLogo = TeamConfig.getLogo( teamId )
+        local teamLogo = TeamConfig.getLogo( teamId, true )
     
         local content = SceneManager.widgetFromJsonFile( "scenes/SettingsTeamListContentFrame.json" )
         contentContainer:addChild( content, 0, childIndex )

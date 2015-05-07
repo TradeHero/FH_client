@@ -145,9 +145,9 @@ function initCouponInfo( content, info )
     if marketType == MarketConfig.MARKET_TYPE_MATCH then
         answerString = Constants.String.history.which_team
         if info["OutcomeSide"] == MarketConfig.ODDS_TYPE_ONE_OPTION then
-            choiceImage = TeamConfig.getLogo( mHomeTeamId )
+            choiceImage = TeamConfig.getLogo( mHomeTeamId, true )
         elseif info["OutcomeSide"] == MarketConfig.ODDS_TYPE_TWO_OPTION then
-            choiceImage = TeamConfig.getLogo( mAwayTeamId )
+            choiceImage = TeamConfig.getLogo( mAwayTeamId, false )
         elseif info["OutcomeSide"] == MarketConfig.ODDS_TYPE_THREE_OPTION then
             choiceImage = Constants.PREDICTION_CHOICE_IMAGE_PATH.."img-draw-blue.png"
         end

@@ -184,7 +184,7 @@ function initSettingsFavoriteTeam( contentContainer, settingsSubItem )
             local teamKey = mFavoriteTeams[i]
             local teamId = TeamConfig.getConfigIdByKey( teamKey )
             local teamName = TeamConfig.getTeamName( teamId )
-            local teamLogo = TeamConfig.getLogo( teamId )
+            local teamLogo = TeamConfig.getLogo( teamId, true )
 
             contentHeight = contentHeight + addFavoriteTeam( contentContainer, teamName, teamLogo, teamKey )
         end

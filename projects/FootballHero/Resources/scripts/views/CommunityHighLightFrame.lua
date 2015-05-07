@@ -80,8 +80,8 @@ function loadFrame( parent, highLightInfo )
 
         teamName1:setText( TeamConfig.getTeamName( TeamConfig.getConfigIdByKey( info["HomeID"] ) ) )
         teamName2:setText( TeamConfig.getTeamName( TeamConfig.getConfigIdByKey( info["AwayID"] ) ) )
-        teamImage1:loadTexture( TeamConfig.getLogo( TeamConfig.getConfigIdByKey( info["HomeID"] ) ) )
-        teamImage2:loadTexture( TeamConfig.getLogo( TeamConfig.getConfigIdByKey( info["AwayID"] ) ) )
+        teamImage1:loadTexture( TeamConfig.getLogo( TeamConfig.getConfigIdByKey( info["HomeID"] ), true ) )
+        teamImage2:loadTexture( TeamConfig.getLogo( TeamConfig.getConfigIdByKey( info["AwayID"] ), false ) )
         time:setText( info["Time"] )
         score:setText( info["HomeGoal"].." - "..info["AwayGoal"] )
 

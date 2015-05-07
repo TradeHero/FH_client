@@ -68,8 +68,8 @@ function helperInitCells( cell, data )
     local imageAway = tolua.cast( panelFade:getChildByName("Image_Team2"), "ImageView" )
     local teamId1 = data["Home"]["TeamId"]
     local teamId2 = data["Away"]["TeamId"]
-    imageHome:loadTexture( TeamConfig.getLogo( TeamConfig.getConfigIdByKey(teamId1) ) )
-    imageAway:loadTexture( TeamConfig.getLogo( TeamConfig.getConfigIdByKey(teamId2) ) )
+    imageHome:loadTexture( TeamConfig.getLogo( TeamConfig.getConfigIdByKey( teamId1 ), true ) )
+    imageAway:loadTexture( TeamConfig.getLogo( TeamConfig.getConfigIdByKey( teamId2 ), false ) )
 
     local textLeague = tolua.cast( panelFade:getChildByName("Label_League"), "Label" )
     textLeague:setText( data["LeagueName"] )
