@@ -151,7 +151,7 @@ function initEvents()
 	EventManager:registerEventHandler( Event.Do_Get_Quickblox_Users, "scripts.actions.DoGetQuickbloxUsersAction" )
 	EventManager:registerEventHandler( Event.Do_Quickblox_Last_Message, "scripts.actions.DoQuickbloxLastMessageAction" )
 	EventManager:registerEventHandler( Event.Do_Get_DailyMotion_Video_Info, "scripts.actions.DoGetDailyMotionVideoInfoAction" )
-	
+	EventManager:registerEventHandler( Event.Do_Get_IP_Info, "scripts.actions.DoGetIPInfoAction" )
 
 	EventManager:registerEventHandler( Event.Show_Error_Message, "scripts.actions.ShowErrorMessageAction" )
 	EventManager:registerEventHandler( Event.Show_Choice_Message, "scripts.actions.ShowChoiceMessageAction" )

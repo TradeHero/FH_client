@@ -1,5 +1,8 @@
 module(..., package.seeall)
 
+local EventManager = require("scripts.events.EventManager").getInstance()
+local Event = require("scripts.events.Event").EventList
+
 local Json = require("json")
 
 KEY_OF_LANGUAGE = "app-language"
@@ -64,4 +67,20 @@ function updateUALanguageTag()
 	local tagsToAdd = {}
 	table.insert( tagsToAdd, languageTag )
 	Misc:sharedDelegate():addUATags( Json.encode( tagsToAdd ) )
+
+	-- Add the location tag.
+	local callback = function( success, jsonResponse )
+		if success and type( jsonResponse ) == "table" then
+			local countryString = jsonResponse["country"]
+			if countryString then
+				CCLuaLog( "UA tag country "..countryString )
+
+				local countryTags = {}
+				table.insert( countryTags, countryString )
+				Misc:sharedDelegate():addUATags( Json.encode( countryTags ) )
+			end
+		end
+	end
+
+	EventManager:postEvent( Event.Do_Get_IP_Info, { callback } )
 end

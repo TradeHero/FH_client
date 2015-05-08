@@ -106,6 +106,7 @@ EventNameList =
     "Do_Get_Quickblox_Users",
     "Do_Quickblox_Last_Message",
     "Do_Get_DailyMotion_Video_Info",
+    "Do_Get_IP_Info",
 
     "Show_Info",
     "Show_Error_Message",
@@ -163,6 +164,7 @@ EventNameDosenotTrackList =
     "Do_Get_Quickblox_Users",
     "Do_Quickblox_Last_Message",
     "Do_Get_DailyMotion_Video_Info",
+    "Do_Get_IP_Info",
 
     "Do_Startup",
     "Check_Start_Tutorial",
