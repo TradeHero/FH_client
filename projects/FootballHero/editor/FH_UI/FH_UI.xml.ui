@@ -198,7 +198,12 @@
   <ProjectType>UIProject</ProjectType>
   <ResRelativePath />
   <imageFileList />
-  <imagePngList />
+  <imagePngList>
+    <string>MatchListScene/match_bkg.png</string>
+    <string>community/img-inactivepage.png</string>
+    <string>community/img-activepage.png</string>
+    <string>community/icn-new-message.png</string>
+  </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>ChatroomScene.json</CurrentUIJson>
+  <CurrentUIJson>CommunityBaseScene.json</CurrentUIJson>
 </UIProject>

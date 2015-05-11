@@ -107,6 +107,7 @@ EventNameList =
     "Do_Quickblox_Last_Message",
     "Do_Get_DailyMotion_Video_Info",
     "Do_Get_IP_Info",
+    "Do_Check_New",
 
     "Show_Info",
     "Show_Error_Message",
@@ -165,6 +166,7 @@ EventNameDosenotTrackList =
     "Do_Quickblox_Last_Message",
     "Do_Get_DailyMotion_Video_Info",
     "Do_Get_IP_Info",
+    "Do_Check_New",
 
     "Do_Startup",
     "Check_Start_Tutorial",

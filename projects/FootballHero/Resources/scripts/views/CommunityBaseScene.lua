@@ -13,6 +13,8 @@ local CommunityHighLightFrame = require("scripts.views.CommunityHighLightFrame")
 local CommunityVideoFrame = require("scripts.views.CommunityVideoFrame")
 local Minigame = require("scripts.data.Minigame").Minigame
 local Header = require("scripts.views.HeaderFrame")
+local CheckListConfig = require("scripts.data.CheckList")
+
 
 local mWidget
 local mTabID
@@ -82,6 +84,17 @@ function initCommunityTab( tabInfo, tabId )
         tab:setTitleColor( ccc3( 127, 127, 127 ) )
         tab:addTouchEventListener( eventHandler )
     end
+
+    if tabId == CommunityConfig.COMMUNITY_TAB_ID_HIGHLIGHT then
+        local isNew = CheckListConfig.isItemNew( CheckListConfig.CHECK_LIST_HIGHLIGHTS )
+        local newFlag = tab:getChildByName("Image_new")
+        newFlag:setEnabled( isNew )
+        
+    elseif tabId == CommunityConfig.COMMUNITY_TAB_ID_VIDEO then
+        local isNew = CheckListConfig.isItemNew( CheckListConfig.CHECK_LIST_VIDEOS )
+        local newFlag = tab:getChildByName("Image_new")
+        newFlag:setEnabled( isNew )
+    end
 end
 
 function loadMainContent( contentContainer, jsonResponse, leaderboardId, subType, minigameResponse )
@@ -98,6 +111,12 @@ end
 
 function onSelectTab( tabID )
     EventManager:postEvent( Event.Enter_Community, { tabID, 1, 1, Constants.FILTER_MIN_PREDICTION } )
+
+    if tabID == CommunityConfig.COMMUNITY_TAB_ID_HIGHLIGHT then
+        CheckListConfig.clearCheckItemNewFlag( CheckListConfig.CHECK_LIST_HIGHLIGHTS )
+    elseif tabID == CommunityConfig.COMMUNITY_TAB_ID_VIDEO then
+        CheckListConfig.clearCheckItemNewFlag( CheckListConfig.CHECK_LIST_VIDEOS )
+    end
 end
 
 function loadCompetitionScene( contentContainer, jsonResponse, minigameResponse )

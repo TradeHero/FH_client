@@ -72,6 +72,9 @@ function checkNext()
 	        -- Load the saved data for quickblox chat room.
 	        EventManager:postEvent( Event.Do_Quickblox_Last_Message, { "Load" } )
 
+	        -- Load the check list info
+	        EventManager:postEvent( Event.Do_Check_New )
+
 	        ConnectingMessage.selfRemove()
 
 	        -- Init the deep link.
