@@ -10,7 +10,10 @@
   "designHeight": 1136,
   "designWidth": 640,
   "textures": [],
-  "texturesPng": [],
+  "texturesPng": [
+    "chat/img-bahasa.png",
+    "community/img-header.png"
+  ],
   "version": "1.6.0.0",
   "widgetTree": {
     "classname": "Panel",
@@ -45,7 +48,7 @@
           "rotation": 0,
           "scaleX": 1,
           "scaleY": 1,
-          "sizePercentX": 0.0625,
+          "sizePercentX": 0.15625,
           "sizePercentY": 0.3773585,
           "sizeType": 0,
           "tag": 35970,
@@ -145,8 +148,8 @@
           "rotation": 0,
           "scaleX": 1,
           "scaleY": 1,
-          "sizePercentX": 0.040625,
-          "sizePercentY": 0.4716981,
+          "sizePercentX": 0.03125,
+          "sizePercentY": 0.3773585,
           "sizeType": 0,
           "tag": 35975,
           "touchAble": false,

@@ -11,8 +11,8 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "community/img-leaguebox.png",
-    "lucky8/img-newresult.png"
+    "chat/img-bahasa.png",
+    "community/img-header.png"
   ],
   "version": "1.6.0.0",
   "widgetTree": {

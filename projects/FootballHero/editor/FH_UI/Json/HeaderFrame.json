@@ -11,12 +11,8 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "community/img-leaguebox.png",
-    "commonRes/default.png",
-    "lucky8/img-notpick.png",
-    "lucky8/img-pick.png",
-    "lucky8/luck8_img_lock.png",
-    "GUI/button.png"
+    "liveScore/livescore_btn_add.png",
+    "liveScore/livescore_btn_added.png"
   ],
   "version": "1.6.0.0",
   "widgetTree": {

@@ -11,8 +11,8 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "spinWheel/btn-ticket.png",
-    "header/footballhero-logo.png"
+    "liveScore/livescore_btn_add.png",
+    "liveScore/livescore_btn_added.png"
   ],
   "version": "1.6.0.0",
   "widgetTree": {
@@ -102,8 +102,8 @@
           "rotation": 0,
           "scaleX": 1,
           "scaleY": 1,
-          "sizePercentX": 0.390625,
-          "sizePercentY": 0.411111116,
+          "sizePercentX": 0.425,
+          "sizePercentY": 0.366666675,
           "sizeType": 0,
           "tag": 255,
           "touchAble": false,

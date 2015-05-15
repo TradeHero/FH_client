@@ -11,9 +11,8 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "MatchCentre/img-blackbox.png",
-    "community/btn-goarrow.png",
-    "community/btn-goarrow-down.png"
+    "chat/img-bahasa.png",
+    "community/img-header.png"
   ],
   "version": "1.6.0.0",
   "widgetTree": {

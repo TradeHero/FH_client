@@ -11,10 +11,8 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "MatchListScene/match_bkg.png",
-    "community/img-inactivepage.png",
-    "community/img-activepage.png",
-    "community/icn-new-message.png"
+    "chat/img-bahasa.png",
+    "community/img-header.png"
   ],
   "version": "1.6.0.0",
   "widgetTree": {
