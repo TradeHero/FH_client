@@ -41,7 +41,7 @@ function loadFrame( parent, titleText, bHasBackBtn, bHasWebView )
     local btnLive = tolua.cast( mWidget:getChildByName("Button_Live"), "Button" )
     btnLive:addTouchEventListener( eventLiveClicked )
 
-    showLiveButton( true )
+    showLiveButton( false )
 end
 
 function eventLiveClicked( sender, eventType )

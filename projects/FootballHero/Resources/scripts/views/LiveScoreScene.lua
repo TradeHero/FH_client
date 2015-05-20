@@ -135,6 +135,14 @@ function initMatchList( groupedLeagueInfo )
             score:setText( LiveScoreConfig.scoreOrTime( game ) )
             status:setText( LiveScoreConfig.statusOrMinute( game ) )
 
+            for i = 1, 3 do
+                subCell:getChildByName("Image_t1_redcard"..i):setEnabled( game["HomeRedCards"] >= i )
+            end
+
+            for i = 1, 3 do
+                subCell:getChildByName("Image_t2_redcard"..i):setEnabled( game["AwayRedCards"] >= i )
+            end
+
             matchListContent:addChild( subCell )
             height = height + subCell:getSize().height
         end
