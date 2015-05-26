@@ -11,8 +11,9 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "MatchListScene/match_bkg.png",
-    "header/back.png"
+    "liveScore/livescore_btn_add.png",
+    "liveScore/livescore_btn_added.png",
+    "liveScore/icn-redcard.png"
   ],
   "version": "1.6.0.0",
   "widgetTree": {

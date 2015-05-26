@@ -593,7 +593,7 @@ function initWelcome( competitionDetail )
                         end
                     end
 
-                    EventManager:postEvent( Event.Enter_Share, { ShareConfig.SHARE_COMPETITION, callback } )
+                    EventManager:postEvent( Event.Enter_Share, { ShareConfig.SHARE_COMPETITION..mCompetitionToken, callback } )
                 end
             end
             share:addTouchEventListener( shareNClose )
@@ -776,7 +776,7 @@ function shareTypeSelectEventHandler( sender, eventType )
             end
         end
 
-        EventManager:postEvent( Event.Enter_Share, { ShareConfig.SHARE_COMPETITION, callback } )
+        EventManager:postEvent( Event.Enter_Share, { ShareConfig.SHARE_COMPETITION..mCompetitionToken, callback } )
     end
 end
 

@@ -146,8 +146,9 @@
   <ResRelativePath />
   <imageFileList />
   <imagePngList>
-    <string>MatchListScene/match_bkg.png</string>
-    <string>header/back.png</string>
+    <string>liveScore/livescore_btn_add.png</string>
+    <string>liveScore/livescore_btn_added.png</string>
+    <string>liveScore/icn-redcard.png</string>
   </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
   <CurrentUIJson>LiveScoreMatchCell.json</CurrentUIJson>
