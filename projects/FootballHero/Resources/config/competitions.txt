@@ -22,6 +22,17 @@
 	},
 
 	{
+		"token":"seacup15", 
+		"title1":"SEA Games Football Challenge", 
+		"title2":"2015", 
+		"body":"Compete against Southeast Asia's best expert predictors and friends for bragging rights and win prizes!", 
+		"isShare":true, 
+		"rules":"1. All matches available for picks close 1 minute before Kickoff. You cannot cancel your predictions once it is placed.\n\n2. Every player will start with zero profit/loss.\n\n3. Standard stake per match is 1000 points. \"Star\" stake are 3,000 points and can be used once in every half day.\n\n4. All picks will be void if the match is postponed or cancelled.\n\n5. The Ranking List will be updated daily.\n\n6. Any prize offer to winners will be forfeited if it contravenes any applicable laws in your country.\n\n7. Rankings are based on SEA Games Football competition profit.\n\n8. To be eligible to win prizes, users have to make a minimum 6 prediction in the competition.\n\n9. In the case of a tie in profit, a tiebreaker rule comes into effect. Tiebreaker will be Win %. If still tied, most number of predictions made. If still tied, Last 10 best streak. If tied, Last day best profit.\n\n10. Winners must send contact details to support@footballheroapp.com to claim his prize.\n\n11. Judges decision is final",
+		"rulesTextHeightIOS":835,
+		"rulesTextHeightAndroid":1100
+	},
+
+	{
 		"token":"minigame", 
 		"title1":"", 
 		"title2":"", 

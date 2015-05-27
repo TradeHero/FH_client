@@ -40,7 +40,6 @@ function loadFrame( parent, titleText, bHasBackBtn, bHasWebView )
 
     local btnLive = tolua.cast( mWidget:getChildByName("Button_Live"), "Button" )
     btnLive:addTouchEventListener( eventLiveClicked )
-    btnLive:setTouchEnabled( false )
 
     showLiveButton( false )
 end
@@ -48,7 +47,7 @@ end
 function eventLiveClicked( sender, eventType )
     if eventType == TOUCH_EVENT_ENDED then
         CCLuaLog("eventLiveClicked")
-        EventManager:postEvent( Event.Enter_LiveScoreScene )
+        EventManager:postEvent( Event.Enter_LiveScoreScene, { 0, false } )
     end
 end
 

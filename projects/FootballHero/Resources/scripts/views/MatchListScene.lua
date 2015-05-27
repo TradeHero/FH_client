@@ -42,7 +42,7 @@ function loadFrame( matchList, leagueKey )
     SceneManager.clearNAddWidget( widget )
     
     Header.loadFrame( widget, nil, false )
-    Header.showLiveButton( false )
+    Header.showLiveButton( true )
 
     Navigator.loadFrame( widget )
     Navigator.chooseNav( 1 )
@@ -499,7 +499,7 @@ function checkMiniGame()
         end
 
         BG = tolua.cast( minigamePopup:getChildByName( "Image_BG" ), "ImageView" )
-        BG:loadTexture( Constants.COMPETITION_IMAGE_PATH.."popup_fhchamp.png" )
+        BG:loadTexture( Constants.COMPETITION_IMAGE_PATH.."popup_seacup15.png" )
         BG:addTouchEventListener( playEventHandler )
     end
 
@@ -720,7 +720,7 @@ function helperInitMatchInfo( topContent, matchInfo, leagueKey )
             -- match ended
             enableMatchStatus( Constants.String.match_list.match_ended )
             --statusPanel:setEnabled( false )
-        elseif matchInfo["Profit"] == nil then
+        elseif type(matchInfo["Profit"]) == "userdata" then
             
         elseif matchInfo["Profit"] >= 0 then
             -- won

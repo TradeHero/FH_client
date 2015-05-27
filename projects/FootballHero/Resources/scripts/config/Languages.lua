@@ -1,25 +1,28 @@
 module(..., package.seeall)
 
+local EventManager = require("scripts.events.EventManager").getInstance()
+local Event = require("scripts.events.Event").EventList
+
 local Json = require("json")
 
 KEY_OF_LANGUAGE = "app-language"
 local LANGUAGE_NAME = {}
-table.insert( LANGUAGE_NAME, "English" )			-- 0
-table.insert( LANGUAGE_NAME, "Chinese" )			-- 1
-table.insert( LANGUAGE_NAME, "French" )				-- 2
-table.insert( LANGUAGE_NAME, "Italian" )			-- 3
-table.insert( LANGUAGE_NAME, "German" )				-- 4
-table.insert( LANGUAGE_NAME, "Spanish" )			-- 5
-table.insert( LANGUAGE_NAME, "Dutch" )				-- 6
-table.insert( LANGUAGE_NAME, "Russian" )			-- 7
-table.insert( LANGUAGE_NAME, "Korean" )				-- 8
-table.insert( LANGUAGE_NAME, "Japanese" )			-- 9
-table.insert( LANGUAGE_NAME, "Hungarian" )			-- 10
-table.insert( LANGUAGE_NAME, "Portuguese" )			-- 11
-table.insert( LANGUAGE_NAME, "Arabic" )				-- 12
-table.insert( LANGUAGE_NAME, "Bahasa Indonesia" )	-- 13
-table.insert( LANGUAGE_NAME, "Thailand" )			-- 14
-table.insert( LANGUAGE_NAME, "Cambodian" )			-- 15
+table.insert( LANGUAGE_NAME, "lang_English" )			-- 0
+table.insert( LANGUAGE_NAME, "lang_Chinese" )			-- 1
+table.insert( LANGUAGE_NAME, "lang_French" )			-- 2
+table.insert( LANGUAGE_NAME, "lang_Italian" )			-- 3
+table.insert( LANGUAGE_NAME, "lang_German" )			-- 4
+table.insert( LANGUAGE_NAME, "lang_Spanish" )			-- 5
+table.insert( LANGUAGE_NAME, "lang_Dutch" )				-- 6
+table.insert( LANGUAGE_NAME, "lang_Russian" )			-- 7
+table.insert( LANGUAGE_NAME, "lang_Korean" )			-- 8
+table.insert( LANGUAGE_NAME, "lang_Japanese" )			-- 9
+table.insert( LANGUAGE_NAME, "lang_Hungarian" )			-- 10
+table.insert( LANGUAGE_NAME, "lang_Portuguese" )		-- 11
+table.insert( LANGUAGE_NAME, "lang_Arabic" )			-- 12
+table.insert( LANGUAGE_NAME, "lang_Bahasa_Indonesia" )	-- 13
+table.insert( LANGUAGE_NAME, "lang_Thailand" )			-- 14
+table.insert( LANGUAGE_NAME, "lang_Cambodian" )			-- 15
 
 local Constants = require("scripts.Constants")
 
@@ -64,4 +67,21 @@ function updateUALanguageTag()
 	local tagsToAdd = {}
 	table.insert( tagsToAdd, languageTag )
 	Misc:sharedDelegate():addUATags( Json.encode( tagsToAdd ) )
+
+	-- Add the location tag.
+	local callback = function( success, jsonResponse )
+		if success and type( jsonResponse ) == "table" then
+			local countryString = jsonResponse["country"]
+			if countryString then
+				countryString = "country_"..countryString
+				CCLuaLog( "UA tag country "..countryString )
+
+				local countryTags = {}
+				table.insert( countryTags, countryString )
+				Misc:sharedDelegate():addUATags( Json.encode( countryTags ) )
+			end
+		end
+	end
+
+	EventManager:postEvent( Event.Do_Get_IP_Info, { callback } )
 end

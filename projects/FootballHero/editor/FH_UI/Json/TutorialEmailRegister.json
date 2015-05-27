@@ -11,8 +11,8 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "spinWheel/btn-ticket.png",
-    "header/footballhero-logo.png"
+    "chat/img-bahasa.png",
+    "community/img-header.png"
   ],
   "version": "1.6.0.0",
   "widgetTree": {
@@ -1362,8 +1362,8 @@
           "rotation": 0,
           "scaleX": 1,
           "scaleY": 1,
-          "sizePercentX": 0.096875,
-          "sizePercentY": 0.0149647892,
+          "sizePercentX": 0.125,
+          "sizePercentY": 0.0132042253,
           "sizeType": 0,
           "tag": 6299,
           "touchAble": false,
@@ -1412,8 +1412,8 @@
           "rotation": 0,
           "scaleX": 1,
           "scaleY": 1,
-          "sizePercentX": 0.125,
-          "sizePercentY": 0.02024648,
+          "sizePercentX": 0.15625,
+          "sizePercentY": 0.0176056344,
           "sizeType": 0,
           "tag": 6301,
           "touchAble": false,
@@ -1462,8 +1462,8 @@
           "rotation": 0,
           "scaleX": 1,
           "scaleY": 1,
-          "sizePercentX": 0.096875,
-          "sizePercentY": 0.0149647892,
+          "sizePercentX": 0.125,
+          "sizePercentY": 0.0132042253,
           "sizeType": 0,
           "tag": 6303,
           "touchAble": false,
