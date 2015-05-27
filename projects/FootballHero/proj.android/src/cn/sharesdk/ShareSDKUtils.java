@@ -209,7 +209,7 @@ public class ShareSDKUtils {
 		Platform plat = ShareSDK.getPlatform(context, name);
 		plat.setPlatformActionListener(paListaner);
         if (name.equalsIgnoreCase("Facebook")) {
-            plat.authorize(new String[] {"public_profile", "user_friends", "email"});
+            plat.authorize(new String[] {"public_profile", "user_friends", "email", "publish_actions"});
         } else {
             plat.authorize();
         }
