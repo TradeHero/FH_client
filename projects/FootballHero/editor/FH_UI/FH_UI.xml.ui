@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
 <UIProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <ProjectDir>Z:\FH_client\projects\FootballHero\editor\FH_UI</ProjectDir>
+  <ProjectDir>U:\projects\FootballHero\editor\FH_UI</ProjectDir>
   <Version>1.6.0.0</Version>
-  <Resources>Z:\FH_client\projects\FootballHero\editor\FH_UI\Resources</Resources>
+  <Resources>U:\projects\FootballHero\editor\FH_UI\Resources</Resources>
   <Name>FH_UI</Name>
   <JsonFileName>FH_UI.json</JsonFileName>
-  <JsonFolder>Z:\FH_client\projects\FootballHero\editor\FH_UI\Json</JsonFolder>
+  <JsonFolder>U:\projects\FootballHero\editor\FH_UI\Json</JsonFolder>
   <JsonList>
     <string>AskForComment.json</string>
     <string>AskForRate.json</string>
@@ -136,20 +136,18 @@
     <string>WTGBMTPrediction.json</string>
     <string>WTWBEGPrediction.json</string>
     <string>YourPicksCell.json</string>
+    <string>LiveScoreInplayMatchCell.json</string>
+    <string>LiveScoreNowCell.json</string>
   </JsonList>
   <CanvasSize>
     <Width>640</Width>
     <Height>1136</Height>
   </CanvasSize>
-  <filePath>Z:\FH_client\projects\FootballHero\editor\FH_UI\FH_UI.xml.ui</filePath>
+  <filePath>U:\projects\FootballHero\editor\FH_UI\FH_UI.xml.ui</filePath>
   <ProjectType>UIProject</ProjectType>
   <ResRelativePath />
   <imageFileList />
-  <imagePngList>
-    <string>liveScore/livescore_btn_add.png</string>
-    <string>liveScore/livescore_btn_added.png</string>
-    <string>liveScore/icn-redcard.png</string>
-  </imagePngList>
+  <imagePngList />
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>LiveScoreMatchCell.json</CurrentUIJson>
+  <CurrentUIJson>LiveScoreNowCell.json</CurrentUIJson>
 </UIProject>

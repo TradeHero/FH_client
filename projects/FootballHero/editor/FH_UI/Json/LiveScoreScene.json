@@ -10,10 +10,7 @@
   "designHeight": 1136,
   "designWidth": 640,
   "textures": [],
-  "texturesPng": [
-    "MatchListScene/match_bkg.png",
-    "header/back.png"
-  ],
+  "texturesPng": [],
   "version": "1.6.0.0",
   "widgetTree": {
     "classname": "Panel",
@@ -179,7 +176,7 @@
           "layoutParameter": null,
           "opacity": 255,
           "positionPercentX": 0.0546875,
-          "positionPercentY": 0.9612675,
+          "positionPercentY": 0.960387349,
           "positionType": 0,
           "rotation": 0,
           "scaleX": 1,

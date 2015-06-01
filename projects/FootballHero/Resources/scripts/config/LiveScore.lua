@@ -33,6 +33,6 @@ function scoreOrTime( gameinfo )
 		status == STATUS_INTERRUPTED then
 		return "-"
 	else
-		return gameinfo["HomeGoals"].." : "..gameinfo["AwayGoals"]
+		return gameinfo["HomeGoals"].." - "..gameinfo["AwayGoals"]
 	end
 end

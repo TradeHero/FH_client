@@ -15,12 +15,14 @@ local LiveScoreConfig = require("scripts.config.LiveScore")
 local DATES = { -2, -1, 0, 1, 2 }
 local RELOAD_DELAY_TIME = 10
 
+local COLOR_YELLOW = ccc3( 240, 252, 48 )
+
 local mWidget
 local mDate
 local mCurrentSelectedDay
 local mRefreshAnim
 
-function loadFrame( groupedLeagueInfo, selectedDay )
+function loadFrame( liveGames, groupedLeagueInfo, selectedDay )
     local widget = GUIReader:shareReader():widgetFromJsonFile("scenes/LiveScoreScene.json")
     mWidget = widget
     widget:registerScriptHandler( EnterOrExit )
@@ -34,7 +36,7 @@ function loadFrame( groupedLeagueInfo, selectedDay )
     backBt:addTouchEventListener( backEventHandler )
 
     mRefreshAnim = nil
-    refreshFrame( groupedLeagueInfo, selectedDay )
+    refreshFrame( liveGames, groupedLeagueInfo, selectedDay )
 end
 
 function doRefresh()
@@ -45,11 +47,11 @@ function doRefresh()
     mRefreshAnim = nil
 end
 
-function refreshFrame( groupedLeagueInfo, selectedDay )
+function refreshFrame( liveGames, groupedLeagueInfo, selectedDay )
     mCurrentSelectedDay = selectedDay
 
     initDates()
-    initMatchList( groupedLeagueInfo )
+    initMatchList( liveGames, groupedLeagueInfo )
 
     if mRefreshAnim == nil then
         local seqArray = CCArray:create()
@@ -103,11 +105,64 @@ function initDates()
     end
 end
 
-function initMatchList( groupedLeagueInfo )
+function initMatchList( liveGames, groupedLeagueInfo )
     local matchListContent = tolua.cast( mWidget:getChildByName("ScrollView_LiveScore"), "ScrollView" )
     matchListContent:removeAllChildrenWithCleanup( true )
     local height = 0
 
+    -- Insert the Live games first.
+    if table.getn( liveGames ) > 0 then
+        local cell = GUIReader:shareReader():widgetFromJsonFile( "scenes/LiveScoreNowCell.json" )
+        matchListContent:addChild( cell )
+        height = height + cell:getSize().height
+    end
+
+    for i = 1, table.getn( liveGames ) do
+        local game = liveGames[i]
+        local cell = SceneManager.widgetFromJsonFile("scenes/LiveScoreInplayMatchCell.json")
+        local leagueId = LeagueConfig.getConfigIdByKey( game["LeagueId"] )
+        local countryId = CountryConfig.getConfigIdByKey( LeagueConfig.getCountryId( leagueId ) )
+
+        local status = tolua.cast( cell:getChildByName("Label_Status"), "Label" )
+        local team1 = tolua.cast( cell:getChildByName("Label_Team1"), "Label" )
+        local team2 = tolua.cast( cell:getChildByName("Label_Team2"), "Label" )
+        local score1 = tolua.cast( cell:getChildByName("Label_Score1"), "Label" )
+        local score2 = tolua.cast( cell:getChildByName("Label_Score2"), "Label" )
+        local leagueFlag = tolua.cast( cell:getChildByName("Image_Nation"), "ImageView" )
+
+        team1:setText( TeamConfig.getTeamName( TeamConfig.getConfigIdByKey( game["HomeTeamId"] ) ) )
+        team2:setText( TeamConfig.getTeamName( TeamConfig.getConfigIdByKey( game["AwayTeamId"] ) ) )
+        score1:setText( game["HomeGoals"] )
+        score2:setText( game["AwayGoals"] )
+        status:setText( LiveScoreConfig.statusOrMinute( game ) )
+        leagueFlag:loadTexture( CountryConfig.getLogo( countryId ) )
+
+        for i = 1, 3 do
+            cell:getChildByName("Image_t1_redcard"..i):setEnabled( game["HomeRedCards"] >= i )
+        end
+
+        for i = 1, 3 do
+            cell:getChildByName("Image_t2_redcard"..i):setEnabled( game["AwayRedCards"] >= i )
+        end
+
+        if game["HomeGoalsNew"] then
+            team1:setColor( COLOR_YELLOW )
+            score1:setColor( COLOR_YELLOW )
+
+
+        end
+
+        if game["AwayGoalsNew"] then
+            team2:setColor( COLOR_YELLOW )
+            score2:setColor( COLOR_YELLOW )
+        end
+
+        matchListContent:addChild( cell )
+        height = height + cell:getSize().height
+    end
+
+
+    -- Insert the others.
     for k,v in pairs( groupedLeagueInfo ) do
         local leagueKey = k
         local games = v
