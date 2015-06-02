@@ -138,3 +138,4 @@ public class ShareCore {
 		return platform instanceof CustomPlatform || isUseClientToShare(platform.getName());
 	}
 }
+

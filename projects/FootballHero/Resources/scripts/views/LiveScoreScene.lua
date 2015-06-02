@@ -106,6 +106,7 @@ function initDates()
 end
 
 function initMatchList( liveGames, groupedLeagueInfo )
+    mWidget:stopAllActions()
     local matchListContent = tolua.cast( mWidget:getChildByName("ScrollView_LiveScore"), "ScrollView" )
     matchListContent:removeAllChildrenWithCleanup( true )
     local height = 0
@@ -129,6 +130,7 @@ function initMatchList( liveGames, groupedLeagueInfo )
         local score1 = tolua.cast( cell:getChildByName("Label_Score1"), "Label" )
         local score2 = tolua.cast( cell:getChildByName("Label_Score2"), "Label" )
         local leagueFlag = tolua.cast( cell:getChildByName("Image_Nation"), "ImageView" )
+        local liveNowIndicator = cell:getChildByName("Image_LiveIndicator")
 
         team1:setText( TeamConfig.getTeamName( TeamConfig.getConfigIdByKey( game["HomeTeamId"] ) ) )
         team2:setText( TeamConfig.getTeamName( TeamConfig.getConfigIdByKey( game["AwayTeamId"] ) ) )
@@ -148,8 +150,6 @@ function initMatchList( liveGames, groupedLeagueInfo )
         if game["HomeGoalsNew"] then
             team1:setColor( COLOR_YELLOW )
             score1:setColor( COLOR_YELLOW )
-
-
         end
 
         if game["AwayGoalsNew"] then
@@ -157,10 +157,22 @@ function initMatchList( liveGames, groupedLeagueInfo )
             score2:setColor( COLOR_YELLOW )
         end
 
+        local seqArray = CCArray:create()
+        seqArray:addObject( CCTargetedAction:create( liveNowIndicator, CCFadeOut:create( 0.5 ) ) )
+        seqArray:addObject( CCTargetedAction:create( liveNowIndicator, CCFadeIn:create( 0.5 ) ) )
+        seqArray:addObject( CCDelayTime:create( 1 ) )
+        mWidget:runAction( CCRepeat:create( CCSequence:create( seqArray ), 10 ) )
+
+
         matchListContent:addChild( cell )
         height = height + cell:getSize().height
     end
 
+    if table.getn( liveGames ) > 0 then
+        local cell = GUIReader:shareReader():widgetFromJsonFile( "scenes/LiveScoreInPlayEndGap.json" )
+        matchListContent:addChild( cell )
+        height = height + cell:getSize().height
+    end
 
     -- Insert the others.
     for k,v in pairs( groupedLeagueInfo ) do
@@ -227,6 +239,7 @@ end
 function EnterOrExit( eventType )
     if eventType == "enter" then
         elseif eventType == "exit" then
+        mWidget:stopAllActions()
         mWidget = nil
         mRefreshAnim = nil
     end

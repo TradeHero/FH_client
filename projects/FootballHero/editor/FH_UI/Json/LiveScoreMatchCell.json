@@ -13,8 +13,7 @@
   "texturesPng": [
     "liveScore/livescore_btn_add.png",
     "liveScore/livescore_btn_added.png",
-    "liveScore/icn-redcard.png",
-    "commonRes/England.png"
+    "liveScore/icn-redcard.png"
   ],
   "version": "1.6.0.0",
   "widgetTree": {
@@ -787,9 +786,9 @@
       "backGroundImageData": null,
       "backGroundScale9Enable": false,
       "bgColorB": 255,
-      "bgColorG": 200,
-      "bgColorOpacity": 100,
-      "bgColorR": 150,
+      "bgColorG": 255,
+      "bgColorOpacity": 25,
+      "bgColorR": 255,
       "bgEndColorB": 255,
       "bgEndColorG": 200,
       "bgEndColorR": 150,
@@ -801,7 +800,7 @@
       "capInsetsX": 0,
       "capInsetsY": 0,
       "clipAble": false,
-      "colorType": 0,
+      "colorType": 1,
       "layoutType": 0,
       "vectorX": 0,
       "vectorY": -0.5

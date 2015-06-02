@@ -10,13 +10,7 @@
   "designHeight": 1136,
   "designWidth": 640,
   "textures": [],
-  "texturesPng": [
-    "liveScore/livescore_btn_add.png",
-    "liveScore/livescore_btn_added.png",
-    "liveScore/icn-redcard.png",
-    "commonRes/England.png",
-    "chat/icn-chatcounter.png"
-  ],
+  "texturesPng": [],
   "version": "1.6.0.0",
   "widgetTree": {
     "classname": "Panel",

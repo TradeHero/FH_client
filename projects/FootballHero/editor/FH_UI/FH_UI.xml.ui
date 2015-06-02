@@ -138,6 +138,7 @@
     <string>YourPicksCell.json</string>
     <string>LiveScoreInplayMatchCell.json</string>
     <string>LiveScoreNowCell.json</string>
+    <string>LiveScoreInPlayEndGap.json</string>
   </JsonList>
   <CanvasSize>
     <Width>640</Width>
@@ -147,7 +148,13 @@
   <ProjectType>UIProject</ProjectType>
   <ResRelativePath />
   <imageFileList />
-  <imagePngList />
+  <imagePngList>
+    <string>liveScore/livescore_btn_add.png</string>
+    <string>liveScore/livescore_btn_added.png</string>
+    <string>liveScore/icn-redcard.png</string>
+    <string>commonRes/England.png</string>
+    <string>chat/icn-chatcounter.png</string>
+  </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
   <CurrentUIJson>LiveScoreNowCell.json</CurrentUIJson>
 </UIProject>
