@@ -156,5 +156,5 @@
     <string>chat/icn-chatcounter.png</string>
   </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>LiveScoreNowCell.json</CurrentUIJson>
+  <CurrentUIJson>LiveScoreInplayMatchCell.json</CurrentUIJson>
 </UIProject>
