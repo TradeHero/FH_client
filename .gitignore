@@ -258,7 +258,7 @@ FakesAssemblies/
 
 ## File-based project format
 *.ipr
-*.iml
+#*.iml
 *.iws
 
 ## Additional for IntelliJ
