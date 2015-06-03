@@ -449,7 +449,7 @@
     <GuidesList />
   </GuidesProject>
   <GuidesProject>
-    <Project>MatchCenterStatsBlankGap_0</Project>
+    <Project>LiveScoreInPlayEndGap</Project>
     <GuidesList />
   </GuidesProject>
   <GuidesProject>
@@ -542,6 +542,14 @@
   </GuidesProject>
   <GuidesProject>
     <Project>LiveScoreMatchCell</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>LiveScoreInplayMatchCell</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>LiveScoreNowCell</Project>
     <GuidesList />
   </GuidesProject>
 </ArrayOfGuidesProject>

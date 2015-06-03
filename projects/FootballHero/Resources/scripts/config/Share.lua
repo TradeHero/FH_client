@@ -36,6 +36,18 @@ ShareContent = {
 		["extInfo"] = "extInfo",
 	},
 	
+	{	["id"] = SHARE_COMPETITION.."americacup15", 
+		["content"] = Constants.String.share.competition_americacup15_content,
+		["image"] = "http://fhmainstorage.blob.core.windows.net/fhres/fb-share-copa.png",
+		["title"] = Constants.String.share.competition_title,
+		["description"] = Constants.String.football_hero,
+		["url"] = "http://www.footballheroapp.com",
+		["type"] = C2DXContentTypeNews,
+		["siteUrl"] = "http://www.footballheroapp.com",
+		["site"] = Constants.String.football_hero,
+		["extInfo"] = "extInfo",
+	},
+
 	{	["id"] = SHARE_SPINTHEWHEEL, 
 		["content"] = Constants.String.share.spinTheWheel_content,
 		["image"] = "http://fhmainstorage.blob.core.windows.net/fhres/spin-the-wheel-1200x650.png",

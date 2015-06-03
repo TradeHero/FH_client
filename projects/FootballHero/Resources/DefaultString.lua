@@ -534,6 +534,7 @@ StringsDefault = {
     spinTheWheel_content = "I won a prize in Spin-The-Wheel game! Win $$$, Messi & Ronaldo Signed Jerseys! www.footballheroapp.com/download",
     competition_content = "I joined a FootballHero Prediction competition. Win $$$, Messi & Ronaldo Signed Jerseys! www.footballheroapp.com/download",
     competition_seacup15_content = "I joined a SEA Games Football Challenge. Win $$$, Messi & Ronaldo Signed Jerseys! www.footballheroapp.com/download",
+    competition_americacup15_content = "I joined a COPA America Cup Challenge. Win $$$, Messi & Ronaldo Signed Jerseys! www.footballheroapp.com/download",
     prediction_content = "%s Win $$$, Messi & Ronaldo Signed Jerseys! www.footballheroapp.com/download",
     predResult_content = "FootballHero: %s\nCLICK HERE TO PLAY! www.footballheroapp.com/download",
     video_content = "%s.\nCLICK HERE TO WATCH! www.footballheroapp.com/download",
