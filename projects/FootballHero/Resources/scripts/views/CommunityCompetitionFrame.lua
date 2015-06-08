@@ -37,23 +37,13 @@ end
 
 function initCompetitionScene( competitionFrame, compList, miniGame )
     
-    local newCompFrame = SceneManager.widgetFromJsonFile("scenes/CommunityNewCompetitionFrame.json")
     local joinedCompFrame = SceneManager.widgetFromJsonFile("scenes/CommunityJoinedCompetitionFrame.json")
     
-    local newHeader = tolua.cast( newCompFrame:getChildByName( "Label_Join" ), "Label" )
-    newHeader:setText( Constants.String.community.title_join_comp )
-
-    local newLabel = tolua.cast( newCompFrame:getChildByName( "Label_New" ), "Label" )
-    newLabel:setText( Constants.String.community.label_new )
-
     local joinedHeader = tolua.cast( joinedCompFrame:getChildByName( "Label_Joined_Comps" ), "Label" )
     joinedHeader:setText( Constants.String.community.title_joined_comp )
 
     local contentHeight = 0
 
-    competitionFrame:addChild( newCompFrame )
-    contentHeight = contentHeight + newCompFrame:getSize().height
-    
     -- check for mini game
     -- TODO: check competition period
     --if shouldShowMiniGame() and not miniGame["Joined"] then
@@ -88,12 +78,6 @@ function initCompetitionScene( competitionFrame, compList, miniGame )
             EventManager:postEvent( Event.Do_Join_Competition, { token } )
         end
     end
-
-    local btnNew = newCompFrame:getChildByName("Button_New")
-    btnNew:addTouchEventListener( createEventHandler )
-    local btnJoin = tolua.cast( newCompFrame:getChildByName("Button_Join"), "Button" )
-    btnJoin:addTouchEventListener( joinEventHandler )
-    btnJoin:setTitleText( Constants.String.button.join )
 
     local joinedHeaderBG = joinedCompFrame:getChildByName( "Image_BG_Joined_Comps" )
     contentHeight = contentHeight + joinedHeaderBG:getSize().height
@@ -197,20 +181,6 @@ function initCompetitionScene( competitionFrame, compList, miniGame )
         local lblCTA = tolua.cast( panelNone:getChildByName("Label_CTA"), "Label" )
         lblCTA:setText( Constants.String.community.label_call_to_arm )
     end
-
-    local tokenInput = ViewUtils.createTextInput( newCompFrame:getChildByName( "Panel_Code" ), Constants.String.community.enter_comp_code, 224 )
-    tokenInput:setFontColor( ccc3( 0, 0, 0 ) )
-    tokenInput:setPlaceholderFontColor( ccc3( 127, 127, 127 ) )
-    tokenInput:setTouchPriority( SceneManager.TOUCH_PRIORITY_MINUS_ONE )
-    local inputDelegate = EditBoxDelegateForLua:create()
-    inputDelegate:registerEventScriptHandler( EDIT_BOX_EVENT_DID_BEGIN, function ( textBox )
-        -- In order not to change the object-c code, here is the work around.
-        -- recall the setPosition() to invoke the CCEditBoxImplIOS::adjustTextFieldPosition()
-        -- Todo remove this code after the object-c fix is pushed out.
-        tokenInput:setPosition( tokenInput:getPosition() )
-    end )
-    newCompFrame:getChildByName( "Panel_Code" ):addNode( tolua.cast( inputDelegate, "CCNode" ) )
-    tokenInput:setDelegate( inputDelegate.__CCEditBoxDelegate__ )
 
     competitionFrame:setInnerContainerSize( CCSize:new( 0, contentHeight ) )
     local layout = tolua.cast( competitionFrame, "Layout" )
