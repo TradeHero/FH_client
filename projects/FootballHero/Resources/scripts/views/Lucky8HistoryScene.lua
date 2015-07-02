@@ -32,16 +32,12 @@ function initResultText( cellInfo )
 
     local UsdWon = cellInfo["UsdWon"]
     local Checked = cellInfo["Checked"]
-    if Checked == false and UsdWon == 500 then
-        showPrizeScene( true )
+    if Checked == false and UsdWon >= 0 then
+        showPrizeScene( cellInfo )
     end
 end
 
-function showPrizeScene( isShow )
-    if isShow == false then 
-        return 
-    end
-
+function showPrizeScene( cellInfo )
     local wonPrice = SceneManager.widgetFromJsonFile( "scenes/Lucky8WonPrice.json" )
     mWonPrize = wonPrice
     mWidget:addChild( wonPrice )
@@ -54,6 +50,14 @@ function showPrizeScene( isShow )
 
     local wonText = tolua.cast( wonPrice:getChildByName("Label_Won"), "Label" )
     wonText:setText( Constants.String.lucky8.won_prize_won_txt )
+
+    local prizeText = tolua.cast( wonPrice:getChildByName("Label_WonPrice"), "Label" )
+    if cellInfo["Pending"] then
+        prizeText:setText( Constants.String.lucky8.pending )
+        wonText:setEnabled( false )
+    else
+        prizeText:setText( "US$ "..cellInfo["UsdWon"] )
+    end
 end
 
 function eventClaim( sender, eventType )
