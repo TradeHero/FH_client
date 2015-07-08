@@ -48,9 +48,9 @@ function loadFrame( userId, competitionId, couponHistory, additionalParam, count
     end
 
     if showBackButton then
-        Header.loadFrame( mWidget, nil, true )
+        Header.loadFrame( mWidget, Constants.String.history.title, true )
     else
-        Header.loadFrame( mWidget, nil, false )
+        Header.loadFrame( mWidget, Constants.String.history.title, false )
     end
 
     mWidget:registerScriptHandler( EnterOrExit )
@@ -177,10 +177,11 @@ function initContent( couponHistory )
     local competitionDetail = Logic:getCompetitionDetail()
     local info = couponHistory:getStats()
     local label = tolua.cast( mWidget:getChildByName("Label_CompTitle"), "Label" )
-    local show = tolua.cast( mWidget:getChildByName("Button_Show"), "Button" )
+    local show = mWidget:getChildByName("Panel_showall")
     if mCompetitionId ~= nil then
         label:setText( competitionDetail:getName() )
-        show:setTitleText( Constants.String.history.show_all )
+        local showLabel = tolua.cast( show:getChildByName("Label_text"), "Label" )
+        showLabel:setText( Constants.String.history.show_all )
         local eventHandler = function( sender, eventType )
             if eventType == TOUCH_EVENT_ENDED then
                 EventManager:postEvent( Event.Enter_History, { mUserId } )
@@ -213,8 +214,8 @@ function initContent( couponHistory )
 
     stat_win:setText( info["NumberOfCouponsWon"] )
     stat_lose:setText( info["NumberOfCouponsLost"] )
-    stat_win_percent:setText( info["WinPercentage"] )
-    stat_gain_percent:setText( info["Roi"] )
+    stat_win_percent:setText( string.format( "%d", info["WinPercentage"] ) )
+    stat_gain_percent:setText( string.format( "%d", info["Roi"] ) )
     stat_last_10_win:setText( info["WinStreakCouponsWon"] )
     stat_last_10_lose:setText( info["WinStreakCouponsLost"] )
 
@@ -279,7 +280,6 @@ function initContent( couponHistory )
         content:setCascadeOpacityEnabled( true )
         mWidget:runAction( CCTargetedAction:create( content, CCFadeIn:create( CONTENT_FADEIN_TIME ) ) )
     end ) )
-    seqArray:addObject( CCDelayTime:create( 0.2 ) )
 
     if table.getn( couponHistory:getOpenData() ) == 0 then
         -- Call to arm
@@ -339,7 +339,6 @@ function initContent( couponHistory )
                 content:setCascadeOpacityEnabled( true )
                 mWidget:runAction( CCTargetedAction:create( content, CCFadeIn:create( CONTENT_FADEIN_TIME ) ) )
             end ) )
-            seqArray:addObject( CCDelayTime:create( 0.2 ) )
             seqArray:addObject( CCCallFuncN:create( function()
                 contentContainer:setInnerContainerSize( CCSize:new( 0, contentHeight ) )
                 local layout = tolua.cast( contentContainer, "Layout" )
@@ -362,7 +361,6 @@ function initContent( couponHistory )
         content:setCascadeOpacityEnabled( true )
         mWidget:runAction( CCTargetedAction:create( content, CCFadeIn:create( CONTENT_FADEIN_TIME ) ) )
     end ) )
-    seqArray:addObject( CCDelayTime:create( 0.2 ) )
 
 
     if table.getn( couponHistory:getClosedData() ) == 0 then
@@ -413,7 +411,6 @@ function initContent( couponHistory )
                 content:setCascadeOpacityEnabled( true )
                 mWidget:runAction( CCTargetedAction:create( content, CCFadeIn:create( CONTENT_FADEIN_TIME ) ) )
             end ) )
-            seqArray:addObject( CCDelayTime:create( 0.2 ) )
             seqArray:addObject( CCCallFuncN:create( function()
                 contentContainer:setInnerContainerSize( CCSize:new( 0, contentHeight ) )
                 local layout = tolua.cast( contentContainer, "Layout" )

@@ -8,7 +8,7 @@ local Event = require("scripts.events.Event").EventList
 local mWidget
 local mbHasWebView
 
-function loadFrame( parent, titleText, bHasBackBtn, bHasWebView )
+function loadFrame( parent, titleText, bHasBackBtn, bHasWebView, bHasMenuBtn )
 	local widget = GUIReader:shareReader():widgetFromJsonFile("scenes/HeaderFrame.json")
     mWidget = widget
     mWidget:registerScriptHandler( EnterOrExit )
@@ -19,9 +19,8 @@ function loadFrame( parent, titleText, bHasBackBtn, bHasWebView )
 	local title = tolua.cast( widget:getChildByName("Label_Title"), "Label" )
     if titleText ~= nil then
 		title:setText( titleText )
-
-		local titleImg = tolua.cast( widget:getChildByName("Image_Title"), "ImageView" )
-		titleImg:setEnabled( false )
+        local titleImg = tolua.cast( widget:getChildByName("Image_Title"), "ImageView" )
+        titleImg:setEnabled( false ) 
     else
     	title:setEnabled( false )
     end
@@ -29,7 +28,7 @@ function loadFrame( parent, titleText, bHasBackBtn, bHasWebView )
 	local backBt = widget:getChildByName("Button_Back")
     if bHasBackBtn then
         SceneManager.setKeypadBackListener( keypadBackEventHandler )
-    	backBt:addTouchEventListener( backEventHandler )
+    	backBt:addTouchEventListener( backEventHandler )       
     else
         SceneManager.clearKeypadBackListener()
     	backBt:setEnabled( false )
@@ -42,6 +41,14 @@ function loadFrame( parent, titleText, bHasBackBtn, bHasWebView )
     btnLive:addTouchEventListener( eventLiveClicked )
 
     showLiveButton( false )
+
+    local menuBtn = tolua.cast( mWidget:getChildByName("Button_menu"), "Button" )
+    menuBtn:addTouchEventListener( menuEventHandler )
+    if bHasMenuBtn then
+        menuBtn:setEnabled( true )
+    else
+        menuBtn:setEnabled( false )
+    end
 end
 
 function eventLiveClicked( sender, eventType )
@@ -86,4 +93,10 @@ function keypadBackEventHandler()
         WebviewDelegate:sharedDelegate():closeWebpage()
     end
     EventManager:popHistory()
+end
+
+function menuEventHandler( sender, eventType )
+    if eventType == TOUCH_EVENT_ENDED then
+        SceneManager.showOrHideSideMenu()
+    end
 end

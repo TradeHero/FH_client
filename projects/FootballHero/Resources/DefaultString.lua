@@ -63,6 +63,7 @@ StringsDefault = {
     leave_comp_yes = "Leave",
   },
   community = {
+    title = "Community",
     all_competitions = "All Leagues & Cups",
     copy = "COPY",
     desc_create_comp = "Predictions made in the selected league for the competition are automatically included in the competition.",
@@ -222,6 +223,7 @@ StringsDefault = {
     predict_on = "Predict on %s",
   },
   history = {
+    title = "My Picks",
     lost = "Lost",
     lost_colon = "Lost:",
     lost_small = "lost",

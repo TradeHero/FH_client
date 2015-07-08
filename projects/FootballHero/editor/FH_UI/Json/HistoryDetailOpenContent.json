@@ -10,7 +10,14 @@
   "designHeight": 1136,
   "designWidth": 640,
   "textures": [],
-  "texturesPng": [],
+  "texturesPng": [
+    "commonRes/img-bkg-general.png",
+    "MyHero/img-photo.png",
+    "history/icn-table.png",
+    "commonRes/England.png",
+    "MatchListScene/Arrow down.png",
+    "MatchListScene/Arrow Up.png"
+  ],
   "version": "1.6.0.0",
   "widgetTree": {
     "classname": "Panel",

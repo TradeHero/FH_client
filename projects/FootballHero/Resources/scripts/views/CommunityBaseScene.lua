@@ -26,7 +26,7 @@ function loadFrame( jsonResponse, tabID, leaderboardId, subType, minigameRespons
     mWidget:registerScriptHandler( EnterOrExit )
     SceneManager.clearNAddWidget( widget )
     
-    Header.loadFrame( mWidget, nil, false )
+    Header.loadFrame( mWidget, Constants.String.community.title, false, nil, true )
 
     Navigator.loadFrame( widget )
 

@@ -25,6 +25,8 @@ local DEEPLINK_VIDEO = "FBVideo"
 local DEEPLINK_GAMECENTER = "gamecenter"
 
 local mSceneGameLayer
+local mSideMenuLayer
+local mSideMenuShown = false
 local mKeyPadBackEnabled = true
 local mKeypadBackListener = nil
 local mWidgets = {}		-- Store widget show in the list to save time loading the same json file.
@@ -44,6 +46,9 @@ function init()
     	director:runWithScene( sceneGame )
     end
     
+    mSideMenuLayer = TouchGroup:create()
+    sceneGame:addChild( mSideMenuLayer )
+
     mSceneGameLayer = TouchGroup:create()
     sceneGame:addChild( mSceneGameLayer )
 
@@ -209,6 +214,21 @@ end
 
 function getWidgetByName( name )
 	return mSceneGameLayer:getWidgetByName( name )
+end
+
+function addSideMenuWidget( widget )
+	mSideMenuLayer:clear()
+	mSideMenuLayer:addWidget( widget )
+end
+
+function showOrHideSideMenu()
+	if mSideMenuShown then
+		mSideMenuShown = false
+		mSceneGameLayer:setPosition( ccp( 0, 0 ) )
+	else
+		mSideMenuShown = true
+		mSceneGameLayer:setPosition( ccp( 512, 0 ) )
+	end
 end
 
 function setKeyPadBackEnabled( enabled )

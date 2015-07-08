@@ -11,7 +11,7 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "MatchListScene/match_bkg.png"
+    "commonRes/img-bkg-general.png"
   ],
   "version": "1.6.0.0",
   "widgetTree": {
@@ -41,7 +41,7 @@
           "ignoreSize": false,
           "layoutParameter": null,
           "opacity": 255,
-          "positionPercentX": 9.313249E-09,
+          "positionPercentX": 0,
           "positionPercentY": 0.07042254,
           "positionType": 0,
           "rotation": 0,
@@ -125,7 +125,7 @@
       "adaptScreen": false,
       "backGroundImage": null,
       "backGroundImageData": {
-        "path": "MatchListScene/match_bkg.png",
+        "path": "commonRes/img-bkg-general.png",
         "plistFile": "",
         "resourceType": 0
       },

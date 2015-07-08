@@ -11,8 +11,11 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "chat/img-bahasa.png",
-    "community/img-header.png"
+    "MatchListScene/img-bkg-general.png",
+    "MatchListScene/icn-football.png",
+    "MatchListScene/icn-basketball.png",
+    "MatchListScene/icn-afootball.png",
+    "MatchListScene/icn-baseball.png"
   ],
   "version": "1.6.0.0",
   "widgetTree": {

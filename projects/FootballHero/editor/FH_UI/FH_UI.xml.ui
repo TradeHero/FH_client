@@ -139,6 +139,7 @@
     <string>LiveScoreInplayMatchCell.json</string>
     <string>LiveScoreNowCell.json</string>
     <string>LiveScoreInPlayEndGap.json</string>
+    <string>SideMenu.json</string>
   </JsonList>
   <CanvasSize>
     <Width>640</Width>
@@ -149,12 +150,10 @@
   <ResRelativePath />
   <imageFileList />
   <imagePngList>
-    <string>liveScore/livescore_btn_add.png</string>
-    <string>liveScore/livescore_btn_added.png</string>
-    <string>liveScore/icn-redcard.png</string>
-    <string>commonRes/England.png</string>
-    <string>chat/icn-chatcounter.png</string>
+    <string>community/img-header.png</string>
+    <string>community/img-leaguebox.png</string>
+    <string>community/btn-CTA.png</string>
   </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>LiveScoreInplayMatchCell.json</CurrentUIJson>
+  <CurrentUIJson>CommunityJoinedCompetitionFrame.json</CurrentUIJson>
 </UIProject>

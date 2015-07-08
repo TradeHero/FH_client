@@ -41,7 +41,7 @@ function loadFrame( matchList, leagueKey )
     mWidget:registerScriptHandler( EnterOrExit )
     SceneManager.clearNAddWidget( widget )
     
-    Header.loadFrame( widget, nil, false )
+    Header.loadFrame( widget, nil, false, nil, true )
     Header.showLiveButton( true )
 
     Navigator.loadFrame( widget )
