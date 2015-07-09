@@ -7,6 +7,8 @@ local Logic = require("scripts.Logic").getInstance()
 local Constants = require("scripts.Constants")
 local CommunityConfig = require("scripts.config.Community")
 local LeaderboardConfig = require("scripts.config.Leaderboard")
+local SportsConfig = require("scripts.config.Sports")
+
 
 local mTabID
 local mLeaderboardId
@@ -55,6 +57,8 @@ function action( param )
     else
         url = RequestUtils.GET_COMPETITION_LIST_REST_CALL
     end
+
+    url = SportsConfig.appendSportIdToURLHelper( url )
 
     local requestInfo = {}
     requestInfo.requestData = ""

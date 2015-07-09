@@ -8,6 +8,7 @@ local Event = require("scripts.events.Event").EventList
 local Logic = require("scripts.Logic").getInstance()
 local Constants = require("scripts.Constants")
 local RateManager = require("scripts.RateManager")
+local SportsConfig = require("scripts.config.Sports")
 
 
 local mLeagueId
@@ -52,6 +53,7 @@ function action( param )
     else
         url = RequestUtils.GET_UPCOMING_GAMES_BY_LEAGUE_REST_CALL.."?leagueId="..leagueId
     end
+    url = SportsConfig.appendSportIdToURLHelper( url )
 
     local requestInfo = {}
     requestInfo.requestData = ""

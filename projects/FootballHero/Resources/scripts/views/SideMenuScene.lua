@@ -5,6 +5,8 @@ local EventManager = require("scripts.events.EventManager").getInstance()
 local Event = require("scripts.events.Event").EventList
 local Constants = require("scripts.Constants")
 local Header = require("scripts.views.HeaderFrame")
+local SportsConfig = require("scripts.config.Sports")
+
 
 local mWidget
 

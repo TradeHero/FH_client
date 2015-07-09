@@ -7,6 +7,7 @@ local EventManager = require("scripts.events.EventManager").getInstance()
 local Event = require("scripts.events.Event").EventList
 local RequestUtils = require("scripts.RequestUtils")
 local Constants = require("scripts.Constants")
+local SportsConfig = require("scripts.config.Sports")
 
 
 local mUserId = Logic:getUserId()
@@ -54,6 +55,8 @@ function action( param )
         mCountryFilter = param[4]
         url = url.."&countryId="..mCountryFilter
     end
+    url = SportsConfig.appendSportIdToURLHelper( url )
+
 
     local requestInfo = {}
     requestInfo.requestData = ""
