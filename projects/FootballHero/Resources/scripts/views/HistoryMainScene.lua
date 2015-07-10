@@ -236,7 +236,7 @@ function initContent( couponHistory )
 
     stat_win:setText( info["NumberOfCouponsWon"] )
     stat_lose:setText( info["NumberOfCouponsLost"] )
-    stat_win_percent:setText( string.format( "%d", info["WinPercentage"] ) )
+    stat_win_percent:setText( info["WinPercentage"] )
     stat_gain_percent:setText( info["Roi"] )
     stat_last_10_win:setText( info["WinStreakCouponsWon"] )
     stat_last_10_lose:setText( info["WinStreakCouponsLost"] )
