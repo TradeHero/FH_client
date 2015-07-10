@@ -172,7 +172,7 @@ EventNameDosenotTrackList =
     "Do_Get_IP_Info",
     "Do_Check_New",
     "Do_Show_Media",
- --   "Do_Follow_Expert",
+    "Do_Follow_Expert",
 
 
     "Do_Startup",

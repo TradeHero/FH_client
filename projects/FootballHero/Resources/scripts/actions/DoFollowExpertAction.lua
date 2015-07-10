@@ -27,10 +27,10 @@ function action( param )
         RequestUtils.messageHandler( requestInfo, isSucceed, body, header, status, errorBuffer, RequestUtils.HTTP_200, true, onRequestSuccess )
     end
 
-    local httpRequest = HttpRequestForLua:create( CCHttpRequest.kHttpGet )
- --   httpRequest:addHeader( Constants.CONTENT_TYPE_JSON )
- --   httpRequest:addHeader( Logic:getAuthSessionString() )
- --   httpRequest:getRequest():setRequestData( requestContentText, string.len( requestContentText ) )
+    local httpRequest = HttpRequestForLua:create( CCHttpRequest.kHttpPost )
+    httpRequest:addHeader( Constants.CONTENT_TYPE_JSON )
+    httpRequest:addHeader( Logic:getAuthSessionString() )
+    httpRequest:getRequest():setRequestData( requestContentText, string.len( requestContentText ) )
     httpRequest:sendHttpRequest( url, handler )
 
     ConnectingMessage.loadFrame()
