@@ -136,6 +136,8 @@ function initLeagueList( leagueKey )
                 leagueName:setText( Constants.String.match_list.most_popular )
             elseif leagueKey == Constants.SpecialLeagueIds.UPCOMING_MATCHES then
                 leagueName:setText( Constants.String.match_list.upcoming_matches )
+            elseif leagueKey == Constants.SpecialLeagueIds.TEAM_EXPERT then
+                leagueName:setText(  Constants.String.match_list.team_expert )
             elseif leagueKey == Constants.SpecialLeagueIds.MOST_DISCUSSED then
                 leagueName:setText( Constants.String.match_list.most_discussed )
             end

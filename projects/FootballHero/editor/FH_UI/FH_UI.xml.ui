@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
 <UIProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <ProjectDir>U:\projects\FootballHero\editor\FH_UI</ProjectDir>
+  <ProjectDir>Z:\workspace\FH_client\projects\FootballHero\editor\FH_UI</ProjectDir>
   <Version>1.6.0.0</Version>
-  <Resources>U:\projects\FootballHero\editor\FH_UI\Resources</Resources>
+  <Resources>Z:\workspace\FH_client\projects\FootballHero\editor\FH_UI\Resources</Resources>
   <Name>FH_UI</Name>
   <JsonFileName>FH_UI.json</JsonFileName>
-  <JsonFolder>U:\projects\FootballHero\editor\FH_UI\Json</JsonFolder>
+  <JsonFolder>Z:\workspace\FH_client\projects\FootballHero\editor\FH_UI\Json</JsonFolder>
   <JsonList>
     <string>AskForComment.json</string>
     <string>AskForRate.json</string>
@@ -19,6 +19,8 @@
     <string>CommunityBaseScene.json</string>
     <string>CommunityCompetitionBannerFrame.json</string>
     <string>CommunityCompetitionWelcome.json</string>
+    <string>CommunityExpertContent.json</string>
+    <string>CommunityExpertFrame.json</string>
     <string>CommunityHighLightContent.json</string>
     <string>CommunityHighLightFrame.json</string>
     <string>CommunityJoinedCompetitionFrame.json</string>
@@ -26,6 +28,7 @@
     <string>CommunityLeaderboardDropdownFrame.json</string>
     <string>CommunityLeaderboardFrame.json</string>
     <string>CommunityLeaderboardListContentFrame.json</string>
+    <string>CommunityMediaFrame.json</string>
     <string>CommunityNewCompetitionFrame.json</string>
     <string>CommunityPlayVideoFrame.json</string>
     <string>CommunityVideoContent.json</string>
@@ -56,7 +59,10 @@
     <string>LeagueDropdownContent.json</string>
     <string>LiveScoreCell.json</string>
     <string>LiveScoreDateCell.json</string>
+    <string>LiveScoreInPlayEndGap.json</string>
+    <string>LiveScoreInplayMatchCell.json</string>
     <string>LiveScoreMatchCell.json</string>
+    <string>LiveScoreNowCell.json</string>
     <string>LiveScoreScene.json</string>
     <string>Lucky8Header.json</string>
     <string>Lucky8HistoryCell.json</string>
@@ -136,25 +142,24 @@
     <string>WTGBMTPrediction.json</string>
     <string>WTWBEGPrediction.json</string>
     <string>YourPicksCell.json</string>
-    <string>LiveScoreInplayMatchCell.json</string>
-    <string>LiveScoreNowCell.json</string>
-    <string>LiveScoreInPlayEndGap.json</string>
   </JsonList>
   <CanvasSize>
     <Width>640</Width>
     <Height>1136</Height>
   </CanvasSize>
-  <filePath>U:\projects\FootballHero\editor\FH_UI\FH_UI.xml.ui</filePath>
+  <filePath>Z:\workspace\FH_client\projects\FootballHero\editor\FH_UI\FH_UI.xml.ui</filePath>
   <ProjectType>UIProject</ProjectType>
   <ResRelativePath />
   <imageFileList />
   <imagePngList>
-    <string>liveScore/livescore_btn_add.png</string>
-    <string>liveScore/livescore_btn_added.png</string>
-    <string>liveScore/icn-redcard.png</string>
+    <string>MatchListScene/match_bkg.png</string>
+    <string>MyHero/img-profbox.png</string>
+    <string>MyHero/img-photo.png</string>
+    <string>Competition/btn-learnmore.png</string>
     <string>commonRes/England.png</string>
-    <string>chat/icn-chatcounter.png</string>
+    <string>MatchListScene/Arrow down.png</string>
+    <string>MatchListScene/Arrow Up.png</string>
   </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>LiveScoreInplayMatchCell.json</CurrentUIJson>
+  <CurrentUIJson>MyPicksHome.json</CurrentUIJson>
 </UIProject>

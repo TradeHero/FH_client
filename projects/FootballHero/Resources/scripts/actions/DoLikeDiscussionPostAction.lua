@@ -26,7 +26,7 @@ function action( param )
     requestInfo.requestData = requestContentText
     requestInfo.url = url
 
-     local handler = function( isSucceed, body, header, status, errorBuffer )
+    local handler = function( isSucceed, body, header, status, errorBuffer )
         RequestUtils.messageHandler( requestInfo, isSucceed, body, header, status, errorBuffer, RequestUtils.HTTP_200, true, onRequestSuccess )
     end
 

@@ -70,6 +70,7 @@ SpecialLeagueIds = {
 	MOST_POPULAR = -1,
 	UPCOMING_MATCHES = -2,
 	MOST_DISCUSSED = -3,
+	TEAM_EXPERT = -4,
 	SPECIAL_COUNT = 3,
 	ALL_LEAGUES = -99,
 }
@@ -78,6 +79,7 @@ function IsSpecialLeague( id )
 
 	if id == SpecialLeagueIds.MOST_POPULAR or 
 		id == SpecialLeagueIds.UPCOMING_MATCHES or
+		id == SpecialLeagueIds.TEAM_EXPERT or
 		id == SpecialLeagueIds.MOST_DISCUSSED then
 
 		bSpecial = true

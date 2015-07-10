@@ -63,6 +63,7 @@ function Logic:new()
 		balance = 0,
 		ActiveInCompetition = false,
 		FbId = nil,
+		mExpert = false,
 		deviceToken = "",
 		favoriteTeams = {},
 		quickBloxToken = "",
@@ -264,6 +265,14 @@ end
 
 function  Logic:getFbId()
 	return self.FbId
+end
+
+function Logic:setExpert( bExpert )
+    self.mExpert = bExpert
+end
+
+function Logic:getExpert( )
+    return self.mExpert
 end
 
 function Logic:getDeviceToken()

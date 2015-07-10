@@ -33,6 +33,7 @@ EventNameList =
     "Enter_Pred_Total_Confirm",
     "Enter_Next_Prediction",
     "Enter_History",
+    "Enter_Expert_History",
     "Enter_History_Detail",
     "Enter_Community",
     "Enter_League_Chat",
@@ -108,6 +109,9 @@ EventNameList =
     "Do_Get_DailyMotion_Video_Info",
     "Do_Get_IP_Info",
     "Do_Check_New",
+    "Do_Show_Media",
+    "Do_Follow_Expert",
+   
 
     "Show_Info",
     "Show_Error_Message",
@@ -167,6 +171,9 @@ EventNameDosenotTrackList =
     "Do_Get_DailyMotion_Video_Info",
     "Do_Get_IP_Info",
     "Do_Check_New",
+    "Do_Show_Media",
+ --   "Do_Follow_Expert",
+
 
     "Do_Startup",
     "Check_Start_Tutorial",

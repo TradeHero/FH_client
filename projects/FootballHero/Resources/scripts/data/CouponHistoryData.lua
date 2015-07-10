@@ -72,6 +72,7 @@ function CouponHistoryData:new( rawDataObj )
 		OpenCoupon = rawDataObj["open"],
     ClosedCoupon = rawDataObj["closed"],
     Balance = rawDataObj["balance"],
+    Follow = rawDataObj["Follows"],
     Stats = rawDataObj["stats"]
 	}
 
@@ -93,6 +94,10 @@ end
 
 function CouponHistoryData:getBalance()
   return self.Balance
+end
+
+function CouponHistoryData:getFollow()
+  return self.Follow
 end
 
 function CouponHistoryData:getStats()

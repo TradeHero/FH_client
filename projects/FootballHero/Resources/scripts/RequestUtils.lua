@@ -23,6 +23,11 @@ WEBSITE_DEV_IP = "http://192.168.1.99:44333"
 SHOOT_TO_WIN_FB_REDIRECT_CALL = WEBSITE_IP.."/api/PenaltyKick/fhpenalty/FHFBRedirect?access_token="
 SHOOT_TO_WIN_GET_USER_COMPETITION_CALL = WEBSITE_IP.."/api/PenaltyKick/fhpenalty/GetUserCompetitionDetails?userId="
 
+FACEBOOK_FRIENDS_LIST_CALL = "/me/friends?access_token="
+--USE_DEV = false
+USE_DEV = true
+
+
 EMAIL_REGISTER_REST_CALL = SERVER_IP.."/api/user/SignupWithEmail"
 FULL_REGISTER_REST_CALL = SERVER_IP.."/api/user/fullSignupWithEmail"
 EMAIL_LOGIN_REST_CALL = SERVER_IP.."/api/loginWithEmail"
@@ -35,6 +40,7 @@ GET_POPULAR_UPCOMING_REST_CALL = SERVER_IP.."/api/games/popularUpcoming"
 GET_UPCOMING_TODAY_REST_CALL = SERVER_IP.."/api/games/upcomingToday"
 GET_UPCOMING_NEXT_REST_CALL = SERVER_IP.."/api/games/upcomingNext"
 GET_MOST_DISCUSSED_REST_CALL = SERVER_IP.."/api/games/mostDiscussed"
+GET_TEAM_EXPERT_REST_CALL = SERVER_IP.."/api/games/TeamExpertGames"
 GET_GAME_MARKETS_REST_CALL = SERVER_IP.."/api/markets/getMarketsForGame"
 GET_COUPON_HISTORY_REST_CALL = SERVER_IP.."/api/couponHistory/getUserCouponHistory"
 GET_MAIN_LEADERBOARD_REST_CALL = SERVER_IP.."/api/leaderboards/getMainLeaderboard"
@@ -43,6 +49,9 @@ GET_COMPETITION_LIST_REST_CALL = SERVER_IP.."/api/competitions/getCompetitionsFo
 GET_COMPETITION_DETAIL_REST_CALL = SERVER_IP.."/api/leaderboards/getCompetitionInfoAndLeaderboard"
 GET_COMPETITION_LEAGUE_REST_CALL = SERVER_IP.."/api/competitions/getCompetitionLeagueIds"
 GET_COMPETITION_DETAILS_REST_CALL = SERVER_IP.."/api/competitions/getCompetitionDetails"
+GET_COMPETITION_TEAM_EXPERT_REST_CALL = SERVER_IP.."/api/teamexperts/getTeamExpertPicks"
+GET_COMPETITION_EXPERT_HISTORY_REST_CALL = SERVER_IP.."/api/teamexperts/getTeamExpertCouponHistory"
+GET_FOLLOW_EXPERTS = SERVER_IP.."/api/teamexperts/followorUnfollwExperts"
 GET_CHAT_MESSAGE_REST_CALL = SERVER_IP.."/api/chat/getChatMessages"
 GET_USER_META_DATA = SERVER_IP.."/api/user/getUsersMetaData"
 GET_WHEEL_PRIZES_REST_CALL = SERVER_IP.."/api/wheel/load"
@@ -77,9 +86,6 @@ POST_NEW_DISCUSSION_REST_CALL = SERVER_IP.."/api/discuss/write"
 POST_LIKE_DISCUSSION_REST_CALL = SERVER_IP.."/api/discuss/like"
 
 
-FACEBOOK_FRIENDS_LIST_CALL = "/me/friends?access_token="
-USE_DEV = false
-
 --[[
     DS:
     {
@@ -106,6 +112,7 @@ function setServerIP( serverIp, cdnServerIp, useDev )
     GET_UPCOMING_TODAY_REST_CALL = serverIp.."/api/games/upcomingToday"
     GET_UPCOMING_NEXT_REST_CALL = serverIp.."/api/games/upcomingNext"
     GET_MOST_DISCUSSED_REST_CALL = serverIp.."/api/games/mostDiscussed"
+    GET_TEAM_EXPERT_REST_CALL = serverIp.."/api/games/TeamExpertGames"
     GET_GAME_MARKETS_REST_CALL = serverIp.."/api/markets/getMarketsForGame"
     GET_COUPON_HISTORY_REST_CALL = serverIp.."/api/couponHistory/getUserCouponHistory"
     GET_MAIN_LEADERBOARD_REST_CALL = serverIp.."/api/leaderboards/getMainLeaderboard"
@@ -114,6 +121,9 @@ function setServerIP( serverIp, cdnServerIp, useDev )
     GET_COMPETITION_DETAIL_REST_CALL = serverIp.."/api/leaderboards/getCompetitionInfoAndLeaderboard"
     GET_COMPETITION_LEAGUE_REST_CALL = serverIp.."/api/competitions/getCompetitionLeagueIds"
     GET_COMPETITION_DETAILS_REST_CALL = serverIp.."/api/competitions/getCompetitionDetails"
+    GET_COMPETITION_TEAM_EXPERT_REST_CALL = serverIp.."/api/teamexperts/getTeamExpertPicks"
+    GET_COMPETITION_EXPERT_HISTORY_REST_CALL = serverIp.."/api/teamexperts/getTeamExpertCouponHistory"
+    GET_FOLLOW_EXPERTS = serverIp.."/api/teamexperts/followorUnfollwExperts"
     GET_CHAT_MESSAGE_REST_CALL = serverIp.."/api/chat/getChatMessages"
     GET_USER_META_DATA = serverIp.."/api/user/getUsersMetaData"
     GET_WHEEL_PRIZES_REST_CALL = serverIp.."/api/wheel/load"

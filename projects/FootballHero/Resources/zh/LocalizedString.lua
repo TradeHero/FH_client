@@ -254,6 +254,7 @@ Strings = {
         todays_matches = "今日赛事",
         match_won = "赢得: %d 分",
         draw = "平局",
+        team_expert = "砖家",
     },
     terms_agree = "登录即表示您同意FootballHero的相关服务条款",
     last_name_optional = "姓氏 (可选填)",

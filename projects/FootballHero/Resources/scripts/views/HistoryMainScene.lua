@@ -23,6 +23,7 @@ local mUserId
 local mHasMoreToLoad
 local mAdditionalParam
 local mCountryFilter
+local mFollow
 
 -- DS for couponHistory see CouponHistoryData
 -- competitionId: The history only contains matches within the leagues in this competition.
@@ -37,6 +38,14 @@ function loadFrame( userId, competitionId, couponHistory, additionalParam, count
 
     local totalPoints = tolua.cast( mWidget:getChildByName("Label_Total_Points"), "Label" )
     totalPoints:setText( string.format( Constants.String.history.total_points, couponHistory:getBalance() ) )
+    
+    local follows = tolua.cast( mWidget:getChildByName("Label_Follow"), "Label" )
+    mFollow = couponHistory:getFollow()
+    if mFollow == nil then
+        follows:setVisible(false)
+    else
+        follows:setText( string.format( Constants.String.history.follows, mFollow ) )
+    end
     
     mUserId = userId
     if mUserId == Logic:getUserId() then
@@ -73,6 +82,10 @@ function refreshFrame( userId, competitionId, couponHistory, additionalParam, co
     local totalPoints = tolua.cast( mWidget:getChildByName("Label_Total_Points"), "Label" )
     totalPoints:setText( string.format( Constants.String.history.total_points, couponHistory:getBalance() ) )
 
+    local follows = tolua.cast( mWidget:getChildByName("Label_Follow"), "Label" )
+    follows:setText( string.format( Constants.String.history.follows, couponHistory:getFollow() ) )
+
+ 
     mStep = 1
     mHasMoreToLoad = false
     initFilter( mCountryFilter )
@@ -178,7 +191,17 @@ function initContent( couponHistory )
     local info = couponHistory:getStats()
     local label = tolua.cast( mWidget:getChildByName("Label_CompTitle"), "Label" )
     local show = tolua.cast( mWidget:getChildByName("Button_Show"), "Button" )
-    if mCompetitionId ~= nil then
+    if mFollow ~= nil then
+        label:setText( "Team Expert" )
+        show:setTitleText( Constants.String.history.show_all )
+        local eventHandler = function( sender, eventType )
+            if eventType == TOUCH_EVENT_ENDED then
+                EventManager:postEvent( Event.Enter_History, { mUserId } )
+            end
+        end
+        show:addTouchEventListener( eventHandler )
+        show:setEnabled( true )
+    elseif mCompetitionId ~= nil then
         label:setText( competitionDetail:getName() )
         show:setTitleText( Constants.String.history.show_all )
         local eventHandler = function( sender, eventType )

@@ -4,6 +4,7 @@ local Constants = require("scripts.Constants")
 local CountryConfig = require("scripts.config.Country")
 local LeagueConfig = require("scripts.config.League")
 local SceneManager = require("scripts.SceneManager")
+local Logic = require("scripts.Logic").getInstance()
 
 local mCountryNum = CountryConfig.getConfigNum()
 
@@ -92,7 +93,11 @@ function initLeagueList( leagueKey )
     mLeagueListContainer:removeAllChildrenWithCleanup( true )
 
     if Constants.IsSpecialLeague( leagueKey ) then
-        for i = 1, Constants.SpecialLeagueIds.SPECIAL_COUNT do
+        local count = Constants.SpecialLeagueIds.SPECIAL_COUNT
+        if Logic:getExpert() == true then
+             count = count + 1
+        end
+        for i = 1, count do
             local eventHandler = function( sender, eventType )
                 if eventType == TOUCH_EVENT_ENDED then
                     mLeagueSelectCallback( -i, sender )
@@ -111,6 +116,8 @@ function initLeagueList( leagueKey )
                 leagueName:setText( Constants.String.match_list.upcoming_matches )
             elseif -i == Constants.SpecialLeagueIds.MOST_DISCUSSED then
                 leagueName:setText( Constants.String.match_list.most_discussed )
+            elseif -i == Constants.SpecialLeagueIds.TEAM_EXPERT then
+                leagueName:setText( Constants.String.match_list.team_expert )
             end
         end
     else

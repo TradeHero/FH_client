@@ -552,4 +552,20 @@
     <Project>LiveScoreNowCell</Project>
     <GuidesList />
   </GuidesProject>
+  <GuidesProject>
+    <Project>CommunityExpertContent</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>CommunityExpertFrame</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>CommunityMediaFrame</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>FH_UI_136</Project>
+    <GuidesList />
+  </GuidesProject>
 </ArrayOfGuidesProject>
