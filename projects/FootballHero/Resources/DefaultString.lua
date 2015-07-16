@@ -30,6 +30,7 @@ StringDefaultSubTableList = {
   "settings",
   "languages",
   "share",
+  "sports",
 }
 
 StringsDefault = {
@@ -546,6 +547,12 @@ StringsDefault = {
     prediction_title = "FootballHero - %s",
     predResult_title = "FootballHero - %s",
     video_title = "FootballHero - %s",
+  },
+  sports = {
+    football = "Football",
+    basketball = "Basketball",
+    baseball = "Baseball",
+    afootball = "Amercian Football",
   },
 }
 

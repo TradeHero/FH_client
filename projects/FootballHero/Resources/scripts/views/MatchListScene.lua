@@ -41,8 +41,9 @@ function loadFrame( matchList, leagueKey )
     mWidget:registerScriptHandler( EnterOrExit )
     SceneManager.clearNAddWidget( widget )
     
-    Header.loadFrame( widget, nil, false, nil, true )
+    Header.loadFrame( widget, nil, false )
     Header.showLiveButton( true )
+    Header.showMenuButtonWithSportChangeEventHanlder( sportChangeEventHandler )
 
     Navigator.loadFrame( widget )
     Navigator.chooseNav( 1 )
@@ -652,8 +653,8 @@ function helperInitMatchInfo( topContent, matchInfo, leagueKey )
     lbPlayed:setText( Constants.String.match_list.played )
     lbTotalFans:setText( Constants.String.match_list.total_fans )
     if leagueKey == Constants.SpecialLeagueIds.MOST_POPULAR or leagueKey == Constants.SpecialLeagueIds.UPCOMING_MATCHES then
-        compName:setText( matchInfo["LeagueName"] )
-        compName:setEnabled( true )
+        --compName:setText( matchInfo["LeagueName"] )
+        --compName:setEnabled( true )
     else
         bg:setSize( CCSize:new( bg:getSize().width, bg:getSize().height - 30 ) )
         topContent:setSize( CCSize:new( topContent:getSize().width, topContent:getSize().height - 30 ) )
@@ -834,4 +835,9 @@ function scrollViewEventHandler( target, eventType )
 end
 
 function scrollViewDoNothingEventHandler( target, eventType )
+end
+
+function sportChangeEventHandler()
+    EventManager:postEvent( Event.Enter_Match_List )
+    MatchListDropdownFrame.initCountryList()
 end

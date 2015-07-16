@@ -26,7 +26,7 @@ function loadFrame( jsonResponse, tabID, leaderboardId, subType, minigameRespons
     mWidget:registerScriptHandler( EnterOrExit )
     SceneManager.clearNAddWidget( widget )
     
-    Header.loadFrame( mWidget, Constants.String.community.title, false, nil, true )
+    Header.loadFrame( mWidget, Constants.String.community.title, false )
 
     Navigator.loadFrame( widget )
 
@@ -125,6 +125,10 @@ function loadCompetitionScene( contentContainer, jsonResponse, minigameResponse 
     local compList = Competitions:new( jsonResponse )
     local minigame = Minigame:new( minigameResponse )
     CommunityCompetitionFrame.loadFrame( contentContainer, compList, minigame )
+    
+    Header.showMenuButtonWithSportChangeEventHanlder( function ()
+        EventManager:postEvent( Event.Enter_Community, { CommunityConfig.COMMUNITY_TAB_ID_COMPETITION } )
+    end )
 end
 
 function loadHighLightScene( contentContainer, jsonResponse )
@@ -132,6 +136,8 @@ function loadHighLightScene( contentContainer, jsonResponse )
     if not CommunityHighLightFrame.isShown() then
         CommunityHighLightFrame.loadFrame( contentContainer, jsonResponse )
     end
+
+    Header.hideMenuButton()
 end
 
 function loadVideoScene( contentContainer, jsonResponse )
@@ -139,6 +145,8 @@ function loadVideoScene( contentContainer, jsonResponse )
     if not CommunityVideoFrame.isShown() then
         CommunityVideoFrame.loadFrame( contentContainer, jsonResponse )
     end
+
+    Header.hideMenuButton()
 end
 
 function loadLeaderboardScene( contentContainer, jsonResponse, leaderboardId, subType )
@@ -147,4 +155,6 @@ function loadLeaderboardScene( contentContainer, jsonResponse, leaderboardId, su
     else
         CommunityLeaderboardFrame.loadFrame( contentContainer, jsonResponse, leaderboardId, subType, false )
     end
+
+    Header.hideMenuButton()
 end

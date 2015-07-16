@@ -1,18 +1,45 @@
 module(..., package.seeall)
 
+local Constants = require("scripts.Constants")
+
+
 local mAvailableSports = {}
 
-table.insert( mAvailableSports, { ["key"] = "Football", ["id"] = 1 } )
-table.insert( mAvailableSports, { ["key"] = "Basketball", ["id"] = 23  } )
-table.insert( mAvailableSports, { ["key"] = "Baseball", ["id"] = 26  } )
-table.insert( mAvailableSports, { ["key"] = "AFootball", ["id"] = 24  } )
+table.insert( mAvailableSports, { ["key"] = "football", ["id"] = 1 } )
+table.insert( mAvailableSports, { ["key"] = "basketball", ["id"] = 3  } )
+table.insert( mAvailableSports, { ["key"] = "afootball", ["id"] = 4  } )
+table.insert( mAvailableSports, { ["key"] = "baseball", ["id"] = 5  } )
 
 
 local mCurrentSport = mAvailableSports[1]
 
+function getAllSports()
+	return mAvailableSports
+end
+
+function getCurrentSportKey()
+	return mCurrentSport["key"]
+end
 
 function getCurrentSportId()
 	return mCurrentSport["id"]
+end
+
+function getCurrentSportLogoPath()
+	return Constants.IMAGE_PATH.."icn-"..mCurrentSport["key"]..".png"
+end
+
+function setCurrentSportByKey( sportKey )
+	if mCurrentSport["key"] == sportKey then
+		return
+	end
+
+	for i = 1, table.getn( mAvailableSports ) do
+		if mAvailableSports[i]["key"] == sportKey then
+			mCurrentSport = mAvailableSports[i]
+			break
+		end
+	end
 end
 
 function appendSportIdToURLHelper( url )

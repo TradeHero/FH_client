@@ -556,4 +556,8 @@
     <Project>SideMenu</Project>
     <GuidesList />
   </GuidesProject>
+  <GuidesProject>
+    <Project>SideMenuContent</Project>
+    <GuidesList />
+  </GuidesProject>
 </ArrayOfGuidesProject>

@@ -13,6 +13,8 @@ local CompetitionStatus = require("scripts.data.Competitions").CompetitionStatus
 local CompetitionConfig = require("scripts.data.Competitions")
 local ConnectingMessage = require("scripts.views.ConnectingMessage")
 local Logic = require("scripts.Logic").getInstance()
+local Header = require("scripts.views.HeaderFrame")
+
 
 local MAX_CONTAINER_HEIGHT = 650
 

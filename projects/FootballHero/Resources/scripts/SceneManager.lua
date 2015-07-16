@@ -7,6 +7,7 @@ local CommunityConfig = require("scripts.config.Community")
 local LeaderboardConfig = require("scripts.config.Leaderboard")
 local RateManager = require("scripts.RateManager")
 local Constants = require("scripts.Constants")
+local SideMenuScene = require("scripts.views.SideMenuScene")
 
 
 TOUCH_PRIORITY_ZERO = 0
@@ -221,13 +222,23 @@ function addSideMenuWidget( widget )
 	mSideMenuLayer:addWidget( widget )
 end
 
-function showOrHideSideMenu()
+function isSideMenuShown()
+	return mSideMenuShown
+end
+
+function showSideMenu( sportChangeEventHandler )
+	if not mSideMenuShown then
+		SideMenuScene.setSportChangeEventHanlder( sportChangeEventHandler )
+		SideMenuScene.updateSelectedSport()
+		mSideMenuShown = true
+		mSceneGameLayer:setPosition( ccp( 512, 0 ) )
+	end
+end
+
+function closeSideMenu()
 	if mSideMenuShown then
 		mSideMenuShown = false
 		mSceneGameLayer:setPosition( ccp( 0, 0 ) )
-	else
-		mSideMenuShown = true
-		mSceneGameLayer:setPosition( ccp( 512, 0 ) )
 	end
 end
 
