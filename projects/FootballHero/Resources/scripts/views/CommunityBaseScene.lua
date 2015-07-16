@@ -86,7 +86,7 @@ function initCommunityTab( tabInfo, tabId )
         tab:addTouchEventListener( eventHandler )
     end
 
-    if tabId == CommunityConfig.COMMUNITY_TAB_ID_HIGHLIGHT then
+    if tabId == CommunityConfig.COMMUNITY_TAB_ID_EXPERT then
         local isNew = CheckListConfig.isItemNew( CheckListConfig.CHECK_LIST_HIGHLIGHTS )
         local newFlag = tab:getChildByName("Image_new")
         newFlag:setEnabled( isNew )
@@ -113,7 +113,7 @@ end
 function onSelectTab( tabID )
     EventManager:postEvent( Event.Enter_Community, { tabID, 1, 1, Constants.FILTER_MIN_PREDICTION } )
 
-    if tabID == CommunityConfig.COMMUNITY_TAB_ID_HIGHLIGHT then
+    if tabID == CommunityConfig.COMMUNITY_TAB_ID_EXPERT then
         CheckListConfig.clearCheckItemNewFlag( CheckListConfig.CHECK_LIST_HIGHLIGHTS )
     elseif tabID == CommunityConfig.COMMUNITY_TAB_ID_VIDEO then
         CheckListConfig.clearCheckItemNewFlag( CheckListConfig.CHECK_LIST_VIDEOS )

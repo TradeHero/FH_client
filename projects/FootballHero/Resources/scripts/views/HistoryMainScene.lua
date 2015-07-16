@@ -23,7 +23,6 @@ local mUserId
 local mHasMoreToLoad
 local mAdditionalParam
 local mCountryFilter
-local mFollow
 
 -- DS for couponHistory see CouponHistoryData
 -- competitionId: The history only contains matches within the leagues in this competition.
@@ -40,16 +39,16 @@ function loadFrame( userId, competitionId, couponHistory, additionalParam, count
     totalPoints:setText( string.format( Constants.String.history.total_points, couponHistory:getBalance() ) )
     
     local follows = tolua.cast( mWidget:getChildByName("Label_Follow"), "Label" )
-    mFollow = couponHistory:getFollow()
-    if mFollow == nil then
+    local nFollow = couponHistory:getFollow()
+    if nFollow == nil then
         follows:setVisible(false)
     else
-        follows:setText( string.format( Constants.String.history.follows, mFollow ) )
+        follows:setText( string.format( Constants.String.history.follows, nFollow ) )
     end
     
     mUserId = userId
     if mUserId == Logic:getUserId() then
-        if mCompetitionId ~= nil then
+        if mCompetitionId ~= nil or nFollow ~= nil then
             showBackButton = true
         end
     else
@@ -83,8 +82,12 @@ function refreshFrame( userId, competitionId, couponHistory, additionalParam, co
     totalPoints:setText( string.format( Constants.String.history.total_points, couponHistory:getBalance() ) )
 
     local follows = tolua.cast( mWidget:getChildByName("Label_Follow"), "Label" )
-    follows:setText( string.format( Constants.String.history.follows, couponHistory:getFollow() ) )
-
+    local nFollow = couponHistory:getFollow()
+    if nFollow == nil then
+        follows:setVisible(false)
+    else
+        follows:setText( string.format( Constants.String.history.follows, nFollow ) )
+    end
  
     mStep = 1
     mHasMoreToLoad = false
@@ -191,9 +194,10 @@ function initContent( couponHistory )
     local info = couponHistory:getStats()
     local label = tolua.cast( mWidget:getChildByName("Label_CompTitle"), "Label" )
     local show = tolua.cast( mWidget:getChildByName("Button_Show"), "Button" )
-    if mFollow ~= nil then
-        label:setText( "Team Expert" )
+    CCLuaLog("initContent")
+    if mAdditionalParam == "Expert" then
         show:setTitleText( Constants.String.history.show_all )
+        label:setText( Constants.String.history.predictions_team )
         local eventHandler = function( sender, eventType )
             if eventType == TOUCH_EVENT_ENDED then
                 EventManager:postEvent( Event.Enter_History, { mUserId } )

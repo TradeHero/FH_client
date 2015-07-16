@@ -6,6 +6,7 @@ local FileUtils = require("scripts.FileUtils")
 local RequestUtils = require("scripts.RequestUtils")
 
 
+CHECK_LIST_EXPERT = "highlights"
 CHECK_LIST_HIGHLIGHTS = "highlights"
 CHECK_LIST_VIDEOS = "videos"
 

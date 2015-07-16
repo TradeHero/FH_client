@@ -94,15 +94,19 @@ function initContent( gameInfo , expertInfo )
         local labelHomeAH =  tolua.cast( gamePanel:getChildByName("Label_HomeAH"), "Label" )
         local labelAwayAH =  tolua.cast( gamePanel:getChildByName("Label_AwayAH"), "Label" )
  --       CCLuaLog("AH:" .. lineAH .. "\tLine:" .. gameInfo[i]["Line"] )
-        if lineAH > 0 then
+        
+        if lineAH == nil then
+            labelHomeAH:setVisible( false )
+            labelAwayAH:setVisible( false )
+        elseif lineAH > 0 then
             labelHomeAH:setText( "A.H. -" .. lineAH )
             labelAwayAH:setVisible( false )
         elseif lineAH < 0 then
             labelAwayAH:setText( "A.H. -" .. -lineAH )
             labelHomeAH:setVisible( false )
         else
+            labelHomeAH:setText( "A.H. -0" )
             labelAwayAH:setVisible( false )
-            labelHomeAH:setVisible( false )
         end
 
 

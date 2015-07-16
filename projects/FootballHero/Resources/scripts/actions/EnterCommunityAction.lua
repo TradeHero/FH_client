@@ -30,12 +30,8 @@ function action( param )
 
     elseif mTabID == CommunityConfig.COMMUNITY_TAB_ID_EXPERT then
         url = RequestUtils.GET_COMPETITION_TEAM_EXPERT_REST_CALL
-    -- elseif mTabID == CommunityConfig.COMMUNITY_TAB_ID_HIGHLIGHT then
-    --     url = RequestUtils.CDN_SERVER_IP.."highlights.txt"
-    --     needRequestHeader = false
     elseif mTabID == CommunityConfig.COMMUNITY_TAB_ID_VIDEO then
         url = RequestUtils.CDN_SERVER_IP.."highlights.txt"
---        url = RequestUtils.CDN_SERVER_IP.."videos.txt"
         needRequestHeader = false
     elseif mTabID == CommunityConfig.COMMUNITY_TAB_ID_LEADERBOARD then
 
