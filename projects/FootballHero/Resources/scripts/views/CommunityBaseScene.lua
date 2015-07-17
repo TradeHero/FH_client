@@ -14,6 +14,7 @@ local CommunityVideoFrame = require("scripts.views.CommunityVideoFrame")
 local Minigame = require("scripts.data.Minigame").Minigame
 local Header = require("scripts.views.HeaderFrame")
 local CheckListConfig = require("scripts.data.CheckList")
+local LeaderboardConfig = require("scripts.config.Leaderboard")
 
 
 local mWidget
@@ -156,5 +157,8 @@ function loadLeaderboardScene( contentContainer, jsonResponse, leaderboardId, su
         CommunityLeaderboardFrame.loadFrame( contentContainer, jsonResponse, leaderboardId, subType, false )
     end
 
-    Header.hideMenuButton()
+    Header.showMenuButtonWithSportChangeEventHanlder( function ()
+        EventManager:postEvent( Event.Enter_Community, { CommunityConfig.COMMUNITY_TAB_ID_LEADERBOARD,
+                LeaderboardConfig.LEADERBOARD_TOP, LeaderboardConfig.LEADERBOARD_TYPE_ROI } )
+    end )
 end
