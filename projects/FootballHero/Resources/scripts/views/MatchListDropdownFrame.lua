@@ -5,7 +5,6 @@ local CountryConfig = require("scripts.config.Country")
 local LeagueConfig = require("scripts.config.League")
 local SceneManager = require("scripts.SceneManager")
 
-local mCountryNum = CountryConfig.getConfigNum()
 
 local mCountryWidget
 local mLeagueWidget

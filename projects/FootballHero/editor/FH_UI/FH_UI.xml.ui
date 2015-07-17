@@ -141,6 +141,7 @@
     <string>LiveScoreInPlayEndGap.json</string>
     <string>SideMenu.json</string>
     <string>SideMenuContent.json</string>
+    <string>SportsDropdownContent.json</string>
   </JsonList>
   <CanvasSize>
     <Width>640</Width>
@@ -154,5 +155,5 @@
     <string>MatchListScene/icn-football.png</string>
   </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>HeaderFrame.json</CurrentUIJson>
+  <CurrentUIJson>MyPicksHome.json</CurrentUIJson>
 </UIProject>

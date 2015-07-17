@@ -11,12 +11,6 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "header/back.png",
-    "liveScore/livescore_btn_live_on.png",
-    "liveScore/livescore_btn_live_off.png",
-    "Navigator/btn-setting.png",
-    "header/footballhero-logo.png",
-    "MatchListScene/icn-sidemenu.png",
     "MatchListScene/icn-football.png"
   ],
   "version": "1.6.0.0",
@@ -31,7 +25,7 @@
         "options": {
           "__type": "ImageViewSurrogate:#EditorCommon.JsonModel.Component.GUI",
           "classname": "ImageView",
-          "name": "Image_CountryLogo",
+          "name": "Image_SportLogo",
           "ZOrder": 2,
           "actiontag": 225,
           "anchorPointX": 0.5,
@@ -43,7 +37,7 @@
           "customProperty": "",
           "flipX": false,
           "flipY": false,
-          "height": 33,
+          "height": 88,
           "ignoreSize": true,
           "layoutParameter": null,
           "opacity": 255,
@@ -51,8 +45,8 @@
           "positionPercentY": 0.52,
           "positionType": 0,
           "rotation": 0,
-          "scaleX": 1,
-          "scaleY": 1,
+          "scaleX": 0.6,
+          "scaleY": 0.6,
           "sizePercentX": 0.078125,
           "sizePercentY": 0.44,
           "sizeType": 0,
@@ -60,7 +54,7 @@
           "touchAble": false,
           "useMergedTexture": false,
           "visible": true,
-          "width": 50,
+          "width": 88,
           "x": 47,
           "y": 39,
           "capInsetsHeight": 0,
@@ -69,13 +63,13 @@
           "capInsetsY": 0,
           "fileName": null,
           "fileNameData": {
-            "path": "commonRes/England.png",
+            "path": "MatchListScene/icn-football.png",
             "plistFile": "",
             "resourceType": 0
           },
           "scale9Enable": false,
-          "scale9Height": 33,
-          "scale9Width": 50
+          "scale9Height": 88,
+          "scale9Width": 88
         }
       },
       {
@@ -85,7 +79,7 @@
         "options": {
           "__type": "LabelSurrogate:#EditorCommon.JsonModel.Component.GUI",
           "classname": "Label",
-          "name": "Label_CountryName",
+          "name": "Label_SportName",
           "ZOrder": 2,
           "actiontag": 226,
           "anchorPointX": 0,

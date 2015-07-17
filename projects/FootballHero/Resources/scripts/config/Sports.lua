@@ -29,6 +29,10 @@ function getCurrentSportLogoPath()
 	return Constants.IMAGE_PATH.."icn-"..mCurrentSport["key"]..".png"
 end
 
+function getSportIdByIndex( index )
+	return mAvailableSports[index]["id"]
+end
+
 function setCurrentSportByKey( sportKey )
 	if mCurrentSport["key"] == sportKey then
 		return
@@ -40,6 +44,10 @@ function setCurrentSportByKey( sportKey )
 			break
 		end
 	end
+end
+
+function getSportLogoPathByIndex( index )
+	return Constants.IMAGE_PATH.."icn-"..mAvailableSports[index]["key"]..".png"
 end
 
 function appendSportIdToURLHelper( url )

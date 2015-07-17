@@ -560,4 +560,8 @@
     <Project>SideMenuContent</Project>
     <GuidesList />
   </GuidesProject>
+  <GuidesProject>
+    <Project>SportsDropdownContent</Project>
+    <GuidesList />
+  </GuidesProject>
 </ArrayOfGuidesProject>

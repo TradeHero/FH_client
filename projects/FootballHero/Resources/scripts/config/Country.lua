@@ -83,6 +83,11 @@ function getCountryName( id )
 	end
 end
 
+function getCountrySportId( id )
+	local config = getConfig( id )
+	return config["sportId"]
+end
+
 function isActive( id )
 	local config = getConfig( id )
 	return config["isActive"]

@@ -11,11 +11,13 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "MatchListScene/img-bkg-general.png",
-    "MatchListScene/icn-football.png",
-    "MatchListScene/icn-basketball.png",
-    "MatchListScene/icn-afootball.png",
-    "MatchListScene/icn-baseball.png"
+    "header/back.png",
+    "liveScore/livescore_btn_live_on.png",
+    "liveScore/livescore_btn_live_off.png",
+    "Navigator/btn-setting.png",
+    "header/footballhero-logo.png",
+    "MatchListScene/icn-sidemenu.png",
+    "MatchListScene/icn-football.png"
   ],
   "version": "1.6.0.0",
   "widgetTree": {

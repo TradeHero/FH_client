@@ -49,7 +49,7 @@ function initScene()
 		local name = tolua.cast( sportPanel:getChildByName("Label_name"), "Label" )
 
 		sportPanel:setName( sport["key"] )
-		icon:loadTexture( Constants.IMAGE_PATH.."icn-"..sport["key"]..".png" )
+		icon:loadTexture( SportsConfig.getSportLogoPathByIndex( i ) )
 		name:setText( Constants.String.sports[sport["key"]] )
 
 		sportPanel:addTouchEventListener( function ( sender, eventType )

@@ -7,12 +7,16 @@ local Event = require("scripts.events.Event").EventList
 local TeamConfig = require("scripts.config.Team")
 local Logic = require("scripts.Logic").getInstance()
 local Constants = require("scripts.Constants")
+local SportsConfig = require("scripts.config.Sports")
 local CountryConfig = require("scripts.config.Country")
 local SMIS = require("scripts.SMIS")
+local SportsDropDownFilter = require("scripts.views.SportsDropDownFilter")
 local StatsDropDownFilter = require("scripts.views.StatsDropDownFilter")
 local CompetitionType = require("scripts.data.Competitions").CompetitionType
 local RequestUtils = require("scripts.RequestUtils")
 local Header = require("scripts.views.HeaderFrame")
+
+
 
 local CONTENT_FADEIN_TIME = 1
 
@@ -100,14 +104,69 @@ function isSelf()
 end
 
 function initFilter( countryFilter )
+    initSportFilter()
+    initCountryFilter( countryFilter )
+end
+
+function initSportFilter()
+    local filterPanel = mWidget:getChildByName("Panel_Sport_Select")
+    local filterExpend = filterPanel:getChildByName( "Button_FilterExpand" )
+    local mask = filterPanel:getChildByName("Panel_Mask")
+    local sportsList = tolua.cast( filterPanel:getChildByName("ScrollView_Sports"), "ScrollView" )
+    local logo = tolua.cast( filterPanel:getChildByName("Image_sportLogo"), "ImageView" )
+    local label = tolua.cast( filterPanel:getChildByName("Label_Sport"), "Label" )
+
+    sportsList:setEnabled( false )
+    mask:setEnabled( false )
+    filterExpend:setBrightStyle( BRIGHT_NORMAL )
+
+    local filterHandler = function( sender, eventType )
+        if eventType == TOUCH_EVENT_ENDED then
+            if sportsList:isEnabled() then
+                mask:setEnabled( false )
+                sportsList:setEnabled( false )
+                filterExpend:setBrightStyle( BRIGHT_NORMAL )
+            else
+                mask:setEnabled( true )
+                sportsList:setEnabled( true )
+                filterExpend:setBrightStyle( BRIGHT_HIGHLIGHT )
+            end
+
+            closeCountryFilter()
+        end
+    end
+    filterPanel:addTouchEventListener( filterHandler )
+
+    local refreshFilter = function( index )
+        if index == Constants.STATS_SHOW_ALL then
+            logo:loadTexture( Constants.COUNTRY_IMAGE_PATH.."favorite.png" )
+        else
+            logo:loadTexture( SportsConfig.getSportLogoPathByIndex( index ) )
+        end
+    end
+
+    local sportSelectedCallback = function( index )
+        mask:setEnabled( false )
+        sportsList:setEnabled( false )
+        filterExpend:setBrightStyle( BRIGHT_NORMAL )
+        
+        refreshFilter( index )
+    end
+
+    SportsDropDownFilter.loadFrame( sportsList, sportSelectedCallback )
+
+    refreshFilter( SportsDropDownFilter.getCurrentChoosedSportIndex() )
+end
+
+function initCountryFilter( countryFilter )
     local filterPanel = mWidget:getChildByName("Panel_League_Select")
     local filterExpend = filterPanel:getChildByName( "Button_FilterExpand" )
     local mask = filterPanel:getChildByName("Panel_Mask")
     local filterList = tolua.cast( filterPanel:getChildByName("ScrollView_Filter"), "ScrollView" )
     local logo = tolua.cast( filterPanel:getChildByName("countryLogo"), "ImageView" )
-    local league = tolua.cast( filterPanel:getChildByName("Label_League"), "Label" )
+    local label = tolua.cast( filterPanel:getChildByName("Label_League"), "Label" )
 
-    league:setText( Constants.String.leaderboard.stats_league )
+    label:setText( Constants.String.leaderboard.stats_league )
 
     filterList:setEnabled( false )
     mask:setEnabled( false )
@@ -124,6 +183,8 @@ function initFilter( countryFilter )
                 filterList:setEnabled( true )
                 filterExpend:setBrightStyle( BRIGHT_HIGHLIGHT )
             end
+
+            closeSportFilter()
         end
     end
     filterPanel:addTouchEventListener( filterHandler )
@@ -161,7 +222,32 @@ function initFilter( countryFilter )
         local countryIndex = CountryConfig.getConfigIdByKey( countryFilter )
         refreshFilter( countryIndex )
     end
-    
+end
+
+function closeSportFilter()
+    local filterPanel = mWidget:getChildByName("Panel_Sport_Select")
+    local filterExpend = filterPanel:getChildByName( "Button_FilterExpand" )
+    local mask = filterPanel:getChildByName("Panel_Mask")
+    local sportsList = tolua.cast( filterPanel:getChildByName("ScrollView_Sports"), "ScrollView" )
+    local logo = tolua.cast( filterPanel:getChildByName("Image_sportLogo"), "ImageView" )
+    local label = tolua.cast( filterPanel:getChildByName("Label_Sport"), "Label" )
+
+    sportsList:setEnabled( false )
+    mask:setEnabled( false )
+    filterExpend:setBrightStyle( BRIGHT_NORMAL )
+end
+
+function closeCountryFilter()
+    local filterPanel = mWidget:getChildByName("Panel_League_Select")
+    local filterExpend = filterPanel:getChildByName( "Button_FilterExpand" )
+    local mask = filterPanel:getChildByName("Panel_Mask")
+    local filterList = tolua.cast( filterPanel:getChildByName("ScrollView_Filter"), "ScrollView" )
+    local logo = tolua.cast( filterPanel:getChildByName("countryLogo"), "ImageView" )
+    local label = tolua.cast( filterPanel:getChildByName("Label_League"), "Label" )
+
+    filterList:setEnabled( false )
+    mask:setEnabled( false )
+    filterExpend:setBrightStyle( BRIGHT_NORMAL )
 end
 
 function initContent( couponHistory )
