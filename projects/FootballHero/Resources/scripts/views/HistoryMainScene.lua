@@ -139,7 +139,7 @@ function initSportFilter()
 
     local refreshFilter = function( index )
         if index == Constants.STATS_SHOW_ALL then
-            logo:loadTexture( Constants.COUNTRY_IMAGE_PATH.."favorite.png" )
+            logo:loadTexture( Constants.IMAGE_PATH.."icn-allsports.png" )
         else
             logo:loadTexture( SportsConfig.getSportLogoPathByIndex( index ) )
         end

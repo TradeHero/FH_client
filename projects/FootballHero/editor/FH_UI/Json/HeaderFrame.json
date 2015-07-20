@@ -11,13 +11,9 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "header/back.png",
-    "liveScore/livescore_btn_live_on.png",
-    "liveScore/livescore_btn_live_off.png",
-    "Navigator/btn-setting.png",
-    "header/footballhero-logo.png",
-    "MatchListScene/icn-sidemenu.png",
-    "MatchListScene/icn-football.png"
+    "MatchListScene/img-bkg-general.png",
+    "MatchCentre/btn-prediction.png",
+    "MatchCentre/btn-predictionmade.png"
   ],
   "version": "1.6.0.0",
   "widgetTree": {

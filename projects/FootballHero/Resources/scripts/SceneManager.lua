@@ -4,6 +4,7 @@ local EventManager = require("scripts.events.EventManager").getInstance()
 local Event = require("scripts.events.Event").EventList
 local RequestUtils = require("scripts.RequestUtils")
 local CommunityConfig = require("scripts.config.Community")
+local SportsConfig = require("scripts.config.Sports")
 local LeaderboardConfig = require("scripts.config.Leaderboard")
 local RateManager = require("scripts.RateManager")
 local Constants = require("scripts.Constants")
@@ -31,6 +32,18 @@ local mSideMenuShown = false
 local mKeyPadBackEnabled = true
 local mKeypadBackListener = nil
 local mWidgets = {}		-- Store widget show in the list to save time loading the same json file.
+
+local mSecondLayerScenes = {
+	"scenes/PredictionBG.json",
+	"scenes/SpecialCompetitionLeaderboard.json",
+	"scenes/SpecialDetailedCompetitionLeaderboard.json",
+	"scenes/CompetitionLeaderboard.json",
+	"scenes/CompetitionMore.json",
+	"scenes/Chat.json",
+	"scenes/CompetitionRules.json",
+	"scenes/MatchCenterDiscussionsPostScene",
+	"scenes/MatchCenterDiscussionsDetailScene.json",
+}
 
 function init()
 	local eglView = CCEGLView:sharedOpenGLView()
@@ -262,8 +275,25 @@ function widgetFromJsonFile( fileName )
 		content:retain()
 		mWidgets[fileName] = content
 	end
-	return mWidgets[fileName]:clone()
+	local widgetInstance = mWidgets[fileName]:clone()
+
+	return widgetInstance
 end
+
+function secondLayerWidgetFromJsonFile( fileName )
+	local widgetInstance = GUIReader:shareReader():widgetFromJsonFile( fileName )
+
+	for i = 1, table.getn( mSecondLayerScenes ) do
+		if fileName == mSecondLayerScenes[i] then
+			widgetInstance = tolua.cast( widgetInstance, "Layout" )
+			widgetInstance:setBackGroundImage( SportsConfig.getCurrentSportBkgPath() )
+			break
+		end
+	end
+
+	return widgetInstance
+end
+
 
 function registerDeepLinkEvent()
 	local callback = function( deepLink )

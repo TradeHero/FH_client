@@ -11,7 +11,15 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "MatchListScene/icn-football.png"
+    "MatchListScene/img-bkg-general.png",
+    "header/back.png",
+    "MatchCentre/img-unlike.png",
+    "MatchCentre/img-like.png",
+    "MatchCentre/img-comment.png",
+    "MatchCentre/img-share.png",
+    "MyHero/img-photo.png",
+    "community/img-leaguebox.png",
+    "MatchCentre/img-write.png"
   ],
   "version": "1.6.0.0",
   "widgetTree": {

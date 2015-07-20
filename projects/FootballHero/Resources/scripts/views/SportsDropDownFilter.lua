@@ -72,7 +72,7 @@ function addSpecial()
     local countryName = tolua.cast( content:getChildByName("Label_SportName"), "Label" )
     
     countryName:setText( Constants.String.history.show_all )
-    logo:loadTexture( Constants.COUNTRY_IMAGE_PATH.."favorite.png" )
+    logo:loadTexture( Constants.IMAGE_PATH.."icn-allsports.png" )
 
     return content:getSize().height
 end

@@ -29,6 +29,10 @@ function getCurrentSportLogoPath()
 	return Constants.IMAGE_PATH.."icn-"..mCurrentSport["key"]..".png"
 end
 
+function getCurrentSportBkgPath()
+	return Constants.IMAGE_PATH.."bkg-"..mCurrentSport["key"]..".png"
+end
+
 function getSportIdByIndex( index )
 	return mAvailableSports[index]["id"]
 end

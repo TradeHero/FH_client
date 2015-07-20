@@ -11,8 +11,8 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "chat/img-bahasa.png",
-    "community/img-header.png"
+    "MatchListScene/img-bkg-general.png",
+    "header/back.png"
   ],
   "version": "1.6.0.0",
   "widgetTree": {

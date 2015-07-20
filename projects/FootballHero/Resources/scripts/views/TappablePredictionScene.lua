@@ -35,7 +35,7 @@ function loadFrame()
     mMarketsInfo = Logic:getCurMarketInfo()
     mBigBetStatus["currBigBet"] = MarketConfig.MARKET_TYPE_INVALID
    
-	mWidget = GUIReader:shareReader():widgetFromJsonFile("scenes/PredictionBG.json")
+	mWidget = SceneManager.secondLayerWidgetFromJsonFile("scenes/PredictionBG.json")
     mWidget:registerScriptHandler( EnterOrExit )
     mWidget:setName( "TappablePredictionScene" )
 

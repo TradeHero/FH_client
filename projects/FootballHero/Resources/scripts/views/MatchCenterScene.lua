@@ -9,6 +9,8 @@ local Logic = require("scripts.Logic").getInstance()
 local EventManager = require("scripts.events.EventManager").getInstance()
 local Event = require("scripts.events.Event").EventList
 local Header = require("scripts.views.HeaderFrame")
+local SportsConfig = require("scripts.config.Sports")
+
 
 local mWidget
 
@@ -35,7 +37,7 @@ function loadFrame( jsonResponse, tabID )
     
     mTabID = tabID
     
-	mWidget = GUIReader:shareReader():widgetFromJsonFile("scenes/MatchCenterTopScene.json")
+	mWidget = GUIReader:shareReader():widgetFromJsonFile("scenes/MatchCenterTopScene.json") 
     mWidget:registerScriptHandler( EnterOrExit )
     SceneManager.clearNAddWidget( mWidget )
     

@@ -11,9 +11,10 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "community/img-header.png",
-    "community/img-leaguebox.png",
-    "community/btn-CTA.png"
+    "MatchListScene/img-bkg-general.png",
+    "header/back.png",
+    "chat/send_icon.png",
+    "chat/More Button.png"
   ],
   "version": "1.6.0.0",
   "widgetTree": {

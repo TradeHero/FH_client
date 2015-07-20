@@ -11,7 +11,7 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "MatchListScene/match_bkg.png"
+    "MatchListScene/img-bkg-general.png"
   ],
   "version": "1.6.0.0",
   "widgetTree": {
@@ -56,7 +56,7 @@
       "adaptScreen": false,
       "backGroundImage": null,
       "backGroundImageData": {
-        "path": "MatchListScene/match_bkg.png",
+        "path": "MatchListScene/img-bkg-general.png",
         "plistFile": "",
         "resourceType": 0
       },

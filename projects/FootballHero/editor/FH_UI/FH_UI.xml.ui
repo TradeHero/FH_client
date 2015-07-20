@@ -152,8 +152,18 @@
   <ResRelativePath />
   <imageFileList />
   <imagePngList>
-    <string>MatchListScene/icn-football.png</string>
+    <string>MatchListScene/img-bkg-general.png</string>
+    <string>header/back.png</string>
+    <string>Competition/copy_icon.png</string>
+    <string>Competition/share_icon.png</string>
+    <string>chat/More Button.png</string>
+    <string>community/icn-no-message.png</string>
+    <string>community/icn-new-message.png</string>
+    <string>community/img-inactivepage.png</string>
+    <string>community/img-activepage.png</string>
+    <string>Competition/img-userposition.png</string>
+    <string>LoginNReg/photo.png</string>
   </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>MyPicksHome.json</CurrentUIJson>
+  <CurrentUIJson>AskForComment.json</CurrentUIJson>
 </UIProject>

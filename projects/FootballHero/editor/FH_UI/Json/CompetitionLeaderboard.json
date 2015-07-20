@@ -11,18 +11,17 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "commonRes/img-bkg-general.png",
-    "chat/btn-groupchat.png",
-    "chat/img-groupchat.png",
-    "chat/icn-chatcounter.png",
-    "chat/btn-enter.png",
-    "chat/btn-language.png",
-    "chat/img-bahasa.png",
-    "chat/img-thai.png",
-    "chat/img-chinese.png",
-    "chat/img-arabic.png",
-    "chat/img-feedback.png",
-    "chat/img-fb.png"
+    "MatchListScene/img-bkg-general.png",
+    "header/back.png",
+    "Competition/copy_icon.png",
+    "Competition/share_icon.png",
+    "chat/More Button.png",
+    "community/icn-no-message.png",
+    "community/icn-new-message.png",
+    "community/img-inactivepage.png",
+    "community/img-activepage.png",
+    "Competition/img-userposition.png",
+    "LoginNReg/photo.png"
   ],
   "version": "1.6.0.0",
   "widgetTree": {
@@ -1499,7 +1498,7 @@
       "adaptScreen": false,
       "backGroundImage": null,
       "backGroundImageData": {
-        "path": "MatchListScene/match_bkg.png",
+        "path": "MatchListScene/img-bkg-general.png",
         "plistFile": "",
         "resourceType": 0
       },
