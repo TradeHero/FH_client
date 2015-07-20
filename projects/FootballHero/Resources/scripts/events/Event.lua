@@ -121,6 +121,7 @@ EventNameList =
 
     "Load_More_In_Leaderboard",
     "Load_More_In_History",
+    "Load_More_In_Expert_History",
     "Load_More_In_Competition_Detail",
     "Load_More_In_Spin_Winner",
     "Load_More_Discussion_Posts",
@@ -186,6 +187,7 @@ EventNameDosenotTrackList =
     
     "Load_More_In_Leaderboard",
     "Load_More_In_History",
+    "Load_More_In_Expert_History",
     "Load_More_In_Competition_Detail",
     "Load_More_In_Spin_Winner",
     "Load_More_Discussion_Posts",

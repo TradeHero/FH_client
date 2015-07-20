@@ -43,6 +43,7 @@ function loadFrame( userId, competitionId, couponHistory, additionalParam, count
     if nFollow == nil then
         follows:setVisible(false)
     else
+        follows:setVisible( true )
         follows:setText( string.format( Constants.String.history.follows, nFollow ) )
     end
     
@@ -86,6 +87,7 @@ function refreshFrame( userId, competitionId, couponHistory, additionalParam, co
     if nFollow == nil then
         follows:setVisible(false)
     else
+        follows:setVisible( true )
         follows:setText( string.format( Constants.String.history.follows, nFollow ) )
     end
  
@@ -522,7 +524,11 @@ end
 function scrollViewEventHandler( target, eventType )
     if eventType == SCROLLVIEW_EVENT_BOUNCE_BOTTOM and mHasMoreToLoad then
         mStep = mStep + 1
-        EventManager:postEvent( Event.Load_More_In_History, { mStep, mCompetitionId, mUserId, mAdditionalParam, mCountryFilter } )
+        if mAdditionalParam == "Expert" then
+            EventManager:postEvent( Event.Load_More_In_Expert_History, { mStep, mCompetitionId, mUserId, mAdditionalParam, mCountryFilter } )
+        else
+            EventManager:postEvent( Event.Load_More_In_History, { mStep, mCompetitionId, mUserId, mAdditionalParam, mCountryFilter } )
+        end
     end
 end
 
