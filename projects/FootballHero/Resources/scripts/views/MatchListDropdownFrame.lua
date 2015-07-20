@@ -61,6 +61,9 @@ function initCountryList()
 end
 
 function addCountry( i, country )
+    if CountryConfig.getLeagueList( i ) == nil then
+        return 0
+    end
     local leagueId = CountryConfig.getLeagueList( i )[1]
 
     local eventHandler = function( sender, eventType )
