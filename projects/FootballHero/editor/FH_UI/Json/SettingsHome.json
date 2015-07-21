@@ -11,8 +11,9 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "chat/img-bahasa.png",
-    "community/img-header.png"
+    "MatchListScene/img-bkg-general.png",
+    "PredictionConfirm/off_button.png",
+    "PredictionConfirm/on_button.png"
   ],
   "version": "1.6.0.0",
   "widgetTree": {
@@ -386,7 +387,7 @@
       "adaptScreen": false,
       "backGroundImage": null,
       "backGroundImageData": {
-        "path": "MatchListScene/match_bkg.png",
+        "path": "commonRes/img-bkg-general.png",
         "plistFile": "",
         "resourceType": 0
       },

@@ -7,6 +7,7 @@ local EventManager = require("scripts.events.EventManager").getInstance()
 local Event = require("scripts.events.Event").EventList
 local RequestUtils = require("scripts.RequestUtils")
 local Constants = require("scripts.Constants")
+local SportsConfig = require("scripts.config.Sports")
 
 
 function action( param )
@@ -27,6 +28,8 @@ function action( param )
     if countryFilter ~= nil and countryFilter ~= Constants.STATS_SHOW_ALL then
         url = url.."&countryId="..countryFilter
     end
+
+    url = SportsConfig.appendSportIdToURLHelper( url )
 
     local requestInfo = {}
     requestInfo.requestData = ""

@@ -528,7 +528,7 @@
       "adaptScreen": false,
       "backGroundImage": null,
       "backGroundImageData": {
-        "path": "MatchListScene/match_bkg.png",
+        "path": "commonRes/img-bkg-general.png",
         "plistFile": "",
         "resourceType": 0
       },

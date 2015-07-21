@@ -11,8 +11,7 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "chat/img-bahasa.png",
-    "community/img-header.png"
+    "MatchListScene/img-bkg-general.png"
   ],
   "version": "1.6.0.0",
   "widgetTree": {
@@ -26,7 +25,7 @@
         "options": {
           "__type": "ImageViewSurrogate:#EditorCommon.JsonModel.Component.GUI",
           "classname": "ImageView",
-          "name": "Image_72",
+          "name": "Image_bg",
           "ZOrder": 0,
           "actiontag": 14314343,
           "anchorPointX": 0.5,
@@ -64,7 +63,7 @@
           "capInsetsY": 0,
           "fileName": null,
           "fileNameData": {
-            "path": "MatchListScene/match_bkg.png",
+            "path": "MatchListScene/img-bkg-general.png",
             "plistFile": "",
             "resourceType": 0
           },

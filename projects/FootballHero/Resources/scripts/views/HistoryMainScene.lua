@@ -7,12 +7,16 @@ local Event = require("scripts.events.Event").EventList
 local TeamConfig = require("scripts.config.Team")
 local Logic = require("scripts.Logic").getInstance()
 local Constants = require("scripts.Constants")
+local SportsConfig = require("scripts.config.Sports")
 local CountryConfig = require("scripts.config.Country")
 local SMIS = require("scripts.SMIS")
+local SportsDropDownFilter = require("scripts.views.SportsDropDownFilter")
 local StatsDropDownFilter = require("scripts.views.StatsDropDownFilter")
 local CompetitionType = require("scripts.data.Competitions").CompetitionType
 local RequestUtils = require("scripts.RequestUtils")
 local Header = require("scripts.views.HeaderFrame")
+
+
 
 local CONTENT_FADEIN_TIME = 1
 
@@ -57,9 +61,9 @@ function loadFrame( userId, competitionId, couponHistory, additionalParam, count
     end
 
     if showBackButton then
-        Header.loadFrame( mWidget, nil, true )
+        Header.loadFrame( mWidget, Constants.String.history.title, true )
     else
-        Header.loadFrame( mWidget, nil, false )
+        Header.loadFrame( mWidget, Constants.String.history.title, false )
     end
 
     mWidget:registerScriptHandler( EnterOrExit )
@@ -118,14 +122,69 @@ function isSelf()
 end
 
 function initFilter( countryFilter )
+    initSportFilter()
+    initCountryFilter( countryFilter )
+end
+
+function initSportFilter()
+    local filterPanel = mWidget:getChildByName("Panel_Sport_Select")
+    local filterExpend = filterPanel:getChildByName( "Button_FilterExpand" )
+    local mask = filterPanel:getChildByName("Panel_Mask")
+    local sportsList = tolua.cast( filterPanel:getChildByName("ScrollView_Sports"), "ScrollView" )
+    local logo = tolua.cast( filterPanel:getChildByName("Image_sportLogo"), "ImageView" )
+    local label = tolua.cast( filterPanel:getChildByName("Label_Sport"), "Label" )
+
+    sportsList:setEnabled( false )
+    mask:setEnabled( false )
+    filterExpend:setBrightStyle( BRIGHT_NORMAL )
+
+    local filterHandler = function( sender, eventType )
+        if eventType == TOUCH_EVENT_ENDED then
+            if sportsList:isEnabled() then
+                mask:setEnabled( false )
+                sportsList:setEnabled( false )
+                filterExpend:setBrightStyle( BRIGHT_NORMAL )
+            else
+                mask:setEnabled( true )
+                sportsList:setEnabled( true )
+                filterExpend:setBrightStyle( BRIGHT_HIGHLIGHT )
+            end
+
+            closeCountryFilter()
+        end
+    end
+    filterPanel:addTouchEventListener( filterHandler )
+
+    local refreshFilter = function( index )
+        if index == Constants.STATS_SHOW_ALL then
+            logo:loadTexture( Constants.IMAGE_PATH.."icn-allsports.png" )
+        else
+            logo:loadTexture( SportsConfig.getSportLogoPathByIndex( index ) )
+        end
+    end
+
+    local sportSelectedCallback = function( index )
+        mask:setEnabled( false )
+        sportsList:setEnabled( false )
+        filterExpend:setBrightStyle( BRIGHT_NORMAL )
+        
+        refreshFilter( index )
+    end
+
+    SportsDropDownFilter.loadFrame( sportsList, sportSelectedCallback )
+
+    refreshFilter( SportsDropDownFilter.getCurrentChoosedSportIndex() )
+end
+
+function initCountryFilter( countryFilter )
     local filterPanel = mWidget:getChildByName("Panel_League_Select")
     local filterExpend = filterPanel:getChildByName( "Button_FilterExpand" )
     local mask = filterPanel:getChildByName("Panel_Mask")
     local filterList = tolua.cast( filterPanel:getChildByName("ScrollView_Filter"), "ScrollView" )
     local logo = tolua.cast( filterPanel:getChildByName("countryLogo"), "ImageView" )
-    local league = tolua.cast( filterPanel:getChildByName("Label_League"), "Label" )
+    local label = tolua.cast( filterPanel:getChildByName("Label_League"), "Label" )
 
-    league:setText( Constants.String.leaderboard.stats_league )
+    label:setText( Constants.String.leaderboard.stats_league )
 
     filterList:setEnabled( false )
     mask:setEnabled( false )
@@ -142,6 +201,8 @@ function initFilter( countryFilter )
                 filterList:setEnabled( true )
                 filterExpend:setBrightStyle( BRIGHT_HIGHLIGHT )
             end
+
+            closeSportFilter()
         end
     end
     filterPanel:addTouchEventListener( filterHandler )
@@ -179,7 +240,32 @@ function initFilter( countryFilter )
         local countryIndex = CountryConfig.getConfigIdByKey( countryFilter )
         refreshFilter( countryIndex )
     end
-    
+end
+
+function closeSportFilter()
+    local filterPanel = mWidget:getChildByName("Panel_Sport_Select")
+    local filterExpend = filterPanel:getChildByName( "Button_FilterExpand" )
+    local mask = filterPanel:getChildByName("Panel_Mask")
+    local sportsList = tolua.cast( filterPanel:getChildByName("ScrollView_Sports"), "ScrollView" )
+    local logo = tolua.cast( filterPanel:getChildByName("Image_sportLogo"), "ImageView" )
+    local label = tolua.cast( filterPanel:getChildByName("Label_Sport"), "Label" )
+
+    sportsList:setEnabled( false )
+    mask:setEnabled( false )
+    filterExpend:setBrightStyle( BRIGHT_NORMAL )
+end
+
+function closeCountryFilter()
+    local filterPanel = mWidget:getChildByName("Panel_League_Select")
+    local filterExpend = filterPanel:getChildByName( "Button_FilterExpand" )
+    local mask = filterPanel:getChildByName("Panel_Mask")
+    local filterList = tolua.cast( filterPanel:getChildByName("ScrollView_Filter"), "ScrollView" )
+    local logo = tolua.cast( filterPanel:getChildByName("countryLogo"), "ImageView" )
+    local label = tolua.cast( filterPanel:getChildByName("Label_League"), "Label" )
+
+    filterList:setEnabled( false )
+    mask:setEnabled( false )
+    filterExpend:setBrightStyle( BRIGHT_NORMAL )
 end
 
 function initContent( couponHistory )
@@ -209,7 +295,8 @@ function initContent( couponHistory )
         show:setEnabled( true )
     elseif mCompetitionId ~= nil then
         label:setText( competitionDetail:getName() )
-        show:setTitleText( Constants.String.history.show_all )
+        local showLabel = tolua.cast( show:getChildByName("Label_text"), "Label" )
+        showLabel:setText( Constants.String.history.show_all )
         local eventHandler = function( sender, eventType )
             if eventType == TOUCH_EVENT_ENDED then
                 EventManager:postEvent( Event.Enter_History, { mUserId } )
@@ -242,8 +329,8 @@ function initContent( couponHistory )
 
     stat_win:setText( info["NumberOfCouponsWon"] )
     stat_lose:setText( info["NumberOfCouponsLost"] )
-    stat_win_percent:setText( info["WinPercentage"] )
-    stat_gain_percent:setText( info["Roi"] )
+    stat_win_percent:setText( string.format( "%d", info["WinPercentage"] ) )
+    stat_gain_percent:setText( string.format( "%d", info["Roi"] ) )
     stat_last_10_win:setText( info["WinStreakCouponsWon"] )
     stat_last_10_lose:setText( info["WinStreakCouponsLost"] )
 
@@ -308,7 +395,6 @@ function initContent( couponHistory )
         content:setCascadeOpacityEnabled( true )
         mWidget:runAction( CCTargetedAction:create( content, CCFadeIn:create( CONTENT_FADEIN_TIME ) ) )
     end ) )
-    seqArray:addObject( CCDelayTime:create( 0.2 ) )
 
     if table.getn( couponHistory:getOpenData() ) == 0 then
         -- Call to arm
@@ -368,7 +454,6 @@ function initContent( couponHistory )
                 content:setCascadeOpacityEnabled( true )
                 mWidget:runAction( CCTargetedAction:create( content, CCFadeIn:create( CONTENT_FADEIN_TIME ) ) )
             end ) )
-            seqArray:addObject( CCDelayTime:create( 0.2 ) )
             seqArray:addObject( CCCallFuncN:create( function()
                 contentContainer:setInnerContainerSize( CCSize:new( 0, contentHeight ) )
                 local layout = tolua.cast( contentContainer, "Layout" )
@@ -391,7 +476,6 @@ function initContent( couponHistory )
         content:setCascadeOpacityEnabled( true )
         mWidget:runAction( CCTargetedAction:create( content, CCFadeIn:create( CONTENT_FADEIN_TIME ) ) )
     end ) )
-    seqArray:addObject( CCDelayTime:create( 0.2 ) )
 
 
     if table.getn( couponHistory:getClosedData() ) == 0 then
@@ -442,7 +526,6 @@ function initContent( couponHistory )
                 content:setCascadeOpacityEnabled( true )
                 mWidget:runAction( CCTargetedAction:create( content, CCFadeIn:create( CONTENT_FADEIN_TIME ) ) )
             end ) )
-            seqArray:addObject( CCDelayTime:create( 0.2 ) )
             seqArray:addObject( CCCallFuncN:create( function()
                 contentContainer:setInnerContainerSize( CCSize:new( 0, contentHeight ) )
                 local layout = tolua.cast( contentContainer, "Layout" )

@@ -11,8 +11,8 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "chat/img-bahasa.png",
-    "community/img-header.png"
+    "MatchListScene/img-bkg-general.png",
+    "GUI/image.png"
   ],
   "version": "1.6.0.0",
   "widgetTree": {
@@ -214,7 +214,7 @@
           "capInsetsY": 0,
           "fileName": null,
           "fileNameData": {
-            "path": "C:\\Program Files\\Cocos Studio\\EditorDefaultRes\\GUI/image.png",
+            "path": "C:\\Program Files (x86)\\Cocos Studio\\EditorDefaultRes\\GUI/image.png",
             "plistFile": "",
             "resourceType": 2
           },
@@ -268,7 +268,7 @@
           "capInsetsY": 0,
           "fileName": null,
           "fileNameData": {
-            "path": "C:\\Program Files\\Cocos Studio\\EditorDefaultRes\\GUI/image.png",
+            "path": "C:\\Program Files (x86)\\Cocos Studio\\EditorDefaultRes\\GUI/image.png",
             "plistFile": "",
             "resourceType": 2
           },
@@ -316,15 +316,15 @@
       "adaptScreen": false,
       "backGroundImage": null,
       "backGroundImageData": {
-        "path": "MatchPrediction/prediction_bkg.png",
+        "path": "MatchListScene/img-bkg-general.png",
         "plistFile": "",
         "resourceType": 0
       },
       "backGroundScale9Enable": false,
       "bgColorB": 255,
-      "bgColorG": 200,
+      "bgColorG": 255,
       "bgColorOpacity": 0,
-      "bgColorR": 150,
+      "bgColorR": 255,
       "bgEndColorB": 255,
       "bgEndColorG": 200,
       "bgEndColorR": 150,
@@ -336,7 +336,7 @@
       "capInsetsX": 0,
       "capInsetsY": 0,
       "clipAble": false,
-      "colorType": 1,
+      "colorType": 0,
       "layoutType": 0,
       "vectorX": 0,
       "vectorY": -0.5

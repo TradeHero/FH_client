@@ -3,6 +3,7 @@ module(..., package.seeall)
 local Constants = require("scripts.Constants")
 local SceneManager = require("scripts.SceneManager")
 local TeamConfig = require("scripts.config.Team")
+local SportsConfig = require("scripts.config.Sports")
 local Logic = require("scripts.Logic").getInstance()
 
 
@@ -15,8 +16,11 @@ local mAwayTeamName
 
 
 function loadFrame( parent, jsonResponse )
-	mWidget = GUIReader:shareReader():widgetFromJsonFile("scenes/MatchCenterStatsFrame.json")
+    mWidget = GUIReader:shareReader():widgetFromJsonFile("scenes/MatchCenterStatsFrame.json")
     parent:addChild( mWidget )
+
+    local bg = tolua.cast( mWidget:getChildByName("Image_bg"), "ImageView" )
+    bg:loadTexture( SportsConfig.getCurrentSportBkgPath() )
 
     local match = Logic:getSelectedMatch()
     mHomeTeamId = match["HomeTeamId"]

@@ -15,6 +15,7 @@ local CommunityMediaFrame = require("scripts.views.CommunityMediaFrame")
 local Minigame = require("scripts.data.Minigame").Minigame
 local Header = require("scripts.views.HeaderFrame")
 local CheckListConfig = require("scripts.data.CheckList")
+local LeaderboardConfig = require("scripts.config.Leaderboard")
 
 
 local mWidget
@@ -27,7 +28,7 @@ function loadFrame( jsonResponse, tabID, leaderboardId, subType, minigameRespons
     mWidget:registerScriptHandler( EnterOrExit )
     SceneManager.clearNAddWidget( widget )
     
-    Header.loadFrame( mWidget, nil, false )
+    Header.loadFrame( mWidget, Constants.String.community.title, false )
 
     Navigator.loadFrame( widget )
 
@@ -126,6 +127,10 @@ function loadCompetitionScene( contentContainer, jsonResponse, minigameResponse 
     local compList = Competitions:new( jsonResponse )
     local minigame = Minigame:new( minigameResponse )
     CommunityCompetitionFrame.loadFrame( contentContainer, compList, minigame )
+    
+    Header.showMenuButtonWithSportChangeEventHanlder( function ()
+        EventManager:postEvent( Event.Enter_Community, { CommunityConfig.COMMUNITY_TAB_ID_COMPETITION } )
+    end )
 end
 
 function loadExpertScene( contentContainer, jsonResponse )
@@ -133,6 +138,8 @@ function loadExpertScene( contentContainer, jsonResponse )
     if not CommunityExpertFrame.isShown() then
         CommunityExpertFrame.loadFrame( contentContainer, jsonResponse )
     end
+
+    Header.hideMenuButton()
 end
 
 function loadVideoScene( contentContainer, jsonResponse )
@@ -140,9 +147,8 @@ function loadVideoScene( contentContainer, jsonResponse )
     if not  CommunityMediaFrame.isShown() then
         CommunityMediaFrame.loadFrame( contentContainer, jsonResponse )
     end
-   -- if not CommunityVideoFrame.isShown() then
-    --     CommunityVideoFrame.loadFrame( contentContainer, jsonResponse )
-    -- end
+
+    Header.hideMenuButton()
 end
 
 function loadLeaderboardScene( contentContainer, jsonResponse, leaderboardId, subType )
@@ -151,4 +157,9 @@ function loadLeaderboardScene( contentContainer, jsonResponse, leaderboardId, su
     else
         CommunityLeaderboardFrame.loadFrame( contentContainer, jsonResponse, leaderboardId, subType, false )
     end
+
+    Header.showMenuButtonWithSportChangeEventHanlder( function ()
+        EventManager:postEvent( Event.Enter_Community, { CommunityConfig.COMMUNITY_TAB_ID_LEADERBOARD,
+                LeaderboardConfig.LEADERBOARD_TOP, LeaderboardConfig.LEADERBOARD_TYPE_ROI } )
+    end )
 end

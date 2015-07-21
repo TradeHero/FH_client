@@ -30,6 +30,7 @@ StringDefaultSubTableList = {
   "settings",
   "languages",
   "share",
+  "sports",
 }
 
 StringsDefault = {
@@ -63,6 +64,7 @@ StringsDefault = {
     leave_comp_yes = "Leave",
   },
   community = {
+    title = "Community",
     all_competitions = "All Leagues & Cups",
     copy = "COPY",
     desc_create_comp = "Predictions made in the selected league for the competition are automatically included in the competition.",
@@ -223,6 +225,7 @@ StringsDefault = {
     predict_on = "Predict on %s",
   },
   history = {
+    title = "My Picks",
     lost = "Lost",
     lost_colon = "Lost:",
     lost_small = "lost",
@@ -548,6 +551,12 @@ StringsDefault = {
     prediction_title = "FootballHero - %s",
     predResult_title = "FootballHero - %s",
     video_title = "FootballHero - %s",
+  },
+  sports = {
+    football = "Football",
+    basketball = "Basketball",
+    baseball = "Baseball",
+    afootball = "Amercian Football",
   },
 }
 

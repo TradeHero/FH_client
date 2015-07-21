@@ -21,7 +21,7 @@ local RELOAD_DELAY_TIME = 5
 function loadFrame( competitionId )
     mCompetitionId = competitionId
 
-    local widget = GUIReader:shareReader():widgetFromJsonFile("scenes/Chat.json")
+    local widget = SceneManager.secondLayerWidgetFromJsonFile("scenes/Chat.json")
     mWidget = widget
     mWidget:registerScriptHandler( EnterOrExit )
     SceneManager.clearNAddWidget( widget )

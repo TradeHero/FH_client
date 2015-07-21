@@ -66,12 +66,12 @@ function loadFrame( subType, competitionId, showRequestPush, tabID, yearNumber, 
 
     local widget
     if mCompetitionType == CompetitionType["Private"] then
-        widget = GUIReader:shareReader():widgetFromJsonFile("scenes/CompetitionLeaderboard.json")
+        widget = SceneManager.secondLayerWidgetFromJsonFile("scenes/CompetitionLeaderboard.json")
     elseif mCompetitionType == CompetitionType["DetailedRanking"] then
         -- Overall / Monthly / Weekly
-        widget = GUIReader:shareReader():widgetFromJsonFile("scenes/SpecialDetailedCompetitionLeaderboard.json")
+        widget = SceneManager.secondLayerWidgetFromJsonFile("scenes/SpecialDetailedCompetitionLeaderboard.json")
     else
-        widget = GUIReader:shareReader():widgetFromJsonFile("scenes/SpecialCompetitionLeaderboard.json")
+        widget = SceneManager.secondLayerWidgetFromJsonFile("scenes/SpecialCompetitionLeaderboard.json")
     end
     mWidget = widget
     mWidget:registerScriptHandler( EnterOrExit )

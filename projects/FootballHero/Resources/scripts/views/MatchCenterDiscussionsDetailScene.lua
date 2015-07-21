@@ -27,7 +27,7 @@ function loadFrame( discussionInfo, comments )
     end
     mPostId = discussionInfo["Id"]    
 
-	mWidget = GUIReader:shareReader():widgetFromJsonFile("scenes/MatchCenterDiscussionsDetailScene.json")
+	mWidget = SceneManager.secondLayerWidgetFromJsonFile("scenes/MatchCenterDiscussionsDetailScene.json")
     mWidget:registerScriptHandler( EnterOrExit )
     SceneManager.clearNAddWidget( mWidget )
     SceneManager.setKeypadBackListener( keypadBackEventHandler )

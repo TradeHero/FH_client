@@ -22,7 +22,7 @@ function loadFrame( selectedLeagues, competitionId, pushNotificationEnabled )
     mCompetitionId = competitionId
     mCompetitionToken = competitionDetail:getJoinToken()
 
-	local widget = GUIReader:shareReader():widgetFromJsonFile("scenes/CompetitionMore.json")
+	local widget = SceneManager.secondLayerWidgetFromJsonFile("scenes/CompetitionMore.json")
     mWidget = widget
     mWidget:registerScriptHandler( EnterOrExit )
     SceneManager.clearNAddWidget( mWidget )

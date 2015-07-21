@@ -6,7 +6,6 @@ local LeagueConfig = require("scripts.config.League")
 local SceneManager = require("scripts.SceneManager")
 local Logic = require("scripts.Logic").getInstance()
 
-local mCountryNum = CountryConfig.getConfigNum()
 
 local mCountryWidget
 local mLeagueWidget
@@ -64,6 +63,7 @@ function addCountry( i, country )
     if CountryConfig.getLeagueList( i ) == nil then
         return 0
     end
+
     local leagueId = CountryConfig.getLeagueList( i )[1]
 
     local eventHandler = function( sender, eventType )
