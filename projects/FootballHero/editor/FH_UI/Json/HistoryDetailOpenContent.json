@@ -11,15 +11,14 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "MatchListScene/img-bkg-general.png",
-    "header/back.png",
-    "MatchCentre/img-unlike.png",
-    "MatchCentre/img-like.png",
-    "MatchCentre/img-comment.png",
-    "MatchCentre/img-share.png",
+    "commonRes/img-bkg-general.png",
     "MyHero/img-photo.png",
-    "community/img-leaguebox.png",
-    "MatchCentre/img-write.png"
+    "MyHero/icn-follower.png",
+    "history/icn-table.png",
+    "commonRes/England.png",
+    "MatchListScene/Arrow down.png",
+    "MatchListScene/Arrow Up.png",
+    "MatchListScene/icn-football.png"
   ],
   "version": "1.6.0.0",
   "widgetTree": {

@@ -54,6 +54,26 @@ function getSportLogoPathByIndex( index )
 	return Constants.IMAGE_PATH.."icn-"..mAvailableSports[index]["key"]..".png"
 end
 
+function getSportLogoPathById( id )
+	for i = 1, table.getn( mAvailableSports ) do
+		if mAvailableSports[i]["id"] == id then
+			return Constants.IMAGE_PATH.."icn-"..mAvailableSports[i]["key"]..".png"
+		end
+	end
+
+	return ""
+end
+
+function getSportBkgPathById( id )
+	for i = 1, table.getn( mAvailableSports ) do
+		if mAvailableSports[i]["id"] == id then
+			return Constants.IMAGE_PATH.."bkg-"..mAvailableSports[i]["key"]..".png"
+		end
+	end
+
+	return ""
+end
+
 function appendSportIdToURLHelper( url )
 	local containsParameters = string.find( url, "?" )
 	if containsParameters ~= nil then

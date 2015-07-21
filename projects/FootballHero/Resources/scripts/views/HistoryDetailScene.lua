@@ -11,6 +11,7 @@ local MatchCenterConfig = require("scripts.config.MatchCenter")
 local Header = require("scripts.views.HeaderFrame")
 local ViewUtils = require("scripts.views.ViewUtils")
 local ShareConfig = require("scripts.config.Share")
+local SportsConfig = require("scripts.config.Sports")
 local Logic = require("scripts.Logic").getInstance()
 
 
@@ -30,10 +31,11 @@ function loadFrame( userId, isOpen, matchInfo )
 	mIsOpen = isOpen
     mGameCouponsDTOs = matchInfo["GameCouponsDTOs"]
 
-    local widget = GUIReader:shareReader():widgetFromJsonFile("scenes/HistoryDetail.json")
+    local widget = tolua.cast( GUIReader:shareReader():widgetFromJsonFile("scenes/HistoryDetail.json"), "Layout" )
     mWidget = widget
     mWidget:registerScriptHandler( EnterOrExit )
     SceneManager.clearNAddWidget( widget )
+    widget:setBackGroundImage( SportsConfig.getSportBkgPathById( matchInfo["SportId"] ) )
     
     Header.loadFrame( widget, nil, true )
 

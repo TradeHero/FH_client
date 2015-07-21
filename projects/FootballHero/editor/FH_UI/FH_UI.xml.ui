@@ -154,7 +154,15 @@
   <ProjectType>UIProject</ProjectType>
   <ResRelativePath />
   <imageFileList />
-  <imagePngList />
+  <imagePngList>
+    <string>MyHero/img-openbox.png</string>
+    <string>MyHero/img-winbox.png</string>
+    <string>MyHero/img-losebox.png</string>
+    <string>MatchListContent/vs-button.png</string>
+    <string>commonRes/default.png</string>
+    <string>history/jiantou.png</string>
+    <string>MatchListScene/icn-football.png</string>
+  </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson />
+  <CurrentUIJson>HistoryMainMatchContent.json</CurrentUIJson>
 </UIProject>
