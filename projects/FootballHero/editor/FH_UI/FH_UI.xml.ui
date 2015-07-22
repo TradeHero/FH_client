@@ -154,7 +154,22 @@
   <ProjectType>UIProject</ProjectType>
   <ResRelativePath />
   <imageFileList />
-  <imagePngList />
+  <imagePngList>
+    <string>commonRes/img-bkg-general.png</string>
+    <string>chat/btn-groupchat.png</string>
+    <string>chat/img-groupchat.png</string>
+    <string>chat/icn-chatcounter.png</string>
+    <string>chat/btn-enter.png</string>
+    <string>chat/btn-language.png</string>
+    <string>chat/img-bahasa.png</string>
+    <string>chat/img-thai.png</string>
+    <string>chat/img-chinese.png</string>
+    <string>chat/img-arabic.png</string>
+    <string>chat/img-feedback.png</string>
+    <string>chat/img-fb.png</string>
+    <string>MatchListScene/icn-football.png</string>
+    <string>MatchListScene/icn-baseball.png</string>
+  </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>TutorialHomepage.json</CurrentUIJson>
+  <CurrentUIJson>ChatroomSelectScene.json</CurrentUIJson>
 </UIProject>

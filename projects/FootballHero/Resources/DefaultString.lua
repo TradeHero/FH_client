@@ -313,6 +313,8 @@ StringsDefault = {
     thai_chat = "Thai",
     chinese_chat = "Chinese",
     arabic_chat = "Arabic",
+    football_chat = "Football",
+    baseball_chat = "Baseball",
   },
   login_success = "Login success.\nLoading data, please wait...",
   marketing_message_1 = "Congratulations on making your first prediction!",

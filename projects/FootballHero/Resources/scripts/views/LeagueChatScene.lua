@@ -42,6 +42,7 @@ function loadFrame( leaguechatId )
     sendBt:addTouchEventListener( sendEventHandler )
 
     local messageInput = ViewUtils.createTextInput( widget:getChildByName( MESSAGE_CONTAINER_NAME ), Constants.String.message_hint, 470, 50 )
+    messageInput:setTouchPriority( SceneManager.TOUCH_PRIORITY_MINUS_ONE )
 
     initTitle()
     doGetLatestMessages()
