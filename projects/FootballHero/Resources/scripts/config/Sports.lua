@@ -6,9 +6,10 @@ local Constants = require("scripts.Constants")
 local mAvailableSports = {}
 
 table.insert( mAvailableSports, { ["key"] = "football", ["id"] = 1 } )
+table.insert( mAvailableSports, { ["key"] = "baseball", ["id"] = 5  } )
 table.insert( mAvailableSports, { ["key"] = "basketball", ["id"] = 3  } )
 table.insert( mAvailableSports, { ["key"] = "afootball", ["id"] = 4  } )
-table.insert( mAvailableSports, { ["key"] = "baseball", ["id"] = 5  } )
+
 
 
 local mCurrentSport = mAvailableSports[1]
