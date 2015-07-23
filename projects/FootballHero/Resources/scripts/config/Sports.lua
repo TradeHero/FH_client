@@ -2,11 +2,13 @@ module(..., package.seeall)
 
 local Constants = require("scripts.Constants")
 
+FOOTBALL_ID = 1
+BASEBALL_ID = 5
 
 local mAvailableSports = {}
 
-table.insert( mAvailableSports, { ["key"] = "football", ["id"] = 1 } )
-table.insert( mAvailableSports, { ["key"] = "baseball", ["id"] = 5  } )
+table.insert( mAvailableSports, { ["key"] = "football", ["id"] = FOOTBALL_ID } )
+table.insert( mAvailableSports, { ["key"] = "baseball", ["id"] = BASEBALL_ID  } )
 --table.insert( mAvailableSports, { ["key"] = "basketball", ["id"] = 3  } )
 --table.insert( mAvailableSports, { ["key"] = "afootball", ["id"] = 4  } )
 

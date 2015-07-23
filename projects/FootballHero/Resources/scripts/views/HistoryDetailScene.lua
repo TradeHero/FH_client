@@ -21,6 +21,7 @@ local mWidget
 local mUserId
 local mIsOpen
 local mGameCouponsDTOs
+local mSportId
 
 local mHomeTeamId
 local mAwayTeamId
@@ -30,12 +31,13 @@ function loadFrame( userId, isOpen, matchInfo )
     mUserId = userId
 	mIsOpen = isOpen
     mGameCouponsDTOs = matchInfo["GameCouponsDTOs"]
+    mSportId = matchInfo["SportId"]
 
     local widget = tolua.cast( GUIReader:shareReader():widgetFromJsonFile("scenes/HistoryDetail.json"), "Layout" )
     mWidget = widget
     mWidget:registerScriptHandler( EnterOrExit )
     SceneManager.clearNAddWidget( widget )
-    widget:setBackGroundImage( SportsConfig.getSportBkgPathById( matchInfo["SportId"] ) )
+    widget:setBackGroundImage( SportsConfig.getSportBkgPathById( mSportId ) )
     
     Header.loadFrame( widget, nil, true )
 
@@ -155,7 +157,12 @@ function initCouponInfo( content, info )
         end
         infoCheckBoxVisible = false
     elseif marketType == MarketConfig.MARKET_TYPE_TOTAL_GOAL then
-        answerString = string.format( Constants.String.history.total_goals, math.ceil( line ) )
+        if mSportId == SportsConfig.BASEBALL_ID then
+            answerString = string.format( Constants.String.history.total_goals_baseball, math.ceil( line ) )
+        else
+            answerString = string.format( Constants.String.history.total_goals, math.ceil( line ) )
+        end
+        
         if answerId then
             choiceImage = Constants.PREDICTION_CHOICE_IMAGE_PATH.."prediction-yes.png"
         else
@@ -169,11 +176,20 @@ function initCouponInfo( content, info )
             teamName = TeamConfig.getTeamName( mHomeTeamId )
         end 
         
-        if absLine == 0 then
-            answerString = string.format( Constants.String.history.win_by_line0, teamName )
+        if mSportId == SportsConfig.BASEBALL_ID then
+            if absLine == 0 then
+                answerString = string.format( Constants.String.history.win_by_line0_baseball, teamName )
+            else
+                answerString = string.format( Constants.String.history.win_by_baseball, teamName, absLine )
+            end
         else
-            answerString = string.format( Constants.String.history.win_by, teamName, absLine )
+            if absLine == 0 then
+                answerString = string.format( Constants.String.history.win_by_line0, teamName )
+            else
+                answerString = string.format( Constants.String.history.win_by, teamName, absLine )
+            end
         end
+        
         
         if answerId then
             choiceImage = Constants.PREDICTION_CHOICE_IMAGE_PATH.."prediction-yes.png"
@@ -215,7 +231,7 @@ function initCouponInfo( content, info )
         labelHome:setText( string.format( Constants.String.handicap.predict_on, Constants.String.button.yes ) )
         labelAway:setText( string.format( Constants.String.handicap.predict_on, Constants.String.button.no ) )
 
-        local yesText, noText = ViewUtils.getYesNoText( line, homeTeam, awayTeam )
+        local yesText, noText = ViewUtils.getYesNoText( line, homeTeam, awayTeam, mSportId )
         txtHome:setText( yesText )
         txtAway:setText( noText )
     end
