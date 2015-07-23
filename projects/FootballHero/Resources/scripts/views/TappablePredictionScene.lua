@@ -104,7 +104,7 @@ function initCurrentPredictionUI()
         mPredictionWidget.releaseFrame()
     end
 
-    if marketType == MarketConfig.MARKET_TYPE_MATCH then
+    if marketType == MarketConfig.MARKET_TYPE_MATCH or marketType == MarketConfig.MARKET_TYPE_MATCH_NODRAW then
 
         mPredictionWidget = MatchPrediction
     elseif marketType == MarketConfig.MARKET_TYPE_TOTAL_GOAL then
