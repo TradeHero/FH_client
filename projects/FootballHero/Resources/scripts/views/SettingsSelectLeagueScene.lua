@@ -72,29 +72,31 @@ function initLeaguesList( contentContainer )
     local contentHeight = 0
     local childIndex = 1
     for i = 1, CountryConfig.getConfigNum() do
-        local leagueNum = table.getn( CountryConfig.getLeagueList( i ) )
-        for j = 1, leagueNum do
-            local leagueId = CountryConfig.getLeagueList( i )[j]
-        
-            local content = SceneManager.widgetFromJsonFile( "scenes/SettingsLeagueListContentFrame.json" )
-            contentContainer:addChild( content, 0, childIndex )
+        if CountryConfig.getLeagueList( i ) ~= nil then
+            local leagueNum = table.getn( CountryConfig.getLeagueList( i ) )
+            for j = 1, leagueNum do
+                local leagueId = CountryConfig.getLeagueList( i )[j]
             
-            local logo = tolua.cast( content:getChildByName("Image_Country"), "ImageView" )
-            local leagueName = tolua.cast( content:getChildByName("Label_Name"), "Label" )
-            local button = content:getChildByName( "Panel_Button" )
-            
-            leagueName:setText( CountryConfig.getCountryName( i ).." - "..LeagueConfig.getLeagueName( leagueId ) )
-            logo:loadTexture( CountryConfig.getLogo( i ) )
+                local content = SceneManager.widgetFromJsonFile( "scenes/SettingsLeagueListContentFrame.json" )
+                contentContainer:addChild( content, 0, childIndex )
+                
+                local logo = tolua.cast( content:getChildByName("Image_Country"), "ImageView" )
+                local leagueName = tolua.cast( content:getChildByName("Label_Name"), "Label" )
+                local button = content:getChildByName( "Panel_Button" )
+                
+                leagueName:setText( CountryConfig.getCountryName( i ).." - "..LeagueConfig.getLeagueName( leagueId ) )
+                logo:loadTexture( CountryConfig.getLogo( i ) )
 
-            contentHeight = contentHeight + content:getSize().height
-            childIndex = childIndex + 1
+                contentHeight = contentHeight + content:getSize().height
+                childIndex = childIndex + 1
 
-            local eventHandler = function( sender, eventType )
-                if eventType == TOUCH_EVENT_ENDED then
-                    EventManager:postEvent( Event.Enter_Settings_Select_Team, LeagueConfig.getConfigId( leagueId ) )
+                local eventHandler = function( sender, eventType )
+                    if eventType == TOUCH_EVENT_ENDED then
+                        EventManager:postEvent( Event.Enter_Settings_Select_Team, LeagueConfig.getConfigId( leagueId ) )
+                    end
                 end
+                button:addTouchEventListener( eventHandler )
             end
-            button:addTouchEventListener( eventHandler )
         end
     end
 

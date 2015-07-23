@@ -46,8 +46,10 @@ function loadFrame( parent, titleText, bHasBackBtn, bHasWebView )
     showLiveButton( false )
 
     local menuBtn = tolua.cast( mWidget:getChildByName("Button_menu"), "Button" )
-    menuBtn:addTouchEventListener( menuEventHandler )
+    local menuPanel = mWidget:getChildByName("Panel_menu")
+    menuPanel:addTouchEventListener( menuEventHandler )
     menuBtn:setEnabled( false )
+    menuPanel:setEnabled( false )
     mSportChangeEventHanlder = nil
 
     hideSportLogo()
@@ -74,7 +76,9 @@ end
 
 function showMenuButtonWithSportChangeEventHanlder( handler )
     local menuBtn = tolua.cast( mWidget:getChildByName("Button_menu"), "Button" )
+    local menuPanel = mWidget:getChildByName("Panel_menu")
     menuBtn:setEnabled( true )
+    menuPanel:setEnabled( true )
 
     mSportChangeEventHanlder = handler
 
@@ -83,7 +87,9 @@ end
 
 function hideMenuButton()
     local menuBtn = tolua.cast( mWidget:getChildByName("Button_menu"), "Button" )
+    local menuPanel = mWidget:getChildByName("Panel_menu")
     menuBtn:setEnabled( false )
+    menuPanel:setEnabled( false )
 
     hideSportLogo()
 end

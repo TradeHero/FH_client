@@ -123,6 +123,8 @@
     <string>SpecialDetailedCompetitionDropdownContent.json</string>
     <string>SpecialDetailedCompetitionDropdownFrame.json</string>
     <string>SpecialDetailedCompetitionLeaderboard.json</string>
+    <string>SideMenu.json</string>
+    <string>SideMenuContent.json</string>
     <string>SpinBalance.json</string>
     <string>SpinEmailCollect.json</string>
     <string>SpinShare.json</string>
@@ -154,22 +156,7 @@
   <ProjectType>UIProject</ProjectType>
   <ResRelativePath />
   <imageFileList />
-  <imagePngList>
-    <string>commonRes/img-bkg-general.png</string>
-    <string>chat/btn-groupchat.png</string>
-    <string>chat/img-groupchat.png</string>
-    <string>chat/icn-chatcounter.png</string>
-    <string>chat/btn-enter.png</string>
-    <string>chat/btn-language.png</string>
-    <string>chat/img-bahasa.png</string>
-    <string>chat/img-thai.png</string>
-    <string>chat/img-chinese.png</string>
-    <string>chat/img-arabic.png</string>
-    <string>chat/img-feedback.png</string>
-    <string>chat/img-fb.png</string>
-    <string>MatchListScene/icn-football.png</string>
-    <string>MatchListScene/icn-baseball.png</string>
-  </imagePngList>
+  <imagePngList />
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>ChatroomSelectScene.json</CurrentUIJson>
+  <CurrentUIJson>SideMenuContent.json</CurrentUIJson>
 </UIProject>
