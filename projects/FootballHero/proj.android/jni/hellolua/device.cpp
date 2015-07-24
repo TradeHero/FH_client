@@ -21,3 +21,12 @@ void closeKeyboardJNI(void *ctx) {
     t.env->CallStaticVoidMethod(t.classID, t.methodID, editTextSource);
   }
 }
+
+string getDeviceIDJNI() {
+  JniMethodInfo t;
+  if (JniHelper::getStaticMethodInfo(t, CLASS_NAME, "getDeviceID", "()Ljava/lang/String;")) {
+    jstring jstr = (jstring)t.env->CallStaticObjectMethod(t.classID, t.methodID);
+    return JniHelper::jstring2string(jstr);
+  }
+  return "";
+}

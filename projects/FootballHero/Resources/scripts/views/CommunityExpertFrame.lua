@@ -163,10 +163,6 @@ end
 function initExpert( expertInfo )
     local expertContainer = mWidget:getChildByName("Panel_Expert")
     for i=1,4 do
-        CCLuaLog( "id:" .. expertInfo[i]["Id"] )
-        CCLuaLog( "DisplayName:" .. expertInfo[i]["DisplayName"] )
-        CCLuaLog( "PictureUrl:" .. tostring(expertInfo[i]["PictureUrl"]) )
-
         local expertPicUrl = expertInfo[i]["PictureUrl"]
 
         local expertPanel = expertContainer:getChildByName("Panel_Expert"..i)

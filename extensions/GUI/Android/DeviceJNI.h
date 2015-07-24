@@ -8,6 +8,7 @@
 #include "ExtensionMacros.h"
 
 void closeKeyboardJNI(void *ctx);
+std::string getDeviceIDJNI();
 
 #endif /* #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID) */
 

@@ -67,6 +67,8 @@ function Logic:new()
 		deviceToken = "",
 		favoriteTeams = {},
 		quickBloxToken = "",
+		deviceID = "",
+	
 
 		competitionDetail = nil,
 	}
@@ -301,6 +303,14 @@ function Logic:checkNUploadDeviceToken()
 			EventManager:postEvent( Event.Do_Post_Device_Token, { self.deviceToken } )
 		end
 	end )
+end
+
+
+function Logic:getDeviceID()
+	if self.devicdID == "" then
+		self.deviceToken = getDeviceID()	
+	end
+	return self.deviceToken
 end
 
 function Logic:setCompetitionDetail( competitionDetail )

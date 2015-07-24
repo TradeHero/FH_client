@@ -12,6 +12,8 @@
 #include <sys/stat.h>
 #endif
 
+#include "DeviceID.h"
+
 USING_NS_CC;
 USING_NS_CC_EXT;
 using namespace CocosDenshion;
@@ -48,6 +50,8 @@ bool AppDelegate::applicationDidFinishLaunching()
     CCLuaStack *pStack = pEngine->getLuaStack();
     lua_State *tolua_s = pStack->getLuaState();
     tolua_extensions_ccb_open(tolua_s);
+    lua_register(tolua_s, "getDeviceID", getDeviceID);
+    
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS || CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID || CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
     pStack = pEngine->getLuaStack();
     tolua_s = pStack->getLuaState();
