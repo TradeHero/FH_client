@@ -568,4 +568,16 @@
     <Project>FH_UI_136</Project>
     <GuidesList />
   </GuidesProject>
+  <GuidesProject>
+    <Project>SideMenu</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>SideMenuContent</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>SportsDropdownContent</Project>
+    <GuidesList />
+  </GuidesProject>
 </ArrayOfGuidesProject>

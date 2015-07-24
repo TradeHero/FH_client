@@ -11,7 +11,7 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "MatchListScene/match_bkg.png",
+    "MatchListScene/img-bkg-general.png",
     "header/back.png",
     "header/footballhero-logo.png",
     "Tutorial/Default Button.png",
@@ -242,8 +242,8 @@
               "rotation": 0,
               "scaleX": 1,
               "scaleY": 1,
-              "sizePercentX": 1,
-              "sizePercentY": 1,
+              "sizePercentX": 0.76,
+              "sizePercentY": 0.20769231,
               "sizeType": 0,
               "tag": 37889,
               "touchAble": false,
@@ -613,7 +613,7 @@
       "adaptScreen": false,
       "backGroundImage": null,
       "backGroundImageData": {
-        "path": "MatchListScene/match_bkg.png",
+        "path": "MatchListScene/img-bkg-general.png",
         "plistFile": "",
         "resourceType": 0
       },

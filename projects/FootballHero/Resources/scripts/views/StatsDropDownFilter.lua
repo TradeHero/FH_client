@@ -3,15 +3,16 @@ module(..., package.seeall)
 local Constants = require("scripts.Constants")
 local CountryConfig = require("scripts.config.Country")
 local LeagueConfig = require("scripts.config.League")
+local SportsConfig = require("scripts.config.Sports")
 local SceneManager = require("scripts.SceneManager")
+local SportsDropDownFilter = require("scripts.views.SportsDropDownFilter")
+
 
 local mCountryNum = CountryConfig.getConfigNum()
 
 local mCountryWidget
 local mContainer
 local mFilterCallback
-
-local mChildIndex
 
 function loadFrame( container, filterCallback )
 	mCountryWidget = "scenes/CountryDropdownContent.json"
@@ -23,27 +24,32 @@ end
 
 function initCountryList()
     local contentHeight = 0
+    mContainer:removeAllChildrenWithCleanup( true )
 
     contentHeight = contentHeight + addSpecial()
 
+    local currentSportIndex = SportsDropDownFilter.getCurrentChoosedSportIndex()
     for i = 1, mCountryNum do
-        local eventHandler = function( sender, eventType )
-            if eventType == TOUCH_EVENT_ENDED then
-                mFilterCallback( i, sender )
+        if  currentSportIndex == Constants.STATS_SHOW_ALL or 
+            CountryConfig.getCountrySportId( i ) == SportsConfig.getSportIdByIndex( currentSportIndex ) then
+            local eventHandler = function( sender, eventType )
+                if eventType == TOUCH_EVENT_ENDED then
+                    mFilterCallback( i, sender )
+                end
             end
-        end
 
-        local content = SceneManager.widgetFromJsonFile( mCountryWidget )
-        mContainer:addChild( content )
-        content:addTouchEventListener( eventHandler )
+            local content = SceneManager.widgetFromJsonFile( mCountryWidget )
+            mContainer:addChild( content )
+            content:addTouchEventListener( eventHandler )
 
-        local logo = tolua.cast( content:getChildByName("Image_CountryLogo"), "ImageView" )
-        local countryName = tolua.cast( content:getChildByName("Label_CountryName"), "Label" )
+            local logo = tolua.cast( content:getChildByName("Image_CountryLogo"), "ImageView" )
+            local countryName = tolua.cast( content:getChildByName("Label_CountryName"), "Label" )
 
-        countryName:setText( CountryConfig.getCountryName( i ) )
-        logo:loadTexture( CountryConfig.getLogo( i ) )
+            countryName:setText( CountryConfig.getCountryName( i ) )
+            logo:loadTexture( CountryConfig.getLogo( i ) )
 
-        contentHeight = contentHeight + content:getSize().height
+            contentHeight = contentHeight + content:getSize().height
+        end        
     end
 
     mContainer:setInnerContainerSize( CCSize:new( 0, contentHeight ) )
@@ -59,7 +65,7 @@ function addSpecial()
         end
     end
 
-    local content = SceneManager.widgetFromJsonFile( mCountryWidget );
+    local content = SceneManager.widgetFromJsonFile( mCountryWidget )
     mContainer:addChild( content );
     content:addTouchEventListener( eventHandler )
 

@@ -4,6 +4,7 @@ local JsonConfigReader = require("scripts.config.JsonConfigReader")
 local LeagueConfig = require("scripts.config.League")
 local Constants = require("scripts.Constants")
 local DoLogReport = require("scripts.actions.DoLogReport")
+local SportsConfig = require("scripts.config.Sports")
 
 
 local FILE_NAME = "config/countries.txt"
@@ -82,6 +83,11 @@ function getCountryName( id )
 	end
 end
 
+function getCountrySportId( id )
+	local config = getConfig( id )
+	return config["sportId"]
+end
+
 function isActive( id )
 	local config = getConfig( id )
 	return config["isActive"]
@@ -131,10 +137,11 @@ function getAllLeagues()
 end
 
 function getShownCountries()
+	local currentSport = SportsConfig.getCurrentSportId()
 	local countries = {}
 
 	for i = 1, getConfigNum() do
-		if mConfig[i]["isOnTop"] and not mConfig[i]["isHidden"] then
+		if mConfig[i]["sportId"] == currentSport and mConfig[i]["isOnTop"] and not mConfig[i]["isHidden"] then
 			countries[i] = mConfig[i]
 			--table.insert( countries, mConfig[i] )
 		end
@@ -144,10 +151,11 @@ function getShownCountries()
 end
 
 function getHiddenCountries()
+	local currentSport = SportsConfig.getCurrentSportId()
 	local countries = {}
 
 	for i = 1, getConfigNum() do
-		if not mConfig[i]["isOnTop"] and not mConfig[i]["isHidden"] then
+		if mConfig[i]["sportId"] == currentSport and not mConfig[i]["isOnTop"] and not mConfig[i]["isHidden"] then
 			countries[i] = mConfig[i]
 			--table.insert( countries, mConfig[i] )
 		end

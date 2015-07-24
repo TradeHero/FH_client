@@ -11,7 +11,7 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "MatchListScene/match_bkg.png"
+    "MatchListScene/img-bkg-general.png"
   ],
   "version": "1.6.0.0",
   "widgetTree": {
@@ -25,7 +25,7 @@
         "options": {
           "__type": "ImageViewSurrogate:#EditorCommon.JsonModel.Component.GUI",
           "classname": "ImageView",
-          "name": "Image_72",
+          "name": "Image_bg",
           "ZOrder": 0,
           "actiontag": 14314343,
           "anchorPointX": 0.5,
@@ -41,14 +41,14 @@
           "ignoreSize": true,
           "layoutParameter": null,
           "opacity": 255,
-          "positionPercentX": 0.50000006,
-          "positionPercentY": 0.922078,
+          "positionPercentX": 0.5,
+          "positionPercentY": 0.9220779,
           "positionType": 0,
           "rotation": 0,
           "scaleX": 1,
           "scaleY": 1,
-          "sizePercentX": 0.125,
-          "sizePercentY": 0.129870132,
+          "sizePercentX": 1,
+          "sizePercentY": 1.84415579,
           "sizeType": 0,
           "tag": 37553,
           "touchAble": false,
@@ -63,7 +63,7 @@
           "capInsetsY": 0,
           "fileName": null,
           "fileNameData": {
-            "path": "MatchListScene/match_bkg.png",
+            "path": "MatchListScene/img-bkg-general.png",
             "plistFile": "",
             "resourceType": 0
           },

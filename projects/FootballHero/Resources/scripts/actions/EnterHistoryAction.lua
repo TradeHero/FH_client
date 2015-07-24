@@ -7,6 +7,8 @@ local EventManager = require("scripts.events.EventManager").getInstance()
 local Event = require("scripts.events.Event").EventList
 local RequestUtils = require("scripts.RequestUtils")
 local Constants = require("scripts.Constants")
+local SportsConfig = require("scripts.config.Sports")
+local SportsDropDownFilter = require("scripts.views.SportsDropDownFilter")
 
 
 local mUserId = Logic:getUserId()
@@ -19,6 +21,7 @@ local mCountryFilter = Constants.STATS_SHOW_ALL
     param[2] is the competition id, default is nil which means show the life time history.
     param[3] is the weekly/monthly paramters, default is empty which means show the overall history.
     param[4] is the country filter, default is show_all.
+    param[5] is the sports filter, default is show_all.
 ]]
 
 function action( param )
@@ -53,6 +56,12 @@ function action( param )
     if param ~= nil and param[4] ~= nil and param[4] ~= Constants.STATS_SHOW_ALL then
         mCountryFilter = param[4]
         url = url.."&countryId="..mCountryFilter
+    end
+
+    if SportsDropDownFilter.getCurrentChoosedSportIndex() ~= Constants.STATS_SHOW_ALL then
+        url = url.."&sportId=".. SportsConfig.getSportIdByIndex( SportsDropDownFilter.getCurrentChoosedSportIndex() )
+    else
+        url = url.."&sportId=-1"
     end
 
     local requestInfo = {}

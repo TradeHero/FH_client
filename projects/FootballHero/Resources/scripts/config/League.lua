@@ -81,4 +81,9 @@ function isHidden( id )
 	return config["isHidden"]
 end
 
+function getSportId( id )
+	local config = getConfig( id )
+	return config["SportId"]
+end
+
 init()

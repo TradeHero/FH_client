@@ -14,7 +14,7 @@
     "Tutorial/splash_bkg.png",
     "Tutorial/Splashscreen_Logo.png"
   ],
-  "version": "1.5.0.0",
+  "version": "1.6.0.0",
   "widgetTree": {
     "classname": "Panel",
     "name": null,
@@ -146,11 +146,11 @@
           "customProperty": "",
           "flipX": false,
           "flipY": false,
-          "height": 571,
+          "height": 585,
           "ignoreSize": true,
           "layoutParameter": null,
           "opacity": 255,
-          "positionPercentX": 0.4640625,
+          "positionPercentX": 0.4875,
           "positionPercentY": 0.607394338,
           "positionType": 0,
           "rotation": 0,
@@ -163,8 +163,8 @@
           "touchAble": false,
           "useMergedTexture": false,
           "visible": true,
-          "width": 632,
-          "x": 297,
+          "width": 500,
+          "x": 312,
           "y": 690,
           "capInsetsHeight": 1,
           "capInsetsWidth": 1,
@@ -177,8 +177,8 @@
             "resourceType": 0
           },
           "scale9Enable": false,
-          "scale9Height": 571,
-          "scale9Width": 632
+          "scale9Height": 585,
+          "scale9Width": 500
         }
       }
     ],

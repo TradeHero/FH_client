@@ -8,6 +8,7 @@ local EventManager = require("scripts.events.EventManager").getInstance()
 local Event = require("scripts.events.Event").EventList
 local TeamConfig = require("scripts.config.Team")
 local MarketConfig = require("scripts.config.Market")
+local SportsConfig = require("scripts.config.Sports")
 local MarketsForGameData = require("scripts.data.MarketsForGameData")
 local Logic = require("scripts.Logic").getInstance()
 local Prediction = require("scripts.data.Prediction").Prediction
@@ -94,7 +95,12 @@ function loadFrame( parent, matchInfo, marketInfo, finishCallback, bigBetStatus,
     end
 
     mLine = MarketsForGameData.getMarketLine( mMarketInfo )
-    question:setText( string.format( Constants.String.match_prediction.will_total_goals, math.ceil( mLine ) ) )
+    if SportsConfig.getCurrentSportId() == SportsConfig.BASEBALL_ID then
+        question:setText( string.format( Constants.String.match_prediction.will_total_goals_baseball, math.ceil( mLine ) ) )
+    else
+        question:setText( string.format( Constants.String.match_prediction.will_total_goals, math.ceil( mLine ) ) )
+    end
+    
     yesWinPoint:setText( string.format( Constants.String.num_of_points, MarketsForGameData.getOddsForType( mMarketInfo, MarketConfig.ODDS_TYPE_ONE_OPTION ) * mStake ) )
     noWinPoint:setText( string.format( Constants.String.num_of_points, MarketsForGameData.getOddsForType( mMarketInfo, MarketConfig.ODDS_TYPE_TWO_OPTION ) * mStake ) )
     stake:setText( string.format( Constants.String.num_of_points, mStake ) )

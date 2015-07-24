@@ -16,7 +16,7 @@ function loadFrame()
     
     mMatch = Logic:getSelectedMatch()
     
-	mWidget = GUIReader:shareReader():widgetFromJsonFile("scenes/MatchCenterDiscussionsPostScene.json")
+	mWidget = SceneManager.secondLayerWidgetFromJsonFile("scenes/MatchCenterDiscussionsPostScene.json")
     mWidget:registerScriptHandler( EnterOrExit )
     SceneManager.clearNAddWidget( mWidget )
     SceneManager.setKeypadBackListener( keypadBackEventHandler )

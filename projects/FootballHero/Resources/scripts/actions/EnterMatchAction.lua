@@ -7,11 +7,14 @@ local EventManager = require("scripts.events.EventManager").getInstance()
 local Event = require("scripts.events.Event").EventList
 local RequestUtils = require("scripts.RequestUtils")
 local Constants = require("scripts.Constants")
+local SportsConfig = require("scripts.config.Sports")
+
 
 function action( param )
     local matchId = param[1]
 
     local url = RequestUtils.GET_GAME_MARKETS_REST_CALL.."?gameId="..matchId
+    url = SportsConfig.appendSportIdToURLHelper( url )
 
     local requestInfo = {}
     requestInfo.requestData = ""

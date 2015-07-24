@@ -12,7 +12,7 @@ local Header = require("scripts.views.HeaderFrame")
 local mWidget
 
 function loadFrame( token )
-	local widget = GUIReader:shareReader():widgetFromJsonFile("scenes/CompetitionRules.json")
+	local widget = SceneManager.secondLayerWidgetFromJsonFile("scenes/CompetitionRules.json")
     mWidget = widget
     mWidget:registerScriptHandler( EnterOrExit )
     SceneManager.clearNAddWidget( widget )

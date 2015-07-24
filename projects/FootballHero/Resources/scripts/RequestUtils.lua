@@ -23,10 +23,6 @@ WEBSITE_DEV_IP = "http://192.168.1.99:44333"
 SHOOT_TO_WIN_FB_REDIRECT_CALL = WEBSITE_IP.."/api/PenaltyKick/fhpenalty/FHFBRedirect?access_token="
 SHOOT_TO_WIN_GET_USER_COMPETITION_CALL = WEBSITE_IP.."/api/PenaltyKick/fhpenalty/GetUserCompetitionDetails?userId="
 
-FACEBOOK_FRIENDS_LIST_CALL = "/me/friends?access_token="
---USE_DEV = false
-USE_DEV = true
-
 
 EMAIL_REGISTER_REST_CALL = SERVER_IP.."/api/user/SignupWithEmail"
 FULL_REGISTER_REST_CALL = SERVER_IP.."/api/user/fullSignupWithEmail"
@@ -34,10 +30,8 @@ EMAIL_LOGIN_REST_CALL = SERVER_IP.."/api/loginWithEmail"
 SET_USER_METADATA_REST_CALL = SERVER_IP.."/api/user/setUserMetaData"
 FB_LOGIN_REST_CALL = SERVER_IP.."/api/user/SignupWithFacebook"
 FB_CONNECT_REST_CALL = SERVER_IP.."/api/user/connectUserWithFacebook"
-GET_ALL_UPCOMING_GAMES_REST_CALL = SERVER_IP.."/api/games/allUpcoming"
 GET_UPCOMING_GAMES_BY_LEAGUE_REST_CALL = SERVER_IP.."/api/games/upcomingByLeague"
 GET_POPULAR_UPCOMING_REST_CALL = SERVER_IP.."/api/games/popularUpcoming"
-GET_UPCOMING_TODAY_REST_CALL = SERVER_IP.."/api/games/upcomingToday"
 GET_UPCOMING_NEXT_REST_CALL = SERVER_IP.."/api/games/upcomingNext"
 GET_MOST_DISCUSSED_REST_CALL = SERVER_IP.."/api/games/mostDiscussed"
 GET_TEAM_EXPERT_REST_CALL = SERVER_IP.."/api/games/TeamExpertGames"
@@ -47,7 +41,6 @@ GET_MAIN_LEADERBOARD_REST_CALL = SERVER_IP.."/api/leaderboards/getMainLeaderboar
 GET_FRIENDS_LEADERBOARD_REST_CALL = SERVER_IP.."/api/leaderboards/getFriendsLeaderboard"
 GET_COMPETITION_LIST_REST_CALL = SERVER_IP.."/api/competitions/getCompetitionsForUser"
 GET_COMPETITION_DETAIL_REST_CALL = SERVER_IP.."/api/leaderboards/getCompetitionInfoAndLeaderboard"
-GET_COMPETITION_LEAGUE_REST_CALL = SERVER_IP.."/api/competitions/getCompetitionLeagueIds"
 GET_COMPETITION_DETAILS_REST_CALL = SERVER_IP.."/api/competitions/getCompetitionDetails"
 GET_COMPETITION_TEAM_EXPERT_REST_CALL = SERVER_IP.."/api/teamexperts/getTeamExpertPicks"
 GET_COMPETITION_EXPERT_HISTORY_REST_CALL = SERVER_IP.."/api/teamexperts/getTeamExpertCouponHistory"
@@ -86,6 +79,9 @@ POST_NEW_DISCUSSION_REST_CALL = SERVER_IP.."/api/discuss/write"
 POST_LIKE_DISCUSSION_REST_CALL = SERVER_IP.."/api/discuss/like"
 
 
+FACEBOOK_FRIENDS_LIST_CALL = "/me/friends?access_token="
+USE_DEV = false
+
 --[[
     DS:
     {
@@ -100,16 +96,13 @@ local mResponseCache = {}
 local RESPONSE_CACHE_TIME = 600
 
 function setServerIP( serverIp, cdnServerIp, useDev )
-    EMAIL_REGISTER_REST_CALL = serverIp.."/api/user/SignupWithEmail"
     FULL_REGISTER_REST_CALL = serverIp.."/api/user/fullSignupWithEmail"
     EMAIL_LOGIN_REST_CALL = serverIp.."/api/loginWithEmail"
     SET_USER_METADATA_REST_CALL = serverIp.."/api/user/setUserMetaData"
     FB_LOGIN_REST_CALL = serverIp.."/api/user/SignupWithFacebook"
     FB_CONNECT_REST_CALL = serverIp.."/api/user/connectUserWithFacebook"
-    GET_ALL_UPCOMING_GAMES_REST_CALL = serverIp.."/api/games/allUpcoming"
     GET_UPCOMING_GAMES_BY_LEAGUE_REST_CALL = serverIp.."/api/games/upcomingByLeague"
     GET_POPULAR_UPCOMING_REST_CALL = serverIp.."/api/games/popularUpcoming"
-    GET_UPCOMING_TODAY_REST_CALL = serverIp.."/api/games/upcomingToday"
     GET_UPCOMING_NEXT_REST_CALL = serverIp.."/api/games/upcomingNext"
     GET_MOST_DISCUSSED_REST_CALL = serverIp.."/api/games/mostDiscussed"
     GET_TEAM_EXPERT_REST_CALL = serverIp.."/api/games/TeamExpertGames"
@@ -119,7 +112,6 @@ function setServerIP( serverIp, cdnServerIp, useDev )
     GET_FRIENDS_LEADERBOARD_REST_CALL = serverIp.."/api/leaderboards/getFriendsLeaderboard"
     GET_COMPETITION_LIST_REST_CALL = serverIp.."/api/competitions/getCompetitionsForUser"
     GET_COMPETITION_DETAIL_REST_CALL = serverIp.."/api/leaderboards/getCompetitionInfoAndLeaderboard"
-    GET_COMPETITION_LEAGUE_REST_CALL = serverIp.."/api/competitions/getCompetitionLeagueIds"
     GET_COMPETITION_DETAILS_REST_CALL = serverIp.."/api/competitions/getCompetitionDetails"
     GET_COMPETITION_TEAM_EXPERT_REST_CALL = serverIp.."/api/teamexperts/getTeamExpertPicks"
     GET_COMPETITION_EXPERT_HISTORY_REST_CALL = serverIp.."/api/teamexperts/getTeamExpertCouponHistory"

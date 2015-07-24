@@ -43,6 +43,7 @@ function loadFrame( matchList, leagueKey )
     
     Header.loadFrame( widget, nil, false )
     Header.showLiveButton( true )
+    Header.showMenuButtonWithSportChangeEventHanlder( sportChangeEventHandler )
 
     Navigator.loadFrame( widget )
     Navigator.chooseNav( 1 )
@@ -836,4 +837,9 @@ function scrollViewEventHandler( target, eventType )
 end
 
 function scrollViewDoNothingEventHandler( target, eventType )
+end
+
+function sportChangeEventHandler()
+    EventManager:postEvent( Event.Enter_Match_List )
+    MatchListDropdownFrame.initCountryList()
 end

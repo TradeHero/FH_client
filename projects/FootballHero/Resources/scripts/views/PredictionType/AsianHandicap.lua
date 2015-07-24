@@ -8,6 +8,7 @@ local EventManager = require("scripts.events.EventManager").getInstance()
 local Event = require("scripts.events.Event").EventList
 local TeamConfig = require("scripts.config.Team")
 local MarketConfig = require("scripts.config.Market")
+local SportsConfig = require("scripts.config.Sports")
 local MarketsForGameData = require("scripts.data.MarketsForGameData")
 local Logic = require("scripts.Logic").getInstance()
 local Prediction = require("scripts.data.Prediction").Prediction
@@ -67,7 +68,11 @@ function loadFrame( parent, matchInfo, marketInfo, finishCallback, bigBetStatus,
     balance:setText( Constants.String.match_prediction.balance )
     stake:setText( Constants.String.match_prediction.stake )
     vs:setText( Constants.String.vs )
-    titleHandicap:setText( Constants.String.handicap.name )
+    if SportsConfig.getCurrentSportId() == SportsConfig.BASEBALL_ID then
+        titleHandicap:setText( Constants.String.handicap_baseball.name )
+    else
+        titleHandicap:setText( Constants.String.handicap.name )
+    end
     popupHandicap:setEnabled( false )
     -- not working
     --popupHandicap:setCascadeOpacityEnabled( true )
@@ -120,12 +125,21 @@ function loadFrame( parent, matchInfo, marketInfo, finishCallback, bigBetStatus,
     if line <= 0 then
         teamName = TeamConfig.getTeamName( TeamConfig.getConfigIdByKey( mMatch["HomeTeamId"] ) )
         absLine = line * ( -1 )
-    end 
-    if line == 0 then
-        question:setText( string.format( Constants.String.match_prediction.will_win_by_line0, teamName ) )
-    else
-        question:setText( string.format( Constants.String.match_prediction.will_win_by, teamName, tostring(absLine) ) )
     end
+    if SportsConfig.getCurrentSportId() == SportsConfig.BASEBALL_ID then
+        if line == 0 then
+            question:setText( string.format( Constants.String.match_prediction.will_win_by_line0_baseball, teamName ) )
+        else
+            question:setText( string.format( Constants.String.match_prediction.will_win_by_baseball, teamName, tostring(absLine) ) )
+        end
+    else
+        if line == 0 then
+            question:setText( string.format( Constants.String.match_prediction.will_win_by_line0, teamName ) )
+        else
+            question:setText( string.format( Constants.String.match_prediction.will_win_by, teamName, tostring(absLine) ) )
+        end
+    end
+    
     
     yesWinPoint:setText( string.format( Constants.String.num_of_points, MarketsForGameData.getOddsForType( mMarketInfo, MarketConfig.ODDS_TYPE_ONE_OPTION ) * mStake ) )
     noWinPoint:setText( string.format( Constants.String.num_of_points, MarketsForGameData.getOddsForType( mMarketInfo, MarketConfig.ODDS_TYPE_TWO_OPTION ) * mStake ) )
@@ -142,7 +156,7 @@ function loadFrame( parent, matchInfo, marketInfo, finishCallback, bigBetStatus,
     labelHome:setText( string.format( Constants.String.handicap.predict_on, Constants.String.button.yes ) )
     labelAway:setText( string.format( Constants.String.handicap.predict_on, Constants.String.button.no ) )
 
-    local yesText, noText = ViewUtils.getYesNoText( line, homeTeam, awayTeam )
+    local yesText, noText = ViewUtils.getYesNoText( line, homeTeam, awayTeam, SportsConfig.getCurrentSportId() )
     txtHome:setText( yesText )
     txtAway:setText( noText )
 

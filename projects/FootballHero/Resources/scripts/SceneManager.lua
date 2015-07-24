@@ -4,9 +4,11 @@ local EventManager = require("scripts.events.EventManager").getInstance()
 local Event = require("scripts.events.Event").EventList
 local RequestUtils = require("scripts.RequestUtils")
 local CommunityConfig = require("scripts.config.Community")
+local SportsConfig = require("scripts.config.Sports")
 local LeaderboardConfig = require("scripts.config.Leaderboard")
 local RateManager = require("scripts.RateManager")
 local Constants = require("scripts.Constants")
+local SideMenuScene = require("scripts.views.SideMenuScene")
 
 
 TOUCH_PRIORITY_ZERO = 0
@@ -25,9 +27,23 @@ local DEEPLINK_VIDEO = "FBVideo"
 local DEEPLINK_GAMECENTER = "gamecenter"
 
 local mSceneGameLayer
+local mSideMenuLayer
+local mSideMenuShown = false
 local mKeyPadBackEnabled = true
 local mKeypadBackListener = nil
 local mWidgets = {}		-- Store widget show in the list to save time loading the same json file.
+
+local mSecondLayerScenes = {
+	"scenes/PredictionBG.json",
+	"scenes/SpecialCompetitionLeaderboard.json",
+	"scenes/SpecialDetailedCompetitionLeaderboard.json",
+	"scenes/CompetitionLeaderboard.json",
+	"scenes/CompetitionMore.json",
+	"scenes/Chat.json",
+	"scenes/CompetitionRules.json",
+	"scenes/MatchCenterDiscussionsPostScene",
+	"scenes/MatchCenterDiscussionsDetailScene.json",
+}
 
 function init()
 	local eglView = CCEGLView:sharedOpenGLView()
@@ -44,6 +60,9 @@ function init()
     	director:runWithScene( sceneGame )
     end
     
+    mSideMenuLayer = TouchGroup:create()
+    sceneGame:addChild( mSideMenuLayer )
+
     mSceneGameLayer = TouchGroup:create()
     sceneGame:addChild( mSceneGameLayer )
 
@@ -215,6 +234,31 @@ function getWidgetByName( name )
 	return mSceneGameLayer:getWidgetByName( name )
 end
 
+function addSideMenuWidget( widget )
+	mSideMenuLayer:clear()
+	mSideMenuLayer:addWidget( widget )
+end
+
+function isSideMenuShown()
+	return mSideMenuShown
+end
+
+function showSideMenu( sportChangeEventHandler )
+	if not mSideMenuShown then
+		SideMenuScene.setSportChangeEventHanlder( sportChangeEventHandler )
+		SideMenuScene.updateSelectedSport()
+		mSideMenuShown = true
+		mSceneGameLayer:setPosition( ccp( 512, 0 ) )
+	end
+end
+
+function closeSideMenu()
+	if mSideMenuShown then
+		mSideMenuShown = false
+		mSceneGameLayer:setPosition( ccp( 0, 0 ) )
+	end
+end
+
 function setKeyPadBackEnabled( enabled )
 	mKeyPadBackEnabled = enabled
 end
@@ -235,8 +279,25 @@ function widgetFromJsonFile( fileName )
 		content:retain()
 		mWidgets[fileName] = content
 	end
-	return mWidgets[fileName]:clone()
+	local widgetInstance = mWidgets[fileName]:clone()
+
+	return widgetInstance
 end
+
+function secondLayerWidgetFromJsonFile( fileName )
+	local widgetInstance = GUIReader:shareReader():widgetFromJsonFile( fileName )
+
+	for i = 1, table.getn( mSecondLayerScenes ) do
+		if fileName == mSecondLayerScenes[i] then
+			widgetInstance = tolua.cast( widgetInstance, "Layout" )
+			widgetInstance:setBackGroundImage( SportsConfig.getCurrentSportBkgPath() )
+			break
+		end
+	end
+
+	return widgetInstance
+end
+
 
 function registerDeepLinkEvent()
 	local callback = function( deepLink )

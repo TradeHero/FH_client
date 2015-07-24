@@ -20,25 +20,6 @@ function action( param )
     elseif mTabID == MatchCenterConfig.MATCH_CENTER_TAB_ID_DISCUSSION then
 
     end
---[[
-    local url = RequestUtils.GET_GAME_MARKETS_REST_CALL.."?gameId="..matchId
-
-    local requestInfo = {}
-    requestInfo.requestData = ""
-    requestInfo.url = url
-
-    local handler = function( isSucceed, body, header, status, errorBuffer )
-        RequestUtils.messageHandler( requestInfo, isSucceed, body, header, status, errorBuffer, RequestUtils.HTTP_200, true, onRequestSuccess, onRequestFailed )
-    end
-
-    local httpRequest = HttpRequestForLua:create( CCHttpRequest.kHttpGet )
-    httpRequest:addHeader( Logic:getAuthSessionString() )
-    httpRequest:sendHttpRequest( url, handler )
-
-    ConnectingMessage.loadFrame()
---]]
-
-    --loadMatchCenterScene( {}, mTabID )
 end
 
 function loadMatchCenterScene( jsonResponse )

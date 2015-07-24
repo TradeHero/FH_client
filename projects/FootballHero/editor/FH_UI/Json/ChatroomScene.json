@@ -10,7 +10,22 @@
   "designHeight": 1136,
   "designWidth": 640,
   "textures": [],
-  "texturesPng": [],
+  "texturesPng": [
+    "commonRes/img-bkg-general.png",
+    "chat/btn-groupchat.png",
+    "chat/img-groupchat.png",
+    "chat/icn-chatcounter.png",
+    "chat/btn-enter.png",
+    "chat/btn-language.png",
+    "chat/img-bahasa.png",
+    "chat/img-thai.png",
+    "chat/img-chinese.png",
+    "chat/img-arabic.png",
+    "chat/img-feedback.png",
+    "chat/img-fb.png",
+    "MatchListScene/icn-football.png",
+    "MatchListScene/icn-baseball.png"
+  ],
   "version": "1.6.0.0",
   "widgetTree": {
     "classname": "Panel",
@@ -565,7 +580,7 @@
       "adaptScreen": false,
       "backGroundImage": null,
       "backGroundImageData": {
-        "path": "MatchListScene/match_bkg.png",
+        "path": "MatchListScene/img-bkg-general.png",
         "plistFile": "",
         "resourceType": 0
       },

@@ -11,8 +11,13 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "liveScore/livescore_btn_add.png",
-    "liveScore/livescore_btn_added.png"
+    "MyHero/img-openbox.png",
+    "MyHero/img-winbox.png",
+    "MyHero/img-losebox.png",
+    "MatchListContent/vs-button.png",
+    "commonRes/default.png",
+    "history/jiantou.png",
+    "MatchListScene/icn-football.png"
   ],
   "version": "1.6.0.0",
   "widgetTree": {
@@ -349,7 +354,7 @@
       "adaptScreen": false,
       "backGroundImage": null,
       "backGroundImageData": {
-        "path": "MatchListScene/match_bkg.png",
+        "path": "MatchListScene/img-bkg-general.png",
         "plistFile": "",
         "resourceType": 0
       },

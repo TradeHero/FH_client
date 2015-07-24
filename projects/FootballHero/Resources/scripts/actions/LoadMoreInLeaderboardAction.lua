@@ -8,6 +8,8 @@ local RequestUtils = require("scripts.RequestUtils")
 local LeaderboardConfig = require("scripts.config.Leaderboard")
 local Logic = require("scripts.Logic").getInstance()
 local Constants = require("scripts.Constants")
+local SportsConfig = require("scripts.config.Sports")
+
 
 local mLeaderboardId
 local mSubType
@@ -22,6 +24,8 @@ function action( param )
     if minPrediction > 1 then
         url = url.."&numberOfCouponsRequired="..minPrediction
     end
+
+    url = SportsConfig.appendSportIdToURLHelper( url )
 
     local requestInfo = {}
     requestInfo.requestData = ""

@@ -22,10 +22,15 @@ function createTextInput( container, placeholderText, width, height, fontName, f
     return textInput
 end
 
-function getYesNoText( line, homeTeam, awayTeam )
+function getYesNoText( line, homeTeam, awayTeam, sportId )
     local bHomeFav = line <= 0
     local absLine = math.abs( line )
-    
+    local stringConfig = Constants.String.handicap
+
+    if sportId == 5 then
+        stringConfig = Constants.String.handicap_baseball
+    end
+
     if absLine < 2 then
         local keyLine = string.gsub( absLine, "%.", "_" )
         local keyYes = "h"..keyLine.."_yes"
@@ -33,11 +38,11 @@ function getYesNoText( line, homeTeam, awayTeam )
         local textYes
         local textNo
         if bHomeFav then
-            textYes = string.format( Constants.String.handicap[keyYes], homeTeam, homeTeam )
-            textNo = string.format( Constants.String.handicap[keyNo], awayTeam, awayTeam )
+            textYes = string.format( stringConfig[keyYes], homeTeam, homeTeam )
+            textNo = string.format( stringConfig[keyNo], awayTeam, awayTeam )
         else
-            textYes = string.format( Constants.String.handicap[keyYes], awayTeam, awayTeam )
-            textNo = string.format( Constants.String.handicap[keyNo], homeTeam, homeTeam )
+            textYes = string.format( stringConfig[keyYes], awayTeam, awayTeam )
+            textNo = string.format( stringConfig[keyNo], homeTeam, homeTeam )
         end
         return textYes, textNo
     else
@@ -52,11 +57,11 @@ function getYesNoText( line, homeTeam, awayTeam )
         local textYes
         local textNo
         if bHomeFav then
-            textYes = string.gsub( Constants.String.handicap[keyYes], "%%TeamName%%", homeTeam )
-            textNo = string.gsub( Constants.String.handicap[keyNo], "%%TeamName%%", awayTeam )
+            textYes = string.gsub( stringConfig[keyYes], "%%TeamName%%", homeTeam )
+            textNo = string.gsub( stringConfig[keyNo], "%%TeamName%%", awayTeam )
         else
-            textYes = string.gsub( Constants.String.handicap[keyYes], "%%TeamName%%", awayTeam )
-            textNo = string.gsub( Constants.String.handicap[keyNo], "%%TeamName%%", homeTeam )
+            textYes = string.gsub( stringConfig[keyYes], "%%TeamName%%", awayTeam )
+            textNo = string.gsub( stringConfig[keyNo], "%%TeamName%%", homeTeam )
         end
         
         textYes = string.gsub( textYes, "%%Line%%", math.floor( absLine ) )

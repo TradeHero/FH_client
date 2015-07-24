@@ -141,13 +141,6 @@
 		15C15689168311CB00D239F2 /* tolua_to.c in Sources */ = {isa = PBXBuildFile; fileRef = 15C15657168311CB00D239F2 /* tolua_to.c */; };
 		15C1568C168311EC00D239F2 /* libcocos2dx.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 15C15346168310C700D239F2 /* libcocos2dx.a */; };
 		15C1568E1683131500D239F2 /* libcurl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 15C1568D1683131500D239F2 /* libcurl.a */; };
-		15C156981683138E00D239F2 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 15C156911683138E00D239F2 /* Default-568h@2x.png */; };
-		15C156991683138E00D239F2 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 15C156921683138E00D239F2 /* Default.png */; };
-		15C1569A1683138E00D239F2 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 15C156931683138E00D239F2 /* Default@2x.png */; };
-		15C1569B1683138E00D239F2 /* Icon-57.png in Resources */ = {isa = PBXBuildFile; fileRef = 15C156941683138E00D239F2 /* Icon-57.png */; };
-		15C1569C1683138E00D239F2 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 15C156951683138E00D239F2 /* Icon-72.png */; };
-		15C1569D1683138E00D239F2 /* Icon-114.png in Resources */ = {isa = PBXBuildFile; fileRef = 15C156961683138E00D239F2 /* Icon-114.png */; };
-		15C1569E1683138E00D239F2 /* Icon-144.png in Resources */ = {isa = PBXBuildFile; fileRef = 15C156971683138E00D239F2 /* Icon-144.png */; };
 		15CA8CF518696744000032AB /* lua_cocos2dx_cocostudio_manual.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 15CA8CEF18696743000032AB /* lua_cocos2dx_cocostudio_manual.cpp */; };
 		15CA8CF618696744000032AB /* lua_cocos2dx_manual.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 15CA8CF118696743000032AB /* lua_cocos2dx_manual.cpp */; };
 		15CA8CF718696744000032AB /* LuaCocoStudio.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 15CA8CF318696743000032AB /* LuaCocoStudio.cpp */; };
@@ -330,11 +323,6 @@
 		732E3ACA19625F0E0009E474 /* MiscHandler.mm in Sources */ = {isa = PBXBuildFile; fileRef = 732E3AC919625F0E0009E474 /* MiscHandler.mm */; };
 		732E3ACD196263A10009E474 /* Misc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 732E3ACB196263A10009E474 /* Misc.cpp */; };
 		733DE92B193DCB1D00361638 /* AssetsManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 733DE929193DCB1D00361638 /* AssetsManager.cpp */; };
-		733DE92F193F262900361638 /* Icon-76.png in Resources */ = {isa = PBXBuildFile; fileRef = 733DE92C193F262900361638 /* Icon-76.png */; };
-		733DE930193F262900361638 /* Icon-120.png in Resources */ = {isa = PBXBuildFile; fileRef = 733DE92D193F262900361638 /* Icon-120.png */; };
-		733DE931193F262900361638 /* Icon-152.png in Resources */ = {isa = PBXBuildFile; fileRef = 733DE92E193F262900361638 /* Icon-152.png */; };
-		733DE934193F26C800361638 /* Default~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 733DE932193F26C800361638 /* Default~ipad.png */; };
-		733DE935193F26C800361638 /* Default-Portrait@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 733DE933193F26C800361638 /* Default-Portrait@2x~ipad.png */; };
 		734532A71965056400E5D444 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 734532A31965028E00E5D444 /* MessageUI.framework */; };
 		73495B8419C048D300626812 /* UADateUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 73495B6F19C048D300626812 /* UADateUtils.m */; };
 		73495B8519C048D300626812 /* UAInboxAlertHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 73495B7119C048D300626812 /* UAInboxAlertHandler.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -743,13 +731,6 @@
 		15C15656168311CB00D239F2 /* tolua_push.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = tolua_push.c; sourceTree = "<group>"; };
 		15C15657168311CB00D239F2 /* tolua_to.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = tolua_to.c; sourceTree = "<group>"; };
 		15C1568D1683131500D239F2 /* libcurl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcurl.a; path = ../../../cocos2dx/platform/third_party/ios/libraries/libcurl.a; sourceTree = "<group>"; };
-		15C156911683138E00D239F2 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = SOURCE_ROOT; };
-		15C156921683138E00D239F2 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = SOURCE_ROOT; };
-		15C156931683138E00D239F2 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = SOURCE_ROOT; };
-		15C156941683138E00D239F2 /* Icon-57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-57.png"; sourceTree = SOURCE_ROOT; };
-		15C156951683138E00D239F2 /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = SOURCE_ROOT; };
-		15C156961683138E00D239F2 /* Icon-114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-114.png"; sourceTree = SOURCE_ROOT; };
-		15C156971683138E00D239F2 /* Icon-144.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-144.png"; sourceTree = SOURCE_ROOT; };
 		15CA8CEF18696743000032AB /* lua_cocos2dx_cocostudio_manual.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = lua_cocos2dx_cocostudio_manual.cpp; sourceTree = "<group>"; };
 		15CA8CF018696743000032AB /* lua_cocos2dx_cocostudio_manual.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lua_cocos2dx_cocostudio_manual.h; sourceTree = "<group>"; };
 		15CA8CF118696743000032AB /* lua_cocos2dx_manual.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = lua_cocos2dx_manual.cpp; sourceTree = "<group>"; };
@@ -1070,11 +1051,6 @@
 		732E3ACC196263A10009E474 /* Misc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Misc.h; path = Utils/Misc.h; sourceTree = "<group>"; };
 		733DE929193DCB1D00361638 /* AssetsManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AssetsManager.cpp; path = AssetsManager/AssetsManager.cpp; sourceTree = "<group>"; };
 		733DE92A193DCB1D00361638 /* AssetsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AssetsManager.h; path = AssetsManager/AssetsManager.h; sourceTree = "<group>"; };
-		733DE92C193F262900361638 /* Icon-76.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-76.png"; sourceTree = SOURCE_ROOT; };
-		733DE92D193F262900361638 /* Icon-120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-120.png"; sourceTree = SOURCE_ROOT; };
-		733DE92E193F262900361638 /* Icon-152.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-152.png"; sourceTree = SOURCE_ROOT; };
-		733DE932193F26C800361638 /* Default~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default~ipad.png"; sourceTree = SOURCE_ROOT; };
-		733DE933193F26C800361638 /* Default-Portrait@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait@2x~ipad.png"; sourceTree = SOURCE_ROOT; };
 		734532A31965028E00E5D444 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		73495B6E19C048D300626812 /* UADateUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UADateUtils.h; sourceTree = "<group>"; };
 		73495B6F19C048D300626812 /* UADateUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UADateUtils.m; sourceTree = "<group>"; };
@@ -3022,12 +2998,7 @@
 				7387400B19FE2A63009AE602 /* scripts */,
 				73A4D4DD19F5180A00433A04 /* Images.xcassets */,
 				73A0739019CC106500EA3519 /* server */,
-				733DE933193F26C800361638 /* Default-Portrait@2x~ipad.png */,
 				73B455D219B085FE0097A722 /* version */,
-				733DE932193F26C800361638 /* Default~ipad.png */,
-				733DE92C193F262900361638 /* Icon-76.png */,
-				733DE92D193F262900361638 /* Icon-120.png */,
-				733DE92E193F262900361638 /* Icon-152.png */,
 				738BA129193D7FD2008A74F6 /* DES56.lua */,
 				73DCA158192DCD95008AC05D /* anims */,
 				73BFF75E19177A46002F173A /* MD5.lua */,
@@ -3043,13 +3014,6 @@
 				730D983D18DC4317000CA5F9 /* json.lua */,
 				730D983E18DC4317000CA5F9 /* scenes */,
 				730D984018DC4317000CA5F9 /* sounds */,
-				15C156911683138E00D239F2 /* Default-568h@2x.png */,
-				15C156921683138E00D239F2 /* Default.png */,
-				15C156931683138E00D239F2 /* Default@2x.png */,
-				15C156941683138E00D239F2 /* Icon-57.png */,
-				15C156951683138E00D239F2 /* Icon-72.png */,
-				15C156961683138E00D239F2 /* Icon-114.png */,
-				15C156971683138E00D239F2 /* Icon-144.png */,
 			);
 			name = Resources;
 			path = ../Resources;
@@ -3130,15 +3094,11 @@
 			files = (
 				739220361A3EA04200F32FE5 /* zh in Resources */,
 				73DCA159192DCD95008AC05D /* anims in Resources */,
-				733DE92F193F262900361638 /* Icon-76.png in Resources */,
 				73495B8E19C048D300626812 /* UAInboxMessageListCell.xib in Resources */,
 				73846DD81A6CBBE0001B4EF1 /* DefaultString.lua in Resources */,
 				7387400C19FE2A63009AE602 /* scripts in Resources */,
-				15C156981683138E00D239F2 /* Default-568h@2x.png in Resources */,
 				7314B4CB19B718240065D927 /* AirshipConfig.plist in Resources */,
-				15C156991683138E00D239F2 /* Default.png in Resources */,
 				730D984D18DC4317000CA5F9 /* scenes in Resources */,
-				15C1569A1683138E00D239F2 /* Default@2x.png in Resources */,
 				73846DDB1A6E3C8B001B4EF1 /* id in Resources */,
 				7314B4B019B715350065D927 /* UAMapPresentationViewController.xib in Resources */,
 				7314B4B419B715350065D927 /* UAPushSettingsAliasView.xib in Resources */,
@@ -3148,16 +3108,12 @@
 				7314B4B319B715350065D927 /* UAPushSettingsAddTagViewController.xib in Resources */,
 				730D984F18DC4317000CA5F9 /* sounds in Resources */,
 				730D984A18DC4317000CA5F9 /* footballhero.lua in Resources */,
-				733DE935193F26C800361638 /* Default-Portrait@2x~ipad.png in Resources */,
-				733DE931193F262900361638 /* Icon-152.png in Resources */,
 				73846DE11A6E6E5A001B4EF1 /* tr in Resources */,
 				7314B4AA19B715350065D927 /* bottom-detail@2x.png in Resources */,
 				7314B4BA19B715350065D927 /* UAPushSettingsView.xib in Resources */,
 				73A4D4DE19F5180A00433A04 /* Images.xcassets in Resources */,
 				73B455D319B085FE0097A722 /* version in Resources */,
 				730D984818DC4317000CA5F9 /* extern.lua in Resources */,
-				15C1569B1683138E00D239F2 /* Icon-57.png in Resources */,
-				733DE934193F26C800361638 /* Default~ipad.png in Resources */,
 				730D984318DC4317000CA5F9 /* CCBReaderLoad.lua in Resources */,
 				7314B4B619B715350065D927 /* UAPushSettingsSoundsViewController.xib in Resources */,
 				73495B9019C048D300626812 /* UAInboxMessageViewController.xib in Resources */,
@@ -3169,7 +3125,6 @@
 				7305FE481A5A820F0071C61E /* iOSa_2.60.0.version in Resources */,
 				73495B8C19C048D300626812 /* list-image-placeholder@2x.png in Resources */,
 				7314B4B519B715350065D927 /* UAPushSettingsChannelInfoViewController.xib in Resources */,
-				15C1569C1683138E00D239F2 /* Icon-72.png in Resources */,
 				73495B8F19C048D300626812 /* UAInboxMessageListController.xib in Resources */,
 				7314B4B919B715350065D927 /* UAPushSettingsUserInfoView.xib in Resources */,
 				7305FE4B1A5A820F0071C61E /* LICENSE in Resources */,
@@ -3179,9 +3134,7 @@
 				730D984B18DC4317000CA5F9 /* images in Resources */,
 				730D984518DC4317000CA5F9 /* CocoStudio.lua in Resources */,
 				73495B8B19C048D300626812 /* list-image-placeholder.png in Resources */,
-				15C1569D1683138E00D239F2 /* Icon-114.png in Resources */,
 				73846DDF1A6E6E5A001B4EF1 /* ar in Resources */,
-				15C1569E1683138E00D239F2 /* Icon-144.png in Resources */,
 				73846DE51A6F8269001B4EF1 /* en in Resources */,
 				73846DE01A6E6E5A001B4EF1 /* th in Resources */,
 				738BA12A193D7FD2008A74F6 /* DES56.lua in Resources */,
@@ -3194,7 +3147,6 @@
 				7314B4AE19B715350065D927 /* top-detail@2x.png in Resources */,
 				73A0739119CC106500EA3519 /* server in Resources */,
 				46C59AD417641FF300F43DC3 /* CCBReaderLoad.lua in Resources */,
-				733DE930193F262900361638 /* Icon-120.png in Resources */,
 				730D984218DC4317000CA5F9 /* AudioEngine.lua in Resources */,
 				73495B8D19C048D300626812 /* UAInboxLocalization.bundle in Resources */,
 			);

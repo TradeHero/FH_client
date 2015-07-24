@@ -37,6 +37,7 @@ function action( param )
         end
 
         local httpRequest = HttpRequestForLua:create( CCHttpRequest.kHttpGet )
+        httpRequest:setPriority( CCHttpRequest.pVeryLow )
         httpRequest:sendHttpRequest( url, handler )
     end   
 end
