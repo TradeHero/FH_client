@@ -204,22 +204,25 @@ end
 function initSelectedLeagues( contentContainer, selectedLeagues )
     local childIndex = 1
     for i = 1, CountryConfig.getConfigNum() do
-        local leagueNum = table.getn( CountryConfig.getLeagueList( i ) )
-        for j = 1, leagueNum do
-            local leagueId = CountryConfig.getLeagueList( i )[j]
+        local leagueList = CountryConfig.getLeagueList( i ) 
+        if leagueList ~= nil then
+            local leagueNum = table.getn( leagueList )
+            for j = 1, leagueNum do
+                local leagueId = leagueList[j]
 
-            if isInSelectedLeague( LeagueConfig.getConfigId( leagueId ), selectedLeagues ) then
-                local content = SceneManager.widgetFromJsonFile( "scenes/LeagueContentWithTransparentBG.json" )
-                contentContainer:addChild( content, 0, childIndex )
-                
-                local logo = tolua.cast( content:getChildByName("countryLogo"), "ImageView" )
-                local leagueName = tolua.cast( content:getChildByName("countryName"), "Label" )
-                
-                leagueName:setText( CountryConfig.getCountryName( i ).." - "..LeagueConfig.getLeagueName( leagueId ) )
-                logo:loadTexture( CountryConfig.getLogo( i ) )
+                if isInSelectedLeague( LeagueConfig.getConfigId( leagueId ), selectedLeagues ) then
+                    local content = SceneManager.widgetFromJsonFile( "scenes/LeagueContentWithTransparentBG.json" )
+                    contentContainer:addChild( content, 0, childIndex )
+                    
+                    local logo = tolua.cast( content:getChildByName("countryLogo"), "ImageView" )
+                    local leagueName = tolua.cast( content:getChildByName("countryName"), "Label" )
+                    
+                    leagueName:setText( CountryConfig.getCountryName( i ).." - "..LeagueConfig.getLeagueName( leagueId ) )
+                    logo:loadTexture( CountryConfig.getLogo( i ) )
 
-                mContainerHeight = mContainerHeight + content:getSize().height
-                childIndex = childIndex + 1
+                    mContainerHeight = mContainerHeight + content:getSize().height
+                    childIndex = childIndex + 1
+                end
             end
         end
     end
