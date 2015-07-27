@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		10FBB9D41B66022900F267D4 /* DeviceUtil.mm in Sources */ = {isa = PBXBuildFile; fileRef = 10FBB9D31B66022900F267D4 /* DeviceUtil.mm */; };
+		10FBB9D71B66109000F267D4 /* DeviceID.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 10FBB9D51B66109000F267D4 /* DeviceID.cpp */; };
 		150CD3951872B593007F1964 /* UITouchGroup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 150CD3931872B593007F1964 /* UITouchGroup.cpp */; };
 		150E36FF17F2B72B0021A6EA /* lua_cocos2dx_extensions_manual.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 150E36FD17F2B72B0021A6EA /* lua_cocos2dx_extensions_manual.cpp */; };
 		1514E39018784113003FC4EE /* CCActionEaseEx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1514E38F18784113003FC4EE /* CCActionEaseEx.cpp */; };
@@ -457,6 +459,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		10FBB9D21B66022900F267D4 /* DeviceUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceUtil.h; sourceTree = "<group>"; };
+		10FBB9D31B66022900F267D4 /* DeviceUtil.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DeviceUtil.mm; sourceTree = "<group>"; };
+		10FBB9D51B66109000F267D4 /* DeviceID.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DeviceID.cpp; path = ../Classes/DeviceID.cpp; sourceTree = "<group>"; };
+		10FBB9D61B66109000F267D4 /* DeviceID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DeviceID.h; path = ../Classes/DeviceID.h; sourceTree = "<group>"; };
 		150CD3931872B593007F1964 /* UITouchGroup.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UITouchGroup.cpp; sourceTree = "<group>"; };
 		150CD3941872B593007F1964 /* UITouchGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UITouchGroup.h; sourceTree = "<group>"; };
 		150CD3981872B6B5007F1964 /* CCActionEaseEx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCActionEaseEx.h; sourceTree = "<group>"; };
@@ -2951,6 +2957,8 @@
 		F293B6E815EB807E00256477 /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
+				10FBB9D21B66022900F267D4 /* DeviceUtil.h */,
+				10FBB9D31B66022900F267D4 /* DeviceUtil.mm */,
 				734F0B741AB983A000AD3C93 /* C2DXiOSShareSDK.h */,
 				734F0B751AB983A000AD3C93 /* C2DXiOSShareSDK.mm */,
 				732CCE961A8DAD95001533F0 /* QuickBloxChatHandler.h */,
@@ -2979,6 +2987,8 @@
 		F293BB7C15EB830F00256477 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				10FBB9D51B66109000F267D4 /* DeviceID.cpp */,
+				10FBB9D61B66109000F267D4 /* DeviceID.h */,
 				F293BB7F15EB831F00256477 /* AppDelegate.h */,
 				F293BB7E15EB831F00256477 /* AppDelegate.cpp */,
 			);
@@ -3324,6 +3334,7 @@
 				15C1552D1683118600D239F2 /* b2Math.cpp in Sources */,
 				7305FE3A1A5A803A0071C61E /* lundump.c in Sources */,
 				15C1552E1683118600D239F2 /* b2Settings.cpp in Sources */,
+				10FBB9D71B66109000F267D4 /* DeviceID.cpp in Sources */,
 				7320C5E21A594422009E47CC /* CCNodeReader.cpp in Sources */,
 				7320C5E61A594487009E47CC /* UIRichText.cpp in Sources */,
 				ED35C0DD18323498002A0750 /* CCComRender.cpp in Sources */,
@@ -3372,6 +3383,7 @@
 				15C155451683118600D239F2 /* b2PrismaticJoint.cpp in Sources */,
 				7314B48F19B7150F0065D927 /* UAPushSettingsSoundsViewController.m in Sources */,
 				73EDFC9618ECFE7400322624 /* FacebookConnector.mm in Sources */,
+				10FBB9D41B66022900F267D4 /* DeviceUtil.mm in Sources */,
 				ED35C0EE18323498002A0750 /* UIImageView.cpp in Sources */,
 				7320C6031A5945A9009E47CC /* LabelReader.cpp in Sources */,
 				15C155461683118600D239F2 /* b2PulleyJoint.cpp in Sources */,
