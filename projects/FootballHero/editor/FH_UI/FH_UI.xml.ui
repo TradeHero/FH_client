@@ -158,5 +158,5 @@
   <imageFileList />
   <imagePngList />
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>LiveScoreInPlayEndGap.json</CurrentUIJson>
+  <CurrentUIJson>MatchListContent.json</CurrentUIJson>
 </UIProject>

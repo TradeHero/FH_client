@@ -7,8 +7,8 @@ BASEBALL_ID = 5
 
 local mAvailableSports = {}
 
-table.insert( mAvailableSports, { ["key"] = "football", ["id"] = FOOTBALL_ID } )
-table.insert( mAvailableSports, { ["key"] = "baseball", ["id"] = BASEBALL_ID  } )
+table.insert( mAvailableSports, { ["key"] = "football", ["id"] = FOOTBALL_ID, ["overunderStats"] = { "15", "25", "35" }, } )
+table.insert( mAvailableSports, { ["key"] = "baseball", ["id"] = BASEBALL_ID, ["overunderStats"] = { "65", "75", "85", "95" },  } )
 --table.insert( mAvailableSports, { ["key"] = "basketball", ["id"] = 3  } )
 --table.insert( mAvailableSports, { ["key"] = "afootball", ["id"] = 4  } )
 
@@ -26,6 +26,10 @@ end
 
 function getCurrentSportId()
 	return mCurrentSport["id"]
+end
+
+function getCurrentSportOverunderStats()
+	return mCurrentSport["overunderStats"]
 end
 
 function getCurrentSportLogoPath()

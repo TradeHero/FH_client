@@ -88,7 +88,14 @@ function switchToSport( sportKey )
 	end
 
 	SportsConfig.setCurrentSportByKey( sportKey )
-	if mSportChangeEventHandler then
+
+	if SportsConfig.getCurrentSportId() == SportsConfig.FOOTBALL_ID then
+        Header.showLiveButton( true )
+    else
+    	Header.showLiveButton( false )
+    end
+
+    if mSportChangeEventHandler then
 		mSportChangeEventHandler()
 		mSportChangeEventHandler = nil
 	end

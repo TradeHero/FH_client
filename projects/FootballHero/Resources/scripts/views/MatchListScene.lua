@@ -5,6 +5,7 @@ local SceneManager = require("scripts.SceneManager")
 local CountryConfig = require("scripts.config.Country")
 local LeagueConfig = require("scripts.config.League")
 local TeamConfig = require("scripts.config.Team")
+local SportsConfig = require("scripts.config.Sports")
 local Navigator = require("scripts.views.Navigator")
 local MatchListDropdownFrame = require("scripts.views.MatchListDropdownFrame")
 local Logic = require("scripts.Logic").getInstance()
@@ -16,6 +17,7 @@ local ConnectingMessage = require("scripts.views.ConnectingMessage")
 local CommunityConfig = require("scripts.config.Community")
 local MatchCenterConfig = require("scripts.config.MatchCenter")
 local Header = require("scripts.views.HeaderFrame")
+
 
 local mWidget
 local mTopLayer
@@ -649,6 +651,13 @@ function helperInitMatchInfo( topContent, matchInfo, leagueKey )
     
     local postCount = tolua.cast( topContent:getChildByName("Label_DiscussionCount"), "Label" )
     postCount:setText( matchInfo["CommentCount"] )
+
+    if SportsConfig.getCurrentSportId() == SportsConfig.BASEBALL_ID then
+        lbDraw:setEnabled( false )
+        drawPercent:setEnabled( false )
+        topContent:getChildByName("Label_SeparatorHome"):setEnabled( false )
+        topContent:getChildByName("Label_SeparatorAway"):setEnabled( false )
+    end
 
     -- Labels
     lbDraw:setText( Constants.String.match_list.draw )

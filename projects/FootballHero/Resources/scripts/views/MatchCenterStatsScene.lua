@@ -231,7 +231,7 @@ function addOverUnderTable( jsonResponse, contentContainer )
    tolua.cast( overunderTable:getChildByName("Label_home"), "Label" ):setText( Constants.String.match_center.home )
    tolua.cast( overunderTable:getChildByName("Label_away"), "Label" ):setText( Constants.String.match_center.away )
 
-   local updateTable = function( lineStr )
+   local updateTable = function( lineStr, lineIndex )
       local lineNum = tonumber( lineStr )
       tolua.cast( overunderTable:getChildByName("Label_line"), "Label" ):setText( lineNum / 10 )
 
@@ -247,25 +247,25 @@ function addOverUnderTable( jsonResponse, contentContainer )
                  suffix = "2"
               end
 
-              tolua.cast( overunderTable:getChildByName("Label_P_total"..suffix), "Label" ):setText( teamFormTableData["OverTotal_"..lineStr] + teamFormTableData["UnderTotal_"..lineStr] )
-              tolua.cast( overunderTable:getChildByName("Label_O_total"..suffix), "Label" ):setText( teamFormTableData["OverTotal_"..lineStr] )
-              tolua.cast( overunderTable:getChildByName("Label_U_total"..suffix), "Label" ):setText( teamFormTableData["UnderTotal_"..lineStr] )
+              tolua.cast( overunderTable:getChildByName("Label_P_total"..suffix), "Label" ):setText( teamFormTableData["OverTotal_"..lineIndex] + teamFormTableData["UnderTotal_"..lineIndex] )
+              tolua.cast( overunderTable:getChildByName("Label_O_total"..suffix), "Label" ):setText( teamFormTableData["OverTotal_"..lineIndex] )
+              tolua.cast( overunderTable:getChildByName("Label_U_total"..suffix), "Label" ):setText( teamFormTableData["UnderTotal_"..lineIndex] )
 
-              tolua.cast( overunderTable:getChildByName("Label_P_home"..suffix), "Label" ):setText( teamFormTableData["OverHome_"..lineStr] + teamFormTableData["UnderHome_"..lineStr] )
-              tolua.cast( overunderTable:getChildByName("Label_O_home"..suffix), "Label" ):setText( teamFormTableData["OverHome_"..lineStr] )
-              tolua.cast( overunderTable:getChildByName("Label_U_home"..suffix), "Label" ):setText( teamFormTableData["UnderHome_"..lineStr] )
+              tolua.cast( overunderTable:getChildByName("Label_P_home"..suffix), "Label" ):setText( teamFormTableData["OverHome_"..lineIndex] + teamFormTableData["UnderHome_"..lineIndex] )
+              tolua.cast( overunderTable:getChildByName("Label_O_home"..suffix), "Label" ):setText( teamFormTableData["OverHome_"..lineIndex] )
+              tolua.cast( overunderTable:getChildByName("Label_U_home"..suffix), "Label" ):setText( teamFormTableData["UnderHome_"..lineIndex] )
 
-              tolua.cast( overunderTable:getChildByName("Label_P_away"..suffix), "Label" ):setText( teamFormTableData["OverAway_"..lineStr] + teamFormTableData["UnderAway_"..lineStr] )
-              tolua.cast( overunderTable:getChildByName("Label_O_away"..suffix), "Label" ):setText( teamFormTableData["OverAway_"..lineStr] )
-              tolua.cast( overunderTable:getChildByName("Label_U_away"..suffix), "Label" ):setText( teamFormTableData["UnderAway_"..lineStr] )
+              tolua.cast( overunderTable:getChildByName("Label_P_away"..suffix), "Label" ):setText( teamFormTableData["OverAway_"..lineIndex] + teamFormTableData["UnderAway_"..lineIndex] )
+              tolua.cast( overunderTable:getChildByName("Label_O_away"..suffix), "Label" ):setText( teamFormTableData["OverAway_"..lineIndex] )
+              tolua.cast( overunderTable:getChildByName("Label_U_away"..suffix), "Label" ):setText( teamFormTableData["UnderAway_"..lineIndex] )
             end
          end
       end
    end
 
-   local lines = { "15", "25", "35" }
+   local lines = SportsConfig.getCurrentSportOverunderStats()
    local currentLineIndex = 2
-   updateTable( lines[currentLineIndex] )
+   updateTable( lines[currentLineIndex], currentLineIndex )
    
    -- Add the button handler.
    local leftHandler = function( sender, eventType )
@@ -275,7 +275,7 @@ function addOverUnderTable( jsonResponse, contentContainer )
             currentLineIndex = table.getn( lines )
          end
 
-         updateTable( lines[currentLineIndex] )
+         updateTable( lines[currentLineIndex], currentLineIndex )
       end
    end
 
@@ -286,7 +286,7 @@ function addOverUnderTable( jsonResponse, contentContainer )
             currentLineIndex = 1
          end
 
-         updateTable( lines[currentLineIndex] )
+         updateTable( lines[currentLineIndex], currentLineIndex )
       end
    end
 
