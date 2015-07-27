@@ -11,7 +11,7 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "MatchListScene/img-bkg-general.png"
+    "MatchCentre/img-blackbox.png"
   ],
   "version": "1.6.0.0",
   "widgetTree": {

@@ -580,4 +580,8 @@
     <Project>SportsDropdownContent</Project>
     <GuidesList />
   </GuidesProject>
+  <GuidesProject>
+    <Project>MatchCenterStatsFormTableNoDraw</Project>
+    <GuidesList />
+  </GuidesProject>
 </ArrayOfGuidesProject>

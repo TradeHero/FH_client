@@ -140,6 +140,13 @@ function initMatchPredictionContent()
     local drawPercent = tolua.cast( fade:getChildByName("Label_DrawPercent"), "Label" )
     local lbDraw = tolua.cast( fade:getChildByName("Label_Draw"), "Label" )
 
+    if not SportsConfig.isCurrentSportHasDraw() then
+        lbDraw:setEnabled( false )
+        drawPercent:setEnabled( false )
+        fade:getChildByName("Label_SeparatorHome"):setEnabled( false )
+        fade:getChildByName("Label_SeparatorAway"):setEnabled( false )
+    end
+
     lbDraw:setText( Constants.String.match_list.draw )
     lbTotalFans:setText( Constants.String.match_list.total_fans )
     fansCount:setText( mMatch["TotalUsersPlayed"] )

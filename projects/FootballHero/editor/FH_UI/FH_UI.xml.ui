@@ -147,6 +147,7 @@
     <string>LiveScoreInplayMatchCell.json</string>
     <string>LiveScoreNowCell.json</string>
     <string>LiveScoreInPlayEndGap.json</string>
+    <string>MatchCenterStatsFormTableNoDraw.json</string>
   </JsonList>
   <CanvasSize>
     <Width>640</Width>
@@ -156,7 +157,9 @@
   <ProjectType>UIProject</ProjectType>
   <ResRelativePath />
   <imageFileList />
-  <imagePngList />
+  <imagePngList>
+    <string>MatchCentre/img-blackbox.png</string>
+  </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>MatchListContent.json</CurrentUIJson>
+  <CurrentUIJson>MatchCenterStatsFormTableNoDraw.json</CurrentUIJson>
 </UIProject>

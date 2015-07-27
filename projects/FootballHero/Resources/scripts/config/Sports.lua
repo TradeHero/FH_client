@@ -7,8 +7,24 @@ BASEBALL_ID = 5
 
 local mAvailableSports = {}
 
-table.insert( mAvailableSports, { ["key"] = "football", ["id"] = FOOTBALL_ID, ["overunderStats"] = { "15", "25", "35" }, } )
-table.insert( mAvailableSports, { ["key"] = "baseball", ["id"] = BASEBALL_ID, ["overunderStats"] = { "65", "75", "85", "95" },  } )
+table.insert( mAvailableSports, { ["key"] = "football", 
+								  ["id"] = FOOTBALL_ID, 
+								  ["hasDraw"] = true,
+								  ["overunderStats"] = { "15", "25", "35" }, 
+								  ["showAgainstInfo"] = true ,
+								  ["showLast6Info"] = true ,
+								  ["showFormTableInfo"] = true ,
+								  ["showOverUnderInfo"] = true ,
+								  ["showLeagueTable"] = true ,} )
+table.insert( mAvailableSports, { ["key"] = "baseball", 
+								  ["id"] = BASEBALL_ID, 
+								  ["hasDraw"] = false,
+								  ["overunderStats"] = { "65", "75", "85", "95" },  
+								  ["showAgainstInfo"] = true ,
+								  ["showLast6Info"] = true ,
+								  ["showFormTableInfo"] = true ,
+								  ["showOverUnderInfo"] = true ,
+								  ["showLeagueTable"] = false ,} )
 --table.insert( mAvailableSports, { ["key"] = "basketball", ["id"] = 3  } )
 --table.insert( mAvailableSports, { ["key"] = "afootball", ["id"] = 4  } )
 
@@ -28,8 +44,32 @@ function getCurrentSportId()
 	return mCurrentSport["id"]
 end
 
+function isCurrentSportHasDraw()
+	return mCurrentSport["hasDraw"]
+end
+
 function getCurrentSportOverunderStats()
 	return mCurrentSport["overunderStats"]
+end
+
+function isCurrentSportShowAgainst()
+	return mCurrentSport["showAgainstInfo"]
+end
+
+function isCurrentSportShowLast6()
+	return mCurrentSport["showLast6Info"]
+end
+
+function isCurrentSportShowFormTable()
+	return mCurrentSport["showFormTableInfo"]
+end
+
+function isCurrentSportShowOverUnder()
+	return mCurrentSport["showOverUnderInfo"]
+end
+
+function isCurrentSportShowLeagueTable()
+	return mCurrentSport["showLeagueTable"]
 end
 
 function getCurrentSportLogoPath()

@@ -652,7 +652,7 @@ function helperInitMatchInfo( topContent, matchInfo, leagueKey )
     local postCount = tolua.cast( topContent:getChildByName("Label_DiscussionCount"), "Label" )
     postCount:setText( matchInfo["CommentCount"] )
 
-    if SportsConfig.getCurrentSportId() == SportsConfig.BASEBALL_ID then
+    if not SportsConfig.isCurrentSportHasDraw() then
         lbDraw:setEnabled( false )
         drawPercent:setEnabled( false )
         topContent:getChildByName("Label_SeparatorHome"):setEnabled( false )

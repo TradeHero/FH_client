@@ -11,14 +11,7 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "MatchListScene/img-bkg-general.png",
-    "header/back.png",
-    "mini-game/btn-ask-friend.png",
-    "mini-game/prizes_shoottowin.png",
-    "mini-game/btn-past-winner.png",
-    "Competition/img-userposition.png",
-    "LoginNReg/photo.png",
-    "mini-game/img-goal-counter.png"
+    "MatchCentre/img-blackbox.png"
   ],
   "version": "1.6.0.0",
   "widgetTree": {

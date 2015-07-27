@@ -32,11 +32,21 @@ function loadFrame( parent, jsonResponse )
     contentContainer:removeAllChildrenWithCleanup( true )
 
     mTotalHeight = 0
-    addAgainstInfo( jsonResponse["Statistics"], contentContainer )
-    addLast6Info( jsonResponse["Statistics"], contentContainer )
-    addFormTableInfo( jsonResponse["Statistics"], contentContainer )
-    addOverUnderTable( jsonResponse["Statistics"], contentContainer )
-    addLeagueTable( jsonResponse["Statistics"], contentContainer )
+    if SportsConfig.isCurrentSportShowAgainst() then
+        addAgainstInfo( jsonResponse["Statistics"], contentContainer )
+    end
+    if SportsConfig.isCurrentSportShowLast6() then
+        addLast6Info( jsonResponse["Statistics"], contentContainer )
+    end
+    if SportsConfig.isCurrentSportShowFormTable() then
+        addFormTableInfo( jsonResponse["Statistics"], contentContainer )
+    end
+    if SportsConfig.isCurrentSportShowOverUnder() then
+        addOverUnderTable( jsonResponse["Statistics"], contentContainer )
+    end
+    if SportsConfig.isCurrentSportShowLeagueTable() then
+        addLeagueTable( jsonResponse["Statistics"], contentContainer )
+    end
 
     contentContainer:setInnerContainerSize( CCSize:new( 0, mTotalHeight ) )
     local layout = tolua.cast( contentContainer, "Layout" )
@@ -163,27 +173,34 @@ function addLast6Info( jsonResponse, contentContainer )
 end
 
 function addFormTableInfo( jsonResponse, contentContainer )
-   -- Add the titla bar
-   local formTable = GUIReader:shareReader():widgetFromJsonFile("scenes/MatchCenterStatsFormTable.json")
-   contentContainer:addChild( formTable )
-   mTotalHeight = mTotalHeight + formTable:getSize().height
-   tolua.cast( formTable:getChildByName("Label_homeTeam"), "Label" ):setText( mHomeTeamName )
-   tolua.cast( formTable:getChildByName("Label_awayTeam"), "Label" ):setText( mAwayTeamName )
-   tolua.cast( formTable:getChildByName("Label_formTable"), "Label" ):setText( Constants.String.match_center.formTable_title )
-   tolua.cast( formTable:getChildByName("Label_P1"), "Label" ):setText( Constants.String.match_center.formTable_played )
-   tolua.cast( formTable:getChildByName("Label_P2"), "Label" ):setText( Constants.String.match_center.formTable_played )
-   tolua.cast( formTable:getChildByName("Label_W1"), "Label" ):setText( Constants.String.match_center.formTable_won )
-   tolua.cast( formTable:getChildByName("Label_W2"), "Label" ):setText( Constants.String.match_center.formTable_won )
-   tolua.cast( formTable:getChildByName("Label_D1"), "Label" ):setText( Constants.String.match_center.formTable_draw )
-   tolua.cast( formTable:getChildByName("Label_D2"), "Label" ):setText( Constants.String.match_center.formTable_draw )
-   tolua.cast( formTable:getChildByName("Label_L1"), "Label" ):setText( Constants.String.match_center.formTable_lost )
-   tolua.cast( formTable:getChildByName("Label_L2"), "Label" ):setText( Constants.String.match_center.formTable_lost )
-   tolua.cast( formTable:getChildByName("Label_total"), "Label" ):setText( Constants.String.match_center.total )
-   tolua.cast( formTable:getChildByName("Label_home"), "Label" ):setText( Constants.String.match_center.home )
-   tolua.cast( formTable:getChildByName("Label_away"), "Label" ):setText( Constants.String.match_center.away )
+    -- Add the titla bar MatchCenterStatsFormTableNoDraw
+    local jsonFilePath
+    if SportsConfig.isCurrentSportHasDraw() then
+        jsonFilePath = "scenes/MatchCenterStatsFormTable.json"
+    else
+        jsonFilePath = "scenes/MatchCenterStatsFormTableNoDraw.json"
+    end
 
-   local formTableData = jsonResponse["TeamForm"]
-   if formTableData ~= nil and type( formTableData ) == "table" and table.getn( formTableData ) > 0 then
+    local formTable = GUIReader:shareReader():widgetFromJsonFile( jsonFilePath )
+    contentContainer:addChild( formTable )
+    mTotalHeight = mTotalHeight + formTable:getSize().height
+    tolua.cast( formTable:getChildByName("Label_homeTeam"), "Label" ):setText( mHomeTeamName )
+    tolua.cast( formTable:getChildByName("Label_awayTeam"), "Label" ):setText( mAwayTeamName )
+    tolua.cast( formTable:getChildByName("Label_formTable"), "Label" ):setText( Constants.String.match_center.formTable_title )
+    tolua.cast( formTable:getChildByName("Label_P1"), "Label" ):setText( Constants.String.match_center.formTable_played )
+    tolua.cast( formTable:getChildByName("Label_P2"), "Label" ):setText( Constants.String.match_center.formTable_played )
+    tolua.cast( formTable:getChildByName("Label_W1"), "Label" ):setText( Constants.String.match_center.formTable_won )
+    tolua.cast( formTable:getChildByName("Label_W2"), "Label" ):setText( Constants.String.match_center.formTable_won )
+    tolua.cast( formTable:getChildByName("Label_D1"), "Label" ):setText( Constants.String.match_center.formTable_draw )
+    tolua.cast( formTable:getChildByName("Label_D2"), "Label" ):setText( Constants.String.match_center.formTable_draw )
+    tolua.cast( formTable:getChildByName("Label_L1"), "Label" ):setText( Constants.String.match_center.formTable_lost )
+    tolua.cast( formTable:getChildByName("Label_L2"), "Label" ):setText( Constants.String.match_center.formTable_lost )
+    tolua.cast( formTable:getChildByName("Label_total"), "Label" ):setText( Constants.String.match_center.total )
+    tolua.cast( formTable:getChildByName("Label_home"), "Label" ):setText( Constants.String.match_center.home )
+    tolua.cast( formTable:getChildByName("Label_away"), "Label" ):setText( Constants.String.match_center.away )
+
+    local formTableData = jsonResponse["TeamForm"]
+    if formTableData ~= nil and type( formTableData ) == "table" and table.getn( formTableData ) > 0 then
       for i = 1, table.getn( formTableData ) do
          local teamFormTableData = formTableData[i]
          if teamFormTableData ~= nil and type( teamFormTableData ) == "table" then
@@ -210,7 +227,7 @@ function addFormTableInfo( jsonResponse, contentContainer )
             tolua.cast( formTable:getChildByName("Label_L_away"..suffix), "Label" ):setText( teamFormTableData["NumberOfAwayGamesLost"] )
          end
       end
-   end
+    end
 end
 
 function addOverUnderTable( jsonResponse, contentContainer )
