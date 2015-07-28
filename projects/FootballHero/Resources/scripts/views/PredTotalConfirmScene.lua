@@ -9,6 +9,7 @@ local ConnectingMessage = require("scripts.views.ConnectingMessage")
 local PushNotificationManager = require("scripts.PushNotificationManager")
 local ShareConfig = require("scripts.config.Share")
 local TeamConfig = require("scripts.config.Team")
+local SportsConfig = require("scripts.config.Sports")
 
 
 local mWidget
@@ -72,7 +73,7 @@ function shareEventHandler( sender, eventType )
        	local shareContent = homeTeamName.." vs "..awayTeamName.."\n"
        	shareContent = shareContent..firstPrediction["Answer"]
 
-        EventManager:postEvent( Event.Enter_Share, { ShareConfig.SHARE_PREDICTION, callback, shareContent } )
+        EventManager:postEvent( Event.Enter_Share, { ShareConfig.SHARE_PREDICTION.."_"..SportsConfig.getCurrentSportKey(), callback, shareContent } )
 	end
 end
 

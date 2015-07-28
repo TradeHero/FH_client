@@ -84,6 +84,12 @@ function getSportIdByIndex( index )
 	return mAvailableSports[index]["id"]
 end
 
+function setCurrentSportByIndex( index )
+	if index >= 1 and index <= table.getn( mAvailableSports ) then
+		mCurrentSport = mAvailableSports[index]
+	end
+end
+
 function setCurrentSportByKey( sportKey )
 	if mCurrentSport["key"] == sportKey then
 		return

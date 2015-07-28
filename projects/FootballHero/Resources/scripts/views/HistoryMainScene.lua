@@ -436,6 +436,11 @@ function initContent( couponHistory )
 
                 local eventHandler = function( sender, eventType )
                     if eventType == TOUCH_EVENT_ENDED then
+                        -- Update the sport to the one player choosed.
+                        if SportsDropDownFilter.getCurrentChoosedSportIndex() ~= Constants.STATS_SHOW_ALL then
+                            SportsConfig.setCurrentSportByIndex( SportsDropDownFilter.getCurrentChoosedSportIndex() )
+                        end
+                        
                         EventManager:postEvent( Event.Enter_Match_List )
                     end
                 end
