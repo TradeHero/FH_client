@@ -62,7 +62,7 @@ function action( param )
 
     local loginData = { Email = mEmail, Password = mPassword, 
                         GMTOffset = RequestUtils.getTimezoneOffset(), DeviceToken = Logic:getDeviceToken(),
-                        useDev = RequestUtils.USE_DEV,
+                        UserDeviceToken = Logic:getDeviceID(), useDev = RequestUtils.USE_DEV,
                         Version = Constants.getClientVersion() }
 
     local userMetaData = { DisplayName = mUserName, FirstName = mFirstName, LastName = mLastName, DoB = "" }

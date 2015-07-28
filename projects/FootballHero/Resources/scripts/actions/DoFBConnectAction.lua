@@ -38,10 +38,13 @@ end
 function onFBConnectSuccess( accessToken )
     mAccessToken = accessToken
     local requestContent = { SocialNetworkType = 0, AuthToken = accessToken, 
-                            GMTOffset = RequestUtils.getTimezoneOffset(), DeviceToken = Logic:getDeviceToken(),
+                            GMTOffset = RequestUtils.getTimezoneOffset(),
+                            DeviceToken = Logic:getDeviceToken(),
+                            UserDeviceToken = Logic:getDeviceID(),
                             useDev = RequestUtils.USE_DEV,
                             Version = Constants.getClientVersion() }
     local requestContentText = Json.encode( requestContent )
+    CCLuaLog("Facebook Login data: "..requestContentText)
     
     local url = RequestUtils.FB_LOGIN_REST_CALL
     

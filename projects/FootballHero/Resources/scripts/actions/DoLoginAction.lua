@@ -30,6 +30,7 @@ function action( param )
 
     local requestContent = { Email = mEmail, Password = mPassword, 
                             DeviceToken = Logic:getDeviceToken(),
+                            UserDeviceToken = Logic:getDeviceID(),
                             useDev = RequestUtils.USE_DEV,
                             Version = Constants.getClientVersion() }
     local requestContentText = Json.encode( requestContent )

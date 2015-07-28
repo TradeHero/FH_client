@@ -305,12 +305,11 @@ function Logic:checkNUploadDeviceToken()
 	end )
 end
 
-
 function Logic:getDeviceID()
-	if self.devicdID == "" then
-		self.deviceToken = getDeviceID()	
-	end
-	return self.deviceToken
+    if self.devicdID == "" then
+        self.deviceID = getDeviceID()
+    end
+    return self.deviceID
 end
 
 function Logic:setCompetitionDetail( competitionDetail )
