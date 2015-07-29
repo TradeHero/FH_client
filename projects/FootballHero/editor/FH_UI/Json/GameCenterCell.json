@@ -10,11 +10,7 @@
   "designHeight": 1136,
   "designWidth": 640,
   "textures": [],
-  "texturesPng": [
-    "MatchListScene/img-bkg-general.png",
-    "MatchCentre/btn-prediction.png",
-    "MatchCentre/btn-predictionmade.png"
-  ],
+  "texturesPng": [],
   "version": "1.6.0.0",
   "widgetTree": {
     "classname": "Panel",
@@ -179,7 +175,7 @@
               "sizePercentY": 0.10958904,
               "sizeType": 0,
               "tag": 37848,
-              "touchAble": true,
+              "touchAble": false,
               "useMergedTexture": false,
               "visible": true,
               "width": 72,
@@ -231,7 +227,7 @@
               "sizePercentY": 0.2739726,
               "sizeType": 0,
               "tag": 37858,
-              "touchAble": true,
+              "touchAble": false,
               "useMergedTexture": false,
               "visible": true,
               "width": 590,
