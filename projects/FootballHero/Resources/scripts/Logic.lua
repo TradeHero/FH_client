@@ -306,7 +306,7 @@ function Logic:checkNUploadDeviceToken()
 end
 
 function Logic:getDeviceID()
-    if self.devicdID == "" then
+    if self.deviceID == "" then
         self.deviceID = getDeviceID()
     end
     return self.deviceID

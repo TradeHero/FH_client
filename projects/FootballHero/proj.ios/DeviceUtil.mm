@@ -97,15 +97,15 @@ NSString* _UDID_iOS6(){
 }
 
 std::string *IOSDevice::getDeviceID(){
-    NSString *uuid;
+    NSString *udid;
     NSString *sysVersion = [UIDevice currentDevice].systemVersion;
     CGFloat version = [sysVersion floatValue];
     
     if (version >= 7.0) {
-        uuid = _UDID_iOS7();
+        udid = _UDID_iOS7();
     } else if (version >= 2.0) {
-        uuid = _UDID_iOS6();
+        udid = _UDID_iOS6();
     }
-    return new std::string([uuid UTF8String]);
+    return new std::string([udid UTF8String]);
 }
 

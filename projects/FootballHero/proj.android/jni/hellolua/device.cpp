@@ -24,6 +24,8 @@ void closeKeyboardJNI(void *ctx) {
 
 string getDeviceIDJNI() {
   JniMethodInfo t;
+//  if (JniHelper::getStaticMethodInfo(t, CLASS_NAME, "getSerialNumber", "()Ljava/lang/String;")) {
+//  if (JniHelper::getStaticMethodInfo(t, CLASS_NAME, "getAndroidID", "()Ljava/lang/String;")) {
   if (JniHelper::getStaticMethodInfo(t, CLASS_NAME, "getDeviceID", "()Ljava/lang/String;")) {
     jstring jstr = (jstring)t.env->CallStaticObjectMethod(t.classID, t.methodID);
     return JniHelper::jstring2string(jstr);

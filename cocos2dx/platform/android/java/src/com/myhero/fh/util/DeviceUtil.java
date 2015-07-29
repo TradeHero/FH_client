@@ -7,6 +7,7 @@ import com.myhero.fh.widget.FHCocos2dxHandler;
 import java.lang.ref.WeakReference;
 import android.telephony.TelephonyManager;
 import org.cocos2dx.lib.Cocos2dxActivity;
+import android.provider.Settings;
 
 public class DeviceUtil {
   @SuppressWarnings("Unused")
@@ -39,6 +40,10 @@ public class DeviceUtil {
   public static String getDeviceID(){
     TelephonyManager tm = (TelephonyManager) Cocos2dxActivity.getContext().getSystemService(Cocos2dxActivity.TELEPHONY_SERVICE);
     return tm.getDeviceId();
+  }
+
+  public static String getAndroidID(){
+    return Settings.System.getString(Cocos2dxActivity.getContext().getContentResolver(), Settings.Secure.ANDROID_ID);
   }
 
 }
