@@ -157,11 +157,7 @@
   <ProjectType>UIProject</ProjectType>
   <ResRelativePath />
   <imageFileList />
-  <imagePngList>
-    <string>Competition/entry_shoottowin.png</string>
-    <string>MatchListScene/Arrow down.png</string>
-    <string>community/img-separator.png</string>
-  </imagePngList>
+  <imagePngList />
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>CompetitionItemNew.json</CurrentUIJson>
+  <CurrentUIJson>GameCenterCell.json</CurrentUIJson>
 </UIProject>

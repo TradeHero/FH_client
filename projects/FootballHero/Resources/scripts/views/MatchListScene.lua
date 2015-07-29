@@ -849,6 +849,7 @@ function scrollViewDoNothingEventHandler( target, eventType )
 end
 
 function sportChangeEventHandler()
-    EventManager:postEvent( Event.Enter_Match_List )
+    EventManager:postEvent( Event.Enter_Match_List, { Constants.SpecialLeagueIds.MOST_POPULAR } )
+    initLeagueList( Constants.SpecialLeagueIds.MOST_POPULAR )
     MatchListDropdownFrame.initCountryList()
 end
