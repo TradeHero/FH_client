@@ -74,7 +74,7 @@ ShareContent = {
 
 	{	["id"] = SHARE_PREDICTION.."_baseball", 
 		["content"] = Constants.String.share.prediction_baseball_content,
-		["image"] = "http://fhmainstorage.blob.core.windows.net/fhres/facebook-share-1.png",
+		["image"] = "http://fhmainstorage.blob.core.windows.net/fhres/baseball-fb-share.png",
 		["title"] = Constants.String.share.prediction_title,
 		["description"] = Constants.String.football_hero,
 		["url"] = "http://www.footballheroapp.com",
