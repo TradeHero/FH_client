@@ -303,7 +303,7 @@ function initContent( couponHistory )
     local label = tolua.cast( mWidget:getChildByName("Label_CompTitle"), "Label" )
     local show = tolua.cast( mWidget:getChildByName("Panel_showall"), "Layout" )
     CCLuaLog("initContent")
-    if mAdditionalParam == "Expert" then
+    if mAdditionalParam == "&isExpert=true" then
         local showLabel = tolua.cast( show:getChildByName("Label_text"), "Label" )
         showLabel:setText( Constants.String.history.show_all )
         label:setText( Constants.String.history.predictions_team )
@@ -638,11 +638,7 @@ end
 function scrollViewEventHandler( target, eventType )
     if eventType == SCROLLVIEW_EVENT_BOUNCE_BOTTOM and mHasMoreToLoad then
         mStep = mStep + 1
-        if mAdditionalParam == "Expert" then
-            EventManager:postEvent( Event.Load_More_In_Expert_History, { mStep, mCompetitionId, mUserId, mAdditionalParam, mCountryFilter } )
-        else
-            EventManager:postEvent( Event.Load_More_In_History, { mStep, mCompetitionId, mUserId, mAdditionalParam, mCountryFilter } )
-        end
+        EventManager:postEvent( Event.Load_More_In_History, { mStep, mCompetitionId, mUserId, mAdditionalParam, mCountryFilter } )
     end
 end
 

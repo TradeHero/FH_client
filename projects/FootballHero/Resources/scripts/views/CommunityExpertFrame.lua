@@ -172,7 +172,7 @@ function initExpert( expertInfo )
         local expertPhotoHandler = function ( sender, eventType )
             print(eventType)
             if eventType == TOUCH_EVENT_ENDED then
-                EventManager:postEvent( Event.Enter_Expert_History, { expertInfo[i]["Id"] } )
+                EventManager:postEvent( Event.Enter_History, { expertInfo[i]["Id"] , nil, "&isExpert=true"} )
             end
         end
 
