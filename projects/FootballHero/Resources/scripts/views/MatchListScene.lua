@@ -26,6 +26,7 @@ local mTheFirstDate = nil
 local mStep
 local mHasMoreToLoad
 
+local MATCH_LIST_DROPDOWN_NAME = "matchListDropdown"
 local MIN_MOVE_DISTANCE = 100
 local OPTION_MOVE_TIME = 0.5
 local OPTION_VIEW_OFFSET_X = 475
@@ -79,7 +80,7 @@ function initLeagueList( leagueKey )
     
     local content = SceneManager.widgetFromJsonFile("scenes/MatchListDropDown.json")
     mWidget:addChild( content )
-
+    content:setName( MATCH_LIST_DROPDOWN_NAME )
 
     local countryList = tolua.cast( content:getChildByName( "ScrollView_Country"), "ScrollView" )
     local leagueList = tolua.cast( content:getChildByName( "ScrollView_League"), "ScrollView" )
@@ -850,6 +851,16 @@ end
 
 function sportChangeEventHandler()
     EventManager:postEvent( Event.Enter_Match_List, { Constants.SpecialLeagueIds.MOST_POPULAR } )
-    initLeagueList( Constants.SpecialLeagueIds.MOST_POPULAR )
     MatchListDropdownFrame.initCountryList()
+
+    -- Reset the match list drop down
+    local content = mWidget:getChildByName( MATCH_LIST_DROPDOWN_NAME )
+
+    local logo = tolua.cast( content:getChildByName( "Image_CountryLogo" ), "ImageView" )
+    local countryName = tolua.cast( content:getChildByName( "Label_CountryName"), "Label" )
+    local leagueName = tolua.cast( content:getChildByName( "Label_LeagueName"), "Label" )
+
+    countryName:setText( Constants.String.match_list.special )
+    leagueName:setText( Constants.String.match_list.most_popular )
+    logo:loadTexture( Constants.COUNTRY_IMAGE_PATH.."favorite.png" )
 end
