@@ -10,7 +10,10 @@
   "designHeight": 1136,
   "designWidth": 640,
   "textures": [],
-  "texturesPng": [],
+  "texturesPng": [
+    "community/img-leaguebox.png",
+    "spinWheel/img-stw.png"
+  ],
   "version": "1.6.0.0",
   "widgetTree": {
     "classname": "Panel",

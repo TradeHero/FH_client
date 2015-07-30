@@ -157,7 +157,10 @@
   <ProjectType>UIProject</ProjectType>
   <ResRelativePath />
   <imageFileList />
-  <imagePngList />
+  <imagePngList>
+    <string>community/img-leaguebox.png</string>
+    <string>spinWheel/img-stw.png</string>
+  </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>GameCenterCell.json</CurrentUIJson>
+  <CurrentUIJson>CompetitionMore.json</CurrentUIJson>
 </UIProject>
