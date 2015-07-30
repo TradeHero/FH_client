@@ -11,8 +11,12 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "community/img-leaguebox.png",
-    "spinWheel/img-stw.png"
+    "MatchListScene/img-bkg-general.png",
+    "header/back.png",
+    "Competition/icn-quit.png",
+    "Competition/btn-alertOff.png",
+    "Competition/btn-alertOn.png",
+    "Competition/icn-rules.png"
   ],
   "version": "1.6.0.0",
   "widgetTree": {
