@@ -16,10 +16,22 @@
 		"title2":"2014/15", 
 		"body":"Share this competition on Facebook and receive instant $10,000 profit to the Season competition!\n\n\n\nThats 10% head start against your peers!", 
 		"isShare":true, 
+		"rules":"1. All matches available for picks close 1 minute before Kickoff. You cannot cancel your predictions once it is placed.\n\n2. Every player will start with zero profit/loss.\n\n3. Standard stake per match is 1000 points. \"Star\" stake are 3,000 points and can be used once in every half day.\n\n4. All picks will be void if the match is postponed or cancelled.\n\n5. The Ranking List will be updated daily.\n\n6. Any prize offer to winners will be forfeited if it contravenes any applicable laws in your country.\n\n7. Rankings are based on weekly profit, monthly profit and season profit.\n\n8. To be eligible to win prizes, users have to make a minimum 10 prediction for the weekly competition and 40 predictions for the monthly competition.\n\n9. Competition ends 31th May 2016.\n\nWinners must send contact details to support@footballheroapp.com to claim his prize within 60 days. Prizes will be forfeited after 60 days.\n\n11. Winners will receive their prizes within 6 to 8 weeks upon confirmation of winning email.\n\n12. Multiple accounts are disallowed and may result in disqualification in the competition.\n\n13. Judges decision is final.\n\n14. Cut-off time for monthly ranking is matches starting before 00.00 UTC time on the first day of the month.",
+		"rulesTextHeightIOS":1020,
+		"rulesTextHeightAndroid":1380
+	},
+
+	{
+		"token":"fhc1516", 
+		"title1":"FootballHero Championship", 
+		"title2":"2015/16", 
+		"body":"Share this competition on Facebook and receive instant $10,000 profit to the Season competition!\n\n\n\nThats 10% head start against your peers!", 
+		"isShare":true, 
 		"rules":"1. All matches available for picks close 1 minute before Kickoff. You cannot cancel your predictions once it is placed.\n\n2. Every player will start with zero profit/loss.\n\n3. Standard stake per match is 1000 points. \"Star\" stake are 3,000 points and can be used once in every half day.\n\n4. All picks will be void if the match is postponed or cancelled.\n\n5. The Ranking List will be updated daily.\n\n6. Any prize offer to winners will be forfeited if it contravenes any applicable laws in your country.\n\n7. Rankings are based on weekly profit, monthly profit and season profit.\n\n8. To be eligible to win prizes, users have to make a minimum 10 prediction for the weekly competition and 40 predictions for the monthly competition.\n\n9. Competition ends 30th April 2015.\n\nWinners must send contact details to support@footballheroapp.com to claim his prize within 60 days. Prizes will be forfeited after 60 days.\n\n11. Winners will receive their prizes within 6 to 8 weeks upon confirmation of winning email.\n\n12. Multiple accounts are disallowed and may result in disqualification in the competition.\n\n13. Judges decision is final.\n\n14. Cut-off time for monthly ranking is matches starting before 00.00 UTC time on the first day of the month.",
 		"rulesTextHeightIOS":1020,
 		"rulesTextHeightAndroid":1380
 	},
+
 
 	{
 		"token":"seacup15", 
