@@ -487,7 +487,7 @@ function checkMiniGame()
         --play:setPositionY( bgPos.y - bgSize.height / 2 + 75 )
 
     elseif bFHCAppear then
-        -- TODO: end date?
+        --[[ TODO: end date?
         -- FH Championship popup
         closeEventHandler = function( sender, eventType )
             if eventType == TOUCH_EVENT_ENDED then
@@ -507,6 +507,7 @@ function checkMiniGame()
         BG = tolua.cast( minigamePopup:getChildByName( "Image_BG" ), "ImageView" )
         BG:loadTexture( Constants.COMPETITION_IMAGE_PATH.."popup_seacup15.png" )
         BG:addTouchEventListener( playEventHandler )
+        --]]
     end
 
     local close = minigamePopup:getChildByName( "Button_Close" )
