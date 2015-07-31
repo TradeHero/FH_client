@@ -341,6 +341,7 @@
 		73495B9019C048D300626812 /* UAInboxMessageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73495B8319C048D300626812 /* UAInboxMessageViewController.xib */; };
 		734F0B731AB9837300AD3C93 /* C2DXShareSDK.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 734F0B711AB9837300AD3C93 /* C2DXShareSDK.cpp */; };
 		734F0B761AB983A000AD3C93 /* C2DXiOSShareSDK.mm in Sources */ = {isa = PBXBuildFile; fileRef = 734F0B751AB983A000AD3C93 /* C2DXiOSShareSDK.mm */; };
+		736466CB1B6B268D007B6827 /* es in Resources */ = {isa = PBXBuildFile; fileRef = 736466CA1B6B268C007B6827 /* es */; };
 		7365C0D218FCE99200C39027 /* FBSessionSingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 7365C0D118FCE99200C39027 /* FBSessionSingleton.m */; };
 		73846DD81A6CBBE0001B4EF1 /* DefaultString.lua in Resources */ = {isa = PBXBuildFile; fileRef = 73846DD71A6CBBE0001B4EF1 /* DefaultString.lua */; };
 		73846DDB1A6E3C8B001B4EF1 /* id in Resources */ = {isa = PBXBuildFile; fileRef = 73846DDA1A6E3C8B001B4EF1 /* id */; };
@@ -1084,6 +1085,7 @@
 		734F0B741AB983A000AD3C93 /* C2DXiOSShareSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = C2DXiOSShareSDK.h; sourceTree = "<group>"; };
 		734F0B751AB983A000AD3C93 /* C2DXiOSShareSDK.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = C2DXiOSShareSDK.mm; sourceTree = "<group>"; };
 		734F0B771ABA741D00AD3C93 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
+		736466CA1B6B268C007B6827 /* es */ = {isa = PBXFileReference; lastKnownFileType = folder; path = es; sourceTree = "<group>"; };
 		7365C0D018FCE99200C39027 /* FBSessionSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBSessionSingleton.h; sourceTree = "<group>"; };
 		7365C0D118FCE99200C39027 /* FBSessionSingleton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBSessionSingleton.m; sourceTree = "<group>"; };
 		73846DD71A6CBBE0001B4EF1 /* DefaultString.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = DefaultString.lua; sourceTree = "<group>"; };
@@ -2998,6 +3000,7 @@
 		F293BC4615EB859D00256477 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				736466CA1B6B268C007B6827 /* es */,
 				73846DE41A6F8269001B4EF1 /* en */,
 				73846DDC1A6E6E5A001B4EF1 /* ar */,
 				73846DDD1A6E6E5A001B4EF1 /* th */,
@@ -3102,6 +3105,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				736466CB1B6B268D007B6827 /* es in Resources */,
 				739220361A3EA04200F32FE5 /* zh in Resources */,
 				73DCA159192DCD95008AC05D /* anims in Resources */,
 				73495B8E19C048D300626812 /* UAInboxMessageListCell.xib in Resources */,

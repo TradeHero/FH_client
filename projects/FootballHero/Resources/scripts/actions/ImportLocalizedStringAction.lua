@@ -3,7 +3,7 @@ module(..., package.seeall)
 local RequestUtils = require("scripts.RequestUtils")
 
 -- Localized strings
-local TARGET_LANGUAGE = "zh"
+local TARGET_LANGUAGE = "es"
 
 local ID_KEY = 1
 local ID_EN_VALUE = 2

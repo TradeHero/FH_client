@@ -33,6 +33,7 @@ local mLanguageConfig = {
     { ["id"] = 12, ["name"] = Constants.String.languages.arabic, ["key"] = "ar", ["LocalizedStringFile"] = "ar.LocalizedString", ["locale"] = "ar_AE" },
 	{ ["id"] = 13, ["name"] = Constants.String.languages.indonesian, ["key"] = "id", ["LocalizedStringFile"] = "id.LocalizedString", ["locale"] = "id_ID" },
 	{ ["id"] = 14, ["name"] = Constants.String.languages.thailand, ["key"] = "th", ["LocalizedStringFile"] = "th.LocalizedString", ["locale"] = "th_TH" },
+	--{ ["id"] = 5, ["name"] = Constants.String.languages.spanish, ["key"] = "es", ["LocalizedStringFile"] = "es.LocalizedString", ["locale"] = "es_ES" },
 }
 
 function getSupportedLanguages()

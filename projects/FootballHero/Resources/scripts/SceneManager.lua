@@ -237,6 +237,14 @@ function addSideMenuWidget( widget )
 	mSideMenuLayer:addWidget( widget )
 end
 
+function hideOrShowSideMenuWidget( hide )
+	if hide then
+		mSideMenuLayer:setVisible( false )
+	else
+		mSideMenuLayer:setVisible( true )
+	end
+end
+
 function isSideMenuShown()
 	return mSideMenuShown
 end

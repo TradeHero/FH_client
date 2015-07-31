@@ -1,78 +1,456 @@
-share.prediction_content	%s Win $$$, Messi & Ronaldo Signed Jerseys! www.footballheroapp.com/download	"%s 赢得了 $$$, 梅西&罗纳尔多亲笔签名球衣！www.footballheroapp.com/download
-"
-share.competition_content	I joined a FootballHero Prediction competition. Win $$$, Messi & Ronaldo Signed Jerseys! www.footballheroapp.com/download	我参加了FootballHero球赛竞猜，赢得了 $$$, 梅西&罗纳尔多亲笔签名球衣！www.footballheroapp.com/download
-share.spinTheWheel_content	I won a prize in Spin-The-Wheel game! Win $$$, Messi & Ronaldo Signed Jerseys! www.footballheroapp.com/download	我在'超级转转转'中赢得了 $$$, 梅西&罗纳尔多亲笔签名球衣！www.footballheroapp.com/download
-share.spinTheWheel_title	FootballHero - I won a prize in Spin-The-Wheel game!	FootballHero - 我在'超级转转转'中赢得了奖金！
-share.competition_title	FootballHero - I joined a soccer prediction competition.	FootballHero - 我在FootbellHero中参加了足球竞彩大赛！
-share.prediction_title	FootballHero - %s	FootballHero - %s
+chat_hint	Tap here to start chatting!	Chatea Aqui
+league_chat.german	German League	Liga Alemana
+league_chat.spanish	Spanish League	Liga Espa?la
+league_chat.others	Other Competitions	Otros competidores
+league_chat.italian	Italian League	Liga Italiana
 league_chat.bahasa_chat	Bahasa Indonesia	Bahasa Indonesia
-league_chat.arabic_chat	Arabic	Arabic
-league_chat.chinese_chat	Chinese	中文
+league_chat.feedback	Feedback & Comments	Comentarios
+league_chat.arabic_chat	Arabic	?rabe
+league_chat.chinese_chat	Chinese	Chino
 league_chat.thai_chat	Thai	Thai
-league_chat.group_chat	Group Chat	群组讨论
-match_center.last6_away_title	Last 6 Away Results	最近6场客场比赛结果
-match_center.against_diagram_wins	%s wins	%s 胜
-match_center.home_short	H	主
-match_center.overunder_over	Over	大盘
-match_center.formTable_lost	L	负
-match_center.home	Home	主场
-match_center.VS	VS	VS
-match_center.post	Post	提交
-match_center.total	Total	所有
-match_center.overunder_title	Over/Under	大小盘
-match_center.overunder_under	Under	小盘
-match_center.away_short	A	客
-match_center.formTable_draw	D	平
-match_center.pos	Pos	名
-match_center.against_content_nodata	No data available.	暂无数据
-match_center.formTable_title	Form Table	数据表
-match_center.total_short	T	总
-match_center.overunder_played	Played	次数
-match_center.leagueTable_title	League Table	联赛表
-match_center.formTable_won	W	胜
-match_center.pts	Pts	分
-match_center.away	Away	客场
-match_center.last6_home_title	Last 6 Home Results	最近6场主场比赛结果
-match_center.against_diagram_draw	Draw	平
-match_center.against_title_date	Date	日期
-match_center.formTable_played	P	场次
-community.title_create_competition	Create Competition	创建比赛
-info.single_discussion	You can only write 1 discussion per match.	每场比赛只能创建一个话题
-handicap.h1_yes	You win if %s wins by 2 goals or more.\nYour bet is refunded if %s wins by 1 goal.	得分条件是%s的胜球数大于2球 \n 若胜球数为1球则退还积分
-handicap.h0_yes	You win if %s wins.\nYour bet is refunded on a draw.	得分条件是%s获胜 \n 若平局则退还积分
-handicap.hX_no	You win if %TeamName% wins, draws or loses by %LineMinusOne% goals or less.\nYour bet is refunded if %TeamName% loses by %Line% goals.	得分条件是%TeamName%获胜,平分,或输球数小于%LineMinusOne% \n 若输球数达到%Line%则退还积分
-handicap.hX_25_yes	You win if %TeamName% wins by %LinePulsOne% goals or more.\nYou lose half your bet if %TeamName% wins by %Line% goals.	得分条件是%TeamName%的胜球数达到%LinePulsOne% \n 若胜球数为%Line%则积分减半
-handicap.hX_75_yes	You win if %TeamName% wins by %LinePulsTwo% goals or more.\nYou win half your bet if %TeamName% win by %LinePulsOne% goals.	得分条件是%TeamName%的胜球数达到%LinePulsTwo% \n 若胜球数为%LinePulsOne%则积分减半
-handicap.hX_yes	You win if %TeamName% wins by %LinePulsOne% goals or more.\nYour bet is refunded if %TeamName% wins by %Line% goals.	得分条件是%TeamName%的胜球数达到%LinePulsOne% \n 若胜球数为%Line%则退还积分
-handicap.h0_75_yes	You win if %s wins by 2 goals or more.\nYou win half your bet if %s wins by 1 goal.	得分条件是%s的胜球数达到%LinePulsOne% \n 若胜球数为%Line%则退还积分
-handicap.h0_5_yes	You win if %s wins.	得分条件是%s获胜
-handicap.h1_5_no	You win if %s wins, draw or loses by 1 goal.	得分条件是%s获胜, 负球数少于一球
-handicap.h1_75_no	You win if %s wins or draw.\nYou lose half your bet if %s loses by 2 goals.	得分条件是%s获胜或打平, 负球数到达2球则损失一般分数
-handicap.h1_75_yes	You win if %s wins by 3 goals or more.\nYou win half your bet if %s wins by 2 goal.	得分条件是%s胜球数到达3个\n 胜球数为两个时积分减半
-handicap.predict_on	Predict on %s	预测 %s
-handicap.hX_25_no	You win if %TeamName% wins, draws or loses by %LineMinusOne% goals or less.\nYou win half your bet if %TeamName% loses by %Line% goals.	得分条件是%TeamName%的负球数少于%LineMinusOne% \n 若负球数达到%Line%则积分减半
-handicap.h1_25_no	You win if %s draws or wins.\nYou win half your bet if %s loses by 1 goal.	得分条件是%s平局或获胜 \m 输球数为1个时积分减半
-handicap.h0_25_no	You win if %s wins.\nYou win half your bet if %s draws.	得分条件是%s获胜 \n 若平局则积分减半
-handicap.h0_5_no	you win if %s wins or draws.	得分条件是%s平局或获胜
-handicap.h0_no	You win if %s wins.\nYour bet is refunded on a draw.	得分条件是%s获胜 \n 平均则退回积分
-handicap.h0_25_yes	You win if %s wins.\nYou lose half your bet if %s draws.	得分条件是%s获胜 \n 平局则积分减半
-handicap.h1_25_yes	You win if %s wins by 2 goals or more.\nYou lose half your bet if %s wins by 1 goal.	得分条件是%s的胜球数达到2个
-handicap.title	Payment Outcome Summary	积分概览
-handicap.hX_5_yes	You win if %TeamName% wins by %LinePulsOne% goals or more.	得分条件是%TeamName%的胜球数达到%LinePulsOne%
-handicap.name	Asian Handicap	亚洲让分盘
-handicap.hX_75_no	You win if %TeamName% wins, draws or loses by %Line% goals or less.\nYou lose half your bet if %TeamName% loses by %LinePulsOne% goals.	得分条件是%TeamName%的负球数少于%Line% \n %TeamName%的负球数达到%LinePulsOne%则积分减半
-handicap.hX_5_no	You win if %TeamName% wins, draws or loses by %Line% goals or less.	得分条件是%TeamName%的负球数少于%Line%
-handicap.h1_5_yes	You win if %s wins by 2 goals or more.	得分条件是%s的胜球数达到2个
-handicap.h1_no	You win if %s wins or draw.\nYour bet is refunded if %s loses by 1 goal.	得分条件是%s获胜或平局 \n 弱若负球数为1个则退还积分
-handicap.h0_75_no	You win if %s wins or draws.\nYou lose half your bet if %s loses by 1 goal.	得分条件是%s获胜或平局 \n 若负球数为1个则积分减半
-history.push_colon	Push:	
-history.draw	Draw	平局
-history.refund	refunded	
-history.win_by_line0	Will %s win on level handicap?	
-match_prediction.answer_match_draw	I have predicted a draw.	我预测是平局
-match_prediction.answer_asian_handicap_no	I have predicted %s wins by %s goals or less.	我预测%s的胜球数会少于等于%s个
-match_prediction.answer_match_win	I have predicted %s to win.	我预测%s会获胜
-match_prediction.answer_total_goal_no	I have predicted the game to have %s goals or less.	我预测比赛总进球数会少于等于%s个
-match_prediction.answer_asian_handicap_yes	I have predicted %s wins by %s goals or more.	我预测%s的胜球数会达到%s个
-match_prediction.will_win_by_line0	Will %s win on level handicap?	
-match_prediction.answer_total_goal_yes	I have predicted the game to have %s goals or more.	我预测比赛总进球数会多于等于%s个
+league_chat.facebook	Like us on Facebook	Me gusta en Facebook
+league_chat.uefa	Uefa Leagues	Ligas UEFA
+league_chat.group_chat	Group Chat	Chat grupal
+league_chat.english	English League	Liga Inglesa
+match_center.last6_away_title	Last 6 Away Results	Ultimos 6 partidos visitante
+match_center.against_diagram_wins	%s wins	
+match_center.title_discussion	Discussion	Discusi?
+match_center.prediction_made	Prediction made	Apuesta hecha
+match_center.home_short	H	
+match_center.overunder_over	Over	Termin?match_center.formTable_lost	L	
+match_center.home	Home	Inicio
+match_center.VS	VS	versus
+match_center.played_out_of	%d out of %d	
+match_center.write_comment	Write a comment...	Escribe un comentario
+match_center.post	Post	Publicar
+match_center.total	Total	Total
+match_center.make_prediction	Predict Now!	Apuesta ahora!
+match_center.overunder_title	Over/Under	Por Encima- Por Debajo
+match_center.against_title	Last Meetings	?timos encuentros
+match_center.load_comments	Load more comments...	Cargar m? comentarios
+match_center.title	Match Center	Partido 
+match_center.time_hours	%d hrs	horas
+match_center.away_short	A	
+match_center.formTable_draw	D	
+match_center.pos	Pos	posiciones
+match_center.against_content_nodata	No data available.	Informacion no disponible.
+match_center.played	Played	Jugado
+match_center.formTable_title	Form Table	Tabla de formaci?
+match_center.total_short	T	
+match_center.just_now	Just Now	Apenas ahora
+match_center.overunder_played	Played	Jugado
+match_center.title_meetings	Statistics	Estadisticas
+match_center.share_title		
+match_center.less	less	Menos
+match_center.leagueTable_title	League Table	Tabla de la Liga
+match_center.overunder_under	Under	Por debajo
+match_center.share_body		
+match_center.formTable_won	W	
+match_center.pts	Pts	Puntos
+match_center.away	Away	De visitante
+match_center.last6_home_title	Last 6 Home Results	Ultimos 6 partidos local
+match_center.against_diagram_draw	Draw	Empate
+match_center.against_title_date	Date	Fecha
+match_center.write_discussion	Write a new discussion...	Inicia una nueva discusi?
+match_center.more	More	M?
+match_center.time_days	%d days	Dias
+match_center.formTable_played	P	
+match_center.time_minutes	%d mins	Minutos
+button.share	Share	Compartir
+button.cancel	Cancel	Cancelar
+button.yes	Yes	SI
+button.existing_user	Existing User	Usuario registrado
+button.enable	Enable	Habilitar
+button.rate_now	Rate now	Calificar ahora
+button.new_user	New User	Nuevo usuario
+button.no_thanks	No, thanks.	No, gracias.
+button.ok	OK	OK
+button.sign_in	Sign In	Registrarse
+button.no	No	No
+button.create	Create!	Crear
+button.forget_password	Forgot Password?	?Olvidaste la contrase??
+button.confirm	Confirm!	Confirmar
+button.predict	Predict!	Apostar
+button.join	Join	Unirse
+button.register	Register	Registrar
+button.play_now	Play Now!	Juega ahora!
+button.go	Go!	Vamos!
+share_type_facebook	Facebook	Facebook
+unknown_team	Unknown Team	Equipo desconocido
+leaderboard.win_ratio_title	Win Ratio	Probabilidad de ganar
+leaderboard.stats_win_rate	Win %	Ganar %
+leaderboard.gain_per_prediction_title	Gain per Prediction	Ganancia por apuesta
+leaderboard.stats_last_ten	Last 10	Ultimos 10
+leaderboard.me_score	%d won	Ganados
+leaderboard.stats_l	L	
+leaderboard.win_ratio_desc	%d%% won (%d predictions)	Ganados
+leaderboard.stats_league	League	Liga
+leaderboard.high_score_title	High Score	Puntaje alto
+leaderboard.stats_w	W	
+leaderboard.high_score_desc	%d won (%d predictions)	Ganados
+leaderboard.gain_per_prediction_desc	%d%% gain (%d predictions)	Ganancia
+leaderboard.stats_win	Win	Ganados
+leaderboard.min_prediction	At least %d predictions	Minimo % apuestas
+leaderboard.stats_gain_rate	Gain %	Ganancia %
+leaderboard.stats_lose	Lose	Perdidos
+last_name	Last Name	Apellido
+quit_title	Are you sure you want to quit?	?Estas seguro que quieres salir?
+spinWheel.ticket_balance_1	%d ticket	Tiquete de la suerte
+spinWheel.ticket_usage	for the latest lucky draw.	Por el ultimo empate de la suerte
+spinWheel.only_show_big_prize	Only show big prize	Solo mostrar grandes premios
+spinWheel.winners	Past Winners	?timos ganadores
+spinWheel.collect_email_you_won	You have won	Ganaste!
+spinWheel.to_claim_prize	to claim prize.	Reclamar premio
+spinWheel.wheel_title	Spin-the-Wheel	Gira la rueda
+spinWheel.please_contact	Please contact	Por favor contactar
+spinWheel.ticket_balance_2	%d tickets	Tiquete de la suerte
+spinWheel.win_ticket_left	left till draw.	Hasta agotarse
+spinWheel.spin_daily	One spin daily	Un giro diario
+spinWheel.share_description	Share with your friends and get an additional spin.	Comparte con tus amigos y obt? una ronda adicional
+spinWheel.balance_title	Balance	Saldo
+spinWheel.wheel_sub_title	Spin-the-Wheel!	Gira la rueda!
+spinWheel.win_ticket_prize	Lucky Draw Ticket	Tiquete adicional
+spinWheel.collect_email_min	Minimum withdrawal is US$25	Retiro minimo 25 dolares
+spinWheel.spin_bonus	BONUS SPIN	Bono gira la rueda
+spinWheel.collect_email_towards_wallet	Please check you account balance	Por favor revisa tu saldo
+spinWheel.collect_email_prize	1 US Dollar	Un dollar
+spinWheel.money_balance	US$ %s Amazon Gift Card	Amazon tarjeta regaldo
+spinWheel.collect_email_label_title	Claim Prize	Reclamar premio
+spinWheel.won	WON	Ganados
+spinWheel.ticket_you_have	You have	Tu tienes
+spinWheel.leave_message	Come back tomorrow for another spin.	Regresa ma?na por un giro mas
+spinWheel.wheel_sub_des	Get your daily spin to win prizes including Messi Signed Jersey and Real Cash!	Obt? tu giro diario para ganar premios, incluyendo la camiseta autografiada por Messi y dinero!
+spinWheel.money_payout_success_notification	Your request has been processed. Please allow 2 - 4 weeks to receive the gift card via your email address.	Tu solicitud ha sido recibida. Por favor espera 2-4 semanas para recibir la tarjeta regalo v? correo electr?ico.
+spinWheel.money_payout_limit	Minimum US$25.00 for withdrawal.	Retiro minimo 25 dolares
+spinWheel.win_prizes	Win attractive prizes including Messi Signed Jersey & Real Cash!	?Gana espectaculares premios, incluyendo la camiseta autografiada por Messi y dinero en efectivo!
+spinWheel.claimVirtualPrize	Congratulations! You have won a %s. Please contact our support.	?Felicitaciones! ?Ganaste un premio! Por favor cont?tanos!
+spinWheel.no_one_won	No one has won any prize yet.	Nadie ha ganado aun.
+spinWheel.come_back_in	Come back in:	Regresa en:
+spinWheel.collect_email_description	Please submit a valid email address. Fake email addresses will be disqualified from winning prizes.	Por favor registra un correo electronico v?ido. Falsas direcciones de correo electronico ser? descalificadas para participar por premios.
+login_success	Login success.\nLoading data, please wait...	Inicio de sesion exitoso/ cargando, por favor espera
+facebook_signin	Sign in with Facebook	Inicia sesion con Facebook
+duration_forever	%s until forever	
+updating_files	Updating %s ...	Actualizando?
+unknown_name	Unknown Name	Nombre desconocido
+duration_to	%s to %s	% de %
+last_name_optional	Last Name (Optional)	Apellido (opcional)
+month.m9	September	Septiembre
+month.m8	August	Agosto
+month.m12	December	Diciembre
+month.m11	November	Noviembre
+month.m3	March	Marzo
+month.m2	February	Febrero
+month.m1	January	Enero
+month.m10	October	Octubre
+month.m4	April	Abril
+month.m5	May	Mayo
+month.m6	June	Junio
+month.m7	July	Julio
+lucky8.won_prize_won_txt	WON	Gan?lucky8.won_prize_btn_claim	Claim prize	Reclamar premio
+lucky8.draw	Draw	Empate
+lucky8.lucky8_title	Lucky 8	8 de la suerte
+lucky8.lucky8_rule	1. You are allowed one entry per day.\n\n2. Predict 8 games correctly and win prizes.\n\n3. Getting all 8 matches correct will win you $500* while getting 7 right will get you a token amount of $5. 6 correct will get you $1.\n\n4. Max prize pool per day is $500. If there is more than one daily winner, the prize pool will be split among the winners. (Example - if there are 2 winners, each will receive $250).\n\n5. Winnings will be credited to your balance page.\n\n6. You can only withdraw when your balance has more than $25 in the account.\n\n7. Judge's decision is Final.\n\n8. Multiple accounts user will be banned and disqualified from winning any prizes. Please refrain from opening more than one FootballHero account.	1. Puedes ingresar una vez por dia. 2. Adivina 8 partidos correctamente y gana premios. 3. Adivinando todos los 8 partidos correctamente obtendras 500 dolares, mientras con 7 correctos obtendras una ficha por 5 dolares, y con 6 correctos una ficha por 1 dolar. 4. el pozo de premios maximo por dia es de 500. si hay mas de un ganador diario, el pozo ser?dividido entre los ganadores (Por ejemplo, si hay 2 ganadores, cada uno recibira $250) 5. las ganancias ser? acreditadas a tu cuenta. 6. Solo podr? retirar dinero cuando el saldo de tu cuenta supere los $25.7. la decision del juez es la decision final. 8.  Usuarios con multiples cuentas ser? eliminados y descalificados para participar por premios.     8. Por favor evita registrar mas de una cuenta en Footballhero.
+lucky8.btn_submit_title	Submit!	Enviar
+lucky8.select_all_matches	please select all matches.	Por favor selecciona todos los partidos.
+lucky8.pending	Pending confirmation	Confirmaci? pendiente
+lucky8.game_center_title	Game Center	Juego 8 de la suerte
+lucky8.game_started	game started	Juego comenz?lucky8.btn_rules_title	Rules	Reglas
+lucky8.lucky8_sub_des	Predict random 8 games daily and win $500 if you guess all 8 matches correctly!	?Adivina 8 juegos aleatorios diario y gana $500, si los adivinas todos correctamente!
+lucky8.btn_picks_title	Your Picks	Tus selecciones
+num_of_points	%d Points	% Puntos
+share_title	Join %s's competition on FootballHero	?nete a % competencia en footballhero
+minigame.friend_help	friend(s) have helped you	Ayuda de un amigo(s)
+minigame.ask_more_friends	Ask more friends!	Preg?ntale a mas amigos
+minigame.goal_to_win	%d goals remaining to win	% goles restantes para ganar
+minigame.winners	Past Winners	?timos ganadores
+minigame.ask_friends_help	Ask friends to help!	Pide ayuda a tus amigos
+minigame.title	Shoot-to-Win Challenge	Desaf? Dispara-para-ganar
+minigame.shoot_to_win_won	You have won!	Ganaste!
+minigame.rules	Rules	Reglas
+minigame.no_one_won	No one has won an Samsung Note Edge yet.	Nadie ha ganado un Samsung Note Edge aun.
+minigame.call_to_action	No one has scored any goals for you yet.	Nadie ha marcado goles por ti aun.
+minigame.helped_to_score	has helped you to score %d goals	te ayud?a marcar % goles
+minigame.iPhone6_winner	Samsung Note Edge Winner	Samsung Note Edge Ganador
+minigame.failed_to_score	failed to score any goals	No hizo ning?n gol.
+minigame.current_score	Current Score:	Puntaje actual:
+choice.leave_comp_no	Stay	Quedarse
+choice.leave_comp_title	Leave Competition	Dejar la competencia
+choice.leave_comp_yes	Leave	Salir
+choice.leave_comp_desc	Are you sure you want to leave the competition?	?Estas seguro que quieres salir?
+support_title	FootballHero - Support	Footballhero- soporte t?nico
+share_body	Can you beat me? Join my competition on FootballHero. Code: %s  www.footballheroapp.com/download	?Puedes derrotarme? ?ete a mi campeonato en Footballhero. C?igo: %s www.footballheroapp.com/descarga
+email	E-mail Address	Direcci? de correo electr?ico
+password	Password	Contrase?
+history.show_all	Show All	Mostrar todo
+history.push_colon	Push:	Presiona
+history.predictions_closed	Closed Predictions	Apuestas cerradas
+history.draw	Draw	Empate
+history.lost	Lost	Perdidos
+history.won_colon	Won:	Ganados
+history.win_count	%d of %d	
+history.total_points	Total Points: %d	Total puntos
+history.predictions_open	Open Predictions	Apuestas abiertas
+history.stake	Stake: %d Points	Apuesta: % Puntos
+history.no_closed_prediction_others	No closed predictions	Apuestas aun abiertas
+history.win_by	Will %s win by %s goals or more?	?% ganar?por % goles o m??
+history.total_goals	Will total goals be %d or more?	?en total ser? % goles o m??
+history.won	Won	Ganados
+history.predictions_all	All Predictions	Todas las apuestas
+history.no_open_prediction	You have no\n open predictions yet.	No haz abierto ninguna apuesta aun.
+history.no_closed_prediction	You have no\n closed predictions yet.	No tienes ninguna apuesta cerrada aun.
+history.no_open_prediction_others	No open predictions	No apuestas abiertas.
+history.refund	refunded	Reembolsado
+history.lost_small	lost	Perdidos
+history.lost_colon	Lost:	Perdidos
+history.won_small	won	Ganados
+history.win_by_line0	Will %s win on level handicap?	?Ganar?%s en el nivel handicap?
+history.which_team	Which team will win?	?Cu? equipo ganar?
+first_name_optional	First Name (Optional)	Nombre (opcional)
+email_confirm	E-mail Address Confirm	Confirmar correo electronico (e-mail)
+match_prediction.share	Share with your friends	Comparte con tus amigos
+match_prediction.hint_tap	Tap to make a prediction!	Presiona aqu?para hacer una apuesta
+match_prediction.win	Win	Gana
+match_prediction.team_to_win	Which team will win?	?Cu? equipo ganar?
+match_prediction.stand_to_win	Stand to Win	Ganar 
+match_prediction.will_total_goals	Will total goals be %d or more?	?en total ser? % goles o m??
+match_prediction.balance	Balance	Saldo
+match_prediction.prediction_summary	Prediction Summary	Resumen apuestas
+match_prediction.facebook	Facebook	Facebook
+match_prediction.answer_match_draw	I have predicted a draw.	He adivinado un empate.
+match_prediction.answer_asian_handicap_no	I have predicted %s wins by %s goals or less.	Apost?a que %s gana por %s goles o menos.
+match_prediction.answer_match_win	I have predicted %s to win.	Apost?%s para ganar.
+match_prediction.answer_total_goal_no	I have predicted the game to have %s goals or less.	Apost?a que el partido tendr?%s goles o menos,
+match_prediction.stake	Stake	Pozo- Apuestas
+match_prediction.answer_asian_handicap_yes	I have predicted %s wins by %s goals or more.	Apost?a que % ganar?por %s goles o m?.
+match_prediction.will_win_by	Will %s win by %s goals or more?	?%s ganar?por %s goles o m??
+match_prediction.will_win_by_line0	Will %s win on level handicap?	?%s ganar?en nivel handicap?
+match_prediction.answer_total_goal_yes	I have predicted the game to have %s goals or more.	Apost?a que el partido tendr?%s goles o menos,
+quit_desc	Tap back again to quit.	presiona atr? de nuevo para salir.
+share.competition_americacup15_content	I joined a COPA America Cup Challenge. Win $$$, Messi & Ronaldo Signed Jerseys! www.footballheroapp.com/download	Me un?al desaf? de la Copa America. Gana $$$, Messi y Ronaldo camisetas autografiafas. Www.footballheroapp/descarga
+share.video_title	FootballHero - %s	
+share.predResult_content	FootballHero: %s\nCLICK HERE TO PLAY! www.footballheroapp.com/download	Footballhero: %S Haz click aqu?para jugar 
+share.competition_seacup15_content	I joined a SEA Games Football Challenge. Win $$$, Messi & Ronaldo Signed Jerseys! www.footballheroapp.com/download	Me un?al desaf? de los Juegos del Sureste asiatico- SEA games. Gana $$$, Messi y Ronaldo camisetas autografiafas. Www.footballheroapp/descarga
+share.predResult_title	FootballHero - %s	
+share.prediction_content	%s Win $$$, Messi & Ronaldo Signed Jerseys! www.footballheroapp.com/download	?%s gana $$$, Messi y Ronaldo camisetas autografiadas! Www.footballheroapp.com/descarga
+share.competition_content	I joined a FootballHero Prediction competition. Win $$$, Messi & Ronaldo Signed Jerseys! www.footballheroapp.com/download	Me un?al campeonato de apuestas de Footballhero.?Gana $$$, Messi y Ronaldo camisetas autografiadas! Www.footballheroapp.com/descarga
+share.video_content	%s.\nCLICK HERE TO WATCH! www.footballheroapp.com/download	Haz click aqu?para ver! Www.footballheroapp.com/descarga
+share.spinTheWheel_content	I won a prize in Spin-The-Wheel game! Win $$$, Messi & Ronaldo Signed Jerseys! www.footballheroapp.com/download	Gan?un premio en Gira- la- rueda! Gana $$$, Messi y Ronaldo camisetas autografiadas. Www.footballheroapp.com/descarga
+share.competition_title	FootballHero - I joined a soccer prediction competition.	Footballhero- Me un?a un campeonato de apuestas.
+share.spinTheWheel_title	FootballHero - I won a prize in Spin-The-Wheel game!	Footballhero- Gan?un premio en el juego Gira-la-rueda!
+share.prediction_title	FootballHero - %s	
+marketing_message_1	Congratulations on making your first prediction!	?Felicitaciones por hacer tu primera apuesta!
+enter_email	Please enter your email address.	Por favor ingresa tu correo electr?ico
+email_signin	Sign in with Email	Registrarse con Email (correo electr?ico)
+password_confirm	Confirm Password	Confirmar contrase?
+event.hint_unqualified	You must predict on %d more matches in this competition to qualify for prizes.	Debes adivinar % o mas partidos en este campeonato para clasificar por premios.
+event.ranking_dropdown_week	Week %1$d: %2$d %3$s-%4$d %5$s	Semana 1 2 3 4 5 
+event.total_players	Total Players	Total jugadores
+event.status_unqualified	- unqualified	Descalificado
+event.prizes	Prizes	Premios
+event.predict_now	Predict Now	?Apuesta ahora!
+event.status_qualified	- qualified	Clasificado
+event.ranking_weekly	Weekly	Semanal
+event.ranking_overall	Season	Temporada
+event.ranking_dropdown_month	%1$s %2$s	
+event.ranking_monthly	Monthly	Mensual
+event.hint_qualified	Qualified for prizes	Calificado para premios
+marketing_message_3	Who will rise to the top?	 ?Qui? llegar?a la cima?
+serverError.COMPETITION_6	No stats data for this year/month/week combination found.	No informaci? estadistica para este a?/mes/semana.
+serverError.COUPON_3	No predictions on coupon. Cannot place empty coupon.	No apuestas en cupones. No colocar cupones vacios.
+serverError.FACEBOOK_2	Oops! You are not connected to Facebook.	?Ups! No estas conectado a Facebook.
+serverError.DEFAULT	Oops! Please try again...	?Ups! Por favor intenta de nuevo.
+serverError.COUPON_1	Stake not allowed.	Apuesta no permitada.
+serverError.LEADERBOARD_2	Oops! Please try again.	?Ups! Por favor intenta de nuevo.
+serverError.LEADERBOARD_1	Oops! Invalid leaderboard. Please try again.	?Ups! Clasificaci? inv?ida. Por favor intenta de nuevo.
+serverError.COUNTRY_1	Oops! Try a different country.	Ups! Intenta con un pa? diferente.
+serverError.COMPETITION_5	User is not enrolled in this competition.	El usuario no est?registrado en esta competencia.
+serverError.COMPETITION_3	Join token does not exist.	Token no existe.
+serverError.COMPETITION_2	The competition does not exist.	La competencia no existe.
+serverError.FACEBOOK_4	Oops! This Facebook account is already in use.	?Ups! Esta cuenta de Facebook est?en uso.
+serverError.WHEEL_3	Could not find a prize.	No encontr?premios.
+serverError.GENERAL_1	Oops! We're sorry. Please try again.	?Ups! Lo sentimos. Por favor intenta de nuevo.
+serverError.SIGNIN_2	Incorrect username or password.	Usuario o contrase? incorrecto.
+serverError.FACEBOOK_3	Oops! This Facebook account is already in use.	?Ups! Esta cuenta de Facebook est?en uso.
+serverError.DISCUSSION_3	Oops! Please try again.	?Ups! Por favor intenta de nuevo.
+serverError.COMPETITION_7	You cannot join a competition that is in preview mode.	No puedes unirte a una competencia que est?en modo preliminar.
+serverError.GENERAL_2	Oops! Your User ID is invalid.	?Ups! Usuario inv?ido.
+serverError.WHEEL_6	The requested amount is bigger than your balance.	La cantidad solicitada es mayor a tu saldo.
+serverError.WHEEL_5	Requested amount is lower than minimum payout.	La cantidad solicitada es menor que el pago minimo.
+serverError.COUPON_4	One or more predictions were already played before.	Una o mas apuestas fueron jugadas anteriormente.
+serverError.SIGNIN_1	Oops! Your email is invaild.	?Ups! Email inv?ido.
+serverError.VERSION_2	New features added! Please update FootballHero in the app store.	Nuevas funciones! Por favor actualiza Footballhero en app store.
+serverError.COMPETITION_4	You are already enrolled in this competition.	Ya est? inscrito en esta competencia.
+serverError.WHEEL_4	User has never spinned the wheel.	El Usuario nunca ha girado la rueda.
+serverError.FACEBOOK_1	Oops! There seems to be an error. Please try again.	?Ups! Error. Por favor intenta de nuevo.
+serverError.WHEEL_1	Your last spin was less than 24 hours ago.	Tu ?ltimo giro fue hace menos de 24 horas.
+serverError.LEAGUE_1	Oops! Try a different league.	?Ups! Intenta una liga diferente.
+serverError.WHEEL_2	Price probabilities don't add up.	
+serverError.DISCUSSION_2	Oops! Please try again.	?Ups! Por favor intenta de nuevo.
+serverError.DISCUSSION_1	Oops! Please try again.	?Ups! Por favor intenta de nuevo.
+serverError.SIGNIN_4	Email and/or password cannot be empty.	Email y contrase? no puede estar en blanco.
+serverError.COUPON_2	Too many predictions on coupon.	Muchas apuestas en cup?.
+serverError.FACEBOOK_5	Oops! We're sorry. Please try again later.	?Ups! Lo sentimos. Por favor intenta de nuevo.
+serverError.COMPETITION_8	Share Bonus already claimed.	Bono compartido ha sido reclamado.
+serverError.COUPON_5	Last big bet was less than 12 hours ago.	La ?ltima gran apuesta fue hace menos de 12 horas.
+serverError.COMPETITION_1	You already created a competition with that name before.	Ya haz creado una competencia con ese nombre.
+serverError.VERSION_1	Please update latest version in the app store.	Por favor actualiza a la ?ltima version en app store.
+serverError.SIGNIN_3	Email address does not exist.	Email no existe.
+match_list.match_ended	Match Ended	Partido termin?match_list.played	Played	Jugado
+match_list.most_popular	Most Popular	M? popular
+match_list.date	%b %d, %A	
+match_list.special	Special	Especial
+match_list.upcoming_matches	Upcoming Matches	Pr?imos partidos
+match_list.more_regions	More Regions	Mas regiones
+match_list.match_started	Match Started	Partido comenz?match_list.less_regions	Less Regions	Menos regiones
+match_list.match_lost	LOST: %d Pts	perdido
+match_list.total_fans	Fans	Fans- Seguidores
+match_list.todays_matches	Today's Matches	Partidos del d?
+match_list.most_discussed	Most Discussed	Mas discutidos
+match_list.match_won	WON: %d Pts	Ganado
+match_list.draw	Draw	Empate
+terms_agree	By Signing in, you are indicating that you have read and agree to FOOTBALL HERO'S	Registr?dote, indicas que haz le?o y aceptado las normas de Footballhero
+community.share	SHARE	Compartir
+community.rules	RULES	Reglas
+community.label_call_to_arm	You are not in any \ncompetition yet.\n\nCreate a new competition and\nchallenge your friends now!	No est? en ninguna competencia a?n. Crea una nueva competencia y desaf? tus amigos.
+community.enter_comp_code	Enter Code	Ingresar c?ido
+community.title_competition	Competitions	Competencias- Campeonatos
+community.copy	COPY	Copiar
+community.title_top_performers	Top Performers	Top participantes
+community.label_months	months	Meses
+community.label_new	New	Nuevo
+community.invite_code	Invitation Code:	C?igo invitaci?
+community.title_create_comp	s competition	T?ulo competencia
+community.title_details	Details	Detalles
+community.highlight_subtitle	YOU ARE NOW LEAVING FOOTBALLHERO	Estas saliendo de Footballhero
+community.title_description	Description	Descripci?
+community.label_how_long	How long will it last?	?Cu?to tiempo durar?
+community.all_competitions	All Leagues & Cups	Todas las ligas y copas
+community.highlight_share_text	Watch the highlights: %s %d - %d %s	Ver lo m? destacado
+community.title_create_competition	Create Competition	Crear competencia
+community.disclaimer	*** Disclaimer - Apple is not a sponsor nor is involved in any way.	Desscargo de responsabilidad- Apple no es un patrocinador o est?involucrado de ninguna manera.
+community.video_share_text	Watch: %s	Ver: 
+community.label_ongoing	Ongoing	En curso
+community.title_video	Videos	Videos
+community.highlight_disclaimer	FootballHero is not the owner of the content that you are about to watch.\n\nThe third party site and content you are about to visit is not hosted or created by FootballHero.\nFootballHero is not responsible for and cannot be held liable or accountable for any of the content hosted on the third party site.	Footballhero no es due? del contenido que est?a punto de ver. La tercera parte y el contenido que est?apunto de ver no fueron creados ni patrocinados por Footballhero. Footbalhero no se hace responsable, ni tampoco puede ser responsabilizado por el contenido presentado por la tercera parte.
+community.title_highlight	Highlights	Lo mas destacado
+community.title_rules	Rules	Reglas
+community.title_join_comp	Join a Competition	Unirse a una competecia
+community.title_joined_comp	Joined Competitions	Competencias enlistadas
+community.title_leaderboard	Leaderboard	clasificaci?
+community.title_eligible	Eligible Leagues/Cups	Ligas/Copas elegibles
+community.label_select_league	Select a League	Selecciona una liga
+community.label_give_title	Give a title to your competition	Escribe un titulo para tu competencia-campeonato
+community.title_duration	Duration	Duraci?
+community.quit	QUIT	Salir
+community.push	PUSH NOTIFICATION	Notificaci? push
+community.label_give_desc	Give a description	Da una descripci?
+community.desc_create_comp	Predictions made in the selected league for the competition are automatically included in the competition.	Apuestas hechas en la liga seleccionada son autom?icamente incluidas en el campeonato-competencia
+community.label_fb_share	Facebook Share	Compartir en facebook
+first_name	First Name	Nombre
+football_hero	FootballHero	
+settings.faq	FAQ	Pregunta Frecuentes
+settings.general	General News	Noticias
+settings.tap_to_edit	Tap to Edit	Presiona para editar
+settings.sounds	Sounds	Sonidos
+settings.send_feedback	Send Feedback	Enviar comentario
+settings.select_league	Select League	Selecciona una liga
+settings.select_language	Select Language	Selecciona un idioma
+settings.user_info	User Information	Informacion del usuario
+settings.edit	Edit	Editar
+settings.phone	Phone number	Tel?ono
+settings.logout	Logout	Cerrar sesi?
+settings.favorite_team_none	No Favorite Teams	No equipos favoritos
+settings.email	E-mail Address	Correo electr?ico
+settings.sound_effects	Sound Effects	Efectos de sonido
+settings.sound_settings	Sound Settings	Ajustes de sonido
+settings.title	Settings	Ajustes
+settings.set_favorite_tams	Set My Favorite Teams	Seleccionar mis equipos favoritos
+settings.push_notification	Push Notification	Notificaci? push
+settings.prediction	Prediction	Apuesta
+settings.others	Others	Otros
+settings.favorite_team	Favorite Teams	Equipos favoritos
+chat_room_title	Select Chatroom	Selecciona una sala de chat
+handicap.h1_yes	You win if %s wins by 2 goals or more.\nYour bet is refunded if %s wins by 1 goal.	Tu ganas si %s gana por 2 o mas goles. Tu apuesta ser?reembolsada si %s gana por un gol.
+handicap.h0_yes	You win if %s wins.\nYour bet is refunded on a draw.	Tu ganas si %s gana. Tu apuesta ser?reembolsada en caso de empate.
+handicap.hX_no	You win if %TeamName% wins, draws or loses by %LineMinusOne% goals or less.\nYour bet is refunded if %TeamName% loses by %Line% goals.	Tu ganas si %s gana, empata o pierde por -1 goles o menos. Tu apuesta ser?reembolsada si %s pierde por - goles.
+handicap.hX_25_yes	You win if %TeamName% wins by %LinePulsOne% goals or more.\nYou lose half your bet if %TeamName% wins by %Line% goals.	Tu ganas si % gana por +1 goles o m?. Tu pierdes la mitad de la apuesta si %s gana por - goles.
+handicap.hX_75_yes	You win if %TeamName% wins by %LinePulsTwo% goals or more.\nYou win half your bet if %TeamName% win by %LinePulsOne% goals.	Tu ganas si % gana por -+2 goles o m?. Tu pierdes la mitad de la apuesta si % gana por +1 goles.
+handicap.hX_yes	You win if %TeamName% wins by %LinePulsOne% goals or more.\nYour bet is refunded if %TeamName% wins by %Line% goals.	Tu ganas si % gana por -+1 goles o m?. Tu pierdes la mitad de la apuesta si %s gana por - goles.
+handicap.h0_75_yes	You win if %s wins by 2 goals or more.\nYou win half your bet if %s wins by 1 goal.	Tu ganas si % gana por 2 goles o m?. Tu ganas la mitad de la apuesta si % gana por un gol.
+handicap.h0_5_yes	You win if %s wins.	Tu ganas si %s gana.
+handicap.h1_5_no	You win if %s wins, draw or loses by 1 goal.	Tu ganas si % gana, empata o pierde por un gol,
+handicap.h1_75_no	You win if %s wins or draw.\nYou lose half your bet if %s loses by 2 goals.	Tu ganas si %s gana o empata. Tu pierdes la mitad de la apuesta si % pierde por dos goles.  
+handicap.h1_75_yes	You win if %s wins by 3 goals or more.\nYou win half your bet if %s wins by 2 goal.	Tu ganas si %s gana por 3 goles o mas. Tu ganas la mitad de la apuesta si %s gana por 2 goles.
+handicap.predict_on	Predict on %s	Apuesta en %s
+handicap.hX_25_no	You win if %TeamName% wins, draws or loses by %LineMinusOne% goals or less.\nYou win half your bet if %TeamName% loses by %Line% goals.	Tu ganas si %s gana, empata o pierde por -1 goles o menos. Tu ganas la mitad de la apuesta si % pierde por - goles.
+handicap.h1_25_no	You win if %s draws or wins.\nYou win half your bet if %s loses by 1 goal.	Tu ganas si %s empata o gana. Tu ganas la mitad de la apuesta si % pierde por 1 gol.
+handicap.h0_25_no	You win if %s wins.\nYou win half your bet if %s draws.	Tu ganas si %s gana. Tu ganas la mitad de la apuesta si % empata.
+handicap.h0_5_no	you win if %s wins or draws.	Tu ganas si % gana o empata.
+handicap.h0_no	You win if %s wins.\nYour bet is refunded on a draw.	Tu ganas si %s gana. La apuesta ser?reembolsada en caso de empate.
+handicap.h0_25_yes	You win if %s wins.\nYou lose half your bet if %s draws.	Tu ganas si %s gana. Tu pierdes la mitad de la apuesta si % empata.
+handicap.h1_25_yes	You win if %s wins by 2 goals or more.\nYou lose half your bet if %s wins by 1 goal.	Tu ganas si %s gana por 2 goles o mas. Tu pierdes la mitad de la apuesta si % gana por 1 gol.
+handicap.title	Payment Outcome Summary	Resumen de pagos
+handicap.hX_5_yes	You win if %TeamName% wins by %LinePulsOne% goals or more.	Tu ganas si % gana por +1 gol o mas.
+handicap.name	Asian Handicap	Handicap asi?ico
+handicap.hX_75_no	You win if %TeamName% wins, draws or loses by %Line% goals or less.\nYou lose half your bet if %TeamName% loses by %LinePulsOne% goals.	Tu ganas si % gana, empata o pierde por - goles o menos. Tu pierdes la mitad de la apuesta si % pierde po +1 goles.
+handicap.hX_5_no	You win if %TeamName% wins, draws or loses by %Line% goals or less.	Tu ganas si % gana, empata o pierde por - goles o menos.
+handicap.h1_5_yes	You win if %s wins by 2 goals or more.	Tu ganas si % gana por 2 goles o m?.
+handicap.h1_no	You win if %s wins or draw.\nYour bet is refunded if %s loses by 1 goal.	Tu ganas si % gana o empata. La apuesta ser?reembolsada si % pierde por 1 gol.
+handicap.h0_75_no	You win if %s wins or draws.\nYou lose half your bet if %s loses by 1 goal.	Tu ganas si % gana o empata. Tu pierdes la mitad de la apuesta si % pierde por 1 gol.
+quit_cancel	Stay	Continuar
+today	Today	Hoy
+user_name	Username	Usuario
+top_performers	Top Performers	Top participantes
+vs	VS	VS
+share_type_email	Email	Correo electr?ico- Email
+support_email	support@footballheroapp.com	Soporte@footballheroapp.com
+optional	(Optional)	(Opcional)
+push_notification.receive	You will receive:	Recibir?:
+push_notification.prediction_summary	. Predictions' summary	Apuestas- Resumen
+push_notification.match_result	. Match results	Resultados del partido
+push_notification.question_competition	Do you want to receive push notification for this competition?	?Quieres recibir notificaciones push sobre esta competencia?
+push_notification.question_prediction	Do you want to receive push notification for all your predictions?	?Quieres recibir notificaciones push sobre todas tus apuestas?
+push_notification.points_won	. Points won or lost	Puntos perdidos o ganados
+push_notification.new_participant	. New participant alert	Alerta- Nuevo participante
+friends	Friends	Amigos
+share_type_SMS	SMS	Mensajes
+share_type_title	Share your competition using...	Comparte tu campeonato (competencia) usando?
+message_hint	Type your message here	Escribe tu mensaje aqu?marketing_message_2	Now challenge your friends in your own mini-competition!	?Ahora desaf? tus amigos en tu propio campeonato ( propia competencia)!
+error.bad_email_format	Bad email format.	Formato del correo incorrecto.
+error.title_default	Oops! You've got an error	?Ups! Error.
+error.blank_password	Password is blank.	Contrase? en blanco
+error.no_sms	You have no SMS set up.	No tienes mensajes para configurar
+error.blank_league	Selected League cannot be blank.	Liga seleccionada no puede estar en blanco
+error.email_not_match	Email do not match.	Email no coincide.
+error.invalid_month	Number of months is not a number.	Numero de meses no es un n?mero.
+error.blank_token	Competition code cannot be blank.	C?ido campeonato- competencia no puede estar en blanco.
+error.blank_email	Email is blank.	Correo- Email en blanco.
+error.blank_title	Title cannot be blank.	T?ulo no puede estar en blanco.
+error.video_not_available	This video is no longer available.	Este video no se encuentra disponible.
+error.updating_failed	Update configurations failed. Please retry.	Actualizaci? de configuraci? fall? Por favor intenta de nuevo.
+error.blank_comp_id	Competition Id cannot be blank.	Identificaci? competencia no puede estar en blanco.
+error.blank_desc	Description cannot be blank.	Descripci? no puede estar en blanco.
+error.password_short	Password too short.	Contrase? muy corta.
+error.password_not_match	Passwords do not match.	Contrase?s no coinciden.
+error.password_long	Password too long.	Contrase? muy larga.
+error.blank_user_name	User name is blank.	Nombre de Usuario en blanco.
+error.no_email	You have no email account set up.	No haz configurado un correo electr?ico. (email)
+error.go_to_store	Go to Store.	Ir a la tienda.
+error.login_failed	Login failed. Please retry.	Inicio de sesion fall? Por favor intenta de nuevo.
+error.match_completed	You have completed this match.	Haz terminado este partido.
+info.competition_not_started	Competition begins %s.	La competencia comienza. El campeonato comienza.
+info.like_fh1	Do you like FootballHero so far?	?Te gusta footballhero?
+info.predictions_entered	You have completed this match.	Haz terminado este partido.
+info.title	Info	Informaci?
+info.star_bet	You can use 3 star stakes every 12 hours	Puedes usar apuestas 3 estrellas cada 12 horas.
+info.single_discussion	You can only write 1 discussion per match.	Solo puedes escribir una discusi? por partido.
+info.shared_to_fb_minigame	You have shared your minigame to Facebook!	?Haz compartido tu minijuego en Facebook!
+info.leave_comment2	Email us your feedback	Env?nos tus comentarios.
+info.coming_soon	Coming Soon!	Pr?imamente.
+info.like_fh2	Please take a moment to rate the app.	Por favor calif?a la aplicaci?.
+info.join_code_copied	Join code is copied to clipboard.	C?igo copiado al portapapeles.
+info.leave_comment1	Let us know how we could improve!	? D?os c?o podemos mejorar!
+info.shared_to_fb	Competition is shared to Facebook.	Haz compartido la competencia- campeonato en Facebook.
+info.announcement_title	Announcement	Anuncio.
+info.odds_not_ready	Odds will be updated soon.\nPlease check again later.	Puntos ser? actualizados pronto. Por favor revisa luego.
+info.new_version	Please download new version and update!	?Por favor descarga la nueva versi?!
