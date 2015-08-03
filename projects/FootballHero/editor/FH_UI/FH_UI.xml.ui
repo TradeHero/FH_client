@@ -157,7 +157,10 @@
   <ProjectType>UIProject</ProjectType>
   <ResRelativePath />
   <imageFileList />
-  <imagePngList />
+  <imagePngList>
+    <string>community/img-header.png</string>
+    <string>community/img-leaguebox.png</string>
+  </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>CommunityJoinedCompetitionFrame.json</CurrentUIJson>
+  <CurrentUIJson>ChatMessageContent.json</CurrentUIJson>
 </UIProject>
