@@ -24,6 +24,18 @@ ShareContent = {
 		["extInfo"] = "extInfo",
 	},
 
+	{	["id"] = SHARE_COMPETITION.."fhc1516", 
+		["content"] = Constants.String.share.competition_content,
+		["image"] = "http://fhmainstorage.blob.core.windows.net/fhres/facebook-share-1.png",
+		["title"] = Constants.String.share.competition_title,
+		["description"] = Constants.String.football_hero,
+		["url"] = "http://www.footballheroapp.com",
+		["type"] = C2DXContentTypeNews,
+		["siteUrl"] = "http://www.footballheroapp.com",
+		["site"] = Constants.String.football_hero,
+		["extInfo"] = "extInfo",
+	},
+
 	{	["id"] = SHARE_COMPETITION.."seacup15", 
 		["content"] = Constants.String.share.competition_seacup15_content,
 		["image"] = "http://fhmainstorage.blob.core.windows.net/fhres/fb-share-seacup.png",
