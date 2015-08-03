@@ -6,7 +6,6 @@ import android.content.pm.PackageManager;
 import android.content.pm.Signature;
 import android.util.Base64;
 import android.util.Log;
-import com.myhero.fh.metrics.Analytics;
 import com.urbanairship.AirshipConfigOptions;
 import com.urbanairship.Logger;
 import com.urbanairship.UAirship;

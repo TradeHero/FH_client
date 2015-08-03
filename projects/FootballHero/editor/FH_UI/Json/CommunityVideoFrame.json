@@ -11,17 +11,14 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "MatchListScene/img-bkg-general.png",
-    "header/back.png",
-    "Competition/copy_icon.png",
-    "Competition/share_icon.png",
-    "chat/More Button.png",
-    "community/icn-no-message.png",
-    "community/icn-new-message.png",
-    "community/img-inactivepage.png",
-    "community/img-activepage.png",
-    "Competition/img-userposition.png",
-    "LoginNReg/photo.png"
+    "commonRes/img-bkg-general.png",
+    "MyHero/img-photo.png",
+    "MyHero/icn-follower.png",
+    "history/icn-table.png",
+    "commonRes/England.png",
+    "MatchListScene/Arrow down.png",
+    "MatchListScene/Arrow Up.png",
+    "MatchListScene/icn-football.png"
   ],
   "version": "1.6.0.0",
   "widgetTree": {

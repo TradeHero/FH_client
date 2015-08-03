@@ -176,10 +176,7 @@ function initCompetitionScene( competitionFrame, compList, miniGame )
         layout:requestDoLayout()
     else
         scrollViewJoined:setEnabled( false )
-        local btnCreate = tolua.cast( panelNone:getChildByName("Button_Create"), "Button" )
-        btnCreate:setTitleText( Constants.String.button.create )
-        btnCreate:addTouchEventListener( createEventHandler )
-
+        
         local lblCTA = tolua.cast( panelNone:getChildByName("Label_CTA"), "Label" )
         lblCTA:setText( Constants.String.community.label_call_to_arm )
     end

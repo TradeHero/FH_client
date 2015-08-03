@@ -157,16 +157,7 @@
   <ProjectType>UIProject</ProjectType>
   <ResRelativePath />
   <imageFileList />
-  <imagePngList>
-    <string>commonRes/img-bkg-general.png</string>
-    <string>MyHero/img-photo.png</string>
-    <string>MyHero/icn-follower.png</string>
-    <string>history/icn-table.png</string>
-    <string>commonRes/England.png</string>
-    <string>MatchListScene/Arrow down.png</string>
-    <string>MatchListScene/Arrow Up.png</string>
-    <string>MatchListScene/icn-football.png</string>
-  </imagePngList>
+  <imagePngList />
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>MyPicksHome.json</CurrentUIJson>
+  <CurrentUIJson>CommunityJoinedCompetitionFrame.json</CurrentUIJson>
 </UIProject>
