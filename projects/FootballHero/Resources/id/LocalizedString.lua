@@ -81,7 +81,7 @@ Strings = {
 	},
 	key = "id",
 	match_center = {
-		last6_away_title = "6 Laga Tandang Terakhir",
+		last6_away_title = "10 Laga Tandang Terakhir",
 		against_diagram_wins = "%s kemenangan",
 		title_discussion = "Diskusi",
 		prediction_made = "Prediksi telah dibuat",
@@ -117,7 +117,7 @@ Strings = {
 		against_title_date = "Tanggal",
 		write_discussion = "Tulis diskusi baru…",
 		against_diagram_draw = "Seri",
-		last6_home_title = "6 Laga Kandang Terakhir",
+		last6_home_title = "10 Laga Kandang Terakhir",
 		away = "Tandang",
 		pts = "Poin",
 		formTable_won = "M",
