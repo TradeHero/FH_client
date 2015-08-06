@@ -3035,9 +3035,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		F293B3C715EB7BE500256477 /* FootballHero */ = {
+		F293B3C715EB7BE500256477 /* SportsHero */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F293B6C415EB7BEA00256477 /* Build configuration list for PBXNativeTarget "FootballHero" */;
+			buildConfigurationList = F293B6C415EB7BEA00256477 /* Build configuration list for PBXNativeTarget "SportsHero" */;
 			buildPhases = (
 				F293B3C415EB7BE500256477 /* Sources */,
 				F293B3C515EB7BE500256477 /* Frameworks */,
@@ -3048,7 +3048,7 @@
 			dependencies = (
 				15C1568B168311DF00D239F2 /* PBXTargetDependency */,
 			);
-			name = FootballHero;
+			name = SportsHero;
 			productName = FootballHero;
 			productReference = F293B3C815EB7BE500256477 /* FootballHero.app */;
 			productType = "com.apple.product-type.application";
@@ -3085,7 +3085,7 @@
 			);
 			projectRoot = "";
 			targets = (
-				F293B3C715EB7BE500256477 /* FootballHero */,
+				F293B3C715EB7BE500256477 /* SportsHero */,
 			);
 		};
 /* End PBXProject section */
@@ -3760,7 +3760,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F293B6C415EB7BEA00256477 /* Build configuration list for PBXNativeTarget "FootballHero" */ = {
+		F293B6C415EB7BEA00256477 /* Build configuration list for PBXNativeTarget "SportsHero" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F293B6C515EB7BEA00256477 /* Debug */,
