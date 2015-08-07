@@ -148,6 +148,8 @@
     <string>LiveScoreNowCell.json</string>
     <string>LiveScoreInPlayEndGap.json</string>
     <string>MatchCenterStatsFormTableNoDraw.json</string>
+    <string>MatchListFriendsReferal.json</string>
+    <string>FriendsReferalSelection.json</string>
   </JsonList>
   <CanvasSize>
     <Width>640</Width>
@@ -158,9 +160,11 @@
   <ResRelativePath />
   <imageFileList />
   <imagePngList>
-    <string>community/img-header.png</string>
-    <string>community/img-leaguebox.png</string>
+    <string>commonRes/img-bkg-general.png</string>
+    <string>MatchListScene/02.png</string>
+    <string>MatchListScene/03.png</string>
+    <string>MatchListScene/04.png</string>
   </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>ChatMessageContent.json</CurrentUIJson>
+  <CurrentUIJson>FriendsReferalSelection.json</CurrentUIJson>
 </UIProject>

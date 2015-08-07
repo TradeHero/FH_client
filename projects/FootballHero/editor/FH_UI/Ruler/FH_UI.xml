@@ -584,4 +584,12 @@
     <Project>MatchCenterStatsFormTableNoDraw</Project>
     <GuidesList />
   </GuidesProject>
+  <GuidesProject>
+    <Project>MatchListFriendsReferal</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>FriendsReferalSelection</Project>
+    <GuidesList />
+  </GuidesProject>
 </ArrayOfGuidesProject>

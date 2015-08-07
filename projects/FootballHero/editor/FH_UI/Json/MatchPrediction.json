@@ -10,7 +10,9 @@
   "designHeight": 1136,
   "designWidth": 640,
   "textures": [],
-  "texturesPng": [],
+  "texturesPng": [
+    "MatchListScene/01.jpg"
+  ],
   "version": "1.6.0.0",
   "widgetTree": {
     "classname": "Panel",
