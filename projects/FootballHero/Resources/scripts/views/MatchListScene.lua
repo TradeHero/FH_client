@@ -220,14 +220,17 @@ function initMatchList( matchList, leagueKey, bInit )
         
         if leagueKey == Constants.SpecialLeagueIds.MOST_POPULAR or leagueKey == Constants.SpecialLeagueIds.MOST_DISCUSSED then
             
-            local hintContent = SceneManager.widgetFromJsonFile("scenes/TapToMakePrediction.json")
+            local friendReferal = SceneManager.widgetFromJsonFile("scenes/MatchListFriendsReferal.json")
+            local referalButton = friendReferal:getChildByName("Button_refer")
+            referalButton:addTouchEventListener( function( sender, eventType )
+                if eventType == TOUCH_EVENT_ENDED then
+                    EventManager:postEvent( Event.Enter_Friend_Referal )
+                end
+            end )
 
-            local hintText = tolua.cast( hintContent:getChildByName("Label_Tap"), "Label" )
-            hintText:setText( Constants.String.match_prediction.hint_tap )
-
-            hintContent:setLayoutParameter( layoutParameter )
-            contentContainer:addChild( hintContent )
-            contentHeight = contentHeight + hintContent:getSize().height
+            friendReferal:setLayoutParameter( layoutParameter )
+            contentContainer:addChild( friendReferal )
+            contentHeight = contentHeight + friendReferal:getSize().height           
 
             for i = 1, table.getn( matchList ) do
                 local match = matchList[i]

@@ -131,6 +131,9 @@ function initEvents()
     EventManager:registerEventHandler( Event.Enter_Lucky8, "scripts.actions.EnterLucky8Action" )
     EventManager:registerEventHandler( Event.Enter_Lucky8History, "scripts.actions.EnterLucky8HistoryAction" )
     EventManager:registerEventHandler( Event.Enter_LiveScoreScene, "scripts.actions.EnterLiveScoreScene" )
+    EventManager:registerEventHandler( Event.Enter_Friend_Referal, "scripts.actions.EnterFriendReferalAction" )
+    EventManager:registerEventHandler( Event.Enter_FB_Friend_Referal, "scripts.actions.EnterFBFriendReferalAction" )
+    
 
     EventManager:registerEventHandler( Event.Do_Lucky8_Rounds, "scripts.actions.DoLucky8RoundsAction" )
     EventManager:registerEventHandler( Event.Do_Lucky8_Submit, "scripts.actions.DoLucky8SubmitAction" )

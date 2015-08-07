@@ -68,6 +68,8 @@ EventNameList =
     "Enter_Lucky8",
     "Enter_Lucky8History",
     "Enter_LiveScoreScene",
+    "Enter_Friend_Referal",
+    "Enter_FB_Friend_Referal",
 
     "Do_Lucky8_Rounds",
     "Do_Lucky8_Submit",
