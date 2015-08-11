@@ -7,6 +7,8 @@ SETTING_TYPE_INFO = 1
 SETTING_TYPE_FAVORITE_TEAM = 2
 SETTING_TYPE_LANGUAGE = 3
 SETTING_TYPE_OTHERS = 4
+SETTING_TYPE_FOLLOW = 5
+
 
 
 SettingsItem = {
@@ -21,6 +23,7 @@ SettingsItem = {
 			--{ ["itemName"] = Constants.String.settings.choose_fav_team, ["event"] = Event.Update_Favorite_Team },
 		},
 	},
+	{ ["SettingType"] = SETTING_TYPE_FOLLOW, ["TitleKey"] = "select_language", ["Enabled"] = true },
 	{ ["SettingType"] = SETTING_TYPE_LANGUAGE, ["TitleKey"] = "select_language", ["Enabled"] = true },
 	{ ["SettingType"] = SETTING_TYPE_OTHERS, ["TitleKey"] = "others", ["Enabled"] = true, ["Items"] = 
 		{

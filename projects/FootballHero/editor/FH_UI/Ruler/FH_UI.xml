@@ -592,4 +592,12 @@
     <Project>FriendsReferalSelection</Project>
     <GuidesList />
   </GuidesProject>
+  <GuidesProject>
+    <Project>SettingsFollowContentFrame</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>SettingsFollowListScene</Project>
+    <GuidesList />
+  </GuidesProject>
 </ArrayOfGuidesProject>

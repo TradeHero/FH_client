@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
 <UIProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <ProjectDir>U:\projects\FootballHero\editor\FH_UI</ProjectDir>
+  <ProjectDir>Z:\workspace\FH_client\projects\FootballHero\editor\FH_UI</ProjectDir>
   <Version>1.6.0.0</Version>
-  <Resources>U:\projects\FootballHero\editor\FH_UI\Resources</Resources>
+  <Resources>Z:\workspace\FH_client\projects\FootballHero\editor\FH_UI\Resources</Resources>
   <Name>FH_UI</Name>
   <JsonFileName>FH_UI.json</JsonFileName>
-  <JsonFolder>U:\projects\FootballHero\editor\FH_UI\Json</JsonFolder>
+  <JsonFolder>Z:\workspace\FH_client\projects\FootballHero\editor\FH_UI\Json</JsonFolder>
   <JsonList>
     <string>AskForComment.json</string>
     <string>AskForRate.json</string>
@@ -81,6 +81,7 @@
     <string>MatchCenterOverUnderTable.json</string>
     <string>MatchCenterStatsBlankGap.json</string>
     <string>MatchCenterStatsFormTable.json</string>
+    <string>MatchCenterStatsFormTableNoDraw.json</string>
     <string>MatchCenterStatsFrame.json</string>
     <string>MatchCenterStatsL6AwayTitle.json</string>
     <string>MatchCenterStatsL6Content.json</string>
@@ -118,13 +119,13 @@
     <string>SettingsTeamListContentFrame.json</string>
     <string>SettingsUserInformationFrame.json</string>
     <string>ShareTypeSelection.json</string>
+    <string>SideMenu.json</string>
+    <string>SideMenuContent.json</string>
     <string>SoundSettings.json</string>
     <string>SpecialCompetitionLeaderboard.json</string>
     <string>SpecialDetailedCompetitionDropdownContent.json</string>
     <string>SpecialDetailedCompetitionDropdownFrame.json</string>
     <string>SpecialDetailedCompetitionLeaderboard.json</string>
-    <string>SideMenu.json</string>
-    <string>SideMenuContent.json</string>
     <string>SpinBalance.json</string>
     <string>SpinEmailCollect.json</string>
     <string>SpinShare.json</string>
@@ -150,12 +151,14 @@
     <string>MatchCenterStatsFormTableNoDraw.json</string>
     <string>MatchListFriendsReferal.json</string>
     <string>FriendsReferalSelection.json</string>
+    <string>SettingsFollowContentFrame.json</string>
+    <string>SettingsFollowListScene.json</string>
   </JsonList>
   <CanvasSize>
     <Width>640</Width>
     <Height>1136</Height>
   </CanvasSize>
-  <filePath>U:\projects\FootballHero\editor\FH_UI\FH_UI.xml.ui</filePath>
+  <filePath>Z:\workspace\FH_client\projects\FootballHero\editor\FH_UI\FH_UI.xml.ui</filePath>
   <ProjectType>UIProject</ProjectType>
   <ResRelativePath />
   <imageFileList />
@@ -164,6 +167,11 @@
     <string>MatchListScene/02.png</string>
     <string>MatchListScene/03.png</string>
     <string>MatchListScene/04.png</string>
+    <string>LoginNReg/photo.png</string>
+    <string>Competition/icn-unqualified.png</string>
+    <string>MatchListScene/Arrow down.png</string>
+    <string>MatchListScene/Arrow Up.png</string>
+    <string>community/img-wininfo.png</string>
   </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
   <CurrentUIJson>FriendsReferalSelection.json</CurrentUIJson>

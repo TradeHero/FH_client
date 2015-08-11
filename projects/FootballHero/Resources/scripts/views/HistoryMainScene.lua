@@ -387,7 +387,7 @@ function initContent( couponHistory )
         logo:addTouchEventListener( logoEventHandler )
     end
     
-    if info["PictureUrl"] ~= nil then
+    if type( info["PictureUrl"] ) ~= "userdata" and info["PictureUrl"] ~= nil then
         local handler = function( filePath )
             if filePath ~= nil and mWidget ~= nil and logo ~= nil then
                 local safeLoadTexture = function()
@@ -402,6 +402,33 @@ function initContent( couponHistory )
             end
         end
         SMIS.getSMImagePath( info["PictureUrl"], handler )
+    end
+
+    local follow = tolua.cast( mWidget:getChildByName("Button_Follow"), "Button" )
+    if isSelf() then
+        follow:setEnabled(false)
+    else
+        local bFollow = info["IsFollowed"]
+        if bFollow then
+            follow:setTitleText("Unfollow")
+        else
+            follow:setTitleText("Follow")
+        end
+
+        local followCallback = function (  )
+            if bFollow then
+                follow:setTitleText("Unfollow")
+            else
+                follow:setTitleText("Follow")
+            end
+        end
+        local followHandler = function( sender, eventType )
+            if eventType == TOUCH_EVENT_ENDED then
+                bFollow = not bFollow
+                EventManager:postEvent( Event.Do_Follow_Expert, { mUserId , bFollow ,  followCallback } )
+            end
+        end
+        follow:addTouchEventListener( followHandler ) 
     end
 
     -- Add the open predictions 

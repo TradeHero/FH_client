@@ -20,6 +20,7 @@ local mDropdownHeight
 local mCurrLanguage
 
 local mFavoriteTeams
+local mFollows
 
 function loadFrame( jsonResponse )
 	local widget = GUIReader:shareReader():widgetFromJsonFile("scenes/SettingsHome.json")
@@ -35,6 +36,7 @@ function loadFrame( jsonResponse )
 
     if jsonResponse then
         mFavoriteTeams = jsonResponse["FavoriteTeams"]
+        mFollows = jsonResponse["FollowUsers"]
     end
     Logic:setFavoriteTeams( mFavoriteTeams )
 
@@ -125,6 +127,8 @@ function initSettingsSubItem( contentContainer, settingsSubItem )
         contentHeight = initSettingsLanguage( contentContainer )
     elseif settingsSubItem.SettingType == SettingsConfig.SETTING_TYPE_OTHERS then
         contentHeight = initSettingsOthers( contentContainer, settingsSubItem )
+    elseif settingsSubItem.SettingType == SettingsConfig.SETTING_TYPE_FOLLOW then
+        contentHeight = initSettingsFollow( contentContainer, settingsSubItem )
     end
 
     return contentHeight
@@ -263,6 +267,104 @@ function removeFavoriteTeam( content, removeKey )
     end
     
 end
+
+function initSettingsFollow( contentContainer, settingsSubItem )
+    
+    local contentHeight = 0
+    local nFollow = table.getn( mFollows ) 
+
+    if nFollow == 0 then
+        local userName = Constants.String.settings.favorite_team_none
+    
+        contentHeight = contentHeight + addFollow( contentContainer, userName )
+    else
+        if nFollow > 3 then
+            for i = 1, 3 do
+                -- local userID = "userID" .. i
+                -- local userName = "userName" .. i
+                local userID = mFollows[i]["UserId"]
+                local userName = mFollows[i]["DisplayName"]
+                local pictureUrl = mFollows[i]["PictureUrl"]
+
+                contentHeight = contentHeight + addFollow( contentContainer, i, userName, userID , pictureUrl)
+            end
+
+            local content = SceneManager.widgetFromJsonFile("scenes/SettingsItemContentFrame.json")
+            local name = tolua.cast( content:getChildByName("Label_Name"), "Label" )
+            name:setText( "Load More..." )
+
+            local button = tolua.cast( content:getChildByName("Panel_Button"), "Layout" )
+            button:setBackGroundImage( Constants.COMMUNITY_IMAGE_PATH.."img-leaguebox.png" )
+
+            local eventHandler = function( sender, eventType )
+                if eventType == TOUCH_EVENT_ENDED then
+                    EventManager:postEvent( Event.Enter_FollowList, {mFollows })
+                end
+            end
+            button:addTouchEventListener( eventHandler )
+
+            contentContainer:addChild( content )
+            contentHeight = contentHeight + content:getSize().height
+        else
+            for i = 1, nFollow do
+                -- local userID = "userID" .. i
+                -- local userName = "userName" .. i
+                local userID = mFollows[i]["UserId"]
+                local userName = mFollows[i]["DisplayName"]
+                local pictureUrl = mFollows[i]["PictureUrl"]
+
+                contentHeight = contentHeight + addFollow( contentContainer, i, userName, userID , pictureUrl)
+            end            
+        end
+    end
+    
+    return contentHeight
+end
+
+function addFollow( contentContainer, i, userName, userID , pictureUrl)
+    local content = SceneManager.widgetFromJsonFile("scenes/SettingsFollowContentFrame.json")
+    local lblName = tolua.cast( content:getChildByName("Label_Name"), "Label" )
+    local logo = tolua.cast( content:getChildByName("Image_Photo"), "ImageView" )
+    local remove = tolua.cast( content:getChildByName("Button_Remove"), "Button" )
+    remove:setEnabled( false )
+
+    lblName:setText( userName )
+ --   logo:loadTexture( teamLogo )
+
+    local seqArray = CCArray:create()
+    seqArray:addObject( CCDelayTime:create( i * 0.2 ) )
+    seqArray:addObject( CCCallFuncN:create( function()
+        if type( pictureUrl ) ~= "userdata" and pictureUrl ~= "" then
+            local handler = function( filePath )
+                if filePath ~= nil and mWidget ~= nil and logo ~= nil then
+                    local safeLoadTexture = function()
+                        logo:loadTexture( filePath )
+                    end
+                    xpcall( safeLoadTexture, function ( msg )  end )
+                end
+            end
+            SMIS.getSMImagePath( pictureUrl, handler )
+        end
+    end ) )
+    mWidget:runAction( CCSequence:create( seqArray ) )
+
+    local eventHandler = function( sender, eventType )
+        -- if eventType == TOUCH_EVENT_ENDED then
+        --     local favorite = tolua.cast( sender, "CheckBox" )
+        --     local failedEventHandler = function( jsonResponse )
+        --         RequestUtils.onRequestFailedByErrorCode( jsonResponse["Message"] )
+        --     end
+        --     local successEventHandler = function( jsonResponse )
+        --         removeFavoriteTeam( content, teamKey )
+        --     end
+        --     EventManager:postEvent( Event.Do_Post_Fav_Team, { teamKey, false, failedEventHandler, successEventHandler } )
+        -- end
+    end
+    contentContainer:addChild( content )
+ 
+    return content:getSize().height
+end
+
 
 function initSettingsLanguage( contentContainer )
     local contentHeight = 0
