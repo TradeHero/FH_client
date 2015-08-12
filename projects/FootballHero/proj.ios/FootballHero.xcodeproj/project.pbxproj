@@ -343,6 +343,8 @@
 		734F0B761AB983A000AD3C93 /* C2DXiOSShareSDK.mm in Sources */ = {isa = PBXBuildFile; fileRef = 734F0B751AB983A000AD3C93 /* C2DXiOSShareSDK.mm */; };
 		736466CB1B6B268D007B6827 /* es in Resources */ = {isa = PBXBuildFile; fileRef = 736466CA1B6B268C007B6827 /* es */; };
 		7365C0D218FCE99200C39027 /* FBSessionSingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 7365C0D118FCE99200C39027 /* FBSessionSingleton.m */; };
+		7368FC0E1B74B8B900A45DC2 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7368FC0D1B74B8B900A45DC2 /* FBSDKShareKit.framework */; };
+		7368FC101B74BAB000A45DC2 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7368FC0F1B74BAB000A45DC2 /* FBSDKCoreKit.framework */; };
 		73846DD81A6CBBE0001B4EF1 /* DefaultString.lua in Resources */ = {isa = PBXBuildFile; fileRef = 73846DD71A6CBBE0001B4EF1 /* DefaultString.lua */; };
 		73846DDB1A6E3C8B001B4EF1 /* id in Resources */ = {isa = PBXBuildFile; fileRef = 73846DDA1A6E3C8B001B4EF1 /* id */; };
 		73846DDF1A6E6E5A001B4EF1 /* ar in Resources */ = {isa = PBXBuildFile; fileRef = 73846DDC1A6E6E5A001B4EF1 /* ar */; };
@@ -1088,6 +1090,8 @@
 		736466CA1B6B268C007B6827 /* es */ = {isa = PBXFileReference; lastKnownFileType = folder; path = es; sourceTree = "<group>"; };
 		7365C0D018FCE99200C39027 /* FBSessionSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBSessionSingleton.h; sourceTree = "<group>"; };
 		7365C0D118FCE99200C39027 /* FBSessionSingleton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBSessionSingleton.m; sourceTree = "<group>"; };
+		7368FC0D1B74B8B900A45DC2 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
+		7368FC0F1B74BAB000A45DC2 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		73846DD71A6CBBE0001B4EF1 /* DefaultString.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = DefaultString.lua; sourceTree = "<group>"; };
 		73846DDA1A6E3C8B001B4EF1 /* id */ = {isa = PBXFileReference; lastKnownFileType = folder; path = id; sourceTree = "<group>"; };
 		73846DDC1A6E6E5A001B4EF1 /* ar */ = {isa = PBXFileReference; lastKnownFileType = folder; path = ar; sourceTree = "<group>"; };
@@ -1297,6 +1301,7 @@
 				73FC0A1A1990781F0006D0E2 /* QuartzCore.framework in Frameworks */,
 				730332FA1AB9232A00657F74 /* ShareSDKFlatShareViewUI.framework in Frameworks */,
 				F293B3CF15EB7BE500256477 /* OpenGLES.framework in Frameworks */,
+				7368FC0E1B74B8B900A45DC2 /* FBSDKShareKit.framework in Frameworks */,
 				F293B3D115EB7BE500256477 /* OpenAL.framework in Frameworks */,
 				730332F21AB9232A00657F74 /* WeChatConnection.framework in Frameworks */,
 				F293B3D315EB7BE500256477 /* AudioToolbox.framework in Frameworks */,
@@ -1307,6 +1312,7 @@
 				1A9D7E63171E38B2000B3B9A /* libluajit.a in Frameworks */,
 				73B0326919BED7620034452A /* MobileAppTracker.framework in Frameworks */,
 				730332FB1AB9232A00657F74 /* ShareSDKShareActionSheet.framework in Frameworks */,
+				7368FC101B74BAB000A45DC2 /* FBSDKCoreKit.framework in Frameworks */,
 				7314B46519B714BC0065D927 /* libUAirship-4.0.3.a in Frameworks */,
 				1AB87031175E0A5B005D39BF /* libwebsockets.a in Frameworks */,
 			);
@@ -2919,6 +2925,8 @@
 		F293B3CB15EB7BE500256477 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7368FC0F1B74BAB000A45DC2 /* FBSDKCoreKit.framework */,
+				7368FC0D1B74B8B900A45DC2 /* FBSDKShareKit.framework */,
 				734F0B771ABA741D00AD3C93 /* libc++.dylib */,
 				730332FE1AB9252400657F74 /* libz.1.2.5.dylib */,
 				730332FC1AB9250E00657F74 /* libicucore.dylib */,

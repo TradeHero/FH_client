@@ -132,7 +132,6 @@ function initEvents()
     EventManager:registerEventHandler( Event.Enter_Lucky8History, "scripts.actions.EnterLucky8HistoryAction" )
     EventManager:registerEventHandler( Event.Enter_LiveScoreScene, "scripts.actions.EnterLiveScoreScene" )
     EventManager:registerEventHandler( Event.Enter_Friend_Referal, "scripts.actions.EnterFriendReferalAction" )
-    EventManager:registerEventHandler( Event.Enter_FB_Friend_Referal, "scripts.actions.EnterFBFriendReferalAction" )
     
 
     EventManager:registerEventHandler( Event.Do_Lucky8_Rounds, "scripts.actions.DoLucky8RoundsAction" )
@@ -177,6 +176,9 @@ function initEvents()
 	EventManager:registerEventHandler( Event.Do_Check_New, "scripts.actions.DoCheckNewAction" )
 	EventManager:registerEventHandler( Event.Do_Show_Media, "scripts.actions.DoShowMediaAction" )
 	EventManager:registerEventHandler( Event.Do_Follow_Expert, "scripts.actions.DoFollowExpertAction" )
+	EventManager:registerEventHandler( Event.Do_FB_Friend_Referal, "scripts.actions.DoFBFriendReferalAction" )
+	EventManager:registerEventHandler( Event.Do_Wechat_Friend_Referal, "scripts.actions.DoWechatFriendReferalAction" )
+	EventManager:registerEventHandler( Event.Do_Wechat_Moments_Friend_Referal, "scripts.actions.DoWechatMomentsFriendReferalAction" )
 	
 	EventManager:registerEventHandler( Event.Show_Error_Message, "scripts.actions.ShowErrorMessageAction" )
 	EventManager:registerEventHandler( Event.Show_Choice_Message, "scripts.actions.ShowChoiceMessageAction" )

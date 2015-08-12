@@ -16,6 +16,7 @@ namespace Social
 		
         void accessTokenUpdate(const char* accessToken);
 		void permissionUpdate(const char* accessToken, bool success);
+        void gameRequest(const char* title, const char* message);
 
 	protected:
 		FacebookDelegate();

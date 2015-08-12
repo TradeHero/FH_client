@@ -69,7 +69,6 @@ EventNameList =
     "Enter_Lucky8History",
     "Enter_LiveScoreScene",
     "Enter_Friend_Referal",
-    "Enter_FB_Friend_Referal",
 
     "Do_Lucky8_Rounds",
     "Do_Lucky8_Submit",
@@ -113,6 +112,9 @@ EventNameList =
     "Do_Check_New",
     "Do_Show_Media",
     "Do_Follow_Expert",
+    "Do_FB_Friend_Referal",
+    "Do_Wechat_Friend_Referal",
+    "Do_Wechat_Moments_Friend_Referal",
    
 
     "Show_Info",
@@ -176,6 +178,9 @@ EventNameDosenotTrackList =
     "Do_Check_New",
     "Do_Show_Media",
     "Do_Follow_Expert",
+    "Do_FB_Friend_Referal",
+    "Do_Wechat_Friend_Referal",
+    "Do_Wechat_Moments_Friend_Referal",
 
 
     "Do_Startup",

@@ -8,7 +8,10 @@
 
 #include "FacebookConnector.h"
 #include "FacebookDelegate.h"
+#import "AppController.h"
+#import "RootViewController.h"
 #import <FacebookSDK/FacebookSDK.h>
+#import <FBSDKShareKit/FBSDKShareKit.h>
 #import "FBSessionSingleton.h"
 
 static FacebookConnector* instance;
@@ -65,4 +68,10 @@ void FacebookConnector::grantPublishPermission(const char* permission)
              Social::FacebookDelegate::sharedDelegate()->permissionUpdate(accessToken, [aSession hasGranted:publishPermission]);
          }];
     }
+}
+
+void FacebookConnector::gameRequest(const char* title, const char* message)
+{
+    AppController *app = (AppController*) [[UIApplication sharedApplication] delegate];
+    [[app getViewController] gameRequest:[NSString stringWithUTF8String:title] withMessage:[NSString stringWithUTF8String:message]];
 }

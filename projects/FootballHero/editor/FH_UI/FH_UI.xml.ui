@@ -159,12 +159,7 @@
   <ProjectType>UIProject</ProjectType>
   <ResRelativePath />
   <imageFileList />
-  <imagePngList>
-    <string>commonRes/img-bkg-general.png</string>
-    <string>MatchListScene/02.png</string>
-    <string>MatchListScene/03.png</string>
-    <string>MatchListScene/04.png</string>
-  </imagePngList>
+  <imagePngList />
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>FriendsReferalSelection.json</CurrentUIJson>
+  <CurrentUIJson />
 </UIProject>

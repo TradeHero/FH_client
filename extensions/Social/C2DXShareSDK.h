@@ -79,6 +79,16 @@ namespace cn
              */
             static void getUserInfo(C2DXPlatType platType, C2DXGetUserInfoResultEvent callback);
             
+            
+            /**
+             *	@brief	分享内容
+             *
+             *	@param 	platType 	平台类型
+             *	@param 	content 	分享内容
+             *	@param 	callback 	回调方法
+             */
+            static void shareContent(C2DXPlatType platType, CCDictionary *content, int handler);
+            
             /**
              *	@brief	分享内容
              *

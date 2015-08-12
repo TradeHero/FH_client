@@ -108,4 +108,17 @@ namespace Social
 
 		mPermissionUpdateHandler = 0;
 	}
+    
+    void FacebookDelegate::gameRequest(const char* title, const char* message)
+    {
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+        FacebookConnector::getInstance()->gameRequest(title, message);
+#endif
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+        //android_facebook_login();
+#endif
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
+
+#endif
+    }
 }

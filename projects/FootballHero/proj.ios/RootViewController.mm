@@ -200,6 +200,42 @@
     [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
+- (void)gameRequest:(NSString *)title withMessage:(NSString *)message
+{
+    
+    if ([[[FBSDKAppInviteDialog alloc] init] canShow]) {
+        FBSDKAppInviteContent *content =[[FBSDKAppInviteContent alloc] init];
+        content.appLinkURL = [NSURL URLWithString:@"http://www.footballheroapp.com"];
+        
+        // present the dialog. Assumes self implements protocol `FBSDKAppInviteDialogDelegate`
+        [FBSDKAppInviteDialog showWithContent:content
+                                     delegate:self];
+    }
+}
+
+/*!
+ @abstract Sent to the delegate when the app invite completes without error.
+ @param appInviteDialog The FBSDKAppInviteDialog that completed.
+ @param results The results from the dialog.  This may be nil or empty.
+ */
+- (void)appInviteDialog:(FBSDKAppInviteDialog *)appInviteDialog didCompleteWithResults:(NSDictionary *)results
+{
+    NSLog(@"Result: appInviteDialog sending success");
+}
+
+/*!
+ @abstract Sent to the delegate when the app invite encounters an error.
+ @param appInviteDialog The FBSDKAppInviteDialog that completed.
+ @param error The error.
+ */
+- (void)appInviteDialog:(FBSDKAppInviteDialog *)appInviteDialog didFailWithError:(NSError *)error
+{
+    NSLog(@"Result: appInviteDialog sending failed");
+    NSLog(@" error => %@ ", [error userInfo] );
+    NSLog(@" error => %@ ", [error localizedDescription] );
+    NSLog(@"%@", error);
+}
+
 /*
  // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
