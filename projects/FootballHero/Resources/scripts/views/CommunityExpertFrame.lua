@@ -65,11 +65,22 @@ function initContent( gameInfo , expertInfo )
     local contentHeight = 0
     local layoutParameter = LinearLayoutParameter:create()
     layoutParameter:setGravity(LINEAR_GRAVITY_CENTER_VERTICAL)
- 
+    
+    local infoPopup = tolua.cast( mWidget:getChildByName("Image_HandicapPopup"), "ImageView" )
+    infoPopup:setVisible( false )
+
+    local infoCheckBox = tolua.cast( mWidget:getChildByName("Image_header"):getChildByName("CheckBox_Info"), "CheckBox" )
+    infoCheckBox:setSelectedState( false )
+    local infoHandler = function ( sender, eventType )
+        if eventType == TOUCH_EVENT_ENDED then
+            infoPopup:setVisible( not infoCheckBox:getSelectedState() )
+        end
+    end
+    infoCheckBox:addTouchEventListener( infoHandler )
+    CCLuaLog( "info end" )
+
     local contentContainer = tolua.cast( mWidget:getChildByName("ScrollView_Expert"), "ScrollView" )
     contentContainer:removeAllChildrenWithCleanup( true )
-
-
 
     for i = 1, 10 do    
         local homeTeamID = TeamConfig.getConfigIdByKey(gameInfo[i]["HomeTeamId"])

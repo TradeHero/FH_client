@@ -109,6 +109,13 @@ function initSettingsHeader( contentContainer, settingsSubItem )
             end
         end
         edit:addTouchEventListener( editEventHandler )
+    elseif settingsSubItem.SettingType == SettingsConfig.SETTING_TYPE_FOLLOW then
+       local editEventHandler = function( sender, eventType )
+            if eventType == TOUCH_EVENT_ENDED then
+                EventManager:postEvent( Event.Enter_FollowList, { mFollows })
+            end
+        end
+        edit:addTouchEventListener( editEventHandler )
     else
         edit:setEnabled( false )
     end
@@ -274,14 +281,12 @@ function initSettingsFollow( contentContainer, settingsSubItem )
     local nFollow = table.getn( mFollows ) 
 
     if nFollow == 0 then
-        local userName = Constants.String.settings.favorite_team_none
+        local userName = Constants.String.settings.follow_user_none
     
-        contentHeight = contentHeight + addFollow( contentContainer, userName )
+        contentHeight = contentHeight + addFollow( contentContainer, 1, userName )
     else
         if nFollow > 3 then
             for i = 1, 3 do
-                -- local userID = "userID" .. i
-                -- local userName = "userName" .. i
                 local userID = mFollows[i]["UserId"]
                 local userName = mFollows[i]["DisplayName"]
                 local pictureUrl = mFollows[i]["PictureUrl"]
@@ -291,14 +296,14 @@ function initSettingsFollow( contentContainer, settingsSubItem )
 
             local content = SceneManager.widgetFromJsonFile("scenes/SettingsItemContentFrame.json")
             local name = tolua.cast( content:getChildByName("Label_Name"), "Label" )
-            name:setText( "Load More..." )
+            name:setText( Constants.String.settings.more )
 
             local button = tolua.cast( content:getChildByName("Panel_Button"), "Layout" )
             button:setBackGroundImage( Constants.COMMUNITY_IMAGE_PATH.."img-leaguebox.png" )
 
             local eventHandler = function( sender, eventType )
                 if eventType == TOUCH_EVENT_ENDED then
-                    EventManager:postEvent( Event.Enter_FollowList, {mFollows })
+                    EventManager:postEvent( Event.Enter_FollowList, { mFollows })
                 end
             end
             button:addTouchEventListener( eventHandler )
@@ -307,8 +312,6 @@ function initSettingsFollow( contentContainer, settingsSubItem )
             contentHeight = contentHeight + content:getSize().height
         else
             for i = 1, nFollow do
-                -- local userID = "userID" .. i
-                -- local userName = "userName" .. i
                 local userID = mFollows[i]["UserId"]
                 local userName = mFollows[i]["DisplayName"]
                 local pictureUrl = mFollows[i]["PictureUrl"]

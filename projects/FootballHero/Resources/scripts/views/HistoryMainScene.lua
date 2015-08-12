@@ -410,16 +410,16 @@ function initContent( couponHistory )
     else
         local bFollow = info["IsFollowed"]
         if bFollow then
-            follow:setTitleText("Unfollow")
+            follow:setTitleText( Constants.String.history.unfollow_button )
         else
-            follow:setTitleText("Follow")
+            follow:setTitleText( Constants.String.history.follow_button )
         end
 
         local followCallback = function (  )
             if bFollow then
-                follow:setTitleText("Unfollow")
+                follow:setTitleText( Constants.String.history.unfollow_button )
             else
-                follow:setTitleText("Follow")
+                follow:setTitleText( Constants.String.history.follow_button )
             end
         end
         local followHandler = function( sender, eventType )

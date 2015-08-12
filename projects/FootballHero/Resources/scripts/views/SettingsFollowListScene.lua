@@ -5,6 +5,7 @@ local EventManager = require("scripts.events.EventManager").getInstance()
 local Event = require("scripts.events.Event").EventList
 local Header = require("scripts.views.HeaderFrame")
 local SMIS = require("scripts.SMIS")
+local Constants = require("scripts.Constants")
 
 local mWidget
 local mFollows
@@ -12,14 +13,14 @@ local mFollows
 function loadFrame( jsonResponse )
     mFollows = jsonResponse
     local nFollow = table.getn( mFollows ) 
-    CCLuaLog ( "follows:" .. nFollow )
+--    CCLuaLog ( "follows:" .. nFollow )
 
     local widget = GUIReader:shareReader():widgetFromJsonFile("scenes/SettingsFollowListScene.json")
     mWidget = widget
     mWidget:registerScriptHandler( EnterOrExit )
     SceneManager.clearNAddWidget( widget )
 
-    Header.loadFrame( mWidget, "Follows", true )
+    Header.loadFrame( mWidget, Constants.String.settings.follow_user , true )
 
 
     local contentContainer = tolua.cast( mWidget:getChildByName("ScrollView"), "ScrollView" )
@@ -29,14 +30,20 @@ function loadFrame( jsonResponse )
     layoutParameter:setGravity(LINEAR_GRAVITY_CENTER_VERTICAL)
     local contentHeight = 0
 
-    for i = 1, nFollow do
-        -- local userID = "userID" .. i
-        -- local userName = "userName" .. i
-        local userID = mFollows[i]["UserId"]
-        local userName = mFollows[i]["DisplayName"]
-        local pictureUrl = mFollows[i]["PictureUrl"]
+    if nFollow == 0 then
+        local userName = Constants.String.settings.follow_user_none
+    
+        contentHeight = contentHeight + addFollow( contentContainer, 1, userName )
+    else
+        for i = 1, nFollow do
+            -- local userID = "userID" .. i
+            -- local userName = "userName" .. i
+            local userID = mFollows[i]["UserId"]
+            local userName = mFollows[i]["DisplayName"]
+            local pictureUrl = mFollows[i]["PictureUrl"]
 
-        contentHeight = contentHeight + addFollow( contentContainer, i, userName, userID , pictureUrl)
+            contentHeight = contentHeight + addFollow( contentContainer, i, userName, userID , pictureUrl)
+        end
     end            
   
     contentContainer:setInnerContainerSize( CCSize:new( 0, contentHeight ) )
@@ -50,7 +57,9 @@ function addFollow( contentContainer, i, userName, userID , pictureUrl)
     local lblName = tolua.cast( content:getChildByName("Label_Name"), "Label" )
     local logo = tolua.cast( content:getChildByName("Image_Photo"), "ImageView" )
     local remove = tolua.cast( content:getChildByName("Button_Remove"), "Button" )
- --   remove:setEnabled( false )
+    if userID == nil then
+       remove:setEnabled( false )
+    end
 
     lblName:setText( userName )
  --   logo:loadTexture( teamLogo )
@@ -100,27 +109,20 @@ function removeFollow( content, removeKey )
         end
     end
 
+    local contentContainer = tolua.cast( mWidget:getChildByName("ScrollView"), "ScrollView" )
+    local innnerContainerHeight = contentContainer:getInnerContainerSize().height
+    local contentHeight = content:getSize().height
+    contentContainer:removeChild( content, true )
+
+    contentContainer:setInnerContainerSize( CCSize:new( 0, innnerContainerHeight - contentHeight ) )
     if table.getn( mFollows ) == 0 then
-        -- local teamName = Constants.String.settings.favorite_team_none
-        -- local teamLogo = Constants.COMMUNITY_IMAGE_PATH.."img-leaguebox.png"
-
-        -- local lblTeamName = tolua.cast( content:getChildByName("Label_Name"), "Label" )
-        -- local logo = tolua.cast( content:getChildByName("Image_Jersey"), "ImageView" )
-        -- local check = tolua.cast( content:getChildByName("CheckBox_Favorite"), "CheckBox" )
-
-        -- lblTeamName:setText( teamName )
-        -- logo:loadTexture( teamLogo )
-        -- check:setEnabled( false )
-    else
-        local contentContainer = tolua.cast( mWidget:getChildByName("ScrollView"), "ScrollView" )
-        local innnerContainerHeight = contentContainer:getInnerContainerSize().height
-        local contentHeight = content:getSize().height
-        contentContainer:removeChild( content, true )
-
-        contentContainer:setInnerContainerSize( CCSize:new( 0, innnerContainerHeight - contentHeight ) )
-        local layout = tolua.cast( contentContainer, "Layout" )
-        layout:requestDoLayout()
+        local userName = Constants.String.settings.follow_user_none
+    
+        contentHeight = contentHeight + addFollow( contentContainer, 1, userName )
+        contentContainer:setInnerContainerSize( CCSize:new( 0, contentHeight ) )
     end
+    local layout = tolua.cast( contentContainer, "Layout" )
+    layout:requestDoLayout()
     
 end
 
