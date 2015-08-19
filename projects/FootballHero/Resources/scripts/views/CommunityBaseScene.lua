@@ -160,6 +160,6 @@ function loadLeaderboardScene( contentContainer, jsonResponse, leaderboardId, su
 
     Header.showMenuButtonWithSportChangeEventHanlder( function ()
         EventManager:postEvent( Event.Enter_Community, { CommunityConfig.COMMUNITY_TAB_ID_LEADERBOARD,
-                LeaderboardConfig.LEADERBOARD_TOP, LeaderboardConfig.LEADERBOARD_TYPE_ROI } )
+                LeaderboardConfig.LEADERBOARD_TOP, LeaderboardConfig.LEADERBOARD_TYPE_ROI, CommunityLeaderboardFrame.getFilter() } )
     end )
 end

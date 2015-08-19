@@ -73,6 +73,7 @@ function CouponHistoryData:new( rawDataObj )
     ClosedCoupon = rawDataObj["closed"],
     Balance = rawDataObj["balance"],
     Follow = rawDataObj["Follows"],
+    Followed = rawDataObj["IsFollowed"],
     Stats = rawDataObj["stats"]
 	}
 
@@ -103,3 +104,9 @@ end
 function CouponHistoryData:getStats()
   return self.Stats
 end
+
+function CouponHistoryData:IsFollowed()
+  return self.Followed
+end
+
+

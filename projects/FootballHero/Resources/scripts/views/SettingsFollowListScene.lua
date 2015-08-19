@@ -6,6 +6,7 @@ local Event = require("scripts.events.Event").EventList
 local Header = require("scripts.views.HeaderFrame")
 local SMIS = require("scripts.SMIS")
 local Constants = require("scripts.Constants")
+local RequestUtils = require("scripts.RequestUtils")
 
 local mWidget
 local mFollows
@@ -99,6 +100,7 @@ end
 
 
 function removeFollow( content, removeKey )
+    RequestUtils.invalidResponseCacheContainsUrl( RequestUtils.GET_COUPON_HISTORY_REST_CALL )
 
     for i = 1, table.getn( mFollows ) do
         local userID = mFollows[i]["UserId"]

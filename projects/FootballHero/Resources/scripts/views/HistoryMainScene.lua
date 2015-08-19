@@ -48,11 +48,9 @@ function loadFrame( userId, competitionId, couponHistory, additionalParam, count
     local nFollow = couponHistory:getFollow()
     if nFollow == nil then
         followPanel:setEnabled( false )
-        userInfoPanel:setPositionX( 180 )
     else
         followPanel:setEnabled( true )
         follows:setText( string.format( Constants.String.history.follows, nFollow ) )
-        userInfoPanel:setPositionX( 90 )
     end
     
     mUserId = userId
@@ -408,7 +406,7 @@ function initContent( couponHistory )
     if isSelf() then
         follow:setEnabled(false)
     else
-        local bFollow = info["IsFollowed"]
+        local bFollow = couponHistory:IsFollowed()
         if bFollow then
             follow:setTitleText( Constants.String.history.unfollow_button )
         else
@@ -421,6 +419,7 @@ function initContent( couponHistory )
             else
                 follow:setTitleText( Constants.String.history.follow_button )
             end
+            RequestUtils.invalidResponseCacheContainsUrl( RequestUtils.GET_COUPON_HISTORY_REST_CALL )
         end
         local followHandler = function( sender, eventType )
             if eventType == TOUCH_EVENT_ENDED then

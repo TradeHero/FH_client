@@ -159,6 +159,15 @@ function initTypeList()
     initCurrentType()
 end
 
+function getFilter()
+    local minCheckbox = tolua.cast( mWidget:getChildByName("CheckBox_Min_Prediction"), "CheckBox" )
+    if minCheckbox:getSelectedState() then
+        return Constants.FILTER_MIN_PREDICTION
+    else
+        return 1
+    end
+end
+
 function initFilter( bRefreshed )
     local minCheckboxEventHandler = function( sender, eventType )
         if eventType == TOUCH_EVENT_ENDED then
@@ -315,7 +324,7 @@ function initLeaderboardContent( i, content, info )
     local seqArray = CCArray:create()
     seqArray:addObject( CCDelayTime:create( i * 0.2 ) )
     seqArray:addObject( CCCallFuncN:create( function()
-        if info["PictureUrl"] ~= nil then
+        if type( info["PictureUrl"] ) ~= "userdata" and info["PictureUrl"] ~= nil then
             local handler = function( filePath )
                 if filePath ~= nil and mWidget ~= nil and logo ~= nil then
                     local safeLoadTexture = function()
