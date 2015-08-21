@@ -205,6 +205,9 @@ public class MainActivity extends Cocos2dxActivity {
   public static void requestPublishPermissions(String newPermission) {
     facebookAuth.requestPublishPermissions(newPermission);
   }
+  public static void gameRequest(String title, String message) {
+    facebookAuth.gameRequest(title, message);
+  }
 
   @Override public void destroyBindingView(final long source) {
     runOnUiThread(new Runnable() {

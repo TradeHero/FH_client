@@ -115,7 +115,7 @@ namespace Social
         FacebookConnector::getInstance()->gameRequest(title, message);
 #endif
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
-        //android_facebook_login();
+        android_facebook_gameRequest(title, message);
 #endif
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
 
