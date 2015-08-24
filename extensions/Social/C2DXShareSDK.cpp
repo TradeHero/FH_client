@@ -202,7 +202,7 @@ void C2DXShareSDK::shareContent(C2DXPlatType platType, CCDictionary *content, in
     mShareHandler = handler;
 #if CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
     
-    multiShare(platTypes, content, shareResultHandler);
+    doShare((int)platType, content, shareResultHandler);
     
 #elif CC_TARGET_PLATFORM == CC_PLATFORM_IOS
 

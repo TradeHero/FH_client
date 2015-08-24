@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.myhero.fh"
-    android:versionCode="104"
+    android:versionCode="108"
     android:versionName="1.50">
 
   <uses-sdk android:minSdkVersion="15" android:targetSdkVersion="19"/>
@@ -84,10 +84,16 @@
       </intent-filter>
     </activity>
 
-    <activity
-        android:name="com.facebook.LoginActivity"
-        android:label="@string/app_name"
-        android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+    <!--<activity-->
+        <!--android:name="com.facebook.LoginActivity"-->
+        <!--android:label="@string/app_name"-->
+        <!--android:theme="@android:style/Theme.Translucent.NoTitleBar"/>-->
+      <activity
+              android:name="com.facebook.FacebookActivity"
+              android:label="@string/app_name"
+              android:configChanges=
+                      "keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+              android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
 
     <activity
           android:name="cn.sharesdk.framework.ShareSDKUIShell"

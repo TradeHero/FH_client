@@ -1246,7 +1246,7 @@
 		ED35C0BF18323498002A0750 /* GUIReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GUIReader.h; sourceTree = "<group>"; };
 		ED35C0C018323498002A0750 /* SceneReader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SceneReader.cpp; sourceTree = "<group>"; };
 		ED35C0C118323498002A0750 /* SceneReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneReader.h; sourceTree = "<group>"; };
-		F293B3C815EB7BE500256477 /* FootballHero.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = FootballHero.app; path = SportsHero.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F293B3C815EB7BE500256477 /* SportsHero.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SportsHero.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F293B3CC15EB7BE500256477 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		F293B3CE15EB7BE500256477 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		F293B3D015EB7BE500256477 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
@@ -2917,7 +2917,7 @@
 		F293B3C915EB7BE500256477 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				F293B3C815EB7BE500256477 /* FootballHero.app */,
+				F293B3C815EB7BE500256477 /* SportsHero.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -3058,7 +3058,7 @@
 			);
 			name = SportsHero;
 			productName = FootballHero;
-			productReference = F293B3C815EB7BE500256477 /* FootballHero.app */;
+			productReference = F293B3C815EB7BE500256477 /* SportsHero.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
