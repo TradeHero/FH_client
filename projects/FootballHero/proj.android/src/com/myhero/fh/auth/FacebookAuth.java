@@ -1,26 +1,23 @@
 package com.myhero.fh.auth;
 import org.cocos2dx.lib.Cocos2dxGLSurfaceView;
 
+import android.util.Log;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 
 import com.facebook.*;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
-import com.facebook.share.ShareApi;
 import com.facebook.share.model.AppInviteContent;
 import com.facebook.share.widget.AppInviteDialog;
 import com.facebook.share.widget.ShareDialog;
 import com.facebook.share.widget.GameRequestDialog;
 
-import java.lang.ref.WeakReference;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Locale;
 import java.util.SimpleTimeZone;
-
 
 public class FacebookAuth implements Auth {
   public static final DateFormat PRECISE_DATE_FORMAT =
@@ -53,6 +50,7 @@ public class FacebookAuth implements Auth {
     sInstance = this;
 
     FacebookSdk.sdkInitialize(activity.getApplicationContext());
+
     mCallbackManager = CallbackManager.Factory.create();
     LoginManager.getInstance().registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
 
@@ -273,26 +271,20 @@ public class FacebookAuth implements Auth {
 //    }
   }
 
-  public void gameRequest(final String title, final String message) {
+  public void inviteFriend(final String appLinkUrl) {
     sCallIndex = 0;
     sInstance.mActivity.runOnUiThread(new Runnable() {
       @Override
       public void run() {
-        sInstance.FBInvite("http://www.footballheroapp.com");
+        if (AppInviteDialog.canShow()) {
+          AppInviteContent content = new AppInviteContent.Builder()
+                  .setApplinkUrl(appLinkUrl)
+                  .build();
+          AppInviteDialog.show(sInstance.mActivity, content);
+        }
       }
     });
-
   }
-
-  public void FBInvite(String strAppLinkUrl) {
-    if (AppInviteDialog.canShow()) {
-      AppInviteContent content = new AppInviteContent.Builder()
-              .setApplinkUrl(strAppLinkUrl)
-              .build();
-      AppInviteDialog.show(sInstance.mActivity, content);
-    }
-  }
-
 
   // Native callback for Cocos2D
   public static native void accessTokenUpdate(String accessToken);

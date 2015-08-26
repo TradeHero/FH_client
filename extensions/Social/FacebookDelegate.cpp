@@ -116,7 +116,7 @@ namespace Social
         FacebookConnector::getInstance()->inviteFriend(appLinkUrl);
 #endif
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
-        android_facebook_gameRequest(title, message);
+        android_facebook_inviteFriend(appLinkUrl);
 #endif
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
 

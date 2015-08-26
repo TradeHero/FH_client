@@ -56,17 +56,14 @@ void android_facebook_requestPublishPermissions(
     jmi.env->DeleteLocalRef(jmi.classID);
   }
 }
-
-void android_facebook_gameRequest(const char* title, const char* message)
+void android_facebook_inviteFriend(const char* appLinkUrl)
 {
   JniMethodInfo jmi;
-  if (JniHelper::getStaticMethodInfo(jmi, "com/myhero/fh/MainActivity", "gameRequest", "(Ljava/lang/String;Ljava/lang/String;)V"))
+  if (JniHelper::getStaticMethodInfo(jmi, "com/myhero/fh/MainActivity", "inviteFriend", "(Ljava/lang/String;)V"))
   {
-    jstring jTitle = jmi.env->NewStringUTF(title);
-    jstring jMessage = jmi.env->NewStringUTF(message);
-    jmi.env->CallStaticVoidMethod(jmi.classID, jmi.methodID, jTitle, jMessage);
-    jmi.env->DeleteLocalRef(jTitle);
-    jmi.env->DeleteLocalRef(jMessage);
+    jstring jUrl = jmi.env->NewStringUTF(appLinkUrl);
+    jmi.env->CallStaticVoidMethod(jmi.classID, jmi.methodID, jUrl);
+    jmi.env->DeleteLocalRef(jUrl);
     jmi.env->DeleteLocalRef(jmi.classID);
   }
 }
