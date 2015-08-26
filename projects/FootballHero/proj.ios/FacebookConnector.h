@@ -9,5 +9,7 @@ public:
     void initSession();
     void login();
     void grantPublishPermission(const char* permission);
-    void gameRequest(const char* title, const char* message);
+    void inviteFriend(const char* appLinkUrl);
+    
+    void inviteFriendResult(bool success);
 };

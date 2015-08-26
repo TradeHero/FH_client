@@ -13,15 +13,17 @@ namespace Social
 
 		void login(int handler);
 		void grantPublishPermission(const char* permission, int handler);
-		
+		void inviteFriend(const char* appLinkUrl, int handler);
+        
         void accessTokenUpdate(const char* accessToken);
 		void permissionUpdate(const char* accessToken, bool success);
-        void gameRequest(const char* title, const char* message);
+        void inviteFriendResult(bool success);
 
 	protected:
 		FacebookDelegate();
 		int mAccessTokenUpdateHandler;
 		int mPermissionUpdateHandler;
+        int mInviteFriendHandler;
 	
 	};
 };

@@ -1,6 +1,6 @@
 /*
 ** Lua binding: Extension
-** Generated automatically by tolua++-1.0.92 on 08/11/15 18:28:01.
+** Generated automatically by tolua++-1.0.92 on 08/12/15 17:30:12.
 */
 
 /****************************************************************************
@@ -171,16 +171,16 @@ static int tolua_Extension_FacebookDelegate_grantPublishPermission00(lua_State* 
 }
 #endif //#ifndef TOLUA_DISABLE
 
-/* method: gameRequest of class  FacebookDelegate */
-#ifndef TOLUA_DISABLE_tolua_Extension_FacebookDelegate_gameRequest00
-static int tolua_Extension_FacebookDelegate_gameRequest00(lua_State* tolua_S)
+/* method: inviteFriend of class  FacebookDelegate */
+#ifndef TOLUA_DISABLE_tolua_Extension_FacebookDelegate_inviteFriend00
+static int tolua_Extension_FacebookDelegate_inviteFriend00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
  if (
      !tolua_isusertype(tolua_S,1,"FacebookDelegate",0,&tolua_err) ||
      !tolua_isstring(tolua_S,2,0,&tolua_err) ||
-     !tolua_isstring(tolua_S,3,0,&tolua_err) ||
+     (tolua_isvaluenil(tolua_S,3,&tolua_err) || !toluafix_isfunction(tolua_S,3,"LUA_FUNCTION",0,&tolua_err)) ||
      !tolua_isnoobj(tolua_S,4,&tolua_err)
  )
   goto tolua_lerror;
@@ -188,19 +188,19 @@ static int tolua_Extension_FacebookDelegate_gameRequest00(lua_State* tolua_S)
 #endif
  {
   FacebookDelegate* self = (FacebookDelegate*)  tolua_tousertype(tolua_S,1,0);
-  const char* title = ((const char*)  tolua_tostring(tolua_S,2,0));
-  const char* message = ((const char*)  tolua_tostring(tolua_S,3,0));
+  const char* appLinkUrl = ((const char*)  tolua_tostring(tolua_S,2,0));
+  LUA_FUNCTION handler = (  toluafix_ref_function(tolua_S,3,0));
 #ifndef TOLUA_RELEASE
-  if (!self) tolua_error(tolua_S,"invalid 'self' in function 'gameRequest'", NULL);
+  if (!self) tolua_error(tolua_S,"invalid 'self' in function 'inviteFriend'", NULL);
 #endif
   {
-   self->gameRequest(title,message);
+   self->inviteFriend(appLinkUrl,handler);
   }
  }
  return 0;
 #ifndef TOLUA_RELEASE
  tolua_lerror:
- tolua_error(tolua_S,"#ferror in function 'gameRequest'.",&tolua_err);
+ tolua_error(tolua_S,"#ferror in function 'inviteFriend'.",&tolua_err);
  return 0;
 #endif
 }
@@ -2012,7 +2012,7 @@ TOLUA_API int tolua_Extension_open (lua_State* tolua_S)
    tolua_function(tolua_S,"sharedDelegate",tolua_Extension_FacebookDelegate_sharedDelegate00);
    tolua_function(tolua_S,"login",tolua_Extension_FacebookDelegate_login00);
    tolua_function(tolua_S,"grantPublishPermission",tolua_Extension_FacebookDelegate_grantPublishPermission00);
-   tolua_function(tolua_S,"gameRequest",tolua_Extension_FacebookDelegate_gameRequest00);
+   tolua_function(tolua_S,"inviteFriend",tolua_Extension_FacebookDelegate_inviteFriend00);
   tolua_endmodule(tolua_S);
   tolua_cclass(tolua_S,"CCHttpRequest","CCHttpRequest","CCObject",NULL);
   tolua_beginmodule(tolua_S,"CCHttpRequest");

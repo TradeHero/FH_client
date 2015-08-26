@@ -70,8 +70,13 @@ void FacebookConnector::grantPublishPermission(const char* permission)
     }
 }
 
-void FacebookConnector::gameRequest(const char* title, const char* message)
+void FacebookConnector::inviteFriend(const char* appLinkUrl)
 {
     AppController *app = (AppController*) [[UIApplication sharedApplication] delegate];
-    [[app getViewController] gameRequest:[NSString stringWithUTF8String:title] withMessage:[NSString stringWithUTF8String:message]];
+    [[app getViewController] inviteFriend:[NSString stringWithUTF8String:appLinkUrl]];
+}
+
+void FacebookConnector::inviteFriendResult(bool success)
+{
+    Social::FacebookDelegate::sharedDelegate()->inviteFriendResult(success);
 }

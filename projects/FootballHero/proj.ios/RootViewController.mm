@@ -25,6 +25,7 @@
 
 #import "RootViewController.h"
 #include "MiscHandler.h"
+#include "FacebookConnector.h"
 
 
 @implementation RootViewController
@@ -200,14 +201,13 @@
     [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
-- (void)gameRequest:(NSString *)title withMessage:(NSString *)message
+- (void)inviteFriend:(NSString *)appLinkUrl
 {
     
     if ([[[FBSDKAppInviteDialog alloc] init] canShow]) {
         FBSDKAppInviteContent *content =[[FBSDKAppInviteContent alloc] init];
-        content.appLinkURL = [NSURL URLWithString:@"http://www.footballheroapp.com"];
+        content.appLinkURL = [NSURL URLWithString:appLinkUrl];
         
-        // present the dialog. Assumes self implements protocol `FBSDKAppInviteDialogDelegate`
         [FBSDKAppInviteDialog showWithContent:content
                                      delegate:self];
     }
@@ -221,6 +221,7 @@
 - (void)appInviteDialog:(FBSDKAppInviteDialog *)appInviteDialog didCompleteWithResults:(NSDictionary *)results
 {
     NSLog(@"Result: appInviteDialog sending success");
+    FacebookConnector::getInstance()->inviteFriendResult(true);
 }
 
 /*!
@@ -234,6 +235,7 @@
     NSLog(@" error => %@ ", [error userInfo] );
     NSLog(@" error => %@ ", [error localizedDescription] );
     NSLog(@"%@", error);
+    FacebookConnector::getInstance()->inviteFriendResult(false);
 }
 
 /*

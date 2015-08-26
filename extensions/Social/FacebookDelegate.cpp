@@ -109,10 +109,11 @@ namespace Social
 		mPermissionUpdateHandler = 0;
 	}
     
-    void FacebookDelegate::gameRequest(const char* title, const char* message)
+    void FacebookDelegate::inviteFriend(const char* appLinkUrl, int handler)
     {
+        mInviteFriendHandler = handler;
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-        FacebookConnector::getInstance()->gameRequest(title, message);
+        FacebookConnector::getInstance()->inviteFriend(appLinkUrl);
 #endif
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
         android_facebook_gameRequest(title, message);
@@ -120,5 +121,28 @@ namespace Social
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
 
 #endif
+    }
+    
+    void FacebookDelegate::inviteFriendResult(bool success)
+    {
+        if (mInviteFriendHandler == 0)
+        {
+            return;
+        }
+        
+        CCScriptEngineProtocol* pScriptProtocol = CCScriptEngineManager::sharedManager()->getScriptEngine();
+        cocos2d::CCLuaEngine* pLuaEngine = dynamic_cast<CCLuaEngine*>(pScriptProtocol);
+        if (pLuaEngine == NULL)
+        {
+            assert(false);
+            return;
+        }
+        
+        CCLuaStack* pStack = pLuaEngine->getLuaStack();
+        pStack->pushBoolean(success);
+        int ret = pStack->executeFunctionByHandler(mInviteFriendHandler, 1);
+        pStack->clean();
+        
+        mInviteFriendHandler = 0;
     }
 }

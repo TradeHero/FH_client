@@ -38,6 +38,6 @@
 
 - (bool)sendSMS:(NSString *)body;
 
-- (void)gameRequest:(NSString *)title withMessage:(NSString *)message;
+- (void)inviteFriend:(NSString *)appLinkUrl;
 
 @end
