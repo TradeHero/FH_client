@@ -5,6 +5,7 @@ local EventManager = require("scripts.events.EventManager").getInstance()
 local Event = require("scripts.events.Event").EventList
 local TeamConfig = require("scripts.config.Team")
 local SMIS = require("scripts.SMIS")
+local RequestUtils = require("scripts.RequestUtils")
 
 local mWidget
 local gameContent = {}
@@ -132,7 +133,7 @@ function initContent( gameInfo , expertInfo )
             local isFollowed = expertInfo[j]["IsFollowed"] 
 --            CCLuaLog( "Gameid:".. expertInfo[j]["PickTeamIds"][i]["GameId"] .. "\tPick:" .. expertInfo[j]["PickTeamIds"][i]["PickId"])
             bigbetImage:setVisible( isBigBet )
-            if isFollowed then
+            if not isFollowed then
                 expertPanel:setBackGroundColorOpacity( 35 )
             end
 
@@ -166,22 +167,17 @@ function initContent( gameInfo , expertInfo )
     layout:requestDoLayout()
 end
 
-function followExpert( )
---    local followCheckBox = tolua.cast( expertPanel:getChildByName("CheckBox_Follow"), "CheckBox" )
-
-end
 
 function initExpert( expertInfo )
     local expertContainer = mWidget:getChildByName("Panel_Expert")
     for i=1,4 do
         local expertPicUrl = expertInfo[i]["PictureUrl"]
 
-        local expertPanel = expertContainer:getChildByName("Panel_Expert"..i)
+        local expertPanel = tolua.cast( expertContainer:getChildByName("Panel_Expert"..i), "Layout" )
         local nameLabel = tolua.cast( expertPanel:getChildByName("Label_Name"), "Label" )
         nameLabel:setText( expertInfo[i]["DisplayName"] )
 
         local expertPhotoHandler = function ( sender, eventType )
-            print(eventType)
             if eventType == TOUCH_EVENT_ENDED then
                 EventManager:postEvent( Event.Enter_History, { expertInfo[i]["Id"] , nil, "&isExpert=true"} )
             end
@@ -193,7 +189,7 @@ function initExpert( expertInfo )
         local seqArray = CCArray:create()
         seqArray:addObject( CCDelayTime:create( i * 0.2 ) )
         seqArray:addObject( CCCallFuncN:create( function()
-            if type( expertPicUrl ) ~= "userdata"  then
+            if type( expertPicUrl ) ~= "userdata" and expertPicUrl ~= nil then
                 local handler = function( filePath )
                     if filePath ~= nil and mWidget ~= nil and photoImage ~= nil then
                         local safeLoadTexture = function()
@@ -208,28 +204,34 @@ function initExpert( expertInfo )
         mWidget:runAction( CCSequence:create( seqArray ) )
 
         local followCheckBox = tolua.cast( expertPanel:getChildByName("CheckBox_Follow"), "CheckBox" )
+        local followCallback =  function ( )
+            RequestUtils.invalidResponseCacheContainsUrl( RequestUtils.GET_COUPON_HISTORY_REST_CALL )
+            if followCheckBox:getSelectedState()  then
+                expertPanel:setBackGroundColorOpacity( 35 )
+                for j=1,10 do
+                    local panel = tolua.cast( gameContent[j]:getChildByName("Panel_Expert" .. i), "Layout" )
+                    panel:setBackGroundColorOpacity( 70 )
+                end
+            else  
+                expertPanel:setBackGroundColorOpacity( 0 )
+                for j=1,10 do
+                    local panel = tolua.cast( gameContent[j]:getChildByName("Panel_Expert" .. i), "Layout" )
+                    panel:setBackGroundColorOpacity( 35 )
+                end
+            end
+        end
         local followEventHandler = function( sender, eventType )
             if eventType == TOUCH_EVENT_ENDED then
-                EventManager:postEvent( Event.Do_Follow_Expert, { expertInfo[i]["Id"] , not followCheckBox:getSelectedState() , followExpert } )
-                local check = tolua.cast( sender, "CheckBox")
-                local expertPanel = tolua.cast( expertContainer:getChildByName("Panel_Expert"..i), "Layout" )
-                if check:getSelectedState()  then
-                    expertPanel:setBackGroundColorOpacity( 35 )
-                    for j=1,10 do
-                        local panel = tolua.cast( gameContent[j]:getChildByName("Panel_Expert" .. i), "Layout" )
-                        panel:setBackGroundColorOpacity( 70 )
-                    end
-                else  
-                    expertPanel:setBackGroundColorOpacity( 0 )
-                    for j=1,10 do
-                        local panel = tolua.cast( gameContent[j]:getChildByName("Panel_Expert" .. i), "Layout" )
-                        panel:setBackGroundColorOpacity( 35 )
-                    end
-                end
+                EventManager:postEvent( Event.Do_Follow_Expert, { expertInfo[i]["Id"] , not followCheckBox:getSelectedState() , followCallback } )
             end
         end
         followCheckBox:setSelectedState( expertInfo[i]["IsFollowed"] )
         followCheckBox:addTouchEventListener(followEventHandler)
+        if expertInfo[i]["IsFollowed"] then
+            expertPanel:setBackGroundColorOpacity( 35 )
+        else
+            expertPanel:setBackGroundColorOpacity( 0 )
+        end
     end
 end
 
