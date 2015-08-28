@@ -179,6 +179,7 @@ function initEvents()
 	EventManager:registerEventHandler( Event.Do_FB_Friend_Referal, "scripts.actions.DoFBFriendReferalAction" )
 	EventManager:registerEventHandler( Event.Do_Wechat_Friend_Referal, "scripts.actions.DoWechatFriendReferalAction" )
 	EventManager:registerEventHandler( Event.Do_Wechat_Moments_Friend_Referal, "scripts.actions.DoWechatMomentsFriendReferalAction" )
+	EventManager:registerEventHandler( Event.Do_Friend_Referal_Success, "scripts.actions.DoFriendReferalSuccessAction" )
 	
 	EventManager:registerEventHandler( Event.Show_Error_Message, "scripts.actions.ShowErrorMessageAction" )
 	EventManager:registerEventHandler( Event.Show_Choice_Message, "scripts.actions.ShowChoiceMessageAction" )

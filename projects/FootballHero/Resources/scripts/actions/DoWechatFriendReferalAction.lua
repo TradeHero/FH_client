@@ -25,6 +25,7 @@ function shareHandler( state, platType, errorMsg )
 			EventManager:postEvent( Event.Show_Error_Message, { errorMsg } )
 		end	
 
+		EventManager:postEvent( Event.Do_Friend_Referal_Success, { 1, 1 } )
 		ConnectingMessage.selfRemove()
 	end
 

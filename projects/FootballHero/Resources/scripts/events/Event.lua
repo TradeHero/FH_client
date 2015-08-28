@@ -115,6 +115,7 @@ EventNameList =
     "Do_FB_Friend_Referal",
     "Do_Wechat_Friend_Referal",
     "Do_Wechat_Moments_Friend_Referal",
+    "Do_Friend_Referal_Success",
    
 
     "Show_Info",
@@ -181,6 +182,7 @@ EventNameDosenotTrackList =
     "Do_FB_Friend_Referal",
     "Do_Wechat_Friend_Referal",
     "Do_Wechat_Moments_Friend_Referal",
+    "Do_Friend_Referal_Success",
 
 
     "Do_Startup",
