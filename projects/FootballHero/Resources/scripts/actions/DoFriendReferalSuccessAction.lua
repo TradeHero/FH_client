@@ -6,9 +6,8 @@ local Logic = require("scripts.Logic").getInstance()
 
 function action( param )
 	local referralType = param[1]
-	local friendCount = param[2]
 
-    local url = RequestUtils.GET_FRIEND_REFERAL_REST_CALL .. "?referralType=" .. referralType .. "&friendCount=" .. friendCount
+    local url = RequestUtils.GET_FRIEND_REFERAL_REST_CALL .. "?referralType=" .. referralType
     CCLuaLog ("GET_FRIEND_REFERAL_REST_CALL:" .. url)
    
     local requestInfo = {}
@@ -28,6 +27,6 @@ end
 
 
 function onRequestSuccess( jsonResponse )
-    CCLuaLog ("onRequestSuccess:" .. jsonResponse)
+    CCLuaLog ("onRequestSuccess:" .. jsonResponse["LeftFriendCount"] .. jsonResponse["TicketCount"] )
 end
 

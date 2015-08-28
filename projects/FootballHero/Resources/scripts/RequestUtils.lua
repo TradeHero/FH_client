@@ -136,6 +136,7 @@ function setServerIP( serverIp, cdnServerIp, useDev )
     GET_LUCKY8_ROUNDS = serverIp .. "/api/lucky8/rounds"
     GET_LUCKY8_WINNERS_REST_CALL = serverIp .. "/api/lucky8/winners"
     GET_LIVE_SCORE_REST_CALL = serverIp .. "/api/games/livescore"
+    GET_FRIEND_REFERAL_REST_CALL = serverIp.."/api/referrals/referral"
     
     POST_LUCKY8_PREDICT = serverIp .. "/api/lucky8/predict"
     POST_COUPONS_REST_CALL = serverIp.."/api/coupons/placeCoupons"
@@ -155,7 +156,6 @@ function setServerIP( serverIp, cdnServerIp, useDev )
     POST_SPIN_PAYOUT_REST_CALL = serverIp.."/api/wheel/payout"
     POST_NEW_DISCUSSION_REST_CALL = serverIp.."/api/discuss/write"
     POST_LIKE_DISCUSSION_REST_CALL = serverIp.."/api/discuss/like"
-    POST_FRIEND_REFERAL_REST_CALL = serverIp.."/api/referrals/referral"
 
 	CDN_SERVER_IP = cdnServerIp
     USE_DEV = useDev
