@@ -10,8 +10,8 @@ local Competitions = require("scripts.data.Competitions").Competitions
 local CommunityCompetitionFrame = require("scripts.views.CommunityCompetitionFrame")
 local CommunityLeaderboardFrame = require("scripts.views.CommunityLeaderboardFrame")
 local CommunityExpertFrame = require("scripts.views.CommunityExpertFrame")
-local CommunityVideoFrame = require("scripts.views.CommunityVideoFrame")
 local CommunityMediaFrame = require("scripts.views.CommunityMediaFrame")
+local CommunityTimelineFrame = require("scripts.views.CommunityTimelineFrame")
 local Minigame = require("scripts.data.Minigame").Minigame
 local Header = require("scripts.views.HeaderFrame")
 local CheckListConfig = require("scripts.data.CheckList")
@@ -96,6 +96,11 @@ function initCommunityTab( tabInfo, tabId )
         local isNew = CheckListConfig.isItemNew( CheckListConfig.CHECK_LIST_VIDEOS )
         local newFlag = tab:getChildByName("Image_new")
         newFlag:setEnabled( isNew )
+       
+    elseif tabId == CommunityConfig.COMMUNITY_TAB_ID_TIMELINE then
+        local isNew = CheckListConfig.isItemNew( CheckListConfig.CHECK_LIST_VIDEOS )
+        local newFlag = tab:getChildByName("Image_new")
+        newFlag:setEnabled( isNew )
     end
 end
 
@@ -108,6 +113,8 @@ function loadMainContent( contentContainer, jsonResponse, leaderboardId, subType
         loadVideoScene( contentContainer, jsonResponse )
     elseif mTabID ==  CommunityConfig.COMMUNITY_TAB_ID_LEADERBOARD then
         loadLeaderboardScene( contentContainer, jsonResponse, leaderboardId, subType )
+    elseif mTabID ==  CommunityConfig.COMMUNITY_TAB_ID_TIMELINE then
+        loadTimelineScene( contentContainer, jsonResponse, leaderboardId, subType )
     end
 end
 
@@ -117,6 +124,8 @@ function onSelectTab( tabID )
     if tabID == CommunityConfig.COMMUNITY_TAB_ID_EXPERT then
         CheckListConfig.clearCheckItemNewFlag( CheckListConfig.CHECK_LIST_HIGHLIGHTS )
     elseif tabID == CommunityConfig.COMMUNITY_TAB_ID_VIDEO then
+        CheckListConfig.clearCheckItemNewFlag( CheckListConfig.CHECK_LIST_VIDEOS )
+    elseif tabID == CommunityConfig.COMMUNITY_TAB_ID_TIMELINE then
         CheckListConfig.clearCheckItemNewFlag( CheckListConfig.CHECK_LIST_VIDEOS )
     end
 end
@@ -162,4 +171,13 @@ function loadLeaderboardScene( contentContainer, jsonResponse, leaderboardId, su
         EventManager:postEvent( Event.Enter_Community, { CommunityConfig.COMMUNITY_TAB_ID_LEADERBOARD,
                 LeaderboardConfig.LEADERBOARD_TOP, LeaderboardConfig.LEADERBOARD_TYPE_ROI, CommunityLeaderboardFrame.getFilter() } )
     end )
+end
+
+function loadTimelineScene( contentContainer, jsonResponse, leaderboardId, subType )
+    CommunityLeaderboardFrame.exitFrame()
+    if not CommunityTimelineFrame.isShown() then
+        CommunityTimelineFrame.loadFrame( contentContainer, jsonResponse )
+    end
+
+    Header.hideMenuButton()
 end

@@ -600,4 +600,12 @@
     <Project>SettingsFollowListScene</Project>
     <GuidesList />
   </GuidesProject>
+  <GuidesProject>
+    <Project>CommunityTimelineFrame</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>CommunityTimelineContent</Project>
+    <GuidesList />
+  </GuidesProject>
 </ArrayOfGuidesProject>

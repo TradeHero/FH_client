@@ -153,6 +153,8 @@
     <string>FriendsReferalSelection.json</string>
     <string>SettingsFollowContentFrame.json</string>
     <string>SettingsFollowListScene.json</string>
+    <string>CommunityTimelineFrame.json</string>
+    <string>CommunityTimelineContent.json</string>
   </JsonList>
   <CanvasSize>
     <Width>640</Width>
@@ -163,16 +165,9 @@
   <ResRelativePath />
   <imageFileList />
   <imagePngList>
-    <string>commonRes/img-bkg-general.png</string>
-    <string>MatchListScene/02.png</string>
-    <string>MatchListScene/03.png</string>
-    <string>MatchListScene/04.png</string>
     <string>LoginNReg/photo.png</string>
-    <string>Competition/icn-unqualified.png</string>
-    <string>MatchListScene/Arrow down.png</string>
-    <string>MatchListScene/Arrow Up.png</string>
-    <string>community/img-wininfo.png</string>
+    <string>commonRes/default.png</string>
   </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>FriendsReferalSelection.json</CurrentUIJson>
+  <CurrentUIJson>CommunityTimelineContent.json</CurrentUIJson>
 </UIProject>
