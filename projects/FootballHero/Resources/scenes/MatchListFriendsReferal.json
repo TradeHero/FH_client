@@ -11,7 +11,7 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "MatchListScene/01.jpg"
+    "MatchListScene/img-invitebanner.png"
   ],
   "version": "1.6.0.0",
   "widgetTree": {
@@ -42,13 +42,13 @@
           "layoutParameter": null,
           "opacity": 255,
           "positionPercentX": 0.5,
-          "positionPercentY": 0.5061213,
+          "positionPercentY": 0.5,
           "positionType": 0,
           "rotation": 0,
           "scaleX": 1,
           "scaleY": 1,
-          "sizePercentX": 0.1609375,
-          "sizePercentY": 0.363636374,
+          "sizePercentX": 0.953125,
+          "sizePercentY": 0.909090936,
           "sizeType": 0,
           "tag": 61180,
           "touchAble": true,
@@ -72,7 +72,7 @@
           "fontType": 0,
           "normal": null,
           "normalData": {
-            "path": "MatchListScene/01.jpg",
+            "path": "MatchListScene/img-invitebanner.png",
             "plistFile": "",
             "resourceType": 0
           },

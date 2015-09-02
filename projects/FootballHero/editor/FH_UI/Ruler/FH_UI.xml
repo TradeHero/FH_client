@@ -592,4 +592,8 @@
     <Project>FriendsReferalSelection</Project>
     <GuidesList />
   </GuidesProject>
+  <GuidesProject>
+    <Project>FriendsReferalAward</Project>
+    <GuidesList />
+  </GuidesProject>
 </ArrayOfGuidesProject>
