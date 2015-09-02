@@ -15,7 +15,7 @@ local mInputPlaceholderFontColor = ccc3( 200, 200, 200 )
 local MIN_MONEY_BALANCE_FOR_PAYOUT = 25
 local mWidget
 
-function loadFrame( moneyBalance, ticketBalance )
+function loadFrame( moneyBalance, ticketBalance, luckyDrawEmail )
 	local widget = GUIReader:shareReader():widgetFromJsonFile("scenes/SpinBalance.json")
     mWidget = widget
     mWidget:registerScriptHandler( EnterOrExit )
@@ -23,12 +23,12 @@ function loadFrame( moneyBalance, ticketBalance )
     SceneManager.clearKeypadBackListener()
     SceneManager.setKeypadBackListener( keypadBackEventHandler )
 
-    local backBt = mWidget:getChildByName("Button_Back")
+    local backBt = mWidget:getChildByName("Panel_Title"):getChildByName("Button_Back")
     backBt:addTouchEventListener( backEventHandler )
 
     Navigator.loadFrame( widget )
 
-    initContent( moneyBalance, ticketBalance )
+    initContent( moneyBalance, ticketBalance, luckyDrawEmail )
 end
 
 function EnterOrExit( eventType )
@@ -52,62 +52,83 @@ function keypadBackEventHandler()
     EventManager:popHistory()
 end
 
-function initContent( moneyBalance, ticketBalance )
-    tolua.cast( mWidget:getChildByName("Label_Title"), "Label" ):setText( Constants.String.spinWheel.balance_title )
-    tolua.cast( mWidget:getChildByName("Label_1"), "Label" ):setText( Constants.String.spinWheel.ticket_you_have )
-    tolua.cast( mWidget:getChildByName("Label_5"), "Label" ):setText( Constants.String.spinWheel.money_payout_limit )
-    tolua.cast( mWidget:getChildByName("Label_disclaimer"), "Label" ):setText( Constants.String.community.disclaimer )
+function initContent( moneyBalance, ticketBalance, luckyDrawEmail )
+    tolua.cast( mWidget:getChildByName("Panel_Title"):getChildByName("Label_Title"), "Label" ):setText( Constants.String.spinWheel.balance_title )
+ 
+    -- Prize Panel
+    local container = mWidget:getChildByName("Panel_Prize")
 
     for i = 1, 2 do
         local info = ticketBalance[i]
         local ticketNum = info["NumberOfLuckyDrawTickets"]
         local prizeConfig = SpinWheelConfig.getPrizeConfigWithID( info["PrizeId"] )
 
-        -- Usage label
-        tolua.cast( mWidget:getChildByName("Label_usage"..i), "Label" ):setText( Constants.String.spinWheel.ticket_usage )
-        
-        -- Prize Image
-        local image = tolua.cast( mWidget:getChildByName("Image_prize"..i), "ImageView" )
-        image:loadTexture( prizeConfig["LocalUrl"] )
+        local labelTicket = tolua.cast( container:getChildByName("Label_Ticket"..i), "Label" )
 
-        -- Ticket Label
-        local ticketText = tolua.cast( mWidget:getChildByName("Label_ticket"..i), "Label" )
         if ticketNum > 1 then
-            ticketText:setText( string.format( Constants.String.spinWheel.ticket_balance_2, ticketNum ) )
+            labelTicket:setText( string.format( Constants.String.spinWheel.ticket_balance_2, ticketNum ) )
         else
-            ticketText:setText( string.format( Constants.String.spinWheel.ticket_balance_1, ticketNum ) )
+            labelTicket:setText( string.format( Constants.String.spinWheel.ticket_balance_1, ticketNum ) )
         end
-
-        -- Description label
-        local prizeDescriptionText = tolua.cast( mWidget:getChildByName("Label_prizeDescription"..i), "Label" )
-        prizeDescriptionText:setText( prizeConfig["DrawInformation"] )
-
-        -- Progress label
-        local progressText = tolua.cast( mWidget:getChildByName("Label_progress"..i), "Label" )
-        progressText:setText( info["NumberOfLuckDrawTicketsLeft"].." "..Constants.String.spinWheel.win_ticket_left )
     end
     
-    local moneyText = tolua.cast( mWidget:getChildByName("Label_balance"), "Label" )
-    moneyText:setText( string.format( Constants.String.spinWheel.money_balance, moneyBalance ) )
+    local labelCash = tolua.cast( container:getChildByName("Label_Money"), "Label" )
+    labelCash:setText( string.format( Constants.String.spinWheel.money_balance, moneyBalance ) )
 
-    local submitBt = mWidget:getChildByName("Button_submit")
+    -- Payment Panel
+    container = mWidget:getChildByName("Panel_Payment")
+    local panelTitle= mWidget:getChildByName("Panel_PayTitle")
     if moneyBalance >= MIN_MONEY_BALANCE_FOR_PAYOUT then
+        emailInput = ViewUtils.createTextInput( container:getChildByName( "Input_Email" ), Constants.String.email )
+        emailConfirmInput = ViewUtils.createTextInput( container:getChildByName( "Input_Confirm" ), Constants.String.email_confirm )
+        emailInput:setFontColor( mInputFontColor )
+        emailConfirmInput:setFontColor( mInputFontColor )
+
+        emailInput:setPlaceholderFontColor( mInputPlaceholderFontColor )
+        emailConfirmInput:setPlaceholderFontColor( mInputPlaceholderFontColor )
+     
+        emailInput:setTouchPriority( SceneManager.TOUCH_PRIORITY_ZERO )
+        emailConfirmInput:setTouchPriority( SceneManager.TOUCH_PRIORITY_ZERO )
+
+        luckyDrawEmail = "spiritrain@gmail.com"
+        if type(luckyDrawEmail) ~= "userdata" and luckyDrawEmail ~= "" then
+            emailInput:setText(luckyDrawEmail)
+            emailConfirmInput:setText(luckyDrawEmail)
+        end
+
+        local btnSubmit = container:getChildByName("Button_Submit")
         local submitEventHandler = function( sender, eventType )
             if eventType == TOUCH_EVENT_ENDED then
-                EventManager:postEvent( Event.Do_Spin_Payout, { moneyBalance, refresh } )
+                local email = emailInput:getText()
+                local emailConfirm = emailConfirmInput:getText()
+
+                local emailCollectSuccessCallback = function()
+                    EventManager:postEvent( Event.Do_Spin_Payout, { moneyBalance, refresh } )
+                end
+                EventManager:postEvent( Event.Do_Post_Spin_Collect_Email, { email, emailConfirm, emailCollectSuccessCallback } )
             end
         end
         
-        submitBt:setEnabled( true )
-        submitBt:addTouchEventListener( submitEventHandler )
+        container:setEnabled( true )
+        panelTitle:setEnabled( true )
+       
+        btnSubmit:addTouchEventListener( submitEventHandler )
     else
-        submitBt:setEnabled( false )
+        container:setEnabled( false )
+        panelTitle:setEnabled( false )
     end
 end
 
+
+
 function refresh( moneyBalance )
-    local moneyText = tolua.cast( mWidget:getChildByName("Label_balance"), "Label" )
-    moneyText:setText( string.format( Constants.String.spinWheel.money_balance, moneyBalance ) )
+    local labelCash = tolua.cast( mWidget:getChildByName("Panel_Prize"):getChildByName("Label_Money"), "Label" )
+    labelCash:setText( string.format( Constants.String.spinWheel.money_balance, moneyBalance ) )
+    mWidget:getChildByName("Panel_PayTitle"):setEnabled( false )
+    mWidget:getChildByName("Panel_Payment"):setEnabled( false )
+    emailInput:setEnabled(false)
+    emailConfirmInput:setEnabled(false)
+
 
     EventManager:postEvent( Event.Show_Info, { Constants.String.spinWheel.money_payout_success_notification } )
 end

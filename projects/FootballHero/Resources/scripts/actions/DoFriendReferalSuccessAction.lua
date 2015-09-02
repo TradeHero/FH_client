@@ -3,6 +3,9 @@ module(..., package.seeall)
 local RequestUtils = require("scripts.RequestUtils")
 local ConnectingMessage = require("scripts.views.ConnectingMessage")
 local Logic = require("scripts.Logic").getInstance()
+local FriendReferalScene = require("scripts.views.FriendReferalScene")
+
+
 
 function action( param )
 	local referralType = param[1]
@@ -28,5 +31,6 @@ end
 
 function onRequestSuccess( jsonResponse )
     CCLuaLog ("onRequestSuccess:" .. jsonResponse["LeftFriendCount"] .. jsonResponse["TicketCount"] )
+    FriendReferalScene.showAwardWidget( jsonResponse["TicketCount"] )
 end
 
