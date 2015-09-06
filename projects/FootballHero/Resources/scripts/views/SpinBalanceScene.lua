@@ -58,7 +58,7 @@ function initContent( moneyBalance, ticketBalance, luckyDrawEmail )
     -- Prize Panel
     local container = mWidget:getChildByName("Panel_Prize")
 
-    for i = 1, 2 do
+    for i = 1, 3 do
         local info = ticketBalance[i]
         local ticketNum = info["NumberOfLuckyDrawTickets"]
         local prizeConfig = SpinWheelConfig.getPrizeConfigWithID( info["PrizeId"] )

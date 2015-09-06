@@ -28,7 +28,7 @@
 #import <MessageUI/MessageUI.h>
 #import <FBSDKShareKit/FBSDKShareKit.h>
 
-@interface RootViewController : UIViewController <UIActionSheetDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, MFMailComposeViewControllerDelegate, MFMessageComposeViewControllerDelegate, FBSDKAppInviteDialogDelegate> {
+@interface RootViewController : UIViewController <UIActionSheetDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, MFMailComposeViewControllerDelegate, MFMessageComposeViewControllerDelegate, FBSDKAppInviteDialogDelegate, FBSDKSharingDelegate> {
 
 }
 
@@ -39,5 +39,7 @@
 - (bool)sendSMS:(NSString *)body;
 
 - (void)inviteFriend:(NSString *)appLinkUrl;
+
+- (void)shareTimeline:(NSString *)title withDescription:(NSString *)description withAppLinkUrl:(NSString *)appLinkUrl;
 
 @end

@@ -208,6 +208,9 @@ public class MainActivity extends Cocos2dxActivity {
   public static void inviteFriend(String appLinkUrl) {
     facebookAuth.inviteFriend(appLinkUrl);
   }
+  public static void shareTimeline(String title, String description, String appLinkUrl) {
+    facebookAuth.shareTimeline(title, description, appLinkUrl);
+  }
 
   @Override public void destroyBindingView(final long source) {
     runOnUiThread(new Runnable() {

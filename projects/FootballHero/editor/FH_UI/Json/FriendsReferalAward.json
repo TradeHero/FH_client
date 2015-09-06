@@ -10,11 +10,7 @@
   "designHeight": 1136,
   "designWidth": 640,
   "textures": [],
-  "texturesPng": [
-    "spinWheel/img-ticket-3.png",
-    "spinWheel/img-shine.png",
-    "spinWheel/btn-yes.png"
-  ],
+  "texturesPng": [],
   "version": "1.6.0.0",
   "widgetTree": {
     "classname": "Panel",
@@ -201,7 +197,7 @@
           "ignoreSize": true,
           "layoutParameter": null,
           "opacity": 255,
-          "positionPercentX": 0.603125,
+          "positionPercentX": 0.5875,
           "positionPercentY": 0.459507048,
           "positionType": 0,
           "rotation": 0,
@@ -215,7 +211,7 @@
           "useMergedTexture": false,
           "visible": true,
           "width": 18,
-          "x": 386,
+          "x": 376,
           "y": 522,
           "areaHeight": 0,
           "areaWidth": 0,

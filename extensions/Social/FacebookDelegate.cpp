@@ -145,4 +145,43 @@ namespace Social
         
         mInviteFriendHandler = 0;
     }
+    
+    void FacebookDelegate::shareTimeline(const char* title, const char* description, const char* appLinkUrl,  int handler)
+    {
+        mShareHandler = handler;
+        CCLOG("FacebookDelegate::shareTimeline");
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+        FacebookConnector::getInstance()->shareTimeline(title, description, appLinkUrl);
+#endif
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+        android_facebook_shareTimeline(title, description, appLinkUrl);
+#endif
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
+        
+#endif
+    }
+    
+    void FacebookDelegate::shareTimelineResult(bool success)
+    {
+        CCLOG("shareTimelineResult");
+        if (mShareHandler == 0)
+        {
+            return;
+        }
+        
+        CCScriptEngineProtocol* pScriptProtocol = CCScriptEngineManager::sharedManager()->getScriptEngine();
+        cocos2d::CCLuaEngine* pLuaEngine = dynamic_cast<CCLuaEngine*>(pScriptProtocol);
+        if (pLuaEngine == NULL)
+        {
+            assert(false);
+            return;
+        }
+        
+        CCLuaStack* pStack = pLuaEngine->getLuaStack();
+        pStack->pushBoolean(success);
+        int ret = pStack->executeFunctionByHandler(mShareHandler, 1);
+        pStack->clean();
+        
+        mShareHandler = 0;
+    }
 }

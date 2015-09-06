@@ -3,10 +3,14 @@ module(..., package.seeall)
 local EventManager = require("scripts.events.EventManager").getInstance()
 local Event = require("scripts.events.Event").EventList
 local ConnectingMessage = require("scripts.views.ConnectingMessage")
+local Constants = require("scripts.Constants")
 
 function action( param )
  --	ConnectingMessage.loadFrame()
-    FacebookDelegate:sharedDelegate():inviteFriend( "https://fb.me/1053951204628560", inviteFriendHandler )
+    FacebookDelegate:sharedDelegate():shareTimeline( Constants.String.share.share_app_title, 
+    	Constants.String.share.share_app_content, 
+    	"http://www.footballheroapp.com", 
+    	inviteFriendHandler )
 end
 
 function inviteFriendHandler( success )

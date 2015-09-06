@@ -123,9 +123,9 @@ ShareContent = {
 	},
 
 	{	["id"] = INVITE_WECHAT, 
-		["content"] = Constants.String.share.wechat_content,
+		["content"] = Constants.String.share.share_app_content,
 		["image"] = "http://fhmainstorage.blob.core.windows.net/fhres/facebook-share-1.png",
-		["title"] = Constants.String.share.wechat_title,
+		["title"] = Constants.String.share.share_app_title,
 		["description"] = Constants.String.football_hero,
 		["url"] = "http://www.footballheroapp.com",
 		["type"] = C2DXContentTypeApp,

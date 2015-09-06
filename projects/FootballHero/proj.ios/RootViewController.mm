@@ -238,6 +238,33 @@
     FacebookConnector::getInstance()->inviteFriendResult(false);
 }
 
+- (void)shareTimeline:(NSString *)title withDescription:(NSString *)description withAppLinkUrl:(NSString *)appLinkUrl
+{
+    FBSDKShareLinkContent *content = [[FBSDKShareLinkContent alloc] init];
+    content.contentTitle = title;
+    content.contentDescription= description;
+    content.contentURL = [NSURL URLWithString:appLinkUrl];
+    [FBSDKShareDialog showFromViewController:self
+                                 withContent:content
+                                    delegate:self];
+}
+
+- (void)sharer:(id<FBSDKSharing>)sharer didCompleteWithResults:(NSDictionary *)results
+{
+    NSLog(@"Result: shareTimeline sending success");
+    FacebookConnector::getInstance()->shareTimelineResult(true);
+}
+
+- (void)sharer:(id<FBSDKSharing>)sharer didFailWithError:(NSError *)error
+{
+    NSLog(@"Result: shareTimeline sending failed");
+    NSLog(@" error => %@ ", [error userInfo] );
+    NSLog(@" error => %@ ", [error localizedDescription] );
+    NSLog(@"%@", error);
+    FacebookConnector::getInstance()->shareTimelineResult(false);
+}
+
+
 /*
  // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
