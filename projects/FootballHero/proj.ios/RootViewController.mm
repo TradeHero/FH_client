@@ -264,6 +264,12 @@
     FacebookConnector::getInstance()->shareTimelineResult(false);
 }
 
+- (void)sharerDidCancel:(id<FBSDKSharing>)sharer
+{
+    NSLog(@"Result: shareTimeline sending canceled");
+    FacebookConnector::getInstance()->shareTimelineResult(false);
+}
+
 
 /*
  // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.

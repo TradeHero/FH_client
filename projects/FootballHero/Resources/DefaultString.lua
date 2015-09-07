@@ -508,6 +508,7 @@ StringsDefault = {
     ticket_you_have = "You have",
     ticket_balance_1 = "%d ticket",
     ticket_balance_2 = "%d tickets",
+    ticket_total = "(%d/%d tickets left)",
     ticket_usage = "for the latest lucky draw.",
     money_balance = "US$ %.2f",
     money_payout_success_notification = "Your request has been processed. Please allow 2 - 4 weeks to receive the gift card via your email address.",

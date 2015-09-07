@@ -10,18 +10,7 @@
   "designHeight": 1136,
   "designWidth": 640,
   "textures": [],
-  "texturesPng": [
-    "commonRes/img-bkg-general.png",
-    "header/back.png",
-    "spinWheel/img-messi.png",
-    "spinWheel/img-ticket-1.png",
-    "spinWheel/img-ronaldo.png",
-    "spinWheel/img-ticket-3.png",
-    "spinWheel/img-rooney.png",
-    "spinWheel/img-ticket-2.png",
-    "spinWheel/img-cash.png",
-    "Competition/btn-learnmore.png"
-  ],
+  "texturesPng": [],
   "version": "1.6.0.0",
   "widgetTree": {
     "classname": "Panel",
@@ -699,7 +688,7 @@
             "options": {
               "__type": "LabelSurrogate:#EditorCommon.JsonModel.Component.GUI",
               "classname": "Label",
-              "name": "Label_Text1",
+              "name": "Label_Total1",
               "ZOrder": 0,
               "actiontag": 24110400,
               "anchorPointX": 0,
@@ -737,7 +726,7 @@
               "fontName": "fonts/HelveticaNeue.ttf",
               "fontSize": 20,
               "hAlignment": 0,
-              "text": "for the latest lucky draw.",
+              "text": "(%/% tickets left)",
               "touchScaleEnable": false,
               "vAlignment": 0
             }
@@ -1007,7 +996,7 @@
             "options": {
               "__type": "LabelSurrogate:#EditorCommon.JsonModel.Component.GUI",
               "classname": "Label",
-              "name": "Label_Text3",
+              "name": "Label_Total3",
               "ZOrder": 0,
               "actiontag": 4431821,
               "anchorPointX": 0,
@@ -1045,7 +1034,7 @@
               "fontName": "fonts/HelveticaNeue.ttf",
               "fontSize": 20,
               "hAlignment": 0,
-              "text": "for the latest lucky draw.",
+              "text": "(%/% tickets left)",
               "touchScaleEnable": false,
               "vAlignment": 0
             }
@@ -1315,7 +1304,7 @@
             "options": {
               "__type": "LabelSurrogate:#EditorCommon.JsonModel.Component.GUI",
               "classname": "Label",
-              "name": "Label_Text2",
+              "name": "Label_Total2",
               "ZOrder": 0,
               "actiontag": 66635131,
               "anchorPointX": 0,
@@ -1353,7 +1342,7 @@
               "fontName": "fonts/HelveticaNeue.ttf",
               "fontSize": 20,
               "hAlignment": 0,
-              "text": "for the latest lucky draw.",
+              "text": "(%/% tickets left)",
               "touchScaleEnable": false,
               "vAlignment": 0
             }
@@ -2057,8 +2046,8 @@
               "ignoreSize": false,
               "layoutParameter": null,
               "opacity": 255,
-              "positionPercentX": 0.09016383,
-              "positionPercentY": 0.159999758,
+              "positionPercentX": 0.08852459,
+              "positionPercentY": 0.155,
               "positionType": 0,
               "rotation": 0,
               "scaleX": 1,
@@ -2191,7 +2180,7 @@
           "ignoreSize": false,
           "layoutParameter": null,
           "opacity": 255,
-          "positionPercentX": 0.0234375168,
+          "positionPercentX": 0.0234375,
           "positionPercentY": 0.1637324,
           "positionType": 0,
           "rotation": 0,

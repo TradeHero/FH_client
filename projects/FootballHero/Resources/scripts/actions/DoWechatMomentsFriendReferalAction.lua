@@ -19,8 +19,6 @@ function shareHandler( state, platType, errorMsg )
 	local delayedTask = function()
 		if state == C2DXResponseStateSuccess then
 			EventManager:postEvent( Event.Do_Friend_Referal_Success, { 4 } )
-			CCLuaLog("Share Success with: "..platType)
-
 		elseif state == C2DXResponseStateFail then
 			CCLuaLog("Share failed.")
 			EventManager:postEvent( Event.Show_Error_Message, { errorMsg } )

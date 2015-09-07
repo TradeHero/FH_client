@@ -61,15 +61,19 @@ function initContent( moneyBalance, ticketBalance, luckyDrawEmail )
     for i = 1, 3 do
         local info = ticketBalance[i]
         local ticketNum = info["NumberOfLuckyDrawTickets"]
+        local ticketLeft = info["NumberOfLuckDrawTicketsLeft"]
+        local ticketTotal = info["NumberOfLuckyDrawTicketsEachRound"]
         local prizeConfig = SpinWheelConfig.getPrizeConfigWithID( info["PrizeId"] )
 
         local labelTicket = tolua.cast( container:getChildByName("Label_Ticket"..i), "Label" )
+        local labelTotal = tolua.cast( container:getChildByName("Label_Total"..i), "Label" )
 
         if ticketNum > 1 then
             labelTicket:setText( string.format( Constants.String.spinWheel.ticket_balance_2, ticketNum ) )
         else
             labelTicket:setText( string.format( Constants.String.spinWheel.ticket_balance_1, ticketNum ) )
         end
+        labelTotal:setText( string.format( Constants.String.spinWheel.ticket_total, ticketLeft, ticketTotal ) )
     end
     
     local labelCash = tolua.cast( container:getChildByName("Label_Money"), "Label" )
