@@ -149,7 +149,6 @@ namespace Social
     void FacebookDelegate::shareTimeline(const char* title, const char* description, const char* appLinkUrl,  int handler)
     {
         mShareHandler = handler;
-        CCLOG("FacebookDelegate::shareTimeline");
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
         FacebookConnector::getInstance()->shareTimeline(title, description, appLinkUrl);
 #endif
@@ -163,7 +162,6 @@ namespace Social
     
     void FacebookDelegate::shareTimelineResult(bool success)
     {
-        CCLOG("shareTimelineResult");
         if (mShareHandler == 0)
         {
             return;

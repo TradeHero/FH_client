@@ -161,17 +161,10 @@
   <ResRelativePath />
   <imageFileList />
   <imagePngList>
-    <string>commonRes/img-bkg-general.png</string>
-    <string>header/back.png</string>
-    <string>spinWheel/img-messi.png</string>
-    <string>spinWheel/img-ticket-1.png</string>
-    <string>spinWheel/img-ronaldo.png</string>
     <string>spinWheel/img-ticket-3.png</string>
-    <string>spinWheel/img-rooney.png</string>
-    <string>spinWheel/img-ticket-2.png</string>
-    <string>spinWheel/img-cash.png</string>
-    <string>Competition/btn-learnmore.png</string>
+    <string>spinWheel/img-shine.png</string>
+    <string>spinWheel/btn-yes.png</string>
   </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>SpinWinTicket.json</CurrentUIJson>
+  <CurrentUIJson>FriendsReferalAward.json</CurrentUIJson>
 </UIProject>

@@ -201,7 +201,7 @@
           "ignoreSize": true,
           "layoutParameter": null,
           "opacity": 255,
-          "positionPercentX": 0.5875,
+          "positionPercentX": 0.634375,
           "positionPercentY": 0.459507048,
           "positionType": 0,
           "rotation": 0,
@@ -215,7 +215,7 @@
           "useMergedTexture": false,
           "visible": true,
           "width": 18,
-          "x": 376,
+          "x": 406,
           "y": 522,
           "areaHeight": 0,
           "areaWidth": 0,
@@ -273,7 +273,7 @@
           "fontName": "fonts/HelveticaNeue.ttf",
           "fontSize": 32,
           "hAlignment": 1,
-          "text": "You have received    Lucky Draw tickets for inviting.",
+          "text": "You have received       Lucky Draw tickets for inviting.",
           "touchScaleEnable": false,
           "vAlignment": 0
         }

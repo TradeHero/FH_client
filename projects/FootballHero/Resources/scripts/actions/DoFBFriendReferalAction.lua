@@ -5,7 +5,7 @@ local Event = require("scripts.events.Event").EventList
 local ConnectingMessage = require("scripts.views.ConnectingMessage")
 
 function action( param )
- --	ConnectingMessage.loadFrame()
+ 	ConnectingMessage.loadFrame()
     FacebookDelegate:sharedDelegate():inviteFriend( "https://fb.me/1053951204628560", inviteFriendHandler )
 end
 
