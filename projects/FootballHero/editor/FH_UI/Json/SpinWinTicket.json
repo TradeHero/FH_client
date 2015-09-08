@@ -11,10 +11,16 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "MatchListScene/img-bkg-general.png",
+    "commonRes/img-bkg-general.png",
     "header/back.png",
-    "chat/send_icon.png",
-    "chat/More Button.png"
+    "spinWheel/img-messi.png",
+    "spinWheel/img-ticket-1.png",
+    "spinWheel/img-ronaldo.png",
+    "spinWheel/img-ticket-3.png",
+    "spinWheel/img-rooney.png",
+    "spinWheel/img-ticket-2.png",
+    "spinWheel/img-cash.png",
+    "Competition/btn-learnmore.png"
   ],
   "version": "1.6.0.0",
   "widgetTree": {
@@ -141,38 +147,38 @@
           "flipX": false,
           "flipY": false,
           "height": 133,
-          "ignoreSize": true,
+          "ignoreSize": false,
           "layoutParameter": null,
           "opacity": 255,
-          "positionPercentX": 0.5,
-          "positionPercentY": 0.5748239,
+          "positionPercentX": 0.515625,
+          "positionPercentY": 0.5677817,
           "positionType": 0,
           "rotation": 0,
           "scaleX": 1.5,
           "scaleY": 1.5,
-          "sizePercentX": 0.2109375,
+          "sizePercentX": 0.2078125,
           "sizePercentY": 0.117077462,
           "sizeType": 0,
           "tag": 26012,
           "touchAble": false,
           "useMergedTexture": false,
           "visible": true,
-          "width": 135,
-          "x": 320,
-          "y": 653,
+          "width": 133,
+          "x": 330,
+          "y": 645,
           "capInsetsHeight": 1,
           "capInsetsWidth": 1,
           "capInsetsX": 0,
           "capInsetsY": 0,
           "fileName": null,
           "fileNameData": {
-            "path": "spinWheel/img-ticket.png",
+            "path": "spinWheel/img-ticket-1.png",
             "plistFile": "",
             "resourceType": 0
           },
           "scale9Enable": false,
           "scale9Height": 133,
-          "scale9Width": 135
+          "scale9Width": 133
         }
       },
       {
@@ -374,7 +380,7 @@
           "fontName": "fonts/HelveticaNeue.ttf",
           "fontSize": 35,
           "hAlignment": 1,
-          "text": "One %s awarded every 3,000 tickets",
+          "text": "One %s awarded every 5,000 tickets",
           "touchScaleEnable": false,
           "vAlignment": 0
         }

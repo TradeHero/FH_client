@@ -74,6 +74,8 @@ class C2DXShareSDK
 
 	static bool hasAutorized(C2DXPlatType platType, LUA_FUNCTION handler);
 
+    static void shareContent(C2DXPlatType platType, CCDictionary *content, LUA_FUNCTION handler);
+
 	static void showShareMenu(CCArray *platTypes, CCDictionary *content, LUA_FUNCTION handler);
 
     static void getCredentialWithType(C2DXPlatType platType, LUA_FUNCTION handler);

@@ -8,7 +8,10 @@
 
 #include "FacebookConnector.h"
 #include "FacebookDelegate.h"
+#import "AppController.h"
+#import "RootViewController.h"
 #import <FacebookSDK/FacebookSDK.h>
+#import <FBSDKShareKit/FBSDKShareKit.h>
 #import "FBSessionSingleton.h"
 
 static FacebookConnector* instance;
@@ -65,4 +68,29 @@ void FacebookConnector::grantPublishPermission(const char* permission)
              Social::FacebookDelegate::sharedDelegate()->permissionUpdate(accessToken, [aSession hasGranted:publishPermission]);
          }];
     }
+}
+
+void FacebookConnector::inviteFriend(const char* appLinkUrl)
+{
+    AppController *app = (AppController*) [[UIApplication sharedApplication] delegate];
+    [[app getViewController] inviteFriend:[NSString stringWithUTF8String:appLinkUrl]];
+}
+
+void FacebookConnector::inviteFriendResult(bool success)
+{
+    Social::FacebookDelegate::sharedDelegate()->inviteFriendResult(success);
+}
+
+void FacebookConnector::shareTimeline(const char* title, const char* description, const char* appLinkUrl)
+{
+    NSLog(@"FacebookConnector::shareTimeline");
+    AppController *app = (AppController*) [[UIApplication sharedApplication] delegate];
+    [[app getViewController] shareTimeline:[NSString stringWithUTF8String:title]
+                           withDescription:[NSString stringWithUTF8String:description]
+                            withAppLinkUrl:[NSString stringWithUTF8String:appLinkUrl]];
+}
+
+void FacebookConnector::shareTimelineResult(bool success)
+{
+    Social::FacebookDelegate::sharedDelegate()->shareTimelineResult(success);
 }

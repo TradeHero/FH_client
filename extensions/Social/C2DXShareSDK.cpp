@@ -197,6 +197,20 @@ void C2DXShareSDK::shareContent(C2DXPlatType platType, CCDictionary *content, C2
 #endif
 }
 
+void C2DXShareSDK::shareContent(C2DXPlatType platType, CCDictionary *content, int handler)
+{
+    mShareHandler = handler;
+#if CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
+    
+    doShare((int)platType, content, shareResultHandler);
+    
+#elif CC_TARGET_PLATFORM == CC_PLATFORM_IOS
+
+    C2DXiOSShareSDK::shareContent(platType, content, shareResultHandler);
+    
+#endif
+}
+
 void C2DXShareSDK::oneKeyShareContent(CCArray *platTypes, CCDictionary *content, C2DXShareResultEvent callback)
 {
 #if CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
@@ -255,13 +269,11 @@ void C2DXShareSDK::showShareMenu(CCArray *platTypes, CCDictionary *content, int 
 {
     mShareHandler = handler;
 #if CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
-    
-    //TODO: Andorid
+
     onekeyShare(0, content, shareResultHandler);
     
 #elif CC_TARGET_PLATFORM == CC_PLATFORM_IOS
-    
-    //TODO: iOS
+
     C2DXiOSShareSDK::showShareMenu(platTypes, content, shareResultHandler);
     
 #endif
@@ -302,14 +314,12 @@ void C2DXShareSDK::getCredentialWithType(C2DXPlatType platType, int handler)
     const char* result = NULL;
 #if CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
     
-    //TODO: Android
     CCDictionary* authInfo = getAuthInfo((int)platType);
     CCString* tokenStr = (CCString*)authInfo->objectForKey("token");
     result = tokenStr->getCString();
     
 #elif CC_TARGET_PLATFORM == CC_PLATFORM_IOS
     
-    //TODO: iOS
     result = C2DXiOSShareSDK::getCredentialWithType(platType);
     
 #endif

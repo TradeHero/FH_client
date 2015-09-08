@@ -64,8 +64,9 @@ end
 
 function onRequestSuccess( jsonResponse )
     local moneyBalance = jsonResponse["RealMoneyBalance"]
+    local luckyDrawEmail = jsonResponse["LuckyDrawEmail"]
     local ticketBalance = jsonResponse["DrawTicketBalances"]
 
     local SpinBalanceScene = require("scripts.views.SpinBalanceScene")
-    SpinBalanceScene.loadFrame( moneyBalance, ticketBalance )
+    SpinBalanceScene.loadFrame( moneyBalance, ticketBalance, luckyDrawEmail )
 end

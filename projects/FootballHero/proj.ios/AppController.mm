@@ -366,7 +366,13 @@ static AppDelegate s_sharedApplication;
     [ShareSDK handleOpenURL:url sourceApplication:sourceApplication annotation:annotation wxDelegate:nil];
     
     return [FBAppCall handleOpenURL:url
-                  sourceApplication:sourceApplication];
+                  sourceApplication:sourceApplication
+                    fallbackHandler:^(FBAppCall *call) {
+                        if ([call.dialogData.method isEqualToString:@"appinvites"]) {
+                            
+                        };
+                        NSLog(@"Open Url fallback handler evoked: %@", call.dialogData.method);
+                    }];
 }
 
 - (RootViewController *)getViewController

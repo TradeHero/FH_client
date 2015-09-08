@@ -7,6 +7,8 @@ SHARE_SPINTHEWHEEL = "spinTheWheel"
 SHARE_PREDICTION = "prediction"
 SHARE_PREDRESULT = "predResult"
 SHARE_VIDEO = "video"
+INVITE_WECHAT = "inviteWechat"
+INVITE_FACEBOOK = "inviteFacebook"
 
 SCREEN_SHOT = "ScreenShot"
 PARAM_VALUE = "ParamValue"
@@ -112,6 +114,18 @@ ShareContent = {
 		["content"] = Constants.String.share.video_content,
 		["image"] = PARAM_VALUE,
 		["title"] = Constants.String.share.video_title,
+		["description"] = Constants.String.football_hero,
+		["url"] = "http://www.footballheroapp.com",
+		["type"] = C2DXContentTypeNews,
+		["siteUrl"] = "http://www.footballheroapp.com",
+		["site"] = Constants.String.football_hero,
+		["extInfo"] = "extInfo",
+	},
+
+	{	["id"] = INVITE_WECHAT, 
+		["content"] = Constants.String.share.share_app_content,
+		["image"] = "http://fhmainstorage.blob.core.windows.net/fhres/facebook-share-1.png",
+		["title"] = Constants.String.share.share_app_title,
 		["description"] = Constants.String.football_hero,
 		["url"] = "http://www.footballheroapp.com",
 		["type"] = C2DXContentTypeNews,

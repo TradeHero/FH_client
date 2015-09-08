@@ -151,6 +151,7 @@
     <string>MatchCenterStatsFormTableNoDraw.json</string>
     <string>MatchListFriendsReferal.json</string>
     <string>FriendsReferalSelection.json</string>
+    <string>FriendsReferalAward.json</string>
     <string>SettingsFollowContentFrame.json</string>
     <string>SettingsFollowListScene.json</string>
   </JsonList>
@@ -162,17 +163,7 @@
   <ProjectType>UIProject</ProjectType>
   <ResRelativePath />
   <imageFileList />
-  <imagePngList>
-    <string>commonRes/img-bkg-general.png</string>
-    <string>MatchListScene/02.png</string>
-    <string>MatchListScene/03.png</string>
-    <string>MatchListScene/04.png</string>
-    <string>LoginNReg/photo.png</string>
-    <string>Competition/icn-unqualified.png</string>
-    <string>MatchListScene/Arrow down.png</string>
-    <string>MatchListScene/Arrow Up.png</string>
-    <string>community/img-wininfo.png</string>
-  </imagePngList>
+  <imagePngList />
   <JsonSuffix>.json</JsonSuffix>
   <CurrentUIJson>FriendsReferalSelection.json</CurrentUIJson>
 </UIProject>

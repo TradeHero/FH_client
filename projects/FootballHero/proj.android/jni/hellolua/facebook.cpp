@@ -32,6 +32,19 @@ extern "C"
     Social::FacebookDelegate::sharedDelegate()->permissionUpdate(
       strlen(token) != 0 ? token : NULL, granted == JNI_TRUE);
   }
+
+  JNIEXPORT void JNICALL Java_com_myhero_fh_auth_FacebookAuth_inviteFriendCallback(JNIEnv *env,
+    jobject thiz, jboolean succeed)
+  {
+    Social::FacebookDelegate::sharedDelegate()->inviteFriendResult(succeed == JNI_TRUE);
+  }
+
+  JNIEXPORT void JNICALL Java_com_myhero_fh_auth_FacebookAuth_shareTimelineCallback(JNIEnv *env,
+    jobject thiz, jboolean succeed)
+  {
+    Social::FacebookDelegate::sharedDelegate()->shareTimelineResult(succeed == JNI_TRUE);
+  }
+
 }
 
 void android_facebook_login()
@@ -56,3 +69,32 @@ void android_facebook_requestPublishPermissions(
     jmi.env->DeleteLocalRef(jmi.classID);
   }
 }
+
+void android_facebook_inviteFriend(const char* appLinkUrl)
+{
+  JniMethodInfo jmi;
+  if (JniHelper::getStaticMethodInfo(jmi, "com/myhero/fh/MainActivity", "inviteFriend", "(Ljava/lang/String;)V"))
+  {
+    jstring jUrl = jmi.env->NewStringUTF(appLinkUrl);
+    jmi.env->CallStaticVoidMethod(jmi.classID, jmi.methodID, jUrl);
+    jmi.env->DeleteLocalRef(jUrl);
+    jmi.env->DeleteLocalRef(jmi.classID);
+  }
+}
+
+void android_facebook_shareTimeline(const char* title, const char* description, const char* appLinkUrl)
+{
+    JniMethodInfo jmi;
+    if (JniHelper::getStaticMethodInfo(jmi, "com/myhero/fh/MainActivity", "shareTimeline", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V"))
+    {
+        jstring jTitle = jmi.env->NewStringUTF(title);
+        jstring jDescription = jmi.env->NewStringUTF(description);
+        jstring jAppUrl = jmi.env->NewStringUTF(appLinkUrl);
+        jmi.env->CallStaticVoidMethod(jmi.classID, jmi.methodID, jTitle, jDescription, jAppUrl);
+        jmi.env->DeleteLocalRef(jTitle);
+        jmi.env->DeleteLocalRef(jDescription);
+        jmi.env->DeleteLocalRef(jAppUrl);
+        jmi.env->DeleteLocalRef(jmi.classID);
+    }
+}
+

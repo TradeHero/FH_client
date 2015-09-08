@@ -593,6 +593,10 @@
     <GuidesList />
   </GuidesProject>
   <GuidesProject>
+    <Project>FriendsReferalAward</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
     <Project>SettingsFollowContentFrame</Project>
     <GuidesList />
   </GuidesProject>

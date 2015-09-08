@@ -26,8 +26,9 @@
 #import <UIKit/UIKit.h>
 #import <MessageUI/MFMailComposeViewController.h>
 #import <MessageUI/MessageUI.h>
+#import <FBSDKShareKit/FBSDKShareKit.h>
 
-@interface RootViewController : UIViewController <UIActionSheetDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, MFMailComposeViewControllerDelegate, MFMessageComposeViewControllerDelegate> {
+@interface RootViewController : UIViewController <UIActionSheetDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, MFMailComposeViewControllerDelegate, MFMessageComposeViewControllerDelegate, FBSDKAppInviteDialogDelegate, FBSDKSharingDelegate> {
 
 }
 
@@ -36,5 +37,9 @@
 - (bool)sendMail:(NSString *)receiver withSubject:(NSString *)subject withBody:(NSString *)body;
 
 - (bool)sendSMS:(NSString *)body;
+
+- (void)inviteFriend:(NSString *)appLinkUrl;
+
+- (void)shareTimeline:(NSString *)title withDescription:(NSString *)description withAppLinkUrl:(NSString *)appLinkUrl;
 
 @end

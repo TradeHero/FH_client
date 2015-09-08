@@ -25,6 +25,7 @@
 
 #import "RootViewController.h"
 #include "MiscHandler.h"
+#include "FacebookConnector.h"
 
 
 @implementation RootViewController
@@ -199,6 +200,76 @@
     
     [self dismissViewControllerAnimated:YES completion:NULL];
 }
+
+- (void)inviteFriend:(NSString *)appLinkUrl
+{
+    
+    if ([[[FBSDKAppInviteDialog alloc] init] canShow]) {
+        FBSDKAppInviteContent *content =[[FBSDKAppInviteContent alloc] init];
+        content.appLinkURL = [NSURL URLWithString:appLinkUrl];
+        
+        [FBSDKAppInviteDialog showWithContent:content
+                                     delegate:self];
+    }
+}
+
+/*!
+ @abstract Sent to the delegate when the app invite completes without error.
+ @param appInviteDialog The FBSDKAppInviteDialog that completed.
+ @param results The results from the dialog.  This may be nil or empty.
+ */
+- (void)appInviteDialog:(FBSDKAppInviteDialog *)appInviteDialog didCompleteWithResults:(NSDictionary *)results
+{
+    NSLog(@"Result: appInviteDialog sending success");
+    FacebookConnector::getInstance()->inviteFriendResult(true);
+}
+
+/*!
+ @abstract Sent to the delegate when the app invite encounters an error.
+ @param appInviteDialog The FBSDKAppInviteDialog that completed.
+ @param error The error.
+ */
+- (void)appInviteDialog:(FBSDKAppInviteDialog *)appInviteDialog didFailWithError:(NSError *)error
+{
+    NSLog(@"Result: appInviteDialog sending failed");
+    NSLog(@" error => %@ ", [error userInfo] );
+    NSLog(@" error => %@ ", [error localizedDescription] );
+    NSLog(@"%@", error);
+    FacebookConnector::getInstance()->inviteFriendResult(false);
+}
+
+- (void)shareTimeline:(NSString *)title withDescription:(NSString *)description withAppLinkUrl:(NSString *)appLinkUrl
+{
+    FBSDKShareLinkContent *content = [[FBSDKShareLinkContent alloc] init];
+    content.contentTitle = title;
+    content.contentDescription= description;
+    content.contentURL = [NSURL URLWithString:appLinkUrl];
+    [FBSDKShareDialog showFromViewController:self
+                                 withContent:content
+                                    delegate:self];
+}
+
+- (void)sharer:(id<FBSDKSharing>)sharer didCompleteWithResults:(NSDictionary *)results
+{
+    NSLog(@"Result: shareTimeline sending success");
+    FacebookConnector::getInstance()->shareTimelineResult(true);
+}
+
+- (void)sharer:(id<FBSDKSharing>)sharer didFailWithError:(NSError *)error
+{
+    NSLog(@"Result: shareTimeline sending failed");
+    NSLog(@" error => %@ ", [error userInfo] );
+    NSLog(@" error => %@ ", [error localizedDescription] );
+    NSLog(@"%@", error);
+    FacebookConnector::getInstance()->shareTimelineResult(false);
+}
+
+- (void)sharerDidCancel:(id<FBSDKSharing>)sharer
+{
+    NSLog(@"Result: shareTimeline sending canceled");
+    FacebookConnector::getInstance()->shareTimelineResult(false);
+}
+
 
 /*
  // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.

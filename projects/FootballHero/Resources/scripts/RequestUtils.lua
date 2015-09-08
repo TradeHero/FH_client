@@ -60,6 +60,7 @@ GET_LUCKY8_GAMES = SERVER_IP .. "/api/lucky8/games"
 GET_LUCKY8_ROUNDS = SERVER_IP .. "/api/lucky8/rounds"
 GET_LUCKY8_WINNERS_REST_CALL = SERVER_IP .. "/api/lucky8/winners"
 GET_LIVE_SCORE_REST_CALL = SERVER_IP .. "/api/games/livescore"
+GET_FRIEND_REFERAL_REST_CALL = SERVER_IP.."/api/referrals/referral"
 
 POST_LUCKY8_PREDICT = SERVER_IP .. "/api/lucky8/predict"
 POST_COUPONS_REST_CALL = SERVER_IP.."/api/coupons/placeCoupons"
@@ -81,7 +82,8 @@ POST_NEW_DISCUSSION_REST_CALL = SERVER_IP.."/api/discuss/write"
 POST_LIKE_DISCUSSION_REST_CALL = SERVER_IP.."/api/discuss/like"
 
 
-FACEBOOK_FRIENDS_LIST_CALL = "/me/friends?access_token="
+FACEBOOK_FRIENDS_LIST_CALL = FACEBOOK_GRAPH_IP.."/me/friends"
+FACEBOOK_INVITABLE_FRIENDS_CALL = FACEBOOK_GRAPH_IP.."/me/invitable_friends"
 USE_DEV = false
 
 --[[
@@ -134,6 +136,7 @@ function setServerIP( serverIp, cdnServerIp, useDev )
     GET_LUCKY8_ROUNDS = serverIp .. "/api/lucky8/rounds"
     GET_LUCKY8_WINNERS_REST_CALL = serverIp .. "/api/lucky8/winners"
     GET_LIVE_SCORE_REST_CALL = serverIp .. "/api/games/livescore"
+    GET_FRIEND_REFERAL_REST_CALL = serverIp.."/api/referrals/referral"
     
     POST_LUCKY8_PREDICT = serverIp .. "/api/lucky8/predict"
     POST_COUPONS_REST_CALL = serverIp.."/api/coupons/placeCoupons"
