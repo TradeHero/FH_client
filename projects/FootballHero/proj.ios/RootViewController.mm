@@ -220,9 +220,13 @@
  */
 - (void)appInviteDialog:(FBSDKAppInviteDialog *)appInviteDialog didCompleteWithResults:(NSDictionary *)results
 {
-    NSLog(@"Result: appInviteDialog sending success");
-    FacebookConnector::getInstance()->inviteFriendResult(true);
-}
+    NSLog(@"Result: appInviteDialog sending success:%@", results.debugDescription );
+    if ([results objectForKey:@"completionGesture"] == nil) {
+         FacebookConnector::getInstance()->inviteFriendResult(true);
+    } else {
+        FacebookConnector::getInstance()->inviteFriendResult(false);
+    }
+ }
 
 /*!
  @abstract Sent to the delegate when the app invite encounters an error.
@@ -251,8 +255,12 @@
 
 - (void)sharer:(id<FBSDKSharing>)sharer didCompleteWithResults:(NSDictionary *)results
 {
-    NSLog(@"Result: shareTimeline sending success");
-    FacebookConnector::getInstance()->shareTimelineResult(true);
+    NSLog(@"Result: shareTimeline sending success:%@", results.debugDescription );
+    if ([results objectForKey:@"postId"] == nil) {
+        FacebookConnector::getInstance()->shareTimelineResult(false);
+    } else {
+        FacebookConnector::getInstance()->shareTimelineResult(true);
+    }
 }
 
 - (void)sharer:(id<FBSDKSharing>)sharer didFailWithError:(NSError *)error
@@ -266,7 +274,7 @@
 
 - (void)sharerDidCancel:(id<FBSDKSharing>)sharer
 {
-    NSLog(@"Result: shareTimeline sending canceled");
+    NSLog(@"Result: shareTimeline sending canceled %@" , [sharer debugDescription]);
     FacebookConnector::getInstance()->shareTimelineResult(false);
 }
 

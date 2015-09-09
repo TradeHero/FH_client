@@ -48,6 +48,7 @@
 #include "MiscHandler.h"
 #import <ShareSDK/ShareSDK.h>
 #import "WXApi.h"                   //微信
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
 
 @implementation AppController
 
@@ -361,6 +362,14 @@ static AppDelegate s_sharedApplication;
         
         MiscHandler::getInstance()->notifyDeepLink([deepLink UTF8String]);
         return YES;
+    }
+    
+    if([[url host] isEqualToString:@"bridge"])
+    {
+        return [[FBSDKApplicationDelegate sharedInstance] application:application
+                                                              openURL:url
+                                                    sourceApplication:sourceApplication
+                                                           annotation:annotation];
     }
     
     [ShareSDK handleOpenURL:url sourceApplication:sourceApplication annotation:annotation wxDelegate:nil];
