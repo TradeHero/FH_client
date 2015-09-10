@@ -485,7 +485,7 @@ StringsDefault = {
     draw = "Draw",
     game_center_title = "Game Center",
     lucky8_title     = "Lucky 8",
-    lucky8_sub_des   = "Predict random 8 games daily and win $500 if you guess all 8 matches correctly!",
+    lucky8_sub_des   = "Predict random 8 games daily and win $250 if you guess all 8 matches correctly!",
     btn_picks_title  = "Your Picks",
     btn_rules_title  = "Rules",
     btn_submit_title = "Submit!",
@@ -494,7 +494,7 @@ StringsDefault = {
     game_started = "game started",
     pending = "Pending confirmation",
     select_all_matches = "please select all matches.",
-    lucky8_rule = "1. You are allowed one entry per day.\n\n2. Predict 8 games correctly and win prizes.\n\n3. Getting all 8 matches correct will win you $500* while getting 7 right will get you a token amount of $5. 6 correct will get you $1.\n\n4. Max prize pool per day is $500. If there is more than one daily winner, the prize pool will be split among the winners. (Example - if there are 2 winners, each will receive $250).\n\n5. Winnings will be credited to your balance page.\n\n6. You can only withdraw when your balance has more than $25 in the account.\n\n7. Judge's decision is Final.\n\n8. Multiple accounts user will be banned and disqualified from winning any prizes. Please refrain from opening more than one SportsHero account.",
+    lucky8_rule = "1. You are allowed one entry per day.\n\n2. Predict 8 games correctly and win prizes.\n\n3. Getting all 8 matches correct will win you $250* while getting 7 right will get you a token amount of $5. 6 correct will get you $1.\n\n4. Max prize pool per day is $250. If there is more than one daily winner, the prize pool will be split among the winners. (Example - if there are 2 winners, each will receive $125).\n\n5. Winnings will be credited to your balance page.\n\n6. You can only withdraw when your balance has more than $25 in the account.\n\n7. Judge's decision is Final.\n\n8. Multiple accounts user will be banned and disqualified from winning any prizes. Please refrain from opening more than one SportsHero account.",
   },
   spinWheel = {
     wheel_title = "Spin-the-Wheel",
