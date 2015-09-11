@@ -114,7 +114,7 @@ function loadMainContent( contentContainer, jsonResponse, leaderboardId, subType
     elseif mTabID ==  CommunityConfig.COMMUNITY_TAB_ID_LEADERBOARD then
         loadLeaderboardScene( contentContainer, jsonResponse, leaderboardId, subType )
     elseif mTabID ==  CommunityConfig.COMMUNITY_TAB_ID_TIMELINE then
-        loadTimelineScene( contentContainer, jsonResponse, leaderboardId, subType )
+        loadTimelineScene( contentContainer, jsonResponse )
     end
 end
 
