@@ -164,10 +164,7 @@
   <ProjectType>UIProject</ProjectType>
   <ResRelativePath />
   <imageFileList />
-  <imagePngList>
-    <string>LoginNReg/photo.png</string>
-    <string>commonRes/default.png</string>
-  </imagePngList>
+  <imagePngList />
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>CommunityTimelineContent.json</CurrentUIJson>
+  <CurrentUIJson>CommunityLeaderboardFrame.json</CurrentUIJson>
 </UIProject>

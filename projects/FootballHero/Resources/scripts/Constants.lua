@@ -41,6 +41,7 @@ WelcomePrefix = "welcome_"
 EntryPrefix = "entry_"
 PrizesPrefix = "prizes_"
 EndPrefix = "end_"
+LogoPrefix = "logo_"
 
 ZORDER_POPUP = 65535
 

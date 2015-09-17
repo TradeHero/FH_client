@@ -41,5 +41,6 @@ function action( param )
 end
 
 function onRequestSuccess( jsonResponse )
+    RequestUtils.invalidResponseCacheContainsUrl( RequestUtils.GET_COMPETITION_DETAIL_REST_CALL )
     EventManager:postEvent( Event.Enter_Community, { CommunityConfig.COMMUNITY_TAB_ID_COMPETITION } )
 end

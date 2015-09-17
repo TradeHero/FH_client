@@ -185,6 +185,7 @@ function initEvents()
 	EventManager:registerEventHandler( Event.Load_More_In_History, "scripts.actions.LoadMoreInHistoryAction" )
 	EventManager:registerEventHandler( Event.Load_More_In_Competition_Detail, "scripts.actions.LoadMoreInCompetitionDetailAction" )
 	EventManager:registerEventHandler( Event.Load_More_In_Spin_Winner, "scripts.actions.LoadMoreInSpinWinnerAction" )
+	EventManager:registerEventHandler( Event.Load_More_In_Timeline, "scripts.actions.LoadMoreInTimelineAction" )
 	EventManager:registerEventHandler( Event.Load_More_Discussion_Posts, "scripts.actions.LoadMoreDiscussionPostsAction" )
 
 	EventManager:registerEventHandler( Event.Export_Unlocalized_String, "scripts.actions.ExportUnlocalizedStringAction" )

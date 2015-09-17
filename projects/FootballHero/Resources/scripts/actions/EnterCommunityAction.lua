@@ -52,7 +52,7 @@ function action( param )
             url = url.."&numberOfCouponsRequired="..minPrediction
         end
         record = true
-   elseif mTabID == CommunityConfig.COMMUNITY_TAB_ID_TIMELINE then
+    elseif mTabID == CommunityConfig.COMMUNITY_TAB_ID_TIMELINE then
         url = RequestUtils.GET_TIMELINE_REST_CALL.."?step=1"
     else
         url = RequestUtils.GET_COMPETITION_LIST_REST_CALL
