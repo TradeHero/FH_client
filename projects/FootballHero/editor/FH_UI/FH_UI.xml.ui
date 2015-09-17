@@ -154,6 +154,8 @@
     <string>FriendsReferalAward.json</string>
     <string>SettingsFollowContentFrame.json</string>
     <string>SettingsFollowListScene.json</string>
+    <string>CommunityTimelineFrame.json</string>
+    <string>CommunityTimelineContent.json</string>
   </JsonList>
   <CanvasSize>
     <Width>640</Width>
@@ -165,5 +167,5 @@
   <imageFileList />
   <imagePngList />
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>FriendsReferalSelection.json</CurrentUIJson>
+  <CurrentUIJson>CommunityLeaderboardFrame.json</CurrentUIJson>
 </UIProject>

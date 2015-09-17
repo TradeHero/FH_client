@@ -301,7 +301,6 @@ function initSpecialCompetitions( parent, compList )
 end
 
 function enterCompetition( competitionId, isDetailedComp )
-
     local sortType = 3
     if isDetailedComp then
         EventManager:postEvent( Event.Enter_Competition_Detail, { competitionId, false, sortType, CompetitionConfig.COMPETITION_TAB_ID_MONTHLY } )

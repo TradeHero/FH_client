@@ -95,6 +95,7 @@ StringsDefault = {
     title_joined_comp = "Joined Competitions",
     title_join_comp = "Join a Competition",
     title_rules = "Rules",
+    title_timeline = "Timeline",
     title_top_performers = "Top Performers",
     title_highlight = "Highlights",
     title_expert = "Team Expert",
