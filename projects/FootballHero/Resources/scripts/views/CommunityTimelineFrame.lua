@@ -25,7 +25,6 @@ function loadFrame( parent, jsonResponse )
 end
 
 function refreshFrame( jsonResponse )
-    CCLuaLog("refreshFrame")
     mStep = 1
     mHasMoreToLoad = true
 
@@ -65,7 +64,6 @@ function initContent( contentContainer, contentHeight, timelines )
     layoutParameter:setGravity(LINEAR_GRAVITY_CENTER_VERTICAL)
  
     for i = 1, table.getn( timelines ) do
-        CCLuaLog ("content hight:" .. contentHeight)
         local content = SceneManager.widgetFromJsonFile("scenes/CommunityTimelineContent.json")
         createContent( content, timelines[i], i )
         content:setLayoutParameter( layoutParameter )
@@ -74,7 +72,6 @@ function initContent( contentContainer, contentHeight, timelines )
         contentContainer:addChild( content )
     end
     contentContainer:setInnerContainerSize( CCSize:new( 0, contentHeight ) )
-    CCLuaLog ("contentHeight:" .. contentHeight .. " inner:" .. contentContainer:getInnerContainerSize().height)
     local layout = tolua.cast( contentContainer, "Layout" )
     layout:requestDoLayout()
 end

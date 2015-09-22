@@ -90,7 +90,7 @@ function initCommunityTab( tabInfo, tabId )
     if tabId == CommunityConfig.COMMUNITY_TAB_ID_EXPERT then
         local isNew = CheckListConfig.isItemNew( CheckListConfig.CHECK_LIST_HIGHLIGHTS )
         local newFlag = tab:getChildByName("Image_new")
-        newFlag:setEnabled( isNew )
+        newFlag:setEnabled( false )
         
     elseif tabId == CommunityConfig.COMMUNITY_TAB_ID_VIDEO then
         local isNew = CheckListConfig.isItemNew( CheckListConfig.CHECK_LIST_VIDEOS )
@@ -100,7 +100,7 @@ function initCommunityTab( tabInfo, tabId )
     elseif tabId == CommunityConfig.COMMUNITY_TAB_ID_TIMELINE then
         local isNew = CheckListConfig.isItemNew( CheckListConfig.CHECK_LIST_VIDEOS )
         local newFlag = tab:getChildByName("Image_new")
-        newFlag:setEnabled( isNew )
+        newFlag:setEnabled( false )
     end
 end
 

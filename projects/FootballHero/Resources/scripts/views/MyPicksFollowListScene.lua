@@ -7,6 +7,7 @@ local Header = require("scripts.views.HeaderFrame")
 local SMIS = require("scripts.SMIS")
 local Constants = require("scripts.Constants")
 local RequestUtils = require("scripts.RequestUtils")
+local Logic = require("scripts.Logic").getInstance()
 
 local mWidget
 local mFollow
@@ -71,6 +72,9 @@ function addFollow( contentContainer, i, userInfo)
     local balance = userInfo["Balance"]
     local isFollowed = userInfo["IsFollowed"]
 
+    if  userId == Logic:getUserId() then
+        btnFollow:setEnabled( false )
+    end
 
     if isFollowed then
         btnFollow:setTitleText( Constants.String.history.unfollow_button )
