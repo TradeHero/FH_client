@@ -612,4 +612,8 @@
     <Project>CommunityTimelineContent</Project>
     <GuidesList />
   </GuidesProject>
+  <GuidesProject>
+    <Project>MyPicksFollowContentFrame</Project>
+    <GuidesList />
+  </GuidesProject>
 </ArrayOfGuidesProject>

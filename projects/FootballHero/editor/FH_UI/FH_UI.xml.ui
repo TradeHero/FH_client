@@ -31,6 +31,8 @@
     <string>CommunityMediaFrame.json</string>
     <string>CommunityNewCompetitionFrame.json</string>
     <string>CommunityPlayVideoFrame.json</string>
+    <string>CommunityTimelineFrame.json</string>
+    <string>CommunityTimelineContent.json</string>
     <string>CommunityVideoContent.json</string>
     <string>CommunityVideoFrame.json</string>
     <string>CompetitionItemNew.json</string>
@@ -45,6 +47,8 @@
     <string>CreateCompetitionContent.json</string>
     <string>EmptyTemplate.json</string>
     <string>ErrorMessage.json</string>
+    <string>FriendsReferalSelection.json</string>
+    <string>FriendsReferalAward.json</string>
     <string>GameCenterCell.json</string>
     <string>GameCenterHeader.json</string>
     <string>GameCenterScene.json</string>
@@ -95,6 +99,7 @@
     <string>MatchListContent.json</string>
     <string>MatchListDropDown.json</string>
     <string>MatchListEmptyIndi.json</string>
+    <string>MatchListFriendsReferal.json</string>
     <string>MatchListScene.json</string>
     <string>MatchPrediction.json</string>
     <string>MinigameDetailScene.json</string>
@@ -102,6 +107,7 @@
     <string>MinigameScrollviewContentFrame.json</string>
     <string>MinigameWinnersScene.json</string>
     <string>MyPicksEmptyFrame.json</string>
+    <string>MyPicksFollowContentFrame.json</string>
     <string>MyPicksHome.json</string>
     <string>Navigator.json</string>
     <string>PredFinalConfirm.json</string>
@@ -111,6 +117,8 @@
     <string>PredictionStatus.json</string>
     <string>PushNotification.json</string>
     <string>PushNotificationMessage.json</string>
+    <string>SettingsFollowContentFrame.json</string>
+    <string>SettingsFollowListScene.json</string>
     <string>SettingsHome.json</string>
     <string>SettingsItemContentFrame.json</string>
     <string>SettingsItemDropdownFrame.json</string>
@@ -145,17 +153,6 @@
     <string>WTGBMTPrediction.json</string>
     <string>WTWBEGPrediction.json</string>
     <string>YourPicksCell.json</string>
-    <string>LiveScoreInplayMatchCell.json</string>
-    <string>LiveScoreNowCell.json</string>
-    <string>LiveScoreInPlayEndGap.json</string>
-    <string>MatchCenterStatsFormTableNoDraw.json</string>
-    <string>MatchListFriendsReferal.json</string>
-    <string>FriendsReferalSelection.json</string>
-    <string>FriendsReferalAward.json</string>
-    <string>SettingsFollowContentFrame.json</string>
-    <string>SettingsFollowListScene.json</string>
-    <string>CommunityTimelineFrame.json</string>
-    <string>CommunityTimelineContent.json</string>
   </JsonList>
   <CanvasSize>
     <Width>640</Width>
@@ -165,7 +162,13 @@
   <ProjectType>UIProject</ProjectType>
   <ResRelativePath />
   <imageFileList />
-  <imagePngList />
+  <imagePngList>
+    <string>LoginNReg/photo.png</string>
+    <string>Competition/btn-learnmore.png</string>
+    <string>MatchListScene/Arrow down.png</string>
+    <string>MatchListScene/Arrow Up.png</string>
+    <string>community/img-separator.png</string>
+  </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>CommunityLeaderboardFrame.json</CurrentUIJson>
+  <CurrentUIJson>MyPicksFollowContentFrame.json</CurrentUIJson>
 </UIProject>

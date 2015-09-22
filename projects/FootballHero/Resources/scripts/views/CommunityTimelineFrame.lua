@@ -36,9 +36,8 @@ end
 
 
 function loadMoreContent( jsonResponse )
-    if table.getn( jsonResponse ) == 0 then
+    if table.getn( jsonResponse ) < 20 then
         mHasMoreToLoad = false
-        return
     end
     mStep = mStep + 1
     local contentContainer = tolua.cast( mWidget:getChildByName("ScrollView"), "ScrollView" )

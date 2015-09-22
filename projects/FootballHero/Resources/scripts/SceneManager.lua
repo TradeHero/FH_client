@@ -133,6 +133,7 @@ function initEvents()
     EventManager:registerEventHandler( Event.Enter_LiveScoreScene, "scripts.actions.EnterLiveScoreScene" )
     EventManager:registerEventHandler( Event.Enter_FollowList, "scripts.actions.EnterFollowList" )
     EventManager:registerEventHandler( Event.Enter_Friend_Referal, "scripts.actions.EnterFriendReferalAction" )
+    EventManager:registerEventHandler( Event.Enter_MyPicksFollowList, "scripts.actions.EnterMyPicksFollowList" )
     
 
     EventManager:registerEventHandler( Event.Do_Lucky8_Rounds, "scripts.actions.DoLucky8RoundsAction" )

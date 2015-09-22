@@ -42,17 +42,6 @@ function loadFrame( userId, competitionId, couponHistory, additionalParam, count
     local userInfoPanel = mWidget:getChildByName("Panel_userInfo")
     local totalPoints = tolua.cast( userInfoPanel:getChildByName("Label_Total_Points"), "Label" )
     totalPoints:setText( string.format( Constants.String.history.total_points, couponHistory:getBalance() ) )
-    
-    local followPanel = mWidget:getChildByName("Panel_follow")
-    local follows = tolua.cast( followPanel:getChildByName("Label_Follow"), "Label" )
-    local nFollow = couponHistory:getFollow()
-    if nFollow == nil then
-        followPanel:setEnabled( false )
-    else
-        followPanel:setEnabled( true )
-        follows:setText( string.format( Constants.String.history.follows, nFollow ) )
-    end
-    
     mUserId = userId
     if mUserId == Logic:getUserId() then
         if mCompetitionId ~= nil or nFollow ~= nil then
@@ -72,6 +61,7 @@ function loadFrame( userId, competitionId, couponHistory, additionalParam, count
     SceneManager.clearNAddWidget( mWidget )
 
     initFilter( mCountryFilter )
+    initFollow( couponHistory )
     initContent( couponHistory )
 
     Navigator.loadFrame( mWidget )
@@ -88,21 +78,26 @@ function refreshFrame( userId, competitionId, couponHistory, additionalParam, co
     local userInfoPanel = mWidget:getChildByName("Panel_userInfo")
     local totalPoints = tolua.cast( userInfoPanel:getChildByName("Label_Total_Points"), "Label" )
     totalPoints:setText( string.format( Constants.String.history.total_points, couponHistory:getBalance() ) )
-
-    local followPanel = mWidget:getChildByName("Panel_follow")
-    local follows = tolua.cast( followPanel:getChildByName("Label_Follow"), "Label" )
-    local nFollow = couponHistory:getFollow()
-    if nFollow == nil then
-        followPanel:setEnabled( false )
+    mUserId = userId
+    if mUserId == Logic:getUserId() then
+        if mCompetitionId ~= nil or nFollow ~= nil then
+            showBackButton = true
+        end
     else
-        followPanel:setEnabled( true )
-        follows:setText( string.format( Constants.String.history.follows, nFollow ) )
+        showBackButton = true
     end
- 
+
+    if showBackButton then
+        Header.loadFrame( mWidget, Constants.String.history.title, true )
+    else
+        Header.loadFrame( mWidget, Constants.String.history.title, false )
+    end
+    initFilter( mCountryFilter )
+    initFollow( couponHistory )
+    initContent( couponHistory )
+
     mStep = 1
     mHasMoreToLoad = false
-    initFilter( mCountryFilter )
-    initContent( couponHistory )
 end
 
 
@@ -128,6 +123,61 @@ end
 function initFilter( countryFilter )
     initSportFilter()
     initCountryFilter( countryFilter )
+end
+
+function initFollow( couponHistory )
+    local btnFollow = tolua.cast( mWidget:getChildByName("Button_Follow"), "Button" )
+    local panelFollower = mWidget:getChildByName("Panel_follower")
+    local labelFollower = tolua.cast( panelFollower:getChildByName("Label_text"), "Label" )
+    local labelNumFollower = tolua.cast( panelFollower:getChildByName("Label_num"), "Label" )
+    local panelFollowing = mWidget:getChildByName("Panel_follow")
+    local labelFollowing = tolua.cast( panelFollowing:getChildByName("Label_text"), "Label" )
+    local labelnumFollowing = tolua.cast( panelFollowing:getChildByName("Label_num"), "Label" )
+
+    labelNumFollower:setText( couponHistory:getFollower() )
+    labelFollower:setText( Constants.String.history.follower )
+    local followerHandler = function( sender, eventType )
+        if eventType == TOUCH_EVENT_ENDED then
+            EventManager:postEvent( Event.Enter_MyPicksFollowList, { mUserId, 1 })
+        end
+    end
+    panelFollower:addTouchEventListener(followerHandler)
+  
+    labelnumFollowing:setText( couponHistory:getFollowing() )
+    labelFollowing:setText( Constants.String.history.following )
+    local followingHandler = function( sender, eventType )
+        if eventType == TOUCH_EVENT_ENDED then
+            EventManager:postEvent( Event.Enter_MyPicksFollowList, { mUserId,2 })
+        end
+    end
+    panelFollowing:addTouchEventListener(followingHandler)
+
+    if isSelf() then
+        btnFollow:setEnabled( false )
+    else
+        local bFollow = couponHistory:IsFollowed()
+        if bFollow then
+            btnFollow:setTitleText( Constants.String.history.unfollow_button )
+        else
+            btnFollow:setTitleText( Constants.String.history.follow_button )
+        end
+
+        local followCallback = function (  )
+            if bFollow then
+                btnFollow:setTitleText( Constants.String.history.unfollow_button )
+            else
+                btnFollow:setTitleText( Constants.String.history.follow_button )
+            end
+            RequestUtils.invalidResponseCacheContainsUrl( RequestUtils.GET_COUPON_HISTORY_REST_CALL )
+        end
+        local followHandler = function( sender, eventType )
+            if eventType == TOUCH_EVENT_ENDED then
+                bFollow = not bFollow
+                EventManager:postEvent( Event.Do_Follow_Expert, { mUserId , bFollow ,  followCallback } )
+            end
+        end
+        btnFollow:addTouchEventListener( followHandler ) 
+    end    
 end
 
 function initSportFilter()
@@ -300,7 +350,7 @@ function initContent( couponHistory )
     local info = couponHistory:getStats()
     local label = tolua.cast( mWidget:getChildByName("Label_CompTitle"), "Label" )
     local show = tolua.cast( mWidget:getChildByName("Panel_showall"), "Layout" )
-    CCLuaLog("initContent")
+
     if mAdditionalParam == "&isExpert=true" then
         local showLabel = tolua.cast( show:getChildByName("Label_text"), "Label" )
         showLabel:setText( Constants.String.history.show_all )
@@ -400,34 +450,6 @@ function initContent( couponHistory )
             end
         end
         SMIS.getSMImagePath( info["PictureUrl"], handler )
-    end
-
-    local follow = tolua.cast( mWidget:getChildByName("Button_Follow"), "Button" )
-    if isSelf() then
-        follow:setEnabled(false)
-    else
-        local bFollow = couponHistory:IsFollowed()
-        if bFollow then
-            follow:setTitleText( Constants.String.history.unfollow_button )
-        else
-            follow:setTitleText( Constants.String.history.follow_button )
-        end
-
-        local followCallback = function (  )
-            if bFollow then
-                follow:setTitleText( Constants.String.history.unfollow_button )
-            else
-                follow:setTitleText( Constants.String.history.follow_button )
-            end
-            RequestUtils.invalidResponseCacheContainsUrl( RequestUtils.GET_COUPON_HISTORY_REST_CALL )
-        end
-        local followHandler = function( sender, eventType )
-            if eventType == TOUCH_EVENT_ENDED then
-                bFollow = not bFollow
-                EventManager:postEvent( Event.Do_Follow_Expert, { mUserId , bFollow ,  followCallback } )
-            end
-        end
-        follow:addTouchEventListener( followHandler ) 
     end
 
     -- Add the open predictions 
