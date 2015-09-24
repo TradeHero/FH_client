@@ -91,10 +91,8 @@ function createContent( content, timeline, i )
     local labelMsg = tolua.cast( panel:getChildByName("Label_Msg"), "Label" )
     local imagePic = tolua.cast( panel:getChildByName("Image_Pic"), "ImageView" )
 
-    local panelMore = tolua.cast( content:getChildByName("Panel_More"), "Layout" )
     local btnMore = tolua.cast( panel:getChildByName("Button_More"), "Button" )
     btnMore:setEnabled( false )
-    panelMore:setEnabled( false )
 
     local userHandler = function( sender, eventType )
         if eventType == TOUCH_EVENT_ENDED then
@@ -124,42 +122,31 @@ function createContent( content, timeline, i )
     mWidget:runAction( CCSequence:create( seqArray ) )
 
     if timelineType == 1 then -- predict
-        local gameId = timeline["GameId"]
+        local gameInfo = timeline["UserGameDTO"]
         local pickId = timeline["PickTeamId"]
         local teamLogo = ""
+        
+        btnMore:setEnabled( true )
+
         local predHandler = function( sender, eventType )
             if eventType == TOUCH_EVENT_ENDED then
-                predictMatch( gameId )
+                predictMatch( gameInfo["GameId"] )
             end
         end
         imagePic:addTouchEventListener( predHandler )
+
+        local userPredHandler = function( sender, eventType )
+            if eventType == TOUCH_EVENT_ENDED then
+                userPredict( userId, gameInfo )
+            end
+        end
+        panel:addTouchEventListener( userPredHandler )
+
         if pickId ~= -1 then
             pickId = TeamConfig.getConfigIdByKey(timeline["PickTeamId"])
             teamLogo = TeamConfig.getLogo( pickId, true )
         end
         imagePic:loadTexture( teamLogo )
-
-        -- local scroll = tolua.cast( mWidget:getChildByName("ScrollView"), "ScrollView" )
-        -- local labelMore = tolua.cast( panelMore:getChildByName("Label_More"), "Label" )
-        -- labelMore:setText( message )
-        -- local btnMore = tolua.cast( panel:getChildByName("Button_More"), "Button" )
-        -- local dropHandler = function( sender, eventType )
-        --     if eventType == TOUCH_EVENT_ENDED then
-        --         local deltaY = 80
-        --         local hight = scroll:getInnerContainerSize().height
-
-        --         panelMore:setEnabled( true )
-        --         btnMore:setEnabled( false )
-        --         content:setSize( CCSize:new( content:getSize().width, content:getSize().height + deltaY ) )
-        --         hight = hight + deltaY
-        --         CCLuaLog("More")
-
-        --         scroll:setInnerContainerSize( CCSize:new( 0, hight ) )
-        --         local layout = tolua.cast( scroll, "Layout" )
-        --         layout:requestDoLayout()
-        --     end
-        -- end
-        -- btnMore:addTouchEventListener(dropHandler)
 
     elseif timelineType == 2 then -- follow
        local followData = timeline["FollowUserMetaData"]
@@ -230,30 +217,26 @@ function predictMatch( matchId )
     EventManager:postEvent( Event.Enter_Match_Center, { 1 , matchId } )
 end
 
+function userPredict( userId, matchInfo )
+--    CCLuaLog( userId .. " Predict " .. matchInfo["GameId"] )
+    EventManager:postEvent( Event.Enter_History_Detail, { userId, true, matchInfo } )
+end
+
 function enterUserHistory( userId )
     EventManager:postEvent( Event.Enter_History, { userId } )
 end
 
 function enterCompetition( competitionId )
     EventManager:postEvent( Event.Enter_Competition_Detail, { competitionId, false, 3, 2 } )
--- http://fhapi-dev1.cloudapp.net/api/leaderboards/getCompetitionInfoAndLeaderboard?competitionId=22910&sortType=3&step=1&perPage=50&useDev=true&yearNumber=2015&monthNumber=09
--- http://fhapi-dev1.cloudapp.net/api/leaderboards/getCompetitionInfoAndLeaderboard?competitionId=22909&sortType=3&step=1&perPage=50&useDev=true
 end
-
 
 function scrollViewEventHandler( target, eventType )
     if eventType == SCROLLVIEW_EVENT_BOUNCE_BOTTOM and mHasMoreToLoad then
         mStep = mStep + 1
         EventManager:postEvent( Event.Load_More_In_Timeline, { mStep } )
-        -- if mFilter == true then
-        --     EventManager:postEvent( Event.Load_More_In_Leaderboard, { mLeaderboardId, mSubType, mStep, Constants.FILTER_MIN_PREDICTION } )
-        -- else
-        --     EventManager:postEvent( Event.Load_More_In_Leaderboard, { mLeaderboardId, mSubType, mStep } )
-        -- end
     elseif eventType == SCROLLVIEW_EVENT_BOUNCE_TOP then
         mStep = 1
         mHasMoreToLoad = true
         EventManager:postEvent( Event.Load_More_In_Timeline, { mStep } )
-        -- EventManager:postEvent( Event.Load_More_In_Leaderboard, { mLeaderboardId, mSubType, mStep, Constants.FILTER_MIN_PREDICTION } )
     end
 end

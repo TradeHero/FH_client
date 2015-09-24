@@ -164,11 +164,9 @@
   <imageFileList />
   <imagePngList>
     <string>LoginNReg/photo.png</string>
-    <string>Competition/btn-learnmore.png</string>
-    <string>MatchListScene/Arrow down.png</string>
-    <string>MatchListScene/Arrow Up.png</string>
-    <string>community/img-separator.png</string>
+    <string>community/btn-goarrow.png</string>
+    <string>community/btn-goarrow-down.png</string>
   </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>MyPicksFollowContentFrame.json</CurrentUIJson>
+  <CurrentUIJson>CommunityTimelineContent.json</CurrentUIJson>
 </UIProject>

@@ -204,6 +204,7 @@ EventNameDosenotTrackList =
     "Load_More_In_Expert_History",
     "Load_More_In_Competition_Detail",
     "Load_More_In_Spin_Winner",
+    "Load_More_In_Timeline",
     "Load_More_Discussion_Posts",
 
     "Export_Unlocalized_String",
