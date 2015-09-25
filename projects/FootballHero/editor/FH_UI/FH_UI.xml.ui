@@ -163,10 +163,14 @@
   <ResRelativePath />
   <imageFileList />
   <imagePngList>
-    <string>LoginNReg/photo.png</string>
-    <string>community/btn-goarrow.png</string>
-    <string>community/btn-goarrow-down.png</string>
+    <string>MatchPrediction/prediction-yes.png</string>
+    <string>MyHero/img-openbox.png</string>
+    <string>MyHero/img-winbox.png</string>
+    <string>MyHero/img-losebox.png</string>
+    <string>MatchPrediction/img-infobox.png</string>
+    <string>MatchPrediction/img-title.png</string>
+    <string>MatchPrediction/icn-info.png</string>
   </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>CommunityTimelineContent.json</CurrentUIJson>
+  <CurrentUIJson>HistoryDetailOpenContent.json</CurrentUIJson>
 </UIProject>

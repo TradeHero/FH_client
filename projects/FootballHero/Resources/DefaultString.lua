@@ -294,6 +294,7 @@ StringsDefault = {
     unfollow_button = "Unfollow",
     show_all = "Show All",
     stake = "Stake: %d Points",
+    odd = "Odd: %.2f",
     win_count = "%d of %d",
     draw = "Draw",
   },
