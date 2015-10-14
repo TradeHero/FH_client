@@ -49,6 +49,7 @@
 #import <ShareSDK/ShareSDK.h>
 #import "WXApi.h"                   //微信
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import "Flurry.h"
 
 @implementation AppController
 
@@ -163,6 +164,7 @@ static AppDelegate s_sharedApplication;
         }
     }
 **/
+    [Flurry startSession:@"ZJW944VMZ5JTVCVM7N69"];
     return YES;
 }
 

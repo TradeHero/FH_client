@@ -64,6 +64,7 @@ import com.localytics.android.LocalyticsAmpSession;
 import com.localytics.android.LocalyticsActivityLifecycleCallbacks;
 
 import com.appsflyer.AppsFlyerLib;
+import com.flurry.android.FlurryAgent;
 
 
 public class MainActivity extends Cocos2dxActivity {
@@ -143,6 +144,12 @@ public class MainActivity extends Cocos2dxActivity {
     QuickBloxChat.init(this);
 
     ShareSDKUtils.prepare();
+
+    // configure Flurry
+    FlurryAgent.setLogEnabled(false);
+
+    // init Flurry
+    FlurryAgent.init(this, "DXBRPTBZ6P8B4YGK98ZW");
   }
 
     @Override

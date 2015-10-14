@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		10EE79A71BCE33DC0097EF70 /* Empty.m in Sources */ = {isa = PBXBuildFile; fileRef = 10EE79A31BCE33DC0097EF70 /* Empty.m */; };
+		10EE79A81BCE33DC0097EF70 /* libFlurry_7.1.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 10EE79A61BCE33DC0097EF70 /* libFlurry_7.1.0.a */; };
 		10FBB9D41B66022900F267D4 /* DeviceUtil.mm in Sources */ = {isa = PBXBuildFile; fileRef = 10FBB9D31B66022900F267D4 /* DeviceUtil.mm */; };
 		10FBB9D71B66109000F267D4 /* DeviceID.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 10FBB9D51B66109000F267D4 /* DeviceID.cpp */; };
 		150CD3951872B593007F1964 /* UITouchGroup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 150CD3931872B593007F1964 /* UITouchGroup.cpp */; };
@@ -462,6 +464,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		10EE79A31BCE33DC0097EF70 /* Empty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Empty.m; sourceTree = "<group>"; };
+		10EE79A41BCE33DC0097EF70 /* Flurry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flurry.h; sourceTree = "<group>"; };
+		10EE79A51BCE33DC0097EF70 /* FlurryWatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlurryWatch.h; sourceTree = "<group>"; };
+		10EE79A61BCE33DC0097EF70 /* libFlurry_7.1.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurry_7.1.0.a; sourceTree = "<group>"; };
 		10FBB9D21B66022900F267D4 /* DeviceUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceUtil.h; sourceTree = "<group>"; };
 		10FBB9D31B66022900F267D4 /* DeviceUtil.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DeviceUtil.mm; sourceTree = "<group>"; };
 		10FBB9D51B66109000F267D4 /* DeviceID.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DeviceID.cpp; path = ../Classes/DeviceID.cpp; sourceTree = "<group>"; };
@@ -1305,6 +1311,7 @@
 				F293B3D115EB7BE500256477 /* OpenAL.framework in Frameworks */,
 				730332F21AB9232A00657F74 /* WeChatConnection.framework in Frameworks */,
 				F293B3D315EB7BE500256477 /* AudioToolbox.framework in Frameworks */,
+				10EE79A81BCE33DC0097EF70 /* libFlurry_7.1.0.a in Frameworks */,
 				F293B3D515EB7BE500256477 /* AVFoundation.framework in Frameworks */,
 				F293B3D715EB7BE500256477 /* UIKit.framework in Frameworks */,
 				F293B3D915EB7BE500256477 /* Foundation.framework in Frameworks */,
@@ -1321,6 +1328,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		10EE79A21BCE33DC0097EF70 /* Flurry */ = {
+			isa = PBXGroup;
+			children = (
+				10EE79A31BCE33DC0097EF70 /* Empty.m */,
+				10EE79A41BCE33DC0097EF70 /* Flurry.h */,
+				10EE79A51BCE33DC0097EF70 /* FlurryWatch.h */,
+				10EE79A61BCE33DC0097EF70 /* libFlurry_7.1.0.a */,
+			);
+			path = Flurry;
+			sourceTree = "<group>";
+		};
 		15C1533F168310C700D239F2 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -2894,6 +2912,7 @@
 		F293B3BD15EB7BE500256477 = {
 			isa = PBXGroup;
 			children = (
+				10EE79A21BCE33DC0097EF70 /* Flurry */,
 				F293BB7C15EB830F00256477 /* Classes */,
 				730332DC1AB9232A00657F74 /* ShareSDK */,
 				732CCE771A8B5DFE001533F0 /* QuickBlox */,
@@ -3230,6 +3249,7 @@
 				73FE00A21A43FEA100B0BC05 /* strbuf.c in Sources */,
 				15C1540D1683112E00D239F2 /* CCScrollViewLoader.cpp in Sources */,
 				15C1540E1683112E00D239F2 /* CCSpriteLoader.cpp in Sources */,
+				10EE79A71BCE33DC0097EF70 /* Empty.m in Sources */,
 				73B455CF19A48B2D0097A722 /* lua_zlib.c in Sources */,
 				732CCE951A8DABE8001533F0 /* QuickBloxChat.cpp in Sources */,
 				ED35C0D918323498002A0750 /* CCUtilMath.cpp in Sources */,
@@ -3664,9 +3684,10 @@
 					"\"$(PROJECT_DIR)/AMP-SDK\"",
 					"\"$(PROJECT_DIR)/Airship\"",
 					"\"$(SRCROOT)/../../../scripting/lua/lua/ios\"",
-					"$(PROJECT_DIR)/AMP-SDK",
-					"$(PROJECT_DIR)/AF-iOS-SDK-v2.5.3.11",
-					"$(PROJECT_DIR)/ShareSDK/Extend/WeChatSDK",
+					"\"$(PROJECT_DIR)/AMP-SDK\"",
+					"\"$(PROJECT_DIR)/AF-iOS-SDK-v2.5.3.11\"",
+					"\"$(PROJECT_DIR)/ShareSDK/Extend/WeChatSDK\"",
+					"\"$(PROJECT_DIR)/Flurry\"",
 				);
 				OTHER_LDFLAGS = (
 					"-lxml2",
@@ -3738,9 +3759,10 @@
 					"\"$(PROJECT_DIR)/AMP-SDK\"",
 					"\"$(PROJECT_DIR)/Airship\"",
 					"\"$(SRCROOT)/../../../scripting/lua/lua/ios\"",
-					"$(PROJECT_DIR)/AMP-SDK",
-					"$(PROJECT_DIR)/AF-iOS-SDK-v2.5.3.11",
-					"$(PROJECT_DIR)/ShareSDK/Extend/WeChatSDK",
+					"\"$(PROJECT_DIR)/AMP-SDK\"",
+					"\"$(PROJECT_DIR)/AF-iOS-SDK-v2.5.3.11\"",
+					"\"$(PROJECT_DIR)/ShareSDK/Extend/WeChatSDK\"",
+					"\"$(PROJECT_DIR)/Flurry\"",
 				);
 				OTHER_LDFLAGS = (
 					"-lxml2",
