@@ -119,7 +119,7 @@ EventNameList =
     "Do_Wechat_Friend_Referal",
     "Do_Wechat_Moments_Friend_Referal",
     "Do_Friend_Referal_Success",
-   
+    "Do_Get_Currencies",
 
     "Show_Info",
     "Show_Error_Message",
@@ -188,6 +188,7 @@ EventNameDosenotTrackList =
     "Do_Wechat_Friend_Referal",
     "Do_Wechat_Moments_Friend_Referal",
     "Do_Friend_Referal_Success",
+    "Do_Get_Currencies",
 
 
     "Do_Startup",

@@ -50,10 +50,8 @@ function loadFrame( parent, matchInfo, marketInfo, finishCallback, bigBetStatus,
     local noWinPoint = tolua.cast( no:getChildByName("noWinPoint"), "Label" )
     local noToWin = tolua.cast( no:getChildByName("Label_ToWin"), "Label" )
     local stake = tolua.cast( mWidget:getChildByName("stake"), "Label" )
-    local balance = tolua.cast( mWidget:getChildByName("balance"), "Label" )
     local bigBet = tolua.cast( mWidget:getChildByName("CheckBox_BigBet"), "CheckBox" )
     local countdown = mWidget:getChildByName("Button_Countdown")
-    local lbBalance = tolua.cast( mWidget:getChildByName("Label_Balance"), "Label" )
     local lbStake = tolua.cast( mWidget:getChildByName("Label_Stake"), "Label" )
     local vs = tolua.cast( mWidget:getChildByName("VS"), "Label" )
     local titleHandicap = tolua.cast( question:getChildByName("Label_Header"), "Label" )
@@ -61,11 +59,9 @@ function loadFrame( parent, matchInfo, marketInfo, finishCallback, bigBetStatus,
 
     local popupHandicap = tolua.cast( mWidget:getChildByName("Image_HandicapPopup"), "ImageView" )
 
-    lbBalance:setText( Constants.String.match_prediction.balance )
     lbStake:setText( Constants.String.match_prediction.stake )
     yesToWin:setText( Constants.String.match_prediction.stand_to_win )
     noToWin:setText( Constants.String.match_prediction.stand_to_win )
-    balance:setText( Constants.String.match_prediction.balance )
     stake:setText( Constants.String.match_prediction.stake )
     vs:setText( Constants.String.vs )
     if SportsConfig.getCurrentSportId() == SportsConfig.BASEBALL_ID then
@@ -144,7 +140,6 @@ function loadFrame( parent, matchInfo, marketInfo, finishCallback, bigBetStatus,
     yesWinPoint:setText( string.format( Constants.String.num_of_points, MarketsForGameData.getOddsForType( mMarketInfo, MarketConfig.ODDS_TYPE_ONE_OPTION ) * mStake ) )
     noWinPoint:setText( string.format( Constants.String.num_of_points, MarketsForGameData.getOddsForType( mMarketInfo, MarketConfig.ODDS_TYPE_TWO_OPTION ) * mStake ) )
     stake:setText( string.format( Constants.String.num_of_points, mStake ) )
-    balance:setText( string.format( Constants.String.num_of_points, Logic:getBalance() - Logic:getUncommitedBalance() ) )
 
     local labelHome = tolua.cast( popupHandicap:getChildByName( "Label_TitleHome"), "Label" )
     local labelAway = tolua.cast( popupHandicap:getChildByName( "Label_TitleAway"), "Label" )

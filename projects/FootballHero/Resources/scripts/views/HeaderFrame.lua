@@ -45,8 +45,8 @@ function loadFrame( parent, titleText, bHasBackBtn, bHasWebView )
 
     showLiveButton( false )
 
-    local menuBtn = tolua.cast( mWidget:getChildByName("Button_menu"), "Button" )
-    local menuPanel = mWidget:getChildByName("Panel_menu")
+    local menuBtn = tolua.cast( mWidget:getChildByName("Button_Menu"), "Button" )
+    local menuPanel = mWidget:getChildByName("Panel_Menu")
     menuPanel:addTouchEventListener( menuEventHandler )
     menuBtn:setEnabled( false )
     menuPanel:setEnabled( false )
@@ -54,6 +54,7 @@ function loadFrame( parent, titleText, bHasBackBtn, bHasWebView )
 
     hideSportLogo()
     refreshLogo()
+    refreshCurrency()
 end
 
 function eventLiveClicked( sender, eventType )
@@ -75,8 +76,8 @@ function showLiveButton( isShow )
 end
 
 function showMenuButtonWithSportChangeEventHanlder( handler )
-    local menuBtn = tolua.cast( mWidget:getChildByName("Button_menu"), "Button" )
-    local menuPanel = mWidget:getChildByName("Panel_menu")
+    local menuBtn = tolua.cast( mWidget:getChildByName("Button_Menu"), "Button" )
+    local menuPanel = mWidget:getChildByName("Panel_Menu")
     menuBtn:setEnabled( true )
     menuPanel:setEnabled( true )
 
@@ -86,8 +87,8 @@ function showMenuButtonWithSportChangeEventHanlder( handler )
 end
 
 function hideMenuButton()
-    local menuBtn = tolua.cast( mWidget:getChildByName("Button_menu"), "Button" )
-    local menuPanel = mWidget:getChildByName("Panel_menu")
+    local menuBtn = tolua.cast( mWidget:getChildByName("Button_Menu"), "Button" )
+    local menuPanel = mWidget:getChildByName("Panel_Menu")
     menuBtn:setEnabled( false )
     menuPanel:setEnabled( false )
 
@@ -95,19 +96,30 @@ function hideMenuButton()
 end
 
 function showSportLogo()
-    local sportLogo = tolua.cast( mWidget:getChildByName("Image_sportLogo"), "ImageView" )
+    local sportLogo = tolua.cast( mWidget:getChildByName("Image_SportLogo"), "ImageView" )
     sportLogo:setEnabled( true )
 end
 
 function hideSportLogo()
-    local sportLogo = tolua.cast( mWidget:getChildByName("Image_sportLogo"), "ImageView" )
+    local sportLogo = tolua.cast( mWidget:getChildByName("Image_SportLogo"), "ImageView" )
     sportLogo:setEnabled( false )
 end
 
 function refreshLogo()
     local resPath = SportsConfig.getCurrentSportLogoPath()
-    local sportLogo = tolua.cast( mWidget:getChildByName("Image_sportLogo"), "ImageView" )
+    local sportLogo = tolua.cast( mWidget:getChildByName("Image_SportLogo"), "ImageView" )
     sportLogo:loadTexture( resPath )
+end
+
+function setCurrency( points, tickets )
+    local labelPoints = tolua.cast( mWidget:getChildByName("Label_Points"), "Label" )
+    local labelTickets = tolua.cast( mWidget:getChildByName("Label_Tickets"), "Label" )
+    labelPoints:setText(points)
+    labelTickets:setText(tickets)
+end
+
+function refreshCurrency()
+    EventManager:postEvent( Event.Do_Get_Currencies, { setCurrency } )
 end
 
 function EnterOrExit( eventType )

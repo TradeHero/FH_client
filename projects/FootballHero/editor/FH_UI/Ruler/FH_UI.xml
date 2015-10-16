@@ -616,4 +616,16 @@
     <Project>MyPicksFollowContentFrame</Project>
     <GuidesList />
   </GuidesProject>
+  <GuidesProject>
+    <Project>StoreFrame</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>StoreContentFrame</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>FH_UI_149</Project>
+    <GuidesList />
+  </GuidesProject>
 </ArrayOfGuidesProject>

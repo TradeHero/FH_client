@@ -153,6 +153,8 @@
     <string>WTGBMTPrediction.json</string>
     <string>WTWBEGPrediction.json</string>
     <string>YourPicksCell.json</string>
+    <string>StoreFrame.json</string>
+    <string>StoreContentFrame.json</string>
   </JsonList>
   <CanvasSize>
     <Width>640</Width>
@@ -163,14 +165,8 @@
   <ResRelativePath />
   <imageFileList />
   <imagePngList>
-    <string>MatchPrediction/prediction-yes.png</string>
-    <string>MyHero/img-openbox.png</string>
-    <string>MyHero/img-winbox.png</string>
-    <string>MyHero/img-losebox.png</string>
-    <string>MatchPrediction/img-infobox.png</string>
-    <string>MatchPrediction/img-title.png</string>
-    <string>MatchPrediction/icn-info.png</string>
+    <string>header/back.png</string>
   </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>HistoryDetailOpenContent.json</CurrentUIJson>
+  <CurrentUIJson>StoreFrame.json</CurrentUIJson>
 </UIProject>
