@@ -134,6 +134,7 @@ function initEvents()
     EventManager:registerEventHandler( Event.Enter_FollowList, "scripts.actions.EnterFollowList" )
     EventManager:registerEventHandler( Event.Enter_Friend_Referal, "scripts.actions.EnterFriendReferalAction" )
     EventManager:registerEventHandler( Event.Enter_MyPicksFollowList, "scripts.actions.EnterMyPicksFollowList" )
+    EventManager:registerEventHandler( Event.Enter_Bet365, "scripts.actions.EnterBet365Action" )
     
 
     EventManager:registerEventHandler( Event.Do_Lucky8_Rounds, "scripts.actions.DoLucky8RoundsAction" )

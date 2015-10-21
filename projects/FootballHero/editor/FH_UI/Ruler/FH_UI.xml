@@ -616,4 +616,12 @@
     <Project>MyPicksFollowContentFrame</Project>
     <GuidesList />
   </GuidesProject>
+  <GuidesProject>
+    <Project>Bet365Cell</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>Bet365Scene</Project>
+    <GuidesList />
+  </GuidesProject>
 </ArrayOfGuidesProject>

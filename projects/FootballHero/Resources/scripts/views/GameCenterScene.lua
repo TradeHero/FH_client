@@ -6,6 +6,7 @@ local Event = require("scripts.events.Event").EventList
 local Constants = require("scripts.Constants")
 local Navigator = require("scripts.views.Navigator")
 local Header = require("scripts.views.GameCenterHeader")
+local SMIS = require("scripts.SMIS")
 
 local mWidget
 local mContentHeight
@@ -38,6 +39,7 @@ end
 function initCells( cellNum )
     mContentHeight = 0
     local contentContainer = tolua.cast( mWidget:getChildByName("ScrollView"), "ScrollView" )
+
     for i = 1, cellNum do
         local eventHandler = function ( sender, eventType )
             if eventType == TOUCH_EVENT_ENDED then
@@ -49,6 +51,7 @@ function initCells( cellNum )
         local panelFade = content:getChildByName( "Panel_Fade" )
         local gameImage = tolua.cast( panelFade:getChildByName("Image_Icon"), "ImageView" )
         gameImage:loadTexture( GAME_IMAGE_PATH[i] )
+        CCLuaLog("image:" .. GAME_IMAGE_PATH[i])
         
         local gameTitle = tolua.cast( panelFade:getChildByName("TextField_Title"), "TextField" )
         gameTitle:setText( GAMECENTER_TITLE_AND_DES[i][1] )
@@ -61,6 +64,30 @@ function initCells( cellNum )
         content:addTouchEventListener( eventHandler )
         updateContentContainer( mContentHeight, content )
     end
+
+    -- ad banner
+    local betHandler = function ( sender, eventType )
+        if eventType == TOUCH_EVENT_ENDED then
+            EventManager:postEvent( Event.Enter_Bet365 )
+        end
+    end
+    local content = SceneManager.widgetFromJsonFile( "scenes/Bet365Cell.json" )
+    local adImage = tolua.cast( content:getChildByName("Image_Ad"), "ImageView" )
+    local url = "https://www.bet365affiliates.com/AffiliateBanners/Games/Promos/LOTR/en-GB/ROI/STD/700x300_6.gif"
+    contentContainer:addChild( content )
+    mContentHeight = mContentHeight + adImage:getSize().height
+    content:addTouchEventListener( betHandler )
+    updateContentContainer( mContentHeight, content )
+
+    local handler = function( filePath )
+        if filePath ~= nil and mWidget ~= nil and adImage ~= nil then
+            local safeLoadTexture = function()
+               adImage:loadTexture( filePath )
+            end
+            xpcall( safeLoadTexture, function ( msg )  end )
+        end
+    end
+    SMIS.getSMImagePath( url, handler )
 end
 
 function updateContentContainer( contentHeight, content )

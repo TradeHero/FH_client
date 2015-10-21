@@ -153,6 +153,8 @@
     <string>WTGBMTPrediction.json</string>
     <string>WTWBEGPrediction.json</string>
     <string>YourPicksCell.json</string>
+    <string>Bet365Cell.json</string>
+    <string>Bet365Scene.json</string>
   </JsonList>
   <CanvasSize>
     <Width>640</Width>
@@ -163,14 +165,11 @@
   <ResRelativePath />
   <imageFileList />
   <imagePngList>
-    <string>MatchPrediction/prediction-yes.png</string>
-    <string>MyHero/img-openbox.png</string>
-    <string>MyHero/img-winbox.png</string>
-    <string>MyHero/img-losebox.png</string>
-    <string>MatchPrediction/img-infobox.png</string>
-    <string>MatchPrediction/img-title.png</string>
-    <string>MatchPrediction/icn-info.png</string>
+    <string>commonRes/landing-bg-bet365.png</string>
+    <string>header/back.png</string>
+    <string>commonRes/bet-365-logo.png</string>
+    <string>commonRes/landing-button-bet365.png</string>
   </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>HistoryDetailOpenContent.json</CurrentUIJson>
+  <CurrentUIJson>Bet365Scene.json</CurrentUIJson>
 </UIProject>

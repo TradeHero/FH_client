@@ -71,6 +71,7 @@ EventNameList =
     "Enter_Friend_Referal",
     "Enter_FollowList",
     "Enter_MyPicksFollowList",
+    "Enter_Bet365",
 
     "Do_Lucky8_Rounds",
     "Do_Lucky8_Submit",

@@ -34,6 +34,7 @@ MINIGAME_IMAGE_PATH = "scenes/mini-game/"
 CHAT_IMAGE_PATH = "scenes/chat/"
 SETTINGS_IMAGE_PATH = "scenes/Settings/"
 
+BET365_URL = "http://imstore.bet365affiliates.com/Tracker.aspx?AffiliateId=83760&AffiliateCode=365_389787&CID=645&DID=82&TID=1&PID=163&LNG=1"
 
 BannerPrefix = "banner_"
 BannerPreviewPrefix = "banner_prev_"
