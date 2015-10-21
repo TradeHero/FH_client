@@ -164,9 +164,7 @@
   <ProjectType>UIProject</ProjectType>
   <ResRelativePath />
   <imageFileList />
-  <imagePngList>
-    <string>header/back.png</string>
-  </imagePngList>
+  <imagePngList />
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>StoreFrame.json</CurrentUIJson>
+  <CurrentUIJson>StoreContentFrame.json</CurrentUIJson>
 </UIProject>

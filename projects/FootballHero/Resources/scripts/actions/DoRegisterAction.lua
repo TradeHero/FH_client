@@ -97,6 +97,7 @@ function onRegisterRequestSuccess( jsonResponse )
     local pictureUrl = jsonResponse["PictureUrl"]
     local startLeagueId = Constants.SpecialLeagueIds.MOST_POPULAR --jsonResponse["StartLeagueId"]
     local balance = jsonResponse["Balance"]
+    local ticket = jsonResponse["Ticket"]
     local FbId = jsonResponse["FbId"]
     local needUpdate = jsonResponse["Update"]
 
@@ -114,6 +115,7 @@ function onRegisterRequestSuccess( jsonResponse )
         Logic:setPictureUrl( pictureUrl )
         Logic:setStartLeagueId( startLeagueId )
         Logic:setBalance( balance )
+        Logic:setTicket( Ticket )
         Logic:setFbId( FbId )
 
         QuickBloxService.login( displayName, pictureUrl, userId, function( token )

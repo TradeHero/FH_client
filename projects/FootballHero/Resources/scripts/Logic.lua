@@ -61,6 +61,7 @@ function Logic:new()
 		pictureUrl = nil,
 		startLeagueId = 0,
 		balance = 0,
+		mTicket = 0,
 		ActiveInCompetition = false,
 		FbId = nil,
 		mExpert = false,
@@ -247,6 +248,14 @@ end
 
 function Logic:getBalance()
 	return self.balance
+end
+
+function Logic:setTicket( ticket )
+	self.mTicket = ticket
+end
+
+function Logic:getTicket()
+	return self.mTicket
 end
 
 function Logic:setActiveInCompetition( active )

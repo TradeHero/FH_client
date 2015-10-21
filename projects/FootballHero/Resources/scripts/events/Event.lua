@@ -62,6 +62,7 @@ EventNameList =
     "Enter_Discussion_Details",
     "Enter_Settings_Select_League",
     "Enter_Settings_Select_Team",
+    "Enter_Store",
     "Enter_Quickblox_Chatroom",
     "Enter_Video_Info",
 	"Enter_GameCenter",
