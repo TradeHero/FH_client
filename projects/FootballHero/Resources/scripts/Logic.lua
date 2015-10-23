@@ -68,6 +68,7 @@ function Logic:new()
 		favoriteTeams = {},
 		quickBloxToken = "",
 		deviceID = "",
+		mBetBlock = true,
 	
 
 		competitionDetail = nil,
@@ -277,6 +278,13 @@ function Logic:getExpert( )
     return self.mExpert
 end
 
+function Logic:setBetBlock( bBlock )
+    self.mBetBlock = bBlock
+end
+
+function Logic:getBetBlock( )
+    return self.mBetBlock
+end
 function Logic:getDeviceToken()
 	if self.deviceToken == "" then
 		Misc:sharedDelegate():getUADeviceToken( function( token )

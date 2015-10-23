@@ -1008,6 +1008,40 @@ static int tolua_Extension_WebviewDelegate_sharedDelegate00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: openWebpage of class  WebviewDelegate */
+#ifndef TOLUA_DISABLE_tolua_Extension_WebviewDelegate_openWebpage01
+static int tolua_Extension_WebviewDelegate_openWebpage01(lua_State* tolua_S)
+{
+#ifndef TOLUA_RELEASE
+    tolua_Error tolua_err;
+    if (
+        !tolua_isusertype(tolua_S,1,"WebviewDelegate",0,&tolua_err) ||
+        !tolua_isstring(tolua_S,2,0,&tolua_err) ||
+         !tolua_isnoobj(tolua_S,3,&tolua_err)
+        )
+        goto tolua_lerror;
+    else
+#endif
+    {
+        WebviewDelegate* self = (WebviewDelegate*)  tolua_tousertype(tolua_S,1,0);
+        const char* url = ((const char*)  tolua_tostring(tolua_S,2,0));
+#ifndef TOLUA_RELEASE
+        if (!self) tolua_error(tolua_S,"invalid 'self' in function 'openWebpage'", NULL);
+#endif
+        {
+            self->openWebpage(url);
+        }
+    }
+    return 0;
+#ifndef TOLUA_RELEASE
+tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'openWebpage'.",&tolua_err);
+    return 0;
+#endif
+}
+#endif //#ifndef TOLUA_DISABLE
+
+
+/* method: openWebpage of class  WebviewDelegate */
 #ifndef TOLUA_DISABLE_tolua_Extension_WebviewDelegate_openWebpage00
 static int tolua_Extension_WebviewDelegate_openWebpage00(lua_State* tolua_S)
 {
@@ -2110,6 +2144,7 @@ TOLUA_API int tolua_Extension_open (lua_State* tolua_S)
   tolua_cclass(tolua_S,"WebviewDelegate","WebviewDelegate","",NULL);
   tolua_beginmodule(tolua_S,"WebviewDelegate");
    tolua_function(tolua_S,"sharedDelegate",tolua_Extension_WebviewDelegate_sharedDelegate00);
+   tolua_function(tolua_S,"openFullScreenWebpage",tolua_Extension_WebviewDelegate_openWebpage01);
    tolua_function(tolua_S,"openWebpage",tolua_Extension_WebviewDelegate_openWebpage00);
    tolua_function(tolua_S,"closeWebpage",tolua_Extension_WebviewDelegate_closeWebpage00);
   tolua_endmodule(tolua_S);

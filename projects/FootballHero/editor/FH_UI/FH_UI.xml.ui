@@ -164,12 +164,7 @@
   <ProjectType>UIProject</ProjectType>
   <ResRelativePath />
   <imageFileList />
-  <imagePngList>
-    <string>commonRes/landing-bg-bet365.png</string>
-    <string>header/back.png</string>
-    <string>commonRes/bet-365-logo.png</string>
-    <string>commonRes/landing-button-bet365.png</string>
-  </imagePngList>
+  <imagePngList />
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>Bet365Scene.json</CurrentUIJson>
+  <CurrentUIJson>PredFinalConfirmButton.json</CurrentUIJson>
 </UIProject>

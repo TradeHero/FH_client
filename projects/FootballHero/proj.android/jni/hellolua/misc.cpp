@@ -44,6 +44,11 @@ extern "C"
     }
 }
 
+void openWebPageAndroid(const char* url)
+{
+    openWebPageAndroid(url, 0, 40, 320, 568);
+}
+
 void openWebPageAndroid(const char* url, int x, int y, int w, int h)
 {
 	// Get Android activity in MainActivity.java

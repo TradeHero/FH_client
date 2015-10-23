@@ -70,6 +70,7 @@ function onRequestSuccess( jsonResponse )
     local pushGenerallyEnabled = profileDto["PushGenerallyEnabled"]
     local needUpdate = profileDto["Update"]
     local isExpert = profileDto["IsExpert"]
+    local isBlock = profileDto["BlockedByCountry"]
 
     if type( pictureUrl ) == "userdata" then
         CCLuaLog("Reset picture Url.")
@@ -94,6 +95,7 @@ function onRequestSuccess( jsonResponse )
         Logic:setActiveInCompetition( active )
         Logic:setFbId( FbId )
         Logic:setExpert( isExpert ) 
+        Logic:setBetBlock( isBlock )
 
         PushNotificationManager.initFromServer( pushGenerallyEnabled, pushForPredictionsEnabled )
 

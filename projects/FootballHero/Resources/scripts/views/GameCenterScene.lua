@@ -7,6 +7,7 @@ local Constants = require("scripts.Constants")
 local Navigator = require("scripts.views.Navigator")
 local Header = require("scripts.views.GameCenterHeader")
 local SMIS = require("scripts.SMIS")
+local Logic = require("scripts.Logic").getInstance()
 
 local mWidget
 local mContentHeight
@@ -29,6 +30,7 @@ local GAME_IMAGE_PATH = {
 function loadFrame()
     local widget = GUIReader:shareReader():widgetFromJsonFile("scenes/GameCenterScene.json")
     mWidget = widget
+ 
     widget:registerScriptHandler( EnterOrExit )
     SceneManager.clearNAddWidget( widget )
     Header.loadFrame( widget, Constants.String.lucky8.game_center_title, false )
@@ -65,29 +67,33 @@ function initCells( cellNum )
         updateContentContainer( mContentHeight, content )
     end
 
-    -- ad banner
-    local betHandler = function ( sender, eventType )
-        if eventType == TOUCH_EVENT_ENDED then
-            EventManager:postEvent( Event.Enter_Bet365 )
-        end
+    if not Logic:getBetBlock() then
+        WebviewDelegate:sharedDelegate():openWebpage(  "http://spiritrain.tk/gamecenter.html", 0, mContentHeight + 120 , 640, 320)
     end
-    local content = SceneManager.widgetFromJsonFile( "scenes/Bet365Cell.json" )
-    local adImage = tolua.cast( content:getChildByName("Image_Ad"), "ImageView" )
-    local url = "https://www.bet365affiliates.com/AffiliateBanners/Games/Promos/LOTR/en-GB/ROI/STD/700x300_6.gif"
-    contentContainer:addChild( content )
-    mContentHeight = mContentHeight + adImage:getSize().height
-    content:addTouchEventListener( betHandler )
-    updateContentContainer( mContentHeight, content )
 
-    local handler = function( filePath )
-        if filePath ~= nil and mWidget ~= nil and adImage ~= nil then
-            local safeLoadTexture = function()
-               adImage:loadTexture( filePath )
-            end
-            xpcall( safeLoadTexture, function ( msg )  end )
-        end
-    end
-    SMIS.getSMImagePath( url, handler )
+    -- ad banner
+    -- local betHandler = function ( sender, eventType )
+    --     if eventType == TOUCH_EVENT_ENDED then
+    --         EventManager:postEvent( Event.Enter_Bet365 )
+    --     end
+    -- end
+    -- local content = SceneManager.widgetFromJsonFile( "scenes/Bet365Cell.json" )
+    -- local adImage = tolua.cast( content:getChildByName("Image_Ad"), "ImageView" )
+    -- local url = "https://www.bet365affiliates.com/AffiliateBanners/Games/Promos/LOTR/en-GB/ROI/STD/700x300_6.gif"
+    -- contentContainer:addChild( content )
+    -- mContentHeight = mContentHeight + adImage:getSize().height
+    -- content:addTouchEventListener( betHandler )
+    -- updateContentContainer( mContentHeight, content )
+
+    -- local handler = function( filePath )
+    --     if filePath ~= nil and mWidget ~= nil and adImage ~= nil then
+    --         local safeLoadTexture = function()
+    --            adImage:loadTexture( filePath )
+    --         end
+    --         xpcall( safeLoadTexture, function ( msg )  end )
+    --     end
+    -- end
+    -- SMIS.getSMImagePath( url, handler )
 end
 
 function updateContentContainer( contentHeight, content )
@@ -102,8 +108,12 @@ function enterGame( index )
 end
 
 function EnterOrExit( eventType )
+    CCLuaLog("EnterOrExit:" .. eventType)
     if eventType == "enter" then
-        elseif eventType == "exit" then
+    elseif eventType == "exit" then
+        if not Logic:getBetBlock() then
+            WebviewDelegate:sharedDelegate():closeWebpage()
+        end
         mWidget = nil
     end
 end

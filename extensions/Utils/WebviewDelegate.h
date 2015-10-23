@@ -11,7 +11,8 @@ namespace Utils
 		~WebviewDelegate();
 		static WebviewDelegate* sharedDelegate();
 
-		void openWebpage(const char* url, int x, int y, int w, int h);
+        void openWebpage(const char* url);
+        void openWebpage(const char* url, int x, int y, int w, int h);
 		void closeWebpage();
 
 	protected:

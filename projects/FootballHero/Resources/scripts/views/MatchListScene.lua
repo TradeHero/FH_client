@@ -71,6 +71,9 @@ end
 function EnterOrExit( eventType )
     if eventType == "enter" then
     elseif eventType == "exit" then
+ --   if not Logic:getBetBlock() then
+         WebviewDelegate:sharedDelegate():closeWebpage()
+ --   end
         mWidget = nil
     end
 end
@@ -231,6 +234,9 @@ function initMatchList( matchList, leagueKey, bInit )
             friendReferal:setLayoutParameter( layoutParameter )
             contentContainer:addChild( friendReferal )
             contentHeight = contentHeight + friendReferal:getSize().height           
+--   if not Logic:getBetBlock() then
+        WebviewDelegate:sharedDelegate():openWebpage(  "http://spiritrain.tk/home.html", 0, 145 , 640, 120)
+ --   end
 
             for i = 1, table.getn( matchList ) do
                 local match = matchList[i]

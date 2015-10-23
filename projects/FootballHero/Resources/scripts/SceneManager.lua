@@ -25,6 +25,7 @@ local DEEPLINK_FBFH = "FBFH"
 local DEEPLINK_HIGHLIGHT = "FBHighlight"
 local DEEPLINK_VIDEO = "FBVideo"
 local DEEPLINK_GAMECENTER = "gamecenter"
+local DEEPLINK_BET365 = "bet365"
 
 local mSceneGameLayer
 local mSideMenuLayer
@@ -392,6 +393,9 @@ function processDeepLink( deepLink, defaultEvent, defaultEventParam )
 		elseif deepLinkPage == DEEPLINK_GAMECENTER then
 			EventManager:postEvent( Event.Enter_GameCenter )
 
+		elseif deepLinkPage == DEEPLINK_BET365 then
+			EventManager:postEvent( Event.Enter_Bet365 )
+			
         else
 			if defaultEvent ~= nil then
 				EventManager:postEvent( defaultEvent, defaultEventParam )

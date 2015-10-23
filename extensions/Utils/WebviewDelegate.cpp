@@ -32,6 +32,17 @@ namespace Utils
 		}
 		return s_sharedUtils;
 	}
+    
+    void WebviewDelegate::openWebpage(const char* url)
+    {
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+        WebviewController::getInstance()->openWebpage(url);
+#endif
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+        openWebPageAndroid(url);
+#endif
+    }
+    
 
 	void WebviewDelegate::openWebpage(const char* url, int x, int y, int w, int h)
 	{

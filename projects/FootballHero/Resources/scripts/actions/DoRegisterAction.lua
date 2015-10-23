@@ -99,6 +99,7 @@ function onRegisterRequestSuccess( jsonResponse )
     local balance = jsonResponse["Balance"]
     local FbId = jsonResponse["FbId"]
     local needUpdate = jsonResponse["Update"]
+    local isBlock = jsonResponse["BlockedByCountry"]
 
     if type( pictureUrl ) == "userdata" then
         pictureUrl = ""
@@ -115,6 +116,7 @@ function onRegisterRequestSuccess( jsonResponse )
         Logic:setStartLeagueId( startLeagueId )
         Logic:setBalance( balance )
         Logic:setFbId( FbId )
+        Logic:setBetBlock( isBlock )
 
         QuickBloxService.login( displayName, pictureUrl, userId, function( token )
             Logic:setQuickBloxToken( token )

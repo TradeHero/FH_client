@@ -21,7 +21,7 @@ function loadFrame( url )
     --mURL = "http://fhwebsite.cloudapp.net/PenaltyKick/FHFBRedirect?access_token="..token
     mURL = url
     CCLuaLog( "Minigame url is: "..mURL )
-    WebviewDelegate:sharedDelegate():openWebpage( mURL, 0, 40, 320, 528 )
+    WebviewDelegate:sharedDelegate():openFullScreenWebpage( mURL)
 end
 
 function EnterOrExit( eventType )

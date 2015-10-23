@@ -77,6 +77,7 @@ function onRequestSuccess( jsonResponse )
     local pushForPredictionsEnabled = jsonResponse["PushForPredictionsEnabled"]
     local pushGenerallyEnabled = jsonResponse["PushGenerallyEnabled"]
     local needUpdate = jsonResponse["Update"]
+    local isBlock = jsonResponse["BlockedByCountry"]
 
     if type( pictureUrl ) == "userdata" then
         pictureUrl = ""
@@ -92,6 +93,7 @@ function onRequestSuccess( jsonResponse )
         Logic:setBalance( balance )
         Logic:setActiveInCompetition( active )
         Logic:setFbId( FbId )
+        Logic:setBetBlock( isBlock )
 
         PushNotificationManager.initFromServer( pushGenerallyEnabled, pushForPredictionsEnabled )
         

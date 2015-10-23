@@ -50,6 +50,9 @@ function loadFrame( jsonResponse, tabID )
     initMatchPredictionContent()
     
     loadMainContent( jsonResponse )
+    if not Logic:getBetBlock() then
+        WebviewDelegate:sharedDelegate():openWebpage(  "http://spiritrain.tk/home.html", 0, 1016 , 640, 120)
+    end
 end
 
 function refreshFrame( jsonResponse, tabID )
@@ -67,6 +70,9 @@ end
 function EnterOrExit( eventType )
     if eventType == "enter" then
     elseif eventType == "exit" then
+    if not Logic:getBetBlock() then
+        WebviewDelegate:sharedDelegate():closeWebpage()
+    end
         mWidget = nil
     end
 end

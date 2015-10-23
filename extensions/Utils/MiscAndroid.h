@@ -1,6 +1,7 @@
 #include <cocos2d.h>
 
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+void openWebPageAndroid(const char* url);
 void openWebPageAndroid(const char* url, int x, int y, int w, int h);
 void closeWebPageAndroid();
 void misc_copy_to_paste_board(const char* content);

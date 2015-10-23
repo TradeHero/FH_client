@@ -3,6 +3,8 @@
 #include "WebviewController.h"
 #import "AppController.h"
 #import "RootViewController.h"
+#include "CCEGLView.h"
+#include "cocos2d.h"
 
 static WebviewController* instance;
 UIWebView *webView;
@@ -19,25 +21,23 @@ WebviewController* WebviewController::getInstance()
     return instance;
 }
 
+void WebviewController::openWebpage(const char* url)
+{
+    openWebpage(url, 0, 80, 768, 984);
+}
+
 void WebviewController::openWebpage(const char* url, int x, int y, int w, int h)
 {
     if (webView == nil)
     {
+        cocos2d::CCEGLView* eglView = cocos2d::CCEGLView::sharedOpenGLView();
+        float scaleX = (float)[UIScreen mainScreen].bounds.size.width /(float)eglView->getDesignResolutionSize().width;
+        float scaleY = (float)[UIScreen mainScreen].bounds.size.height /(float)eglView->getDesignResolutionSize().height;
+        
         AppController *app = (AppController*) [[UIApplication sharedApplication] delegate];
         UIView *mainView = [app getViewController].view;
-        NSString *m = [[UIDevice currentDevice] model];
-        if (IS_IPHONE)
-        {
-            webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 40, 320, 528)];
-        }
-        else if (IS_IPAD)
-        {
-            webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 80, 768, 984)];
-        }
-        
+        webView = [[UIWebView alloc] initWithFrame:CGRectMake(x * scaleX, y * scaleY, w * scaleX, h * scaleY)];
         [mainView addSubview:webView];
-        
-       
     }
     
     NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithUTF8String:url]]];

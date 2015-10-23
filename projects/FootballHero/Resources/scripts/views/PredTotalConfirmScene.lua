@@ -77,6 +77,12 @@ function shareEventHandler( sender, eventType )
 	end
 end
 
+function betEventHandler( sender, eventType )
+	if eventType == TOUCH_EVENT_ENDED then
+    	EventManager:postEvent( Event.Enter_Bet365 )
+	end
+end
+
 function initContent()
 
 	local title = tolua.cast( mWidget:getChildByName("Label_Title"), "Label" )
@@ -128,6 +134,8 @@ function initContent()
     cancelBt:addTouchEventListener( cancelEventHandler )
     local shareBt = tolua.cast( buttonsWidget:getChildByName("share"), "CheckBox" )
     shareBt:addTouchEventListener( shareEventHandler )
+    local betBt = tolua.cast( buttonsWidget:getChildByName("bet365"), "Button" )
+    betBt:addTouchEventListener( betEventHandler )
 
     confirmBt:setTitleText( Constants.String.button.confirm )
     cancelBt:setTitleText( Constants.String.button.cancel )
