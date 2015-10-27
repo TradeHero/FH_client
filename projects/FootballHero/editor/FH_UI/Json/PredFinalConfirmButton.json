@@ -10,7 +10,12 @@
   "designHeight": 1136,
   "designWidth": 640,
   "textures": [],
-  "texturesPng": [],
+  "texturesPng": [
+    "PredictionConfirm/white_popup.png",
+    "Tutorial/Default Button.png",
+    "Competition/btn-share.png",
+    "MatchPrediction/btn-bet365.png"
+  ],
   "version": "1.6.0.0",
   "widgetTree": {
     "classname": "Panel",
@@ -296,7 +301,7 @@
         "options": {
           "__type": "ButtonSurrogate:#EditorCommon.JsonModel.Component.GUI",
           "classname": "Button",
-          "name": "bet356",
+          "name": "bet365",
           "ZOrder": 0,
           "actiontag": 37653828,
           "anchorPointX": 0.5,
@@ -318,8 +323,8 @@
           "rotation": 0,
           "scaleX": 1,
           "scaleY": 1,
-          "sizePercentX": 0.1609375,
-          "sizePercentY": 0.189573467,
+          "sizePercentX": 0.396875,
+          "sizePercentY": 0.369668245,
           "sizeType": 0,
           "tag": 70337,
           "touchAble": true,

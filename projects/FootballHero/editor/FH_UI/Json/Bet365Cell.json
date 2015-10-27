@@ -11,7 +11,7 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "GUI/image.png"
+    "GUI/button.png"
   ],
   "version": "1.6.0.0",
   "widgetTree": {
@@ -19,18 +19,18 @@
     "name": null,
     "children": [
       {
-        "classname": "ImageView",
+        "classname": "Button",
         "name": null,
         "children": [],
         "options": {
-          "__type": "ImageViewSurrogate:#EditorCommon.JsonModel.Component.GUI",
-          "classname": "ImageView",
-          "name": "Image_Ad",
+          "__type": "ButtonSurrogate:#EditorCommon.JsonModel.Component.GUI",
+          "classname": "Button",
+          "name": "Button_Ad",
           "ZOrder": 0,
-          "actiontag": 46111055,
+          "actiontag": 65999689,
           "anchorPointX": 0.5,
           "anchorPointY": 0.5,
-          "classType": "CocoStudio.EngineAdapterWrap.CSImageView",
+          "classType": "CocoStudio.EngineAdapterWrap.CSButton",
           "colorB": 255,
           "colorG": 255,
           "colorR": 255,
@@ -47,29 +47,48 @@
           "rotation": 0,
           "scaleX": 1,
           "scaleY": 1,
-          "sizePercentX": 0.9375,
+          "sizePercentX": 0.953125,
           "sizePercentY": 0.857142866,
           "sizeType": 0,
-          "tag": 70322,
-          "touchAble": false,
+          "tag": 70812,
+          "touchAble": true,
           "useMergedTexture": false,
           "visible": true,
-          "width": 600,
+          "width": 610,
           "x": 320,
           "y": 150,
           "capInsetsHeight": 1,
           "capInsetsWidth": 1,
           "capInsetsX": 0,
           "capInsetsY": 0,
-          "fileName": null,
-          "fileNameData": {
-            "path": "C:\\Program Files (x86)\\Cocos Studio\\EditorDefaultRes\\GUI/image.png",
+          "disabled": null,
+          "disabledData": {
+            "path": null,
+            "plistFile": null,
+            "resourceType": 0
+          },
+          "fontName": "微软雅黑",
+          "fontSize": 14,
+          "fontType": 0,
+          "normal": null,
+          "normalData": {
+            "path": "C:\\Program Files (x86)\\Cocos Studio\\EditorDefaultRes\\GUI/button.png",
             "plistFile": "",
             "resourceType": 2
           },
+          "pressed": null,
+          "pressedData": {
+            "path": null,
+            "plistFile": null,
+            "resourceType": 0
+          },
           "scale9Enable": false,
           "scale9Height": 300,
-          "scale9Width": 600
+          "scale9Width": 610,
+          "text": "",
+          "textColorB": 255,
+          "textColorG": 255,
+          "textColorR": 255
         }
       }
     ],
@@ -78,7 +97,7 @@
       "classname": "Panel",
       "name": "Panel_Root",
       "ZOrder": 11,
-      "actiontag": 18176357,
+      "actiontag": -1,
       "anchorPointX": 0,
       "anchorPointY": 0,
       "classType": "CocoStudio.EngineAdapterWrap.CSPanel",

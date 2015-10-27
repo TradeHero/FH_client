@@ -10,6 +10,7 @@ local EventManager = require("scripts.events.EventManager").getInstance()
 local Event = require("scripts.events.Event").EventList
 local Header = require("scripts.views.HeaderFrame")
 local SportsConfig = require("scripts.config.Sports")
+local SMIS = require("scripts.SMIS")
 
 
 local mWidget
@@ -42,7 +43,7 @@ function loadFrame( jsonResponse, tabID )
     SceneManager.clearNAddWidget( mWidget )
     
     Header.loadFrame( mWidget, Constants.String.match_center.title, true )
-    Navigator.loadFrame( mWidget )
+--    Navigator.loadFrame( mWidget )
 
     -- init Last Meetings, Discussion header tab
     initMatchCenterTab()
@@ -51,7 +52,19 @@ function loadFrame( jsonResponse, tabID )
     
     loadMainContent( jsonResponse )
     if not Logic:getBetBlock() then
-        WebviewDelegate:sharedDelegate():openWebpage(  "http://spiritrain.tk/home.html", 0, 1016 , 640, 120)
+    --     WebviewDelegate:sharedDelegate():openWebpage(  "http://spiritrain.tk/home.html", 0, 1016 , 640, 120)
+        local betHandler = function ( sender, eventType )
+            if eventType == TOUCH_EVENT_ENDED then
+                EventManager:postEvent( Event.Enter_Bet365 )
+            end
+        end
+        local content = SceneManager.widgetFromJsonFile( "scenes/MatchListFriendsReferal.json" )
+        local referalButton = tolua.cast( content:getChildByName("Button_refer"), "Button" )
+        referalButton:addTouchEventListener( betHandler )
+        referalButton:loadTextureNormal( Constants.IMAGE_PATH .. "ads/banner_home.jpg" )
+ 
+        mWidget:addChild( content )
+        content:setPosition( ccp( 0, 0 ) )
     end
 end
 
@@ -70,9 +83,9 @@ end
 function EnterOrExit( eventType )
     if eventType == "enter" then
     elseif eventType == "exit" then
-    if not Logic:getBetBlock() then
-        WebviewDelegate:sharedDelegate():closeWebpage()
-    end
+        -- if not Logic:getBetBlock() then
+        --     WebviewDelegate:sharedDelegate():closeWebpage()
+        -- end
         mWidget = nil
     end
 end
