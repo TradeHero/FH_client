@@ -260,8 +260,8 @@ public class MainActivity extends Cocos2dxActivity {
               getWindowManager().getDefaultDisplay().getMetrics(metrics);
 
               PointF ratio = new PointF();
-              ratio.x = (float)metrics.heightPixels / 568;
-              ratio.y = (float)metrics.widthPixels / 320;
+              ratio.x = (float)metrics.heightPixels / 1136;
+              ratio.y = (float)metrics.widthPixels / 640;
               Log.d(this.getClass().getName(), "height = " + metrics.heightPixels + " width = " + metrics.widthPixels +
                       " ratio = (" + ratio.x + ", " + ratio.y + ")");
 
@@ -291,10 +291,12 @@ public class MainActivity extends Cocos2dxActivity {
     
     public void closeWebPage() {
         this.runOnUiThread(new Runnable() {
-          public void run() {
-            m_webLayout.removeView(m_webView);
-            m_webView.destroy();
-          }
+            public void run() {
+                if (m_webView != null) {
+                    m_webLayout.removeView(m_webView);
+                    m_webView.destroy();
+                }
+            }
         });
     }
   

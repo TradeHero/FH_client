@@ -47,7 +47,9 @@ void WebviewController::openWebpage(const char* url, int x, int y, int w, int h)
 
 void WebviewController::closeWebpage()
 {
-    [webView removeFromSuperview];
-    [webView release];
-    webView = nil;
+    if (webView != nil){
+        [webView removeFromSuperview];
+        [webView release];
+        webView = nil;
+    }
 }
