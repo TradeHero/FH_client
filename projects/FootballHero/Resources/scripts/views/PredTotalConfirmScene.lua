@@ -136,6 +136,9 @@ function initContent()
     shareBt:addTouchEventListener( shareEventHandler )
     local betBt = tolua.cast( buttonsWidget:getChildByName("bet365"), "Button" )
     betBt:addTouchEventListener( betEventHandler )
+    if Logic:getBetBlock() then
+    	betBt:setEnabled( false )
+    end
 
     confirmBt:setTitleText( Constants.String.button.confirm )
     cancelBt:setTitleText( Constants.String.button.cancel )

@@ -245,7 +245,7 @@ function initMatchList( matchList, leagueKey, bInit )
                 -- ad banner
                 local betHandler = function ( sender, eventType )
                     if eventType == TOUCH_EVENT_ENDED then
-                        EventManager:postEvent( Event.Enter_Friend_Referal )
+                        EventManager:postEvent( Event.Enter_Bet365 )
                     end
                 end
                 local content = SceneManager.widgetFromJsonFile( "scenes/MatchListFriendsReferal.json" )
