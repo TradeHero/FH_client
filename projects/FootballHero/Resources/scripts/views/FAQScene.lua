@@ -19,7 +19,7 @@ end
 
 function EnterOrExit( eventType )
     if eventType == "enter" then
-        WebviewDelegate:sharedDelegate():openFullScreenWebpage( "http://footballheroapp.com/faq.html")
+        WebviewDelegate:sharedDelegate():openWebpage( "http://footballheroapp.com/faq.html", 0, 80, 768, 984 )
     elseif eventType == "exit" then
         mWidget = nil
     end

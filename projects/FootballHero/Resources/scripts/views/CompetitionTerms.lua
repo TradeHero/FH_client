@@ -20,7 +20,7 @@ function loadFrame( name, token )
 
     mURL = "http://footballheroapp.com/terms/"..token.."/".."terms.html"
     CCLuaLog( "T&C url is: "..mURL )
-    WebviewDelegate:sharedDelegate():openFullScreenWebpage( mURL )
+    WebviewDelegate:sharedDelegate():openWebpage( mURL, 0, 80, 768, 984 )
 end
 
 function EnterOrExit( eventType )

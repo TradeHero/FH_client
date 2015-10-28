@@ -24,7 +24,7 @@ function loadFrame( name, token, type, index )
     end
     mURL = mURL..".html"
     CCLuaLog( "Prize url is: "..mURL )
-    WebviewDelegate:sharedDelegate():openFullScreenWebpage( mURL )
+    WebviewDelegate:sharedDelegate():openWebpage( mURL, 0, 80, 768, 984 )
 end
 
 function EnterOrExit( eventType )
