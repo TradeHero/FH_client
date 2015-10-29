@@ -54,3 +54,17 @@ void android_analytics_postEvent(const char* eventName, const char* paramString)
     minfo.env->DeleteLocalRef(activityObj);
   }
 }
+
+void android_flurry_postEvent(const char* eventName, const char* paramString)
+{
+  JniMethodInfo minfo;
+
+  if (JniHelper::getStaticMethodInfo(minfo, "com/myhero/fh/MainActivity", "logFlurryEvent", "(Ljava/lang/String;Ljava/lang/String;)V")) {
+    jstring jEventName = minfo.env->NewStringUTF(eventName);
+    jstring jParamString = minfo.env->NewStringUTF(paramString);
+    minfo.env->CallStaticVoidMethod(minfo.classID, minfo.methodID, jEventName, jParamString);
+    minfo.env->DeleteLocalRef(jEventName);
+    minfo.env->DeleteLocalRef(jParamString);
+    minfo.env->DeleteLocalRef(minfo.classID);
+  }
+}

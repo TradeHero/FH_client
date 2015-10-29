@@ -313,5 +313,11 @@ public class MainActivity extends Cocos2dxActivity {
         ParamStringEvent event = new ParamStringEvent(eventName, paramString);
         localyticsSession.tagEvent( eventName, event.getAttributes() );
     }
+
+    //log flurry event
+    public static void logFlurryEvent(String eventName, String paramString){
+        ParamStringEvent event = new ParamStringEvent(eventName, paramString);
+        FlurryAgent.logEvent( eventName, event.getAttributes() );
+    }
 }
 

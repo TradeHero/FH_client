@@ -979,6 +979,41 @@ static int tolua_Extension_Analytics_postEvent00(lua_State* tolua_S)
 }
 #endif //#ifndef TOLUA_DISABLE
 
+/* method: postEvent of class  Analytics */
+#ifndef TOLUA_DISABLE_tolua_Extension_Analytics_postFlurryEvent00
+static int tolua_Extension_Analytics_postFlurryEvent00(lua_State* tolua_S)
+{
+#ifndef TOLUA_RELEASE
+    tolua_Error tolua_err;
+    if (
+        !tolua_isusertype(tolua_S,1,"Analytics",0,&tolua_err) ||
+        !tolua_isstring(tolua_S,2,0,&tolua_err) ||
+        !tolua_isstring(tolua_S,3,0,&tolua_err) ||
+        !tolua_isnoobj(tolua_S,4,&tolua_err)
+        )
+        goto tolua_lerror;
+    else
+#endif
+    {
+        Analytics* self = (Analytics*)  tolua_tousertype(tolua_S,1,0);
+        const char* eventName = ((const char*)  tolua_tostring(tolua_S,2,0));
+        const char* paramString = ((const char*)  tolua_tostring(tolua_S,3,0));
+ #ifndef TOLUA_RELEASE
+        if (!self) tolua_error(tolua_S,"invalid 'self' in function 'postFlurryEvent'", NULL);
+#endif
+        {
+            self->postFlurryEvent(eventName, paramString);
+        }
+    }
+    return 0;
+#ifndef TOLUA_RELEASE
+tolua_lerror:
+    tolua_error(tolua_S,"#ferror in function 'postFlurryEvent'.",&tolua_err);
+    return 0;
+#endif
+}
+#endif //#ifndef TOLUA_DISABLE
+
 /* method: sharedDelegate of class  WebviewDelegate */
 #ifndef TOLUA_DISABLE_tolua_Extension_WebviewDelegate_sharedDelegate00
 static int tolua_Extension_WebviewDelegate_sharedDelegate00(lua_State* tolua_S)
@@ -2140,6 +2175,7 @@ TOLUA_API int tolua_Extension_open (lua_State* tolua_S)
   tolua_beginmodule(tolua_S,"Analytics");
    tolua_function(tolua_S,"sharedDelegate",tolua_Extension_Analytics_sharedDelegate00);
    tolua_function(tolua_S,"postEvent",tolua_Extension_Analytics_postEvent00);
+   tolua_function(tolua_S,"postFlurryEvent",tolua_Extension_Analytics_postFlurryEvent00);
   tolua_endmodule(tolua_S);
   tolua_cclass(tolua_S,"WebviewDelegate","WebviewDelegate","",NULL);
   tolua_beginmodule(tolua_S,"WebviewDelegate");

@@ -33,6 +33,7 @@ function onRequestSubmitSuccess( json )
         Action = "submit prediction of lucky8 sucess",
     }
     Analytics:sharedDelegate():postEvent( Constants.ANALYTICS_EVENT_SUBMIT_PREDITION_LUCK8, Json.encode( params ) )
+    Analytics:sharedDelegate():postFlurryEvent( Constants.ANALYTICS_EVENT_SUBMIT_PREDITION_LUCK8, Json.encode( params ) )
 	EventManager:postEvent( Event.Enter_Lucky8 )
 end
 

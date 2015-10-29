@@ -60,6 +60,7 @@ function onRequestSuccess( jsonResponse )
                         Teamid2 = prediction["TeamId2"], }
         CCLuaLog("Send ANALYTICS_EVENT_PREDICTION: "..Json.encode( params ) )
         Analytics:sharedDelegate():postEvent( Constants.ANALYTICS_EVENT_PREDICTION, Json.encode( params ) )
+        Analytics:sharedDelegate():postFlurryEvent( Constants.ANALYTICS_EVENT_PREDICTION, Json.encode( params ) )
     end
 
     if predictions:getShareOnFacebook() then
@@ -69,6 +70,7 @@ function onRequestSuccess( jsonResponse )
                         Location = "prediction summary" }
         CCLuaLog("Send ANALYTICS_EVENT_SOCIAL_ACTION: "..Json.encode( params ) )
         Analytics:sharedDelegate():postEvent( Constants.ANALYTICS_EVENT_SOCIAL_ACTION, Json.encode( params ) )
+        Analytics:sharedDelegate():postFlurryEvent( Constants.ANALYTICS_EVENT_SOCIAL_ACTION, Json.encode( params ) )
     end
 
     Logic:resetPredictions()

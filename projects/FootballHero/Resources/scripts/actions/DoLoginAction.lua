@@ -104,6 +104,7 @@ function onRequestSuccess( jsonResponse )
 
         local params = { Platform = "email" }
         Analytics:sharedDelegate():postEvent( Constants.ANALYTICS_EVENT_LOGIN, Json.encode( params ) )
+        Analytics:sharedDelegate():postFlurryEvent( Constants.ANALYTICS_EVENT_LOGIN, Json.encode( params ) )
 
         QuickBloxService.login( displayName, pictureUrl, userId, function( token )
             Logic:setQuickBloxToken( token )

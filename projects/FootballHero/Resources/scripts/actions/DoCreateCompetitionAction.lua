@@ -70,11 +70,13 @@ function onRequestSuccess( jsonResponse )
                         Location = "competition creation" }
         CCLuaLog("Send ANALYTICS_EVENT_SOCIAL_ACTION: "..Json.encode( params ) )
         Analytics:sharedDelegate():postEvent( Constants.ANALYTICS_EVENT_SOCIAL_ACTION, Json.encode( params ) )
+        Analytics:sharedDelegate():postFlurryEvent( Constants.ANALYTICS_EVENT_SOCIAL_ACTION, Json.encode( params ) )
     end
 
     local params = { Action = "create"}
     CCLuaLog("Send ANALYTICS_EVENT_COMPETITION: "..Json.encode( params ) )
     Analytics:sharedDelegate():postEvent( Constants.ANALYTICS_EVENT_COMPETITION, Json.encode( params ) )
+    Analytics:sharedDelegate():postFlurryEvent( Constants.ANALYTICS_EVENT_COMPETITION, Json.encode( params ) )
 
     EventManager:popHistoryWithoutExec()    -- Remove the create competition event in history. So that it can back direct to the Community scene.
     EventManager:postEvent( Event.Enter_Competition_Detail, { competitionId, true, 3, CompetitionConfig.COMPETITION_TAB_ID_OVERALL } )

@@ -4,6 +4,7 @@ local SceneManager = require("scripts.SceneManager")
 local Constants = require("scripts.Constants")
 local EventManager = require("scripts.events.EventManager").getInstance()
 local Event = require("scripts.events.Event").EventList
+local Json = require("json")
 
 local mWidget
 local mAwardWidget
@@ -46,6 +47,9 @@ end
 
 function betEventHandler( sender, eventType )
     if eventType == TOUCH_EVENT_ENDED then
+        local params = { Action = "bet365" }
+        Analytics:sharedDelegate():postEvent( Constants.ANALYTICS_EVENT_BET365, Json.encode( params ) )
+        Analytics:sharedDelegate():postFlurryEvent( Constants.ANALYTICS_EVENT_BET365, Json.encode( params ) )
         Misc:sharedDelegate():openUrl( Constants.BET365_URL )
     end
 end

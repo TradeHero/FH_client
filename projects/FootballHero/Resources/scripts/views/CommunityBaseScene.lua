@@ -16,6 +16,7 @@ local Minigame = require("scripts.data.Minigame").Minigame
 local Header = require("scripts.views.HeaderFrame")
 local CheckListConfig = require("scripts.data.CheckList")
 local LeaderboardConfig = require("scripts.config.Leaderboard")
+local Json = require("json")
 
 
 local mWidget
@@ -108,12 +109,18 @@ function loadMainContent( contentContainer, jsonResponse, leaderboardId, subType
     if mTabID == CommunityConfig.COMMUNITY_TAB_ID_COMPETITION then
         loadCompetitionScene( contentContainer, jsonResponse, minigameResponse )
     elseif mTabID == CommunityConfig.COMMUNITY_TAB_ID_EXPERT then
+        local params = { Action = "enter expert" }
+        Analytics:sharedDelegate():postEvent( Constants.ANALYTICS_EVENT_ENTER_EXPERT, Json.encode( params ) )
+        Analytics:sharedDelegate():postFlurryEvent( Constants.ANALYTICS_EVENT_ENTER_EXPERT, Json.encode( params ) )
         loadExpertScene( contentContainer, jsonResponse )
     elseif mTabID == CommunityConfig.COMMUNITY_TAB_ID_VIDEO then
         loadVideoScene( contentContainer, jsonResponse )
     elseif mTabID ==  CommunityConfig.COMMUNITY_TAB_ID_LEADERBOARD then
         loadLeaderboardScene( contentContainer, jsonResponse, leaderboardId, subType )
     elseif mTabID ==  CommunityConfig.COMMUNITY_TAB_ID_TIMELINE then
+        local params = { Action = "enter timeline" }
+        Analytics:sharedDelegate():postEvent( Constants.ANALYTICS_EVENT_ENTER_TIMELINE, Json.encode( params ) )
+        Analytics:sharedDelegate():postFlurryEvent( Constants.ANALYTICS_EVENT_ENTER_TIMELINE, Json.encode( params ) )
         loadTimelineScene( contentContainer, jsonResponse )
     end
 end

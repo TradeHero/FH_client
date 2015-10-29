@@ -42,4 +42,14 @@ namespace Utils
 		android_analytics_postEvent(eventName, paramString);
 #endif
 	}
+    
+    void Analytics::postFlurryEvent(const char* eventName, const char* paramString)
+    {
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+        AnalyticsHandler::getInstance()->postFlurryEvent(eventName, paramString);
+#endif
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+        android_flurry_postEvent(eventName, paramString);
+#endif
+    }
 }

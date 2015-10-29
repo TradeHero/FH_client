@@ -36,6 +36,7 @@ function onRequestLucky8MatchListSuccess( json )
         Action = "Enter lucky8",
     }
     Analytics:sharedDelegate():postEvent( Constants.ANALYTICS_EVENT_ENTER_LUCKY8, Json.encode( params ) )
+    Analytics:sharedDelegate():postFlurryEvent( Constants.ANALYTICS_EVENT_ENTER_LUCKY8, Json.encode( params ) )
 end
 
 function action( param )

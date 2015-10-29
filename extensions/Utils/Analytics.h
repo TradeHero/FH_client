@@ -12,6 +12,7 @@ namespace Utils
 		static Analytics* sharedDelegate();
 
 		void postEvent(const char* eventName, const char* paramString);
+        void postFlurryEvent(const char* eventName, const char* paramString);
 
 	protected:
 		Analytics();

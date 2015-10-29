@@ -19,30 +19,6 @@ function loadFrame( parent, jsonResponse )
 
     initExpert( expertInfo )
     initContent( gameInfo , expertInfo )
-
-    --[[expert[{"Id":88398,
-                "DisplayName":"Michael Gulgun",
-                "PictureUrl":"https://fbcdn-profile-a.akamaihd.net/hprofile-ak-xpf1/v/t1.0-1/p200x200/10304791_294737007364470_1553892509341301836_n.jpg?oh=85018632db0fe88350a9210cf4529937&oe=5506FB46&__gda__=1426140576_26b2dc86e9ed06a520ee4ac763c4ebd9",
-                "PickTeamIds":[
-                    {"GameId":310790,"PickId":-1,"BigBet":false},
-                    {"GameId":310796,"PickId":-1,"BigBet":false},
-                    {"GameId":310794,"PickId":-1,"BigBet":false},
-                    {"GameId":321661,"PickId":-1,"BigBet":false},
-                    {"GameId":310788,"PickId":-1,"BigBet":false},
-                    {"GameId":310797,"PickId":-1,"BigBet":false},
-                    {"GameId":310795,"PickId":-1,"BigBet":false},
-                    {"GameId":321740,"PickId":-1,"BigBet":false},
-                    {"GameId":327059,"PickId":-1,"BigBet":false},
-                    {"GameId":310789,"PickId":-1,"BigBet":false}],
-                "IsFollowed":false}
-    ]]
-    --[[{"Id":310796,
-        "StartTime":1436094000,
-        "HomeTeamId":13487,
-        "AwayTeamId":4037,
-        "Line":null}
-    ]]
-
 end
 
 function exitFrame()
@@ -78,12 +54,11 @@ function initContent( gameInfo , expertInfo )
         end
     end
     infoCheckBox:addTouchEventListener( infoHandler )
-    CCLuaLog( "info end" )
 
     local contentContainer = tolua.cast( mWidget:getChildByName("ScrollView_Expert"), "ScrollView" )
     contentContainer:removeAllChildrenWithCleanup( true )
 
-    for i = 1, 10 do    
+    for i = 1, table.getn( gameInfo )  do
         local homeTeamID = TeamConfig.getConfigIdByKey(gameInfo[i]["HomeTeamId"])
         local awayTeamID = TeamConfig.getConfigIdByKey(gameInfo[i]["AwayTeamId"])
         local timeDisplay = os.date( "%b-%d %H:%M", gameInfo[i]["StartTime"] )

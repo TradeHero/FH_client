@@ -68,4 +68,5 @@ function loadSpinUI( response )
     local params = { Action = "start" }
     CCLuaLog("Send ANALYTICS_EVENT_SPINWHEEL: "..Json.encode( params ) )
     Analytics:sharedDelegate():postEvent( Constants.ANALYTICS_EVENT_SPINWHEEL, Json.encode( params ) )
+    Analytics:sharedDelegate():postFlurryEvent( Constants.ANALYTICS_EVENT_SPINWHEEL, Json.encode( params ) )
 end

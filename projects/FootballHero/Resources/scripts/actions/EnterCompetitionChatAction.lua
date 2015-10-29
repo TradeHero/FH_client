@@ -14,6 +14,7 @@ function action( param )
 		local params = { Action = "chat"}
 	    CCLuaLog("Send ANALYTICS_EVENT_COMPETITION: "..Json.encode( params ) )
 	    Analytics:sharedDelegate():postEvent( Constants.ANALYTICS_EVENT_COMPETITION, Json.encode( params ) )
+	    Analytics:sharedDelegate():postFlurryEvent( Constants.ANALYTICS_EVENT_COMPETITION, Json.encode( params ) )
 	end
 
     -- Load empty chat scene
