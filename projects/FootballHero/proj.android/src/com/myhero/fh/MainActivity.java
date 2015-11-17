@@ -33,6 +33,9 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import cn.sharesdk.ShareSDKUtils;
+import com.myhero.fh.googlesdk.IabHelper;
+import com.myhero.fh.googlesdk.IabResult;
+import com.myhero.fh.googlesdk.Inventory;
 import com.myhero.fh.metrics.events.ParamStringEvent;
 
 import com.crashlytics.android.Crashlytics;
@@ -77,6 +80,10 @@ public class MainActivity extends Cocos2dxActivity {
   private ClipboardManager m_clipboard;
 
   private LocalyticsAmpSession localyticsSession;
+
+  private static GooglePlayIABPlugin mGooglePlayIABPlugin;
+
+
 
 
   static {
@@ -150,6 +157,10 @@ public class MainActivity extends Cocos2dxActivity {
 
     // init Flurry
     FlurryAgent.init(this, "DXBRPTBZ6P8B4YGK98ZW");
+
+    // 初始化iab
+      mGooglePlayIABPlugin = new GooglePlayIABPlugin(this);
+      mGooglePlayIABPlugin.onCreate(savedInstanceState);
   }
 
     @Override
@@ -173,6 +184,7 @@ public class MainActivity extends Cocos2dxActivity {
     @Override
     public void onDestroy() {
         super.onDestroy();
+        mGooglePlayIABPlugin.onDestroy();
         Log.v("###", "onDestroy");
     }
 
@@ -193,6 +205,9 @@ public class MainActivity extends Cocos2dxActivity {
   @Override
   protected void onActivityResult(int requestCode, int resultCode, Intent data) {
     facebookAuth.onActivityResult(requestCode, resultCode, data);
+    if (mGooglePlayIABPlugin != null && mGooglePlayIABPlugin.handleActivityResult(requestCode, resultCode, data)) {
+        Log.d(GooglePlayIABPlugin.TAG, "onActivityResult handled by GooglePlayIABPlugin (" + requestCode + "," + resultCode + "," + data);
+    }
     super.onActivityResult(requestCode, resultCode, data);
   }
 
@@ -205,7 +220,6 @@ public class MainActivity extends Cocos2dxActivity {
     glSurfaceView.setEGLConfigChooser(5, 6, 5, 0, 16, 8);
     return glSurfaceView;
   }
-
   public static void login() {
     facebookAuth.authenticate(new FacebookAuthenticationCallback());
   }
@@ -218,6 +232,36 @@ public class MainActivity extends Cocos2dxActivity {
   public static void shareTimeline(String title, String description, String appLinkUrl) {
     facebookAuth.shareTimeline(title, description, appLinkUrl);
   }
+
+    public static void buy(int level){
+        String itemId = "com.myhero.fh.";
+        switch (level){
+            case 1:
+                itemId += "item1";
+                break;
+            case 2:
+                itemId += "item2";
+                break;
+            case 4:
+                itemId += "item3";
+                break;
+            case 7:
+                itemId += "item4";
+                break;
+            case 15:
+                itemId += "item5";
+                break;
+            default:
+                itemId += "item1";
+                break;
+        }
+        mGooglePlayIABPlugin.PayStart(itemId, null);
+    }
+
+    public static void requestProducts(){
+        Log.d("IAB", "req products");
+        mGooglePlayIABPlugin.ReqItemInfo("com.myhero.fh.item1 com.myhero.fh.item2");
+    }
 
   @Override public void destroyBindingView(final long source) {
     runOnUiThread(new Runnable() {

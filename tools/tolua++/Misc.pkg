@@ -31,5 +31,7 @@ class Misc
 
 	void openRate();
 
+	const char* getDeviceID();
+
 	void terminate();
 };		

@@ -13,7 +13,7 @@
   "texturesPng": [
     "community/img-leaguebox.png",
     "spinWheel/img-stw.png",
-    "spinWheel/btn-submit.png"
+    "spinWheel/btn-buy-tickets.png"
   ],
   "version": "1.6.0.0",
   "widgetTree": {
@@ -253,7 +253,58 @@
           {
             "classname": "Button",
             "name": null,
-            "children": [],
+            "children": [
+              {
+                "classname": "Label",
+                "name": null,
+                "children": [],
+                "options": {
+                  "__type": "LabelSurrogate:#EditorCommon.JsonModel.Component.GUI",
+                  "classname": "Label",
+                  "name": "Label_buy",
+                  "ZOrder": 0,
+                  "actiontag": 50080696,
+                  "anchorPointX": 0.5,
+                  "anchorPointY": 0.5,
+                  "classType": "CocoStudio.EngineAdapterWrap.CSLabel",
+                  "colorB": 255,
+                  "colorG": 255,
+                  "colorR": 255,
+                  "customProperty": "",
+                  "flipX": false,
+                  "flipY": false,
+                  "height": 20,
+                  "ignoreSize": true,
+                  "layoutParameter": null,
+                  "opacity": 255,
+                  "positionPercentX": 0.1,
+                  "positionPercentY": 0.025,
+                  "positionType": 0,
+                  "rotation": 0,
+                  "scaleX": 1,
+                  "scaleY": 1,
+                  "sizePercentX": 0.59375,
+                  "sizePercentY": 0.675,
+                  "sizeType": 0,
+                  "tag": 72866,
+                  "touchAble": false,
+                  "useMergedTexture": false,
+                  "visible": true,
+                  "width": 10,
+                  "x": 16,
+                  "y": 1,
+                  "areaHeight": 0,
+                  "areaWidth": 0,
+                  "fontFile": null,
+                  "fontName": "fonts/HelveticaNeue.ttf",
+                  "fontSize": 20,
+                  "hAlignment": 0,
+                  "text": "1",
+                  "touchScaleEnable": false,
+                  "vAlignment": 0
+                }
+              }
+            ],
             "options": {
               "__type": "ButtonSurrogate:#EditorCommon.JsonModel.Component.GUI",
               "classname": "Button",
@@ -273,8 +324,8 @@
               "ignoreSize": false,
               "layoutParameter": null,
               "opacity": 255,
-              "positionPercentX": 0.8078016,
-              "positionPercentY": 0.174649119,
+              "positionPercentX": 0.80625,
+              "positionPercentY": 0.173515975,
               "positionType": 0,
               "rotation": 0,
               "scaleX": 1,
@@ -304,7 +355,7 @@
               "fontType": 0,
               "normal": null,
               "normalData": {
-                "path": "spinWheel/btn-submit.png",
+                "path": "spinWheel/btn-buy-tickets.png",
                 "plistFile": "",
                 "resourceType": 0
               },
@@ -317,7 +368,7 @@
               "scale9Enable": false,
               "scale9Height": 40,
               "scale9Width": 160,
-              "text": "1",
+              "text": "",
               "textColorB": 255,
               "textColorG": 255,
               "textColorR": 255

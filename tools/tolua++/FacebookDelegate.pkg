@@ -6,4 +6,5 @@ class FacebookDelegate
 	void login(LUA_FUNCTION handler);
 	void grantPublishPermission(const char* permission, LUA_FUNCTION handler);
 	void inviteFriend(const char* appLinkUrl, LUA_FUNCTION handler);
+    void shareTimeline(const char* title, const char* description, const char* appLinkUrl, LUA_FUNCTION handler);
 };

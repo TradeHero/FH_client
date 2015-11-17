@@ -316,7 +316,7 @@ end
 
 function Logic:getDeviceID()
     if self.deviceID == "" then
-        self.deviceID = getDeviceID()
+		self.deviceID = Misc:sharedDelegate():getDeviceID()
     end
     return self.deviceID
 end

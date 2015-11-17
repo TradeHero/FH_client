@@ -44,17 +44,23 @@ function loadFrame( parent, matchInfo, marketInfo, finishCallback, bigBetStatus,
     local team1 = tolua.cast( mWidget:getChildByName("team1"), "ImageView" )
     local team2 = tolua.cast( mWidget:getChildByName("team2"), "ImageView" )
     local draw = tolua.cast( mWidget:getChildByName("draw"), "ImageView" )
+    local stake = tolua.cast( mWidget:getChildByName("stake"), "ImageView" )
+    local cooldown = tolua.cast( mWidget:getChildByName("cooldown"), "ImageView" )
+    local bigBet = tolua.cast( mWidget:getChildByName("bigBet"), "CheckBox" )
+
     local team1WinPoint = tolua.cast( team1:getChildByName("team1WinPoint"), "Label" )
     local team2WinPoint = tolua.cast( team2:getChildByName("team2WinPoint"), "Label" )
     local drawWinPoint = tolua.cast( draw:getChildByName("drawWinPoint"), "Label" )
-    local stake = tolua.cast( mWidget:getChildByName("stake"), "Label" )
-    local bigBet = tolua.cast( mWidget:getChildByName("CheckBox_BigBet"), "CheckBox" )
-    local countdown = mWidget:getChildByName("Button_Countdown")
+--    local stake = tolua.cast( mWidget:getChildByName("stake"), "Label" )
+--    local bigBet = tolua.cast( mWidget:getChildByName("CheckBox_BigBet"), "CheckBox" )
+--    local countdown = mWidget:getChildByName("Button_Countdown")
     local lbQuestion = tolua.cast( mWidget:getChildByName("question"), "Label" )
-    local lbStake = tolua.cast( mWidget:getChildByName("Label_Stake"), "Label" )
+    local lbStake = tolua.cast( stake:getChildByName("Label_Stake"), "Label" )
     local lb1ToWin = tolua.cast( team1:getChildByName("Label_StandToWin"), "Label" )
     local lb2ToWin = tolua.cast( team2:getChildByName("Label_StandToWin"), "Label" )
     local lbDrawToWin = tolua.cast( draw:getChildByName("Label_StandToWin"), "Label" )
+    local stakenum = tolua.cast( stake:getChildByName("stake"), "Label" )
+
 
     -- labels
     lbQuestion:setText( Constants.String.match_prediction.team_to_win )
@@ -69,7 +75,7 @@ function loadFrame( parent, matchInfo, marketInfo, finishCallback, bigBetStatus,
         bigBet:setEnabled( false )
     
         mRemainingTime = bigBetStatus["timeToNextBet"]
-        local labelTime = tolua.cast( countdown:getChildByName("Label_Time"), "Label" )
+        local labelTime = tolua.cast( cooldown:getChildByName("Label_Time"), "Label" )
         labelTime:setText( os.date( "!%X", mRemainingTime ) )
         performWithDelay( mWidget, doCountdown, 1 )
 
@@ -78,9 +84,9 @@ function loadFrame( parent, matchInfo, marketInfo, finishCallback, bigBetStatus,
                 EventManager:postEvent( Event.Show_Info, { Constants.String.info.star_bet } )
             end
         end
-        countdown:addTouchEventListener( eventHandler )
+ --       cooldown:addTouchEventListener( eventHandler )
     else
-        countdown:setEnabled( false )
+        cooldown:setEnabled( false )
         if bigBetStatus["currBigBet"] == MarketConfig.MARKET_TYPE_MATCH then
             -- active
             bigBet:setSelectedState( true )
@@ -99,14 +105,14 @@ function loadFrame( parent, matchInfo, marketInfo, finishCallback, bigBetStatus,
 
     team1:loadTexture( TeamConfig.getLogo( TeamConfig.getConfigIdByKey( mMatch["HomeTeamId"] ), true ) )
     team2:loadTexture( TeamConfig.getLogo( TeamConfig.getConfigIdByKey( mMatch["AwayTeamId"] ), false ) )
-    team1WinPoint:setText( string.format( Constants.String.num_of_points, MarketsForGameData.getOddsForType( mMarketInfo, MarketConfig.ODDS_TYPE_ONE_OPTION ) * mStake ) )
-    team2WinPoint:setText( string.format( Constants.String.num_of_points, MarketsForGameData.getOddsForType( mMarketInfo, MarketConfig.ODDS_TYPE_TWO_OPTION ) * mStake ) )
+    team1WinPoint:setText( MarketsForGameData.getOddsForType( mMarketInfo, MarketConfig.ODDS_TYPE_ONE_OPTION ) * mStake )
+    team2WinPoint:setText( MarketsForGameData.getOddsForType( mMarketInfo, MarketConfig.ODDS_TYPE_TWO_OPTION ) * mStake )
     if MarketsForGameData.getOddsForType( mMarketInfo, MarketConfig.ODDS_TYPE_THREE_OPTION ) > 0 then
-        drawWinPoint:setText( string.format( Constants.String.num_of_points, MarketsForGameData.getOddsForType( mMarketInfo, MarketConfig.ODDS_TYPE_THREE_OPTION ) * mStake ) )
+        drawWinPoint:setText( MarketsForGameData.getOddsForType( mMarketInfo, MarketConfig.ODDS_TYPE_THREE_OPTION ) * mStake )
     else
         draw:setEnabled( false )
     end
-    stake:setText( string.format( Constants.String.num_of_points, mStake ) )
+    stakenum:setText( mStake )
 
     team1:addTouchEventListener( selectTeam1Win )
     team2:addTouchEventListener( selectTeam2Win )
@@ -205,7 +211,7 @@ function selectBigBet( sender, eventType )
             mStake = Constants.STAKE_BIGBET
         end
         
-        local stake = tolua.cast( mWidget:getChildByName("stake"), "Label" )
+        local stake = tolua.cast( mWidget:getChildByName("stake"):getChildByName("stake"), "Label" )
         local team1 = tolua.cast( mWidget:getChildByName("team1"), "ImageView" )
         local team2 = tolua.cast( mWidget:getChildByName("team2"), "ImageView" )
         local draw = tolua.cast( mWidget:getChildByName("draw"), "ImageView" )
@@ -213,11 +219,11 @@ function selectBigBet( sender, eventType )
         local team2WinPoint = tolua.cast( team2:getChildByName("team2WinPoint"), "Label" )
         local drawWinPoint = tolua.cast( draw:getChildByName("drawWinPoint"), "Label" )
 
-        stake:setText( string.format( Constants.String.num_of_points, mStake ) )
-        team1WinPoint:setText( string.format( Constants.String.num_of_points, MarketsForGameData.getOddsForType( mMarketInfo, MarketConfig.ODDS_TYPE_ONE_OPTION ) * mStake ) )
-        team2WinPoint:setText( string.format( Constants.String.num_of_points, MarketsForGameData.getOddsForType( mMarketInfo, MarketConfig.ODDS_TYPE_TWO_OPTION ) * mStake ) )
+        stake:setText( mStake )
+        team1WinPoint:setText( MarketsForGameData.getOddsForType( mMarketInfo, MarketConfig.ODDS_TYPE_ONE_OPTION ) * mStake )
+        team2WinPoint:setText( MarketsForGameData.getOddsForType( mMarketInfo, MarketConfig.ODDS_TYPE_TWO_OPTION ) * mStake )
         if MarketsForGameData.getOddsForType( mMarketInfo, MarketConfig.ODDS_TYPE_THREE_OPTION ) > 0 then
-            drawWinPoint:setText( string.format( Constants.String.num_of_points, MarketsForGameData.getOddsForType( mMarketInfo, MarketConfig.ODDS_TYPE_THREE_OPTION ) * mStake ) )
+            drawWinPoint:setText( MarketsForGameData.getOddsForType( mMarketInfo, MarketConfig.ODDS_TYPE_THREE_OPTION ) * mStake )
         end
     end
 end
@@ -284,18 +290,18 @@ function doCountdown()
 end
 
 function updateTimer()
-    local countdown = mWidget:getChildByName("Button_Countdown")
-    local labelTime = tolua.cast( countdown:getChildByName("Label_Time"), "Label" )
+    local cooldown = mWidget:getChildByName("cooldown")
+    local labelTime = tolua.cast( cooldown:getChildByName("Label_Time"), "Label" )
 
     mRemainingTime = mRemainingTime - 1
     if mRemainingTime < 0 then
-        local bigBet = tolua.cast( mWidget:getChildByName("CheckBox_BigBet"), "CheckBox" ) 
+        local bigBet = tolua.cast( mWidget:getChildByName("bigBet"), "CheckBox" ) 
         --inactive
         bigBet:setEnabled( true )
         bigBet:setOpacity( 127 )
         bigBet:setSelectedState( false )
         bigBet:addTouchEventListener( selectBigBet )
-        countdown:setEnabled( false )
+        cooldown:setEnabled( false )
     else
         labelTime:setText( os.date( "!%X", mRemainingTime ) )
         performWithDelay( mWidget, doCountdown, 1 )

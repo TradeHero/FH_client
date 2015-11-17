@@ -11,9 +11,9 @@ LOCAL_SRC_FILES :=  hellolua/main.cpp \
                     hellolua/analytics.cpp \
                     hellolua/CCEditBoxImplAndroidJNI.cpp \
                     hellolua/device.cpp \
+                    hellolua/store.cpp \
                     hellolua/misc.cpp \
                     hellolua/quickblox.cpp \
-                    ../../Classes/DeviceID.cpp \
                     ../../Classes/AppDelegate.cpp
 
 

@@ -12,5 +12,6 @@ void misc_get_UA_DeviceToken();
 void misc_get_deepLink();
 void misc_add_UA_Tags(const char* tagsString);
 void misc_remove_UA_Tags(const char* tagsString);
+const char* misc_get_device_ID();
 void misc_open_rate();
 #endif

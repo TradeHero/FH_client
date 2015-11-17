@@ -34,6 +34,8 @@ public:
     
     const char* getDeepLink();
     
+    const char* getDeviceID();
+    
     void notifyDeepLink(const char* deepLink);
     
     void openRate();

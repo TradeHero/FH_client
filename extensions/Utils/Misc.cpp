@@ -296,6 +296,19 @@ namespace Utils
 #endif
 	}
 
+    const char* Misc::getDeviceID()
+    {
+        const char* result = NULL;
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+        result = MiscHandler::getInstance()->getDeviceID();
+#endif
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+        result = misc_get_device_ID();
+#endif
+        CCLog("Misc get device id: %s" ,result);
+        return result;
+    }
+ 
 	void Misc::terminate()
 	{
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)

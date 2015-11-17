@@ -64,6 +64,8 @@ GET_LUCKY8_WINNERS_REST_CALL = SERVER_IP .. "/api/lucky8/winners"
 GET_LIVE_SCORE_REST_CALL = SERVER_IP .. "/api/games/livescore"
 GET_FRIEND_REFERAL_REST_CALL = SERVER_IP.."/api/referrals/referral"
 GET_CURRENCIES = SERVER_IP.."/api/referrals/referral"
+GET_PRODUCTS = SERVER_IP.."/api/Products/GetProducts"
+GET_ADD_TICKET = SERVER_IP.."/api/Tickets/AddTicket"
 
 POST_LUCKY8_PREDICT = SERVER_IP .. "/api/lucky8/predict"
 POST_COUPONS_REST_CALL = SERVER_IP.."/api/coupons/placeCoupons"
@@ -142,8 +144,10 @@ function setServerIP( serverIp, cdnServerIp, useDev )
     GET_LUCKY8_WINNERS_REST_CALL = serverIp .. "/api/lucky8/winners"
     GET_LIVE_SCORE_REST_CALL = serverIp .. "/api/games/livescore"
     GET_FRIEND_REFERAL_REST_CALL = serverIp.."/api/referrals/referral"
-    GET_CURRENCIES = serverIp.."/api/referrals/referral"
-    
+    GET_CURRENCIES_REST_CALL = serverIp.."/api/referrals/referral"
+    GET_PRODUCTS_REST_CALL = serverIp.."/api/Products/GetProducts"
+    GET_ADD_TICKET = serverIp.."/api/Tickets/AddTicket"
+
     POST_LUCKY8_PREDICT = serverIp .. "/api/lucky8/predict"
     POST_COUPONS_REST_CALL = serverIp.."/api/coupons/placeCoupons"
     POST_FAV_TEAM_REST_CALL= serverIp.."/api/user/favoriteTeam"

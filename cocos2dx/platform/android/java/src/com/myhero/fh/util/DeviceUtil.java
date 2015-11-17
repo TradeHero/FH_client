@@ -5,9 +5,6 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import com.myhero.fh.widget.FHCocos2dxHandler;
 import java.lang.ref.WeakReference;
-import android.telephony.TelephonyManager;
-import org.cocos2dx.lib.Cocos2dxActivity;
-import android.provider.Settings;
 
 public class DeviceUtil {
   @SuppressWarnings("Unused")
@@ -31,19 +28,6 @@ public class DeviceUtil {
     InputMethodManager imm = (InputMethodManager) focusingView.getContext().getSystemService
         (Context.INPUT_METHOD_SERVICE);
     imm.showSoftInput(focusingView, 0);
-  }
-
-  public static String getSerialNumber() {
-    return android.os.Build.SERIAL;
-  }
-
-  public static String getDeviceID(){
-    TelephonyManager tm = (TelephonyManager) Cocos2dxActivity.getContext().getSystemService(Cocos2dxActivity.TELEPHONY_SERVICE);
-    return tm.getDeviceId();
-  }
-
-  public static String getAndroidID(){
-    return Settings.System.getString(Cocos2dxActivity.getContext().getContentResolver(), Settings.Secure.ANDROID_ID);
   }
 
 }

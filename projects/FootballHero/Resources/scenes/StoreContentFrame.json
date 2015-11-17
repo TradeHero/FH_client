@@ -11,7 +11,7 @@
   "designWidth": 640,
   "textures": [],
   "texturesPng": [
-    "spinWheel/img-messi.png",
+    "Store/icn-tickets.png",
     "Competition/btn-predictnow.png",
     "community/btn-CTA.png"
   ],
@@ -39,8 +39,8 @@
           "customProperty": "",
           "flipX": false,
           "flipY": false,
-          "height": 93,
-          "ignoreSize": true,
+          "height": 90,
+          "ignoreSize": false,
           "layoutParameter": null,
           "opacity": 255,
           "positionPercentX": 0.106557377,
@@ -50,7 +50,7 @@
           "scaleX": 1,
           "scaleY": 1,
           "sizePercentX": 0.147540987,
-          "sizePercentY": 0.775,
+          "sizePercentY": 0.75,
           "sizeType": 0,
           "tag": 71593,
           "touchAble": false,
@@ -65,12 +65,12 @@
           "capInsetsY": 0,
           "fileName": null,
           "fileNameData": {
-            "path": "spinWheel/img-messi.png",
+            "path": "Store/icn-tickets.png",
             "plistFile": "",
             "resourceType": 0
           },
           "scale9Enable": false,
-          "scale9Height": 93,
+          "scale9Height": 90,
           "scale9Width": 90
         }
       },
@@ -257,8 +257,8 @@
               "rotation": 0,
               "scaleX": 1,
               "scaleY": 1,
-              "sizePercentX": 1.05555558,
-              "sizePercentY": 1.08,
+              "sizePercentX": 0.81,
+              "sizePercentY": 0.72,
               "sizeType": 0,
               "tag": 71601,
               "touchAble": false,
@@ -304,14 +304,14 @@
           "rotation": 0,
           "scaleX": 1,
           "scaleY": 1,
-          "sizePercentX": 0.147540987,
+          "sizePercentX": 0.163934425,
           "sizePercentY": 0.208333328,
           "sizeType": 0,
           "tag": 71600,
           "touchAble": false,
           "useMergedTexture": false,
           "visible": true,
-          "width": 90,
+          "width": 100,
           "x": 487,
           "y": 92,
           "capInsetsHeight": 1,
@@ -326,7 +326,7 @@
           },
           "scale9Enable": false,
           "scale9Height": 25,
-          "scale9Width": 90
+          "scale9Width": 100
         }
       },
       {

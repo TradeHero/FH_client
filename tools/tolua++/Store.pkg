@@ -1,0 +1,9 @@
+
+class Store
+{
+    static Store* sharedDelegate();
+        
+    void requestProducts(LUA_FUNCTION handler);
+    
+    void buy(int level, LUA_FUNCTION handler);
+};
