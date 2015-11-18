@@ -305,7 +305,6 @@ namespace Utils
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
         result = misc_get_device_ID();
 #endif
-        CCLog("Misc get device id: %s" ,result);
         return result;
     }
  
