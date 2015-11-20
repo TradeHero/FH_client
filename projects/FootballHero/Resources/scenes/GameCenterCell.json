@@ -261,7 +261,7 @@
                 "options": {
                   "__type": "LabelSurrogate:#EditorCommon.JsonModel.Component.GUI",
                   "classname": "Label",
-                  "name": "Label_buy",
+                  "name": "Label_Ticket",
                   "ZOrder": 0,
                   "actiontag": 50080696,
                   "anchorPointX": 0.5,
@@ -283,8 +283,8 @@
                   "rotation": 0,
                   "scaleX": 1,
                   "scaleY": 1,
-                  "sizePercentX": 0.59375,
-                  "sizePercentY": 0.675,
+                  "sizePercentX": 0.0625,
+                  "sizePercentY": 0.5,
                   "sizeType": 0,
                   "tag": 72866,
                   "touchAble": false,
@@ -308,7 +308,7 @@
             "options": {
               "__type": "ButtonSurrogate:#EditorCommon.JsonModel.Component.GUI",
               "classname": "Button",
-              "name": "Button_Buy",
+              "name": "Button_Play",
               "ZOrder": 0,
               "actiontag": 14775176,
               "anchorPointX": 0.5,
