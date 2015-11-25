@@ -9,7 +9,7 @@ local StoreConfig = require("scripts.config.Store")
 
 local mWidget
 
-function loadFrame( jsonResponse )
+function loadFrame( jsonResponse, storeResponse )
     mWidget = GUIReader:shareReader():widgetFromJsonFile("scenes/StoreFrame.json")
     mWidget:registerScriptHandler( EnterOrExit )
     SceneManager.clearNAddWidget( mWidget )
@@ -21,7 +21,7 @@ function loadFrame( jsonResponse )
 
     Navigator.loadFrame( mWidget )
 
-    initContent( jsonResponse )
+    initContent( jsonResponse, storeResponse)
 end
 
 function EnterOrExit( eventType )
@@ -50,18 +50,29 @@ end
 -- {"Id":3,"Name":"Box of Tickets","Ticket":30,"Sp":1000,"Level":4,"IsBestDeal":false},
 -- {"Id":4,"Name":"Tickets Heaven","Ticket":50,"Sp":1000,"Level":7,"IsBestDeal":true},
 -- {"Id":5,"Name":"Get free tickets!","Ticket":1,"Sp":0,"Level":0,"IsBestDeal":false}]
-function initContent( products )
+function initContent( products, storeResponse )
     tolua.cast( mWidget:getChildByName("Panel_Title"):getChildByName("Label_Title"), "Label" ):setText( Constants.String.store.title )
-
+ 
     local contentHeight = 0
     local layoutParameter = LinearLayoutParameter:create()
     layoutParameter:setGravity(LINEAR_GRAVITY_CENTER_VERTICAL)
+
+    local store = {}
+    local count = table.getn( storeResponse )
+    -- 为 store 传回结果排序
+    for i=1, count do
+        for j=1, count do
+            if storeResponse[j]["id"] == StoreConfig.ProductInfo[products[i]["Level"]]["id"] then
+                store[i] = storeResponse[j]
+            end
+        end
+    end
  
     -- Prize Panel
     local container = mWidget:getChildByName("ScrollView")
     container:removeAllChildrenWithCleanup( true )
 
-    for i = 1, table.getn( products ) - 1 do
+    for i = 1, count do
         local content = SceneManager.widgetFromJsonFile("scenes/StoreContentFrame.json")
         local imageItem = tolua.cast( content:getChildByName("Image_Item"), "ImageView" )
         local imageBest = content:getChildByName("Image_Best")
@@ -70,11 +81,10 @@ function initContent( products )
         local labelPrice = tolua.cast( content:getChildByName("Label_Pirce"), "Label" )
         local btnBuy = tolua.cast( content:getChildByName("Button_Buy"), "Button" )
 
---        imageItem:loadTexture("")
-
         labelTitle:setText( products[i]["Name"] )
         labelDetail:setText( string.format( Constants.String.store.detail, products[i]["Ticket"], products[i]["Sp"] ))
-        labelPrice:setText( "$" .. ( 10 * products[i]["Level"] - 0.01) )
+        labelPrice:setText( store[i]["price"] )
+        
 
         if not products[i]["IsBestDeal"] then
             imageBest:setEnabled( false )
@@ -82,14 +92,14 @@ function initContent( products )
 
         local payEventHandler = function ( ... )
             CCLuaLog("buy")
-            EventManager:postEvent( Event.Do_Buy_Product, { products[i]["Id"] } )
+            EventManager:postEvent( Event.Do_Buy_Product, { i } )
         end
 
         local buyEventHandler = function( sender, eventType )
             if eventType == TOUCH_EVENT_ENDED then
                 CCLuaLog("buy handler")
-                --EventManager:postEvent( Event.Do_Buy_Product, { products[i]["Id"] })
-                Store:sharedDelegate():buy( products[i]["Level"] , payEventHandler)
+--                EventManager:postEvent( Event.Do_Buy_Product, { i })
+                Store:sharedDelegate():buy( StoreConfig.ProductInfo[products[i]["Level"]]["id"] , payEventHandler)
             end
         end
         btnBuy:addTouchEventListener( buyEventHandler )

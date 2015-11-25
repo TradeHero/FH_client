@@ -166,5 +166,5 @@
   <imageFileList />
   <imagePngList />
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>StoreContentFrame.json</CurrentUIJson>
+  <CurrentUIJson />
 </UIProject>

@@ -44,18 +44,22 @@ namespace Utils
     }
     
     
-    void Store::requestProducts(int handler){
+    void Store::requestProducts(const char* ids, int handler){
         mRequestProductHandler = handler;
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-        StoreHandler::getInstance()->requestProducts();
+        StoreHandler::getInstance()->requestProductPrice(ids);
 #endif
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
-        android_requestProducts();
+        android_requestProducts(ids);
 #endif
     }
     
-    void Store::requestProductResult(bool success)
+    void Store::requestProductResult(const char* result, bool success)
     {
+        if (!success) {
+            return;
+        }
+        
         if (mRequestProductHandler == 0)
         {
             return;
@@ -70,26 +74,25 @@ namespace Utils
         }
         
         CCLuaStack* pStack = pLuaEngine->getLuaStack();
-        pStack->pushBoolean(success);
+        pStack->pushString(result);
         pStack->executeFunctionByHandler(mRequestProductHandler, 1);
         pStack->clean();
         
         mRequestProductHandler = 0;
     }
     
-    void Store::buy(int level, int handler){
+    void Store::buy(const char* id, int handler){
         mPaymentHandler = handler;
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-        StoreHandler::getInstance()->buy(level);
+        StoreHandler::getInstance()->buy(id);
 #endif
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
-        android_buy(level);
+        android_buy(id);
 #endif
     }
     
     void Store::buyResult(bool success)
     {
-        CCLuaLog("Buy Result");
         if (mPaymentHandler == 0)
         {
             return;

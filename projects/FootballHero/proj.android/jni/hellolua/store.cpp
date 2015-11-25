@@ -11,9 +11,9 @@ using namespace cocos2d;
 extern "C"
 {
   JNIEXPORT void JNICALL Java_com_myhero_fh_GooglePlayIABPlugin_requestProductCallback(JNIEnv *env,
-   jobject thiz, jboolean succeed)
+   jobject thiz, jstring str, jboolean succeed)
   {
-    Utils::Store::sharedDelegate()->requestProductResult(succeed == JNI_TRUE);
+    Utils::Store::sharedDelegate()->requestProductResult(env->GetStringUTFChars(str, NULL), succeed == JNI_TRUE);
   }
 
   JNIEXPORT void JNICALL Java_com_myhero_fh_GooglePlayIABPlugin_buyCallback(JNIEnv *env,
@@ -24,22 +24,25 @@ extern "C"
 
 }
 
-void android_requestProducts()
+void android_requestProducts(const char* ids)
 {
   JniMethodInfo jmi;
-  if (JniHelper::getStaticMethodInfo(jmi, "com/myhero/fh/MainActivity", "requestProducts", "()V"))
+  if (JniHelper::getStaticMethodInfo(jmi, "com/myhero/fh/MainActivity", "requestProducts", "(Ljava/lang/String;)V"))
   {
-    jmi.env->CallStaticVoidMethod(jmi.classID, jmi.methodID);
+    jstring jIds = jmi.env->NewStringUTF(ids);
+    jmi.env->CallStaticVoidMethod(jmi.classID, jmi.methodID, jIds);
     jmi.env->DeleteLocalRef(jmi.classID);
-  }
+   }
 }
 
-void android_buy(int level)
+void android_buy(const char* id)
 {
   JniMethodInfo jmi;
-  if (JniHelper::getStaticMethodInfo(jmi, "com/myhero/fh/MainActivity", "buy", "(I)V"))
+  if (JniHelper::getStaticMethodInfo(jmi, "com/myhero/fh/MainActivity", "buy", "(Ljava/lang/String;)V"))
   {
-    jmi.env->CallStaticVoidMethod(jmi.classID, jmi.methodID, level);
+    jstring jId = jmi.env->NewStringUTF(id);
+    jmi.env->CallStaticVoidMethod(jmi.classID, jmi.methodID, jId);
     jmi.env->DeleteLocalRef(jmi.classID);
+    jmi.env->DeleteLocalRef(jId);
   }
 }

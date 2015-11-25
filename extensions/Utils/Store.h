@@ -18,9 +18,9 @@ namespace Utils
         ~Store();
         static Store* sharedDelegate();
         
-        void requestProducts(int handler);
-        void requestProductResult(bool success);
-        void buy(int level, int handler);
+        void requestProducts(const char* ids, int handler);
+        void requestProductResult(const char* result,bool success);
+        void buy(const char* id, int handler);
         void buyResult(bool success);
         
     protected:

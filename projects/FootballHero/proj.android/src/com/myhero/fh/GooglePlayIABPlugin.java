@@ -48,7 +48,7 @@ public class GooglePlayIABPlugin
 
     void complain(String message) {
         Log.e(TAG, "**** Error: " + message);
-        alert("Error: " + message);
+ //       alert("Error: " + message);
     }
 
     void alert(String message) {
@@ -111,7 +111,21 @@ public class GooglePlayIABPlugin
 		}
 		return jsonSkuDetail.toString();
 	}
-	
+
+	private String inventoryToJson(Inventory inventory) throws JSONException {
+		JSONArray jsonSkuDetail = new JSONArray();
+		for (Map.Entry<String, SkuDetails> entry : inventory.mSkuMap.entrySet()) {
+			JSONObject jEntry = entry.getValue().getJson();
+			JSONObject jsonDetail = new JSONObject();
+			jsonDetail.put("id", jEntry.get("productId"));
+			jsonDetail.put("title", jEntry.get("title"));
+			jsonDetail.put("description", jEntry.get("description"));
+			jsonDetail.put("price", jEntry.get("price"));
+			jsonSkuDetail.put(jsonDetail);
+		}
+		return jsonSkuDetail.toString();
+	}
+
 	
     // Listener that's called when we finish querying the items and subscriptions we own
     IabHelper.QueryInventoryFinishedListener mGotInventoryListener = new IabHelper.QueryInventoryFinishedListener() {
@@ -139,7 +153,7 @@ public class GooglePlayIABPlugin
              */
 
 			try {
-				String strJsonSkuDetail = inventoryToSkuJson(inventory);
+				String strJsonSkuDetail = inventoryToJson(inventory);
 				runNativeOnReceiveItemInfo(strJsonSkuDetail);
 				Log.d(TAG, "strJsonSkuDetail: " + strJsonSkuDetail);
 			} catch (JSONException e) {
@@ -291,21 +305,18 @@ public class GooglePlayIABPlugin
         }
     };	
 
-	public static native void nativeOnReceiveItemInfo(String strJsonSkuDetail);
-	public static native void nativeOnPurchased(String strJsonPurchaseInfo, String strSignature);
+	public static native void buyCallback(boolean succeed);
+	public static native void requestProductCallback(String json, boolean succeed);
 	public static native void nativeOnFailed(String strItemKey, String strInfo);
 	public static native void nativeOnRestore(String strJsonPurchaseInfo, String strSignature);
 
-	public static native void buyCallback(boolean succeed);
-	public static native void requestProductCallback(boolean succeed);
 
 	public static void runNativeOnReceiveItemInfo(final String strJsonSkuDetail) {
 		Cocos2dxGLSurfaceView.getInstance().queueEvent(new Runnable() {
 			public void run() {
-				Log.d(TAG, "runNativeOnReceiveItemInfo" + strJsonSkuDetail);
-				requestProductCallback(true);
-	//			nativeOnReceiveItemInfo(strJsonSkuDetail);
-			} 
+				Log.d(TAG, "info:" + strJsonSkuDetail);
+				requestProductCallback(strJsonSkuDetail, true);
+			}
 		});
 	}
 	
@@ -314,8 +325,7 @@ public class GooglePlayIABPlugin
 			public void run() {
 				Log.d(TAG, "runNativeOnPurchased" + strJsonPurchaseInfo + "  sig:" + strSignature);
 				buyCallback(true);
-				//nativeOnPurchased(strJsonPurchaseInfo, strSignature);
-			} 
+			}
 		});
 	}
 

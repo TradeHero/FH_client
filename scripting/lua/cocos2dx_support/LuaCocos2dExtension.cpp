@@ -1,6 +1,6 @@
 /*
 ** Lua binding: Extension
-** Generated automatically by tolua++-1.0.92 on 11/17/15 16:22:18.
+** Generated automatically by tolua++-1.0.92 on 11/25/15 11:20:11.
 */
 
 /****************************************************************************
@@ -1688,20 +1688,22 @@ static int tolua_Extension_Store_requestProducts00(lua_State* tolua_S)
  tolua_Error tolua_err;
  if (
      !tolua_isusertype(tolua_S,1,"Store",0,&tolua_err) ||
-     (tolua_isvaluenil(tolua_S,2,&tolua_err) || !toluafix_isfunction(tolua_S,2,"LUA_FUNCTION",0,&tolua_err)) ||
-     !tolua_isnoobj(tolua_S,3,&tolua_err)
+     !tolua_isstring(tolua_S,2,0,&tolua_err) ||
+     (tolua_isvaluenil(tolua_S,3,&tolua_err) || !toluafix_isfunction(tolua_S,3,"LUA_FUNCTION",0,&tolua_err)) ||
+     !tolua_isnoobj(tolua_S,4,&tolua_err)
  )
   goto tolua_lerror;
  else
 #endif
  {
   Store* self = (Store*)  tolua_tousertype(tolua_S,1,0);
-  LUA_FUNCTION handler = (  toluafix_ref_function(tolua_S,2,0));
+  const char* ids = ((const char*)  tolua_tostring(tolua_S,2,0));
+  LUA_FUNCTION handler = (  toluafix_ref_function(tolua_S,3,0));
 #ifndef TOLUA_RELEASE
   if (!self) tolua_error(tolua_S,"invalid 'self' in function 'requestProducts'", NULL);
 #endif
   {
-   self->requestProducts(handler);
+   self->requestProducts(ids,handler);
   }
  }
  return 0;
@@ -1721,7 +1723,7 @@ static int tolua_Extension_Store_buy00(lua_State* tolua_S)
  tolua_Error tolua_err;
  if (
      !tolua_isusertype(tolua_S,1,"Store",0,&tolua_err) ||
-     !tolua_isnumber(tolua_S,2,0,&tolua_err) ||
+     !tolua_isstring(tolua_S,2,0,&tolua_err) ||
      (tolua_isvaluenil(tolua_S,3,&tolua_err) || !toluafix_isfunction(tolua_S,3,"LUA_FUNCTION",0,&tolua_err)) ||
      !tolua_isnoobj(tolua_S,4,&tolua_err)
  )
@@ -1730,13 +1732,13 @@ static int tolua_Extension_Store_buy00(lua_State* tolua_S)
 #endif
  {
   Store* self = (Store*)  tolua_tousertype(tolua_S,1,0);
-  int level = ((int)  tolua_tonumber(tolua_S,2,0));
+  const char* id = ((const char*)  tolua_tostring(tolua_S,2,0));
   LUA_FUNCTION handler = (  toluafix_ref_function(tolua_S,3,0));
 #ifndef TOLUA_RELEASE
   if (!self) tolua_error(tolua_S,"invalid 'self' in function 'buy'", NULL);
 #endif
   {
-   self->buy(level,handler);
+   self->buy(id,handler);
   }
  }
  return 0;

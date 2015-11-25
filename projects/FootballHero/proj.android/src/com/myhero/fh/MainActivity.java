@@ -68,6 +68,8 @@ import com.localytics.android.LocalyticsActivityLifecycleCallbacks;
 
 import com.appsflyer.AppsFlyerLib;
 import com.flurry.android.FlurryAgent;
+import org.json.*;
+import org.json.JSONException;
 
 
 public class MainActivity extends Cocos2dxActivity {
@@ -233,34 +235,24 @@ public class MainActivity extends Cocos2dxActivity {
     facebookAuth.shareTimeline(title, description, appLinkUrl);
   }
 
-    public static void buy(int level){
-        String itemId = "com.myhero.fh.";
-        switch (level){
-            case 1:
-                itemId += "item1";
-                break;
-            case 2:
-                itemId += "item2";
-                break;
-            case 4:
-                itemId += "item3";
-                break;
-            case 7:
-                itemId += "item4";
-                break;
-            case 15:
-                itemId += "item5";
-                break;
-            default:
-                itemId += "item1";
-                break;
-        }
-        mGooglePlayIABPlugin.PayStart(itemId, null);
+    public static void buy(String id){
+        mGooglePlayIABPlugin.PayStart(id, null);
     }
 
-    public static void requestProducts(){
-        Log.d("IAB", "req products");
-        mGooglePlayIABPlugin.ReqItemInfo("com.myhero.fh.item1 com.myhero.fh.item2");
+    public static void requestProducts(String jStr){
+        Log.d("IAB", "req products:" +  jStr);
+        try {
+            JSONArray array = new JSONArray(jStr);
+            String ids = "";
+            for (int i = 0; i < array.length(); i++) {
+                ids += array.getString(i) + " ";
+            }
+            mGooglePlayIABPlugin.ReqItemInfo(ids);
+        }
+        catch (JSONException exception)
+        {
+            exception.printStackTrace();
+        }
     }
 
   @Override public void destroyBindingView(final long source) {
