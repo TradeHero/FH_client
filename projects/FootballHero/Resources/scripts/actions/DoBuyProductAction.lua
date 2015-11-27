@@ -2,9 +2,7 @@ module(..., package.seeall)
 
 local Json = require("json")
 local RequestUtils = require("scripts.RequestUtils")
-local ConnectingMessage = require("scripts.views.ConnectingMessage")
 local Logic = require("scripts.Logic").getInstance()
-local Constants = require("scripts.Constants")
 
 local mJsonResponse
 

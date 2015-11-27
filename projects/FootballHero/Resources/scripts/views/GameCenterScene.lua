@@ -6,6 +6,7 @@ local Event = require("scripts.events.Event").EventList
 local Constants = require("scripts.Constants")
 local Navigator = require("scripts.views.Navigator")
 local Header = require("scripts.views.HeaderFrame")
+local SpinWheelConfig = require("scripts.config.SpinWheel")
 
 local mWidget
 local mContentHeight
@@ -56,10 +57,21 @@ function initCells( cellNum )
         local gameDes = tolua.cast( panelFade:getChildByName("TextField_Content"), "TextField" )
         gameDes:setText( GAMECENTER_TITLE_AND_DES[i][2] )
 
+        local btnPlay = tolua.cast( panelFade:getChildByName("Button_Play"), "Button" )
+        btnPlay:addTouchEventListener( eventHandler )
+
+        local lbTicket = tolua.cast( btnPlay:getChildByName("Label_Ticket"), "Label" )
+        local remainingTime = SpinWheelConfig.getNextSpinTime() - os.time()
+
         contentContainer:addChild( content )
         mContentHeight = mContentHeight + content:getSize().height
-        content:addTouchEventListener( eventHandler )
+        
         updateContentContainer( mContentHeight, content )
+        if i == 2 then
+            if remainingTime <= 0 then
+                lbTicket:setText( "free" )
+            end
+        end
     end
 end
 

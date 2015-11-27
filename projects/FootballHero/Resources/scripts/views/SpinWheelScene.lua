@@ -62,7 +62,7 @@ function loadFrame()
     mWidget = widget
 
     -- Set the text
-    tolua.cast( mWidget:getChildByName("Label_6"), "Label" ):setText( Constants.String.spinWheel.wheel_sub_title )
+    tolua.cast( mWidget:getChildByName("Label_Title"), "Label" ):setText( Constants.String.spinWheel.wheel_sub_title )
     tolua.cast( mWidget:getChildByName("Label_bonusTitle"), "Label" ):setText( Constants.String.spinWheel.spin_bonus )
     tolua.cast( mWidget:getChildByName("Label_normalTitle"), "Label" ):setText( Constants.String.spinWheel.spin_daily )
     tolua.cast( mWidget:getChildByName("Label_timeTitle"), "Label" ):setText( Constants.String.spinWheel.come_back_in )
@@ -118,8 +118,6 @@ function loadFrame()
     local labelTimeTitle = tolua.cast( mWidget:getChildByName("Label_timeTitle"), "Label" )
 
     if mRemainingTime <= 0 then
-        mWheelState = WHEEL_STATE_START
-        playStartAnim()
         labelTime:setEnabled( false )
         labelTimeTitle:setEnabled( false )
     else
@@ -128,6 +126,9 @@ function loadFrame()
         labelTime:setText( os.date( "!%X", mRemainingTime ) )
         performWithDelay( mWidget, updateTimer, 1 )
     end
+
+    mWheelState = WHEEL_STATE_START
+    playStartAnim()
     
 
     mIsBonusSpin = false
@@ -371,11 +372,12 @@ function stopEventHandler( sender,eventType )
         if mWheelState == WHEEL_STATE_START_RUNNING and mWheelCurrentSpeed >= MAX_ROTATE_SPEED and mStopPressed == false then
             AudioEngine.playEffect( AudioEngine.SETTINGS_ON_OFF )
             mStopPressed = true
-            local handler = function( prizeId, numberOfLuckyDrawTicketsLeft )
+            local handler = function( prizeId, numberOfLuckyDrawTicketsLeft, ticket )
                 mWheelState = WHEEL_STATE_CHECK_STOP_ANGLE
                 mTargetStopAngle = ( 360 - SpinWheelConfig.getStopAngleByPrizeID( prizeId ) - STOP_ROTATION_SUM ) % 360
                 mWinPrizeId = prizeId
                 mWinNumTicketLeft = numberOfLuckyDrawTicketsLeft
+                Logic:setTicket( ticket )
             end
             EventManager:postEvent( Event.Do_Spin, { handler } )
         end

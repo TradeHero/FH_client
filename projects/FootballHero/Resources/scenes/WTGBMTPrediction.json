@@ -283,6 +283,78 @@
         }
       },
       {
+        "classname": "CheckBox",
+        "name": null,
+        "children": [],
+        "options": {
+          "__type": "CheckBoxSurrogate:#EditorCommon.JsonModel.Component.GUI",
+          "classname": "CheckBox",
+          "name": "bigBet",
+          "ZOrder": 0,
+          "actiontag": 13876718,
+          "anchorPointX": 0.5,
+          "anchorPointY": 0.5,
+          "classType": "CocoStudio.EngineAdapterWrap.CSCheckBox",
+          "colorB": 255,
+          "colorG": 255,
+          "colorR": 255,
+          "customProperty": "",
+          "flipX": false,
+          "flipY": false,
+          "height": 80,
+          "ignoreSize": false,
+          "layoutParameter": null,
+          "opacity": 255,
+          "positionPercentX": 0.4984375,
+          "positionPercentY": 0.5545775,
+          "positionType": 0,
+          "rotation": 0,
+          "scaleX": 1,
+          "scaleY": 1,
+          "sizePercentX": 0.125,
+          "sizePercentY": 0.07042254,
+          "sizeType": 0,
+          "tag": 72879,
+          "touchAble": true,
+          "useMergedTexture": false,
+          "visible": true,
+          "width": 80,
+          "x": 319,
+          "y": 630,
+          "backGroundBox": null,
+          "backGroundBoxData": {
+            "path": "header/icn-3x.png",
+            "plistFile": "",
+            "resourceType": 0
+          },
+          "backGroundBoxDisabled": null,
+          "backGroundBoxDisabledData": {
+            "path": null,
+            "plistFile": null,
+            "resourceType": 0
+          },
+          "backGroundBoxSelected": null,
+          "backGroundBoxSelectedData": {
+            "path": "header/icn-3x.png",
+            "plistFile": "",
+            "resourceType": 0
+          },
+          "frontCross": null,
+          "frontCrossData": {
+            "path": "header/icn-3x.png",
+            "plistFile": "",
+            "resourceType": 0
+          },
+          "frontCrossDisabled": null,
+          "frontCrossDisabledData": {
+            "path": null,
+            "plistFile": null,
+            "resourceType": 0
+          },
+          "selectedState": true
+        }
+      },
+      {
         "classname": "ImageView",
         "name": null,
         "children": [
@@ -535,7 +607,7 @@
           "layoutParameter": null,
           "opacity": 255,
           "positionPercentX": 0.4984375,
-          "positionPercentY": 0.5290493,
+          "positionPercentY": 0.492957741,
           "positionType": 0,
           "rotation": 0,
           "scaleX": 1,
@@ -549,7 +621,7 @@
           "visible": true,
           "width": 260,
           "x": 319,
-          "y": 601,
+          "y": 560,
           "capInsetsHeight": 1,
           "capInsetsWidth": 1,
           "capInsetsX": 0,
@@ -563,78 +635,6 @@
           "scale9Enable": false,
           "scale9Height": 40,
           "scale9Width": 260
-        }
-      },
-      {
-        "classname": "CheckBox",
-        "name": null,
-        "children": [],
-        "options": {
-          "__type": "CheckBoxSurrogate:#EditorCommon.JsonModel.Component.GUI",
-          "classname": "CheckBox",
-          "name": "bigBet",
-          "ZOrder": 0,
-          "actiontag": 13876718,
-          "anchorPointX": 0.5,
-          "anchorPointY": 0.5,
-          "classType": "CocoStudio.EngineAdapterWrap.CSCheckBox",
-          "colorB": 255,
-          "colorG": 255,
-          "colorR": 255,
-          "customProperty": "",
-          "flipX": false,
-          "flipY": false,
-          "height": 80,
-          "ignoreSize": false,
-          "layoutParameter": null,
-          "opacity": 255,
-          "positionPercentX": 0.4984375,
-          "positionPercentY": 0.528169036,
-          "positionType": 0,
-          "rotation": 0,
-          "scaleX": 1,
-          "scaleY": 1,
-          "sizePercentX": 0.125,
-          "sizePercentY": 0.07042254,
-          "sizeType": 0,
-          "tag": 72879,
-          "touchAble": true,
-          "useMergedTexture": false,
-          "visible": true,
-          "width": 80,
-          "x": 319,
-          "y": 600,
-          "backGroundBox": null,
-          "backGroundBoxData": {
-            "path": "header/icn-3x.png",
-            "plistFile": "",
-            "resourceType": 0
-          },
-          "backGroundBoxDisabled": null,
-          "backGroundBoxDisabledData": {
-            "path": null,
-            "plistFile": null,
-            "resourceType": 0
-          },
-          "backGroundBoxSelected": null,
-          "backGroundBoxSelectedData": {
-            "path": "header/icn-3x.png",
-            "plistFile": "",
-            "resourceType": 0
-          },
-          "frontCross": null,
-          "frontCrossData": {
-            "path": "header/icn-3x.png",
-            "plistFile": "",
-            "resourceType": 0
-          },
-          "frontCrossDisabled": null,
-          "frontCrossDisabledData": {
-            "path": null,
-            "plistFile": null,
-            "resourceType": 0
-          },
-          "selectedState": true
         }
       },
       {

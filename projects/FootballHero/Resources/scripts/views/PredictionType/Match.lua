@@ -57,6 +57,7 @@ function loadFrame( parent, matchInfo, marketInfo, finishCallback, bigBetStatus,
     local lb2ToWin = tolua.cast( team2:getChildByName("Label_StandToWin"), "Label" )
     local lbDrawToWin = tolua.cast( draw:getChildByName("Label_StandToWin"), "Label" )
     local stakenum = tolua.cast( stake:getChildByName("stake"), "Label" )
+    local btnBuy= tolua.cast( cooldown:getChildByName("Button_bigbet"), "Button" )
 
 
     -- labels
@@ -66,38 +67,31 @@ function loadFrame( parent, matchInfo, marketInfo, finishCallback, bigBetStatus,
     lb2ToWin:setText( Constants.String.match_prediction.stand_to_win )
     lbDrawToWin:setText( Constants.String.match_prediction.stand_to_win )
 
-    mStake = Constants.STAKE
-    if bigBetStatus["timeToNextBet"] > 0 then
+    selectBigBet( bigBetStatus[MarketConfig.MARKET_NAME_MATCH] )
+    bigBet:setSelectedState( bigBetStatus[MarketConfig.MARKET_NAME_MATCH] )
+    bigBet:addTouchEventListener( bigBetHandler )
+    cooldown:setEnabled( false )
+
+    if bigBetStatus[MarketConfig.MARKET_NAME_MATCH] == false and bigBetStatus["timeToNextBet"] > 0 then
         -- show countdown
+        cooldown:setEnabled( true )
         bigBet:setEnabled( false )
-    
         mRemainingTime = bigBetStatus["timeToNextBet"]
         local labelTime = tolua.cast( cooldown:getChildByName("Label_Time"), "Label" )
         labelTime:setText( os.date( "!%X", mRemainingTime ) )
         performWithDelay( mWidget, doCountdown, 1 )
 
-        local eventHandler = function( sender, eventType )
+        local buyHandler =  function( sender, eventType )
             if eventType == TOUCH_EVENT_ENDED then
-                EventManager:postEvent( Event.Show_Info, { Constants.String.info.star_bet } )
+                if Logic:getTicket() > 0 then
+                    cooldown:setEnabled( false )
+                    bigBet:setEnabled( true )
+                    selectBigBet( true )
+                    bigBet:setSelectedState( true )
+                end
             end
         end
- --       cooldown:addTouchEventListener( eventHandler )
-    else
-        cooldown:setEnabled( false )
-        if bigBetStatus["currBigBet"] == MarketConfig.MARKET_TYPE_MATCH then
-            -- active
-            bigBet:setSelectedState( true )
-            bigBet:addTouchEventListener( selectBigBet )
-            mStake = Constants.STAKE_BIGBET
-        elseif bigBetStatus["currBigBet"] == MarketConfig.MARKET_TYPE_INVALID then
-            --inactive
-            bigBet:setOpacity( 127 )
-            bigBet:setSelectedState( false )
-            bigBet:addTouchEventListener( selectBigBet )
-        else
-            --disabled
-            bigBet:setBright( false )
-        end
+        btnBuy:addTouchEventListener( buyHandler )
     end
 
     team1:loadTexture( TeamConfig.getLogo( TeamConfig.getConfigIdByKey( mMatch["HomeTeamId"] ), true ) )
@@ -195,33 +189,36 @@ function selectDraw( sender, eventType )
     end
 end
 
-function selectBigBet( sender, eventType )
-    local checkbox = tolua.cast( sender, "CheckBox" )
-    if eventType == TOUCH_EVENT_ENDED then
-        if checkbox:getSelectedState() then
-            checkbox:setOpacity( 127 )
-            mBigBetCallback( MarketConfig.MARKET_TYPE_INVALID )
-            mStake = Constants.STAKE
-        else
-            checkbox:setOpacity( 255 )
-            mBigBetCallback( MarketConfig.MARKET_TYPE_MATCH )
-            mStake = Constants.STAKE_BIGBET
-        end
-        
-        local stake = tolua.cast( mWidget:getChildByName("stake"):getChildByName("stake"), "Label" )
-        local team1 = tolua.cast( mWidget:getChildByName("team1"), "ImageView" )
-        local team2 = tolua.cast( mWidget:getChildByName("team2"), "ImageView" )
-        local draw = tolua.cast( mWidget:getChildByName("draw"), "ImageView" )
-        local team1WinPoint = tolua.cast( team1:getChildByName("team1WinPoint"), "Label" )
-        local team2WinPoint = tolua.cast( team2:getChildByName("team2WinPoint"), "Label" )
-        local drawWinPoint = tolua.cast( draw:getChildByName("drawWinPoint"), "Label" )
+function selectBigBet( status )
+    mBigBetCallback( MarketConfig.MARKET_NAME_MATCH, status )
+    bigBet = tolua.cast( mWidget:getChildByName("bigBet"), "CheckBox" )
+    if status == true then
+        bigBet:setOpacity( 255 )
+        mStake = Constants.STAKE_BIGBET
+    else
+        bigBet:setOpacity( 127 )
+        mStake = Constants.STAKE
+    end
+    local stake = tolua.cast( mWidget:getChildByName("stake"):getChildByName("stake"), "Label" )
+    local team1 = tolua.cast( mWidget:getChildByName("team1"), "ImageView" )
+    local team2 = tolua.cast( mWidget:getChildByName("team2"), "ImageView" )
+    local draw = tolua.cast( mWidget:getChildByName("draw"), "ImageView" )
+    local team1WinPoint = tolua.cast( team1:getChildByName("team1WinPoint"), "Label" )
+    local team2WinPoint = tolua.cast( team2:getChildByName("team2WinPoint"), "Label" )
+    local drawWinPoint = tolua.cast( draw:getChildByName("drawWinPoint"), "Label" )
 
-        stake:setText( mStake )
-        team1WinPoint:setText( MarketsForGameData.getOddsForType( mMarketInfo, MarketConfig.ODDS_TYPE_ONE_OPTION ) * mStake )
-        team2WinPoint:setText( MarketsForGameData.getOddsForType( mMarketInfo, MarketConfig.ODDS_TYPE_TWO_OPTION ) * mStake )
-        if MarketsForGameData.getOddsForType( mMarketInfo, MarketConfig.ODDS_TYPE_THREE_OPTION ) > 0 then
-            drawWinPoint:setText( MarketsForGameData.getOddsForType( mMarketInfo, MarketConfig.ODDS_TYPE_THREE_OPTION ) * mStake )
-        end
+    stake:setText( mStake )
+    team1WinPoint:setText( MarketsForGameData.getOddsForType( mMarketInfo, MarketConfig.ODDS_TYPE_ONE_OPTION ) * mStake )
+    team2WinPoint:setText( MarketsForGameData.getOddsForType( mMarketInfo, MarketConfig.ODDS_TYPE_TWO_OPTION ) * mStake )
+    if MarketsForGameData.getOddsForType( mMarketInfo, MarketConfig.ODDS_TYPE_THREE_OPTION ) > 0 then
+        drawWinPoint:setText( MarketsForGameData.getOddsForType( mMarketInfo, MarketConfig.ODDS_TYPE_THREE_OPTION ) * mStake )
+    end
+end
+
+function bigBetHandler( sender, eventType )
+    if eventType == TOUCH_EVENT_ENDED then
+        local checkbox = tolua.cast( sender, "CheckBox" )
+        selectBigBet( not checkbox:getSelectedState() )
     end
 end
 
