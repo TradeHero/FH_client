@@ -115,7 +115,7 @@ function onRegisterRequestSuccess( jsonResponse )
         Logic:setPictureUrl( pictureUrl )
         Logic:setStartLeagueId( startLeagueId )
         Logic:setBalance( balance )
-        Logic:setTicket( Ticket )
+        Logic:setTicket( ticket )
         Logic:setFbId( FbId )
 
         QuickBloxService.login( displayName, pictureUrl, userId, function( token )

@@ -67,7 +67,7 @@ function initCells( cellNum )
         mContentHeight = mContentHeight + content:getSize().height
         
         updateContentContainer( mContentHeight, content )
-        if i == 2 then
+        if i == 1 then
             if remainingTime <= 0 then
                 lbTicket:setText( "free" )
             end

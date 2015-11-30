@@ -370,16 +370,20 @@ end
 function stopEventHandler( sender,eventType )
     if eventType == TOUCH_EVENT_ENDED then
         if mWheelState == WHEEL_STATE_START_RUNNING and mWheelCurrentSpeed >= MAX_ROTATE_SPEED and mStopPressed == false then
-            AudioEngine.playEffect( AudioEngine.SETTINGS_ON_OFF )
-            mStopPressed = true
-            local handler = function( prizeId, numberOfLuckyDrawTicketsLeft, ticket )
-                mWheelState = WHEEL_STATE_CHECK_STOP_ANGLE
-                mTargetStopAngle = ( 360 - SpinWheelConfig.getStopAngleByPrizeID( prizeId ) - STOP_ROTATION_SUM ) % 360
-                mWinPrizeId = prizeId
-                mWinNumTicketLeft = numberOfLuckyDrawTicketsLeft
-                Logic:setTicket( ticket )
+            if Logic:getTicket() <= 0 and mRemainingTime > 0 then
+                EventManager:postEvent( Event.Show_Get_Tickets )
+            else
+                AudioEngine.playEffect( AudioEngine.SETTINGS_ON_OFF )
+                mStopPressed = true
+                local handler = function( prizeId, numberOfLuckyDrawTicketsLeft, ticket )
+                    mWheelState = WHEEL_STATE_CHECK_STOP_ANGLE
+                    mTargetStopAngle = ( 360 - SpinWheelConfig.getStopAngleByPrizeID( prizeId ) - STOP_ROTATION_SUM ) % 360
+                    mWinPrizeId = prizeId
+                    mWinNumTicketLeft = numberOfLuckyDrawTicketsLeft
+                    Logic:setTicket( ticket )
+                end
+                EventManager:postEvent( Event.Do_Spin, { handler } )
             end
-            EventManager:postEvent( Event.Do_Spin, { handler } )
         end
     end
 end
@@ -513,8 +517,8 @@ function shareCompleteEventHandler( success )
 end
 
 function leaveSpin()
-    local leaveHandler = function()
-        EventManager:postEvent( Event.Enter_Community )
-    end
-    EventManager:postEvent( Event.Show_Info, { Constants.String.spinWheel.leave_message, leaveHandler } ) 
+    -- local leaveHandler = function()
+    --     EventManager:postEvent( Event.Enter_Community )
+    -- end
+    -- EventManager:postEvent( Event.Show_Info, { Constants.String.spinWheel.leave_message, leaveHandler } ) 
 end

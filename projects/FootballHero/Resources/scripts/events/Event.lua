@@ -128,6 +128,7 @@ EventNameList =
     "Show_Choice_Message",
     "Show_Marketing_Message",
     "Show_Please_Update",
+    "Show_Get_Tickets",
 
     "Load_More_In_Leaderboard",
     "Load_More_In_History",
@@ -202,6 +203,7 @@ EventNameDosenotTrackList =
     "Show_Choice_Message",
     "Show_Marketing_Message",
     "Show_Please_Update",
+    "Show_Get_Tickets",
     
     "Load_More_In_Leaderboard",
     "Load_More_In_History",

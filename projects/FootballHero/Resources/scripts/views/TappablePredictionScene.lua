@@ -35,7 +35,7 @@ function loadFrame()
     mMarketsInfo = Logic:getCurMarketInfo()
     mBigBetStatus[MarketConfig.MARKET_NAME_MATCH] = false
     mBigBetStatus[MarketConfig.MARKET_NAME_TOTAL_GOAL] = false
-    mBigBetStatus[MarketConfig.MARKET_TYPE_ASIAN_HANDICAP] = false
+    mBigBetStatus[MarketConfig.MARKET_NAME_ASIAN_HANDICAP] = false
 
 	mWidget = SceneManager.secondLayerWidgetFromJsonFile("scenes/PredictionBG.json")
     mWidget:registerScriptHandler( EnterOrExit )

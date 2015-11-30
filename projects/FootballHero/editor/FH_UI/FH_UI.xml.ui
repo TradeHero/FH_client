@@ -155,6 +155,7 @@
     <string>YourPicksCell.json</string>
     <string>StoreFrame.json</string>
     <string>StoreContentFrame.json</string>
+    <string>GetTickets.json</string>
   </JsonList>
   <CanvasSize>
     <Width>640</Width>
@@ -164,7 +165,11 @@
   <ProjectType>UIProject</ProjectType>
   <ResRelativePath />
   <imageFileList />
-  <imagePngList />
+  <imagePngList>
+    <string>Popup/img-popupbox.png</string>
+    <string>Popup/img-toppopup.png</string>
+    <string>Tutorial/Default Button.png</string>
+  </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson />
+  <CurrentUIJson>GetTickets.json</CurrentUIJson>
 </UIProject>
