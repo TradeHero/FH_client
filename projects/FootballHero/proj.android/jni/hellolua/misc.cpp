@@ -244,6 +244,17 @@ void misc_get_deepLink() {
           }
 }
 
+const char* misc_get_device_ID() {
+  JniMethodInfo jmi;
+//  if (JniHelper::getStaticMethodInfo(jmi, "com/myhero/fh/util/MiscUtil", "getSerialNumber", "()Ljava/lang/String;")) {
+//  if (JniHelper::getStaticMethodInfo(jmi, "com/myhero/fh/util/MiscUtil", "getAndroidID", "()Ljava/lang/String;")) {
+  if (JniHelper::getStaticMethodInfo(jmi, "com/myhero/fh/util/MiscUtil", "getDeviceID", "()Ljava/lang/String;")) {
+    jstring jstr = (jstring)jmi.env->CallStaticObjectMethod(jmi.classID, jmi.methodID);
+    return JniHelper::jstring2string(jstr).c_str();
+  }
+  return "";
+}
+
 void misc_open_rate() {
     JniMethodInfo jmi;
         if (JniHelper::getStaticMethodInfo(jmi, "com/myhero/fh/util/MiscUtil",

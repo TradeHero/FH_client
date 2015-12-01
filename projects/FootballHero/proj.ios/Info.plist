@@ -19,7 +19,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.53</string>
+	<string>1.54</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleURLTypes</key>
@@ -45,7 +45,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1.53.7</string>
+	<string>1.54.1</string>
 	<key>FacebookAppID</key>
 	<string>788386747851675</string>
 	<key>FacebookDisplayName</key>
@@ -63,6 +63,8 @@
 		<key>opengles-1</key>
 		<true/>
 	</dict>
+	<key>UIRequiresFullScreen</key>
+	<true/>
 	<key>UIStatusBarHidden</key>
 	<true/>
 	<key>UISupportedInterfaceOrientations</key>

@@ -61,6 +61,7 @@ function Logic:new()
 		pictureUrl = nil,
 		startLeagueId = 0,
 		balance = 0,
+		mTicket = 0,
 		ActiveInCompetition = false,
 		FbId = nil,
 		mExpert = false,
@@ -250,6 +251,14 @@ function Logic:getBalance()
 	return self.balance
 end
 
+function Logic:setTicket( ticket )
+	self.mTicket = ticket
+end
+
+function Logic:getTicket()
+	return self.mTicket
+end
+
 function Logic:setActiveInCompetition( active )
 	self.ActiveInCompetition = active
 end
@@ -315,7 +324,7 @@ end
 
 function Logic:getDeviceID()
     if self.deviceID == "" then
-        self.deviceID = getDeviceID()
+		self.deviceID = Misc:sharedDelegate():getDeviceID()
     end
     return self.deviceID
 end

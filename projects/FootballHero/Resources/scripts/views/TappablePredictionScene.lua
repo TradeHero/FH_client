@@ -33,8 +33,10 @@ local mBigBetStatus = {}
 function loadFrame()
     mMatch = Logic:getSelectedMatch()
     mMarketsInfo = Logic:getCurMarketInfo()
-    mBigBetStatus["currBigBet"] = MarketConfig.MARKET_TYPE_INVALID
-   
+    mBigBetStatus[MarketConfig.MARKET_NAME_MATCH] = false
+    mBigBetStatus[MarketConfig.MARKET_NAME_TOTAL_GOAL] = false
+    mBigBetStatus[MarketConfig.MARKET_NAME_ASIAN_HANDICAP] = false
+
 	mWidget = SceneManager.secondLayerWidgetFromJsonFile("scenes/PredictionBG.json")
     mWidget:registerScriptHandler( EnterOrExit )
     mWidget:setName( "TappablePredictionScene" )
@@ -124,8 +126,8 @@ function initCurrentPredictionUI()
     end
 end
 
-function makeBigBetCallback( mIndex )
-    mBigBetStatus["currBigBet"] = mIndex
+function makeBigBetCallback( mIndex, status )
+    mBigBetStatus[mIndex] = status
 end
 
 function makePredictionCallback( selectedIndex, prediction )

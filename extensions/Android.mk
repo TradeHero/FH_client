@@ -59,6 +59,7 @@ Social/Android/JSON/CCJSONConverter.cpp \
 Social/Android/JSON/cJSON/cJSON.c \
 Utils/Analytics.cpp \
 Utils/Misc.cpp \
+Utils/Store.cpp \
 Utils/WebviewDelegate.cpp \
 Utils/QuickBloxChat.cpp \
 physics_nodes/CCPhysicsDebugNode.cpp \

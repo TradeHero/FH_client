@@ -7,10 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		10CF61C91BE73D4500B88D33 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10CF61C81BE73D4500B88D33 /* StoreKit.framework */; };
+		10CF61CD1BE8B1D100B88D33 /* Store.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 10CF61CB1BE8B1D100B88D33 /* Store.cpp */; };
+		10CF61D21BE8B7F900B88D33 /* StoreHandler.mm in Sources */ = {isa = PBXBuildFile; fileRef = 10CF61D11BE8B7F900B88D33 /* StoreHandler.mm */; };
 		10EE79A71BCE33DC0097EF70 /* Empty.m in Sources */ = {isa = PBXBuildFile; fileRef = 10EE79A31BCE33DC0097EF70 /* Empty.m */; };
 		10EE79A81BCE33DC0097EF70 /* libFlurry_7.1.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 10EE79A61BCE33DC0097EF70 /* libFlurry_7.1.0.a */; };
-		10FBB9D41B66022900F267D4 /* DeviceUtil.mm in Sources */ = {isa = PBXBuildFile; fileRef = 10FBB9D31B66022900F267D4 /* DeviceUtil.mm */; };
-		10FBB9D71B66109000F267D4 /* DeviceID.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 10FBB9D51B66109000F267D4 /* DeviceID.cpp */; };
 		150CD3951872B593007F1964 /* UITouchGroup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 150CD3931872B593007F1964 /* UITouchGroup.cpp */; };
 		150E36FF17F2B72B0021A6EA /* lua_cocos2dx_extensions_manual.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 150E36FD17F2B72B0021A6EA /* lua_cocos2dx_extensions_manual.cpp */; };
 		1514E39018784113003FC4EE /* CCActionEaseEx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1514E38F18784113003FC4EE /* CCActionEaseEx.cpp */; };
@@ -464,14 +465,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		10CF61C81BE73D4500B88D33 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		10CF61CB1BE8B1D100B88D33 /* Store.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Store.cpp; path = Utils/Store.cpp; sourceTree = "<group>"; };
+		10CF61CC1BE8B1D100B88D33 /* Store.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Store.h; path = Utils/Store.h; sourceTree = "<group>"; };
+		10CF61D01BE8B6F300B88D33 /* StoreHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StoreHandler.h; sourceTree = "<group>"; };
+		10CF61D11BE8B7F900B88D33 /* StoreHandler.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = StoreHandler.mm; sourceTree = "<group>"; };
 		10EE79A31BCE33DC0097EF70 /* Empty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Empty.m; sourceTree = "<group>"; };
 		10EE79A41BCE33DC0097EF70 /* Flurry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flurry.h; sourceTree = "<group>"; };
 		10EE79A51BCE33DC0097EF70 /* FlurryWatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlurryWatch.h; sourceTree = "<group>"; };
 		10EE79A61BCE33DC0097EF70 /* libFlurry_7.1.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurry_7.1.0.a; sourceTree = "<group>"; };
-		10FBB9D21B66022900F267D4 /* DeviceUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceUtil.h; sourceTree = "<group>"; };
-		10FBB9D31B66022900F267D4 /* DeviceUtil.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DeviceUtil.mm; sourceTree = "<group>"; };
-		10FBB9D51B66109000F267D4 /* DeviceID.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DeviceID.cpp; path = ../Classes/DeviceID.cpp; sourceTree = "<group>"; };
-		10FBB9D61B66109000F267D4 /* DeviceID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DeviceID.h; path = ../Classes/DeviceID.h; sourceTree = "<group>"; };
 		150CD3931872B593007F1964 /* UITouchGroup.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UITouchGroup.cpp; sourceTree = "<group>"; };
 		150CD3941872B593007F1964 /* UITouchGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UITouchGroup.h; sourceTree = "<group>"; };
 		150CD3981872B6B5007F1964 /* CCActionEaseEx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCActionEaseEx.h; sourceTree = "<group>"; };
@@ -1275,6 +1277,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				10CF61C91BE73D4500B88D33 /* StoreKit.framework in Frameworks */,
 				7314B4C119B717580065D927 /* Security.framework in Frameworks */,
 				730332FF1AB9252400657F74 /* libz.1.2.5.dylib in Frameworks */,
 				730332FD1AB9250E00657F74 /* libicucore.dylib in Frameworks */,
@@ -2623,6 +2626,8 @@
 				73D51F27192F44A4000A65AF /* WebviewDelegate.h */,
 				73DCA131192C4EE7008AC05D /* Analytics.cpp */,
 				73DCA132192C4EE7008AC05D /* Analytics.h */,
+				10CF61CB1BE8B1D100B88D33 /* Store.cpp */,
+				10CF61CC1BE8B1D100B88D33 /* Store.h */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -2944,6 +2949,7 @@
 		F293B3CB15EB7BE500256477 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				10CF61C81BE73D4500B88D33 /* StoreKit.framework */,
 				7368FC0F1B74BAB000A45DC2 /* FBSDKCoreKit.framework */,
 				7368FC0D1B74B8B900A45DC2 /* FBSDKShareKit.framework */,
 				734F0B771ABA741D00AD3C93 /* libc++.dylib */,
@@ -2986,8 +2992,6 @@
 		F293B6E815EB807E00256477 /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
-				10FBB9D21B66022900F267D4 /* DeviceUtil.h */,
-				10FBB9D31B66022900F267D4 /* DeviceUtil.mm */,
 				734F0B741AB983A000AD3C93 /* C2DXiOSShareSDK.h */,
 				734F0B751AB983A000AD3C93 /* C2DXiOSShareSDK.mm */,
 				732CCE961A8DAD95001533F0 /* QuickBloxChatHandler.h */,
@@ -3009,6 +3013,8 @@
 				F293B6FA15EB823D00256477 /* RootViewController.mm */,
 				732E3AC619625EBB0009E474 /* MiscHandler.h */,
 				732E3AC919625F0E0009E474 /* MiscHandler.mm */,
+				10CF61D01BE8B6F300B88D33 /* StoreHandler.h */,
+				10CF61D11BE8B7F900B88D33 /* StoreHandler.mm */,
 			);
 			name = "Other Sources";
 			sourceTree = "<group>";
@@ -3016,8 +3022,6 @@
 		F293BB7C15EB830F00256477 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				10FBB9D51B66109000F267D4 /* DeviceID.cpp */,
-				10FBB9D61B66109000F267D4 /* DeviceID.h */,
 				F293BB7F15EB831F00256477 /* AppDelegate.h */,
 				F293BB7E15EB831F00256477 /* AppDelegate.cpp */,
 			);
@@ -3352,6 +3356,7 @@
 				ED35C0DE18323498002A0750 /* CCInputDelegate.cpp in Sources */,
 				7320C6171A59461E009E47CC /* ScrollViewReader.cpp in Sources */,
 				15C155241683118600D239F2 /* b2Distance.cpp in Sources */,
+				10CF61D21BE8B7F900B88D33 /* StoreHandler.mm in Sources */,
 				734F0B761AB983A000AD3C93 /* C2DXiOSShareSDK.mm in Sources */,
 				15C155251683118600D239F2 /* b2DynamicTree.cpp in Sources */,
 				15C155261683118600D239F2 /* b2TimeOfImpact.cpp in Sources */,
@@ -3366,7 +3371,6 @@
 				15C1552D1683118600D239F2 /* b2Math.cpp in Sources */,
 				7305FE3A1A5A803A0071C61E /* lundump.c in Sources */,
 				15C1552E1683118600D239F2 /* b2Settings.cpp in Sources */,
-				10FBB9D71B66109000F267D4 /* DeviceID.cpp in Sources */,
 				7320C5E21A594422009E47CC /* CCNodeReader.cpp in Sources */,
 				7320C5E61A594487009E47CC /* UIRichText.cpp in Sources */,
 				ED35C0DD18323498002A0750 /* CCComRender.cpp in Sources */,
@@ -3415,7 +3419,6 @@
 				15C155451683118600D239F2 /* b2PrismaticJoint.cpp in Sources */,
 				7314B48F19B7150F0065D927 /* UAPushSettingsSoundsViewController.m in Sources */,
 				73EDFC9618ECFE7400322624 /* FacebookConnector.mm in Sources */,
-				10FBB9D41B66022900F267D4 /* DeviceUtil.mm in Sources */,
 				ED35C0EE18323498002A0750 /* UIImageView.cpp in Sources */,
 				7320C6031A5945A9009E47CC /* LabelReader.cpp in Sources */,
 				15C155461683118600D239F2 /* b2PulleyJoint.cpp in Sources */,
@@ -3469,6 +3472,7 @@
 				46C1008E16BF786A00F74D54 /* CCLuaStack.cpp in Sources */,
 				46C1008F16BF786A00F74D54 /* CCLuaValue.cpp in Sources */,
 				46C1009016BF786A00F74D54 /* Cocos2dxLuaLoader.cpp in Sources */,
+				10CF61CD1BE8B1D100B88D33 /* Store.cpp in Sources */,
 				ED35C0F318323498002A0750 /* UISlider.cpp in Sources */,
 				46C1009116BF786A00F74D54 /* LuaCocos2d.cpp in Sources */,
 				73495B8919C048D300626812 /* UAInboxNavUI.m in Sources */,
@@ -3636,6 +3640,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(PROJECT_DIR)\"",
@@ -3713,6 +3718,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = YES;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(PROJECT_DIR)\"",

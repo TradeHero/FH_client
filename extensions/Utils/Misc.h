@@ -55,6 +55,8 @@ namespace Utils
 
 		void openRate();
 
+        const char* getDeviceID();
+
 		void terminate();
 	protected:
 		Misc();

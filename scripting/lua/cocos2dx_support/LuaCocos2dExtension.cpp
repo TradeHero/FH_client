@@ -1,6 +1,6 @@
 /*
 ** Lua binding: Extension
-** Generated automatically by tolua++-1.0.92 on 08/12/15 17:30:12.
+** Generated automatically by tolua++-1.0.92 on 11/25/15 11:20:11.
 */
 
 /****************************************************************************
@@ -41,6 +41,7 @@ extern "C" {
 #include "Analytics.h"
 #include "WebviewDelegate.h"
 #include "Misc.h"
+#include "Store.h"
 #include "QuickBloxChat.h"
 #include "C2DXShareSDK.h"
 
@@ -57,21 +58,22 @@ using namespace cn::sharesdk;
 /* function to register type */
 static void tolua_reg_types (lua_State* tolua_S)
 {
- tolua_usertype(tolua_S,"CCArray");
  tolua_usertype(tolua_S,"Misc");
  tolua_usertype(tolua_S,"CCLayer");
  tolua_usertype(tolua_S,"CCEditBoxDelegate");
- tolua_usertype(tolua_S,"cocos2d::CCNode");
- tolua_usertype(tolua_S,"HttpRequestForLua");
- tolua_usertype(tolua_S,"C2DXShareSDK");
- tolua_usertype(tolua_S,"WebviewDelegate");
  tolua_usertype(tolua_S,"Analytics");
- tolua_usertype(tolua_S,"CCHttpRequest");
- tolua_usertype(tolua_S,"FacebookDelegate");
  tolua_usertype(tolua_S,"QuickBloxChat");
+ tolua_usertype(tolua_S,"CCHttpRequest");
+ tolua_usertype(tolua_S,"CCDictionary");
+ tolua_usertype(tolua_S,"CCArray");
+ tolua_usertype(tolua_S,"cocos2d::CCNode");
+ tolua_usertype(tolua_S,"WebviewDelegate");
+ tolua_usertype(tolua_S,"C2DXShareSDK");
+ tolua_usertype(tolua_S,"FacebookDelegate");
+ tolua_usertype(tolua_S,"HttpRequestForLua");
  
  tolua_usertype(tolua_S,"CCObject");
- tolua_usertype(tolua_S,"CCDictionary");
+ tolua_usertype(tolua_S,"Store");
  tolua_usertype(tolua_S,"EditBoxDelegateForLua");
 }
 
@@ -211,36 +213,36 @@ static int tolua_Extension_FacebookDelegate_inviteFriend00(lua_State* tolua_S)
 static int tolua_Extension_FacebookDelegate_shareTimeline00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
-    tolua_Error tolua_err;
-    if (
-        !tolua_isusertype(tolua_S,1,"FacebookDelegate",0,&tolua_err) ||
-        !tolua_isstring(tolua_S,2,0,&tolua_err) ||
-        !tolua_isstring(tolua_S,3,0,&tolua_err) ||
-        !tolua_isstring(tolua_S,4,0,&tolua_err) ||
-        (tolua_isvaluenil(tolua_S,5,&tolua_err) || !toluafix_isfunction(tolua_S,5,"LUA_FUNCTION",0,&tolua_err)) ||
-        !tolua_isnoobj(tolua_S,6,&tolua_err)
-        )
-        goto tolua_lerror;
-    else
+ tolua_Error tolua_err;
+ if (
+     !tolua_isusertype(tolua_S,1,"FacebookDelegate",0,&tolua_err) ||
+     !tolua_isstring(tolua_S,2,0,&tolua_err) ||
+     !tolua_isstring(tolua_S,3,0,&tolua_err) ||
+     !tolua_isstring(tolua_S,4,0,&tolua_err) ||
+     (tolua_isvaluenil(tolua_S,5,&tolua_err) || !toluafix_isfunction(tolua_S,5,"LUA_FUNCTION",0,&tolua_err)) ||
+     !tolua_isnoobj(tolua_S,6,&tolua_err)
+ )
+  goto tolua_lerror;
+ else
 #endif
-    {
-        FacebookDelegate* self = (FacebookDelegate*)  tolua_tousertype(tolua_S,1,0);
-        const char* title = ((const char*)  tolua_tostring(tolua_S,2,0));
-        const char* description = ((const char*)  tolua_tostring(tolua_S,3,0));
-        const char* appLinkUrl = ((const char*)  tolua_tostring(tolua_S,4,0));
-        LUA_FUNCTION handler = (  toluafix_ref_function(tolua_S,5,0));
+ {
+  FacebookDelegate* self = (FacebookDelegate*)  tolua_tousertype(tolua_S,1,0);
+  const char* title = ((const char*)  tolua_tostring(tolua_S,2,0));
+  const char* description = ((const char*)  tolua_tostring(tolua_S,3,0));
+  const char* appLinkUrl = ((const char*)  tolua_tostring(tolua_S,4,0));
+  LUA_FUNCTION handler = (  toluafix_ref_function(tolua_S,5,0));
 #ifndef TOLUA_RELEASE
-        if (!self) tolua_error(tolua_S,"invalid 'self' in function 'shareTimeline'", NULL);
+  if (!self) tolua_error(tolua_S,"invalid 'self' in function 'shareTimeline'", NULL);
 #endif
-        {
-            self->shareTimeline(title, description, appLinkUrl, handler);
-        }
-    }
-    return 0;
+  {
+   self->shareTimeline(title,description,appLinkUrl,handler);
+  }
+ }
+ return 0;
 #ifndef TOLUA_RELEASE
-tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'shareTimeline'.",&tolua_err);
-    return 0;
+ tolua_lerror:
+ tolua_error(tolua_S,"#ferror in function 'shareTimeline'.",&tolua_err);
+ return 0;
 #endif
 }
 #endif //#ifndef TOLUA_DISABLE
@@ -1656,6 +1658,38 @@ static int tolua_Extension_Misc_openRate00(lua_State* tolua_S)
 }
 #endif //#ifndef TOLUA_DISABLE
 
+/* method: getDeviceID of class  Misc */
+#ifndef TOLUA_DISABLE_tolua_Extension_Misc_getDeviceID00
+static int tolua_Extension_Misc_getDeviceID00(lua_State* tolua_S)
+{
+#ifndef TOLUA_RELEASE
+ tolua_Error tolua_err;
+ if (
+     !tolua_isusertype(tolua_S,1,"Misc",0,&tolua_err) ||
+     !tolua_isnoobj(tolua_S,2,&tolua_err)
+ )
+  goto tolua_lerror;
+ else
+#endif
+ {
+  Misc* self = (Misc*)  tolua_tousertype(tolua_S,1,0);
+#ifndef TOLUA_RELEASE
+  if (!self) tolua_error(tolua_S,"invalid 'self' in function 'getDeviceID'", NULL);
+#endif
+  {
+   const char* tolua_ret = (const char*)  self->getDeviceID();
+   tolua_pushstring(tolua_S,(const char*)tolua_ret);
+  }
+ }
+ return 1;
+#ifndef TOLUA_RELEASE
+ tolua_lerror:
+ tolua_error(tolua_S,"#ferror in function 'getDeviceID'.",&tolua_err);
+ return 0;
+#endif
+}
+#endif //#ifndef TOLUA_DISABLE
+
 /* method: terminate of class  Misc */
 #ifndef TOLUA_DISABLE_tolua_Extension_Misc_terminate00
 static int tolua_Extension_Misc_terminate00(lua_State* tolua_S)
@@ -1682,6 +1716,104 @@ static int tolua_Extension_Misc_terminate00(lua_State* tolua_S)
 #ifndef TOLUA_RELEASE
  tolua_lerror:
  tolua_error(tolua_S,"#ferror in function 'terminate'.",&tolua_err);
+ return 0;
+#endif
+}
+#endif //#ifndef TOLUA_DISABLE
+
+/* method: sharedDelegate of class  Store */
+#ifndef TOLUA_DISABLE_tolua_Extension_Store_sharedDelegate00
+static int tolua_Extension_Store_sharedDelegate00(lua_State* tolua_S)
+{
+#ifndef TOLUA_RELEASE
+ tolua_Error tolua_err;
+ if (
+     !tolua_isusertable(tolua_S,1,"Store",0,&tolua_err) ||
+     !tolua_isnoobj(tolua_S,2,&tolua_err)
+ )
+  goto tolua_lerror;
+ else
+#endif
+ {
+  {
+   Store* tolua_ret = (Store*)  Store::sharedDelegate();
+    tolua_pushusertype(tolua_S,(void*)tolua_ret,"Store");
+  }
+ }
+ return 1;
+#ifndef TOLUA_RELEASE
+ tolua_lerror:
+ tolua_error(tolua_S,"#ferror in function 'sharedDelegate'.",&tolua_err);
+ return 0;
+#endif
+}
+#endif //#ifndef TOLUA_DISABLE
+
+/* method: requestProducts of class  Store */
+#ifndef TOLUA_DISABLE_tolua_Extension_Store_requestProducts00
+static int tolua_Extension_Store_requestProducts00(lua_State* tolua_S)
+{
+#ifndef TOLUA_RELEASE
+ tolua_Error tolua_err;
+ if (
+     !tolua_isusertype(tolua_S,1,"Store",0,&tolua_err) ||
+     !tolua_isstring(tolua_S,2,0,&tolua_err) ||
+     (tolua_isvaluenil(tolua_S,3,&tolua_err) || !toluafix_isfunction(tolua_S,3,"LUA_FUNCTION",0,&tolua_err)) ||
+     !tolua_isnoobj(tolua_S,4,&tolua_err)
+ )
+  goto tolua_lerror;
+ else
+#endif
+ {
+  Store* self = (Store*)  tolua_tousertype(tolua_S,1,0);
+  const char* ids = ((const char*)  tolua_tostring(tolua_S,2,0));
+  LUA_FUNCTION handler = (  toluafix_ref_function(tolua_S,3,0));
+#ifndef TOLUA_RELEASE
+  if (!self) tolua_error(tolua_S,"invalid 'self' in function 'requestProducts'", NULL);
+#endif
+  {
+   self->requestProducts(ids,handler);
+  }
+ }
+ return 0;
+#ifndef TOLUA_RELEASE
+ tolua_lerror:
+ tolua_error(tolua_S,"#ferror in function 'requestProducts'.",&tolua_err);
+ return 0;
+#endif
+}
+#endif //#ifndef TOLUA_DISABLE
+
+/* method: buy of class  Store */
+#ifndef TOLUA_DISABLE_tolua_Extension_Store_buy00
+static int tolua_Extension_Store_buy00(lua_State* tolua_S)
+{
+#ifndef TOLUA_RELEASE
+ tolua_Error tolua_err;
+ if (
+     !tolua_isusertype(tolua_S,1,"Store",0,&tolua_err) ||
+     !tolua_isstring(tolua_S,2,0,&tolua_err) ||
+     (tolua_isvaluenil(tolua_S,3,&tolua_err) || !toluafix_isfunction(tolua_S,3,"LUA_FUNCTION",0,&tolua_err)) ||
+     !tolua_isnoobj(tolua_S,4,&tolua_err)
+ )
+  goto tolua_lerror;
+ else
+#endif
+ {
+  Store* self = (Store*)  tolua_tousertype(tolua_S,1,0);
+  const char* id = ((const char*)  tolua_tostring(tolua_S,2,0));
+  LUA_FUNCTION handler = (  toluafix_ref_function(tolua_S,3,0));
+#ifndef TOLUA_RELEASE
+  if (!self) tolua_error(tolua_S,"invalid 'self' in function 'buy'", NULL);
+#endif
+  {
+   self->buy(id,handler);
+  }
+ }
+ return 0;
+#ifndef TOLUA_RELEASE
+ tolua_lerror:
+ tolua_error(tolua_S,"#ferror in function 'buy'.",&tolua_err);
  return 0;
 #endif
 }
@@ -2201,7 +2333,14 @@ TOLUA_API int tolua_Extension_open (lua_State* tolua_S)
    tolua_function(tolua_S,"requestPushNotification",tolua_Extension_Misc_requestPushNotification00);
    tolua_function(tolua_S,"openUrl",tolua_Extension_Misc_openUrl00);
    tolua_function(tolua_S,"openRate",tolua_Extension_Misc_openRate00);
+   tolua_function(tolua_S,"getDeviceID",tolua_Extension_Misc_getDeviceID00);
    tolua_function(tolua_S,"terminate",tolua_Extension_Misc_terminate00);
+  tolua_endmodule(tolua_S);
+  tolua_cclass(tolua_S,"Store","Store","",NULL);
+  tolua_beginmodule(tolua_S,"Store");
+   tolua_function(tolua_S,"sharedDelegate",tolua_Extension_Store_sharedDelegate00);
+   tolua_function(tolua_S,"requestProducts",tolua_Extension_Store_requestProducts00);
+   tolua_function(tolua_S,"buy",tolua_Extension_Store_buy00);
   tolua_endmodule(tolua_S);
   tolua_cclass(tolua_S,"QuickBloxChat","QuickBloxChat","",NULL);
   tolua_beginmodule(tolua_S,"QuickBloxChat");

@@ -41,5 +41,5 @@ function onRequestSuccess( jsonResponse )
     --Invalid the player balance cache.
     RequestUtils.invalidResponseCacheContainsUrl( RequestUtils.GET_COUPON_HISTORY_REST_CALL )
 
-    mCallback( jsonResponse["PrizeId"], jsonResponse["NumberOfLuckyDrawTicketsLeft"] )
+    mCallback( jsonResponse["PrizeId"], jsonResponse["NumberOfLuckyDrawTicketsLeft"], jsonResponse["Ticket"] )
 end

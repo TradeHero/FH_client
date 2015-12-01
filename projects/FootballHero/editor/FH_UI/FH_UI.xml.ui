@@ -155,6 +155,10 @@
     <string>YourPicksCell.json</string>
     <string>Bet365Cell.json</string>
     <string>Bet365Scene.json</string>
+    <string>StoreFrame.json</string>
+    <string>StoreContentFrame.json</string>
+    <string>GetTickets.json</string>
+    <string>GoldenTicketsIntroduce.json</string>
   </JsonList>
   <CanvasSize>
     <Width>640</Width>
@@ -164,7 +168,11 @@
   <ProjectType>UIProject</ProjectType>
   <ResRelativePath />
   <imageFileList />
-  <imagePngList />
+  <imagePngList>
+    <string>Popup/tickets-box.png</string>
+    <string>Popup/btn-close.png</string>
+    <string>Popup/btn-buy-tickets-popup.png</string>
+  </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>CommunityExpertFrame.json</CurrentUIJson>
+  <CurrentUIJson>GetTickets.json</CurrentUIJson>
 </UIProject>

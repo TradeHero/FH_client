@@ -64,6 +64,7 @@ function onRequestSuccess( jsonResponse )
     local pictureUrl = profileDto["PictureUrl"]
     local startLeagueId = Constants.SpecialLeagueIds.MOST_POPULAR --profileDto["StartLeagueId"]
     local balance = profileDto["Balance"]
+    local ticket = profileDto["Ticket"]
     local active = profileDto["ActiveInCompetition"]
     local FbId = profileDto["FbId"]
     local pushForPredictionsEnabled = profileDto["PushForPredictionsEnabled"]
@@ -92,6 +93,7 @@ function onRequestSuccess( jsonResponse )
         Logic:setPictureUrl( pictureUrl )
         Logic:setStartLeagueId( startLeagueId )
         Logic:setBalance( balance )
+        Logic:setTicket( ticket )
         Logic:setActiveInCompetition( active )
         Logic:setFbId( FbId )
         Logic:setExpert( isExpert ) 

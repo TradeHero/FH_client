@@ -5,8 +5,9 @@ local EventManager = require("scripts.events.EventManager").getInstance()
 local Event = require("scripts.events.Event").EventList
 local Constants = require("scripts.Constants")
 local Navigator = require("scripts.views.Navigator")
-local Header = require("scripts.views.GameCenterHeader")
+local Header = require("scripts.views.HeaderFrame")
 local SMIS = require("scripts.SMIS")
+local SpinWheelConfig = require("scripts.config.SpinWheel")
 local Logic = require("scripts.Logic").getInstance()
 
 local mWidget
@@ -33,7 +34,7 @@ function loadFrame()
  
     widget:registerScriptHandler( EnterOrExit )
     SceneManager.clearNAddWidget( widget )
-    Header.loadFrame( widget, Constants.String.lucky8.game_center_title, false )
+    Header.loadFrame( widget, Constants.String.lucky8.game_center_title, false, false, true )
     Navigator.loadFrame( widget )
     initCells( table.getn( ENTER_GAME_EVENT_LIST ) )
 end
@@ -60,10 +61,21 @@ function initCells( cellNum )
         local gameDes = tolua.cast( panelFade:getChildByName("TextField_Content"), "TextField" )
         gameDes:setText( GAMECENTER_TITLE_AND_DES[i][2] )
 
+        local btnPlay = tolua.cast( panelFade:getChildByName("Button_Play"), "Button" )
+        btnPlay:addTouchEventListener( eventHandler )
+
+        local lbTicket = tolua.cast( btnPlay:getChildByName("Label_Ticket"), "Label" )
+        local remainingTime = SpinWheelConfig.getNextSpinTime() - os.time()
+
         contentContainer:addChild( content )
         mContentHeight = mContentHeight + content:getSize().height
-        content:addTouchEventListener( eventHandler )
+        
         updateContentContainer( mContentHeight, content )
+        if i == 1 then
+            if remainingTime <= 0 then
+                lbTicket:setText( "free" )
+            end
+        end
     end
 
 
@@ -108,7 +120,11 @@ function updateContentContainer( contentHeight, content )
 end
 
 function enterGame( index )
-    EventManager:postEvent( ENTER_GAME_EVENT_LIST[index][1], ENTER_GAME_EVENT_LIST[index][2] )
+    if Logic:getTicket() > 0 then
+        EventManager:postEvent( ENTER_GAME_EVENT_LIST[index][1], ENTER_GAME_EVENT_LIST[index][2] )
+    else
+        EventManager:postEvent( Event.Show_Get_Tickets )
+    end
 end
 
 function EnterOrExit( eventType )

@@ -49,6 +49,7 @@ end
 
 function onRequestSuccess( jsonResponse )
     local balance = jsonResponse["Balance"]
+    local ticket = jsonResponse["Ticket"]
 
     local predictions = Logic:getPredictions()
     for i = 1, predictions:getSize() do
@@ -75,6 +76,7 @@ function onRequestSuccess( jsonResponse )
 
     Logic:resetPredictions()
     Logic:setBalance( balance )
+    Logic:setTicket( ticket )
 
     RequestUtils.clearResponseCache()
     EventManager:postEvent( Event.Enter_Match_List, { nil } )

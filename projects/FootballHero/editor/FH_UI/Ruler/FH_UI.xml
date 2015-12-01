@@ -624,4 +624,20 @@
     <Project>Bet365Scene</Project>
     <GuidesList />
   </GuidesProject>
+  <GuidesProject>
+    <Project>StoreFrame</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>StoreContentFrame</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>GetTickets</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>GoldenTicketsIntroduce</Project>
+    <GuidesList />
+  </GuidesProject>
 </ArrayOfGuidesProject>

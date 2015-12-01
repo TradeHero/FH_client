@@ -5,13 +5,14 @@ local SceneManager = require("scripts.SceneManager")
 local EventManager = require("scripts.events.EventManager").getInstance()
 local Event = require("scripts.events.Event").EventList
 local SportsConfig = require("scripts.config.Sports")
+local Logic = require("scripts.Logic").getInstance()
 
 
 local mWidget
 local mbHasWebView
 local mSportChangeEventHanlder
 
-function loadFrame( parent, titleText, bHasBackBtn, bHasWebView )
+function loadFrame( parent, titleText, bHasBackBtn, bHasWebView, bHasBalance )
 	local widget = GUIReader:shareReader():widgetFromJsonFile("scenes/HeaderFrame.json")
     mWidget = widget
     mWidget:registerScriptHandler( EnterOrExit )
@@ -28,29 +29,45 @@ function loadFrame( parent, titleText, bHasBackBtn, bHasWebView )
     	title:setEnabled( false )
     end
 	
-	local backBt = widget:getChildByName("Button_Back")
+	local btnBack = widget:getChildByName("Button_Back")
     if bHasBackBtn then
         SceneManager.setKeypadBackListener( keypadBackEventHandler )
-    	backBt:addTouchEventListener( backEventHandler )       
+    	btnBack:addTouchEventListener( backEventHandler )       
     else
         SceneManager.clearKeypadBackListener()
-    	backBt:setEnabled( false )
+    	btnBack:setEnabled( false )
     end
 
-	local settingsBt = widget:getChildByName("Button_Settings")
-    settingsBt:addTouchEventListener( settingsEventHandler )
+    local btnBalance = widget:getChildByName("Button_Balance")
+    if bHasBalance then
+        btnBalance:addTouchEventListener( balanceEventHandler )
+    else
+        btnBalance:setEnabled( false )
+    end
+
+	local btnSettings = widget:getChildByName("Button_Settings")
+    btnSettings:addTouchEventListener( settingsEventHandler )
+
+    local btnStore = widget:getChildByName("Button_Store")
+    btnStore:addTouchEventListener( storeEventHandler )
 
     local btnLive = tolua.cast( mWidget:getChildByName("Button_Live"), "Button" )
     btnLive:addTouchEventListener( eventLiveClicked )
 
     showLiveButton( false )
 
-    local menuBtn = tolua.cast( mWidget:getChildByName("Button_menu"), "Button" )
-    local menuPanel = mWidget:getChildByName("Panel_menu")
+    local menuBtn = tolua.cast( mWidget:getChildByName("Button_Menu"), "Button" )
+    local menuPanel = mWidget:getChildByName("Panel_Menu")
     menuPanel:addTouchEventListener( menuEventHandler )
     menuBtn:setEnabled( false )
     menuPanel:setEnabled( false )
     mSportChangeEventHanlder = nil
+
+    local labelBalance = tolua.cast( mWidget:getChildByName("Label_Points"), "Label" )
+    labelBalance:setText( Logic:getBalance() )
+
+    local labelTickets = tolua.cast( mWidget:getChildByName("Label_Tickets"), "Label" )
+    labelTickets:setText( Logic:getTicket() )
 
     hideSportLogo()
     refreshLogo()
@@ -75,8 +92,8 @@ function showLiveButton( isShow )
 end
 
 function showMenuButtonWithSportChangeEventHanlder( handler )
-    local menuBtn = tolua.cast( mWidget:getChildByName("Button_menu"), "Button" )
-    local menuPanel = mWidget:getChildByName("Panel_menu")
+    local menuBtn = tolua.cast( mWidget:getChildByName("Button_Menu"), "Button" )
+    local menuPanel = mWidget:getChildByName("Panel_Menu")
     menuBtn:setEnabled( true )
     menuPanel:setEnabled( true )
 
@@ -86,8 +103,8 @@ function showMenuButtonWithSportChangeEventHanlder( handler )
 end
 
 function hideMenuButton()
-    local menuBtn = tolua.cast( mWidget:getChildByName("Button_menu"), "Button" )
-    local menuPanel = mWidget:getChildByName("Panel_menu")
+    local menuBtn = tolua.cast( mWidget:getChildByName("Button_Menu"), "Button" )
+    local menuPanel = mWidget:getChildByName("Panel_Menu")
     menuBtn:setEnabled( false )
     menuPanel:setEnabled( false )
 
@@ -95,19 +112,30 @@ function hideMenuButton()
 end
 
 function showSportLogo()
-    local sportLogo = tolua.cast( mWidget:getChildByName("Image_sportLogo"), "ImageView" )
+    local sportLogo = tolua.cast( mWidget:getChildByName("Image_SportLogo"), "ImageView" )
     sportLogo:setEnabled( true )
 end
 
 function hideSportLogo()
-    local sportLogo = tolua.cast( mWidget:getChildByName("Image_sportLogo"), "ImageView" )
+    local sportLogo = tolua.cast( mWidget:getChildByName("Image_SportLogo"), "ImageView" )
     sportLogo:setEnabled( false )
 end
 
 function refreshLogo()
     local resPath = SportsConfig.getCurrentSportLogoPath()
-    local sportLogo = tolua.cast( mWidget:getChildByName("Image_sportLogo"), "ImageView" )
+    local sportLogo = tolua.cast( mWidget:getChildByName("Image_SportLogo"), "ImageView" )
     sportLogo:loadTexture( resPath )
+end
+
+function setCurrency( points, tickets )
+    local labelPoints = tolua.cast( mWidget:getChildByName("Label_Points"), "Label" )
+    local labelTickets = tolua.cast( mWidget:getChildByName("Label_Tickets"), "Label" )
+    labelPoints:setText(points)
+    labelTickets:setText(tickets)
+end
+
+function refreshCurrency()
+    EventManager:postEvent( Event.Do_Get_Currencies, { setCurrency } )
 end
 
 function EnterOrExit( eventType )
@@ -123,9 +151,21 @@ function settingsEventHandler( sender, eventType )
 	end
 end
 
+function storeEventHandler( sender, eventType  )
+    if eventType == TOUCH_EVENT_ENDED then
+        EventManager:postEvent( Event.Enter_Store )
+    end
+end
+
 function backEventHandler( sender, eventType )
     if eventType == TOUCH_EVENT_ENDED then
         keypadBackEventHandler()
+    end
+end
+
+function balanceEventHandler( sender, eventType )
+    if eventType == TOUCH_EVENT_ENDED then
+        EventManager:postEvent( Event.Enter_Spin_balance )
     end
 end
 

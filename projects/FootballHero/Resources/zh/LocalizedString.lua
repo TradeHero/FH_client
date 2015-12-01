@@ -484,6 +484,21 @@ Strings = {
     quit_desc = "再次点击返回退出",
     message_hint = "在此输入消息",
     marketing_message_1 = "恭喜！你刚刚完成了你的第一场预测！",
+    sports = {
+        football = "足球",
+        basketball = "篮球",
+        baseball = "棒球",
+        afootball = "橄榄球",
+    },
+    store = {
+        title = "商店",
+        item = "商品",
+        description = "说明",
+        price = "价格",
+        best = "热卖",
+        buy = "购买",
+        detail = "%d张票和%dSP分数",
+    },
 }
 
 

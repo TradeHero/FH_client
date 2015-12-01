@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.*;
 import android.net.Uri;
+import android.provider.Settings;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.provider.MediaStore;
 import org.cocos2dx.lib.Cocos2dxActivity;
@@ -177,6 +179,19 @@ public class MiscUtil {
             break;
     }
   }
+
+    public static String getSerialNumber() {
+        return android.os.Build.SERIAL;
+    }
+
+    public static String getDeviceID(){
+        TelephonyManager tm = (TelephonyManager) Cocos2dxActivity.getContext().getSystemService(Cocos2dxActivity.TELEPHONY_SERVICE);
+        return tm.getDeviceId();
+    }
+
+    public static String getAndroidID(){
+        return Settings.System.getString(Cocos2dxActivity.getContext().getContentResolver(), Settings.Secure.ANDROID_ID);
+    }
 
     public static native void sendMailResult(int resultCode);
     public static native void sendSmsResult(int resultCode);

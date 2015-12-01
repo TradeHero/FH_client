@@ -301,6 +301,7 @@ extern "C" {
 #include "Analytics.h"
 #include "WebviewDelegate.h"
 #include "Misc.h"
+#include "Store.h"
 #include "QuickBloxChat.h"
 #include "C2DXShareSDK.h"
 

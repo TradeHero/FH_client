@@ -97,6 +97,7 @@ function onRegisterRequestSuccess( jsonResponse )
     local pictureUrl = jsonResponse["PictureUrl"]
     local startLeagueId = Constants.SpecialLeagueIds.MOST_POPULAR --jsonResponse["StartLeagueId"]
     local balance = jsonResponse["Balance"]
+    local ticket = jsonResponse["Ticket"]
     local FbId = jsonResponse["FbId"]
     local needUpdate = jsonResponse["Update"]
     local isBlock = jsonResponse["BlockedByCountry"]
@@ -115,6 +116,7 @@ function onRegisterRequestSuccess( jsonResponse )
         Logic:setPictureUrl( pictureUrl )
         Logic:setStartLeagueId( startLeagueId )
         Logic:setBalance( balance )
+        Logic:setTicket( ticket )
         Logic:setFbId( FbId )
         Logic:setBetBlock( isBlock )
 

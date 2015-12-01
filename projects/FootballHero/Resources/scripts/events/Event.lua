@@ -62,6 +62,7 @@ EventNameList =
     "Enter_Discussion_Details",
     "Enter_Settings_Select_League",
     "Enter_Settings_Select_Team",
+    "Enter_Store",
     "Enter_Quickblox_Chatroom",
     "Enter_Video_Info",
 	"Enter_GameCenter",
@@ -120,13 +121,16 @@ EventNameList =
     "Do_Wechat_Friend_Referal",
     "Do_Wechat_Moments_Friend_Referal",
     "Do_Friend_Referal_Success",
-   
+    "Do_Get_Currencies",
+    "Do_Buy_Product",
+    "Do_Intro_Golden_Ticket",
 
     "Show_Info",
     "Show_Error_Message",
     "Show_Choice_Message",
     "Show_Marketing_Message",
     "Show_Please_Update",
+    "Show_Get_Tickets",
 
     "Load_More_In_Leaderboard",
     "Load_More_In_History",
@@ -189,6 +193,9 @@ EventNameDosenotTrackList =
     "Do_Wechat_Friend_Referal",
     "Do_Wechat_Moments_Friend_Referal",
     "Do_Friend_Referal_Success",
+    "Do_Get_Currencies",
+    "Do_Buy_Product",
+    "Do_Intro_Golden_Ticket",
 
 
     "Do_Startup",
@@ -199,6 +206,7 @@ EventNameDosenotTrackList =
     "Show_Choice_Message",
     "Show_Marketing_Message",
     "Show_Please_Update",
+    "Show_Get_Tickets",
     
     "Load_More_In_Leaderboard",
     "Load_More_In_History",

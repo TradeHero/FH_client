@@ -615,6 +615,15 @@ StringsDefault = {
     baseball = "Baseball",
     afootball = "Amercian Football",
   },
+  store = {
+    title = "Store",
+    item = "ITEM",
+    description = "DESCRIPTION",
+    price = "PRICE",
+    best = "BEST DEAL",
+    buy = "Buy",
+    detail = "%d Tickets, %d SHPs"
+  },
 }
 
 local modename = "DefaultString"
