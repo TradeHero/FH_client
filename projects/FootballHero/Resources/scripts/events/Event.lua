@@ -122,6 +122,7 @@ EventNameList =
     "Do_Friend_Referal_Success",
     "Do_Get_Currencies",
     "Do_Buy_Product",
+    "Do_Intro_Golden_Ticket",
 
     "Show_Info",
     "Show_Error_Message",
@@ -193,6 +194,7 @@ EventNameDosenotTrackList =
     "Do_Friend_Referal_Success",
     "Do_Get_Currencies",
     "Do_Buy_Product",
+    "Do_Intro_Golden_Ticket",
 
 
     "Do_Startup",

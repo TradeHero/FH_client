@@ -628,4 +628,8 @@
     <Project>GetTickets</Project>
     <GuidesList />
   </GuidesProject>
+  <GuidesProject>
+    <Project>GoldenTicketsIntroduce</Project>
+    <GuidesList />
+  </GuidesProject>
 </ArrayOfGuidesProject>

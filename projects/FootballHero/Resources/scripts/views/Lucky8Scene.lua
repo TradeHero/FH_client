@@ -83,27 +83,32 @@ function helperInitPickscell( cell, cellInfo )
 end
 
 function updateYourPicks( jsonResponse )
-    mYourPicksData = {}
-    local contentContainer = tolua.cast( mWidget:getChildByName("ScrollView_Content"), "ScrollView" )
-    contentContainer:removeAllChildrenWithCleanup( true )
-    mScrollViewHeight = 0
-    
-    local Rounds = jsonResponse["Rounds"]
-    for k,v in pairs( Rounds ) do
-        local cell = SceneManager.widgetFromJsonFile( CELL_RES_STRING[1] )
-        cell:addTouchEventListener( enterHistory )
-        contentContainer:addChild( cell )
-        helperInitPickscell( cell, v )
-        mScrollViewHeight = mScrollViewHeight + cell:getSize().height
-        updateScrollView( mScrollViewHeight, contentContainer )
+    if Logic:getTicket() > 0 then
+        mYourPicksData = {}
+        local contentContainer = tolua.cast( mWidget:getChildByName("ScrollView_Content"), "ScrollView" )
+        contentContainer:removeAllChildrenWithCleanup( true )
+        mScrollViewHeight = 0
 
-        local cellData = {
-            kCell = cell,
-            cellInfo = v,
-        }
+        local Rounds = jsonResponse["Rounds"]
+        for k,v in pairs( Rounds ) do
+            local cell = SceneManager.widgetFromJsonFile( CELL_RES_STRING[1] )
+            cell:addTouchEventListener( enterHistory )
+            contentContainer:addChild( cell )
+            helperInitPickscell( cell, v )
+            mScrollViewHeight = mScrollViewHeight + cell:getSize().height
+            updateScrollView( mScrollViewHeight, contentContainer )
 
-        table.insert( mYourPicksData, cellData )
+            local cellData = {
+                kCell = cell,
+                cellInfo = v,
+            }
+
+            table.insert( mYourPicksData, cellData )
+        end
+    else
+        EventManager:postEvent( Event.Show_Get_Tickets )
     end
+
 end
 
 function refreshPageOfPicks( params )

@@ -88,6 +88,8 @@ function loadFrame( parent, matchInfo, marketInfo, finishCallback, bigBetStatus,
                     bigBet:setEnabled( true )
                     selectBigBet( true )
                     bigBet:setSelectedState( true )
+                else
+                    EventManager:postEvent( Event.Show_Get_Tickets )
                 end
             end
         end

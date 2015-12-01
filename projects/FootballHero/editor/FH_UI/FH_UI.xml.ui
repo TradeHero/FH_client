@@ -156,6 +156,7 @@
     <string>StoreFrame.json</string>
     <string>StoreContentFrame.json</string>
     <string>GetTickets.json</string>
+    <string>GoldenTicketsIntroduce.json</string>
   </JsonList>
   <CanvasSize>
     <Width>640</Width>
@@ -166,9 +167,9 @@
   <ResRelativePath />
   <imageFileList />
   <imagePngList>
-    <string>Popup/img-popupbox.png</string>
-    <string>Popup/img-toppopup.png</string>
-    <string>Tutorial/Default Button.png</string>
+    <string>Popup/tickets-box.png</string>
+    <string>Popup/btn-close.png</string>
+    <string>Popup/btn-buy-tickets-popup.png</string>
   </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
   <CurrentUIJson>GetTickets.json</CurrentUIJson>

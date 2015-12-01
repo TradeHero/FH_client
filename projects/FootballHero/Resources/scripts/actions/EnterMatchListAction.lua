@@ -142,6 +142,10 @@ function onRequestSuccess( matchList )
     if RateManager.shouldAskToRate() then
         EventManager:postEvent( Event.Do_Ask_For_Rate )
     end
+    introTicket = CCUserDefault:sharedUserDefault():getBoolForKey( "INTRO_TICKET" )
+    if not introTicket then
+        EventManager:postEvent( Event.Do_Intro_Golden_Ticket )
+    end
 end
 
 function onRequestFailed( jsonResponse )

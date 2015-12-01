@@ -1,6 +1,5 @@
 module(..., package.seeall)
 
-local Constants = require("scripts.Constants")
 local SceneManager = require("scripts.SceneManager")
 local EventManager = require("scripts.events.EventManager").getInstance()
 local Event = require("scripts.events.Event").EventList
@@ -8,25 +7,21 @@ local Event = require("scripts.events.Event").EventList
 local mWidget
 
 function loadFrame()
-	local widget = GUIReader:shareReader():widgetFromJsonFile("scenes/GetTickets.json")
+	local widget = GUIReader:shareReader():widgetFromJsonFile("scenes/GoldenTicketsIntroduce.json")
     local bg = widget:getChildByName("Image_bg")
-    
-    local btnBuy = bg:getChildByName("Button_Buy")
+
+    local btnClose = tolua.cast( bg:getChildByName("Button_Close"), "Button" )
+    local btnBuy = tolua.cast( bg:getChildByName("Button_Buy"), "Button" )
+
+    btnClose:addTouchEventListener( closeEventHandler )
     btnBuy:addTouchEventListener( buyEventHandler )
-
-    local btnCancel =  bg:getChildByName("Button_Cancel")
-    btnCancel:addTouchEventListener( onCancel )
-
 
     widget:addTouchEventListener( onFrameTouch )
     mWidget = widget
     mWidget:registerScriptHandler( EnterOrExit )
-    SceneManager.addWidget( widget )
+    SceneManager.addWidget( mWidget )
     SceneManager.setKeyPadBackEnabled( false )
-end
-
-function isShown()
-    return mWidget ~= nil
+    CCUserDefault:sharedUserDefault():setBoolForKey( "INTRO_TICKET", true )
 end
 
 function EnterOrExit( eventType )
@@ -36,20 +31,19 @@ function EnterOrExit( eventType )
     end
 end
 
-function buyEventHandler( sender, eventType )
+function closeEventHandler( sender, eventType )
     if eventType == TOUCH_EVENT_ENDED then
         SceneManager.removeWidget( mWidget )
         SceneManager.setKeyPadBackEnabled( true )
+    end
+end
+
+function buyEventHandler( sender, eventType )
+    if eventType == TOUCH_EVENT_ENDED then
         EventManager:postEvent( Event.Enter_Store )
     end
 end
 
-function onCancel( sender, eventType )
-    if eventType == TOUCH_EVENT_ENDED then
-        SceneManager.setKeyPadBackEnabled( true )
-        SceneManager.removeWidget( mWidget )
-    end
-end
 
 function onFrameTouch( sender, eventType )
     -- Do nothing, just block touch event.

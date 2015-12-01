@@ -7,6 +7,7 @@ local Constants = require("scripts.Constants")
 local Navigator = require("scripts.views.Navigator")
 local Header = require("scripts.views.HeaderFrame")
 local SpinWheelConfig = require("scripts.config.SpinWheel")
+local Logic = require("scripts.Logic").getInstance()
 
 local mWidget
 local mContentHeight
@@ -83,7 +84,11 @@ function updateContentContainer( contentHeight, content )
 end
 
 function enterGame( index )
-    EventManager:postEvent( ENTER_GAME_EVENT_LIST[index][1], ENTER_GAME_EVENT_LIST[index][2] )
+    if Logic:getTicket() > 0 then
+        EventManager:postEvent( ENTER_GAME_EVENT_LIST[index][1], ENTER_GAME_EVENT_LIST[index][2] )
+    else
+        EventManager:postEvent( Event.Show_Get_Tickets )
+    end
 end
 
 function EnterOrExit( eventType )

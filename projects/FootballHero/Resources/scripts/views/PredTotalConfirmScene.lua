@@ -14,6 +14,7 @@ local SportsConfig = require("scripts.config.Sports")
 
 local mWidget
 local mAccessToken
+local mBigBetCount
 
 function loadFrame()
 	local widget = GUIReader:shareReader():widgetFromJsonFile("scenes/PredFinalConfirm.json")
@@ -42,14 +43,19 @@ end
 
 function confirmEventHandler( sender, eventType )
 	if eventType == TOUCH_EVENT_ENDED then
-		local callback = function()
-			Logic:setPredictionMetadata( "", false )
-	    	EventManager:postEvent( Event.Do_Post_Predictions, { mAccessToken } )
-		end
 
-	    AudioEngine.playEffect( AudioEngine.SUBMIT_PREDICTION )
-	    
-		PushNotificationManager.checkShowPredictionSwitch( callback, callback )	
+		if  Logic:getTicket() - mBigBetCount < 0 then
+	        EventManager:postEvent( Event.Show_Get_Tickets )
+	    else
+			local callback = function()
+				Logic:setPredictionMetadata( "", false )
+		    	EventManager:postEvent( Event.Do_Post_Predictions, { mAccessToken } )
+			end
+
+		    AudioEngine.playEffect( AudioEngine.SUBMIT_PREDICTION )
+		    
+			PushNotificationManager.checkShowPredictionSwitch( callback, callback )	
+	    end
 	end
 end
 
@@ -90,6 +96,8 @@ function initContent()
     local contentHeight = 0
 
     local predictions = Logic:getPredictions()
+	mBigBetCount = 0
+
 	for i = 1, predictions:getSize() do
 		local content = SceneManager.widgetFromJsonFile("scenes/PredFinalConfirmContent.json")
 		local coupon = predictions:get( i )
@@ -110,6 +118,8 @@ function initContent()
 
 		if coupon["Stake"] ~= Constants.STAKE_BIGBET then
 			bigBet:setEnabled( false )
+		else
+			mBigBetCount = mBigBetCount + 1
 		end
 
         content:setLayoutParameter( layoutParameter )
