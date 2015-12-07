@@ -5,6 +5,8 @@ local RequestUtils = require("scripts.RequestUtils")
 local ConnectingMessage = require("scripts.views.ConnectingMessage")
 local Logic = require("scripts.Logic").getInstance()
 local StoreConfig = require("scripts.config.Store") 
+local EventManager = require("scripts.events.EventManager").getInstance()
+local Event = require("scripts.events.Event").EventList
 
 local mJsonResponse
 
@@ -35,8 +37,12 @@ function onRequestSuccess( jsonResponse )
     Store:sharedDelegate():requestProducts( Json.encode( productId ), storeHandler)
 end
 
-function storeHandler( products )
+function storeHandler( msg, success )
     ConnectingMessage.selfRemove()
-    local StoreScene = require("scripts.views.StoreScene")
-    StoreScene.loadFrame( mJsonResponse, Json.decode( products ) )
+    if success then
+        local StoreScene = require("scripts.views.StoreScene")
+        StoreScene.loadFrame( mJsonResponse, Json.decode( msg ) )
+    else
+        EventManager:postEvent( Event.Show_Error_Message, { "Connect to AppStore failed." } )
+    end
 end

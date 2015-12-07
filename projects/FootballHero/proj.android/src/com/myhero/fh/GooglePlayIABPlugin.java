@@ -94,6 +94,10 @@ public class GooglePlayIABPlugin
 			public void run() {
 				List lstStrTypeId = java.util.Arrays.asList(strItemTypeIdSet.split(" "));
 				Log.d(TAG, "Querying inventory:" + lstStrTypeId.size());
+				if (lstStrTypeId.size() == 0){
+					runNativeOnReceiveItemInfo("no products", false);
+					return;
+				}
 				try {
 					sInstance.mHelper.queryInventoryAsync(true, lstStrTypeId,
 							sInstance.mGotInventoryListener);
@@ -133,11 +137,15 @@ public class GooglePlayIABPlugin
             Log.d(TAG, "Query inventory finished.");
 
             // Have we been disposed of in the meantime? If so, quit.
-            if (mHelper == null) return;
+            if (mHelper == null) {
+				runNativeOnReceiveItemInfo("Something wrong:" + result, false);
+				return;
+			}
 
             // Is it a failure?
             if (result.isFailure()) {
                 complain("Failed to query inventory: " + result);
+				runNativeOnReceiveItemInfo("Failed to query inventory: " + result, false);
                 return;
             }            
 
@@ -154,9 +162,10 @@ public class GooglePlayIABPlugin
 
 			try {
 				String strJsonSkuDetail = inventoryToJson(inventory);
-				runNativeOnReceiveItemInfo(strJsonSkuDetail);
+				runNativeOnReceiveItemInfo(strJsonSkuDetail, true);
 				Log.d(TAG, "strJsonSkuDetail: " + strJsonSkuDetail);
 			} catch (JSONException e) {
+				runNativeOnReceiveItemInfo("Couldn't serialize the inventory", false);
 				Log.d(TAG, "Couldn't serialize the inventory");
 			}
 
@@ -311,11 +320,11 @@ public class GooglePlayIABPlugin
 	public static native void nativeOnRestore(String strJsonPurchaseInfo, String strSignature);
 
 
-	public static void runNativeOnReceiveItemInfo(final String strJsonSkuDetail) {
+	public static void runNativeOnReceiveItemInfo(final String msg,final boolean succeed) {
 		Cocos2dxGLSurfaceView.getInstance().queueEvent(new Runnable() {
 			public void run() {
-				Log.d(TAG, "info:" + strJsonSkuDetail);
-				requestProductCallback(strJsonSkuDetail, true);
+				Log.d(TAG, "info:" + msg);
+				requestProductCallback( msg, succeed);
 			}
 		});
 	}

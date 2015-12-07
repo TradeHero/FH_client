@@ -56,9 +56,6 @@ namespace Utils
     
     void Store::requestProductResult(const char* result, bool success)
     {
-        if (!success) {
-            return;
-        }
         
         if (mRequestProductHandler == 0)
         {
@@ -75,7 +72,8 @@ namespace Utils
         
         CCLuaStack* pStack = pLuaEngine->getLuaStack();
         pStack->pushString(result);
-        pStack->executeFunctionByHandler(mRequestProductHandler, 1);
+        pStack->pushBoolean(success);
+        pStack->executeFunctionByHandler(mRequestProductHandler, 2);
         pStack->clean();
         
         mRequestProductHandler = 0;

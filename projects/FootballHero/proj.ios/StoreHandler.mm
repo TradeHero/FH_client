@@ -128,20 +128,10 @@ void StoreHandler::paymentWithProduct(IOSProduct *iosProduct, int quantity)
     NSUInteger count = [myProduct count];
     if(count == 0){
         NSLog(@"--------------并没有商品------------------");
+        Utils::Store::sharedDelegate()->requestProductResult("no products", false);
         return;
     }
     _iosiap->setSkProducts([myProduct retain]);
-    
-    // populate UI
-//    for(SKProduct *product in myProduct){
-//        NSLog(@"product info");
-//        NSLog(@"SKProduct 描述信息%@", [product description]);
-//        NSLog(@"产品标题 %@" , product.localizedTitle);
-//        NSLog(@"产品描述信息: %@" , product.localizedDescription);
-//        NSLog(@"价格: %@" , product.price);
-//        NSLog(@"Product id: %@" , product.productIdentifier);
-//    }
-    
     
     NSMutableArray *productArray = [NSMutableArray arrayWithCapacity:count];
     for (int index = 0; index < count; index++) {
