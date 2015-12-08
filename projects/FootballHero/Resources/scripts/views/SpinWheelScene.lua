@@ -14,6 +14,7 @@ local Logic = require("scripts.Logic").getInstance()
 local ConnectingMessage = require("scripts.views.ConnectingMessage")
 local Header = require("scripts.views.HeaderFrame")
 local ShareConfig = require("scripts.config.Share")
+local RequestUtils = require("scripts.RequestUtils")
 
 
 -- Below value is per second
@@ -517,8 +518,9 @@ function shareCompleteEventHandler( success )
 end
 
 function leaveSpin()
-    -- local leaveHandler = function()
-    --     EventManager:postEvent( Event.Enter_Community )
-    -- end
-    -- EventManager:postEvent( Event.Show_Info, { Constants.String.spinWheel.leave_message, leaveHandler } ) 
+--    local leaveHandler = function()
+    RequestUtils.invalidResponseCacheContainsUrl( RequestUtils.GET_WHEEL_PRIZES_REST_CALL )
+        EventManager:postEvent( Event.Enter_GameCenter )
+--    end
+--    EventManager:postEvent( Event.Show_Info, { Constants.String.spinWheel.leave_message, leaveHandler } ) 
 end
