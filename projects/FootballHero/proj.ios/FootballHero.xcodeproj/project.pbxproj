@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		105D6A401C16BBFA00549CE7 /* dev in Resources */ = {isa = PBXBuildFile; fileRef = 105D6A3F1C16BBFA00549CE7 /* dev */; };
 		10CF61C91BE73D4500B88D33 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10CF61C81BE73D4500B88D33 /* StoreKit.framework */; };
 		10CF61CD1BE8B1D100B88D33 /* Store.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 10CF61CB1BE8B1D100B88D33 /* Store.cpp */; };
 		10CF61D21BE8B7F900B88D33 /* StoreHandler.mm in Sources */ = {isa = PBXBuildFile; fileRef = 10CF61D11BE8B7F900B88D33 /* StoreHandler.mm */; };
@@ -465,6 +466,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		105D6A3F1C16BBFA00549CE7 /* dev */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dev; sourceTree = "<group>"; };
 		10CF61C81BE73D4500B88D33 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		10CF61CB1BE8B1D100B88D33 /* Store.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Store.cpp; path = Utils/Store.cpp; sourceTree = "<group>"; };
 		10CF61CC1BE8B1D100B88D33 /* Store.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Store.h; path = Utils/Store.h; sourceTree = "<group>"; };
@@ -3031,6 +3033,7 @@
 		F293BC4615EB859D00256477 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				105D6A3F1C16BBFA00549CE7 /* dev */,
 				736466CA1B6B268C007B6827 /* es */,
 				73846DE41A6F8269001B4EF1 /* en */,
 				73846DDC1A6E6E5A001B4EF1 /* ar */,
@@ -3180,6 +3183,7 @@
 				730D984518DC4317000CA5F9 /* CocoStudio.lua in Resources */,
 				73495B8B19C048D300626812 /* list-image-placeholder.png in Resources */,
 				73846DDF1A6E6E5A001B4EF1 /* ar in Resources */,
+				105D6A401C16BBFA00549CE7 /* dev in Resources */,
 				73846DE51A6F8269001B4EF1 /* en in Resources */,
 				73846DE01A6E6E5A001B4EF1 /* th in Resources */,
 				738BA12A193D7FD2008A74F6 /* DES56.lua in Resources */,

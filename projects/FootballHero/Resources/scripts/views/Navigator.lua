@@ -38,7 +38,7 @@ function loadFrame( parent )
     end
     chooseNav( mLastSelectedId )
 
-    local serverContextText = FileUtils.readStringFromFile("server")
+    local serverContextText = FileUtils.readStringFromFile( Constants.SERVER_FILE )
     local serverContext = Json.decode( serverContextText )
     if not serverContext.useDev then
     	local devText = mWidget:getChildByName( "Label_DevMode" )

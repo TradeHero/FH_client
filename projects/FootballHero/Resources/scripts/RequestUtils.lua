@@ -172,7 +172,7 @@ function setServerIP( serverIp, cdnServerIp, useDev )
 end
 
 function initServer()
-    local serverContextText = FileUtils.readStringFromFile("server")
+    local serverContextText = FileUtils.readStringFromFile( Constants.SERVER_FILE )
     CCLuaLog("Server context: "..serverContextText)
     local serverContext = Json.decode( serverContextText )
     setServerIP( serverContext.serverURL, serverContext.CDNserverURL, serverContext.useDev )

@@ -11,6 +11,9 @@ GAME_WINNERS_SPINWHEEL = 2
 GAME_WIDTH = 640
 GAME_HEIGHT = 1136
 
+SERVER_FILE = "server"
+-- SERVER_FILE = "dev"
+
 CONTENT_TYPE_JSON = "Content-Type: application/json"
 CONTENT_TYPE_PLAINTEXT = "Content-Type: text/plain"
 CONTENT_TYPE_JPG = "Content-Type: image/jpg"
