@@ -55,7 +55,7 @@ function initContent()
                 end
             end
         end
-        button:addTouchEventListener( eventHandler )
+--        button:addTouchEventListener( eventHandler )
     end
 
     local facebookBtn = mWidget:getChildByName( "Button_FBLike" )

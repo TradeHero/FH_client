@@ -45,7 +45,7 @@ StoreHandler* StoreHandler::getInstance()
     {
         instance = new StoreHandler();
         iAPTransactionObserver *observer = [[iAPTransactionObserver alloc] init];
-         [[SKPaymentQueue defaultQueue] addTransactionObserver:observer];
+        [[SKPaymentQueue defaultQueue] addTransactionObserver:observer];
     }
     return instance;
 }
@@ -60,8 +60,8 @@ void StoreHandler::requestProductPrice(const char* data)
     NSError *error = nil;
     NSData *jsonData = [[NSString stringWithUTF8String:data] dataUsingEncoding:NSUTF8StringEncoding];
     NSMutableSet *idSet = [NSJSONSerialization JSONObjectWithData:jsonData
-                                                      options:NSJSONReadingAllowFragments
-                                                        error:&error];
+                                                          options:NSJSONReadingAllowFragments
+                                                            error:&error];
     if (error == NULL)
     {
         SKProductsRequest *productsRequest = [[SKProductsRequest alloc] initWithProductIdentifiers:idSet];
@@ -79,7 +79,7 @@ void StoreHandler::buy(const char *name)
     if ([SKPaymentQueue canMakePayments]) {
         NSLog(@"---------StoreHandler::can buy(%s)---------", name);
         paymentWithProduct(iOSProductByIdentifier(name));
-     } else {
+    } else {
         NSLog(@"---------StoreHandler::can not buy(%s)---------", name);
     }
 }
@@ -148,13 +148,27 @@ void StoreHandler::paymentWithProduct(IOSProduct *iosProduct, int quantity)
         }
         
         IOSProduct *iosProduct = new IOSProduct;
-        iosProduct->productIdentifier = std::string([skProduct.productIdentifier UTF8String]);
-        [product setObject:skProduct.productIdentifier forKey:@"id"];
-        iosProduct->localizedTitle = std::string([skProduct.localizedTitle UTF8String]);
-        [product setObject:skProduct.localizedTitle forKey:@"title"];
-        iosProduct->localizedDescription = std::string([skProduct.localizedDescription UTF8String]);
-        [product setObject:skProduct.localizedDescription forKey:@"description"];
-       
+        if (skProduct.productIdentifier != NULL){
+            iosProduct->productIdentifier = std::string([skProduct.productIdentifier UTF8String]);
+            [product setObject:skProduct.productIdentifier forKey:@"id"];
+        } else {
+            iosProduct->productIdentifier = "";
+        }
+        
+        if (skProduct.localizedTitle != NULL){
+            iosProduct->localizedTitle = std::string([skProduct.localizedTitle UTF8String]);
+            [product setObject:skProduct.localizedTitle forKey:@"title"];
+        } else {
+            iosProduct->localizedTitle = "";
+        }
+        
+        if (skProduct.localizedDescription != NULL){
+            iosProduct->localizedDescription = std::string([skProduct.localizedDescription UTF8String]);
+            [product setObject:skProduct.localizedDescription forKey:@"description"];
+        } else {
+            iosProduct->localizedDescription = "";
+        }
+        
         // locale price to string
         NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
         [formatter setFormatterBehavior:NSNumberFormatterBehavior10_4];
@@ -181,7 +195,7 @@ void StoreHandler::paymentWithProduct(IOSProduct *iosProduct, int quantity)
 - (void)requestDidFinish:(SKRequest *)request
 {
     NSLog(@"---------requestDidFinish------------");
-//    _iosiap->delegate->onRequestProductsFinish();
+    //    _iosiap->delegate->onRequestProductsFinish();
     [request.delegate release];
     [request release];
 }

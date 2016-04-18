@@ -74,7 +74,7 @@ function initContent( discussionInfo )
     end
 
     local button = tolua.cast( mWidget:getChildByName("Button_Discussion"), "Button" )
-    button:addTouchEventListener( eventHandler )
+ --   button:addTouchEventListener( eventHandler )
     local text = tolua.cast( button:getChildByName("Label_Discussion"), "Label" )
     text:setText( Constants.String.match_center.write_discussion )
 
@@ -85,14 +85,14 @@ function initContent( discussionInfo )
     layoutParameter:setGravity(LINEAR_GRAVITY_CENTER_VERTICAL)
     local contentHeight = 0
     
-    for i = 1, table.getn( discussionInfo ) do
-        local content = SceneManager.widgetFromJsonFile("scenes/MatchCenterDiscussionsContentFrame.json")
-        content:setLayoutParameter( layoutParameter )
-        contentContainer:addChild( content,  -discussionInfo[i]["UnixTimeStamp"] )
-        contentHeight = contentHeight + content:getSize().height
-        initDiscussionContent( i, content, discussionInfo[i] )
-    end
-    mCurrentTotalNum = table.getn( discussionInfo )
+    -- for i = 1, table.getn( discussionInfo ) do
+    --     local content = SceneManager.widgetFromJsonFile("scenes/MatchCenterDiscussionsContentFrame.json")
+    --     content:setLayoutParameter( layoutParameter )
+    --     contentContainer:addChild( content,  -discussionInfo[i]["UnixTimeStamp"] )
+    --     contentHeight = contentHeight + content:getSize().height
+    --     initDiscussionContent( i, content, discussionInfo[i] )
+    -- end
+    -- mCurrentTotalNum = table.getn( discussionInfo )
 
     contentContainer:setInnerContainerSize( CCSize:new( 0, contentHeight ) )
     local layout = tolua.cast( contentContainer, "Layout" )
