@@ -288,7 +288,11 @@ function Logic:getExpert( )
 end
 
 function Logic:setBetBlock( bBlock )
-    self.mBetBlock = bBlock
+	if CCApplication:sharedApplication():getTargetPlatform() == kTargetAndroid then
+		self.mBetBlock = true
+	else
+	    self.mBetBlock = bBlock
+	end
 end
 
 function Logic:getBetBlock( )
