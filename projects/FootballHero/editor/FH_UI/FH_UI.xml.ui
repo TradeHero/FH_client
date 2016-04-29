@@ -168,11 +168,7 @@
   <ProjectType>UIProject</ProjectType>
   <ResRelativePath />
   <imageFileList />
-  <imagePngList>
-    <string>Popup/tickets-box.png</string>
-    <string>Popup/btn-close.png</string>
-    <string>Popup/btn-buy-tickets-popup.png</string>
-  </imagePngList>
+  <imagePngList />
   <JsonSuffix>.json</JsonSuffix>
   <CurrentUIJson>GetTickets.json</CurrentUIJson>
 </UIProject>
