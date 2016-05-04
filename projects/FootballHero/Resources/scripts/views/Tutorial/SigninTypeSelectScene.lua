@@ -26,6 +26,10 @@ function loadFrame()
     facebook:addTouchEventListener( signinTypeFacebookEventHandler )
     facebook:setTitleText( Constants.String.facebook_signin )
     
+    local yuuzoo = tolua.cast( mWidget:getChildByName("yuuzoo"), "Button" )
+    yuuzoo:addTouchEventListener( signinTypeYuuzooEventHandler )
+    yuuzoo:setTitleText( Constants.String.facebook_signin )
+    
     helperSetTouchEnabled( false )
 end
 
@@ -54,6 +58,12 @@ end
 function signinTypeFacebookEventHandler( sender, eventType )
     if eventType == TOUCH_EVENT_ENDED then
         EventManager:postEvent( Event.Do_FB_Connect )
+    end
+end
+
+function signinTypeYuuzooEventHandler( sender, eventType )
+    if eventType == TOUCH_EVENT_ENDED then
+        EventManager:postEvent( Event.Do_YZ_Connect )
     end
 end
 
