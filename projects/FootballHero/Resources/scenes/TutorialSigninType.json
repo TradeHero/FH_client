@@ -13,7 +13,8 @@
   "texturesPng": [
     "Tutorial/Default Button.png",
     "Tutorial/email_icon.png",
-    "Tutorial/facebook_icon.png"
+    "Tutorial/facebook_icon.png",
+    "Tutorial/yuuzoo_icon.png"
   ],
   "version": "1.6.0.0",
   "widgetTree": {
@@ -300,7 +301,7 @@
               "flipX": false,
               "flipY": false,
               "height": 46,
-              "ignoreSize": true,
+              "ignoreSize": false,
               "layoutParameter": null,
               "opacity": 255,
               "positionPercentX": -0.397482,
@@ -309,14 +310,14 @@
               "rotation": 0,
               "scaleX": 1,
               "scaleY": 1,
-              "sizePercentX": 0.0431654677,
+              "sizePercentX": 0.08273381,
               "sizePercentY": 0.479166657,
               "sizeType": 0,
               "tag": 74771,
               "touchAble": false,
               "useMergedTexture": false,
               "visible": true,
-              "width": 24,
+              "width": 46,
               "x": -221,
               "y": 0,
               "capInsetsHeight": 1,
@@ -325,13 +326,13 @@
               "capInsetsY": 0,
               "fileName": null,
               "fileNameData": {
-                "path": "Tutorial/facebook_icon.png",
+                "path": "Tutorial/yuuzoo_icon.png",
                 "plistFile": "",
                 "resourceType": 0
               },
               "scale9Enable": false,
               "scale9Height": 46,
-              "scale9Width": 24
+              "scale9Width": 46
             }
           }
         ],
@@ -344,9 +345,9 @@
           "anchorPointX": 0.5,
           "anchorPointY": 0.5,
           "classType": "CocoStudio.EngineAdapterWrap.CSButton",
-          "colorB": 152,
-          "colorG": 89,
-          "colorR": 59,
+          "colorB": 40,
+          "colorG": 32,
+          "colorR": 236,
           "customProperty": "",
           "flipX": false,
           "flipY": false,
