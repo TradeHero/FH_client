@@ -11,43 +11,31 @@ local PushNotificationManager = require("scripts.PushNotificationManager")
 local QuickBloxService = require("scripts.QuickBloxService")
 
 
-local mAccessToken
-
 function action( param )
-	local RequestUtils = require("scripts.RequestUtils")
 
-    local handler = function( state, platType, accessToken )
-        if state == C2DXResponseStateCancel or state == C2DXResponseStateFail then
-            -- To handle user reject to the oAuth.
-            CCLuaLog("FB Login failed.")
-            onFBConnectFailed()
-        elseif state == C2DXResponseStateSuccess then
-            CCLuaLog("Get login result "..accessToken)
-            onFBConnectSuccess( accessToken )
-        end
+    mEmail, mPassword = param[1], param[2]
+
+    if string.len( mEmail ) == 0 then
+        RequestUtils.onRequestFailed( Constants.String.error.blank_email )
+        return
+    end
+    if string.len( mPassword ) == 0 then
+        RequestUtils.onRequestFailed( Constants.String.error.blank_password )
+        return
     end
 
-    ConnectingMessage.loadFrame()
-    C2DXShareSDK:authorize( C2DXPlatTypeFacebook, handler )
-end
-
-function onFBConnectFailed()
-    ConnectingMessage.selfRemove()
-end
-
-function onFBConnectSuccess( accessToken )
-    mAccessToken = accessToken
-    local requestContent = { SocialNetworkType = 0, AuthToken = accessToken, 
-                            GMTOffset = RequestUtils.getTimezoneOffset(),
+    local requestContent = { Email = mEmail, Password = mPassword, 
+                            SocialNetworkType = 3, 
                             DeviceToken = Logic:getDeviceToken(),
                             UserDeviceToken = Logic:getDeviceID(),
                             useDev = RequestUtils.USE_DEV,
                             Version = Constants.getClientVersion() }
+
     local requestContentText = Json.encode( requestContent )
-    CCLuaLog("Facebook Login data: "..requestContentText)
+    CCLuaLog("Yuuzoo Login data: "..requestContentText)
     
-    local url = RequestUtils.FB_LOGIN_REST_CALL
-    
+    local url = RequestUtils.YUUZOO_LOGIN_REST_CALL
+
     local requestInfo = {}
     requestInfo.requestData = requestContentText
     requestInfo.url = url
@@ -78,6 +66,7 @@ function onRequestSuccess( jsonResponse )
     local pushForPredictionsEnabled = jsonResponse["PushForPredictionsEnabled"]
     local pushGenerallyEnabled = jsonResponse["PushGenerallyEnabled"]
     local needUpdate = jsonResponse["Update"]
+    local isExpert = jsonResponse["IsExpert"]
     local isBlock = jsonResponse["BlockedByCountry"]
 
     if type( pictureUrl ) == "userdata" then
@@ -87,7 +76,14 @@ function onRequestSuccess( jsonResponse )
     if needUpdate then
         EventManager:postEvent( Event.Show_Please_Update, { Constants.String.info.new_version } )
     else
-        Logic:setUserInfo( "", "", mAccessToken, sessionToken, userId )
+
+        -- Popup Footballhero Championship if not already joined
+        local stage = CCUserDefault:sharedUserDefault():getIntegerForKey( Constants.EVENT_FHC_STATUS_KEY )
+        if stage ~= Constants.EVENT_FHC_STATUS_JOINED then
+            CCUserDefault:sharedUserDefault():setIntegerForKey( Constants.EVENT_FHC_STATUS_KEY, Constants.EVENT_FHC_STATUS_TO_OPEN )
+        end
+
+        Logic:setUserInfo( mEmail, "", "", sessionToken, userId )
         Logic:setDisplayName( displayName )
         Logic:setPictureUrl( pictureUrl )
         Logic:setStartLeagueId( startLeagueId )
@@ -95,13 +91,14 @@ function onRequestSuccess( jsonResponse )
         Logic:setTicket( ticket )
         Logic:setActiveInCompetition( active )
         Logic:setFbId( FbId )
+        Logic:setExpert( isExpert ) 
         Logic:setBetBlock( isBlock )
 
         PushNotificationManager.initFromServer( pushGenerallyEnabled, pushForPredictionsEnabled )
         
         local finishEvent = Event.Enter_Match_List
         
-        local params = { Platform = "facebook" }
+        local params = { Platform = "yuuzoo" }
         Analytics:sharedDelegate():postEvent( Constants.ANALYTICS_EVENT_LOGIN, Json.encode( params ) )
         Analytics:sharedDelegate():postFlurryEvent( Constants.ANALYTICS_EVENT_LOGIN, Json.encode( params ) )
 

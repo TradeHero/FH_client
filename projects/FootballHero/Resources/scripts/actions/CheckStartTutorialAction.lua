@@ -14,6 +14,7 @@ function action( param )
     local EmailSigninScene = require("scripts.views.Tutorial.EmailSigninScene")
     local EmailRegisterScene = require("scripts.views.Tutorial.EmailRegisterScene")
     local EmailForgotPasswordScene = require("scripts.views.Tutorial.EmailForgotPasswordScene")
+    local YuuzooSigninScene = require("scripts.views.Tutorial.YuuzooSigninScene")
 
     CCLuaLog( "Device Token is: "..Logic:getDeviceToken() )
 
@@ -32,4 +33,5 @@ function action( param )
     EmailSigninScene.loadFrame()
     EmailRegisterScene.loadFrame()
     EmailForgotPasswordScene.loadFrame()
+    YuuzooSigninScene.loadFrame()
 end
