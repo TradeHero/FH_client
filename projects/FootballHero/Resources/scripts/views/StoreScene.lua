@@ -82,7 +82,7 @@ function initContent( products, storeResponse )
         local btnBuy = tolua.cast( content:getChildByName("Button_Buy"), "Button" )
 
         labelTitle:setText( products[i]["Name"] )
-        labelDetail:setText( string.format( Constants.String.store.detail, products[i]["Ticket"], products[i]["Sp"] ))
+        labelDetail:setText( string.format( Constants.String.store.detail, products[i]["Ticket"] ))
         labelPrice:setText( store[i]["price"] )
         
 

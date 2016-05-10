@@ -499,7 +499,7 @@ Strings = {
         price = "价格",
         best = "热卖",
         buy = "购买",
-        detail = "%d张票和%dSP分数",
+        detail = "%d张票",
     },
 }
 

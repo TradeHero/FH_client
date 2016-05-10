@@ -83,7 +83,7 @@ function onRequestSuccess( jsonResponse )
             CCUserDefault:sharedUserDefault():setIntegerForKey( Constants.EVENT_FHC_STATUS_KEY, Constants.EVENT_FHC_STATUS_TO_OPEN )
         end
 
-        Logic:setUserInfo( mEmail, "", "", sessionToken, userId )
+        Logic:setUserInfo( mEmail, mPassword, "yuuzoo", sessionToken, userId )
         Logic:setDisplayName( displayName )
         Logic:setPictureUrl( pictureUrl )
         Logic:setStartLeagueId( startLeagueId )

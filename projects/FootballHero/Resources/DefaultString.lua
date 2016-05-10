@@ -624,7 +624,7 @@ StringsDefault = {
     price = "PRICE",
     best = "BEST DEAL",
     buy = "Buy",
-    detail = "%d Tickets, %d SHPs"
+    detail = "%d Tickets"
   },
 }
 
