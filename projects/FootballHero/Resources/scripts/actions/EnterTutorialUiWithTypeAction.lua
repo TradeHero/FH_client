@@ -9,6 +9,7 @@ function action( param )
 	local EmailSigninScene = require("scripts.views.Tutorial.EmailSigninScene")
 	local EmailRegisterScene = require("scripts.views.Tutorial.EmailRegisterScene")
 	local EmailForgotPasswordScene = require("scripts.views.Tutorial.EmailForgotPasswordScene")
+	local YuuzooSigninScene = require("scripts.views.Tutorial.YuuzooSigninScene")
 	
 	local uiType = param[1]
 	print( "uiType"..uiType )
@@ -16,7 +17,10 @@ function action( param )
 		if EmailSelectScene.isFrameShown() then
 			local delayTime = EmailSelectScene.playMoveAnim( 1 )
 	    	SigninTypeSelectScene.playMoveAnim( 1, delayTime )
-		else
+		elseif YuuzooSigninScene.isFrameShown() then
+			local delayTime = YuuzooSigninScene.playMoveAnim( 1 )
+	    	SigninTypeSelectScene.playMoveAnim( 1, delayTime )
+	    else
 			SigninTypeSelectScene.playFadeInAnim()
 		end
 		SigninTypeSelectScene.onShown()
@@ -53,6 +57,12 @@ function action( param )
 	    	EmailForgotPasswordScene.playMoveAnim( -1, delayTime )
 		end
 		EmailForgotPasswordScene.onShown()
+	elseif uiType == Constants.TUTORIAL_SHOW_YUUZOO_SIGNIN then
+		if SigninTypeSelectScene.isFrameShown() then
+			local delayTime = SigninTypeSelectScene.playMoveAnim( -1 )
+	    	YuuzooSigninScene.playMoveAnim( -1, delayTime )
+	    end
+		YuuzooSigninScene.onShown()
 	end
 	
 end

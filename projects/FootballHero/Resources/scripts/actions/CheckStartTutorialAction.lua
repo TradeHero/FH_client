@@ -14,13 +14,16 @@ function action( param )
     local EmailSigninScene = require("scripts.views.Tutorial.EmailSigninScene")
     local EmailRegisterScene = require("scripts.views.Tutorial.EmailRegisterScene")
     local EmailForgotPasswordScene = require("scripts.views.Tutorial.EmailForgotPasswordScene")
-
-    CCLuaLog( "Device Token is: "..Logic:getDeviceToken() )
+    local YuuzooSigninScene = require("scripts.views.Tutorial.YuuzooSigninScene")
 
     if Logic:getEmail() ~= nil and string.len( Logic:getEmail() ) > 0 and
         Logic:getPassword() ~= nil and string.len( Logic:getPassword() ) > 0 then
         StartTutorialScene.loadFrame( true )
-        EventManager:postEvent( Event.Do_Login, { Logic:getEmail(), Logic:getPassword() } )
+        if Logic:getFBAccessToken() == "yuuzoo" then
+            EventManager:postEvent( Event.Do_YZ_Connect, { Logic:getEmail(), Logic:getPassword() } )
+        else
+            EventManager:postEvent( Event.Do_Login, { Logic:getEmail(), Logic:getPassword() } )
+        end
     elseif Logic:getFBAccessToken() ~= nil and string.len( Logic:getFBAccessToken() ) > 0 then
         StartTutorialScene.loadFrame( true )
         EventManager:postEvent( Event.Do_FB_Connect )
@@ -32,4 +35,5 @@ function action( param )
     EmailSigninScene.loadFrame()
     EmailRegisterScene.loadFrame()
     EmailForgotPasswordScene.loadFrame()
+    YuuzooSigninScene.loadFrame()
 end

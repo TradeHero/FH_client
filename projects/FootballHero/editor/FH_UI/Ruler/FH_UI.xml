@@ -640,4 +640,8 @@
     <Project>GoldenTicketsIntroduce</Project>
     <GuidesList />
   </GuidesProject>
+  <GuidesProject>
+    <Project>TutorialYuuzooSignin</Project>
+    <GuidesList />
+  </GuidesProject>
 </ArrayOfGuidesProject>

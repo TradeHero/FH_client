@@ -159,6 +159,7 @@
     <string>StoreContentFrame.json</string>
     <string>GetTickets.json</string>
     <string>GoldenTicketsIntroduce.json</string>
+    <string>TutorialYuuzooSignin.json</string>
   </JsonList>
   <CanvasSize>
     <Width>640</Width>
@@ -169,10 +170,12 @@
   <ResRelativePath />
   <imageFileList />
   <imagePngList>
-    <string>Popup/tickets-box.png</string>
-    <string>Popup/btn-close.png</string>
-    <string>Popup/btn-buy-tickets-popup.png</string>
+    <string>Tutorial/Default Button.png</string>
+    <string>header/back.png</string>
+    <string>Tutorial/email_icon.png</string>
+    <string>Tutorial/password_icon.png</string>
+    <string>LoginNReg/line.png</string>
   </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>GetTickets.json</CurrentUIJson>
+  <CurrentUIJson>TutorialYuuzooSignin.json</CurrentUIJson>
 </UIProject>

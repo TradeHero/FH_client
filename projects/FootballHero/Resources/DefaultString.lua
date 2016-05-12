@@ -52,6 +52,7 @@ StringsDefault = {
     register = "Register",
     share = "Share",
     sign_in = "Sign In",
+    yuuzoo_sign_in = "Yuuzoo Account Sign In",
     yes = "Yes",
     rate_now = "Rate now",
   },
@@ -199,6 +200,7 @@ StringsDefault = {
     total_players = "Total Players",
   },
   facebook_signin = "Sign in with Facebook",
+  yuuzoo_signin = "Sign in with Yuuzoo",
   first_name = "First Name",
   first_name_optional = "First Name (Optional)",
   football_hero = "SportsHero",
@@ -622,7 +624,7 @@ StringsDefault = {
     price = "PRICE",
     best = "BEST DEAL",
     buy = "Buy",
-    detail = "%d Tickets, %d SHPs"
+    detail = "%d Tickets"
   },
 }
 

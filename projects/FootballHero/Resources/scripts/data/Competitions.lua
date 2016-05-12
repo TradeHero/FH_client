@@ -77,7 +77,6 @@ function Competitions:getSpecialCompetitions()
     local competition = self.List[i]
     if competition ~= nil then
       if competition["CompetitionType"] ~= CompetitionType["Private"] then
-          print( "Special Competition! ID = "..competition["Id"] )
           table.insert( specialCompetitions, competition )
           
       end

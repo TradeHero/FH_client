@@ -186,30 +186,6 @@ function initCompetitionScene( competitionFrame, compList, miniGame )
     layout:requestDoLayout()
 end
 
-function initSpinWheel( parent )
-    local contentHeight = 0
-
-    local bannerFrame = SceneManager.widgetFromJsonFile("scenes/CommunityCompetitionBannerFrame.json")
-    
-    local bannerBG = tolua.cast( bannerFrame:getChildByName( "Image_BannerBG" ), "ImageView" )
-    bannerBG:loadTexture(  Constants.COMPETITION_IMAGE_PATH..Constants.BannerPrefix.."spinWheel"..".png" )
-
-    local joinEventHandler = function( sender, eventType )
-        if eventType == TOUCH_EVENT_ENDED then
-            EventManager:postEvent( Event.Enter_Spin_the_Wheel )
-        end
-    end
-
-    local joinBtn = tolua.cast( bannerFrame:getChildByName( "Button_Join" ), "Button" )
-    joinBtn:setTitleText( Constants.String.button.play_now )
-    joinBtn:addTouchEventListener( joinEventHandler )
-
-    parent:addChild( bannerFrame )
-    contentHeight = contentHeight + bannerFrame:getSize().height
-
-    return contentHeight
-end
-
 function initMiniGame( parent, miniGame )
     local contentHeight = 0
 
@@ -225,7 +201,7 @@ function initMiniGame( parent, miniGame )
     end
     local joinBtn = tolua.cast( bannerFrame:getChildByName( "Button_Join" ), "Button" )
     joinBtn:addTouchEventListener( joinEventHandler )
-    joinBtn:setTitleText( Constants.String.button.join )
+--    joinBtn:setTitleText( Constants.String.button.join )
 
     parent:addChild( bannerFrame )
     contentHeight = contentHeight + bannerFrame:getSize().height
@@ -268,12 +244,16 @@ function initSpecialCompetitions( parent, compList )
 
             local joinEventHandler = function( sender, eventType )
                 if eventType == TOUCH_EVENT_ENDED then
-                    EventManager:postEvent( Event.Do_Join_Competition, { competition["JoinToken"] } )
+                    if Logic:getTicket() > 0 then
+                        EventManager:postEvent( Event.Do_Join_Competition, { competition["JoinToken"] } )
+                    else
+                        EventManager:postEvent( Event.Show_Get_Tickets )
+                    end
                 end
             end
             local joinBtn = tolua.cast( bannerFrame:getChildByName( "Button_Join" ), "Button" )
             joinBtn:addTouchEventListener( joinEventHandler )
-            joinBtn:setTitleText( Constants.String.button.join )
+--            joinBtn:setTitleText( Constants.String.button.join )
 
             parent:addChild( bannerFrame )
             contentHeight = contentHeight + bannerFrame:getSize().height
