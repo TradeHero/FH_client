@@ -5,7 +5,6 @@ local Navigator = require("scripts.views.Navigator")
 local EventManager = require("scripts.events.EventManager").getInstance()
 local Event = require("scripts.events.Event").EventList
 local Constants = require("scripts.Constants")
-local StoreConfig = require("scripts.config.Store")
 
 local mWidget
 
@@ -21,7 +20,8 @@ function loadFrame( jsonResponse, storeResponse )
 
     Navigator.loadFrame( mWidget )
 
-    initContent( jsonResponse, storeResponse)
+--    initContent( jsonResponse, storeResponse)
+    initContentWithoutStore(jsonResponse)
 end
 
 function EnterOrExit( eventType )
@@ -62,7 +62,7 @@ function initContent( products, storeResponse )
     -- 为 store 传回结果排序
     for i=1, count do
         for j=1, count do
-            if storeResponse[j]["id"] == StoreConfig.ProductInfo[products[i]["Level"]]["id"] then
+            if storeResponse[j]["id"] == Constants.StorePrefix .. products[i]["Level"] then
                 store[i] = storeResponse[j]
             end
         end
@@ -81,7 +81,7 @@ function initContent( products, storeResponse )
         local labelPrice = tolua.cast( content:getChildByName("Label_Pirce"), "Label" )
         local btnBuy = tolua.cast( content:getChildByName("Button_Buy"), "Button" )
 
-        labelTitle:setText( products[i]["Name"] )
+        labelTitle:setText( store[i]["title"] )
         labelDetail:setText( string.format( Constants.String.store.detail, products[i]["Ticket"] ))
         labelPrice:setText( store[i]["price"] )
         
@@ -91,15 +91,12 @@ function initContent( products, storeResponse )
         end
 
         local payEventHandler = function ( ... )
-            CCLuaLog("buy")
             EventManager:postEvent( Event.Do_Buy_Product, { i } )
         end
 
         local buyEventHandler = function( sender, eventType )
             if eventType == TOUCH_EVENT_ENDED then
-                CCLuaLog("buy handler")
---                EventManager:postEvent( Event.Do_Buy_Product, { i })
-                Store:sharedDelegate():buy( StoreConfig.ProductInfo[products[i]["Level"]]["id"] , payEventHandler)
+                Store:sharedDelegate():buy( Constants.StorePrefix .. products[i]["Level"] , payEventHandler)
             end
         end
         btnBuy:addTouchEventListener( buyEventHandler )
@@ -109,6 +106,57 @@ function initContent( products, storeResponse )
         contentHeight = contentHeight + content:getSize().height
     end
 end
+
+function initContentWithoutStore( products )
+    tolua.cast( mWidget:getChildByName("Panel_Title"):getChildByName("Label_Title"), "Label" ):setText( Constants.String.store.title )
+ 
+    local contentHeight = 0
+    local layoutParameter = LinearLayoutParameter:create()
+    layoutParameter:setGravity(LINEAR_GRAVITY_CENTER_VERTICAL)
+ 
+    -- Prize Panel
+    local container = mWidget:getChildByName("ScrollView")
+    container:removeAllChildrenWithCleanup( true )
+
+    local count = table.getn( products )
+
+    for i = 1, count do
+        local content = SceneManager.widgetFromJsonFile("scenes/StoreContentFrame.json")
+        local imageItem = tolua.cast( content:getChildByName("Image_Item"), "ImageView" )
+        local imageBest = content:getChildByName("Image_Best")
+        local labelTitle = tolua.cast( content:getChildByName("Label_Title"), "Label" )
+        local labelDetail = tolua.cast( content:getChildByName("Label_Detail"), "Label" )
+        local labelPrice = tolua.cast( content:getChildByName("Label_Pirce"), "Label" )
+        local btnBuy = tolua.cast( content:getChildByName("Button_Buy"), "Button" )
+
+        labelTitle:setText( products[i]["Name"] )
+        labelDetail:setText( string.format( Constants.String.store.detail, products[i]["Ticket"] ))
+        labelPrice:setText( "$" .. (products[i]["Ticket"] -1)..".99")
+        
+
+        if not products[i]["IsBestDeal"] then
+            imageBest:setEnabled( false )
+        end
+
+        local payEventHandler = function ( ... )
+            EventManager:postEvent( Event.Do_Buy_Product, { i } )
+        end
+
+        local buyEventHandler = function( sender, eventType )
+            if eventType == TOUCH_EVENT_ENDED then
+                CCLuaLog("buy handler")
+--                EventManager:postEvent( Event.Do_Buy_Product, { i })
+                Store:sharedDelegate():buy( Constants.StorePrefix .. products[i]["Level"] , payEventHandler)
+            end
+        end
+        btnBuy:addTouchEventListener( buyEventHandler )
+
+        content:setLayoutParameter( layoutParameter )
+        container:addChild( content )
+        contentHeight = contentHeight + content:getSize().height
+    end
+end
+
 
 
 

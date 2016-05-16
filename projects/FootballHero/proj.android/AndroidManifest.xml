@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.myhero.fh"
-    android:versionCode="119"
-    android:versionName="1.54">
+    android:versionCode="120"
+    android:versionName="1.55">
 
   <uses-sdk android:minSdkVersion="15" android:targetSdkVersion="19"/>
   <uses-feature android:glEsVersion="0x00020000"/>

@@ -53,6 +53,8 @@ PrizesPrefix = "prizes_"
 EndPrefix = "end_"
 LogoPrefix = "logo_"
 
+StorePrefix = "com.myhero.fh.item"
+
 ZORDER_POPUP = 65535
 
 DRAW = 0

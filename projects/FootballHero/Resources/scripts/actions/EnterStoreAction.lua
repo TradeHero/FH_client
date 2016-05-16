@@ -4,9 +4,9 @@ local Json = require("json")
 local RequestUtils = require("scripts.RequestUtils")
 local ConnectingMessage = require("scripts.views.ConnectingMessage")
 local Logic = require("scripts.Logic").getInstance()
-local StoreConfig = require("scripts.config.Store") 
 local EventManager = require("scripts.events.EventManager").getInstance()
 local Event = require("scripts.events.Event").EventList
+local Constants = require("scripts.Constants")
 
 local mJsonResponse
 
@@ -32,7 +32,7 @@ function onRequestSuccess( jsonResponse )
     mJsonResponse = jsonResponse
     local productId = {}
     for i = 1, table.getn( jsonResponse ) - 1 do
-        productId[i] = StoreConfig.ProductInfo[ jsonResponse[i]["Level"] ][ "id" ]
+        productId[i] = Constants.StorePrefix .. jsonResponse[i]["Level"]
     end
     Store:sharedDelegate():requestProducts( Json.encode( productId ), storeHandler)
 end

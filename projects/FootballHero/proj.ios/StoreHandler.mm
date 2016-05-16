@@ -22,9 +22,8 @@
 @implementation iAPTransactionObserver
 - (void)paymentQueue:(SKPaymentQueue *)queue updatedTransactions:(NSArray *)transactions
 {
-    NSLog(@"---------updatedTransactions count:%d", (int)transactions.count);
+//    NSLog(@"---------updatedTransactions count:%d", (int)transactions.count);
     for (SKPaymentTransaction *transaction in transactions) {
-        NSLog(@"---------updatedTransactions %s------------", [transaction.payment.productIdentifier UTF8String]);
         if (transaction.transactionState == SKPaymentTransactionStatePurchasing) {
             return;
         } else if (transaction.transactionState == SKPaymentTransactionStatePurchased){
@@ -56,7 +55,7 @@ StoreHandler::StoreHandler(){
 
 void StoreHandler::requestProductPrice(const char* data)
 {
-    NSLog(@"---------StoreHandler::requestProductPrize------------");
+//    NSLog(@"---------StoreHandler::requestProductPrize------------");
     NSError *error = nil;
     NSData *jsonData = [[NSString stringWithUTF8String:data] dataUsingEncoding:NSUTF8StringEncoding];
     NSMutableSet *idSet = [NSJSONSerialization JSONObjectWithData:jsonData
@@ -77,8 +76,11 @@ void StoreHandler::requestProductPrice(const char* data)
 void StoreHandler::buy(const char *name)
 {
     if ([SKPaymentQueue canMakePayments]) {
-        NSLog(@"---------StoreHandler::can buy(%s)---------", name);
-        paymentWithProduct(iOSProductByIdentifier(name));
+//        NSLog(@"---------StoreHandler::can buy(%s)---------", name);
+        IOSProduct *iosProduct = iOSProductByIdentifier(name);
+        if (iosProduct) {
+            paymentWithProduct(iosProduct);
+        }
     } else {
         NSLog(@"---------StoreHandler::can not buy(%s)---------", name);
     }
@@ -98,7 +100,7 @@ void StoreHandler::addIOSProduct(IOSProduct *product){
 
 IOSProduct *StoreHandler::iOSProductByIdentifier(const char* identifier)
 {
-    NSLog(@"---------StoreHandler::iOSProductByIdentifier(%s)------------",identifier);
+//    NSLog(@"---------StoreHandler::iOSProductByIdentifier(%s)------------",identifier);
     std::vector <IOSProduct *>::iterator iterator;
     for (iterator = iOSProducts.begin(); iterator != iOSProducts.end(); iterator++) {
         IOSProduct *iosProduct = *iterator;
@@ -112,7 +114,7 @@ IOSProduct *StoreHandler::iOSProductByIdentifier(const char* identifier)
 
 void StoreHandler::paymentWithProduct(IOSProduct *iosProduct, int quantity)
 {
-    NSLog(@"---------StoreHandler::paymentWithProduct------------");
+//    NSLog(@"---------StoreHandler::paymentWithProduct------------");
     SKProduct *skProduct = [(NSArray *)(skProducts) objectAtIndex:iosProduct->index];
     SKMutablePayment *payment = [SKMutablePayment paymentWithProduct:skProduct];
     payment.quantity = quantity;
@@ -194,7 +196,7 @@ void StoreHandler::paymentWithProduct(IOSProduct *iosProduct, int quantity)
 
 - (void)requestDidFinish:(SKRequest *)request
 {
-    NSLog(@"---------requestDidFinish------------");
+//    NSLog(@"---------requestDidFinish------------");
     //    _iosiap->delegate->onRequestProductsFinish();
     [request.delegate release];
     [request release];
