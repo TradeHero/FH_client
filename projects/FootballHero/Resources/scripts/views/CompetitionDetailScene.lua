@@ -784,8 +784,9 @@ function competitionPrizeEventHandler( sender, eventType )
     if eventType == TOUCH_EVENT_ENDED then
         local title = tolua.cast( mWidget:getChildByName("title"), "Label" )
         local titleText = title:getStringValue()
-        EventManager:postEvent( Event.Enter_Competition_Prize, { titleText, mCompetitionToken, Constants.COMPETITION_PRIZE_OVERALL, 0 } )
-    end
+--        EventManager:postEvent( Event.Enter_Competition_Prize, { titleText, mCompetitionToken, Constants.COMPETITION_PRIZE_OVERALL, 0 } )
+        EventManager:postEvent( Event.Enter_Prize_Scene, { mCompetitionToken } )
+   end
 end
 
 function chatRoomEventHandler( sender, eventType )

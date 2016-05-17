@@ -52,6 +52,9 @@ EntryPrefix = "entry_"
 PrizesPrefix = "prizes_"
 EndPrefix = "end_"
 LogoPrefix = "logo_"
+PrizeBgPrefix = "prize_bg_"
+PrizeLogoPrefix = "prize_logo_"
+PrizeItemPrefix = "prize_item_"
 
 StorePrefix = "com.myhero.fh.item"
 

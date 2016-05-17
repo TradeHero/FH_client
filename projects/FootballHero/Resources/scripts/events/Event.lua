@@ -73,6 +73,7 @@ EventNameList =
     "Enter_FollowList",
     "Enter_MyPicksFollowList",
     "Enter_Bet365",
+    "Enter_Prize_Scene",
 
     "Do_Lucky8_Rounds",
     "Do_Lucky8_Submit",
