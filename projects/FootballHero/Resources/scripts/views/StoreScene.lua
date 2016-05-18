@@ -20,8 +20,8 @@ function loadFrame( jsonResponse, storeResponse )
 
     Navigator.loadFrame( mWidget )
 
---    initContent( jsonResponse, storeResponse)
-    initContentWithoutStore(jsonResponse)
+    initContent( jsonResponse, storeResponse)
+--    initContentWithoutStore(jsonResponse)
 end
 
 function EnterOrExit( eventType )

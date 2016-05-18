@@ -31,7 +31,7 @@ end
 function onRequestSuccess( jsonResponse )
     mJsonResponse = jsonResponse
     local productId = {}
-    for i = 1, table.getn( jsonResponse ) - 1 do
+    for i = 1, table.getn( jsonResponse ) do
         productId[i] = Constants.StorePrefix .. jsonResponse[i]["Level"]
     end
     Store:sharedDelegate():requestProducts( Json.encode( productId ), storeHandler)
