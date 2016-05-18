@@ -10,7 +10,7 @@ function action( param )
  	ConnectingMessage.loadFrame()
     FacebookDelegate:sharedDelegate():shareTimeline( Constants.String.share.share_app_title, 
     	Constants.String.share.share_app_content, 
-    	"http://www.footballheroapp.com", 
+    	"http://www.sportshero.mobi", 
     	inviteFriendHandler )
 end
 

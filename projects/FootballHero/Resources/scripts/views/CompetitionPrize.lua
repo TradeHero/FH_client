@@ -18,7 +18,7 @@ function loadFrame( name, token, type, index )
     
     Header.loadFrame( mWidget, name, true, true )
 
-    mURL = "http://footballheroapp.com/prize/"..token.."/"..type
+    mURL = "http://sportshero.mobi/prize/"..token.."/"..type
     if type ~= Constants.COMPETITION_PRIZE_OVERALL then
         mURL = mURL.."_"..index
     end

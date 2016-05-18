@@ -18,7 +18,7 @@ function loadFrame( name, token )
     
     Header.loadFrame( mWidget, name, true, true )
 
-    mURL = "http://footballheroapp.com/terms/"..token.."/".."terms.html"
+    mURL = "http://sportshero.mobi/terms/"..token.."/".."terms.html"
     CCLuaLog( "T&C url is: "..mURL )
     WebviewDelegate:sharedDelegate():openWebpage( mURL, 0, 80, 768, 984 )
 end

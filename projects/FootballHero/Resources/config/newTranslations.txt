@@ -178,7 +178,7 @@ choice.leave_comp_title	Leave Competition	Dejar la competencia
 choice.leave_comp_yes	Leave	Salir
 choice.leave_comp_desc	Are you sure you want to leave the competition?	?Estas seguro que quieres salir?
 support_title	FootballHero - Support	Footballhero- soporte t?nico
-share_body	Can you beat me? Join my competition on FootballHero. Code: %s  www.footballheroapp.com/download	?Puedes derrotarme? ?ete a mi campeonato en Footballhero. C?igo: %s www.footballheroapp.com/descarga
+share_body	Can you beat me? Join my competition on FootballHero. Code: %s  www.sportshero.mobi/download	?Puedes derrotarme? ?ete a mi campeonato en Footballhero. C?igo: %s www.sportshero.mobi/descarga
 email	E-mail Address	Direcci? de correo electr?ico
 password	Password	Contrase?
 history.show_all	Show All	Mostrar todo
@@ -226,15 +226,15 @@ match_prediction.will_win_by	Will %s win by %s goals or more?	?%s ganar?por %s g
 match_prediction.will_win_by_line0	Will %s win on level handicap?	?%s ganar?en nivel handicap?
 match_prediction.answer_total_goal_yes	I have predicted the game to have %s goals or more.	Apost?a que el partido tendr?%s goles o menos,
 quit_desc	Tap back again to quit.	presiona atr? de nuevo para salir.
-share.competition_americacup15_content	I joined a COPA America Cup Challenge. Win $$$, Messi & Ronaldo Signed Jerseys! www.footballheroapp.com/download	Me un?al desaf? de la Copa America. Gana $$$, Messi y Ronaldo camisetas autografiafas. Www.footballheroapp/descarga
+share.competition_americacup15_content	I joined a COPA America Cup Challenge. Win $$$, Messi & Ronaldo Signed Jerseys! www.sportshero.mobi/download	Me un?al desaf? de la Copa America. Gana $$$, Messi y Ronaldo camisetas autografiafas. Www.footballheroapp/descarga
 share.video_title	FootballHero - %s	
-share.predResult_content	FootballHero: %s\nCLICK HERE TO PLAY! www.footballheroapp.com/download	Footballhero: %S Haz click aqu?para jugar 
-share.competition_seacup15_content	I joined a SEA Games Football Challenge. Win $$$, Messi & Ronaldo Signed Jerseys! www.footballheroapp.com/download	Me un?al desaf? de los Juegos del Sureste asiatico- SEA games. Gana $$$, Messi y Ronaldo camisetas autografiafas. Www.footballheroapp/descarga
+share.predResult_content	FootballHero: %s\nCLICK HERE TO PLAY! www.sportshero.mobi/download	Footballhero: %S Haz click aqu?para jugar 
+share.competition_seacup15_content	I joined a SEA Games Football Challenge. Win $$$, Messi & Ronaldo Signed Jerseys! www.sportshero.mobi/download	Me un?al desaf? de los Juegos del Sureste asiatico- SEA games. Gana $$$, Messi y Ronaldo camisetas autografiafas. Www.footballheroapp/descarga
 share.predResult_title	FootballHero - %s	
-share.prediction_content	%s Win $$$, Messi & Ronaldo Signed Jerseys! www.footballheroapp.com/download	?%s gana $$$, Messi y Ronaldo camisetas autografiadas! Www.footballheroapp.com/descarga
-share.competition_content	I joined a FootballHero Prediction competition. Win $$$, Messi & Ronaldo Signed Jerseys! www.footballheroapp.com/download	Me un?al campeonato de apuestas de Footballhero.?Gana $$$, Messi y Ronaldo camisetas autografiadas! Www.footballheroapp.com/descarga
-share.video_content	%s.\nCLICK HERE TO WATCH! www.footballheroapp.com/download	Haz click aqu?para ver! Www.footballheroapp.com/descarga
-share.spinTheWheel_content	I won a prize in Spin-The-Wheel game! Win $$$, Messi & Ronaldo Signed Jerseys! www.footballheroapp.com/download	Gan?un premio en Gira- la- rueda! Gana $$$, Messi y Ronaldo camisetas autografiadas. Www.footballheroapp.com/descarga
+share.prediction_content	%s Win $$$, Messi & Ronaldo Signed Jerseys! www.sportshero.mobi/download	?%s gana $$$, Messi y Ronaldo camisetas autografiadas! Www.sportshero.mobi/descarga
+share.competition_content	I joined a FootballHero Prediction competition. Win $$$, Messi & Ronaldo Signed Jerseys! www.sportshero.mobi/download	Me un?al campeonato de apuestas de Footballhero.?Gana $$$, Messi y Ronaldo camisetas autografiadas! Www.sportshero.mobi/descarga
+share.video_content	%s.\nCLICK HERE TO WATCH! www.sportshero.mobi/download	Haz click aqu?para ver! Www.sportshero.mobi/descarga
+share.spinTheWheel_content	I won a prize in Spin-The-Wheel game! Win $$$, Messi & Ronaldo Signed Jerseys! www.sportshero.mobi/download	Gan?un premio en Gira- la- rueda! Gana $$$, Messi y Ronaldo camisetas autografiadas. Www.sportshero.mobi/descarga
 share.competition_title	FootballHero - I joined a soccer prediction competition.	Footballhero- Me un?a un campeonato de apuestas.
 share.spinTheWheel_title	FootballHero - I won a prize in Spin-The-Wheel game!	Footballhero- Gan?un premio en el juego Gira-la-rueda!
 share.prediction_title	FootballHero - %s	
@@ -403,7 +403,7 @@ user_name	Username	Usuario
 top_performers	Top Performers	Top participantes
 vs	VS	VS
 share_type_email	Email	Correo electr?ico- Email
-support_email	support@footballheroapp.com	Soporte@footballheroapp.com
+support_email	support@sportshero.mobi	Soporte@sportshero.mobi
 optional	(Optional)	(Opcional)
 push_notification.receive	You will receive:	Recibir?:
 push_notification.prediction_summary	. Predictions' summary	Apuestas- Resumen

@@ -2,10 +2,10 @@ module(..., package.seeall)
 
 Strings = {
 	share = {
-		prediction_content = "%s Menangkan $$$, Baju bertanda tangan Messi & Ronaldo! www.footballheroapp.com/download",
+		prediction_content = "%s Menangkan $$$, Baju bertanda tangan Messi & Ronaldo! www.sportshero.mobi/download",
 		spinTheWheel_title = "FootballHero - Saya menang hadiah di game Spin-the-Wheel!",
-		spinTheWheel_content = "Saya menang hadiah di game Spin-the-Wheel! Menangkan $$$, Baju bertanda tangan Messi & Ronaldo! www.footballheroapp.com/download",
-		competition_content = "Saya ikut kejuaraan prediksi FootballHero. Menangkan $$$, Baju bertanda tangan Messi & Ronaldo! www.footballheroapp.com/download",
+		spinTheWheel_content = "Saya menang hadiah di game Spin-the-Wheel! Menangkan $$$, Baju bertanda tangan Messi & Ronaldo! www.sportshero.mobi/download",
+		competition_content = "Saya ikut kejuaraan prediksi FootballHero. Menangkan $$$, Baju bertanda tangan Messi & Ronaldo! www.sportshero.mobi/download",
 		competition_title = "FootballHero - Saya ikut kejuaraan prediksi sepakbola. ",
 		prediction_title = "FootballHero - %s",
 	},
@@ -265,7 +265,7 @@ Strings = {
 	quit_title = "Apakah Anda ingin keluar?",
 	duration_forever = "%s untuk selamanya",
 	marketing_message_3 = "Siapa yang akan menjadi pemain terbaik?",
-	share_body = "Dapatkah Anda mengalahkan Saya? Gabung ke dalam kompetisi Saya melalui FootballHero. Kode: %s  www.footballheroapp.com/download",
+	share_body = "Dapatkah Anda mengalahkan Saya? Gabung ke dalam kompetisi Saya melalui FootballHero. Kode: %s  www.sportshero.mobi/download",
 	updating_files = "Memperbarui %s ...",
 	match_list = {
 		match_ended = "Permainan Usa",
@@ -480,7 +480,7 @@ Strings = {
 	support_title = "FootballHero - Bantuan",
 	vs = "VS",
 	share_type_email = "Email",
-	support_email = "support@footballheroapp.com",
+	support_email = "support@sportshero.mobi",
 	user_name = "Nama Pengguna",
 	marketing_message_2 = "Sekarang tantang teman-teman Anda di kompetisi kecil Anda!",
 	friends = "Teman",

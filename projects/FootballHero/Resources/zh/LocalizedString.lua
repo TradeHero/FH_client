@@ -2,10 +2,10 @@ module(..., package.seeall)
 
 Strings = {
     share = {
-        prediction_content = "%s 赢得了 $$$, 梅西&罗纳尔多亲笔签名球衣！www.footballheroapp.com/download",
+        prediction_content = "%s 赢得了 $$$, 梅西&罗纳尔多亲笔签名球衣！www.sportshero.mobi/download",
         spinTheWheel_title = "FootballHero - 我在'超级转转转'中赢得了奖金！",
-        spinTheWheel_content = "我在'超级转转转'中赢得了 $$$, 梅西&罗纳尔多亲笔签名球衣！www.footballheroapp.com/download",
-        competition_content = "我参加了FootballHero球赛竞猜，赢得了 $$$, 梅西&罗纳尔多亲笔签名球衣！www.footballheroapp.com/download",
+        spinTheWheel_content = "我在'超级转转转'中赢得了 $$$, 梅西&罗纳尔多亲笔签名球衣！www.sportshero.mobi/download",
+        competition_content = "我参加了FootballHero球赛竞猜，赢得了 $$$, 梅西&罗纳尔多亲笔签名球衣！www.sportshero.mobi/download",
         competition_title = "FootballHero - 我在FootbellHero中参加了足球竞彩大赛！",
         prediction_title = "FootballHero - %s",
     },
@@ -385,8 +385,8 @@ Strings = {
     },
     support_title = "用户反馈",
     vs = "VS",
-    share_body = "嘿！你能比我预测得更准吗？加入我在FootballHero创建的比分预测大赛吧！邀请码: %s  www.footballheroapp.com/download",
-    support_email = "support@footballheroapp.com",
+    share_body = "嘿！你能比我预测得更准吗？加入我在FootballHero创建的比分预测大赛吧！邀请码: %s  www.sportshero.mobi/download",
+    support_email = "support@sportshero.mobi",
     serverError = {
         COMPETITION_6 = "日期数据未找到！",
         COUPON_3 = "No predictions on coupon. Cannot place empty coupon.",
