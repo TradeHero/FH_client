@@ -7,6 +7,10 @@ local Event = require("scripts.events.Event").EventList
 
 local mWidget
 
+
+
+
+
 function loadFrame(mToken)
     local widget = SceneManager.secondLayerWidgetFromJsonFile("scenes/PrizeFrame.json")
     mWidget = widget
@@ -29,6 +33,24 @@ function loadFrame(mToken)
 
     local item = tolua.cast( mWidget:getChildByName("Image_item"), "ImageView" ) 
     item:loadTexture( Constants.COMPETITION_IMAGE_PATH.. Constants.PrizeItemPrefix .. mToken ..".png" )
+
+    local mPrizeConfig = {
+        { ["token"] = "eruo2016", ["prize1"] = "Win a Messi Signed Jersey", ["prize2"] = "A Signed Football Card" },
+        { ["token"] = "americacup2016", ["prize1"] = "Win a Maradona Signed Jersey", ["prize2"] = "A Signed Football Card" },
+    }
+
+
+    for i = 1, table.getn( mPrizeConfig ) do
+        local text
+        if mToken == mPrizeConfig[i]["token"] then
+            text = tolua.cast( mWidget:getChildByName("Label_Prize1"), "Label" )
+            text:setText( mPrizeConfig[i]["prize1"] )
+            for j=2,10 do
+                text = tolua.cast( mWidget:getChildByName("Label_Prize"..j), "Label" )
+                text:setText( mPrizeConfig[i]["prize2"] )
+            end
+        end
+    end
    
 end
 
