@@ -35,7 +35,7 @@ function loadFrame(mToken)
     item:loadTexture( Constants.COMPETITION_IMAGE_PATH.. Constants.PrizeItemPrefix .. mToken ..".png" )
 
     local mPrizeConfig = {
-        { ["token"] = "eruo2016", ["prize1"] = "Win a Messi Signed Jersey", ["prize2"] = "A Signed Football Card" },
+        { ["token"] = "euro2016", ["prize1"] = "Win a Messi Signed Jersey", ["prize2"] = "A Signed Football Card" },
         { ["token"] = "americacup2016", ["prize1"] = "Win a Maradona Signed Jersey", ["prize2"] = "A Signed Football Card" },
     }
 
