@@ -648,4 +648,12 @@
     <Project>PrizeFrame</Project>
     <GuidesList />
   </GuidesProject>
+  <GuidesProject>
+    <Project>PrizeNameFrame</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>PrizeContent</Project>
+    <GuidesList />
+  </GuidesProject>
 </ArrayOfGuidesProject>

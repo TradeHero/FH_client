@@ -161,10 +161,12 @@
     <string>GoldenTicketsIntroduce.json</string>
     <string>TutorialYuuzooSignin.json</string>
     <string>PrizeFrame.json</string>
+    <string>PrizeNameFrame.json</string>
+    <string>PrizeContent.json</string>
   </JsonList>
   <CanvasSize>
-    <Width>768</Width>
-    <Height>1024</Height>
+    <Width>640</Width>
+    <Height>1136</Height>
   </CanvasSize>
   <filePath>Z:\workspace\FH_client\projects\FootballHero\editor\FH_UI\FH_UI.xml.ui</filePath>
   <ProjectType>UIProject</ProjectType>
@@ -172,12 +174,11 @@
   <imageFileList />
   <imagePngList>
     <string>Competition/prize_bg.png</string>
-    <string>Competition/btn-prize.png</string>
+    <string>header/back.png</string>
     <string>Competition/prize_logo.png</string>
     <string>Competition/prize_item.png</string>
-    <string>Competition/Join_text.png</string>
-    <string>header/back.png</string>
+    <string>Competition/btn-prize.png</string>
   </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>PrizeFrame.json</CurrentUIJson>
+  <CurrentUIJson>PrizeNameFrame.json</CurrentUIJson>
 </UIProject>

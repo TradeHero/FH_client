@@ -91,7 +91,7 @@ function initContent( products, storeResponse )
         end
 
         local payEventHandler = function ( ... )
-            EventManager:postEvent( Event.Do_Buy_Product, { i } )
+            EventManager:postEvent( Event.Do_Buy_Product, { products[i]["Id"]} )
         end
 
         local buyEventHandler = function( sender, eventType )
@@ -139,12 +139,11 @@ function initContentWithoutStore( products )
         end
 
         local payEventHandler = function ( ... )
-            EventManager:postEvent( Event.Do_Buy_Product, { i } )
+            EventManager:postEvent( Event.Do_Buy_Product, { products[i]["Id"] } )
         end
 
         local buyEventHandler = function( sender, eventType )
             if eventType == TOUCH_EVENT_ENDED then
-                CCLuaLog("buy handler")
 --                EventManager:postEvent( Event.Do_Buy_Product, { i })
                 Store:sharedDelegate():buy( Constants.StorePrefix .. products[i]["Level"] , payEventHandler)
             end
