@@ -126,6 +126,7 @@ EventNameList =
     "Do_Get_Currencies",
     "Do_Buy_Product",
     "Do_Intro_Golden_Ticket",
+    "Do_Ask_For_Join",
 
     "Show_Info",
     "Show_Error_Message",
@@ -199,6 +200,7 @@ EventNameDosenotTrackList =
     "Do_Get_Currencies",
     "Do_Buy_Product",
     "Do_Intro_Golden_Ticket",
+    "Do_Ask_For_Join",
 
 
     "Do_Startup",

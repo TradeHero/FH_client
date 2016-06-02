@@ -191,6 +191,7 @@ function initEvents()
 	EventManager:registerEventHandler( Event.Do_Friend_Referal_Success, "scripts.actions.DoFriendReferalSuccessAction" )
 	EventManager:registerEventHandler( Event.Do_Buy_Product, "scripts.actions.DoBuyProductAction" )
 	EventManager:registerEventHandler( Event.Do_Intro_Golden_Ticket, "scripts.actions.DoIntroGoldenTicket" )
+	EventManager:registerEventHandler( Event.Do_Ask_For_Join, "scripts.actions.DoAskForJoin" )
 	
 	EventManager:registerEventHandler( Event.Show_Error_Message, "scripts.actions.ShowErrorMessageAction" )
 	EventManager:registerEventHandler( Event.Show_Choice_Message, "scripts.actions.ShowChoiceMessageAction" )

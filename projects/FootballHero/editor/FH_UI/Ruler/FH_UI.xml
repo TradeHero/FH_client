@@ -656,4 +656,8 @@
     <Project>PrizeContent</Project>
     <GuidesList />
   </GuidesProject>
+  <GuidesProject>
+    <Project>AskForJoin</Project>
+    <GuidesList />
+  </GuidesProject>
 </ArrayOfGuidesProject>
