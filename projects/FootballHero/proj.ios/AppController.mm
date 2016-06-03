@@ -103,7 +103,7 @@ static AppDelegate s_sharedApplication;
     NSLog(@"Start date:%@",startTime);
     
     // Localytics
-    [[LocalyticsSession shared] LocalyticsSession:@"d16d149eabf971a5b376a43-aa0e6fc0-1c50-11e4-49cb-00a426b17dd8"];
+    [[LocalyticsSession shared] LocalyticsSession:@"245f8e12a2879282b0b41d1-e9a045ca-2893-11e6-84b7-0086bc74ca0f"];
     [[LocalyticsSession shared] setLoggingEnabled:YES];
     
     // MAT
