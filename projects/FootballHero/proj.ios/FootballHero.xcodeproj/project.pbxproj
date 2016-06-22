@@ -13,6 +13,13 @@
 		10CF61D21BE8B7F900B88D33 /* StoreHandler.mm in Sources */ = {isa = PBXBuildFile; fileRef = 10CF61D11BE8B7F900B88D33 /* StoreHandler.mm */; };
 		10EE79A71BCE33DC0097EF70 /* Empty.m in Sources */ = {isa = PBXBuildFile; fileRef = 10EE79A31BCE33DC0097EF70 /* Empty.m */; };
 		10EE79A81BCE33DC0097EF70 /* libFlurry_7.1.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 10EE79A61BCE33DC0097EF70 /* libFlurry_7.1.0.a */; };
+		10FD25A41D1A8CE500DBD396 /* arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 10FD259D1D1A8CE500DBD396 /* arrow.png */; };
+		10FD25A51D1A8CE500DBD396 /* arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 10FD259E1D1A8CE500DBD396 /* arrow@2x.png */; };
+		10FD25A61D1A8CE500DBD396 /* arrow@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 10FD259F1D1A8CE500DBD396 /* arrow@3x.png */; };
+		10FD25A71D1A8CE500DBD396 /* lq_x@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 10FD25A01D1A8CE500DBD396 /* lq_x@2x.png */; };
+		10FD25A81D1A8CE500DBD396 /* td_in_app_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 10FD25A11D1A8CE500DBD396 /* td_in_app_icon.png */; };
+		10FD25A91D1A8CE500DBD396 /* TongDaoSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10FD25A21D1A8CE500DBD396 /* TongDaoSDK.framework */; };
+		10FD25AA1D1A8CE500DBD396 /* TongDaoUILibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10FD25A31D1A8CE500DBD396 /* TongDaoUILibrary.framework */; };
 		150CD3951872B593007F1964 /* UITouchGroup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 150CD3931872B593007F1964 /* UITouchGroup.cpp */; };
 		150E36FF17F2B72B0021A6EA /* lua_cocos2dx_extensions_manual.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 150E36FD17F2B72B0021A6EA /* lua_cocos2dx_extensions_manual.cpp */; };
 		1514E39018784113003FC4EE /* CCActionEaseEx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1514E38F18784113003FC4EE /* CCActionEaseEx.cpp */; };
@@ -476,6 +483,13 @@
 		10EE79A41BCE33DC0097EF70 /* Flurry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flurry.h; sourceTree = "<group>"; };
 		10EE79A51BCE33DC0097EF70 /* FlurryWatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlurryWatch.h; sourceTree = "<group>"; };
 		10EE79A61BCE33DC0097EF70 /* libFlurry_7.1.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurry_7.1.0.a; sourceTree = "<group>"; };
+		10FD259D1D1A8CE500DBD396 /* arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow.png; sourceTree = "<group>"; };
+		10FD259E1D1A8CE500DBD396 /* arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrow@2x.png"; sourceTree = "<group>"; };
+		10FD259F1D1A8CE500DBD396 /* arrow@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrow@3x.png"; sourceTree = "<group>"; };
+		10FD25A01D1A8CE500DBD396 /* lq_x@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lq_x@2x.png"; sourceTree = "<group>"; };
+		10FD25A11D1A8CE500DBD396 /* td_in_app_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = td_in_app_icon.png; sourceTree = "<group>"; };
+		10FD25A21D1A8CE500DBD396 /* TongDaoSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TongDaoSDK.framework; sourceTree = "<group>"; };
+		10FD25A31D1A8CE500DBD396 /* TongDaoUILibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TongDaoUILibrary.framework; sourceTree = "<group>"; };
 		150CD3931872B593007F1964 /* UITouchGroup.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UITouchGroup.cpp; sourceTree = "<group>"; };
 		150CD3941872B593007F1964 /* UITouchGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UITouchGroup.h; sourceTree = "<group>"; };
 		150CD3981872B6B5007F1964 /* CCActionEaseEx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCActionEaseEx.h; sourceTree = "<group>"; };
@@ -1298,6 +1312,7 @@
 				73FC0A19199074C10006D0E2 /* SystemConfiguration.framework in Frameworks */,
 				73FC0A17199074B40006D0E2 /* libsqlite3.dylib in Frameworks */,
 				730332F31AB9232A00657F74 /* AGCommon.framework in Frameworks */,
+				10FD25AA1D1A8CE500DBD396 /* TongDaoUILibrary.framework in Frameworks */,
 				730332F61AB9232A00657F74 /* ShareSDKCoreService.framework in Frameworks */,
 				730332F71AB9232A00657F74 /* libWeChatSDK.a in Frameworks */,
 				73FC0A15199074A40006D0E2 /* libz.dylib in Frameworks */,
@@ -1325,6 +1340,7 @@
 				73B0326919BED7620034452A /* MobileAppTracker.framework in Frameworks */,
 				730332FB1AB9232A00657F74 /* ShareSDKShareActionSheet.framework in Frameworks */,
 				7368FC101B74BAB000A45DC2 /* FBSDKCoreKit.framework in Frameworks */,
+				10FD25A91D1A8CE500DBD396 /* TongDaoSDK.framework in Frameworks */,
 				7314B46519B714BC0065D927 /* libUAirship-4.0.3.a in Frameworks */,
 				1AB87031175E0A5B005D39BF /* libwebsockets.a in Frameworks */,
 			);
@@ -1342,6 +1358,28 @@
 				10EE79A61BCE33DC0097EF70 /* libFlurry_7.1.0.a */,
 			);
 			path = Flurry;
+			sourceTree = "<group>";
+		};
+		10FD258C1D1A8C3200DBD396 /* Tongdao */ = {
+			isa = PBXGroup;
+			children = (
+				10FD259C1D1A8CE500DBD396 /* Td_Image_bundle */,
+				10FD25A21D1A8CE500DBD396 /* TongDaoSDK.framework */,
+				10FD25A31D1A8CE500DBD396 /* TongDaoUILibrary.framework */,
+			);
+			name = Tongdao;
+			sourceTree = "<group>";
+		};
+		10FD259C1D1A8CE500DBD396 /* Td_Image_bundle */ = {
+			isa = PBXGroup;
+			children = (
+				10FD259D1D1A8CE500DBD396 /* arrow.png */,
+				10FD259E1D1A8CE500DBD396 /* arrow@2x.png */,
+				10FD259F1D1A8CE500DBD396 /* arrow@3x.png */,
+				10FD25A01D1A8CE500DBD396 /* lq_x@2x.png */,
+				10FD25A11D1A8CE500DBD396 /* td_in_app_icon.png */,
+			);
+			path = Td_Image_bundle;
 			sourceTree = "<group>";
 		};
 		15C1533F168310C700D239F2 /* Products */ = {
@@ -2919,6 +2957,7 @@
 		F293B3BD15EB7BE500256477 = {
 			isa = PBXGroup;
 			children = (
+				10FD258C1D1A8C3200DBD396 /* Tongdao */,
 				10EE79A21BCE33DC0097EF70 /* Flurry */,
 				F293BB7C15EB830F00256477 /* Classes */,
 				730332DC1AB9232A00657F74 /* ShareSDK */,
@@ -3140,6 +3179,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				736466CB1B6B268D007B6827 /* es in Resources */,
+				10FD25A51D1A8CE500DBD396 /* arrow@2x.png in Resources */,
 				739220361A3EA04200F32FE5 /* zh in Resources */,
 				73DCA159192DCD95008AC05D /* anims in Resources */,
 				73495B8E19C048D300626812 /* UAInboxMessageListCell.xib in Resources */,
@@ -3156,6 +3196,7 @@
 				7314B4B319B715350065D927 /* UAPushSettingsAddTagViewController.xib in Resources */,
 				730D984F18DC4317000CA5F9 /* sounds in Resources */,
 				730D984A18DC4317000CA5F9 /* footballhero.lua in Resources */,
+				10FD25A71D1A8CE500DBD396 /* lq_x@2x.png in Resources */,
 				73846DE11A6E6E5A001B4EF1 /* tr in Resources */,
 				7314B4AA19B715350065D927 /* bottom-detail@2x.png in Resources */,
 				7314B4BA19B715350065D927 /* UAPushSettingsView.xib in Resources */,
@@ -3182,8 +3223,10 @@
 				730D984B18DC4317000CA5F9 /* images in Resources */,
 				730D984518DC4317000CA5F9 /* CocoStudio.lua in Resources */,
 				73495B8B19C048D300626812 /* list-image-placeholder.png in Resources */,
+				10FD25A41D1A8CE500DBD396 /* arrow.png in Resources */,
 				73846DDF1A6E6E5A001B4EF1 /* ar in Resources */,
 				105D6A401C16BBFA00549CE7 /* dev in Resources */,
+				10FD25A61D1A8CE500DBD396 /* arrow@3x.png in Resources */,
 				73846DE51A6F8269001B4EF1 /* en in Resources */,
 				73846DE01A6E6E5A001B4EF1 /* th in Resources */,
 				738BA12A193D7FD2008A74F6 /* DES56.lua in Resources */,
@@ -3194,6 +3237,7 @@
 				7314B4AD19B715350065D927 /* top-detail.png in Resources */,
 				7314B4B819B715350065D927 /* UAPushSettingsTokenView.xib in Resources */,
 				7314B4AE19B715350065D927 /* top-detail@2x.png in Resources */,
+				10FD25A81D1A8CE500DBD396 /* td_in_app_icon.png in Resources */,
 				73A0739119CC106500EA3519 /* server in Resources */,
 				46C59AD417641FF300F43DC3 /* CCBReaderLoad.lua in Resources */,
 				730D984218DC4317000CA5F9 /* AudioEngine.lua in Resources */,
