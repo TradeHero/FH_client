@@ -52,4 +52,24 @@ namespace Utils
         android_flurry_postEvent(eventName, paramString);
 #endif
     }
+    
+    void Analytics::postTongdaoEvent(const char* eventName, const char* paramString)
+    {
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+        AnalyticsHandler::getInstance()->postTongdaoEvent(eventName, paramString);
+#endif
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+        android_tongdao_postEvent(eventName, paramString);
+#endif
+    }
+    
+    void Analytics::loginTongdao(const char* eventName)
+    {
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+        AnalyticsHandler::getInstance()->loginTongdao(eventName);
+#endif
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+        android_login_Tongdao(eventName);
+#endif
+    }
 }

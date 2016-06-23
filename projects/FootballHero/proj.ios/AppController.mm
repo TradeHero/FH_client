@@ -166,9 +166,9 @@ static AppDelegate s_sharedApplication;
     }
 **/
     [Flurry startSession:@"ZJW944VMZ5JTVCVM7N69"];
-    return YES;
     
     [[TongDaoUiCore sharedManager]initSdkWithAppKey:@"db0207b6d522c5d143f5da933f1858c5"];
+    return YES;
  }
 
 - (void) signin:(NSString *)userName withProfileImg:(NSString *)profileImg andUserId:(int)userId {
