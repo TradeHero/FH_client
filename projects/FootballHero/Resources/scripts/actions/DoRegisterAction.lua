@@ -164,6 +164,7 @@ function onRegisterNameRequestSuccess( jsonResponse )
     local params = { Platform = "email" }
     Analytics:sharedDelegate():postEvent( Constants.ANALYTICS_EVENT_LOGIN, Json.encode( params ) )
     Analytics:sharedDelegate():postFlurryEvent( Constants.ANALYTICS_EVENT_LOGIN, Json.encode( params ) )
+    Analytics:sharedDelegate():postTongdaoEvent( Constants.ANALYTICS_EVENT_LOGIN, Json.encode( params ) )
 
     EventManager:postEvent( Event.Check_File_Version, { mConfigMd5Info, finishEvent, finishEventParam } )
 end

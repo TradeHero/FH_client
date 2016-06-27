@@ -75,7 +75,7 @@ void AnalyticsHandler::postTongdaoEvent(const char* eventName, const char* param
         if (error == nil)
         {
             NSLog(@"Post Tongdao event: %s param: %s", eventName, paramString);
-            [[TongDaoUiCore sharedManager] trackWithEventName:(NSString*)eventName andValues:params];
+            [[TongDaoUiCore sharedManager] trackWithEventName:[NSString stringWithUTF8String:eventName] andValues:params];
         }
         else
         {
@@ -85,11 +85,37 @@ void AnalyticsHandler::postTongdaoEvent(const char* eventName, const char* param
     else
     {
         NSLog(@"Post Tongdao event: %s", eventName);
-        [[TongDaoUiCore sharedManager]trackWithEventName:(NSString*)eventName];
+        [[TongDaoUiCore sharedManager] trackWithEventName:[NSString stringWithUTF8String:eventName]];
     }
 }
+
 void AnalyticsHandler::loginTongdao(const char* userId)
 {
-    [TongDao setUserId:(NSString*)userId];
+    [TongDao setUserId:[NSString stringWithUTF8String:userId]];
 }
+
+void AnalyticsHandler::trackTongdaoAttr(const char* paramString)
+{
+    NSError *error = nil;
+    NSData *data = [[NSString stringWithUTF8String:paramString] dataUsingEncoding:NSUTF8StringEncoding];
+    NSDictionary *params = [NSJSONSerialization JSONObjectWithData:data options:NSJSONWritingPrettyPrinted error:&error];
+    
+    if (error == nil)
+    {
+        NSLog(@"Track Tongdao Attr: param: %s", paramString);
+        [[TongDaoUiCore sharedManager] identify:params];
+    }
+    else
+    {
+        NSLog(@"Post event error with: %@", error);
+    }
+}
+
+void AnalyticsHandler::trackTongdaoOrder(const char* orderName, const float* price, const char* currency)
+{
+    NSLog(@"Track Tongdao order: %s param: %s", orderName, currency);
+    [[TongDaoUiCore sharedManager] trackPlaceOrder:[NSString stringWithUTF8String:orderName] andPrice:*price andCurrency:[NSString stringWithUTF8String:currency]];
+}
+
+
 

@@ -63,13 +63,33 @@ namespace Utils
 #endif
     }
     
-    void Analytics::loginTongdao(const char* eventName)
+    void Analytics::loginTongdao(const char* userId)
     {
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-        AnalyticsHandler::getInstance()->loginTongdao(eventName);
+        AnalyticsHandler::getInstance()->loginTongdao(userId);
 #endif
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
-        android_login_Tongdao(eventName);
+        android_login_Tongdao(userId);
+#endif
+    }
+    
+    void Analytics::trackTongdaoAttr(const char* paramString)
+    {
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+        AnalyticsHandler::getInstance()->trackTongdaoAttr(paramString);
+#endif
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+        android_tongdao_trackAttr(attrName, paramString);
+#endif
+    }    
+    
+    void Analytics::trackTongdaoOrder(const char* orderName, const float* price, const char* currency)
+    {
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+        AnalyticsHandler::getInstance()->trackTongdaoOrder(orderName, price, currency);
+#endif
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+        android_tongdao_trackOrder(orderName, price, currency);
 #endif
     }
 }

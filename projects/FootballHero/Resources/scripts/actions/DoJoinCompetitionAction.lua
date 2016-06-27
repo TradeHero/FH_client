@@ -51,12 +51,14 @@ function onRequestSuccess( jsonResponse )
     CCLuaLog("Send ANALYTICS_EVENT_COMPETITION: "..Json.encode( params ) )
     Analytics:sharedDelegate():postEvent( Constants.ANALYTICS_EVENT_COMPETITION, Json.encode( params ) )
     Analytics:sharedDelegate():postFlurryEvent( Constants.ANALYTICS_EVENT_COMPETITION, Json.encode( params ) )
+    Analytics:sharedDelegate():postTongdaoEvent( Constants.ANALYTICS_EVENT_COMPETITION, Json.encode( params ) )
 
     if competitionType ~=CompetitionType["Private"] then
         local params = { Action = "join", Competition = joinToken }
         CCLuaLog("Send ANALYTICS_EVENT_SPECIAL_COMPETITION: "..Json.encode( params ) )
         Analytics:sharedDelegate():postEvent( Constants.ANALYTICS_EVENT_SPECIAL_COMPETITION, Json.encode( params ) )
         Analytics:sharedDelegate():postFlurryEvent( Constants.ANALYTICS_EVENT_SPECIAL_COMPETITION, Json.encode( params ) )
+        Analytics:sharedDelegate():postTongdaoEvent( Constants.ANALYTICS_EVENT_SPECIAL_COMPETITION, Json.encode( params ) )
     end
 
     local sortType = 3

@@ -37,6 +37,7 @@ function onRequestSuccess( jsonResponse )
     CCLuaLog("Send ANALYTICS_EVENT_SPINWHEEL: "..Json.encode( params ) )
     Analytics:sharedDelegate():postEvent( Constants.ANALYTICS_EVENT_SPINWHEEL, Json.encode( params ) )
     Analytics:sharedDelegate():postFlurryEvent( Constants.ANALYTICS_EVENT_SPINWHEEL, Json.encode( params ) )
+    Analytics:sharedDelegate():postTongdaoEvent( Constants.ANALYTICS_EVENT_SPINWHEEL, Json.encode( params ) )
 
     --Invalid the player balance cache.
     RequestUtils.invalidResponseCacheContainsUrl( RequestUtils.GET_COUPON_HISTORY_REST_CALL )

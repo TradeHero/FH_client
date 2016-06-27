@@ -22,6 +22,7 @@ function shareHandler( state, platType, errorMsg )
             local params = { Action = "wechat invite" }
             Analytics:sharedDelegate():postEvent( Constants.ANALYTICS_EVENT_FRIENDS_REFERRAL, Json.encode( params ) )
             Analytics:sharedDelegate():postFlurryEvent( Constants.ANALYTICS_EVENT_FRIENDS_REFERRAL, Json.encode( params ) )
+            Analytics:sharedDelegate():postTongdaoEvent( Constants.ANALYTICS_EVENT_FRIENDS_REFERRAL, Json.encode( params ) )
             EventManager:postEvent( Event.Do_Friend_Referal_Success, { Constants.REFERRAL_TYPE_WECHAT_INVITE } )
 		elseif state == C2DXResponseStateFail then
 			CCLuaLog("Share failed.")

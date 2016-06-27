@@ -34,6 +34,7 @@ function onRequestSubmitSuccess( json )
     }
     Analytics:sharedDelegate():postEvent( Constants.ANALYTICS_EVENT_SUBMIT_PREDITION_LUCK8, Json.encode( params ) )
     Analytics:sharedDelegate():postFlurryEvent( Constants.ANALYTICS_EVENT_SUBMIT_PREDITION_LUCK8, Json.encode( params ) )
+    Analytics:sharedDelegate():postTongdaoEvent( Constants.ANALYTICS_EVENT_SUBMIT_PREDITION_LUCK8, Json.encode( params ) )
 	EventManager:postEvent( Event.Enter_Lucky8 )
 end
 

@@ -19,6 +19,7 @@ function inviteFriendHandler( success )
         local params = { Action = "facebook timeline" }
         Analytics:sharedDelegate():postEvent( Constants.ANALYTICS_EVENT_FRIENDS_REFERRAL, Json.encode( params ) )
         Analytics:sharedDelegate():postFlurryEvent( Constants.ANALYTICS_EVENT_FRIENDS_REFERRAL, Json.encode( params ) )
+        Analytics:sharedDelegate():postTongdaoEvent( Constants.ANALYTICS_EVENT_FRIENDS_REFERRAL, Json.encode( params ) )
 		EventManager:postEvent( Event.Do_Friend_Referal_Success, { Constants.REFERRAL_TYPE_FACEBOOK_TIMELINE } )
 	else
 		CCLuaLog("facebook share timeline failed")

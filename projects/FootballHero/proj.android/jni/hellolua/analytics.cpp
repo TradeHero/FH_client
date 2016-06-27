@@ -68,3 +68,31 @@ void android_flurry_postEvent(const char* eventName, const char* paramString)
     minfo.env->DeleteLocalRef(minfo.classID);
   }
 }
+
+
+void android_tongdao_postEvent(const char* eventName, const char* paramString)
+{
+  JniMethodInfo minfo;
+
+  if (JniHelper::getStaticMethodInfo(minfo, "com/myhero/fh/MainActivity", "logTongdaoEvent", "(Ljava/lang/String;Ljava/lang/String;)V")) {
+    jstring jEventName = minfo.env->NewStringUTF(eventName);
+    jstring jParamString = minfo.env->NewStringUTF(paramString);
+    minfo.env->CallStaticVoidMethod(minfo.classID, minfo.methodID, jEventName, jParamString);
+    minfo.env->DeleteLocalRef(jEventName);
+    minfo.env->DeleteLocalRef(jParamString);
+    minfo.env->DeleteLocalRef(minfo.classID);
+  }
+}
+
+
+void android_login_Tongdao(const char* userId)
+{
+  JniMethodInfo minfo;
+
+  if (JniHelper::getMethodInfo(minfo, "com/myhero/fh/MainActivity", "loginTongdao", "(Ljava/lang/String;)V")) {
+    jstring jUserId = minfo.env->NewStringUTF(userId);
+    minfo.env->CallVoidMethod(minfo.classID, minfo.methodID, jUserId);
+    minfo.env->DeleteLocalRef(jUserId);
+    minfo.env->DeleteLocalRef(minfo.classID);
+  }
+}
