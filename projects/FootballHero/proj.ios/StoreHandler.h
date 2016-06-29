@@ -21,6 +21,8 @@ public:
     std::string localizedTitle;
     std::string localizedDescription;
     std::string localizedPrice;// has be localed, just display it on UI.
+    std::string currencyCode;
+    std::string currencySymbol;
     bool isValid;
     int index;//internal use : index of skProducts
 };

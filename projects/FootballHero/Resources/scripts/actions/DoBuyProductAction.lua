@@ -5,9 +5,15 @@ local RequestUtils = require("scripts.RequestUtils")
 local Logic = require("scripts.Logic").getInstance()
 
 local mJsonResponse
+local mProductName
+local mProductPrice
+local mProductCurrency
 
 function action( param )
     local url = RequestUtils.GET_ADD_TICKET .. "?productId=" .. param[1]
+    mProductName = param[2]
+    mProductPrice = param[3]
+    mProductCurrency = param[4]
 
     local requestInfo = {}
     requestInfo.requestData = ""
@@ -27,4 +33,5 @@ function onRequestSuccess( jsonResponse )
     local tickets = jsonResponse["TicketAmount"]
     Logic:setBalance( balance + Logic:getBalance() )
     Logic:setTicket( tickets + Logic:getTicket() )
+    Analytics:sharedDelegate():trackTongdaoOrder( mProductName, mProductPrice, mProductCurrency)
 end

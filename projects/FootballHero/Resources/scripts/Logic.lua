@@ -131,6 +131,7 @@ function Logic:getSelectedLeagues()
 end
 
 function Logic:setSelectedLeagues( selectedLeagues )
+	Analytics:sharedDelegate():trackTongdaoAttr( "Language", selectedLeagues)
 	self.mSelectedLeagues = selectedLeagues
 end
 
@@ -162,6 +163,7 @@ function Logic:setUserInfo( email, password, fbAccessToken, sessionToken, userId
 	accountInfo[ACCOUNT_INFO_PASSWORD] = password
 	accountInfo[ACCOUNT_INFO_FB_ACCESSTOKEN] = fbAccessToken
 	FileUtils.writeStringToFile( ACCOUNT_INFO_FILE, Json.encode( accountInfo ) )
+	Analytics:sharedDelegate():trackTongdaoAttr( "Email", email)
 end
 
 function Logic:clearAccountInfoFile()
@@ -225,6 +227,7 @@ end
 
 function Logic:setDisplayName( name )
 	self.displayName = name
+	Analytics:sharedDelegate():trackTongdaoAttr( "UserName", name)
 end
 
 function Logic:getPictureUrl()
@@ -233,6 +236,7 @@ end
 
 function Logic:setPictureUrl( url )
 	self.pictureUrl = url
+	Analytics:sharedDelegate():trackTongdaoAttr( "Avatar", url)
 end
 
 function Logic:getStartLeagueId()
@@ -245,6 +249,7 @@ end
 
 function Logic:setBalance( balance )
 	self.balance = balance
+	Analytics:sharedDelegate():trackTongdaoAttr( "Balance", balance)
 end
 
 function Logic:getBalance()
@@ -253,6 +258,7 @@ end
 
 function Logic:setTicket( ticket )
 	self.mTicket = ticket
+	Analytics:sharedDelegate():trackTongdaoAttr( "Ticket", ticket)
 end
 
 function Logic:getTicket()

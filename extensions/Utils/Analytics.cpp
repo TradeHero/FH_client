@@ -73,15 +73,24 @@ namespace Utils
 #endif
     }
     
-    void Analytics::trackTongdaoAttr(const char* paramString)
+    void Analytics::trackTongdaoAttr(const char* attrName, const char* value)
     {
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-        AnalyticsHandler::getInstance()->trackTongdaoAttr(paramString);
+        AnalyticsHandler::getInstance()->trackTongdaoAttr(attrName, value);
 #endif
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
-        android_tongdao_trackAttr(attrName, paramString);
+        android_tongdao_trackAttr(attrName, value);
 #endif
     }    
+    void Analytics::trackTongdaoAttrs(const char* paramString)
+    {
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+        AnalyticsHandler::getInstance()->trackTongdaoAttrs(paramString);
+#endif
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+        android_tongdao_trackAttrs(paramString);
+#endif
+    }
     
     void Analytics::trackTongdaoOrder(const char* orderName, const float* price, const char* currency)
     {

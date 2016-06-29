@@ -91,10 +91,11 @@ void AnalyticsHandler::postTongdaoEvent(const char* eventName, const char* param
 
 void AnalyticsHandler::loginTongdao(const char* userId)
 {
+    NSLog(@"Login Tongdao: %s", userId);
     [TongDao setUserId:[NSString stringWithUTF8String:userId]];
 }
 
-void AnalyticsHandler::trackTongdaoAttr(const char* paramString)
+void AnalyticsHandler::trackTongdaoAttrs(const char* paramString)
 {
     NSError *error = nil;
     NSData *data = [[NSString stringWithUTF8String:paramString] dataUsingEncoding:NSUTF8StringEncoding];
@@ -102,7 +103,7 @@ void AnalyticsHandler::trackTongdaoAttr(const char* paramString)
     
     if (error == nil)
     {
-        NSLog(@"Track Tongdao Attr: param: %s", paramString);
+        NSLog(@"Track Tongdao Attr:%s", paramString);
         [[TongDaoUiCore sharedManager] identify:params];
     }
     else
@@ -111,11 +112,30 @@ void AnalyticsHandler::trackTongdaoAttr(const char* paramString)
     }
 }
 
-void AnalyticsHandler::trackTongdaoOrder(const char* orderName, const float* price, const char* currency)
+void AnalyticsHandler::trackTongdaoAttr(const char* attrName, const char* value)
 {
-    NSLog(@"Track Tongdao order: %s param: %s", orderName, currency);
-    [[TongDaoUiCore sharedManager] trackPlaceOrder:[NSString stringWithUTF8String:orderName] andPrice:*price andCurrency:[NSString stringWithUTF8String:currency]];
+    NSLog(@"Track Tongdao Attr: %s value: %s", attrName, value);
+    NSString* attr = [NSString stringWithUTF8String:attrName];
+    if ([attr isEqualToString:@"UserName"]) {
+        [[TongDaoUiCore sharedManager] identifyUserName:[NSString stringWithUTF8String:value]];
+    } else if ([attr isEqualToString:@"Email"]){
+        [[TongDaoUiCore sharedManager] identifyEmail:[NSString stringWithUTF8String:value]];
+    } else if ([attr isEqualToString:@"Phone"]){
+        [[TongDaoUiCore sharedManager] identifyPhone:[NSString stringWithUTF8String:value]];
+    } else if ([attr isEqualToString:@"Gender"]){
+        [[TongDaoUiCore sharedManager] identifyGender:[NSString stringWithUTF8String:value]];
+    } else if ([attr isEqualToString:@"Avatar"]){
+        [[TongDaoUiCore sharedManager] identifyAvatar:[NSString stringWithUTF8String:value]];
+    } else if ([attr isEqualToString:@"FullName"]){
+        [[TongDaoUiCore sharedManager] identifyFullName:[NSString stringWithUTF8String:value]];
+    } else {
+        [[TongDaoUiCore sharedManager] identifyWithKey:attr
+                                              andValue:[NSString stringWithUTF8String:value]];
+    }
 }
 
-
-
+void AnalyticsHandler::trackTongdaoOrder(const char* orderName, const float* price, const char* currency)
+{
+    NSLog(@"Track Tongdao order: %s price: %f currency:%s", orderName, *price, currency);
+    [[TongDaoUiCore sharedManager] trackPlaceOrder:[NSString stringWithUTF8String:orderName] andPrice:*price andCurrency:[NSString stringWithUTF8String:currency]];
+}
