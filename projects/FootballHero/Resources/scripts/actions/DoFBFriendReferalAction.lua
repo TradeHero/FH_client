@@ -13,10 +13,11 @@ end
 
 function inviteFriendHandler( success )
 	if success then
-        local params = { Action = "facebook invite" }
-        Analytics:sharedDelegate():postEvent( Constants.ANALYTICS_EVENT_FRIENDS_REFERRAL, Json.encode( params ) )
-        Analytics:sharedDelegate():postFlurryEvent( Constants.ANALYTICS_EVENT_FRIENDS_REFERRAL, Json.encode( params ) )
-		EventManager:postEvent( Event.Do_Friend_Referal_Success, { Constants.REFERRAL_TYPE_FACEBOOK_INVITE } )
+    local params = { Action = "facebook invite" }
+    Analytics:sharedDelegate():postEvent( Constants.ANALYTICS_EVENT_FRIENDS_REFERRAL, Json.encode( params ) )
+    Analytics:sharedDelegate():postFlurryEvent( Constants.ANALYTICS_EVENT_FRIENDS_REFERRAL, Json.encode( params ) )
+    Analytics:sharedDelegate():postTongdaoEvent( Constants.ANALYTICS_EVENT_FRIENDS_REFERRAL, Json.encode( params ) )
+    EventManager:postEvent( Event.Do_Friend_Referal_Success, { Constants.REFERRAL_TYPE_FACEBOOK_INVITE } )
 	else
 		CCLuaLog("facebook invite friend failed")
 	end

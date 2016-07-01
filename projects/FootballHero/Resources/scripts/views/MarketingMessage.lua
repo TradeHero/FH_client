@@ -51,6 +51,7 @@ function okEventHandler( sender, eventType )
         CCLuaLog("Send ANALYTICS_EVENT_POPUP: "..Json.encode( params ) )
         Analytics:sharedDelegate():postEvent( Constants.ANALYTICS_EVENT_POPUP, Json.encode( params ) )
         Analytics:sharedDelegate():postFlurryEvent( Constants.ANALYTICS_EVENT_POPUP, Json.encode( params ) )
+        Analytics:sharedDelegate():postTongdaoEvent( Constants.ANALYTICS_EVENT_POPUP, Json.encode( params ) )
 
         EventManager:postEvent( Event.Enter_Create_Competition, { true, mLeagueId } )
     end
@@ -65,6 +66,7 @@ function closeEventHandler( sender, eventType )
         CCLuaLog("Send ANALYTICS_EVENT_POPUP: "..Json.encode( params ) )
         Analytics:sharedDelegate():postEvent( Constants.ANALYTICS_EVENT_POPUP, Json.encode( params ) )
         Analytics:sharedDelegate():postFlurryEvent( Constants.ANALYTICS_EVENT_POPUP, Json.encode( params ) )
+        Analytics:sharedDelegate():postTongdaoEvent( Constants.ANALYTICS_EVENT_POPUP, Json.encode( params ) )
 
         SceneManager.removeWidget( mWidget )
     end

@@ -50,6 +50,7 @@ function betEventHandler( sender, eventType )
         local params = { Action = "bet365" }
         Analytics:sharedDelegate():postEvent( Constants.ANALYTICS_EVENT_BET365, Json.encode( params ) )
         Analytics:sharedDelegate():postFlurryEvent( Constants.ANALYTICS_EVENT_BET365, Json.encode( params ) )
+        Analytics:sharedDelegate():postTongdaoEvent( Constants.ANALYTICS_EVENT_BET365, Json.encode( params ) )
         Misc:sharedDelegate():openUrl( Constants.BET365_URL )
     end
 end

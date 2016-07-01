@@ -21,7 +21,7 @@ WebviewController* WebviewController::getInstance()
     return instance;
 }
 
-void WebviewController::openWebpage(const char* url)
+void WebviewController::openFullScreenWebpage(const char* url)
 {
     openWebpage(url, 0, 80, 768, 984);
 }

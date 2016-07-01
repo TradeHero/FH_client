@@ -69,4 +69,5 @@ function loadSpinUI( response )
     CCLuaLog("Send ANALYTICS_EVENT_SPINWHEEL: "..Json.encode( params ) )
     Analytics:sharedDelegate():postEvent( Constants.ANALYTICS_EVENT_SPINWHEEL, Json.encode( params ) )
     Analytics:sharedDelegate():postFlurryEvent( Constants.ANALYTICS_EVENT_SPINWHEEL, Json.encode( params ) )
+    Analytics:sharedDelegate():postTongdaoEvent( Constants.ANALYTICS_EVENT_SPINWHEEL, Json.encode( params ) )
 end

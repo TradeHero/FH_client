@@ -137,5 +137,6 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="tongrd-android-sdk-3.0.0" level="project" />
   </component>
 </module>

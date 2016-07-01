@@ -33,10 +33,10 @@ namespace Utils
 		return s_sharedUtils;
 	}
     
-    void WebviewDelegate::openWebpage(const char* url)
+    void WebviewDelegate::openFullScreenWebpage(const char* url)
     {
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-        WebviewController::getInstance()->openWebpage(url);
+        WebviewController::getInstance()->openFullScreenWebpage(url);
 #endif
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
         openWebPageAndroid(url);

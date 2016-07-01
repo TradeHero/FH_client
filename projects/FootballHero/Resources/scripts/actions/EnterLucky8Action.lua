@@ -35,12 +35,12 @@ function onRequestLucky8MatchListSuccess( json )
     		lucky8Scene.loadFrame( json )
     	end
 
-        local params = {
-            Action = "Enter lucky8",
-        }
-        Analytics:sharedDelegate():postEvent( Constants.ANALYTICS_EVENT_ENTER_LUCKY8, Json.encode( params ) )
-        Analytics:sharedDelegate():postFlurryEvent( Constants.ANALYTICS_EVENT_ENTER_LUCKY8, Json.encode( params ) )
-    end
+    local params = {
+        Action = "Enter lucky8",
+    }
+    Analytics:sharedDelegate():postEvent( Constants.ANALYTICS_EVENT_ENTER_LUCKY8, Json.encode( params ) )
+    Analytics:sharedDelegate():postFlurryEvent( Constants.ANALYTICS_EVENT_ENTER_LUCKY8, Json.encode( params ) )
+    Analytics:sharedDelegate():postTongdaoEvent( Constants.ANALYTICS_EVENT_ENTER_LUCKY8, Json.encode( params ) )
 end
 
 function action( param )

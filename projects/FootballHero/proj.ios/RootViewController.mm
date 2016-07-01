@@ -26,6 +26,7 @@
 #import "RootViewController.h"
 #include "MiscHandler.h"
 #include "FacebookConnector.h"
+#import <TongDaoUILibrary/TongDaoUiCore.h>
 
 
 @implementation RootViewController
@@ -343,5 +344,18 @@
     [super dealloc];
 }
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [[TongDaoUiCore sharedManager] onSessionStart:self];
+    [[TongDaoUiCore sharedManager] displayInAppMessage:self.view];
+    
+}
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [[TongDaoUiCore sharedManager] onSessionEnd:self];
+}
 
 @end

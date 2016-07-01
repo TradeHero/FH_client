@@ -50,6 +50,7 @@
 #import "WXApi.h"                   //微信
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import "Flurry.h"
+#import <TongDaoUILibrary/TongDaoUiCore.h>
 
 @implementation AppController
 
@@ -165,8 +166,10 @@ static AppDelegate s_sharedApplication;
     }
 **/
     [Flurry startSession:@"ZJW944VMZ5JTVCVM7N69"];
+    
+    [[TongDaoUiCore sharedManager]initSdkWithAppKey:@"db0207b6d522c5d143f5da933f1858c5"];
     return YES;
-}
+ }
 
 - (void) signin:(NSString *)userName withProfileImg:(NSString *)profileImg andUserId:(int)userId {
     // QuickBlox session creation
@@ -405,6 +408,7 @@ static AppDelegate s_sharedApplication;
     
     NSString* token = [UAPush shared].deviceToken;
     MiscHandler::getInstance()->responseUADeviceToken([token UTF8String]);
+    [[TongDaoUiCore sharedManager] identifyPushToken:(NSString*)token];
 }
 
 

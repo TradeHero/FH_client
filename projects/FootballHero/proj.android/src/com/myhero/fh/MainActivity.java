@@ -52,6 +52,7 @@ import com.myhero.fh.widget.FHCocos2dxHandler;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.HashMap;
 
 import org.cocos2dx.lib.Cocos2dxActivity;
 import org.cocos2dx.lib.Cocos2dxGLSurfaceView;
@@ -70,6 +71,9 @@ import com.appsflyer.AppsFlyerLib;
 import com.flurry.android.FlurryAgent;
 import org.json.*;
 import org.json.JSONException;
+
+import com.tongdao.sdk.TongDao;
+
 
 
 public class MainActivity extends Cocos2dxActivity {
@@ -159,6 +163,9 @@ public class MainActivity extends Cocos2dxActivity {
 
     // init Flurry
     FlurryAgent.init(this, "DXBRPTBZ6P8B4YGK98ZW");
+
+      //init Tongdao
+      TongDao.init(this, Constants.TONGDAO_APP_KEY);
 
     // 初始化iab
       mGooglePlayIABPlugin = new GooglePlayIABPlugin(this);
@@ -354,6 +361,18 @@ public class MainActivity extends Cocos2dxActivity {
     public static void logFlurryEvent(String eventName, String paramString){
         ParamStringEvent event = new ParamStringEvent(eventName, paramString);
         FlurryAgent.logEvent( eventName, event.getAttributes() );
+    }
+
+    //log tongdao event
+    public static void logTongdaoEvent(String eventName, String paramString){
+        ParamStringEvent event = new ParamStringEvent(eventName, paramString);
+        TongDao.track( eventName, new HashMap(event.getAttributes()));
+//        TongDao.track(eventName);
+    }
+
+    //tongdao login
+    public void loginTongdao(String userId){
+        TongDao.setUserId(this, userId);
     }
 }
 

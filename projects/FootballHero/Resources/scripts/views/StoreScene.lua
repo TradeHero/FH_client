@@ -83,7 +83,7 @@ function initContent( products, storeResponse )
 
         labelTitle:setText( store[i]["title"] )
         labelDetail:setText( string.format( Constants.String.store.detail, products[i]["Ticket"] ))
-        labelPrice:setText( store[i]["price"] )
+        labelPrice:setText( store[i]["symbol"] .. " " .. store[i]["price"] )
         
 
         if not products[i]["IsBestDeal"] then
@@ -91,7 +91,7 @@ function initContent( products, storeResponse )
         end
 
         local payEventHandler = function ( ... )
-            EventManager:postEvent( Event.Do_Buy_Product, { products[i]["Id"]} )
+            EventManager:postEvent( Event.Do_Buy_Product, { products[i]["Id"], store[i]["title"], store[i]["price"], store[i]["code"] } )
         end
 
         local buyEventHandler = function( sender, eventType )

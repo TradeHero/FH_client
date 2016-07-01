@@ -52,4 +52,83 @@ namespace Utils
         android_flurry_postEvent(eventName, paramString);
 #endif
     }
+    
+    void Analytics::postTongdaoEvent(const char* eventName, const char* paramString)
+    {
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+        AnalyticsHandler::getInstance()->postTongdaoEvent(eventName, paramString);
+#endif
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+        android_tongdao_postEvent(eventName, paramString);
+#endif
+    }
+    
+    void Analytics::loginTongdao(const char* userId)
+    {
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+        AnalyticsHandler::getInstance()->loginTongdao(userId);
+#endif
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+        android_login_Tongdao(userId);
+#endif
+    }
+    
+    void Analytics::trackTongdaoAttr(const char* attrName, const char* value)
+    {
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+        AnalyticsHandler::getInstance()->trackTongdaoAttr(attrName, value);
+#endif
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+        android_tongdao_trackAttr(attrName, value);
+#endif
+    }    
+    void Analytics::trackTongdaoAttrs(const char* paramString)
+    {
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+        AnalyticsHandler::getInstance()->trackTongdaoAttrs(paramString);
+#endif
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+        android_tongdao_trackAttrs(paramString);
+#endif
+    }
+    
+    void Analytics::trackTongdaoOrder(const char* orderName, const float* price, const char* currency)
+    {
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+        AnalyticsHandler::getInstance()->trackTongdaoOrder(orderName, price, currency);
+#endif
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+        android_tongdao_trackOrder(orderName, price, currency);
+#endif
+    }
+    
+    void Analytics::tractSessionStart(const char* pageName)
+    {
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+        AnalyticsHandler::getInstance()->tractSessionStart(pageName);
+#endif
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+        android_tongdao_trackSessionStart(paramString);
+#endif
+    }
+    
+    void Analytics::tractSessionEnd(const char* pageName)
+    {
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+        AnalyticsHandler::getInstance()->tractSessionEnd(pageName);
+#endif
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+        android_tongdao_trackSessionEnd(paramString);
+#endif
+    }
+    
+    void Analytics::trackRegistration()
+    {
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+        AnalyticsHandler::getInstance()->trackRegistration();
+#endif
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+        android_tongdao_trackRegistration();
+#endif
+    }
 }

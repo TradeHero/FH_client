@@ -1,6 +1,6 @@
 /*
 ** Lua binding: Extension
-** Generated automatically by tolua++-1.0.92 on 11/25/15 11:20:11.
+** Generated automatically by tolua++-1.0.92 on 07/01/16 15:13:50.
 */
 
 /****************************************************************************
@@ -981,37 +981,308 @@ static int tolua_Extension_Analytics_postEvent00(lua_State* tolua_S)
 }
 #endif //#ifndef TOLUA_DISABLE
 
-/* method: postEvent of class  Analytics */
+/* method: postFlurryEvent of class  Analytics */
 #ifndef TOLUA_DISABLE_tolua_Extension_Analytics_postFlurryEvent00
 static int tolua_Extension_Analytics_postFlurryEvent00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
-    tolua_Error tolua_err;
-    if (
-        !tolua_isusertype(tolua_S,1,"Analytics",0,&tolua_err) ||
-        !tolua_isstring(tolua_S,2,0,&tolua_err) ||
-        !tolua_isstring(tolua_S,3,0,&tolua_err) ||
-        !tolua_isnoobj(tolua_S,4,&tolua_err)
-        )
-        goto tolua_lerror;
-    else
+ tolua_Error tolua_err;
+ if (
+     !tolua_isusertype(tolua_S,1,"Analytics",0,&tolua_err) ||
+     !tolua_isstring(tolua_S,2,0,&tolua_err) ||
+     !tolua_isstring(tolua_S,3,0,&tolua_err) ||
+     !tolua_isnoobj(tolua_S,4,&tolua_err)
+ )
+  goto tolua_lerror;
+ else
 #endif
-    {
-        Analytics* self = (Analytics*)  tolua_tousertype(tolua_S,1,0);
-        const char* eventName = ((const char*)  tolua_tostring(tolua_S,2,0));
-        const char* paramString = ((const char*)  tolua_tostring(tolua_S,3,0));
- #ifndef TOLUA_RELEASE
-        if (!self) tolua_error(tolua_S,"invalid 'self' in function 'postFlurryEvent'", NULL);
-#endif
-        {
-            self->postFlurryEvent(eventName, paramString);
-        }
-    }
-    return 0;
+ {
+  Analytics* self = (Analytics*)  tolua_tousertype(tolua_S,1,0);
+  const char* eventName = ((const char*)  tolua_tostring(tolua_S,2,0));
+  const char* paramString = ((const char*)  tolua_tostring(tolua_S,3,0));
 #ifndef TOLUA_RELEASE
-tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'postFlurryEvent'.",&tolua_err);
-    return 0;
+  if (!self) tolua_error(tolua_S,"invalid 'self' in function 'postFlurryEvent'", NULL);
+#endif
+  {
+   self->postFlurryEvent(eventName,paramString);
+  }
+ }
+ return 0;
+#ifndef TOLUA_RELEASE
+ tolua_lerror:
+ tolua_error(tolua_S,"#ferror in function 'postFlurryEvent'.",&tolua_err);
+ return 0;
+#endif
+}
+#endif //#ifndef TOLUA_DISABLE
+
+/* method: postTongdaoEvent of class  Analytics */
+#ifndef TOLUA_DISABLE_tolua_Extension_Analytics_postTongdaoEvent00
+static int tolua_Extension_Analytics_postTongdaoEvent00(lua_State* tolua_S)
+{
+#ifndef TOLUA_RELEASE
+ tolua_Error tolua_err;
+ if (
+     !tolua_isusertype(tolua_S,1,"Analytics",0,&tolua_err) ||
+     !tolua_isstring(tolua_S,2,0,&tolua_err) ||
+     !tolua_isstring(tolua_S,3,0,&tolua_err) ||
+     !tolua_isnoobj(tolua_S,4,&tolua_err)
+ )
+  goto tolua_lerror;
+ else
+#endif
+ {
+  Analytics* self = (Analytics*)  tolua_tousertype(tolua_S,1,0);
+  const char* eventName = ((const char*)  tolua_tostring(tolua_S,2,0));
+  const char* paramString = ((const char*)  tolua_tostring(tolua_S,3,0));
+#ifndef TOLUA_RELEASE
+  if (!self) tolua_error(tolua_S,"invalid 'self' in function 'postTongdaoEvent'", NULL);
+#endif
+  {
+   self->postTongdaoEvent(eventName,paramString);
+  }
+ }
+ return 0;
+#ifndef TOLUA_RELEASE
+ tolua_lerror:
+ tolua_error(tolua_S,"#ferror in function 'postTongdaoEvent'.",&tolua_err);
+ return 0;
+#endif
+}
+#endif //#ifndef TOLUA_DISABLE
+
+/* method: loginTongdao of class  Analytics */
+#ifndef TOLUA_DISABLE_tolua_Extension_Analytics_loginTongdao00
+static int tolua_Extension_Analytics_loginTongdao00(lua_State* tolua_S)
+{
+#ifndef TOLUA_RELEASE
+ tolua_Error tolua_err;
+ if (
+     !tolua_isusertype(tolua_S,1,"Analytics",0,&tolua_err) ||
+     !tolua_isstring(tolua_S,2,0,&tolua_err) ||
+     !tolua_isnoobj(tolua_S,3,&tolua_err)
+ )
+  goto tolua_lerror;
+ else
+#endif
+ {
+  Analytics* self = (Analytics*)  tolua_tousertype(tolua_S,1,0);
+  const char* userId = ((const char*)  tolua_tostring(tolua_S,2,0));
+#ifndef TOLUA_RELEASE
+  if (!self) tolua_error(tolua_S,"invalid 'self' in function 'loginTongdao'", NULL);
+#endif
+  {
+   self->loginTongdao(userId);
+  }
+ }
+ return 0;
+#ifndef TOLUA_RELEASE
+ tolua_lerror:
+ tolua_error(tolua_S,"#ferror in function 'loginTongdao'.",&tolua_err);
+ return 0;
+#endif
+}
+#endif //#ifndef TOLUA_DISABLE
+
+/* method: trackTongdaoAttr of class  Analytics */
+#ifndef TOLUA_DISABLE_tolua_Extension_Analytics_trackTongdaoAttr00
+static int tolua_Extension_Analytics_trackTongdaoAttr00(lua_State* tolua_S)
+{
+#ifndef TOLUA_RELEASE
+ tolua_Error tolua_err;
+ if (
+     !tolua_isusertype(tolua_S,1,"Analytics",0,&tolua_err) ||
+     !tolua_isstring(tolua_S,2,0,&tolua_err) ||
+     !tolua_isstring(tolua_S,3,0,&tolua_err) ||
+     !tolua_isnoobj(tolua_S,4,&tolua_err)
+ )
+  goto tolua_lerror;
+ else
+#endif
+ {
+  Analytics* self = (Analytics*)  tolua_tousertype(tolua_S,1,0);
+  const char* attrName = ((const char*)  tolua_tostring(tolua_S,2,0));
+  const char* value = ((const char*)  tolua_tostring(tolua_S,3,0));
+#ifndef TOLUA_RELEASE
+  if (!self) tolua_error(tolua_S,"invalid 'self' in function 'trackTongdaoAttr'", NULL);
+#endif
+  {
+   self->trackTongdaoAttr(attrName,value);
+  }
+ }
+ return 0;
+#ifndef TOLUA_RELEASE
+ tolua_lerror:
+ tolua_error(tolua_S,"#ferror in function 'trackTongdaoAttr'.",&tolua_err);
+ return 0;
+#endif
+}
+#endif //#ifndef TOLUA_DISABLE
+
+/* method: trackTongdaoAttrs of class  Analytics */
+#ifndef TOLUA_DISABLE_tolua_Extension_Analytics_trackTongdaoAttrs00
+static int tolua_Extension_Analytics_trackTongdaoAttrs00(lua_State* tolua_S)
+{
+#ifndef TOLUA_RELEASE
+ tolua_Error tolua_err;
+ if (
+     !tolua_isusertype(tolua_S,1,"Analytics",0,&tolua_err) ||
+     !tolua_isstring(tolua_S,2,0,&tolua_err) ||
+     !tolua_isnoobj(tolua_S,3,&tolua_err)
+ )
+  goto tolua_lerror;
+ else
+#endif
+ {
+  Analytics* self = (Analytics*)  tolua_tousertype(tolua_S,1,0);
+  const char* paramString = ((const char*)  tolua_tostring(tolua_S,2,0));
+#ifndef TOLUA_RELEASE
+  if (!self) tolua_error(tolua_S,"invalid 'self' in function 'trackTongdaoAttrs'", NULL);
+#endif
+  {
+   self->trackTongdaoAttrs(paramString);
+  }
+ }
+ return 0;
+#ifndef TOLUA_RELEASE
+ tolua_lerror:
+ tolua_error(tolua_S,"#ferror in function 'trackTongdaoAttrs'.",&tolua_err);
+ return 0;
+#endif
+}
+#endif //#ifndef TOLUA_DISABLE
+
+/* method: trackTongdaoOrder of class  Analytics */
+#ifndef TOLUA_DISABLE_tolua_Extension_Analytics_trackTongdaoOrder00
+static int tolua_Extension_Analytics_trackTongdaoOrder00(lua_State* tolua_S)
+{
+#ifndef TOLUA_RELEASE
+ tolua_Error tolua_err;
+ if (
+     !tolua_isusertype(tolua_S,1,"Analytics",0,&tolua_err) ||
+     !tolua_isstring(tolua_S,2,0,&tolua_err) ||
+     !tolua_isnumber(tolua_S,3,0,&tolua_err) ||
+     !tolua_isstring(tolua_S,4,0,&tolua_err) ||
+     !tolua_isnoobj(tolua_S,5,&tolua_err)
+ )
+  goto tolua_lerror;
+ else
+#endif
+ {
+  Analytics* self = (Analytics*)  tolua_tousertype(tolua_S,1,0);
+  const char* orderName = ((const char*)  tolua_tostring(tolua_S,2,0));
+  const float price = ((const float)  tolua_tonumber(tolua_S,3,0));
+  const char* currency = ((const char*)  tolua_tostring(tolua_S,4,0));
+#ifndef TOLUA_RELEASE
+  if (!self) tolua_error(tolua_S,"invalid 'self' in function 'trackTongdaoOrder'", NULL);
+#endif
+  {
+   self->trackTongdaoOrder(orderName,&price,currency);
+   tolua_pushnumber(tolua_S,(lua_Number)price);
+  }
+ }
+ return 1;
+#ifndef TOLUA_RELEASE
+ tolua_lerror:
+ tolua_error(tolua_S,"#ferror in function 'trackTongdaoOrder'.",&tolua_err);
+ return 0;
+#endif
+}
+#endif //#ifndef TOLUA_DISABLE
+
+/* method: tractSessionStart of class  Analytics */
+#ifndef TOLUA_DISABLE_tolua_Extension_Analytics_tractSessionStart00
+static int tolua_Extension_Analytics_tractSessionStart00(lua_State* tolua_S)
+{
+#ifndef TOLUA_RELEASE
+ tolua_Error tolua_err;
+ if (
+     !tolua_isusertype(tolua_S,1,"Analytics",0,&tolua_err) ||
+     !tolua_isstring(tolua_S,2,0,&tolua_err) ||
+     !tolua_isnoobj(tolua_S,3,&tolua_err)
+ )
+  goto tolua_lerror;
+ else
+#endif
+ {
+  Analytics* self = (Analytics*)  tolua_tousertype(tolua_S,1,0);
+  const char* pageName = ((const char*)  tolua_tostring(tolua_S,2,0));
+#ifndef TOLUA_RELEASE
+  if (!self) tolua_error(tolua_S,"invalid 'self' in function 'tractSessionStart'", NULL);
+#endif
+  {
+   self->tractSessionStart(pageName);
+  }
+ }
+ return 0;
+#ifndef TOLUA_RELEASE
+ tolua_lerror:
+ tolua_error(tolua_S,"#ferror in function 'tractSessionStart'.",&tolua_err);
+ return 0;
+#endif
+}
+#endif //#ifndef TOLUA_DISABLE
+
+/* method: tractSessionEnd of class  Analytics */
+#ifndef TOLUA_DISABLE_tolua_Extension_Analytics_tractSessionEnd00
+static int tolua_Extension_Analytics_tractSessionEnd00(lua_State* tolua_S)
+{
+#ifndef TOLUA_RELEASE
+ tolua_Error tolua_err;
+ if (
+     !tolua_isusertype(tolua_S,1,"Analytics",0,&tolua_err) ||
+     !tolua_isstring(tolua_S,2,0,&tolua_err) ||
+     !tolua_isnoobj(tolua_S,3,&tolua_err)
+ )
+  goto tolua_lerror;
+ else
+#endif
+ {
+  Analytics* self = (Analytics*)  tolua_tousertype(tolua_S,1,0);
+  const char* pageName = ((const char*)  tolua_tostring(tolua_S,2,0));
+#ifndef TOLUA_RELEASE
+  if (!self) tolua_error(tolua_S,"invalid 'self' in function 'tractSessionEnd'", NULL);
+#endif
+  {
+   self->tractSessionEnd(pageName);
+  }
+ }
+ return 0;
+#ifndef TOLUA_RELEASE
+ tolua_lerror:
+ tolua_error(tolua_S,"#ferror in function 'tractSessionEnd'.",&tolua_err);
+ return 0;
+#endif
+}
+#endif //#ifndef TOLUA_DISABLE
+
+/* method: trackRegistration of class  Analytics */
+#ifndef TOLUA_DISABLE_tolua_Extension_Analytics_trackRegistration00
+static int tolua_Extension_Analytics_trackRegistration00(lua_State* tolua_S)
+{
+#ifndef TOLUA_RELEASE
+ tolua_Error tolua_err;
+ if (
+     !tolua_isusertype(tolua_S,1,"Analytics",0,&tolua_err) ||
+     !tolua_isnoobj(tolua_S,2,&tolua_err)
+ )
+  goto tolua_lerror;
+ else
+#endif
+ {
+  Analytics* self = (Analytics*)  tolua_tousertype(tolua_S,1,0);
+#ifndef TOLUA_RELEASE
+  if (!self) tolua_error(tolua_S,"invalid 'self' in function 'trackRegistration'", NULL);
+#endif
+  {
+   self->trackRegistration();
+  }
+ }
+ return 0;
+#ifndef TOLUA_RELEASE
+ tolua_lerror:
+ tolua_error(tolua_S,"#ferror in function 'trackRegistration'.",&tolua_err);
+ return 0;
 #endif
 }
 #endif //#ifndef TOLUA_DISABLE
@@ -1043,40 +1314,6 @@ static int tolua_Extension_WebviewDelegate_sharedDelegate00(lua_State* tolua_S)
 #endif
 }
 #endif //#ifndef TOLUA_DISABLE
-
-/* method: openWebpage of class  WebviewDelegate */
-#ifndef TOLUA_DISABLE_tolua_Extension_WebviewDelegate_openWebpage01
-static int tolua_Extension_WebviewDelegate_openWebpage01(lua_State* tolua_S)
-{
-#ifndef TOLUA_RELEASE
-    tolua_Error tolua_err;
-    if (
-        !tolua_isusertype(tolua_S,1,"WebviewDelegate",0,&tolua_err) ||
-        !tolua_isstring(tolua_S,2,0,&tolua_err) ||
-         !tolua_isnoobj(tolua_S,3,&tolua_err)
-        )
-        goto tolua_lerror;
-    else
-#endif
-    {
-        WebviewDelegate* self = (WebviewDelegate*)  tolua_tousertype(tolua_S,1,0);
-        const char* url = ((const char*)  tolua_tostring(tolua_S,2,0));
-#ifndef TOLUA_RELEASE
-        if (!self) tolua_error(tolua_S,"invalid 'self' in function 'openWebpage'", NULL);
-#endif
-        {
-            self->openWebpage(url);
-        }
-    }
-    return 0;
-#ifndef TOLUA_RELEASE
-tolua_lerror:
-    tolua_error(tolua_S,"#ferror in function 'openWebpage'.",&tolua_err);
-    return 0;
-#endif
-}
-#endif //#ifndef TOLUA_DISABLE
-
 
 /* method: openWebpage of class  WebviewDelegate */
 #ifndef TOLUA_DISABLE_tolua_Extension_WebviewDelegate_openWebpage00
@@ -1114,6 +1351,39 @@ static int tolua_Extension_WebviewDelegate_openWebpage00(lua_State* tolua_S)
 #ifndef TOLUA_RELEASE
  tolua_lerror:
  tolua_error(tolua_S,"#ferror in function 'openWebpage'.",&tolua_err);
+ return 0;
+#endif
+}
+#endif //#ifndef TOLUA_DISABLE
+
+/* method: openFullScreenWebpage of class  WebviewDelegate */
+#ifndef TOLUA_DISABLE_tolua_Extension_WebviewDelegate_openFullScreenWebpage00
+static int tolua_Extension_WebviewDelegate_openFullScreenWebpage00(lua_State* tolua_S)
+{
+#ifndef TOLUA_RELEASE
+ tolua_Error tolua_err;
+ if (
+     !tolua_isusertype(tolua_S,1,"WebviewDelegate",0,&tolua_err) ||
+     !tolua_isstring(tolua_S,2,0,&tolua_err) ||
+     !tolua_isnoobj(tolua_S,3,&tolua_err)
+ )
+  goto tolua_lerror;
+ else
+#endif
+ {
+  WebviewDelegate* self = (WebviewDelegate*)  tolua_tousertype(tolua_S,1,0);
+  const char* url = ((const char*)  tolua_tostring(tolua_S,2,0));
+#ifndef TOLUA_RELEASE
+  if (!self) tolua_error(tolua_S,"invalid 'self' in function 'openFullScreenWebpage'", NULL);
+#endif
+  {
+   self->openFullScreenWebpage(url);
+  }
+ }
+ return 0;
+#ifndef TOLUA_RELEASE
+ tolua_lerror:
+ tolua_error(tolua_S,"#ferror in function 'openFullScreenWebpage'.",&tolua_err);
  return 0;
 #endif
 }
@@ -2308,12 +2578,20 @@ TOLUA_API int tolua_Extension_open (lua_State* tolua_S)
    tolua_function(tolua_S,"sharedDelegate",tolua_Extension_Analytics_sharedDelegate00);
    tolua_function(tolua_S,"postEvent",tolua_Extension_Analytics_postEvent00);
    tolua_function(tolua_S,"postFlurryEvent",tolua_Extension_Analytics_postFlurryEvent00);
+   tolua_function(tolua_S,"postTongdaoEvent",tolua_Extension_Analytics_postTongdaoEvent00);
+   tolua_function(tolua_S,"loginTongdao",tolua_Extension_Analytics_loginTongdao00);
+   tolua_function(tolua_S,"trackTongdaoAttr",tolua_Extension_Analytics_trackTongdaoAttr00);
+   tolua_function(tolua_S,"trackTongdaoAttrs",tolua_Extension_Analytics_trackTongdaoAttrs00);
+   tolua_function(tolua_S,"trackTongdaoOrder",tolua_Extension_Analytics_trackTongdaoOrder00);
+   tolua_function(tolua_S,"tractSessionStart",tolua_Extension_Analytics_tractSessionStart00);
+   tolua_function(tolua_S,"tractSessionEnd",tolua_Extension_Analytics_tractSessionEnd00);
+   tolua_function(tolua_S,"trackRegistration",tolua_Extension_Analytics_trackRegistration00);
   tolua_endmodule(tolua_S);
   tolua_cclass(tolua_S,"WebviewDelegate","WebviewDelegate","",NULL);
   tolua_beginmodule(tolua_S,"WebviewDelegate");
    tolua_function(tolua_S,"sharedDelegate",tolua_Extension_WebviewDelegate_sharedDelegate00);
-   tolua_function(tolua_S,"openFullScreenWebpage",tolua_Extension_WebviewDelegate_openWebpage01);
    tolua_function(tolua_S,"openWebpage",tolua_Extension_WebviewDelegate_openWebpage00);
+   tolua_function(tolua_S,"openFullScreenWebpage",tolua_Extension_WebviewDelegate_openFullScreenWebpage00);
    tolua_function(tolua_S,"closeWebpage",tolua_Extension_WebviewDelegate_closeWebpage00);
   tolua_endmodule(tolua_S);
   tolua_cclass(tolua_S,"Misc","Misc","",NULL);

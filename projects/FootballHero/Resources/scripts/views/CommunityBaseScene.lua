@@ -112,6 +112,7 @@ function loadMainContent( contentContainer, jsonResponse, leaderboardId, subType
         local params = { Action = "enter expert" }
         Analytics:sharedDelegate():postEvent( Constants.ANALYTICS_EVENT_ENTER_EXPERT, Json.encode( params ) )
         Analytics:sharedDelegate():postFlurryEvent( Constants.ANALYTICS_EVENT_ENTER_EXPERT, Json.encode( params ) )
+        Analytics:sharedDelegate():postTongdaoEvent( Constants.ANALYTICS_EVENT_ENTER_EXPERT, Json.encode( params ) )
         loadExpertScene( contentContainer, jsonResponse )
     elseif mTabID == CommunityConfig.COMMUNITY_TAB_ID_VIDEO then
         loadVideoScene( contentContainer, jsonResponse )
@@ -121,6 +122,7 @@ function loadMainContent( contentContainer, jsonResponse, leaderboardId, subType
         local params = { Action = "enter timeline" }
         Analytics:sharedDelegate():postEvent( Constants.ANALYTICS_EVENT_ENTER_TIMELINE, Json.encode( params ) )
         Analytics:sharedDelegate():postFlurryEvent( Constants.ANALYTICS_EVENT_ENTER_TIMELINE, Json.encode( params ) )
+        Analytics:sharedDelegate():postTongdaoEvent( Constants.ANALYTICS_EVENT_ENTER_TIMELINE, Json.encode( params ) )
         loadTimelineScene( contentContainer, jsonResponse )
     end
 end

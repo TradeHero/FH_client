@@ -150,6 +150,10 @@ void StoreHandler::paymentWithProduct(IOSProduct *iosProduct, int quantity)
         }
         
         IOSProduct *iosProduct = new IOSProduct;
+//        NSLog(@"product: %@, %@, %@",
+//              skProduct.localizedTitle,
+//              skProduct.productIdentifier,
+//              skProduct.price );
         if (skProduct.productIdentifier != NULL){
             iosProduct->productIdentifier = std::string([skProduct.productIdentifier UTF8String]);
             [product setObject:skProduct.productIdentifier forKey:@"id"];
@@ -173,14 +177,22 @@ void StoreHandler::paymentWithProduct(IOSProduct *iosProduct, int quantity)
         
         // locale price to string
         NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
-        [formatter setFormatterBehavior:NSNumberFormatterBehavior10_4];
-        [formatter setNumberStyle:NSNumberFormatterCurrencyStyle];
         [formatter setLocale:skProduct.priceLocale];
+        
         NSString *priceStr = [formatter stringFromNumber:skProduct.price];
-        [formatter release];
         iosProduct->localizedPrice = std::string([priceStr UTF8String]);
         [product setObject:priceStr forKey:@"price"];
         
+        NSString *codeStr = [formatter currencyCode];
+        iosProduct->currencyCode = std::string([codeStr UTF8String]);
+        [product setObject:codeStr forKey:@"code"];
+
+        NSString *symbolStr = [formatter currencySymbol];
+        iosProduct->currencyCode = std::string([symbolStr UTF8String]);
+        [product setObject:symbolStr forKey:@"symbol"];
+        [formatter release];
+        
+
         iosProduct->index = index;
         iosProduct->isValid = isValid;
         _iosiap->addIOSProduct(iosProduct);

@@ -458,6 +458,7 @@ function sendAnalytics( nextImageID, shared )
     CCLuaLog("Send ANALYTICS_EVENT_MINIGAME_ACTION: "..Json.encode( params ) )
     Analytics:sharedDelegate():postEvent( Constants.ANALYTICS_EVENT_MINIGAME, Json.encode( params ) )
     Analytics:sharedDelegate():postFlurryEvent( Constants.ANALYTICS_EVENT_MINIGAME, Json.encode( params ) )
+    Analytics:sharedDelegate():postTongdaoEvent( Constants.ANALYTICS_EVENT_MINIGAME, Json.encode( params ) )
 end
 
 function checkMiniGame()
