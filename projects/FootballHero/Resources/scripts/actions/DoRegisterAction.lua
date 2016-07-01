@@ -124,6 +124,13 @@ function onRegisterRequestSuccess( jsonResponse )
             Logic:setQuickBloxToken( token )
         end )
 
+        local params = { Platform = "email" }
+        Analytics:sharedDelegate():postEvent( Constants.ANALYTICS_EVENT_LOGIN, Json.encode( params ) )
+        Analytics:sharedDelegate():postFlurryEvent( Constants.ANALYTICS_EVENT_LOGIN, Json.encode( params ) )
+        Analytics:sharedDelegate():loginTongdao(userId)
+        Analytics:sharedDelegate():trackRegistration()
+        Analytics:sharedDelegate():postTongdaoEvent( Constants.ANALYTICS_EVENT_LOGIN, Json.encode( params ) )
+
         onRegisterNameRequestSuccess()
 
 --[[
@@ -151,7 +158,7 @@ function onRegisterRequestSuccess( jsonResponse )
     end
 end
 
-function onRegisterNameRequestSuccess( jsonResponse )
+function onRegisterNameRequestSuccess( )
     Logic:setDisplayName( mUserName )
     
     if mLogoSelected then
@@ -160,11 +167,6 @@ function onRegisterNameRequestSuccess( jsonResponse )
 
     local finishEvent = Event.Enter_Match_List
     local finishEventParam = {}
-
-    local params = { Platform = "email" }
-    Analytics:sharedDelegate():postEvent( Constants.ANALYTICS_EVENT_LOGIN, Json.encode( params ) )
-    Analytics:sharedDelegate():postFlurryEvent( Constants.ANALYTICS_EVENT_LOGIN, Json.encode( params ) )
-    Analytics:sharedDelegate():postTongdaoEvent( Constants.ANALYTICS_EVENT_LOGIN, Json.encode( params ) )
 
     EventManager:postEvent( Event.Check_File_Version, { mConfigMd5Info, finishEvent, finishEventParam } )
 end

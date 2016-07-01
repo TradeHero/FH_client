@@ -101,4 +101,34 @@ namespace Utils
         android_tongdao_trackOrder(orderName, price, currency);
 #endif
     }
+    
+    void Analytics::tractSessionStart(const char* pageName)
+    {
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+        AnalyticsHandler::getInstance()->tractSessionStart(pageName);
+#endif
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+        android_tongdao_trackSessionStart(paramString);
+#endif
+    }
+    
+    void Analytics::tractSessionEnd(const char* pageName)
+    {
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+        AnalyticsHandler::getInstance()->tractSessionEnd(pageName);
+#endif
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+        android_tongdao_trackSessionEnd(paramString);
+#endif
+    }
+    
+    void Analytics::trackRegistration()
+    {
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+        AnalyticsHandler::getInstance()->trackRegistration();
+#endif
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+        android_tongdao_trackRegistration();
+#endif
+    }
 }

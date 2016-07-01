@@ -408,6 +408,7 @@ static AppDelegate s_sharedApplication;
     
     NSString* token = [UAPush shared].deviceToken;
     MiscHandler::getInstance()->responseUADeviceToken([token UTF8String]);
+    [[TongDaoUiCore sharedManager] identifyPushToken:(NSString*)token];
 }
 
 

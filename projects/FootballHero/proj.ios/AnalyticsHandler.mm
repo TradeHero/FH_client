@@ -5,6 +5,8 @@
 #import "Flurry.h"
 #import <TongDaoSDK/TongDao.h>
 #import <TongDaoUILibrary/TongDaoUiCore.h>
+#import "AppController.h"
+#import "RootViewController.h"
 
 
 static AnalyticsHandler* instance;
@@ -139,3 +141,35 @@ void AnalyticsHandler::trackTongdaoOrder(const char* orderName, const float* pri
     NSLog(@"Track Tongdao order: %s price: %f currency:%s", orderName, *price, currency);
     [[TongDaoUiCore sharedManager] trackPlaceOrder:[NSString stringWithUTF8String:orderName] andPrice:*price andCurrency:[NSString stringWithUTF8String:currency]];
 }
+
+
+void AnalyticsHandler::tractSessionStart(const char* pageName)
+{
+    NSLog(@"Track Tongdao Session Start");
+    if (pageName == NULL) {
+        AppController *app = (AppController*) [[UIApplication sharedApplication] delegate];
+        RootViewController *viewController = [app getViewController];
+        [[TongDaoUiCore sharedManager] onSessionStart:viewController];
+    } else {
+        [[TongDaoUiCore sharedManager] onSessionStartWithPageName:[NSString stringWithUTF8String:pageName]];
+    }
+}
+
+void AnalyticsHandler::tractSessionEnd(const char* pageName)
+{
+    NSLog(@"Track Tongdao Session End");
+    if (pageName == NULL) {
+        AppController *app = (AppController*) [[UIApplication sharedApplication] delegate];
+        RootViewController *viewController = [app getViewController];
+        [[TongDaoUiCore sharedManager] onSessionEnd:viewController];
+    } else {
+        [[TongDaoUiCore sharedManager] onSessionEndWithPageName:[NSString stringWithUTF8String:pageName]];
+    }
+}
+
+void AnalyticsHandler::trackRegistration()
+{
+    NSLog(@"Track Tongdao Registration");
+    [[TongDaoUiCore sharedManager] trackRegistration];
+}
+

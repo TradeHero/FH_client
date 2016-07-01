@@ -1,6 +1,6 @@
 /*
 ** Lua binding: Extension
-** Generated automatically by tolua++-1.0.92 on 06/28/16 14:45:27.
+** Generated automatically by tolua++-1.0.92 on 07/01/16 15:13:50.
 */
 
 /****************************************************************************
@@ -1185,6 +1185,103 @@ static int tolua_Extension_Analytics_trackTongdaoOrder00(lua_State* tolua_S)
 #ifndef TOLUA_RELEASE
  tolua_lerror:
  tolua_error(tolua_S,"#ferror in function 'trackTongdaoOrder'.",&tolua_err);
+ return 0;
+#endif
+}
+#endif //#ifndef TOLUA_DISABLE
+
+/* method: tractSessionStart of class  Analytics */
+#ifndef TOLUA_DISABLE_tolua_Extension_Analytics_tractSessionStart00
+static int tolua_Extension_Analytics_tractSessionStart00(lua_State* tolua_S)
+{
+#ifndef TOLUA_RELEASE
+ tolua_Error tolua_err;
+ if (
+     !tolua_isusertype(tolua_S,1,"Analytics",0,&tolua_err) ||
+     !tolua_isstring(tolua_S,2,0,&tolua_err) ||
+     !tolua_isnoobj(tolua_S,3,&tolua_err)
+ )
+  goto tolua_lerror;
+ else
+#endif
+ {
+  Analytics* self = (Analytics*)  tolua_tousertype(tolua_S,1,0);
+  const char* pageName = ((const char*)  tolua_tostring(tolua_S,2,0));
+#ifndef TOLUA_RELEASE
+  if (!self) tolua_error(tolua_S,"invalid 'self' in function 'tractSessionStart'", NULL);
+#endif
+  {
+   self->tractSessionStart(pageName);
+  }
+ }
+ return 0;
+#ifndef TOLUA_RELEASE
+ tolua_lerror:
+ tolua_error(tolua_S,"#ferror in function 'tractSessionStart'.",&tolua_err);
+ return 0;
+#endif
+}
+#endif //#ifndef TOLUA_DISABLE
+
+/* method: tractSessionEnd of class  Analytics */
+#ifndef TOLUA_DISABLE_tolua_Extension_Analytics_tractSessionEnd00
+static int tolua_Extension_Analytics_tractSessionEnd00(lua_State* tolua_S)
+{
+#ifndef TOLUA_RELEASE
+ tolua_Error tolua_err;
+ if (
+     !tolua_isusertype(tolua_S,1,"Analytics",0,&tolua_err) ||
+     !tolua_isstring(tolua_S,2,0,&tolua_err) ||
+     !tolua_isnoobj(tolua_S,3,&tolua_err)
+ )
+  goto tolua_lerror;
+ else
+#endif
+ {
+  Analytics* self = (Analytics*)  tolua_tousertype(tolua_S,1,0);
+  const char* pageName = ((const char*)  tolua_tostring(tolua_S,2,0));
+#ifndef TOLUA_RELEASE
+  if (!self) tolua_error(tolua_S,"invalid 'self' in function 'tractSessionEnd'", NULL);
+#endif
+  {
+   self->tractSessionEnd(pageName);
+  }
+ }
+ return 0;
+#ifndef TOLUA_RELEASE
+ tolua_lerror:
+ tolua_error(tolua_S,"#ferror in function 'tractSessionEnd'.",&tolua_err);
+ return 0;
+#endif
+}
+#endif //#ifndef TOLUA_DISABLE
+
+/* method: trackRegistration of class  Analytics */
+#ifndef TOLUA_DISABLE_tolua_Extension_Analytics_trackRegistration00
+static int tolua_Extension_Analytics_trackRegistration00(lua_State* tolua_S)
+{
+#ifndef TOLUA_RELEASE
+ tolua_Error tolua_err;
+ if (
+     !tolua_isusertype(tolua_S,1,"Analytics",0,&tolua_err) ||
+     !tolua_isnoobj(tolua_S,2,&tolua_err)
+ )
+  goto tolua_lerror;
+ else
+#endif
+ {
+  Analytics* self = (Analytics*)  tolua_tousertype(tolua_S,1,0);
+#ifndef TOLUA_RELEASE
+  if (!self) tolua_error(tolua_S,"invalid 'self' in function 'trackRegistration'", NULL);
+#endif
+  {
+   self->trackRegistration();
+  }
+ }
+ return 0;
+#ifndef TOLUA_RELEASE
+ tolua_lerror:
+ tolua_error(tolua_S,"#ferror in function 'trackRegistration'.",&tolua_err);
  return 0;
 #endif
 }
@@ -2486,6 +2583,9 @@ TOLUA_API int tolua_Extension_open (lua_State* tolua_S)
    tolua_function(tolua_S,"trackTongdaoAttr",tolua_Extension_Analytics_trackTongdaoAttr00);
    tolua_function(tolua_S,"trackTongdaoAttrs",tolua_Extension_Analytics_trackTongdaoAttrs00);
    tolua_function(tolua_S,"trackTongdaoOrder",tolua_Extension_Analytics_trackTongdaoOrder00);
+   tolua_function(tolua_S,"tractSessionStart",tolua_Extension_Analytics_tractSessionStart00);
+   tolua_function(tolua_S,"tractSessionEnd",tolua_Extension_Analytics_tractSessionEnd00);
+   tolua_function(tolua_S,"trackRegistration",tolua_Extension_Analytics_trackRegistration00);
   tolua_endmodule(tolua_S);
   tolua_cclass(tolua_S,"WebviewDelegate","WebviewDelegate","",NULL);
   tolua_beginmodule(tolua_S,"WebviewDelegate");

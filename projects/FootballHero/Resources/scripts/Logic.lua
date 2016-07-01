@@ -257,6 +257,9 @@ function Logic:getBalance()
 end
 
 function Logic:setTicket( ticket )
+	if self.mTicket > ticket then
+		Analytics:sharedDelegate():trackTongdaoAttr( "SpendTicket", self.mTicket - ticket)
+	end
 	self.mTicket = ticket
 	Analytics:sharedDelegate():trackTongdaoAttr( "Ticket", ticket)
 end
