@@ -84,7 +84,6 @@ void android_tongdao_postEvent(const char* eventName, const char* paramString)
   }
 }
 
-
 void android_login_Tongdao(const char* userId)
 {
   JniMethodInfo minfo;
@@ -93,6 +92,81 @@ void android_login_Tongdao(const char* userId)
     jstring jUserId = minfo.env->NewStringUTF(userId);
     minfo.env->CallVoidMethod(minfo.classID, minfo.methodID, jUserId);
     minfo.env->DeleteLocalRef(jUserId);
+    minfo.env->DeleteLocalRef(minfo.classID);
+  }
+}
+
+void android_tongdao_trackAttr(const char* attrName, const char* value)
+{
+  JniMethodInfo minfo;
+
+  if (JniHelper::getStaticMethodInfo(minfo, "com/myhero/fh/MainActivity", "trackTongdaoAttr", "(Ljava/lang/String;Ljava/lang/String;)V")) {
+    jstring jAttrName = minfo.env->NewStringUTF(attrName);
+    jstring jValue = minfo.env->NewStringUTF(value);
+    minfo.env->CallStaticVoidMethod(minfo.classID, minfo.methodID, jAttrName, jValue);
+    minfo.env->DeleteLocalRef(jAttrName);
+    minfo.env->DeleteLocalRef(jValue);
+    minfo.env->DeleteLocalRef(minfo.classID);
+  }
+}
+
+void android_tongdao_trackAttrs(const char* paramString)
+{
+  JniMethodInfo minfo;
+
+  if (JniHelper::getStaticMethodInfo(minfo, "com/myhero/fh/MainActivity", "trackTongdaoAttrs", "(Ljava/lang/String;)V")) {
+    jstring jParamString = minfo.env->NewStringUTF(paramString);
+    minfo.env->CallStaticVoidMethod(minfo.classID, minfo.methodID, jParamString);
+    minfo.env->DeleteLocalRef(jParamString);
+    minfo.env->DeleteLocalRef(minfo.classID);
+  }
+}
+
+void android_tongdao_trackOrder(const char* orderName, const float price, const char* currency)
+{
+  JniMethodInfo minfo;
+
+  if (JniHelper::getStaticMethodInfo(minfo, "com/myhero/fh/MainActivity", "trackTongdaoOrder", "(Ljava/lang/String;FLjava/lang/String;)V")) {
+    jstring jOrderName = minfo.env->NewStringUTF(orderName);
+    jfloat jPrice = price;
+    jstring jCurrency = minfo.env->NewStringUTF(currency);
+    minfo.env->CallStaticVoidMethod(minfo.classID, minfo.methodID, jOrderName, jPrice, jCurrency );
+    minfo.env->DeleteLocalRef(jOrderName);
+    minfo.env->DeleteLocalRef(jCurrency);
+    minfo.env->DeleteLocalRef(minfo.classID);
+  }
+}
+
+void android_tongdao_trackSessionStart(const char* pageName)
+{
+  JniMethodInfo minfo;
+
+  if (JniHelper::getStaticMethodInfo(minfo, "com/myhero/fh/MainActivity", "trackTongdaoSessionStart", "(Ljava/lang/String;)V")) {
+    jstring jParamString = minfo.env->NewStringUTF(pageName);
+    minfo.env->CallStaticVoidMethod(minfo.classID, minfo.methodID, jParamString);
+    minfo.env->DeleteLocalRef(jParamString);
+    minfo.env->DeleteLocalRef(minfo.classID);
+  }
+}
+
+void android_tongdao_trackSessionEnd(const char* pageName)
+{
+  JniMethodInfo minfo;
+
+  if (JniHelper::getStaticMethodInfo(minfo, "com/myhero/fh/MainActivity", "trackTongdaoSessionEnd", "(Ljava/lang/String;)V")) {
+    jstring jParamString = minfo.env->NewStringUTF(pageName);
+    minfo.env->CallStaticVoidMethod(minfo.classID, minfo.methodID, jParamString);
+    minfo.env->DeleteLocalRef(jParamString);
+    minfo.env->DeleteLocalRef(minfo.classID);
+  }
+}
+
+void android_tongdao_trackRegistration()
+{
+  JniMethodInfo minfo;
+
+  if (JniHelper::getStaticMethodInfo(minfo, "com/myhero/fh/MainActivity", "trackTongdaoRegistration", "()V")) {
+    minfo.env->CallStaticVoidMethod(minfo.classID, minfo.methodID);
     minfo.env->DeleteLocalRef(minfo.classID);
   }
 }

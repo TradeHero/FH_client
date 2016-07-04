@@ -136,10 +136,10 @@ void AnalyticsHandler::trackTongdaoAttr(const char* attrName, const char* value)
     }
 }
 
-void AnalyticsHandler::trackTongdaoOrder(const char* orderName, const float* price, const char* currency)
+void AnalyticsHandler::trackTongdaoOrder(const char* orderName, const float price, const char* currency)
 {
-    NSLog(@"Track Tongdao order: %s price: %f currency:%s", orderName, *price, currency);
-    [[TongDaoUiCore sharedManager] trackPlaceOrder:[NSString stringWithUTF8String:orderName] andPrice:*price andCurrency:[NSString stringWithUTF8String:currency]];
+    NSLog(@"Track Tongdao order: %s price: %f currency:%s", orderName, price, currency);
+    [[TongDaoUiCore sharedManager] trackPlaceOrder:[NSString stringWithUTF8String:orderName] andPrice:price andCurrency:[NSString stringWithUTF8String:currency]];
 }
 
 
