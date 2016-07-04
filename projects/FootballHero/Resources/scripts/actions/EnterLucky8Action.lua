@@ -34,7 +34,8 @@ function onRequestLucky8MatchListSuccess( json )
     	else
     		lucky8Scene.loadFrame( json )
     	end
-
+    end
+    
     local params = {
         Action = "Enter lucky8",
     }
