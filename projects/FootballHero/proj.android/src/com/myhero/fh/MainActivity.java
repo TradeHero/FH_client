@@ -33,9 +33,6 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import cn.sharesdk.ShareSDKUtils;
-import com.myhero.fh.googlesdk.IabHelper;
-import com.myhero.fh.googlesdk.IabResult;
-import com.myhero.fh.googlesdk.Inventory;
 import com.myhero.fh.metrics.events.ParamStringEvent;
 
 import com.crashlytics.android.Crashlytics;
@@ -407,19 +404,24 @@ public class MainActivity extends Cocos2dxActivity {
     //log tongdao event
     public static void logTongdaoEvent(String eventName, String paramString){
         if (paramString == null || paramString.isEmpty()){
+            Log.d("Tongdao", "Event:"+ eventName);
             TongDao.track(eventName);
         } else {
-            TongDao.track(eventName, parseJson2HashMap(paramString));
+            Log.d("Tongdao", "Event:"+ eventName +" Params:" + paramString);
+            ParamStringEvent event = new ParamStringEvent(eventName, paramString);
+            TongDao.track(eventName, new HashMap<String, Object>(event.getAttributes()));
         }
     }
 
     //tongdao login
-    public void loginTongdao(String userId){
-        TongDao.setUserId(this, userId);
+    public static void loginTongdao(String userId){
+        Log.d("Tongdao", "Lgoin:"+ userId);
+        TongDao.setUserId((Activity)getJavaActivity(), userId);
     }
 
     //log tongdao event
     public static void trackTongdaoAttr(String attrName, String value){
+        Log.d("Tongdao", "Attr Name:"+ attrName + " Value:" + value);
         if (attrName.equals("UserName")){
             TongDao.identifyUserName(value);
         } else if (attrName.equals("Email")){
@@ -439,11 +441,13 @@ public class MainActivity extends Cocos2dxActivity {
 
     //track tongdao attributes
     public static void trackTongdaoAttrs(String paramString){
+        Log.d("Tongdao", "Attr Name:"+ paramString);
         TongDao.identify(parseJson2HashMap(paramString));
     }
 
     //track tongdao Order
     public static void trackTongdaoOrder(String orderName, float price, String currencyCode){
+        Log.d("Tongdao", "Order Name:"+ orderName + " Price:" + price + " Currency:" + currencyCode);
         Currency currency = Currency.getInstance(currencyCode);
         TongDao.trackPlaceOrder(orderName, price, currency);
     }
@@ -461,6 +465,7 @@ public class MainActivity extends Cocos2dxActivity {
 
     //track tongdao Registration
     public static void trackTongdaoRegistration(){
+        Log.d("Tongdao", "trackTongdaoRegistration");
         TongDao.trackRegistration();
     }
 }

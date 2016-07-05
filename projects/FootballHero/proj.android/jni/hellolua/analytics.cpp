@@ -88,9 +88,9 @@ void android_login_Tongdao(const char* userId)
 {
   JniMethodInfo minfo;
 
-  if (JniHelper::getMethodInfo(minfo, "com/myhero/fh/MainActivity", "loginTongdao", "(Ljava/lang/String;)V")) {
+  if (JniHelper::getStaticMethodInfo(minfo, "com/myhero/fh/MainActivity", "loginTongdao", "(Ljava/lang/String;)V")) {
     jstring jUserId = minfo.env->NewStringUTF(userId);
-    minfo.env->CallVoidMethod(minfo.classID, minfo.methodID, jUserId);
+    minfo.env->CallStaticVoidMethod(minfo.classID, minfo.methodID, jUserId);
     minfo.env->DeleteLocalRef(jUserId);
     minfo.env->DeleteLocalRef(minfo.classID);
   }

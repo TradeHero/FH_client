@@ -1,6 +1,7 @@
 package com.myhero.fh;
 
 import java.util.Arrays;
+import java.util.Currency;
 import java.util.List;
 import java.util.Map;
 
@@ -17,8 +18,7 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.widget.ImageView;
+import java.text.DecimalFormat;
 
 public class GooglePlayIABPlugin
 {
@@ -124,7 +124,13 @@ public class GooglePlayIABPlugin
 			jsonDetail.put("id", jEntry.get("productId"));
 			jsonDetail.put("title", jEntry.get("title"));
 			jsonDetail.put("description", jEntry.get("description"));
-			jsonDetail.put("price", jEntry.get("price"));
+			DecimalFormat decimalFormat=new DecimalFormat("0.00");
+			String priceStr= decimalFormat.format(Integer.parseInt(jEntry.get("price_amount_micros").toString()) / 1000000.0f);
+			jsonDetail.put("price", priceStr);
+			String currencyCode = jEntry.get("price_currency_code").toString();
+			Currency currency = Currency.getInstance(currencyCode);
+			jsonDetail.put("code", currencyCode);
+			jsonDetail.put("symbol", currency.getSymbol());
 			jsonSkuDetail.put(jsonDetail);
 		}
 		return jsonSkuDetail.toString();
