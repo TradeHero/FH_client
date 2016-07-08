@@ -33,9 +33,6 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import cn.sharesdk.ShareSDKUtils;
-import com.myhero.fh.googlesdk.IabHelper;
-import com.myhero.fh.googlesdk.IabResult;
-import com.myhero.fh.googlesdk.Inventory;
 import com.myhero.fh.metrics.events.ParamStringEvent;
 
 import com.crashlytics.android.Crashlytics;
@@ -51,9 +48,9 @@ import com.myhero.fh.util.QuickBloxChat;
 import com.myhero.fh.widget.FHCocos2dxHandler;
 
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.HashMap;
+import java.util.*;
 
+import com.tongdao.sdk.enums.TdGender;
 import org.cocos2dx.lib.Cocos2dxActivity;
 import org.cocos2dx.lib.Cocos2dxGLSurfaceView;
 
@@ -342,8 +339,50 @@ public class MainActivity extends Cocos2dxActivity {
             }
         });
     }
-  
-    //@@ADD Vincent: copy to paste board function for Android
+
+    private static HashMap<String, Object> parseJson2HashMap(String paramString){
+        HashMap<String, Object> paramMap = new HashMap<>();
+        if (paramString != null) {
+            try {
+                JSONObject paramObject = new JSONObject(paramString);
+
+                Iterator<String> iterator = paramObject.keys();
+                String key = null;
+                String value = null;
+                while (iterator.hasNext()) {
+                    key = iterator.next();
+                    value = paramObject.getString(key);
+                    paramMap.put(key, value);
+                }
+            } catch (JSONException exception) {
+                exception.printStackTrace();
+            }
+        }
+        return paramMap;
+    }
+
+    private static Map<String, String> parseJson2Map(String paramString) {
+        Map<String, String> paramMap = new HashMap<>();
+        if (paramString != null) {
+            try {
+                JSONObject paramObject = new JSONObject(paramString);
+
+                Iterator<String> iterator = paramObject.keys();
+                String key = null;
+                String value = null;
+                while (iterator.hasNext()) {
+                    key = iterator.next();
+                    value = paramObject.getString(key);
+                    paramMap.put(key, value);
+                }
+            } catch (JSONException exception) {
+                exception.printStackTrace();
+            }
+        }
+        return paramMap;
+    }
+
+        //@@ADD Vincent: copy to paste board function for Android
     public void copyToPasteBoard(String content)
     {
         // Vincent: does not work here.. libc crashes
@@ -359,20 +398,75 @@ public class MainActivity extends Cocos2dxActivity {
 
     //log flurry event
     public static void logFlurryEvent(String eventName, String paramString){
-        ParamStringEvent event = new ParamStringEvent(eventName, paramString);
-        FlurryAgent.logEvent( eventName, event.getAttributes() );
+         FlurryAgent.logEvent( eventName,  parseJson2Map(paramString) );
     }
 
     //log tongdao event
     public static void logTongdaoEvent(String eventName, String paramString){
-        ParamStringEvent event = new ParamStringEvent(eventName, paramString);
-        TongDao.track( eventName, new HashMap(event.getAttributes()));
-//        TongDao.track(eventName);
+        if (paramString == null || paramString.isEmpty()){
+            Log.d("Tongdao", "Event:"+ eventName);
+            TongDao.track(eventName);
+        } else {
+            Log.d("Tongdao", "Event:"+ eventName +" Params:" + paramString);
+            ParamStringEvent event = new ParamStringEvent(eventName, paramString);
+            TongDao.track(eventName, new HashMap<String, Object>(event.getAttributes()));
+        }
     }
 
     //tongdao login
-    public void loginTongdao(String userId){
-        TongDao.setUserId(this, userId);
+    public static void loginTongdao(String userId){
+        Log.d("Tongdao", "Lgoin:"+ userId);
+        TongDao.setUserId((Activity)getJavaActivity(), userId);
+    }
+
+    //log tongdao event
+    public static void trackTongdaoAttr(String attrName, String value){
+        Log.d("Tongdao", "Attr Name:"+ attrName + " Value:" + value);
+        if (attrName.equals("UserName")){
+            TongDao.identifyUserName(value);
+        } else if (attrName.equals("Email")){
+            TongDao.identifyEmail(value);
+        } else if (attrName.equals("Phone")){
+            TongDao.identifyPhone(value);
+        } else if (attrName.equals("Gender")){
+            TongDao.identifyGender(TdGender.valueOf(value));
+        } else if (attrName.equals("Avatar")){
+            TongDao.identifyAvatar(value);
+        } else if (attrName.equals("identifyFullName")) {
+            TongDao.identifyFullName(value);
+        } else {
+            TongDao.identify(attrName, value);
+        }
+    }
+
+    //track tongdao attributes
+    public static void trackTongdaoAttrs(String paramString){
+        Log.d("Tongdao", "Attr Name:"+ paramString);
+        TongDao.identify(parseJson2HashMap(paramString));
+    }
+
+    //track tongdao Order
+    public static void trackTongdaoOrder(String orderName, float price, String currencyCode){
+        Log.d("Tongdao", "Order Name:"+ orderName + " Price:" + price + " Currency:" + currencyCode);
+        Currency currency = Currency.getInstance(currencyCode);
+        TongDao.trackPlaceOrder(orderName, price, currency);
+    }
+
+    //track tongdao Session Start
+    public static void trackTongdaoSessionStart(String pageName){
+        TongDao.onSessionStart(pageName);
+    }
+
+    //track tongdao Session End
+    public static void trackTongdaoSessionEnd(String pageName){
+        TongDao.onSessionEnd(pageName);
+    }
+
+
+    //track tongdao Registration
+    public static void trackTongdaoRegistration(){
+        Log.d("Tongdao", "trackTongdaoRegistration");
+        TongDao.trackRegistration();
     }
 }
 

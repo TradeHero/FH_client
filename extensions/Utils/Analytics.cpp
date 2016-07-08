@@ -92,7 +92,7 @@ namespace Utils
 #endif
     }
     
-    void Analytics::trackTongdaoOrder(const char* orderName, const float* price, const char* currency)
+    void Analytics::trackTongdaoOrder(const char* orderName, float price, const char* currency)
     {
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
         AnalyticsHandler::getInstance()->trackTongdaoOrder(orderName, price, currency);
@@ -108,7 +108,7 @@ namespace Utils
         AnalyticsHandler::getInstance()->tractSessionStart(pageName);
 #endif
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
-        android_tongdao_trackSessionStart(paramString);
+        android_tongdao_trackSessionStart(pageName);
 #endif
     }
     
@@ -118,7 +118,7 @@ namespace Utils
         AnalyticsHandler::getInstance()->tractSessionEnd(pageName);
 #endif
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
-        android_tongdao_trackSessionEnd(paramString);
+        android_tongdao_trackSessionEnd(pageName);
 #endif
     }
     

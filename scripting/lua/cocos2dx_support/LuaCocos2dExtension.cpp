@@ -1,6 +1,6 @@
 /*
 ** Lua binding: Extension
-** Generated automatically by tolua++-1.0.92 on 07/01/16 15:13:50.
+** Generated automatically by tolua++-1.0.92 on 07/04/16 15:22:55.
 */
 
 /****************************************************************************
@@ -1177,11 +1177,10 @@ static int tolua_Extension_Analytics_trackTongdaoOrder00(lua_State* tolua_S)
   if (!self) tolua_error(tolua_S,"invalid 'self' in function 'trackTongdaoOrder'", NULL);
 #endif
   {
-   self->trackTongdaoOrder(orderName,&price,currency);
-   tolua_pushnumber(tolua_S,(lua_Number)price);
+   self->trackTongdaoOrder(orderName,price,currency);
   }
  }
- return 1;
+ return 0;
 #ifndef TOLUA_RELEASE
  tolua_lerror:
  tolua_error(tolua_S,"#ferror in function 'trackTongdaoOrder'.",&tolua_err);
