@@ -408,8 +408,7 @@ public class MainActivity extends Cocos2dxActivity {
             TongDao.track(eventName);
         } else {
             Log.d("Tongdao", "Event:"+ eventName +" Params:" + paramString);
-            ParamStringEvent event = new ParamStringEvent(eventName, paramString);
-            TongDao.track(eventName, new HashMap<String, Object>(event.getAttributes()));
+            TongDao.track(eventName, parseJson2HashMap(paramString));
         }
     }
 
