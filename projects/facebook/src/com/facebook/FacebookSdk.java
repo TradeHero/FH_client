@@ -32,17 +32,18 @@ import android.util.Log;
 
 import com.facebook.appevents.AppEventsLogger;
 import com.facebook.internal.AppEventsLoggerUtility;
+import com.facebook.internal.LockOnGetVariable;
 import com.facebook.internal.BoltsMeasurementEventListener;
 import com.facebook.internal.AttributionIdentifiers;
 import com.facebook.internal.NativeProtocol;
 import com.facebook.internal.Utility;
 import com.facebook.internal.Validate;
+import com.facebook.internal.WebDialog;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
-import java.lang.reflect.Field;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
@@ -71,7 +72,7 @@ public final class FacebookSdk {
     private static AtomicLong onProgressThreshold = new AtomicLong(65536);
     private static volatile boolean isDebugEnabled = BuildConfig.DEBUG;
     private static boolean isLegacyTokenUpgradeSupported = false;
-    private static File cacheDir;
+    private static LockOnGetVariable<File> cacheDir;
     private static Context applicationContext;
     private static final int DEFAULT_CORE_POOL_SIZE = 5;
     private static final int DEFAULT_MAXIMUM_POOL_SIZE = 128;
@@ -161,7 +162,7 @@ public final class FacebookSdk {
             throw new FacebookException(CALLBACK_OFFSET_NEGATIVE);
         }
         FacebookSdk.callbackRequestCodeOffset = callbackRequestCodeOffset;
-        sdkInitialize(applicationContext);
+        sdkInitialize(applicationContext, callback);
     }
 
     /**
@@ -181,7 +182,7 @@ public final class FacebookSdk {
      *                 sdk is already initialized.
      */
     public static synchronized void sdkInitialize(
-            Context applicationContext,
+            final Context applicationContext,
             final InitializeCallback callback) {
         if (sdkInitialized) {
             if (callback != null) {
@@ -201,6 +202,11 @@ public final class FacebookSdk {
 
         // Make sure we've loaded default settings if we haven't already.
         FacebookSdk.loadDefaultsFromMetadata(FacebookSdk.applicationContext);
+
+        // Set sdkInitialized to true now so the bellow async tasks don't throw not initialized
+        // exceptions.
+        sdkInitialized = true;
+
         // Load app settings from network so that dialog configs are available
         Utility.loadAppSettingsAsync(FacebookSdk.applicationContext, applicationId);
         // Fetch available protocol versions from the apps on the device
@@ -208,10 +214,16 @@ public final class FacebookSdk {
 
         BoltsMeasurementEventListener.getInstance(FacebookSdk.applicationContext);
 
-        cacheDir = FacebookSdk.applicationContext.getCacheDir();
+        cacheDir = new LockOnGetVariable<File>(
+                new Callable<File>() {
+                    @Override
+                    public File call() throws Exception {
+                        return FacebookSdk.applicationContext.getCacheDir();
+                    }
+                });
 
-        FutureTask<Void> accessTokenLoadFutureTask =
-                new FutureTask<Void>(new Callable<Void>() {
+        FutureTask<Void> futureTask =
+                new FutureTask<>(new Callable<Void>() {
                     @Override
                     public Void call() throws Exception {
                         AccessTokenManager.getInstance().loadCurrentAccessToken();
@@ -226,12 +238,15 @@ public final class FacebookSdk {
                         if (callback != null) {
                             callback.onInitialized();
                         }
+
+                        // Flush any app events that might have been persisted during last run.
+                        AppEventsLogger.newLogger(
+                                applicationContext.getApplicationContext()).flush();
+
                         return null;
                     }
                 });
-        getExecutor().execute(accessTokenLoadFutureTask);
-
-        sdkInitialized = true;
+        getExecutor().execute(futureTask);
     }
 
     /**
@@ -365,13 +380,7 @@ public final class FacebookSdk {
     public static Executor getExecutor() {
         synchronized (LOCK) {
             if (FacebookSdk.executor == null) {
-                Executor executor = getAsyncTaskExecutor();
-                if (executor == null) {
-                    executor = new ThreadPoolExecutor(
-                            DEFAULT_CORE_POOL_SIZE, DEFAULT_MAXIMUM_POOL_SIZE, DEFAULT_KEEP_ALIVE,
-                            TimeUnit.SECONDS, DEFAULT_WORK_QUEUE, DEFAULT_THREAD_FACTORY);
-                }
-                FacebookSdk.executor = executor;
+                FacebookSdk.executor = AsyncTask.THREAD_POOL_EXECUTOR;
             }
         }
         return FacebookSdk.executor;
@@ -422,32 +431,6 @@ public final class FacebookSdk {
     public static Context getApplicationContext() {
         Validate.sdkInitialized();
         return applicationContext;
-    }
-
-    private static Executor getAsyncTaskExecutor() {
-        Field executorField = null;
-        try {
-            executorField = AsyncTask.class.getField("THREAD_POOL_EXECUTOR");
-        } catch (NoSuchFieldException e) {
-            return null;
-        }
-
-        Object executorObject = null;
-        try {
-            executorObject = executorField.get(null);
-        } catch (IllegalAccessException e) {
-            return null;
-        }
-
-        if (executorObject == null) {
-            return null;
-        }
-
-        if (!(executorObject instanceof Executor)) {
-            return null;
-        }
-
-        return (Executor) executorObject;
     }
 
     /**
@@ -625,12 +608,10 @@ public final class FacebookSdk {
                 } else {
                     applicationId = appIdString;
                 }
-
-                applicationId = (String) appId;
             } else if (appId instanceof Integer) {
                 throw new FacebookException(
-                        "App Ids cannot be directly placed in the manfiest." +
-                        "They mut be prexied by 'fb' or be placed in the string resource file.");
+                        "App Ids cannot be directly placed in the manifest." +
+                        "They must be prefixed by 'fb' or be placed in the string resource file.");
             }
         }
 
@@ -756,7 +737,7 @@ public final class FacebookSdk {
      * @param theme A theme to use
      */
     public static void setWebDialogTheme(int theme) {
-        webDialogTheme = theme;
+        webDialogTheme = (theme != 0) ? theme : WebDialog.DEFAULT_THEME;
     }
 
     /**
@@ -767,7 +748,7 @@ public final class FacebookSdk {
      */
     public static File getCacheDir() {
         Validate.sdkInitialized();
-        return cacheDir;
+        return cacheDir.getValue();
     }
 
     /**
@@ -775,7 +756,7 @@ public final class FacebookSdk {
      * @param cacheDir the cache directory
      */
     public static void setCacheDir(File cacheDir) {
-        FacebookSdk.cacheDir = cacheDir;
+        FacebookSdk.cacheDir = new LockOnGetVariable<File>(cacheDir);
     }
 
     /**

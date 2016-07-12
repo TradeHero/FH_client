@@ -47,6 +47,8 @@ import com.facebook.FacebookSdk;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.HttpMethod;
+import com.facebook.appevents.AppEventsConstants;
+import com.facebook.appevents.internal.Constants;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -56,6 +58,7 @@ import org.json.JSONTokener;
 import java.io.*;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.math.BigInteger;
 import java.net.HttpURLConnection;
 import java.net.URLConnection;
 
@@ -85,9 +88,13 @@ public final class Utility {
             "supports_implicit_sdk_logging";
     private static final String APP_SETTING_NUX_CONTENT = "gdpv4_nux_content";
     private static final String APP_SETTING_NUX_ENABLED = "gdpv4_nux_enabled";
+    private static final String APP_SETTING_CUSTOM_TABS_ENABLED =
+            "gdpv4_chrome_custom_tabs_enabled";
     private static final String APP_SETTING_DIALOG_CONFIGS = "android_dialog_configs";
     private static final String APP_SETTING_ANDROID_SDK_ERROR_CATEGORIES =
             "android_sdk_error_categories";
+    private static final String APP_SETTING_APP_EVENTS_SESSION_TIMEOUT =
+            "app_events_session_timeout";
     private static final String EXTRA_APP_EVENTS_INFO_FORMAT_VERSION = "a2";
     private static final String DIALOG_CONFIG_DIALOG_NAME_FEATURE_NAME_SEPARATOR = "\\|";
     private static final String DIALOG_CONFIG_NAME_KEY = "name";
@@ -100,8 +107,10 @@ public final class Utility {
             APP_SETTING_SUPPORTS_IMPLICIT_SDK_LOGGING,
             APP_SETTING_NUX_CONTENT,
             APP_SETTING_NUX_ENABLED,
+            APP_SETTING_CUSTOM_TABS_ENABLED,
             APP_SETTING_DIALOG_CONFIGS,
-            APP_SETTING_ANDROID_SDK_ERROR_CATEGORIES
+            APP_SETTING_ANDROID_SDK_ERROR_CATEGORIES,
+            APP_SETTING_APP_EVENTS_SESSION_TIMEOUT
     };
     private static final String APPLICATION_FIELDS = "fields";
 
@@ -126,26 +135,33 @@ public final class Utility {
     private static long timestampOfLastCheck = -1;
     private static long totalExternalStorageGB = -1;
     private static long availableExternalStorageGB = -1;
-    private static String deviceTimezone = "";
+    private static String deviceTimezoneAbbreviation = "";
+    private static String deviceTimeZoneName = "";
     private static String carrierName = noCarrierConstant;
 
     public static class FetchedAppSettings {
         private boolean supportsImplicitLogging;
         private String nuxContent;
         private boolean nuxEnabled;
+        private boolean customTabsEnabled;
+        private int sessionTimeoutInSeconds;
         private Map<String, Map<String, DialogFeatureConfig>> dialogConfigMap;
         private FacebookRequestErrorClassification errorClassification;
 
         private FetchedAppSettings(boolean supportsImplicitLogging,
                                    String nuxContent,
                                    boolean nuxEnabled,
+                                   boolean customTabsEnabled,
+                                   int sessionTimeoutInSeconds,
                                    Map<String, Map<String, DialogFeatureConfig>> dialogConfigMap,
                                    FacebookRequestErrorClassification errorClassification) {
             this.supportsImplicitLogging = supportsImplicitLogging;
             this.nuxContent = nuxContent;
             this.nuxEnabled = nuxEnabled;
+            this.customTabsEnabled = customTabsEnabled;
             this.dialogConfigMap = dialogConfigMap;
             this.errorClassification = errorClassification;
+            this.sessionTimeoutInSeconds = sessionTimeoutInSeconds;
         }
 
         public boolean supportsImplicitLogging() {
@@ -158,6 +174,14 @@ public final class Utility {
 
         public boolean getNuxEnabled() {
             return nuxEnabled;
+        }
+
+        public boolean getCustomTabsEnabled() {
+            return customTabsEnabled;
+        }
+
+        public int getSessionTimeoutInSeconds() {
+            return sessionTimeoutInSeconds;
         }
 
         public Map<String, Map<String, DialogFeatureConfig>> getDialogConfigurations() {
@@ -498,7 +522,7 @@ public final class Utility {
         }
     }
 
-    public static void putCommaSeparatedStringList(Bundle b, String key, ArrayList<String> list) {
+    public static void putCommaSeparatedStringList(Bundle b, String key, List<String> list) {
         if (list != null) {
             StringBuilder builder = new StringBuilder();
             for (String string : list) {
@@ -561,7 +585,7 @@ public final class Utility {
     }
 
     public static void disconnectQuietly(URLConnection connection) {
-        if (connection instanceof HttpURLConnection) {
+        if (connection != null && connection instanceof HttpURLConnection) {
             ((HttpURLConnection) connection).disconnect();
         }
     }
@@ -777,13 +801,27 @@ public final class Utility {
         FacebookSdk.getExecutor().execute(new Runnable() {
             @Override
             public void run() {
+                // See if we had a cached copy and use that immediately.
+                SharedPreferences sharedPrefs = context.getSharedPreferences(
+                        APP_SETTINGS_PREFS_STORE,
+                        Context.MODE_PRIVATE);
+                String settingsJSONString = sharedPrefs.getString(settingsKey, null);
+                if (!isNullOrEmpty(settingsJSONString)) {
+                    JSONObject settingsJSON = null;
+                    try {
+                        settingsJSON = new JSONObject(settingsJSONString);
+                    } catch (JSONException je) {
+                        logd(LOG_TAG, je);
+                    }
+                    if (settingsJSON != null) {
+                        parseAppSettingsFromJSON(applicationId, settingsJSON);
+                    }
+                }
+
                 JSONObject resultJSON = getAppSettingsQueryResponse(applicationId);
                 if (resultJSON != null) {
                     parseAppSettingsFromJSON(applicationId, resultJSON);
 
-                    SharedPreferences sharedPrefs = context.getSharedPreferences(
-                            APP_SETTINGS_PREFS_STORE,
-                            Context.MODE_PRIVATE);
                     sharedPrefs.edit()
                             .putString(settingsKey, resultJSON.toString())
                             .apply();
@@ -792,23 +830,6 @@ public final class Utility {
                 loadingSettings.set(false);
             }
         });
-
-        // Also see if we had a cached copy and use that immediately.
-        SharedPreferences sharedPrefs = context.getSharedPreferences(
-                APP_SETTINGS_PREFS_STORE,
-                Context.MODE_PRIVATE);
-        String settingsJSONString = sharedPrefs.getString(settingsKey, null);
-        if (!isNullOrEmpty(settingsJSONString)) {
-            JSONObject settingsJSON = null;
-            try {
-                settingsJSON = new JSONObject(settingsJSONString);
-            } catch (JSONException je) {
-                logd(LOG_TAG, je);
-            }
-            if (settingsJSON != null) {
-                parseAppSettingsFromJSON(applicationId, settingsJSON);
-            }
-        }
     }
 
     // This call only gets the app settings if they're already fetched
@@ -849,6 +870,10 @@ public final class Utility {
                 settingsJSON.optBoolean(APP_SETTING_SUPPORTS_IMPLICIT_SDK_LOGGING, false),
                 settingsJSON.optString(APP_SETTING_NUX_CONTENT, ""),
                 settingsJSON.optBoolean(APP_SETTING_NUX_ENABLED, false),
+                settingsJSON.optBoolean(APP_SETTING_CUSTOM_TABS_ENABLED, false),
+                settingsJSON.optInt(
+                        APP_SETTING_APP_EVENTS_SESSION_TIMEOUT,
+                        Constants.getDefaultAppEventsSessionTimeoutInSeconds()),
                 parseDialogConfigurations(settingsJSON.optJSONObject(APP_SETTING_DIALOG_CONFIGS)),
                 errorClassification
         );
@@ -940,8 +965,11 @@ public final class Utility {
         }
 
         if (directoryOrFile.isDirectory()) {
-            for (File child : directoryOrFile.listFiles()) {
-                deleteDirectory(child);
+            final File[] children = directoryOrFile.listFiles();
+            if (children != null) {
+                for (final File child : children) {
+                    deleteDirectory(child);
+                }
             }
         }
         directoryOrFile.delete();
@@ -1041,7 +1069,7 @@ public final class Utility {
         extraInfoArray.put(locale.getLanguage() + "_" + locale.getCountry());
 
         // Time zone
-        extraInfoArray.put(deviceTimezone);
+        extraInfoArray.put(deviceTimezoneAbbreviation);
 
         // Carrier
         extraInfoArray.put(carrierName);
@@ -1073,6 +1101,8 @@ public final class Utility {
         // External Storage
         extraInfoArray.put(totalExternalStorageGB);
         extraInfoArray.put(availableExternalStorageGB);
+
+        extraInfoArray.put(deviceTimeZoneName);
 
         params.put("extinfo", extraInfoArray.toString());
     }
@@ -1324,13 +1354,6 @@ public final class Utility {
             return numCPUCores;
         }
 
-        // Gingerbread doesn't support giving a single application access to both cores,
-        // so for our purposes GB devices are effectively single core.
-        if (Build.VERSION.SDK_INT <= Utility.GINGERBREAD_MR1) {
-            numCPUCores = 1;
-            return numCPUCores;
-        }
-
         // Enumerate all available CPU files and try to count the number of CPU cores.
         try {
             int res = 0;
@@ -1342,7 +1365,9 @@ public final class Utility {
                 }
             });
 
-            numCPUCores = cpuFiles.length;
+            if (cpuFiles != null) {
+                numCPUCores = cpuFiles.length;
+            }
         } catch (Exception e) {
         }
 
@@ -1369,7 +1394,11 @@ public final class Utility {
     private static void refreshTimezone() {
         try {
             TimeZone tz = TimeZone.getDefault();
-            deviceTimezone = tz.getDisplayName(tz.inDaylightTime(new Date()), TimeZone.SHORT);
+            deviceTimezoneAbbreviation = tz.getDisplayName(
+                    tz.inDaylightTime(new Date()),
+                    TimeZone.SHORT
+            );
+            deviceTimeZoneName = tz.getID();
         } catch (Exception e) {
         }
     }
@@ -1430,5 +1459,62 @@ public final class Utility {
 
     private static long convertBytesToGB(double bytes) {
         return Math.round(bytes / (1024.0 * 1024.0 * 1024.0));
+    }
+
+    /**
+     * Internal helper class that is used to hold two different permission lists (granted and
+     * declined)
+     */
+    public static class PermissionsPair {
+        List<String> grantedPermissions;
+        List<String> declinedPermissions;
+
+        public PermissionsPair(List<String> grantedPermissions, List<String> declinedPermissions) {
+            this.grantedPermissions = grantedPermissions;
+            this.declinedPermissions = declinedPermissions;
+        }
+
+        public List<String> getGrantedPermissions() {
+            return grantedPermissions;
+        }
+
+        public List<String> getDeclinedPermissions() {
+            return declinedPermissions;
+        }
+    }
+
+    public static PermissionsPair handlePermissionResponse(JSONObject result)
+        throws JSONException {
+
+        JSONObject permissions = result.getJSONObject("permissions");
+
+        JSONArray data = permissions.getJSONArray("data");
+        List<String> grantedPermissions = new ArrayList<>(data.length());
+        List<String> declinedPermissions = new ArrayList<>(data.length());
+
+        for (int i = 0; i < data.length(); ++i) {
+            JSONObject object = data.optJSONObject(i);
+            String permission = object.optString("permission");
+            if (permission == null || permission.equals("installed")) {
+                continue;
+            }
+            String status = object.optString("status");
+            if (status == null) {
+                continue;
+            }
+
+            if (status.equals("granted")) {
+                grantedPermissions.add(permission);
+            } else if (status.equals("declined")) {
+                declinedPermissions.add(permission);
+            }
+        }
+
+        return new PermissionsPair(grantedPermissions, declinedPermissions);
+    }
+
+    public static String generateRandomString(int length) {
+        Random r = new Random();
+        return new BigInteger(length * 5, r).toString(32);
     }
 }

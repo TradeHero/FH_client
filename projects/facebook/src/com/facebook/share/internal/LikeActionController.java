@@ -25,7 +25,6 @@ import android.content.*;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.support.v4.app.Fragment;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
@@ -36,6 +35,7 @@ import com.facebook.internal.AppCall;
 import com.facebook.internal.BundleJSONConverter;
 import com.facebook.internal.CallbackManagerImpl;
 import com.facebook.internal.FileLruCache;
+import com.facebook.internal.FragmentWrapper;
 import com.facebook.internal.Logger;
 import com.facebook.internal.NativeProtocol;
 import com.facebook.internal.ServerProtocol;
@@ -668,7 +668,10 @@ public class LikeActionController {
     /**
      * Entry-point to the code that performs the like/unlike action.
      */
-    public void toggleLike(Activity activity, Fragment fragment, Bundle analyticsParameters) {
+    public void toggleLike(
+            Activity activity,
+            FragmentWrapper fragment,
+            Bundle analyticsParameters) {
         boolean shouldLikeObject = !this.isObjectLiked;
 
         if (canUseOGPublish()) {
@@ -790,7 +793,7 @@ public class LikeActionController {
 
     private void presentLikeDialog(
             final Activity activity,
-            final Fragment fragment,
+            final FragmentWrapper fragmentWrapper,
             final Bundle analyticsParameters) {
         String analyticsEvent = null;
 
@@ -819,8 +822,8 @@ public class LikeActionController {
                     .setObjectType(objectTypeString)
                     .build();
 
-            if (fragment != null) {
-                new LikeDialog(fragment).show(likeContent);
+            if (fragmentWrapper != null) {
+                new LikeDialog(fragmentWrapper).show(likeContent);
             } else {
                 new LikeDialog(activity).show(likeContent);
             }
@@ -1574,8 +1577,6 @@ public class LikeActionController {
         }
     }
 
-
-
     private class GetEngagementRequestWrapper extends AbstractRequestWrapper {
         // Initialize the like status to what we currently have. This way, empty/error responses
         // don't end up clearing out the state.
@@ -1596,6 +1597,9 @@ public class LikeActionController {
                             "count_string_without_like," +
                             "social_sentence_with_like," +
                             "social_sentence_without_like)");
+
+            // Ensure that the social sentence returned is localized
+            requestParams.putString("locale", Locale.getDefault().toString());
 
             setRequest(new GraphRequest(
                     AccessToken.getCurrentAccessToken(),
