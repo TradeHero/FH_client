@@ -85,7 +85,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/libs/ShareSDK-Facebook-2.5.9.jar!/" />
+          <root url="jar://$MODULE_DIR$/libs/ShareSDK-Facebook-2.7.4.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
