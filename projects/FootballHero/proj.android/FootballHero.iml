@@ -76,7 +76,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/libs/ShareSDK-Core-2.5.9.jar!/" />
+          <root url="jar://$MODULE_DIR$/libs/ShareSDK-Facebook-2.7.4.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -85,7 +85,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/libs/ShareSDK-Facebook-2.5.9.jar!/" />
+          <root url="jar://$MODULE_DIR$/libs/MobCommons-2016.0707.1708.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -94,7 +94,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/libs/ShareSDK-Wechat-2.5.9.jar!/" />
+          <root url="jar://$MODULE_DIR$/libs/ShareSDK-Wechat-Moments-2.7.4.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -103,7 +103,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/libs/ShareSDK-Wechat-Core-2.5.9.jar!/" />
+          <root url="jar://$MODULE_DIR$/libs/ShareSDK-Wechat-2.7.4.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -112,7 +112,25 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/libs/ShareSDK-Wechat-Moments-2.5.9.jar!/" />
+          <root url="jar://$MODULE_DIR$/libs/ShareSDK-Core-2.7.4.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/libs/ShareSDK-Wechat-Core-2.7.4.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/libs/MobTools-2016.0707.1708.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />

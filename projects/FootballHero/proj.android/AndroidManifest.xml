@@ -95,13 +95,13 @@
               android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
 
       <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
-    <activity
-          android:name="cn.sharesdk.framework.ShareSDKUIShell"
-          android:theme="@android:style/Theme.Translucent.NoTitleBar"
-          android:configChanges="keyboardHidden|orientation|screenSize"
-          android:screenOrientation="portrait"
-          android:windowSoftInputMode="stateHidden|adjustResize" >
-    </activity>
+      <activity
+              android:name="com.mob.tools.MobUIShell"
+              android:theme="@android:style/Theme.Translucent.NoTitleBar"
+              android:configChanges="keyboardHidden|orientation|screenSize"
+              android:screenOrientation="portrait"
+              android:windowSoftInputMode="stateHidden|adjustResize" >
+       </activity>
 
     <!--微信分享回调 -->
     <activity
