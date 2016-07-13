@@ -51,7 +51,11 @@ void callBackComplete(int action, int platformId, CCString* accessToken, CCDicti
 
 void callBackError(int action, int platformId, CCDictionary* res){
     CCDictionary* errorDic = CCDictionary::create();
-    errorDic->setObject(res->objectForKey("error_msg"), "error_msg");
+    if (res->objectForKey("error_msg") != NULL) {
+        errorDic->setObject(res->objectForKey("error_msg"), "error_msg");
+    } else {
+        errorDic->setObject(CCString::create("unknown error"), "error_msg");
+    }
 	if (action == 1 && NULL != authCb) { // 1 = ACTION_AUTHORIZING
 		authCb(C2DXResponseStateFail, (C2DXPlatType) platformId, errorDic, "");
 	} else if (action == 8 && NULL != infoCb) { // 8 = ACTION_USER_INFOR
