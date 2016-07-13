@@ -498,9 +498,9 @@ public class WebDialog extends Dialog {
             if (DISABLE_SSL_CHECK_FOR_TESTING) {
                 handler.proceed();
             } else {
-//                super.onReceivedSslError(view, handler, error);
+                super.onReceivedSslError(view, handler, error);
 
-                handler.proceed();
+                handler.cancel();
                 sendErrorToListener(new FacebookDialogException(null, ERROR_FAILED_SSL_HANDSHAKE, null));
             }
         }
