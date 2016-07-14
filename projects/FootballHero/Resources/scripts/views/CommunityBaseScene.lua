@@ -69,6 +69,7 @@ end
 function initCommunityTab( tabInfo, tabId )
     local tab = tolua.cast( mWidget:getChildByName( tabInfo["id"] ), "Button" )
     tab:setTitleText( Constants.String.community[tabInfo["displayNameKey"]] )
+    CCLuaLog(tabId)
 
     local isActive = mTabID == tabId
 
@@ -124,6 +125,8 @@ function loadMainContent( contentContainer, jsonResponse, leaderboardId, subType
         Analytics:sharedDelegate():postFlurryEvent( Constants.ANALYTICS_EVENT_ENTER_TIMELINE, Json.encode( params ) )
         Analytics:sharedDelegate():postTongdaoEvent( Constants.ANALYTICS_EVENT_ENTER_TIMELINE, Json.encode( params ) )
         loadTimelineScene( contentContainer, jsonResponse )
+    elseif mTabID == CommunityConfig.COMMUNITY_TAB_ID_PREMIUM then
+        loadPremiumScene( contentContainer, jsonResponse )
     end
 end
 
@@ -189,4 +192,17 @@ function loadTimelineScene( contentContainer, jsonResponse, leaderboardId, subTy
     end
 
     Header.hideMenuButton()
+end
+
+function loadPremiumScene( contentContainer, jsonResponse, leaderboardId, subType )
+    if CommunityLeaderboardFrame.isShown() then
+        CommunityLeaderboardFrame.loadFrame( contentContainer, jsonResponse, leaderboardId, subType, true )
+    else
+        CommunityLeaderboardFrame.loadFrame( contentContainer, jsonResponse, leaderboardId, subType, false )
+    end
+
+    Header.showMenuButtonWithSportChangeEventHanlder( function ()
+        EventManager:postEvent( Event.Enter_Community, { CommunityConfig.COMMUNITY_TAB_ID_LEADERBOARD,
+                LeaderboardConfig.LEADERBOARD_TOP, LeaderboardConfig.LEADERBOARD_TYPE_ROI, CommunityLeaderboardFrame.getFilter() } )
+    end )
 end

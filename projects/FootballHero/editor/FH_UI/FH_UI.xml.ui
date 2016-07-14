@@ -174,10 +174,11 @@
   <ResRelativePath />
   <imageFileList />
   <imagePngList>
-    <string>Competition/ad_bg.png</string>
-    <string>Popup/close_icon.png</string>
-    <string>Competition/btn-prize.png</string>
+    <string>commonRes/img-bkg-general.png</string>
+    <string>community/img-inactivepage.png</string>
+    <string>community/img-activepage.png</string>
+    <string>community/icn-new.png</string>
   </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>AskForJoin.json</CurrentUIJson>
+  <CurrentUIJson>CommunityLeaderboardFrame.json</CurrentUIJson>
 </UIProject>

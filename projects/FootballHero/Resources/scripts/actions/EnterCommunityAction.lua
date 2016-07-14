@@ -7,6 +7,7 @@ local Logic = require("scripts.Logic").getInstance()
 local Constants = require("scripts.Constants")
 local CommunityConfig = require("scripts.config.Community")
 local LeaderboardConfig = require("scripts.config.Leaderboard")
+local PremiumboardConfig = require("scripts.config.Premiumboard")
 local SportsConfig = require("scripts.config.Sports")
 
 
@@ -54,6 +55,23 @@ function action( param )
         record = true
     elseif mTabID == CommunityConfig.COMMUNITY_TAB_ID_TIMELINE then
         url = RequestUtils.GET_TIMELINE_REST_CALL.."?step=1"
+    elseif mTabID == CommunityConfig.COMMUNITY_TAB_ID_PREMIUM then
+
+        mLeaderboardId = param[2]
+        local leaderboardType = param[3]
+        local minPrediction = param[4] or 1
+        local step = 1
+
+        url = PremiumboardConfig.LeaderboardType[mLeaderboardId]["request"]
+        if PremiumboardConfig.LeaderboardSubType[leaderboardType] ~= nil then
+            mSubType = PremiumboardConfig.LeaderboardSubType[leaderboardType]
+        end
+
+        url = url.."?sortType="..mSubType["sortType"].."&step="..step.."&perPage="..Constants.RANKINGS_PER_PAGE
+        if minPrediction > 1 then
+            url = url.."&numberOfCouponsRequired="..minPrediction
+        end
+        record = true
     else
         url = RequestUtils.GET_COMPETITION_LIST_REST_CALL
     end
