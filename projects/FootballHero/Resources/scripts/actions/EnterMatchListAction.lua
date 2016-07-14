@@ -146,10 +146,6 @@ function onRequestSuccess( matchList )
     if not introTicket then
         EventManager:postEvent( Event.Do_Intro_Golden_Ticket )
     end
-    local timestamp =  CCUserDefault:sharedUserDefault():getIntegerForKey( "COMPETITION_AD_TIME" )
-    if os.time() - timestamp > 60*60*24 then
-        EventManager:postEvent( Event.Do_Ask_For_Join, "euro2016" )
-    end
 end
 
 function onRequestFailed( jsonResponse )
