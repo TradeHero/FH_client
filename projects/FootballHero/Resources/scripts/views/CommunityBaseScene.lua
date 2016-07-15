@@ -12,6 +12,7 @@ local CommunityLeaderboardFrame = require("scripts.views.CommunityLeaderboardFra
 local CommunityExpertFrame = require("scripts.views.CommunityExpertFrame")
 local CommunityMediaFrame = require("scripts.views.CommunityMediaFrame")
 local CommunityTimelineFrame = require("scripts.views.CommunityTimelineFrame")
+local CommunityPremiumFrame = require("scripts.views.CommunityPremiumFrame")
 local Minigame = require("scripts.data.Minigame").Minigame
 local Header = require("scripts.views.HeaderFrame")
 local CheckListConfig = require("scripts.data.CheckList")
@@ -69,7 +70,6 @@ end
 function initCommunityTab( tabInfo, tabId )
     local tab = tolua.cast( mWidget:getChildByName( tabInfo["id"] ), "Button" )
     tab:setTitleText( Constants.String.community[tabInfo["displayNameKey"]] )
-    CCLuaLog(tabId)
 
     local isActive = mTabID == tabId
 
@@ -126,7 +126,7 @@ function loadMainContent( contentContainer, jsonResponse, leaderboardId, subType
         Analytics:sharedDelegate():postTongdaoEvent( Constants.ANALYTICS_EVENT_ENTER_TIMELINE, Json.encode( params ) )
         loadTimelineScene( contentContainer, jsonResponse )
     elseif mTabID == CommunityConfig.COMMUNITY_TAB_ID_PREMIUM then
-        loadPremiumScene( contentContainer, jsonResponse )
+        loadPremiumScene( contentContainer, jsonResponse, leaderboardId, subType )
     end
 end
 
@@ -144,6 +144,7 @@ end
 
 function loadCompetitionScene( contentContainer, jsonResponse, minigameResponse )
     CommunityLeaderboardFrame.exitFrame()
+    CommunityPremiumFrame.exitFrame()
 
     local compList = Competitions:new( jsonResponse )
     local minigame = Minigame:new( minigameResponse )
@@ -156,6 +157,7 @@ end
 
 function loadExpertScene( contentContainer, jsonResponse )
     CommunityLeaderboardFrame.exitFrame()
+    CommunityPremiumFrame.exitFrame()
     if not CommunityExpertFrame.isShown() then
         CommunityExpertFrame.loadFrame( contentContainer, jsonResponse )
     end
@@ -165,6 +167,7 @@ end
 
 function loadVideoScene( contentContainer, jsonResponse )
     CommunityLeaderboardFrame.exitFrame()
+    CommunityPremiumFrame.exitFrame()
     if not  CommunityMediaFrame.isShown() then
         CommunityMediaFrame.loadFrame( contentContainer, jsonResponse )
     end
@@ -187,6 +190,7 @@ end
 
 function loadTimelineScene( contentContainer, jsonResponse, leaderboardId, subType )
     CommunityLeaderboardFrame.exitFrame()
+    CommunityPremiumFrame.exitFrame()
     if not CommunityTimelineFrame.isShown() then
         CommunityTimelineFrame.loadFrame( contentContainer, jsonResponse )
     end
@@ -195,14 +199,14 @@ function loadTimelineScene( contentContainer, jsonResponse, leaderboardId, subTy
 end
 
 function loadPremiumScene( contentContainer, jsonResponse, leaderboardId, subType )
-    if CommunityLeaderboardFrame.isShown() then
-        CommunityLeaderboardFrame.loadFrame( contentContainer, jsonResponse, leaderboardId, subType, true )
+    if CommunityPremiumFrame.isShown() then
+        CommunityPremiumFrame.loadFrame( contentContainer, jsonResponse, leaderboardId, subType, true )
     else
-        CommunityLeaderboardFrame.loadFrame( contentContainer, jsonResponse, leaderboardId, subType, false )
+        CommunityPremiumFrame.loadFrame( contentContainer, jsonResponse, leaderboardId, subType, false )
     end
 
     Header.showMenuButtonWithSportChangeEventHanlder( function ()
         EventManager:postEvent( Event.Enter_Community, { CommunityConfig.COMMUNITY_TAB_ID_LEADERBOARD,
-                LeaderboardConfig.LEADERBOARD_TOP, LeaderboardConfig.LEADERBOARD_TYPE_ROI, CommunityLeaderboardFrame.getFilter() } )
+                LeaderboardConfig.LEADERBOARD_TOP, LeaderboardConfig.LEADERBOARD_TYPE_ROI, CommunityPremiumFrame.getFilter() } )
     end )
 end

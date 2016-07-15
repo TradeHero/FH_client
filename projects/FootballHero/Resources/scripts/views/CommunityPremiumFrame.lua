@@ -4,7 +4,7 @@ local SceneManager = require("scripts.SceneManager")
 local EventManager = require("scripts.events.EventManager").getInstance()
 local Event = require("scripts.events.Event").EventList
 local CommunityConfig = require("scripts.config.Community")
-local LeaderboardConfig = require("scripts.config.Leaderboard")
+local LeaderboardConfig = require("scripts.config.Premiumboard")
 local CommunityLeaderboardDropdownFrame = require("scripts.views.CommunityLeaderboardDropdownFrame")
 local SMIS = require("scripts.SMIS")
 local Constants = require("scripts.Constants")
@@ -69,6 +69,7 @@ end
 
 function initTitles()
     local title = tolua.cast( mWidget:getChildByName("Label_Leaderboard_Type"), "Label" )
+    CCLuaLog("init title:" .. mLeaderboardId)
     title:setText( Constants.String[LeaderboardConfig.LeaderboardType[mLeaderboardId]["displayNameKey"]] )
 
     local minTitle = tolua.cast( mWidget:getChildByName( "Label_Min_Prediction" ), "Label" )
@@ -92,27 +93,16 @@ function initTypeList()
     
     --local leaderboardType = mWidget:getChildByName( "Label_Leaderboard_Type")
     local leftPanel = mWidget:getChildByName( "Panel_Arrow_Left")
-    local leftButton = leftPanel:getChildByName( "Button_Left")
-    local rightPanel = mWidget:getChildByName( "Panel_Arrow_Right")
-    local rightButton = rightPanel:getChildByName( "Button_Right")
+    leftPanel:setEnabled( false )
 
-    local switchLeaderboardEventHandler = function( sender, eventType ) 
-        if eventType == TOUCH_EVENT_ENDED then
-            -- Stop the loading logo actions.
-            mWidget:stopAllActions()
-            
-            local otherType = mLeaderboardId % table.getn( LeaderboardConfig.LeaderboardType ) + 1
-            if mFilter == true then
-                EventManager:postEvent( Event.Enter_Community, { CommunityConfig.COMMUNITY_TAB_ID_LEADERBOARD, otherType, typeKey, Constants.FILTER_MIN_PREDICTION } )
-            else
-                EventManager:postEvent( Event.Enter_Community, { CommunityConfig.COMMUNITY_TAB_ID_LEADERBOARD, otherType, typeKey } )
-            end
-        end
-    end
-    leftPanel:addTouchEventListener( switchLeaderboardEventHandler )
-    leftButton:addTouchEventListener( switchLeaderboardEventHandler )
-    rightPanel:addTouchEventListener( switchLeaderboardEventHandler )
-    rightButton:addTouchEventListener( switchLeaderboardEventHandler )
+    local leftButton = leftPanel:getChildByName( "Button_Left")
+    leftButton:setEnabled( false )
+
+    local rightPanel = mWidget:getChildByName( "Panel_Arrow_Right")
+    rightPanel:setEnabled( false )
+
+    local rightButton = rightPanel:getChildByName( "Button_Right")
+    rightButton:setEnabled( false )
     
     local buttonEventHandler = function( sender, eventType )
         if eventType == TOUCH_EVENT_ENDED then
