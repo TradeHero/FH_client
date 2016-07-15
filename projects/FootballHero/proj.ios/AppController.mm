@@ -168,9 +168,20 @@ static AppDelegate s_sharedApplication;
     [Flurry startSession:@"ZJW944VMZ5JTVCVM7N69"];
     
     [[TongDaoUiCore sharedManager]initSdkWithAppKey:@"db0207b6d522c5d143f5da933f1858c5"];
+    [self registerRemoteNotification];
     return YES;
  }
-
+-(void)registerRemoteNotification{
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0) {
+        
+        UIUserNotificationSettings *uns = [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeAlert|UIUserNotificationTypeBadge|UIUserNotificationTypeSound) categories:nil];
+        [[UIApplication sharedApplication] registerForRemoteNotifications];
+        [[UIApplication sharedApplication] registerUserNotificationSettings:uns];
+    } else {
+        UIRemoteNotificationType apn_type = (UIRemoteNotificationType)(UIRemoteNotificationTypeAlert|UIRemoteNotificationTypeSound|UIRemoteNotificationTypeBadge);
+        [[UIApplication sharedApplication] registerForRemoteNotificationTypes:apn_type];
+    }
+}
 - (void) signin:(NSString *)userName withProfileImg:(NSString *)profileImg andUserId:(int)userId {
     // QuickBlox session creation
     QBSessionParameters *extendedAuthRequest = [[QBSessionParameters alloc] init];
@@ -406,9 +417,14 @@ static AppDelegate s_sharedApplication;
     // push is enabled if the outlined process is followed. This call is required.
     [[UAPush shared] registerDeviceToken:deviceToken];
     
+    
     NSString* token = [UAPush shared].deviceToken;
     MiscHandler::getInstance()->responseUADeviceToken([token UTF8String]);
-    [[TongDaoUiCore sharedManager] identifyPushToken:(NSString*)token];
+    
+    NSString *myToken = [[deviceToken description] stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]];
+    myToken = [myToken stringByReplacingOccurrencesOfString:@" " withString:@""];
+    [[TongDaoUiCore sharedManager] identifyPushToken:myToken];
+    NSLog(@"the push token %@",myToken);
 }
 
 
