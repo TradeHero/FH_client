@@ -30,6 +30,9 @@ import android.util.Log;
 import android.util.Pair;
 
 import com.facebook.internal.*;
+import com.facebook.share.internal.OpenGraphJSONUtility;
+import com.facebook.share.model.ShareOpenGraphObject;
+import com.facebook.share.model.SharePhoto;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -95,7 +98,7 @@ public class GraphRequest {
     private static final String FORMAT_JSON = "json";
     private static final String SDK_PARAM = "sdk";
     private static final String SDK_ANDROID = "android";
-    private static final String ACCESS_TOKEN_PARAM = "access_token";
+    public static final String ACCESS_TOKEN_PARAM = "access_token";
     private static final String BATCH_ENTRY_NAME_PARAM = "name";
     private static final String BATCH_ENTRY_OMIT_RESPONSE_ON_SUCCESS_PARAM =
             "omit_response_on_success";
@@ -122,6 +125,7 @@ public class GraphRequest {
     public static final String FIELDS_PARAM = "fields";
 
     private static final String MIME_BOUNDARY = "3i2ndDfv2rTHiSisAbouNdArYfORhtTPEefj3q2f";
+    private static final String GRAPH_PATH_FORMAT = "%s/%s";
 
     private static String defaultBatchApplicationId;
 
@@ -600,6 +604,12 @@ public class GraphRequest {
         Bundle parameters = new Bundle();
 
         if (accessToken == null) {
+            if (attributionIdentifiers == null) {
+                throw new FacebookException(
+                        "There is no access token and attribution identifiers could not be " +
+                                "retrieved");
+            }
+
             // Only use the attributionID if we don't have an access token.  If we do, then the user
             // token will be used to identify the user, and is more reliable than the attributionID.
             String udid = attributionIdentifiers.getAttributionId() != null
@@ -613,7 +623,7 @@ public class GraphRequest {
         // Server will choose to not provide the App User ID in the event that event usage has been
         // limited for this user for this app.
         if (FacebookSdk.getLimitEventAndDataUsage(context)
-                || attributionIdentifiers.isTrackingLimited()) {
+                || (attributionIdentifiers != null && attributionIdentifiers.isTrackingLimited())) {
             parameters.putString("limit_event_usage", "1");
         }
 
@@ -1051,14 +1061,14 @@ public class GraphRequest {
             throw new FacebookException("could not construct URL for request", e);
         }
 
-        HttpURLConnection connection;
+        HttpURLConnection connection = null;
         try {
             connection = createConnection(url);
 
             serializeToUrlConnection(requests, connection);
-        } catch (IOException e) {
-            throw new FacebookException("could not construct request body", e);
-        } catch (JSONException e) {
+        } catch (IOException | JSONException e) {
+            Utility.disconnectQuietly(connection);
+
             throw new FacebookException("could not construct request body", e);
         }
 
@@ -1140,18 +1150,23 @@ public class GraphRequest {
 
         HttpURLConnection connection = null;
         try {
-            connection = toHttpConnection(requests);
-        } catch (Exception ex) {
-            List<GraphResponse> responses = GraphResponse.constructErrorResponses(
-                    requests.getRequests(),
-                    null,
-                    new FacebookException(ex));
-            runCallbacks(requests, responses);
-            return responses;
-        }
+            try {
+                connection = toHttpConnection(requests);
+            } catch (Exception ex) {
+                List<GraphResponse> responses = GraphResponse.constructErrorResponses(
+                        requests.getRequests(),
+                        null,
+                        new FacebookException(ex));
+                runCallbacks(requests, responses);
+                return responses;
+            }
 
-        List<GraphResponse> responses = executeConnectionAndWait(connection, requests);
-        return responses;
+            List<GraphResponse> responses = executeConnectionAndWait(connection, requests);
+
+            return responses;
+        } finally {
+            Utility.disconnectQuietly(connection);
+        }
     }
 
     /**
@@ -1207,7 +1222,7 @@ public class GraphRequest {
         Validate.notEmptyAndContainsNoNulls(requests, "requests");
 
         GraphRequestAsyncTask asyncTask = new GraphRequestAsyncTask(requests);
-        asyncTask.executeOnSettingsExecutor();
+        asyncTask.executeOnExecutor(FacebookSdk.getExecutor());
         return asyncTask;
     }
 
@@ -1304,7 +1319,7 @@ public class GraphRequest {
      * @param callbackHandler a Handler that will be used to post calls to the callback for each
      *                        request; if null, a Handler will be instantiated on the calling
      *                        thread
-     * @param connection      the HttpURLConnection that the requests were serialized into
+     * @param connection the HttpURLConnection that the requests were serialized into
      * @param requests        the requests represented by the HttpURLConnection
      * @return a RequestAsyncTask that is executing the request
      */
@@ -1316,7 +1331,7 @@ public class GraphRequest {
 
         GraphRequestAsyncTask asyncTask = new GraphRequestAsyncTask(connection, requests);
         requests.setCallbackHandler(callbackHandler);
-        asyncTask.executeOnSettingsExecutor();
+        asyncTask.executeOnExecutor(FacebookSdk.getExecutor());
         return asyncTask;
     }
 
@@ -1807,6 +1822,65 @@ public class GraphRequest {
         }
     }
 
+    /**
+     * Create an User Owned Open Graph object
+     *
+     * Use this method to create an open graph object, which can then be posted utilizing the same
+     * GraphRequest methods as other GraphRequests.
+     *
+     * @param openGraphObject The open graph object to create. Only SharePhotos with the imageUrl
+     *                        set are accepted through this helper method.
+     * @return GraphRequest for creating the given openGraphObject
+     * @throws FacebookException thrown in the case of a JSONException or in the case of invalid
+     *                           format for SharePhoto (missing imageUrl)
+     */
+
+    public static GraphRequest createOpenGraphObject(final ShareOpenGraphObject openGraphObject)
+            throws FacebookException {
+        String type = openGraphObject.getString("type");
+        if (type == null) {
+            type = openGraphObject.getString("og:type");
+        }
+
+        if (type == null) {
+            throw new FacebookException("Open graph object type cannot be null");
+        }
+        try {
+            JSONObject stagedObject = (JSONObject) OpenGraphJSONUtility.toJSONValue(
+                    openGraphObject,
+                    new OpenGraphJSONUtility.PhotoJSONProcessor() {
+                        @Override
+                        public JSONObject toJSONObject(SharePhoto photo) {
+                            Uri photoUri = photo.getImageUrl();
+                            JSONObject photoJSONObject = new JSONObject();
+                            try {
+                                photoJSONObject.put(
+                                        NativeProtocol.IMAGE_URL_KEY, photoUri.toString());
+                            } catch (Exception e) {
+                                throw new FacebookException("Unable to attach images", e);
+                            }
+                            return photoJSONObject;
+                        }
+                    });
+            String ogType = type;
+            Bundle parameters = new Bundle();
+            parameters.putString("object", stagedObject.toString());
+
+            String graphPath = String.format(
+                    Locale.ROOT, GRAPH_PATH_FORMAT,
+                    ME,
+                    "objects/" + ogType);
+            return new GraphRequest(
+                    AccessToken.getCurrentAccessToken(),
+                    graphPath,
+                    parameters,
+                    HttpMethod.POST);
+        }
+        catch(JSONException e){
+            throw new FacebookException(e.getMessage());
+        }
+    }
+
     private static void processGraphObjectProperty(
             String key,
             Object value,
@@ -2108,11 +2182,6 @@ public class GraphRequest {
             }
             writeContentDisposition(key, key, mimeType);
 
-            InputStream inputStream = FacebookSdk
-                    .getApplicationContext()
-                    .getContentResolver()
-                    .openInputStream(contentUri);
-
             int totalBytes = 0;
             if (outputStream instanceof ProgressNoopOutputStream) {
                 // If we are only counting bytes then skip reading the file
@@ -2120,6 +2189,10 @@ public class GraphRequest {
 
                 ((ProgressNoopOutputStream) outputStream).addProgress(contentSize);
             } else {
+                InputStream inputStream = FacebookSdk
+                        .getApplicationContext()
+                        .getContentResolver()
+                        .openInputStream(contentUri);
                 totalBytes += Utility.copyAndCloseInputStream(inputStream, outputStream);
             }
 

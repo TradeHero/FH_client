@@ -79,6 +79,18 @@ public final class AppGroupCreationContent implements ShareModel {
         out.writeSerializable(this.privacy);
     }
 
+    @SuppressWarnings("unused")
+    public static final Creator<AppGroupCreationContent> CREATOR =
+            new Creator<AppGroupCreationContent>() {
+                public AppGroupCreationContent createFromParcel(final Parcel in) {
+                    return new AppGroupCreationContent(in);
+                }
+
+                public AppGroupCreationContent[] newArray(final int size) {
+                    return new AppGroupCreationContent[size];
+                }
+            };
+
     /**
      * Specifies the privacy of a group.
      */
@@ -151,13 +163,6 @@ public final class AppGroupCreationContent implements ShareModel {
                     .setName(content.getName())
                     .setDescription(content.getDescription())
                     .setAppGroupPrivacy(content.getAppGroupPrivacy());
-        }
-
-        @Override
-        public Builder readFrom(final Parcel parcel) {
-            return this.readFrom(
-                    (AppGroupCreationContent) parcel.readParcelable(
-                            AppGroupCreationContent.class.getClassLoader()));
         }
     }
 }

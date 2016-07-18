@@ -24,6 +24,7 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -55,7 +56,7 @@ import java.util.Map;
 import java.util.Set;
 
 class LoginClient implements Parcelable {
-    LoginMethodHandler [] handlersToTry;
+    LoginMethodHandler[] handlersToTry;
     int currentHandler = -1;
     Fragment fragment;
     OnCompletedListener onCompletedListener;
@@ -137,7 +138,7 @@ class LoginClient implements Parcelable {
         }
     }
 
-    private LoginMethodHandler getCurrentHandler() {
+    LoginMethodHandler getCurrentHandler() {
         if (currentHandler >= 0) {
             return handlersToTry[currentHandler];
         } else {
@@ -163,8 +164,16 @@ class LoginClient implements Parcelable {
             handlers.add(new KatanaProxyLoginMethodHandler(this));
         }
 
+        if (behavior.allowsCustomTabAuth()) {
+            handlers.add(new CustomTabLoginMethodHandler(this));
+        }
+
         if (behavior.allowsWebViewAuth()) {
             handlers.add(new WebViewLoginMethodHandler(this));
+        }
+
+        if (behavior.allowsDeviceAuth()) {
+            handlers.add(new DeviceAuthMethodHandler(this));
         }
 
         LoginMethodHandler [] result = new LoginMethodHandler[handlers.size()];
@@ -235,9 +244,9 @@ class LoginClient implements Parcelable {
         LoginMethodHandler handler = getCurrentHandler();
         if (handler.needsInternetPermission() && !checkInternetPermission()) {
             addLoggingExtra(
-                LoginLogger.EVENT_EXTRAS_MISSING_INTERNET_PERMISSION,
-                AppEventsConstants.EVENT_PARAM_VALUE_YES,
-                false
+                    LoginLogger.EVENT_EXTRAS_MISSING_INTERNET_PERMISSION,
+                    AppEventsConstants.EVENT_PARAM_VALUE_YES,
+                    false
             );
             return false;
         }
@@ -250,9 +259,9 @@ class LoginClient implements Parcelable {
             // We didn't try it, so we don't get any other completion
             // notification -- log that we skipped it.
             addLoggingExtra(
-                LoginLogger.EVENT_EXTRAS_NOT_TRIED,
+                    LoginLogger.EVENT_EXTRAS_NOT_TRIED,
                     handler.getNameForLogging(),
-                true
+                    true
             );
         }
 
@@ -360,7 +369,7 @@ class LoginClient implements Parcelable {
 
     private LoginLogger getLogger() {
         if (loginLogger == null ||
-            !loginLogger.getApplicationId().equals(pendingRequest.getApplicationId())) {
+                !loginLogger.getApplicationId().equals(pendingRequest.getApplicationId())) {
 
             loginLogger = new LoginLogger(getActivity(), pendingRequest.getApplicationId());
         }
@@ -431,6 +440,7 @@ class LoginClient implements Parcelable {
         private final String applicationId;
         private final String authId;
         private boolean isRerequest = false;
+        private String deviceRedirectUriString;
 
         Request(
                 LoginBehavior loginBehavior,
@@ -478,6 +488,14 @@ class LoginClient implements Parcelable {
             this.isRerequest = isRerequest;
         }
 
+        String getDeviceRedirectUriString() {
+            return this.deviceRedirectUriString;
+        }
+
+        void setDeviceRedirectUriString(String deviceRedirectUriString) {
+            this.deviceRedirectUriString = deviceRedirectUriString;
+        }
+
         boolean hasPublishPermission() {
             for (String permission : permissions) {
                 if (LoginManager.isPublishPermission(permission)) {
@@ -498,6 +516,7 @@ class LoginClient implements Parcelable {
             this.applicationId = parcel.readString();
             this.authId = parcel.readString();
             this.isRerequest = parcel.readByte() != 0 ? true : false;
+            this.deviceRedirectUriString = parcel.readString();
         }
 
         @Override
@@ -513,6 +532,7 @@ class LoginClient implements Parcelable {
             dest.writeString(applicationId);
             dest.writeString(authId);
             dest.writeByte((byte)(isRerequest ? 1 : 0));
+            dest.writeString(deviceRedirectUriString);
         }
 
         public static final Parcelable.Creator<Request> CREATOR = new Parcelable.Creator() {
@@ -629,72 +649,6 @@ class LoginClient implements Parcelable {
                 return new Result[size];
             }
         };
-    }
-
-    /**
-     * Internal helper class that is used to hold two different permission lists (granted and
-     * declined)
-     */
-    private static class PermissionsPair {
-        List<String> grantedPermissions;
-        List<String> declinedPermissions;
-
-        public PermissionsPair(List<String> grantedPermissions, List<String> declinedPermissions) {
-            this.grantedPermissions = grantedPermissions;
-            this.declinedPermissions = declinedPermissions;
-        }
-
-        public List<String> getGrantedPermissions() {
-            return grantedPermissions;
-        }
-
-        public List<String> getDeclinedPermissions() {
-            return declinedPermissions;
-        }
-    }
-
-    /**
-     * This parses a server response to a call to me/permissions.  It will return the list of
-     * granted permissions. It will optionally update an access token with the requested permissions.
-     *
-     * @param response The server response
-     * @return A list of granted permissions or null if an error
-     */
-    private static PermissionsPair handlePermissionResponse(GraphResponse response) {
-        if (response.getError() != null) {
-            return null;
-        }
-
-        JSONObject result = response.getJSONObject();
-        if (result == null) {
-            return null;
-        }
-
-        JSONArray data = result.optJSONArray("data");
-        if (data == null || data.length() == 0) {
-            return null;
-        }
-        List<String> grantedPermissions = new ArrayList<String>(data.length());
-        List<String> declinedPermissions = new ArrayList<String>(data.length());
-
-        for (int i = 0; i < data.length(); ++i) {
-            JSONObject object = data.optJSONObject(i);
-            String permission = object.optString("permission");
-            if (permission == null || permission.equals("installed")) {
-                continue;
-            }
-            String status = object.optString("status");
-            if (status == null) {
-                continue;
-            }
-            if(status.equals("granted")) {
-                grantedPermissions.add(permission);
-            } else if (status.equals("declined")) {
-                declinedPermissions.add(permission);
-            }
-        }
-
-        return new PermissionsPair(grantedPermissions, declinedPermissions);
     }
 
     // Parcelable implementation

@@ -25,13 +25,17 @@ function requestLucky8MatchList(  )
 end
 
 function onRequestLucky8MatchListSuccess( json )
-	local lucky8Scene = require( "scripts.views.Lucky8Scene" )
-	if lucky8Scene.isFrameShown() then
-		lucky8Scene.refreshPage( json )
-	else
-		lucky8Scene.loadFrame( json )
-	end
-
+    if table.getn(json["Games"]) < 8 then
+        EventManager:postEvent( Event.Show_Error_Message, { "There is not enough matches today, please try again tomorrow" } )
+    else
+    	local lucky8Scene = require( "scripts.views.Lucky8Scene" )
+    	if lucky8Scene.isFrameShown() then
+    		lucky8Scene.refreshPage( json )
+    	else
+    		lucky8Scene.loadFrame( json )
+    	end
+    end
+    
     local params = {
         Action = "Enter lucky8",
     }

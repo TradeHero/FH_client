@@ -44,6 +44,11 @@ public class ShareSDKUtils {
 			public boolean handleMessage(final Message msg) {
 				PluginWrapper.runOnGLThread(new Runnable() {
 					public void run() {
+						if (msg != null) {
+							Log.d("ShareSDKUtils", msg.toString());
+						} else  {
+							Log.d("ShareSDKUtils", "Msg is null");
+						}
 						onJavaCallback((String) msg.obj);
 					}
 				});

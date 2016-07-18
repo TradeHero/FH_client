@@ -22,7 +22,7 @@
       <sourceFolder url="file://$MODULE_DIR$/gen" isTestSource="false" generated="true" />
       <excludeFolder url="file://$MODULE_DIR$/bin" />
     </content>
-    <orderEntry type="jdk" jdkName="Android API 16 Platform" jdkType="Android SDK" />
+    <orderEntry type="jdk" jdkName="Android API 19 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="google-play-services_lib" />
     <orderEntry type="module" module-name="java" />
@@ -76,7 +76,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/libs/ShareSDK-Core-2.5.9.jar!/" />
+          <root url="jar://$MODULE_DIR$/libs/ShareSDK-Facebook-2.7.4.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -85,7 +85,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/libs/ShareSDK-Facebook-2.5.9.jar!/" />
+          <root url="jar://$MODULE_DIR$/libs/MobCommons-2016.0707.1708.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -94,7 +94,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/libs/ShareSDK-Wechat-2.5.9.jar!/" />
+          <root url="jar://$MODULE_DIR$/libs/ShareSDK-Wechat-Moments-2.7.4.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -103,7 +103,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/libs/ShareSDK-Wechat-Core-2.5.9.jar!/" />
+          <root url="jar://$MODULE_DIR$/libs/ShareSDK-Wechat-2.7.4.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -112,7 +112,25 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/libs/ShareSDK-Wechat-Moments-2.5.9.jar!/" />
+          <root url="jar://$MODULE_DIR$/libs/ShareSDK-Core-2.7.4.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/libs/ShareSDK-Wechat-Core-2.7.4.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/libs/MobTools-2016.0707.1708.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -127,7 +145,15 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="module" module-name="plugin" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/libs/tongrd-android-sdk-3.0.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
     <orderEntry type="module-library">
       <library name="Crashlytics">
         <CLASSES>
@@ -137,6 +163,6 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="library" name="tongrd-android-sdk-3.0.0" level="project" />
+    <orderEntry type="module" module-name="plugin" />
   </component>
 </module>

@@ -22,7 +22,6 @@ package com.facebook.share.internal;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -33,6 +32,7 @@ import com.facebook.internal.AppCall;
 import com.facebook.internal.CallbackManagerImpl;
 import com.facebook.internal.DialogFeature;
 import com.facebook.internal.DialogPresenter;
+import com.facebook.internal.FragmentWrapper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -73,14 +73,12 @@ public class LikeDialog extends FacebookDialogBase<LikeContent, LikeDialog.Resul
 
     // Public for internal use
     public static boolean canShowNativeDialog() {
-        return (Build.VERSION.SDK_INT >= ShareConstants.MIN_API_VERSION_FOR_WEB_FALLBACK_DIALOGS) &&
-                DialogPresenter.canPresentNativeDialogWithFeature(getFeature());
+        return DialogPresenter.canPresentNativeDialogWithFeature(getFeature());
     }
 
     // Public for internal use
     public static boolean canShowWebFallback() {
-        return (Build.VERSION.SDK_INT >= ShareConstants.MIN_API_VERSION_FOR_WEB_FALLBACK_DIALOGS) &&
-                DialogPresenter.canPresentWebFallbackDialogWithFeature(getFeature());
+        return DialogPresenter.canPresentWebFallbackDialogWithFeature(getFeature());
     }
 
     public LikeDialog(Activity activity) {
@@ -88,7 +86,15 @@ public class LikeDialog extends FacebookDialogBase<LikeContent, LikeDialog.Resul
     }
 
     public LikeDialog(Fragment fragment) {
-        super(fragment, DEFAULT_REQUEST_CODE);
+        this(new FragmentWrapper(fragment));
+    }
+
+    public LikeDialog(android.app.Fragment fragment) {
+        this(new FragmentWrapper(fragment));
+    }
+
+    public LikeDialog(FragmentWrapper fragmentWrapper) {
+        super(fragmentWrapper, DEFAULT_REQUEST_CODE);
     }
 
     @Override
@@ -136,7 +142,7 @@ public class LikeDialog extends FacebookDialogBase<LikeContent, LikeDialog.Resul
 
     private class NativeHandler extends ModeHandler {
         @Override
-        public boolean canShow(final LikeContent content) {
+        public boolean canShow(final LikeContent content, boolean isBestEffort) {
             return (content != null) && LikeDialog.canShowNativeDialog();
         }
 
@@ -168,7 +174,7 @@ public class LikeDialog extends FacebookDialogBase<LikeContent, LikeDialog.Resul
 
     private class WebFallbackHandler extends ModeHandler {
         @Override
-        public boolean canShow(final LikeContent content) {
+        public boolean canShow(final LikeContent content, boolean isBestEffort) {
             return (content != null) && LikeDialog.canShowWebFallback();
         }
 

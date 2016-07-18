@@ -28,6 +28,8 @@ import com.facebook.internal.Utility;
 import com.facebook.internal.WebDialog;
 import com.facebook.share.model.AppGroupCreationContent;
 import com.facebook.share.model.GameRequestContent;
+import com.facebook.share.model.ShareContent;
+import com.facebook.share.model.ShareHashtag;
 import com.facebook.share.model.ShareLinkContent;
 import com.facebook.share.model.ShareOpenGraphContent;
 
@@ -80,10 +82,10 @@ public class WebDialogParameters {
                 webParams,
                 ShareConstants.WEB_DIALOG_PARAM_MESSAGE,
                 gameRequestContent.getMessage());
-        Utility.putNonEmptyString(
+        Utility.putCommaSeparatedStringList(
                 webParams,
                 ShareConstants.WEB_DIALOG_PARAM_TO,
-                gameRequestContent.getTo());
+                gameRequestContent.getRecipients());
         Utility.putNonEmptyString(
                 webParams,
                 ShareConstants.WEB_DIALOG_PARAM_TITLE,
@@ -116,17 +118,22 @@ public class WebDialogParameters {
     }
 
     public static Bundle create(ShareLinkContent shareLinkContent) {
-        Bundle params = new Bundle();
+        Bundle params = createBaseParameters(shareLinkContent);
         Utility.putUri(
                 params,
                 ShareConstants.WEB_DIALOG_PARAM_HREF,
                 shareLinkContent.getContentUrl());
 
+        Utility.putNonEmptyString(
+                params,
+                ShareConstants.WEB_DIALOG_PARAM_QUOTE,
+                shareLinkContent.getQuote());
+
         return params;
     }
 
     public static Bundle create(ShareOpenGraphContent shareOpenGraphContent) {
-        Bundle params = new Bundle();
+        Bundle params = createBaseParameters(shareOpenGraphContent);
 
         Utility.putNonEmptyString(
                 params,
@@ -144,6 +151,20 @@ public class WebDialogParameters {
             }
         } catch (JSONException e) {
             throw new FacebookException("Unable to serialize the ShareOpenGraphContent to JSON", e);
+        }
+
+        return params;
+    }
+
+    public static Bundle createBaseParameters(ShareContent shareContent) {
+        Bundle params = new Bundle();
+
+        ShareHashtag shareHashtag = shareContent.getShareHashtag();
+        if (shareHashtag != null) {
+            Utility.putNonEmptyString(
+                    params,
+                    ShareConstants.WEB_DIALOG_PARAM_HASHTAG,
+                    shareHashtag.getHashtag());
         }
 
         return params;
@@ -172,6 +193,18 @@ public class WebDialogParameters {
                 ShareConstants.WEB_DIALOG_PARAM_PICTURE,
                 Utility.getUriString(shareLinkContent.getImageUrl()));
 
+        Utility.putNonEmptyString(
+                webParams,
+                ShareConstants.WEB_DIALOG_PARAM_QUOTE,
+                shareLinkContent.getQuote());
+
+        ShareHashtag shareHashtag = shareLinkContent.getShareHashtag();
+        if (shareHashtag != null) {
+            Utility.putNonEmptyString(
+                    webParams,
+                    ShareConstants.WEB_DIALOG_PARAM_HASHTAG,
+                    shareLinkContent.getShareHashtag().getHashtag());
+        }
         return webParams;
     }
 
