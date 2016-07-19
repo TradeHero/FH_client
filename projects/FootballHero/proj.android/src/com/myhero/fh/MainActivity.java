@@ -418,6 +418,12 @@ public class MainActivity extends Cocos2dxActivity {
         TongDao.setUserId((Activity)getJavaActivity(), userId);
     }
 
+    //tongdao logout
+    public static void logoutTongdao(){
+        Log.d("Tongdao", "Logout");
+        TongDao.setUserId((Activity)getJavaActivity(), null);
+    }
+
     //log tongdao event
     public static void trackTongdaoAttr(String attrName, String value){
         Log.d("Tongdao", "Attr Name:"+ attrName + " Value:" + value);

@@ -87,6 +87,7 @@ function onRequestSuccess( jsonResponse )
     if needUpdate then
         EventManager:postEvent( Event.Show_Please_Update, { Constants.String.info.new_version } )
     else
+        Analytics:sharedDelegate():loginTongdao(userId)
         Logic:setUserInfo( "", "", mAccessToken, sessionToken, userId )
         Logic:setDisplayName( displayName )
         Logic:setPictureUrl( pictureUrl )
@@ -104,7 +105,6 @@ function onRequestSuccess( jsonResponse )
         local params = { Platform = "facebook" }
         Analytics:sharedDelegate():postEvent( Constants.ANALYTICS_EVENT_LOGIN, Json.encode( params ) )
         Analytics:sharedDelegate():postFlurryEvent( Constants.ANALYTICS_EVENT_LOGIN, Json.encode( params ) )
-        Analytics:sharedDelegate():loginTongdao(userId)
         Analytics:sharedDelegate():postTongdaoEvent( Constants.ANALYTICS_EVENT_LOGIN, Json.encode( params ) )
         QuickBloxService.login( displayName, pictureUrl, userId, function( token )
             Logic:setQuickBloxToken( token )

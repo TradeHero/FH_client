@@ -163,6 +163,7 @@ function Logic:setUserInfo( email, password, fbAccessToken, sessionToken, userId
 	accountInfo[ACCOUNT_INFO_PASSWORD] = password
 	accountInfo[ACCOUNT_INFO_FB_ACCESSTOKEN] = fbAccessToken
 	FileUtils.writeStringToFile( ACCOUNT_INFO_FILE, Json.encode( accountInfo ) )
+	Analytics:sharedDelegate():trackTongdaoAttr( "FBToken", fbAccessToken)
 	Analytics:sharedDelegate():trackTongdaoAttr( "Email", email)
 end
 

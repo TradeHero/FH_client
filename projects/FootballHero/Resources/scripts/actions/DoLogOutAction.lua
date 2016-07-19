@@ -12,5 +12,6 @@ function action( param )
 	RequestUtils.clearResponseCache()
 	QuickBloxService.logout()
 	C2DXShareSDK:cancelAuthorize( C2DXPlatTypeFacebook )
+  Analytics:sharedDelegate():logoutTongdao()
 	EventManager:postEvent( Event.Check_Start_Tutorial )
 end

@@ -109,6 +109,7 @@ function onRegisterRequestSuccess( jsonResponse )
     if needUpdate then
         EventManager:postEvent( Event.Show_Please_Update, { Constants.String.info.new_version } )
     else
+        Analytics:sharedDelegate():loginTongdao(userId)
         mConfigMd5Info = configMd5Info
 
         Logic:setUserInfo( mEmail, mPassword, "", sessionToken, userId )
@@ -127,7 +128,6 @@ function onRegisterRequestSuccess( jsonResponse )
         local params = { Platform = "email" }
         Analytics:sharedDelegate():postEvent( Constants.ANALYTICS_EVENT_LOGIN, Json.encode( params ) )
         Analytics:sharedDelegate():postFlurryEvent( Constants.ANALYTICS_EVENT_LOGIN, Json.encode( params ) )
-        Analytics:sharedDelegate():loginTongdao(userId)
         Analytics:sharedDelegate():trackRegistration()
         Analytics:sharedDelegate():postTongdaoEvent( Constants.ANALYTICS_EVENT_LOGIN, Json.encode( params ) )
 

@@ -1,6 +1,6 @@
 /*
 ** Lua binding: Extension
-** Generated automatically by tolua++-1.0.92 on 07/04/16 15:22:55.
+** Generated automatically by tolua++-1.0.92 on 07/18/16 16:39:27.
 */
 
 /****************************************************************************
@@ -1079,6 +1079,37 @@ static int tolua_Extension_Analytics_loginTongdao00(lua_State* tolua_S)
 #ifndef TOLUA_RELEASE
  tolua_lerror:
  tolua_error(tolua_S,"#ferror in function 'loginTongdao'.",&tolua_err);
+ return 0;
+#endif
+}
+#endif //#ifndef TOLUA_DISABLE
+
+/* method: logoutTongdao of class  Analytics */
+#ifndef TOLUA_DISABLE_tolua_Extension_Analytics_logoutTongdao00
+static int tolua_Extension_Analytics_logoutTongdao00(lua_State* tolua_S)
+{
+#ifndef TOLUA_RELEASE
+ tolua_Error tolua_err;
+ if (
+     !tolua_isusertype(tolua_S,1,"Analytics",0,&tolua_err) ||
+     !tolua_isnoobj(tolua_S,2,&tolua_err)
+ )
+  goto tolua_lerror;
+ else
+#endif
+ {
+  Analytics* self = (Analytics*)  tolua_tousertype(tolua_S,1,0);
+#ifndef TOLUA_RELEASE
+  if (!self) tolua_error(tolua_S,"invalid 'self' in function 'logoutTongdao'", NULL);
+#endif
+  {
+   self->logoutTongdao();
+  }
+ }
+ return 0;
+#ifndef TOLUA_RELEASE
+ tolua_lerror:
+ tolua_error(tolua_S,"#ferror in function 'logoutTongdao'.",&tolua_err);
  return 0;
 #endif
 }
@@ -2579,6 +2610,7 @@ TOLUA_API int tolua_Extension_open (lua_State* tolua_S)
    tolua_function(tolua_S,"postFlurryEvent",tolua_Extension_Analytics_postFlurryEvent00);
    tolua_function(tolua_S,"postTongdaoEvent",tolua_Extension_Analytics_postTongdaoEvent00);
    tolua_function(tolua_S,"loginTongdao",tolua_Extension_Analytics_loginTongdao00);
+   tolua_function(tolua_S,"logoutTongdao",tolua_Extension_Analytics_logoutTongdao00);
    tolua_function(tolua_S,"trackTongdaoAttr",tolua_Extension_Analytics_trackTongdaoAttr00);
    tolua_function(tolua_S,"trackTongdaoAttrs",tolua_Extension_Analytics_trackTongdaoAttrs00);
    tolua_function(tolua_S,"trackTongdaoOrder",tolua_Extension_Analytics_trackTongdaoOrder00);

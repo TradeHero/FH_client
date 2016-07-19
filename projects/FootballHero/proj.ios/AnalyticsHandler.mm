@@ -97,6 +97,12 @@ void AnalyticsHandler::loginTongdao(const char* userId)
     [TongDao setUserId:[NSString stringWithUTF8String:userId]];
 }
 
+void AnalyticsHandler::logoutTongdao()
+{
+    NSLog(@"Logout Tongdao");
+    [TongDao setUserId:nil];
+}
+
 void AnalyticsHandler::trackTongdaoAttrs(const char* paramString)
 {
     NSError *error = nil;
