@@ -180,9 +180,46 @@
               <action android:name="com.android.vending.INSTALL_REFERRER" />
           </intent-filter>
       </receiver>
-      <meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />
+      <meta-data android:name="com.google.android.gms.version" android:value="9256000" />
 
       <receiver android:name="com.myhero.fh.IntentReceiver" />
+
+      <!-- [START gcm_receiver] -->
+      <receiver
+              android:name="com.google.android.gms.gcm.GcmReceiver"
+              android:exported="true"
+              android:permission="com.google.android.c2dm.permission.SEND" >
+          <intent-filter>
+              <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+              <category android:name="com.myher.fh" />
+          </intent-filter>
+      </receiver>
+      <!-- [END gcm_receiver] -->
+
+      <!-- [START gcm_listener] -->
+      <service
+              android:name="com.myhero.fh.MyGcmListenerService"
+              android:exported="false" >
+          <intent-filter>
+              <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+          </intent-filter>
+      </service>
+      <!-- [END gcm_listener] -->
+      <!-- [START instanceId_listener] -->
+      <service
+              android:name="com.myhero.fh.MyInstanceIDListenerService"
+              android:exported="false">
+          <intent-filter>
+              <action android:name="com.google.android.gms.iid.InstanceID"/>
+          </intent-filter>
+      </service>
+      <!-- [END instanceId_listener] -->
+      <service
+              android:name="com.myhero.fh.RegistrationIntentService"
+              android:exported="false">
+      </service>
+
+
   </application>
   <supports-screens android:largeScreens="true"
       android:smallScreens="true"
