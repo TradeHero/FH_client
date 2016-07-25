@@ -340,13 +340,18 @@ end
 
 function processDeepLink( deepLink, defaultEvent, defaultEventParam )
 
+  if deepLink == nil then
+    CCLuaLog("Process deep link: empty deepLink ")
+    return
+  else
+    CCLuaLog("Process deep link: " .. deepLink)
+  end
+
 	local delayedTask = function()
         -- deepLink content for example: /user/me
 		local deepLinklist = RequestUtils.split( deepLink, "/" )
 		local deepLinkPage = deepLinklist[2]
 		local deepLinkParameter = deepLinklist[3]
-		CCLuaLog("Process deep link: "..deepLink)
-
 		if deepLinkPage == DEEPLINK_USER_PROFILE then
 
 			if deepLinkParameter == "me" then
