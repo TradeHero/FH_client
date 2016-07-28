@@ -17,11 +17,10 @@ local mStep
 local mCurrentTotalNum
 local mHasMoreToLoad
 local mDropDown
-local mFilter
 
 -- DS for subType see LeaderboardConfig
 function loadFrame( parent, leaderboardInfo, leaderboardId, subType, bRefresh )
-  mWidget = GUIReader:shareReader():widgetFromJsonFile("scenes/CommunityLeaderboardFrame.json")
+  mWidget = GUIReader:shareReader():widgetFromJsonFile("scenes/CommunityPremiumboardFrame.json")
     parent:addChild( mWidget )
 
     mLeaderboardId = leaderboardId
@@ -32,13 +31,6 @@ function loadFrame( parent, leaderboardInfo, leaderboardId, subType, bRefresh )
     initTitles()
     initContent( leaderboardInfo )
     initTypeList()
-
-    if bRefresh then
-        initFilter( true )
-    else
-        mFilter = true
-        initFilter( false )
-    end
 end
 
 function refreshFrame( parent, leaderboardInfo, leaderboardId, subType )
@@ -71,9 +63,6 @@ function initTitles()
     local title = tolua.cast( mWidget:getChildByName("Label_Leaderboard_Type"), "Label" )
     CCLuaLog("init title:" .. mLeaderboardId)
     title:setText( Constants.String[LeaderboardConfig.LeaderboardType[mLeaderboardId]["displayNameKey"]] )
-
-    local minTitle = tolua.cast( mWidget:getChildByName( "Label_Min_Prediction" ), "Label" )
-    minTitle:setText( string.format( Constants.String.leaderboard.min_prediction, Constants.FILTER_MIN_PREDICTION ) )
 end
 
 function backEventHandler( sender,eventType )
@@ -91,19 +80,7 @@ function initTypeList()
     local button = mWidget:getChildByName("Panel_Filter")
     local expendedIndicator = mWidget:getChildByName( "Button_Filter" )
     
-    --local leaderboardType = mWidget:getChildByName( "Label_Leaderboard_Type")
-    local leftPanel = mWidget:getChildByName( "Panel_Arrow_Left")
-    leftPanel:setEnabled( false )
-
-    local leftButton = leftPanel:getChildByName( "Button_Left")
-    leftButton:setEnabled( false )
-
-    local rightPanel = mWidget:getChildByName( "Panel_Arrow_Right")
-    rightPanel:setEnabled( false )
-
-    local rightButton = rightPanel:getChildByName( "Button_Right")
-    rightButton:setEnabled( false )
-    
+    --local leaderboardType = mWidget:getChildByName( "Label_Leaderboard_Type")    
     local buttonEventHandler = function( sender, eventType )
         if eventType == TOUCH_EVENT_ENDED then
             if list:isEnabled() then
@@ -136,11 +113,7 @@ function initTypeList()
 
         -- Stop the loading logo actions.
         mWidget:stopAllActions()
-        if mFilter == true then
-            EventManager:postEvent( Event.Enter_Community, { CommunityConfig.COMMUNITY_TAB_ID_LEADERBOARD, mLeaderboardId, typeKey, Constants.FILTER_MIN_PREDICTION } )
-        else
-            EventManager:postEvent( Event.Enter_Community, { CommunityConfig.COMMUNITY_TAB_ID_LEADERBOARD, mLeaderboardId, typeKey } )
-        end
+        EventManager:postEvent( Event.Enter_Community, { CommunityConfig.COMMUNITY_TAB_ID_LEADERBOARD, mLeaderboardId, typeKey, Constants.FILTER_MIN_PREDICTION } )
     end
 
     CommunityLeaderboardDropdownFrame.loadFrame( "scenes/CommunityLeaderboardDropdownContentFrame.json", 
@@ -150,38 +123,11 @@ function initTypeList()
 end
 
 function getFilter()
-    local minCheckbox = tolua.cast( mWidget:getChildByName("CheckBox_Min_Prediction"), "CheckBox" )
-    if minCheckbox:getSelectedState() then
-        return Constants.FILTER_MIN_PREDICTION
-    else
-        return 1
-    end
+    return Constants.FILTER_MIN_PREDICTION
 end
 
 function initFilter( bRefreshed )
-    local minCheckboxEventHandler = function( sender, eventType )
-        if eventType == TOUCH_EVENT_ENDED then
-            local minCheckBox = tolua.cast( sender, "CheckBox" )
-            
-            mWidget:stopAllActions()
 
-            if minCheckBox:getSelectedState() == true then                
-                mFilter = false
-                EventManager:postEvent( Event.Enter_Community, { CommunityConfig.COMMUNITY_TAB_ID_LEADERBOARD, mLeaderboardId, typeKey } )
-            else                
-                mFilter = true
-                EventManager:postEvent( Event.Enter_Community, { CommunityConfig.COMMUNITY_TAB_ID_LEADERBOARD, mLeaderboardId, typeKey, Constants.FILTER_MIN_PREDICTION } )
-            end
-        end
-    end
-    local minCheckbox = tolua.cast( mWidget:getChildByName("CheckBox_Min_Prediction"), "CheckBox" )
-    minCheckbox:addTouchEventListener( minCheckboxEventHandler )
-    
-    if bRefreshed == true then
-        minCheckbox:setSelectedState( mFilter )
-    else
-        minCheckbox:setSelectedState( true )
-    end
 end
 
 function initContent( leaderboardInfo )
@@ -376,10 +322,6 @@ end
 function scrollViewEventHandler( target, eventType )
     if eventType == SCROLLVIEW_EVENT_BOUNCE_BOTTOM and mHasMoreToLoad then
         mStep = mStep + 1
-        if mFilter == true then
-            EventManager:postEvent( Event.Load_More_In_Leaderboard, { mLeaderboardId, mSubType, mStep, Constants.FILTER_MIN_PREDICTION } )
-        else
-            EventManager:postEvent( Event.Load_More_In_Leaderboard, { mLeaderboardId, mSubType, mStep } )
-        end
+        EventManager:postEvent( Event.Load_More_In_Leaderboard, { mLeaderboardId, mSubType, mStep, Constants.FILTER_MIN_PREDICTION } )
     end
 end

@@ -164,6 +164,8 @@
     <string>PrizeNameFrame.json</string>
     <string>PrizeContent.json</string>
     <string>AskForJoin.json</string>
+    <string>CommunityPremiumboardFrame.json</string>
+    <string>CommunityPremiumrboardListContentFrame.json</string>
   </JsonList>
   <CanvasSize>
     <Width>640</Width>
@@ -173,12 +175,7 @@
   <ProjectType>UIProject</ProjectType>
   <ResRelativePath />
   <imageFileList />
-  <imagePngList>
-    <string>commonRes/img-bkg-general.png</string>
-    <string>community/img-inactivepage.png</string>
-    <string>community/img-activepage.png</string>
-    <string>community/icn-new.png</string>
-  </imagePngList>
+  <imagePngList />
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>CommunityLeaderboardFrame.json</CurrentUIJson>
+  <CurrentUIJson />
 </UIProject>
