@@ -168,6 +168,9 @@ static AppDelegate s_sharedApplication;
     [Flurry startSession:@"ZJW944VMZ5JTVCVM7N69"];
     
     [[TongDaoUiCore sharedManager]initSdkWithAppKey:@"db0207b6d522c5d143f5da933f1858c5"];
+    
+    [[FBSDKApplicationDelegate sharedInstance] application:application
+                             didFinishLaunchingWithOptions:launchOptions];
     return YES;
  }
 
@@ -290,6 +293,7 @@ static AppDelegate s_sharedApplication;
     
     // Handle the user leaving the app while the Facebook login dialog is being shown
     // For example: when the user presses the iOS "home" button while the login dialog is active
+    [FBSDKAppEvents activateApp];
     [FBAppCall handleDidBecomeActive];
     
     [[LocalyticsSession shared] resume];
