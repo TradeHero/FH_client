@@ -27,6 +27,7 @@ import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
 import com.google.android.gms.gcm.GcmListenerService;
+import com.tongdao.sdk.TongDao;
 
 public class MyGcmListenerService extends GcmListenerService {
 
@@ -45,6 +46,18 @@ public class MyGcmListenerService extends GcmListenerService {
         String message = data.getString("message");
         Log.d(TAG, "From: " + from);
         Log.d(TAG, "Message: " + message);
+
+        // Here we need to track if the user receive the message
+        //String extra = data.getString("extra");
+        //TongDao.trackOpenPushMessage(extra);
+        // After we need to open the link
+        // TongDao.openPage(this, extra);
+        // But in this code there is no callback created yet when user click
+        // on the notification
+        // GCM do not create the notification itself, you need to to it first
+        // the notification is created but we need to add a callback when the user click
+        // on the notification.
+
 
         if (from.startsWith("/topics/")) {
             // message received from some topic.

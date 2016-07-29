@@ -27,6 +27,8 @@ import com.google.android.gms.gcm.GcmPubSub;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 import com.google.android.gms.iid.InstanceID;
 
+import com.tongdao.sdk.TongDao;
+
 import java.io.IOException;
 
 public class RegistrationIntentService extends IntentService {
@@ -86,7 +88,8 @@ public class RegistrationIntentService extends IntentService {
      * @param token The new token.
      */
     private void sendRegistrationToServer(String token) {
-        // Add custom implementation, as needed.
+        // This sends the push token to TongDAO server, that's it.
+        TongDao.identifyPushToken(token);
     }
 
     /**
