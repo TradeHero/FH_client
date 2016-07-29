@@ -139,7 +139,7 @@ function initContent( leaderboardInfo )
     local contentHeight = 0
 
     for i = 1, table.getn( leaderboardInfo ) do
-        local content = SceneManager.widgetFromJsonFile("scenes/CommunityLeaderboardListContentFrame.json")
+        local content = SceneManager.widgetFromJsonFile("scenes/CommunityPremiumboardListContentFrame.json")
         content:setLayoutParameter( layoutParameter )
         contentContainer:addChild( content )
         contentHeight = contentHeight + content:getSize().height
@@ -160,10 +160,7 @@ function initLeaderboardContent( i, content, info )
     local index = tolua.cast( top:getChildByName("Label_Index"), "Label" )
     local logo = tolua.cast( top:getChildByName("Image_Logo"), "ImageView" )
     local click = top:getChildByName("Panel_Click")
-    local drop = top:getChildByName("Panel_Dropdown")
-    local btn = tolua.cast( drop:getChildByName("Button_Dropdown"), "Button" )
     local stats = top:getChildByName("Panel_Stats")
-    stats:setEnabled( false )
 
     local check = tolua.cast( top:getChildByName("Image_Check"), "ImageView" )
     check:setEnabled( false )
@@ -174,40 +171,6 @@ function initLeaderboardContent( i, content, info )
         end
     end
     click:addTouchEventListener( eventHandler )
-
-    local dropHandler = function( sender, eventType )
-        if eventType == TOUCH_EVENT_ENDED then
-            
-            local deltaY = stats:getSize().height
-            local contentContainer = tolua.cast( mWidget:getChildByName("ScrollView_Leaderboard"), "ScrollView" )
-            local contentHeight = contentContainer:getInnerContainerSize().height
-
-            if stats:isEnabled() then
-                stats:setEnabled( false )
-                btn:setBrightStyle( BRIGHT_NORMAL )
-
-                content:setSize( CCSize:new( content:getSize().width, content:getSize().height - deltaY ) )
-                top:setPositionY( top:getPositionY() - deltaY )
-
-                contentHeight = contentHeight - deltaY
-            else
-                stats:setEnabled( true )
-                btn:setBrightStyle( BRIGHT_HIGHLIGHT )
-                
-                content:setSize( CCSize:new( content:getSize().width, content:getSize().height + deltaY ) )
-                top:setPositionY( top:getPositionY() + deltaY )
-
-                contentHeight = contentHeight + deltaY
-            end
-
-            contentContainer:setInnerContainerSize( CCSize:new( 0, contentHeight ) )
-            local layout = tolua.cast( contentContainer, "Layout" )
-            layout:requestDoLayout()
-            contentContainer:addEventListenerScrollView( scrollViewEventHandler )
-        end
-    end
-    drop:addTouchEventListener( dropHandler )
-    btn:addTouchEventListener( dropHandler )
 
     if info["DisplayName"] == nil or type( info["DisplayName"] ) ~= "string" then
         name:setText( Constants.String.unknown_name )
