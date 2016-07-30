@@ -74,6 +74,18 @@ ShareContent = {
 		["extInfo"] = "extInfo",
 	},
 
+	{	["id"] = SHARE_COMPETITION.."olympic2016", 
+		["content"] = Constants.String.share.competition_olympic2016_content,
+		["image"] = "http://fhmainstorage.blob.core.windows.net/fhres/facebook-share-1.png",
+		["title"] = Constants.String.share.competition_title,
+		["description"] = Constants.String.football_hero,
+		["url"] = "http://www.sportshero.mobi",
+		["type"] = C2DXContentTypeNews,
+		["siteUrl"] = "http://www.sportshero.mobi",
+		["site"] = Constants.String.football_hero,
+		["extInfo"] = "extInfo",
+	},
+
 	{	["id"] = SHARE_COMPETITION.."euro2016", 
 		["content"] = Constants.String.share.competition_euro2016_content,
 		["image"] = "http://fhmainstorage.blob.core.windows.net/fhres/fb-share-euro2016.png",

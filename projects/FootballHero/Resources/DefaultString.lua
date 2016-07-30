@@ -600,6 +600,7 @@ StringsDefault = {
     competition_seacup15_content = "I joined a SEA Games Football Challenge. Win $$$, Messi & Ronaldo Signed Jerseys! www.sportshero.mobi/download",
     competition_americacup15_content = "I joined a COPA America Cup Challenge. Win $$$, Messi & Ronaldo Signed Jerseys! www.sportshero.mobi/download",
     competition_americacup2016_content = "I joined a Euro Cup Challenge. Win $$$, Messi Signed Jersey! www.sportshero.mobi/download",
+    competition_olympic2016_content = "I joined a Olympic Challenge. Win $$$, Fablous Prize! www.sportshero.mobi/download",
     competition_euro2016_content = "I joined a COPA America Cup Challenge. Win $$$, Maradona Signed Jerseys! www.sportshero.mobi/download",
     prediction_football_content = "%s Win $$$, Messi & Ronaldo Signed Jerseys! www.sportshero.mobi/download",
     prediction_baseball_content = "%s Win $$$, Messi & Ronaldo Signed Jerseys! www.sportshero.mobi/download",

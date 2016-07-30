@@ -41,6 +41,7 @@ function initNamePrize(mToken)
     local mPrizeConfig = {
         { ["token"] = "euro2016", ["prize1"] = "Win a Messi Signed Jersey", ["prize2"] = "A Signed Football Card" },
         { ["token"] = "americacup2016", ["prize1"] = "Win a Maradona Signed Jersey", ["prize2"] = "A Signed Football Card" },
+        { ["token"] = "olympic2016", ["prize1"] = "Win a Maradona Signed Jersey", ["prize2"] = "A Signed Football Card" },
     }
 
     for i = 1, table.getn( PrizeConfig.PrizeContent ) do
@@ -94,6 +95,7 @@ function initPrize(mToken)
     local mPrizeConfig = {
         { ["token"] = "euro2016", ["prize1"] = "Win a Messi Signed Jersey", ["prize2"] = "A Signed Football Card" },
         { ["token"] = "americacup2016", ["prize1"] = "Win a Maradona Signed Jersey", ["prize2"] = "A Signed Football Card" },
+        { ["token"] = "olympic2016", ["prize1"] = "Win a Maradona Signed Jersey", ["prize2"] = "A Signed Football Card" },
     }
 
     for i = 1, table.getn( mPrizeConfig ) do
