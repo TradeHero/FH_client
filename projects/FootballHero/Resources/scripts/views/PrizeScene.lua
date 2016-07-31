@@ -10,7 +10,11 @@ local mWidget
 
 function loadFrame( mToken )
 --    initPrize(mToken)
-    initNamePrize(mToken)
+    if mToken == "olympic2016" then
+        initOlympic()
+    else
+        initNamePrize(mToken)
+    end
 end
 
 function initNamePrize(mToken)
@@ -109,6 +113,19 @@ function initPrize(mToken)
             end
         end
     end   
+end
+function initOlympic()
+    local widget = SceneManager.secondLayerWidgetFromJsonFile("scenes/PrizeOlympic.json")
+    mWidget = widget
+    mWidget:registerScriptHandler( EnterOrExit )
+    SceneManager.clearNAddWidget( widget )
+    SceneManager.clearKeypadBackListener()
+    SceneManager.setKeypadBackListener( keypadBackEventHandler )
+
+    widget = tolua.cast( widget, "Layout" )
+
+    local btnBack = mWidget:getChildByName("Button_Back")
+    btnBack:addTouchEventListener( backEventHandler )
 end
 
 function EnterOrExit( eventType )
