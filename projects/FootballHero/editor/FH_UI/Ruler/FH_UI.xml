@@ -660,4 +660,8 @@
     <Project>AskForJoin</Project>
     <GuidesList />
   </GuidesProject>
+  <GuidesProject>
+    <Project>PrizeOlympic</Project>
+    <GuidesList />
+  </GuidesProject>
 </ArrayOfGuidesProject>

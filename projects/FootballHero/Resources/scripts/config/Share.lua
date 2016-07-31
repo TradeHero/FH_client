@@ -76,7 +76,7 @@ ShareContent = {
 
 	{	["id"] = SHARE_COMPETITION.."olympic2016", 
 		["content"] = Constants.String.share.competition_olympic2016_content,
-		["image"] = "http://fhmainstorage.blob.core.windows.net/fhres/facebook-share-1.png",
+		["image"] = "http://fhmainstorage.blob.core.windows.net/fhres/facebook-share-olympic2016.png",
 		["title"] = Constants.String.share.competition_title,
 		["description"] = Constants.String.football_hero,
 		["url"] = "http://www.sportshero.mobi",
