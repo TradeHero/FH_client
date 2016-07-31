@@ -10,11 +10,7 @@
   "designHeight": 1136,
   "designWidth": 640,
   "textures": [],
-  "texturesPng": [
-    "Competition/ad_bg.png",
-    "Popup/close_icon.png",
-    "Competition/btn-prize.png"
-  ],
+  "texturesPng": [],
   "version": "1.6.0.0",
   "widgetTree": {
     "classname": "Panel",
@@ -121,7 +117,7 @@
               "layoutParameter": null,
               "opacity": 255,
               "positionPercentX": 0,
-              "positionPercentY": -0.416156471,
+              "positionPercentY": -0.4154762,
               "positionType": 0,
               "rotation": 0,
               "scaleX": 1,

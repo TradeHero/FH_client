@@ -31,6 +31,10 @@
     <string>CommunityMediaFrame.json</string>
     <string>CommunityNewCompetitionFrame.json</string>
     <string>CommunityPlayVideoFrame.json</string>
+    <string>CommunityPremiumLeaderboardFrame.json</string>
+    <string>CommunityPremiumLeaderboardListContentFrame.json</string>
+    <string>CommunityPremiumPredictFrame.json</string>
+    <string>CommunityPremiumPredictContentFrame.json</string>
     <string>CommunityTimelineFrame.json</string>
     <string>CommunityTimelineContent.json</string>
     <string>CommunityVideoContent.json</string>
@@ -164,8 +168,6 @@
     <string>PrizeNameFrame.json</string>
     <string>PrizeContent.json</string>
     <string>AskForJoin.json</string>
-    <string>CommunityPremiumboardFrame.json</string>
-    <string>CommunityPremiumboardListContentFrame.json</string>
   </JsonList>
   <CanvasSize>
     <Width>640</Width>
@@ -176,11 +178,11 @@
   <ResRelativePath />
   <imageFileList />
   <imagePngList>
-    <string>LoginNReg/photo.png</string>
-    <string>Competition/icn-unqualified.png</string>
-    <string>community/img-wininfo.png</string>
-    <string>spinWheel/btn-buy-tickets.png</string>
+    <string>commonRes/img-bkg-general.png</string>
+    <string>community/img-inactivepage.png</string>
+    <string>community/img-activepage.png</string>
+    <string>community/icn-new.png</string>
   </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>CommunityPremiumboardListContentFrame.json</CurrentUIJson>
+  <CurrentUIJson>CommunityBaseScene.json</CurrentUIJson>
 </UIProject>

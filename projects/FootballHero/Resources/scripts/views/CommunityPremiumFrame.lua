@@ -17,10 +17,11 @@ local mStep
 local mCurrentTotalNum
 local mHasMoreToLoad
 local mDropDown
+local mFilter
 
 -- DS for subType see LeaderboardConfig
 function loadFrame( parent, leaderboardInfo, leaderboardId, subType, bRefresh )
-  mWidget = GUIReader:shareReader():widgetFromJsonFile("scenes/CommunityPremiumboardFrame.json")
+    mWidget = GUIReader:shareReader():widgetFromJsonFile("scenes/CommunityPremiumLeaderboardFrame.json")
     parent:addChild( mWidget )
 
     mLeaderboardId = leaderboardId
@@ -31,6 +32,13 @@ function loadFrame( parent, leaderboardInfo, leaderboardId, subType, bRefresh )
     initTitles()
     initContent( leaderboardInfo )
     initTypeList()
+
+    if bRefresh then
+        initFilter( true )
+    else
+        mFilter = true
+        initFilter( false )
+    end
 end
 
 function refreshFrame( parent, leaderboardInfo, leaderboardId, subType )
@@ -61,8 +69,10 @@ end
 
 function initTitles()
     local title = tolua.cast( mWidget:getChildByName("Label_Leaderboard_Type"), "Label" )
-    CCLuaLog("init title:" .. mLeaderboardId)
     title:setText( Constants.String[LeaderboardConfig.LeaderboardType[mLeaderboardId]["displayNameKey"]] )
+
+    local minTitle = tolua.cast( mWidget:getChildByName( "Label_Min_Prediction" ), "Label" )
+    minTitle:setText( string.format( Constants.String.leaderboard.min_prediction, Constants.FILTER_MIN_PREDICTION ) )
 end
 
 function backEventHandler( sender,eventType )
@@ -80,7 +90,30 @@ function initTypeList()
     local button = mWidget:getChildByName("Panel_Filter")
     local expendedIndicator = mWidget:getChildByName( "Button_Filter" )
     
-    --local leaderboardType = mWidget:getChildByName( "Label_Leaderboard_Type")    
+    --local leaderboardType = mWidget:getChildByName( "Label_Leaderboard_Type")
+    local leftPanel = mWidget:getChildByName( "Panel_Arrow_Left")
+    local leftButton = leftPanel:getChildByName( "Button_Left")
+    local rightPanel = mWidget:getChildByName( "Panel_Arrow_Right")
+    local rightButton = rightPanel:getChildByName( "Button_Right")
+
+    local switchLeaderboardEventHandler = function( sender, eventType ) 
+        if eventType == TOUCH_EVENT_ENDED then
+            -- Stop the loading logo actions.
+            mWidget:stopAllActions()
+            
+            local otherType = mLeaderboardId % table.getn( LeaderboardConfig.LeaderboardType ) + 1
+            if mFilter == true then
+                EventManager:postEvent( Event.Enter_Community, { CommunityConfig.COMMUNITY_TAB_ID_PREMIUM, otherType, typeKey, Constants.FILTER_MIN_PREDICTION } )
+            else
+                EventManager:postEvent( Event.Enter_Community, { CommunityConfig.COMMUNITY_TAB_ID_PREMIUM, otherType, typeKey } )
+            end
+        end
+    end
+    leftPanel:addTouchEventListener( switchLeaderboardEventHandler )
+    leftButton:addTouchEventListener( switchLeaderboardEventHandler )
+    rightPanel:addTouchEventListener( switchLeaderboardEventHandler )
+    rightButton:addTouchEventListener( switchLeaderboardEventHandler )
+    
     local buttonEventHandler = function( sender, eventType )
         if eventType == TOUCH_EVENT_ENDED then
             if list:isEnabled() then
@@ -113,7 +146,11 @@ function initTypeList()
 
         -- Stop the loading logo actions.
         mWidget:stopAllActions()
-        EventManager:postEvent( Event.Enter_Community, { CommunityConfig.COMMUNITY_TAB_ID_LEADERBOARD, mLeaderboardId, typeKey, Constants.FILTER_MIN_PREDICTION } )
+        if mFilter == true then
+            EventManager:postEvent( Event.Enter_Community, { CommunityConfig.COMMUNITY_TAB_ID_PREMIUM, mLeaderboardId, typeKey, Constants.FILTER_MIN_PREDICTION } )
+        else
+            EventManager:postEvent( Event.Enter_Community, { CommunityConfig.COMMUNITY_TAB_ID_PREMIUM, mLeaderboardId, typeKey } )
+        end
     end
 
     CommunityLeaderboardDropdownFrame.loadFrame( "scenes/CommunityLeaderboardDropdownContentFrame.json", 
@@ -123,15 +160,42 @@ function initTypeList()
 end
 
 function getFilter()
-    return Constants.FILTER_MIN_PREDICTION
+    local minCheckbox = tolua.cast( mWidget:getChildByName("CheckBox_Min_Prediction"), "CheckBox" )
+    if minCheckbox:getSelectedState() then
+        return Constants.FILTER_MIN_PREDICTION
+    else
+        return 1
+    end
 end
 
 function initFilter( bRefreshed )
+    local minCheckboxEventHandler = function( sender, eventType )
+        if eventType == TOUCH_EVENT_ENDED then
+            local minCheckBox = tolua.cast( sender, "CheckBox" )
+            
+            mWidget:stopAllActions()
 
+            if minCheckBox:getSelectedState() == true then                
+                mFilter = false
+                EventManager:postEvent( Event.Enter_Community, { CommunityConfig.COMMUNITY_TAB_ID_PREMIUM, mLeaderboardId, typeKey } )
+            else                
+                mFilter = true
+                EventManager:postEvent( Event.Enter_Community, { CommunityConfig.COMMUNITY_TAB_ID_PREMIUM, mLeaderboardId, typeKey, Constants.FILTER_MIN_PREDICTION } )
+            end
+        end
+    end
+    local minCheckbox = tolua.cast( mWidget:getChildByName("CheckBox_Min_Prediction"), "CheckBox" )
+    minCheckbox:addTouchEventListener( minCheckboxEventHandler )
+    
+    if bRefreshed == true then
+        minCheckbox:setSelectedState( mFilter )
+    else
+        minCheckbox:setSelectedState( true )
+    end
 end
 
 function initContent( leaderboardInfo )
-  local contentContainer = tolua.cast( mWidget:getChildByName("ScrollView_Leaderboard"), "ScrollView" )
+    local contentContainer = tolua.cast( mWidget:getChildByName("ScrollView_Leaderboard"), "ScrollView" )
     contentContainer:removeAllChildrenWithCleanup( true )
 
     local layoutParameter = LinearLayoutParameter:create()
@@ -139,7 +203,7 @@ function initContent( leaderboardInfo )
     local contentHeight = 0
 
     for i = 1, table.getn( leaderboardInfo ) do
-        local content = SceneManager.widgetFromJsonFile("scenes/CommunityPremiumboardListContentFrame.json")
+        local content = SceneManager.widgetFromJsonFile("scenes/CommunityPremiumLeaderboardListContentFrame.json")
         content:setLayoutParameter( layoutParameter )
         contentContainer:addChild( content )
         contentHeight = contentHeight + content:getSize().height
@@ -158,9 +222,20 @@ function initLeaderboardContent( i, content, info )
     local name = tolua.cast( top:getChildByName("Label_Name"), "Label" )
     local score = tolua.cast( top:getChildByName("Label_Score"), "Label" )
     local index = tolua.cast( top:getChildByName("Label_Index"), "Label" )
+    local open = tolua.cast( top:getChildByName("Label_open"), "Label" )
     local logo = tolua.cast( top:getChildByName("Image_Logo"), "ImageView" )
     local click = top:getChildByName("Panel_Click")
+    local drop = top:getChildByName("Panel_Dropdown")
+    local btn = tolua.cast( drop:getChildByName("Button_Dropdown"), "Button" )
     local stats = top:getChildByName("Panel_Stats")
+    stats:setEnabled( false )
+
+    info["open"] = 1
+    if info["open"] == 0 then
+        open:setEnabled( false )
+    else
+        open:setText(string.format( "%d open", info["open"] ))
+    end
 
     local check = tolua.cast( top:getChildByName("Image_Check"), "ImageView" )
     check:setEnabled( false )
@@ -171,6 +246,40 @@ function initLeaderboardContent( i, content, info )
         end
     end
     click:addTouchEventListener( eventHandler )
+
+    local dropHandler = function( sender, eventType )
+        if eventType == TOUCH_EVENT_ENDED then
+            
+            local deltaY = stats:getSize().height
+            local contentContainer = tolua.cast( mWidget:getChildByName("ScrollView_Leaderboard"), "ScrollView" )
+            local contentHeight = contentContainer:getInnerContainerSize().height
+
+            if stats:isEnabled() then
+                stats:setEnabled( false )
+                btn:setBrightStyle( BRIGHT_NORMAL )
+
+                content:setSize( CCSize:new( content:getSize().width, content:getSize().height - deltaY ) )
+                top:setPositionY( top:getPositionY() - deltaY )
+
+                contentHeight = contentHeight - deltaY
+            else
+                stats:setEnabled( true )
+                btn:setBrightStyle( BRIGHT_HIGHLIGHT )
+                
+                content:setSize( CCSize:new( content:getSize().width, content:getSize().height + deltaY ) )
+                top:setPositionY( top:getPositionY() + deltaY )
+
+                contentHeight = contentHeight + deltaY
+            end
+
+            contentContainer:setInnerContainerSize( CCSize:new( 0, contentHeight ) )
+            local layout = tolua.cast( contentContainer, "Layout" )
+            layout:requestDoLayout()
+            contentContainer:addEventListenerScrollView( scrollViewEventHandler )
+        end
+    end
+    drop:addTouchEventListener( dropHandler )
+    btn:addTouchEventListener( dropHandler )
 
     if info["DisplayName"] == nil or type( info["DisplayName"] ) ~= "string" then
         name:setText( Constants.String.unknown_name )
@@ -285,6 +394,10 @@ end
 function scrollViewEventHandler( target, eventType )
     if eventType == SCROLLVIEW_EVENT_BOUNCE_BOTTOM and mHasMoreToLoad then
         mStep = mStep + 1
-        EventManager:postEvent( Event.Load_More_In_Leaderboard, { mLeaderboardId, mSubType, mStep, Constants.FILTER_MIN_PREDICTION } )
+        if mFilter == true then
+            EventManager:postEvent( Event.Load_More_In_Leaderboard, { mLeaderboardId, mSubType, mStep, Constants.FILTER_MIN_PREDICTION } )
+        else
+            EventManager:postEvent( Event.Load_More_In_Leaderboard, { mLeaderboardId, mSubType, mStep } )
+        end
     end
 end

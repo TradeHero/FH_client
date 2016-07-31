@@ -13,7 +13,8 @@
   "texturesPng": [
     "LoginNReg/photo.png",
     "Competition/icn-unqualified.png",
-    "community/img-wininfo.png"
+    "community/img-wininfo.png",
+    "spinWheel/btn-buy-tickets.png"
   ],
   "version": "1.6.0.0",
   "widgetTree": {

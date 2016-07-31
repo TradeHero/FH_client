@@ -661,11 +661,19 @@
     <GuidesList />
   </GuidesProject>
   <GuidesProject>
-    <Project>CommunityPremiumboardFrame</Project>
+    <Project>CommunityPremiumPredictFrame</Project>
     <GuidesList />
   </GuidesProject>
   <GuidesProject>
-    <Project>CommunityPremiumboardListContentFrame</Project>
+    <Project>CommunityPremiumPredictContentFrame</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>CommunityPremiumLeaderboardFrame</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>CommunityPremiumLeaderboardListContentFrame</Project>
     <GuidesList />
   </GuidesProject>
 </ArrayOfGuidesProject>
