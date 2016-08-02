@@ -230,11 +230,10 @@ function initLeaderboardContent( i, content, info )
     local stats = top:getChildByName("Panel_Stats")
     stats:setEnabled( false )
 
-    info["open"] = 1
-    if info["open"] == 0 then
+    if info["OpenCount"] == 0 then
         open:setEnabled( false )
     else
-        open:setText(string.format( "%d open", info["open"] ))
+        open:setText(string.format( "%d open", info["OpenCount"] ))
     end
 
     local check = tolua.cast( top:getChildByName("Image_Check"), "ImageView" )
@@ -294,7 +293,7 @@ function initLeaderboardContent( i, content, info )
         score:setColor( ccc3( 79, 199, 93 ) )
     end
 
-    index:setText( i )
+    index:setText( info["NonPremiumRank"] )
 
     -- stat box
     local title_stat_win = tolua.cast( stats:getChildByName("Label_Title_Win"), "Label" )

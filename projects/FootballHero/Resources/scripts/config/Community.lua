@@ -21,6 +21,6 @@ CommunityType = {
 
   { ["id"] = "Button_Timeline", ["displayNameKey"] = "title_timeline" },
 
-  { ["id"] = "Button_Premium", ["displayNameKey"] = "title_premium" },
+  { ["id"] = "Button_Premium", ["displayNameKey"] = "title_pleaderboard" },
 }
 
