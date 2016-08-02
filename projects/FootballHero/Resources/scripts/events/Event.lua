@@ -136,6 +136,7 @@ EventNameList =
     "Show_Get_Tickets",
 
     "Load_More_In_Leaderboard",
+    "Load_More_In_PremiumLeaderboard",
     "Load_More_In_History",
     "Load_More_In_Expert_History",
     "Load_More_In_Competition_Detail",
@@ -214,6 +215,7 @@ EventNameDosenotTrackList =
     "Show_Get_Tickets",
     
     "Load_More_In_Leaderboard",
+    "Load_More_In_PremiumLeaderboard",
     "Load_More_In_History",
     "Load_More_In_Expert_History",
     "Load_More_In_Competition_Detail",

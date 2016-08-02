@@ -371,7 +371,7 @@ function loadMoreContent( leaderboardInfo )
             end
         end
 
-        local content = SceneManager.widgetFromJsonFile("scenes/CommunityLeaderboardListContentFrame.json")
+        local content = SceneManager.widgetFromJsonFile("scenes/CommunityPremiumLeaderboardListContentFrame.json")
         content:setLayoutParameter( layoutParameter )
         contentContainer:addChild( content )
         contentHeight = contentHeight + content:getSize().height
@@ -394,9 +394,9 @@ function scrollViewEventHandler( target, eventType )
     if eventType == SCROLLVIEW_EVENT_BOUNCE_BOTTOM and mHasMoreToLoad then
         mStep = mStep + 1
         if mFilter == true then
-            EventManager:postEvent( Event.Load_More_In_Leaderboard, { mLeaderboardId, mSubType, mStep, Constants.FILTER_MIN_PREDICTION } )
+            EventManager:postEvent( Event.Load_More_In_PremiumLeaderboard, { mLeaderboardId, mSubType, mStep, Constants.FILTER_MIN_PREDICTION } )
         else
-            EventManager:postEvent( Event.Load_More_In_Leaderboard, { mLeaderboardId, mSubType, mStep } )
+            EventManager:postEvent( Event.Load_More_In_PremiumLeaderboard, { mLeaderboardId, mSubType, mStep } )
         end
     end
 end
