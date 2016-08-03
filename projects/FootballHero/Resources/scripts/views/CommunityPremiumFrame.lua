@@ -223,6 +223,7 @@ function initLeaderboardContent( i, content, info )
     local score = tolua.cast( top:getChildByName("Label_Score"), "Label" )
     local index = tolua.cast( top:getChildByName("Label_Index"), "Label" )
     local open = tolua.cast( top:getChildByName("Label_open"), "Label" )
+    local dot = tolua.cast( top:getChildByName("Image_Dot"), "ImageView" )
     local logo = tolua.cast( top:getChildByName("Image_Logo"), "ImageView" )
     local click = top:getChildByName("Panel_Click")
     local drop = top:getChildByName("Panel_Dropdown")
@@ -232,6 +233,7 @@ function initLeaderboardContent( i, content, info )
 
     if info["OpenCount"] == 0 then
         open:setEnabled( false )
+        dot:setEnabled( false )
     else
         open:setText(string.format( "%d open", info["OpenCount"] ))
     end
