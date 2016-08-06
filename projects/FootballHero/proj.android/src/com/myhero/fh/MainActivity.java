@@ -152,8 +152,7 @@ public class MainActivity extends Cocos2dxActivity {
               new LocalyticsActivityLifecycleCallbacks(this.localyticsSession));
     this.localyticsSession.setLoggingEnabled(true);
 
-    AppsFlyerLib.setAppsFlyerKey("pEuxjZE2GpyRXXwFjHHRRU");
-    AppsFlyerLib.sendTracking(getApplicationContext());
+    AppsFlyerLib.getInstance().startTracking(this.getApplication(), Constants.APPSFLYER_APP_KEY);
 
     QuickBloxChat.init(this);
 

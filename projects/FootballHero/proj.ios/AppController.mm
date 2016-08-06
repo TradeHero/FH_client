@@ -128,7 +128,7 @@ static AppDelegate s_sharedApplication;
     NSLog(@"UA device token is %@", [UAPush shared].deviceToken);
 
     // AppsFlyer
-    [AppsFlyerTracker sharedTracker].appsFlyerDevKey = @"pEuxjZE2GpyRXXwFjHHRRU";
+    [AppsFlyerTracker sharedTracker].appsFlyerDevKey = @"qpaAPeBqyY48v4bAKRs9o6";
     [AppsFlyerTracker sharedTracker].appleAppID = @"859894802";
 
     NSTimeInterval timeInterval = [startTime timeIntervalSinceNow];
