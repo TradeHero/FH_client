@@ -164,6 +164,7 @@
     <string>PrizeNameFrame.json</string>
     <string>PrizeContent.json</string>
     <string>AskForJoin.json</string>
+    <string>PrizeOlympic.json</string>
   </JsonList>
   <CanvasSize>
     <Width>640</Width>
@@ -174,10 +175,9 @@
   <ResRelativePath />
   <imageFileList />
   <imagePngList>
-    <string>Competition/ad_bg.png</string>
-    <string>Popup/close_icon.png</string>
-    <string>Competition/btn-prize.png</string>
+    <string>Competition/Prize_olympic.png</string>
+    <string>header/back.png</string>
   </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>AskForJoin.json</CurrentUIJson>
+  <CurrentUIJson>PrizeOlympic.json</CurrentUIJson>
 </UIProject>

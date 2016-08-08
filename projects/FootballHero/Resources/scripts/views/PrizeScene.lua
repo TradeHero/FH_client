@@ -10,7 +10,11 @@ local mWidget
 
 function loadFrame( mToken )
 --    initPrize(mToken)
-    initNamePrize(mToken)
+    if mToken == "olympic2016" then
+        initOlympic()
+    else
+        initNamePrize(mToken)
+    end
 end
 
 function initNamePrize(mToken)
@@ -41,6 +45,7 @@ function initNamePrize(mToken)
     local mPrizeConfig = {
         { ["token"] = "euro2016", ["prize1"] = "Win a Messi Signed Jersey", ["prize2"] = "A Signed Football Card" },
         { ["token"] = "americacup2016", ["prize1"] = "Win a Maradona Signed Jersey", ["prize2"] = "A Signed Football Card" },
+        { ["token"] = "olympic2016", ["prize1"] = "Win a Maradona Signed Jersey", ["prize2"] = "A Signed Football Card" },
     }
 
     for i = 1, table.getn( PrizeConfig.PrizeContent ) do
@@ -94,6 +99,7 @@ function initPrize(mToken)
     local mPrizeConfig = {
         { ["token"] = "euro2016", ["prize1"] = "Win a Messi Signed Jersey", ["prize2"] = "A Signed Football Card" },
         { ["token"] = "americacup2016", ["prize1"] = "Win a Maradona Signed Jersey", ["prize2"] = "A Signed Football Card" },
+        { ["token"] = "olympic2016", ["prize1"] = "Win a Maradona Signed Jersey", ["prize2"] = "A Signed Football Card" },
     }
 
     for i = 1, table.getn( mPrizeConfig ) do
@@ -107,6 +113,19 @@ function initPrize(mToken)
             end
         end
     end   
+end
+function initOlympic()
+    local widget = SceneManager.secondLayerWidgetFromJsonFile("scenes/PrizeOlympic.json")
+    mWidget = widget
+    mWidget:registerScriptHandler( EnterOrExit )
+    SceneManager.clearNAddWidget( widget )
+    SceneManager.clearKeypadBackListener()
+    SceneManager.setKeypadBackListener( keypadBackEventHandler )
+
+    widget = tolua.cast( widget, "Layout" )
+
+    local btnBack = mWidget:getChildByName("Button_Back")
+    btnBack:addTouchEventListener( backEventHandler )
 end
 
 function EnterOrExit( eventType )

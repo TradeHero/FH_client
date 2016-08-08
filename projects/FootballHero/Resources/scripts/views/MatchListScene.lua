@@ -223,39 +223,48 @@ function initMatchList( matchList, leagueKey, bInit )
         
         if leagueKey == Constants.SpecialLeagueIds.MOST_POPULAR or leagueKey == Constants.SpecialLeagueIds.MOST_DISCUSSED then
             
-            -- if not Logic:getBetBlock() then
-            --     WebviewDelegate:sharedDelegate():openWebpage(  "http://spiritrain.tk/home.html", 0, 145 , 640, 120)
-            -- end
-            if Logic:getBetBlock() then
-            -- if false then
-                local friendReferal = SceneManager.widgetFromJsonFile("scenes/MatchListFriendsReferal.json")
-                local referalButton = friendReferal:getChildByName("Button_refer")
-                referalButton:addTouchEventListener( function( sender, eventType )
-                    if eventType == TOUCH_EVENT_ENDED then
-                        EventManager:postEvent( Event.Enter_Friend_Referal )
-                    end
-                end )
+           -- if Logic:getBetBlock() then
+           --  -- if false then
+           --      local friendReferal = SceneManager.widgetFromJsonFile("scenes/MatchListFriendsReferal.json")
+           --      local referalButton = friendReferal:getChildByName("Button_refer")
+           --      referalButton:addTouchEventListener( function( sender, eventType )
+           --          if eventType == TOUCH_EVENT_ENDED then
+           --              EventManager:postEvent( Event.Enter_Friend_Referal )
+           --          end
+           --      end )
 
-                friendReferal:setLayoutParameter( layoutParameter )
-                contentContainer:addChild( friendReferal )
-                contentHeight = contentHeight + friendReferal:getSize().height           
-            else
-                -- WebviewDelegate:sharedDelegate():openWebpage(  "http://spiritrain.tk/home.html", 0, 145 , 640, 120)
+           --      friendReferal:setLayoutParameter( layoutParameter )
+           --      contentContainer:addChild( friendReferal )
+           --      contentHeight = contentHeight + friendReferal:getSize().height           
+           --  else
+           --      -- ad banner
+           --      local betHandler = function ( sender, eventType )
+           --          if eventType == TOUCH_EVENT_ENDED then
+           --              EventManager:postEvent( Event.Enter_Bet365 )
+           --          end
+           --      end
+           --      local content = SceneManager.widgetFromJsonFile( "scenes/MatchListFriendsReferal.json" )
+           --      local referalButton = tolua.cast( content:getChildByName("Button_refer"), "Button" )
+           --      referalButton:addTouchEventListener( betHandler )
+           --      referalButton:loadTextureNormal( Constants.IMAGE_PATH .. "ads/banner_home.jpg" )
 
-                -- ad banner
-                local betHandler = function ( sender, eventType )
-                    if eventType == TOUCH_EVENT_ENDED then
-                        EventManager:postEvent( Event.Enter_Bet365 )
-                    end
+           --      contentContainer:addChild( content )
+           --      contentHeight = contentHeight + content:getSize().height
+           --  end
+
+            local olympicHandler = function ( sender, eventType )
+                if eventType == TOUCH_EVENT_ENDED then
+                    EventManager:postEvent( Event.Enter_Community, { CommunityConfig.COMMUNITY_TAB_ID_COMPETITION } )
                 end
-                local content = SceneManager.widgetFromJsonFile( "scenes/MatchListFriendsReferal.json" )
-                local referalButton = tolua.cast( content:getChildByName("Button_refer"), "Button" )
-                referalButton:addTouchEventListener( betHandler )
-                referalButton:loadTextureNormal( Constants.IMAGE_PATH .. "ads/banner_home.jpg" )
-
-                contentContainer:addChild( content )
-                contentHeight = contentHeight + content:getSize().height
             end
+            local content = SceneManager.widgetFromJsonFile( "scenes/MatchListFriendsReferal.json" )
+            local referalButton = tolua.cast( content:getChildByName("Button_refer"), "Button" )
+            referalButton:addTouchEventListener( olympicHandler )
+           referalButton:loadTextureNormal( Constants.IMAGE_PATH .. "ads/banner_olympic.jpg" )
+
+            contentContainer:addChild( content )
+            contentHeight = contentHeight + content:getSize().height
+
 
             for i = 1, table.getn( matchList ) do
                 local match = matchList[i]

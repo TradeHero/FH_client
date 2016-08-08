@@ -13,6 +13,7 @@
 		10CF61C91BE73D4500B88D33 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10CF61C81BE73D4500B88D33 /* StoreKit.framework */; };
 		10CF61CD1BE8B1D100B88D33 /* Store.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 10CF61CB1BE8B1D100B88D33 /* Store.cpp */; };
 		10CF61D21BE8B7F900B88D33 /* StoreHandler.mm in Sources */ = {isa = PBXBuildFile; fileRef = 10CF61D11BE8B7F900B88D33 /* StoreHandler.mm */; };
+		10E368C51D583A1000283601 /* vi in Resources */ = {isa = PBXBuildFile; fileRef = 10E368C41D583A1000283601 /* vi */; };
 		10EE79A71BCE33DC0097EF70 /* Empty.m in Sources */ = {isa = PBXBuildFile; fileRef = 10EE79A31BCE33DC0097EF70 /* Empty.m */; };
 		10EE79A81BCE33DC0097EF70 /* libFlurry_7.1.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 10EE79A61BCE33DC0097EF70 /* libFlurry_7.1.0.a */; };
 		10FD25B31D1B855B00DBD396 /* arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 10FD25AC1D1B855B00DBD396 /* arrow.png */; };
@@ -483,6 +484,7 @@
 		10CF61CC1BE8B1D100B88D33 /* Store.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Store.h; path = Utils/Store.h; sourceTree = "<group>"; };
 		10CF61D01BE8B6F300B88D33 /* StoreHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StoreHandler.h; sourceTree = "<group>"; };
 		10CF61D11BE8B7F900B88D33 /* StoreHandler.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = StoreHandler.mm; sourceTree = "<group>"; };
+		10E368C41D583A1000283601 /* vi */ = {isa = PBXFileReference; lastKnownFileType = folder; path = vi; sourceTree = "<group>"; };
 		10EE79A31BCE33DC0097EF70 /* Empty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Empty.m; sourceTree = "<group>"; };
 		10EE79A41BCE33DC0097EF70 /* Flurry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flurry.h; sourceTree = "<group>"; };
 		10EE79A51BCE33DC0097EF70 /* FlurryWatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlurryWatch.h; sourceTree = "<group>"; };
@@ -3072,6 +3074,7 @@
 		F293BC4615EB859D00256477 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				10E368C41D583A1000283601 /* vi */,
 				105D6A3F1C16BBFA00549CE7 /* dev */,
 				736466CA1B6B268C007B6827 /* es */,
 				73846DE41A6F8269001B4EF1 /* en */,
@@ -3193,6 +3196,7 @@
 				BFA3732919F8E6AB001FCA85 /* LocalizedString.lua in Resources */,
 				10FD25B51D1B855B00DBD396 /* arrow@3x.png in Resources */,
 				10FD25B41D1B855B00DBD396 /* arrow@2x.png in Resources */,
+				10E368C51D583A1000283601 /* vi in Resources */,
 				7314B4B219B715350065D927 /* UAPushMoreSettingsView.xib in Resources */,
 				7314B4B319B715350065D927 /* UAPushSettingsAddTagViewController.xib in Resources */,
 				730D984F18DC4317000CA5F9 /* sounds in Resources */,
