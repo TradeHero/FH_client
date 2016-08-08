@@ -73,6 +73,16 @@ namespace Utils
 #endif
     }
     
+    void Analytics::logoutTongdao()
+    {
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+        AnalyticsHandler::getInstance()->logoutTongdao();
+#endif
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+        android_logout_Tongdao();
+#endif
+    }
+    
     void Analytics::trackTongdaoAttr(const char* attrName, const char* value)
     {
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)

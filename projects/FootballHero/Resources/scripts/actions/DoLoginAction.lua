@@ -88,6 +88,7 @@ function onRequestSuccess( jsonResponse )
             CCUserDefault:sharedUserDefault():setIntegerForKey( Constants.EVENT_FHC_STATUS_KEY, Constants.EVENT_FHC_STATUS_TO_OPEN )
         end
 
+        Analytics:sharedDelegate():loginTongdao(userId)
         Logic:setUserInfo( mEmail, mPassword, "", sessionToken, userId )
         Logic:setDisplayName( displayName )
         Logic:setPictureUrl( pictureUrl )
@@ -107,7 +108,6 @@ function onRequestSuccess( jsonResponse )
         local params = { Platform = "email" }
         Analytics:sharedDelegate():postEvent( Constants.ANALYTICS_EVENT_LOGIN, Json.encode( params ) )
         Analytics:sharedDelegate():postFlurryEvent( Constants.ANALYTICS_EVENT_LOGIN, Json.encode( params ) )
-        Analytics:sharedDelegate():loginTongdao(userId)
         Analytics:sharedDelegate():postTongdaoEvent( Constants.ANALYTICS_EVENT_LOGIN,  Json.encode( params ))
 
         QuickBloxService.login( displayName, pictureUrl, userId, function( token )

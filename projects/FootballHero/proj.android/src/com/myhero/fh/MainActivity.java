@@ -23,16 +23,18 @@
  ****************************************************************************/
 package com.myhero.fh;
 
-import android.content.ClipData;
-import android.content.ClipboardManager;
-import android.content.Context;
-import android.content.Intent;
+import android.content.*;
 import android.graphics.PointF;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
+import android.widget.ProgressBar;
 import cn.sharesdk.ShareSDKUtils;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
 import com.myhero.fh.metrics.events.ParamStringEvent;
 
 import com.crashlytics.android.Crashlytics;
@@ -85,7 +87,9 @@ public class MainActivity extends Cocos2dxActivity {
   private LocalyticsAmpSession localyticsSession;
 
   private static GooglePlayIABPlugin mGooglePlayIABPlugin;
+    private BroadcastReceiver mRegistrationBroadcastReceiver;
 
+    private boolean isReceiverRegistered;
 
 
 
@@ -167,8 +171,53 @@ public class MainActivity extends Cocos2dxActivity {
     // 初始化iab
       mGooglePlayIABPlugin = new GooglePlayIABPlugin(this);
       mGooglePlayIABPlugin.onCreate(savedInstanceState);
+
+      mRegistrationBroadcastReceiver = new BroadcastReceiver() {
+          @Override
+          public void onReceive(Context context, Intent intent) {
+              SharedPreferences sharedPreferences =
+                      PreferenceManager.getDefaultSharedPreferences(context);
+              boolean sentToken = sharedPreferences
+                      .getBoolean(QuickstartPreferences.SENT_TOKEN_TO_SERVER, false);
+              if (sentToken) {
+                  Log.v("GCM", "GCM sent");
+              } else {
+                  Log.v("GCM", "GCM not sent");
+              }
+          }
+      };
+      registerReceiver();
+
+      if (checkPlayServices()) {
+          // Start IntentService to register this application with GCM.
+          Intent intent = new Intent(this, RegistrationIntentService.class);
+          startService(intent);
+      }
   }
 
+    private void registerReceiver(){
+        if(!isReceiverRegistered) {
+            LocalBroadcastManager.getInstance(this).registerReceiver(mRegistrationBroadcastReceiver,
+                    new IntentFilter(QuickstartPreferences.REGISTRATION_COMPLETE));
+            isReceiverRegistered = true;
+        }
+    }
+
+    private boolean checkPlayServices() {
+        GoogleApiAvailability apiAvailability = GoogleApiAvailability.getInstance();
+        int resultCode = apiAvailability.isGooglePlayServicesAvailable(this);
+        if (resultCode != ConnectionResult.SUCCESS) {
+            if (apiAvailability.isUserResolvableError(resultCode)) {
+                apiAvailability.getErrorDialog(this, resultCode, 9000)
+                        .show();
+            } else {
+                Log.i("CheckPlayService", "This device is not supported.");
+                finish();
+            }
+            return false;
+        }
+        return true;
+    }
     @Override
     protected void onNewIntent(Intent intent)
     {
@@ -183,6 +232,7 @@ public class MainActivity extends Cocos2dxActivity {
         mobileAppTracker.setReferralSources(this);
         // MAT will not function unless the measureSession call is included
         mobileAppTracker.measureSession();
+        registerReceiver();
 
         Log.v("###", "onResume");
     }
@@ -204,6 +254,8 @@ public class MainActivity extends Cocos2dxActivity {
 
     @Override
     public void onPause() {
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(mRegistrationBroadcastReceiver);
+        isReceiverRegistered = false;
         Log.v("###", "onPause");
         super.onPause();
     }
@@ -416,6 +468,12 @@ public class MainActivity extends Cocos2dxActivity {
     public static void loginTongdao(String userId){
         Log.d("Tongdao", "Lgoin:"+ userId);
         TongDao.setUserId((Activity)getJavaActivity(), userId);
+    }
+
+    //tongdao logout
+    public static void logoutTongdao(){
+        Log.d("Tongdao", "Logout");
+        TongDao.setUserId((Activity)getJavaActivity(), null);
     }
 
     //log tongdao event

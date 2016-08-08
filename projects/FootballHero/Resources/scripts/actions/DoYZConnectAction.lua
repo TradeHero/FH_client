@@ -82,6 +82,7 @@ function onRequestSuccess( jsonResponse )
         if stage ~= Constants.EVENT_FHC_STATUS_JOINED then
             CCUserDefault:sharedUserDefault():setIntegerForKey( Constants.EVENT_FHC_STATUS_KEY, Constants.EVENT_FHC_STATUS_TO_OPEN )
         end
+        Analytics:sharedDelegate():loginTongdao(userId)
 
         Logic:setUserInfo( mEmail, mPassword, "yuuzoo", sessionToken, userId )
         Logic:setDisplayName( displayName )
@@ -101,7 +102,6 @@ function onRequestSuccess( jsonResponse )
         local params = { Platform = "yuuzoo" }
         Analytics:sharedDelegate():postEvent( Constants.ANALYTICS_EVENT_LOGIN, Json.encode( params ) )
         Analytics:sharedDelegate():postFlurryEvent( Constants.ANALYTICS_EVENT_LOGIN, Json.encode( params ) )
-        Analytics:sharedDelegate():loginTongdao(userId)
         Analytics:sharedDelegate():postTongdaoEvent( Constants.ANALYTICS_EVENT_LOGIN, Json.encode( params ) )
 
         QuickBloxService.login( displayName, pictureUrl, userId, function( token )

@@ -96,6 +96,15 @@ void android_login_Tongdao(const char* userId)
   }
 }
 
+void android_logout_Tongdao()
+{
+  JniMethodInfo minfo;
+
+  if (JniHelper::getStaticMethodInfo(minfo, "com/myhero/fh/MainActivity", "logoutTongdao", "()V")) {
+    minfo.env->CallStaticVoidMethod(minfo.classID, minfo.methodID);
+    minfo.env->DeleteLocalRef(minfo.classID);
+  }
+}
 void android_tongdao_trackAttr(const char* attrName, const char* value)
 {
   JniMethodInfo minfo;
