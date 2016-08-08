@@ -23,6 +23,7 @@ table.insert( LANGUAGE_NAME, "lang_Arabic" )			-- 12
 table.insert( LANGUAGE_NAME, "lang_Bahasa_Indonesia" )	-- 13
 table.insert( LANGUAGE_NAME, "lang_Thailand" )			-- 14
 table.insert( LANGUAGE_NAME, "lang_Cambodian" )			-- 15
+table.insert( LANGUAGE_NAME, "lang_Vietnam" )			-- 16
 
 local Constants = require("scripts.Constants")
 
@@ -30,10 +31,11 @@ local Constants = require("scripts.Constants")
 local mLanguageConfig = {
 	{ ["id"] = 0, ["name"] = Constants.String.languages.english, ["key"] = "en", ["LocalizedStringFile"] = "en.LocalizedString", ["locale"] = "en_US" },
 	{ ["id"] = 1, ["name"] = Constants.String.languages.chinese, ["key"] = "zh", ["LocalizedStringFile"] = "zh.LocalizedString", ["locale"] = "zh_CN" },
-    { ["id"] = 12, ["name"] = Constants.String.languages.arabic, ["key"] = "ar", ["LocalizedStringFile"] = "ar.LocalizedString", ["locale"] = "ar_AE" },
+	{ ["id"] = 5, ["name"] = Constants.String.languages.spanish, ["key"] = "es", ["LocalizedStringFile"] = "es.LocalizedString", ["locale"] = "es_ES" },
+  { ["id"] = 12, ["name"] = Constants.String.languages.arabic, ["key"] = "ar", ["LocalizedStringFile"] = "ar.LocalizedString", ["locale"] = "ar_AE" },
 	{ ["id"] = 13, ["name"] = Constants.String.languages.indonesian, ["key"] = "id", ["LocalizedStringFile"] = "id.LocalizedString", ["locale"] = "id_ID" },
 	{ ["id"] = 14, ["name"] = Constants.String.languages.thailand, ["key"] = "th", ["LocalizedStringFile"] = "th.LocalizedString", ["locale"] = "th_TH" },
-	--{ ["id"] = 5, ["name"] = Constants.String.languages.spanish, ["key"] = "es", ["LocalizedStringFile"] = "es.LocalizedString", ["locale"] = "es_ES" },
+	{ ["id"] = 16, ["name"] = Constants.String.languages.vietnam, ["key"] = "vi", ["LocalizedStringFile"] = "vi.LocalizedString", ["locale"] = "vi_VN" },
 }
 
 function getSupportedLanguages()

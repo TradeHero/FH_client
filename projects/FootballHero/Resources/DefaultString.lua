@@ -325,6 +325,7 @@ StringsDefault = {
     arabic = "العربية",
     thailand = "ไทย",
     spanish = "Spanish",
+    vietnam = "Việt Nam",
   },
   last_name = "Last Name",
   last_name_optional = "Last Name (Optional)",

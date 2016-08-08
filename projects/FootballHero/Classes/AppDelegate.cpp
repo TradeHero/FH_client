@@ -127,6 +127,14 @@ bool AppDelegate::applicationDidFinishLaunching()
     {
         resLanguageKey = "ar";
     }
+    else if (currentLanguage == kLanguageVietnam)
+    {
+        resLanguageKey = "vi";
+    }
+    else if (currentLanguage == kLanguageSpanish)
+    {
+        resLanguageKey = "es";
+    }
     
     searchPaths.insert(searchPaths.begin(), CCFileUtils::sharedFileUtils()->getDefaultResRootPath() + resLanguageKey);
     searchPaths.insert(searchPaths.begin(), CCFileUtils::sharedFileUtils()->getWritablePath() + "local");
