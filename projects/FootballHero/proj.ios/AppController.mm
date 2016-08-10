@@ -167,7 +167,7 @@ static AppDelegate s_sharedApplication;
 **/
     [Flurry startSession:@"ZJW944VMZ5JTVCVM7N69"];
     
-    [[TongDaoUiCore sharedManager]initSdkWithAppKey:@"db0207b6d522c5d143f5da933f1858c5"];
+    [[TongDaoUiCore sharedManager]initSdkWithAppKey:@"db0207b6d522c5d143f5da933f1858c5" andUserId:nil andIgnoreInfor:TDLocationIfor];
     
     [[FBSDKApplicationDelegate sharedInstance] application:application
                              didFinishLaunchingWithOptions:launchOptions];

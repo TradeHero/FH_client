@@ -72,6 +72,8 @@ import org.json.*;
 import org.json.JSONException;
 
 import com.tongdao.sdk.TongDao;
+import android.telephony.TelephonyManager;
+import android.provider.Settings;
 
 
 
@@ -152,6 +154,8 @@ public class MainActivity extends Cocos2dxActivity {
               new LocalyticsActivityLifecycleCallbacks(this.localyticsSession));
     this.localyticsSession.setLoggingEnabled(true);
 
+    AppsFlyerLib.getInstance().setImeiData( ((TelephonyManager) getSystemService(TELEPHONY_SERVICE)).getDeviceId());
+    AppsFlyerLib.getInstance().setAndroidIdData(Settings.System.getString(getContentResolver(), Settings.Secure.ANDROID_ID));
     AppsFlyerLib.getInstance().startTracking(this.getApplication(), Constants.APPSFLYER_APP_KEY);
 
     QuickBloxChat.init(this);
@@ -232,6 +236,7 @@ public class MainActivity extends Cocos2dxActivity {
         // MAT will not function unless the measureSession call is included
         mobileAppTracker.measureSession();
         registerReceiver();
+        TongDao.onSessionStart(this);
 
         Log.v("###", "onResume");
     }
@@ -247,6 +252,7 @@ public class MainActivity extends Cocos2dxActivity {
     public void onRestart() {
         Log.v("###", "onRestart");
         super.onRestart();
+        TongDao.onSessionEnd(this);
 
         ShareSDKUtils.appResume();
     }
