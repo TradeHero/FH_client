@@ -25,9 +25,13 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
+import java.util.Set;
 
 import com.google.android.gms.gcm.GcmListenerService;
-import com.tongdao.sdk.TongDao;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+
 
 public class MyGcmListenerService extends GcmListenerService {
 
@@ -43,9 +47,26 @@ public class MyGcmListenerService extends GcmListenerService {
     // [START receive_message]
     @Override
     public void onMessageReceived(String from, Bundle data) {
+        JSONObject json = new JSONObject();
+        Set<String> keys = data.keySet();
+        for (String key : keys) {
+            try {
+                // json.put(key, bundle.get(key)); see edit below
+                json.put(key, JSONObject.wrap(data.get(key)));
+            } catch(JSONException e) {
+                //Handle exception here
+            }
+        }
+
+        String type = data.getString("tongrd_type");
+        String value = data.getString("tongrd_value");
+
         String message = data.getString("message");
-        Log.d(TAG, "From: " + from);
-        Log.d(TAG, "Message: " + message);
+
+        String extraData = json.toString();
+
+        Log.e(TAG, "From: " + from);
+        Log.e(TAG, "Message: " + message);
 
         // Here we need to track if the user receive the message
         //String extra = data.getString("extra");
@@ -77,7 +98,7 @@ public class MyGcmListenerService extends GcmListenerService {
          * In some cases it may be useful to show a notification indicating to the user
          * that a message was received.
          */
-        sendNotification(message);
+        sendNotification(message, type, value, extraData);
         // [END_EXCLUDE]
     }
     // [END receive_message]
@@ -87,13 +108,22 @@ public class MyGcmListenerService extends GcmListenerService {
      *
      * @param message GCM message received.
      */
-    private void sendNotification(String message) {
+    private void sendNotification(String message, String type, String value, String extraData) {
         Log.v("send GCM Message", message);
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent();
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.putExtra("value", value);
+        intent.putExtra("NotificationMessage", extraData);
+        if( type.equalsIgnoreCase("url") ) {
+            intent.setAction(MyGcmPushMessageReceiver.OPEN_URL);
+        }
+        else {
+            intent.setClass(this, MainActivity.class);
+        }
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
                 PendingIntent.FLAG_ONE_SHOT);
 
+        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
                 .setSmallIcon(R.drawable.icon)

@@ -197,6 +197,13 @@
       <!-- [END gcm_receiver] -->
 
       <!-- [START gcm_listener] -->
+      <receiver
+              android:name="com.myhero.fh.MyGcmPushMessageReceiver">
+          <intent-filter>
+              <action android:name="com.gcm.message.OPEN_URL" />
+              <category android:name="com.example.gcm" />
+          </intent-filter>
+      </receiver>
       <service
               android:name="com.myhero.fh.MyGcmListenerService"
               android:exported="false" >
