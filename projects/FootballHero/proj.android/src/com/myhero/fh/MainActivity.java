@@ -183,7 +183,10 @@ public class MainActivity extends Cocos2dxActivity {
               boolean sentToken = sharedPreferences
                       .getBoolean(QuickstartPreferences.SENT_TOKEN_TO_SERVER, false);
               if (sentToken) {
-                  Log.v("GCM", "GCM sent");
+                  String device_token = sharedPreferences
+                          .getString(QuickstartPreferences.REGISTRATION_TOKEN, "");
+                  TongDao.identifyPushToken(device_token);
+                  Log.v("GCM", device_token);
               } else {
                   Log.v("GCM", "GCM not sent");
               }
@@ -196,6 +199,7 @@ public class MainActivity extends Cocos2dxActivity {
           Intent intent = new Intent(this, RegistrationIntentService.class);
           startService(intent);
       }
+      onNewIntent(getIntent());
   }
 
     private void registerReceiver(){
@@ -226,6 +230,18 @@ public class MainActivity extends Cocos2dxActivity {
     {
         super.onNewIntent(intent);
         setIntent(intent);
+        Log.i("GCM", "NotificationMessage - ");
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            if (extras.containsKey("NotificationMessage")) {
+                // extract the extra-data in the Notification
+                String msg = extras.getString("NotificationMessage");
+                Log.i("GCM", "NotificationMessage - " + msg);
+                TongDao.trackOpenPushMessage(msg);
+                TongDao.openPage(this, msg);
+
+            }
+        }
     }
 
     @Override
@@ -235,8 +251,8 @@ public class MainActivity extends Cocos2dxActivity {
         mobileAppTracker.setReferralSources(this);
         // MAT will not function unless the measureSession call is included
         mobileAppTracker.measureSession();
-        registerReceiver();
         TongDao.onSessionStart(this);
+        registerReceiver();
 
         Log.v("###", "onResume");
     }

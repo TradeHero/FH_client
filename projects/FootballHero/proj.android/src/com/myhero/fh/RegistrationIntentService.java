@@ -56,12 +56,7 @@ public class RegistrationIntentService extends IntentService {
                     "GCM", null);
             // [END get_token]
             Log.i(TAG, "GCM Registration Token: " + token);
-
-            // TODO: Implement this method to send any registration to your app's servers.
-            sendRegistrationToServer(token);
-
-            // Subscribe to topic channels
-            subscribeTopics(token);
+            sharedPreferences.edit().putString(QuickstartPreferences.REGISTRATION_TOKEN, token).apply();
 
             // You should store a boolean that indicates whether the generated token has been
             // sent to your server. If the boolean is false, send the token to your server,
@@ -79,32 +74,6 @@ public class RegistrationIntentService extends IntentService {
         LocalBroadcastManager.getInstance(this).sendBroadcast(registrationComplete);
     }
 
-    /**
-     * Persist registration to third-party servers.
-     *
-     * Modify this method to associate the user's GCM registration token with any server-side account
-     * maintained by your application.
-     *
-     * @param token The new token.
-     */
-    private void sendRegistrationToServer(String token) {
-        // This sends the push token to TongDAO server, that's it.
-        TongDao.identifyPushToken(token);
-    }
-
-    /**
-     * Subscribe to any GCM topics of interest, as defined by the TOPICS constant.
-     *
-     * @param token GCM token
-     * @throws IOException if unable to reach the GCM PubSub service
-     */
-    // [START subscribe_topics]
-    private void subscribeTopics(String token) throws IOException {
-        GcmPubSub pubSub = GcmPubSub.getInstance(this);
-        for (String topic : TOPICS) {
-            pubSub.subscribe(token, "/topics/" + topic, null);
-        }
-    }
     // [END subscribe_topics]
 
 }
