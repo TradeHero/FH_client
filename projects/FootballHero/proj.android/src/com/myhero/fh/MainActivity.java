@@ -252,7 +252,6 @@ public class MainActivity extends Cocos2dxActivity {
     public void onRestart() {
         Log.v("###", "onRestart");
         super.onRestart();
-        TongDao.onSessionEnd(this);
 
         ShareSDKUtils.appResume();
     }
@@ -262,6 +261,7 @@ public class MainActivity extends Cocos2dxActivity {
         LocalBroadcastManager.getInstance(this).unregisterReceiver(mRegistrationBroadcastReceiver);
         isReceiverRegistered = false;
         Log.v("###", "onPause");
+        TongDao.onSessionEnd(this);
         super.onPause();
     }
 
