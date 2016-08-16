@@ -60,5 +60,7 @@ function loadGameCenter( response )
     local gameCenterScene = require( "scripts.views.GameCenterScene" )
     if gameCenterScene.isFrameShown() ~= true then
         gameCenterScene.loadFrame()
+    else
+        gameCenterScene.refreshFrame()
     end
 end

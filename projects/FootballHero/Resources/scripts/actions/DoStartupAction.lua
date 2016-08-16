@@ -9,6 +9,7 @@ local SideMenuScene = require("scripts.views.SideMenuScene")
 function action( param )
 	-- Update the UA Tag
 	LanguageConfig.updateUALanguageTag()
+  LanguageConfig.updateTongdaoLanguage()
 
 	EventManager:postEvent( Event.Check_Start_Tutorial )
 

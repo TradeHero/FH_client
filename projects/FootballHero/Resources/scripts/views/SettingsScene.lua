@@ -412,6 +412,7 @@ function initSettingsLanguage( contentContainer )
                     CCUserDefault:sharedUserDefault():setStringForKey( LanguagesConfig.KEY_OF_LANGUAGE, tostring(appLanguage) )
                     toggleLanguageDropDown( language["name"] )
                     LanguagesConfig.updateUALanguageTag()
+                    LanguagesConfig.updateTongdaoLanguage()
                     EventManager:postEvent( Event.Do_Select_Language, { appLanguage } )
                 end
             end

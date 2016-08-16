@@ -131,7 +131,6 @@ function Logic:getSelectedLeagues()
 end
 
 function Logic:setSelectedLeagues( selectedLeagues )
-	Analytics:sharedDelegate():trackTongdaoAttr( "Language", selectedLeagues)
 	self.mSelectedLeagues = selectedLeagues
 end
 

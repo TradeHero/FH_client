@@ -60,6 +60,11 @@ function getLanguageName( id )
 	return LANGUAGE_NAME[1]
 end
 
+function updateTongdaoLanguage()
+  local appLanguage = tonumber( CCUserDefault:sharedUserDefault():getStringForKey( KEY_OF_LANGUAGE ) )
+  Analytics:sharedDelegate():trackTongdaoAttr( "Language", getLanguageConfigById(appLanguage)["locale"])
+end
+
 function updateUALanguageTag()
 	-- Remove all language Tags
 	Misc:sharedDelegate():removeUATags( Json.encode( LANGUAGE_NAME ) )

@@ -18,11 +18,6 @@ local ENTER_GAME_EVENT_LIST = {
     { Event.Enter_Lucky8, nil },
 }
 
-local GAMECENTER_TITLE_AND_DES = {
-    { Constants.String.spinWheel.wheel_title, Constants.String.spinWheel.wheel_sub_des },
-    { Constants.String.lucky8.lucky8_title, Constants.String.lucky8.lucky8_sub_des },
-}
-
 local GAME_IMAGE_PATH = {
     Constants.SPINWHEEL_IMAGE_PATH .. "img-stw.png",
     Constants.LUCKY8_IMAGE_PATH .. "img-lucky8.png",
@@ -39,9 +34,18 @@ function loadFrame()
     initCells( table.getn( ENTER_GAME_EVENT_LIST ) )
 end
 
+function refreshFrame( )
+    initCells( table.getn( ENTER_GAME_EVENT_LIST ) )
+end
+
 function initCells( cellNum )
     mContentHeight = 0
     local contentContainer = tolua.cast( mWidget:getChildByName("ScrollView"), "ScrollView" )
+
+    local GAMECENTER_TITLE_AND_DES = {
+        { Constants.String.spinWheel.wheel_title, Constants.String.spinWheel.wheel_sub_des },
+        { Constants.String.lucky8.lucky8_title, Constants.String.lucky8.lucky8_sub_des },
+    }
 
     for i = 1, cellNum do
         local eventHandler = function ( sender, eventType )
@@ -64,18 +68,10 @@ function initCells( cellNum )
         local btnPlay = tolua.cast( panelFade:getChildByName("Button_Play"), "Button" )
         btnPlay:addTouchEventListener( eventHandler )
 
-        local lbTicket = tolua.cast( btnPlay:getChildByName("Label_Ticket"), "Label" )
-        local remainingTime = SpinWheelConfig.getNextSpinTime() - os.time()
-
         contentContainer:addChild( content )
         mContentHeight = mContentHeight + content:getSize().height
         
         updateContentContainer( mContentHeight, content )
-        if i == 1 then
-            if remainingTime <= 0 then
-                lbTicket:setText( "free" )
-            end
-        end
     end
 
 
@@ -108,8 +104,6 @@ function initCells( cellNum )
         end
         SMIS.getSMImagePath( url, handler )
     end
-
-
 end
 
 function updateContentContainer( contentHeight, content )

@@ -65,8 +65,6 @@ function loadFrame()
     -- Set the text
     tolua.cast( mWidget:getChildByName("Label_Title"), "Label" ):setText( Constants.String.spinWheel.wheel_sub_title )
     tolua.cast( mWidget:getChildByName("Label_bonusTitle"), "Label" ):setText( Constants.String.spinWheel.spin_bonus )
-    tolua.cast( mWidget:getChildByName("Label_normalTitle"), "Label" ):setText( Constants.String.spinWheel.spin_daily )
-    tolua.cast( mWidget:getChildByName("Label_timeTitle"), "Label" ):setText( Constants.String.spinWheel.come_back_in )
 
     widget:registerScriptHandler( EnterOrExit )
     SceneManager.clearNAddWidget( widget )
@@ -78,7 +76,6 @@ function loadFrame()
     local stopBt = mWidget:getChildByName("Button_stop")
     local winnerBt = mWidget:getChildByName("Button_winner")
     local balanceBt = mWidget:getChildByName("Button_balance")
-    local normalSpinTitle = tolua.cast( mWidget:getChildByName("Label_normalTitle"), "Label" )
     local bonusSpinTitle = tolua.cast( mWidget:getChildByName("Label_bonusTitle"), "Label" )
 
     local btnPopup = tolua.cast( mWidget:getChildByName("CheckBox_Info"), "CheckBox" )
@@ -104,7 +101,6 @@ function loadFrame()
     stopBt:addTouchEventListener( stopEventHandler )
     winnerBt:addTouchEventListener( winnerEventHandler )
     balanceBt:addTouchEventListener( balanceEventHandler )
-    normalSpinTitle:setEnabled( true )
     bonusSpinTitle:setEnabled( false )
 
     Navigator.loadFrame( widget )
@@ -114,19 +110,19 @@ function loadFrame()
     initWinTicketWidget()
     initShareWidget()
 
-    mRemainingTime = SpinWheelConfig.getNextSpinTime() - os.time()
-    local labelTime = tolua.cast( mWidget:getChildByName("Label_Time"), "Label" )
-    local labelTimeTitle = tolua.cast( mWidget:getChildByName("Label_timeTitle"), "Label" )
+    -- mRemainingTime = SpinWheelConfig.getNextSpinTime() - os.time()
+    -- local labelTime = tolua.cast( mWidget:getChildByName("Label_Time"), "Label" )
+    -- local labelTimeTitle = tolua.cast( mWidget:getChildByName("Label_timeTitle"), "Label" )
 
-    if mRemainingTime <= 0 then
-        labelTime:setEnabled( false )
-        labelTimeTitle:setEnabled( false )
-    else
-        labelTime:setEnabled( true )
-        labelTimeTitle:setEnabled( true )
-        labelTime:setText( os.date( "!%X", mRemainingTime ) )
-        performWithDelay( mWidget, updateTimer, 1 )
-    end
+    -- if mRemainingTime <= 0 then
+    --     labelTime:setEnabled( false )
+    --     labelTimeTitle:setEnabled( false )
+    -- else
+    --     labelTime:setEnabled( true )
+    --     labelTimeTitle:setEnabled( true )
+    --     labelTime:setText( os.date( "!%X", mRemainingTime ) )
+    --     performWithDelay( mWidget, updateTimer, 1 )
+    -- end
 
     mWheelState = WHEEL_STATE_START
     playStartAnim()
@@ -150,18 +146,18 @@ end
 
 
 function updateTimer()
-    mRemainingTime = mRemainingTime - 1
-    local labelTime = tolua.cast( mWidget:getChildByName("Label_Time"), "Label" )
-    local labelTimeTitle = tolua.cast( mWidget:getChildByName("Label_timeTitle"), "Label" )
-    if mRemainingTime < 0 then    
-        mWheelState = WHEEL_STATE_START
-        playStartAnim()
-        labelTime:setEnabled( false )
-        labelTimeTitle:setEnabled( false )
-    else
-        labelTime:setText( os.date( "!%X", mRemainingTime ) )
-        performWithDelay( mWidget, updateTimer, 1 )
-    end
+    -- mRemainingTime = mRemainingTime - 1
+    -- local labelTime = tolua.cast( mWidget:getChildByName("Label_Time"), "Label" )
+    -- local labelTimeTitle = tolua.cast( mWidget:getChildByName("Label_timeTitle"), "Label" )
+    -- if mRemainingTime < 0 then    
+    --     mWheelState = WHEEL_STATE_START
+    --     playStartAnim()
+    --     labelTime:setEnabled( false )
+    --     labelTimeTitle:setEnabled( false )
+    -- else
+    --     labelTime:setText( os.date( "!%X", mRemainingTime ) )
+    --     performWithDelay( mWidget, updateTimer, 1 )
+    -- end
 end
 
 function EnterOrExit( eventType )
@@ -371,7 +367,7 @@ end
 function stopEventHandler( sender,eventType )
     if eventType == TOUCH_EVENT_ENDED then
         if mWheelState == WHEEL_STATE_START_RUNNING and mWheelCurrentSpeed >= MAX_ROTATE_SPEED and mStopPressed == false then
-            if Logic:getTicket() <= 0 and mRemainingTime > 0 then
+            if Logic:getTicket() <= 0 then
                 EventManager:postEvent( Event.Show_Get_Tickets )
             else
                 AudioEngine.playEffect( AudioEngine.SETTINGS_ON_OFF )
@@ -508,9 +504,7 @@ function shareCompleteEventHandler( success )
         -- Start bonus spin
         mIsBonusSpin = true
         mStopPressed = false
-        local normalSpinTitle = tolua.cast( mWidget:getChildByName("Label_normalTitle"), "Label" )
         local bonusSpinTitle = tolua.cast( mWidget:getChildByName("Label_bonusTitle"), "Label" )
-        normalSpinTitle:setEnabled( false )
         bonusSpinTitle:setEnabled( true )
         mWheelBG:setRotation( 0 )
         playStartAnim()
